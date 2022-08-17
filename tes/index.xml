@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TES on Cours info TSI</title>
+    <link>https://info-tsi-vieljeux.github.io/tes/</link>
+    <description>Recent content in TES on Cours info TSI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://info-tsi-vieljeux.github.io/tes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bases de données</title>
+      <link>https://info-tsi-vieljeux.github.io/tes/basededonne%CC%81es/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/tes/basededonne%CC%81es/</guid>
+      <description>Bases de données Les bases de données (database en anglais) sont une forme d&amp;rsquo;organisation des données.
+Une base de donnée permet de centraliser différentes données en évitant les duplications inutiles et garantissant un partage efficace de ces données en évitant les corruptions.
+Une base de données peut gérer des données organisées suivant différents modèles : navigationnel, hierarchique, relationnel, post-relationnel. C&amp;rsquo;est le modèle relationnel, le plus utilisé, qui va nous intéresser ici.</description>
+    </item>
+    
+  </channel>
+</rss>
