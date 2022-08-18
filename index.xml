@@ -13,7 +13,7 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
       <guid>https://info-tsi-vieljeux.github.io/tsti2d/rappelschimie/</guid>
-      <description>MathJax.Hub.Config({ tex2jax: {inlineMath: [[&#34;$&#34;,&#34;$&#34;],[&#34;\\(&#34;,&#34;\\)&#34;]]} })  Rappels sur les solutions  Accroche
+      <description>Rappels sur les solutions Présentation
  Pictogrammes Savoir et savoir faire Calculer la masse molaire d&amp;rsquo;une molécule à partir de celles des atomes qui la constituent.
 Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à partir de la masse $m$ de l&amp;rsquo;espèce et de sa masse molaire $M$ : $\displaystyle n=\frac{m}{M}$ Déterminer une concentration massique $\displaystyle C_m=\frac{m}{V}$ et une concentration molaire $\displaystyle C=\frac{n}{V}$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une masse volumique $\rho$ : $m=\rho\times V$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration massique $C_m$ : $m=C_m\times V$ Déterminer une quantité de matière $n$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration molaire $C$ : $n=C\times V$ Donner le protocole d&amp;rsquo;une dissolution.</description>
     </item>
@@ -33,7 +33,7 @@ Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à parti
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
       <guid>https://info-tsi-vieljeux.github.io/tsti2d/acide/</guid>
-      <description>Réactions chimiques acido-basiques  Accroche
+      <description>Réactions chimiques acido-basiques Présentation
  L&amp;rsquo;expérience de la fontaine d&amp;rsquo;ammoniac   Questions    D&amp;rsquo;après le tableau suivant, que pouvez-vous dire du pH de la solution aqueuse une fois que l&amp;rsquo;ammoniac se dissout dedans ?   Comment expliquer le jaillisement de l&amp;rsquo;eau dans la 1re expérience et la contraction du ballon dans la 2e.
   Comment évolue le pH dans la 1re expérience ?
   De quoi témoigne l&amp;rsquo;élévation de la température du ballon ?</description>
@@ -45,7 +45,7 @@ Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à parti
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
       <guid>https://info-tsi-vieljeux.github.io/tsti2d/chgmtetat/</guid>
-      <description>Changements d&amp;rsquo;état  Accroche
+      <description>Changements d&amp;rsquo;état Présentation
  Rappels  La température rend compte de l&#39;agitation moléculaire.
 La température absolue se mesure en kelvins $K$ $(\pu{0^\circ C = 273,15 K})$.
 L&#39;énergie interne $U$ d&amp;rsquo;un système se compose des énergies microscopiques cinétiques (agitation) et potentielles (interaction) des molécules qui le constituent.
@@ -60,6 +60,18 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
       
       <guid>https://info-tsi-vieljeux.github.io/1es/soleil/</guid>
       <description>Le Soleil, notre source d&amp;rsquo;énergie </description>
+    </item>
+    
+    <item>
+      <title>Piles</title>
+      <link>https://info-tsi-vieljeux.github.io/tsti2d/piles/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/tsti2d/piles/</guid>
+      <description>Piles, accumulateurs et piles à combustible Présentation
+ Rappels Réactions d&amp;rsquo;oxydoréduction : Les réactions acidobasiques sont des échanges de protons alors que les réactions d&#39;oxydoréduction sont des échanges d&amp;rsquo;électrons.
+La pile Daniell :
+  Savoir et savoir faire   Exercice issu du bac </description>
     </item>
     
     <item>
