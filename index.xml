@@ -84,12 +84,36 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
     </item>
     
     <item>
+      <title>Combustions</title>
+      <link>https://info-tsi-vieljeux.github.io/tsti2d/combustion/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/tsti2d/combustion/</guid>
+      <description>Combustions Présentation
+ Rappel Savoir et savoir faire Déterminer une puissance instantanée à partir d&amp;rsquo;une courbe d&amp;rsquo;énergie.
+Déterminer une énergie à partir d&amp;rsquo;une courbe de puissance.
+Calculer un rendement.
+ </description>
+    </item>
+    
+    <item>
       <title>Son et musique, porteurs d&#39;information</title>
       <link>https://info-tsi-vieljeux.github.io/1es/musique/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
       <guid>https://info-tsi-vieljeux.github.io/1es/musique/</guid>
       <description>Son et musique, porteurs d&amp;rsquo;information </description>
+    </item>
+    
+    <item>
+      <title>Énergie/Puissance</title>
+      <link>https://info-tsi-vieljeux.github.io/tsti2d/egiepuiss/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/tsti2d/egiepuiss/</guid>
+      <description>Énergie / Puissance Présentation
+ Rappel L&amp;rsquo;énergie $\Delta E$ (en J) reçue ou fournie par un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$  où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.
+Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à : $\displaystyle P = \frac{\Delta E}{\Delta t}$  $\pu{1 kWh = 3,6 MJ}$</description>
     </item>
     
     <item>

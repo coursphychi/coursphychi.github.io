@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Piles - Cours info TSI</title>
+    <title>Énergie/Puissance - Cours info TSI</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -77,7 +77,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 <script>quizdown.register(quizdownHighlight).register(quizdownKatex).init()</script> 
 	
   </head>
-  <body class="" data-url="/tsti2d/piles/">
+  <body class="" data-url="/tsti2d/egiepuiss/">
     <nav id="sidebar" class="">
 
 
@@ -227,7 +227,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/tsti2d/piles/" title="Piles" class="dd-item active">
+      <li data-nav-id="/tsti2d/piles/" title="Piles" class="dd-item ">
         <a href="/tsti2d/piles/">
         Piles
         
@@ -269,7 +269,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/tsti2d/egiepuiss/" title="Énergie/Puissance" class="dd-item ">
+      <li data-nav-id="/tsti2d/egiepuiss/" title="Énergie/Puissance" class="dd-item active">
         <a href="/tsti2d/egiepuiss/">
         Énergie/Puissance
         
@@ -501,7 +501,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Piles
+                   Énergie/Puissance
                  
                   </span>
                 </div>
@@ -510,10 +510,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#rappels">Rappels</a></li>
+    <li><a href="#rappel">Rappel</a></li>
+    <li><a href="#puissance-instantanée">Puissance instantanée</a></li>
     <li><a href="#savoir-et-savoir-faire">Savoir et savoir faire</a></li>
-    <li><a href="#exercice-issu-du-bac">Exercice issu du bac</a></li>
-    <li><a href="#quiz">Quiz</a></li>
   </ul>
 </nav>
     </div>
@@ -533,243 +532,97 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<h1 id="piles-accumulateurs-et-piles-à-combustible">Piles, accumulateurs et piles à combustible</h1>
-<p style="text-align:center;font-size: 25px"><a href="https://presentationssite.github.io/tsti/piles">Présentation</a></p>
+<h1 id="énergie--puissance">Énergie / Puissance</h1>
+<p style="text-align:center;font-size: 25px"><a href="https://presentationssite.github.io/tsti/acide">Présentation</a></p>
 <hr>
-<h2 id="rappels">Rappels</h2>
-<p>Réactions d&rsquo;oxydoréduction :
-<img src="/Redox-cm.pdf" alt=""></p>
-
-<div class="notices info" ><p>Il y a  <strong>échanges d&rsquo;électrons</strong> lors d&rsquo;une réaction d'<strong>oxydoréduction</strong> (alors que ce sont des <strong>échanges de protons</strong> dans les réactions <strong>acidobasiques</strong> ).</p>
-
+<h2 id="rappel">Rappel</h2>
+<p>L&rsquo;énergie $\Delta E$ (en J) reçue ou fournie par un système pendant $\Delta t$ (en s) est donnée par :
+<br></p>
+<div style="display: flex;justify-content: center;">
+<div style = "border:solid red 3px;width:max-content;padding: 10px 10px 7px 10px;">
+$\displaystyle \Delta E = P\times \Delta t$
+</div></div>
+<p>où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.</p>
+<p>Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à :
+<br></p>
+<div style="display: flex;justify-content: center;">
+<div style = "border:solid blue 3px;width:max-content;padding: 10px 10px 10px 10px;">
+$\displaystyle P = \frac{\Delta E}{\Delta t}$
+</div></div>
+<p>$\pu{1 kWh = 3,6 MJ}$</p>
+<h2 id="puissance-instantanée">Puissance instantanée</h2>
+<p>La puissance instantanée $p(t)$ est la limite lorsque $\Delta t$ tend vers 0 de la puissance moyenne&amp;nbsp::
+<br></p>
+<div style="display: flex;justify-content: center;">
+<div style = "border:solid blue 3px;width:max-content;padding: 10px 10px 10px 10px;">
+$\displaystyle p(t) = \frac{\mathrm{d} E}{\mathrm{d} t}$
+</div></div>
+<p>Autrement dit, il s&rsquo;agit de la dérivée de $E(t)$.</p>
+<p>Énergie $\rightarrow$ puissance instantanée :</p>
+<div style="display: flex;justify-content: center;">
+<iframe scrolling="no" title="Puissance" src="https://www.geogebra.org/material/iframe/id/ny4d6hy2/width/758/height/479/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/false/ctl/false" width="758px" height="479px" style="border:0px;"> </iframe>
 </div>
-<p>La pile Daniell :</p>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/GT4yJjJ9OKE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+<p>Puissance instantanée $\rightarrow$ énergie :</p>
+<div style="display: flex;justify-content: center;">
+<iframe scrolling="no" title="Énergie - Puissance" src="https://www.geogebra.org/material/iframe/id/zzhegfep/width/758/height/479/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/false/ctl/false" width="758px" height="479px" style="border:0px;"> </iframe>
 </div>
+<br>
+<p>Lors d&rsquo;une situation expérimentale réelle, on ne dispose quasiment jamais des courbes continues de $p(t)$ ou de $E(t)$, car les mesures sont généralement des séries discrètes de points.</p>
+<p>Pour déterminer $E$ à partir d&rsquo;une série de mesures de $p(t)$ :</p>
+<p><img src="/gifintegie.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># mesures de p(t) à différents t</span>
+P <span style="color:#f92672">=</span> [<span style="color:#ae81ff">4.525</span>, <span style="color:#ae81ff">9.62</span>, <span style="color:#ae81ff">15.275</span>, <span style="color:#ae81ff">22.63</span>, <span style="color:#ae81ff">31.685</span>, <span style="color:#ae81ff">44.13</span>, <span style="color:#ae81ff">59.405</span>, <span style="color:#ae81ff">75.25</span>, <span style="color:#ae81ff">88.825</span>, <span style="color:#ae81ff">95.615</span>, <span style="color:#ae81ff">89.96</span>, <span style="color:#ae81ff">74.68</span>, <span style="color:#ae81ff">58.275</span>, <span style="color:#ae81ff">43.565</span>, <span style="color:#ae81ff">32.25</span>, <span style="color:#ae81ff">22.63</span>, <span style="color:#ae81ff">15.275</span>, <span style="color:#ae81ff">9.62</span>, <span style="color:#ae81ff">4.525</span>]
+n <span style="color:#f92672">=</span> len(P)
+dt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>  <span style="color:#75715e"># temps entre 2 mesures</span>
+
+Etot <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+E <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) :
+		<span style="color:#75715e">### Code à déterminer</span>
+		E<span style="color:#f92672">.</span>append(Etot)
+T <span style="color:#f92672">=</span> [i<span style="color:#f92672">*</span>dt <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n)] <span style="color:#75715e"># liste des temps</span>
+
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+fig, ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">10</span>))
+ax2 <span style="color:#f92672">=</span> ax1<span style="color:#f92672">.</span>twinx()
+ax1<span style="color:#f92672">.</span>plot(T,P,<span style="color:#e6db74">&#39;bo--&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Puissance&#39;</span>)
+ax2<span style="color:#f92672">.</span>plot(T[<span style="color:#ae81ff">1</span>:n],E,<span style="color:#e6db74">&#39;ro--&#39;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Energie&#39;</span>)
+
+ax1<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;temps (s)&#39;</span>)
+ax1<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;Puissance (W)&#39;</span>,c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;blue&#39;</span>)
+ax2<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;Énergie (J)&#39;</span>,c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>)
+
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#39;E = {Etot} J&#39;</span>)
+</code></pre></div><p>Pour déterminer $p(t)$ à partir d&rsquo;une série de mesures de $E(t)$ :</p>
+<p><img src="/gifderpuiss.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># mesures de E(t) à différents t</span>
+E  <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.226</span>, <span style="color:#ae81ff">0.905</span>, <span style="color:#ae81ff">2.150</span>, <span style="color:#ae81ff">3.960</span>, <span style="color:#ae81ff">6.676</span>, <span style="color:#ae81ff">10.297</span>, <span style="color:#ae81ff">15.502</span>, <span style="color:#ae81ff">22.178</span>, <span style="color:#ae81ff">30.552</span>, <span style="color:#ae81ff">39.943</span>, <span style="color:#ae81ff">49.675</span>, <span style="color:#ae81ff">57.935</span>, <span style="color:#ae81ff">64.611</span>, <span style="color:#ae81ff">69.590</span>, <span style="color:#ae81ff">73.324</span>, <span style="color:#ae81ff">76.040</span>, <span style="color:#ae81ff">77.850</span>, <span style="color:#ae81ff">79.095</span>, <span style="color:#ae81ff">79.774</span>, <span style="color:#ae81ff">80.0</span>]  
+n <span style="color:#f92672">=</span> len(E)
+dt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>  <span style="color:#75715e"># temps entre 2 mesures</span>
+
+P <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) :
+		<span style="color:#75715e">### Code à déterminer</span>
+		P<span style="color:#f92672">.</span>append(p)
+T <span style="color:#f92672">=</span> [i<span style="color:#f92672">*</span>dt <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n)] <span style="color:#75715e"># liste des temps</span>
+
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+fig, ax1 <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">10</span>))
+ax2 <span style="color:#f92672">=</span> ax1<span style="color:#f92672">.</span>twinx()
+ax1<span style="color:#f92672">.</span>plot(T,E,<span style="color:#e6db74">&#39;ro--&#39;</span>)
+ax2<span style="color:#f92672">.</span>plot(T[<span style="color:#ae81ff">1</span>:n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>],P,<span style="color:#e6db74">&#39;bo--&#39;</span>)
+ax1<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;temps (s)&#39;</span>)
+ax1<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;Énergie (J)&#39;</span>,c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>)
+ax2<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;Puissance (W)&#39;</span>,c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;blue&#39;</span>)
+</code></pre></div><p><a href="https://colab.research.google.com/drive/1Spnaf9eOirMYTT5JxFcRUcGbLXnR0nuJ?usp=sharing">Lien vers Colab</a> pour compléter les codes (il faut vous connecter à un compte Google pour pouvoir exécuter le code).</p>
 <br>
 <h2 id="savoir-et-savoir-faire">Savoir et savoir faire</h2>
 
-<div class="notices coeur" ><p><input type="checkbox"> Équilibrer les <strong>demi-équations</strong> redox
-<br>
-<input type="checkbox"> Déterminer une <strong>équation bilan</strong> à partir des demi-équations
-<br>
-<input type="checkbox"> Savoir ce qui se passe à chaque électrode pendant une décharge et pendant une charge
-<br>
-<input type="checkbox"> lier une demi-équation à une électrode (<strong>cathode</strong> ou <strong>anode</strong>)
-<br>
-<input type="checkbox"> Savoir différentier et définir une <strong>pile</strong>, un <strong>accumulateur</strong> et une <strong>batterie</strong>
-<br>
-<input type="checkbox"> Calculer l’<strong>énergie totale stockée</strong>
-<br>
-<input type="checkbox"> Exploiter les principales caractéristiques des piles ou accumulateurs (<strong>tension à vide</strong>, <strong>capacité</strong>, <strong>énergies massique</strong> et <strong>volumique</strong>, <strong>nombre de cycles de charge et décharge</strong>) pour les utiliser dans des applications spécifiques.</p>
+<div class="notices coeur" ><p><input type="checkbox"> Déterminer une <strong>puissance instantanée</strong> à partir d&rsquo;une courbe d&rsquo;énergie.<br><br>
+<input type="checkbox"> Déterminer une <strong>énergie</strong> à partir d&rsquo;une courbe de puissance.<br><br>
+<input type="checkbox"> Calculer un <strong>rendement</strong>.</p>
 
 </div>
-
-<div class="notices piege" >
-</div>
-<br>
-<h2 id="exercice-issu-du-bac">Exercice issu du bac</h2>
-<h2 id="quiz">Quiz</h2>
-
-<div class='quizdown'>
-  
-
----
-primary_color: steelblue
-secondary_color: "#f2f2f2"
-text_color: black
-shuffle_questions: false
-
----
-
-## 
-
-Les piles et les accumulateurs sont le siège de réactions :
-
-- [ ] de précipitation
-- [ ] acide-base
-- [x] d'oxydoréduction
-
-## 
-
-Un accumulateur peut fonctionner comme :
-
-- [x] récepteur électrique
-- [x] générateur électrique
-- [ ] transformateur electrique
-
-## 
-
-La borne positive d'une pile est en contact avec un oxydant qui, lorsque la pile fonctionne&nbsp;:
-
-- [x] capte des électrons issus du circuit électrique
-- [ ] cède des électrons issus du circuit électrique
-- [ ] capte des électrons issus du pont salin
-
-## 
-
-Les porteurs de charges sont :
-
-- [ ] des électrons dans les solutions
-- [x] des électrons dans les fils de connexion
-- [x] des ions dans les solutions
-
-## 
-
-Une pile fournit une quantité maximale d'électrons $n_{\ce{e-}}$. Sa capacité $Q$&nbsp;:
-
-- [x] s'exprime en coulombs
-- [ ] est égale à $\frac{n_{\ce{e-}}}{F}$
-- [x] est égale à $n_{\ce{e-}} F$
-
-## 
-
-Lorsque l'un des réactifs est épuisé :
-
-- [x] une pile ne peut plus être utilisée, il faut la recycler
-- [ ] un accumulateur ne peut plus être utilisé, il faut le recycler
-- [x] un accumulateur peut être rechargé
-
-## 
-
-Lors de sa recharge, un accumulateur :
-
-- [x] reçoit de l'énergie
-- [x] joue le rôle d'un récepteur electrique
-- [ ] fournit de l'énergie
-
-## 
-
-Une pile de tension à vide $\pu{1,5 V}$ et de résistance interne $\pu{0,5 \Omega}$ débite un courant de $\pu{1 A}$. La tension $U$ à ses bornes vaut&nbsp;:
-
-- [ ] $\pu{2 V}$
-- [x] $\pu{1 V}$
-- [ ] $\pu{1,5 V}$
-
-> Même déchargée, la tension à vide d'une pile varie peu (par exemple, une batterie au plomb est considérée complètement déchargée si $U<\pu{11,5 V}$). C'est sa résistance interne qui augmente au fur et à mesure de sa décharge entraînant la diminution de sa tension en fonctionnement.
-
-## 
-
-Un accumulateur de capacité $Q = \pu{5 A * h}$ peut débiter un courant de $\pu{1 A}$ pendant :
-
-- [x] $\pu{5 h}$
-- [ ] $\pu{1 h}$
-- [x] $\pu{300 min}$
-
-## 
-
-Pour un accumulateur, la cathode est :
-
-- [ ] toujours la borne ⊕
-- [x] la borne ⊕ lors de la décharge
-- [x] toujours l'électrode à laquelle on observe une réduction
-
-## 
-
-L'énergie stockée dans une pile dépend&nbsp;:
-
-- [ ] de sa puissance
-- [ ] de l'intensité du courant de décharge
-- [x] des quantités de réactifs qu'elle stocke
-
-## 
-
-L'énergie stockée dans une batterie peut s'exprimer en&nbsp;:
-
-- [x] $\pu{W * h}$
-- [ ] $\pu{W * h-1}$
-- [x] $\pu{J}$ 
-
-## 
-
-L'autre nom de la quantité d'électricité stockée dans une batterie est&nbsp;:
-
-- [ ] son intensité
-- [ ] son énergie massique
-- [x] sa capacité 
-
-## 
-
-Pour la demi-équation électronique $\ce{H2 = 2H+ + 2e-}$&nbsp;:
-
-- [x] $\ce{H+}$ est un oxydant
-- [x] $\ce{H2}$ est un réducteur
-- [ ] $\ce{H2}$ est un oxydant
-
-## 
-
-Les nombres stœchiométriques pour la demi-équation $\ce{a O2 + b H+ +c e- = d H2O }$ sont&nbsp;:
-
-- [ ] $a = 1$; $b = 2$; $c = 3$; $d = 4$
-- [x] $a = 1$; $b = 4$; $c = 4$; $d = 2$
-- [ ] $a = 2$; $b = 1$; $c = 0$; $d = 3$
-
-## 
-
-Bilan de matière pour 1,0 mol de $\ce{PbO2}$&nbsp;:<br>
-$\ce{PbO2 + 4 H+ + 2 e- = Pb^2+ + 2 H2O}$
-
-- [ ] $n_{\ce{e-}}  = \pu{0,5 mol}$<br>$n_\ce{Pb^2+} =  \pu{1,0 mol}$
-- [ ] $n_{\ce{e-}}  = \pu{1,0 mol}$<br>$n_\ce{Pb^2+} =  \pu{1,0 mol}$
-- [x] $n_{\ce{e-}}  = \pu{2,0 mol}$<br>$n_\ce{Pb^2+} =  \pu{1,0 mol}$
-
-## 
-
-Lors de la recharge d'une batterie au plomb à électrolyte acide&nbsp;:<br>
-$\ce{2 Pb^2+ + 2 H2O  -> PbO2 + 4 H+ + Pb}$
-
-- [ ] le pH de l'électrolyte augmente
-- [x] le pH de l'électrolyte diminue
-- [ ] il n'y a aucune incidence sur le pH de l'électrolyte
-
-## 
-
-L'équation bilan de fonctionnement d'une pile à hydrogène est&nbsp;:
-
-- [x] $\frac{1}{2} {\text{O}_2}_{\text{(g)}} + {\text{H}_2}_{\text{(g)}} \rightarrow {\text{H}_2\text{O}}_{\text{(l)}}$
-- [ ] $\text{H}_2 = 2 \text{H}^+ + 2 \text{e}^-$
-- [ ] $2 {\text{H}_2\text{O}}_{\text{(l)}}  \rightarrow{\text{O}_2}_{\text{(g)}} + 4 \text{H}^+ + 4 \text{e}^-$
-
-## 
-
-Bilan de matière pour 1,0 mol d'électrons dans&nbsp;:<br>
-$\ce{H_2 = 2 H+ + 2 e-}$
-
-- [ ] $n_{\ce{H2}} = \pu{0,5 mol}$<br>$n_{\ce{H+}} = \pu{0,5 mol}$
-- [ ] $n_{\ce{H2}} = \pu{1,0 mol}$<br>$n_{\ce{H+}} = \pu{2,0 mol}$
-- [x] $n_{\ce{H2}} = \pu{0,5 mol}$<br>$n_{\ce{H+}} = \pu{1,0 mol}$
-
-## 
-
-Une pile à hydrogène consomme 2,0 mol de dihydrogène&nbsp;:<br>
-$\ce{O2_{(g)} + 2 H2_{(g)} -> 2 H2O_{(l)}}$
-
-- [x] elle consomme 1,0 mol de dioxygène
-- [x] elle produit 2,0 mol d'eau
-- [ ] elle consomme 2,0 mol de dioxygène
-
-## 
-
-Pour une quantité d'électricité échangée $Q=\pu{1,0 A * h}$&nbsp;:
-
-- [ ] $n_{\ce{e-}} = \pu{96500 mol}$
-- [ ] $n_{\ce{e-}}  = \pu{1,0E-5 mol}$
-- [x] $n_{\ce{e-}}  = \pu{3,7E-2 mol}$
-
-> $F = \pu{96500 C * mol-1}$
-
-## 
-
-Le bilan de matière d'une pile à combustible dépend&nbsp;:
-
-- [ ] uniquement de sa durée d'utilisation
-- [ ] de la tension qu'elle délivre
-- [x] de l'énergie qu'elle a fournie
-
-
-</div>
-
 
 
 <footer class="footline">
@@ -872,26 +725,6 @@ Le bilan de matière d'une pile à combustible dépend&nbsp;:
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
                 
                 
 
@@ -919,6 +752,23 @@ Le bilan de matière d'une pile à combustible dépend&nbsp;:
             
         
                     
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -926,6 +776,9 @@ Le bilan de matière d'une pile à combustible dépend&nbsp;:
             
             
                 
+                    
+                        
+                        
                     
                 
                 

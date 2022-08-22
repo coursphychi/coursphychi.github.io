@@ -70,11 +70,25 @@
 	"content": "Enseignement scientifique de terminale Programme officiel\n"
 },
 {
+	"uri": "https://info-tsi-vieljeux.github.io/tsti2d/combustion/",
+	"title": "Combustions",
+	"tags": [],
+	"description": "",
+	"content": "Combustions Présentation\n Rappel Savoir et savoir faire Déterminer une puissance instantanée à partir d\u0026rsquo;une courbe d\u0026rsquo;énergie.\nDéterminer une énergie à partir d\u0026rsquo;une courbe de puissance.\nCalculer un rendement.\n "
+},
+{
 	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/",
 	"title": "Son et musique, porteurs d&#39;information",
 	"tags": [],
 	"description": "",
 	"content": "Son et musique, porteurs d\u0026rsquo;information "
+},
+{
+	"uri": "https://info-tsi-vieljeux.github.io/tsti2d/egiepuiss/",
+	"title": "Énergie/Puissance",
+	"tags": [],
+	"description": "",
+	"content": "Énergie / Puissance Présentation\n Rappel L\u0026rsquo;énergie $\\Delta E$ (en J) reçue ou fournie par un système pendant $\\Delta t$ (en s) est donnée par : $\\displaystyle \\Delta E = P\\times \\Delta t$  où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\\Delta t$.\nEt on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\\Delta t$ grâce à : $\\displaystyle P = \\frac{\\Delta E}{\\Delta t}$  $\\pu{1 kWh = 3,6 MJ}$\nPuissance instantanée La puissance instantanée $p(t)$ est la limite lorsque $\\Delta t$ tend vers 0 de la puissance moyenne\u0026amp;nbsp:: $\\displaystyle p(t) = \\frac{\\mathrm{d} E}{\\mathrm{d} t}$  Autrement dit, il s\u0026rsquo;agit de la dérivée de $E(t)$.\nÉnergie $\\rightarrow$ puissance instantanée :\n  Puissance instantanée $\\rightarrow$ énergie :\n  Lors d\u0026rsquo;une situation expérimentale réelle, on ne dispose quasiment jamais des courbes continues de $p(t)$ ou de $E(t)$, car les mesures sont généralement des séries discrètes de points.\nPour déterminer $E$ à partir d\u0026rsquo;une série de mesures de $p(t)$ :\n# mesures de p(t) à différents t P = [4.525, 9.62, 15.275, 22.63, 31.685, 44.13, 59.405, 75.25, 88.825, 95.615, 89.96, 74.68, 58.275, 43.565, 32.25, 22.63, 15.275, 9.62, 4.525] n = len(P) dt = 0.1 # temps entre 2 mesures Etot = 0 E = [] for i in range(n-1) : ### Code à déterminer E.append(Etot) T = [i*dt for i in range(n)] # liste des temps import matplotlib.pyplot as plt fig, ax1 = plt.subplots(figsize=(15,10)) ax2 = ax1.twinx() ax1.plot(T,P,\u0026#39;bo--\u0026#39;,label=\u0026#39;Puissance\u0026#39;) ax2.plot(T[1:n],E,\u0026#39;ro--\u0026#39;,label=\u0026#39;Energie\u0026#39;) ax1.set_xlabel(\u0026#39;temps (s)\u0026#39;) ax1.set_ylabel(\u0026#39;Puissance (W)\u0026#39;,c=\u0026#39;blue\u0026#39;) ax2.set_ylabel(\u0026#39;Énergie (J)\u0026#39;,c=\u0026#39;red\u0026#39;) print(f\u0026#39;E = {Etot} J\u0026#39;) Pour déterminer $p(t)$ à partir d\u0026rsquo;une série de mesures de $E(t)$ :\n# mesures de E(t) à différents t E = [0.0, 0.226, 0.905, 2.150, 3.960, 6.676, 10.297, 15.502, 22.178, 30.552, 39.943, 49.675, 57.935, 64.611, 69.590, 73.324, 76.040, 77.850, 79.095, 79.774, 80.0] n = len(E) dt = 0.1 # temps entre 2 mesures P = [] for i in range(1,n-1) : ### Code à déterminer P.append(p) T = [i*dt for i in range(n)] # liste des temps import matplotlib.pyplot as plt fig, ax1 = plt.subplots(figsize=(15,10)) ax2 = ax1.twinx() ax1.plot(T,E,\u0026#39;ro--\u0026#39;) ax2.plot(T[1:n-1],P,\u0026#39;bo--\u0026#39;) ax1.set_xlabel(\u0026#39;temps (s)\u0026#39;) ax1.set_ylabel(\u0026#39;Énergie (J)\u0026#39;,c=\u0026#39;red\u0026#39;) ax2.set_ylabel(\u0026#39;Puissance (W)\u0026#39;,c=\u0026#39;blue\u0026#39;) Lien vers Colab pour compléter les codes (il faut vous connecter à un compte Google pour pouvoir exécuter le code).\nSavoir et savoir faire Déterminer une puissance instantanée à partir d\u0026rsquo;une courbe d\u0026rsquo;énergie.\nDéterminer une énergie à partir d\u0026rsquo;une courbe de puissance.\nCalculer un rendement.\n "
 },
 {
 	"uri": "https://info-tsi-vieljeux.github.io/tes/basededonne%CC%81es/",
