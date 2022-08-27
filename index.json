@@ -1,5 +1,12 @@
 [
 {
+	"uri": "https://info-tsi-vieljeux.github.io/1es/matiere/elements/",
+	"title": "Les éléments",
+	"tags": [],
+	"description": "",
+	"content": "Abondance et origine Présentation\n      Radioactivité "
+},
+{
 	"uri": "https://info-tsi-vieljeux.github.io/tsti2d/rappelschimie/",
 	"title": "Rappels chimie",
 	"tags": [],
@@ -8,10 +15,24 @@
 },
 {
 	"uri": "https://info-tsi-vieljeux.github.io/1es/matiere/",
-	"title": "Une longueur histoire de la matière",
+	"title": "La matière",
 	"tags": [],
 	"description": "",
-	"content": "Une longue histoire de la matière "
+	"content": "Une longueur histoire de la matière "
+},
+{
+	"uri": "https://info-tsi-vieljeux.github.io/tes/energie/",
+	"title": "Le futur des énergies",
+	"tags": [],
+	"description": "",
+	"content": "Le futur des énergies "
+},
+{
+	"uri": "https://info-tsi-vieljeux.github.io/tes/climat/",
+	"title": "Science, climat et société",
+	"tags": [],
+	"description": "",
+	"content": "Science, climat et société Composition atmosphère "
 },
 {
 	"uri": "https://info-tsi-vieljeux.github.io/tsti2d/",
@@ -28,6 +49,13 @@
 	"content": "Réactions chimiques acido-basiques Présentation\n L\u0026rsquo;expérience de la fontaine d\u0026rsquo;ammoniac   Questions    D\u0026rsquo;après le tableau suivant, que pouvez-vous dire du pH de la solution aqueuse une fois que l\u0026rsquo;ammoniac se dissout dedans ?   Comment expliquer le jaillisement de l\u0026rsquo;eau dans la 1re expérience et la contraction du ballon dans la 2e.\n  Comment évolue le pH dans la 1re expérience ?\n  De quoi témoigne l\u0026rsquo;élévation de la température du ballon ?\n  Quelle est l\u0026rsquo;équation de la réaction ?\n   Simulation Testez la simulation puis répondez aux questions suivantes :\n   Comment évolue le pH lorsqu\u0026rsquo;on dilue la solution ?\n  Comment évoluent $\\ce{[H3O+]}$ et $\\ce{[HO-]}$ lorsqu\u0026rsquo;on dilue la solution ?\n  Comment évoluent $\\ce{[H3O+]}$ et $\\ce{[HO-]}$ lorsque le pH augmente ?\n  Que vaut le ratio $\\displaystyle \\frac{\\ce{[H3O+]}}{\\ce{[HO-]}}$ lorsque le pH vaut 4 ?\n  Que vaut le ratio $\\displaystyle \\frac{\\ce{[H3O+]}}{\\ce{[HO-]}}$ lorsque le pH vaut 10 ?\n  Déterminez $\\ce{[H3O+]}$ lorsque le pH vaut 3,5 grâce à la simulation et vérifiez par le calcul.\n   Savoir et savoir faire Identifier un acide par sa capacité à céder un $\\ce{H+}$, en déduire la base conjuguée.\nÉcrire l\u0026rsquo;équation de la réaction entre un acide et une base à partir des couples acide-base.\nCalculer un pH à partir de $\\ce{[H3O+]}$ et inversement, calculer $\\ce{[H3O+]}$ à partir d\u0026rsquo;un pH.\n Attention à bien écrire pH, petit p, grand H, pour \u0026ldquo;potentiel Hydrogène\u0026rdquo;.\n Une solution aqueuse peut-être acide (pH \u0026lt; 7) alors qu\u0026rsquo;une base est le soluté majoritaire dans la solution et inversement.\nPar exemple, l\u0026rsquo;espèce majoritaire à $pH=5,5$ dans solution contenant le couple $\\ce{(CH3COOH/CH3COO-)}$ est la base $\\ce{CH3COO-}$ !\nMais ajouter un acide dans la solution fera toujours ➘ le pH alors qu\u0026rsquo;ajouter une base le fera ➚.\n "
 },
 {
+	"uri": "https://info-tsi-vieljeux.github.io/1es/soleil/bilanradia/",
+	"title": "Bilan radiatif",
+	"tags": [],
+	"description": "",
+	"content": "Bilan radiatif terrestre "
+},
+{
 	"uri": "https://info-tsi-vieljeux.github.io/tsti2d/chgmtetat/",
 	"title": "Changements d&#39;état",
 	"tags": [],
@@ -35,11 +63,11 @@
 	"content": "Changements d\u0026rsquo;état Présentation\n Rappels  La température rend compte de l'agitation moléculaire.\nLa température absolue se mesure en kelvins $K$ $(\\pu{0^\\circ C = 273,15 K})$.\nL'énergie interne $U$ d\u0026rsquo;un système se compose des énergies microscopiques cinétiques (agitation) et potentielles (interaction) des molécules qui le constituent.\nLa variation d\u0026rsquo;énergie interne $\\Delta U = U_f - U_i$ d\u0026rsquo;un solide ou d\u0026rsquo;un liquide est donnée par la formule suivante :\n $$\\Delta U = m c \\Delta\\theta$$   où $m$ est la masse (en $\\pu kg$)\n$c$ est la capacité thermique massique (en $\\pu{ J * K-1 * kg-1}$)\net $\\Delta \\theta = \\theta_f - \\theta_i$ est la variation de température (en $\\pu K$ ou en $\\pu{^\\circ C}$)\n Savoir et savoir faire Les liaisons intermoléculaires dans l\u0026rsquo;eau sont dues aux liaisons hydrogènes qu\u0026rsquo;il faut savoir décrire.\nLire et utiliser un diagramme d\u0026rsquo;état $(P,T)$ ; savoir déterminer l\u0026rsquo;état physique pour une pression et une température donnée et après une modification des paramètres.\nSavoir si un changement d\u0026rsquo;état est exothermique ou endothermique.\nCalculer une énergie de changement d\u0026rsquo;état à partir de l\u0026rsquo;énergie massique de changement d\u0026rsquo;état.\n L\u0026rsquo;évaporation est une vaporisation progressive qui a lieu à la surface d\u0026rsquo;un liquide (et non dans son volume). L\u0026rsquo;évaporation peut avoir lieu à des pressions et températures différentes de celles de la vaporisation.\n L\u0026rsquo;énergie massique de changement d\u0026rsquo;état est aussi appelée enthalpie massique de changement d\u0026rsquo;état et peut être notée $l$, ou $L$, ou $\\Delta h$, ou $h$, ou encore $H$.\n Dans le langage courant, le terme condensation se substitue le plus souvent à liquéfaction et désigne alors le phénomène opposé à l\u0026rsquo;évaporation.\n Exercice issu du bac "
 },
 {
-	"uri": "https://info-tsi-vieljeux.github.io/1es/soleil/",
-	"title": "Le Soleil, notre source d&#39;énergie",
+	"uri": "https://info-tsi-vieljeux.github.io/1es/matiere/cristaux/",
+	"title": "Cristaux",
 	"tags": [],
 	"description": "",
-	"content": "Le Soleil, notre source d\u0026rsquo;énergie "
+	"content": "Cristaux "
 },
 {
 	"uri": "https://info-tsi-vieljeux.github.io/tsti2d/piles/",
@@ -49,6 +77,13 @@
 	"content": "Piles, accumulateurs et piles à combustible Présentation\n Rappels Réactions d\u0026rsquo;oxydoréduction : Il y a échanges d\u0026rsquo;électrons lors d\u0026rsquo;une réaction d'oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques ).\n La pile Daniell :\n  Savoir et savoir faire Équilibrer les demi-équations redox Déterminer une équation bilan à partir des demi-équations Savoir ce qui se passe à chaque électrode pendant une décharge et pendant une charge lier une demi-équation à une électrode (cathode ou anode) Savoir différentier et définir une pile, un accumulateur et une batterie Calculer l’énergie totale stockée Exploiter les principales caractéristiques des piles ou accumulateurs (tension à vide, capacité, énergies massique et volumique, nombre de cycles de charge et décharge) pour les utiliser dans des applications spécifiques.\n  Exercice issu du bac Sur l\u0026rsquo;oxydoréduction Sur les piles Quiz --- primary_color: steelblue secondary_color: \"#f2f2f2\" text_color: black shuffle_questions: false --- ## Les piles et les accumulateurs sont le siège de réactions : - [ ] de précipitation - [ ] acide-base - [x] d'oxydoréduction ## Un accumulateur peut fonctionner comme : - [x] récepteur électrique - [x] générateur électrique - [ ] transformateur electrique ## La borne positive d'une pile est en contact avec un oxydant qui, lorsque la pile fonctionne\u0026nbsp;: - [x] capte des électrons issus du circuit électrique - [ ] cède des électrons issus du circuit électrique - [ ] capte des électrons issus du pont salin ## Les porteurs de charges sont : - [ ] des électrons dans les solutions - [x] des électrons dans les fils de connexion - [x] des ions dans les solutions ## Une pile fournit une quantité maximale d'électrons $n_{\\ce{e-}}$. Sa capacité $Q$\u0026nbsp;: - [x] s'exprime en coulombs - [ ] est égale à $\\frac{n_{\\ce{e-}}}{F}$ - [x] est égale à $n_{\\ce{e-}} F$ ## Lorsque l'un des réactifs est épuisé : - [x] une pile ne peut plus être utilisée, il faut la recycler - [ ] un accumulateur ne peut plus être utilisé, il faut le recycler - [x] un accumulateur peut être rechargé ## Lors de sa recharge, un accumulateur : - [x] reçoit de l'énergie - [x] joue le rôle d'un récepteur electrique - [ ] fournit de l'énergie ## Une pile de tension à vide $\\pu{1,5 V}$ et de résistance interne $\\pu{0,5 \\Omega}$ débite un courant de $\\pu{1 A}$. La tension $U$ à ses bornes vaut\u0026nbsp;: - [ ] $\\pu{2 V}$ - [x] $\\pu{1 V}$ - [ ] $\\pu{1,5 V}$  Même déchargée, la tension à vide d'une pile varie peu (par exemple, une batterie au plomb est considérée complètement déchargée si $UPbO2 + 4 H+ + Pb}$ - [ ] le pH de l'électrolyte augmente - [x] le pH de l'électrolyte diminue - [ ] il n'y a aucune incidence sur le pH de l'électrolyte ## L'équation bilan de fonctionnement d'une pile à hydrogène est\u0026nbsp;: - [x] $\\frac{1}{2} {\\text{O}_2}_{\\text{(g)}} + {\\text{H}_2}_{\\text{(g)}} \\rightarrow {\\text{H}_2\\text{O}}_{\\text{(l)}}$ - [ ] $\\text{H}_2 = 2 \\text{H}^+ + 2 \\text{e}^-$ - [ ] $2 {\\text{H}_2\\text{O}}_{\\text{(l)}} \\rightarrow{\\text{O}_2}_{\\text{(g)}} + 4 \\text{H}^+ + 4 \\text{e}^-$ ## Bilan de matière pour 1,0 mol d'électrons dans\u0026nbsp;:\n$\\ce{H_2 = 2 H+ + 2 e-}$ - [ ] $n_{\\ce{H2}} = \\pu{0,5 mol}$\n$n_{\\ce{H+}} = \\pu{0,5 mol}$ - [ ] $n_{\\ce{H2}} = \\pu{1,0 mol}$\n$n_{\\ce{H+}} = \\pu{2,0 mol}$ - [x] $n_{\\ce{H2}} = \\pu{0,5 mol}$\n$n_{\\ce{H+}} = \\pu{1,0 mol}$ ## Une pile à hydrogène consomme 2,0 mol de dihydrogène\u0026nbsp;:\n$\\ce{O2_{(g)} + 2 H2_{(g)} - 2 H2O_{(l)}}$ - [x] elle consomme 1,0 mol de dioxygène - [x] elle produit 2,0 mol d'eau - [ ] elle consomme 2,0 mol de dioxygène ## Pour une quantité d'électricité échangée $Q=\\pu{1,0 A * h}$\u0026nbsp;: - [ ] $n_{\\ce{e-}} = \\pu{96500 mol}$ - [ ] $n_{\\ce{e-}} = \\pu{1,0E-5 mol}$ - [x] $n_{\\ce{e-}} = \\pu{3,7E-2 mol}$  $F = \\pu{96500 C * mol-1}$ ## Le bilan de matière d'une pile à combustible dépend\u0026nbsp;: - [ ] uniquement de sa durée d'utilisation - [ ] de la tension qu'elle délivre - [x] de l'énergie qu'elle a fournie  "
 },
 {
+	"uri": "https://info-tsi-vieljeux.github.io/1es/soleil/rayonnement/",
+	"title": "Rayonnement solaire",
+	"tags": [],
+	"description": "",
+	"content": "Rayonnement solaire "
+},
+{
 	"uri": "https://info-tsi-vieljeux.github.io/1es/",
 	"title": "1ES",
 	"tags": [],
@@ -56,8 +91,29 @@
 	"content": "Enseignement scientifique de première Programme officiel\n"
 },
 {
+	"uri": "https://info-tsi-vieljeux.github.io/1es/soleil/",
+	"title": "Le Soleil",
+	"tags": [],
+	"description": "",
+	"content": "Le Soleil, notre source d\u0026rsquo;énergie "
+},
+{
+	"uri": "https://info-tsi-vieljeux.github.io/1es/terre/mesure/",
+	"title": "Forme et mesure",
+	"tags": [],
+	"description": "",
+	"content": "Forme de la Terre Mesure de la Terre "
+},
+{
+	"uri": "https://info-tsi-vieljeux.github.io/1es/terre/terreespace/",
+	"title": "La Terre dans l&#39;espace",
+	"tags": [],
+	"description": "",
+	"content": "Mouvement Lune "
+},
+{
 	"uri": "https://info-tsi-vieljeux.github.io/1es/terre/",
-	"title": "La Terre, un astre singulier",
+	"title": "La Terre",
 	"tags": [],
 	"description": "",
 	"content": "La Terre, un astre singulier "
@@ -77,11 +133,32 @@
 	"content": "Combustions Présentation\n Savoir et savoir faire Écrire et équuilibrer l\u0026rsquo;équation d\u0026rsquo;une combustion complète.\nÉtablir un bilan de matière : savoir déterminer la masse de $\\ce{CO2}$ ou d'$\\ce{H2O}$ dans le cas de la combustion complète d\u0026rsquo;une masse $m$ de combustible.\nDéterminer l\u0026rsquo;énergie dégagée par une combustion.\n Exercice issu du bac "
 },
 {
-	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/",
-	"title": "Son et musique, porteurs d&#39;information",
+	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/musique/",
+	"title": "Musique",
 	"tags": [],
 	"description": "",
-	"content": "Son et musique, porteurs d\u0026rsquo;information "
+	"content": "La musique ou l\u0026rsquo;art de faire entendre les nombres "
+},
+{
+	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/numerisation/",
+	"title": "Numérisation",
+	"tags": [],
+	"description": "",
+	"content": "Le son, une information à coder "
+},
+{
+	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/son/",
+	"title": "Son",
+	"tags": [],
+	"description": "",
+	"content": "Le son, un phénomène vibratoire "
+},
+{
+	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/",
+	"title": "Son et musique",
+	"tags": [],
+	"description": "",
+	"content": "Son et musique, porteurs d’information "
 },
 {
 	"uri": "https://info-tsi-vieljeux.github.io/tsti2d/egiepuiss/",
@@ -91,11 +168,11 @@
 	"content": "Énergie / Puissance Présentation\n Rappel L\u0026rsquo;énergie $\\Delta E$ (en J) reçue ou fournie par un système pendant $\\Delta t$ (en s) est donnée par : $\\displaystyle \\Delta E = P\\times \\Delta t$  où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\\Delta t$.\nEt on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\\Delta t$ grâce à : $\\displaystyle P = \\frac{\\Delta E}{\\Delta t}$  $\\pu{1 kWh = 3,6 MJ}$\nPuissance instantanée La puissance instantanée $p(t)$ est la limite lorsque $\\Delta t$ tend vers 0 de la puissance moyenne\u0026amp;nbsp:: $\\displaystyle p(t) = \\frac{\\mathrm{d} E}{\\mathrm{d} t}$  Autrement dit, il s\u0026rsquo;agit de la dérivée de $E(t)$.\nÉnergie $\\rightarrow$ puissance instantanée :\n  Puissance instantanée $\\rightarrow$ énergie :\n  Lors d\u0026rsquo;une situation expérimentale réelle, on ne dispose quasiment jamais des courbes continues de $p(t)$ ou de $E(t)$, car les mesures sont généralement des séries discrètes de points.\nPour déterminer $E$ à partir d\u0026rsquo;une série de mesures de $p(t)$ :\n# mesures de p(t) à différents t P = [4.525, 9.62, 15.275, 22.63, 31.685, 44.13, 59.405, 75.25, 88.825, 95.615, 89.96, 74.68, 58.275, 43.565, 32.25, 22.63, 15.275, 9.62, 4.525] n = len(P) dt = 0.1 # temps entre 2 mesures Etot = 0 E = [] for i in range(n-1) : ### Code à déterminer E.append(Etot) T = [i*dt for i in range(n)] # liste des temps import matplotlib.pyplot as plt fig, ax1 = plt.subplots(figsize=(15,10)) ax2 = ax1.twinx() ax1.plot(T,P,\u0026#39;bo--\u0026#39;,label=\u0026#39;Puissance\u0026#39;) ax2.plot(T[1:n],E,\u0026#39;ro--\u0026#39;,label=\u0026#39;Energie\u0026#39;) ax1.set_xlabel(\u0026#39;temps (s)\u0026#39;) ax1.set_ylabel(\u0026#39;Puissance (W)\u0026#39;,c=\u0026#39;blue\u0026#39;) ax2.set_ylabel(\u0026#39;Énergie (J)\u0026#39;,c=\u0026#39;red\u0026#39;) print(f\u0026#39;E = {Etot} J\u0026#39;) Pour déterminer $p(t)$ à partir d\u0026rsquo;une série de mesures de $E(t)$ :\n# mesures de E(t) à différents t E = [0.0, 0.226, 0.905, 2.150, 3.960, 6.676, 10.297, 15.502, 22.178, 30.552, 39.943, 49.675, 57.935, 64.611, 69.590, 73.324, 76.040, 77.850, 79.095, 79.774, 80.0] n = len(E) dt = 0.1 # temps entre 2 mesures P = [] for i in range(1,n-1) : ### Code à déterminer P.append(p) T = [i*dt for i in range(n)] # liste des temps import matplotlib.pyplot as plt fig, ax1 = plt.subplots(figsize=(15,10)) ax2 = ax1.twinx() ax1.plot(T,E,\u0026#39;ro--\u0026#39;) ax2.plot(T[1:n-1],P,\u0026#39;bo--\u0026#39;) ax1.set_xlabel(\u0026#39;temps (s)\u0026#39;) ax1.set_ylabel(\u0026#39;Énergie (J)\u0026#39;,c=\u0026#39;red\u0026#39;) ax2.set_ylabel(\u0026#39;Puissance (W)\u0026#39;,c=\u0026#39;blue\u0026#39;) Lien vers Colab pour compléter les codes (il faut vous connecter à un compte Google pour pouvoir exécuter le code).\nSavoir et savoir faire Déterminer une puissance instantanée à partir d\u0026rsquo;une courbe d\u0026rsquo;énergie.\nDéterminer une énergie à partir d\u0026rsquo;une courbe de puissance.\nCalculer un rendement.\n "
 },
 {
-	"uri": "https://info-tsi-vieljeux.github.io/tes/basededonne%CC%81es/",
-	"title": "Bases de données",
+	"uri": "https://info-tsi-vieljeux.github.io/tsti2d/conduction/",
+	"title": "Conduction thermique",
 	"tags": [],
 	"description": "",
-	"content": "Bases de données Les bases de données (database en anglais) sont une forme d\u0026rsquo;organisation des données.\nUne base de donnée permet de centraliser différentes données en évitant les duplications inutiles et garantissant un partage efficace de ces données en évitant les corruptions.\nUne base de données peut gérer des données organisées suivant différents modèles : navigationnel, hierarchique, relationnel, post-relationnel. C\u0026rsquo;est le modèle relationnel, le plus utilisé, qui va nous intéresser ici.\nDans un modèle relationnel, les données sont organisées dans des tables (des tableaux à deux dimensions) ayant des relations entre elles via des clés.\nbase des\n "
+	"content": "Conduction thermique Présentation\n Rappels  Les 3 modes de transferts thermiques sont\u0026nbsp;:    la conduction\u0026nbsp;:  agitation moléculaire qui se transmet de proche en proche dans un matériau.   la convection\u0026nbsp;:  mouvement d'ensemble de la matière dans un fluide type air ou eau.   le rayonnement\u0026nbsp;:  transfert à distance, même dans le vide, par des ondes électromagnétiques ayant un spectre de type corps noir.\nC'est comme ça que le soleil nous chauffe.      Questions :   Quel mode de transfert est illustré par cette vidéo ?     la convection (l'air chaud monte sous l'effet de la gravité)     Qu'est-ce qu c'est et expliquer forme, matériau et orientation\u0026nbsp;?    Souvent en aluminium car bonne conductivité thermique, leur forme vise à maximiser la surface d'échange et l'orientation permet à l'air chaud de s'élever par convection et donc d'être remplacé.     Pourquoi un glaçon fond-il moins vite dans de l'eau salé que dans de l'eau douce\u0026nbsp;?    L'eau salé est plus dense que l'eau douce issue de la fusion du glaçon et cette eau froide reste alors en haut, au contact du glaçon plutôt que s'homogénéiser avec le reste de l'eau par convection.     Qu'ont en commun les meilleurs isolants thermiques\u0026nbsp;?    Ils emprisonnent de l'air. Et dans le cas de l'aerogel, les cavités sont si petites (de l'ordre du nm) que la conduction y est plus difficile que dans l'air libre (et la convection est bien sûr complètement absente).     Comment expliquer ce qu'on voit dans cette vidéo\u0026nbsp;?\n    Dans ce matériau très isolant, le flux thermique dû à la conduction thermique du centre vers les bords (en particulier les coins) n'arrive pas à compenser le flux thermique radiatif sortant. Résultat : les coins se refroidissent rapidement ($\\approx\\pu{35 ^\\circ C}$) malgré que le centre soit encore à plus de ($\\pu{1200 ^\\circ C}$)\u0026nbsp;!      Savoir et savoir faire Définir un flux thermique et le calculer.\nSavoir comment le flux thermique évolue en fonction de l\u0026rsquo;écart de température et de la résistance thermique.\nCalculer la valeur de la résistance thermique d’une paroi à partir de son épaisseur et de la conductivité thermique du matériau.\nCalculer la résistance thermique d’une paroi composée de plusieurs couches de matériaux différents.\n La résistance thermique telle que définie dans la présentation est en réalité la résistance thermique surfacique.\nLa vraie résistance thermique est définie par $R_{th}=\\frac{e}{S \\lambda}$ et s\u0026rsquo;exprime en $\\pu{K * W-1}$.\nAvec cette définition, on a $\\Phi = \\frac{\\Delta \\theta}{R_{th}}$.\nCependant, le programme semble préférer la résistance thermique surfacique tout en l\u0026rsquo;appelant \u0026ldquo;résistance thermique\u0026rdquo;, ce qui peut prêter à confusion, mais cela semble aussi être l\u0026rsquo;usage dans le secteur du bâtiment.\nMoralité, faites très attention aux unités et sachez que les deux définitions existent.\n On mesure une résistance thermique grâce à un appareil capable de mesurer un flux thermique.\nLorsqu\u0026rsquo;on dispose d\u0026rsquo;un échantillon, on peut utiliser un appareil un peu encombrant constitué de deux plaques métalliques dont l\u0026rsquo;une est reliée à une résistance électrique.\nLe matériau dont on cherche à mesurer la résistance thermique est placé entre deux plaques métalliques.\nLa plaque du bas est au contact d’une source froide dont la température n’est pas réglable tandis que la plaque du haut est au contact d’une résistance électrique qui joue le rôle de la source chaude.\nL’appareil mesure la tension et l’intensité de la résistance ainsi que les températures des deux plaques une fois le régime permanent atteint.\nLa puissance électrique de la résistance constituant la source chaude est égale au flux thermique traversant le matériau testé. Mais pour mesurer la résistance thermique d\u0026rsquo;une paroi sur site, on ne peut pas utiliser cet apapreil. On se tourne alors vers des fluxmètres thermiques beaucoup moins encombrant constitués d\u0026rsquo;une seule plaque.\nOn place la plaque contre la paroi (à l\u0026rsquo;intérieur ou à l\u0026rsquo;extérieur) et on mesure préciséments la température de chaque côté de la paroi. Le principe est que le flux qui sort ou entre dans une paroi est aussi le flux qui la traverse (en régime permanent).\nPour des mesures officielles, une norme existe.\n Activité issue du manuel Nathan "
 },
 {
 	"uri": "https://info-tsi-vieljeux.github.io/",

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>La matière on Cours info TSI</title>
+    <link>https://info-tsi-vieljeux.github.io/1es/matiere/</link>
+    <description>Recent content in La matière on Cours info TSI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://info-tsi-vieljeux.github.io/1es/matiere/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Les éléments</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/matiere/elements/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/matiere/elements/</guid>
+      <description>Abondance et origine Présentation
+      Radioactivité </description>
+    </item>
+    
+    <item>
+      <title>Cristaux</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/matiere/cristaux/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/matiere/cristaux/</guid>
+      <description>Cristaux </description>
+    </item>
+    
+  </channel>
+</rss>

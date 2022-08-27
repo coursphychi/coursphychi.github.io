@@ -8,6 +8,16 @@
     <language>fr</language>
     <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://info-tsi-vieljeux.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Les éléments</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/matiere/elements/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/matiere/elements/</guid>
+      <description>Abondance et origine Présentation
+      Radioactivité </description>
+    </item>
+    
+    <item>
       <title>Rappels chimie</title>
       <link>https://info-tsi-vieljeux.github.io/tsti2d/rappelschimie/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -16,15 +26,6 @@
       <description>Rappels sur les solutions Présentation
  Pictogrammes Savoir et savoir faire Calculer la masse molaire d&amp;rsquo;une molécule à partir de celles des atomes qui la constituent.
 Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à partir de la masse $m$ de l&amp;rsquo;espèce et de sa masse molaire $M$ : $\displaystyle n=\frac{m}{M}$ Déterminer une concentration massique $\displaystyle C_m=\frac{m}{V}$ et une concentration molaire $\displaystyle C=\frac{n}{V}$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une masse volumique $\rho$ : $m=\rho\times V$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration massique $C_m$ : $m=C_m\times V$ Déterminer une quantité de matière $n$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration molaire $C$ : $n=C\times V$ Donner le protocole d&amp;rsquo;une dissolution.</description>
-    </item>
-    
-    <item>
-      <title>Une longueur histoire de la matière</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/matiere/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://info-tsi-vieljeux.github.io/1es/matiere/</guid>
-      <description>Une longue histoire de la matière </description>
     </item>
     
     <item>
@@ -37,6 +38,15 @@ Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à parti
  L&amp;rsquo;expérience de la fontaine d&amp;rsquo;ammoniac   Questions    D&amp;rsquo;après le tableau suivant, que pouvez-vous dire du pH de la solution aqueuse une fois que l&amp;rsquo;ammoniac se dissout dedans ?   Comment expliquer le jaillisement de l&amp;rsquo;eau dans la 1re expérience et la contraction du ballon dans la 2e.
   Comment évolue le pH dans la 1re expérience ?
   De quoi témoigne l&amp;rsquo;élévation de la température du ballon ?</description>
+    </item>
+    
+    <item>
+      <title>Bilan radiatif</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/soleil/bilanradia/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/soleil/bilanradia/</guid>
+      <description>Bilan radiatif terrestre </description>
     </item>
     
     <item>
@@ -54,12 +64,12 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
     </item>
     
     <item>
-      <title>Le Soleil, notre source d&#39;énergie</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/soleil/</link>
+      <title>Cristaux</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/matiere/cristaux/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/1es/soleil/</guid>
-      <description>Le Soleil, notre source d&amp;rsquo;énergie </description>
+      <guid>https://info-tsi-vieljeux.github.io/1es/matiere/cristaux/</guid>
+      <description>Cristaux </description>
     </item>
     
     <item>
@@ -75,12 +85,30 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
     </item>
     
     <item>
-      <title>La Terre, un astre singulier</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/terre/</link>
+      <title>Rayonnement solaire</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/soleil/rayonnement/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/1es/terre/</guid>
-      <description>La Terre, un astre singulier </description>
+      <guid>https://info-tsi-vieljeux.github.io/1es/soleil/rayonnement/</guid>
+      <description>Rayonnement solaire </description>
+    </item>
+    
+    <item>
+      <title>Forme et mesure</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/terre/mesure/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/terre/mesure/</guid>
+      <description>Forme de la Terre Mesure de la Terre </description>
+    </item>
+    
+    <item>
+      <title>La Terre dans l&#39;espace</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/terre/terreespace/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/terre/terreespace/</guid>
+      <description>Mouvement Lune </description>
     </item>
     
     <item>
@@ -97,12 +125,30 @@ Déterminer l&amp;rsquo;énergie dégagée par une combustion.
     </item>
     
     <item>
-      <title>Son et musique, porteurs d&#39;information</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/musique/</link>
+      <title>Musique</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/musique/musique/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/1es/musique/</guid>
-      <description>Son et musique, porteurs d&amp;rsquo;information </description>
+      <guid>https://info-tsi-vieljeux.github.io/1es/musique/musique/</guid>
+      <description>La musique ou l&amp;rsquo;art de faire entendre les nombres </description>
+    </item>
+    
+    <item>
+      <title>Numérisation</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/musique/numerisation/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/musique/numerisation/</guid>
+      <description>Le son, une information à coder </description>
+    </item>
+    
+    <item>
+      <title>Son</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/musique/son/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/musique/son/</guid>
+      <description>Le son, un phénomène vibratoire </description>
     </item>
     
     <item>
@@ -117,14 +163,13 @@ Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pend
     </item>
     
     <item>
-      <title>Bases de données</title>
-      <link>https://info-tsi-vieljeux.github.io/tes/basededonne%CC%81es/</link>
+      <title>Conduction thermique</title>
+      <link>https://info-tsi-vieljeux.github.io/tsti2d/conduction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tes/basededonne%CC%81es/</guid>
-      <description>Bases de données Les bases de données (database en anglais) sont une forme d&amp;rsquo;organisation des données.
-Une base de donnée permet de centraliser différentes données en évitant les duplications inutiles et garantissant un partage efficace de ces données en évitant les corruptions.
-Une base de données peut gérer des données organisées suivant différents modèles : navigationnel, hierarchique, relationnel, post-relationnel. C&amp;rsquo;est le modèle relationnel, le plus utilisé, qui va nous intéresser ici.</description>
+      <guid>https://info-tsi-vieljeux.github.io/tsti2d/conduction/</guid>
+      <description>Conduction thermique Présentation
+ Rappels  Les 3 modes de transferts thermiques sont&amp;nbsp;:    la conduction&amp;nbsp;:  agitation moléculaire qui se transmet de proche en proche dans un matériau.   la convection&amp;nbsp;:  mouvement d&#39;ensemble de la matière dans un fluide type air ou eau.   le rayonnement&amp;nbsp;:  transfert à distance, même dans le vide, par des ondes électromagnétiques ayant un spectre de type corps noir.</description>
     </item>
     
   </channel>

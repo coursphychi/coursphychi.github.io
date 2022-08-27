@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>La Terre on Cours info TSI</title>
+    <link>https://info-tsi-vieljeux.github.io/1es/terre/</link>
+    <description>Recent content in La Terre on Cours info TSI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://info-tsi-vieljeux.github.io/1es/terre/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Forme et mesure</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/terre/mesure/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/terre/mesure/</guid>
+      <description>Forme de la Terre Mesure de la Terre </description>
+    </item>
+    
+    <item>
+      <title>La Terre dans l&#39;espace</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/terre/terreespace/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/terre/terreespace/</guid>
+      <description>Mouvement Lune </description>
+    </item>
+    
+  </channel>
+</rss>

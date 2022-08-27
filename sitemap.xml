@@ -3,13 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://info-tsi-vieljeux.github.io/1es/matiere/elements/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://info-tsi-vieljeux.github.io/tsti2d/rappelschimie/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://info-tsi-vieljeux.github.io/1es/matiere/</loc>
-    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://info-tsi-vieljeux.github.io/tes/energie/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://info-tsi-vieljeux.github.io/tes/climat/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url>
   
   <url>
@@ -23,12 +38,17 @@
   </url>
   
   <url>
+    <loc>https://info-tsi-vieljeux.github.io/1es/soleil/bilanradia/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://info-tsi-vieljeux.github.io/tsti2d/chgmtetat/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://info-tsi-vieljeux.github.io/1es/soleil/</loc>
+    <loc>https://info-tsi-vieljeux.github.io/1es/matiere/cristaux/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
   </url>
   
@@ -38,13 +58,33 @@
   </url>
   
   <url>
+    <loc>https://info-tsi-vieljeux.github.io/1es/soleil/rayonnement/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://info-tsi-vieljeux.github.io/1es/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://info-tsi-vieljeux.github.io/1es/terre/</loc>
+    <loc>https://info-tsi-vieljeux.github.io/1es/soleil/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://info-tsi-vieljeux.github.io/1es/terre/mesure/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://info-tsi-vieljeux.github.io/1es/terre/terreespace/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://info-tsi-vieljeux.github.io/1es/terre/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url>
   
   <url>
@@ -58,8 +98,23 @@
   </url>
   
   <url>
-    <loc>https://info-tsi-vieljeux.github.io/1es/musique/</loc>
+    <loc>https://info-tsi-vieljeux.github.io/1es/musique/musique/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://info-tsi-vieljeux.github.io/1es/musique/numerisation/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://info-tsi-vieljeux.github.io/1es/musique/son/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://info-tsi-vieljeux.github.io/1es/musique/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url>
   
   <url>
@@ -68,7 +123,7 @@
   </url>
   
   <url>
-    <loc>https://info-tsi-vieljeux.github.io/tes/basededonne%CC%81es/</loc>
+    <loc>https://info-tsi-vieljeux.github.io/tsti2d/conduction/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
   </url>
   
