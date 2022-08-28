@@ -18,11 +18,6 @@
   </url>
   
   <url>
-    <loc>https://info-tsi-vieljeux.github.io/tes/energie/</loc>
-    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://info-tsi-vieljeux.github.io/tes/climat/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url>
@@ -64,6 +59,11 @@
   
   <url>
     <loc>https://info-tsi-vieljeux.github.io/1es/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://info-tsi-vieljeux.github.io/tes/energie/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url>
   
