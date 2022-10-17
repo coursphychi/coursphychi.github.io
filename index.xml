@@ -19,8 +19,7 @@ Découverte de la radioactivité :
       Chambre à brouillard permettant de visualiser la radioactivité naturelle :
     Bruit d&#39;un compteur geiger : 
    Estimez votre exposition annuelle à la radioactivité.
- Documents :
- Graphes d&amp;rsquo;abondance et classification périodique Activité déchets nucléaires  </description>
+Graphiques de XKCD présentant les ordres de grandeur des différents niveaux d&amp;rsquo;irradiations aux rayonnements ionisants :  Documents :</description>
     </item>
     
     <item>
@@ -32,6 +31,19 @@ Découverte de la radioactivité :
       <description>Rappels sur les solutions Présentation
  Pictogrammes Savoir et savoir faire Calculer la masse molaire d&amp;rsquo;une molécule à partir de celles des atomes qui la constituent.
 Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à partir de la masse $m$ de l&amp;rsquo;espèce et de sa masse molaire $M$ : $\displaystyle n=\frac{m}{M}$ Déterminer une concentration massique $\displaystyle C_m=\frac{m}{V}$ et une concentration molaire $\displaystyle C=\frac{n}{V}$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une masse volumique $\rho$ : $m=\rho\times V$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration massique $C_m$ : $m=C_m\times V$ Déterminer une quantité de matière $n$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration molaire $C$ : $n=C\times V$ Donner le protocole d&amp;rsquo;une dissolution.</description>
+    </item>
+    
+    <item>
+      <title>Rayonnement solaire</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/soleil/rayonnement/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/soleil/rayonnement/</guid>
+      <description>Rayonnement solaire Vidéo sur l&amp;rsquo;énergie des étoiles :
+   Vidéo sur les mouvements de la Terre et du Soleil :
+   Vidéo sur l&amp;rsquo;impact de l&amp;rsquo;inclinaison de la Terre par rapport au Soleil :
+There should have been a video here but your browser does not seem to support it.    Documents :
+ Activité énergie des étoiles Activité température des étoiles  </description>
     </item>
     
     <item>
@@ -86,15 +98,6 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
  Rappels Réactions d&amp;rsquo;oxydoréduction : Il y a échanges d&amp;rsquo;électrons lors d&amp;rsquo;une réaction d&#39;oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques).
  La pile Daniell :
   Savoir et savoir faire Équilibrer les demi-équations redox Déterminer une équation bilan à partir des demi-équations Savoir ce qui se passe à chaque électrode pendant une décharge et pendant une charge lier une demi-équation à une électrode (cathode ou anode) Savoir différentier et définir une pile, un accumulateur et une batterie Calculer l’énergie totale stockée Exploiter les principales caractéristiques des piles ou accumulateurs (tension à vide, capacité, énergies massique et volumique, nombre de cycles de charge et décharge) pour les utiliser dans des applications spécifiques.</description>
-    </item>
-    
-    <item>
-      <title>Rayonnement solaire</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/soleil/rayonnement/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://info-tsi-vieljeux.github.io/1es/soleil/rayonnement/</guid>
-      <description>Rayonnement solaire </description>
     </item>
     
     <item>
