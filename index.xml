@@ -42,7 +42,7 @@ Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à parti
       <description>Rayonnement solaire Vidéo sur l&amp;rsquo;énergie des étoiles :
    Vidéo sur les mouvements de la Terre et du Soleil :
    Vidéo sur l&amp;rsquo;impact de l&amp;rsquo;inclinaison de la Terre par rapport au Soleil :
-There should have been a video here but your browser does not seem to support it.    Documents :
+ Documents :
  Activité énergie des étoiles Activité température des étoiles  </description>
     </item>
     
@@ -168,7 +168,7 @@ Déterminer l&amp;rsquo;énergie dégagée par une combustion.
       
       <guid>https://info-tsi-vieljeux.github.io/tsti2d/egiepuiss/</guid>
       <description>Énergie / Puissance Présentation
- Rappel L&amp;rsquo;énergie $\Delta E$ (en J) reçue ou fournie par un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$  où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.
+ Rappels L&amp;rsquo;énergie $\Delta E$ (en J) reçue ou fournie par un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$  où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.
 Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à : $\displaystyle P = \frac{\Delta E}{\Delta t}$  $\pu{1 kWh = 3,6 MJ}$</description>
     </item>
     
@@ -189,7 +189,8 @@ Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pend
       
       <guid>https://info-tsi-vieljeux.github.io/tsti2d/puisselec/</guid>
       <description>Puissance en régime sinusoïdal Présentation
- </description>
+Savoir et savoir faire Savoir définir la puissance apparente $S$. Savoir que la puissance apparente est une grandeur de dimensionnement d&amp;rsquo;une installation ou d&amp;rsquo;un équipement électrique. Savoir définir la puissance active $P$. Calculer le facteur de puissance $k=P/S$ d&amp;rsquo;un récepteur en régime sinusoïdal.
+ Activité numérique Comment calculer numériquement la valeur de la puissance active d’un système à partir des évolutions temporelles de la tension et de l’intensité du courant ?</description>
     </item>
     
     <item>
