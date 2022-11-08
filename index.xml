@@ -129,9 +129,9 @@ Résultat, le trajet le plus court entre deux points est bien à nouveau la droi
       <guid>https://info-tsi-vieljeux.github.io/tsti2d/combustion/</guid>
       <description>Combustions Présentation
  Savoir et savoir faire Écrire et équuilibrer l&amp;rsquo;équation d&amp;rsquo;une combustion complète.
-Établir un bilan de matière : savoir déterminer la masse de $\ce{CO2}$ ou d&#39;$\ce{H2O}$ dans le cas de la combustion complète d&amp;rsquo;une masse $m$ de combustible.
+⚠️ Établir un bilan de matière : savoir déterminer la masse de $\ce{CO2}$ ou d&#39;$\ce{H2O}$ dans le cas de la combustion complète d&amp;rsquo;une masse $m$ de combustible.
 Déterminer l&amp;rsquo;énergie dégagée par une combustion.
- Exercice issu du bac </description>
+ Si on ne fait pas la différence entre le pouvoir calorifique inférieur $\text{PCI}$ ou supérieur $\text{PCS}$ en parlant seulement de pouvoir calorifique $\text{PC}$, il s&amp;rsquo;agit en fait la plupart du temps, sans le dire, du $\text{PCI}$.</description>
     </item>
     
     <item>
