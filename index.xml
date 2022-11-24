@@ -193,8 +193,7 @@ Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pend
       
       <guid>https://info-tsi-vieljeux.github.io/tsti2d/puisselec/</guid>
       <description>Puissance en régime sinusoïdal Présentation
-Savoir et savoir faire Savoir définir la puissance apparente $S$. Savoir que la puissance apparente est une grandeur de dimensionnement d&amp;rsquo;une installation ou d&amp;rsquo;un équipement électrique. Savoir définir la puissance active $P$. Calculer le facteur de puissance $k=P/S$ d&amp;rsquo;un récepteur en régime sinusoïdal.
- Activité numérique Comment calculer numériquement la valeur de la puissance active d’un système à partir des évolutions temporelles de la tension et de l’intensité du courant ?</description>
+Rappels  En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;:  La tension et l&#39;intensité moyenne.    Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;:  La tension et l&#39;intensité efficace.    Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;?  $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$    Savoir et savoir faire Savoir définir la puissance apparente $S$.</description>
     </item>
     
     <item>
