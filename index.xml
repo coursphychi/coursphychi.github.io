@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Introduction on Cours info TSI</title>
+    <title>Cours de physique-chimie on Cours info TSI</title>
     <link>https://info-tsi-vieljeux.github.io/</link>
-    <description>Recent content in Introduction on Cours info TSI</description>
+    <description>Recent content in Cours de physique-chimie on Cours info TSI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://info-tsi-vieljeux.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -107,7 +107,7 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
       
       <guid>https://info-tsi-vieljeux.github.io/1es/terre/mesure/</guid>
       <description>Forme de la Terre   
-    Mesure de la Terre Quel est le trajet le plus court entre deux points ?
+   Quel est le trajet le plus court entre deux points ?
 Dans un espace plat, c&amp;rsquo;est la droite.
 Mais ce n&amp;rsquo;est plus cas si l&amp;rsquo;espace est courbe ! On le constate dans l&amp;rsquo;exemple du trajet en avion entre Bordeau et Portland.
 projection gonomique Elle transforme les grands cercles en droite.

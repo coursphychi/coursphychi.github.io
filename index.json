@@ -102,7 +102,7 @@
 	"title": "Forme et mesure",
 	"tags": [],
 	"description": "",
-	"content": "Forme de la Terre   \n    Mesure de la Terre Quel est le trajet le plus court entre deux points ?\nDans un espace plat, c\u0026rsquo;est la droite.\nMais ce n\u0026rsquo;est plus cas si l\u0026rsquo;espace est courbe ! On le constate dans l\u0026rsquo;exemple du trajet en avion entre Bordeau et Portland.\nprojection gonomique Elle transforme les grands cercles en droite.\nRésultat, le trajet le plus court entre deux points est bien à nouveau la droite.\nEn faisant passer le plan tangeant par le pôle Nord :\n"
+	"content": "Forme de la Terre   \n   Quel est le trajet le plus court entre deux points ?\nDans un espace plat, c\u0026rsquo;est la droite.\nMais ce n\u0026rsquo;est plus cas si l\u0026rsquo;espace est courbe ! On le constate dans l\u0026rsquo;exemple du trajet en avion entre Bordeau et Portland.\nprojection gonomique Elle transforme les grands cercles en droite.\nRésultat, le trajet le plus court entre deux points est bien à nouveau la droite.\nEn faisant passer le plan tangeant par le pôle Nord :\n"
 },
 {
 	"uri": "https://info-tsi-vieljeux.github.io/1es/terre/terreespace/",
@@ -193,11 +193,11 @@
 	"title": "Lumière",
 	"tags": [],
 	"description": "",
-	"content": "Énergie transportée par la lumière Présentation\nRappels   Lien entre la fréquence $f$ et la longueur d'onde $\\lambda$\u0026nbsp;?  $$\\lambda=\\frac{c}{f}$$  Où $c$ est la célérité (vitesse) de la lumière\n$c = \\pu{3,0*10^8 m*s-1}$     Étendu en longueurs d'ondes de la partie visible du spectre électromagnétique\u0026nbsp;?     Simulation expérience   Lien vers applet Geogebra.\n  Lien vers l\u0026rsquo;activité.\n  Savoir et savoir faire Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon. Citer et exploiter la relation $ΔE = h\\cdot f$ reliant une variation d’énergie à la fréquence des photons émis ou reçus. Identifier les formes d’énergie mises en jeu dans une conversion photovoltaïque et une conversion photothermique. Exploiter les caractéristiques tension-courant d’un panneau photovoltaïque pour identifier son point de fonctionnement. Réaliser le bilan de puissance pour déterminer le rendement d’une conversion photovoltaïque et d’une conversion photothermique.\n L'irradiance, qui est la puissance radiative reçue par mètre carré (unité : $\\pu{W*m-2}$), peut aussi être appelé éclairement énergétique.\n Exercices  caractéristiques et point de fonctionnement refuge de montagne (bac 2022)  "
+	"content": "Énergie transportée par la lumière Présentation\nRappels   Lien entre la fréquence $f$ et la longueur d'onde $\\lambda$\u0026nbsp;?  $$\\lambda=\\frac{c}{f}$$  Où $c$ est la célérité (vitesse) de la lumière\n$c = \\pu{3,0*10^8 m*s-1}$     Étendu en longueurs d'ondes de la partie visible du spectre électromagnétique\u0026nbsp;?     Simulation expérience   Lien vers applet Geogebra.\n  Lien vers l\u0026rsquo;activité.\n  Savoir et savoir faire Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon. Citer et exploiter la relation $ΔE = h\\cdot f$ reliant une variation d’énergie à la fréquence des photons émis ou reçus. Identifier les formes d’énergie mises en jeu dans une conversion photovoltaïque et une conversion photothermique. Exploiter les caractéristiques tension-courant d’un panneau photovoltaïque pour identifier son point de fonctionnement. Réaliser le bilan de puissance pour déterminer le rendement d’une conversion photovoltaïque et d’une conversion photothermique.\n L'irradiance, qui est la puissance radiative reçue par mètre carré (unité : $\\pu{W*m-2}$), peut aussi être appelé éclairement énergétique.\n Exercices  caractéristiques et point de fonctionnement - Correction refuge de montagne (bac 2022)  "
 },
 {
 	"uri": "https://info-tsi-vieljeux.github.io/",
-	"title": "Introduction",
+	"title": "Cours de physique-chimie",
 	"tags": [],
 	"description": "",
 	"content": "Cours de physique-chimie           TSTI2D 1ES TES    "
