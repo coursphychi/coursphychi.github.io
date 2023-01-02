@@ -111,5 +111,39 @@ $c = \pu{3,0*10^8 m*s-1}$     Étendu en longueurs d&#39;ondes de la partie visi
   Savoir et savoir faire Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon.</description>
     </item>
     
+    <item>
+      <title>Signaux</title>
+      <link>https://info-tsi-vieljeux.github.io/tsti2d/signaux/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/tsti2d/signaux/</guid>
+      <description>Signaux Présentation
+Rappels Un signal est une quantité qui dépend du temps.
+Mathématiquement, un signal est modélisé par une fonction $t\mapsto f(t)$ qui à chaque instant $t\in \mathbb{R}$ associe une valeur $f(t)$.
+  Qu&#39;est-ce qu&#39;un signal périodique&amp;nbsp;?  Un signal périodique est un signal qui se répète à l&#39;identique dans le temps.
+La durée d&#39;une répétition est appelée période et est notée $T$ (unité de base : la seconde).</description>
+    </item>
+    
+    <item>
+      <title>Incertitudes</title>
+      <link>https://info-tsi-vieljeux.github.io/tsti2d/incertitudes/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/tsti2d/incertitudes/</guid>
+      <description>Incertitudes Présentation
+Savoir et savoir faire Procéder à l’évaluation d’une incertitude-type par une approche statistique (type A). Savoir utiliser sa calculette pour déterminer la moyenne et l&amp;rsquo;écart-type expérimental d&amp;rsquo;une série de données. Procéder à l’évaluation d’une incertitude-type associée à une mesure unique en exploitant une relation fournie (type B). Comparer le poids des différentes sources d’erreur, à partir de l’incertitude-type associée à chacune d’elles. Faire des propositions pour améliorer un protocole de mesure.</description>
+    </item>
+    
+    <item>
+      <title>Mécanique</title>
+      <link>https://info-tsi-vieljeux.github.io/tsti2d/mecanique/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/tsti2d/mecanique/</guid>
+      <description>Mécanique Présentation
+
+Savoir et savoir faire Déterminer la résultante des forces appliquées à un système dont le mouvement est rectiligne à partir de l’accélération en utilisant le principe fondamental de la mécanique (PFD). Déterminer les caractéristiques de l’accélération d’un système dans le cas d’un mouvement rectiligne à partir des forces extérieures appliquées en utilisant le PFD. Exploiter numériquement des résultats expérimentaux pour valider le modèle de la chute libre. Exploiter des mesures pour modéliser une force de résistance aérodynamique lors d’un déplacement d’un solide à vitesse constante.</description>
+    </item>
+    
   </channel>
 </rss>
