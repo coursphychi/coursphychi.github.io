@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Bilan radiatif - Cours info TSI</title>
+    <title>Mécanique - Cours info TSI</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -79,7 +79,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/1es/soleil/bilanradia/">
+  <body class="" data-url="/tsti2d/mecanique-rot/">
     <nav id="sidebar" class="">
 
 
@@ -140,7 +140,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/tsti2d/" title="TSTI2D" class="dd-item
-        
+        parent
         
         
         ">
@@ -397,7 +397,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/tsti2d/mecanique-rot/" title="Mécanique" class="dd-item ">
+      <li data-nav-id="/tsti2d/mecanique-rot/" title="Mécanique" class="dd-item active">
         <a href="/tsti2d/mecanique-rot/">
         Mécanique
         
@@ -447,7 +447,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/" title="1ES" class="dd-item
-        parent
+        
         
         
         ">
@@ -554,7 +554,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/soleil/" title="Le Soleil" class="dd-item
-        parent
+        
         
         
         ">
@@ -601,7 +601,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/1es/soleil/bilanradia/" title="Bilan radiatif" class="dd-item active">
+      <li data-nav-id="/1es/soleil/bilanradia/" title="Bilan radiatif" class="dd-item ">
         <a href="/1es/soleil/bilanradia/">
         Bilan radiatif
         
@@ -960,14 +960,20 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Bilan radiatif
+                   Mécanique
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#savoir-et-savoir-faire">Savoir et savoir faire</a></li>
+    <li><a href="#tptd">TP/TD</a></li>
+    <li><a href="#exercices">Exercices</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -985,17 +991,48 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<h1 id="bilan-radiatif-terrestre">Bilan radiatif terrestre</h1>
-<p>Vidéo sur l&rsquo;impact de l&rsquo;inclinaison de la Terre par rapport au Soleil :</p>
-<video controls style="display:block;position:relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);width:800px;max-width:100%">
-  <source src="/inclinaison.mp4" type="video/mp4">
-</video>
+<h1 id="mécanique">Mécanique</h1>
+<p style="text-align:center;font-size: 25px"><a href="https://presentationssite.github.io/tsti/mecanique">Présentation</a></p>
+<p><a href="/cm-meca.pdf"><img src="/cm-meca.png" alt=""></a></p>
+<h2 id="savoir-et-savoir-faire">Savoir et savoir faire</h2>
+
+<div class="notices coeur" ><p><input type="checkbox"> Déterminer la <strong>résultante des forces</strong> appliquées à un système dont le mouvement est rectiligne <strong>à partir de l’accélération</strong> en utilisant le <strong>principe fondamental de la mécanique</strong> (PFD).
+<br><br>
+<input type="checkbox"> Déterminer les caractéristiques de l’<strong>accélération</strong> d’un système dans le cas d’un mouvement rectiligne <strong>à partir des forces extérieures</strong> appliquées en utilisant le PFD.
+<br><br>
+<input type="checkbox"> Exploiter numériquement des résultats expérimentaux pour valider le <strong>modèle de la chute libre</strong>.
+<br><br>
+<input type="checkbox"> Exploiter des mesures pour modéliser une <strong>force de résistance aérodynamique</strong> lors d’un déplacement d’un solide à vitesse constante.
+<br><br>
+<input type="checkbox"> Exploiter la relation entre la <strong>variation d’énergie cinétique</strong> d’un solide en translation et le <strong>travail des forces</strong> extérieures appliquées (TEC) pour déterminer une force de frottement supposée constante (frottement solide-solide)
+<br><br>
+<input type="checkbox"> Écrire et exploiter la relation entre <strong>vitesse linéaire</strong> et <strong>vitesse angulaire</strong>.
+<br><br>
+<input type="checkbox"> Définir et calculer le <strong>moment d’une force</strong> et d’un <strong>couple de forces</strong>.
+<br><br>
+<input type="checkbox"> Exploiter graphiquement la <strong>caractéristique mécanique d&rsquo;un moteur</strong> pour déterminer le <strong>point de fonctionnement</strong> d’un ensemble moteur-charge en régime permanent.</p>
+
+</div>
+
+<div class="notices note" ><p>On appelle aussi la <strong>force d&rsquo;un fluide sur un solide</strong> qui se déplace à travers lui une <strong>force de résistance aérodynamique</strong>.</p>
+
+</div>
+
+<div class="notices piege" ><p>La &ldquo;chute libre&rdquo; d&rsquo;un parachutiste avant qu&rsquo;il ouvre son parachute n&rsquo;est pas physiquement une chute libre !</p>
+
+</div>
 <br>
-<hr>
-<p>Documents :</p>
+<h2 id="tptd">TP/TD</h2>
 <ul>
-<li><a href="/act-dist-temp.pdf">Activité température et distance au Soleil</a></li>
-<li><a href="/act-albedo.pdf">Activité température et albédo</a></li>
+<li><a href="https://presentationssite.github.io/tsti/tdpfd/#/"><strong>Sur le principe fondamental de la dynamique</strong></a></li>
+<li><a href="https://presentationssite.github.io/tsti/tdmecafrott/#/"><strong>Sur les forces de frottement</strong></a></li>
+</ul>
+<br>
+<h2 id="exercices">Exercices</h2>
+<ul>
+<li><a href="/exomecataxiage.pdf"><strong>pfd - taxiage d&rsquo;un avion</strong> (bac 2022)</a></li>
+<li><a href="/exomecaglacier.pdf"><strong>chute libre - profondeur d&rsquo;un trou de forage</strong> (bac 2022)</a> - <a href="https://presentationssite.github.io/tsti/correc-chutelibre/#/" style="font-weight:bold;color:green">Correction</a></li>
+<li><a href="/exomecaremontepente.pdf"><strong>pfd + travail - remonte pente</strong> (sujet 0)</a></li>
 </ul>
 
 
@@ -1034,6 +1071,20 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
                         
                         
                     
@@ -1044,6 +1095,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                     
                     
 
+                    
+            
+        
                     
                         
             
@@ -1210,21 +1264,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1241,6 +1280,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1261,7 +1303,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
-                    
                 
                 
 
@@ -1276,9 +1317,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1328,7 +1366,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
-                    
                 
                 
 
@@ -1341,9 +1378,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1360,7 +1394,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
-                    
                     
                 
                 
@@ -1380,9 +1413,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
-                    
-                        
-                        
                     
                 
                 
