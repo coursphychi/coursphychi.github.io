@@ -51,7 +51,7 @@ Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à parti
       
       <guid>https://info-tsi-vieljeux.github.io/tsti2d/acide/</guid>
       <description>Réactions chimiques acido-basiques Présentation
- L&amp;rsquo;expérience de la fontaine d&amp;rsquo;ammoniac     Questions :   De quoi témoigne l&#39;élévation de la température du ballon&amp;nbsp;? D&#39;après le tableau suivant, que pouvez-vous dire de l&#39;évolution du pH de la solution aqueuse une fois que l&#39;ammoniac se dissout dedans et réagit avec l&#39;eau&amp;nbsp;?   Par conséquent, l&#39;ammoniac est-il une base ou un acide ? Comment expliquer le jaillisement de l&#39;eau dans la 1re expérience et la contraction du ballon dans la 2e&amp;nbsp;?</description>
+ Expérience introductive  Vidéo :        Questions :   De quoi témoigne l&#39;élévation de la température du ballon&amp;nbsp;? D&#39;après le tableau suivant, que pouvez-vous dire de l&#39;évolution du pH de la solution aqueuse une fois que l&#39;ammoniac se dissout dedans et réagit avec l&#39;eau&amp;nbsp;?   Par conséquent, l&#39;ammoniac est-il une base ou un acide ? Comment expliquer le jaillisement de l&#39;eau dans la 1re expérience et la contraction du ballon dans la 2e&amp;nbsp;?</description>
     </item>
     
     <item>
@@ -97,7 +97,7 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
       <description>Piles, accumulateurs et piles à combustible Présentation
  Rappels Réactions d&amp;rsquo;oxydoréduction : Il y a échanges d&amp;rsquo;électrons lors d&amp;rsquo;une réaction d&#39;oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques).
  La pile Daniell :
-  Savoir et savoir faire Équilibrer les demi-équations redox Déterminer une équation bilan à partir des demi-équations Savoir ce qui se passe à chaque électrode pendant une décharge et pendant une charge lier une demi-équation à une électrode (cathode ou anode) Savoir différentier et définir une pile, un accumulateur et une batterie Calculer l’énergie totale stockée Exploiter les principales caractéristiques des piles ou accumulateurs (tension à vide, capacité, énergies massique et volumique, nombre de cycles de charge et décharge) pour les utiliser dans des applications spécifiques.</description>
+  Savoir et savoir faire Équilibrer les demi-équations redox Déterminer une équation bilan à partir des demi-équations Décrire ce qui se passe à chaque électrode pendant une décharge et pendant une charge Lier une demi-équation à une électrode (cathode ou anode) Différentier et définir une pile, un accumulateur et une batterie Calculer l’énergie totale stockée Exploiter les principales caractéristiques des piles ou accumulateurs (tension à vide, capacité, énergies massique et volumique, nombre de cycles de charge et décharge) pour les utiliser dans des applications spécifiques.</description>
     </item>
     
     <item>
@@ -128,10 +128,7 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
       
       <guid>https://info-tsi-vieljeux.github.io/tsti2d/combustion/</guid>
       <description>Combustions Présentation
- Savoir et savoir faire Écrire et équuilibrer l&amp;rsquo;équation d&amp;rsquo;une combustion complète.
-⚠️ Établir un bilan de matière : savoir déterminer la masse de $\ce{CO2}$ ou d&#39;$\ce{H2O}$ dans le cas de la combustion complète d&amp;rsquo;une masse $m$ de combustible.
-Déterminer l&amp;rsquo;énergie dégagée par une combustion.
- Si on ne fait pas la différence entre le pouvoir calorifique inférieur $\text{PCI}$ ou supérieur $\text{PCS}$ en parlant seulement de pouvoir calorifique $\text{PC}$, il s&amp;rsquo;agit en fait la plupart du temps, sans le dire, du $\text{PCI}$.</description>
+ Rappels  Un composé organique contient du carbone. Un hydrocarbure contient exclusivement du carbone et de l&#39;hydrogène. Un alcane est un hydrocarbure saturé = les carbones ne sont liés entre eux que par des liaisons simples. Sa formule brute (s&amp;rsquo;il n&amp;rsquo;est pas cyclique) est $\ce{C_nH_{2n+2}}$. Un alcène est un hydrocarbure insaturé = la chaîne carbonée contient au moins une double liaison covalente. La formule brute d&amp;rsquo;un alcène non cyclique mono insaturé (une seule double liaison) est $\ce{C_nH_{2n}}$.</description>
     </item>
     
     <item>
@@ -200,9 +197,8 @@ Rappels  En régime alternatif, le voltmètre et l&#39;ampèremètre en mode con
       <guid>https://info-tsi-vieljeux.github.io/tsti2d/lumiere/</guid>
       <description>Énergie transportée par la lumière Présentation
 Rappels   Lien entre la fréquence $f$ et la longueur d&#39;onde $\lambda$&amp;nbsp;?  $$\lambda=\frac{c}{f}$$  Où $c$ est la célérité (vitesse) de la lumière
-$c = \pu{3,0*10^8 m*s-1}$     Étendu en longueurs d&#39;ondes de la partie visible du spectre électromagnétique&amp;nbsp;?     Simulation expérience   Lien vers applet Geogebra.
-  Lien vers l&amp;rsquo;activité.
-  Savoir et savoir faire Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon.</description>
+$c = \pu{3,0*10^8 m*s-1}$     Étendu en longueurs d&#39;ondes de la partie visible du spectre électromagnétique&amp;nbsp;?     Simulations   Photons et niveaux d&amp;rsquo;énergie (spectres) : applet Geogebra
+  Tracé d&amp;rsquo;une caractéristique : applet Geogebra + activité</description>
     </item>
     
     <item>
