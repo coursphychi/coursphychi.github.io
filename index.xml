@@ -235,5 +235,15 @@ Savoir et savoir faire Procéder à l’évaluation d’une incertitude-type par
 Savoir et savoir faire Déterminer la résultante des forces appliquées à un système dont le mouvement est rectiligne à partir de l’accélération en utilisant le principe fondamental de la mécanique (PFD). Déterminer les caractéristiques de l’accélération d’un système dans le cas d’un mouvement rectiligne à partir des forces extérieures appliquées en utilisant le PFD. Exploiter numériquement des résultats expérimentaux pour valider le modèle de la chute libre. Exploiter des mesures pour modéliser une force de résistance aérodynamique lors d’un déplacement d’un solide à vitesse constante.</description>
     </item>
     
+    <item>
+      <title>Son</title>
+      <link>https://info-tsi-vieljeux.github.io/tsti2d/son/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/tsti2d/son/</guid>
+      <description>Ondes sonores Présentation
+Carte mentale   Savoir et savoir faire Déterminer la fréquence du fondamental et des harmoniques à partir du spectre d’amplitude d’un signal sonore.. Définir et distinguer la notion de timbre et de hauteur. Exploiter la relation entre l&#39;intensité acoustique et le niveau sonore et savoir se débrouiller avec les décibels (dB). Exploiter des informations relatives aux courbes de sensibilité de l’oreille humaine (fréquences audible, seuil d&amp;rsquo;audibilité, seuil de douleur, etc.</description>
+    </item>
+    
   </channel>
 </rss>
