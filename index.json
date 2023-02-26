@@ -21,6 +21,13 @@
 	"content": "Rayonnement solaire Vidéo sur l\u0026rsquo;énergie des étoiles :\n    Documents :\n Activité énergie des étoiles Activité température des étoiles  "
 },
 {
+	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/son/",
+	"title": "Son",
+	"tags": [],
+	"description": "",
+	"content": "Le son, un phénomène vibratoire Comme l\u0026rsquo;a montré Joseph Fourier (1768-1830), tout signal périodique peut se décomposer en une somme de sinusoïdes.\nLes sons musicaux (une note joué par un instrument) sont eux mêmes des signaux périodiques. Ils sont donc décomposables en une série de signaux sinusoïdaux.\n"
+},
+{
 	"uri": "https://info-tsi-vieljeux.github.io/1es/matiere/",
 	"title": "La matière",
 	"tags": [],
@@ -70,6 +77,13 @@
 	"content": "Cristaux     "
 },
 {
+	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/musique/",
+	"title": "Musique",
+	"tags": [],
+	"description": "",
+	"content": "La musique ou l\u0026rsquo;art de faire entendre les nombres "
+},
+{
 	"uri": "https://info-tsi-vieljeux.github.io/tsti2d/piles/",
 	"title": "Piles",
 	"tags": [],
@@ -112,6 +126,13 @@
 	"content": "Mouvement et référentiels Vidéo sur les mouvements de la Terre et du Soleil :\n    Lune La Lune :\n Séance Lune\n "
 },
 {
+	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/numerisation/",
+	"title": "Numérisation",
+	"tags": [],
+	"description": "",
+	"content": "Le son, une information à coder "
+},
+{
 	"uri": "https://info-tsi-vieljeux.github.io/1es/terre/",
 	"title": "La Terre",
 	"tags": [],
@@ -138,27 +159,6 @@
 	"tags": [],
 	"description": "",
 	"content": "Combustions Présentation\n Rappels  Un composé organique contient du carbone. Un hydrocarbure contient exclusivement du carbone et de l'hydrogène. Un alcane est un hydrocarbure saturé = les carbones ne sont liés entre eux que par des liaisons simples. Sa formule brute (s\u0026rsquo;il n\u0026rsquo;est pas cyclique) est $\\ce{C_nH_{2n+2}}$. Un alcène est un hydrocarbure insaturé = la chaîne carbonée contient au moins une double liaison covalente. La formule brute d\u0026rsquo;un alcène non cyclique mono insaturé (une seule double liaison) est $\\ce{C_nH_{2n}}$. Un alcool est un composé organique dont l\u0026rsquo;un des atomes de carbone est lié à un groupe hydroxyle ($\\ce{-OH}$)  Savoir et savoir faire Écrire et équilibrer l\u0026rsquo;équation d\u0026rsquo;une combustion complète.\n⚠️ Établir un bilan de matière : savoir déterminer la masse de $\\ce{CO2}$ ou d'$\\ce{H2O}$ dans le cas de la combustion complète d\u0026rsquo;une masse $m$ de combustible.\nDéterminer l\u0026rsquo;énergie dégagée par une combustion.\n Si on ne fait pas la différence entre le pouvoir calorifique inférieur $\\text{PCI}$ ou supérieur $\\text{PCS}$ en parlant seulement de pouvoir calorifique $\\text{PC}$, il s\u0026rsquo;agit en fait la plupart du temps, sans le dire, du $\\text{PCI}$.\nOn a alors : $Q=m_{\\text{combustible}}\\times \\text{PC}$, où $Q$ est la chaleur dégagée, en J.\n Document  Exercice poêle à bois (extrait sujet 2022 métropole) Fin exo 4 du bac blanc (extrait sujet 2023 Mayotte-Liban)  Quiz --- primary_color: steelblue secondary_color: \"#f2f2f2\" text_color: black shuffle_questions: false --- ## Les produits de la combustion complète des alcools\u0026nbsp;: - [x] sont identiques à ceux de la combustion complète des alcènes - [x] sont identiques à ceux de la combustion complète des alcanes - [ ] sont identiques à ceux de la combustion complète du dihydrogène ## La molécule de formule brute $\\ce{C6H12}$\u0026nbsp;: - [x] est un alcène - [x] est un hydrocarbure - [x] est une molécule organique - [ ] est un alcool - [ ] est un alcane ## La molécule de formule brute $\\ce{C2H5OH}$\u0026nbsp;: - [ ] est un alcène - [x] est un alcool - [ ] est un alcane - [ ] est un hydrocarbure - [x] est une molécule organique ## Pour la combustion complète du méthane\u0026nbsp;: - [x] le dioxygène est le comburant de la réaction - [ ] le dioxygène est le carburant de la réaction - [ ] le dioxygène est l'un des produits de la réaction ## Parmi les pictogrammes suivant, lesquels peuvent figurer sur une bouteille de butane\u0026nbsp;: - [x] ![](/pictinfl.png) - [ ] ![](/pictcorr.png) - [ ] ![](/pictcomb.png) - [x] ![](/pictpress.png) ## L'équation bilan de la combustion complète du méthane est\u0026nbsp;: - [x] $\\ce{CH4 + 2O2 \\longrightarrow CO2 + 2 H2O}$ - [ ] $\\ce{CH4 + O2 \\longrightarrow CO2 + H2O}$ - [ ] $\\ce{CO2 + 2 H2O \\longrightarrow CH4 + 2O2}$ ## Lesquelles de ces valeurs peuvent correspondre au PCI d'un combustible\u0026nbsp;? - [x] $\\pu{50 MJ*kg-1}$ - [x] $\\pu{0,30 kJ*g-1}$ - [ ] $\\pu{4,18 kJ*kg-1*K-1}$ ## La différence entre le PCI et le PCS\u0026nbsp;: - [ ] provient d'une combustion incomplète - [ ] est due à l'évaporation du dioxyde de carbone - [x] provient de la condensation de l'eau contenue dans les fumées ## Comparaison entre le PCI et le PCS\u0026nbsp;: - [x] la valeur du PCI est toujours plus faible que la valeur du PCS - [ ] la valeur du PCS est toujours plus faible que la valeur du PCI - [ ] les deux valeurs sont différentes car elles sont exprimées dans des unités différentes ## Un gaz à effet de serre\u0026nbsp;: - [x] est pratiquement transparent pour le rayonnement visible - [ ] est fabriqué dans une serre - [ ] est pratiquement transparent pour le rayonnement infrarouge ## Les principaux gaz à effet de serre dans l'atmosphère terrestre sont\u0026nbsp;: - [x] l'eau - [x] le dioxyde de carbone - [ ] le dioxygène - [ ] le diazote - [x] le méthane ## L'augmentation des concentrations de gaz à effet de serre dans l'atmosphère terrestre\u0026nbsp;: - [x] tend à augmenter la température de l'atmosphère terrestre - [ ] est responsable du trou dans la couche d'ozone - [x] est principalement d'origine humaine  "
-},
-{
-	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/musique/",
-	"title": "Musique",
-	"tags": [],
-	"description": "",
-	"content": "La musique ou l\u0026rsquo;art de faire entendre les nombres "
-},
-{
-	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/numerisation/",
-	"title": "Numérisation",
-	"tags": [],
-	"description": "",
-	"content": "Le son, une information à coder "
-},
-{
-	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/son/",
-	"title": "Son",
-	"tags": [],
-	"description": "",
-	"content": "Le son, un phénomène vibratoire "
 },
 {
 	"uri": "https://info-tsi-vieljeux.github.io/1es/musique/",

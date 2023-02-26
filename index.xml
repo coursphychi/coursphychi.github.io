@@ -45,6 +45,16 @@ Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à parti
     </item>
     
     <item>
+      <title>Son</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/musique/son/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/musique/son/</guid>
+      <description>Le son, un phénomène vibratoire Comme l&amp;rsquo;a montré Joseph Fourier (1768-1830), tout signal périodique peut se décomposer en une somme de sinusoïdes.
+Les sons musicaux (une note joué par un instrument) sont eux mêmes des signaux périodiques. Ils sont donc décomposables en une série de signaux sinusoïdaux.</description>
+    </item>
+    
+    <item>
       <title>Acide/Base</title>
       <link>https://info-tsi-vieljeux.github.io/tsti2d/acide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -89,6 +99,15 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
     </item>
     
     <item>
+      <title>Musique</title>
+      <link>https://info-tsi-vieljeux.github.io/1es/musique/musique/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://info-tsi-vieljeux.github.io/1es/musique/musique/</guid>
+      <description>La musique ou l&amp;rsquo;art de faire entendre les nombres </description>
+    </item>
+    
+    <item>
       <title>Piles</title>
       <link>https://info-tsi-vieljeux.github.io/tsti2d/piles/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -123,25 +142,6 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
     </item>
     
     <item>
-      <title>Combustions</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/combustion/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/combustion/</guid>
-      <description>Combustions Présentation
- Rappels  Un composé organique contient du carbone. Un hydrocarbure contient exclusivement du carbone et de l&#39;hydrogène. Un alcane est un hydrocarbure saturé = les carbones ne sont liés entre eux que par des liaisons simples. Sa formule brute (s&amp;rsquo;il n&amp;rsquo;est pas cyclique) est $\ce{C_nH_{2n+2}}$. Un alcène est un hydrocarbure insaturé = la chaîne carbonée contient au moins une double liaison covalente. La formule brute d&amp;rsquo;un alcène non cyclique mono insaturé (une seule double liaison) est $\ce{C_nH_{2n}}$.</description>
-    </item>
-    
-    <item>
-      <title>Musique</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/musique/musique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://info-tsi-vieljeux.github.io/1es/musique/musique/</guid>
-      <description>La musique ou l&amp;rsquo;art de faire entendre les nombres </description>
-    </item>
-    
-    <item>
       <title>Numérisation</title>
       <link>https://info-tsi-vieljeux.github.io/1es/musique/numerisation/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -151,12 +151,13 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
     </item>
     
     <item>
-      <title>Son</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/musique/son/</link>
+      <title>Combustions</title>
+      <link>https://info-tsi-vieljeux.github.io/tsti2d/combustion/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/1es/musique/son/</guid>
-      <description>Le son, un phénomène vibratoire </description>
+      <guid>https://info-tsi-vieljeux.github.io/tsti2d/combustion/</guid>
+      <description>Combustions Présentation
+ Rappels  Un composé organique contient du carbone. Un hydrocarbure contient exclusivement du carbone et de l&#39;hydrogène. Un alcane est un hydrocarbure saturé = les carbones ne sont liés entre eux que par des liaisons simples. Sa formule brute (s&amp;rsquo;il n&amp;rsquo;est pas cyclique) est $\ce{C_nH_{2n+2}}$. Un alcène est un hydrocarbure insaturé = la chaîne carbonée contient au moins une double liaison covalente. La formule brute d&amp;rsquo;un alcène non cyclique mono insaturé (une seule double liaison) est $\ce{C_nH_{2n}}$.</description>
     </item>
     
     <item>
