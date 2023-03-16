@@ -105,7 +105,8 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
       <guid>https://info-tsi-vieljeux.github.io/1es/musique/musique/</guid>
-      <description>La musique ou l&amp;rsquo;art de faire entendre les nombres   </description>
+      <description>La musique ou l&amp;rsquo;art de faire entendre les nombres    Son pur et son composé Un son pur est une vibration sinusoïdale. C&amp;rsquo;est un signal ne contenant qu&amp;rsquo;une seule fréquence.
+Le son correspondant à une note jouée par un instrument de musique n’est pas un son pur, mais le signal sonore $s$ qui lui est associé a la particularité d’être périodique ($s(t+T)=s(t)$ où $T=1/f$ est la période du signal et $f$ sa fréquence, exprimée en hertz).</description>
     </item>
     
     <item>
