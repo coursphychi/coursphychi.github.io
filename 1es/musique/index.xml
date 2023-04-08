@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Son et musique on Cours info TSI</title>
-    <link>https://info-tsi-vieljeux.github.io/1es/musique/</link>
-    <description>Recent content in Son et musique on Cours info TSI</description>
+    <title>Son et musique on Cours de physique chimie</title>
+    <link>https://coursphychi.github.io/1es/musique/</link>
+    <description>Recent content in Son et musique on Cours de physique chimie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://info-tsi-vieljeux.github.io/1es/musique/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://coursphychi.github.io/1es/musique/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Son</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/musique/son/</link>
+      <link>https://coursphychi.github.io/1es/musique/son/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/1es/musique/son/</guid>
+      <guid>https://coursphychi.github.io/1es/musique/son/</guid>
       <description>Le son, un phénomène vibratoire Présentation
 Comme l&amp;rsquo;a montré Joseph Fourier (1768-1830), tout signal périodique peut se décomposer en une somme de sinusoïdes.
 Les sons musicaux (une note joué par un instrument) sont eux mêmes des signaux périodiques. Ils sont donc décomposables en une série de signaux sinusoïdaux.</description>
@@ -20,20 +20,20 @@ Les sons musicaux (une note joué par un instrument) sont eux mêmes des signaux
     
     <item>
       <title>Musique</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/musique/musique/</link>
+      <link>https://coursphychi.github.io/1es/musique/musique/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/1es/musique/musique/</guid>
+      <guid>https://coursphychi.github.io/1es/musique/musique/</guid>
       <description>La musique ou l&amp;rsquo;art de faire entendre les nombres    Son pur et son composé Un son pur est une vibration sinusoïdale. C&amp;rsquo;est un signal ne contenant qu&amp;rsquo;une seule fréquence.
 Le son correspondant à une note jouée par un instrument de musique n’est pas un son pur, mais le signal sonore $s$ qui lui est associé a la particularité d’être périodique ($s(t+T)=s(t)$ où $T=1/f$ est la période du signal et $f$ sa fréquence, exprimée en hertz).</description>
     </item>
     
     <item>
       <title>Numérisation</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/musique/numerisation/</link>
+      <link>https://coursphychi.github.io/1es/musique/numerisation/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/1es/musique/numerisation/</guid>
+      <guid>https://coursphychi.github.io/1es/musique/numerisation/</guid>
       <description>Le son, une information à coder </description>
     </item>
     

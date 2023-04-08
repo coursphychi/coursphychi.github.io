@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>La Terre on Cours info TSI</title>
-    <link>https://info-tsi-vieljeux.github.io/1es/terre/</link>
-    <description>Recent content in La Terre on Cours info TSI</description>
+    <title>La Terre on Cours de physique chimie</title>
+    <link>https://coursphychi.github.io/1es/terre/</link>
+    <description>Recent content in La Terre on Cours de physique chimie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://info-tsi-vieljeux.github.io/1es/terre/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://coursphychi.github.io/1es/terre/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Forme et mesure</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/terre/mesure/</link>
+      <link>https://coursphychi.github.io/1es/terre/mesure/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/1es/terre/mesure/</guid>
+      <guid>https://coursphychi.github.io/1es/terre/mesure/</guid>
       <description>Forme de la Terre    figure { position: relative; padding: 0px; margin: auto; max-width: 800px; } img { display: block; max-width: 100%; max-height: inherit; width: auto; } figcaption { position: absolute; background-color: #222; color: #fff; font: italic smaller sans-serif; padding: 3px; text-align: center; bottom: 0; left: 0; right: 0; }   Photo composite de l&#39;éclipse lunaire de 8 novembre 2022 (Andrew McCarthy).  
 Ératosthène</description>
     </item>
     
     <item>
       <title>La Terre dans l&#39;espace</title>
-      <link>https://info-tsi-vieljeux.github.io/1es/terre/terreespace/</link>
+      <link>https://coursphychi.github.io/1es/terre/terreespace/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/1es/terre/terreespace/</guid>
+      <guid>https://coursphychi.github.io/1es/terre/terreespace/</guid>
       <description>Mouvement et référentiels Vidéos sur les mouvements de la Terre et du Soleil :
        Lune La Lune :
  Séance Lune

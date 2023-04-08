@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>TSTI2D on Cours info TSI</title>
-    <link>https://info-tsi-vieljeux.github.io/tsti2d/</link>
-    <description>Recent content in TSTI2D on Cours info TSI</description>
+    <title>TSTI2D on Cours de physique chimie</title>
+    <link>https://coursphychi.github.io/tsti2d/</link>
+    <description>Recent content in TSTI2D on Cours de physique chimie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://info-tsi-vieljeux.github.io/tsti2d/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://coursphychi.github.io/tsti2d/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Rappels chimie</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/rappelschimie/</link>
+      <link>https://coursphychi.github.io/tsti2d/rappelschimie/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/rappelschimie/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/rappelschimie/</guid>
       <description>Rappels sur les solutions Présentation
  Pictogrammes Savoir et savoir faire Calculer la masse molaire d&amp;rsquo;une molécule à partir de celles des atomes qui la constituent.
 Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à partir de la masse $m$ de l&amp;rsquo;espèce et de sa masse molaire $M$ : $\displaystyle n=\frac{m}{M}$ Déterminer une concentration massique $\displaystyle C_m=\frac{m}{V}$ et une concentration molaire $\displaystyle C=\frac{n}{V}$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une masse volumique $\rho$ : $m=\rho\times V$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration massique $C_m$ : $m=C_m\times V$ Déterminer une quantité de matière $n$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration molaire $C$ : $n=C\times V$ Donner le protocole d&amp;rsquo;une dissolution.</description>
@@ -20,20 +20,20 @@ Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à parti
     
     <item>
       <title>Acide/Base</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/acide/</link>
+      <link>https://coursphychi.github.io/tsti2d/acide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/acide/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/acide/</guid>
       <description>Réactions chimiques acido-basiques Présentation
  Expérience introductive  Vidéo :        Questions :   De quoi témoigne l&#39;élévation de la température du ballon&amp;nbsp;? D&#39;après le tableau suivant, que pouvez-vous dire de l&#39;évolution du pH de la solution aqueuse une fois que l&#39;ammoniac se dissout dedans et réagit avec l&#39;eau&amp;nbsp;?   Par conséquent, l&#39;ammoniac est-il une base ou un acide ? Comment expliquer le jaillisement de l&#39;eau dans la 1re expérience et la contraction du ballon dans la 2e&amp;nbsp;?</description>
     </item>
     
     <item>
       <title>Changements d&#39;état</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/chgmtetat/</link>
+      <link>https://coursphychi.github.io/tsti2d/chgmtetat/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/chgmtetat/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/chgmtetat/</guid>
       <description>Changements d&amp;rsquo;état Présentation
  Rappels  La température rend compte de l&#39;agitation moléculaire.
 La température absolue se mesure en kelvins $K$ $(\pu{0^\circ C = 273,15 K})$.
@@ -44,10 +44,10 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
     
     <item>
       <title>Piles</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/piles/</link>
+      <link>https://coursphychi.github.io/tsti2d/piles/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/piles/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/piles/</guid>
       <description>Piles, accumulateurs et piles à combustible Présentation
  Rappels Réactions d&amp;rsquo;oxydoréduction : Il y a échanges d&amp;rsquo;électrons lors d&amp;rsquo;une réaction d&#39;oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques).
  La pile Daniell :
@@ -56,20 +56,20 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
     
     <item>
       <title>Combustions</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/combustion/</link>
+      <link>https://coursphychi.github.io/tsti2d/combustion/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/combustion/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/combustion/</guid>
       <description>Combustions Présentation
  Rappels  Un composé organique contient du carbone. Un hydrocarbure contient exclusivement du carbone et de l&#39;hydrogène. Un alcane est un hydrocarbure saturé = les carbones ne sont liés entre eux que par des liaisons simples. Sa formule brute (s&amp;rsquo;il n&amp;rsquo;est pas cyclique) est $\ce{C_nH_{2n+2}}$. Un alcène est un hydrocarbure insaturé = la chaîne carbonée contient au moins une double liaison covalente. La formule brute d&amp;rsquo;un alcène non cyclique mono insaturé (une seule double liaison) est $\ce{C_nH_{2n}}$.</description>
     </item>
     
     <item>
       <title>Énergie/Puissance</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/egiepuiss/</link>
+      <link>https://coursphychi.github.io/tsti2d/egiepuiss/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/egiepuiss/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/egiepuiss/</guid>
       <description>Énergie / Puissance Présentation
  Rappels L&amp;rsquo;énergie $\Delta E$ (en J) reçue ou fournie par un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$  où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.
 Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à : $\displaystyle P = \frac{\Delta E}{\Delta t}$  $\pu{1 kWh = 3,6 MJ}$</description>
@@ -77,30 +77,30 @@ Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pend
     
     <item>
       <title>Conduction thermique</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/conduction/</link>
+      <link>https://coursphychi.github.io/tsti2d/conduction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/conduction/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/conduction/</guid>
       <description>Conduction thermique Présentation
  Rappels  Les 3 modes de transferts thermiques sont&amp;nbsp;:    la conduction&amp;nbsp;:  agitation moléculaire qui se transmet de proche en proche dans un matériau.   la convection&amp;nbsp;:  mouvement d&#39;ensemble de la matière dans un fluide type air ou eau.   le rayonnement&amp;nbsp;:  transfert à distance, même dans le vide, par des ondes électromagnétiques ayant un spectre de type corps noir.</description>
     </item>
     
     <item>
       <title>Puissance électrique</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/puisselec/</link>
+      <link>https://coursphychi.github.io/tsti2d/puisselec/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/puisselec/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/puisselec/</guid>
       <description>Puissance en régime sinusoïdal Présentation
 Rappels  En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;:  La tension et l&#39;intensité moyenne.    Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;:  La tension et l&#39;intensité efficace.    Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;?  $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$    Savoir et savoir faire Savoir définir la puissance apparente $S$.</description>
     </item>
     
     <item>
       <title>Lumière</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/lumiere/</link>
+      <link>https://coursphychi.github.io/tsti2d/lumiere/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/lumiere/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/lumiere/</guid>
       <description>Énergie transportée par la lumière Présentation
 Rappels   Lien entre la fréquence $f$ et la longueur d&#39;onde $\lambda$&amp;nbsp;?  $$\lambda=\frac{c}{f}$$  Où $c$ est la célérité (vitesse) de la lumière
 $c = \pu{3,0*10^8 m*s-1}$     Étendu en longueurs d&#39;ondes de la partie visible du spectre électromagnétique&amp;nbsp;?     Simulations   Photons et niveaux d&amp;rsquo;énergie (spectres) : applet Geogebra
@@ -109,10 +109,10 @@ $c = \pu{3,0*10^8 m*s-1}$     Étendu en longueurs d&#39;ondes de la partie visi
     
     <item>
       <title>Signaux</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/signaux/</link>
+      <link>https://coursphychi.github.io/tsti2d/signaux/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/signaux/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/signaux/</guid>
       <description>Signaux Présentation
 Rappels Un signal est une quantité qui dépend du temps.
 Mathématiquement, un signal est modélisé par une fonction $t\mapsto f(t)$ qui à chaque instant $t\in \mathbb{R}$ associe une valeur $f(t)$.
@@ -122,20 +122,20 @@ La durée d&#39;une répétition est appelée période et est notée $T$ (unité
     
     <item>
       <title>Incertitudes</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/incertitudes/</link>
+      <link>https://coursphychi.github.io/tsti2d/incertitudes/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/incertitudes/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/incertitudes/</guid>
       <description>Incertitudes Présentation
 Savoir et savoir faire Procéder à l’évaluation d’une incertitude-type par une approche statistique (type A). Savoir utiliser sa calculette pour déterminer la moyenne et l&amp;rsquo;écart-type expérimental d&amp;rsquo;une série de données. Procéder à l’évaluation d’une incertitude-type associée à une mesure unique en exploitant une relation fournie (type B). Comparer le poids des différentes sources d’erreur, à partir de l’incertitude-type associée à chacune d’elles. Faire des propositions pour améliorer un protocole de mesure.</description>
     </item>
     
     <item>
       <title>Mécanique</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/mecanique/</link>
+      <link>https://coursphychi.github.io/tsti2d/mecanique/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/mecanique/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/mecanique/</guid>
       <description>Mécanique Présentation méca au programme du bac
 Présentation partie rotation
 
@@ -144,10 +144,10 @@ Savoir et savoir faire Déterminer la résultante des forces appliquées à un s
     
     <item>
       <title>Son</title>
-      <link>https://info-tsi-vieljeux.github.io/tsti2d/son/</link>
+      <link>https://coursphychi.github.io/tsti2d/son/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://info-tsi-vieljeux.github.io/tsti2d/son/</guid>
+      <guid>https://coursphychi.github.io/tsti2d/son/</guid>
       <description>Ondes sonores Présentation
 Carte mentale   Savoir et savoir faire Déterminer la fréquence du fondamental et des harmoniques à partir du spectre d’amplitude d’un signal sonore.. Définir et distinguer la notion de timbre et de hauteur. Exploiter la relation entre l&#39;intensité acoustique et le niveau sonore et savoir se débrouiller avec les décibels (dB). Exploiter des informations relatives aux courbes de sensibilité de l’oreille humaine (fréquences audible, seuil d&amp;rsquo;audibilité, seuil de douleur, etc.</description>
     </item>
