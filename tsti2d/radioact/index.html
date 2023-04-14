@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Numérisation - Cours de physique chimie</title>
+    <title>Radioactivité - Cours de physique chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -79,7 +79,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/1es/musique/numerisation/">
+  <body class="" data-url="/tsti2d/radioact/">
     <nav id="sidebar" class="">
 
 
@@ -140,7 +140,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/tsti2d/" title="TSTI2D" class="dd-item
-        
+        parent
         
         
         ">
@@ -439,7 +439,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/tsti2d/radioact/" title="Radioactivité" class="dd-item ">
+      <li data-nav-id="/tsti2d/radioact/" title="Radioactivité" class="dd-item active">
         <a href="/tsti2d/radioact/">
         Radioactivité
         
@@ -468,7 +468,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/" title="1ES" class="dd-item
-        parent
+        
         
         
         ">
@@ -731,7 +731,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/musique/" title="Son et musique" class="dd-item
-        parent
+        
         
         
         ">
@@ -799,7 +799,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/1es/musique/numerisation/" title="Numérisation" class="dd-item active">
+      <li data-nav-id="/1es/musique/numerisation/" title="Numérisation" class="dd-item ">
         <a href="/1es/musique/numerisation/">
         Numérisation
         
@@ -981,14 +981,19 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Numérisation
+                   Radioactivité
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#expériences">Expériences</a></li>
+    <li><a href="#savoir-et-savoir-faire">Savoir et savoir faire</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -1006,7 +1011,41 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<h1 id="le-son-une-information-à-coder">Le son, une information à coder</h1>
+<h1 id="radioactivité">Radioactivité</h1>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tsti/radioact">Présentation</a></p>
+<p><audio id="audio" src="/geigercounter.mp3"></audio></p>
+<a href="#" id="play">
+<img src="/geiger.png">
+</a>
+<script>
+document.getElementById('play').addEventListener('click', function (e) {
+  e.preventDefault();
+  document.getElementById('audio').play();
+});
+</script>
+<h2 id="expériences">Expériences</h2>
+<ul>
+<li><a href="https://presentationssite.github.io/tsti/expradioact"><strong>Désintégration radioactive de la classe</strong></a>.</li>
+<li><a href=""><strong>TP durée de vie d&rsquo;une bulle</strong></a></li>
+</ul>
+<br>
+<h2 id="savoir-et-savoir-faire">Savoir et savoir faire</h2>
+
+<div class="notices coeur" ><p><input type="checkbox"> Distinguer la radioactivité naturelle de la radioactivité artificielle.<br><br>
+<input type="checkbox"> Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.<br><br>
+<input type="checkbox"> Citer la définition de l’activité d’une source radioactive et indiquer son unité.<br><br>
+<input type="checkbox"> Exploiter la définition de la demi-vie d’une espèce radioactive.<br><br>
+<input type="checkbox"> Comparer la décroissance radioactive de deux espèces connaissant leurs demi-vies respectives.<br><br>
+<input type="checkbox"> Distinguer une réaction de fission d’une réaction de fusion, l’équation nucléaire étant donnée.<br><br>
+<input type="checkbox"> Déterminer la valeur du défaut de masse lors d’une réaction nucléaire l’équation étant donnée.<br><br>
+<input type="checkbox"> Calculer l’énergie libérée lors d’une réaction nucléaire, le défaut de masse étant connu.</p>
+
+</div>
+
+<div class="notices piege" ><p>Faire attentionà garder assez de chiffres significatifs lors des calculs de défaut de masse. La différence se joue la plupart du temps plusieurs chiffres après la virgule (dans les unités standards).</p>
+
+</div>
+<br>
 
 
 <footer class="footline">
@@ -1044,6 +1083,20 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
                         
                         
                     
@@ -1054,6 +1107,25 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                     
                     
 
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -1236,37 +1308,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1287,6 +1328,8 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
+                        
+                        
                     
                 
                 
@@ -1302,9 +1345,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1450,7 +1490,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
-                    
                 
                 
 
@@ -1464,8 +1503,21 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
-                        
+            
+            
+                
                     
                 
                 
@@ -1494,23 +1546,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
         
                     
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -1521,9 +1556,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
-                    
-                        
-                        
                     
                 
                 
