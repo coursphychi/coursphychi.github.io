@@ -46,7 +46,7 @@
 	"title": "TSTI2D",
 	"tags": [],
 	"description": "",
-	"content": "Physique-chimie de terminale STI2D Programme officiel\n   Rappels solutions Acide/Base Changements d\u0026rsquo;état Piles Combustions Énergie/Puissance Conduction thermique Puissance électrique Lumière Signaux Incertitudes Mécanique Ondes sonores Radioactivité Pression Transport électrique "
+	"content": "Physique-chimie de terminale STI2D Programme officiel\n   Rappels solutions Acide/Base Changements d\u0026rsquo;état Piles Combustions Énergie/Puissance Conduction thermique Puissance électrique Lumière Signaux Incertitudes Mécanique Ondes sonores Radioactivité Pression Transport de l\u0026rsquo;électricité "
 },
 {
 	"uri": "https://coursphychi.github.io/tsti2d/acide/",
@@ -246,7 +246,7 @@
 },
 {
 	"uri": "https://coursphychi.github.io/tsti2d/transport/",
-	"title": "Transport électrique",
+	"title": "Transport de l&#39;électricité",
 	"tags": [],
 	"description": "",
 	"content": "Transport de l\u0026rsquo;électricité Présentation\nSavoir et savoir faire Savoir schématiser l’organisation du transport et de la distribution de l’énergie électrique pour une ligne monophasée.\nDistinguer et citer les caractéristiques essentielles du réseau de distribution électrique.\nRelier qualitativement le facteur de puissance d’un équipement de puissance donnée aux pertes dans les lignes d’alimentation.\nCiter les rôles du transformateur (élévation de tension, diminution de tension, isolation galvanique).\nRelier qualitativement l’augmentation, pour une charge donnée, de la tension de distribution à la diminution des pertes dans les lignes d’alimentation.\nExploiter des documents mettant en évidence les seuils de dangerosité du courant électrique.\nCiter des dispositifs de protection des individus contre les risques du courant électrique : isolation, alimentation en très basse tension et disjoncteur différentiel dans une installation domestique.\nCiter des dispositifs de protection des matériels contre les risques du courant électrique : fusible et disjoncteur.\n Activité  Canalisations  TP  Principe fondamental de l\u0026rsquo;hydrostatique  "
