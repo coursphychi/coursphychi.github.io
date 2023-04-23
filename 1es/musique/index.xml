@@ -34,7 +34,8 @@ Le son correspondant à une note jouée par un instrument de musique n’est pas
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
       <guid>https://coursphychi.github.io/1es/musique/numerisation/</guid>
-      <description>Le son, une information à coder </description>
+      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Le son, une information à coder Analogique vs Numérique Avant les années 1990, le support sur lequel est enregistrée la musique était le plus souvent analogique, mais avec la démocratisation du Compact Disk, les supports numériques deviennent rapidement majoritaires.
+ Définir les termes analogique et numérique.</description>
     </item>
     
   </channel>

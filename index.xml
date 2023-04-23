@@ -148,7 +148,8 @@ Rappels Réactions d&amp;rsquo;oxydoréduction : Il y a échanges d&amp;rsquo;�
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
       <guid>https://coursphychi.github.io/1es/musique/numerisation/</guid>
-      <description>Le son, une information à coder </description>
+      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Le son, une information à coder Analogique vs Numérique Avant les années 1990, le support sur lequel est enregistrée la musique était le plus souvent analogique, mais avec la démocratisation du Compact Disk, les supports numériques deviennent rapidement majoritaires.
+ Définir les termes analogique et numérique.</description>
     </item>
     
     <item>
@@ -259,10 +260,37 @@ Carte mentale   Savoir et savoir faire Déterminer la fréquence du fondamental 
       <guid>https://coursphychi.github.io/tsti2d/radioact/</guid>
       <description>Radioactivité Présentation
 
-  document.getElementById(&#39;play&#39;).addEventListener(&#39;click&#39;, function (e) { e.preventDefault(); document.getElementById(&#39;audio&#39;).play(); });  Expériences  Désintégration radioactive de la classe. TP durée de vie d&amp;rsquo;une bulle  Savoir et savoir faire Distinguer la radioactivité naturelle de la radioactivité artificielle.
+  document.getElementById(&#39;play&#39;).addEventListener(&#39;click&#39;, function (e) { e.preventDefault(); document.getElementById(&#39;audio&#39;).play(); });  Expériences  Désintégration radioactive de la classe TP durée de vie d&amp;rsquo;une bulle et Notebook Python pour la régression linéaire  Savoir et savoir faire Distinguer la radioactivité naturelle de la radioactivité artificielle.
 Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.
-Citer la définition de l’activité d’une source radioactive et indiquer son unité.
-Exploiter la définition de la demi-vie d’une espèce radioactive.</description>
+Citer la définition de l’activité d’une source radioactive et indiquer son unité.</description>
+    </item>
+    
+    <item>
+      <title>Pression</title>
+      <link>https://coursphychi.github.io/tsti2d/pression/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://coursphychi.github.io/tsti2d/pression/</guid>
+      <description>Pression et statique des fluides Présentation
+
+Savoir et savoir faire Définir la pression exercée sur une surface à partir de la résultante des forces pressantes appliquées.
+Distinguer la pression absolue de la pression relative.
+Citer et exploiter le principe fondamental de l&amp;rsquo;hydrostatique.
+ Le principe fondamental de l&amp;rsquo;hydrostatique peut s&amp;rsquo;écrire différemment suivant l&amp;rsquo;orientation des axes (parle-t-on de la hauteur ou de la profondeur ?) et suivant si on considère les élévations $z$ ou leur écart $\Delta z = z_2-z_1 = h$.</description>
+    </item>
+    
+    <item>
+      <title>Transport électrique</title>
+      <link>https://coursphychi.github.io/tsti2d/transport/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://coursphychi.github.io/tsti2d/transport/</guid>
+      <description>Transport de l&amp;rsquo;électricité Présentation
+Savoir et savoir faire Savoir schématiser l’organisation du transport et de la distribution de l’énergie électrique pour une ligne monophasée.
+Distinguer et citer les caractéristiques essentielles du réseau de distribution électrique.
+Relier qualitativement le facteur de puissance d’un équipement de puissance donnée aux pertes dans les lignes d’alimentation.
+Citer les rôles du transformateur (élévation de tension, diminution de tension, isolation galvanique).
+Relier qualitativement l’augmentation, pour une charge donnée, de la tension de distribution à la diminution des pertes dans les lignes d’alimentation.</description>
     </item>
     
   </channel>
