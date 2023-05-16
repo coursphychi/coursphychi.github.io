@@ -260,7 +260,7 @@ Carte mentale   Savoir et savoir faire Déterminer la fréquence du fondamental 
       <guid>https://coursphychi.github.io/tsti2d/radioact/</guid>
       <description>Radioactivité Présentation
 
-  document.getElementById(&#39;play&#39;).addEventListener(&#39;click&#39;, function (e) { e.preventDefault(); document.getElementById(&#39;audio&#39;).play(); });  Expériences  Désintégration radioactive de la classe TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours  Activités  Datation Déchets nucléaires Exercice défaut de masse et énergie  Savoir et savoir faire Distinguer la radioactivité naturelle de la radioactivité artificielle.
+  document.getElementById(&#39;play&#39;).addEventListener(&#39;click&#39;, function (e) { e.preventDefault(); document.getElementById(&#39;audio&#39;).play(); });  Expériences  Désintégration radioactive de la classe TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours  Activités  Datation Déchets nucléaires Exercice défaut de masse et énergie - Correction  Savoir et savoir faire Distinguer la radioactivité naturelle de la radioactivité artificielle.
 Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.</description>
     </item>
     
