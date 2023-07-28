@@ -632,6 +632,7 @@ div.notices.coeur p {
     background: #FFCAC5;
 }
 
+
 div.notices.coeur p:first-child:after {
     content: 'À savoir faire';
 }
@@ -643,6 +644,27 @@ div.notices.coeur p:first-child:before {
     font-family: "Font Awesome 6 free";
     font-weight: 900;
     content: "\e4fe";
+    left: 10px;
+}
+
+
+div.notices.definition p {
+    border-top: 30px solid #B51700;
+    background: #FFCAC5;
+}
+
+
+div.notices.definition p:first-child:after {
+    content: var(--title, 'Définition');
+}
+
+div.notices.definition p:first-child:before {
+    position: absolute;
+    top: 2px;
+    color: #fff;
+    font-family: "Font Awesome 6 free";
+    font-weight: 900;
+    content: "\f518";
     left: 10px;
 }
 

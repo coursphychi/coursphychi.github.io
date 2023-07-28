@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://coursphychi.github.io/2nde/melanges/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://coursphychi.github.io/1es/matiere/elements/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
   </url>
@@ -23,17 +28,17 @@
   </url>
   
   <url>
+    <loc>https://coursphychi.github.io/2nde/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://coursphychi.github.io/1es/matiere/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://coursphychi.github.io/tes/climat/</loc>
-    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://coursphychi.github.io/tsti2d/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url>
   
@@ -68,6 +73,11 @@
   </url>
   
   <url>
+    <loc>https://coursphychi.github.io/2nde/solutions/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://coursphychi.github.io/1es/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url>
@@ -80,6 +90,11 @@
   <url>
     <loc>https://coursphychi.github.io/1es/soleil/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://coursphychi.github.io/2nde/atome/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
   </url>
   
   <url>
@@ -118,7 +133,22 @@
   </url>
   
   <url>
+    <loc>https://coursphychi.github.io/2nde/lewis/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://coursphychi.github.io/2nde/son/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://coursphychi.github.io/1es/musique/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://coursphychi.github.io/tsti2d/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url>
   
