@@ -263,14 +263,12 @@ Rappels  Les 3 modes de transferts thermiques sont&amp;nbsp;:    la conduction&a
     </item>
     
     <item>
-      <title>Son</title>
-      <link>https://coursphychi.github.io/2nde/son/</link>
+      <title>Inertie</title>
+      <link>https://coursphychi.github.io/2nde/inertie/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://coursphychi.github.io/2nde/son/</guid>
-      <description>Signal sonore Présentation
-
-Documents  Exercice - Mesure historique de la vitesse du son dans l&amp;rsquo;eau Exercice - Sonar TP - Mesure de la vitesse du son TP - Analyse d&amp;rsquo;un son musical  </description>
+      <guid>https://coursphychi.github.io/2nde/inertie/</guid>
+      <description>table { margin: auto; border-collapse: collapse; border: none !important; } td { width: 60px; height: 60px; border: 5px solid white !important; text-align: center; vertical-align: middle; font-size: 1em; } td.clickable { cursor: pointer; } .s-block { background-color: #0076BA; } .p-block { background-color: #0076BA; } .neutre { background-color: #0076BA; } .noble-gas { background-color: #EE220C; } .empty { border: none !important; color:#1C90F3; font-weight:bold; } .symbol { font-size: 2em; font-weight:bold; color:#fff; } .atomic-number { font-size: 1.</description>
     </item>
     
     <item>
@@ -282,6 +280,17 @@ Documents  Exercice - Mesure historique de la vitesse du son dans l&amp;rsquo;ea
       <description>Puissance en régime sinusoïdal Présentation
 Rappels  En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;:  La tension et l&#39;intensité moyenne.    Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;:  La tension et l&#39;intensité efficace.    Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;?  $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$    Savoir et savoir faire coeur
 Savoir définir la puissance apparente $S$.</description>
+    </item>
+    
+    <item>
+      <title>Son</title>
+      <link>https://coursphychi.github.io/2nde/son/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://coursphychi.github.io/2nde/son/</guid>
+      <description>Signal sonore Présentation
+
+Documents  Exercice - Mesure historique de la vitesse du son dans l&amp;rsquo;eau Exercice - Sonar TP - Mesure de la vitesse du son TP - Analyse d&amp;rsquo;un son musical  </description>
     </item>
     
     <item>
