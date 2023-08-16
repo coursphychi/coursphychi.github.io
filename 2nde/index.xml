@@ -73,6 +73,24 @@ Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite 
     </item>
     
     <item>
+      <title>Changement d&#39;état</title>
+      <link>https://coursphychi.github.io/2nde/chgt_etat/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://coursphychi.github.io/2nde/chgt_etat/</guid>
+      <description>table { margin: auto; border-collapse: collapse; border: none !important; } td { width: 60px; height: 60px; border: 5px solid white !important; text-align: center; vertical-align: middle; font-size: 1em; } td.clickable { cursor: pointer; } .s-block { background-color: #0076BA; } .p-block { background-color: #0076BA; } .neutre { background-color: #0076BA; } .noble-gas { background-color: #EE220C; } .empty { border: none !important; color:#1C90F3; font-weight:bold; } .symbol { font-size: 2em; font-weight:bold; color:#fff; } .atomic-number { font-size: 1.</description>
+    </item>
+    
+    <item>
+      <title>Réaction chimique</title>
+      <link>https://coursphychi.github.io/2nde/reaction/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://coursphychi.github.io/2nde/reaction/</guid>
+      <description>table { margin: auto; border-collapse: collapse; border: none !important; } td { width: 60px; height: 60px; border: 5px solid white !important; text-align: center; vertical-align: middle; font-size: 1em; } td.clickable { cursor: pointer; } .s-block { background-color: #0076BA; } .p-block { background-color: #0076BA; } .neutre { background-color: #0076BA; } .noble-gas { background-color: #EE220C; } .empty { border: none !important; color:#1C90F3; font-weight:bold; } .symbol { font-size: 2em; font-weight:bold; color:#fff; } .atomic-number { font-size: 1.</description>
+    </item>
+    
+    <item>
       <title>Mouvement</title>
       <link>https://coursphychi.github.io/2nde/mouvement/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -91,15 +109,6 @@ Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite 
     </item>
     
     <item>
-      <title>Changement d&#39;état</title>
-      <link>https://coursphychi.github.io/2nde/chgt_etat/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/2nde/chgt_etat/</guid>
-      <description>table { margin: auto; border-collapse: collapse; border: none !important; } td { width: 60px; height: 60px; border: 5px solid white !important; text-align: center; vertical-align: middle; font-size: 1em; } td.clickable { cursor: pointer; } .s-block { background-color: #0076BA; } .p-block { background-color: #0076BA; } .neutre { background-color: #0076BA; } .noble-gas { background-color: #EE220C; } .empty { border: none !important; color:#1C90F3; font-weight:bold; } .symbol { font-size: 2em; font-weight:bold; color:#fff; } .atomic-number { font-size: 1.</description>
-    </item>
-    
-    <item>
       <title>Son</title>
       <link>https://coursphychi.github.io/2nde/son/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -108,6 +117,15 @@ Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite 
       <description>Signal sonore Présentation
 
 Documents  Exercice - Mesure historique de la vitesse du son dans l&amp;rsquo;eau Exercice - Sonar TP - Mesure de la vitesse du son TP - Analyse d&amp;rsquo;un son musical  </description>
+    </item>
+    
+    <item>
+      <title>Électricité</title>
+      <link>https://coursphychi.github.io/2nde/elec/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://coursphychi.github.io/2nde/elec/</guid>
+      <description>table { margin: auto; border-collapse: collapse; border: none !important; } td { width: 60px; height: 60px; border: 5px solid white !important; text-align: center; vertical-align: middle; font-size: 1em; } td.clickable { cursor: pointer; } .s-block { background-color: #0076BA; } .p-block { background-color: #0076BA; } .neutre { background-color: #0076BA; } .noble-gas { background-color: #EE220C; } .empty { border: none !important; color:#1C90F3; font-weight:bold; } .symbol { font-size: 2em; font-weight:bold; color:#fff; } .atomic-number { font-size: 1.</description>
     </item>
     
   </channel>
