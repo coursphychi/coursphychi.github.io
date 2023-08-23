@@ -294,6 +294,13 @@
 	"content": "Signal sonore Présentation\n\nDocuments  Exercice - Mesure historique de la vitesse du son dans l\u0026rsquo;eau Exercice - Sonar TP - Mesure de la vitesse du son TP - Analyse d\u0026rsquo;un son musical  "
 },
 {
+	"uri": "https://coursphychi.github.io/2nde/lumiere/",
+	"title": "Lumière",
+	"tags": [],
+	"description": "",
+	"content": " table { margin: auto; border-collapse: collapse; border: none !important; } td { width: 60px; height: 60px; border: 5px solid white !important; text-align: center; vertical-align: middle; font-size: 1em; } td.clickable { cursor: pointer; } .s-block { background-color: #0076BA; } .p-block { background-color: #0076BA; } .neutre { background-color: #0076BA; } .noble-gas { background-color: #EE220C; } .empty { border: none !important; color:#1C90F3; font-weight:bold; } .symbol { font-size: 2em; font-weight:bold; color:#fff; } .atomic-number { font-size: 1.5em; font-weight:bold; color: #fff; } .electron-configuration { font-size: 1em; color: #fff; }  Lumière et spectre Présentation\n\nDocuments et autres  Activité 1 - Caractéristique d\u0026rsquo;une thermistance + notebook Python Activité 2 - Comment fabriquer un thermomètre à partir d\u0026rsquo;une thermistance ?  "
+},
+{
 	"uri": "https://coursphychi.github.io/tsti2d/mecanique/",
 	"title": "Mécanique",
 	"tags": [],
