@@ -79,7 +79,7 @@ Les sons musicaux (une note joué par un instrument) sont eux mêmes des signaux
       
       <guid>https://coursphychi.github.io/tsti2d/acide/</guid>
       <description>Réactions chimiques acido-basiques Présentation
-Expérience introductive  Vidéo :        Questions :   De quoi témoigne l&#39;élévation de la température du ballon&amp;nbsp;? D&#39;après le tableau suivant, que pouvez-vous dire de l&#39;évolution du pH de la solution aqueuse une fois que l&#39;ammoniac se dissout dedans et réagit avec l&#39;eau&amp;nbsp;?   Par conséquent, l&#39;ammoniac est-il une base ou un acide ? Comment expliquer le jaillisement de l&#39;eau dans la 1re expérience et la contraction du ballon dans la 2e&amp;nbsp;?</description>
+Expérience  Vidéo :        Questions :   De quoi témoigne l&#39;élévation de la température du ballon&amp;nbsp;? D&#39;après le tableau suivant, que pouvez-vous dire de l&#39;évolution du pH de la solution aqueuse une fois que l&#39;ammoniac se dissout et réagit avec l&#39;eau&amp;nbsp;?   Par conséquent, l&#39;ammoniac est-il une base ou un acide ? Comment expliquer le jaillisement de l&#39;eau dans la 1re expérience et la contraction du ballon dans la 2e&amp;nbsp;?</description>
     </item>
     
     <item>
@@ -364,8 +364,8 @@ Documents  Exercice - Mesure historique de la vitesse du son dans l&amp;rsquo;ea
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
       <guid>https://coursphychi.github.io/tsti2d/mecanique/</guid>
-      <description>Mécanique Présentation méca au programme du bac
-Présentation partie rotation
+      <description>Mécanique Présentation méca 1re partie
+Présentation méca 2e partie (rotations)
 
 Savoir et savoir faire coeur
 Déterminer la résultante des forces appliquées à un système dont le mouvement est rectiligne à partir de l’accélération en utilisant le principe fondamental de la mécanique (PFD). Déterminer les caractéristiques de l’accélération d’un système dans le cas d’un mouvement rectiligne à partir des forces extérieures appliquées en utilisant le PFD. Exploiter numériquement des résultats expérimentaux pour valider le modèle de la chute libre.</description>
@@ -399,7 +399,7 @@ Déterminer la fréquence du fondamental et des harmoniques à partir du spectre
       <guid>https://coursphychi.github.io/tsti2d/radioact/</guid>
       <description>Radioactivité Présentation
 
-  document.getElementById(&#39;play&#39;).addEventListener(&#39;click&#39;, function (e) { e.preventDefault(); document.getElementById(&#39;audio&#39;).play(); });  Expériences  Désintégration radioactive de la classe TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours  Activités  Datation Déchets nucléaires Exercice défaut de masse et énergie - Correction  Savoir et savoir faire coeur
+  document.getElementById(&#39;play&#39;).addEventListener(&#39;click&#39;, function (e) { e.preventDefault(); document.getElementById(&#39;audio&#39;).play(); });  Expériences  Désintégration radioactive de la classe TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours  Activités  Datation Déchets nucléaires Exercice défaut de masse et énergieCorrection--  Savoir et savoir faire coeur
 Distinguer la radioactivité naturelle de la radioactivité artificielle.
 Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.</description>
     </item>
