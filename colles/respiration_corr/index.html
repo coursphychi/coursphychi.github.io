@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Combustions - Cours de physique chimie</title>
+    <title> - Cours de physique chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -79,7 +79,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/tsti2d/combustion/">
+  <body class="" data-url="/colles/respiration_corr/">
     <nav id="sidebar" class="">
 
 
@@ -935,7 +935,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/tsti2d/" title="TSTI2D" class="dd-item
-        parent
+        
         
         
         ">
@@ -1045,7 +1045,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/tsti2d/combustion/" title="Combustions" class="dd-item active">
+      <li data-nav-id="/tsti2d/combustion/" title="Combustions" class="dd-item ">
         <a href="/tsti2d/combustion/">
         Combustions
         
@@ -1347,7 +1347,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Combustions
+                   
                  
                   </span>
                 </div>
@@ -1356,10 +1356,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#rappels">Rappels</a></li>
-    <li><a href="#savoir-et-savoir-faire">Savoir et savoir faire</a></li>
-    <li><a href="#exercices">Exercices</a></li>
-    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#correction">Correction</a></li>
   </ul>
 </nav>
     </div>
@@ -1379,167 +1376,103 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<h1 id="combustions">Combustions</h1>
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tsti/combustion">Présentation</a></p>
-<br>
-<h2 id="rappels">Rappels</h2>
+<h2 id="correction">Correction</h2>
+<p>La respiration permet d&rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&rsquo;espère).</p>
+<p>On va supposer l&rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&rsquo;énergie interne de $n$ moles d&rsquo;air vaut $U=\frac{5}{2}nRT$.</p>
+<p>On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro. <br>
+De même, seules les pressions relatives nous intéressent $\Rightarrow$ la pression $P$  avant inspiration (= après expiration) est prise comme égale à zéro.</p>
+<p>Une modélisation de $V(P)$ à partir de mesures expérimentales (faites pour $P$ grâce à un cathéter œsophagien et pour $V$ grâce à un pléthysmographe) donne :</p>
 <ul>
-<li>Un <strong>composé organique</strong> contient du <strong>carbone</strong>.</li>
-<li>Un <strong>hydrocarbure</strong> contient exclusivement du <strong>carbone</strong> et de l'<strong>hydrogène</strong>.</li>
-<li>Un <strong>alcane</strong> est un hydrocarbure saturé  = les carbones ne sont liés entre eux que par des <strong>liaisons simples</strong>. Sa formule brute (s&rsquo;il n&rsquo;est pas cyclique) est $\ce{C_nH_{2n+2}}$.</li>
-<li>Un <strong>alcène</strong> est un hydrocarbure insaturé = la chaîne carbonée contient au moins une <strong>double liaison</strong> covalente. La formule brute d&rsquo;un alcène non cyclique mono insaturé (une seule double liaison) est $\ce{C_nH_{2n}}$.</li>
-<li>Un <strong>alcool</strong> est un composé organique dont l&rsquo;un des atomes de carbone est lié à un <strong>groupe hydroxyle</strong> ($\ce{-OH}$)</li>
+<li>pour l&rsquo;inspiration : $V=A_I\left(1-e^{-k_IP}\right)$</li>
+<li>pour l&rsquo;expiration : $V=A_E\left(1-e^{-k_EP}\right)$</li>
 </ul>
+<p>Avec $A_I=3,57\text{ L}$, $k_I=0,964.10^{-3}\text{ Pa}^{-1}$, $A_E=3,35\text{ L}$, $k_E=1,644.10^{-3}\text{ Pa}^{-1}$.</p>
+<p>$A$ est la capacité pulmonaire maximale et $k$ est un coefficient de compressibilité.<br>
+$A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;affaissent, leurs parois se collant sous l&rsquo;action de la tension superficielle (et ce malgré que le poumon produise des surfactants équivalents à ceux qu&rsquo;on trouve dans le savon pour abaisser cette énergie de surface&hellip; Sans eux, c&rsquo;est tout le poumon qui s&rsquo;affaisserait). Et c&rsquo;est aussi pourquoi $k_I&gt;k_E$ ; à l&rsquo;inspiration, il faut vaincre la tension de surface pour recruter à nouveau les alvéoles affaissées.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">from</span> scipy.integrate <span style="color:#f92672">import</span> quad
+<span style="color:#f92672">from</span> scipy.optimize <span style="color:#f92672">import</span> fsolve
+
+A_I, A_E <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.57</span>, <span style="color:#ae81ff">3.35</span>
+k_I, k_E <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.964</span>, <span style="color:#ae81ff">1.644</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">P_I</span>(V) : <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>k_I<span style="color:#f92672">*</span>(np<span style="color:#f92672">.</span>log(A_I<span style="color:#f92672">/</span>(A_I<span style="color:#f92672">-</span>V)))
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">P_E</span>(V) : <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>k_E<span style="color:#f92672">*</span>(np<span style="color:#f92672">.</span>log(A_E<span style="color:#f92672">/</span>(A_E<span style="color:#f92672">-</span>V)))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">diff</span>(V) : <span style="color:#66d9ef">return</span> P_I(V)<span style="color:#f92672">-</span>P_E(V)
+
+Vmax <span style="color:#f92672">=</span> min(A_E,A_I)
+
+V_f <span style="color:#f92672">=</span> fsolve(diff,[<span style="color:#ae81ff">1</span>,Vmax<span style="color:#f92672">-</span><span style="color:#ae81ff">1e-5</span>])[<span style="color:#ae81ff">1</span>]
+P_f <span style="color:#f92672">=</span> P_I(V_f)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;V_f = {:.2f} L&#34;</span><span style="color:#f92672">.</span>format(V_f))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;P_f = {:.2f} kPa&#34;</span><span style="color:#f92672">.</span>format(P_f))
+
+
+V <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>,V_f,<span style="color:#ae81ff">100</span>)
+
+plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">10</span>),dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">150</span>)
+plt<span style="color:#f92672">.</span>plot(V,P_I(V),c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;inspiration&#34;</span>)
+plt<span style="color:#f92672">.</span>plot(V,P_E(V),c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;expiration&#34;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Volume V (L)&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Pression P (kPa)&#34;</span>)
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><pre><code>V_f = 3.31 L
+P_f = 2.73 kPa
+</code></pre>
+<p><img src="/courberespi1.png" alt="png"></p>
+<ol>
+<li>
+<p>Déterminer numériquement les valeurs finales de volume et de pression $V_f$ et $P_f$ en fin d&rsquo;inspiration / début d&rsquo;expiration (on est sensé obtenir $V_f = 3,31\text{ L}$ et $P_f = 2,73\text{ kPa}$).</p>
+</li>
+<li>
+<p>Reproduire la figure ci-dessus représentant $P(V)$ à l&rsquo;inspiration et à l&rsquo;expiration en utilisant la librairie <code>matplotlib</code>.</p>
+</li>
+<li>
+<p>Lorsque la respiration n&rsquo;est pas forcée, les muscles respiratoires ne travaillent que pendant l&rsquo;inspiration (l&rsquo;élasticité des poumons suffit pour l&rsquo;expiration). Calculer ce travailnnumériquement. Et analytiquement, montrer qu&rsquo;il vaut $-A_IP_f+P_fV_f+\frac{V_f}{k_I}$. Quelle proportion du métabolisme d&rsquo;un humain moyen (10 MJ par jour) la respiration représente-t-elle ?</p>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">W <span style="color:#f92672">=</span> quad(P_I, <span style="color:#ae81ff">0</span>, V_f)[<span style="color:#ae81ff">0</span>]
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;W = {:.2f} J&#34;</span><span style="color:#f92672">.</span>format(W))
+prop <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span><span style="color:#f92672">*</span><span style="color:#ae81ff">24</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span>W<span style="color:#f92672">/</span><span style="color:#ae81ff">10e6</span><span style="color:#f92672">*</span><span style="color:#ae81ff">100</span> <span style="color:#75715e"># pour 15 inspirations par minute</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;proportion du métabolisme : {:.2f} %&#34;</span><span style="color:#f92672">.</span>format(prop))
+</code></pre></div><p><code>W = 2.73 J</code><br>
+<code>proportion du métabolisme : 0.59</code></p>
 <br>
-<h2 id="savoir-et-savoir-faire">Savoir et savoir faire</h2>
-
-<div class="notices coeur" style="--title: 'coeur';">
-  <p style="display: none;">coeur</p>
-  <div class="notice-body">
-    <p><input type="checkbox"> Écrire et équilibrer l&rsquo;équation d&rsquo;une combustion complète.<br><br>
-<input type="checkbox"> ⚠️ Établir un bilan de matière : savoir déterminer la masse de $\ce{CO2}$ ou d'$\ce{H2O}$ dans le cas de la combustion complète d&rsquo;une masse $m$ de combustible.<br><br>
-<input type="checkbox"> Déterminer l&rsquo;énergie dégagée par une combustion.</p>
-
-  </div>
-</div>
-
-<div class="notices piege" style="--title: 'piege';">
-  <p style="display: none;">piege</p>
-  <div class="notice-body">
-    <p>Si on ne fait pas la différence entre le pouvoir calorifique inférieur $\text{PCI}$ ou supérieur $\text{PCS}$ en parlant seulement de pouvoir calorifique $\text{PC}$, il s&rsquo;agit en fait la plupart du temps, sans le dire, du $\text{PCI}$.<br>
-On a alors : $Q=m_{\text{combustible}}\times \text{PC}$, où $Q$ est la chaleur dégagée, en J.</p>
-
-  </div>
-</div>
-<br>
-<h2 id="exercices">Exercices</h2>
-<ul>
-<li><a href="/exocombubac.pdf"><strong>Exercice poêle à bois</strong> (extrait sujet 2022 métropole)</a></li>
-<li><a href="/excombbacblanc.pdf"><strong>Fin exo 4 du bac blanc</strong> (extrait sujet 2023 Mayotte-Liban)</a></li>
-</ul>
-<br>
-<h2 id="quiz">Quiz</h2>
-
-<div class='quizdown'>
-  
-
----
-primary_color: steelblue
-secondary_color: "#f2f2f2"
-text_color: black
-shuffle_questions: false
-
----
-
-##
-
-Les produits de la combustion complète des alcools&nbsp;:
-
-- [x] sont identiques à ceux de la combustion complète des alcènes
-- [x] sont identiques à ceux de la combustion complète des alcanes  
-- [ ] sont identiques à ceux de la combustion complète du dihydrogène
-
-
-## 
-
-La molécule de formule brute $\ce{C6H12}$&nbsp;:
-
-- [x] est un alcène
-- [x] est un hydrocarbure
-- [x] est une molécule organique
-- [ ] est un alcool
-- [ ] est un alcane
-
-## 
-
-La molécule de formule brute $\ce{C2H5OH}$&nbsp;:
-
-- [ ] est un alcène 
-- [x] est un alcool
-- [ ] est un alcane
-- [ ] est un hydrocarbure
-- [x] est une molécule organique
-
-
-## 
-
-Pour la combustion complète du méthane&nbsp;:
-
-- [x] le dioxygène est le comburant de la réaction
-- [ ] le dioxygène est le carburant de la réaction 
-- [ ] le dioxygène est l'un des produits de la réaction
-
-## 
-
-Parmi les pictogrammes suivant, lesquels peuvent figurer sur une bouteille de butane&nbsp;:
-
-- [x] ![](/pictinfl.png)
-- [ ] ![](/pictcorr.png)
-- [ ] ![](/pictcomb.png)
-- [x] ![](/pictpress.png)
-
-## 
-
-L'équation bilan de la combustion complète du méthane est&nbsp;:
-
-- [x] $\ce{CH4 + 2O2 \longrightarrow CO2 + 2 H2O}$
-- [ ] $\ce{CH4 + O2 \longrightarrow CO2 + H2O}$
-- [ ] $\ce{CO2 + 2 H2O \longrightarrow CH4 + 2O2}$
-
-
-## 
-
-Lesquelles de ces valeurs peuvent correspondre au PCI d'un combustible&nbsp;?
-
-- [x] $\pu{50 MJ*kg-1}$
-- [x] $\pu{0,30 kJ*g-1}$ 
-- [ ] $\pu{4,18 kJ*kg-1*K-1}$
-
-## 
-
-La différence entre le PCI et le PCS&nbsp;:
-
-- [ ] provient d'une combustion incomplète
-- [ ] est due à l'évaporation du dioxyde de carbone 
-- [x] provient de la condensation de l'eau contenue dans les fumées
-
-## 
-
-Comparaison entre le PCI et le PCS&nbsp;:
-
-- [x] la valeur du PCI est toujours plus faible que la valeur du PCS
-- [ ] la valeur du PCS est toujours plus faible que la valeur du PCI
-- [ ] les deux valeurs sont différentes car elles sont exprimées dans des unités différentes
-
-## 
-
-Un gaz à effet de serre&nbsp;:
-
-- [x] est pratiquement transparent pour le rayonnement visible
-- [ ] est fabriqué dans une serre
-- [ ] est pratiquement transparent pour le rayonnement infrarouge
-
-## 
-
-Les principaux gaz à effet de serre dans l'atmosphère terrestre sont&nbsp;:
-
-- [x] l'eau
-- [x] le dioxyde de carbone
-- [ ] le dioxygène
-- [ ] le diazote
-- [x] le méthane
-
-##
-
-L'augmentation des concentrations de gaz à effet de serre dans l'atmosphère terrestre&nbsp;:
-
-- [x] tend à augmenter la température de l'atmosphère terrestre
-- [ ] est responsable du trou dans la couche d'ozone
-- [x] est principalement d'origine humaine
-
-
-</div>
-
+<p>$\begin{aligned} W&amp;=-W_I &amp;\text{le travail musculaire s&rsquo;oppose au travail des forces de pression} \\ &amp;=-\int_0^{V_f}-PdV \\ &amp; =\int_0^{P_f}PA_I k_I e^{-k_I P}dP &amp;\text{en utilisant }dV=A_Ik_Ie^{-k_IP}dP \\ &amp; =A_Ik_I\left[\frac{-P}{k_I}e^{-k_I P}\right]_0^{P_f}-A_Ik_I\int_0^{P_f}\frac{-1}{k_I} e^{-k_I P}dP &amp;\text{intégration par partie}  \\ &amp; =A_Ik_I\left[\frac{-P}{k_I}e^{-k_I P}\right]_0^{P_f}-A_Ik_I\left[\frac{1}{k_I^2}e^{-k_I P}\right]_0^{P_f} &amp; \\ &amp; =-A_I P_f e^{-k_I P_f}-\frac{A_I}{k_I}e^{-k_I P_f}+\frac{A_I}{k_I} \\ &amp; =-A_IP_f+P_fV_f+\frac{V_f}{k_I}&amp;\text{car }A_Ie^{-k_IP_f}=A_I-V_f \end{aligned}$</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">W <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>A_I<span style="color:#f92672">*</span>P_f <span style="color:#f92672">+</span> P_f<span style="color:#f92672">*</span>V_f <span style="color:#f92672">+</span> V_f<span style="color:#f92672">/</span>k_I
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;W = {:.2f} J&#34;</span><span style="color:#f92672">.</span>format(W))
+</code></pre></div><p><code>W = 2.73 J</code></p>
+<ol start="4">
+<li>Que vaut le transfert thermique $Q_I$ fourni à l&rsquo;air lors d&rsquo;une inspiration ?</li>
+</ol>
+<p>$\Delta U_I = W_I + Q_I \Rightarrow Q_I = \Delta U_I - W_I$<br></p>
+<p>$\begin{aligned}Q_I &amp;= \frac{5}{2}(P_fV_f - 0)-\int_0^{V_f} -P dV\\&amp;= \frac{5}{2}(P_fV_f - 0)-A_IP_f+P_fV_f+\frac{V_f}{k_I}\\&amp;=\frac{7}{2}P_fV_f-A_I P_f +\frac{V_f}{k_I}\end{aligned}$</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Q_I <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>P_f<span style="color:#f92672">*</span>V_f <span style="color:#f92672">-</span> A_I<span style="color:#f92672">*</span>P_f<span style="color:#f92672">+</span>V_f<span style="color:#f92672">/</span>k_I
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Q_I = {:.1f} J&#34;</span><span style="color:#f92672">.</span>format(Q_I))
+Q_I <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>P_f<span style="color:#f92672">*</span>V_f <span style="color:#f92672">+</span> W
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Q_I = {:.1f} J&#34;</span><span style="color:#f92672">.</span>format(Q_I))
+</code></pre></div><p><code>Q_I = 25.3 J</code><br></p>
+<ol start="5">
+<li>Calculer le transfert thermique $Q$ lors d&rsquo;un cycle respiratoire complet puis la puissance thermique libérée. Commenter son signe.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">6</span>),dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">150</span>)
+plt<span style="color:#f92672">.</span>plot(V,P_I(V),c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;inspiration&#34;</span>)
+plt<span style="color:#f92672">.</span>plot(V,P_E(V),c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;expiration&#34;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Volume V (L)&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Pression P (kPa)&#34;</span>)
+plt<span style="color:#f92672">.</span>legend()
+plt<span style="color:#f92672">.</span>fill_between(V, P_I(V), P_E(V), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;yellow&#34;</span>, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.2</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/courberespi2.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Q <span style="color:#f92672">=</span> quad(diff, <span style="color:#ae81ff">0</span>, V_f)[<span style="color:#ae81ff">0</span>]
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Q = {:.3f} J&#34;</span><span style="color:#f92672">.</span>format(Q))
+Plib <span style="color:#f92672">=</span> Q<span style="color:#f92672">/</span><span style="color:#ae81ff">4</span> <span style="color:#75715e"># en prenant 4 s pour un cycle respiratoire (15 respirations par minute)</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Plib = {:.3f} W&#34;</span><span style="color:#f92672">.</span>format(Plib))
+</code></pre></div><p><code>Q = 0.821 J</code><br>
+<code>Plib = 0.205 W</code></p>
 
 
 <footer class="footline">
@@ -2096,7 +2029,6 @@ L'augmentation des concentrations de gaz à effet de serre dans l'atmosphère te
             
                 
                     
-                    
                 
                 
 
@@ -2109,9 +2041,6 @@ L'augmentation des concentrations de gaz à effet de serre dans l'atmosphère te
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -2177,7 +2106,6 @@ L'augmentation des concentrations de gaz à effet de serre dans l'atmosphère te
             
                 
                     
-                    
                 
                 
 
@@ -2193,9 +2121,6 @@ L'augmentation des concentrations de gaz à effet de serre dans l'atmosphère te
             
             
                 
-                    
-                        
-                        
                     
                 
                 
