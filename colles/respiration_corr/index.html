@@ -36,22 +36,22 @@
     
 
     
-    <link href="/css/nucleus.css?1696782142" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1696782142" rel="stylesheet">
-    <link href="/css/hybrid.css?1696782142" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1696782142" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1696782142" rel="stylesheet">
-    <link href="/css/auto-complete.css?1696782142" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1696782142" rel="stylesheet">
-    <link href="/css/theme.css?1696782142" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1696782142" rel="stylesheet">
+    <link href="/css/nucleus.css?1696785743" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1696785743" rel="stylesheet">
+    <link href="/css/hybrid.css?1696785743" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1696785743" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1696785743" rel="stylesheet">
+    <link href="/css/auto-complete.css?1696785743" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1696785743" rel="stylesheet">
+    <link href="/css/theme.css?1696785743" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1696785743" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1696782142" rel="stylesheet">
+    <link href="/css/theme-blue.css?1696785743" rel="stylesheet">
     
-    <link href="/css/foo.css?1696782142" rel="stylesheet"><link href="/css/bar.css?1696782142" rel="stylesheet">
+    <link href="/css/foo.css?1696785743" rel="stylesheet"><link href="/css/bar.css?1696785743" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1696782142"></script>
+    <script src="/js/jquery-3.3.1.min.js?1696785743"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -105,14 +105,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1696782142"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1696782142"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1696785743"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1696785743"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1696782142"></script>
+<script type="text/javascript" src="/js/search.js?1696785743"></script>
 
     
   </div>
@@ -1397,17 +1397,17 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
 A_I, A_E <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.57</span>, <span style="color:#ae81ff">3.35</span>
 k_I, k_E <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.964</span>, <span style="color:#ae81ff">1.644</span>
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">P_I</span>(V) : <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>k_I<span style="color:#f92672">*</span>(np<span style="color:#f92672">.</span>log(A_I<span style="color:#f92672">/</span>(A_I<span style="color:#f92672">-</span>V)))
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">P_E</span>(V) : <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>k_E<span style="color:#f92672">*</span>(np<span style="color:#f92672">.</span>log(A_E<span style="color:#f92672">/</span>(A_E<span style="color:#f92672">-</span>V)))
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">P_I</span>(V): <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>k_I<span style="color:#f92672">*</span>(np<span style="color:#f92672">.</span>log(A_I<span style="color:#f92672">/</span>(A_I<span style="color:#f92672">-</span>V)))
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">P_E</span>(V): <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>k_E<span style="color:#f92672">*</span>(np<span style="color:#f92672">.</span>log(A_E<span style="color:#f92672">/</span>(A_E<span style="color:#f92672">-</span>V)))
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">diff</span>(V) : <span style="color:#66d9ef">return</span> P_I(V)<span style="color:#f92672">-</span>P_E(V)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">diff</span>(V): <span style="color:#66d9ef">return</span> P_I(V)<span style="color:#f92672">-</span>P_E(V)
 
 Vmax <span style="color:#f92672">=</span> min(A_E,A_I)
 
 V_f <span style="color:#f92672">=</span> fsolve(diff,[<span style="color:#ae81ff">1</span>,Vmax<span style="color:#f92672">-</span><span style="color:#ae81ff">1e-5</span>])[<span style="color:#ae81ff">1</span>]
 P_f <span style="color:#f92672">=</span> P_I(V_f)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;V_f = {:.2f} L&#34;</span><span style="color:#f92672">.</span>format(V_f))
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;P_f = {:.2f} kPa&#34;</span><span style="color:#f92672">.</span>format(P_f))
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;V_f = {V_f:.2f} L&#34;</span>)
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;P_f = {P_f:.2f} kPa&#34;</span>)
 
 
 V <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>,V_f,<span style="color:#ae81ff">100</span>)
@@ -1419,9 +1419,8 @@ plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;V
 plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Pression P (kPa)&#34;</span>)
 plt<span style="color:#f92672">.</span>legend()
 plt<span style="color:#f92672">.</span>show()
-</code></pre></div><pre><code>V_f = 3.31 L
-P_f = 2.73 kPa
-</code></pre>
+</code></pre></div><p><code>V_f = 3.31 L</code><br>
+<code>P_f = 2.73 kPa</code></p>
 <p><img src="/courberespi1.png" alt="png"></p>
 <ol>
 <li>
@@ -1435,15 +1434,15 @@ P_f = 2.73 kPa
 </li>
 </ol>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">W <span style="color:#f92672">=</span> quad(P_I, <span style="color:#ae81ff">0</span>, V_f)[<span style="color:#ae81ff">0</span>]
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;W = {:.2f} J&#34;</span><span style="color:#f92672">.</span>format(W))
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;W = {W:.2f} J&#34;</span>)
 prop <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span><span style="color:#f92672">*</span><span style="color:#ae81ff">24</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span>W<span style="color:#f92672">/</span><span style="color:#ae81ff">10e6</span><span style="color:#f92672">*</span><span style="color:#ae81ff">100</span> <span style="color:#75715e"># pour 15 inspirations par minute</span>
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;proportion du métabolisme : {:.2f} %&#34;</span><span style="color:#f92672">.</span>format(prop))
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;proportion du métabolisme : {prop:.2f} %&#34;</span>)
 </code></pre></div><p><code>W = 2.73 J</code><br>
 <code>proportion du métabolisme : 0.59</code></p>
 <br>
 <p>$\begin{aligned} W&amp;=-W_I &amp;\text{le travail musculaire s&rsquo;oppose au travail des forces de pression} \\ &amp;=-\int_0^{V_f}-PdV \\ &amp; =\int_0^{P_f}PA_I k_I e^{-k_I P}dP &amp;\text{en utilisant }dV=A_Ik_Ie^{-k_IP}dP \\ &amp; =A_Ik_I\left[\frac{-P}{k_I}e^{-k_I P}\right]_0^{P_f}-A_Ik_I\int_0^{P_f}\frac{-1}{k_I} e^{-k_I P}dP &amp;\text{intégration par partie}  \\ &amp; =A_Ik_I\left[\frac{-P}{k_I}e^{-k_I P}\right]_0^{P_f}-A_Ik_I\left[\frac{1}{k_I^2}e^{-k_I P}\right]_0^{P_f} &amp; \\ &amp; =-A_I P_f e^{-k_I P_f}-\frac{A_I}{k_I}e^{-k_I P_f}+\frac{A_I}{k_I} \\ &amp; =-A_IP_f+P_fV_f+\frac{V_f}{k_I}&amp;\text{car }A_Ie^{-k_IP_f}=A_I-V_f \end{aligned}$</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">W <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>A_I<span style="color:#f92672">*</span>P_f <span style="color:#f92672">+</span> P_f<span style="color:#f92672">*</span>V_f <span style="color:#f92672">+</span> V_f<span style="color:#f92672">/</span>k_I
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;W = {:.2f} J&#34;</span><span style="color:#f92672">.</span>format(W))
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;W = {W:.2f} J&#34;</span>)
 </code></pre></div><p><code>W = 2.73 J</code></p>
 <ol start="4">
 <li>Que vaut le transfert thermique $Q_I$ fourni à l&rsquo;air lors d&rsquo;une inspiration ?</li>
@@ -1451,10 +1450,11 @@ prop <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span><
 <p>$\Delta U_I = W_I + Q_I \Rightarrow Q_I = \Delta U_I - W_I$<br></p>
 <p>$\begin{aligned}Q_I &amp;= \frac{5}{2}(P_fV_f - 0)-\int_0^{V_f} -P dV\\&amp;= \frac{5}{2}(P_fV_f - 0)-A_IP_f+P_fV_f+\frac{V_f}{k_I}\\&amp;=\frac{7}{2}P_fV_f-A_I P_f +\frac{V_f}{k_I}\end{aligned}$</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Q_I <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>P_f<span style="color:#f92672">*</span>V_f <span style="color:#f92672">-</span> A_I<span style="color:#f92672">*</span>P_f<span style="color:#f92672">+</span>V_f<span style="color:#f92672">/</span>k_I
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Q_I = {:.1f} J&#34;</span><span style="color:#f92672">.</span>format(Q_I))
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;Q_I = {Q_I:.1f} J&#34;</span>)
 Q_I <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>P_f<span style="color:#f92672">*</span>V_f <span style="color:#f92672">+</span> W
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Q_I = {:.1f} J&#34;</span><span style="color:#f92672">.</span>format(Q_I))
-</code></pre></div><p><code>Q_I = 25.3 J</code><br></p>
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;Q_I = {Q_I:.1f} J&#34;</span>)
+</code></pre></div><p><code>Q_I = 25.3 J</code><br>
+<code>Q_I = 25.3 J</code></p>
 <ol start="5">
 <li>Calculer le transfert thermique $Q$ lors d&rsquo;un cycle respiratoire complet puis la puissance thermique libérée. Commenter son signe.</li>
 </ol>
@@ -1468,9 +1468,9 @@ plt<span style="color:#f92672">.</span>fill_between(V, P_I(V), P_E(V), color <sp
 plt<span style="color:#f92672">.</span>show()
 </code></pre></div><p><img src="/courberespi2.png" alt="png"></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Q <span style="color:#f92672">=</span> quad(diff, <span style="color:#ae81ff">0</span>, V_f)[<span style="color:#ae81ff">0</span>]
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Q = {:.3f} J&#34;</span><span style="color:#f92672">.</span>format(Q))
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;Q = {Q:.3f} J&#34;</span>)
 Plib <span style="color:#f92672">=</span> Q<span style="color:#f92672">/</span><span style="color:#ae81ff">4</span> <span style="color:#75715e"># en prenant 4 s pour un cycle respiratoire (15 respirations par minute)</span>
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Plib = {:.3f} W&#34;</span><span style="color:#f92672">.</span>format(Plib))
+<span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;Plib = {Plib:.3f} W&#34;</span>)
 </code></pre></div><p><code>Q = 0.821 J</code><br>
 <code>Plib = 0.205 W</code></p>
 
@@ -2316,19 +2316,19 @@ Plib <span style="color:#f92672">=</span> Q<span style="color:#f92672">/</span><
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1696782142"></script>
-    <script src="/js/perfect-scrollbar.min.js?1696782142"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1696782142"></script>
-    <script src="/js/jquery.sticky.js?1696782142"></script>
-    <script src="/js/featherlight.min.js?1696782142"></script>
-    <script src="/js/highlight.pack.js?1696782142"></script>
+    <script src="/js/clipboard.min.js?1696785743"></script>
+    <script src="/js/perfect-scrollbar.min.js?1696785743"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1696785743"></script>
+    <script src="/js/jquery.sticky.js?1696785743"></script>
+    <script src="/js/featherlight.min.js?1696785743"></script>
+    <script src="/js/highlight.pack.js?1696785743"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1696782142"></script>
-    <script src="/js/learn.js?1696782142"></script>
-    <script src="/js/hugo-learn.js?1696782142"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1696785743"></script>
+    <script src="/js/learn.js?1696785743"></script>
+    <script src="/js/hugo-learn.js?1696785743"></script>
     
         
-            <script src="/mermaid/mermaid.js?1696782142"></script>
+            <script src="/mermaid/mermaid.js?1696785743"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
