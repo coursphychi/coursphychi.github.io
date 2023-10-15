@@ -24,21 +24,6 @@ Objet pouvant être dénombré. Les atomes isolés, les ions, les molécules son
     </item>
     
     <item>
-      <title>Les éléments</title>
-      <link>https://coursphychi.github.io/1es/matiere/elements/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/matiere/elements/</guid>
-      <description>Abondance et origine Présentation
-       Radioactivité Présentation
-Découverte de la radioactivité :
-      Chambre à brouillard permettant de visualiser la radioactivité naturelle :
-    Bruit d&#39;un compteur geiger : 
-   Estimez votre exposition annuelle à la radioactivité.
-Graphiques de XKCD présentant les ordres de grandeur des différents niveaux d&amp;rsquo;irradiations aux rayonnements ionisants :  Documents :</description>
-    </item>
-    
-    <item>
       <title>Onde</title>
       <link>https://coursphychi.github.io/colles/onde/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -60,34 +45,12 @@ Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à parti
     </item>
     
     <item>
-      <title>Rayonnement solaire</title>
-      <link>https://coursphychi.github.io/1es/soleil/rayonnement/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/soleil/rayonnement/</guid>
-      <description>Rayonnement solaire Vidéo sur l&amp;rsquo;énergie des étoiles :
-    Documents :
- Activité énergie des étoiles Activité température des étoiles  </description>
-    </item>
-    
-    <item>
       <title>Respiration</title>
       <link>https://coursphychi.github.io/colles/respiration/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
       <guid>https://coursphychi.github.io/colles/respiration/</guid>
       <description>table { margin: auto; border-collapse: collapse; border: none !important; } td { width: 60px; height: 60px; border: 5px solid white !important; text-align: center; vertical-align: middle; font-size: 1em; } td.clickable { cursor: pointer; } .s-block { background-color: #0076BA; } .p-block { background-color: #0076BA; } .neutre { background-color: #0076BA; } .noble-gas { background-color: #EE220C; } .empty { border: none !important; color:#1C90F3; font-weight:bold; } .symbol { font-size: 2em; font-weight:bold; color:#fff; } .atomic-number { font-size: 1.</description>
-    </item>
-    
-    <item>
-      <title>Son</title>
-      <link>https://coursphychi.github.io/1es/musique/son/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/musique/son/</guid>
-      <description>Le son, un phénomène vibratoire Présentation
-Comme l&amp;rsquo;a montré Joseph Fourier (1768-1830), tout signal périodique peut se décomposer en une somme de sinusoïdes.
-Les sons musicaux (une note joué par un instrument) sont eux mêmes des signaux périodiques. Ils sont donc décomposables en une série de signaux sinusoïdaux.</description>
     </item>
     
     <item>
@@ -110,17 +73,6 @@ Expérience  Vidéo :        Questions :   De quoi témoigne l&#39;élévation d
     </item>
     
     <item>
-      <title>Bilan radiatif</title>
-      <link>https://coursphychi.github.io/1es/soleil/bilanradia/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/soleil/bilanradia/</guid>
-      <description>Bilan radiatif terrestre Vidéo sur l&amp;rsquo;impact de l&amp;rsquo;inclinaison de la Terre par rapport au Soleil :
-  Documents :
- Activité température et distance au Soleil Activité température et albédo  </description>
-    </item>
-    
-    <item>
       <title>Changements d&#39;état</title>
       <link>https://coursphychi.github.io/tsti2d/chgmtetat/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -132,25 +84,6 @@ La température absolue se mesure en kelvins $K$ $(\pu{0^\circ C = 273,15 K})$.
 L&#39;énergie interne $U$ d&amp;rsquo;un système se compose des énergies microscopiques cinétiques (agitation) et potentielles (interaction) des molécules qui le constituent.
 La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un solide ou d&amp;rsquo;un liquide est donnée par la formule suivante :
  $$\Delta U = m c \Delta\theta$$   où $m$ est la masse (en $\pu kg$)</description>
-    </item>
-    
-    <item>
-      <title>Cristaux</title>
-      <link>https://coursphychi.github.io/1es/matiere/cristaux/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/matiere/cristaux/</guid>
-      <description>Cristaux     </description>
-    </item>
-    
-    <item>
-      <title>Musique</title>
-      <link>https://coursphychi.github.io/1es/musique/musique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/musique/musique/</guid>
-      <description>La musique ou l&amp;rsquo;art de faire entendre les nombres    Son pur et son composé Un son pur est une vibration sinusoïdale. C&amp;rsquo;est un signal ne contenant qu&amp;rsquo;une seule fréquence.
-Le son correspondant à une note jouée par un instrument de musique n’est pas un son pur, mais le signal sonore $s$ qui lui est associé a la particularité d’être périodique ($s(t+T)=s(t)$ où $T=1/f$ est la période du signal et $f$ sa fréquence, exprimée en hertz).</description>
     </item>
     
     <item>
@@ -195,39 +128,6 @@ Définitions Élément chimique
 Ensemble des atomes (isolés ou engagés dans un édifice polyatomique neutre ou chargé) et des ions monoatomiques comportant un même nombre de protons dans leur noyau.
   Exemple :
 Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite comportent des atomes de chlore ou des ions chlorure de même Z = 17, caractérisant l’élément chlore.</description>
-    </item>
-    
-    <item>
-      <title>Forme et mesure</title>
-      <link>https://coursphychi.github.io/1es/terre/mesure/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/terre/mesure/</guid>
-      <description>Forme de la Terre    figure { position: relative; padding: 0px; margin: auto; max-width: 800px; } img { display: block; max-width: 100%; max-height: inherit; width: auto; } figcaption { position: absolute; background-color: #222; color: #fff; font: italic smaller sans-serif; padding: 3px; text-align: center; bottom: 0; left: 0; right: 0; }   Photo composite de l&#39;éclipse lunaire de 8 novembre 2022 (Andrew McCarthy).  
-Ératosthène</description>
-    </item>
-    
-    <item>
-      <title>La Terre dans l&#39;espace</title>
-      <link>https://coursphychi.github.io/1es/terre/terreespace/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/terre/terreespace/</guid>
-      <description>Mouvement et référentiels Vidéos sur les mouvements de la Terre et du Soleil :
-       Lune La Lune :
- Séance Lune
-  D&amp;#39;après vous, qu&amp;#39;est-ce qui ne va pas dans cette image ? pic.twitter.com/G4D56a1F5x
-&amp;mdash; Astropierre (@astropierre) March 29, 2023   Pourquoi ne voit-on jamais un tel croissant haut dans le ciel ?  </description>
-    </item>
-    
-    <item>
-      <title>Numérisation</title>
-      <link>https://coursphychi.github.io/1es/musique/numerisation/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/musique/numerisation/</guid>
-      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Le son, une information à coder Analogique vs Numérique Avant les années 1990, le support sur lequel est enregistrée la musique était le plus souvent analogique, mais avec la démocratisation du Compact Disk, les supports numériques deviennent rapidement majoritaires.
- Définir les termes analogique et numérique.</description>
     </item>
     
     <item>

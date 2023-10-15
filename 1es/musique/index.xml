@@ -7,36 +7,5 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://coursphychi.github.io/1es/musique/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Son</title>
-      <link>https://coursphychi.github.io/1es/musique/son/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/musique/son/</guid>
-      <description>Le son, un phénomène vibratoire Présentation
-Comme l&amp;rsquo;a montré Joseph Fourier (1768-1830), tout signal périodique peut se décomposer en une somme de sinusoïdes.
-Les sons musicaux (une note joué par un instrument) sont eux mêmes des signaux périodiques. Ils sont donc décomposables en une série de signaux sinusoïdaux.</description>
-    </item>
-    
-    <item>
-      <title>Musique</title>
-      <link>https://coursphychi.github.io/1es/musique/musique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/musique/musique/</guid>
-      <description>La musique ou l&amp;rsquo;art de faire entendre les nombres    Son pur et son composé Un son pur est une vibration sinusoïdale. C&amp;rsquo;est un signal ne contenant qu&amp;rsquo;une seule fréquence.
-Le son correspondant à une note jouée par un instrument de musique n’est pas un son pur, mais le signal sonore $s$ qui lui est associé a la particularité d’être périodique ($s(t+T)=s(t)$ où $T=1/f$ est la période du signal et $f$ sa fréquence, exprimée en hertz).</description>
-    </item>
-    
-    <item>
-      <title>Numérisation</title>
-      <link>https://coursphychi.github.io/1es/musique/numerisation/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/1es/musique/numerisation/</guid>
-      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Le son, une information à coder Analogique vs Numérique Avant les années 1990, le support sur lequel est enregistrée la musique était le plus souvent analogique, mais avec la démocratisation du Compact Disk, les supports numériques deviennent rapidement majoritaires.
- Définir les termes analogique et numérique.</description>
-    </item>
-    
   </channel>
 </rss>
