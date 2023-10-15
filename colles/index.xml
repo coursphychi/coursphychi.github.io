@@ -26,6 +26,15 @@
     </item>
     
     <item>
+      <title>Réfraction</title>
+      <link>https://coursphychi.github.io/colles/refraction/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://coursphychi.github.io/colles/refraction/</guid>
+      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Réfraction   Schématiser la situation lorsque la caméra est dans l&amp;rsquo;eau en représentant les rayons lumineux, les angles et en faisant apparaître les paramètres nécessaires.   Correction   On cherche à déterminer la distance $D$ entre la caméra et le mur.</description>
+    </item>
+    
+    <item>
       <title>Tremplins</title>
       <link>https://coursphychi.github.io/colles/tremplins/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
