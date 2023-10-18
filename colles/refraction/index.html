@@ -36,22 +36,22 @@
     
 
     
-    <link href="/css/nucleus.css?1697496672" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1697496672" rel="stylesheet">
-    <link href="/css/hybrid.css?1697496672" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1697496672" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1697496672" rel="stylesheet">
-    <link href="/css/auto-complete.css?1697496672" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1697496672" rel="stylesheet">
-    <link href="/css/theme.css?1697496672" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1697496672" rel="stylesheet">
+    <link href="/css/nucleus.css?1697643568" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1697643568" rel="stylesheet">
+    <link href="/css/hybrid.css?1697643568" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1697643568" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1697643568" rel="stylesheet">
+    <link href="/css/auto-complete.css?1697643568" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1697643568" rel="stylesheet">
+    <link href="/css/theme.css?1697643568" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1697643568" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1697496672" rel="stylesheet">
+    <link href="/css/theme-blue.css?1697643568" rel="stylesheet">
     
-    <link href="/css/foo.css?1697496672" rel="stylesheet"><link href="/css/bar.css?1697496672" rel="stylesheet">
+    <link href="/css/foo.css?1697643568" rel="stylesheet"><link href="/css/bar.css?1697643568" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1697496672"></script>
+    <script src="/js/jquery-3.3.1.min.js?1697643568"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -105,14 +105,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1697496672"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1697496672"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1697643568"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1697643568"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1697496672"></script>
+<script type="text/javascript" src="/js/search.js?1697643568"></script>
 
     
   </div>
@@ -1202,7 +1202,7 @@ $$\begin{aligned}
 </blockquote>
 </details>
 <ol start="4">
-<li>Quelle approximation peut-on faire ?</li>
+<li>Quelles approximations peut-on faire ?</li>
 </ol>
 <details>
 <summary id="correcsum">
@@ -1241,6 +1241,39 @@ $$\tan \left(\sin^{-1}\left(\frac{n_{air}}{n_{eau}}\sin\left(\tan^{-1}\left(\fra
 Correction</summary>
 <blockquote id="correc">
 <a href="https://colab.research.google.com/drive/1QD9yHmXzN25woSPemtNbuOeXNxK5frL3?usp=sharing">Lien vers notebook Colab.</a>
+</blockquote>
+</details>
+<ol start="7">
+<li>Reschématiser la situation en prenant en compte les approximations faites à la question 4.</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+<img src="/schemacollerefrsimpl.png">
+</blockquote>
+</details>
+<ol start="8">
+<li>En utilisant les deux triangles, déterminer algébriquement $D$ en fonction de $c$, $n_{eau}$ et $n_{air}$ (partir de Snell-Descartes et utiliser la trigonométrie et Pythagore).</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+<img src="/schemacollerefrcorr.png">
+$$
+\begin{aligned}
+n_{air} \sin\theta &= n_{eau}\sin\theta_r\\
+n_{air} \frac{3,5c}{\sqrt{D^2+(3,5c)^2}} &= n_{eau} \frac{2,5c}{\sqrt{D^2+(2,5c)^2}}\\
+\Rightarrow n_{air}^2 \frac{(3,5c)^2}{D^2+(3,5c)^2} &= n_{eau}^2 \frac{(2,5c)^2}{D^2+(2,5c)^2}
+\end{aligned}
+$$
+D'où
+<div style="display: flex;justify-content: center;">
+<div style = "border:solid red 3px;width:min-content;padding: 0px 10px 0px 10px;font-size: 18px;">
+$$D = 2,5 \times 3,5 \times c  \times \sqrt{\frac{ n_{eau}^2-n_{air}^2}{(3,5 \times  n_{air})^2 - (2,5 \times n_{eau})^2}}$$
+</div></div>
+Pour $\pu{c = 20 cm}$, on trouve $\pu{D = 1,4 m}$.
 </blockquote>
 </details>
 <hr>
@@ -1949,19 +1982,19 @@ Correction</summary>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1697496672"></script>
-    <script src="/js/perfect-scrollbar.min.js?1697496672"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1697496672"></script>
-    <script src="/js/jquery.sticky.js?1697496672"></script>
-    <script src="/js/featherlight.min.js?1697496672"></script>
-    <script src="/js/highlight.pack.js?1697496672"></script>
+    <script src="/js/clipboard.min.js?1697643568"></script>
+    <script src="/js/perfect-scrollbar.min.js?1697643568"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1697643568"></script>
+    <script src="/js/jquery.sticky.js?1697643568"></script>
+    <script src="/js/featherlight.min.js?1697643568"></script>
+    <script src="/js/highlight.pack.js?1697643568"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1697496672"></script>
-    <script src="/js/learn.js?1697496672"></script>
-    <script src="/js/hugo-learn.js?1697496672"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1697643568"></script>
+    <script src="/js/learn.js?1697643568"></script>
+    <script src="/js/hugo-learn.js?1697643568"></script>
     
         
-            <script src="/mermaid/mermaid.js?1697496672"></script>
+            <script src="/mermaid/mermaid.js?1697643568"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
