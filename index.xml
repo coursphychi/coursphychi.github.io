@@ -55,6 +55,15 @@ Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à parti
     
     <item>
       <title>Réfraction</title>
+      <link>https://coursphychi.github.io/colles/lentilles/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://coursphychi.github.io/colles/lentilles/</guid>
+      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Lentilles minces  En utilisant le schéma ci-dessus, démontrer la relation de conjugaison de Newton pour les lentilles minces qui stipule que : $$ \overline{A&amp;rsquo;F&#39;}\cdot\overline{AF} = \overline{O&amp;rsquo;F&#39;}\cdot\overline{OF} $$   Correction Thalès dans les traingles F&#39;OC et F&#39;A&#39;B&#39;&amp;nbsp;: $$\frac{\overline{OF&#39;}}{\overline{OC}}=\frac{\overline{A&#39;F&#39;}}{\overline{A&#39;B&#39;}}$$ Et comme $\overline{OC}=\overline{AB}$, on a&amp;nbsp;: $$ \begin{equation} \frac{\overline{A&#39;B&#39;}}{\overline{AB}}=\frac{\overline{A&#39;F&#39;}}{\overline{OF&#39;}} \end{equation} $$ Thalès dans FAB et FOD&amp;nbsp;: $$\frac{\overline{OF}}{\overline{OD}}=\frac{\overline{AF}}{\overline{AB}}$$ Et comme $\overline{OD}=\overline{A&#39;B&#39;}$, on a&amp;nbsp;: $$ \begin{equation} \frac{\overline{A&#39;B&#39;}}{\overline{AB}}=\frac{\overline{OF}}{\overline{AF}} \end{equation}$$ En combinant (1) et (2), on obtient&amp;nbsp;: $$ \begin{equation} \overline{A&#39;F&#39;}\cdot\overline{AF} = \overline{O&#39;F&#39;}\cdot\overline{OF} \end{equation} $$   En introduisant le point $O$ pour décomposer les distances algébriques $\overline{AF}$ et $\overline{A&amp;rsquo;F&#39;}$, partir de la relation de conjugaison de Newton pour obtenir celle de Descartes.</description>
+    </item>
+    
+    <item>
+      <title>Réfraction</title>
       <link>https://coursphychi.github.io/colles/refraction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
@@ -104,7 +113,8 @@ La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un 
       <description>Piles, accumulateurs et piles à combustible Présentation
 Rappels Réactions d&amp;rsquo;oxydoréduction : info
 Il y a échanges d&amp;rsquo;électrons lors d&amp;rsquo;une réaction d&#39;oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques).
-    Savoir et savoir faire coeur
+    
+Savoir et savoir faire coeur
 Équilibrer les demi-équations redox Déterminer une équation bilan à partir des demi-équations Décrire ce qui se passe à chaque électrode pendant une décharge et pendant une charge Lier une demi-équation à une électrode (cathode ou anode) Différentier et définir une pile, un accumulateur et une batterie Calculer l’énergie totale stockée Exploiter les principales caractéristiques des piles ou accumulateurs (tension à vide, capacité, énergies massique et volumique, nombre de cycles de charge et décharge) pour les utiliser dans des applications spécifiques.</description>
     </item>
     

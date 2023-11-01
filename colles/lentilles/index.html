@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Inertie - Cours de physique chimie</title>
+    <title>Réfraction - Cours de physique chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -79,7 +79,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/2nde/inertie/">
+  <body class="" data-url="/colles/lentilles/">
     <nav id="sidebar" class="">
 
 
@@ -140,7 +140,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/2nde/" title="2nde" class="dd-item
-        parent
+        
         
         
         ">
@@ -334,7 +334,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/2nde/inertie/" title="Inertie" class="dd-item active">
+      <li data-nav-id="/2nde/inertie/" title="Inertie" class="dd-item ">
         <a href="/2nde/inertie/">
         Inertie
         
@@ -1118,18 +1118,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Inertie
+                   Réfraction
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#documents">Documents</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -1148,65 +1144,196 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 
 <style>
-table {
-  margin: auto;
-  border-collapse: collapse;
-  border: none !important;
-}
-td {
-  width: 60px;
-  height: 60px;
-  border: 5px solid white !important;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 1em;
-}
-td.clickable {
-  cursor: pointer;
-}
-.s-block {
-  background-color: #0076BA;
-}
-.p-block {
-  background-color: #0076BA;
-}
-.neutre {
-  background-color: #0076BA;
-}
-.noble-gas {
-  background-color: #EE220C;
-}
-.empty {
-  border: none !important;
-  color:#1C90F3;
-  font-weight:bold;
-}
-.symbol {
-  font-size: 2em;
-  font-weight:bold;
-  color:#fff;
-}
-.atomic-number {
-  font-size: 1.5em;
-  font-weight:bold;
-  color: #fff;
-}
-.electron-configuration {
-  font-size: 1em;
-  color: #fff;
-}
+ 	#correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ 	#comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ 	#commsum
+  {
+    color: #004D80;
+  }
+ 	#correcsum
+  {
+    color: #006C65;
+  }
 </style>
-<h1 id="forces-et-principe-dinertie">Forces et principe d&rsquo;inertie</h1>
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/2nde/inertie">Présentation</a></p>
-<p><a href="/cm-inertie.pdf"><img src="/cm-inertie.png" alt=""></a></p>
-<h2 id="documents">Documents</h2>
-<ul>
-<li><a href="/tpinertie.pdf"><strong>TP - Principe d&rsquo;inertie</strong></a> + <a href="https://presentationssite.github.io/2nde/tpinertie"><strong>accroche</strong></a></li>
-<li><a href="/tppoids.pdf"><strong>TP - Lien entre masse et poids</strong></a> + <a href="https://colab.research.google.com/drive/1uIE16VldDMLuSSRNpXRIz5i8eiGaiTST?usp=sharing"><strong>partie python</strong></a></li>
-<li><a href="https://colab.research.google.com/drive/1p-QxzfllfrySCHkR9YHZUNAVhRrLh2aK?usp=sharing"><strong>Activité python - Chute libre d&rsquo;une balle</strong></a></li>
-<li><a href="https://phet.colorado.edu/sims/html/gravity-force-lab-basics/latest/gravity-force-lab-basics_all.html?locale=fr"><strong>Simulation - Force gravitationnelle entre deux masses</strong></a></li>
-</ul>
-
+<h1 id="lentilles-minces">Lentilles minces</h1>
+<img src="/schemlent.png">
+<ol>
+<li>En utilisant le schéma ci-dessus, démontrer la <b>relation de conjugaison de Newton</b> pour les lentilles minces qui stipule que :
+$$
+\overline{A&rsquo;F'}\cdot\overline{AF} = \overline{O&rsquo;F'}\cdot\overline{OF}
+$$</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+Thalès dans les traingles F'OC et F'A'B'&nbsp;:
+$$\frac{\overline{OF'}}{\overline{OC}}=\frac{\overline{A'F'}}{\overline{A'B'}}$$
+Et comme $\overline{OC}=\overline{AB}$, on a&nbsp;:
+$$
+\begin{equation}
+\frac{\overline{A'B'}}{\overline{AB}}=\frac{\overline{A'F'}}{\overline{OF'}}
+\end{equation}
+$$
+Thalès dans FAB et FOD&nbsp;:
+$$\frac{\overline{OF}}{\overline{OD}}=\frac{\overline{AF}}{\overline{AB}}$$
+Et comme $\overline{OD}=\overline{A'B'}$, on a&nbsp;:
+$$
+\begin{equation}
+\frac{\overline{A'B'}}{\overline{AB}}=\frac{\overline{OF}}{\overline{AF}}
+\end{equation}$$
+En combinant (1) et (2), on obtient&nbsp;:
+$$
+\begin{equation}
+\overline{A'F'}\cdot\overline{AF} = \overline{O'F'}\cdot\overline{OF}
+\end{equation}
+$$
+</blockquote>
+</details>
+<ol start="2">
+<li>En introduisant le point $O$ pour décomposer les distances algébriques $\overline{AF}$ et $\overline{A&rsquo;F'}$, partir de la relation de conjugaison de Newton pour obtenir celle de Descartes.</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+On écrit que $\overline{A'F'}=-\overline{OA'}+\overline{OF'}$ et que $\overline{AF}=-\overline{OA}+\overline{OF}$ et on utilise le fait que $\overline{OF}=-\overline{OF'}$.<br>
+En injectant tout ça dans (3), on obtient&nbsp;:
+$$
+(-\overline{OA'}+\overline{OF'})(-\overline{OA}-\overline{OF'})=-(\overline{OF'})^2
+$$
+On développe&nbsp;:
+$$
+\overline{OA'}\cdot\overline{OA}+\overline{OA'}\cdot\overline{OF'}-\overline{OF'}\cdot\overline{OA}\color{red}-{(\overline{OF'})^2}\color{black}=\color{red}{-(\overline{OF'})^2}
+$$
+Les termes en rouge se simplifient et il ne nours reste plus qu'à diviser par le produit $\overline{OA}\cdot\overline{OA'}\cdot\overline{OF'}$ l'expression obtenue (aucune des trois distances ne doit donc être nulle)&nbsp;:
+$$
+\frac{1}{\overline{OF'}}+\frac{1}{\overline{OA}}-\frac{1}{\overline{OA'}}=0
+$$
+Et en réarrangenat, on obtient bien la relation de conjugaison de Descartes&nbsp;:
+<div style="display: flex;justify-content: center;">
+<div style = "border:solid red 3px;width:min-content;padding: 0px 10px 0px 10px;font-size: 18px;">
+$$
+\frac{1}{\overline{OA'}}-\frac{1}{\overline{OA}}=\frac{1}{\overline{OF'}}
+$$
+    </div></div>
+</blockquote>
+</details>
+<p>On cherche maintenant à déterminer la distance $D$ entre la caméra et le mur.</p>
+<ol start="3">
+<li>Écrire la relation liant $\theta$, $c$ et $D$.</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+$$\tan\theta = \frac{3,5\times c}{D}$$
+</blockquote>
+</details>
+<ol start="4">
+<li>Écrire la relation liant $\theta_r$, $h$, $d$, $c$ et $D$.</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+$$\begin{aligned}
+(D-d)\tan\theta_r + h &= 2,5\times c\\
+\tan\theta_r &= \frac{2,5\times c-h}{D-d}
+\end{aligned}$$
+</blockquote>
+</details>
+<ol start="5">
+<li>Quelles approximations peut-on faire ?</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+$$d\ll D \;\text{  et  }\;h\ll 2,5c$$
+La relation précédente devient alors :
+$$
+\tan\theta_r = \frac{2,5\times c}{D}
+$$
+</blockquote>
+</details>
+<ol start="6">
+<li>Utiliser la relation de la question 3 et Snell-Descartes pour remplacer $\theta_r$ dans la relation de la question 4 (dans sa version simplifiée).</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+$$\begin{aligned}
+n_{air} \sin\theta &= n_{eau}\sin\theta_r\\
+\Rightarrow \theta_r &= \sin^{-1}\left(\frac{n_{air}}{n_{eau}}\sin\theta\right)
+\end{aligned}$$
+Et en utilisant la relation de la question 2 :
+$$\theta_r = \sin^{-1}\left(\frac{n_{air}}{n_{eau}}\sin\left(\tan^{-1}\left(\frac{3,5\times c}{D}\right)\right)\right)$$
+$$\tan\theta_r = \frac{2,5c}{D}$$
+devient donc :
+$$\tan \left(\sin^{-1}\left(\frac{n_{air}}{n_{eau}}\sin\left(\tan^{-1}\left(\frac{3,5\times c}{D}\right)\right)\right)\right)= \frac{2,5\times c}{D}$$
+</blockquote>
+</details>
+<ol start="7">
+<li>Utiliser Python pour trouver graphiquement une approximation de la solution.</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+<a href="https://colab.research.google.com/drive/1QD9yHmXzN25woSPemtNbuOeXNxK5frL3?usp=sharing">Lien vers notebook Colab.</a>
+</blockquote>
+</details>
+<ol start="8">
+<li>Reschématiser la situation en prenant en compte les approximations faites à la question 4.</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+<img src="/schemacollerefrsimpl.png">
+</blockquote>
+</details>
+<ol start="9">
+<li>En utilisant les deux triangles, déterminer algébriquement $D$ en fonction de $c$, $n_{eau}$ et $n_{air}$ (partir de Snell-Descartes et utiliser la trigonométrie et Pythagore).</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+<img src="/schemacollerefrcorr.png">
+$$
+\begin{aligned}
+n_{air} \sin\theta &= n_{eau}\sin\theta_r\\
+n_{air} \frac{3,5c}{\sqrt{D^2+(3,5c)^2}} &= n_{eau} \frac{2,5c}{\sqrt{D^2+(2,5c)^2}}\\
+\Rightarrow n_{air}^2 \frac{(3,5c)^2}{D^2+(3,5c)^2} &= n_{eau}^2 \frac{(2,5c)^2}{D^2+(2,5c)^2}
+\end{aligned}
+$$
+D'où
+<div style="display: flex;justify-content: center;">
+<div style = "border:solid red 3px;width:min-content;padding: 0px 10px 0px 10px;font-size: 18px;">
+$$D = 2,5 \times 3,5 \times c  \times \sqrt{\frac{ n_{eau}^2-n_{air}^2}{(3,5 \times  n_{air})^2 - (2,5 \times n_{eau})^2}}$$
+</div></div>
+Pour $\pu{c = 5,0 cm}$, on trouve $\pu{D = 35 cm}$.
+</blockquote>
+</details>
+<hr>
+<video width="700" controls style="display:block;max-width: 100%;position:relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <source src="https://presentationssite.github.io/perchemoite.mp4" type="video/mp4">
+</video>
+<br>
+<video width="700" controls style="display:block;max-width: 100%;position:relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <source src="https://presentationssite.github.io/casse.mp4" type="video/mp4">
+</video>
 
 <footer class="footline">
 	
@@ -1243,20 +1370,6 @@ td.clickable {
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
                         
                         
                     
@@ -1267,9 +1380,6 @@ td.clickable {
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -1388,7 +1498,6 @@ td.clickable {
             
                 
                     
-                    
                 
                 
 
@@ -1405,8 +1514,21 @@ td.clickable {
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
-                        
+            
+            
+                
                     
                 
                 
