@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Conduction thermique - Cours de physique chimie</title>
+    <title>Lentilles - Cours de physique chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -79,7 +79,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/tsti2d/conduction/">
+  <body class="" data-url="/colles/lentilles2/">
     <nav id="sidebar" class="">
 
 
@@ -706,7 +706,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/tsti2d/" title="TSTI2D" class="dd-item
-        parent
+        
         
         
         ">
@@ -858,7 +858,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/tsti2d/conduction/" title="Conduction thermique" class="dd-item active">
+      <li data-nav-id="/tsti2d/conduction/" title="Conduction thermique" class="dd-item ">
         <a href="/tsti2d/conduction/">
         Conduction thermique
         
@@ -1076,7 +1076,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        
+        parent
         
         
         ">
@@ -1161,21 +1161,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Conduction thermique
+                   Lentilles
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#rappels">Rappels</a></li>
-    <li><a href="#savoir-et-savoir-faire">Savoir et savoir faire</a></li>
-    <li><a href="#documents">Documents</a></li>
-    <li><a href="#quiz">Quiz</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -1193,287 +1186,92 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<h1 id="conduction-thermique">Conduction thermique</h1>
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tsti/conduction">Présentation</a></p>
-<br>
-<h2 id="rappels">Rappels</h2>
+<style>
+ 	#correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ 	#comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ 	#commsum
+  {
+    color: #004D80;
+  }
+ 	#correcsum
+  {
+    color: #006C65;
+  }
+</style>
+<h1 id="lentilles-minces--modéliser-le-flou">Lentilles minces : modéliser le flou</h1>
+<p>L&rsquo;objectif de cet exercice est de reproduire par traitement d&rsquo;image, à l&rsquo;aide d&rsquo;un programme Python, ce qu&rsquo;on verrait sur un écran situé derrière une lentille convergente pour différentes positions de l&rsquo;écran ; on fournit au programme une image et des paramètres (le diamètre de la lentille $D$, sa distance focale $f'$, la distance lentille-objet $\overline{OA}$, la distance lentille-écran $\overline{OE}$, la taille de l&rsquo;objet $\overline{AB}$), et il produit une image correspondant à ce qu&rsquo;on verrait sur l&rsquo;écran.</p>
+<ol>
+<li>Pourquoi la représentation sur l&rsquo;écran est-elle floue lorsque la distance entre la lentille et l&rsquo;écran est différente de $\overline{A&rsquo;B'}$ ? Faire un schéma pour illustrer.</li>
+</ol>
 <details>
-<summary>Les 3 modes de <span style="font-weight:bold">transferts thermiques</span> sont&nbsp;:</summary>
-<blockquote>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+<img src="/schemlentflou.png">
+À un point objet ne correspond plus sur l'écran un point image mais une tâche de diamètre $d$.
+</blockquote>
+</details>
+<ol start="2">
+<li>Déterminer la hauteur $H$ de la représentation de l&rsquo;objet sur l&rsquo;écran ainsi que le diamètre d&rsquo;une tâche $d$ en fonction de $D$, $f'$, $\overline{OA}$, $\overline{OE}$ et $\overline{AB}$.</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+    $\displaystyle d = \frac{|\overline{OE}-\overline{OA'}|}{f'+\overline{OA}}$
 <ul>
-<li><details>
-<summary>la <span style="font-weight:bold">conduction</span>&nbsp;:</summary>
-<p>
-agitation moléculaire qui se transmet de proche en proche dans un matériau.
-</p>
-</details></li>
-<li><details>
-<summary>la <span style="font-weight:bold">convection</span>&nbsp;:</summary>
-<p>
-mouvement d'ensemble de la matière dans un fluide type air ou eau.
-</p>
-</details></li>
-<li><details>
-<summary>le <span style="font-weight:bold">rayonnement</span>&nbsp;:</summary>
-<p>
-transfert à distance, même dans le vide, par des ondes électromagnétiques ayant un spectre de type corps noir.<br>
-C'est comme ça que le soleil nous chauffe.
-</details></li>
+<li>Si $ \overline{OE}< f' $&nbsp;:<br>
+    $\displaystyle H = D + \frac{|A'B'|-D}{\overline{OA'}\cdot \overline{OE}}$
+    </li> 
+<li>Si $ \overline{OE}< f' $&nbsp;:<br>
+    $\displaystyle H = |A'B'|\frac{( \overline{OE}-f')}{\overline{OA'}-f'}$
+                         </li>
 </ul>
 </blockquote>
 </details>
-<br>
-<details>
-<summary>Questions :</summary>
-<ol>
-<li><details>
-<summary>Quel mode de transfert thermique est-il illustré dans cette expérience&nbsp;? Et quel serait l'effet de changer le métal de la tige&nbsp;?
-<p style="text-align:center">
-<iframe width="420" height="240"
-src="https://www.youtube.com/embed/LxJoLeeqk88" allow="fullscreen;">
-</iframe>
-</p>
-</summary>
-<blockquote>
-<p>
-La conduction. Le transfert thermique de proche en proche sera d'autant plus rapide que la conductivité thermique du métal est élevée.
-<p style="text-align:center">
-<iframe width="420" height="240"
-src="https://www.youtube.com/embed/RHQ17S72ON4" allow="fullscreen;">
-</iframe>
-</p>
-</p>
-</blockquote>
-</details>
-</li>
-<li><details>
-<summary>Quel mode de transfert est illustré par cette vidéo ?
-<p style="text-align:center">
-<video src="/convection.mp4" width="20%" type="video/mp4" autoplay="true" loop="true"  preload="auto" controls muted></video>
-</p>
-</summary>
-<blockquote>
-<p>
-La convection (l'air chaud monte sous l'effet de la gravité)
-<img src="/flammespace.png">
-</p>
-</blockquote>
-</details>
-</li>
-<li><details>
-<summary>Qu'est-ce que c'est ? Expliquer leurs formes, le matériau utilisé et leur orientation&nbsp;?
-<p style="text-align:center">
-<img src="/heatsinks.png">
-</p>
-</summary>
-<blockquote>
-<p>
-Souvent en aluminium car bonne conductivité thermique, leur forme vise à maximiser la surface d'échange et l'orientation permet à l'air chaud de s'élever par convection et donc d'être remplacé.
-</p>
-</blockquote>
-</details>
-</li>
-<li><details>
-<summary>Pourquoi un glaçon fond-il moins vite dans de l'eau salé que dans de l'eau douce&nbsp;?
-</summary>
-<blockquote>
-<p>
-L'eau salé est plus dense que l'eau douce issue de la fusion du glaçon et cette eau froide reste alors en haut, au contact du glaçon plutôt que s'homogénéiser avec le reste de l'eau par convection. 
-</p>
-</blockquote>
-</details>
-</li>
-<br>
-<li><details>
-<summary>Qu'ont en commun les meilleurs isolants thermiques&nbsp;?
-<img src="/differentesconductivites.png">
-</summary>
-<blockquote>
-<p>
-Ils emprisonnent de l'air. Et dans le cas de l'aerogel, les cavités sont si petites (de l'ordre du nm) que la conduction y est plus difficile que dans l'air libre (et la convection est bien sûr complètement absente).
-</p>
-<p style="text-align:center">
-<iframe width="420" height="240"
-src="https://www.youtube.com/embed/AeJ9q45PfD0" allow="fullscreen;">
-</iframe>
-</p>
-</blockquote>
-</details>
-</li>
-<li><details>
-<summary>Comment expliquer ce qu'on voit dans cette vidéo&nbsp;?<br>
-<p style="text-align:center">
-<iframe width="420" height="315"
-src="https://www.youtube.com/embed/Pp9Yax8UNoM" allow="fullscreen;">
-</iframe>
-</p>
-</summary>
-<blockquote>
-<p>
-Dans ce matériau très isolant, le flux thermique dû à la conduction thermique du centre vers les bords (en particulier les coins) n'arrive pas à compenser le flux thermique radiatif sortant. Résultat : les coins se refroidissent rapidement ($\approx\pu{35 ^\circ C}$) malgré que le centre soit encore à plus de ($\pu{1200 ^\circ C}$)&nbsp;!
-</p>
-</blockquote>
-</details>
-</li>
+<p>Le programme Python est déjà écrit à l&rsquo;exception de la fonction centrale qui contient la physique du problème :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calcule_taille</span>(D:float, fprime:float, OA:float, OE:float, AB:float) <span style="color:#f92672">-&gt;</span> tuple:
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Entrées:
+</span><span style="color:#e6db74">        D: diamètre de la lentille (en m)
+</span><span style="color:#e6db74">        fprime: 0 distance focale de la lentille (en m)
+</span><span style="color:#e6db74">        OA: distance lentille-objet (en m)
+</span><span style="color:#e6db74">        OE: distance lentille-écran (en m)
+</span><span style="color:#e6db74">        AB: taille objet (en m)
+</span><span style="color:#e6db74">    Sorties:
+</span><span style="color:#e6db74">        tuple (H,d) avec:
+</span><span style="color:#e6db74">        H: hauteur de la représentation de l&#39;objet sur l&#39;écran (en m)
+</span><span style="color:#e6db74">        d: diamètre des tâches sur l&#39;écran (en m)
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#75715e"># CODE À COMPLÉTER</span>
+    <span style="color:#66d9ef">return</span> H, d
+</code></pre></div><ol start="3">
+<li>Se rendre sur <a href="https://colab.research.google.com/drive/1mf8qHa3ZdkZ43RzJWAAmXbzfzaQTYaPO?usp=sharing">ce notebook Colab</a> et compléter la fonction.</li>
 </ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+Exemple de solution :
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calcule_taille</span>(D, fprime, OA, OE, AB):
+    OAprime <span style="color:#f92672">=</span> fprime <span style="color:#f92672">*</span> OA <span style="color:#f92672">/</span> (fprime <span style="color:#f92672">+</span> OA)
+    d <span style="color:#f92672">=</span> (abs(OE <span style="color:#f92672">-</span> OAprime) <span style="color:#f92672">/</span> OAprime <span style="color:#f92672">*</span> D)
+    AprimeBprime <span style="color:#f92672">=</span> AB<span style="color:#f92672">*</span>OAprime<span style="color:#f92672">/</span>OA
+    <span style="color:#66d9ef">if</span> OE <span style="color:#f92672">&lt;</span> OAprime:
+        H <span style="color:#f92672">=</span> D <span style="color:#f92672">+</span> (abs(AprimeBprime) <span style="color:#f92672">-</span> D)<span style="color:#f92672">/</span>OAprime <span style="color:#f92672">*</span> OE
+    <span style="color:#66d9ef">else</span>:
+        H <span style="color:#f92672">=</span> abs(AprimeBprime) <span style="color:#f92672">*</span> (OE<span style="color:#f92672">-</span>fprime) <span style="color:#f92672">/</span> (abs(OAprime<span style="color:#f92672">-</span>fprime))
+    <span style="color:#66d9ef">return</span> H, d
+</code></pre></div></blockquote>
 </details>
-<br>
-<h2 id="savoir-et-savoir-faire">Savoir et savoir faire</h2>
-
-<div class="notices coeur" style="--title: 'coeur';">
-  <p style="display: none;">coeur</p>
-  <div class="notice-body">
-    <p><input type="checkbox"> Définir un <strong>flux thermique</strong> et le calculer.<br><br>
-<input type="checkbox"> Savoir comment le flux thermique évolue en fonction de l&rsquo;écart de température et de la résistance thermique.<br><br>
-<input type="checkbox"> Calculer la valeur de la <strong>résistance thermique</strong> d’une paroi à partir de son épaisseur et de la conductivité thermique du matériau.<br><br>
-<input type="checkbox"> Calculer la résistance thermique d’une paroi composée de plusieurs couches de matériaux différents.</p>
-
-  </div>
-</div>
-
-<div class="notices piege" style="--title: 'piege';">
-  <p style="display: none;">piege</p>
-  <div class="notice-body">
-    <p>La résistance thermique telle que définie dans la présentation est en réalité la <strong>résistance thermique surfacique</strong>.<br>
-La vraie résistance thermique est définie par $R_{th}=\frac{e}{S \lambda}$ et s&rsquo;exprime en $\pu{K * W-1}$.<br>
-Avec cette définition, on a $\Phi = \frac{\Delta \theta}{R_{th}}$.<br>
-Cependant, le programme semble préférer la résistance thermique surfacique tout en l&rsquo;appelant &ldquo;résistance thermique&rdquo;, ce qui peut prêter à confusion, mais cela semble aussi être l&rsquo;usage dans le secteur du bâtiment.<br>
-Moralité, faites très attention aux unités et sachez que les deux définitions existent.</p>
-
-  </div>
-</div>
-
-<div class="notices note" style="--title: 'note';">
-  <p style="display: none;">note</p>
-  <div class="notice-body">
-    <p>Pour <strong>mesurer une résistance thermique</strong>, on utilise un appareil capable de mesurer le <strong>flux thermique</strong>.<br>
-Lorsqu&rsquo;on dispose d&rsquo;un échantillon, on peut utiliser un appareil un peu encombrant constitué de deux plaques métalliques dont l&rsquo;une est reliée à une résistance électrique.<br>
-Le matériau dont on cherche à mesurer la résistance thermique est placé entre deux plaques métalliques.<br>
-La plaque du bas est au contact d’une source froide dont la température n’est pas réglable tandis que la plaque du haut est au contact d’une résistance électrique qui joue le rôle de la source chaude.<br>
-L’appareil mesure la tension et l’intensité de la résistance ainsi que les températures des deux plaques une fois le régime permanent atteint.<br>
-La puissance électrique de la résistance constituant la source chaude est égale au flux thermique traversant le matériau testé.
-<br><br>
-Mais pour mesurer la résistance thermique d&rsquo;une paroi sur site, on ne peut pas utiliser cet apapreil. On se tourne alors vers des <strong>fluxmètres thermiques</strong> beaucoup moins encombrant constitués d&rsquo;une seule plaque.<br>
-On place la plaque contre la paroi (à l&rsquo;intérieur ou à l&rsquo;extérieur) pour mesurer le flux entrant ou sortant et on mesure préciséments la température de chaque côté de la paroi. Le principe est que le flux qui sort ou entre dans une paroi est aussi le flux qui la traverse (en régime permanent).<br>
-Pour des mesures officielles, <a href="https://pure.tudelft.nl/ws/portalfiles/portal/51444610/1_s2.0_S0378778818314282_main.pdf">une norme existe</a>.</p>
-
-  </div>
-</div>
-<br>
-<h2 id="documents">Documents</h2>
-<p><a href="/act-conduct.pdf"><strong>Activité : amélioration de l&rsquo;isolation d&rsquo;une maison par l&rsquo;extérieur</strong> (issue du manuel Nathan)</a><br>
-<a href="/exo-paroi-glace.pdf"><strong>Stockage d&rsquo;une carotte de glace</strong> (extrait sujet 2021 candidat libre remplacement)</a></p>
-<br>
-<h2 id="quiz">Quiz</h2>
-
-<div class='quizdown'>
-  
-
----
-primary_color: steelblue
-secondary_color: "#f2f2f2"
-text_color: black
-shuffle_questions: false
-
----
-
-##
-
-Le flux thermique se mesure&nbsp;:
-
-- [x] en W
-- [ ] en J
-- [ ] en  K
-
-
-##
-
-Si on double la surface d'une paroi, le flux thermique à travers cette paroi&nbsp;:
-
-- [x] est multiplié par 2
-- [ ] est divisé par 2
-- [ ] reste inchangé
-
-
-
-##
-
-Si on augmente la résistance thermique d'une paroi, le flux thermique à travers cette paroi&nbsp;:
-
-
-- [x] diminue
-- [ ] augmente
-- [ ] ne change pas
-
-
-
-##
-
-Si l'écart de température entre l'intérieur et l'extérieur est divisé par 2, le flux thermique à travers la paroi&nbsp;:
-
-
-- [ ] est multiplié par 2
-- [ ] reste inchangé
-- [x] est divisé par 2
-
-
-##
-
-La résistance thermique d'une paroi homogène&nbsp;:
-
-- [x] dépend du matériau constituant la paroi
-- [x] augmente avec l'épaisseur de la paroi
-- [ ] augmente avec la surface de la paroi
-
-
-##
-
-Lorsqu'un matériau isolant se tasse, sa résistance thermique&nbsp;:
-
-- [x] diminue
-- [ ] augmente
-- [ ] ne varie pas
-
-##
-
-20 cm d'épaisseur d'un matériau ayant une conductivité thermique de $\pu{1,0 W*m-1*K-1}$ a une résistance thermique de&nbsp;:
-
-- [ ] $\pu{0,05 m2*K*W-1}$
-- [x] $\pu{0,20 m2*K*W-1}$
-- [ ] $\pu{20 m2*K*W-1}$
-
-##
-
-On ajoute à une paroi dont la résistance thermique mesure $\pu{2,0 m2*K*W-1}$, un matériau isolant dont la résistance thermique mesure $\pu{4,0 m2*K*W-1}$. La nouvelle résistance thermique de la paroi vaut&nbsp;:
-
-- [ ] $\pu{8,0 m2*K*W-1}$
-- [x] $\pu{6,0 m2*K*W-1}$
-- [ ] $\pu{3,0 m2*K*W-1}$
-
-
-##
-
-Un ordre de grandeur de la résistance thermique de 20 cm d'épaisseur d'un matériau isolant est&nbsp;:
-
-- [ ] $\pu{5E2 m2*K*W-1}$
-- [x] $\pu{5 m2*K*W-1}$
-- [ ] $\pu{0,05 m2*K*W-1}$
-
-> [valeurs usuelles](https://presentationssite.github.io/tsti/conduction/#/1/4)
-
-##
-
-Pour une épaisseur usuelle, on peut négliger la résistance thermique des matériaux suivant devant celle de 20 cm de parpaing&nbsp;:
-
-- [ ] de la paille en botte
-- [x] du carrelage
-- [ ] du polystyrène expansé
-
-> [valeurs usuelles](https://presentationssite.github.io/tsti/conduction/#/1/4)
-
-
-</div>
-
 
 
 <footer class="footline">
@@ -1886,7 +1684,6 @@ Pour une épaisseur usuelle, on peut négliger la résistance thermique des mat�
             
                 
                     
-                    
                 
                 
 
@@ -1899,9 +1696,6 @@ Pour une épaisseur usuelle, on peut négliger la résistance thermique des mat�
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1999,7 +1793,6 @@ Pour une épaisseur usuelle, on peut négliger la résistance thermique des mat�
             
                 
                     
-                    
                 
                 
 
@@ -2015,9 +1808,6 @@ Pour une épaisseur usuelle, on peut négliger la résistance thermique des mat�
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -2165,6 +1955,7 @@ Pour une épaisseur usuelle, on peut négliger la résistance thermique des mat�
             
             
                 
+                    
                     
                 
                 

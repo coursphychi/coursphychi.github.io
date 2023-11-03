@@ -24,6 +24,24 @@ Objet pouvant être dénombré. Les atomes isolés, les ions, les molécules son
     </item>
     
     <item>
+      <title>Lentilles</title>
+      <link>https://coursphychi.github.io/colles/lentilles1/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://coursphychi.github.io/colles/lentilles1/</guid>
+      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Lentilles minces : démos  En utilisant le schéma ci-dessus, démontrer la relation de conjugaison de Newton pour les lentilles minces qui stipule que : $$ \overline{A&amp;rsquo;F&#39;}\cdot\overline{AF} = \overline{O&amp;rsquo;F&#39;}\cdot\overline{OF} $$   Correction Thalès dans les traingles F&#39;OC et F&#39;A&#39;B&#39;&amp;nbsp;: $$\frac{\overline{OF&#39;}}{\overline{OC}}=\frac{\overline{A&#39;F&#39;}}{\overline{A&#39;B&#39;}}$$ Et comme $\overline{OC}=\overline{AB}$, on a&amp;nbsp;: $$ \begin{equation} \frac{\overline{A&#39;B&#39;}}{\overline{AB}}=\frac{\overline{A&#39;F&#39;}}{\overline{OF&#39;}} \end{equation} $$ Thalès dans FAB et FOD&amp;nbsp;: $$\frac{\overline{OF}}{\overline{OD}}=\frac{\overline{AF}}{\overline{AB}}$$ Et comme $\overline{OD}=\overline{A&#39;B&#39;}$, on a&amp;nbsp;: $$ \begin{equation} \frac{\overline{A&#39;B&#39;}}{\overline{AB}}=\frac{\overline{OF}}{\overline{AF}} \end{equation}$$ En combinant (1) et (2), on obtient&amp;nbsp;: $$ \begin{equation} \overline{A&#39;F&#39;}\cdot\overline{AF} = \overline{O&#39;F&#39;}\cdot\overline{OF} \end{equation} $$   En introduisant le point $O$ pour décomposer les distances algébriques $\overline{AF}$ et $\overline{A&amp;rsquo;F&#39;}$, partir de la relation de conjugaison de Newton pour obtenir celle de Descartes.</description>
+    </item>
+    
+    <item>
+      <title>Lentilles</title>
+      <link>https://coursphychi.github.io/colles/lentilles2/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      
+      <guid>https://coursphychi.github.io/colles/lentilles2/</guid>
+      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Lentilles minces : modéliser le flou L&amp;rsquo;objectif de cet exercice est de reproduire par traitement d&amp;rsquo;image, à l&amp;rsquo;aide d&amp;rsquo;un programme Python, ce qu&amp;rsquo;on verrait sur un écran situé derrière une lentille convergente pour différentes positions de l&amp;rsquo;écran ; on fournit au programme une image et des paramètres (le diamètre de la lentille $D$, sa distance focale $f&#39;$, la distance lentille-objet $\overline{OA}$, la distance lentille-écran $\overline{OE}$, la taille de l&amp;rsquo;objet $\overline{AB}$), et il produit une image correspondant à ce qu&amp;rsquo;on verrait sur l&amp;rsquo;écran.</description>
+    </item>
+    
+    <item>
       <title>Onde</title>
       <link>https://coursphychi.github.io/colles/onde/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -54,12 +72,14 @@ Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à parti
     </item>
     
     <item>
-      <title>Réfraction</title>
-      <link>https://coursphychi.github.io/colles/lentilles/</link>
+      <title>Respiration</title>
+      <link>https://coursphychi.github.io/colles/respiration_corr/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       
-      <guid>https://coursphychi.github.io/colles/lentilles/</guid>
-      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Lentilles minces  En utilisant le schéma ci-dessus, démontrer la relation de conjugaison de Newton pour les lentilles minces qui stipule que : $$ \overline{A&amp;rsquo;F&#39;}\cdot\overline{AF} = \overline{O&amp;rsquo;F&#39;}\cdot\overline{OF} $$   Correction Thalès dans les traingles F&#39;OC et F&#39;A&#39;B&#39;&amp;nbsp;: $$\frac{\overline{OF&#39;}}{\overline{OC}}=\frac{\overline{A&#39;F&#39;}}{\overline{A&#39;B&#39;}}$$ Et comme $\overline{OC}=\overline{AB}$, on a&amp;nbsp;: $$ \begin{equation} \frac{\overline{A&#39;B&#39;}}{\overline{AB}}=\frac{\overline{A&#39;F&#39;}}{\overline{OF&#39;}} \end{equation} $$ Thalès dans FAB et FOD&amp;nbsp;: $$\frac{\overline{OF}}{\overline{OD}}=\frac{\overline{AF}}{\overline{AB}}$$ Et comme $\overline{OD}=\overline{A&#39;B&#39;}$, on a&amp;nbsp;: $$ \begin{equation} \frac{\overline{A&#39;B&#39;}}{\overline{AB}}=\frac{\overline{OF}}{\overline{AF}} \end{equation}$$ En combinant (1) et (2), on obtient&amp;nbsp;: $$ \begin{equation} \overline{A&#39;F&#39;}\cdot\overline{AF} = \overline{O&#39;F&#39;}\cdot\overline{OF} \end{equation} $$   En introduisant le point $O$ pour décomposer les distances algébriques $\overline{AF}$ et $\overline{A&amp;rsquo;F&#39;}$, partir de la relation de conjugaison de Newton pour obtenir celle de Descartes.</description>
+      <guid>https://coursphychi.github.io/colles/respiration_corr/</guid>
+      <description>Correction La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).
+On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.
+On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
     </item>
     
     <item>
@@ -378,17 +398,6 @@ Distinguer et citer les caractéristiques essentielles du réseau de distributio
 Relier qualitativement le facteur de puissance d’un équipement de puissance donnée aux pertes dans les lignes d’alimentation.
 Citer les rôles du transformateur (élévation de tension, diminution de tension, isolation galvanique).
 Relier qualitativement l’augmentation, pour une charge donnée, de la tension de distribution à la diminution des pertes dans les lignes d’alimentation.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://coursphychi.github.io/colles/respiration_corr/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://coursphychi.github.io/colles/respiration_corr/</guid>
-      <description>Correction La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).
-On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.
-On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
     </item>
     
   </channel>
