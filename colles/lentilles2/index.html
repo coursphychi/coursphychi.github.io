@@ -36,22 +36,22 @@
     
 
     
-    <link href="/css/nucleus.css?1699224437" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1699224437" rel="stylesheet">
-    <link href="/css/hybrid.css?1699224437" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1699224437" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1699224437" rel="stylesheet">
-    <link href="/css/auto-complete.css?1699224437" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1699224437" rel="stylesheet">
-    <link href="/css/theme.css?1699224437" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1699224437" rel="stylesheet">
+    <link href="/css/nucleus.css?1699300114" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1699300114" rel="stylesheet">
+    <link href="/css/hybrid.css?1699300114" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1699300114" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1699300114" rel="stylesheet">
+    <link href="/css/auto-complete.css?1699300114" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1699300114" rel="stylesheet">
+    <link href="/css/theme.css?1699300114" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1699300114" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1699224437" rel="stylesheet">
+    <link href="/css/theme-blue.css?1699300114" rel="stylesheet">
     
-    <link href="/css/foo.css?1699224437" rel="stylesheet"><link href="/css/bar.css?1699224437" rel="stylesheet">
+    <link href="/css/foo.css?1699300114" rel="stylesheet"><link href="/css/bar.css?1699300114" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1699224437"></script>
+    <script src="/js/jquery-3.3.1.min.js?1699300114"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -105,14 +105,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1699224437"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1699224437"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1699300114"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1699300114"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1699224437"></script>
+<script type="text/javascript" src="/js/search.js?1699300114"></script>
 
     
   </div>
@@ -1223,20 +1223,30 @@ Correction</summary>
 </blockquote>
 </details>
 <ol start="2">
-<li>Déterminer la hauteur $H$ de la figure sur l&rsquo;écran ainsi que le diamètre d&rsquo;une tâche $d$ en fonction de $D$, $f'$, $\overline{OA}$, $\overline{OE}$ et $\overline{AB}$.</li>
+<li>Déterminer $\overline{OA'}$ et $\overline{A'B'}$ en fonction de $\overline{OA}$, $f'$ et $\overline{AB}$.</li>
 </ol>
 <details>
 <summary id="correcsum">
 Correction</summary>
 <blockquote id="correc">
-    $\displaystyle d = \frac{|\overline{OE}-\overline{OA'}|}{f'+\overline{OA}}$
+$\displaystyle \overline{OA'} = \frac{\overline{OA}\cdot f'}{\overline{OA}+f'}$<br>
+$\displaystyle \overline{A'B'} = \overline{AB}\times\frac{\overline{OA'}}{\overline{OA}}$
+</blockquote>
+</details>
+<ol start="3">
+<li>Déterminer la hauteur $H$ de la figure sur l&rsquo;écran ainsi que le diamètre d&rsquo;une tâche $d$ en fonction de $D$, $f'$, $\overline{OA'}$, $\overline{OE}$ et $\overline{A&rsquo;B'}$.</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
 <ul>
-<li>Si $ \overline{OE} < f' $&nbsp;:<br>
-    $\displaystyle H = D + \overline{OE}\times \frac{|A'B'|-D}{\overline{OA'}}$
-    </li> 
-<li>Si $ \overline{OE} > f' $&nbsp;:<br>
-    $\displaystyle H = |A'B'|\times\frac{ \overline{OE}-f'}{\overline{OA'}-f'}$
-                         </li>
+<li>$\displaystyle d = D\times\frac{|\overline{OE}-\overline{OA'}|}{\overline{OA'}}$</li>
+<li>Le schéma nous montre que $H-A'B'$ est proportionnel à $|\overline{OE}-\overline{OA'}|$ $\Rightarrow$ $\displaystyle \frac{H-A'B'}{|\overline{OE}-\overline{OA'}|} = cste$.<br>
+Et comme lorsque $\overline{OE}=0$, $H=D$, on a :<br>
+$\displaystyle \frac{H-A'B'}{|\overline{OE}-\overline{OA'}|} = \frac{D-A'B'}{|0-\overline{OA'}|}$<br>
+On en déduit que $\displaystyle H = A'B'+\frac{D-A'B'}{\overline{OA'}}\times |\overline{OE}-\overline{OA'}|$
+</li>
 </ul>
 </blockquote>
 </details>
@@ -1255,7 +1265,6 @@ Correction</summary>
 </span><span style="color:#e6db74">        d: diamètre des tâches sur l&#39;écran (en m)
 </span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
     <span style="color:#75715e"># CODE À COMPLÉTER</span>
-    <span style="color:#66d9ef">return</span> H, d
 </code></pre></div><ol start="3">
 <li>Se rendre sur <a href="https://colab.research.google.com/drive/1mf8qHa3ZdkZ43RzJWAAmXbzfzaQTYaPO?usp=sharing">ce notebook Colab</a> et compléter la fonction.</li>
 </ol>
@@ -1268,10 +1277,7 @@ Exemple de solution :
     OAprime <span style="color:#f92672">=</span> fprime <span style="color:#f92672">*</span> OA <span style="color:#f92672">/</span> (fprime <span style="color:#f92672">+</span> OA)
     d <span style="color:#f92672">=</span> (abs(OE <span style="color:#f92672">-</span> OAprime) <span style="color:#f92672">/</span> OAprime <span style="color:#f92672">*</span> D)
     AprimeBprime <span style="color:#f92672">=</span> AB <span style="color:#f92672">*</span> OAprime <span style="color:#f92672">/</span> OA
-    <span style="color:#66d9ef">if</span> OE <span style="color:#f92672">&lt;</span> OAprime:
-        H <span style="color:#f92672">=</span> D <span style="color:#f92672">+</span> (abs(AprimeBprime) <span style="color:#f92672">-</span> D) <span style="color:#f92672">/</span> OAprime <span style="color:#f92672">*</span> OE
-    <span style="color:#66d9ef">else</span>:
-        H <span style="color:#f92672">=</span> abs(AprimeBprime) <span style="color:#f92672">*</span> (OE <span style="color:#f92672">-</span> fprime) <span style="color:#f92672">/</span> (abs(OAprime <span style="color:#f92672">-</span> fprime))
+    H <span style="color:#f92672">=</span> abs(AprimeBprime) <span style="color:#f92672">+</span> (D <span style="color:#f92672">-</span> abs(AprimeBprime)) <span style="color:#f92672">/</span> OAprime <span style="color:#f92672">*</span> (abs(OE <span style="color:#f92672">-</span> OAprime))
     <span style="color:#66d9ef">return</span> H, d
 </code></pre></div></blockquote>
 </details>
@@ -2026,19 +2032,19 @@ Exemple de solution :
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1699224437"></script>
-    <script src="/js/perfect-scrollbar.min.js?1699224437"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1699224437"></script>
-    <script src="/js/jquery.sticky.js?1699224437"></script>
-    <script src="/js/featherlight.min.js?1699224437"></script>
-    <script src="/js/highlight.pack.js?1699224437"></script>
+    <script src="/js/clipboard.min.js?1699300114"></script>
+    <script src="/js/perfect-scrollbar.min.js?1699300114"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1699300114"></script>
+    <script src="/js/jquery.sticky.js?1699300114"></script>
+    <script src="/js/featherlight.min.js?1699300114"></script>
+    <script src="/js/highlight.pack.js?1699300114"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1699224437"></script>
-    <script src="/js/learn.js?1699224437"></script>
-    <script src="/js/hugo-learn.js?1699224437"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1699300114"></script>
+    <script src="/js/learn.js?1699300114"></script>
+    <script src="/js/hugo-learn.js?1699300114"></script>
     
         
-            <script src="/mermaid/mermaid.js?1699224437"></script>
+            <script src="/mermaid/mermaid.js?1699300114"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
