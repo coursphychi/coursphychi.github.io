@@ -1,263 +1,159 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://coursphychi.github.io/2nde/melanges/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/colles/lentilles1/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/colles/lentilles2/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/colles/onde/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/colles/oscillsolide/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/rappelschimie/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://coursphychi.github.io/colles/respiration/</loc>
-    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://coursphychi.github.io/colles/respiration_corr/</loc>
-    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/colles/refraction/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://coursphychi.github.io/colles/respiration/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url><url>
+    <loc>https://coursphychi.github.io/colles/respiration_corr/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url><url>
     <loc>https://coursphychi.github.io/colles/tremplins/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/1es/matiere/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tes/climat/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/acide/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/chgmtetat/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/piles/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/solutions/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/1es/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tes/energie/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/1es/soleil/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/atome/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/1es/terre/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tes/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tes/vivant/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/combustion/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/lewis/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/1es/musique/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://coursphychi.github.io/2nde/mole/</loc>
-    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/egiepuiss/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://coursphychi.github.io/2nde/mole/</loc>
+    <lastmod>2021-03-06T14:23:56+01:00</lastmod>
+  </url><url>
     <loc>https://coursphychi.github.io/1es/exposes/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/chgt_etat/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/conduction/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/reaction/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/puisselec/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/lumiere/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/mouvement/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/signaux/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/inertie/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/incertitudes/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/son/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/lumiere/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/mecanique/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/son/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/2nde/elec/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/radioact/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/pression/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tsti2d/transport/</loc>
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/colles/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://coursphychi.github.io/tags/</loc>
   </url>
-  
 </urlset>

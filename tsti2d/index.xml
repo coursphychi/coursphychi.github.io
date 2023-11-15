@@ -6,195 +6,166 @@
     <description>Recent content in TSTI2D on Cours de physique chimie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://coursphychi.github.io/tsti2d/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate>
+    <atom:link href="https://coursphychi.github.io/tsti2d/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Rappels chimie</title>
       <link>https://coursphychi.github.io/tsti2d/rappelschimie/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/rappelschimie/</guid>
       <description>Rappels sur les solutions Présentation
 Pictogrammes Savoir et savoir faire coeur
 Calculer la masse molaire d&amp;rsquo;une molécule à partir de celles des atomes qui la constituent.
 Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à partir de la masse $m$ de l&amp;rsquo;espèce et de sa masse molaire $M$ : $\displaystyle n=\frac{m}{M}$ Déterminer une concentration massique $\displaystyle C_m=\frac{m}{V}$ et une concentration molaire $\displaystyle C=\frac{n}{V}$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une masse volumique $\rho$ : $m=\rho\times V$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration massique $C_m$ : $m=C_m\times V$ Déterminer une quantité de matière $n$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration molaire $C$ : $n=C\times V$ Donner le protocole d&amp;rsquo;une dissolution.</description>
     </item>
-    
     <item>
       <title>Acide/Base</title>
       <link>https://coursphychi.github.io/tsti2d/acide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/acide/</guid>
       <description>Réactions chimiques acido-basiques Présentation
-Expérience  Vidéo :        Questions :   De quoi témoigne l&#39;élévation de la température du ballon&amp;nbsp;? D&#39;après le tableau suivant, que pouvez-vous dire de l&#39;évolution du pH de la solution aqueuse une fois que l&#39;ammoniac se dissout et réagit avec l&#39;eau&amp;nbsp;?   Par conséquent, l&#39;ammoniac est-il une base ou un acide ? Comment expliquer le jaillisement de l&#39;eau dans la 1re expérience et la contraction du ballon dans la 2e&amp;nbsp;?</description>
+Expérience Vidéo : Questions : De quoi témoigne l&#39;élévation de la température du ballon&amp;nbsp;? D&#39;après le tableau suivant, que pouvez-vous dire de l&#39;évolution du pH de la solution aqueuse une fois que l&#39;ammoniac se dissout et réagit avec l&#39;eau&amp;nbsp;? Par conséquent, l&#39;ammoniac est-il une base ou un acide ? Comment expliquer le jaillisement de l&#39;eau dans la 1re expérience et la contraction du ballon dans la 2e&amp;nbsp;?</description>
     </item>
-    
     <item>
       <title>Changements d&#39;état</title>
       <link>https://coursphychi.github.io/tsti2d/chgmtetat/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/chgmtetat/</guid>
       <description>Changements d&amp;rsquo;état Présentation
-Rappels  La température rend compte de l&#39;agitation moléculaire.
+Rappels La température rend compte de l&amp;rsquo;agitation moléculaire.
 La température absolue se mesure en kelvins $K$ $(\pu{0^\circ C = 273,15 K})$.
-L&#39;énergie interne $U$ d&amp;rsquo;un système se compose des énergies microscopiques cinétiques (agitation) et potentielles (interaction) des molécules qui le constituent.
+L&amp;rsquo;énergie interne $U$ d&amp;rsquo;un système se compose des énergies microscopiques cinétiques (agitation) et potentielles (interaction) des molécules qui le constituent.
 La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un solide ou d&amp;rsquo;un liquide est donnée par la formule suivante :
- $$\Delta U = m c \Delta\theta$$   où $m$ est la masse (en $\pu kg$)</description>
+$$\Delta U = m c \Delta\theta$$ où $m$ est la masse (en $\pu kg$)</description>
     </item>
-    
     <item>
       <title>Piles</title>
       <link>https://coursphychi.github.io/tsti2d/piles/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/piles/</guid>
       <description>Piles, accumulateurs et piles à combustible Présentation
 Rappels Réactions d&amp;rsquo;oxydoréduction : info
-Il y a échanges d&amp;rsquo;électrons lors d&amp;rsquo;une réaction d&#39;oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques).
-    
+Il y a échanges d&amp;rsquo;électrons lors d&amp;rsquo;une réaction d&amp;rsquo;oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques).
 Savoir et savoir faire coeur
 Équilibrer les demi-équations redox Déterminer une équation bilan à partir des demi-équations Décrire ce qui se passe à chaque électrode pendant une décharge et pendant une charge Lier une demi-équation à une électrode (cathode ou anode) Différentier et définir une pile, un accumulateur et une batterie Calculer l’énergie totale stockée Exploiter les principales caractéristiques des piles ou accumulateurs (tension à vide, capacité, énergies massique et volumique, nombre de cycles de charge et décharge) pour les utiliser dans des applications spécifiques.</description>
     </item>
-    
     <item>
       <title>Combustions</title>
       <link>https://coursphychi.github.io/tsti2d/combustion/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/combustion/</guid>
       <description>Combustions Présentation
-Rappels  Un composé organique contient du carbone. Un hydrocarbure contient exclusivement du carbone et de l&#39;hydrogène. Un alcane est un hydrocarbure saturé = les carbones ne sont liés entre eux que par des liaisons simples. Sa formule brute (s&amp;rsquo;il n&amp;rsquo;est pas cyclique) est $\ce{C_nH_{2n+2}}$. Un alcène est un hydrocarbure insaturé = la chaîne carbonée contient au moins une double liaison covalente. La formule brute d&amp;rsquo;un alcène non cyclique mono insaturé (une seule double liaison) est $\ce{C_nH_{2n}}$.</description>
+Rappels Un composé organique contient du carbone. Un hydrocarbure contient exclusivement du carbone et de l&amp;rsquo;hydrogène. Un alcane est un hydrocarbure saturé = les carbones ne sont liés entre eux que par des liaisons simples. Sa formule brute (s&amp;rsquo;il n&amp;rsquo;est pas cyclique) est $\ce{C_nH_{2n+2}}$. Un alcène est un hydrocarbure insaturé = la chaîne carbonée contient au moins une double liaison covalente. La formule brute d&amp;rsquo;un alcène non cyclique mono insaturé (une seule double liaison) est $\ce{C_nH_{2n}}$.</description>
     </item>
-    
     <item>
       <title>Énergie/Puissance</title>
       <link>https://coursphychi.github.io/tsti2d/egiepuiss/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/egiepuiss/</guid>
       <description>Énergie / Puissance Présentation
-Rappels L&amp;rsquo;énergie $\Delta E$ (en J) reçue ou fournie par un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$  où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.
-Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à : $\displaystyle P = \frac{\Delta E}{\Delta t}$  Conversion à connaître et à savoir redémontrer :</description>
+Rappels L&amp;rsquo;énergie $\Delta E$ (en J) reçue ou fournie par un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$ où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.
+Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à : $\displaystyle P = \frac{\Delta E}{\Delta t}$ Conversion à connaître et à savoir redémontrer :</description>
     </item>
-    
     <item>
       <title>Conduction thermique</title>
       <link>https://coursphychi.github.io/tsti2d/conduction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/conduction/</guid>
       <description>Conduction thermique Présentation
-Rappels  Les 3 modes de transferts thermiques sont&amp;nbsp;:    la conduction&amp;nbsp;:  agitation moléculaire qui se transmet de proche en proche dans un matériau.   la convection&amp;nbsp;:  mouvement d&#39;ensemble de la matière dans un fluide type air ou eau.   le rayonnement&amp;nbsp;:  transfert à distance, même dans le vide, par des ondes électromagnétiques ayant un spectre de type corps noir.</description>
+Rappels Les 3 modes de transferts thermiques sont&amp;nbsp;: la conduction&amp;nbsp;: agitation moléculaire qui se transmet de proche en proche dans un matériau. la convection&amp;nbsp;: mouvement d&#39;ensemble de la matière dans un fluide type air ou eau. le rayonnement&amp;nbsp;: transfert à distance, même dans le vide, par des ondes électromagnétiques ayant un spectre de type corps noir.
+C&#39;est comme ça que le soleil nous chauffe. Questions : Quel mode de transfert thermique est-il illustré dans cette expérience&amp;nbsp;?</description>
     </item>
-    
     <item>
       <title>Puissance électrique</title>
       <link>https://coursphychi.github.io/tsti2d/puisselec/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/puisselec/</guid>
       <description>Puissance en régime sinusoïdal Présentation
-Rappels  En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;:  La tension et l&#39;intensité moyenne.    Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;:  La tension et l&#39;intensité efficace.    Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;?  $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$    Savoir et savoir faire coeur
-Savoir définir la puissance apparente $S$.</description>
+Rappels En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;: La tension et l&#39;intensité moyenne. Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;: La tension et l&#39;intensité efficace. Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;? $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$ Savoir et savoir faire coeur
+Savoir définir la puissance apparente $S$. Savoir que la puissance apparente est une grandeur de dimensionnement d&amp;rsquo;une installation ou d&amp;rsquo;un équipement électrique.</description>
     </item>
-    
     <item>
       <title>Lumière</title>
       <link>https://coursphychi.github.io/tsti2d/lumiere/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/lumiere/</guid>
       <description>Énergie transportée par la lumière Présentation
-Rappels   Lien entre la fréquence $f$ et la longueur d&#39;onde $\lambda$&amp;nbsp;?  $$\lambda=\frac{c}{f}$$  Où $c$ est la célérité (vitesse) de la lumière
-$c = \pu{3,0*10^8 m*s-1}$     Étendu en longueurs d&#39;ondes de la partie visible du spectre électromagnétique&amp;nbsp;?     Simulations   Photons et niveaux d&amp;rsquo;énergie (spectres) : applet Geogebra
-  Tracé d&amp;rsquo;une caractéristique : applet Geogebra + activité</description>
+Rappels Lien entre la fréquence $f$ et la longueur d&#39;onde $\lambda$&amp;nbsp;? $$\lambda=\frac{c}{f}$$ Où $c$ est la célérité (vitesse) de la lumière
+$c = \pu{3,0*10^8 m*s-1}$ Étendu en longueurs d&#39;ondes de la partie visible du spectre électromagnétique&amp;nbsp;? Simulations Photons et niveaux d&amp;rsquo;énergie (spectres) : applet Geogebra
+Tracé d&amp;rsquo;une caractéristique : applet Geogebra + activité
+Savoir et savoir faire coeur
+Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon.</description>
     </item>
-    
     <item>
       <title>Signaux</title>
       <link>https://coursphychi.github.io/tsti2d/signaux/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/signaux/</guid>
       <description>Signaux Présentation
 Rappels Un signal est une quantité qui dépend du temps.
 Mathématiquement, un signal est modélisé par une fonction $t\mapsto f(t)$ qui à chaque instant $t\in \mathbb{R}$ associe une valeur $f(t)$.
-  Qu&#39;est-ce qu&#39;un signal périodique&amp;nbsp;?  Un signal périodique est un signal qui se répète à l&#39;identique dans le temps.
-La durée d&#39;une répétition est appelée période et est notée $T$ (unité de base : la seconde).</description>
+Qu&#39;est-ce qu&#39;un signal périodique&amp;nbsp;? Un signal périodique est un signal qui se répète à l&#39;identique dans le temps.
+La durée d&#39;une répétition est appelée période et est notée $T$ (unité de base : la seconde).
+Mathématiquement, on dit qu’une fonction $f:\mathbb{R}\rightarrow\mathbb{R}$ est périodique de période $T&gt;0$ lorsque la relation $f(t+T)=f(t)$ est satisfaite pour tout $t\in\mathbb{R}$.</description>
     </item>
-    
     <item>
       <title>Incertitudes</title>
       <link>https://coursphychi.github.io/tsti2d/incertitudes/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/incertitudes/</guid>
-      <description>Incertitudes   Petite expérience Qui a le plus faible temps de réaction ? Comment être sûr ?
+      <description>Incertitudes Petite expérience Qui a le plus faible temps de réaction ? Comment être sûr ?
 Utilisation de la calculette Calcul de la moyenne et de l&amp;rsquo;écart-type expérimental :
 Petites vidéos expliquant les manips sur les différentes calculettes.
 Savoir et savoir faire coeur
-Procéder à l’évaluation d’une incertitude-type par une approche statistique (type A). Savoir utiliser sa calculette pour déterminer la moyenne et l&amp;rsquo;écart-type expérimental d&amp;rsquo;une série de données.</description>
+Procéder à l’évaluation d’une incertitude-type par une approche statistique (type A). Savoir utiliser sa calculette pour déterminer la moyenne et l&amp;rsquo;écart-type expérimental d&amp;rsquo;une série de données. Procéder à l’évaluation d’une incertitude-type associée à une mesure unique en exploitant une relation fournie (type B).</description>
     </item>
-    
     <item>
       <title>Mécanique</title>
       <link>https://coursphychi.github.io/tsti2d/mecanique/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/mecanique/</guid>
       <description>Mécanique Présentation méca 1re partie
 Présentation méca 2e partie (rotations)
-
 Savoir et savoir faire coeur
 Déterminer la résultante des forces appliquées à un système dont le mouvement est rectiligne à partir de l’accélération en utilisant le principe fondamental de la mécanique (PFD). Déterminer les caractéristiques de l’accélération d’un système dans le cas d’un mouvement rectiligne à partir des forces extérieures appliquées en utilisant le PFD. Exploiter numériquement des résultats expérimentaux pour valider le modèle de la chute libre.</description>
     </item>
-    
     <item>
       <title>Son</title>
       <link>https://coursphychi.github.io/tsti2d/son/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/son/</guid>
       <description>Ondes sonores Présentation
-Carte mentale   Savoir et savoir faire coeur
-Déterminer la fréquence du fondamental et des harmoniques à partir du spectre d’amplitude d’un signal sonore.. Définir et distinguer la notion de timbre et de hauteur. Exploiter la relation entre l&#39;intensité acoustique et le niveau sonore et savoir se débrouiller avec les décibels (dB). Exploiter des informations relatives aux courbes de sensibilité de l’oreille humaine (fréquences audible, seuil d&amp;rsquo;audibilité, seuil de douleur, etc.</description>
+Carte mentale Savoir et savoir faire coeur
+Déterminer la fréquence du fondamental et des harmoniques à partir du spectre d’amplitude d’un signal sonore.. Définir et distinguer la notion de timbre et de hauteur. Exploiter la relation entre l&amp;rsquo;intensité acoustique et le niveau sonore et savoir se débrouiller avec les décibels (dB). Exploiter des informations relatives aux courbes de sensibilité de l’oreille humaine (fréquences audible, seuil d&amp;rsquo;audibilité, seuil de douleur, etc.</description>
     </item>
-    
     <item>
       <title>Radioactivité</title>
       <link>https://coursphychi.github.io/tsti2d/radioact/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/radioact/</guid>
       <description>Radioactivité Présentation
-
-  document.getElementById(&#39;play&#39;).addEventListener(&#39;click&#39;, function (e) { e.preventDefault(); document.getElementById(&#39;audio&#39;).play(); });  Expériences  Désintégration radioactive de la classe TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours  Activités  Datation Déchets nucléaires Exercice défaut de masse et énergieCorrection--  Savoir et savoir faire coeur
+Expériences Désintégration radioactive de la classe TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours Activités Datation Déchets nucléaires Exercice défaut de masse et énergie Savoir et savoir faire coeur
 Distinguer la radioactivité naturelle de la radioactivité artificielle.
-Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.</description>
+Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.
+Citer la définition de l’activité d’une source radioactive et indiquer son unité.</description>
     </item>
-    
     <item>
       <title>Pression</title>
       <link>https://coursphychi.github.io/tsti2d/pression/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/pression/</guid>
       <description>Pression et statique des fluides Présentation
-
 Savoir et savoir faire coeur
 Définir la pression exercée sur une surface à partir de la résultante des forces pressantes appliquées.
 Distinguer la pression absolue de la pression relative.
 Citer et exploiter le principe fondamental de l&amp;rsquo;hydrostatique.
-  piege
+piege
 Le principe fondamental de l&amp;rsquo;hydrostatique peut s&amp;rsquo;écrire différemment suivant l&amp;rsquo;orientation des axes (parle-t-on de la hauteur ou de la profondeur ?) et suivant si on considère les élévations $z$ ou leur écart $\Delta z = z_2-z_1 = h$.</description>
     </item>
-    
     <item>
       <title>Transport de l&#39;électricité</title>
       <link>https://coursphychi.github.io/tsti2d/transport/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/tsti2d/transport/</guid>
       <description>Transport de l&amp;rsquo;électricité Présentation
 Savoir et savoir faire coeur
@@ -204,6 +175,5 @@ Relier qualitativement le facteur de puissance d’un équipement de puissance d
 Citer les rôles du transformateur (élévation de tension, diminution de tension, isolation galvanique).
 Relier qualitativement l’augmentation, pour une charge donnée, de la tension de distribution à la diminution des pertes dans les lignes d’alimentation.</description>
     </item>
-    
   </channel>
 </rss>

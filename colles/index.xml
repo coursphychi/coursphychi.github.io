@@ -6,84 +6,78 @@
     <description>Recent content in Colles on Cours de physique chimie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate><atom:link href="https://coursphychi.github.io/colles/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate>
+    <atom:link href="https://coursphychi.github.io/colles/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lentilles</title>
       <link>https://coursphychi.github.io/colles/lentilles1/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/colles/lentilles1/</guid>
-      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Lentilles minces : démos  En utilisant le schéma ci-dessus, démontrer la relation de conjugaison de Newton pour les lentilles minces qui stipule que : $$ \overline{A&amp;rsquo;F&#39;}\cdot\overline{AF} = \overline{O&amp;rsquo;F&#39;}\cdot\overline{OF} $$   Correction Thalès dans les traingles F&#39;OC et F&#39;A&#39;B&#39;&amp;nbsp;: $$\frac{\overline{OF&#39;}}{\overline{OC}}=\frac{\overline{A&#39;F&#39;}}{\overline{A&#39;B&#39;}}$$ Et comme $\overline{OC}=\overline{AB}$, on a&amp;nbsp;: $$ \begin{equation} \frac{\overline{A&#39;B&#39;}}{\overline{AB}}=\frac{\overline{A&#39;F&#39;}}{\overline{OF&#39;}} \end{equation} $$ Thalès dans FAB et FOD&amp;nbsp;: $$\frac{\overline{OF}}{\overline{OD}}=\frac{\overline{AF}}{\overline{AB}}$$ Et comme $\overline{OD}=\overline{A&#39;B&#39;}$, on a&amp;nbsp;: $$ \begin{equation} \frac{\overline{A&#39;B&#39;}}{\overline{AB}}=\frac{\overline{OF}}{\overline{AF}} \end{equation}$$ En combinant (1) et (2), on obtient&amp;nbsp;: $$ \begin{equation} \overline{A&#39;F&#39;}\cdot\overline{AF} = \overline{O&#39;F&#39;}\cdot\overline{OF} \end{equation} $$   En introduisant le point $O$ pour décomposer les distances algébriques $\overline{AF}$ et $\overline{A&amp;rsquo;F&#39;}$, partir de la relation de conjugaison de Newton pour obtenir celle de Descartes.</description>
+      <description>Lentilles minces : démos En utilisant le schéma ci-dessus, démontrer la relation de conjugaison de Newton pour les lentilles minces qui stipule que : $$ \overline{A&amp;rsquo;F&amp;rsquo;}\cdot\overline{AF} = \overline{O&amp;rsquo;F&amp;rsquo;}\cdot\overline{OF} $$ Correction Thalès dans les traingles F&#39;OC et F&#39;A&#39;B&#39;&amp;nbsp;: $$\frac{\overline{OF&#39;}}{\overline{OC}}=\frac{\overline{A&#39;F&#39;}}{\overline{A&#39;B&#39;}}$$ Et comme $\overline{OC}=\overline{AB}$, on a&amp;nbsp;: $$ \begin{equation} \frac{\overline{A&#39;B&#39;}}{\overline{AB}}=\frac{\overline{A&#39;F&#39;}}{\overline{OF&#39;}} \end{equation} $$ Thalès dans FAB et FOD&amp;nbsp;: $$\frac{\overline{OF}}{\overline{OD}}=\frac{\overline{AF}}{\overline{AB}}$$ Et comme $\overline{OD}=\overline{A&#39;B&#39;}$, on a&amp;nbsp;: $$ \begin{equation} \frac{\overline{A&#39;B&#39;}}{\overline{AB}}=\frac{\overline{OF}}{\overline{AF}} \end{equation}$$ En combinant (1) et (2), on obtient&amp;nbsp;: $$ \begin{equation} \overline{A&#39;F&#39;}\cdot\overline{AF} = \overline{O&#39;F&#39;}\cdot\overline{OF} \end{equation} $$ En introduisant le point $O$ pour décomposer les distances algébriques $\overline{AF}$ et $\overline{A&amp;rsquo;F&amp;rsquo;}$, partir de la relation de conjugaison de Newton pour obtenir celle de Descartes.</description>
     </item>
-    
     <item>
       <title>Lentilles</title>
       <link>https://coursphychi.github.io/colles/lentilles2/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/colles/lentilles2/</guid>
-      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Lentilles minces : modéliser le flou L&amp;rsquo;objectif de cet exercice est de reproduire par traitement d&amp;rsquo;image, à l&amp;rsquo;aide d&amp;rsquo;un programme Python, ce qu&amp;rsquo;on verrait sur un écran situé derrière une lentille convergente pour différentes positions de l&amp;rsquo;écran ; on fournit au programme un fichier image et des paramètres (le diamètre de la lentille $D$, sa distance focale $f&#39;$, la distance lentille-objet $\overline{OA}$, la distance lentille-écran $\overline{OE}$, la taille de l&amp;rsquo;objet $\overline{AB}$), et il produit une image correspondant à ce qu&amp;rsquo;on verrait sur l&amp;rsquo;écran.</description>
+      <description>Lentilles minces : modéliser le flou L&amp;rsquo;objectif de cet exercice est de reproduire par traitement d&amp;rsquo;image, à l&amp;rsquo;aide d&amp;rsquo;un programme Python, ce qu&amp;rsquo;on verrait sur un écran situé derrière une lentille convergente pour différentes positions de l&amp;rsquo;écran ; on fournit au programme un fichier image et des paramètres (le diamètre de la lentille $D$, sa distance focale $f&amp;rsquo;$, la distance lentille-objet $\overline{OA}$, la distance lentille-écran $\overline{OE}$, la taille de l&amp;rsquo;objet $\overline{AB}$), et il produit une image correspondant à ce qu&amp;rsquo;on verrait sur l&amp;rsquo;écran.</description>
     </item>
-    
     <item>
       <title>Onde</title>
       <link>https://coursphychi.github.io/colles/onde/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/colles/onde/</guid>
       <description>Onde Inspecter le code ci-dessous :
-  Combien de périodes observe-t-on pendant l&amp;rsquo;animation ? Modifier le code pour visualiser 10 périodes.  Imaginons qu&amp;rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.
+Combien de périodes observe-t-on pendant l&amp;rsquo;animation ? Modifier le code pour visualiser 10 périodes. Imaginons qu&amp;rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.
 Quel sera le retard temporel de l&amp;rsquo;anneau i par rapport à l&amp;rsquo;anneau 0 ? Faire en sorte que l&amp;rsquo;animation montre une telle onde en modifiant la ligne 62. Que vaut alors la longueur d&amp;rsquo;onde $\lambda$ ?</description>
     </item>
-    
     <item>
       <title>Oscillateur</title>
       <link>https://coursphychi.github.io/colles/oscillsolide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/colles/oscillsolide/</guid>
-      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Simulation d&amp;rsquo;un oscillateur mécanique  Oscillateur amorti par frottement fluide :
- Faire les modifications nécessaires pour se placer dans le régime apériodique critique.  Oscillateur amorti par frottement solide :
- Faire les modifications nécessaires pour étudier un oscillateur amorti par frottement solide plutôt que par frottement fluide.</description>
+      <description> Simulation d&amp;rsquo;un oscillateur mécanique Oscillateur amorti par frottement fluide :
+Faire les modifications nécessaires pour se placer dans le régime apériodique critique. Oscillateur amorti par frottement solide :
+Faire les modifications nécessaires pour étudier un oscillateur amorti par frottement solide plutôt que par frottement fluide.
+Analyser les graphes obtenus.
+Déterminer la variation entre deux élongations maximales consécutives du ressort.
+Correction Approche dynamique et énergétique </description>
     </item>
-    
+    <item>
+      <title>Réfraction</title>
+      <link>https://coursphychi.github.io/colles/refraction/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/colles/refraction/</guid>
+      <description>Réfraction Le champ de l&amp;rsquo;image fait 7 carreaux de largeur en dehors de l&amp;rsquo;eau mais seulement 5 sous l&amp;rsquo;eau. L&amp;rsquo;exercice vise dans un premier temps à expliquer cette observation puis à déterminer la distance entre le mur et la caméra.
+Observerait-on la même chose en immergeant sa tête sous l&amp;rsquo;eau, les yeux ouverts ? Et avec un masque ? Correction Les carreaux ne nous apparaitraient pas plus grands si on ouvrait les yeux sous l&#39;eau.</description>
+    </item>
     <item>
       <title>Respiration</title>
       <link>https://coursphychi.github.io/colles/respiration/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/colles/respiration/</guid>
-      <description>table { margin: auto; border-collapse: collapse; border: none !important; } td { width: 60px; height: 60px; border: 5px solid white !important; text-align: center; vertical-align: middle; font-size: 1em; } td.clickable { cursor: pointer; } .s-block { background-color: #0076BA; } .p-block { background-color: #0076BA; } .neutre { background-color: #0076BA; } .noble-gas { background-color: #EE220C; } .empty { border: none !important; color:#1C90F3; font-weight:bold; } .symbol { font-size: 2em; font-weight:bold; color:#fff; } .atomic-number { font-size: 1.</description>
+      <description>AP - Thermodynamique La respiration La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).
+On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.
+On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
     </item>
-    
     <item>
       <title>Respiration</title>
       <link>https://coursphychi.github.io/colles/respiration_corr/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/colles/respiration_corr/</guid>
       <description>Correction La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).
 On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.
 On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
     </item>
-    
-    <item>
-      <title>Réfraction</title>
-      <link>https://coursphychi.github.io/colles/refraction/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
-      <guid>https://coursphychi.github.io/colles/refraction/</guid>
-      <description>#correc { color: #006C65; border-left: solid 10px #C7DDDC; } #comm { color: #004D80; border-left: solid 10px #B3CAD9; } #commsum { color: #004D80; } #correcsum { color: #006C65; }  Réfraction   Le champ de l&amp;rsquo;image fait 7 carreaux de largeur en dehors de l&amp;rsquo;eau mais seulement 5 sous l&amp;rsquo;eau. L&amp;rsquo;exercice vise dans un premier temps à expliquer cette observation puis à déterminer la distance entre le mur et la caméra.</description>
-    </item>
-    
     <item>
       <title>Tremplins</title>
       <link>https://coursphychi.github.io/colles/tremplins/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      
       <guid>https://coursphychi.github.io/colles/tremplins/</guid>
-      <description>table { margin: auto; border-collapse: collapse; border: none !important; } td { width: 60px; height: 60px; border: 5px solid white !important; text-align: center; vertical-align: middle; font-size: 1em; } td.clickable { cursor: pointer; } .s-block { background-color: #0076BA; } .p-block { background-color: #0076BA; } .neutre { background-color: #0076BA; } .noble-gas { background-color: #EE220C; } .empty { border: none !important; color:#1C90F3; font-weight:bold; } .symbol { font-size: 2em; font-weight:bold; color:#fff; } .atomic-number { font-size: 1.</description>
+      <description>Colle mécanique Deux balles dévalent chacune un tremplin différent dont les points de départ et d&amp;rsquo;arrivée ont même altitude :
+Les différentes coordonnées sont données ci-dessous. Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s-2. La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.
+Questions préliminaires :
+Qulle balle atterrit le plus loin ? Quelle balle parcourt le moins de distance ?</description>
     </item>
-    
   </channel>
 </rss>

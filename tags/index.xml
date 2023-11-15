@@ -5,6 +5,7 @@
     <link>https://coursphychi.github.io/tags/</link>
     <description>Recent content in Tags on Cours de physique chimie</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>fr</language><atom:link href="https://coursphychi.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>fr</language>
+    <atom:link href="https://coursphychi.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
