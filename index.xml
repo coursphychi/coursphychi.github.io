@@ -185,7 +185,7 @@ La configuration électronique de l’atome de sodium (numéro atomique Z = 11
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/egiepuiss/</guid>
       <description>Énergie / Puissance Présentation
-Rappels L&amp;rsquo;énergie $\Delta E$ (en J) reçue ou fournie par un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$ où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.
+Rappels La variation d&amp;rsquo;énergie $\Delta E$ (en J) d&amp;rsquo;un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$ où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.
 Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à : $\displaystyle P = \frac{\Delta E}{\Delta t}$ Conversion à connaître et à savoir redémontrer :</description>
     </item>
     <item>
