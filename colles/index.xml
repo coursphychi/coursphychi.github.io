@@ -9,6 +9,14 @@
     <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate>
     <atom:link href="https://coursphychi.github.io/colles/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Lance-balle</title>
+      <link>https://coursphychi.github.io/colles/lanceballe/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/colles/lanceballe/</guid>
+      <description>Lance-balle Un lanceur de balle est fixé au sol mais le canon est libre de pivoter autour d’un axe horizontal. Le lanceur envoie ses projectiles avec toujours la même vitesse initiale $v_0$ mais avec un angle aléatoire distribué uniformément entre 0° et 180°.
+Selon vous, chaque secteur découpant l&amp;rsquo;axe $x$ de manière régulière va-t-il recevoir autant de balles ? Si non, comment supposeriez-vous que la densité d&amp;rsquo;impacts $\frac{dN}{dx}$ sur un petit intervalle $dx$ évolue en fonction de $x$ ?</description>
+    </item>
+    <item>
       <title>Lentilles</title>
       <link>https://coursphychi.github.io/colles/lentilles1/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>

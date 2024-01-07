@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>2nde - Cours de physique chimie</title>
+    <title>Lance-balle - Cours de physique chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -79,7 +79,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/2nde/">
+  <body class="" data-url="/colles/lanceballe/">
     <nav id="sidebar" class="">
 
 
@@ -141,7 +141,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     
     <li data-nav-id="/2nde/" title="2nde" class="dd-item
         
-        active
+        
         
         ">
       <a href="/2nde/">
@@ -1126,7 +1126,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        
+        parent
         
         
         ">
@@ -1212,13 +1212,22 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
-                   2nde
+                   Lance-balle
                  
                   </span>
                 </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents"></nav>
+    </div>
+</div>
+
                 
               </div>
             </div>
@@ -1227,52 +1236,92 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
 
 
         
 
 
+<style>
+ 	#correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ 	#comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ 	#commsum
+  {
+    color: #004D80;
+  }
+ 	#correcsum
+  {
+    color: #006C65;
+  }
+</style>
+<h1 id="lance-balle">Lance-balle</h1>
+<p><img src="/lancebaballe.png" alt=""></p>
+<p>Un lanceur de balle est fixé au sol mais le canon est libre de pivoter autour d’un axe horizontal. <br>
+Le lanceur envoie ses projectiles avec toujours la même vitesse initiale $v_0$ mais avec un angle aléatoire distribué uniformément entre 0° et 180°.<br></p>
+<p><img src="/lanceballe.png" alt=""></p>
+<ol>
+<li>
+<p>Selon vous, chaque secteur découpant l&rsquo;axe $x$ de manière régulière va-t-il recevoir autant de balles ? Si non, comment supposeriez-vous que la densité d&rsquo;impacts $\frac{dN}{dx}$ sur un petit intervalle $dx$ évolue en fonction de $x$ ?</p>
+</li>
+<li>
+<p>Déterminer les équations horaires du mouvement d’un projectile (pour une vitesse initiale $\vec{v_0}$ faisant un angle $\phi$ avec l&rsquo;axe $x$ et en négligeant les frottements de l&rsquo;air).</p>
+</li>
+<li>
+<p>En déduire l&rsquo;équation de la trajectoire de la balle.</p>
+</li>
+<li>
+<p>Déterminer la portée $x(\phi)$ de la balle en fonction de l&rsquo;angle $\phi$.</p>
+</li>
+<li>
+<p>En appelant $N_{tot}$ le nombre de balles envoyées en tout, déterminer le nombre $N(\phi)$ de balles envoyées avec un angle compris entre 0 et $\phi$. En déduire $\frac{dN}{d\phi}$.</p>
+</li>
+<li>
+<p>En utilisant le fait qu&rsquo;on puisse écrire (dans les conditions de l&rsquo;exercice) que $\frac{dN}{d\phi} = \frac{dN}{dx} \frac{dx}{d\phi}$, déterminer la densité $\frac{dN}{dx}$ d&rsquo;impacts de balles entre $x$ et $x+dx$.</p>
+</li>
+<li>
+<p>Vérifier en complétant le code python <a href="https://colab.research.google.com/drive/1_AmyxEoZioIaUMPO9iR-R78WoPSK0jP6?usp=sharing#scrollTo=76ruVg_Ao381">de ce notebook</a>.</p>
+</li>
+</ol>
+<details>
+<summary id="correcsum">
+Correction</summary>
+<blockquote id="correc">
+Exemple de solution :
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> cos,sin,pi
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">50000</span>
+</span></span><span style="display:flex;"><span>v0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>g <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>dt <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-3</span>
+</span></span><span style="display:flex;"><span>x_sol <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(N):
+</span></span><span style="display:flex;"><span>    phi <span style="color:#f92672">=</span> random()<span style="color:#f92672">*</span>pi
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    vx <span style="color:#f92672">=</span> v0<span style="color:#f92672">*</span>cos(phi)
+</span></span><span style="display:flex;"><span>    vy <span style="color:#f92672">=</span> v0<span style="color:#f92672">*</span>sin(phi)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> y <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        vy <span style="color:#f92672">+=</span> <span style="color:#f92672">-</span>g<span style="color:#f92672">*</span>dt
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">+=</span> vx<span style="color:#f92672">*</span>dt
+</span></span><span style="display:flex;"><span>        y <span style="color:#f92672">+=</span> vy<span style="color:#f92672">*</span>dt
+</span></span><span style="display:flex;"><span>    x_sol<span style="color:#f92672">.</span>append(x)
+</span></span></code></pre></div></blockquote>
+</details>
 
-	<h1 id="physique-chimie-de-seconde">Physique-chimie de seconde</h1>
-<br>
-<p style="text-align:center;font-size: 25px"><a href="https://cache.media.education.gouv.fr/file/SP1-MEN-22-1-2019/98/9/spe634_annexe_1062989.pdf">Programme officiel</a></p>
-<div style="position:relative; width:100%; max-width: 100%; margin-left: auto;margin-right: auto;">
-<a href="https://www.nasa.gov/feature/goddard/2023/webb-makes-first-detection-of-crucial-carbon-molecule">
-<img src="/accueil2nde.jpg" style="border-radius:10px;"></a></div>
-<h2 id="descriptions-de-la-matière">Descriptions de la matière</h2>
-<h4 id="à-léchelle-macroscopique-">À l&rsquo;échelle macroscopique :</h4>
-<h4 id="input-typecheckbox-mélangesmelanges"><input type="checkbox"> <a href="./melanges">Mélanges</a></h4>
-<h4 id="input-typecheckbox-solutionssolutions"><input type="checkbox"> <a href="./solutions">Solutions</a></h4>
-<h4 id="à-léchelle-microscopique-">À l&rsquo;échelle microscopique :</h4>
-<h4 id="input-typecheckbox-entités-chimiquesatome"><input type="checkbox"> <a href="./atome">Entités chimiques</a></h4>
-<h4 id="input-typecheckbox-cortège-électroniquelewis"><input type="checkbox"> <a href="./lewis">Cortège électronique</a></h4>
-<h4 id="input-typecheckbox-molemole"><input type="checkbox"> <a href="./mole">Mole</a></h4>
-<h2 id="transformations-de-la-matière">Transformations de la matière</h2>
-<h4 id="input-typecheckbox-physiquechgt_etat"><input type="checkbox"> <a href="./chgt_etat">Physique</a></h4>
-<h4 id="input-typecheckbox-chimiquereaction"><input type="checkbox"> <a href="./reaction">Chimique</a></h4>
-<h4 id="input-typecheckbox-nucléairerappelschimie"><input type="checkbox"> <a href="./rappelschimie">Nucléaire</a></h4>
-<h2 id="mécanique">Mécanique</h2>
-<h4 id="input-typecheckbox-mouvementsmouvement"><input type="checkbox"> <a href="./mouvement">Mouvements</a></h4>
-<h4 id="input-typecheckbox-actions-et-principe-dinertieinertie"><input type="checkbox"> <a href="./inertie">Actions et principe d&rsquo;inertie</a></h4>
-<h2 id="ondes-et-signaux">Ondes et signaux</h2>
-<h4 id="input-typecheckbox-sonson"><input type="checkbox"> <a href="./son">Son</a></h4>
-<h4 id="input-typecheckbox-lumière-et-spectrelumiere"><input type="checkbox"> <a href="./lumiere">Lumière et spectre</a></h4>
-<h4 id="input-typecheckbox-vision-et-imagelentille"><input type="checkbox"> <a href="./lentille">Vision et image</a></h4>
-<h4 id="input-typecheckbox-électricitéelec"><input type="checkbox"> <a href="./elec">Électricité</a></h4>
 
-
-
-
-
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
-        
-            </div> 
         
         </div>
         
@@ -1304,413 +1353,8 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1928,6 +1572,24 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
                         
             
             
@@ -1979,6 +1641,33 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                         
             
             
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
         
                     
             
@@ -1988,6 +1677,366 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -2082,3 +2131,4 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
   </body>
 </html>
+
