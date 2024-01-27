@@ -608,6 +608,7 @@ div.notices.def p:first-child:after {
     content: 'Définition';
 }
 
+
 div.notices.piege p {
     border-top: 30px solid #99195E;
     background: #FAC5DF;

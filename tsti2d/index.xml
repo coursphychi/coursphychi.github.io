@@ -14,8 +14,7 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/rappelschimie/</guid>
       <description>Rappels sur les solutions Présentation
-Pictogrammes Savoir et savoir faire coeur
-Calculer la masse molaire d&amp;rsquo;une molécule à partir de celles des atomes qui la constituent.
+Pictogrammes Savoir et savoir faire Calculer la masse molaire d&amp;rsquo;une molécule à partir de celles des atomes qui la constituent.
 Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à partir de la masse $m$ de l&amp;rsquo;espèce et de sa masse molaire $M$ : $\displaystyle n=\frac{m}{M}$ Déterminer une concentration massique $\displaystyle C_m=\frac{m}{V}$ et une concentration molaire $\displaystyle C=\frac{n}{V}$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une masse volumique $\rho$ : $m=\rho\times V$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration massique $C_m$ : $m=C_m\times V$ Déterminer une quantité de matière $n$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration molaire $C$ : $n=C\times V$ Donner le protocole d&amp;rsquo;une dissolution.</description>
     </item>
     <item>
@@ -44,10 +43,8 @@ $$\Delta U = m c \Delta\theta$$ où $m$ est la masse (en $\pu kg$)</description>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/piles/</guid>
       <description>Piles, accumulateurs et piles à combustible Présentation
-Rappels Réactions d&amp;rsquo;oxydoréduction : info
-Il y a échanges d&amp;rsquo;électrons lors d&amp;rsquo;une réaction d&amp;rsquo;oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques).
-Savoir et savoir faire coeur
-Équilibrer les demi-équations redox Déterminer une équation bilan à partir des demi-équations Décrire ce qui se passe à chaque électrode pendant une décharge et pendant une charge Lier une demi-équation à une électrode (cathode ou anode) Différentier et définir une pile, un accumulateur et une batterie Calculer l’énergie totale stockée Exploiter les principales caractéristiques des piles ou accumulateurs (tension à vide, capacité, énergies massique et volumique, nombre de cycles de charge et décharge) pour les utiliser dans des applications spécifiques.</description>
+Rappels Réactions d&amp;rsquo;oxydoréduction : Il y a échanges d&amp;rsquo;électrons lors d&amp;rsquo;une réaction d&amp;rsquo;oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques).
+Savoir et savoir faire Équilibrer les demi-équations redox Déterminer une équation bilan à partir des demi-équations Décrire ce qui se passe à chaque électrode pendant une décharge et pendant une charge Lier une demi-équation à une électrode (cathode ou anode) Différentier et définir une pile, un accumulateur et une batterie Calculer l’énergie totale stockée Exploiter les principales caractéristiques des piles ou accumulateurs (tension à vide, capacité, énergies massique et volumique, nombre de cycles de charge et décharge) pour les utiliser dans des applications spécifiques.</description>
     </item>
     <item>
       <title>Combustions</title>
@@ -81,8 +78,7 @@ C&#39;est comme ça que le soleil nous chauffe. Questions : Quel mode de transfe
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/puisselec/</guid>
       <description>Puissance en régime sinusoïdal Présentation
-Rappels En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;: La tension et l&#39;intensité moyenne. Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;: La tension et l&#39;intensité efficace. Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;? $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$ Savoir et savoir faire coeur
-Savoir définir la puissance apparente $S$. Savoir que la puissance apparente est une grandeur de dimensionnement d&amp;rsquo;une installation ou d&amp;rsquo;un équipement électrique.</description>
+Rappels En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;: La tension et l&#39;intensité moyenne. Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;: La tension et l&#39;intensité efficace. Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;? $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$ Savoir et savoir faire Savoir définir la puissance apparente $S$. Savoir que la puissance apparente est une grandeur de dimensionnement d&amp;rsquo;une installation ou d&amp;rsquo;un équipement électrique.</description>
     </item>
     <item>
       <title>Lumière</title>
@@ -93,8 +89,7 @@ Savoir définir la puissance apparente $S$. Savoir que la puissance apparente es
 Rappels Lien entre la fréquence $f$ et la longueur d&#39;onde $\lambda$&amp;nbsp;? $$\lambda=\frac{c}{f}$$ Où $c$ est la célérité (vitesse) de la lumière
 $c = \pu{3,0*10^8 m*s-1}$ Étendu en longueurs d&#39;ondes de la partie visible du spectre électromagnétique&amp;nbsp;? Simulations Photons et niveaux d&amp;rsquo;énergie (spectres) : applet Geogebra
 Tracé d&amp;rsquo;une caractéristique : applet Geogebra + activité
-Savoir et savoir faire coeur
-Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon.</description>
+Savoir et savoir faire Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon.</description>
     </item>
     <item>
       <title>Signaux</title>
@@ -116,8 +111,7 @@ Mathématiquement, on dit qu’une fonction $f:\mathbb{R}\rightarrow\mathbb{R}$ 
       <description>Incertitudes Petite expérience Qui a le plus faible temps de réaction ? Comment être sûr ?
 Utilisation de la calculette Calcul de la moyenne et de l&amp;rsquo;écart-type expérimental :
 Petites vidéos expliquant les manips sur les différentes calculettes.
-Savoir et savoir faire coeur
-Procéder à l’évaluation d’une incertitude-type par une approche statistique (type A). Savoir utiliser sa calculette pour déterminer la moyenne et l&amp;rsquo;écart-type expérimental d&amp;rsquo;une série de données. Procéder à l’évaluation d’une incertitude-type associée à une mesure unique en exploitant une relation fournie (type B).</description>
+Savoir et savoir faire Procéder à l’évaluation d’une incertitude-type par une approche statistique (type A). Savoir utiliser sa calculette pour déterminer la moyenne et l&amp;rsquo;écart-type expérimental d&amp;rsquo;une série de données. Procéder à l’évaluation d’une incertitude-type associée à une mesure unique en exploitant une relation fournie (type B).</description>
     </item>
     <item>
       <title>Mécanique</title>
@@ -126,8 +120,7 @@ Procéder à l’évaluation d’une incertitude-type par une approche statistiq
       <guid>https://coursphychi.github.io/tsti2d/mecanique/</guid>
       <description>Mécanique Présentation méca 1re partie
 Présentation méca 2e partie (rotations)
-Savoir et savoir faire coeur
-Déterminer la résultante des forces appliquées à un système dont le mouvement est rectiligne à partir de l’accélération en utilisant le principe fondamental de la mécanique (PFD). Déterminer les caractéristiques de l’accélération d’un système dans le cas d’un mouvement rectiligne à partir des forces extérieures appliquées en utilisant le PFD. Exploiter numériquement des résultats expérimentaux pour valider le modèle de la chute libre.</description>
+Savoir et savoir faire Déterminer la résultante des forces appliquées à un système dont le mouvement est rectiligne à partir de l’accélération en utilisant le principe fondamental de la mécanique (PFD). Déterminer les caractéristiques de l’accélération d’un système dans le cas d’un mouvement rectiligne à partir des forces extérieures appliquées en utilisant le PFD. Exploiter numériquement des résultats expérimentaux pour valider le modèle de la chute libre.</description>
     </item>
     <item>
       <title>Son</title>
@@ -135,8 +128,7 @@ Déterminer la résultante des forces appliquées à un système dont le mouveme
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/son/</guid>
       <description>Ondes sonores Présentation
-Carte mentale Savoir et savoir faire coeur
-Déterminer la fréquence du fondamental et des harmoniques à partir du spectre d’amplitude d’un signal sonore.. Définir et distinguer la notion de timbre et de hauteur. Exploiter la relation entre l&amp;rsquo;intensité acoustique et le niveau sonore et savoir se débrouiller avec les décibels (dB). Exploiter des informations relatives aux courbes de sensibilité de l’oreille humaine (fréquences audible, seuil d&amp;rsquo;audibilité, seuil de douleur, etc.</description>
+Carte mentale Savoir et savoir faire Déterminer la fréquence du fondamental et des harmoniques à partir du spectre d’amplitude d’un signal sonore.. Définir et distinguer la notion de timbre et de hauteur. Exploiter la relation entre l&amp;rsquo;intensité acoustique et le niveau sonore et savoir se débrouiller avec les décibels (dB). Exploiter des informations relatives aux courbes de sensibilité de l’oreille humaine (fréquences audible, seuil d&amp;rsquo;audibilité, seuil de douleur, etc.</description>
     </item>
     <item>
       <title>Radioactivité</title>
@@ -144,8 +136,7 @@ Déterminer la fréquence du fondamental et des harmoniques à partir du spectre
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/radioact/</guid>
       <description>Radioactivité Présentation
-Expériences Désintégration radioactive de la classe TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours Activités Datation Déchets nucléaires Exercice défaut de masse et énergie Savoir et savoir faire coeur
-Distinguer la radioactivité naturelle de la radioactivité artificielle.
+Expériences Désintégration radioactive de la classe TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours Activités Datation Déchets nucléaires Exercice défaut de masse et énergie Savoir et savoir faire Distinguer la radioactivité naturelle de la radioactivité artificielle.
 Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.
 Citer la définition de l’activité d’une source radioactive et indiquer son unité.</description>
     </item>
@@ -155,11 +146,9 @@ Citer la définition de l’activité d’une source radioactive et indiquer son
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/pression/</guid>
       <description>Pression et statique des fluides Présentation
-Savoir et savoir faire coeur
-Définir la pression exercée sur une surface à partir de la résultante des forces pressantes appliquées.
+Savoir et savoir faire Définir la pression exercée sur une surface à partir de la résultante des forces pressantes appliquées.
 Distinguer la pression absolue de la pression relative.
 Citer et exploiter le principe fondamental de l&amp;rsquo;hydrostatique.
-piege
 Le principe fondamental de l&amp;rsquo;hydrostatique peut s&amp;rsquo;écrire différemment suivant l&amp;rsquo;orientation des axes (parle-t-on de la hauteur ou de la profondeur ?) et suivant si on considère les élévations $z$ ou leur écart $\Delta z = z_2-z_1 = h$.</description>
     </item>
     <item>
@@ -168,8 +157,7 @@ Le principe fondamental de l&amp;rsquo;hydrostatique peut s&amp;rsquo;écrire di
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/transport/</guid>
       <description>Transport de l&amp;rsquo;électricité Présentation
-Savoir et savoir faire coeur
-Savoir schématiser l’organisation du transport et de la distribution de l’énergie électrique pour une ligne monophasée.
+Savoir et savoir faire Savoir schématiser l’organisation du transport et de la distribution de l’énergie électrique pour une ligne monophasée.
 Distinguer et citer les caractéristiques essentielles du réseau de distribution électrique.
 Relier qualitativement le facteur de puissance d’un équipement de puissance donnée aux pertes dans les lignes d’alimentation.
 Citer les rôles du transformateur (élévation de tension, diminution de tension, isolation galvanique).
