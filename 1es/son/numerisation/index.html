@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Le futur des énergies - Cours de physique chimie</title>
+    <title>Numérisation - Cours de physique chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -79,7 +79,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/tes/energie/">
+  <body class="" data-url="/1es/son/numerisation/">
     <nav id="sidebar" class="">
 
 
@@ -447,7 +447,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/" title="1ES" class="dd-item
-        
+        parent
         
         
         ">
@@ -618,7 +618,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/son/" title="Son et musique" class="dd-item
-        
+        parent
         
         
         ">
@@ -674,7 +674,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     
     <li data-nav-id="/1es/son/numerisation/" title="Numérisation" class="dd-item
         
-        
+        active
         
         ">
       <a href="/1es/son/numerisation/">
@@ -715,7 +715,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/tes/" title="TES" class="dd-item
-        parent
+        
         
         
         ">
@@ -771,7 +771,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     
     <li data-nav-id="/tes/energie/" title="Le futur des énergies" class="dd-item
         
-        active
+        
         
         ">
       <a href="/tes/energie/">
@@ -1322,7 +1322,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Le futur des énergies
+                   Numérisation
                  
                   </span>
                 </div>
@@ -1331,27 +1331,16 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#deux-siècles-dénergie-électrique">Deux siècles d&rsquo;énergie électrique</a>
+    <li><a href="#analogique-vs-numérique">Analogique vs Numérique</a></li>
+    <li><a href="#pourquoi-numériser-">Pourquoi numériser ?</a></li>
+    <li><a href="#codage-dun-son">Codage d&rsquo;un son</a>
       <ul>
-        <li><a href="#un-peu-dhistoire">Un peu d&rsquo;histoire</a></li>
-        <li><a href="#quelques-notions-physiques-importantes">Quelques notions physiques importantes</a></li>
-        <li><a href="#conversion-électromécanique">Conversion électromécanique</a></li>
-        <li><a href="#photovoltaïsme">Photovoltaïsme</a></li>
+        <li><a href="#échantillonnage">Échantillonnage</a></li>
+        <li><a href="#quantification">Quantification</a></li>
       </ul>
     </li>
-    <li><a href="#les-atouts-de-lélectricité">Les atouts de l’électricité</a>
-      <ul>
-        <li><a href="#obtention-dénergie-électrique-sans-combustion">Obtention d&rsquo;énergie électrique sans combustion</a></li>
-        <li><a href="#dangers-des-énergies">Dangers des énergies</a></li>
-        <li><a href="#problème-du-stockage">Problème du stockage</a></li>
-      </ul>
-    </li>
-    <li><a href="#optimisation-du-transport-de-lélectricité">Optimisation du transport de l’électricité</a></li>
-    <li><a href="#choix-énergétiques-et-impacts-sur-les-sociétés">Choix énergétiques et impacts sur les sociétés</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
+    <li><a href="#exemple-">Exemple :</a></li>
+    <li><a href="#débit-binaire-et-compression">Débit binaire et compression</a></li>
   </ul>
 </nav>
     </div>
@@ -1372,417 +1361,241 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 
 
-	<hr>
-<style>
-blockquote ul, blockquote li {
-font-size: 1.1rem;
-color: #999;
-}
+	<style>
+ 	#correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ 	#comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ 	#commsum
+  {
+    color: #004D80;
+  }
+ 	#correcsum
+  {
+    color: #006C65;
+  }
 </style>
-<p style="text-align:center;font-size: 25px"><a href="https://presentationssite.github.io/tes/expos">Exposés</a>/<a href="https://presentationssite.github.io/tes/debats">Débats</a></p>
+<h1 id="le-son-une-information-à-coder">Le son, une information à coder</h1>
+<h2 id="analogique-vs-numérique">Analogique vs Numérique</h2>
+<p>Avant les années 1990, le support sur lequel est enregistrée la musique était le plus souvent <strong>analogique</strong>, mais avec la démocratisation du Compact Disk, les supports <strong>numériques</strong> deviennent rapidement majoritaires.</p>
+<blockquote>
+<p>Définir les termes analogique et numérique.
+Nommer et classer les supports suivants entre analogique et numérique.</p>
+</blockquote>
+<p><img src="/stockage.jpg?width=800px" alt=""></p>
+<h2 id="pourquoi-numériser-">Pourquoi numériser ?</h2>
+<p>Selon vous, quels sont les principaux avantages d&rsquo;une numérisation des données ?</p>
+<details>
+<summary id="correcsum">
+Correction (cliquer pour afficher)</summary>
+<blockquote id="correc">
+<ul>
+<li>permet d'emmagasiner de grandes quantités d'information sur des volumes de faibles dimensions&nbsp;;</li>
+<li>permet de dupliquer exactement et facilement les informations numériques et cela pour un moindre coût&nbsp;;</li>
+<li>permet de distribuer largement les informations grâce aux réseaux informatiques et notamment grâce à Internet.</li>
+</ul>
+</blockquote>
+</details>
+<br>
+<h2 id="codage-dun-son">Codage d&rsquo;un son</h2>
+<p>Un son est une vibration mécanique se propageant dans l’air ou dans un autre milieu (fluide, solide&hellip;). À l’aide d’un micro, un son peut être capté et converti en un signal analogique modélisé mathématiquement par une fonction représentant par exemple une tension en fonction du temps.</p>
+<p>Le traitement numérique de ce signal analogique, réalisé à l’aide d’un <strong>convertisseur analogique/numérique</strong> (CAN), consiste à <strong>discrétiser</strong> cette fonction en abscisse et en ordonnée pour en extraire un nombre fini de données.</p>
+<ul>
+<li><strong>L’échantillonnage</strong> consiste à relever différentes valeurs de la tension à intervalles de temps réguliers.</li>
+<li><strong>La quantification</strong>, quant à elle, revient à associer à chaque valeur de l’échantillon un nombre dont la longueur de l’écriture binaire est décidée par avance.</li>
+</ul>
+<br>
+<h3 id="échantillonnage">Échantillonnage</h3>
+<p>Considérons la représentation graphique en fonction du temps de la tension électrique correspondant au signal analogique du La du diapason (La3), son pur de fréquence $f=\pu{440 Hz}$.</p>
+<p>Un échantillonnage à la fréquence $f_e$ revient à garder constante la valeur du signal au début de la période pendant toute la période d&rsquo;échantillonnage $T_e = 1/f_e$.</p>
+<p>Plus $f_e$ est grande et plus le signal restitué est fidèle.</p>
+<div style=" position: relative;overflow: hidden;max-width: 673px;
+  margin: auto; padding-bottom: min(87.82%,591px);"> 
+<iframe scrolling="no" title="purcomplexe" src="https://www.geogebra.org/material/iframe/id/uggrvubv/width/673/height/591/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/false/ctl/false" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;"> </iframe>
+</div>
+<blockquote>
+<p>Pour quelle valeur de $f_e$, le signal échantillonné est-il un signal carré (ou créneau) ayant la même fréquence que le signal sinusoïdal initial ?</p>
+</blockquote>
+<p>On appelle cette fréquence la fréquence de Nyquist. C&rsquo;est la fréquence d&rsquo;échantillonnage minimale nécessaire pour que la fréquence du signal échantillonnée soit la même que celle du signal de départ.</p>
+<blockquote>
+<p>Sachant que l&rsquo;oreille humaine est capable d&rsquo;entendre des sons jusqu&rsquo;à 20000 Hz, à partir de quelle fréquence d&rsquo;échantillonage est-on sûr d&rsquo;enregistrer fidèlement un son ?</p>
+</blockquote>
+<blockquote>
+<p>Sur une ligne téléphonique, un son est échantillonnée à 8000 Hz. Pourquoi est-ce suffisant ?</p>
+</blockquote>
+<p>On considère un ensemble de valeurs obtenues par échantillonnage d’un son pur. L’unité portée sur l’axe des abscisses est la seconde.</p>
+<p><img src="/exo_ech.png?width=800px" alt=""></p>
+<blockquote>
+<p>Déterminer la fréquence du son échantillonné.</p>
+<p>Déterminer la fréquence $f_e$ d’échantillonnage.</p>
+</blockquote>
+<br>
+<h3 id="quantification">Quantification</h3>
+<h4 id="écriture-binaire-dun-nombre-entier">Écriture binaire d&rsquo;un nombre entier</h4>
+<div style="position:relative; width:640px; max-width:100%; height:480px; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<iframe width="640" height="480"  src="https://www.youtube.com/embed/lP9PaDs2xgQ" title="Ératosthène : mesure de la circonférence terrestre" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width:100%"></iframe>
+</div>
+<p>Les shadoks comptent en base 4, mais les ordinateurs, eux, préfèrent la base 2 car ils n&rsquo;ont que deux chiffres à leur disposition : $1$ et $0$, ouvert ou fermé (un ordinateur n&rsquo;est finalement qu&rsquo;un ensemble d&rsquo;interrupteurs !).</p>
+<p>0 et 1 sont les seuls nombres que l’on peut coder sur un seul bit. Sur deux bits, il y a quatre nombres codés : $00$, $01$, $10$ et $11$.</p>
+<p>Plus généralement, si $p$ est un entier naturel non nul, on peut coder $2^p$ nombres entiers sur $p$ bits.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><a href="https://docs.google.com/spreadsheets/d/1M9vJymBWdIucjmWlli_9FMRs11DSSPedlvV9e_nc-Cs/edit?usp=sharing">T05</a></th>
-<th style="text-align:center"><a href="https://docs.google.com/spreadsheets/d/1LTbUSqsSstchVU61PorlsATglT6EtsYsH2cmz_X7d8k/edit?usp=sharing">T07</a></th>
-<th style="text-align:center"><a href="https://docs.google.com/spreadsheets/d/1333Ktfq7hiOQn9ZWEbmVytQQseSNZg7j4UmeatNiHk8/edit?usp=sharing">T08</a></th>
+<th style="text-align:center">Nombre $p$ de bits</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">8</th>
+<th style="text-align:center">10</th>
+<th style="text-align:center">16</th>
+<th style="text-align:center">24</th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>Nombre de nombres codables</strong></td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">256</td>
+<td style="text-align:center">1 024</td>
+<td style="text-align:center">65 536</td>
+<td style="text-align:center">16 777 216</td>
+</tr>
+</tbody>
 </table>
-<hr>
-<h1 id="le-futur-des-energies">Le futur des energies</h1>
-<h2 id="deux-siècles-dénergie-électrique">Deux siècles d&rsquo;énergie électrique</h2>
-<h3 id="un-peu-dhistoire">Un peu d&rsquo;histoire</h3>
-<br>
-<p>Dans sa fresque monumentale commanditée par la Compagnie parisienne de distribution d&rsquo;électricité pour l&rsquo;exposition universelle de 1937 intitulée <a href="https://www.parismusees.paris.fr/sites/default/files/iframe/mam_360_sisso_dufy/">la Fée électricité</a>, Raoul Dufy représente dans la partie inférieure une flopée de  savants et penseurs ayant contribué à l&rsquo;invention de l&rsquo;électricité.<br><a href="https://www.parismusees.paris.fr/sites/default/files/iframe/mam_360_sisso_dufy/"><img src="/feeelec.png" alt=""></a></p>
-<br>
-<p>Vidéo survolant l&rsquo;histoire de l&rsquo;électricité au 19<sup>e</sup> siècle :</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/JoscDcbAjbY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<br>
-<h3 id="quelques-notions-physiques-importantes">Quelques notions physiques importantes</h3>
-<p><img src="/puissbd.png?width=700px" alt=""></p>
-<style>
-#puiss p:first-child:after {
-    content: 'Puissance';
-}
-</style>
-
-<div class="notices def" style="--title: 'puiss';">
-  <p style="display: none;">puiss</p>
-  <div class="notice-body">
-    <p>La <strong>puissance</strong> est la variation d&rsquo;énergie par unité de temps :
-$$\displaystyle P=\frac{\Delta E}{\Delta t}$$
-Les unités de base sont le joule ($\pu{J}$) pour la variation d&rsquo;énergie $\Delta E$, la seconde ($\pu{s}$) pour la durée $\Delta t$ et le watt ($\pu{W}$) pour la puissance $P$.<br>
-Mais dans le secteur de l&rsquo;électricité, on utilise le plus souvent l&rsquo;heure ($\pu{h}$) pour $\Delta t$ et le kilowattheure $\pu{kWh}$ pour l&rsquo;énergie.</p>
-
-  </div>
-</div>
-<style>
-#rend p:first-child:after {
-    content: 'Rendement';
-}
-</style>
-
-<div class="notices def" style="--title: 'rend';">
-  <p style="display: none;">rend</p>
-  <div class="notice-body">
-    <p>Définition du rendement $r$ :<br>
-$\displaystyle r=\frac{E_{utile}}{E_{perdue}}=\frac{P_{utile}}{P_{perdue}}$<br></p>
-
-  </div>
-</div>
-<br>
-<p>Ajourd&rsquo;hui, on sait obtenir de l&rsquo;énergie électrique à partir de deux sources d&rsquo;énergie très différentes :</p>
+<p>On voit ainsi qu’un octet, constitué de 8 bits, permet de représenter 256 nombres distincts. L’octet est l’unité qui permet de mesurer la quantité de données en informatique, c&rsquo;est l&rsquo;unité de mémoire.</p>
+<p>Les nombres positifs sont simplement écrits dans leur écriture binaire : ainsi le nombre 3 a-t-il pour écriture binaire $011$ sur 3 bits.</p>
+<p>La technique du complément à 2 permet de coder des nombres négatifs. Si l&rsquo;espace de codage est de $p$ bits, alors cette technique permet de coder tous les nombres positifs de $0$ à $2^{p-1}$ et tous les nombres négatifs de $-2^p$ à $0$.</p>
+<p>Algorithme à suivre :</p>
 <ul>
-<li>l&rsquo;énergie mécanique</li>
-<li>l&rsquo;énergie de rayonnement</li>
+<li>
+<p>On considère l’écriture binaire de sa valeur absolue. Par exemple pour écrire $-3$ sur 3 bits, on commence par écrire $011$.</p>
+</li>
+<li>
+<p>On détermine le complément à 2 de ce dernier nombre, ce qui revient à prendre la
+négation de chaque bit : $0$ est remplacé par $1$ et $1$ est remplacé par $0$. Par exemple, $011$ devient $100$.</p>
+</li>
+<li>
+<p>On ajoute $1$ au nombre obtenu (ne pas oublier les retenues éventuelles), ce qui
+constitue le code cherché. Par exemple, en ajoutant $1$ à $100$, on obtient $101$. Le
+codage de $-3$ est $101$.</p>
+</li>
 </ul>
-<br>
-<h3 id="conversion-électromécanique">Conversion électromécanique</h3>
 <blockquote>
-<p>Comment s&rsquo;appelle et à quoi sert cette pièce d&rsquo;un moteur thermique ?</p>
-</blockquote>
-<div style="display: flex;justify-content: center;">
-<div style="width:600px;">
-<img src="/altvoiture.png" style="border-radius:30px">
-</div>
-</div>
-
-<div class="notices info" style="--title: 'info';">
-  <p style="display: none;">info</p>
-  <div class="notice-body">
-    <p>Principe physique du fonctionnement d&rsquo;un alternateur : l&rsquo;<strong>induction électromagnétique</strong>.</p>
-
-  </div>
-</div>
-<br>
-<p style="text-align:center">
-<a href="https://phet.colorado.edu/sims/html/faradays-law/latest/faradays-law_all.html?locale=fr"><b>Animation sur le phénomène d'induction électromagnétique découvert par Faraday</b></a></p>
-<p style="text-align:center">
-<a href="https://vod-progressive.akamaized.net/exp=1662156671~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F4122%2F16%2F420612845%2F1817790645.mp4~hmac=48086d7ccf64eb301b1cbe9a45eb8c06cb4a4d573d9079de0d26a2202d7b69b1/vimeo-prod-skyfire-std-us/01/4122/16/420612845/1817790645.mp4">Vidéo experience lycéee alternateur</a></p>
-<br>
-<ul>
-<li>
-<p>Éclaté d&rsquo;un <strong>alternateur</strong> :
-<img src="/eclataltern.png" alt=""></p>
-</li>
-<li>
-<p>Une <strong>turbine</strong> (à gaz) :</p>
-</li>
-</ul>
-<div style="display: flex;justify-content: center;">
-<div style="width:600px;">
-<img src="/turbine.png" style="border-radius:30px">
-</div>
-</div>
-<p>L&rsquo;ensemble forme un <strong>turbo-alternateur</strong>.</p>
-<p><img src="/chainturbogen.png?width=800px" alt=""></p>
-<blockquote>
-<p>Quelle conversion opère la turbine / à quoi sert-elle ?</p>
-</blockquote>
-
-<div class="notices info" style="--title: 'info';">
-  <p style="display: none;">info</p>
-  <div class="notice-body">
-    <p>Dans ce cas, le rendement vaut : $\displaystyle r=\frac{E_{élec}}{E_{méca}}=\frac{P_{élec}}{P_{méca}}$<br>
-Un alternateur peut atteindre des <strong>rendements</strong>  supérieurs à 99%.<br>
-Globalement, le rendement d&rsquo;un alternateur croît avec sa masse (et par ricochet avec la puissance électrique qu&rsquo;il délivre).</p>
-
-  </div>
-</div>
-<p><img src="/groupelectro.png?width=400px" alt=""></p>
-<p>L&rsquo;alternateur d&rsquo;un groupe électrogène (utilisé par exemple pour un food truck) capable de délivré 3 kW a un rendement autour de 85% alors que l&rsquo;alternateur du réacteur nucléaire de Flamanville-3 délivrant 1750 MW a un rendement compris entre 98,2% et 99,3%.</p>
-<br>
-<h3 id="photovoltaïsme">Photovoltaïsme</h3>
-<p><img src="/chainpv.png?width=800px" alt=""></p>
-
-<div class="notices info" style="--title: 'info';">
-  <p style="display: none;">info</p>
-  <div class="notice-body">
-    <p>Principe physique du fonctionnement d&rsquo;une cellule photovoltaïque : l&rsquo;<strong>effet photoélectrique</strong>.</p>
-
-  </div>
-</div>
-<p style="text-align:center">
-<a href="https://www.youtube.com/watch?v=v-1zjdUTu0o">Vidéo expérience effet photoélectrique</a></p>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/8RjGHmlOu58" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/7BUjVyw5LaM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<br>
-<hr>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/AHFZVn38dTM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<br>
-<h2 id="les-atouts-de-lélectricité">Les atouts de l’électricité</h2>
-<h3 id="obtention-dénergie-électrique-sans-combustion">Obtention d&rsquo;énergie électrique sans combustion</h3>
-<p>Aujourd&rsquo;hui, la majorité de l&rsquo;énergie électrique est obtenue à partir de sources fossiles dans des <strong>centrales thermiques à flamme</strong>. Mais on sait faire autrement.</p>
-<h4 id="centrales-hydrauliques-">Centrales hydrauliques :</h4>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/vqbdbigU900" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<p>En 2020, la puissance installée des centrales hydroélectriques atteint 1330 GW, produisant environ  4370 TWh soit 70 % de la production mondiale d&rsquo;énergie renouvelable et 15,6 % de la production mondiale d’électricité en 2019.</p>
-<p>La centrale hydroélectrique la plus puissante de France se trouve au barrage de Grand&rsquo;Maison en Isère. Elle peut délivrer une puissance de 1800 MW.</p>
-<p>La plus grande centrale hydroélectrique au monde est le barrage des Trois-Gorges en Chine. Sa puissance installée est de 22500 MW.</p>
-
-<div class="notices note" style="--title: 'note';">
-  <p style="display: none;">note</p>
-  <div class="notice-body">
-    <p>On distingue les centrales gravitaires, les stations de transfert d&rsquo;énergie par pompage et les centrales maritimes.</p>
-
-  </div>
-</div>
-<br>
-<h4 id="centrales-nucléaires-">Centrales nucléaires :</h4>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/I09DhTubNqE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<p>En France, les réacteurs nucléaires délivrent une puissance entre 900 MW et 1450 MW et une centrale possède entre 2 et 6 réacteurs.</p>
-<p><img src="/parcnuc.png?width=800px" alt=""></p>
-<p>Répartition des centrales nucléaires dans le monde :</p>
-<div style="display: flex;justify-content: center;">
-<div style="width:800px;">
-<img src="/repartcentr.png" style="border-radius:30px">
-</div>
-</div>
-<h4 id="centrales--géothermiques-">Centrales  géothermiques :</h4>
-<p>L&rsquo;efficacité énergétique des centrales géothermiques est faible, environ 10 à 23%, parce que les fluides géothermiques sont à basse température en comparaison de la vapeur des chaudières. De par les lois de la thermodynamique, cette basse température limite l&rsquo;efficacité des machines thermiques dans l&rsquo;extraction d&rsquo;énergie utile pendant la production d&rsquo;électricité. La chaleur résiduelle est perdue, à moins qu&rsquo;elle puisse être utilisée directement et sur place, par exemple dans des serres, des scieries ou dans le chauffage urbain. L&rsquo;efficacité énergétique médiocre du système n&rsquo;affecte pas autant les coûts opérationnels que pour une centrale à charbon ou autre combustible fossile, mais elle pèse sur la viabilité de la centrale. Afin de produire plus d&rsquo;énergie que les pompes n&rsquo;en consomment, la production d&rsquo;électricité requiert des champs géothermiques à haute température et des cycles thermiques spécialisés.</p>
-<p>Comme la géothermie ne repose pas sur des sources d&rsquo;énergie intermittentes, telles que par exemple le vent ou le solaire, son facteur de charge peut être très élevé : il a été démontré qu&rsquo;il peut aller jusqu&rsquo;à 96%. Cependant la moyenne du facteur de charge des centrales était de 74,5% en 2008, selon le GIEC, et les centrales récentes atteignent souvent des facteurs de charge supérieurs à 90%.</p>
-<p>La puissance installée des centrales géothermiques s&rsquo;élève à 15950 MW en 2020.</p>
-<p>En France, la production d&rsquo;électricité géothermique provient pour l&rsquo;essentiel de la Centrale géothermique de Bouillante en Guadeloupe 15 MW.</p>
-<br>
-<h4 id="parcs-éoliens-">Parcs éoliens :</h4>
-<p>Une éolienne sur Terre peut délivrer aujourd&rsquo;hui jusqu&rsquo;à 3 MW et en mer 15 MW, mais le facteur de charge moyen est faible.</p>
-<p>Les éoliennes fonctionnent environ 80% du temps mais avec une puissance très variable, située entre 0 et (théoriquement) 100% ; par exemple, en 2020, en France, la puissance éolienne a atteint son maximum à 13409 MW le 10 février à 18 h, avec un facteur de charge de 80,1% ; son minimum a été observé à 124 MW le 24 avril à 11 h. La puissance moyenne mensuelle observée a varié de 2713 MW en août à 8342 MW en février, alors que la puissance installée atteignait 17616 MW fin 2020 ; le taux d&rsquo;utilisation (facteur de charge) de cette puissance (puissance moyenne/puissance nominale) a été en moyenne de 26,35% en 2020</p>
-<p>En France, les plus gros investissements concernent des parcs éoliens offshore. Celui prévu au large de l&rsquo;île d&rsquo;Oléron s&rsquo;étendrait sur 300 km<sup>2</sup> et pourrait produire jusqu&rsquo;à 1 GW.</p>
-<p><img src="/parcoleron.png?width=800px" alt=""></p>
-<p><a href="https://www.debatpublic.fr/sites/default/files/2021-09/2021-09-Eolien_mer_Oleron_DMO.pdf">Document gouvernemental de préparation au débat public sur le projet éolien en mer au large d&rsquo;Oléron</a></p>
-<br>
-<h4 id="centrales-photovoltaïques-">Centrales photovoltaïques :</h4>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/k_ut9pb3kjU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<p><img src="/cestas.png" alt=""></p>
-<p>En France, la plus grande centrale solaire photovoltaïque est situé à Cestas en Gironde. Elle s&rsquo;étend sur 260 ha et peut délivrer jusqu&rsquo;à 300 MW.</p>
-<br>
-<h4 id="centrales-solaires-thermiques-">Centrales solaires thermiques :</h4>
-<div style="display: flex;justify-content: center;">
-<div style="width:600px;">
-<img src="/soltherm.png" style="border-radius:30px">
-</div>
-</div>
-<p>Une centrale solaire thermodynamique à concentration est un site industriel qui concentre les rayons du Soleil à l&rsquo;aide de miroirs afin de chauffer un fluide caloporteur, lequel permet en général de produire de l&rsquo;électricité. Ce type de centrale permet, en stockant ce fluide dans un réservoir, de prolonger le fonctionnement de la centrale plusieurs heures au-delà du coucher du Soleil.</p>
-<p>Pourquoi ne pas couvrir le Sahara en panneaux solaires pour alimenter le monde en énergie ?</p>
-<div style="display:flex;justify-content:center">
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Surface area in the Sahara desert 🏜 required to power the world with solar energy (Concentrated solar power plant with 2,500 kWh/m² a year). <a href="https://t.co/DbIAc5jGnK">pic.twitter.com/DbIAc5jGnK</a></p>&mdash; World of Engineering (@engineers_feed) <a href="https://twitter.com/engineers_feed/status/1535130921182982145?ref_src=twsrc%5Etfw">June 10, 2022</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/7OpM_zKGE4o" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-</div>
-<br>
-<h3 id="dangers-des-énergies">Dangers des énergies</h3>
-<h4 id="dangers-pour-la-santé">Dangers pour la santé</h4>
-<ul>
-<li>
-<p><a href="https://www.andra.fr/les-dechets-radioactifs/tout-comprendre-sur-les-dechets-radioactifs">Site sur les déchets nucléaires par l&rsquo;entreprise publique en ayant la charge</a></p>
-</li>
-<li>
-<p><a href="https://www.radiofrance.fr/franceculture/podcasts/l-invite-e-des-matins/transition-energetique-avons-nous-encore-le-temps-8678304">Interview de Jean-Marc Jancovici à la matinale de France-Culture</a></p>
-</li>
-<li>
-<p>Dangerosités comparées des différentes sources d&rsquo;énergie :</p>
-</li>
-</ul>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/Jzfpyo-q-RM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<br>
-<h4 id="dangers-environnementaux">Dangers environnementaux</h4>
-<ul>
-<li>impact sur les écosystèmes</li>
-</ul>
-<p><img src="/risqueolien.png?width=800px" alt=""></p>
-<ul>
-<li>émission de GES</li>
-</ul>
-<p><img src="/co2rnv.png?width=700px" alt=""></p>
-<br>
-<h3 id="problème-du-stockage">Problème du stockage</h3>
-<p><a href="https://particulier.edf.fr/fr/accueil/guide-energie/electricite/stockage-energie-electricite.html">Page sur le stockage de l&rsquo;électricité par EDF</a></p>
-<p>Pour pallier l’écart temporel entre la production d’électricité et son utilisation, il convient de prévoir des dispositifs de stockage. L’énergie électrique ne pouvant être stockée, il convient de la convertir auparavant. Trois conversions (en énergie chimique, potentielle ou électromagnétique) sont actuellement envisagées, dans des proportions très différentes.</p>
-<ul>
-<li>
-<p><strong>Stockage d’énergie potentielle de pesanteur</strong> :
-Une solution de stockage très rentable développée depuis longtemps et largement majoritaire en terme d&rsquo;énergie stockée est la station de <strong>transfert d’énergie par pompage</strong> (STEP). Aux heures creuses, l’eau d’un bassin aval est pompée et relevée vers un bassin en amont. Aux heures de pointe de consommation, l’eau est turbinée, transformant ainsi de l’énergie potentielle de pesanteur en énergie électrique.</p>
-</li>
-<li>
-<p><strong>Stockage chimique</strong> :<br>
-Celui-ci induit un certain nombre d’enjeux. Le secteur R&amp;D travaille sur de nouvelles technologies. On peut notamment évoquer les recherches concernant la <strong>batterie</strong> Li-Air qui permettrait un stockage de l’ordre de 2 000 Wh.kg<sup>-1</sup> contre environ 200 Wh.kg<sup>-1</sup> pour les batteries Li-Ion très utilisées à l’heure actuelle (téléphone, véhicule électrique&hellip;). Cependant, d’autres facteurs restent problématiques dans l’utilisation de celles-ci (matières premières, recyclage&hellip;).<br>
-L’<strong>hydrogène</strong> produit par électrolyse puis utilisé dans la pile à combustible constitue une autre voie de stockage chimique.<br></p>
-</li>
-<li>
-<p><strong>Stockage d’énergie électromagnétique</strong> :<br>
-Le SMES (Superconducting Magnetic Energy Storage) permet de stocker l’énergie sous forme d’un champ magnétique créé par un courant continu circulant dans un supraconducteur.<br>
-À l’heure actuelle, ce dispositif efficace mais très couteux n’est utilisé que dans la haute technologie.<br>
-On peut aussi évoquer les <a href="https://books.openedition.org/editionscnrs/11104?lang=en">super-condensateurs</a> qui stocke cette fois-ci sous forme d&rsquo;un champ électrique (<a href="https://vod-progressive.akamaized.net/exp=1661786325~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F4120%2F16%2F420604013%2F1817591776.mp4~hmac=4deed2bac48709e6fd68e01e465774a85ef6c6c57a1dfc7b9424f86601c3e50e/vimeo-prod-skyfire-std-us/01/4120/16/420604013/1817591776.mp4">vidéo expérience lycée condensateur</a>)</p>
-</li>
-</ul>
-<br>
-<h2 id="optimisation-du-transport-de-lélectricité">Optimisation du transport de l’électricité</h2>
-<p><img src="/pilone.png" alt=""></p>
-<ul>
-<li>Les transformateurs</li>
-</ul>
-<p><img src="/transfo_color.png?width=500px" alt=""></p>
-<p style="text-align:center">
-<a href="https://vod-progressive.akamaized.net/exp=1661786927~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F4123%2F16%2F420615225%2F1817690711.mp4~hmac=6143afae78ca49a84e41fac0c3fbe3d91ab6a7288b5acfc96d4008a212401af2/vimeo-prod-skyfire-std-us/01/4123/16/420615225/1817690711.mp4">vidéo expérience lycée transformateur</a></p>
-<ul>
-<li>Les lignes électriques :</li>
-</ul>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/qjY31x0m3d8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<ul>
-<li>
-<p>Réseau acctuel et du futur (<strong>smart grid</strong>) :</p>
-<ul>
-<li>Présentation RTE :</li>
-</ul>
-</li>
-</ul>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/P9-Y2MVP_tQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<br>
-<p>Extrait du <a href="https://www.rte-france.com/eco2mix/la-consommation-delectricite-en-france">site de RTE</a> qui affiche la consommation d&rsquo;électricité en France ainsi que d&rsquo;autres données comme celles des échanges interrégionaux et internationaux :</p>
-<blockquote>
-<p>
-Le rôle de RTE est de garantir l’équilibre entre l’offre et la demande d’électricité en France :
-<ul>
-<li>La demande est estimée par RTE (prévision de consommation) ;</li>
-<li>L’offre est celle des producteurs, commercialisateurs et responsables de programmation (prévision de production).</li>
-</ul>
-<p>La prévision de consommation en France métropolitaine effectuée la veille pour le lendemain est la résultante d’un modèle prédictif utilisant :</p>
-<ul>
-<li>des données météo (historique et prévisions) ;</li>
-<li>des données de consommation (historique) ;</li>
-<li>des données d’effacement (historique et prévisions), soit les capacités de réduction de consommation de certains clients ;</li>
-<li>la thermosensibilité et les gradients été/ hiver, soit la hausse de la consommation liée à la baisse des températures ;</li>
-<li>des éléments de calendrier (jours fériés, week-end, vacances scolaires…).</li>
-</ul>
-</p>
+<p>Appliquer l’algorithme ci-dessus pour déterminer le codage de -1 et -2.</p>
 </blockquote>
 <br>
-<ul><ul><li>Adapter le réseau à la transition écologique : <a href="https://www.ecologie.gouv.fr/sites/default/files/Plan%20ressources%20R%C3%A9seaux%20%C3%A9lectriques.pdf">document gouvernemental.</a></li></ul></ul>
+<h4 id="signal-numérisé">Signal numérisé</h4>
+<p>La courbe ci-dessous est obtenue après quantification de la courbe échantillonnée précédente.</p>
+<p><img src="/exo_num.png?width=800px" alt=""></p>
+<blockquote>
+<p>Indiquer sur combien de bits sont codés les valeurs quantifiés.</p>
+</blockquote>
+<div style=" position: relative;overflow: hidden;max-width: 1019px;
+  margin: auto; padding-bottom: min(84.40%,860px);"> 
+<iframe scrolling="no" title="purcomplexe" src="https://www.geogebra.org/material/iframe/id/t6jbyduj/width/1019/height/860/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/false/ctl/false" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;"> </iframe>
+</div>
+<h2 id="exemple-">Exemple :</h2>
+<p>Fichier sonore original (quantification sur 16 bits et échantillonnage de 48 kHz) :</p>
+ <audio controls="controls">
+  <source type="audio/mp3" src="/ech48kHz16bit.mp3"></source>
+  <p>Your browser does not support the audio element.</p>
+</audio>
+<ul>
+<li>Modification de la fréquence d&rsquo;échantillonnage (en gardant la quantification sur 16 bit) :</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>16 kHz</th>
+<th>8 kHz</th>
+<th>4 kHz</th>
+<th>2 kHz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech16kHz16bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech8kHz16bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech4kHz16bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech4kHz16bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Modification de la quantification (en gardant l&rsquo;échantillonnage à 48 kHz) :</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>8 bit</th>
+<th>6 bit</th>
+<th>4 bit</th>
+<th>2 bit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech48kHz8bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech48kHz6bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech48kHz4bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech48kHz2bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+</tr>
+</tbody>
+</table>
+<p>Passage par ligne téléphonique (quantification sur 8 bit et échantillonage à 8 kHz) :</p>
+<audio controls="controls">
+  <source type="audio/mp3" src="/ech8kHz8bit.mp3"></source>
+  <p>Your browser does not support the audio element.</p>
+</audio>
 <br>
-<h2 id="choix-énergétiques-et-impacts-sur-les-sociétés">Choix énergétiques et impacts sur les sociétés</h2>
-<h4 id="lélectricité-en-francehttpsbilan-electrique-2021rte-francecom"><a href="https://bilan-electrique-2021.rte-france.com">L&rsquo;électricité en France</a></h4>
-<div style="position:relative; width:1000px; max-width: 100%; margin-left: auto;margin-right: auto;">
-<img src="https://bilan-electrique-2021.rte-france.com/wp-content/uploads/2022/02/—export_chiffres-cles@2x.png" width="80%" style="margin-top:-10px">
-</div>
-<br>
-<h4 id="lénergie-en-francehttpswwwstatistiquesdeveloppement-durablegouvfredition-numeriquechiffres-cles-energie-20227-bilan-energetique-de-la-france"><a href="https://www.statistiques.developpement-durable.gouv.fr/edition-numerique/chiffres-cles-energie-2022/7-bilan-energetique-de-la-france">L&rsquo;énergie en France</a></h4>
-<p><img src="https://www.statistiques.developpement-durable.gouv.fr/edition-numerique/chiffres-cles-energie-2022/image/ensemble-des-energies-cgdd.svg" alt="">
-<a href="https://www.statistiques.developpement-durable.gouv.fr/edition-numerique/chiffres-cles-energie-2022/7-bilan-energetique-de-la-france#images-5">Compléments au graphe</a></p>
-<br>
-<h4 id="perspectives-et-futur-énergétique-objectif-2050httpsassetsrte-francecomprodpublic2021-12futurs-energetiques-2050-principaux-resultatspdf"><a href="https://assets.rte-france.com/prod/public/2021-12/Futurs-Energetiques-2050-principaux-resultats.pdf">Perspectives et futur énergétique (objectif 2050)</a></h4>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/ok31_F_2_I0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
 <br>
 <br>
-<h4 id="les-émissions-de-ges-dans-le-mondehttpswwwwriorginsights4-charts-explain-greenhouse-gas-emissions-countries-and-sectors"><a href="https://www.wri.org/insights/4-charts-explain-greenhouse-gas-emissions-countries-and-sectors">Les émissions de GES dans le monde</a></h4>
-<p><a href=""><img src="https://files.wri.org/d8/s3fs-public/2022-06/world-ghg-emissions-2019.png" width="80%" style="margin-top:-20px"></a></p>
-<br>
-<h4 id="enjeux-de-société">Enjeux de société</h4>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/SD9yVca6hHI" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/yiw6_JakZFc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/LxgMdjyw8uw" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-</div>
-<p>Le pétrole a ouvert une ère d&rsquo;énergie abondante qui a eu des répercussions fantastiques sur l&rsquo;humanité. Le défi est de réussir à s&rsquo;en passer sans sacrifier entièrement l&rsquo;incroyable confort qu&rsquo;il a apporté.</p>
-<p><img src="/ironman.png" alt=""></p>
-<p><img src="/egiabond.png" alt=""></p>
-<div style="display:flex;justify-content:center">
-<blockquote class="twitter-tweet"><p lang="fr" dir="ltr">🟢 <a href="https://twitter.com/hashtag/Thread?src=hash&amp;ref_src=twsrc%5Etfw">#Thread</a> - La Trajectoire 1,5 °C est-elle vraiment si insupportable pour un citoyen moyen ? ⚠️<br><br>👉 On parle souvent de cette trajectoire comme  &quot;insupportable&quot;, je vous propose un fil qui mêle la prise en compte de politique structurelle ET des changements de comportements. ⤵️ <a href="https://t.co/SupGIcdEkc">pic.twitter.com/SupGIcdEkc</a></p>&mdash; Après l&#39;Effondrement (@AEffondrement) <a href="https://twitter.com/AEffondrement/status/1551503292898893824?ref_src=twsrc%5Etfw">July 25, 2022</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-</div>
+<h2 id="débit-binaire-et-compression">Débit binaire et compression</h2>
+<p>Le débit binaire mesure la quantité de données numériques transmises par unité de temps. L’unité utilisée est le bit par seconde (bit/s) et ses multiples kbit/s, Mbit/s ou Gbit/s.</p>
+<p>Quelques débits binaires typiques :</p>
+<ul>
+<li>télégraphie morse : 40 bit/s</li>
+<li>connexion bluetooth : 3 Mbit/s</li>
+<li>connexion internet par fibre : de 100 Mbit/s à 2 Gbit/s</li>
+</ul>
+<p>Pour transmettre une voix sur une ligne téléphonique, celle-ci est échantillonnée avec une fréquence de 8000 Hz et est codée sur 8 bits.</p>
+<blockquote>
+<p>Quel débit nécessite la diffusion d&rsquo;un son sur une ligne téléphonique (en bit/s) ?</p>
+</blockquote>
+<p>Sur un disque audio numérique (CD), la musique est enregistrée en stéréo. Elle est codée sur 16 bits avec une fréquence d’échantillonnage de 44,1 kHz.</p>
+<blockquote>
+<p>Quel espace de stockage (en octets) nécessite une seconde de musique sur un CD ?</p>
+</blockquote>
+<p>Les services de musique en ligne proposent en téléchargement de la musique en diverses résolutions. L’un d’eux propose des fichiers « haute résolution » correspondant à un échantillonnage à 192 kHz, un codage sur 24 bits et un enregistrement stéréo.
+On fait l’hypothèse que les fichiers proposés ne sont pas compressés.</p>
+<blockquote>
+<p>Quel est l’espace de stockage nécessaire (en octets) pour enregistrer une seconde de musique de cette qualité ?
+Une connexion ADSL à 8 Mbit/s est-elle suffisante pour pouvoir streamer cet album ?
+Quelle est la taille d’un fichier pouvant contenir un enregistrement de cette qualité des six suites pour violoncelle de Bach, d’une durée totale de 2 h 15 min ?</p>
+</blockquote>
+<p>Pour réduire les difficultés liées au stockage et à la transmission de fichiers audio, on effectue des compressions des données. Il existe des techniques de compression sans perte et d’autres avec perte.</p>
+<p>Une compression est dite sans perte d’information si elle permet de récupérer, après décompression, l’intégralité des sons produits. Elle est réalisée par des algorithmes exploitant les redondances et la prévision de ces redondances dans les fichiers audio. Ainsi, le format FLAC permet de réduire de 30 % à 70 % la taille d’un fichier audio sans perte d’information.</p>
+<p>Dans le cas contraire, la compression est dite avec perte. La compression avec perte supprime les sons peu audibles. La compression est effectuée par des algorithmes. Un format très connu de compression de ce type est le MP3.</p>
+<p>Les services de musique en ligne proposent en streaming ou en téléchargement des fichiers MP3 à 128 kbit/s. Cela signifie que, pour un tel fichier, une seconde de musique nécessite 128 kbit de données.</p>
+<p>Comme pour un CD audio, une seconde de musique nécessite 1411 kbit de données, on en déduit que le taux de compression d’un CD audio vers un fichier MP3 à 128 kbit/s est égal à $\frac{128}{1411}\approx0,091$.</p>
+<p>Le taux de compression est alors d’environ 9 % ou encore dans le ratio de 1:11 puisque $0,9\approx1/11$.</p>
+<blockquote>
+<p>Le fichier audio précédent contenant les suites de Bach est compressé en un fichier MP3 à 320 kbit/s. Calculer le taux de compression pour passer d’un fichier à l’autre.
+Quelle est la taille du fichier MP3 obtenu ?
+Un mélomane possède dans son audiothèque de nombreux CD, tous enregistrés en stéréo, échantillonnés à 44,1 kHz et codés sur 16 bits. Il estime qu’en moyenne, chaque CD dure une heure et décide de stocker sa musique sous forme de fichiers MP3 à
+320 kbit/s.
+Combien peut-il stocker de fichiers MP3 sur un disque dur ayant une capacité de 1 To ?</p>
+</blockquote>
 
 
 
@@ -2050,6 +1863,7 @@ Le rôle de RTE est de garantir l’équilibre entre l’offre et la demande d�
             
                 
                     
+                    
                 
                 
 
@@ -2064,6 +1878,9 @@ Le rôle de RTE est de garantir l’équilibre entre l’offre et la demande d�
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2135,59 +1952,6 @@ Le rôle de RTE est de garantir l’équilibre entre l’offre et la demande d�
                     
                     
 
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
             
         
@@ -2247,6 +2011,12 @@ Le rôle de RTE est de garantir l’équilibre entre l’offre et la demande d�
             
         
                     
+            
+        
+                    
+            
+        
+                    
                         
             
             
@@ -2254,6 +2024,53 @@ Le rôle de RTE est de garantir l’équilibre entre l’offre et la demande d�
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
