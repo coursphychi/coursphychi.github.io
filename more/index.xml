@@ -1,79 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>En plus on Cours de physique chimie</title>
+    <title>MORE on Cours de physique chimie</title>
     <link>https://coursphychi.github.io/more/</link>
-    <description>Recent content in En plus on Cours de physique chimie</description>
+    <description>Recent content in MORE on Cours de physique chimie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate>
     <atom:link href="https://coursphychi.github.io/more/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Pythagore</title>
-      <link>https://coursphychi.github.io/more/info/pythagore/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/info/pythagore/</guid>
-      <description>Théorème de Pythagore : Réciproque du théorème Test de l&amp;rsquo;égalité de Pythagore :
-Théorème Démonstrations Démonstration d&amp;rsquo;Euclide :
-Démonstrations par découpage :
-Les deux démostrations par découpage précédentes reposent en fait sur la possibilité de paver le plan avec deux carrés de côtés différents.
-Une démonstration plus &amp;ldquo;physique&amp;rdquo; (reposant sur ce qu&amp;rsquo;implique une relation de proportionnalité sur une surface).
-Exercices historiques Un problème babylonien Ce problème a été découvert sur des tablettes d’argile babylonienne entre -2000 et -1600.</description>
-    </item>
-    <item>
-      <title>Pythagore</title>
-      <link>https://coursphychi.github.io/more/maths/pythagore/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/pythagore/</guid>
-      <description>Théorème de Pythagore : Réciproque du théorème Test de l&amp;rsquo;égalité de Pythagore :
-Théorème Démonstrations Démonstration d&amp;rsquo;Euclide :
-Démonstrations par découpage :
-Les deux démostrations par découpage précédentes reposent en fait sur la possibilité de paver le plan avec deux carrés de côtés différents.
-Une démonstration plus &amp;ldquo;physique&amp;rdquo; (reposant sur ce qu&amp;rsquo;implique une relation de proportionnalité sur une surface).
-Exercices historiques Un problème babylonien Ce problème a été découvert sur des tablettes d’argile babylonienne entre -2000 et -1600.</description>
-    </item>
-    <item>
-      <title>Pythagore</title>
-      <link>https://coursphychi.github.io/more/physique/pythagore/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/pythagore/</guid>
-      <description>Théorème de Pythagore : Réciproque du théorème Test de l&amp;rsquo;égalité de Pythagore :
-Théorème Démonstrations Démonstration d&amp;rsquo;Euclide :
-Démonstrations par découpage :
-Les deux démostrations par découpage précédentes reposent en fait sur la possibilité de paver le plan avec deux carrés de côtés différents.
-Une démonstration plus &amp;ldquo;physique&amp;rdquo; (reposant sur ce qu&amp;rsquo;implique une relation de proportionnalité sur une surface).
-Exercices historiques Un problème babylonien Ce problème a été découvert sur des tablettes d’argile babylonienne entre -2000 et -1600.</description>
-    </item>
-    <item>
-      <title>Arithmétique</title>
-      <link>https://coursphychi.github.io/more/info/arithmetique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/info/arithmetique/</guid>
-      <description> Arithmétique et théorie des nombres : Dénombrabilité Fractions continues </description>
-    </item>
-    <item>
-      <title>Arithmétique</title>
-      <link>https://coursphychi.github.io/more/maths/arithmetique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/arithmetique/</guid>
-      <description>Arithmétique et théorie des nombres : Dénombrabilité Numération De nombreux systèmes de numération à bases entières ont été utilisés par différents peuples et à différentes époques.
-Par exemple :
-système binaire (base 2) utilisé dans des langues d&amp;rsquo;Amérique du Sud et d&amp;rsquo;Océanie, et utilisé de nos jours en informatique.
-système quinaire (base 5) dont il reste des traces jusqu&amp;rsquo;au xxe siècle dans des langues africaines, mais aussi, partiellement, dans les notations tchouvache, suzhou, romaine et maya.</description>
-    </item>
-    <item>
-      <title>Arithmétique</title>
-      <link>https://coursphychi.github.io/more/physique/arithmetique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/arithmetique/</guid>
-      <description> Arithmétique et théorie des nombres : Dénombrabilité Fractions continues </description>
-    </item>
-    <item>
-      <title>Algèbre</title>
-      <link>https://coursphychi.github.io/more/maths/algebre/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/algebre/</guid>
-      <description> Algèbre Équations Algèbre de Boole Algèbre linéaire Combinatoire Théorie des groupes Théorie des graphes </description>
-    </item>
   </channel>
 </rss>

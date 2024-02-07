@@ -98,21 +98,14 @@
 	"content": "Une longue histoire de la matière Abondance et origine des éléments Présentation\nRadioactivité Présentation\nChambre à brouillard permettant de visualiser les rayonnements chargés émis par les désintégrations radioactives :\nDans cette vidéo, des sources radioactives sont utilisées :\nBruit d'un compteur geiger : Estimez votre exposition annuelle à la radioactivité.\nGraphiques de XKCD présentant les ordres de grandeur des différents niveaux d\u0026rsquo;irradiations aux rayonnements ionisants : Documents :\nGraphes d\u0026rsquo;abondance et classification périodique Activité déchets nucléaires Cristaux "
 },
 {
-	"uri": "https://coursphychi.github.io/more/info/pythagore/",
-	"title": "Pythagore",
+	"uri": "https://coursphychi.github.io/more/maths/",
+	"title": "Maths",
 	"tags": [],
 	"description": "",
-	"content": " Théorème de Pythagore : Réciproque du théorème Test de l\u0026rsquo;égalité de Pythagore :\nThéorème Démonstrations Démonstration d\u0026rsquo;Euclide :\nDémonstrations par découpage :\nLes deux démostrations par découpage précédentes reposent en fait sur la possibilité de paver le plan avec deux carrés de côtés différents.\nUne démonstration plus \u0026ldquo;physique\u0026rdquo; (reposant sur ce qu\u0026rsquo;implique une relation de proportionnalité sur une surface).\nExercices historiques Un problème babylonien Ce problème a été découvert sur des tablettes d’argile babylonienne entre -2000 et -1600.\nune perche est posée verticalement contre un mur. Si son extrémité haute glisse de 6 unités vers le bas contre le mur, de combien d’unité glisse horizontalement l’extrémité basse ?\nThere should have been a video here but your browser does not seem to support it. Réponse (cliquer pour afficher) 18 Un problème chinois Un problème plus difficile datant d’entre -250 et +50 (en Chine, le théorème de Pythagore se nomme Goo Gu 勾股).\nDans une mare, un lotus dépasse de 10 cm à la verticale. Un coup de vent le pousse de 60 cm et la fleur touche alors la surface. Quelle est la profondeur de la mare ?\nThere should have been a video here but your browser does not seem to support it. Réponse (cliquer pour afficher) 175 cm "
+	"content": "Un peu de maths Géométrie Algèbre Arithmétique Analyse Probabilités et Statistique "
 },
 {
 	"uri": "https://coursphychi.github.io/more/maths/pythagore/",
-	"title": "Pythagore",
-	"tags": [],
-	"description": "",
-	"content": " Théorème de Pythagore : Réciproque du théorème Test de l\u0026rsquo;égalité de Pythagore :\nThéorème Démonstrations Démonstration d\u0026rsquo;Euclide :\nDémonstrations par découpage :\nLes deux démostrations par découpage précédentes reposent en fait sur la possibilité de paver le plan avec deux carrés de côtés différents.\nUne démonstration plus \u0026ldquo;physique\u0026rdquo; (reposant sur ce qu\u0026rsquo;implique une relation de proportionnalité sur une surface).\nExercices historiques Un problème babylonien Ce problème a été découvert sur des tablettes d’argile babylonienne entre -2000 et -1600.\nune perche est posée verticalement contre un mur. Si son extrémité haute glisse de 6 unités vers le bas contre le mur, de combien d’unité glisse horizontalement l’extrémité basse ?\nThere should have been a video here but your browser does not seem to support it. Réponse (cliquer pour afficher) 18 Un problème chinois Un problème plus difficile datant d’entre -250 et +50 (en Chine, le théorème de Pythagore se nomme Goo Gu 勾股).\nDans une mare, un lotus dépasse de 10 cm à la verticale. Un coup de vent le pousse de 60 cm et la fleur touche alors la surface. Quelle est la profondeur de la mare ?\nThere should have been a video here but your browser does not seem to support it. Réponse (cliquer pour afficher) 175 cm "
-},
-{
-	"uri": "https://coursphychi.github.io/more/physique/pythagore/",
 	"title": "Pythagore",
 	"tags": [],
 	"description": "",
@@ -161,25 +154,11 @@
 	"content": " Physique-chimie en spécialité\nde première générale Programme officiel\nConstitution et transformations de la matière Suivi de l’évolution d’un système, siège d’une transformation Détermination physique d\u0026rsquo;une quantité de matière Réaction d\u0026rsquo;oxydo-réduction Avancement Détermination chimique d\u0026rsquo;une quantité de matière : titrages De la structure des entités aux propriétés physiques de la matière : Schéma de Lewis, géométrie, polarité Cohésion, solubilité/miscibilité Chimie organique Structure des entités organiques Synthèses Combustions Mouvement et interactions Interactions fondamentales et champs Description d’un fluide au repos Mouvement d’un système L’énergie : conversions et transferts Électricité et énergie Mécanique et énergie Ondes et signaux Ondes Ondes mécaniques Lumière Images Couleurs Modèles ondulatoire et particulaire de la lumière "
 },
 {
-	"uri": "https://coursphychi.github.io/more/info/arithmetique/",
-	"title": "Arithmétique",
-	"tags": [],
-	"description": "",
-	"content": " Arithmétique et théorie des nombres : Dénombrabilité Fractions continues "
-},
-{
 	"uri": "https://coursphychi.github.io/more/maths/arithmetique/",
 	"title": "Arithmétique",
 	"tags": [],
 	"description": "",
 	"content": " Arithmétique et théorie des nombres : Dénombrabilité Numération \u0016De nombreux systèmes de numération à bases entières ont été utilisés par différents peuples et à différentes époques.\nPar exemple :\nsystème binaire (base 2) utilisé dans des langues d\u0026rsquo;Amérique du Sud et d\u0026rsquo;Océanie, et utilisé de nos jours en informatique.\nsystème quinaire (base 5) dont il reste des traces jusqu\u0026rsquo;au xxe siècle dans des langues africaines, mais aussi, partiellement, dans les notations tchouvache, suzhou, romaine et maya. Le nom des chiffres 6, 7, 8 et 9 dans de nombreuses langues témoignent de ce système quinaire: ils se disent 5+1, 5+2, 5+3 et 5+4 en wolof (langue de la famille nigéro-congolaise), en khmer (langue austro-asiatique), en nahuatl (langue uto-aztèque), et, dans de nombreuses langues austronésiennes telles qu\u0026rsquo;en lote ou en ngadha (sous forme partielle). La base quinaire apparait parfois comme base auxiliaire ou sous-base de la base décimale, comme dans le système romain, ou de la base vigésimale.\nsystème duodécimal (base 12), déjà utilisé par les Sumériens et Assyro-babyloniens pour des mesures de longueur et de temps. On le retrouve dans un certain nombre de monnaies et d\u0026rsquo;unités de compte courantes en Europe au Moyen Âge, notamment dans le système impérial d\u0026rsquo;unités (il faut 12 pouces pour faire un pied), et dans le commerce. Il sert encore, par exemple, pour compter les mois, les heures, les fleurs, les huîtres et les œufs.\nsystème hexadécimal (base 16), très couramment utilisé en électronique ainsi qu\u0026rsquo;en informatique. Son intérêt réside dans les conversions triviales avec la base 2, tout en permettant une écriture plus compacte des nombres.\nsystème vigésimal (ou vicésimal, base 20) existe au Bhoutan en langue dzongkha, et était en usage chez les Aztèques vers 1200 et, quoiqu\u0026rsquo;irrégulier, pour la numération maya. Il était aussi présent en vieux français, ce qui explique l\u0026rsquo;usage du mot quatre-vingts pour le nombre 80, ou encore le nom de l\u0026rsquo;hôpital des Quinze-Vingts, qui pouvait accueillir 300 patients.\nChiffres de Kaktovik :\nToutes les langues eskimo-aléoutes d\u0026rsquo;Alaska et du Canada utilisent un système vigésimal pour compter. Les chiffres arabes, qui ont été conçus pour un système décimal, sont inadéquats pour l\u0026rsquo;iñupiaq et les autres langues inuites. Pour remédier à ce problème, des élèves d\u0026rsquo;une école de Kaktovik, en Alaska, ont inventé un système à base 20 en 1994, qui s\u0026rsquo;est répandu parmi les Iñupiat en Alaska et a été envisagé au Canada.\nsystème sexagésimal (base 60) était utilisé pour la numération babylonienne et en Mésopotamie vers 3300 av. J.-C., ainsi que par les Indiens et les Arabes en trigonométrie. Il sert encore actuellement dans la mesure du temps et certaines mesures des angles. Les chiffres et nombres mésopotamiens de 1 à 59 : Source : Wikipedia\nFractions continues Algorithme d\u0026rsquo;Euclide Une écriture récursive de l\u0026rsquo;algo en Python :\ndef pgcd(a,b): if b == 0: return a else: return pgcd(b,a%b) Un des plus anciens algorithmes connus, très simple dans sa formulation mais qui recèle des surpises comme l\u0026rsquo;apparition du nombre d\u0026rsquo;or dans la détermination de sa complexité temporelle (nombre d\u0026rsquo;étapes de calcul en fonction des entiers a et b ).\nTriplets pythagoriciens Divisibilité et nombres premiers "
-},
-{
-	"uri": "https://coursphychi.github.io/more/physique/arithmetique/",
-	"title": "Arithmétique",
-	"tags": [],
-	"description": "",
-	"content": " Arithmétique et théorie des nombres : Dénombrabilité Fractions continues "
 },
 {
 	"uri": "https://coursphychi.github.io/tes/energie/",
@@ -358,7 +337,7 @@
 },
 {
 	"uri": "https://coursphychi.github.io/more/",
-	"title": "En plus",
+	"title": "MORE",
 	"tags": [],
 	"description": "",
 	"content": "En plus Un peu de maths Un peu d\u0026rsquo;informatique Plus de physique "
