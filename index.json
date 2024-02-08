@@ -95,7 +95,7 @@
 	"title": "Géométrie",
 	"tags": [],
 	"description": "",
-	"content": " Petite énigme à base d'inégalité triangulaire Pythagore Les deux démostrations par découpage précédentes reposent en fait sur la possibilité de paver le plan avec deux carrés de côtés différents.\nUne démonstration plus \u0026ldquo;physique\u0026rdquo; (reposant sur ce qu\u0026rsquo;implique une relation de proportionnalité sur une surface).\nDeux vieux exos Un problème babylonien Ce problème a été découvert sur des tablettes d’argile babylonienne entre -2000 et -1600.\nune perche est posée verticalement contre un mur. Si son extrémité haute glisse de 6 unités vers le bas contre le mur, de combien d’unité glisse horizontalement l’extrémité basse ?\nThere should have been a video here but your browser does not seem to support it. Réponse (cliquer pour afficher) 18 Un problème chinois Un problème plus difficile datant d’entre -250 et +50 (en Chine, le théorème de Pythagore se nomme Goo Gu 勾股).\nDans une mare, un lotus dépasse de 10 cm à la verticale. Un coup de vent le pousse de 60 cm et la fleur touche alors la surface. Quelle est la profondeur de la mare ?\nThere should have been a video here but your browser does not seem to support it. Réponse (cliquer pour afficher) 175 cm Aires et volumes "
+	"content": " Pythagore Les deux démostrations par découpage précédentes reposent en fait sur la possibilité de paver le plan avec deux carrés de côtés différents.\nUne démonstration plus \u0026ldquo;physique\u0026rdquo; (reposant sur ce qu\u0026rsquo;implique une relation de proportionnalité sur une surface).\nDeux vieux exos Un problème babylonien Ce problème a été découvert sur des tablettes d’argile babylonienne entre -2000 et -1600.\nune perche est posée verticalement contre un mur. Si son extrémité haute glisse de 6 unités vers le bas contre le mur, de combien d’unité glisse horizontalement l’extrémité basse ?\nThere should have been a video here but your browser does not seem to support it. Réponse (cliquer pour afficher) 18 Un problème chinois Un problème plus difficile datant d’entre -250 et +50 (en Chine, le théorème de Pythagore se nomme Goo Gu 勾股).\nDans une mare, un lotus dépasse de 10 cm à la verticale. Un coup de vent le pousse de 60 cm et la fleur touche alors la surface. Quelle est la profondeur de la mare ?\nThere should have been a video here but your browser does not seem to support it. Réponse (cliquer pour afficher) 175 cm Thalès Aires et volumes "
 },
 {
 	"uri": "https://coursphychi.github.io/1es/matiere/",
@@ -193,7 +193,7 @@
 	"title": "Algèbre",
 	"tags": [],
 	"description": "",
-	"content": " Algèbre Équations Algèbre de Boole Algèbre linéaire Combinatoire Théorie des groupes Théorie des graphes "
+	"content": " Algèbre Équations Identités remarquables Algèbre de Boole Algèbre linéaire Combinatoire / graphes Cours sur les graphes Théorie des groupes La théorie des groupes découpe et structure les représentations physiques que l’on se fait du monde. Elle prescrit le choix même des grandeurs physique. Son importance est phénoménale.\nNotes de lecture \u0026ldquo;améliorées\u0026rdquo; de la première partie du livre de Wu-Ki Tung «Group Theory in Physics» sur les groupes finis :\nChapitre 1 Chapitre 2 Multiplication de polynômes et FFT "
 },
 {
 	"uri": "https://coursphychi.github.io/1es/terre/terre1/",
@@ -208,6 +208,13 @@
 	"tags": [],
 	"description": "",
 	"content": " La Terre, un astre singulier Forme de la Terre Horizon Ératosthène Histoire du mètre Se déplacer sur une sphère Représenter une sphère sur un plan La Terre dans l\u0026rsquo;univers Copernic Parallaxe Mouvements de la Terre Lune "
+},
+{
+	"uri": "https://coursphychi.github.io/more/maths/probastat/",
+	"title": "Probabilité / Statistiques",
+	"tags": [],
+	"description": "",
+	"content": " Probabilités Les probabilités sont des calculs a priori, visant à prédire les issues d’évènements n’ayant pas encore eu lieu, alors que les statistiques sont des calculs a posteriori qui analysent les issues d’évènements déjà réalisés.\nStatistiques Test d\u0026rsquo;hypothèse Les statistiques au service de la prise de décision en science.\nTraitement des données "
 },
 {
 	"uri": "https://coursphychi.github.io/tes/videosinterro/",

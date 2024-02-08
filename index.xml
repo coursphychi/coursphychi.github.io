@@ -119,10 +119,10 @@ Qulle balle atterrit le plus loin ? Quelle balle parcourt le moins de distance�
       <link>https://coursphychi.github.io/more/maths/geometrie/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/</guid>
-      <description>Petite énigme à base d&#39;inégalité triangulaire Pythagore Les deux démostrations par découpage précédentes reposent en fait sur la possibilité de paver le plan avec deux carrés de côtés différents.
+      <description>Pythagore Les deux démostrations par découpage précédentes reposent en fait sur la possibilité de paver le plan avec deux carrés de côtés différents.
 Une démonstration plus &amp;ldquo;physique&amp;rdquo; (reposant sur ce qu&amp;rsquo;implique une relation de proportionnalité sur une surface).
 Deux vieux exos Un problème babylonien Ce problème a été découvert sur des tablettes d’argile babylonienne entre -2000 et -1600.
-une perche est posée verticalement contre un mur.</description>
+une perche est posée verticalement contre un mur. Si son extrémité haute glisse de 6 unités vers le bas contre le mur, de combien d’unité glisse horizontalement l’extrémité basse ?</description>
     </item>
     <item>
       <title>Acide/Base</title>
@@ -192,7 +192,17 @@ Documents et autres Un peu de maths : ordre de grandeur, puissances de 10, multi
       <link>https://coursphychi.github.io/more/maths/algebre/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/algebre/</guid>
-      <description> Algèbre Équations Algèbre de Boole Algèbre linéaire Combinatoire Théorie des groupes Théorie des graphes </description>
+      <description>Algèbre Équations Identités remarquables Algèbre de Boole Algèbre linéaire Combinatoire / graphes Cours sur les graphes Théorie des groupes La théorie des groupes découpe et structure les représentations physiques que l’on se fait du monde. Elle prescrit le choix même des grandeurs physique. Son importance est phénoménale.
+Notes de lecture &amp;ldquo;améliorées&amp;rdquo; de la première partie du livre de Wu-Ki Tung «Group Theory in Physics» sur les groupes finis :</description>
+    </item>
+    <item>
+      <title>Probabilité / Statistiques</title>
+      <link>https://coursphychi.github.io/more/maths/probastat/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/probastat/</guid>
+      <description> Probabilités Les probabilités sont des calculs a priori, visant à prédire les issues d’évènements n’ayant pas encore eu lieu, alors que les statistiques sont des calculs a posteriori qui analysent les issues d’évènements déjà réalisés.
+Statistiques Test d&amp;rsquo;hypothèse Les statistiques au service de la prise de décision en science.
+Traitement des données </description>
     </item>
     <item>
       <title>Combustions</title>
