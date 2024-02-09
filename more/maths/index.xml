@@ -33,17 +33,19 @@ système quinaire (base 5) dont il reste des traces jusqu&amp;rsquo;au xxe sièc
       <link>https://coursphychi.github.io/more/maths/algebre/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/algebre/</guid>
-      <description>Algèbre Équations Identités remarquables Algèbre de Boole Algèbre linéaire Combinatoire / graphes Cours sur les graphes Théorie des groupes La théorie des groupes découpe et structure les représentations physiques que l’on se fait du monde. Elle prescrit le choix même des grandeurs physique. Son importance est phénoménale.
-Notes de lecture &amp;ldquo;améliorées&amp;rdquo; de la première partie du livre de Wu-Ki Tung «Group Theory in Physics» sur les groupes finis :</description>
+      <description>Algèbre Équations Identités remarquables Algèbre de Boole L&amp;rsquo;algèbre de Boole permet d&amp;rsquo;algébriser la logique. C&amp;rsquo;est le langage naturelle des circuits électroniques à la base de l&amp;rsquo;informatique.
+Algèbre linéaire L&amp;rsquo;algèbre linéaire est un outil fondamental pour la physique et en particulier pour la physique quantique dont c&amp;rsquo;est la base même.
+Application de l&amp;rsquo;algèbre linéaire (et de la géométrie projective) pour déceler et corriger le plus efficacement possible les erreurs dans un message.</description>
     </item>
     <item>
       <title>Probabilité / Statistiques</title>
       <link>https://coursphychi.github.io/more/maths/probastat/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/probastat/</guid>
-      <description> Probabilités Les probabilités sont des calculs a priori, visant à prédire les issues d’évènements n’ayant pas encore eu lieu, alors que les statistiques sont des calculs a posteriori qui analysent les issues d’évènements déjà réalisés.
-Statistiques Test d&amp;rsquo;hypothèse Les statistiques au service de la prise de décision en science.
-Traitement des données </description>
+      <description>Probabilités Une petite énigme à base d&amp;rsquo;inégalité triangulaire :
+Quelle est la probabilité de pouvoir faire un triangle avec les 3 bouts obtenus en cassant aléatoirement un spaghetti en deux endroits ?
+Quelle est la probabilité que deux élèves d&amp;rsquo;une classe est un anniversaire le même jour ?
+Lorsqu&amp;rsquo;on n&amp;rsquo;a jamais fait le calcul ou entendu parler du résultat, notre intuition nous amène généralement à soupçonner une probabilité bien plus petite qu&amp;rsquo;elle ne l&amp;rsquo;est.</description>
     </item>
   </channel>
 </rss>
