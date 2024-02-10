@@ -116,21 +116,21 @@
 	"title": "Maths",
 	"tags": [],
 	"description": "",
-	"content": "Un peu de maths Géométrie Algèbre Arithmétique Analyse Probabilités et Statistique "
+	"content": "Un peu de maths Géométrie Algèbre Arithmétique Probabilités et Statistique "
 },
 {
 	"uri": "https://coursphychi.github.io/more/physique/meca/",
 	"title": "Mécanique",
 	"tags": [],
 	"description": "",
-	"content": " Pour aller plus loin en mécanique Une approche historique sur l\u0026rsquo;émergence du concept d\u0026rsquo;énergie en mécanique, de Descartes à Einstein.\nTrois démonstrations de la formule de l\u0026rsquo;énergie cinétique.\nJe trouve la deuxième (celle de Johann Bernoulli) fabuleuse d\u0026rsquo;intuition géométrique.\nÉtudier la chute libre, c\u0026rsquo;est joueur avec des paraboles.\nLa force de Coriolis n\u0026rsquo;est pas une force mais traduit juste la galère d\u0026rsquo;aller droit dans un référentiel tournant.\nComprendre cet effet permet d\u0026rsquo;expliquer les rotations des masses d\u0026rsquo;air cycloniques et anticycloniques ou encore d\u0026rsquo;en savoir plus sur ces troyens qui peuplent l\u0026rsquo;orbite de Jupiter.\nPetits exercices de niveau licence/prépa parlant de mouvements autour ou dans la Terre et prenant toujours 42 min (le nombre fétiche des geeks depuis que Douglas Adams en a fait la réponse à toute chose dans l\u0026rsquo;univers).\n"
+	"content": " Mécanique Une approche historique sur l\u0026rsquo;émergence du concept d\u0026rsquo;énergie en mécanique, de Descartes à Einstein.\nTrois démonstrations de la formule de l\u0026rsquo;énergie cinétique.\nJe trouve la deuxième (celle de Johann Bernoulli) fabuleuse d\u0026rsquo;intuition géométrique.\nÉtudier la chute libre, c\u0026rsquo;est joueur avec des paraboles.\nLa force de Coriolis n\u0026rsquo;est pas une force mais traduit juste la galère d\u0026rsquo;aller droit dans un référentiel tournant.\nComprendre cet effet permet d\u0026rsquo;expliquer les rotations des masses d\u0026rsquo;air cycloniques et anticycloniques ou encore d\u0026rsquo;en savoir plus sur ces troyens qui peuplent l\u0026rsquo;orbite de Jupiter.\nPetits exercices de niveau licence/prépa parlant de mouvements autour ou dans la Terre et prenant toujours 42 min (le nombre fétiche des geeks depuis que Douglas Adams en a fait la réponse à toute chose dans l\u0026rsquo;univers).\n"
 },
 {
 	"uri": "https://coursphychi.github.io/more/physique/",
 	"title": "Physique",
 	"tags": [],
 	"description": "",
-	"content": "Plus de physque Mécanique Optique Relativité restreinte Relativité générale Mécanique quantique Physique statistique Chaos Curiosités "
+	"content": "Plus de physique Mécanique Optique Relativité restreinte Relativité générale Mécanique quantique Physique statistique Chaos Curiosités "
 },
 {
 	"uri": "https://coursphychi.github.io/tes/climat/",
@@ -200,7 +200,7 @@
 	"title": "Optique",
 	"tags": [],
 	"description": "",
-	"content": " "
+	"content": " Optique La physique de l\u0026rsquo;arc-en-ciel avec des simulations en VPython.\nPhysique et maths des lentilles avec simulations VPython.\n"
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/atome/",
@@ -249,7 +249,7 @@
 	"title": "Relativité restreinte",
 	"tags": [],
 	"description": "",
-	"content": " Relativité restreinte Vision géométrique Série de vidéos sur la relativité restreinte avec un angle plutôt géométrique.\nSource : le génial petit livre \u0026ldquo;Very special relativity - An illustrated guide\u0026rdquo; de Sander Bais.\nParadoxe des jumeaux Champ magnétique Il n\u0026rsquo;y a pas de champ magnétique, seulement un champ électrique et du mouvement :\n"
+	"content": " Relativité restreinte Vision géométrique Série de vidéos sur la relativité restreinte avec un angle plutôt géométrique.\nSource : le génial petit livre \u0026ldquo;Very special relativity - An illustrated guide\u0026rdquo; de Sander Bais.\nParadoxe des jumeaux Champ magnétique Il n\u0026rsquo;y a pas de champ magnétique, seulement un champ électrique et du mouvement.\nEn cela, le champ magnétique est l\u0026rsquo;illustration la plus spectaculaire de la relativité restreinte puisque le moindre aimant illustre la théorie d\u0026rsquo;Einstein !\n"
 },
 {
 	"uri": "https://coursphychi.github.io/tes/videosinterro/",
