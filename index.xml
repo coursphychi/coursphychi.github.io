@@ -125,6 +125,18 @@ Deux vieux exos Un problème babylonien Ce problème a été découvert sur des 
 une perche est posée verticalement contre un mur. Si son extrémité haute glisse de 6 unités vers le bas contre le mur, de combien d’unité glisse horizontalement l’extrémité basse ?</description>
     </item>
     <item>
+      <title>Mécanique</title>
+      <link>https://coursphychi.github.io/more/physique/meca/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/physique/meca/</guid>
+      <description>Pour aller plus loin en mécanique Une approche historique sur l&amp;rsquo;émergence du concept d&amp;rsquo;énergie en mécanique, de Descartes à Einstein.
+Trois démonstrations de la formule de l&amp;rsquo;énergie cinétique.
+Je trouve la deuxième (celle de Johann Bernoulli) fabuleuse d&amp;rsquo;intuition géométrique.
+Étudier la chute libre, c&amp;rsquo;est joueur avec des paraboles.
+La force de Coriolis n&amp;rsquo;est pas une force mais traduit juste la galère d&amp;rsquo;aller droit dans un référentiel tournant.
+Comprendre cet effet permet d&amp;rsquo;expliquer les rotations des masses d&amp;rsquo;air cycloniques et anticycloniques ou encore d&amp;rsquo;en savoir plus sur ces troyens qui peuplent l&amp;rsquo;orbite de Jupiter.</description>
+    </item>
+    <item>
       <title>Acide/Base</title>
       <link>https://coursphychi.github.io/tsti2d/acide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -177,6 +189,13 @@ système binaire (base 2) utilisé dans des langues d&amp;rsquo;Amérique du Sud
 système quinaire (base 5) dont il reste des traces jusqu&amp;rsquo;au xxe siècle dans des langues africaines, mais aussi, partiellement, dans les notations tchouvache, suzhou, romaine et maya.</description>
     </item>
     <item>
+      <title>Optique</title>
+      <link>https://coursphychi.github.io/more/physique/optique/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/physique/optique/</guid>
+      <description> </description>
+    </item>
+    <item>
       <title>Entités chimiques</title>
       <link>https://coursphychi.github.io/2nde/atome/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -207,6 +226,15 @@ Quelle est la probabilité que deux élèves d&amp;rsquo;une classe est un anniv
 Lorsqu&amp;rsquo;on n&amp;rsquo;a jamais fait le calcul ou entendu parler du résultat, notre intuition nous amène généralement à soupçonner une probabilité bien plus petite qu&amp;rsquo;elle ne l&amp;rsquo;est.</description>
     </item>
     <item>
+      <title>Relativité restreinte</title>
+      <link>https://coursphychi.github.io/more/physique/relatres/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/physique/relatres/</guid>
+      <description>Relativité restreinte Vision géométrique Série de vidéos sur la relativité restreinte avec un angle plutôt géométrique.
+Source : le génial petit livre &amp;ldquo;Very special relativity - An illustrated guide&amp;rdquo; de Sander Bais.
+Paradoxe de jumeaux Champ magnétique Il n&amp;rsquo;y a pas de champ magnétique, seulement le champ électrique et du mouvement.</description>
+    </item>
+    <item>
       <title>Combustions</title>
       <link>https://coursphychi.github.io/tsti2d/combustion/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -225,6 +253,13 @@ Exemple :
 La configuration électronique de l’atome de sodium (numéro atomique Z = 11) est $\text{1s}^2\,\text{2s}^2\,\text{2p}^6\,\text{3s}^1$ à l’état fondamental. Cette configuration permet de retrouver la position de l’élément sodium dans le tableau périodique : il se situe dans la 3e période et la 1re colonne du bloc s, et par conséquent, la 1re colonne du tableau.</description>
     </item>
     <item>
+      <title>Relativité générale</title>
+      <link>https://coursphychi.github.io/more/physique/relatge/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/physique/relatge/</guid>
+      <description>Relativité générale Le plus merveilleux livre sur la relativité générale est sans contexte à mes yeux &amp;ldquo;A Journey into Gravity and Spacetime&amp;rdquo; du génial John Archibald Wheeler. Il réussit le tour de force d&amp;rsquo;expliquer la relativité générale sans recourir à des mathématiques complexes mais aussi sans esquiver du tout la profondeur conceptuelle de la théorie. Le livre commence par un long poème qui finit en résumant l&amp;rsquo;objectif du livre :</description>
+    </item>
+    <item>
       <title>Énergie/Puissance</title>
       <link>https://coursphychi.github.io/tsti2d/egiepuiss/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -241,6 +276,14 @@ Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pend
       <description> Quantité de matière Présentation
 Définition Grandeur, exprimée en moles, utilisée pour dénombrer les entités d’une espèce chimique dans un échantillon de matière, une mole étant définie comme un ensemble d’exactement $6,02214076\times10^{23}$ entités.
 Documents TP - Bouteille bleue </description>
+    </item>
+    <item>
+      <title>Mécanique quantique</title>
+      <link>https://coursphychi.github.io/more/physique/quantique/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/physique/quantique/</guid>
+      <description>Mécanique quantique Le paradoxe EPR (et plus généralement le concept d&amp;rsquo;intrication quantique) est le vortex autour duquel tourne les différentes interprétations de la quantique puisqu&amp;rsquo;il met en porte-à-faux nos deux explications les plus abouties du monde : la quantique et la relativité. La relativité est par nature une théorie locale alors que le paradoxe EPR démontre la non localité quantique.
+Un joli test de la non-localité quantique sans utiliser d&amp;rsquo;inégalités.</description>
     </item>
     <item>
       <title>Changement d&#39;état</title>
@@ -262,6 +305,13 @@ Rappels Les 3 modes de transferts thermiques sont&amp;nbsp;: la conduction&amp;n
 C&#39;est comme ça que le soleil nous chauffe. Questions : Quel mode de transfert thermique est-il illustré dans cette expérience&amp;nbsp;?</description>
     </item>
     <item>
+      <title>Physique statistique</title>
+      <link>https://coursphychi.github.io/more/physique/phistat/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/physique/phistat/</guid>
+      <description>Physique statistique Petite série de vidéo sur la physique statistique, de la définition de la température à l&amp;rsquo;entropie en passant par le facteur de Boltzmann et la loi de Planck :</description>
+    </item>
+    <item>
       <title>Réaction chimique</title>
       <link>https://coursphychi.github.io/2nde/reaction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -274,12 +324,31 @@ Exemple :
 L’action d’acide chlorhydrique sur du magnésium solide peut être modélisée par une réaction dont l’équation est : $\ce{Mg(s) + 2H+(aq) = Mg^2+(aq) + H2(g)}$</description>
     </item>
     <item>
+      <title>Chaos</title>
+      <link>https://coursphychi.github.io/more/physique/chaos/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/physique/chaos/</guid>
+      <description>Chaos Au confin des maths et de la physique, une des plus belle chose qui soit : le chaos (avec son cheptel de fractales et d&amp;rsquo;attracteurs étranges). Le chaos n&amp;rsquo;a pas grand chose à voir avec son image &amp;ldquo;grand public&amp;rdquo;, il est en fait ultra organise, mais timide, il le cache&amp;hellip;
+Un attracteur s&amp;rsquo;obtient en résolvant certains systèmes d&amp;rsquo;équations différentielles contenant des non linéarités.
+L&amp;rsquo;intégration du système suivant donne le fameux attracteur de Lorez en papillon par exemple : $$\begin{cases}x&amp;rsquo;=\sigma(y-x)\\y&amp;rsquo;=\rho x-y-xz\\z&amp;rsquo;=xy-\beta \end{cases}$$ Avec les valeurs de paramètres suivantes : $$\begin{cases}\sigma = 3\\\rho = 26.</description>
+    </item>
+    <item>
       <title>Puissance électrique</title>
       <link>https://coursphychi.github.io/tsti2d/puisselec/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/puisselec/</guid>
       <description>Puissance en régime sinusoïdal Présentation
 Rappels En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;: La tension et l&#39;intensité moyenne. Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;: La tension et l&#39;intensité efficace. Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;? $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$ Savoir et savoir faire Savoir définir la puissance apparente $S$. Savoir que la puissance apparente est une grandeur de dimensionnement d&amp;rsquo;une installation ou d&amp;rsquo;un équipement électrique.</description>
+    </item>
+    <item>
+      <title>Curiosités</title>
+      <link>https://coursphychi.github.io/more/physique/jeux/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/physique/jeux/</guid>
+      <description>L&amp;rsquo;anagyre refuse obstinément de tourner dans le sens qu&amp;rsquo;il n&amp;rsquo;aime pas :
+La toupie tippe-top se redresse semblant braver les lois physiques. C&amp;rsquo;est le couple des forces de frottement qui est responsable de cette bizarrerie.
+L&amp;rsquo;oiseau buveur estt une star (on le retrouve dans Alien ou les Simpsons par exemple).
+Et c&amp;rsquo;est aussi un bon exercice de thermodynamique (qui a été donné au concours de Centrale il y a un bail).</description>
     </item>
     <item>
       <title>Lumière</title>
