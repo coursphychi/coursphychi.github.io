@@ -200,7 +200,7 @@
 	"title": "Optique",
 	"tags": [],
 	"description": "",
-	"content": " Optique La physique de l\u0026rsquo;arc-en-ciel avec des simulations en VPython.\nPhysique et maths des lentilles avec simulations VPython.\n"
+	"content": " Optique Arcs-en-ciel La physique de l\u0026rsquo;arc-en-ciel avec des simulations en VPython.\nLentilles Physique et maths des lentilles avec simulations VPython.\nPolarisation "
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/atome/",
@@ -389,7 +389,7 @@
 	"title": "Physique statistique",
 	"tags": [],
 	"description": "",
-	"content": " Physique statistique Petite série de vidéo sur la physique statistique, de la définition de la température à l\u0026rsquo;entropie en passant par le facteur de Boltzmann et la loi de Planck :\n"
+	"content": " Physique statistique Petite série de vidéo sur la physique statistique, de la définition de la température à l\u0026rsquo;entropie en passant par le facteur de Boltzmann et la loi de Planck :\nL\u0026rsquo;entropie est une notion passionnante qui ramifie dans différents champs.\nEn théorie de l\u0026rsquo;information, Claude Shannon a appelé entropie la mesure de la quantité d\u0026rsquo;information contenu dans un message. Ramenée à la physique, l\u0026rsquo;entropie de Shannon mesure le nombre de questions binaires (dont la réponse est oui ou non) auxquelles il faudrait répondre pour spécifier le microétat du système pour un macroétat donné.\nCherchant une réponse au paradoxe de Maxwell, Leó Szilárd a formulé en 1929 une équivalence entre l\u0026rsquo;énergie et l\u0026rsquo;information et il posa que le minimum de travail nécessaire pour stocker un bit d\u0026rsquo;information ou l\u0026rsquo;énergie libérée au moment de son effacement vaut $k_BT\\ln(2)$.\nOn observe une convergence de la recherche en informatique et en physique théorique sur les questions de l\u0026rsquo;entropie et de la complexité.\nJohn Wheeler est un des premiers à militer pour qu\u0026rsquo;on s\u0026rsquo;oriente vers une explication de l\u0026rsquo;univers basée sur son contenu en information, le bit élémentaire, ce qu\u0026rsquo;il résume par la formule \u0026ldquo;it from bit\u0026rdquo;.\nLe fait qu\u0026rsquo;un trou noir ait une entropie proportionnelle à son aire et non à sa masse, comme l\u0026rsquo;ont montré Stephen Hawking et Jacob Bekenstein, semble donner corps à cette idée que le bit est l\u0026rsquo;atome de notre compréhension de l\u0026rsquo;univers. Tout horizon se présenterait en effet comme une sorte d\u0026rsquo;écran sur lequel s\u0026rsquo;écrit l\u0026rsquo;information qu\u0026rsquo;il contient. C\u0026rsquo;est le principe holographique.\n"
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/reaction/",
@@ -403,7 +403,7 @@
 	"title": "Chaos",
 	"tags": [],
 	"description": "",
-	"content": " Chaos Au confin des maths et de la physique, une des plus belle chose qui soit : le chaos (avec son cheptel de fractales et d\u0026rsquo;attracteurs étranges). Le chaos n\u0026rsquo;a pas grand chose à voir avec son image \u0026ldquo;grand public\u0026rdquo; puisqu\u0026rsquo;il est finalement très organisé. Mais timide, il le cache bien\u0026hellip;\nL\u0026rsquo;intégration du système d\u0026rsquo;équations différentielles suivant donne le fameux attracteur de Lorenz avec sa forme caractéristique de papillon : $$\\begin{cases}x\u0026rsquo;=\\sigma(y-x)\\\\y\u0026rsquo;=\\rho x-y-xz\\\\z\u0026rsquo;=xy-\\beta \\end{cases}$$ Avec les valeurs de paramètres suivantes : $$\\begin{cases}\\sigma = 3\\\\\\rho = 26.5\\\\\\beta = 1\\end{cases}$$ et le point de départ $(x_0;y_0;z_0)=(0;1;1,05)$, cela donne :\nCet article relate la récente histore du chaos dans la recherche scientifique et insiste en particulier sur le rôle fondamental de deux programmeuses : Ellen Fetter and Margaret Hamilton.\nLe livre Nonlinear Dynamics and Chaos de Steven Strogatz introduit le domaine de manière passionnante.\n"
+	"content": " Chaos Au confin des maths et de la physique, une des plus belle chose qui soit : le chaos (avec son cheptel de fractales et d\u0026rsquo;attracteurs étranges). Le chaos n\u0026rsquo;a pas grand chose à voir avec son image \u0026ldquo;grand public\u0026rdquo; puisqu\u0026rsquo;il est finalement très organisé. Mais timide, il le cache bien\u0026hellip;\nL\u0026rsquo;intégration du système d\u0026rsquo;équations différentielles suivant donne le fameux attracteur de Lorenz avec sa forme caractéristique de papillon : $$\\begin{cases}x\u0026rsquo;=\\sigma(y-x)\\\\y\u0026rsquo;=\\rho x-y-xz\\\\z\u0026rsquo;=xy-\\beta \\end{cases}$$ Avec les valeurs de paramètres suivantes : $$\\begin{cases}\\sigma = 3\\\\\\rho = 26.5\\\\\\beta = 1\\end{cases}$$ et le point de départ $(x_0;y_0;z_0)=(0;1;1,05)$, cela donne :\nCet article relate l\u0026rsquo;histore du chaos en tant qu\u0026rsquo;objet de recherche et insiste en particulier sur le rôle fondamental de deux programmeuses : Ellen Fetter et Margaret Hamilton.\nLe livre Nonlinear Dynamics and Chaos de Steven Strogatz introduit le domaine de manière passionnante.\n"
 },
 {
 	"uri": "https://coursphychi.github.io/more/",

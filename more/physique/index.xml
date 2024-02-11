@@ -25,8 +25,9 @@ Comprendre cet effet permet d&amp;rsquo;expliquer les rotations des masses d&amp
       <link>https://coursphychi.github.io/more/physique/optique/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/optique/</guid>
-      <description>Optique La physique de l&amp;rsquo;arc-en-ciel avec des simulations en VPython.
-Physique et maths des lentilles avec simulations VPython.</description>
+      <description> Optique Arcs-en-ciel La physique de l&amp;rsquo;arc-en-ciel avec des simulations en VPython.
+Lentilles Physique et maths des lentilles avec simulations VPython.
+Polarisation </description>
     </item>
     <item>
       <title>Relativité restreinte</title>
@@ -58,7 +59,9 @@ Un joli test de la non-localité quantique sans utiliser d&amp;rsquo;inégalité
       <link>https://coursphychi.github.io/more/physique/phistat/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/phistat/</guid>
-      <description>Physique statistique Petite série de vidéo sur la physique statistique, de la définition de la température à l&amp;rsquo;entropie en passant par le facteur de Boltzmann et la loi de Planck :</description>
+      <description>Physique statistique Petite série de vidéo sur la physique statistique, de la définition de la température à l&amp;rsquo;entropie en passant par le facteur de Boltzmann et la loi de Planck :
+L&amp;rsquo;entropie est une notion passionnante qui ramifie dans différents champs.
+En théorie de l&amp;rsquo;information, Claude Shannon a appelé entropie la mesure de la quantité d&amp;rsquo;information contenu dans un message. Ramenée à la physique, l&amp;rsquo;entropie de Shannon mesure le nombre de questions binaires (dont la réponse est oui ou non) auxquelles il faudrait répondre pour spécifier le microétat du système pour un macroétat donné.</description>
     </item>
     <item>
       <title>Chaos</title>
