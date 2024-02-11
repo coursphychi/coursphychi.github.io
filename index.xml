@@ -119,10 +119,8 @@ Qulle balle atterrit le plus loin ? Quelle balle parcourt le moins de distance�
       <link>https://coursphychi.github.io/more/maths/geometrie/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/</guid>
-      <description>Pythagore Les deux démostrations par découpage précédentes reposent en fait sur la possibilité de paver le plan avec deux carrés de côtés différents.
-Une démonstration plus &amp;ldquo;physique&amp;rdquo; (reposant sur ce qu&amp;rsquo;implique une relation de proportionnalité sur une surface).
-Deux vieux exos Un problème babylonien Ce problème a été découvert sur des tablettes d’argile babylonienne entre -2000 et -1600.
-une perche est posée verticalement contre un mur. Si son extrémité haute glisse de 6 unités vers le bas contre le mur, de combien d’unité glisse horizontalement l’extrémité basse ?</description>
+      <description>Géométrie La géométrie est avec l&amp;rsquo;arithmétique une des plus vieilles branches des mathématiques.
+Géométrie et physique sont intimement liées. Le développement de la géométrie a en partie été poussé par les questionnements des astronomes (sur la position des astres, leur mouvement, leur taille, leur distance, etc.) et des ingénieurs (pour construire des trucs qui tiennent debout). Et aujourd&amp;rsquo;hui, un courant de la physique théorique s&amp;rsquo;appuie sur la géométrie pour chercher des représentations des lois physiques fondamentales.</description>
     </item>
     <item>
       <title>Mécanique</title>
@@ -217,7 +215,7 @@ Algèbre linéaire L&amp;rsquo;algèbre linéaire est un outil fondamental pour 
 Application de l&amp;rsquo;algèbre linéaire (et de la géométrie projective) pour déceler et corriger le plus efficacement possible les erreurs dans un message.</description>
     </item>
     <item>
-      <title>Probabilité / Statistiques</title>
+      <title>Probabilités / Statistiques</title>
       <link>https://coursphychi.github.io/more/maths/probastat/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/probastat/</guid>
@@ -347,10 +345,9 @@ Rappels En régime alternatif, le voltmètre et l&#39;ampèremètre en mode cont
       <link>https://coursphychi.github.io/more/physique/jeux/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/jeux/</guid>
-      <description>L&amp;rsquo;anagyre refuse obstinément de tourner dans le sens qu&amp;rsquo;il n&amp;rsquo;aime pas :
-La toupie tippe-top se redresse semblant braver les lois physiques. C&amp;rsquo;est le couple des forces de frottement qui est responsable de cette bizarrerie.
-L&amp;rsquo;oiseau buveur estt une star (on le retrouve dans Alien ou les Simpsons par exemple).
-Et c&amp;rsquo;est aussi un bon exercice de thermodynamique (qui a été donné au concours de Centrale il y a un bail).</description>
+      <description>Jeux et curiosités scientifiques La toupie tippe-top La toupie tippe-top se redresse semblant braver les lois physiques. C&amp;rsquo;est le couple des forces de frottement qui est responsable de cette bizarrerie.
+Wolfgang Pauli et Niels Bohr, deux immenses physiciens au cœur de la révolution quantique, regardant une toupie tippe-top se relever.
+Comme le centre de masse s&amp;rsquo;est élevé, on a envie de s&amp;rsquo;inquiéter pour la conservation de l&amp;rsquo;énergie Mais il ne faut pas !</description>
     </item>
     <item>
       <title>Lumière</title>
