@@ -65,9 +65,8 @@ Un joli test de la non-localité quantique sans utiliser d&amp;rsquo;inégalité
       <link>https://coursphychi.github.io/more/physique/chaos/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/chaos/</guid>
-      <description>Chaos Au confin des maths et de la physique, une des plus belle chose qui soit : le chaos (avec son cheptel de fractales et d&amp;rsquo;attracteurs étranges). Le chaos n&amp;rsquo;a pas grand chose à voir avec son image &amp;ldquo;grand public&amp;rdquo;, il est en fait ultra organise, mais timide, il le cache&amp;hellip;
-Un attracteur s&amp;rsquo;obtient en résolvant certains systèmes d&amp;rsquo;équations différentielles contenant des non linéarités.
-L&amp;rsquo;intégration du système suivant donne le fameux attracteur de Lorez en papillon par exemple : $$\begin{cases}x&amp;rsquo;=\sigma(y-x)\\y&amp;rsquo;=\rho x-y-xz\\z&amp;rsquo;=xy-\beta \end{cases}$$ Avec les valeurs de paramètres suivantes : $$\begin{cases}\sigma = 3\\\rho = 26.</description>
+      <description>Chaos Au confin des maths et de la physique, une des plus belle chose qui soit : le chaos (avec son cheptel de fractales et d&amp;rsquo;attracteurs étranges). Le chaos n&amp;rsquo;a pas grand chose à voir avec son image &amp;ldquo;grand public&amp;rdquo; puisqu&amp;rsquo;il est finalement très organisé. Mais timide, il le cache bien&amp;hellip;
+L&amp;rsquo;intégration du système d&amp;rsquo;équations différentielles suivant donne le fameux attracteur de Lorenz avec sa forme caractéristique de papillon : $$\begin{cases}x&amp;rsquo;=\sigma(y-x)\\y&amp;rsquo;=\rho x-y-xz\\z&amp;rsquo;=xy-\beta \end{cases}$$ Avec les valeurs de paramètres suivantes : $$\begin{cases}\sigma = 3\\\rho = 26.</description>
     </item>
     <item>
       <title>Curiosités</title>
