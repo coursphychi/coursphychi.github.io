@@ -36,22 +36,22 @@
     
 
     
-    <link href="/css/nucleus.css?1707992265" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1707992265" rel="stylesheet">
-    <link href="/css/hybrid.css?1707992265" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1707992265" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1707992265" rel="stylesheet">
-    <link href="/css/auto-complete.css?1707992265" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1707992265" rel="stylesheet">
-    <link href="/css/theme.css?1707992265" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1707992265" rel="stylesheet">
+    <link href="/css/nucleus.css?1708041746" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1708041746" rel="stylesheet">
+    <link href="/css/hybrid.css?1708041746" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1708041746" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1708041746" rel="stylesheet">
+    <link href="/css/auto-complete.css?1708041746" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1708041746" rel="stylesheet">
+    <link href="/css/theme.css?1708041746" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1708041746" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1707992265" rel="stylesheet">
+    <link href="/css/theme-blue.css?1708041746" rel="stylesheet">
     
-    <link href="/css/foo.css?1707992265" rel="stylesheet"><link href="/css/bar.css?1707992265" rel="stylesheet">
+    <link href="/css/foo.css?1708041746" rel="stylesheet"><link href="/css/bar.css?1708041746" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1707992265"></script>
+    <script src="/js/jquery-3.3.1.min.js?1708041746"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -105,14 +105,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1707992265"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1707992265"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1708041746"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1708041746"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1707992265"></script>
+<script type="text/javascript" src="/js/search.js?1708041746"></script>
 
     
   </div>
@@ -1990,11 +1990,15 @@ Cela signifie qu&rsquo;on ne présuppose rien de particulier sur les données (�
 </tbody>
 </table>
 
+<div class="notices tip" style="--title: 'tip';">
+  <p style="display: none;">tip</p>
+  <div class="notice-body">
+    <p>Lorsqu&rsquo;on ne connaît rien sur les données, on peut toujours commencer par prendre la racine carrée du nombre de points dans l&rsquo;ensemble d&rsquo;entraînement comme <em>k</em> de départ.</p>
 
-
-<div class="notices tip" ><p>Lorsqu&rsquo;on ne connaît rien sur les données, on peut toujours commencer par prendre la racine carrée du nombre de points dans l&rsquo;ensemble d&rsquo;entraînement comme <em>k</em> de départ.</p>
-
+  </div>
 </div>
+
+
 <p>Le choix de <em>k</em> est donc affaire de compromis. Pour le rendre plus scientifique, on peut chercher à mesurer la performance de l&rsquo;algorithme pour différentes valeurs de <em>k</em>.</p>
 <p>Mais comment mesure-t-on la <strong>performance d&rsquo;un algorithme d&rsquo;apprentissage automatique</strong> ?</p>
 <br>
@@ -2011,55 +2015,60 @@ Cela signifie qu&rsquo;on ne présuppose rien de particulier sur les données (�
 <li>les <strong>faux négatifs</strong> FN (les 3 identifiés comme des non 3).</li>
 </ul>
 <p>À partir de ces effectifs, on peut calculer 3 grandeurs permettant d&rsquo;évaluer la qualité de la prédiction :</p>
-<style>
-#prec p:first-child:after {
-    content: 'Précision';
-}
-</style>
 
-
-
-<div class="notices def"  id="prec"  ><p>Nombre de données bien prédites parmi les prédictions positives :
+<div class="notices def" style="--title: 'Précision';">
+  <p style="display: none;">Précision</p>
+  <div class="notice-body">
+    <p>Nombre de données bien prédites parmi les prédictions positives :
 $$\frac{VP}{VP+FP}$$</p>
 
+  </div>
 </div>
-<style>
-#rap p:first-child:after {
-    content: 'Rappel ou sensibilité';
-}
-</style>
 
 
 
-<div class="notices def"  id="rap"  ><p>Nombre de données bien prédites parmi les données positives :
+<div class="notices def" style="--title: 'Rappel ou sensibilité';">
+  <p style="display: none;">Rappel ou sensibilité</p>
+  <div class="notice-body">
+    <p>Nombre de données bien prédites parmi les données positives :
 $$\frac{VP}{VP+FN}$$<br></p>
 
-</div>
-<style>
-#exa p:first-child:after {
-    content: 'Exactitude (accuracy)';
-}
-</style>
-
-
-
-<div class="notices def"  id="exa"  ><p>$$\frac{VP+VN}{VP+VN+FP+FN}$$<br></p>
-
+  </div>
 </div>
 
 
 
-<div class="notices info" ><p>Un algorithme peut très bien être très précis (les prédictions positives sont bien des 3), mais peu sensible, avec un faible taux de rappel (parmi tous les 3, peu ont été identifiés).<br>
+<div class="notices def" style="--title: 'Exactitude \28 accuracy\29 ';">
+  <p style="display: none;">Exactitude (accuracy)</p>
+  <div class="notice-body">
+    <p>$$\frac{VP+VN}{VP+VN+FP+FN}$$<br></p>
+
+  </div>
+</div>
+
+
+
+<div class="notices info" style="--title: 'info';">
+  <p style="display: none;">info</p>
+  <div class="notice-body">
+    <p>Un algorithme peut très bien être très précis (les prédictions positives sont bien des 3), mais peu sensible, avec un faible taux de rappel (parmi tous les 3, peu ont été identifiés).<br>
 À l&rsquo;inverse, on peut avoir une bonne sensibilité (la plupart des vrais 3 ont été identifiés comme tel), mais peu précis (beaucoup de chiffres identifiés comme des 3 sont en fait d&rsquo;autres chiffres).</p>
 
+  </div>
 </div>
+
+
 <p><img src="/matconfus.png?width=800px" alt=""></p>
 
+<div class="notices tip" style="--title: 'tip';">
+  <p style="display: none;">tip</p>
+  <div class="notice-body">
+    <p>On peut tout aussi bien définir la matrice de confusion avec les prédictions sur les lignes et la réalité sur les colonnes.</p>
 
-
-<div class="notices tip" ><p>On peut tout aussi bien définir la matrice de confusion avec les prédictions sur les lignes et la réalité sur les colonnes.</p>
-
+  </div>
 </div>
+
+
 <p>Maintenant qu&rsquo;on sait évaluer l&rsquo;algorithme, cherchons la valeur de <strong>k</strong> qui maximise l&rsquo;exactitude.</p>
 <p>Dans le graphe ci-dessous, on a tracé l&rsquo;<em>exactitude</em> de l&rsquo;algorithme pour la reconnaissance des &ldquo;9&rdquo; en fonction de la valeur de <em>k</em>.
 <img src="/meilleurk.png?width=600px" alt="">
@@ -2077,11 +2086,15 @@ Si notre but est de reconnaître le mieux possible les 9 manuscrits, il semblera
 <p>L&rsquo;algorithme dépend d&rsquo;un seul paramètre en plus des données : le nombre de partitions (clusters) <em>k</em>.</p>
 <p>On commence par choisir <em>k</em> points au hasard dans l&rsquo;espace des données (il peut s&rsquo;agir de <em>k</em> points de données ou de <em>k</em> autres points). Ce sont les <em>k</em> centres (ou centroïdes).</p>
 
+<div class="notices tip" style="--title: 'tip';">
+  <p style="display: none;">tip</p>
+  <div class="notice-body">
+    <p>Plus les points choisis au départ sont éloignés les uns des autres, mieux c&rsquo;est. Une amélioration de l&rsquo;algorithme de base proposée en 2007, k-means++, s&rsquo;en assure.</p>
 
-
-<div class="notices tip" ><p>Plus les points choisis au départ sont éloignés les uns des autres, mieux c&rsquo;est. Une amélioration de l&rsquo;algorithme de base proposée en 2007, k-means++, s&rsquo;en assure.</p>
-
+  </div>
 </div>
+
+
 <p>On attribue ensuite à chaque centre tous les points de données qui lui sont le plus proches, formant ainsi <em>k</em> groupes.</p>
 <p>Enfin, on déplace chaque centre au barycentre de son groupe.</p>
 <p>On répète les deux dernières opérations (attribution des points les plus près et déplacement des centres) tant que les centres bougent d&rsquo;une itération à l&rsquo;autre.</p>
@@ -2105,11 +2118,15 @@ où $\mu_i$ est le barycentre des points dans $S_i$.</p>
 <p>Là encore, le coude indique le nombre <em>k</em> idéal.<br>
 On semble donc avoir trouver une tactique utilisable lorsqu&rsquo;on n&rsquo;a pas d&rsquo;autres indices.</p>
 <p>
+<div class="notices tip" style="--title: 'tip';">
+  <p style="display: none;">tip</p>
+  <div class="notice-body">
+    <p>Il existe des méthodes plus précises pour déterminer <em>k</em>, mais elles sont aussi plus gourmandes en calcul. La plus répandue utilise les <em>coefficients de silhouette</em> de chaque point  (différence entre la distance moyenne avec les points du même groupe (cohésion) et la distance moyenne avec les points des autres groupes voisins (séparation)).</p>
 
-
-<div class="notices tip" ><p>Il existe des méthodes plus précises pour déterminer <em>k</em>, mais elles sont aussi plus gourmandes en calcul. La plus répandue utilise les <em>coefficients de silhouette</em> de chaque point  (différence entre la distance moyenne avec les points du même groupe (cohésion) et la distance moyenne avec les points des autres groupes voisins (séparation)).</p>
-
+  </div>
 </div>
+
+
 <img src="/xkcdkmeans.png?width=400px" alt=""></p>
 <h3 id="limites">Limites</h3>
 <p>L&rsquo;algorithme des $k$-moyennes se confronte à une difficulté classique en apprentissage automatique, et plus généralement pour tout problème d&rsquo;optimisation : <strong>obtenir un minimum global plutôt qu&rsquo;un minimum local</strong>.</p>
@@ -2176,13 +2193,17 @@ Réponse (cliquer pour afficher)</summary>
 <p>Ces modèles de langage peuvent ainsi reproduire des préjugés sexistes ; les données d&rsquo;apprentissage contiennent plus d&rsquo;infirmiers ou secrétaires femmes et de patrons ou ingénieurs hommes et le modèle a alors tendance à associer plus une femme à une infirmière qu&rsquo;à une ingénieure.<br>
 Au-delà du genre, ces modèles peuvent renforcer un large éventail de stéréotypes lié à la race, à l&rsquo;âge, la nationalité, la religion ou le milieu d&rsquo;origine.</p>
 
-
-
-<div class="notices note" ><p>Sur ce point, les modèles de langage n&rsquo;ont pas grand chose à envier aux humains.<br>
+<div class="notices note" style="--title: 'note';">
+  <p style="display: none;">note</p>
+  <div class="notice-body">
+    <p>Sur ce point, les modèles de langage n&rsquo;ont pas grand chose à envier aux humains.<br>
 <a href="https://d1wqtxts1xzle7.cloudfront.net/31764855/Stoeger_Ziegler_David_2004_what_is_a_SPECIALIST-libre.pdf?1391436241=&amp;response-content-disposition=inline%3B+filename%3DWhat_is_a_Specialist_Effects_of_the_Male.pdf&amp;Expires=1707345043&amp;Signature=NDfFLQJNw26CJG9qQ0APYCQ6l5VakqIfa9iSt5r73Ppm4lnd-gYuVM5syWAS3is7Yfa5micP046Ue6v4Uz2EI2migdHCNMRamWJgyjtHi0yvmdd4Vf5BBtEDswp6T6oaqzIQ90UAXubrZPTFRF~YMesciToM9zddnDsGewfJ8xg9kgI5v05URJezV9vTjLqSLfSlv-wUOBYhScRY16KT8otDz-xhYl4eSCN6NdTlZpuIZ1X3Q55wz6V1AXn7vMPAr87XOOb6MLL2CCx-6dX3bGf02ORSULiKIPLD8Cnx~JpZrwWiEgjGyK7-13kTbOsp2Xwhh~MHHPHkbrinF3lSWw__&amp;Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA">Une étude de 2004</a> sur  personnes montre en effet que seuls 32% résolvent la petite énigme suivante :<br>
 Un père et son fils ont un grave accident de voiture. Le père meurt. Le fils est entre la vie et la mort. On l&rsquo;amène aux urgences et le chirurgien qui le voit dit : &ldquo;Je ne peux pas l&rsquo;opérer car c&rsquo;est mon fils.&rdquo; Comment cela se fait-il ?</p>
 
+  </div>
 </div>
+
+
 <h3 id="quand-la-machine-devra-choisir-à-notre-place">Quand la machine devra choisir à notre place</h3>
 <p>Dans une situation où vous sacrifier permet de sauver plusieurs vies, la voiture autonome qui vous conduit doit-elle choisir de vous tuer ?</p>
 <p><a href="https://www.moralmachine.net">Une expérience sociologique</a> visant à donner une perspective humaine aux futures décisions morales des machines permet de se pencher sur ces décisions un peu glauques.</p>
@@ -3389,19 +3410,19 @@ Un père et son fils ont un grave accident de voiture. Le père meurt. Le fils e
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1707992265"></script>
-    <script src="/js/perfect-scrollbar.min.js?1707992265"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1707992265"></script>
-    <script src="/js/jquery.sticky.js?1707992265"></script>
-    <script src="/js/featherlight.min.js?1707992265"></script>
-    <script src="/js/highlight.pack.js?1707992265"></script>
+    <script src="/js/clipboard.min.js?1708041746"></script>
+    <script src="/js/perfect-scrollbar.min.js?1708041746"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1708041746"></script>
+    <script src="/js/jquery.sticky.js?1708041746"></script>
+    <script src="/js/featherlight.min.js?1708041746"></script>
+    <script src="/js/highlight.pack.js?1708041746"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1707992265"></script>
-    <script src="/js/learn.js?1707992265"></script>
-    <script src="/js/hugo-learn.js?1707992265"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1708041746"></script>
+    <script src="/js/learn.js?1708041746"></script>
+    <script src="/js/hugo-learn.js?1708041746"></script>
     
         
-            <script src="/mermaid/mermaid.js?1707992265"></script>
+            <script src="/mermaid/mermaid.js?1708041746"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

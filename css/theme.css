@@ -604,8 +604,9 @@ div.notices.def p {
     background: #E7F2FA;
 }
 
+
 div.notices.def p:first-child:after {
-    content: 'Définition';
+    content: var(--title, 'Définition');
 }
 
 
