@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Lentilles - Cours de physique chimie</title>
+    <title>Aires, Volumes et plus - Cours de physique chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -79,7 +79,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/colles/lentilles2/">
+  <body class="" data-url="/more/maths/geometrie/geo3/">
     <nav id="sidebar" class="">
 
 
@@ -1342,7 +1342,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/" title="MORE" class="dd-item
-        
+        parent
         
         
         ">
@@ -1397,7 +1397,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/" title="Maths" class="dd-item
-        
+        parent
         
         
         ">
@@ -1426,7 +1426,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/geometrie/" title="Géométrie" class="dd-item
-        
+        parent
         
         
         ">
@@ -1494,7 +1494,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/more/maths/geometrie/geo3/" title="Aires, Volumes et plus" class="dd-item ">
+      <li data-nav-id="/more/maths/geometrie/geo3/" title="Aires, Volumes et plus" class="dd-item active">
         <a href="/more/maths/geometrie/geo3/">
         Aires, Volumes et plus
         
@@ -1808,7 +1808,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        parent
+        
         
         
         ">
@@ -1902,14 +1902,20 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Lentilles
+                   Aires, Volumes et plus
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#aires-et-volumes">Aires et volumes</a></li>
+    <li><a href="#un-petit-problème-en-dimension-n">Un petit problème en dimension n</a></li>
+    <li><a href="#courbes-de-poursuite">Courbes de poursuite</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -1928,97 +1934,48 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 
 <style>
- 	#correc
+ #correc
   {
     color: #006C65;
     border-left: solid 10px #C7DDDC;
   }
- 	#comm
+ #comm
   {
     color: #004D80;
     border-left: solid 10px #B3CAD9;
   }
- 	#commsum
+ #commsum
   {
     color: #004D80;
   }
- 	#correcsum
+ #correcsum
   {
     color: #006C65;
   }
 </style>
-<h1 id="lentilles-minces--modéliser-le-flou">Lentilles minces : modéliser le flou</h1>
-<p>L&rsquo;objectif de cet exercice est de reproduire par traitement d&rsquo;image, à l&rsquo;aide d&rsquo;un programme Python, ce qu&rsquo;on verrait sur un écran situé derrière une lentille convergente pour différentes positions de l&rsquo;écran ; on fournit au programme un fichier image et des paramètres (le diamètre de la lentille $D$, sa distance focale $f&rsquo;$, la distance lentille-objet $\overline{OA}$, la distance lentille-écran $\overline{OE}$, la taille de l&rsquo;objet $\overline{AB}$), et il produit une image correspondant à ce qu&rsquo;on verrait sur l&rsquo;écran.</p>
-<ol>
-<li>Pourquoi la figure sur l&rsquo;écran est-elle floue lorsque la distance entre la lentille et l&rsquo;écran est différente de $\overline{OA&rsquo;}$ ? Faire un schéma pour illustrer.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-<img src="/schemlentflou.png">
-À un point objet ne correspond plus sur l'écran un point image mais une tâche de diamètre $d$.
-</blockquote>
-</details>
-<ol start="2">
-<li>Déterminer $\overline{OA&rsquo;}$ et $\overline{A'B&rsquo;}$ en fonction de $\overline{OA}$, $f&rsquo;$ et $\overline{AB}$.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-$\displaystyle \overline{OA'} = \frac{\overline{OA}\cdot f'}{\overline{OA}+f'}$<br>
-$\displaystyle \overline{A'B'} = \overline{AB}\times\frac{\overline{OA'}}{\overline{OA}}$
-</blockquote>
-</details>
-<ol start="3">
-<li>Déterminer la hauteur $H$ de la figure sur l&rsquo;écran ainsi que le diamètre d&rsquo;une tâche $d$ en fonction de $D$, $f&rsquo;$, $\overline{OA&rsquo;}$, $\overline{OE}$ et $\overline{A&rsquo;B&rsquo;}$.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-<ul>
-<li>$\displaystyle d = D\times\frac{|\overline{OE}-\overline{OA'}|}{\overline{OA'}}$</li>
-<li>Le schéma nous montre que $H-A'B'$ est proportionnel à $|\overline{OE}-\overline{OA'}|$ $\Rightarrow$ $\displaystyle \frac{H-A'B'}{|\overline{OE}-\overline{OA'}|} = cste$.<br>
-Et comme lorsque $\overline{OE}=0$, $H=D$, on a :<br>
-$\displaystyle \frac{H-A'B'}{|\overline{OE}-\overline{OA'}|} = \frac{D-A'B'}{|0-\overline{OA'}|}$<br>
-On en déduit que $\displaystyle H = A'B'+\frac{D-A'B'}{\overline{OA'}}\times |\overline{OE}-\overline{OA'}|$
-</li>
-</ul>
-</blockquote>
-</details>
-<p>Le programme Python est déjà écrit à l&rsquo;exception de la fonction centrale qui contient la physique du problème :</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calcule_taille</span>(D:float, fprime:float, OA:float, OE:float, AB:float) <span style="color:#f92672">-&gt;</span> tuple:
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Entrées:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        D: diamètre de la lentille (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        fprime: 0 distance focale de la lentille (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        OA: distance lentille-objet (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        OE: distance lentille-écran (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        AB: taille objet (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Sorties:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        tuple (H,d) avec:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        H: hauteur de la figure sur l&#39;écran (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        d: diamètre des tâches sur l&#39;écran (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># CODE À COMPLÉTER</span>
-</span></span></code></pre></div><ol start="3">
-<li>Se rendre sur <a href="https://colab.research.google.com/drive/1mf8qHa3ZdkZ43RzJWAAmXbzfzaQTYaPO?usp=sharing">ce notebook Colab</a> et compléter la fonction.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-Exemple de solution :
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calcule_taille</span>(D, fprime, OA, OE, AB):
-</span></span><span style="display:flex;"><span>    OAprime <span style="color:#f92672">=</span> fprime <span style="color:#f92672">*</span> OA <span style="color:#f92672">/</span> (fprime <span style="color:#f92672">+</span> OA)
-</span></span><span style="display:flex;"><span>    d <span style="color:#f92672">=</span> (abs(OE <span style="color:#f92672">-</span> OAprime) <span style="color:#f92672">/</span> OAprime <span style="color:#f92672">*</span> D)
-</span></span><span style="display:flex;"><span>    AprimeBprime <span style="color:#f92672">=</span> AB <span style="color:#f92672">*</span> OAprime <span style="color:#f92672">/</span> OA
-</span></span><span style="display:flex;"><span>    H <span style="color:#f92672">=</span> abs(AprimeBprime) <span style="color:#f92672">+</span> (D <span style="color:#f92672">-</span> abs(AprimeBprime)) <span style="color:#f92672">/</span> OAprime <span style="color:#f92672">*</span> (abs(OE <span style="color:#f92672">-</span> OAprime))
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> H, d
-</span></span></code></pre></div></blockquote>
-</details>
+<h1 id="autres-joyeusetés">Autres joyeusetés</h1>
+<h2 id="aires-et-volumes">Aires et volumes</h2>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/5_PiZrfLghQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</div>
+<br>
+<div style="position:relative; width:640px; max-width:100%; height:480px; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<iframe width="640" height="480"  src="https://www.youtube.com/embed/X18McrjdGeA" title="Aires 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width:100%"></iframe>
+</div>
+<br>
+<div style="position:relative; width:640px; max-width:100%; height:480px; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<iframe width="640" height="480"  src="https://www.youtube.com/embed/-N-DvHc2Lhs" title="Aire du triangle sphérique" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width:100%"></iframe>
+</div>
+<br>
+<div style="position:relative; width:640px; max-width:100%; height:480px; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<iframe width="640" height="480"  src="https://www.youtube.com/embed/1oS1sMcLj2A" title="Aires 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width:100%"></iframe>
+</div>
+<hr>
+<h2 id="un-petit-problème-en-dimension-n">Un petit problème en dimension n</h2>
+<hr>
+<h2 id="courbes-de-poursuite">Courbes de poursuite</h2>
 
 
 <footer class="footline">
@@ -2858,6 +2815,7 @@ Exemple de solution :
             
                 
                     
+                    
                 
                 
 
@@ -2872,6 +2830,9 @@ Exemple de solution :
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2889,6 +2850,7 @@ Exemple de solution :
             
                 
                     
+                    
                 
                 
 
@@ -2904,6 +2866,7 @@ Exemple de solution :
             
                 
                     
+                    
                 
                 
 
@@ -2917,56 +2880,8 @@ Exemple de solution :
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -3000,6 +2915,61 @@ Exemple de solution :
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -3026,38 +2996,6 @@ Exemple de solution :
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -3155,6 +3093,38 @@ Exemple de solution :
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -3165,7 +3135,6 @@ Exemple de solution :
             
             
                 
-                    
                     
                 
                 

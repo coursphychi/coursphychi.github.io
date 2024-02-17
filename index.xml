@@ -119,15 +119,6 @@ Questions préliminaires :
 Qulle balle atterrit le plus loin ? Quelle balle parcourt le moins de distance ?</description>
     </item>
     <item>
-      <title>Géométrie</title>
-      <link>https://coursphychi.github.io/more/maths/geometrie/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/geometrie/</guid>
-      <description>Géométrie La géométrie est avec l&amp;rsquo;arithmétique une des plus vieilles branches des mathématiques. L&amp;rsquo;arithmétique pour tenir les comptes et la géométrie pour mesurer les terres
-Géométrie et physique sont intimement liées. Le développement de la géométrie a en partie été poussé par les questionnements des astronomes (sur la position des astres, leur mouvement, leur taille, leur distance, etc.) et des ingénieurs (pour construire des trucs qui tiennent debout).
-De nos jours, différents courants de la physique théorique se tournent vers la géométrie plutôt que vers le calcul pour trouver une explication aux lois fondamentales.</description>
-    </item>
-    <item>
       <title>Mécanique</title>
       <link>https://coursphychi.github.io/more/physique/meca/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
@@ -204,6 +195,15 @@ Lentilles Physique et maths des lentilles avec simulations VPython.
 Polarisation </description>
     </item>
     <item>
+      <title>Pythagore et Thalès</title>
+      <link>https://coursphychi.github.io/more/maths/geometrie/geo1/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/geometrie/geo1/</guid>
+      <description>Le triangle Pythagore Pythagore a vécu à Samos (une île grecque) au 6e siècle avant notre ère. Malgré le nom qu&amp;rsquo;on lui donne, le théorème de Pythagore était connu et utilisé par les Babyloniens et les Indiens des siècles avant Pythagore. Mais peut-être que Pythagore a été le premier à l&amp;rsquo;introduire en Grèce et cela a suffi à lui octroyer une reconnaissance éternelle.
+La démonstration historique d&amp;rsquo;Euclide :
+Deux démonstrations par découpage et réarrangement :</description>
+    </item>
+    <item>
       <title>Entités chimiques</title>
       <link>https://coursphychi.github.io/2nde/atome/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -223,6 +223,16 @@ Documents et autres Un peu de maths : ordre de grandeur, puissances de 10, multi
       <description>Algèbre Équations Identités remarquables Algèbre de Boole L&amp;rsquo;algèbre de Boole permet d&amp;rsquo;algébriser la logique. C&amp;rsquo;est le langage naturelle des circuits électroniques à la base de l&amp;rsquo;informatique.
 Algèbre linéaire L&amp;rsquo;algèbre linéaire est un outil fondamental pour la physique et en particulier pour la physique quantique dont c&amp;rsquo;est la base même.
 Application de l&amp;rsquo;algèbre linéaire (et de la géométrie projective) pour déceler et corriger le plus efficacement possible les erreurs dans un message.</description>
+    </item>
+    <item>
+      <title>Cercle et Trigo</title>
+      <link>https://coursphychi.github.io/more/maths/geometrie/geo2/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/geometrie/geo2/</guid>
+      <description>Cercle et triangle Trigonométrie La loi des sinus a contribué à la définition du mètre, la première unité &amp;ldquo;universelle&amp;rdquo; lors de la révolution française.
+Delambre et Méchain furent missionner pour mesurer le plus précisément possible un bout de méridien entre Dunkerque et Barcelone, la toute neuve définition du mètre étant :
+un mètre est la dix millionième partie d&amp;rsquo;un quart de méridien terrestre
+Le cercle répétiteur de Borda fut leur arme secrète.</description>
     </item>
     <item>
       <title>Probabilités / Statistiques</title>
@@ -262,6 +272,13 @@ Définitions Configuration électronique d’un atome
 Répartition des électrons d’un atome dans les différentes couches et sous-couches.
 Exemple :
 La configuration électronique de l’atome de sodium (numéro atomique Z = 11) est $\text{1s}^2\,\text{2s}^2\,\text{2p}^6\,\text{3s}^1$ à l’état fondamental. Cette configuration permet de retrouver la position de l’élément sodium dans le tableau périodique : il se situe dans la 3e période et la 1re colonne du bloc s, et par conséquent, la 1re colonne du tableau.</description>
+    </item>
+    <item>
+      <title>Aires, Volumes et plus</title>
+      <link>https://coursphychi.github.io/more/maths/geometrie/geo3/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/geometrie/geo3/</guid>
+      <description> Autres joyeusetés Aires et volumes Un petit problème en dimension n Courbes de poursuite </description>
     </item>
     <item>
       <title>Relativité générale</title>

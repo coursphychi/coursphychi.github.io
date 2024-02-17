@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Géométrie on Cours de physique chimie</title>
+    <link>https://coursphychi.github.io/more/maths/geometrie/</link>
+    <description>Recent content in Géométrie on Cours de physique chimie</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate>
+    <atom:link href="https://coursphychi.github.io/more/maths/geometrie/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pythagore et Thalès</title>
+      <link>https://coursphychi.github.io/more/maths/geometrie/geo1/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/geometrie/geo1/</guid>
+      <description>Le triangle Pythagore Pythagore a vécu à Samos (une île grecque) au 6e siècle avant notre ère. Malgré le nom qu&amp;rsquo;on lui donne, le théorème de Pythagore était connu et utilisé par les Babyloniens et les Indiens des siècles avant Pythagore. Mais peut-être que Pythagore a été le premier à l&amp;rsquo;introduire en Grèce et cela a suffi à lui octroyer une reconnaissance éternelle.
+La démonstration historique d&amp;rsquo;Euclide :
+Deux démonstrations par découpage et réarrangement :</description>
+    </item>
+    <item>
+      <title>Cercle et Trigo</title>
+      <link>https://coursphychi.github.io/more/maths/geometrie/geo2/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/geometrie/geo2/</guid>
+      <description>Cercle et triangle Trigonométrie La loi des sinus a contribué à la définition du mètre, la première unité &amp;ldquo;universelle&amp;rdquo; lors de la révolution française.
+Delambre et Méchain furent missionner pour mesurer le plus précisément possible un bout de méridien entre Dunkerque et Barcelone, la toute neuve définition du mètre étant :
+un mètre est la dix millionième partie d&amp;rsquo;un quart de méridien terrestre
+Le cercle répétiteur de Borda fut leur arme secrète.</description>
+    </item>
+    <item>
+      <title>Aires, Volumes et plus</title>
+      <link>https://coursphychi.github.io/more/maths/geometrie/geo3/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/geometrie/geo3/</guid>
+      <description> Autres joyeusetés Aires et volumes Un petit problème en dimension n Courbes de poursuite </description>
+    </item>
+  </channel>
+</rss>

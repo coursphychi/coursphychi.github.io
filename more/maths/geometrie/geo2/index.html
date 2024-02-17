@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Lentilles - Cours de physique chimie</title>
+    <title>Cercle et Trigo - Cours de physique chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -79,7 +79,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/colles/lentilles2/">
+  <body class="" data-url="/more/maths/geometrie/geo2/">
     <nav id="sidebar" class="">
 
 
@@ -1342,7 +1342,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/" title="MORE" class="dd-item
-        
+        parent
         
         
         ">
@@ -1397,7 +1397,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/" title="Maths" class="dd-item
-        
+        parent
         
         
         ">
@@ -1426,7 +1426,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/geometrie/" title="Géométrie" class="dd-item
-        
+        parent
         
         
         ">
@@ -1473,7 +1473,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/more/maths/geometrie/geo2/" title="Cercle et Trigo" class="dd-item ">
+      <li data-nav-id="/more/maths/geometrie/geo2/" title="Cercle et Trigo" class="dd-item active">
         <a href="/more/maths/geometrie/geo2/">
         Cercle et Trigo
         
@@ -1808,7 +1808,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        parent
+        
         
         
         ">
@@ -1902,14 +1902,19 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Lentilles
+                   Cercle et Trigo
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#trigonométrie">Trigonométrie</a></li>
+    <li><a href="#théorème-de-langle-inscrit-et-de-langle-au-centre">Théorème de l&rsquo;angle inscrit et de l&rsquo;angle au centre</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -1928,97 +1933,84 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 
 <style>
- 	#correc
+ #correc
   {
     color: #006C65;
     border-left: solid 10px #C7DDDC;
   }
- 	#comm
+ #comm
   {
     color: #004D80;
     border-left: solid 10px #B3CAD9;
   }
- 	#commsum
+ #commsum
   {
     color: #004D80;
   }
- 	#correcsum
+ #correcsum
   {
     color: #006C65;
   }
 </style>
-<h1 id="lentilles-minces--modéliser-le-flou">Lentilles minces : modéliser le flou</h1>
-<p>L&rsquo;objectif de cet exercice est de reproduire par traitement d&rsquo;image, à l&rsquo;aide d&rsquo;un programme Python, ce qu&rsquo;on verrait sur un écran situé derrière une lentille convergente pour différentes positions de l&rsquo;écran ; on fournit au programme un fichier image et des paramètres (le diamètre de la lentille $D$, sa distance focale $f&rsquo;$, la distance lentille-objet $\overline{OA}$, la distance lentille-écran $\overline{OE}$, la taille de l&rsquo;objet $\overline{AB}$), et il produit une image correspondant à ce qu&rsquo;on verrait sur l&rsquo;écran.</p>
-<ol>
-<li>Pourquoi la figure sur l&rsquo;écran est-elle floue lorsque la distance entre la lentille et l&rsquo;écran est différente de $\overline{OA&rsquo;}$ ? Faire un schéma pour illustrer.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-<img src="/schemlentflou.png">
-À un point objet ne correspond plus sur l'écran un point image mais une tâche de diamètre $d$.
+<h1 id="cercle-et-triangle">Cercle et triangle</h1>
+<h2 id="trigonométrie">Trigonométrie</h2>
+<div style="position:relative; width:900px; max-width: 100%; margin-left: auto;margin-right: auto;">
+<video src="/enroule.mp4"  width="100%"  autoplay="true" loop="true" style="clip-path: inset(1px 1px);"></video>
+</div>
+<p><img src="/cercleder.png?width=1000" alt=""></p>
+<p><img src="/cerclecos.gif" alt=""></p>
+<br>
+<hr>
+<br>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/4-EClV7U8nM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</div>
+<br>
+<p>La <strong>loi des sinus</strong> a contribué à la définition du <strong>mètre</strong>, la première unité &ldquo;<strong>universelle</strong>&rdquo; lors de la révolution française.</p>
+<p>Delambre et Méchain furent missionner pour mesurer le plus précisément possible un bout de méridien entre Dunkerque et Barcelone, la toute neuve définition du <strong>mètre</strong> étant :</p>
+<blockquote>
+<p><strong>un mètre est la dix millionième partie d&rsquo;un quart de méridien terrestre</strong></p>
 </blockquote>
-</details>
-<ol start="2">
-<li>Déterminer $\overline{OA&rsquo;}$ et $\overline{A'B&rsquo;}$ en fonction de $\overline{OA}$, $f&rsquo;$ et $\overline{AB}$.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-$\displaystyle \overline{OA'} = \frac{\overline{OA}\cdot f'}{\overline{OA}+f'}$<br>
-$\displaystyle \overline{A'B'} = \overline{AB}\times\frac{\overline{OA'}}{\overline{OA}}$
+<p>Le cercle répétiteur de Borda fut leur arme secrète. Il permettait alors de mesurer des angles avec une incertitude de quelques secondes seulement. Mesurer des distances avec cette précision est beaucoupl plus difficile ! L&rsquo;idée fut alors de réaliser des triangulations : on vise des sommets faciles à repérer et on note les angles entre eux. Ils réalisèrent des dizaines de visées tout le long du bout de méridien étudié et le recouvrit de triangles.</p>
+<p><img src="/metremeridien.png" alt=""></p>
+<p>Une seule distance mesurée avec une grande précision permit alors de déterminer toutes les autres.
+En effet, grâce à la <strong>loi des sinus</strong>, la connaissance de la longueur d&rsquo;un côté et de deux angles dans un triangle permet de déterminer les longueurs des deux autres côtés.</p>
+<p>Thalès l&rsquo;avait déjà semble-t-il réalisé puisqu&rsquo;il aurait mis au point la méthode suivante pour connaître la distance entre un navire et la côte : deux observateurs s&rsquo;éloignent l&rsquo;un de l&rsquo;autre sur le trait de côte et mesure l&rsquo;angle entre l&rsquo;autre et le bateau ainsi que la distance qui les sépare l&rsquo;un de l&rsquo;autre.</p>
+<div style="position:relative; width:600px; max-width: 100%; margin-left: auto; margin-right: auto; border-radius:10px">
+<img src="/trigula.png" style="border-radius:10px">
+</div>
+<p>$$\beta=180^\circ - (\alpha+\gamma)$$
+$$AB = AC\times\frac{\sin\gamma}{\sin\beta}$$
+$$d=AB\sin\alpha$$</p>
+<br>
+<hr>
+<h2 id="théorème-de-langle-inscrit-et-de-langle-au-centre">Théorème de l&rsquo;angle inscrit et de l&rsquo;angle au centre</h2>
+<br>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/IO6ZVNXkk4U" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</div>
+<p>Nom d&rsquo;un théorème et système éducatif :</p>
+<blockquote>
+<p>L&rsquo;éducation secondaire se démocratise au cours du xixe siècle. La géométrie, qui a souvent pour but d&rsquo;exercer à la logique, en est un élément important. Les manuels se répandent, et leurs auteurs se mettent à introduire plus ou moins systématiquement des éléments historiques, en particulier en attribuant des noms de mathématicien aux théorèmes. L&rsquo;époque est également au renouveau des recherches historiques sur les mathématiques de la Grèce antique. C&rsquo;est dans ce contexte qu&rsquo;à partir de la fin du xixe siècle le nom de Thalès est attribué à deux théorèmes distincts. En France puis en Italie c&rsquo;est à un théorème du livre VI des Éléments d&rsquo;Euclide, soit celui sur la proportionnalité des segments découpés par une ligne parallèle à un côté dans un triangle, soit sa généralisation pour deux sécantes. En Allemagne c&rsquo;est au théorème de l&rsquo;angle inscrit dans un demi-cercle. Ces dénominations sont bien établies dans les années 1920, époque à laquelle d&rsquo;autres pays adoptent l&rsquo;une ou l&rsquo;autre (mais pas l&rsquo;Angleterre ni les États-Unis).<br><br>
+Ces choix correspondent à des traditions différentes d&rsquo;enseignement de la géométrie, plutôt fidèle à Euclide et à l&rsquo;ordre d&rsquo;exposition des Éléments en Allemagne, alors qu&rsquo;une tradition plus anti-euclidienne s&rsquo;est développée en France depuis La Ramée. Le choix s&rsquo;est porté en France et en Italie, sur un théorème qui met en évidence un invariant de la géométrie affine, le rapport de mesures algébriques sur une droite, ce qui correspond au développement en Europe de la géométrie projective et affine au xixe siècle. Ce théorème est mis en avant dans les débuts de l&rsquo;apprentissage de la géométrie, alors que l&rsquo;Allemagne privilégie le théorème de Pythagore, et choisit de donner le nom de Thalès à un théorème lié au triangle rectangle.<br><br>
+Dans un cas comme dans l&rsquo;autre, le choix du nom n&rsquo;a finalement pas obéi a des considérations strictement historiques. L&rsquo;histoire est instrumentalisée au service d&rsquo;un choix didactique : il s&rsquo;agit de mettre un théorème en avant, en lui attribuant le nom d&rsquo;un mathématicien célèbre, d&rsquo;où des choix différents dans des traditions d&rsquo;enseignement différentes.</p>
 </blockquote>
-</details>
-<ol start="3">
-<li>Déterminer la hauteur $H$ de la figure sur l&rsquo;écran ainsi que le diamètre d&rsquo;une tâche $d$ en fonction de $D$, $f&rsquo;$, $\overline{OA&rsquo;}$, $\overline{OE}$ et $\overline{A&rsquo;B&rsquo;}$.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-<ul>
-<li>$\displaystyle d = D\times\frac{|\overline{OE}-\overline{OA'}|}{\overline{OA'}}$</li>
-<li>Le schéma nous montre que $H-A'B'$ est proportionnel à $|\overline{OE}-\overline{OA'}|$ $\Rightarrow$ $\displaystyle \frac{H-A'B'}{|\overline{OE}-\overline{OA'}|} = cste$.<br>
-Et comme lorsque $\overline{OE}=0$, $H=D$, on a :<br>
-$\displaystyle \frac{H-A'B'}{|\overline{OE}-\overline{OA'}|} = \frac{D-A'B'}{|0-\overline{OA'}|}$<br>
-On en déduit que $\displaystyle H = A'B'+\frac{D-A'B'}{\overline{OA'}}\times |\overline{OE}-\overline{OA'}|$
-</li>
-</ul>
-</blockquote>
-</details>
-<p>Le programme Python est déjà écrit à l&rsquo;exception de la fonction centrale qui contient la physique du problème :</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calcule_taille</span>(D:float, fprime:float, OA:float, OE:float, AB:float) <span style="color:#f92672">-&gt;</span> tuple:
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Entrées:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        D: diamètre de la lentille (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        fprime: 0 distance focale de la lentille (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        OA: distance lentille-objet (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        OE: distance lentille-écran (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        AB: taille objet (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Sorties:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        tuple (H,d) avec:
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        H: hauteur de la figure sur l&#39;écran (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        d: diamètre des tâches sur l&#39;écran (en m)
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># CODE À COMPLÉTER</span>
-</span></span></code></pre></div><ol start="3">
-<li>Se rendre sur <a href="https://colab.research.google.com/drive/1mf8qHa3ZdkZ43RzJWAAmXbzfzaQTYaPO?usp=sharing">ce notebook Colab</a> et compléter la fonction.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-Exemple de solution :
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calcule_taille</span>(D, fprime, OA, OE, AB):
-</span></span><span style="display:flex;"><span>    OAprime <span style="color:#f92672">=</span> fprime <span style="color:#f92672">*</span> OA <span style="color:#f92672">/</span> (fprime <span style="color:#f92672">+</span> OA)
-</span></span><span style="display:flex;"><span>    d <span style="color:#f92672">=</span> (abs(OE <span style="color:#f92672">-</span> OAprime) <span style="color:#f92672">/</span> OAprime <span style="color:#f92672">*</span> D)
-</span></span><span style="display:flex;"><span>    AprimeBprime <span style="color:#f92672">=</span> AB <span style="color:#f92672">*</span> OAprime <span style="color:#f92672">/</span> OA
-</span></span><span style="display:flex;"><span>    H <span style="color:#f92672">=</span> abs(AprimeBprime) <span style="color:#f92672">+</span> (D <span style="color:#f92672">-</span> abs(AprimeBprime)) <span style="color:#f92672">/</span> OAprime <span style="color:#f92672">*</span> (abs(OE <span style="color:#f92672">-</span> OAprime))
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> H, d
-</span></span></code></pre></div></blockquote>
-</details>
+<p style="text-align:right">
+<i>Source : <a href="https://fr.wikipedia.org/wiki/Angle_inscrit_dans_un_demi-cercle#Appellation">Wikipédia</a></i>
+</p>
+<br>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/tFel-c8dKH0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</div>
+<br>
+<p><img src="/delahire.gif" alt=""></p>
+<br>
 
 
 <footer class="footline">
@@ -2858,6 +2850,7 @@ Exemple de solution :
             
                 
                     
+                    
                 
                 
 
@@ -2872,6 +2865,9 @@ Exemple de solution :
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2889,6 +2885,7 @@ Exemple de solution :
             
                 
                     
+                    
                 
                 
 
@@ -2904,6 +2901,7 @@ Exemple de solution :
             
                 
                     
+                    
                 
                 
 
@@ -2916,6 +2914,9 @@ Exemple de solution :
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2933,40 +2934,6 @@ Exemple de solution :
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -2984,40 +2951,8 @@ Exemple de solution :
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
                         
-            
-            
-                
                     
                 
                 
@@ -3026,6 +2961,12 @@ Exemple de solution :
                     
                     
 
+                    
+            
+        
+                    
+            
+        
                     
                         
             
@@ -3058,6 +2999,38 @@ Exemple de solution :
                     
             
         
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
                         
             
@@ -3155,6 +3128,38 @@ Exemple de solution :
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -3165,7 +3170,6 @@ Exemple de solution :
             
             
                 
-                    
                     
                 
                 
