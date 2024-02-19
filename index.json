@@ -252,6 +252,13 @@
 	"content": " La Terre, un astre singulier Forme de la Terre Horizon Ératosthène Histoire du mètre Se déplacer sur une sphère Représenter une sphère sur un plan La Terre dans l\u0026rsquo;univers Copernic Parallaxe Mouvements de la Terre Lune "
 },
 {
+	"uri": "https://coursphychi.github.io/tes/vivant/demographie/",
+	"title": "Modèles démographiques",
+	"tags": [],
+	"description": "",
+	"content": " Les modèles démographiques Données et prédictions mondiales Les croissances exponentielles Question bonus : pourquoi la longueur des cordes d\u0026rsquo;un piano suit-elle une progression géométrique comme dans le dessin ci-dessous (réinvestissement du programme de 1ES) ? Quelle est la raison de la suite ?\nActivités Activité maths et croissance Activité Malthus Activité Japon appliquette geogebra appliquette geogebra appliquette geogebra 1\nappliquette geogebra 2 $\\rightarrow$ Correction\n"
+},
+{
 	"uri": "https://coursphychi.github.io/more/maths/probastat/",
 	"title": "Probabilités / Statistiques",
 	"tags": [],
@@ -285,13 +292,6 @@
 	"tags": [],
 	"description": "",
 	"content": " Une histoire du vivant Les modèles démographiques Passé et futur Croissance exponentielle Stagnation et décroissance Intelligence Artificielle Histoire de l\u0026rsquo;IA Apprentissage machine (KNN et K-Means) IA et éthique Inférences bayésiennes Motivation Théorème de Bayes Exemples Aide au diagnostic médical "
-},
-{
-	"uri": "https://coursphychi.github.io/tes/vivant/demographie/",
-	"title": "Une histoire du vivant",
-	"tags": [],
-	"description": "",
-	"content": " Les modèles démographiques Données et prédictions mondiales Les croissances exponentielles Question bonus : pourquoi la longueur des cordes d\u0026rsquo;un piano suit-elle une progression géométrique comme dans le dessin ci-dessous (réinvestissement du programme de 1ES) ? Quelle est la raison de la suite ?\nActivités Activité maths et croissance Activité Malthus Activité Japon appliquette geogebra appliquette geogebra appliquette geogebra 1\nappliquette geogebra 2 $\\rightarrow$ Correction\n"
 },
 {
 	"uri": "https://coursphychi.github.io/tsti2d/combustion/",
