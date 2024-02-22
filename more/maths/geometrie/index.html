@@ -36,22 +36,22 @@
     
 
     
-    <link href="/css/nucleus.css?1708309350" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1708309350" rel="stylesheet">
-    <link href="/css/hybrid.css?1708309350" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1708309350" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1708309350" rel="stylesheet">
-    <link href="/css/auto-complete.css?1708309350" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1708309350" rel="stylesheet">
-    <link href="/css/theme.css?1708309350" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1708309350" rel="stylesheet">
+    <link href="/css/nucleus.css?1708620402" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1708620402" rel="stylesheet">
+    <link href="/css/hybrid.css?1708620402" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1708620402" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1708620402" rel="stylesheet">
+    <link href="/css/auto-complete.css?1708620402" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1708620402" rel="stylesheet">
+    <link href="/css/theme.css?1708620402" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1708620402" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1708309350" rel="stylesheet">
+    <link href="/css/theme-blue.css?1708620402" rel="stylesheet">
     
-    <link href="/css/foo.css?1708309350" rel="stylesheet"><link href="/css/bar.css?1708309350" rel="stylesheet">
+    <link href="/css/foo.css?1708620402" rel="stylesheet"><link href="/css/bar.css?1708620402" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1708309350"></script>
+    <script src="/js/jquery-3.3.1.min.js?1708620402"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -105,14 +105,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1708309350"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1708309350"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1708620402"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1708620402"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1708309350"></script>
+<script type="text/javascript" src="/js/search.js?1708620402"></script>
 
     
   </div>
@@ -1578,6 +1578,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
             
           
+            
+            
+          
         
         </ul>
       
@@ -1897,6 +1900,8 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -1905,14 +1910,19 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents"></nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
         <div id="head-tags">
         
         </div>
-        
-          <div id="chapter">
         
         <div id="body-inner">
 
@@ -1922,8 +1932,15 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 
 	<h1 id="géométrie">Géométrie</h1>
-<p>La géométrie est avec l&rsquo;arithmétique une des plus vieilles branches des mathématiques.<br>L&rsquo;arithmétique pour tenir les comptes et la géométrie pour mesurer les terres</p>
+<p>La géométrie est avec l&rsquo;arithmétique une des plus vieilles branches des mathématiques (l&rsquo;arithmétique pour tenir les comptes et la géométrie pour mesurer les terres).</p>
 <p>Géométrie et physique sont intimement liées. Le développement de la géométrie a en partie été poussé par les questionnements des astronomes (sur la position des astres, leur mouvement, leur taille, leur distance, etc.) et des ingénieurs (pour construire des trucs qui tiennent debout). Et une explication géométrique des lois fondamentales de l&rsquo;univers attire toujours certains chercheurs, plus de 2000 ans après Platon.</p>
+<hr>
+<ul>
+<li><a href="./geo1/"><strong>Triangle : Pythagore, Thalès, droite d&rsquo;Euler</strong></a></li>
+<li><a href="./geo2/"><strong>Cercle et triangle : trigonométrie, angle inscrit</strong></a></li>
+<li><a href="./geo3/"><strong>Aires, Volumes et autre</strong></a></li>
+</ul>
+<hr>
 <br>
 <div id="canvasContainer" style="width: 100%; max-width: 1000px; margin: auto;">
     <canvas id="myCanvas"></canvas>
@@ -1940,14 +1957,20 @@ var maxIterations = 120;
 var reversing = false;
 var states = [];
 var initialPositions = [];
+var animationFrameId = null;
 
 function resizeCanvas() {
+    // Annuler l'animation en cours pour éviter les doubles appels
+    if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+    }
+
     canvas.width = document.getElementById('canvasContainer').clientWidth;
     canvas.height = canvas.width * 0.75;
     initialPositions = [
         [canvas.width * 0.0, canvas.height * 0.0],
-        [canvas.width * 1., canvas.height * 0.0],
-        [canvas.width * 0.5, canvas.height * 1.]
+        [canvas.width * 1.0, canvas.height * 0.0],
+        [canvas.width * 0.5, canvas.height * 1.0]
     ];
     resetAnimation();
     draw();
@@ -1973,34 +1996,31 @@ function updatePositions(points) {
 function draw() {
     delay++;
     if (delay < delayMax) {
-        requestAnimationFrame(draw);
+        animationFrameId = requestAnimationFrame(draw);
         return;
     }
     delay = 0;
     
     if (!reversing && states.length < maxIterations) {
-        // Lors de l'ajout, dessiner le nouveau polygone en noir et conserver la couleur du précédent
         if (states.length > 0) {
             states[states.length - 1].color = colors[colorIndex % colors.length];
             colorIndex++;
         }
-        states.push({points: points.map(p => [...p]), color: "#FFF"}); // Nouveau polygone en noir
+        states.push({points: points.map(p => [...p]), color: "#FFF"});
         points = updatePositions(points);
     } else if (states.length >= maxIterations && !reversing) {
         reversing = true;
     } else if (states.length > 0 && reversing) {
-        // Lors de l'effacement, changer la couleur du dernier polygone en noir avant de l'effacer
         if (states.length === 1) {
-            states.pop(); // Si c'est le dernier, le retirer directement
+            states.pop();
         } else {
-            states[states.length - 1].color = "#FFF"; // Changer la couleur du dernier en noir
-            setTimeout(() => states.pop(), delayMax * 10); // Retarder l'effacement pour visualiser le changement de couleur
+            states[states.length - 1].color = "#FFF";
+            setTimeout(() => states.pop(), delayMax * 10);
         }
     } else if (states.length === 0 && reversing) {
         resetAnimation();
     }
     
-    // Effacer et redessiner tous les polygones
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     states.forEach(state => {
         ctx.beginPath();
@@ -2015,7 +2035,7 @@ function draw() {
         ctx.stroke();
     });
     
-    requestAnimationFrame(draw);
+    animationFrameId = requestAnimationFrame(draw);
 }
 
 window.addEventListener('resize', resizeCanvas);
@@ -2030,8 +2050,6 @@ resizeCanvas();
 	
 </footer>
 
-        
-            </div> 
         
         </div>
         
@@ -3027,6 +3045,11 @@ resizeCanvas();
             
         
                     
+                        
+            
+            
+        
+                    
             
         
                     
@@ -3258,19 +3281,19 @@ resizeCanvas();
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1708309350"></script>
-    <script src="/js/perfect-scrollbar.min.js?1708309350"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1708309350"></script>
-    <script src="/js/jquery.sticky.js?1708309350"></script>
-    <script src="/js/featherlight.min.js?1708309350"></script>
-    <script src="/js/highlight.pack.js?1708309350"></script>
+    <script src="/js/clipboard.min.js?1708620402"></script>
+    <script src="/js/perfect-scrollbar.min.js?1708620402"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1708620402"></script>
+    <script src="/js/jquery.sticky.js?1708620402"></script>
+    <script src="/js/featherlight.min.js?1708620402"></script>
+    <script src="/js/highlight.pack.js?1708620402"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1708309350"></script>
-    <script src="/js/learn.js?1708309350"></script>
-    <script src="/js/hugo-learn.js?1708309350"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1708620402"></script>
+    <script src="/js/learn.js?1708620402"></script>
+    <script src="/js/hugo-learn.js?1708620402"></script>
     
         
-            <script src="/mermaid/mermaid.js?1708309350"></script>
+            <script src="/mermaid/mermaid.js?1708620402"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

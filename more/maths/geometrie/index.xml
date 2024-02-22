@@ -14,8 +14,8 @@
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo1/</guid>
       <description>Le triangle Pythagore Pythagore a vécu à Samos (une île grecque) au 6e siècle avant notre ère. Malgré le nom qu&amp;rsquo;on lui donne, le théorème de Pythagore était connu et utilisé par les Babyloniens et les Indiens des siècles avant Pythagore. Mais peut-être que Pythagore a été le premier à l&amp;rsquo;introduire en Grèce et cela a suffi à lui octroyer une reconnaissance éternelle.
-La démonstration historique d&amp;rsquo;Euclide :
-Deux démonstrations par découpage et réarrangement :</description>
+Théorème de Pythagore :
+Si un triangle est rectangle, alors le carré de la longueur de l’hypoténuse est égal à la somme des carrés des longueurs des deux autres côtés.</description>
     </item>
     <item>
       <title>Cercle et Trigo</title>
@@ -32,7 +32,7 @@ Le cercle répétiteur de Borda fut leur arme secrète.</description>
       <link>https://coursphychi.github.io/more/maths/geometrie/geo3/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo3/</guid>
-      <description> Autres joyeusetés Aires et volumes Un petit problème en dimension n Courbes de poursuite </description>
+      <description> Autres joyeusetés Aires et volumes Surprises des volumes en grande dimension Courbes de poursuite </description>
     </item>
   </channel>
 </rss>
