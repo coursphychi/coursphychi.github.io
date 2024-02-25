@@ -272,13 +272,11 @@ Exemple :
 La configuration électronique de l’atome de sodium (numéro atomique Z = 11) est $\text{1s}^2\,\text{2s}^2\,\text{2p}^6\,\text{3s}^1$ à l’état fondamental. Cette configuration permet de retrouver la position de l’élément sodium dans le tableau périodique : il se situe dans la 3e période et la 1re colonne du bloc s, et par conséquent, la 1re colonne du tableau.</description>
     </item>
     <item>
-      <title>Aires, Volumes et plus</title>
+      <title>Aires et Volumes</title>
       <link>https://coursphychi.github.io/more/maths/geometrie/geo3/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo3/</guid>
-      <description>Autres joyeusetés Aires et volumes Surprises des volumes en grande dimension Le volume d&amp;rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$.
-Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;
-à 1D, la boule se réduit à un segment de longueur $R$. à 2D, c&amp;rsquo;est un disque de &amp;ldquo;volume&amp;rdquo; $\pi R^2$. Ce qu&amp;rsquo;on appelle aire dans notre monde 3D est bien le volume (l&amp;rsquo;espace contenu à l&amp;rsquo;intérieur) d&amp;rsquo;un monde 2D.</description>
+      <description> Aires et volumes </description>
     </item>
     <item>
       <title>Relativité générale</title>
@@ -306,6 +304,16 @@ Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pend
 Définition Quantité de matière d’une espèce chimique
 Grandeur, exprimée en moles, utilisée pour dénombrer les entités d’une espèce chimique dans un échantillon de matière, une mole étant définie comme un ensemble d’exactement $6,02214076\times10^{23}$ entités.
 Documents TP - Bouteille bleue </description>
+    </item>
+    <item>
+      <title>Dimensions</title>
+      <link>https://coursphychi.github.io/more/maths/geometrie/geo4/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/geometrie/geo4/</guid>
+      <description>Curse of dimensionnality :
+surprises en grande dimension Le volume d&amp;rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$.
+Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;
+à 1D, la boule se réduit à un segment de longueur $R$. à 2D, c&amp;rsquo;est un disque de &amp;ldquo;volume&amp;rdquo; $\pi R^2$. Ce qu&amp;rsquo;on appelle aire dans notre monde 3D est bien le volume (l&amp;rsquo;espace contenu à l&amp;rsquo;intérieur) d&amp;rsquo;un monde 2D. à 3D, le volume de la boule vaut $\frac{4}{3}\pi R^3$.</description>
     </item>
     <item>
       <title>Logique</title>

@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Respiration - Cours de physique chimie</title>
+    <title>Dimensions - Cours de physique chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -79,7 +79,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/colles/respiration_corr/">
+  <body class="" data-url="/more/maths/geometrie/geo4/">
     <nav id="sidebar" class="">
 
 
@@ -1342,7 +1342,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/" title="MORE" class="dd-item
-        
+        parent
         
         
         ">
@@ -1397,7 +1397,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/" title="Maths" class="dd-item
-        
+        parent
         
         
         ">
@@ -1426,7 +1426,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/geometrie/" title="Géométrie" class="dd-item
-        
+        parent
         
         
         ">
@@ -1515,7 +1515,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/more/maths/geometrie/geo4/" title="Dimensions" class="dd-item ">
+      <li data-nav-id="/more/maths/geometrie/geo4/" title="Dimensions" class="dd-item active">
         <a href="/more/maths/geometrie/geo4/">
         Dimensions
         
@@ -1832,7 +1832,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        parent
+        
         
         
         ">
@@ -1926,7 +1926,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Respiration
+                   Dimensions
                  
                   </span>
                 </div>
@@ -1935,7 +1935,16 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#correction">Correction</a></li>
+    <li>
+      <ul>
+        <li><a href="#petite-énigme">Petite énigme</a></li>
+        <li><a href="#volume-dune-n-boule">Volume d&rsquo;une $n$-boule</a></li>
+        <li><a href="#boule-dans-boite">Boule dans boite</a></li>
+        <li><a href="#concentration-sur-les-bords">Concentration sur les bords</a></li>
+        <li><a href="#the-average-man">The &ldquo;Average man&rdquo;</a></li>
+        <li><a href="#distance-entre-les-points">Distance entre les points</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -1955,103 +1964,149 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<h2 id="correction">Correction</h2>
-<p>La respiration permet d&rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&rsquo;espère).</p>
-<p>On va supposer l&rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&rsquo;énergie interne de $n$ moles d&rsquo;air vaut $U=\frac{5}{2}nRT$.</p>
-<p>On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro. <br>
-De même, seules les pressions relatives nous intéressent $\Rightarrow$ la pression $P$  avant inspiration (= après expiration) est prise comme égale à zéro.</p>
-<p>Une modélisation de $V(P)$ à partir de mesures expérimentales (faites pour $P$ grâce à un cathéter œsophagien et pour $V$ grâce à un pléthysmographe) donne :</p>
+<style>
+ #correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ #comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ #commsum
+  {
+    color: #004D80;
+  }
+ #correcsum
+  {
+    color: #006C65;
+  }
+</style>
+<h1 id="curse-of-dimensionnalitynbspbrsurprises-en-grande-dimension">Curse of dimensionnality :<br>surprises en grande dimension</h1>
+<p>Le volume d&rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$.</p>
+<p>Pour la boule, de rayon $R$, c&rsquo;est plus compliqué&hellip;</p>
 <ul>
-<li>pour l&rsquo;inspiration : $V=A_I\left(1-e^{-k_IP}\right)$</li>
-<li>pour l&rsquo;expiration : $V=A_E\left(1-e^{-k_EP}\right)$</li>
+<li>à 1D, la boule se réduit à un segment de longueur $R$.</li>
+<li>à 2D, c&rsquo;est un disque de &ldquo;volume&rdquo; $\pi R^2$. Ce qu&rsquo;on appelle aire dans notre monde 3D est bien le volume (l&rsquo;espace contenu à l&rsquo;intérieur) d&rsquo;un monde 2D.</li>
+<li>à 3D, le volume de la boule vaut $\frac{4}{3}\pi R^3$.</li>
 </ul>
-<p>Avec $A_I=3,57\text{ L}$, $k_I=0,964.10^{-3}\text{ Pa}^{-1}$, $A_E=3,35\text{ L}$, $k_E=1,644.10^{-3}\text{ Pa}^{-1}$.</p>
-<p>$A$ est la capacité pulmonaire maximale et $k$ est un coefficient de compressibilité.<br>
-$A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;affaissent, leurs parois se collant sous l&rsquo;action de la tension superficielle (et ce malgré que le poumon produise des surfactants équivalents à ceux qu&rsquo;on trouve dans le savon pour abaisser cette énergie de surface&hellip; Sans eux, c&rsquo;est tout le poumon qui s&rsquo;affaisserait). Et c&rsquo;est aussi pourquoi $k_I&gt;k_E$ ; à l&rsquo;inspiration, il faut vaincre la tension de surface pour recruter à nouveau les alvéoles affaissées.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.integrate <span style="color:#f92672">import</span> quad
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.optimize <span style="color:#f92672">import</span> fsolve
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>A_I, A_E <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.57</span>, <span style="color:#ae81ff">3.35</span>
-</span></span><span style="display:flex;"><span>k_I, k_E <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.964</span>, <span style="color:#ae81ff">1.644</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">P_I</span>(V): <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>k_I<span style="color:#f92672">*</span>(np<span style="color:#f92672">.</span>log(A_I<span style="color:#f92672">/</span>(A_I<span style="color:#f92672">-</span>V)))
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">P_E</span>(V): <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>k_E<span style="color:#f92672">*</span>(np<span style="color:#f92672">.</span>log(A_E<span style="color:#f92672">/</span>(A_E<span style="color:#f92672">-</span>V)))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">diff</span>(V): <span style="color:#66d9ef">return</span> P_I(V)<span style="color:#f92672">-</span>P_E(V)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Vmax <span style="color:#f92672">=</span> min(A_E,A_I)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>V_f <span style="color:#f92672">=</span> fsolve(diff,[<span style="color:#ae81ff">1</span>,Vmax<span style="color:#f92672">-</span><span style="color:#ae81ff">1e-5</span>])[<span style="color:#ae81ff">1</span>]
-</span></span><span style="display:flex;"><span>P_f <span style="color:#f92672">=</span> P_I(V_f)
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;V_f = </span><span style="color:#e6db74">{</span>V_f<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> L&#34;</span>)
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;P_f = </span><span style="color:#e6db74">{</span>P_f<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> kPa&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>V <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>,V_f,<span style="color:#ae81ff">100</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">10</span>),dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">150</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(V,P_I(V),c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;inspiration&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(V,P_E(V),c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;expiration&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Volume V (L)&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Pression P (kPa)&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><p><code>V_f = 3.31 L</code><br>
-<code>P_f = 2.73 kPa</code></p>
-<p><img src="/courberespi1.png" alt="png"></p>
-<ol>
-<li>
-<p>Déterminer numériquement les valeurs finales de volume et de pression $V_f$ et $P_f$ en fin d&rsquo;inspiration / début d&rsquo;expiration (on est sensé obtenir $V_f = 3,31\text{ L}$ et $P_f = 2,73\text{ kPa}$).</p>
-</li>
-<li>
-<p>Reproduire la figure ci-dessus représentant $P(V)$ à l&rsquo;inspiration et à l&rsquo;expiration en utilisant la librairie <code>matplotlib</code>.</p>
-</li>
-<li>
-<p>Lorsque la respiration n&rsquo;est pas forcée, les muscles respiratoires ne travaillent que pendant l&rsquo;inspiration (l&rsquo;élasticité des poumons suffit pour l&rsquo;expiration). Calculer ce travailnnumériquement. Et analytiquement, montrer qu&rsquo;il vaut $-A_IP_f+P_fV_f+\frac{V_f}{k_I}$. Quelle proportion du métabolisme d&rsquo;un humain moyen (10 MJ par jour) la respiration représente-t-elle ?</p>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>W <span style="color:#f92672">=</span> quad(P_I, <span style="color:#ae81ff">0</span>, V_f)[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;W = </span><span style="color:#e6db74">{</span>W<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> J&#34;</span>)
-</span></span><span style="display:flex;"><span>prop <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span><span style="color:#f92672">*</span><span style="color:#ae81ff">24</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span>W<span style="color:#f92672">/</span><span style="color:#ae81ff">10e6</span><span style="color:#f92672">*</span><span style="color:#ae81ff">100</span> <span style="color:#75715e"># pour 15 inspirations par minute</span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;proportion du métabolisme : </span><span style="color:#e6db74">{</span>prop<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> %&#34;</span>)
-</span></span></code></pre></div><p><code>W = 2.73 J</code><br>
-<code>proportion du métabolisme : 0.59</code></p>
+<p>Mais à plus grande dimension ? Pour des boules de rayon 1, ça nous donne les volumes suivants en fonction de la dimension : $1$, $\pi$, $\frac{4\pi}{3}$. Est-ce que cela continue d&rsquo;augmenter pour les dimensions supérieures ?<br>
+Aussi bizarre que cela puisse paraître, on va voir que le volume culmine en dimension 5 puis s&rsquo;effondre jusqu&rsquo;à presque s&rsquo;évanouir !</p>
+<p>La petite énigme suivante va nous familiariser avec ces bizarreries.</p>
 <br>
-<p>$\begin{aligned} W&amp;=-W_I &amp;\text{le travail musculaire s&rsquo;oppose au travail des forces de pression} \\ &amp;=-\int_0^{V_f}-PdV \\ &amp; =\int_0^{P_f}PA_I k_I e^{-k_I P}dP &amp;\text{en utilisant }dV=A_Ik_Ie^{-k_IP}dP \\ &amp; =A_Ik_I\left[\frac{-P}{k_I}e^{-k_I P}\right]_0^{P_f}-A_Ik_I\int_0^{P_f}\frac{-1}{k_I} e^{-k_I P}dP &amp;\text{intégration par partie}  \\ &amp; =A_Ik_I\left[\frac{-P}{k_I}e^{-k_I P}\right]_0^{P_f}-A_Ik_I\left[\frac{1}{k_I^2}e^{-k_I P}\right]_0^{P_f} &amp; \\ &amp; =-A_I P_f e^{-k_I P_f}-\frac{A_I}{k_I}e^{-k_I P_f}+\frac{A_I}{k_I} \\ &amp; =-A_IP_f+P_fV_f+\frac{V_f}{k_I}&amp;\text{car }A_Ie^{-k_IP_f}=A_I-V_f \end{aligned}$</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>W <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>A_I<span style="color:#f92672">*</span>P_f <span style="color:#f92672">+</span> P_f<span style="color:#f92672">*</span>V_f <span style="color:#f92672">+</span> V_f<span style="color:#f92672">/</span>k_I
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;W = </span><span style="color:#e6db74">{</span>W<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> J&#34;</span>)
-</span></span></code></pre></div><p><code>W = 2.73 J</code></p>
-<ol start="4">
-<li>Que vaut le transfert thermique $Q_I$ fourni à l&rsquo;air lors d&rsquo;une inspiration ?</li>
-</ol>
-<p>$\Delta U_I = W_I + Q_I \Rightarrow Q_I = \Delta U_I - W_I$<br></p>
-<p>$\begin{aligned}Q_I &amp;= \frac{5}{2}(P_fV_f - 0)-\int_0^{V_f} -P dV\\&amp;= \frac{5}{2}(P_fV_f - 0)-A_IP_f+P_fV_f+\frac{V_f}{k_I}\\&amp;=\frac{7}{2}P_fV_f-A_I P_f +\frac{V_f}{k_I}\end{aligned}$</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Q_I <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>P_f<span style="color:#f92672">*</span>V_f <span style="color:#f92672">-</span> A_I<span style="color:#f92672">*</span>P_f<span style="color:#f92672">+</span>V_f<span style="color:#f92672">/</span>k_I
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Q_I = </span><span style="color:#e6db74">{</span>Q_I<span style="color:#e6db74">:</span><span style="color:#e6db74">.1f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> J&#34;</span>)
-</span></span><span style="display:flex;"><span>Q_I <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>P_f<span style="color:#f92672">*</span>V_f <span style="color:#f92672">+</span> W
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Q_I = </span><span style="color:#e6db74">{</span>Q_I<span style="color:#e6db74">:</span><span style="color:#e6db74">.1f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> J&#34;</span>)
-</span></span></code></pre></div><p><code>Q_I = 25.3 J</code><br>
-<code>Q_I = 25.3 J</code></p>
-<ol start="5">
-<li>Calculer le transfert thermique $Q$ lors d&rsquo;un cycle respiratoire complet puis la puissance thermique libérée. Commenter son signe.</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">6</span>),dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">150</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(V,P_I(V),c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;inspiration&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(V,P_E(V),c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;expiration&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Volume V (L)&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Pression P (kPa)&#34;</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>fill_between(V, P_I(V), P_E(V), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;yellow&#34;</span>, alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.2</span>)
-</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><p><img src="/courberespi2.png" alt="png"></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Q <span style="color:#f92672">=</span> quad(diff, <span style="color:#ae81ff">0</span>, V_f)[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Q = </span><span style="color:#e6db74">{</span>Q<span style="color:#e6db74">:</span><span style="color:#e6db74">.3f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> J&#34;</span>)
-</span></span><span style="display:flex;"><span>Plib <span style="color:#f92672">=</span> Q<span style="color:#f92672">/</span><span style="color:#ae81ff">4</span> <span style="color:#75715e"># en prenant 4 s pour un cycle respiratoire (15 respirations par minute)</span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Plib = </span><span style="color:#e6db74">{</span>Plib<span style="color:#e6db74">:</span><span style="color:#e6db74">.3f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> W&#34;</span>)
-</span></span></code></pre></div><p><code>Q = 0.821 J</code><br>
-<code>Plib = 0.205 W</code></p>
+<h3 id="petite-énigme">Petite énigme</h3>
+<blockquote>
+<p>On prend un $n$-cube (cube de dimension $n$) de côté $4$ et on y place à l&rsquo;intérieur autant de  $n$-boules de rayon $1$ que l&rsquo;on peut.<br>Quel sera le rayon de la plus grande $n$-boule possible que l&rsquo;on pourra placer au centre de la boite, dans l&rsquo;espace laissé libre par les autres boules ?</p>
+</blockquote>
+<p>On peut décomposer la boite en $2^n$ sous-boites de côté $2$ contenant chacune une boule de côté $1$.</p>
+<ul>
+<li>à 1D, il ne reste aucune place pour une sphère au milieu : le $1$-cube de côté $4$ est un segment de longueur $4$ dans lequel on peut placer deux $1$-boules de rayon $1$ qui sont des segments de longueur $2$.</li>
+<li>à 2D, 4 $2$-boules (disques) sont placés dans le $2$-cube (carré). Pythagore nous dit que la distance entre le centre de chaque boule et le centre de la boite vaut $\sqrt{R^2+R^2}=R\sqrt{2}$. Par conséquent, le rayon de la plus grande $2$-boule (disque) que l&rsquo;on peut placer au centre est de $R\sqrt{2}-R=\sqrt{2}-1$.</li>
+</ul>
+<p><img src="/dimncube.png?width=500px" alt=""></p>
+<ul>
+<li>à 3D, on place 8 $3$-boules dans le $3$-cube. On peut faire le même raisonnement qu&rsquo;à 2D pour trouver la distance entre le centre des $3$-boules et celui de la boite. C&rsquo;est toujours Pythagore qui nous aide (du moins sa généralisation à $n$ dimensions) et on obtient comme plus grand rayon possible pour la $3$-boule du milieu : $\sqrt{R^2+R^2+R^2}-R = \sqrt{3}R-R = \sqrt{3}-1$.</li>
+</ul>
+<p><img src="/tourneboule.gif?width=500px" alt=""></p>
+<p>On peut sans problème généraliser à $n$ dimensions. Le rayon de la sphère du milieu vaudra $\sqrt{n}-1$. Facile !</p>
+<p>Mais regardons maintenant ce que cela signifie.<br>
+À 4D, la sphère du milieu est aussi grande que les 16 autres ! À 9D, le rayon de la sphère centrale vaut 2 !!! Elle est deux fois plus grande que les 512 voisines et elle touche les parois de la boite. À partir de 10D, la boule centrale déborderait de la boite&hellip; Sorcellerie !</p>
+<br>
+<h3 id="volume-dune-n-boule">Volume d&rsquo;une $n$-boule</h3>
+<p>Le volume $V_n$ d&rsquo;une $n$-boule de rayon $R$ peut se déterminer grâce à la formule de récurrence suivante  $\displaystyle V_n(R)=\frac{2\pi R^2}{n} V_{n-2}(R)$<br>
+En prenant $V_0(R) =1$ (à partir de la formule du cube $a^n$) et $V_1(R)=2R$, on peut déterminer le volume en toute dimension.</p>
+<br>
+<details>
+<summary id="correcsum">
+<a style="color:#006C65;">Démonstration de la formule de récurrence&nbsp;:</a></summary>
+<blockquote id="correc"> 
+Le volume du $n$-boule est par définition $\displaystyle V_n(R) = \underset{x_1^2+x_2^2+\cdots+x_n^2≤R^2}{\int\cdots\int} dx_1 dx_2\cdots dx_n$.<br>
+Séparons l'intégration en deux&nbsp;:
+$\displaystyle V_n(R) = \underset{x_1^2+x_2^2≤R^2}{\iint}\left(\underset{x_3^2+\cdots+x_n^2≤R^2-x_1^2-x_2^2}{\int\cdots\int} dx_3\cdots dx_n\right)dx_1dx_2 = \underset{x_1^2+x_2^2≤R^2}{\iint}V_{n-2}\left(\sqrt{R^2-x_1^2-x_2^2}\right)dx_1dx_2$<br>
+Passons en coordonnées polaires pour les deux premières dimensions en posant $x_1 = r\cos\theta$ et $x_2 = r\sin\theta$.<br>
+On a alors $x_1^2+x_2^2=r^2$ et $dx_1dx_2 = r dr d\theta$.<br>
+$V_n(R)$ devient&nbsp;:<br>
+$\displaystyle V_n(R) = \int_0^{2\pi}\int_0^R V_{n-2}\left(\sqrt{R^2-r^2}\right)rdrd\theta$<br>
+Or par symétrie et analyse dimensionnelle $V_n(a\times R) = a^nV_n(R)$, et ici, on a $V_{n-2}\left(\sqrt{R^2-r^2}\right)=V_{n-2}\left(\left(\sqrt{1-\frac{r^2}{R^2}}\right)R\right)=\left(1-\frac{r^2}{R^2}\right)^{\frac{n-2}{2}}V_{n-2}(R)$<br>
+Finalement $V_n$ se réduit à&nbsp;:<br>
+$
+\begin{aligned}
+V_n(R) &= V_{n-2}(R)\int_0^{2\pi}\int_0^R \left(1-\frac{r^2}{R^2}\right)^{\frac{n-2}{2}}rdrd\theta\\\\
+& = 2\pi V_{n-2}(R) \int_0^R \left(1-\frac{r^2}{R^2}\right)^{\frac{n-2}{2}}rdr\\\\
+& =  2\pi V_{n-2}(R) \left[-\frac{R^2}{2}\frac{2}{n}\left(1-\frac{r^2}{R^2}\right)^{\frac{n}{2}}\right]_{r=0}^{r=R}\\\\
+& = \frac{2\pi R^2}{n} V_{n-2}(R)
+\end{aligned}
+$
+</blockquote>
+</details>
+<br>
+<p>On va ne s&rsquo;intéresser ici qu&rsquo;aux $n$-boules de rayon un. Le petit programme suivant nous permet d&rsquo;obtenir leurs volumes :</p>
+<br>
+<iframe src="https://trinket.io/embed/python/ad65489bb8" width="100%" height="500" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+<p><img src="/voldim.png?width=1200px" alt=""></p>
+<p>Le volume culmine en dimension 5 puis ne fait que diminuer. Qu&rsquo;a de particulier la dimension 5 ? Pas grand chose&hellip;</p>
+<p>Regardons ce que nous dit la formule de récurrence :</p>
+<ul>
+<li>si $n$ est pair :<br>
+$\displaystyle V_n(R) = \frac{2\pi R}{n}\times\frac{2\pi R}{n-2}\times\cdots\times \frac{2\pi R}{4}\times\frac{2\pi R}{2}\times V_0(R)$, avec $V_0(R) = 1$<br>
+Donc $\displaystyle V_n(R) = \frac{2^{n/2}\pi^{n/2}R^n}{n\cdot (n-2)\cdots  4 \cdot 2} =  \frac{\pi^{n/2}R^n}{\left(\frac{n}{2}\right)!}$</li>
+<li>si $n$ est impair :<br>
+$\displaystyle V_n(R) = \frac{2\pi R}{n}\times\frac{2\pi R}{n-2}\times\cdots\times \frac{2\pi R}{3}\times\frac{2\pi R}{1}\times V_1(R)$, avec$V_1(R)=2R$<br>
+Donc $\displaystyle V_n(R) = \frac{2^{\frac{n+1}{2}}\pi^{\frac{n-1}{2}}R^n}{n\cdot (n-2)\cdots  3\cdot 1} $<br>
+L&rsquo;ensemble des deux formules peuvent se combiner en une seule utilisant la fonction gamma $\Gamma$ :<br>
+$\displaystyle V_n(R) = \frac{\pi^{\frac{n}{2}}R^n}{\Gamma\left(\frac{n}{2}+1\right)} $</li>
+</ul>
+<p>En traçant l&rsquo;évolution du volume pour différents rayons, on constate que le maximum change de dimension.</p>
+<p><img src="/dimcourbe.png?width=1000px" alt=""></p>
+<p>La présence d&rsquo;un maximum s&rsquo;explique par la course entre le numérateur de la formule, à base de puissances, et le dénominateur fait de factorielles. Si les puissances peuvent démarrer plus vite, la factorielle finira toujours fatalement par dominer (dans les deux cas, on a un produit de n facteurs mais pour la factorielle, ces facteurs augmentent an fonction de n). Et c&rsquo;est bien ça le plus intéressant : cet évanouissement du volume de l&rsquo;hyperboule pour des grandes dimensions.</p>
+<p>Essayons de mieux comprendre son origine.</p>
+<br>
+<h3 id="boule-dans-boite">Boule dans boite</h3>
+<p>Plaçons maintenant la $n$-boule de rayon 1 dans un $n$-cube de côté 2 et calculons la proportion de volume occupé par la boule (il suffit de diviser par $2^n$ le volume de la boule).</p>
+<p><img src="/ratiodim.png?width=1000px" alt=""></p>
+<p>Le rapport des deux volumes s&rsquo;écrabouille très très vite. Il faut une échelle logarithmique pour y voir plus clair</p>
+<p><img src="/ratiodimlog.png?width=1000px" alt=""></p>
+<p>À 11 dimensions,  la boule ne représente plus qu&rsquo;un millième du volume de la boite et c&rsquo;est environ un millionième en dimension 17. Soit quasiment rien&hellip; Alors qu&rsquo;il s&rsquo;agit bien à chaque fois de la plus grande sphère possible ! Si on augmentait son rayon d&rsquo;un poil, elle déborderait.</p>
+<p>Raison de cette apparente étrangeté : la différence entre le volume du cube et celui de la sphère réside dans les coins !</p>
+<p><img src="/boule23.png?width=700px" alt=""></p>
+<p>Or plus la dimension augmente, plus le cube a de coins&hellip; En effet, un $n$-cube possède $2^n$ coins. Ajoutez à cela que les diagonales deviennent de plus en plus grandes ($\sqrt{n}$), et on commense à se convaincre que le volume de la sphère va vite devenir négligeable&hellip;</p>
+<br>
+<h3 id="concentration-sur-les-bords">Concentration sur les bords</h3>
+<p>En tirant des points au hasard dans un hypercube, on va vérifier que plus la dimension augmente, plus le volume se concentre sur les bords.</p>
+<p><img src="/bordsdimn.png?width=900px" alt=""></p>
+<p>Dans le petit programme suivant, on tire un million de points au hasard dans un $n$-cube de côté 1 et on calcule la proportion qui se trouve à une distance inférieure à 0,1 d&rsquo;un bord. C&rsquo;est facile, il suffit de checker si c&rsquo;est le cas pour chaque tirage correspondant à la coordonnée sur chaque axe. Dès qu&rsquo;une coordonnée est inférieure à 0,1 ou supérieure à 0,9 (on suppose ici que les coordonnées des sommets du cube sont des séquences de 0 et de 1), on compte le point.</p>
+<iframe src="https://trinket.io/embed/python/e05913ce44" width="100%" height="450" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+<br>
+<p>La raison de cette concentration devient évidente à la lecture du programme ; pour qu&rsquo;un point soit près d&rsquo;un bords, il suffit qu&rsquo;une de ses coordonnées soit près d&rsquo;un bord. Or si on augmente le nombre de dimensions, on augmente par la même le nombre de coordonnées et donc le nombre de tirages. Plus la dimension augmente moins ça devient possible qu&rsquo;aucune des coordonnées ne tombe près d&rsquo;un bord.</p>
+<p>Cela permet d&rsquo;ailleurs d&rsquo;expliquer que le volume de l&rsquo;hypersphère de rayon 1 se ratatine : ses points doivent être presque tous loin des bords. En effet, la sphère touche les bords qu&rsquo;au centre des faces or un hypercube de dimension $n$ compte seulement $2n$ faces (hypercubes de dimension $n-1$) pour $2^n$ sommets !</p>
+<br>
+<h3 id="the-average-man">The &ldquo;Average man&rdquo;</h3>
+<p>Ce résultat a une conséquence très importante en science des données : augmenter le nombre de variables descriptives revient à augmenter le nombre de dimensions et si ces variables décrivent différents aspects d&rsquo;un individu, on en arrive à la conclusion que l&rsquo;<strong>individu moyen</strong> n&rsquo;existe pas puisqu&rsquo;il y aura presque toujours au moins une de ces variables qui sera hors standard.</p>
+<p>L&rsquo;U.S. Air Force l&rsquo;a découvert au prix fort à la fin des années 40. Beaucoup de pilotes se crashaient (jusqu&rsquo;à 17 le même jour !), mais personne ne savait trop pourquoi&hellip; Jusqu&rsquo;à ce qu&rsquo;un jeune scientifique qui venait d&rsquo;être engagé par l&rsquo;armée, Gilbert Daniels, se résolut à mesurer tous les pilotes.</p>
+<div style="position:relative; width:500px; max-width:100%; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius:20px;">
+<img src="/pilotemoyen.png" style="border-radius:20px;">
+</div>
+<p>Les cockpits et les casques avaient tout spécialement été dessinés pour s&rsquo;adapter au pilote moyen après avoir fait des statistiques sur des milliers de jeunes hommes. Mais lorsque Daniels pris les mesures des plus de 4000 pilotes pour 10 critères différents (circonférence de la poitrine, longueur d&rsquo;entre-jambes, etc.) et qu&rsquo;il regarda combien étaient autour de 30% de la moyenne pour chacune des carcatéristiques, il n&rsquo;en trouva&hellip; aucun ! Le pilote moyen n&rsquo;existe pas. Résultat, chaque pilote avait au moins un truc qui cloche par rapport au design du cockpit, ce qui rendait plus hasardeuse la maîtrise de l&rsquo;avion.</p>
+<p>Daniels reporta ses résultats <a href="https://apps.dtic.mil/sti/tr/pdf/AD0010203.pdf">dans cette étude intitulée <em>The &ldquo;Average man&rdquo;?</em></a>.
+Cela fit changer son fusil d&rsquo;épaule à l&rsquo;armée américaine en adaptant l&rsquo;avion au pilote plutôt que l&rsquo;inverse.</p>
+<br>
+<h3 id="distance-entre-les-points">Distance entre les points</h3>
+<p>Une autre bizarrerie apparaît lorsqu&rsquo;on regarde la distance séparant deux points pris au hasard dans un hypercube.</p>
+<p>Les histogrammes suivant représentent la répartition des distances obtenues entre chaque paire pour 1000 points tirés au hasard uniformément dans l&rsquo;hypercube. Les pointillés indiquent les distances minimales (0) et maximales ($\sqrt{n}$) possibles pour ces distances.</p>
+<p><img src="/distptdim.png" alt=""></p>
+<p>Encore de la magie noire : en grande dimension, la distance entre deux points est à peu près toujours la même !!</p>
+<p>Ce n&rsquo;est finalement pas si dur à intuiter. Tirer un point au hasard dans l&rsquo;hypercube de dimension $n$ revient à choisir au hasard $n$ coordonnées pour construire un vecteur $\vec{v_1}=x_1 \vec{e_1}+x_2\vec{e_2}+\cdots + x_n\vec{e_n}$. Et on fait pareil avec un 2<sup>e</sup> point : $\vec{v_2}=x_1^\prime \vec{e_1}+x^\prime_2\vec{e_2}+\cdots + x^\prime_n\vec{e_n}$.</p>
+<p><img src="/distvec.png?width=500px" alt=""></p>
+<p>Pour $n$ grand, la probabilité que ces deux vecteurs soient orthogonaux (ce qui signifie que leurs directions sont indépendantes) devient énorme. En effet, il suffit qu&rsquo;une des coordonnées soit quasiment nulle pour qu&rsquo;il y ait orthogonalité et en multipliant les tirages, ça va finir par arriver.</p>
+<p>En supposant pour simplifier que chacun des points se ballade à peu près au milieu d&rsquo;une demi-diagonale de l&rsquo;hypercube (puisqu&rsquo;il est bourré de diagonales en grande dimension), on se retrouve avec deux vecteurs orthogonaux éloignés de $\frac{\sqrt{n}}{4}$ du centre. Leur distance sera donc approximativement $\sqrt{\left(\frac{\sqrt{n}}{4}\right)^2+\left(\frac{\sqrt{n}}{4}\right)^2}=\frac{1}{2\sqrt{2}}\sqrt{n}\approx 0,35\sqrt{n}$. La distance entre deux points augmenterait donc comme la racine carrée du nombre de dimensions.</p>
+<p>En ajustant la courbe obtenue en traçant la distance moyenne par une fonction $a\sqrt{n}$, l&rsquo;accord est plutôt très bon ! On obtient $a=0,41$. Pour le coup, ce n&rsquo;est pas tout à fait nos $0,35$ mais pour un modèle ultra simplifié, on n&rsquo;est pas si loin&hellip;</p>
+<p><img src="/evoldistmoy.png" alt=""></p>
+<p>Par contre on voit que la variabilité, incarnée par l&rsquo;écart-type, n&rsquo;est pas modifiée. C&rsquo;est ce qui explique que la variabilité relative devient, elle, de plus en plus faible quand le nombre de dimensions augmente.</p>
+<p>La raison dans cette constance de l&rsquo;écart-type vient de son évolution inversement proportionnelle à la racine carrée du nombre d&rsquo;échantillons. Or ici, le nombre d&rsquo;échantillons correspond à la dimension. Par conséquent l&rsquo;augmentation de la variabilité provoquée par l&rsquo;augmentation des distances ($\propto\sqrt{n}$) est compensée par la diminution de cette même variabilité du fait de l&rsquo;augmentation du nombre de tirages ($\propto 1/\sqrt{n}$) .</p>
+<p><img src="/suphisto.png" alt=""></p>
+<p>On comprend mieux pourquoi un algorithme comme KNN qui vise à prédire une valeur ou catégorie en regardant celle des plus proches voisins galère à grande dimension ; tous les voisins sont à peu près à la même distance&hellip;</p>
 
 
 <footer class="footline">
@@ -2891,6 +2946,7 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
             
                 
                     
+                    
                 
                 
 
@@ -2905,6 +2961,9 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2922,6 +2981,7 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
             
                 
                     
+                    
                 
                 
 
@@ -2937,6 +2997,7 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
             
                 
                     
+                    
                 
                 
 
@@ -2950,72 +3011,8 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -3063,7 +3060,38 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
                         
             
             
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
         
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
             
         
@@ -3081,19 +3109,6 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
                     
 
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
             
         
                     
@@ -3112,6 +3127,27 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
                     
             
         
+                    
+                        
+            
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
                         
             
@@ -3209,6 +3245,38 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -3219,7 +3287,6 @@ $A_E&lt;A_I$ car en fin d&rsquo;expiration, des alvéoles se referment, s&rsquo;
             
             
                 
-                    
                     
                 
                 
