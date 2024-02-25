@@ -32,7 +32,9 @@ Le cercle répétiteur de Borda fut leur arme secrète.</description>
       <link>https://coursphychi.github.io/more/maths/geometrie/geo3/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo3/</guid>
-      <description> Autres joyeusetés Aires et volumes Surprises des volumes en grande dimension Courbes de poursuite </description>
+      <description>Autres joyeusetés Aires et volumes Surprises des volumes en grande dimension Le volume d&amp;rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$.
+Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;
+à 1D, la boule se réduit à un segment de longueur $R$. à 2D, c&amp;rsquo;est un disque de &amp;ldquo;volume&amp;rdquo; $\pi R^2$. Ce qu&amp;rsquo;on appelle aire dans notre monde 3D est bien le volume (l&amp;rsquo;espace contenu à l&amp;rsquo;intérieur) d&amp;rsquo;un monde 2D.</description>
     </item>
   </channel>
 </rss>

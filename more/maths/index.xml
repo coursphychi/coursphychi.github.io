@@ -23,9 +23,7 @@ système quinaire (base 5) dont il reste des traces jusqu&amp;rsquo;au xxe sièc
       <link>https://coursphychi.github.io/more/maths/algebre/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/algebre/</guid>
-      <description>Algèbre Équations Identités remarquables Algèbre de Boole L&amp;rsquo;algèbre de Boole permet d&amp;rsquo;algébriser la logique. C&amp;rsquo;est le langage naturelle des circuits électroniques à la base de l&amp;rsquo;informatique.
-Algèbre linéaire L&amp;rsquo;algèbre linéaire est un outil fondamental pour la physique et en particulier pour la physique quantique dont c&amp;rsquo;est la base même.
-Application de l&amp;rsquo;algèbre linéaire (et de la géométrie projective) pour déceler et corriger le plus efficacement possible les erreurs dans un message.</description>
+      <description>Algèbre Équations Jusque là, rien de bien folichon&amp;hellip; Mais si on libère la variable de nos polynômes en lui permettant de se balader dans l&amp;rsquo;espace des complexes, tout devient plus sympa. Déjà, plus d&amp;rsquo;histoires de 0, 1 ou 2 solutions pour un polynôme de degré 2&amp;hellip; En complexe, un polynôme de degré 2 a toujours 2 solutions. C&amp;rsquo;est quand même plus propre comme ça. Et d&amp;rsquo;ailleurs, un polynôme de degré n a toujours n racines et peut donc se factoriser en n polynômes de degré 1.</description>
     </item>
     <item>
       <title>Probabilités / Statistiques</title>
