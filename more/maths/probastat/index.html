@@ -36,22 +36,22 @@
     
 
     
-    <link href="/css/nucleus.css?1708888801" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1708888801" rel="stylesheet">
-    <link href="/css/hybrid.css?1708888801" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1708888801" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1708888801" rel="stylesheet">
-    <link href="/css/auto-complete.css?1708888801" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1708888801" rel="stylesheet">
-    <link href="/css/theme.css?1708888801" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1708888801" rel="stylesheet">
+    <link href="/css/nucleus.css?1709125358" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1709125358" rel="stylesheet">
+    <link href="/css/hybrid.css?1709125358" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1709125358" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1709125358" rel="stylesheet">
+    <link href="/css/auto-complete.css?1709125358" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1709125358" rel="stylesheet">
+    <link href="/css/theme.css?1709125358" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1709125358" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1708888801" rel="stylesheet">
+    <link href="/css/theme-blue.css?1709125358" rel="stylesheet">
     
-    <link href="/css/foo.css?1708888801" rel="stylesheet"><link href="/css/bar.css?1708888801" rel="stylesheet">
+    <link href="/css/foo.css?1709125358" rel="stylesheet"><link href="/css/bar.css?1709125358" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1708888801"></script>
+    <script src="/js/jquery-3.3.1.min.js?1709125358"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -105,14 +105,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1708888801"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1708888801"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1709125358"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1709125358"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1708888801"></script>
+<script type="text/javascript" src="/js/search.js?1709125358"></script>
 
     
   </div>
@@ -1932,8 +1932,26 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#loi-binomiale">Loi Binomiale</a></li>
+    <li><a href="#loi-normale">Loi normale</a></li>
+    <li><a href="#densité-de-probabilités">Densité de probabilités</a></li>
+    <li><a href="#probabilités-conditionnelles-et-bayes">Probabilités conditionnelles et Bayes</a></li>
+    <li><a href="#chaînes-de-markov">Chaînes de Markov</a></li>
+    <li><a href="#curiosités-et-énigmes">Curiosités et énigmes</a>
+      <ul>
+        <li><a href="#spaghetti-et-inégalité-triangulaire">Spaghetti et inégalité triangulaire</a></li>
+        <li><a href="#anniversaires-simultanés">Anniversaires simultanés</a></li>
+        <li><a href="#paradoxe-des-deux-enfants">Paradoxe des deux enfants</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#les-différentes-moyennes">Les différentes moyennes</a></li>
+    <li><a href="#monte-carlo">Monte Carlo</a></li>
+    <li><a href="#paradoxe-de-simpson">Paradoxe de Simpson</a></li>
     <li><a href="#test-dhypothèse">Test d&rsquo;hypothèse</a></li>
-    <li><a href="#traitement-des-données">Traitement des données</a></li>
+    <li><a href="#analyse-en-composante-proincipale">Analyse en composante proincipale</a></li>
   </ul>
 </nav>
     </div>
@@ -1974,50 +1992,41 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   }
 </style>
 <h1 id="probabilités">Probabilités</h1>
-<p>Une petite énigme à base d&rsquo;inégalité triangulaire :</p>
-<p>Quelle est la probabilité de pouvoir faire un triangle avec les 3 bouts obtenus en cassant aléatoirement un spaghetti en deux endroits ?</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/EdRzfn3ctK8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-</div>
-<br>
-<p>Quelle est la probabilité que deux élèves d&rsquo;une classe est un anniversaire le même jour ?</p>
-<p>Lorsqu&rsquo;on n&rsquo;a jamais fait le calcul ou entendu parler du résultat, notre intuition nous amène généralement à soupçonner une probabilité bien plus petite qu&rsquo;elle ne l&rsquo;est.<br>
-C&rsquo;est d&rsquo;ailleurs assez fréquent que notre intuition soit aux fraises lorsqu&rsquo;il s&rsquo;agit d&rsquo;estimer une probabilité ou expliquer des statistiques (voir le paradoxe de Simpson plus bas).</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/1Wpajb8Dk04" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-</div>
-<br>
+<h2 id="loi-binomiale">Loi Binomiale</h2>
 <p>D&rsquo;une épreuve de Bernoulli à la loi binomiale :</p>
+<br>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/zkfa9uAy1yM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </div>
 <br>
-<p>La célèbre gaussienne :</p>
+<h2 id="loi-normale">Loi normale</h2>
+<p>La célèbre gaussienne (ou courbe en cloche) :</p>
+<br>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/H_r7iDhANl0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </div>
 <br>
+<h2 id="densité-de-probabilités">Densité de probabilités</h2>
 <p>Nouvelle énigme permettant de parler des densités de probabilité :</p>
 <p>Quelle est la distance moyenne entre deux points pris au hasard sur un segment ?</p>
+<br>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/XLYXqpl9Z0s" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </div>
+<br>
 <p>On peut vérifier la solution statistiquement avec un petit programme simplissime :</p>
+<br>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;">
 <iframe src="https://trinket.io/embed/python/5354f08fd4?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 </div>
 <br>
-<br>
+<h2 id="probabilités-conditionnelles-et-bayes">Probabilités conditionnelles et Bayes</h2>
 <p>Les probabilités conditionnelles au tribunal, chez le médecin et dans un vieux jeu télévisé américain :</p>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
@@ -2026,7 +2035,40 @@ C&rsquo;est d&rsquo;ailleurs assez fréquent que notre intuition soit aux fraise
 </div>
 <p><img src="https://imgs.xkcd.com/comics/monty_hall.png" alt=""></p>
 <br>
+<h2 id="chaînes-de-markov">Chaînes de Markov</h2>
+<p>Le jeu de Penney a d&rsquo;étonnantes propriété. Les chaînes de Markov aident à le démystifier :</p>
+<br>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/mIN9AWYKtjc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</div>
+<br>
+<h2 id="curiosités-et-énigmes">Curiosités et énigmes</h2>
+<h3 id="spaghetti-et-inégalité-triangulaire">Spaghetti et inégalité triangulaire</h3>
+<p>Une petite énigme à base d&rsquo;inégalité triangulaire :</p>
+<p>Quelle est la probabilité de pouvoir faire un triangle avec les 3 bouts obtenus en cassant aléatoirement un spaghetti en deux endroits ?</p>
+<br>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/EdRzfn3ctK8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</div>
+<br>
+<h3 id="anniversaires-simultanés">Anniversaires simultanés</h3>
+<p>Quelle est la probabilité que deux élèves d&rsquo;une classe est un anniversaire le même jour ?</p>
+<p>Lorsqu&rsquo;on n&rsquo;a jamais fait le calcul ou entendu parler du résultat, notre intuition nous amène généralement à soupçonner une probabilité bien plus petite qu&rsquo;elle ne l&rsquo;est.<br>
+C&rsquo;est d&rsquo;ailleurs assez fréquent que notre intuition soit aux fraises lorsqu&rsquo;il s&rsquo;agit d&rsquo;estimer une probabilité ou expliquer des statistiques (voir le paradoxe de Simpson plus bas).</p>
+<br>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/1Wpajb8Dk04" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</div>
+<br>
+<h3 id="paradoxe-des-deux-enfants">Paradoxe des deux enfants</h3>
 <p>Le paradoxe des deux enfants repose grandement sur la formulation et provoque encore parfois des débats passionnés.</p>
+<br>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/MeoIzbjC_HM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
@@ -2037,13 +2079,7 @@ C&rsquo;est d&rsquo;ailleurs assez fréquent que notre intuition soit aux fraise
 <iframe src="https://trinket.io/embed/python/4dae14528c?toggleCode=true" width="100%" height="500" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 </div>
 <br>
-<p>Pour se lancer dans une carrière d&rsquo;arnaqueur de rue :</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/mIN9AWYKtjc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-</div>
-<br>
+<hr>
 
 <div class="notices tip" style="--title: 'tip';">
   <p style="display: none;">tip</p>
@@ -2056,11 +2092,16 @@ C&rsquo;est d&rsquo;ailleurs assez fréquent que notre intuition soit aux fraise
 
 <hr>
 <h1 id="statistiques">Statistiques</h1>
+<h2 id="les-différentes-moyennes">Les différentes moyennes</h2>
+<br>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/v5NTpB6DGbQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </div>
+<br>
+<h2 id="monte-carlo">Monte Carlo</h2>
+<p>Dans la duxième partie de la vidéo, on cherche à répondre à la grande question suivante : comment s&rsquo;assurer d&rsquo;avoir suffisamment d&rsquo;échantillons pour obtenir des statistiques fiables ? Ou plus prosaïquement : à partir de combien est-ce suffisant ? On utilise d&rsquo;abord les propriétés de la loi normale puis on construit un estimateur à partir de l&rsquo;<strong>inégalité de Bienaymé-Tchebychev</strong>.</p>
 <br>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
@@ -2068,13 +2109,15 @@ C&rsquo;est d&rsquo;ailleurs assez fréquent que notre intuition soit aux fraise
 </div>
 </div>
 <br>
-<p>Ce paradox a fait des dégâts lors de la campagne de vaccination pour le Covid. Les chiffres de la vidéo sont proches des chiffres communiqués par l&rsquo;état d&rsquo;Israël qui était un des premiers pays à pouvoir vacciner.</p>
+<h2 id="paradoxe-de-simpson">Paradoxe de Simpson</h2>
+<p>Ce paradoxe a fait des dégâts lors de la campagne de vaccination pour le Covid. Les chiffres de la vidéo sont proches des chiffres communiqués par l&rsquo;état d&rsquo;Israël qui était un des premiers pays à pouvoir vacciner.</p>
 <p><a href="https://www.covid-datascience.com/post/israeli-data-how-can-efficacy-vs-severe-disease-be-strong-when-60-of-hospitalized-are-vaccinated">L&rsquo;article</a> qui a servi en partie pour la vidéo.</p>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/Bu3znAquSuk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </div>
+<br>
 <h2 id="test-dhypothèse">Test d&rsquo;hypothèse</h2>
 <p>Les statistiques au service de la prise de décision en science.</p>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
@@ -2082,7 +2125,8 @@ C&rsquo;est d&rsquo;ailleurs assez fréquent que notre intuition soit aux fraise
   <iframe src="https://www.youtube.com/embed/9TxSmOK6GWA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </div>
-<h2 id="traitement-des-données">Traitement des données</h2>
+<br>
+<h2 id="analyse-en-composante-proincipale">Analyse en composante proincipale</h2>
 <p>L&rsquo;analyse en composante principale permet de faire parler les données.</p>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
@@ -3340,19 +3384,19 @@ C&rsquo;est d&rsquo;ailleurs assez fréquent que notre intuition soit aux fraise
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1708888801"></script>
-    <script src="/js/perfect-scrollbar.min.js?1708888801"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1708888801"></script>
-    <script src="/js/jquery.sticky.js?1708888801"></script>
-    <script src="/js/featherlight.min.js?1708888801"></script>
-    <script src="/js/highlight.pack.js?1708888801"></script>
+    <script src="/js/clipboard.min.js?1709125358"></script>
+    <script src="/js/perfect-scrollbar.min.js?1709125358"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1709125358"></script>
+    <script src="/js/jquery.sticky.js?1709125358"></script>
+    <script src="/js/featherlight.min.js?1709125358"></script>
+    <script src="/js/highlight.pack.js?1709125358"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1708888801"></script>
-    <script src="/js/learn.js?1708888801"></script>
-    <script src="/js/hugo-learn.js?1708888801"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1709125358"></script>
+    <script src="/js/learn.js?1709125358"></script>
+    <script src="/js/hugo-learn.js?1709125358"></script>
     
         
-            <script src="/mermaid/mermaid.js?1708888801"></script>
+            <script src="/mermaid/mermaid.js?1709125358"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -13,7 +13,8 @@
       <link>https://coursphychi.github.io/more/maths/arithmetique/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/arithmetique/</guid>
-      <description>Arithmétique et théorie des nombres : Dénombrabilité Numération De nombreux systèmes de numération à bases entières ont été utilisés par différents peuples et à différentes époques.
+      <description>Arithmétique et théorie des nombres : Infinis dénombrables et indénombrables Des entiers aux transcendants en passant par l&amp;rsquo;hypothèse du continu ($\aleph_0 = 2^{\aleph_1}$) :
+Numération De nombreux systèmes de numération à bases entières ont été utilisés par différents peuples et à différentes époques.
 Par exemple :
 système binaire (base 2) utilisé dans des langues d&amp;rsquo;Amérique du Sud et d&amp;rsquo;Océanie, et utilisé de nos jours en informatique.
 système quinaire (base 5) dont il reste des traces jusqu&amp;rsquo;au xxe siècle dans des langues africaines, mais aussi, partiellement, dans les notations tchouvache, suzhou, romaine et maya.</description>
@@ -30,10 +31,12 @@ système quinaire (base 5) dont il reste des traces jusqu&amp;rsquo;au xxe sièc
       <link>https://coursphychi.github.io/more/maths/probastat/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/probastat/</guid>
-      <description>Probabilités Une petite énigme à base d&amp;rsquo;inégalité triangulaire :
-Quelle est la probabilité de pouvoir faire un triangle avec les 3 bouts obtenus en cassant aléatoirement un spaghetti en deux endroits ?
-Quelle est la probabilité que deux élèves d&amp;rsquo;une classe est un anniversaire le même jour ?
-Lorsqu&amp;rsquo;on n&amp;rsquo;a jamais fait le calcul ou entendu parler du résultat, notre intuition nous amène généralement à soupçonner une probabilité bien plus petite qu&amp;rsquo;elle ne l&amp;rsquo;est.</description>
+      <description>Probabilités Loi Binomiale D&amp;rsquo;une épreuve de Bernoulli à la loi binomiale :
+Loi normale La célèbre gaussienne (ou courbe en cloche) :
+Densité de probabilités Nouvelle énigme permettant de parler des densités de probabilité :
+Quelle est la distance moyenne entre deux points pris au hasard sur un segment ?
+On peut vérifier la solution statistiquement avec un petit programme simplissime :
+Probabilités conditionnelles et Bayes Les probabilités conditionnelles au tribunal, chez le médecin et dans un vieux jeu télévisé américain :</description>
     </item>
     <item>
       <title>Logique</title>
