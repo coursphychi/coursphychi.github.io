@@ -36,22 +36,22 @@
     
 
     
-    <link href="/css/nucleus.css?1709483984" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1709483984" rel="stylesheet">
-    <link href="/css/hybrid.css?1709483984" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1709483984" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1709483984" rel="stylesheet">
-    <link href="/css/auto-complete.css?1709483984" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1709483984" rel="stylesheet">
-    <link href="/css/theme.css?1709483984" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1709483984" rel="stylesheet">
+    <link href="/css/nucleus.css?1709508633" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1709508633" rel="stylesheet">
+    <link href="/css/hybrid.css?1709508633" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1709508633" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1709508633" rel="stylesheet">
+    <link href="/css/auto-complete.css?1709508633" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1709508633" rel="stylesheet">
+    <link href="/css/theme.css?1709508633" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1709508633" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1709483984" rel="stylesheet">
+    <link href="/css/theme-blue.css?1709508633" rel="stylesheet">
     
-    <link href="/css/foo.css?1709483984" rel="stylesheet"><link href="/css/bar.css?1709483984" rel="stylesheet">
+    <link href="/css/foo.css?1709508633" rel="stylesheet"><link href="/css/bar.css?1709508633" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1709483984"></script>
+    <script src="/js/jquery-3.3.1.min.js?1709508633"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -105,14 +105,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1709483984"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1709483984"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1709508633"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1709508633"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1709483984"></script>
+<script type="text/javascript" src="/js/search.js?1709508633"></script>
 
     
   </div>
@@ -1958,6 +1958,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <li><a href="#interception">Interception</a></li>
     <li><a href="#manœuvre-dévitement-de-lenola-gay">Manœuvre d&rsquo;évitement de l&rsquo;Enola Gay</a></li>
     <li><a href="#poursuite-cyclique">Poursuite cyclique</a></li>
+    <li><a href="#attaque---défense-et-théorie-des-jeux">Attaque - Défense et théorie des jeux</a></li>
     <li><a href="#murmurations">Murmurations</a></li>
   </ul>
 </nav>
@@ -2067,9 +2068,29 @@ Les points $I$ solutions doivent donc vérifier : $\displaystyle \frac{\sqrt{(x
 Son centre est sur l&rsquo;axe horizontal $\displaystyle \left(\frac{n^2m-p}{n^2-1};0\right)$ et son rayon vaut $\displaystyle \frac{n(p-m)}{|1-n^2|}$.</p>
 <p>Pour déterminer la direction à prendre pour le chasseur, il suffit de regarder où la direction de la cible coupe le cercle d&rsquo;Apollonius.</p>
 <br>
-<div style="position:relative; width:725px; max-width:100%; margin-left: auto; margin-right: auto; ">
-<iframe scrolling="no" title="Apollonius" src="https://www.geogebra.org/material/iframe/id/qwv9keyf/width/725/height/638/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" width="725px" height="638px" style="border:0px;"> </iframe>
+<div id="iframe-container" style="position:relative; width:100%; max-width:725px; margin-left:auto; margin-right:auto; overflow:hidden;">
+    <iframe id="iframe-apollonius" scrolling="no" title="Apollonius" src="https://www.geogebra.org/material/iframe/id/qwv9keyf/width/725/height/638/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" style="position:absolute; top:0; left:0; width:100%; border:0px;"> </iframe>
 </div>
+<script>
+function adjustIframeHeight() {
+    var maxWidth = 725; // La largeur maximale de l'iframe
+    var aspectRatio = 0.88; // Le ratio hauteur/largeur
+    var container = document.getElementById('iframe-container');
+    var iframe = document.getElementById('iframe-apollonius');
+    // Calculer le padding-top basé sur la largeur du conteneur
+    var paddingTop = Math.min(container.offsetWidth * aspectRatio, maxWidth * aspectRatio);
+    // Appliquer le padding-top pour maintenir le ratio d'aspect
+    container.style.paddingTop = paddingTop + 'px';
+    // Ajuster la hauteur de l'iframe pour correspondre au nouveau padding-top
+    iframe.style.height = paddingTop + 'px';
+}
+
+// Ajuster la hauteur à la première charge
+adjustIframeHeight();
+
+// Ajuster la hauteur lors du redimensionnement de la fenêtre
+window.addEventListener('resize', adjustIframeHeight);
+</script>
 <br>
 <p>On remarque que même si la cible va plus vite que le chasseur $n&gt;1$, il peut y avoir interseption (et pour deux directions différentes du chasseur). Mais pour cela, l&rsquo;angle $\theta$ de la direction de la cible ne doit pas être supérieur à $\displaystyle \sin^{-1}\left(\frac{v_{chasseur}}{v_{cible}}\right)$.</p>
 <p>En effet, la situation limite correspond à une direction de la cible tangente au cercle d&rsquo;Apollonius (voir dessin ci-dessous).</p>
@@ -2117,6 +2138,8 @@ Son centre est sur l&rsquo;axe horizontal $\displaystyle \left(\frac{n^2m-p}{n^2
 <br>
 <p>On peut s&rsquo;amuser à combiner les poursuites pour faire des jolies figures&hellip; Ci-dessous, on assemblé 6 poursuites à 3 tortues pour former un hexagone.</p>
 <p><img src="/nbugspurs2.png?width=800px" alt=""></p>
+<h2 id="attaque---défense-et-théorie-des-jeux">Attaque - Défense et théorie des jeux</h2>
+<br>
 <h2 id="murmurations">Murmurations</h2>
 <div style="position:relative; width:800px; max-width:100%; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
@@ -3397,19 +3420,19 @@ Son centre est sur l&rsquo;axe horizontal $\displaystyle \left(\frac{n^2m-p}{n^2
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1709483984"></script>
-    <script src="/js/perfect-scrollbar.min.js?1709483984"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1709483984"></script>
-    <script src="/js/jquery.sticky.js?1709483984"></script>
-    <script src="/js/featherlight.min.js?1709483984"></script>
-    <script src="/js/highlight.pack.js?1709483984"></script>
+    <script src="/js/clipboard.min.js?1709508633"></script>
+    <script src="/js/perfect-scrollbar.min.js?1709508633"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1709508633"></script>
+    <script src="/js/jquery.sticky.js?1709508633"></script>
+    <script src="/js/featherlight.min.js?1709508633"></script>
+    <script src="/js/highlight.pack.js?1709508633"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1709483984"></script>
-    <script src="/js/learn.js?1709483984"></script>
-    <script src="/js/hugo-learn.js?1709483984"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1709508633"></script>
+    <script src="/js/learn.js?1709508633"></script>
+    <script src="/js/hugo-learn.js?1709508633"></script>
     
         
-            <script src="/mermaid/mermaid.js?1709483984"></script>
+            <script src="/mermaid/mermaid.js?1709508633"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
