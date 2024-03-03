@@ -39,9 +39,20 @@ Le cercle répétiteur de Borda fut leur arme secrète.</description>
       <link>https://coursphychi.github.io/more/maths/geometrie/geo4/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo4/</guid>
-      <description>Curse of dimensionality Le volume d&amp;rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$.
+      <description>Curse of dimensionality L&amp;rsquo;expression Curse of dimensionality vient de l&amp;rsquo;américain Richard Bellman alors qu&amp;rsquo;il considérait des problèmes en programmation dynamique (qu&amp;rsquo;il inventa en 1953). La traduction française, Fléau de la dimension, fait un peu bizarre&amp;hellip;
+Mais qu&amp;rsquo;est-ce donc que ce &amp;ldquo;fléau&amp;rdquo; ?
+Le volume d&amp;rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$. Jusque là, ça va.
 Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;
-à 1D, la boule se réduit à un segment de longueur $R$. à 2D, c&amp;rsquo;est un disque de &amp;ldquo;volume&amp;rdquo; $\pi R^2$. Ce qu&amp;rsquo;on appelle aire dans notre monde 3D est bien le volume (l&amp;rsquo;espace contenu à l&amp;rsquo;intérieur) d&amp;rsquo;un monde 2D. à 3D, le volume de la boule vaut $\frac{4}{3}\pi R^3$.</description>
+à 1D, la boule se réduit à un segment de longueur $R$.</description>
+    </item>
+    <item>
+      <title>Courbes de poursuite</title>
+      <link>https://coursphychi.github.io/more/maths/geometrie/geo5/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/geometrie/geo5/</guid>
+      <description>Poursuite Paradoxe d&amp;rsquo;Achille et de la tortue Ce célèbre paradoxe de Zénon d&amp;rsquo;Élée a été rapporté dans La Physique par Aristote.
+Celui qui court le plus lentement ne sera jamais rattrapé par le plus rapide. Car le poursuivant doit d&amp;rsquo;abord atteindre le point d&amp;rsquo;où est parti le poursuivi, si bien que le plus lent doit toujours avoir une longueur d&amp;rsquo;avance
+Imaginons qu&amp;rsquo;Achille aille deux fois plus vite que la tortue et que la tortue est une distance d&amp;rsquo;avance $d$ au départ.</description>
     </item>
   </channel>
 </rss>
