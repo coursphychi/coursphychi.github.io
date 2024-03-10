@@ -36,22 +36,22 @@
     
 
     
-    <link href="/css/nucleus.css?1710036574" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1710036574" rel="stylesheet">
-    <link href="/css/hybrid.css?1710036574" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1710036574" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1710036574" rel="stylesheet">
-    <link href="/css/auto-complete.css?1710036574" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1710036574" rel="stylesheet">
-    <link href="/css/theme.css?1710036574" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1710036574" rel="stylesheet">
+    <link href="/css/nucleus.css?1710107562" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1710107562" rel="stylesheet">
+    <link href="/css/hybrid.css?1710107562" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1710107562" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1710107562" rel="stylesheet">
+    <link href="/css/auto-complete.css?1710107562" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1710107562" rel="stylesheet">
+    <link href="/css/theme.css?1710107562" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1710107562" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1710036574" rel="stylesheet">
+    <link href="/css/theme-blue.css?1710107562" rel="stylesheet">
     
-    <link href="/css/foo.css?1710036574" rel="stylesheet"><link href="/css/bar.css?1710036574" rel="stylesheet">
+    <link href="/css/foo.css?1710107562" rel="stylesheet"><link href="/css/bar.css?1710107562" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1710036574"></script>
+    <script src="/js/jquery-3.3.1.min.js?1710107562"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -105,14 +105,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1710036574"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1710036574"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1710107562"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1710107562"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1710036574"></script>
+<script type="text/javascript" src="/js/search.js?1710107562"></script>
 
     
   </div>
@@ -2173,8 +2173,66 @@ Et puisque $\displaystyle a=\frac{v^2}{R}$, on obtient : $\displaystyle R =\fra
 <p>On peut alors imaginer la matrice de gain suivante :
 <img src="/poursuitematrice.png?width=500px" alt="">
 On peut l&rsquo;interpréter ainsi : les chances de survie du bombarider le mieux protégé sont de 80% s&rsquo;il est attaqué (et de 100% s&rsquo;il ne l&rsquo;est pas&hellip;) alors que le moins bien protégé n&rsquo;a que 60% de chance de s&rsquo;en sortir (et 100% si on le laisse tranquille).</p>
-<p>On a imaginé ainsi un &ldquo;<strong>jeu</strong>&rdquo;  <strong>à somme nulle</strong> (les gains d&rsquo;un joueur sont les pertes de l&rsquo;autre). Dans la nomenclature de la théorie des jeux, il s&rsquo;agit d&rsquo;un jeu <strong>injuste</strong> puisque toutes les entrée sont positives. Cela signifie que bleu repart forcément gagnant. Cela ne signifie pas que rouge ne va pas jouerer comme on peut le concevoir dans notre exemple macabre.</p>
-<p>La stratégie optimale pour deux joueurs rationnels va constituer à minimiser le &ldquo;score&rdquo; maximum que l&rsquo;autre joueur peut faire en suivant ainsi un principe du moindre mal. En effet, chaque joueur sait que l&rsquo;autre va chercher à maximiser ses gains et va donc s&rsquo;évertuer à rendre cette maximisation la plus faible possible.</p>
+<p>On a imaginé ainsi un &ldquo;<strong>jeu</strong>&rdquo;  <strong>à somme nulle</strong> (les gains d&rsquo;un joueur sont les pertes de l&rsquo;autre). Dans la nomenclature de la théorie des jeux, il s&rsquo;agit d&rsquo;un jeu <strong>injuste</strong> puisque toutes les entrée sont positives $\Rightarrow$ bleu repart forcément &ldquo;gagnant&rdquo; (même si ça n&rsquo;a pas vraiment de sens ici).</p>
+<p>La stratégie optimale pour deux joueurs rationnels va consister à minimiser le &ldquo;score&rdquo; maximum que l&rsquo;autre joueur peut faire en suivant ainsi un principe du moindre mal. En effet, chaque joueur sait que l&rsquo;autre va chercher à maximiser ses gains et va donc s&rsquo;évertuer à rendre cette maximisation la plus faible possible.</p>
+<p>Si une stratégie unique permet d&rsquo;arriver à cette fin, sans que le joueur soit rationnellement motivé à changer de stratégie à un prochain tour pour augmenter ses gains, on dit qu&rsquo;il joue une <strong>stratégie pure</strong>.<br>
+C&rsquo;est le cas dans l&rsquo;exemple suivant :</p>
+<p><img src="/poursuitematrice2.png?width=500px" alt=""></p>
+<p>Bleu est incité à choisir la stratégie B1 pour maximiser ses gains minimums réalisables : dans les pires des cas, il recevra 5 alors qu&rsquo;avec la stratégie B2, il recevrait au pire 3. Or Bleu peut s&rsquo;attendre que Rouge essaye bien de minimiser les gains de Bleu.<br>
+Si Rouge joue sa première stratégie, il perd au pire 6 alors qu&rsquo;avec la seconde, il perd au pire 5. Donc Rouge va joueur la seconde stratégie.</p>
+<p>En résumé, Bleu choisi la ligne contenant le plus grand des plus petits gains et Rouge choisit la colonne contenant le plus petit gain maximum possible.</p>
+<p>Le résultat de la partie est ici un gain de 5 pour Bleu.</p>
+<p>Lorsque, comme dans cet exemple, le gain minimal sur la ligne comportant le plus grand minimum possible est égal au gain maximal sur la colonne contenant le plus petit maximum possible, on dit que le jeu est <strong>stable</strong>. Aucun des joueurs ne sera inciter à changer de stratégie. On dit que le jeu possède un <strong>point col</strong> (ou point-selle car l&rsquo;espace des paramètres ressemble alors à une selle de cheval). On a en effet, un minimum local dans une direction et un maximum local dans l&rsquo;autre.</p>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<div id="monGraphique" style="position:relative; width:600px; max-width:100%; margin-left: auto; margin-right: auto; "></div>
+<script>
+fetch('/selledecheval.json')
+  .then(response => response.json())
+  .then(data => {
+    Plotly.newPlot('monGraphique', data.data, data.layout);
+  });
+</script>
+<p>Changeons de matrice de gain :</p>
+<p><img src="/poursuitematrice3.png?width=500px" alt=""></p>
+<p>Pour maximiser le gain mimal, Bleu choisi la stratégie B2 ($4&gt;3$) alors que pour minimiser le gain maximal pour Bleu, Rouge choisit la stratégie R1 ($5&lt;6$). On remarque que le plus grand gain minimal sur une rangée ($4$) est maintenant différent du plus petit gain maximal sur une colonne ($5$). La conséquence est que maintenant, chacun des deux joueurs est incité à changer sa stratégie. Si Rouge passe de la stratégie R1 à R2 par exemple, il réduit le gain de Bleu de $5$ à $4$ (en imaginant que Bleu ait bien choisit la stratégie B2). Mais alors, Bleu est tenté de passer de la stratégie B2 à B1 pour passer d&rsquo;un gain de $4$ à un un gain de $6$. Et ainsi de suite&hellip;</p>
+<p>Joueur une stratégie pure est donc optimal pour aucun des joueurs. Le mieux qu&rsquo;ils puissent faire est jouer une <strong>stratégie mixte</strong> composée d&rsquo;un mélange aléatoire (pour que l&rsquo;autre joueur ne puisse pas anticiper) des stratégies 1 et 2.</p>
+<p>Ce fut l&rsquo;un des tours de force de John von Neumann de démontrer en 1926 qu&rsquo;il existe pour tout jeu à deux opposants à somme nulle une stratégie mixte optimale pour les deux joueurs telle qu&rsquo;ils puissent espérer le même gain  moyen $V$, $V$ étant le meilleur possible. C&rsquo;est le <strong>théorème du minimax</strong>.</p>
+<p>Débusquons cette stratégie optimale pour le dernier exemple. On va supposer que Bleu joue la stratégie B1 avec une probabilité $p$ et B2 avec donc une probabilité $1-p$. Et Rouge joue R1 avec la probabilité $q$ et R2 avec la probabilité $1-q$.</p>
+<p>Si bleu joue B1, il gagne $3q + 6(1-q)$. Et s&rsquo;il joue B2, il gagne $5q+4(1-q)$. L&rsquo;espérance de gain de Bleu est donc $V(p,q)=p[3q+6(1-q)]+(1-p)[5q+4(1-q)]=4+2p+q-4pq$.</p>
+<p>Du point de vue de Rouge, on obtient une espérance de gain valant $q[3p+5(1-p)]+(1-q)[6p+4(1-p)]=4+2p+q-4pq$. On retrouve donc $V(q,p)$.</p>
+<p>Si on trace $V(p,q)$, on retrouve une selle de cheval. La stratégie optimale pour Bleu et Rouge va donc consister à placer leurs stratégies sur le point col ou point minimax.</p>
+ <div id="monGraphique2" style="position:relative; width:600px; max-width:100%; margin-left: auto; margin-right: auto; "></div>
+<script>
+fetch('/selledecheval2.json')
+  .then(response => response.json())
+  .then(data => {
+    Plotly.newPlot('monGraphique2', data.data, data.layout);
+  });
+</script>
+<p>Bleu veut choisir $p$ tel que $\displaystyle \frac{\partial V}{\partial q} = 0$. Cela donne $1-4p=0$ et donc $p=1/4$. La distribution de probabilité optimale pour Bleu est donc $(1/4;3/4)$.</p>
+<p>Rouge veut choisir $q$ tel que $\displaystyle \frac{\partial V}{\partial p} = 0$. Cela donne $2-4q=0$ et donc $q=1/2$. La distribution de probabilité optimale pour Rouge est donc $(1/2;1/2)$.</p>
+<p>Le gain pour les deux au point minimax est alors $V(p=1/4,q=1/2) = 4,5$.</p>
+<p>Revenons maintenant à notre problème de guerre froide.</p>
+<p><img src="/poursuitematrice.png?width=500px" alt=""></p>
+<p>Il n&rsquo;y a clairement pas de point col pour des stratégies pures puisque le plus grand minimum pour les lignes est 80 alors que le plus petit maximum pour les colonnes est 100. Il faut donc jouer des stratégies mixtes. Supposons, comme dans l&rsquo;exemple précédent, que celle de Bleu soit $(p;1-p)$ et que celle de rouge soit $(q;1-q)$.</p>
+<ul>
+<li>Pour Bleu : $V(p,q)= p[80q+100(1-q)]+(1-p)[100q+60(1-q)]$</li>
+<li>Pour Rouge : $V(p,q)=q[80p+100(1-p)]+(1-q)[100p+60(1-p)]$</li>
+</ul>
+<p>Dans les deux cas, $V(p,q)=60+40p+40q-60pq$. On obtient à nouveau bien une selle de cheval dont on cherche le point col.</p>
+ <div id="monGraphique3" style="position:relative; width:600px; max-width:100%; margin-left: auto; margin-right: auto; "></div>
+<script>
+fetch('/selledecheval3.json')
+  .then(response => response.json())
+  .then(data => {
+    Plotly.newPlot('monGraphique3', data.data, data.layout);
+  });
+</script>
+<p>Le point minimax est tel que $\displaystyle \frac{\partial V}{\partial p} = \frac{\partial V}{\partial q}  = 0$. Cela donne $40-60q=0$ et $40-60p=0$, d&rsquo;où $p=q=2/3$. Les stratégies mixtes optimales pour Bleu et Rouge ont le même distribution de probabilités : $(2/3\,;1/3)$.</p>
+<p>Contrairement à l&rsquo;intuition, Bleu doit placer la bombe dans l&rsquo;avion le moins protégé dans 1/3 des cas. Et toujours dans 1/3 des cas, Rouge doit attaquer ce bombardier (le moins protégé).</p>
+<p>La valeur du gain au point minimax vaut $\displaystyle V\left(\frac{1}{3},\frac{2}{3}\right)=60+40\left(\frac{2}{3}\right)+40\left(\frac{2}{3}\right)-60\left(\frac{2}{3}\right)\left(\frac{2}{3}\right)=\frac{260}{3}\approx 86,7$. Le porteur de la bombe va donc survivre avec une probabilité de $86,7\%$ qui est supérieure aux $80\%$ correspondant à la stratégie évidente, mais finalement naïve, de toujours placer la bombe dans le bombardier le mieux protégé.</p>
+<p>Et que se passe-t-il si Bleu applique la stratégie mais pas Rouge ?<br>
+On a alors $\displaystyle V\left(\frac{1}{3},\frac{2}{3}\right) = 60+40\left(\frac{2}{3}\right)+40q-60\left(\frac{2}{3}\right)q=\frac{260}{3}+40q-40q=\frac{260}{3}$. Le résultat est indépendant de $q$ ! Quelle que soit la stratégie de Rouge, le gain est assuré par Bleu. Et à l&rsquo;inverse, si Rouge applique la stratégie mais pas Bleu, on obtient à nouveau le même résultat, independant de $p$.</p>
 <br>
 <h2 id="murmurations">Murmurations</h2>
 <div style="position:relative; width:800px; max-width:100%; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
@@ -2190,6 +2248,11 @@ On peut l&rsquo;interpréter ainsi : les chances de survie du bombarider le mie
 </div>
 <br>
 <p>Comme le montre cette très chouette vidéo de fouloscopie, nos histoires de poursuite participent à l&rsquo;explication des comportements collectifs fascinants des bancs de possions ou des murmurations d&rsquo;étourneaux. Un poisson (ou oiseau) ne ferait en fait que poursuivre les quelques individus immédiatement dans son champ de vision.</p>
+<p>Le code suivant utilise les 6 premiers voisins et permet de voyager un peu dans le diagramme de phase.</p>
+<br>
+<div style="position:relative; width:810px; max-width: 100%; margin-left: auto;margin-right: auto;">
+<iframe src="https://trinket.io/embed/glowscript/54274cbedc?outputOnly=true&start=result" width="100%" height="750" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+</div>
 
 
 <footer class="footline">
@@ -3458,19 +3521,19 @@ On peut l&rsquo;interpréter ainsi : les chances de survie du bombarider le mie
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1710036574"></script>
-    <script src="/js/perfect-scrollbar.min.js?1710036574"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1710036574"></script>
-    <script src="/js/jquery.sticky.js?1710036574"></script>
-    <script src="/js/featherlight.min.js?1710036574"></script>
-    <script src="/js/highlight.pack.js?1710036574"></script>
+    <script src="/js/clipboard.min.js?1710107562"></script>
+    <script src="/js/perfect-scrollbar.min.js?1710107562"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1710107562"></script>
+    <script src="/js/jquery.sticky.js?1710107562"></script>
+    <script src="/js/featherlight.min.js?1710107562"></script>
+    <script src="/js/highlight.pack.js?1710107562"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1710036574"></script>
-    <script src="/js/learn.js?1710036574"></script>
-    <script src="/js/hugo-learn.js?1710036574"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1710107562"></script>
+    <script src="/js/learn.js?1710107562"></script>
+    <script src="/js/hugo-learn.js?1710107562"></script>
     
         
-            <script src="/mermaid/mermaid.js?1710036574"></script>
+            <script src="/mermaid/mermaid.js?1710107562"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
