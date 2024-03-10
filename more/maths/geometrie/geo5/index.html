@@ -36,22 +36,22 @@
     
 
     
-    <link href="/css/nucleus.css?1710035950" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1710035950" rel="stylesheet">
-    <link href="/css/hybrid.css?1710035950" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1710035950" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1710035950" rel="stylesheet">
-    <link href="/css/auto-complete.css?1710035950" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1710035950" rel="stylesheet">
-    <link href="/css/theme.css?1710035950" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1710035950" rel="stylesheet">
+    <link href="/css/nucleus.css?1710036574" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1710036574" rel="stylesheet">
+    <link href="/css/hybrid.css?1710036574" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1710036574" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1710036574" rel="stylesheet">
+    <link href="/css/auto-complete.css?1710036574" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1710036574" rel="stylesheet">
+    <link href="/css/theme.css?1710036574" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1710036574" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1710035950" rel="stylesheet">
+    <link href="/css/theme-blue.css?1710036574" rel="stylesheet">
     
-    <link href="/css/foo.css?1710035950" rel="stylesheet"><link href="/css/bar.css?1710035950" rel="stylesheet">
+    <link href="/css/foo.css?1710036574" rel="stylesheet"><link href="/css/bar.css?1710036574" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1710035950"></script>
+    <script src="/js/jquery-3.3.1.min.js?1710036574"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -105,14 +105,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1710035950"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1710035950"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1710036574"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1710036574"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1710035950"></script>
+<script type="text/javascript" src="/js/search.js?1710036574"></script>
 
     
   </div>
@@ -2126,7 +2126,7 @@ Et puisque $\displaystyle a=\frac{v^2}{R}$, on obtient : $\displaystyle R =\fra
 <iframe src="https://trinket.io/embed/python/92f6eeb03c?outputOnly=true&start=result" width="100%" height="750" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 </div>
 <br>
-<p>On remarque que le polygone formé par les tortues est une réduction et rotation du polygone de départ.</p>
+<p>On remarque que le polygone formé par les tortues est à tout moment une réduction et rotation du polygone de départ.</p>
 <br>
 <div style="position:relative; width:600px; max-width:100%; margin-left: auto; margin-right: auto; ">
 <iframe src="https://trinket.io/embed/python/d6e2011399?outputOnly=true&start=result" width="100%" height="750" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
@@ -2135,24 +2135,24 @@ Et puisque $\displaystyle a=\frac{v^2}{R}$, on obtient : $\displaystyle R =\fra
 <p>Utilisons les coordonnées polaires $(r(t);\theta(t))$ pour décrire une des tortues dont la position initiale servira d&rsquo;origine des angles $(r(0)=r;\theta(0)=0).$</p>
 <p><img src="/schematortue.png?width=400px" alt=""></p>
 <p>$\displaystyle v_r = \frac{dr}{dt} = -v\sin\left(\frac{\pi}{n}\right)$<br></p>
-<p>$\displaystyle v_\theta = \frac{dr}{dt} = v\cos\left(\frac{\pi}{n}\right)$<br></p>
+<p>$\displaystyle v_\theta = r\frac{d\theta}{dt} = v\cos\left(\frac{\pi}{n}\right)$<br></p>
 <p>En jouant un peu avec ces deux expressions, on obtient :<br></p>
-<p>$\displaystyle \frac{v}{r}\cos\left(\frac{\pi}{n}\right) = \frac{d\theta}{dt} = \frac{d\theta}{dr} \cdot\frac{dr}{dt} = -v\sin\left(\frac{\pi}{n}\right)$</p>
+<p>$\displaystyle \frac{v}{r}\cos\left(\frac{\pi}{n}\right) = \frac{d\theta}{dt} = \frac{d\theta}{dr} \cdot\frac{dr}{dt} = -\frac{d\theta}{dr}v\sin\left(\frac{\pi}{n}\right)$</p>
 <p>On peut simplifier par $v$, ce qui donne :</p>
 <p>$\displaystyle \frac{dr}{d\theta} = -r\frac{\sin(\pi/n)}{\cos(\pi/n)} = -r\tan\left(\frac{\pi}{n}\right)$</p>
 <p>Et finalement :</p>
-<p>$\displaystyle \frac{dr}{r} = - -\tan\left(\frac{\pi}{n}\right) d\theta$</p>
-<p>Ce qui s&rsquo;intègre en une belle spirale logarithmique :</p>
+<p>$\displaystyle \frac{dr}{r} = - \tan\left(\frac{\pi}{n}\right) d\theta$</p>
+<p>Ce qui s&rsquo;intègre en une belle <strong>spirale logarithmique</strong> :</p>
 <p>$\displaystyle r(\theta) = r(0)\exp\left(-\theta\tan\left(\frac{\pi}{n}\right)\right)$</p>
 <p>Cherchons maintenant le temps mis par les tortues pour rejoindre le centre du polygone :</p>
 <p>$\displaystyle T=\int_0^T dt = \int_{r(0)}^0 \frac{dr}{(dr/dt)}=\int_{r(0)}^0\frac{dr}{-v\sin(\pi/n)}$</p>
 <p>D&rsquo;où $\displaystyle T = \frac{1}{v}\int_0^{r(0)}\frac{dr}{\sin(\pi/n)} = \frac{r(0)}{v \sin(\pi/n)}$</p>
-<p>Et là distance parcourue vaut donc $\displaystyle D = \frac{r(0)}{ \sin(\pi/n)}$.</p>
+<p>Et la distance parcourue vaut donc $\displaystyle D = \frac{r(0)}{ \sin(\pi/n)}$.</p>
 <p><img src="/tortuecarre.png?width=500px" alt=""></p>
 <p>Dans le cas d&rsquo;un carré, les expressions deviennnent encore plus simples :</p>
 <p>$\displaystyle r(\theta) = r(0)\exp\left(-\theta \right)$</p>
-<p>Et $\displaystyle D = r(0)\frac{\sqrt{2}}{2} = a$, en appelant $a$ le côté du carré. Donc le long de leur spirale, les tortues parcourent au final la longueur d&rsquo;un côté du carré initiale.</p>
-<p>On peut expliquer ça simplement par le fait que la <strong>vitesse relative</strong> entre deux tortues restent en permanence identique à $v$ puisque leurs vecteurs vitesse restent orthogonaux.</p>
+<p>Et $\displaystyle D = r(0)\frac{\sqrt{2}}{2} = a$, en appelant $a$ le côté du carré. Donc le long de leur spirale, les tortues parcourent au final la longueur d&rsquo;un côté du carré initial.</p>
+<p>On peut expliquer ça simplement par le fait que la <strong>vitesse relative</strong> entre deux tortues restent en permanence identique à $v$ puisque leurs vecteurs vitesse sont à tout moment orthogonaux.</p>
 <br>
 <p>On peut s&rsquo;amuser à combiner les poursuites pour faire des jolies figures&hellip; Ci-dessous, on assemblé 6 poursuites à 3 tortues pour former un hexagone.</p>
 <p><img src="/nbugspurs2.png?width=1000px" alt=""></p>
@@ -3458,19 +3458,19 @@ On peut l&rsquo;interpréter ainsi : les chances de survie du bombarider le mie
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1710035950"></script>
-    <script src="/js/perfect-scrollbar.min.js?1710035950"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1710035950"></script>
-    <script src="/js/jquery.sticky.js?1710035950"></script>
-    <script src="/js/featherlight.min.js?1710035950"></script>
-    <script src="/js/highlight.pack.js?1710035950"></script>
+    <script src="/js/clipboard.min.js?1710036574"></script>
+    <script src="/js/perfect-scrollbar.min.js?1710036574"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1710036574"></script>
+    <script src="/js/jquery.sticky.js?1710036574"></script>
+    <script src="/js/featherlight.min.js?1710036574"></script>
+    <script src="/js/highlight.pack.js?1710036574"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1710035950"></script>
-    <script src="/js/learn.js?1710035950"></script>
-    <script src="/js/hugo-learn.js?1710035950"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1710036574"></script>
+    <script src="/js/learn.js?1710036574"></script>
+    <script src="/js/hugo-learn.js?1710036574"></script>
     
         
-            <script src="/mermaid/mermaid.js?1710035950"></script>
+            <script src="/mermaid/mermaid.js?1710036574"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
