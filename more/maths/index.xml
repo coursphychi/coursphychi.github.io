@@ -39,16 +39,6 @@ On peut vérifier la solution statistiquement avec un petit programme simplissim
 Probabilités conditionnelles et Bayes Les probabilités conditionnelles au tribunal, chez le médecin et dans un vieux jeu télévisé américain :</description>
     </item>
     <item>
-      <title>Logique</title>
-      <link>https://coursphychi.github.io/more/maths/logique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/logique/</guid>
-      <description>Logique Algèbre de Boole L&amp;rsquo;algèbre de Boole permet d&amp;rsquo;algébriser la logique.
-Logique des propositions L&amp;rsquo;implication $A\rightarrow B$ signifie que si $A$ est vraie alors $B$ est vraie.
-$A$ $B$ $A\rightarrow B$ 0 0 1 0 1 1 1 0 0 1 1 1 L&amp;rsquo;implication réciproque s&amp;rsquo;écrit $B\rightarrow A$. On peut la lire : $B$ est vraie seulement si $A$ est vraie.
-$A$ $B$ $B\rightarrow A$ 0 0 1 0 1 0 1 0 1 1 1 1 S&amp;rsquo;il y a conjonction entre l&amp;rsquo;implication ($B$ si $A$) et sa réciproque ($B$ seulement si $A$), ce qui s&amp;rsquo;écrit $(A\rightarrow B) \land (B\rightarrow A)$, alors les propositions $A$ et $B$ sont dites matériellement équivalentes $A \leftrightarrow B$.</description>
-    </item>
-    <item>
       <title>Théorie des jeux</title>
       <link>https://coursphychi.github.io/more/maths/jeux/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
