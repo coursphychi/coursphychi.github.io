@@ -366,10 +366,9 @@ Un joli test de la non-localité quantique sans utiliser d&amp;rsquo;inégalité
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/logique/logique1/</guid>
       <description>note
-Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc.
-Calcul des propositions Syntaxe Langage Le langage du calcul propositionnel est constitué
-de variables propositionnelles $P$, $Q$, $R$,&amp;hellip;, de connecteurs logiques $\neg, \lor, \land, \rightarrow, \leftrightarrow$ et de parenthèses. On désigna par $VAR=\Set{P,Q,R\dots}$ l&amp;rsquo;ensemble des variables propositionnelles, potentiellement infini.
-Le connectecteur logique $\neg$ est unaire (ou d&amp;rsquo;arité 1) puisqu&amp;rsquo;il transforme à lui seul une formule en une autre formule.</description>
+Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
+Calcul des propositions Le calcul des propositions (ou calcul propositionnel ou logique des propositions) permet de modéliser des raisonnements simples. Son pouvoir expressif est assez limité.
+Syntaxe Langage Le langage du calcul des propositions est constitué de variables propositionnelles $P$, $Q$, $R$,&amp;hellip;, de connecteurs logiques $\neg, \lor, \land, \rightarrow, \leftrightarrow$ et de parenthèses.</description>
     </item>
     <item>
       <title>Changement d&#39;état</title>
