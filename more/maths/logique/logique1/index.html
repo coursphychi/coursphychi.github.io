@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1710896655" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1710896655" rel="stylesheet">
-    <link href="/css/hybrid.css?1710896655" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1710896655" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1710896655" rel="stylesheet">
-    <link href="/css/auto-complete.css?1710896655" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1710896655" rel="stylesheet">
-    <link href="/css/theme.css?1710896655" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1710896655" rel="stylesheet">
+    <link href="/css/nucleus.css?1710946015" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1710946015" rel="stylesheet">
+    <link href="/css/hybrid.css?1710946015" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1710946015" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1710946015" rel="stylesheet">
+    <link href="/css/auto-complete.css?1710946015" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1710946015" rel="stylesheet">
+    <link href="/css/theme.css?1710946015" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1710946015" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1710896655" rel="stylesheet">
+    <link href="/css/theme-blue.css?1710946015" rel="stylesheet">
     
-    <link href="/css/foo.css?1710896655" rel="stylesheet"><link href="/css/bar.css?1710896655" rel="stylesheet">
+    <link href="/css/foo.css?1710946015" rel="stylesheet"><link href="/css/bar.css?1710946015" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1710896655"></script>
+    <script src="/js/jquery-3.3.1.min.js?1710946015"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1710896655"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1710896655"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1710946015"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1710946015"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1710896655"></script>
+<script type="text/javascript" src="/js/search.js?1710946015"></script>
 
     
   </div>
@@ -2063,7 +2063,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         <li><a href="#formules-logiquement-équivalentes">Formules logiquement équivalentes</a></li>
         <li><a href="#théorie-et-conséquence-sémantique">Théorie et conséquence sémantique</a></li>
         <li><a href="#substitution-de-sous-formules-équivalentes">Substitution de sous formules équivalentes</a></li>
-        <li><a href="#jeux-dévaluation">Jeux dévaluation</a></li>
+        <li><a href="#jeux-dévaluation">Jeux d&rsquo;évaluation</a></li>
       </ul>
     </li>
   </ul>
@@ -2382,9 +2382,9 @@ Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ 
 <p>Dans l&rsquo;exemple suivant, on détermine une formule équivalente avec $\neg$ et $\lor$ comme seuls connecteurs logiques (et on élimine les doubles négations dans la dernière étape.</p>
 <p><img src="/gifsubstit.gif" alt=""></p>
 <br>
-<h3 id="jeux-dévaluation">Jeux dévaluation</h3>
+<h3 id="jeux-dévaluation">Jeux d&rsquo;évaluation</h3>
 <br>
-<p>Ernst Zermelo a démontré que les jeux tour à tour à deux joueurs finis, à information parfaite (pas comme la bataille navale), sans hasard, et sans match nul, sont tous <strong>déterminés</strong>. Cela signifie qu&rsquo;un des deux joueurs a une stratégie gagnante.</p>
+<p>Ernst Zermelo a démontré que les jeux tour à tour à deux joueurs finis, à information parfaite (pas comme la bataille navale), sans hasard, et sans match nul, sont tous <strong>déterminés</strong>. Cela signifie qu&rsquo;un des deux joueurs a une <strong>stratégie gagnante</strong>.</p>
 <p>Pour pouver ce résultat, on va représenter toutes les configurations possibles dans le jeu par un arbre dont les nœuds sont étiquetés par un des deux joueurs (0 ou 1) et les arêtes sont ses coups possibles depuis cette position. Les feuilles de l&rsquo;arbre correspondent à des positions gagnantes, soit pour 0, soit pour 1. Puis on va décrire un algorithme permettant de déterminer lequel des deux joueurs a une stratégie gagnante sur une position donnée.</p>
 <p>On commence par colorier en <b style="color:#EE220C">rouge</b> les feuilles gagnantes pour <b style="color:#EE220C">0</b> et en <b style="color:#1DB100">vert</b> les feuilles gagnantes pour <b style="color:#1DB100">1</b>.</p>
 <p>Ensuite on regarde les prédécesseurs de ces feuilles :</p>
@@ -2408,8 +2408,8 @@ Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ 
 <p><img src="/gifarbrejeu.gif" alt=""></p>
 <p>Étant donné un modèle $\mathcal{M}$ et une formule $\phi \in \mathcal{F}$, la valeur que prend la formule dans le modèle peut être obtenue grâce à un jeu inventé par Jaakko Hintikka, noté $\mathbb{E}v(\mathcal{M},\phi)$ et appelé <strong>jeu d&rsquo;évaluation</strong>.</p>
 <p>$\phi$ doit être écrite avec seulement les connecteurs logiques $\neg$, $\land$ et $\lor$ (ce qui, comme on l&rsquo;a vu, est toujours possible).</p>
-<p>Les deux joueurs s&rsquo;appellent le <strong>V</strong>érificateur (<strong>V</strong>) dont le but est de prouver que la formule est satisfaite dans le modèle ($\mathcal{M}\models\phi$) et le <strong>F</strong>alsificateur (<strong>F</strong>) qui doit montrer que la formule est fausse ($\mathcal{M}\not\models\phi$).</p>
-<p>L&rsquo;arbre du jeu correspond à l&rsquo;arbre de la formule. Si un nœud est une disjonction $\lor$, c&rsquo;est au tour de <strong>V</strong> et si c&rsquo;est une conjonction $\land$, c&rsquo;est au tour de <strong>F</strong>. Si le nœud est une négation $\neg$, les deux joueurs échangent leur rôle.</p>
+<p>Les deux joueurs s&rsquo;appellent le <strong>V</strong>érificateur (<strong><b style="color:#1DB100">V</b></strong>) dont le but est de prouver que la formule est satisfaite dans le modèle ($\mathcal{M}\models\phi$) et le <strong>F</strong>alsificateur (<strong><b style="color:#EE220C">F</b></strong>) qui doit montrer que la formule est fausse ($\mathcal{M}\not\models\phi$).</p>
+<p>L&rsquo;arbre du jeu correspond à l&rsquo;arbre de la formule. Si un nœud est une disjonction $\lor$, c&rsquo;est au tour de <strong><b style="color:#1DB100">V</b></strong> et si c&rsquo;est une conjonction $\land$, c&rsquo;est au tour de <strong><b style="color:#EE220C">F</b></strong>. Si le nœud est une négation $\neg$, les deux joueurs échangent leur rôle.</p>
 <p>Pour savoir quel joueur gagne, on cherche lequel a une stratégie gagnante sur l&rsquo;arbre de jeu en faisant attention à garder la trace du nombre de permutations de rôle pour connaître sa véritable identité (celle de départ).</p>
 <br>
 
@@ -3739,19 +3739,19 @@ Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ 
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1710896655"></script>
-    <script src="/js/perfect-scrollbar.min.js?1710896655"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1710896655"></script>
-    <script src="/js/jquery.sticky.js?1710896655"></script>
-    <script src="/js/featherlight.min.js?1710896655"></script>
-    <script src="/js/highlight.pack.js?1710896655"></script>
+    <script src="/js/clipboard.min.js?1710946015"></script>
+    <script src="/js/perfect-scrollbar.min.js?1710946015"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1710946015"></script>
+    <script src="/js/jquery.sticky.js?1710946015"></script>
+    <script src="/js/featherlight.min.js?1710946015"></script>
+    <script src="/js/highlight.pack.js?1710946015"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1710896655"></script>
-    <script src="/js/learn.js?1710896655"></script>
-    <script src="/js/hugo-learn.js?1710896655"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1710946015"></script>
+    <script src="/js/learn.js?1710946015"></script>
+    <script src="/js/hugo-learn.js?1710946015"></script>
     
         
-            <script src="/mermaid/mermaid.js?1710896655"></script>
+            <script src="/mermaid/mermaid.js?1710946015"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

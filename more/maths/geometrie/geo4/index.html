@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1710896655" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1710896655" rel="stylesheet">
-    <link href="/css/hybrid.css?1710896655" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1710896655" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1710896655" rel="stylesheet">
-    <link href="/css/auto-complete.css?1710896655" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1710896655" rel="stylesheet">
-    <link href="/css/theme.css?1710896655" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1710896655" rel="stylesheet">
+    <link href="/css/nucleus.css?1710946015" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1710946015" rel="stylesheet">
+    <link href="/css/hybrid.css?1710946015" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1710946015" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1710946015" rel="stylesheet">
+    <link href="/css/auto-complete.css?1710946015" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1710946015" rel="stylesheet">
+    <link href="/css/theme.css?1710946015" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1710946015" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1710896655" rel="stylesheet">
+    <link href="/css/theme-blue.css?1710946015" rel="stylesheet">
     
-    <link href="/css/foo.css?1710896655" rel="stylesheet"><link href="/css/bar.css?1710896655" rel="stylesheet">
+    <link href="/css/foo.css?1710946015" rel="stylesheet"><link href="/css/bar.css?1710946015" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1710896655"></script>
+    <script src="/js/jquery-3.3.1.min.js?1710946015"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1710896655"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1710896655"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1710946015"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1710946015"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1710896655"></script>
+<script type="text/javascript" src="/js/search.js?1710946015"></script>
 
     
   </div>
@@ -2216,11 +2216,15 @@ Cela fit changer son fusil d&rsquo;épaule à l&rsquo;armée américaine en adap
 <p>Ce n&rsquo;est finalement pas si dur à intuiter. Tirer un point au hasard dans l&rsquo;hypercube de dimension $n$ revient à choisir au hasard $n$ coordonnées pour construire un vecteur $\vec{v_1}=x_1 \vec{e_1}+x_2\vec{e_2}+\cdots + x_n\vec{e_n}$. Et on fait pareil avec un 2<sup>e</sup> point : $\vec{v_2}=x_1^\prime \vec{e_1}+x^\prime_2\vec{e_2}+\cdots + x^\prime_n\vec{e_n}$.</p>
 <p><img src="/distvec.png?width=500px" alt=""></p>
 <p>Pour $n$ grand, la probabilité que ces deux vecteurs soient orthogonaux (ce qui signifie que leurs directions sont indépendantes) devient énorme. En effet, il suffit qu&rsquo;une des coordonnées soit quasiment nulle pour qu&rsquo;il y ait orthogonalité et en multipliant les tirages, ça va finir par arriver.</p>
-<p>En supposant pour simplifier que chacun des points se ballade à peu près au milieu d&rsquo;une demi-diagonale de l&rsquo;hypercube (puisqu&rsquo;il est bourré de diagonales en grande dimension), on se retrouve avec deux vecteurs orthogonaux éloignés de $\frac{\sqrt{n}}{4}$ du centre. Leur distance sera donc approximativement $\sqrt{\left(\frac{\sqrt{n}}{4}\right)^2+\left(\frac{\sqrt{n}}{4}\right)^2}=\frac{1}{2\sqrt{2}}\sqrt{n}\approx 0,35\sqrt{n}$. La distance entre deux points augmenterait donc comme la racine carrée du nombre de dimensions.</p>
+<p>En supposant pour simplifier que chacun des points se ballade à peu près au milieu d&rsquo;une demi-diagonale de l&rsquo;hypercube (puisqu&rsquo;il est bourré de diagonales en grande dimension), on se retrouve avec deux vecteurs orthogonaux éloignés de $\frac{\sqrt{n}}{4}$ du centre. Leur distance sera donc approximativement $\sqrt{\left(\frac{\sqrt{n}}{4}\right)^2+\left(\frac{\sqrt{n}}{4}\right)^2}=\frac{1}{2\sqrt{2}}\sqrt{n}\approx 0,35\sqrt{n}$. La distance entre deux points augmenterait ainsi comme la racine carrée du nombre de dimensions.</p>
 <p>En ajustant la courbe obtenue en traçant la distance moyenne par une fonction $a\sqrt{n}$, l&rsquo;accord est plutôt très bon ! On obtient $a=0,41$. Pour le coup, ce n&rsquo;est pas tout à fait nos $0,35$ mais pour un modèle ultra simplifié, on n&rsquo;est pas si loin&hellip;</p>
 <p><img src="/evoldistmoy.png" alt=""></p>
-<p>Par contre on voit que la variabilité, incarnée par l&rsquo;écart-type, n&rsquo;est pas modifiée. C&rsquo;est ce qui explique que la variabilité relative devient, elle, de plus en plus faible quand le nombre de dimensions augmente.</p>
-<p>La raison dans cette constance de l&rsquo;écart-type vient de son évolution inversement proportionnelle à la racine carrée du nombre d&rsquo;échantillons. Or ici, le nombre d&rsquo;échantillons correspond à la dimension. Par conséquent l&rsquo;augmentation de la variabilité provoquée par l&rsquo;augmentation des distances ($\propto\sqrt{n}$) est compensée par la diminution de cette même variabilité du fait de l&rsquo;augmentation du nombre de tirages ($\propto 1/\sqrt{n}$) .</p>
+<p>On constate par contre que la variabilité, incarnée par l&rsquo;écart-type, n&rsquo;est pas modifiée ! C&rsquo;est ce qui explique que la variabilité relative devient, elle, de plus en plus faible quand le nombre de dimensions augmente.</p>
+<p>La raison de cette conservation de l&rsquo;écart-type est à chercher du côté  de son évolution inversement proportionnelle à la racine carrée du nombre d&rsquo;échantillons.</p>
+<video width="800" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto;">
+  <source src="/evolution_ecart_type.mp4" type="video/mp4">
+</video>
+<p>Or ici, le nombre d&rsquo;échantillons correspond à la dimension. Par conséquent l&rsquo;augmentation de la variabilité provoquée par l&rsquo;augmentation des distances ($\propto\sqrt{n}$) est compensée par la diminution de cette même variabilité du fait de l&rsquo;augmentation du nombre de tirages ($\propto 1/\sqrt{n}$) .</p>
 <p><img src="/suphisto.png" alt=""></p>
 <p>On comprend mieux pourquoi un algorithme comme KNN qui vise à prédire une valeur ou catégorie en regardant celle des plus proches voisins galère à grande dimension ; tous les voisins sont à peu près à la même distance&hellip;</p>
 
@@ -3555,19 +3559,19 @@ Cela fit changer son fusil d&rsquo;épaule à l&rsquo;armée américaine en adap
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1710896655"></script>
-    <script src="/js/perfect-scrollbar.min.js?1710896655"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1710896655"></script>
-    <script src="/js/jquery.sticky.js?1710896655"></script>
-    <script src="/js/featherlight.min.js?1710896655"></script>
-    <script src="/js/highlight.pack.js?1710896655"></script>
+    <script src="/js/clipboard.min.js?1710946015"></script>
+    <script src="/js/perfect-scrollbar.min.js?1710946015"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1710946015"></script>
+    <script src="/js/jquery.sticky.js?1710946015"></script>
+    <script src="/js/featherlight.min.js?1710946015"></script>
+    <script src="/js/highlight.pack.js?1710946015"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1710896655"></script>
-    <script src="/js/learn.js?1710896655"></script>
-    <script src="/js/hugo-learn.js?1710896655"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1710946015"></script>
+    <script src="/js/learn.js?1710946015"></script>
+    <script src="/js/hugo-learn.js?1710946015"></script>
     
         
-            <script src="/mermaid/mermaid.js?1710896655"></script>
+            <script src="/mermaid/mermaid.js?1710946015"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
