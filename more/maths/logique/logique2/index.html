@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Logique - Cours Physique-Chimie</title>
+    <title>Propositions - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1710946015" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1710946015" rel="stylesheet">
-    <link href="/css/hybrid.css?1710946015" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1710946015" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1710946015" rel="stylesheet">
-    <link href="/css/auto-complete.css?1710946015" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1710946015" rel="stylesheet">
-    <link href="/css/theme.css?1710946015" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1710946015" rel="stylesheet">
+    <link href="/css/nucleus.css?1710975046" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1710975046" rel="stylesheet">
+    <link href="/css/hybrid.css?1710975046" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1710975046" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1710975046" rel="stylesheet">
+    <link href="/css/auto-complete.css?1710975046" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1710975046" rel="stylesheet">
+    <link href="/css/theme.css?1710975046" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1710975046" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1710946015" rel="stylesheet">
+    <link href="/css/theme-blue.css?1710975046" rel="stylesheet">
     
-    <link href="/css/foo.css?1710946015" rel="stylesheet"><link href="/css/bar.css?1710946015" rel="stylesheet">
+    <link href="/css/foo.css?1710975046" rel="stylesheet"><link href="/css/bar.css?1710975046" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1710946015"></script>
+    <script src="/js/jquery-3.3.1.min.js?1710975046"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1710946015"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1710946015"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1710975046"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1710975046"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1710946015"></script>
+<script type="text/javascript" src="/js/search.js?1710975046"></script>
 
     
   </div>
@@ -2040,7 +2040,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Logique
+                   Propositions
                  
                   </span>
                 </div>
@@ -2049,13 +2049,15 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#algèbre-de-boole">Algèbre de Boole</a></li>
-    <li><a href="#logique-des-propositions">Logique des propositions</a></li>
-    <li><a href="#logique-des-prédicats">Logique des prédicats</a>
+    <li><a href="#sémantique">Sémantique</a>
       <ul>
-        <li></li>
-        <li><a href="#aspect-sémantique">Aspect sémantique</a></li>
-        <li><a href="#aspect-syntaxique">Aspect syntaxique</a></li>
+        <li><a href="#modèle">Modèle</a></li>
+        <li><a href="#évaluation-des-formules">Évaluation des formules</a></li>
+        <li><a href="#formules-logiquement-équivalentes">Formules logiquement équivalentes</a></li>
+        <li><a href="#théorie-et-conséquence-sémantique">Théorie et conséquence sémantique</a></li>
+        <li><a href="#substitution-de-sous-formules-équivalentes">Substitution de sous formules équivalentes</a></li>
+        <li><a href="#jeux-dévaluation">Jeux d&rsquo;évaluation</a></li>
+        <li><a href="#table-de-vérité">Table de vérité</a></li>
       </ul>
     </li>
   </ul>
@@ -2097,771 +2099,262 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     color: #006C65;
   }
 </style>
-<h1 id="logique">Logique</h1>
-<h2 id="algèbre-de-boole">Algèbre de Boole</h2>
-<p>L&rsquo;algèbre de Boole permet d&rsquo;algébriser la logique.</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/_9nogCrIrIY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [ ['$', '$'], ['\\(', '\\)'] ]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script
+  type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<br>
+
+<div class="notices note" style="--title: 'note';">
+  <p style="display: none;">note</p>
+  <div class="notice-body">
+    <p>Ces pages sont des notes de lecture du livre <em>La logique pas à pas</em> de Jacques Duparc que je paraphrase allégrement.</p>
+
+  </div>
 </div>
+
+
+<br>
+<h1 id="calcul-des-propositions">Calcul des propositions</h1>
+<p style="text-align:center;">
+<a href="../logique1" style="font-size:2em;">Avant : <b>la syntaxe</b></a>
+</p>
+<h2 id="sémantique">Sémantique</h2>
+<br>
+<h3 id="modèle">Modèle</h3>
+<br>
+<p>La sémantique concerne l&rsquo;interprétation des formules. Le calcul propositionnel est très frustre à cet égard. Une variable propositionnelle vaut soit 1, soit 0, c&rsquo;est-à-dire qu&rsquo;elle est soit vraie, soit fausse. Et il en est de même pour une formule dont l&rsquo;interprétation se déduit de celles des variables et des règles qu&rsquo;impliquent les connecteurs.</p>
+<p>À partir de l&rsquo;ensemble des variables $VAR$, on peut construire une fonction $\delta$ qui associe une valeur de vérité à certains éléments de $VAR$ :<br>$\delta :\;VAR\rightarrow\set{0,1}$<br>
+$\delta$ est une <strong>distribution de valeurs de vérité</strong>.</p>
+<p>$\delta$ permet de définir un <strong>modèle</strong> $\mathcal{M}$ du calcul propositionnel.</p>
+<p><img src="/semantique1.png?width=500px" alt=""></p>
+<p>Imaginons qu&rsquo;un ensemble de formules ne possèdent que deux variables $P$ et $Q$. On a alors 4 modèles différents possibles :</p>
+<p><img src="/semantique2.png?width=1300px" alt=""></p>
+<ul>
+<li>$\mathcal{M}_1$ pour lequel la distribution de valeur de vérité $\delta_1$ est définie par : $\delta_1(P) = 0$ et $\delta_1(Q)=0$</li>
+<li>$\mathcal{M}_2$ pour lequel la distribution de valeur de vérité $\delta_2$ est définie par : $\delta_2(P) = 0$ et $\delta_2(Q)=1$</li>
+<li>$\mathcal{M}_3$ pour lequel la distribution de valeur de vérité $\delta_3$ est définie par : $\delta_3(P) = 1$ et $\delta_3(Q)=0$</li>
+<li>$\mathcal{M}_4$ pour lequel la distribution de valeur de vérité $\delta_4$ est définie par : $\delta_4(P) = 1$ et $\delta_4(Q)=1$</li>
+</ul>
+<p>Pour un modèle $\mathcal{M}$, si $\delta(P)=1$, on note $\mathcal{M}\models P$. Cela signifie que $P$ est vraie dans le modèle $\mathcal{M}$.<br>
+À linverse, si $\delta(P)=0$, on écrira $\mathcal{M}\not\models P$.</p>
+<p>Si  $\mathcal{M}\not\models P$ alors $\mathcal{M}\models \neg P$.</p>
+<p>Exemple :<br>
+si $\mathcal{M}\models P,\neg Q,R$, cela signifie que dans le modèle $\mathcal{M}$, $P$ et $R$ sont vraies, mais $Q$ est fausse.</p>
+<br>
+<h3 id="évaluation-des-formules">Évaluation des formules</h3>
+<br>
+<p>Pour évaluer des formules, il faut pouvoir étendre la fonction de distribution de valeurs de vérité des seules variables propositionnelles à toutes les formules de $\mathcal{F}$. $\delta$ devient alors $\delta_\mathcal{F}$ et on construit $\delta_\mathcal{F}$ à partir de $\delta$ en utilisant les règles suivantes :</p>
+<ul>
+<li>
+<p>$\delta_\mathcal{F}(\phi) = \delta(\phi)$ si $\phi$ est une variable propositionnelle.</p>
+</li>
+<li>
+<p>$\delta_\mathcal{F}(\neg\phi) = 1- \delta_\mathcal{F}(\phi)$ (non $\phi$ est vraie seulement si $\phi$ est fausse).
+<img src="/formsemnot.png?width=150px" alt=""></p>
+</li>
+<li>
+<p>$\delta_\mathcal{F}(\phi \lor\psi) = \max\left(\delta_\mathcal{F}(\phi) ,\delta_\mathcal{F}(\psi) \right) $ ($\phi \lor\psi$ est toujours vraie sauf lorsque les deux sous-formules $\phi$ et $\psi$ sont toutes deux fausses).
+<img src="/formsemou.png?width=800px" alt=""></p>
+</li>
+<li>
+<p>$\delta_\mathcal{F}(\phi \land \psi) = \delta_\mathcal{F}(\phi) \cdot \delta_\mathcal{F}(\psi)$ ($\phi \land\psi$ est toujours fausse sauf lorsque les deux sous-formules $\phi$ et $\psi$ sont toutes deux vraies).
+<img src="/formsemet.png?width=800px" alt=""></p>
+</li>
+<li>
+<p>$\delta_\mathcal{F}(\phi \rightarrow \psi) = \max\left(1- \delta_\mathcal{F}(\phi) ,\delta_\mathcal{F}(\psi) \right)$ ($\phi \rightarrow \psi$ est toujours vraie sauf quand à la fois $\phi$ est vraie et $\psi$ est fausse).
+<img src="/formsemimp.png?width=800px" alt=""></p>
+</li>
+<li>
+<p>$\delta_\mathcal{F}(\phi \leftrightarrow \psi) = \max\left(\delta_\mathcal{F}(\phi) \cdot\delta_\mathcal{F}(\psi), (1-\delta_\mathcal{F}(\phi) )\cdot(1-\delta_\mathcal{F}(\psi) ) \right)$ ($\phi \leftrightarrow \psi$ est vraie lorsque $\phi$ et $\psi$ ont la même valeur de vérité).
+<img src="/formsemequ.png?width=800px" alt=""></p>
+</li>
+</ul>
+<p>Avec nos petits coloriages, on peut maintenant s&rsquo;atteler à la valeur de vérité d&rsquo;une formule complexe dans un modèle donné.<br></p>
+<p>Soit le modèle $\mathcal{M}$ défini par $\mathcal{M}\models P,\neg Q, R$ et la formule $\phi$ qu&rsquo;on s&rsquo;est amusé à linéariser plus haut. On va partir des feuilles et remonter jusqu&rsquo;à la racine de l&rsquo;arbre.
+<img src="/gifverite.gif" alt=""></p>
+<p>Comme la racine est fausse, la formule $\phi$ est fausse dans ce modèle : $\mathcal{M}\not\models\phi$.<br>
+La formule n&rsquo;est d&rsquo;ailleurs vraie que dans un seul des 8 modèles possibles.
+<img src="/huitmodeles.png" alt=""></p>
+<p>Si la hauteur $n$ de la formule est grande, le coloriage devient vite impraticable car trop long. En imaginant que tous les opérateurs sont binaires et que chaque branche est de longueur $n$, cela nous demanderait le coloriage de $0+2+2^2+\ldots+2^{n-1}=2^n-1$ nouveaux nœuds. Avec une formule de hauteur 31, ce qui ne semble pas délirant, on pourrait se retrouver à devoir colorier plus d&rsquo;un milliard de nœuds&hellip;</p>
+<br>
+<h3 id="formules-logiquement-équivalentes">Formules logiquement équivalentes</h3>
+<br>
+<p>Une formule $\phi$ est <strong>satisfaite</strong> dans un modèle $\mathcal{M}$ si elle est vraie dans ce modèle. La distribution de valeur de vérité $\delta$ qui caractérise $\mathcal{M}$ vaut alors 1.<br>
+$\mathcal{M}\models\phi$ signifie que $\delta_\mathcal{F}(\phi) = 1$ et $\mathcal{M}\not\models\phi$ signifie que $\delta_\mathcal{F}(\phi) = 0$.</p>
+<p>Deux formules $\phi$ et $\psi$ sont deux formules <strong>équivalentes</strong> ($\phi\equiv\psi$) ssi elles sont satisfaites dans les mêmes modèles (mêmes valeurs de vérité dans les mêmes modèles).<br></p>
+<p>Corollaire :<br>
+$\phi\equiv\psi$ ssi (pour tout modèle $\mathcal{M}$, $\mathcal{M}\models \phi\leftrightarrow \psi$).</p>
+<p style="margin-bottom:-1.1em;">Preuve :</p>
+<ul>
+<li>Si les deux formules sont équivalentes dans un modèle, alors $\delta_\mathcal{F}(\phi)=\delta_\mathcal{F}(\psi)$ dans ce modèle. Et par conséquent $\delta_\mathcal{F}(\phi\leftrightarrow\psi)=1$.</li>
+<li>Inversement, si la formule $\phi\leftrightarrow\psi$ est vraie dans tout modèle, les valeurs que prennent $\phi$ et $\psi$ dans ces modèles sont les mêmes.</li>
+</ul>
+<p style="margin-bottom:-1.1em;">La relation est&nbsp;:</p>
+<ul>
+<li><strong>réflexive</strong> : $\phi\equiv\phi$</li>
+<li><strong>symétrique</strong> : $\phi\equiv\psi$ ssi $\psi\equiv\phi$</li>
+<li><strong>transitive</strong> : Si ($\phi\equiv\psi$ et $\psi \equiv\theta$) alors $\psi\equiv\theta$</li>
+</ul>
+<p style="margin-top:-1em;">Donc il s'agit bien d'une <b>relation d'équivalence</b>.</p>
+<br>
+<h3 id="théorie-et-conséquence-sémantique">Théorie et conséquence sémantique</h3>
+<br>
+<p>Une <strong>théorie</strong> $\mathcal{T}$ du calcul des propositions est un ensemble de formules : $\mathcal{T} \sube \mathcal{F}$.</p>
+<ul>
+<li>$\mathcal{T}$ est <strong>satisfaite</strong> dans le modèle $\mathcal{M}$ ($\mathcal{M}$ est un modèle de $\mathcal{T}$), noté $\mathcal{M}\models\mathcal{T}$, si pour toute formule $\phi$ de $\mathcal{T}$, $\mathcal{M}\models\phi$.</li>
+<li>$\mathcal{T}$  est <strong>satisfaisable</strong> ou <strong>consistante</strong> s&rsquo;il existe au moins un modèle $\mathcal{M}$ tel que $\mathcal{M}\models\mathcal{T}$.</li>
+<li>$\mathcal{T}$ est <strong>inconsistante</strong> si $\mathcal{T}$ n&rsquo;est pas satisfaisable.</li>
+</ul>
+<p>Une théorie est inconsistante lorsqu&rsquo;elle se contredit. Elle dit alors quelque chose et son contraire, ce qui ne peut être vérifié dans aucun modèle.</p>
+<p>Comparons maintenant deux théories $\mathcal{T}$ et $\mathcal{T&rsquo;}$ :</p>
+<ul>
+<li>
+<p>$\mathcal{T&rsquo;}$ est une <strong>conséquence sémantique</strong> de $\mathcal{T}$, noté $\mathcal{T} \models \mathcal{T&rsquo;}$ si tout modèle satisfaisant $\mathcal{T}$ satisfait aussi $\mathcal{T&rsquo;}$.</p>
+</li>
+<li>
+<p>$\mathcal{T}$ et $\mathcal{T&rsquo;}$ sont deux <strong>théories équivalentes</strong>, noté $\mathcal{T} \equiv \mathcal{T&rsquo;}$, si elles ont exactement les mêmes modèles.</p>
+</li>
+</ul>
+<p>Plus une théorie raconte de choses, moins elle possède de modèles. Et si elle raconte trop de choses, elle finit par devenir inconsistante car plus aucun modèle ne peut la satisfaire.</p>
+<p>On écrit $\mathcal{T}\models\phi$ si la théorie $\mathcal{T&rsquo;}$ se réduit au singleton $\set{\phi}$.<br>
+Et $\models\phi$ est un raccourci pour $\empty \models \phi$ ce qui signifie que $\phi$ est une conséquence logique de la théorie vide. Or la théorie vide ne dit rien et est donc satisfaite dans tous les modèles. Cela revient donc à dire que $\phi$ est vraie dans tous les modèles. $\phi$ est appelée une <strong>tautologie</strong>.</p>
+<p><img src="/inclusiontheorie.png?width=500px" alt=""></p>
+<p>$\mathcal{T}\models\mathcal{T&rsquo;}$ ssi l&rsquo;ensemble des modèles de $\mathcal{T}$ est contenu dans l&rsquo;ensemble des modèles de $\mathcal{T&rsquo;}$.<br>
+En effet, $\mathcal{T&rsquo;}$ est une conséquence sémantique de $\mathcal{T}$ si elle est vraie partout où $\mathcal{T}$ est vraie.</p>
+<p>Deux théories équivalentes ont exactement les mêmes modèles ($\mathcal{T}\equiv \mathcal{T&rsquo;}$ correspond à avoir à la fois $\mathcal{T}\models \mathcal{T&rsquo;}$ et $\mathcal{T&rsquo;}\models \mathcal{T}$), ce qui revient à dire qu&rsquo;il n&rsquo;existe pas de modèle pouvant les discriminer. Elles ne sont pas nécessairement égales (pas nécessairement le même ensemble de formules), mais elles sont égales sur le plan sémantique puisqu&rsquo;elles signifient la même chose.</p>
+
+<div class="notices info" style="--title: 'info';">
+  <p style="display: none;">info</p>
+  <div class="notice-body">
+    <p>La notion de conséquence sémantique est la version sémantique de la notion de déduction. Dire qu&rsquo;une formule est une conséquence sémantique d&rsquo;une théorie, c&rsquo;est affirmer que partout où la théorie est satisfaite (c.-à-d. quand les hypothèses sont vraies), la formule l&rsquo;est également. La formule découle donc de la théorie.</p>
+
+  </div>
 </div>
-<br>
-<hr>
-<h2 id="logique-des-propositions">Logique des propositions</h2>
-<br>
-<p>L&rsquo;<strong>implication</strong> $A\rightarrow B$ signifie que si $A$ est vraie alors $B$ est vraie.</p>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$A\rightarrow B$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>L&rsquo;<strong>implication réciproque</strong> s&rsquo;écrit $B\rightarrow A$. On peut la lire : $B$ est vraie seulement si $A$ est vraie.</p>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$B\rightarrow A$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>S&rsquo;il y a conjonction entre l&rsquo;implication ($B$ si $A$) et sa réciproque ($B$ seulement si $A$), ce qui s&rsquo;écrit $(A\rightarrow B) \land (B\rightarrow A)$, alors les propositions $A$ et $B$ sont dites <strong>matériellement équivalentes</strong> $A \leftrightarrow B$.</p>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$A\leftrightarrow B$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>On peut exprimer l&rsquo;équivalence entre deux propositions de plusieurs manières :</p>
-<ul>
-<li>$A$ si et seulement si (ssi) $B$ ;</li>
-<li>pour que $A$, il faut et il suffit que $B$ ;</li>
-<li>une condition nécessaire et suffisante pour $A$ est $B$.</li>
-</ul>
-<p>L&rsquo;implication $A\rightarrow B$ est <strong>logiquement équivalente</strong> à sa <strong>contraposée</strong>  $\neg B\rightarrow \neg A$, ce qui signifie que leurs tables de vérité sont les mêmes.</p>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$\neg B\rightarrow \neg A$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>On note $A\rightarrow B \equiv \neg B\rightarrow \neg A$.</p>
-<p>L&rsquo;<strong>équivalence logique</strong> entre deux propositions revient à dire que l&rsquo;<strong>équivalence matérielle</strong> entre les deux propositions est une tautologie (toujours vraie). L&rsquo;équivalence matérielle est un opérateur, c&rsquo;est un élément du <strong>langage de la logique des propositions</strong>. L&rsquo;équivalence logique ne fait pas partie de ce langage mais d&rsquo;un <strong>méta-langage</strong>.</p>
-<p>Il ne faut pas confondre la contraposée avec <strong>la négation de l&rsquo;antécédent</strong> $\neg A\rightarrow \neg B$ qui n&rsquo;est pas logiquement équivalente à l&rsquo;implication.</p>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$\neg A\rightarrow \neg B$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>La négation de l&rsquo;antécédant est équivalent à la réciproque de la contraposée. L&rsquo;utiliser en pensant qu&rsquo;il est équivalent à l&rsquo;implication est un raisonnement fallacieux ou <strong>sophisme</strong>.</p>
-<p>Une proposition $F$ est une <strong>conséquence logique</strong> d&rsquo;un ensemble de formules $\Gamma$ si lorsque les $\Gamma$ sont vraies, alors $F$ est vraie.  On note $\Gamma\models F$.<br>Cela revient à dire que $\Gamma\rightarrow F$ est une tautologie.<br>
-Comme $\equiv$, $\models$ est un élément du méta-langage.</p>
-<p>Exemples :</p>
+
+
 <ul>
 <li>
-<p>$A\models A\lor B$</p>
+<p>Si $\mathcal{T}$ est satisfaisable et $\mathcal{T&rsquo;}\sube\mathcal{T}$, alors $\mathcal{T&rsquo;}$ est également satisfaisable.<br>
+En restreignant une théorie, on conserve la non contradiction.<br>
+Le contraire n&rsquo;est évidemment pas vrai. Si on étend une théorie (en ajoutant de nouvelles formules), on diminue le nombre de modèles qui la satisfait. Et on accroît ce nombre de modèles en enlevant des formules à la théorie, pour atteindre à la limite tous les modèles possibles lorsque la théorie devient vide.</p>
 </li>
 <li>
-<p>$A\land B \models B$</p>
+<p>Si $\mathcal{T&rsquo;}$ est inconsistante et $\mathcal{T&rsquo;}\sube\mathcal{T}$, alors $\mathcal{T}$ est également inconsistante.<br>
+Étendre une théorie inconsistante ne peut pas la rendre satisfaisable.</p>
 </li>
 <li>
-<p><strong>Modus ponens</strong> :<br>
-$A \land (A\rightarrow B) \models B$<br></p>
-<blockquote>
-<p>S&rsquo;il a plu ($A$) alors le sol est mouillé ($B$)<br>
-Il a plu ($A$)<br>
-Alors le sol est mouillé ($B$)</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$A\rightarrow B$</th>
-<th>$A \land (A\rightarrow B) $</th>
-<th>$A \land (A\rightarrow B) \rightarrow B$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
+<p>Si $\mathcal{T&rsquo;}\models\phi$ et $\mathcal{T&rsquo;}\sube\mathcal{T}$, alors $\mathcal{T}\models\phi$. Si $\phi$ est la conséquence d&rsquo;une théorie, alors elle est la conséquence de toute théorie qui étend celle-ci (puisque le nombre de modèles satisfaisant cette théorie étendue s&rsquo;est réduit et qu&rsquo;on ne peut donc pas y trouver un nouveau modèle où $\phi$ deviendrait fausse).</p>
 </li>
 <li>
-<p><strong>Modus tollens</strong> :<br>
-$\neg B \land (A\rightarrow B) \models \neg A$ <br></p>
-<blockquote>
-<p>S&rsquo;il a plu ($A$) alors le sol est mouillé ($B$)<br>
-Le sol n&rsquo;est pas mouillé ($\neg B$)<br>
-Alors il n&rsquo;a pas plu ($\neg A$)</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$A\rightarrow B$</th>
-<th>$\neg B \land (A\rightarrow B) $</th>
-<th>$\neg B \land (A\rightarrow B) \rightarrow \neg A$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
+<p>$\mathcal{T}$ est inconsistante ssi $\mathcal{T}\models\phi\land\neg\phi$.</p>
 </li>
 <li>
-<p><strong>Syllogisme hypothétique</strong> :<br>
-$(A\rightarrow B) \land (B\rightarrow C) \models A\rightarrow C$</p>
-<blockquote>
-<p>Si je bois ($A$), je ne peux pas conduire ($B$).<br>
-Si je ne peux pas conduire ($B$), je dois appeler un taxi ($C$).<br>
-Par conséquent, si je bois ($A$), alors je dois appeler un taxi ($C$).</p>
-</blockquote>
-<p>Ce syllogisme incarne le principe de <strong>transitivité de l&rsquo;implication</strong>.</p>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$C$</th>
-<th>$A\rightarrow B$</th>
-<th>$B\rightarrow C$</th>
-<th>$A\rightarrow C$</th>
-<th>$(A\rightarrow B) \land (B\rightarrow C)$</th>
-<th>$(A\rightarrow B) \land (B\rightarrow C) \rightarrow (A\rightarrow C)$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
+<p>$\mathcal{T}$ est inconsistante ssi pour toute formule $\phi$, $\mathcal{T}\models\phi$. En effet, la plus grande théorie possible ($\mathcal{F}$) contient toute formule $\phi$ et sa négation.</p>
 </li>
 <li>
-<p><strong>Syllogisme disjonctif</strong> :<br>
-$(A\lor B) \land (\neg A) \models B$<br></p>
-<blockquote>
-<p>C&rsquo;est soit bleu ($A$), soit rouge ($B$)<br>
-Ce n&rsquo;est pas bleu ($\neg A$)<br>
-Alors c&rsquo;est rouge ($B$)</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$A\lor B$</th>
-<th>$(A\lor B)\land (\neg A) $</th>
-<th>$(A\lor B)\land (\neg A) \rightarrow B$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ul>
-<p>Deux <strong>raisonnements fallacieux</strong> sont cousins du modus ponens et du modus tollens :</p>
-<ul>
-<li>
-<p>la <strong>négation de l&rsquo;antécédent</strong> :<br>
-$\neg A \land (A\rightarrow B)  \not\models \neg B$ <br></p>
-<blockquote>
-<p>S&rsquo;il a plu ($A$) alors le sol est mouillé ($B$)<br>
-Il n&rsquo;a pas plu ($\neg A$)<br>
-Alors le sol n&rsquo;est pas mouillé ($\neg B$)</p>
-</blockquote>
-<p>C&rsquo;est faux, le sol peut être mouillé malgré l&rsquo;absence de pluie.<br></p>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$A\rightarrow B$</th>
-<th>$\neg A \land (A\rightarrow B) $</th>
-<th>$\neg A \land (A\rightarrow B) \rightarrow \neg B$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>La table de vérité montre que $\neg A \land (A\rightarrow B) \rightarrow \neg B$ n&rsquo;est pas une tautologie, ce qui prouve qu&rsquo;il n&rsquo;y a pas conséquence logique.</p>
+<p>$\mathcal{T}\models\phi$ ssi $\mathcal{T}\cup\set{\neg\phi}$ est inconsistante.<br>
+En effet, dire que $\phi$ est conséquence sémantique de $\mathcal{T}$, c&rsquo;est dire que $\phi$ est vraie dans tous les modèles de $\mathcal{T}$ et donc que $\neg\phi$ est fausse dans tous les modèles de $\mathcal{T}$. Impossible donc pour un modèle de satisfaire à la fois $\mathcal{T}$ et $\neg\phi$.<br>
+À l&rsquo;inverse, si $\mathcal{T}\cup\set{\neg\phi}$ est inconsistante, alors $\neg\phi$ est fausse dans tous les modèles de $\mathcal{T}$ et donc $\phi$ est vraie dans tous les modèles de $\mathcal{T}$. D&rsquo;où $\mathcal{T}\models\phi$.</p>
 </li>
 <li>
-<p>l&rsquo;<strong>affirmation du conséquent</strong> :<br>
-$B \land (A\rightarrow B)  \not\models A$<br></p>
-<blockquote>
-<p>S&rsquo;il a plu ($A$) alors le sol est mouillé ($B$)<br>
-Le sol est mouillé ($B$)<br>
-Alors il a plu ($A$)</p>
-</blockquote>
-<p>C&rsquo;est faux. Le sol peut être mouillé pour d&rsquo;autres raisons.C&rsquo;est une confusion entre la possibilité et la nécessité.<br></p>
-<table>
-<thead>
-<tr>
-<th>$A$</th>
-<th>$B$</th>
-<th>$A\rightarrow B$</th>
-<th>$B \land (A\rightarrow B) $</th>
-<th>$B \land (A\rightarrow B) \rightarrow A$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
+<p>$\mathcal{T}\cup\set{\phi}\models\psi$ ssi $\mathcal{T}\models\phi\rightarrow\psi$.<br>
+La seule possibilité pour que $\phi\rightarrow\psi$ soit fausse est si à la fois $\phi$ est vraie et $\psi$ est fausse.  Or si $\mathcal{T}\cup\set{\phi}\models\psi$, cela signifie que si $\phi$ est vraie dans un modèle, alors $\psi$ est nécessairement vraie dans ce même modèle.<br>
+À l&rsquo;inverse, si $\phi\rightarrow\psi$ est conséquence de $\mathcal{T}$, alors $\psi$ est vraie dans tous les modèles de $\mathcal{T}\cup\set{\phi}$ puisque $\phi\rightarrow\psi$ est vraie dans tous les modèles de $\mathcal{T}$.<br>
+En d&rsquo;autres termes, déduire $\phi\rightarrow\psi$ de nos hypothèses $\mathcal{T}$, c&rsquo;est la même chose que déduire $\psi$ en faisant l&rsquo;hypothèse supplémentaire qu&rsquo;on a $\phi$.</p>
 </li>
 </ul>
 <br>
-<hr>
+<h3 id="substitution-de-sous-formules-équivalentes">Substitution de sous formules équivalentes</h3>
 <br>
-<h2 id="logique-des-prédicats">Logique des prédicats</h2>
+<p>Dans une formule, <strong>substituer</strong> une sous-formule par une autre revient à retirer toutes la partie de l&rsquo;arbre qui descend d&rsquo;un nœud et la remplacer par un autre sous-arbre.</p>
+<p>Si la sous-formule &ldquo;greffée&rdquo; est équivalente à la sous-formule retirée, alors la nouvelle formule est équivalente à l&rsquo;originale.</p>
+<p>L&rsquo;intérêt des substitutions est de simplifier la formule pour rendre son interprétation plus facile.</p>
+<p>Une simplification forte (bien qu&rsquo;elle agrandisse l&rsquo;arbre) consiste à restreindre le nombre de symboles utilisés.</p>
+<p>On peut ainsi toujours transformer une formule $\phi$ par une formule $\phi_{\neg,\lor,\land}\equiv\phi$ avec tous ses connecteurs logiques dans $\set{\neg,\lor,\land}$.<br>
+Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ :</p>
+<p><img src="/substit1.png?width=700px" alt=""></p>
+<p>On peut aller encore plus loin en transformant une formule $\phi$ par une formule $\phi_{\neg,\lor}\equiv\phi$ avec tous ses connecteurs logiques dans $\set{\neg,\lor}$.</p>
+<p>Ou bien en transformant une formule $\phi$ par une formule $\phi_{\neg,\land}\equiv\phi$ avec tous ses connecteurs logiques dans $\set{\neg,\land}$.</p>
+<p>On utilise pour cela les deux substitutions suivantes :</p>
+<p><img src="/substit2.png?width=600px" alt=""></p>
+<p>Dans l&rsquo;exemple suivant, on détermine une formule équivalente avec $\neg$ et $\lor$ comme seuls connecteurs logiques (et on élimine les doubles négations dans la dernière étape.</p>
+<p><img src="/gifsubstit.gif" alt=""></p>
 <br>
-<blockquote>
-<p>Tous les hommes sont mortels ($A$)<br>
-Socrate est un homme ($B$)<br>
-Donc Socrate est mortel ($C$)</p>
-</blockquote>
-<p>Ce syllogisme s&rsquo;écrit en logique des propositions $A\land B \models C$, ce qui n&rsquo;est pas valide&hellip;<br>
-La logique des propositions vit dans un monde constitué seulement de faits. On va dépasser ça grâce à la logique des prédicats qui peuple le monde d&rsquo;objets (chiens, théories, chiffres, Socrate, etc.), de relations (rouge, premier, plus grand que, être mortel, etc.) et de fonctions (ajouter 1, longueur, nom du frère, etc.).</p>
-<p>L&rsquo;upgrade de la logique des propositions en logique des prédicats ou <b>logique du 1<sup>er</sup> ordre</b> passe ainsi par l&rsquo;introduction des notions de <strong>variables</strong>, de <strong>constantes</strong>, de <strong>fonctions</strong>, de <strong>prédicats</strong>, et de <strong>quantificateurs</strong>.</p>
+<h3 id="jeux-dévaluation">Jeux d&rsquo;évaluation</h3>
+<br>
+<p>Ernst Zermelo a démontré que les jeux tour à tour à deux joueurs finis, à information parfaite (pas comme la bataille navale), sans hasard, et sans match nul, sont tous <strong>déterminés</strong>. Cela signifie qu&rsquo;un des deux joueurs a une <strong>stratégie gagnante</strong>.</p>
+<p>Pour pouver ce résultat, on va représenter toutes les configurations possibles dans le jeu par un arbre dont les nœuds sont étiquetés par un des deux joueurs (0 ou 1) et les arêtes sont ses coups possibles depuis cette position. Les feuilles de l&rsquo;arbre correspondent à des positions gagnantes, soit pour 0, soit pour 1. Puis on va décrire un algorithme permettant de déterminer lequel des deux joueurs a une stratégie gagnante sur une position donnée.</p>
+<p>On commence par colorier en <b style="color:#EE220C">rouge</b> les feuilles gagnantes pour <b style="color:#EE220C">0</b> et en <b style="color:#1DB100">vert</b> les feuilles gagnantes pour <b style="color:#1DB100">1</b>.</p>
+<p>Ensuite on regarde les prédécesseurs de ces feuilles :</p>
 <ul>
-<li>Les <strong>variables</strong> ($x$, $y$, $z$, etc.) représentent les objets dont on parle.</li>
-<li>Les <strong>constantes</strong> ($a$, $b$, $c$, etc.) sont des valeurs particulières des objets (ici Socrate).</li>
-<li>Variables et constantes sont des <strong>termes</strong> du langage.</li>
-<li>les <strong>fonctions</strong> ($f$, $g$, $h$, etc.) permettent de fabriquer de nouveaux termes à partir d&rsquo;anciens. Le nombre de terme auquels la fonction s&rsquo;applique s&rsquo;appelle sont <strong>arité</strong>. Une constante est une fonction d&rsquo;arité 0.</li>
-<li>les <strong>prédicats</strong> ($P$, $Q$, $R$, etc.) rendent compte des relation entre les termes (ici &ldquo;être un homme&rdquo; et &ldquo;être mortel&rdquo;). L&rsquo;arité d&rsquo;un prédicat est à nouveau le nombre de termes qu&rsquo;il prend en argument.</li>
-<li>les quantificateurs sont d&rsquo;une part le <strong>quantificateur universel</strong> $\foralll$ qui sinfie (&ldquo;pour tout&rdquo;) et le <strong>quantificateur existentiel</strong> $\exists$ qui signifie (&ldquo;il existe&rdquo;).</li>
+<li>s&rsquo;il s&rsquo;agit d&rsquo;une position de <b style="color:#EE220C">0</b>, alors
+<ul>
+<li>on le colorie en <b style="color:#EE220C">rouge</b> si au moins un des successeurs est <b style="color:#EE220C">rouge</b> car alors <b style="color:#EE220C">0</b> peut y aller et gagner.</li>
+<li>on le colorie en <b style="color:#1DB100">vert</b> si tous ses successeurs sont <b style="color:#1DB100">verts</b> (car <b style="color:#EE220C">0</b> n&rsquo;a alors pas d&rsquo;autre choix que d&rsquo;aller sur une position gagnante de <b style="color:#1DB100">1</b> et lui donner la victoire).</li>
 </ul>
-<p>Les constantes et les variables sont issues d’un même ensemble appelé le <strong>domaine</strong>.</p>
-<p>Une <strong>formule atomique</strong> est de la forme $P(t_1,\ldots,t_n)$ où $P$ est une prédicat d&rsquo;arité $n$ et $t_1,\ldots,t_n$ sont des termes.<br>
-On construit des <strong>formules complexes</strong> en combinant des formules atomiques grâce à des connecteurs.</p>
-<p>Revenons à l&rsquo;exemple de départ.<br>
-Appelons $x$ la variable homme, $s$ la constante Socrate, $P$ le prédicat &ldquo;être un homme&rdquo; et $Q$ le prédicat &ldquo;être mortel&rdquo;.<br>
-L&rsquo;énoncé devient :<br>
-$(\forall x P(x)\rightarrow Q(x))\land P(s)\models Q(s)$<br></p>
-  <br>
-<h4 id="carré-daristote">Carré d&rsquo;Aristote</h4>
-<br>
-<p>En combinant deux prédicats $P$ et $Q$, leur négation et les deux quantificateurs, on peut construire 4 propositions donts les relations sont représentées dans le carré d&rsquo;Aristote.</p>
-<p><img src="/carraristote.png?width=800px" alt=""></p>
+</li>
+<li>s&rsquo;il s&rsquo;agit d&rsquo;une position de <b style="color:#1DB100">1</b>, alors on inverse le raisonnement :
 <ul>
-<li>
-<p>Deux propositions sont <strong>contradictoires</strong> si elles ne peuvent être ni vraies ni fausses en même temps.<br>Sont donc contradictoire deux propositions dont l&rsquo;une est la négation de l&rsquo;autre.<br>
-Pour mieux le voir, on va réécrire les propositions universelles sous des formes logiquement équivalentes utilisant le quantificateur existentiel.<br>
-Il est ainsi équivalent de dire $\forall x(P(x)\rightarrow Q(x))$ (tout $P$ est $Q$) et $\neg\exists x (P(x)\land\neg Q(x))$ (il n&rsquo;existe pas de $P$ qui soit non $Q$). On retrouve bien ainsi que <strong>A</strong> est la négation de <strong>O</strong>.<br>
-De même, $\forall x(P(x)\rightarrow \neg Q(x)$ (&ldquo;aucun $P$ n&rsquo;est $Q$&rdquo; ou plus clairement &ldquo;tous les $P$ sont non $Q$&rdquo;) est équivalent à $\neg\exists x (P(x)\land  Q(x))$ (&ldquo;il n&rsquo;existe pas de $P$ qui soit $Q$&rdquo;). Donc <strong>E</strong> nie bien <strong>I</strong>.</p>
-</li>
-<li>
-<p>Deux propositions sont <strong>contraires</strong> ne peuvent pas être vraies en même temps (comme les contradictoires) mais elles peuvent être fausses en même temps par contre. Pour une proposition donnée, on peut trouver plusieurs propositions contraires. Le fait qu&rsquo;une propositions soit fausse n&rsquo;entraîne pas qu&rsquo;une de ses propositions contraires soit vraie.</p>
-</li>
-<li>
-<p>Des propositions <strong>subcontraires</strong> peuvent être vraies en même temps mais pas fausses en même temps.</p>
-</li>
-<li>
-<p>Des propositions <strong>subalternes</strong> s&rsquo;opposent par la quantité.  Si la proposition universelle est vraie, alors la proposition particulière est vraie aussi.</p>
+<li>on le colorie en <b style="color:#1DB100">vert</b> si au moins un des successeurs est <b style="color:#1DB100">vert</b> car alors <b style="color:#1DB100">1</b> peut y aller et gagner.</li>
+<li>on le colorie en <b style="color:#EE220C">rouge</b> si tous ses successeurs sont <b style="color:#EE220C">rouges</b> (car <b style="color:#1DB100">1</b> n&rsquo;a alors pas d&rsquo;autre choix que d&rsquo;aller sur une position gagnante de <b style="color:#EE220C">0</b> et lui donner la victoire).</li>
+</ul>
 </li>
 </ul>
-<hr>
-<h4 id="aparté-sur-les-syllogismes">Aparté sur les syllogismes</h4>
-<p>Aristote s&rsquo;est amusé à définir et répertorier tous les <strong>syllogismes</strong> possibles.<br>
-Un syllogisme est un raisonnement mettant en œuvre trois propositions : les deux premières sont les <strong>prémisses</strong> et elles conduisent à une conclusion.</p>
+<p>On répète ensuite la procédure avec les prédécesseurs des nœuds que l&rsquo;on vient de colorer jusqu&rsquo;à remonter à la racine.</p>
+<p>Comme on finira fatalement par colorier ainsi chaque nœud de l&rsquo;arbre, on prouve qu&rsquo;il existe au moins une stratégie gagnante pour chacun des sous-arbres et pour le jeu complet.</p>
+<p>Un petit exemple :</p>
+<p><img src="/gifarbrejeu.gif" alt=""></p>
+<p>Étant donné un modèle $\mathcal{M}$ et une formule $\phi \in \mathcal{F}$, la valeur que prend la formule dans le modèle peut être obtenue grâce à un jeu inventé par Jaakko Hintikka, noté $\mathbb{E}v(\mathcal{M},\phi)$ et appelé <strong>jeu d&rsquo;évaluation</strong>.</p>
+<p>$\phi$ doit être écrite avec seulement les connecteurs logiques $\neg$, $\land$ et $\lor$ (ce qui, comme on l&rsquo;a vu, est toujours possible).</p>
+<p>Les deux joueurs s&rsquo;appellent le <strong>V</strong>érificateur (<b style="color:#1DB100">V</b>) dont le but est de prouver que la formule est satisfaite dans le modèle ($\mathcal{M}\models\phi$) et le <strong>F</strong>alsificateur (<b style="color:#EE220C">F</b>) qui doit montrer que la formule est fausse ($\mathcal{M}\not\models\phi$).</p>
+<p>L&rsquo;arbre du jeu correspond à l&rsquo;arbre de la formule. Si un nœud est une disjonction $\lor$, c&rsquo;est au tour de <b style="color:#1DB100">V</b> et si c&rsquo;est une conjonction $\land$, c&rsquo;est au tour de <b style="color:#EE220C">F</b>. Si le nœud est une négation $\neg$, les deux joueurs échangent leur rôle. De plus, les propositions vraies correspondent à des positions gagnantes pour <b style="color:#1DB100">V</b> et les propositions fausses sont gagnantes pour <b style="color:#EE220C">F</b>.</p>
+<p>Grâce à ces règles, on obtient le théorème suivant :</p>
+<ol>
+<li>$\mathcal{M}\models\phi$ ssi <b style="color:#1DB100">V</b> a une stratégie gagnante dans $\mathbb{E}v(\mathcal{M},\phi)$.</li>
+<li>$\mathcal{M}\models\neg\phi$ ssi <b style="color:#EE220C">F</b> a une stratégie gagnante dans $\mathbb{E}v(\mathcal{M},\phi)$.</li>
+</ol>
+<p>Prouvons-le par induction sur la hauteur de la formule $\phi$ :<br></p>
+<blockquote>
 <ul>
-<li>La 1<sup>re</sup> prémisse est la majeure. C&rsquo;est une des propositions universelles <strong>A</strong> ou <strong>I</strong>.</li>
-<li>La 2<sup>e</sup> prémisse est la mineure. Elle peut être d&rsquo;une des 4 formes <strong>A</strong>, <strong>E</strong>, <strong>I</strong> ou <strong>O</strong>, mais elle doit avoir un terme commun avec la majeure.</li>
-<li>La conclusion peut être d&rsquo;une des 4 formes, mais elle doit avoir un terme commun avec la majeure.</li>
+<li> $ht(\phi)=0$ correspond à une formule $\phi$ réduite à une variable propositionnelle. On vérifie alors tout de suite 1. et 2..</li>
+<li> $ht(\phi)=n+1$</li>
+    <ul>
+    <li> si $\phi=\neg\psi$, alors l'hypothèse d'induction opère sur $\psi$.<br>
+    Le jeu d'évaluation impliquant $\psi$ est le même que celui impliquant $\phi$ à un changement de rôle près. Si $\psi$ est vraie, alors <b style="color:#1DB100">V</b> a une stratégie gagnante dans $\mathbb{E}v(\mathcal{M},\psi)$ (par hypothèse d'induction) et donc <b style="color:#EE220C">F</b> a une stratégie gagnante dans $\mathbb{E}v(\mathcal{M},\phi)$ (par la règle de changement de rôle). Une $\phi$ fausse donne bien une stratégie gagnante pour <b style="color:#EE220C">F</b>. Et inversement, une $\phi$ vraie donnera bien une stratégie gagnante pour <b style="color:#1DB100">V</b>.</li>
+    <li> si $\phi=\psi_1\land\psi_2$, alors l'hypothèse d'induction opère sur $\psi_1$ et $\psi_2$.<br>
+    Puisqu'on est sur un $\land$, les règles du jeu stipulent que c'est au tour de <b style="color:#EE220C">F</b> de jouer.<br>
+    $\phi$ vraie implique $\psi_1$ et $\psi_2$ vraie, ce qui donne une stratégie gagnante pour <b style="color:#1DB100">V</b> puisque les deux branches sont gagnantes. Et à l'inverse, si $\phi$ est fausse, cela implique qu'au moins une des sous-formules soit fausse et donc que <b style="color:#EE220C">F</b> dispose d'au moins une branche avec une stratégie gagnante ce qui assure que le nœud $\land$ est gagnant pour <b style="color:#EE220C">F</b>.</li>
+    <li> si $\phi=\psi_1\lor\psi_2$, alors l'hypothèse d'induction opère sur $\psi_1$ et $\psi_2$.<br>
+    C'est au tour de <b style="color:#1DB100">V</b> de jouer d'après les règles. Il n'a besoin que d'une branche gagnante pour rendre le nœud victorieux. Or si $\phi$ est vraie, c'est bien le cas&nbsp;: au moins une des sous-formules est vraie et donc au moins une branche victorieuse s'ouvre à <b style="color:#1DB100">V</b>.<br>
+    Et une $\phi$ fausse implique que les deux sous-formules sont fausses aussi et donc victorieuses pour <b style="color:#EE220C">F</b>, ce qui donne le nœud $\lor$ à <b style="color:#EE220C">F</b>.</li>
+    </ul>
 </ul>
-<p>De toutes les possibilités, Aristote a isolé 24 syllogismes valides dont 4 ont un statut particulier puisqu&rsquo;ils peuvent générer les autres. Au Moyen-Âge, les scolastiques ont fabriqué des moyens mnémotechniques à base des lettres correspondant aux formes des propositions. Les 4 stars sont alors :</p>
-<ul>
-<li>
-<p>B<strong>a</strong>rb<strong>a</strong>r<strong>a</strong> (pour <strong>AAA</strong>) dont l&rsquo;exemple type est celui du début avec Socrate (où il faut remplacer &ldquo;Socrate est un homme&rdquo; et &ldquo;Socrate est mortel&rdquo; par &ldquo;tous les Socrates sont des hommes&rdquo; et &ldquo;tous les Socrates sont mortels&rdquo;.<br></p>
-<blockquote>
-<p>Tout P est Q<br>
-Tout R est P<br>
-Donc tout R est Q</p>
 </blockquote>
-</li>
-<li>
-<p>C<strong>e</strong>l<strong>a</strong>r<strong>e</strong>nt (pour <strong>EAE</strong>) :</p>
-<blockquote>
-<p>Aucun P n&rsquo;est Q<br>
-Tout R est P<br>
-Donc aucun R n&rsquo;est Q</p>
-</blockquote>
-</li>
-<li>
-<p>D<strong>a</strong>r<strong>i</strong><b>i</b> (pour <strong>AII</strong>) :</p>
-<blockquote>
-<p>Tout P est Q<br>
-Quelque R est P<br>
-donc quelque R est Q</p>
-</blockquote>
-</li>
-<li>
-<p>F<strong>e</strong>r<strong>i</strong><b>o</b> (pour <strong>EIO</strong>) :</p>
-<blockquote>
-<p>Aucun P n&rsquo;est Q<br>
-Quelque R est P<br>
-donc quelque R n&rsquo;est pas Q</p>
-</blockquote>
-</li>
-</ul>
-<p>Les syllogismes, c&rsquo;est mignons, mais ils n&rsquo;ont à peu près jamais été utilisés par les mathématiciens pour leurs démonstrations&hellip;</p>
-<hr>
-<h4 id="variables-libres-et-liées">Variables libres et liées</h4>
+<p>Exemple : considérons la formule $\bar{\phi}=\neg\left(\left(\neg\left(\neg P\land\left(\left( Q\land \left( R\land\neg P\right)\right)\lor\left( Q\land\neg P\right)\right)\right)\land\left( P\land\left( R\lor \neg R\right)\right)\lor\left(( R\land Q\right)\right)\right)$ dont l&rsquo;arbre est représenté ci-dessous. Et on se donne le modèle $\mathcal{M}\models P,Q,\neg R$</p>
+<p><img src="/formjeu1.png?width=500px" alt=""></p>
+<p>On commence par colorier les feuilles conformément au modèle, puis on remplace chaque occurrence de $\lor$, $\land$, $\neg$ respectivement par les symboles <b style="color:#1DB100">V</b>, <b style="color:#EE220C">F</b> et <b  style="color:#0076BA">⇔</b>.</p>
+<p><img src="/formjeu2.png?width=1000px" alt=""></p>
+<p>Ensuite on s&rsquo;occupe des changements de rôle : si la branche connectant un nœud à la racine contient un nombre impair d&rsquo;inversions, on intervertit l&rsquo;étiquette du nœud, et sinon on la laisse telle quelle.</p>
+<p><img src="/formjeu3.png?width=1000px" alt=""></p>
+<p>On peut maintenant retirer les symboles d&rsquo;inversion et chercher lequel de <b style="color:#1DB100">V</b> ou <b style="color:#EE220C">F</b> a une stratégie gagnante en remontant depuis les feuilles.</p>
+<p><img src="/formjeu4.png" alt=""></p>
+<p>Victoire au Falsificateur <b style="color:#EE220C">F</b> ! D&rsquo;après le théorème, on a donc $\mathcal{M}\not\models\phi$.</p>
+<p>Les trois stratégies gagnantes possibles pour le Falsificateur sont les suivantes :</p>
+<p><img src="/formjeu5.png?width=1200px" alt=""></p>
 <br>
-<p>On dit qu’une occurrence de la variable $x$ dans une formule $F$ est <strong>liée</strong> si un quantificateur porte sur elle.<br>
-Si aucun quantificateur ne porte sur l&rsquo;occurence de la variable, on parle d’occurrence <strong>libre</strong>. <br>
-Une variable est <strong>libre</strong> si toutes ses occurrences sont libres.<br>
-Une variable est <strong>liée</strong> si elle a au moins une occurrence liée. On parle aussi de variable muette dans ce dernier cas.</p>
-<p>Exemple :<br>
-Dans $\forall x (P(x)\rightarrow Q(x,y))$, $x$ est lié et $y$ est libre.</p>
-<p>Une formule sans variable libre est dit <strong>close</strong> (ou fermée).<br>
-Une <strong>théorie</strong> est un ensemble de formules closes.</p>
+<h3 id="table-de-vérité">Table de vérité</h3>
 <br>
-<h3 id="aspect-sémantique">Aspect sémantique</h3>
-<h4 id="interprétations-et-modèles">Interprétations et modèles</h4>
-<br>
-<p>Les <strong>interprétations</strong> visent à donner une valeur de vérité aux formules. Pour cela, l&rsquo;interprétation $I$ d&rsquo;une formule $F$ sur un domaine $D$ pioche dans $D$ pour affecter des valeurs aux constantes et associe à chaque symbole de prédicat une relation sur le domaine (de la bonne arité) et à chaque symbole de fonction une fonction sur le domaine (toujours de la bonne arité).</p>
-<p>Une formule atomique $P(t_1,\ldots,t_n)$ est vraie dans une interprétation $I$ sur le domaine $D$ si et seulement si les éléments du domaine qui sont l&rsquo;interprétation des termes $t_1,\ldots,t_n$ sont dans la relation correspondant à l&rsquo;interprétation du prédicat $P$.</p>
-<p>La valeur de vérité d&rsquo;une formule complexe est calculée à partir des valeurs de vérités des atomes dont elle est composée en suivant les règles de la logique des propositions.</p>
-<p>Exemples :<br></p>
-<blockquote>
-<p>Interprétons $F = \forall x P(x)\rightarrow Q(x)$ sur le domaine $\{a,b,c\}$.</p>
-<table>
-<thead>
-<tr>
-<th>$x$</th>
-<th>$P_I(x)$</th>
-<th>$Q_I(x)$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$a$</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>$b$</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>$c$</td>
-<td>0</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-<p>Dans cette interprétation, $F$ est vraie car $P_I(x)\rightarrow Q_I(x)$ est bien vraie pour toutes les valeurs de $x$.</p>
-<p>Mais il suffit d&rsquo;interpréter $P(x)$ un peu différemment pour que $F$ devienne fausse :</p>
-<table>
-<thead>
-<tr>
-<th>$x$</th>
-<th>$P_{I&rsquo;}(x)$</th>
-<th>$Q_{I&rsquo;}(x)$</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$a$</td>
-<td>1</td>
-<td>1</td>
-<td></td>
-</tr>
-<tr>
-<td>$b$</td>
-<td>0</td>
-<td>1</td>
-<td></td>
-</tr>
-<tr>
-<td>$c$</td>
-<td>1</td>
-<td>0</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</blockquote>
-<blockquote>
-<p>De manière moins arbitraire, on cherche en général une interprétation qui a du sens.<br>
-La formule $F = \forall x\forall y (P(x,a)\land P(y,x)\rightarrow \neg P(y,a)$ peut vouloir dire &ldquo;les amis des amis de $a$ ne sont pas amis de $a$&rdquo; en interprétant $P$ comme une relation d&rsquo;amité.<br>
-Considérons l&rsquo;interprétation suivante : $D=\{\text{Anna}, \text{Bob}, \text{Joe}, \text{Clovis},  \text{Aline}\}$, $a_I=\text{Anna}$, $P_I=\{ (\text{Anna},\text{Joe}), (\text{Anna},\text{Bob}), (\text{Joe},\text{Clovis}), (\text{Bob},\text{Aline}) \}$.<br>
-Anna est amie avec Joe et Bob, Joe est ami avec Clovis, Bob est ami avec Aline, et ni Clovis, ni Aline ne sont amis avec Anna. Donc la formule est vraie dans cette interprétation.</p>
-<p>On aurait aussi pu interpréter $P$ comme une relation de supériorité.<br>
-Imaginons donc maintenant $I&rsquo;$ donnée par : $D&rsquo;=\{1,5,12,52\}$, $a_{I&rsquo;}=5$ et $P_{I&rsquo;}(x,y)=1$ si $x&gt;y$.<br>
-On voit maintenant que $F$ est forcément fausse dans cette interprétation puisque la relation $&gt;$ est transitive.</p>
-</blockquote>
-<p>Une interprétation d&rsquo;une formule sur un domaine est un <strong>modèle</strong> de cette formule si la formule est vraie pour cette interprétation.<br>
-C&rsquo;est le cas de $I$ pour nos exemples, mais pas de $I&rsquo;$.</p>
-<p>Une formule est <strong>valide</strong> (tautologie) si elle est vraie quelle que soit l&rsquo;interprétation (si toute interprétation est un modèle).<br>
-Aucune des deux formules en exemple n&rsquo;est valide.<br>
-Exemple de formule valide : $\forall x P(x) \rightarrow \exists x P(x)$ (si une propriété est vraie pour tout $x$, alors elle est vraie pour au moins un $x$).</p>
-<p>Une formule est <strong>satisfaisable</strong> (ou consistante) s&rsquo;il elle possède un modèle.</p>
-<p><u>Rq</u> : une formule peut donc être invalide et consistante.</p>
-<br>
-<h4 id="équivalence-et-conséquence">Équivalence et conséquence</h4>
-<br>
-<p>Deux formules $F$ et $F&rsquo;$ sont sémantiquement <strong>équivalentes</strong> si pour toute interprétation $I$, $F_I=F_I&rsquo;$ (mêmes tables de vérité).<br>  On note $F\equiv F&rsquo;$.<br>
-Exemple : $\neg\neg P(x) \equiv P(x)$</p>
-<br>
-<p>Un ensemble de formules $\{F_1,\ldots,F_n\}$ <strong>satisfait</strong> une formule $F$ si tout modèle de $\{F_1,\ldots,F_n\}$ est aussi modèle de $F$.<br>
-On dit que $F$ est <strong>conséquence sémantique</strong> de la théorie$T = \{F_1,\ldots,F_n\}$ et on note $\{F_1,\ldots,F_n\} \models F$.<br>
-Exemple : $P(a)\models \exists x P(x)$</p>
-<p>Si $F$ est une formule <strong>valide</strong>, on note $\models F$ (il y a une quantification universelle implicite sur toutes les représentations).</p>
-<br>
-<p>$\{F_1,\ldots,F_n\} \models F$ équivaut à :</p>
-<ul>
-<li>$\models (F_1\land\ldots\land F_n)\rightarrow  F$</li>
-<li>$\models \neg(F_1\land\ldots\land F_n)\lor  F$</li>
-<li>si les formules sont closes, $ F_1\land\ldots\land F_n \land \neg  F$ est insatisfaisable (preuve par l&rsquo;absurde).</li>
-</ul>
-<br>
-<h3 id="aspect-syntaxique">Aspect syntaxique</h3>
-<p>S&rsquo;assurer de la validité d&rsquo;une formule suppose de s&rsquo;assurer qu&rsquo;elle est vraie pour un nombre d&rsquo;interprétations potentiellement infini. Et même lorsqu&rsquo;il est fini, l&rsquo;attribution</p>
 
 
 <footer class="footline">
@@ -4189,19 +3682,19 @@ Exemple : $P(a)\models \exists x P(x)$</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1710946015"></script>
-    <script src="/js/perfect-scrollbar.min.js?1710946015"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1710946015"></script>
-    <script src="/js/jquery.sticky.js?1710946015"></script>
-    <script src="/js/featherlight.min.js?1710946015"></script>
-    <script src="/js/highlight.pack.js?1710946015"></script>
+    <script src="/js/clipboard.min.js?1710975046"></script>
+    <script src="/js/perfect-scrollbar.min.js?1710975046"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1710975046"></script>
+    <script src="/js/jquery.sticky.js?1710975046"></script>
+    <script src="/js/featherlight.min.js?1710975046"></script>
+    <script src="/js/highlight.pack.js?1710975046"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1710946015"></script>
-    <script src="/js/learn.js?1710946015"></script>
-    <script src="/js/hugo-learn.js?1710946015"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1710975046"></script>
+    <script src="/js/learn.js?1710975046"></script>
+    <script src="/js/hugo-learn.js?1710975046"></script>
     
         
-            <script src="/mermaid/mermaid.js?1710946015"></script>
+            <script src="/mermaid/mermaid.js?1710975046"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

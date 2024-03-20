@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Categories - Cours Physique-Chimie</title>
+    <title>Logique - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/categories/">
+  <body class="" data-url="/more/maths/logique/logique-c/">
     <nav id="sidebar" class="">
 
 
@@ -1341,7 +1341,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/" title="MORE" class="dd-item
-        
+        parent
         
         
         ">
@@ -1469,7 +1469,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/" title="Maths" class="dd-item
-        
+        parent
         
         
         ">
@@ -2040,14 +2040,26 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Categories
+                   Logique
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#algèbre-de-boole">Algèbre de Boole</a></li>
+    <li><a href="#logique-des-propositions">Logique des propositions</a></li>
+    <li><a href="#logique-des-prédicats">Logique des prédicats</a>
+      <ul>
+        <li></li>
+        <li><a href="#aspect-sémantique">Aspect sémantique</a></li>
+        <li><a href="#aspect-syntaxique">Aspect syntaxique</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -2065,15 +2077,794 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-
-
-
+<style>
+ #correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ #comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ #commsum
+  {
+    color: #004D80;
+  }
+ #correcsum
+  {
+    color: #006C65;
+  }
+</style>
+<h1 id="logique">Logique</h1>
+<h2 id="algèbre-de-boole">Algèbre de Boole</h2>
+<p>L&rsquo;algèbre de Boole permet d&rsquo;algébriser la logique.</p>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/_9nogCrIrIY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</div>
+<br>
+<hr>
+<h2 id="logique-des-propositions">Logique des propositions</h2>
+<br>
+<p>L&rsquo;<strong>implication</strong> $A\rightarrow B$ signifie que si $A$ est vraie alors $B$ est vraie.</p>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$A\rightarrow B$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>L&rsquo;<strong>implication réciproque</strong> s&rsquo;écrit $B\rightarrow A$. On peut la lire : $B$ est vraie seulement si $A$ est vraie.</p>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$B\rightarrow A$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>S&rsquo;il y a conjonction entre l&rsquo;implication ($B$ si $A$) et sa réciproque ($B$ seulement si $A$), ce qui s&rsquo;écrit $(A\rightarrow B) \land (B\rightarrow A)$, alors les propositions $A$ et $B$ sont dites <strong>matériellement équivalentes</strong> $A \leftrightarrow B$.</p>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$A\leftrightarrow B$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>On peut exprimer l&rsquo;équivalence entre deux propositions de plusieurs manières :</p>
 <ul>
-	
+<li>$A$ si et seulement si (ssi) $B$ ;</li>
+<li>pour que $A$, il faut et il suffit que $B$ ;</li>
+<li>une condition nécessaire et suffisante pour $A$ est $B$.</li>
 </ul>
+<p>L&rsquo;implication $A\rightarrow B$ est <strong>logiquement équivalente</strong> à sa <strong>contraposée</strong>  $\neg B\rightarrow \neg A$, ce qui signifie que leurs tables de vérité sont les mêmes.</p>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$\neg B\rightarrow \neg A$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>On note $A\rightarrow B \equiv \neg B\rightarrow \neg A$.</p>
+<p>L&rsquo;<strong>équivalence logique</strong> entre deux propositions revient à dire que l&rsquo;<strong>équivalence matérielle</strong> entre les deux propositions est une tautologie (toujours vraie). L&rsquo;équivalence matérielle est un opérateur, c&rsquo;est un élément du <strong>langage de la logique des propositions</strong>. L&rsquo;équivalence logique ne fait pas partie de ce langage mais d&rsquo;un <strong>méta-langage</strong>.</p>
+<p>Il ne faut pas confondre la contraposée avec <strong>la négation de l&rsquo;antécédent</strong> $\neg A\rightarrow \neg B$ qui n&rsquo;est pas logiquement équivalente à l&rsquo;implication.</p>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$\neg A\rightarrow \neg B$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>La négation de l&rsquo;antécédant est équivalent à la réciproque de la contraposée. L&rsquo;utiliser en pensant qu&rsquo;il est équivalent à l&rsquo;implication est un raisonnement fallacieux ou <strong>sophisme</strong>.</p>
+<p>Une proposition $F$ est une <strong>conséquence logique</strong> d&rsquo;un ensemble de formules $\Gamma$ si lorsque les $\Gamma$ sont vraies, alors $F$ est vraie.  On note $\Gamma\models F$.<br>Cela revient à dire que $\Gamma\rightarrow F$ est une tautologie.<br>
+Comme $\equiv$, $\models$ est un élément du méta-langage.</p>
+<p>Exemples :</p>
+<ul>
+<li>
+<p>$A\models A\lor B$</p>
+</li>
+<li>
+<p>$A\land B \models B$</p>
+</li>
+<li>
+<p><strong>Modus ponens</strong> :<br>
+$A \land (A\rightarrow B) \models B$<br></p>
+<blockquote>
+<p>S&rsquo;il a plu ($A$) alors le sol est mouillé ($B$)<br>
+Il a plu ($A$)<br>
+Alors le sol est mouillé ($B$)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$A\rightarrow B$</th>
+<th>$A \land (A\rightarrow B) $</th>
+<th>$A \land (A\rightarrow B) \rightarrow B$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Modus tollens</strong> :<br>
+$\neg B \land (A\rightarrow B) \models \neg A$ <br></p>
+<blockquote>
+<p>S&rsquo;il a plu ($A$) alors le sol est mouillé ($B$)<br>
+Le sol n&rsquo;est pas mouillé ($\neg B$)<br>
+Alors il n&rsquo;a pas plu ($\neg A$)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$A\rightarrow B$</th>
+<th>$\neg B \land (A\rightarrow B) $</th>
+<th>$\neg B \land (A\rightarrow B) \rightarrow \neg A$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Syllogisme hypothétique</strong> :<br>
+$(A\rightarrow B) \land (B\rightarrow C) \models A\rightarrow C$</p>
+<blockquote>
+<p>Si je bois ($A$), je ne peux pas conduire ($B$).<br>
+Si je ne peux pas conduire ($B$), je dois appeler un taxi ($C$).<br>
+Par conséquent, si je bois ($A$), alors je dois appeler un taxi ($C$).</p>
+</blockquote>
+<p>Ce syllogisme incarne le principe de <strong>transitivité de l&rsquo;implication</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$C$</th>
+<th>$A\rightarrow B$</th>
+<th>$B\rightarrow C$</th>
+<th>$A\rightarrow C$</th>
+<th>$(A\rightarrow B) \land (B\rightarrow C)$</th>
+<th>$(A\rightarrow B) \land (B\rightarrow C) \rightarrow (A\rightarrow C)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Syllogisme disjonctif</strong> :<br>
+$(A\lor B) \land (\neg A) \models B$<br></p>
+<blockquote>
+<p>C&rsquo;est soit bleu ($A$), soit rouge ($B$)<br>
+Ce n&rsquo;est pas bleu ($\neg A$)<br>
+Alors c&rsquo;est rouge ($B$)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$A\lor B$</th>
+<th>$(A\lor B)\land (\neg A) $</th>
+<th>$(A\lor B)\land (\neg A) \rightarrow B$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>Deux <strong>raisonnements fallacieux</strong> sont cousins du modus ponens et du modus tollens :</p>
+<ul>
+<li>
+<p>la <strong>négation de l&rsquo;antécédent</strong> :<br>
+$\neg A \land (A\rightarrow B)  \not\models \neg B$ <br></p>
+<blockquote>
+<p>S&rsquo;il a plu ($A$) alors le sol est mouillé ($B$)<br>
+Il n&rsquo;a pas plu ($\neg A$)<br>
+Alors le sol n&rsquo;est pas mouillé ($\neg B$)</p>
+</blockquote>
+<p>C&rsquo;est faux, le sol peut être mouillé malgré l&rsquo;absence de pluie.<br></p>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$A\rightarrow B$</th>
+<th>$\neg A \land (A\rightarrow B) $</th>
+<th>$\neg A \land (A\rightarrow B) \rightarrow \neg B$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>La table de vérité montre que $\neg A \land (A\rightarrow B) \rightarrow \neg B$ n&rsquo;est pas une tautologie, ce qui prouve qu&rsquo;il n&rsquo;y a pas conséquence logique.</p>
+</li>
+<li>
+<p>l&rsquo;<strong>affirmation du conséquent</strong> :<br>
+$B \land (A\rightarrow B)  \not\models A$<br></p>
+<blockquote>
+<p>S&rsquo;il a plu ($A$) alors le sol est mouillé ($B$)<br>
+Le sol est mouillé ($B$)<br>
+Alors il a plu ($A$)</p>
+</blockquote>
+<p>C&rsquo;est faux. Le sol peut être mouillé pour d&rsquo;autres raisons.C&rsquo;est une confusion entre la possibilité et la nécessité.<br></p>
+<table>
+<thead>
+<tr>
+<th>$A$</th>
+<th>$B$</th>
+<th>$A\rightarrow B$</th>
+<th>$B \land (A\rightarrow B) $</th>
+<th>$B \land (A\rightarrow B) \rightarrow A$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<br>
+<hr>
+<br>
+<h2 id="logique-des-prédicats">Logique des prédicats</h2>
+<br>
+<blockquote>
+<p>Tous les hommes sont mortels ($A$)<br>
+Socrate est un homme ($B$)<br>
+Donc Socrate est mortel ($C$)</p>
+</blockquote>
+<p>Ce syllogisme s&rsquo;écrit en logique des propositions $A\land B \models C$, ce qui n&rsquo;est pas valide&hellip;<br>
+La logique des propositions vit dans un monde constitué seulement de faits. On va dépasser ça grâce à la logique des prédicats qui peuple le monde d&rsquo;objets (chiens, théories, chiffres, Socrate, etc.), de relations (rouge, premier, plus grand que, être mortel, etc.) et de fonctions (ajouter 1, longueur, nom du frère, etc.).</p>
+<p>L&rsquo;upgrade de la logique des propositions en logique des prédicats ou <b>logique du 1<sup>er</sup> ordre</b> passe ainsi par l&rsquo;introduction des notions de <strong>variables</strong>, de <strong>constantes</strong>, de <strong>fonctions</strong>, de <strong>prédicats</strong>, et de <strong>quantificateurs</strong>.</p>
+<ul>
+<li>Les <strong>variables</strong> ($x$, $y$, $z$, etc.) représentent les objets dont on parle.</li>
+<li>Les <strong>constantes</strong> ($a$, $b$, $c$, etc.) sont des valeurs particulières des objets (ici Socrate).</li>
+<li>Variables et constantes sont des <strong>termes</strong> du langage.</li>
+<li>les <strong>fonctions</strong> ($f$, $g$, $h$, etc.) permettent de fabriquer de nouveaux termes à partir d&rsquo;anciens. Le nombre de terme auquels la fonction s&rsquo;applique s&rsquo;appelle sont <strong>arité</strong>. Une constante est une fonction d&rsquo;arité 0.</li>
+<li>les <strong>prédicats</strong> ($P$, $Q$, $R$, etc.) rendent compte des relation entre les termes (ici &ldquo;être un homme&rdquo; et &ldquo;être mortel&rdquo;). L&rsquo;arité d&rsquo;un prédicat est à nouveau le nombre de termes qu&rsquo;il prend en argument.</li>
+<li>les quantificateurs sont d&rsquo;une part le <strong>quantificateur universel</strong> $\foralll$ qui sinfie (&ldquo;pour tout&rdquo;) et le <strong>quantificateur existentiel</strong> $\exists$ qui signifie (&ldquo;il existe&rdquo;).</li>
+</ul>
+<p>Les constantes et les variables sont issues d’un même ensemble appelé le <strong>domaine</strong>.</p>
+<p>Une <strong>formule atomique</strong> est de la forme $P(t_1,\ldots,t_n)$ où $P$ est une prédicat d&rsquo;arité $n$ et $t_1,\ldots,t_n$ sont des termes.<br>
+On construit des <strong>formules complexes</strong> en combinant des formules atomiques grâce à des connecteurs.</p>
+<p>Revenons à l&rsquo;exemple de départ.<br>
+Appelons $x$ la variable homme, $s$ la constante Socrate, $P$ le prédicat &ldquo;être un homme&rdquo; et $Q$ le prédicat &ldquo;être mortel&rdquo;.<br>
+L&rsquo;énoncé devient :<br>
+$(\forall x P(x)\rightarrow Q(x))\land P(s)\models Q(s)$<br></p>
+  <br>
+<h4 id="carré-daristote">Carré d&rsquo;Aristote</h4>
+<br>
+<p>En combinant deux prédicats $P$ et $Q$, leur négation et les deux quantificateurs, on peut construire 4 propositions donts les relations sont représentées dans le carré d&rsquo;Aristote.</p>
+<p><img src="/carraristote.png?width=800px" alt=""></p>
+<ul>
+<li>
+<p>Deux propositions sont <strong>contradictoires</strong> si elles ne peuvent être ni vraies ni fausses en même temps.<br>Sont donc contradictoire deux propositions dont l&rsquo;une est la négation de l&rsquo;autre.<br>
+Pour mieux le voir, on va réécrire les propositions universelles sous des formes logiquement équivalentes utilisant le quantificateur existentiel.<br>
+Il est ainsi équivalent de dire $\forall x(P(x)\rightarrow Q(x))$ (tout $P$ est $Q$) et $\neg\exists x (P(x)\land\neg Q(x))$ (il n&rsquo;existe pas de $P$ qui soit non $Q$). On retrouve bien ainsi que <strong>A</strong> est la négation de <strong>O</strong>.<br>
+De même, $\forall x(P(x)\rightarrow \neg Q(x)$ (&ldquo;aucun $P$ n&rsquo;est $Q$&rdquo; ou plus clairement &ldquo;tous les $P$ sont non $Q$&rdquo;) est équivalent à $\neg\exists x (P(x)\land  Q(x))$ (&ldquo;il n&rsquo;existe pas de $P$ qui soit $Q$&rdquo;). Donc <strong>E</strong> nie bien <strong>I</strong>.</p>
+</li>
+<li>
+<p>Deux propositions sont <strong>contraires</strong> ne peuvent pas être vraies en même temps (comme les contradictoires) mais elles peuvent être fausses en même temps par contre. Pour une proposition donnée, on peut trouver plusieurs propositions contraires. Le fait qu&rsquo;une propositions soit fausse n&rsquo;entraîne pas qu&rsquo;une de ses propositions contraires soit vraie.</p>
+</li>
+<li>
+<p>Des propositions <strong>subcontraires</strong> peuvent être vraies en même temps mais pas fausses en même temps.</p>
+</li>
+<li>
+<p>Des propositions <strong>subalternes</strong> s&rsquo;opposent par la quantité.  Si la proposition universelle est vraie, alors la proposition particulière est vraie aussi.</p>
+</li>
+</ul>
+<hr>
+<h4 id="aparté-sur-les-syllogismes">Aparté sur les syllogismes</h4>
+<p>Aristote s&rsquo;est amusé à définir et répertorier tous les <strong>syllogismes</strong> possibles.<br>
+Un syllogisme est un raisonnement mettant en œuvre trois propositions : les deux premières sont les <strong>prémisses</strong> et elles conduisent à une conclusion.</p>
+<ul>
+<li>La 1<sup>re</sup> prémisse est la majeure. C&rsquo;est une des propositions universelles <strong>A</strong> ou <strong>I</strong>.</li>
+<li>La 2<sup>e</sup> prémisse est la mineure. Elle peut être d&rsquo;une des 4 formes <strong>A</strong>, <strong>E</strong>, <strong>I</strong> ou <strong>O</strong>, mais elle doit avoir un terme commun avec la majeure.</li>
+<li>La conclusion peut être d&rsquo;une des 4 formes, mais elle doit avoir un terme commun avec la majeure.</li>
+</ul>
+<p>De toutes les possibilités, Aristote a isolé 24 syllogismes valides dont 4 ont un statut particulier puisqu&rsquo;ils peuvent générer les autres. Au Moyen-Âge, les scolastiques ont fabriqué des moyens mnémotechniques à base des lettres correspondant aux formes des propositions. Les 4 stars sont alors :</p>
+<ul>
+<li>
+<p>B<strong>a</strong>rb<strong>a</strong>r<strong>a</strong> (pour <strong>AAA</strong>) dont l&rsquo;exemple type est celui du début avec Socrate (où il faut remplacer &ldquo;Socrate est un homme&rdquo; et &ldquo;Socrate est mortel&rdquo; par &ldquo;tous les Socrates sont des hommes&rdquo; et &ldquo;tous les Socrates sont mortels&rdquo;.<br></p>
+<blockquote>
+<p>Tout P est Q<br>
+Tout R est P<br>
+Donc tout R est Q</p>
+</blockquote>
+</li>
+<li>
+<p>C<strong>e</strong>l<strong>a</strong>r<strong>e</strong>nt (pour <strong>EAE</strong>) :</p>
+<blockquote>
+<p>Aucun P n&rsquo;est Q<br>
+Tout R est P<br>
+Donc aucun R n&rsquo;est Q</p>
+</blockquote>
+</li>
+<li>
+<p>D<strong>a</strong>r<strong>i</strong><b>i</b> (pour <strong>AII</strong>) :</p>
+<blockquote>
+<p>Tout P est Q<br>
+Quelque R est P<br>
+donc quelque R est Q</p>
+</blockquote>
+</li>
+<li>
+<p>F<strong>e</strong>r<strong>i</strong><b>o</b> (pour <strong>EIO</strong>) :</p>
+<blockquote>
+<p>Aucun P n&rsquo;est Q<br>
+Quelque R est P<br>
+donc quelque R n&rsquo;est pas Q</p>
+</blockquote>
+</li>
+</ul>
+<p>Les syllogismes, c&rsquo;est mignons, mais ils n&rsquo;ont à peu près jamais été utilisés par les mathématiciens pour leurs démonstrations&hellip;</p>
+<hr>
+<h4 id="variables-libres-et-liées">Variables libres et liées</h4>
+<br>
+<p>On dit qu’une occurrence de la variable $x$ dans une formule $F$ est <strong>liée</strong> si un quantificateur porte sur elle.<br>
+Si aucun quantificateur ne porte sur l&rsquo;occurence de la variable, on parle d’occurrence <strong>libre</strong>. <br>
+Une variable est <strong>libre</strong> si toutes ses occurrences sont libres.<br>
+Une variable est <strong>liée</strong> si elle a au moins une occurrence liée. On parle aussi de variable muette dans ce dernier cas.</p>
+<p>Exemple :<br>
+Dans $\forall x (P(x)\rightarrow Q(x,y))$, $x$ est lié et $y$ est libre.</p>
+<p>Une formule sans variable libre est dit <strong>close</strong> (ou fermée).<br>
+Une <strong>théorie</strong> est un ensemble de formules closes.</p>
+<br>
+<h3 id="aspect-sémantique">Aspect sémantique</h3>
+<h4 id="interprétations-et-modèles">Interprétations et modèles</h4>
+<br>
+<p>Les <strong>interprétations</strong> visent à donner une valeur de vérité aux formules. Pour cela, l&rsquo;interprétation $I$ d&rsquo;une formule $F$ sur un domaine $D$ pioche dans $D$ pour affecter des valeurs aux constantes et associe à chaque symbole de prédicat une relation sur le domaine (de la bonne arité) et à chaque symbole de fonction une fonction sur le domaine (toujours de la bonne arité).</p>
+<p>Une formule atomique $P(t_1,\ldots,t_n)$ est vraie dans une interprétation $I$ sur le domaine $D$ si et seulement si les éléments du domaine qui sont l&rsquo;interprétation des termes $t_1,\ldots,t_n$ sont dans la relation correspondant à l&rsquo;interprétation du prédicat $P$.</p>
+<p>La valeur de vérité d&rsquo;une formule complexe est calculée à partir des valeurs de vérités des atomes dont elle est composée en suivant les règles de la logique des propositions.</p>
+<p>Exemples :<br></p>
+<blockquote>
+<p>Interprétons $F = \forall x P(x)\rightarrow Q(x)$ sur le domaine $\{a,b,c\}$.</p>
+<table>
+<thead>
+<tr>
+<th>$x$</th>
+<th>$P_I(x)$</th>
+<th>$Q_I(x)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$a$</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>$b$</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>$c$</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Dans cette interprétation, $F$ est vraie car $P_I(x)\rightarrow Q_I(x)$ est bien vraie pour toutes les valeurs de $x$.</p>
+<p>Mais il suffit d&rsquo;interpréter $P(x)$ un peu différemment pour que $F$ devienne fausse :</p>
+<table>
+<thead>
+<tr>
+<th>$x$</th>
+<th>$P_{I&rsquo;}(x)$</th>
+<th>$Q_{I&rsquo;}(x)$</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$a$</td>
+<td>1</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>$b$</td>
+<td>0</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>$c$</td>
+<td>1</td>
+<td>0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<blockquote>
+<p>De manière moins arbitraire, on cherche en général une interprétation qui a du sens.<br>
+La formule $F = \forall x\forall y (P(x,a)\land P(y,x)\rightarrow \neg P(y,a)$ peut vouloir dire &ldquo;les amis des amis de $a$ ne sont pas amis de $a$&rdquo; en interprétant $P$ comme une relation d&rsquo;amité.<br>
+Considérons l&rsquo;interprétation suivante : $D=\{\text{Anna}, \text{Bob}, \text{Joe}, \text{Clovis},  \text{Aline}\}$, $a_I=\text{Anna}$, $P_I=\{ (\text{Anna},\text{Joe}), (\text{Anna},\text{Bob}), (\text{Joe},\text{Clovis}), (\text{Bob},\text{Aline}) \}$.<br>
+Anna est amie avec Joe et Bob, Joe est ami avec Clovis, Bob est ami avec Aline, et ni Clovis, ni Aline ne sont amis avec Anna. Donc la formule est vraie dans cette interprétation.</p>
+<p>On aurait aussi pu interpréter $P$ comme une relation de supériorité.<br>
+Imaginons donc maintenant $I&rsquo;$ donnée par : $D&rsquo;=\{1,5,12,52\}$, $a_{I&rsquo;}=5$ et $P_{I&rsquo;}(x,y)=1$ si $x&gt;y$.<br>
+On voit maintenant que $F$ est forcément fausse dans cette interprétation puisque la relation $&gt;$ est transitive.</p>
+</blockquote>
+<p>Une interprétation d&rsquo;une formule sur un domaine est un <strong>modèle</strong> de cette formule si la formule est vraie pour cette interprétation.<br>
+C&rsquo;est le cas de $I$ pour nos exemples, mais pas de $I&rsquo;$.</p>
+<p>Une formule est <strong>valide</strong> (tautologie) si elle est vraie quelle que soit l&rsquo;interprétation (si toute interprétation est un modèle).<br>
+Aucune des deux formules en exemple n&rsquo;est valide.<br>
+Exemple de formule valide : $\forall x P(x) \rightarrow \exists x P(x)$ (si une propriété est vraie pour tout $x$, alors elle est vraie pour au moins un $x$).</p>
+<p>Une formule est <strong>satisfaisable</strong> (ou consistante) s&rsquo;il elle possède un modèle.</p>
+<p><u>Rq</u> : une formule peut donc être invalide et consistante.</p>
+<br>
+<h4 id="équivalence-et-conséquence">Équivalence et conséquence</h4>
+<br>
+<p>Deux formules $F$ et $F&rsquo;$ sont sémantiquement <strong>équivalentes</strong> si pour toute interprétation $I$, $F_I=F_I&rsquo;$ (mêmes tables de vérité).<br>  On note $F\equiv F&rsquo;$.<br>
+Exemple : $\neg\neg P(x) \equiv P(x)$</p>
+<br>
+<p>Un ensemble de formules $\{F_1,\ldots,F_n\}$ <strong>satisfait</strong> une formule $F$ si tout modèle de $\{F_1,\ldots,F_n\}$ est aussi modèle de $F$.<br>
+On dit que $F$ est <strong>conséquence sémantique</strong> de la théorie$T = \{F_1,\ldots,F_n\}$ et on note $\{F_1,\ldots,F_n\} \models F$.<br>
+Exemple : $P(a)\models \exists x P(x)$</p>
+<p>Si $F$ est une formule <strong>valide</strong>, on note $\models F$ (il y a une quantification universelle implicite sur toutes les représentations).</p>
+<br>
+<p>$\{F_1,\ldots,F_n\} \models F$ équivaut à :</p>
+<ul>
+<li>$\models (F_1\land\ldots\land F_n)\rightarrow  F$</li>
+<li>$\models \neg(F_1\land\ldots\land F_n)\lor  F$</li>
+<li>si les formules sont closes, $ F_1\land\ldots\land F_n \land \neg  F$ est insatisfaisable (preuve par l&rsquo;absurde).</li>
+</ul>
+<br>
+<h3 id="aspect-syntaxique">Aspect syntaxique</h3>
+<p>S&rsquo;assurer de la validité d&rsquo;une formule suppose de s&rsquo;assurer qu&rsquo;elle est vraie pour un nombre d&rsquo;interprétations potentiellement infini. Et même lorsqu&rsquo;il est fini, l&rsquo;attribution</p>
 
 
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
@@ -2905,6 +3696,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
+                    
                 
                 
 
@@ -2920,18 +3712,8 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
+                        
                     
                 
                 
@@ -2940,9 +3722,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -2976,6 +3755,22 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -2984,6 +3779,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
+                    
                 
                 
 
@@ -2998,6 +3794,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -3412,3 +4211,4 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
   </body>
 </html>
+
