@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1711286522" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1711286522" rel="stylesheet">
-    <link href="/css/hybrid.css?1711286522" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1711286522" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1711286522" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711286522" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1711286522" rel="stylesheet">
-    <link href="/css/theme.css?1711286522" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1711286522" rel="stylesheet">
+    <link href="/css/nucleus.css?1711289930" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1711289930" rel="stylesheet">
+    <link href="/css/hybrid.css?1711289930" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1711289930" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1711289930" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711289930" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1711289930" rel="stylesheet">
+    <link href="/css/theme.css?1711289930" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1711289930" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1711286522" rel="stylesheet">
+    <link href="/css/theme-blue.css?1711289930" rel="stylesheet">
     
-    <link href="/css/foo.css?1711286522" rel="stylesheet"><link href="/css/bar.css?1711286522" rel="stylesheet">
+    <link href="/css/foo.css?1711289930" rel="stylesheet"><link href="/css/bar.css?1711289930" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1711286522"></script>
+    <script src="/js/jquery-3.3.1.min.js?1711289930"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1711286522"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1711286522"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1711289930"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1711289930"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1711286522"></script>
+<script type="text/javascript" src="/js/search.js?1711289930"></script>
 
     
   </div>
@@ -2711,7 +2711,7 @@ $\set{\neg,\lor}$ et $\set{\neg,\land}$ sont des systèmes complets minimaux de 
 <div id="preuve">
 <p style="margin-bottom:-1.1em;">Prouvons-le pour $\set{\neg,\lor}$ (il suffit d'intervertir $\lor$ et $\land$ pour obtenir l'autre preuve) en considérant toutes les réductions de l'ensemble possibles&nbsp;:</p>
 <ul>
-<li> $\set{}$ : les formules ne sont plus que des variables propositionnelles. Or une variable propositionnelle ne peut être équivalente à une formule comme $P\lor Q$ où $P$ et $Q$ sont deux variables différentes. Pour s'en convaincre, 
+<li> $\set{}$ : les formules ne sont plus que des variables propositionnelles. Or une variable propositionnelle ne peut être équivalente à une formule comme $P\lor Q$ où $P$ et $Q$ sont deux variables différentes. Pour s'en convaincre,&nbsp;:
 <ul>
 <li>si $R=P$, on considère le modèle dans lequel $P$ est faux et $Q$ est vraie.</li>
 <li>si $R=Q$, on considère le modèle dans lequel $Q$ est faux et $P$ est vraie</li>
@@ -2724,7 +2724,8 @@ $\set{\neg,\lor}$ et $\set{\neg,\land}$ sont des systèmes complets minimaux de 
 <li>si $R=Q$, il suffit d'un modèle où $Q$ est vraie.</li>
 <li>si $R\not = P,Q$,  il suffit d'un modèle où $R$ est vraie alors que $P$ est vraie.</li>
 </ul></li>
-<li>$\set{\lor}$ : montrons qu'on ne peut pas créer de formule équivalente à $\neg P$ avec ce connecteur. toutes les formules construisibles sont dans ce cas de la forme $(P_1\lor\cdots\lor P_k)$.<br>
+<li>$\set{\lor}$ : montrons qu'on ne peut pas créer de formule équivalente à $\neg P$ avec ce connecteur.<br>
+Toutes les formules construisibles sont dans ce cas de la forme $(P_1\lor\cdots\lor P_k)$.<br>
 Raisonnons par l'absurde en supposant que $(P_1\lor\cdots\lor P_k)\equiv \neg P$. Il suffit de trouver un modèle où tous les $P_i$ et $P$ sont vraies pour aboutir à une contradiction.
 </li>
 </ul>
@@ -2752,7 +2753,7 @@ $\set{\not\!\lor}$ et $\set{\not\!\!\land}$ sont des systèmes complets minimaux
 $</p>
 </div>
 </li>
-<li> On suppose maintenante que toutes les formules de hauteur $n$ peuvent s'écrire seulement avec $\not\!\lor$ et vérifions que c'est encore le cas pour les formules de hauteur $n+1$. Comme $\phi$ ne contient que $\neg$ et $\lor$, deux cas se présentent&nbsp;:
+<li> On suppose maintenant que toutes les formules de hauteur $n$ peuvent s'écrire seulement avec $\not\!\lor$ et on vérifie que c'est encore le cas pour les formules de hauteur $n+1$. Comme $\phi$ ne contient que $\neg$ et $\lor$, seuls deux cas se présentent&nbsp;:
 <ul>
 <li>$\phi=\neg\varphi$&nbsp;: par hypothèse d'induction, $\varphi$ est équivalente à une formule $\psi'$ qui ne s'écrit qu'avec $\not\!\lor$. La formule $\psi=\psi' \not\!\lor \; \psi'$ convient&nbsp;:
 <div style="overflow-x: auto;">
@@ -4172,19 +4173,19 @@ $</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1711286522"></script>
-    <script src="/js/perfect-scrollbar.min.js?1711286522"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1711286522"></script>
-    <script src="/js/jquery.sticky.js?1711286522"></script>
-    <script src="/js/featherlight.min.js?1711286522"></script>
-    <script src="/js/highlight.pack.js?1711286522"></script>
+    <script src="/js/clipboard.min.js?1711289930"></script>
+    <script src="/js/perfect-scrollbar.min.js?1711289930"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1711289930"></script>
+    <script src="/js/jquery.sticky.js?1711289930"></script>
+    <script src="/js/featherlight.min.js?1711289930"></script>
+    <script src="/js/highlight.pack.js?1711289930"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1711286522"></script>
-    <script src="/js/learn.js?1711286522"></script>
-    <script src="/js/hugo-learn.js?1711286522"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1711289930"></script>
+    <script src="/js/learn.js?1711289930"></script>
+    <script src="/js/hugo-learn.js?1711289930"></script>
     
         
-            <script src="/mermaid/mermaid.js?1711286522"></script>
+            <script src="/mermaid/mermaid.js?1711289930"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
