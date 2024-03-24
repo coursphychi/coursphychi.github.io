@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Transport de l&#39;électricité - Cours Physique-Chimie</title>
+    <title>Propositions - Preuve - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/tsti2d/transport/">
+  <body class="" data-url="/more/maths/logique/logique3/">
     <nav id="sidebar" class="">
 
 
@@ -971,7 +971,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/tsti2d/" title="TSTI2D" class="dd-item
-        parent
+        
         
         
         ">
@@ -1312,7 +1312,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/tsti2d/transport/" title="Transport de l&#39;électricité" class="dd-item active">
+      <li data-nav-id="/tsti2d/transport/" title="Transport de l&#39;électricité" class="dd-item ">
         <a href="/tsti2d/transport/">
         Transport de l&#39;électricité
         
@@ -1341,7 +1341,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/" title="MORE" class="dd-item
-        
+        parent
         
         
         ">
@@ -1469,7 +1469,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/" title="Maths" class="dd-item
-        
+        parent
         
         
         ">
@@ -1723,7 +1723,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/logique/" title="Logique" class="dd-item
-        
+        parent
         
         
         ">
@@ -2085,7 +2085,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Transport de l&#39;électricité
+                   Propositions - Preuve
                  
                   </span>
                 </div>
@@ -2094,9 +2094,13 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#savoir-et-savoir-faire">Savoir et savoir faire</a></li>
-    <li><a href="#documents-sur-la-sécurité-électrique">Documents sur la sécurité électrique</a></li>
-    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#théorie-de-la-démonstration">Théorie de la démonstration</a>
+      <ul>
+        <li><a href="#langage">Langage</a></li>
+        <li><a href="#formules">Formules</a></li>
+        <li><a href="#linéarisation-dune-formule">Linéarisation d&rsquo;une formule</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -2116,151 +2120,167 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<h1 id="transport-de-lélectricité">Transport de l&rsquo;électricité</h1>
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tsti/transport">Présentation</a></p>
+<style>
+ #correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ #comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ #commsum
+  {
+    color: #004D80;
+  }
+ #correcsum
+  {
+    color: #006C65;
+  }
+  #preuve
+{
+    background-color:#EAEAEA;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+#def
+{
+    background-color:#DCEFFE;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+#theo
+{
+    background-color:#FBE1DE;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+</style>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [ ['$', '$'], ['\\(', '\\)'] ]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script
+  type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
 <br>
-<h2 id="savoir-et-savoir-faire">Savoir et savoir faire</h2>
 
-<div class="notices coeur" style="--title: 'coeur';">
-  <p style="display: none;">coeur</p>
+<div class="notices note" style="--title: 'note';">
+  <p style="display: none;">note</p>
   <div class="notice-body">
-    <p><input type="checkbox"> Savoir schématiser l’organisation du <strong>transport</strong> et de la <strong>distribution</strong> de l’<strong>énergie électrique</strong> pour une ligne monophasée.<br><br>
-<input type="checkbox"> Distinguer et citer les caractéristiques essentielles du <strong>réseau de distribution électrique</strong>.<br><br>
-<input type="checkbox"> Relier qualitativement le <strong>facteur de puissance</strong> d’un équipement de puissance donnée aux <strong>pertes dans les lignes</strong> d’alimentation.<br><br>
-<input type="checkbox"> Citer les rôles du <strong>transformateur</strong> (élévation de tension, diminution de tension, isolation galvanique).<br><br>
-<input type="checkbox"> Relier qualitativement l’<strong>augmentation</strong>, pour une charge donnée, <strong>de la tension</strong> de distribution à la <strong>diminution des pertes</strong> dans les lignes d’alimentation.<br><br>
-<input type="checkbox"> Exploiter des documents mettant en évidence les <strong>seuils de dangerosité du courant électrique</strong>.<br><br>
-<input type="checkbox"> Citer des <strong>dispositifs de protection des individus contre les risques du courant électrique</strong> : <strong>isolation</strong>, <strong>alimentation en très basse tension</strong> et <strong>disjoncteur différentiel</strong> dans une installation domestique.<br><br>
-<input type="checkbox"> Citer des <strong>dispositifs de protection des matériels contre les risques du courant électrique</strong> : <strong>fusible</strong> et <strong>disjoncteur</strong>.<br><br></p>
+    <p>Ces pages sont des notes de lecture du livre <em>La logique pas à pas</em> de Jacques Duparc que je paraphrase allégrement.</p>
 
   </div>
 </div>
 
 
 <br>
-<h2 id="documents-sur-la-sécurité-électrique">Documents sur la sécurité électrique</h2>
-<ul>
-<li><a href="https://www.inrs.fr/dms/inrs/CataloguePapier/ED/TI-ED-6344/ed6344.pdf"><strong>10 règles élémentaires de sécurité</strong></a></li>
-<li><a href="https://www.inrs.fr/dms/inrs/CataloguePapier/ED/TI-ED-6345/ed6345.pdf"><strong>Document plus complet sur l&rsquo;électricité et ses dangers</strong></a></li>
-</ul>
+<h1 id="calcul-des-propositions">Calcul des propositions</h1>
 <br>
-<h2 id="quiz">Quiz</h2>
+<h2 id="théorie-de-la-démonstration">Théorie de la démonstration</h2>
+<br>
+<h3 id="langage">Langage</h3>
+<br>
+<div id="def">
+<p style="margin-bottom:-1.1em;">Le <b>langage</b> du calcul des propositions est constitué </p>
+<ul>
+<li>de variables propositionnelles $P$, $Q$, $R$,..., </li>
+<li>de connecteurs logiques $\neg, \lor, \land, \rightarrow, \leftrightarrow$</li>
+<li>et de parenthèses.</li>
+</ul>
+</div>
+<p>On désigna par $VAR=\Set{P,Q,R\dots}$ l&rsquo;ensemble des variables propositionnelles, potentiellement infini.</p>
+<div id="def">
+<ul>
+<li>Le connectecteur logique $\neg$ est unaire (ou d'arité 1) puisqu'il transforme à lui seul une formule en une autre formule. C'est le symbole de <b>négation</b> et il se dit <b>non</b>.</li>
+<li>Les autres connecteurs logiques sont binaires (d'arité 2) puisqu'ils lient deux formules en une nouvelle.</li>
+<ul>
+    <li>$\lor$ est le symbole de <b>disjonction</b> ("<b>ou</b>")</li>
+    <li>$\land$ est le symbole de <b>conjonction</b> ("<b>et</b>")</li>
+    <li>$\rightarrow$ est le symbole d'<b>implication</b> ("<b>mplique</b>")</li>
+    <li>$\leftrightarrow$ est le symbole de <b>double implication</b> ou d'<b>équivalence</b> ("<b>si et seulement si</b>" ou "<b>équivaut à</b>")</li>
+</ul>
+</ul>
+</div>
+<br>
+<div id="def">
+<p>Le <b>langage</b> du calcul des propositions est alors l&rsquo;ensemble suivant : $\mathcal{L} = VAR\cup\Set{\neg,\lor,\land,\rightarrow,\leftrightarrow,(,)}$</p>
+</div>
+<br>
+<h3 id="formules">Formules</h3>
+<br>
+<p>On peut représenter les formules du calcul propositionnel par des <strong>arbres</strong> dont les feuilles sont des variables propositionnelles et les nœuds sont des connecteurs.</p>
+<div id="def">
+<p style="margin-bottom:-1.1em;">L'ensemble $\mathcal{F}$ des formules du calcul propositionnel est le plus petit ensemble d'arbres qui</p>
+<ul>
+<li>contient chaque arbre réduit à sa racine qui est une variable propositionnelle.</li>
+<li>chaque fois qu'il contient des formules $\phi$ et $\psi$ contient également  les formules suivantes&nbsp;:
+<div style="position:relative; width:500px; max-width: 100%; margin-left: auto;margin-right: auto;">
+<img src="/ensformules.png"></div>
+</li>
+</ul>
+</div>
+<p>La <strong>hauteur</strong> d&rsquo;une formule est la longueur de sa plus longue branche.</p>
 
-<div class='quizdown'>
-  
+<div class="notices tip" style="--title: 'tip';">
+  <p style="display: none;">tip</p>
+  <div class="notice-body">
+    <p>C&rsquo;est une définition par <strong>récurrence</strong> (ou <strong>inductive</strong>) : on a d&rsquo;abord défini les feuilles, cas de base de hauteur 0, puis on a donné la recette pour passer d&rsquo;un arbre de hauteur $n$ à un arbre de hauteur $n+1$.</p>
 
----
-primary_color: steelblue
-secondary_color: "#f2f2f2"
-text_color: black
-shuffle_questions: false
-
----
-
-##
-
-Sur les plus longues distances (liaisons inter-régions ou inter-pays), la tension peut être portée jusqu'à $\pu{400000 V}$&nbsp;.
-
-- [x] Vrai
-- [ ] Faux
-
-##
-
-Pour une utilisation domestique, la valeur efficace de la tension monophasée vaut&nbsp;:
-
-- [x] 230 V
-- [ ] 400 V
-- [ ] 12 V
-
-##
-
-Le transport de l'énergie électrique se fait à haute tension pour&nbsp;:
-
-- [x] diminuer l'intensité des courants de ligne
-- [x] diminuer les pertes en ligne
-- [ ] augmenter la puissance transportée
-
-##
-
-Une ligne de longueur $\pu{4,0 km}$ a une résistance de $\pu{0,45 \Omega*km-1}$.<br> Elle est parcourue par un courant d'intensité efficace $\pu{I = 134 A}$.<br>La puissance dissipée par effet joule est égale à&nbsp;:
-
-- [x] $\pu{32 kW}$
-- [ ] $\pu{2,4E2 W}$
-- [ ] $\pu{59 W}$
-
-##
-
-Pour passer d'une tension de 20&nbsp;kV à 400&nbsp;kV, on utilise&nbsp;:
-
-- [x] un transformateur élévateur de tension
-- [ ] un poste de distribution
-- [ ] un interrupteur à haute tension 
-
-> https://presentationssite.github.io/tsti/transport/#/7
-
-
-##
-
-Un transformateur est constitué de $N_1=500$ spires au primaire et $N_2 = 50$ spires au secondaire.
-
-- [x] son rapport de transformation $m$ vaut 0,1
-- [ ] son rapport de transformation $m$ vaut 10
-- [ ] son rapport de transformation $m$ vaut 1
-
-
-##
-
-On applique au primaire d'un transformateur ayant un $m$ valant 0,02 une tension efficace $U_1=\pu{20 kV}$.
-
-- [x] la tension efficace au secondaire vaut 400 V
-- [ ] la tension efficace au secondaire vaut 230 V
-- [ ] la tension efficace au secondaire vaut 0,4 V
-
-
-##
-
-Un transformateur fonctionne pour des tensions&nbsp;:
-
-- [ ] continues
-- [x] alternatives
-- [x] sinusoïdales
-
-##
-
-Un fusible de calibre 2&nbsp;A est installé sur un grille-pain.
-
-- [ ] il protège la personne qui utilise le grille-pain
-- [x] il protège le grille-pain contre une surintensité
-- [x] il coupe le circuit si l'intensitéefficace dépasse 2&nbsp;A.
-
-
-##
-
-Un disjoncteur différentiel associé à une prise de terre&nbsp;:
-
-- [ ] protège les personnes de l'électrisation
-- [x] protège les personnes de l'électrocution 
-- [ ] coupe le circuit en cas de surintensité
-
-##
-
-Dans une salle de bain, la valeur efficace de la tension de sécurité vaut&nbsp;:
-
-- [ ] 230 V
-- [x] 25 V
-- [ ] 50 V
-
-##
-
-Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
-
-- [ ] 230 V
-- [ ] 25 V
-- [x] 50 V
-
-
+  </div>
 </div>
 
+
+<p>Une <strong>sous formule</strong> d&rsquo;une formule $\phi$ est un sous-arbre de $\phi$ dont l&rsquo;un des nœuds de $\phi$ est la racine.</p>
+<p><img src="/sousformules.png?width=600px" alt=""></p>
+<p>La formule de hauteur 5 ci-dessus contient :</p>
+<ul>
+<li>5 feuilles, sous-formules de hauteur 0 (en vert),</li>
+<li>3 sous-formules de hauteur 1 (en rouge),</li>
+<li>2 sous-formules de hauteur 2 (en bleu),</li>
+<li>1 sous-formule de hauteur 3 (en rose),</li>
+<li>1 sous-formule de hauteur 4 (en jaune).</li>
+</ul>
+<p>Lorsqu&rsquo;une sous-formule apparaît plusieurs fois dans une formule, on dit qu&rsquo;elle a plusieurs <strong>occurences</strong>.</p>
+<br>
+<h3 id="linéarisation-dune-formule">Linéarisation d&rsquo;une formule</h3>
+<br>
+<p>La linéarisation $\bar{\theta}$ d&rsquo;une formule $\theta$ peut s&rsquo;obtenir par induction :</p>
+<ul>
+<li>une feuille $\color{#007100}P$ se linéarise en $\color{#007100}P$ : $\bar{\theta}=\color{#007100}P$</li>
+<li>les linéarisations des sous-formules suivantes <img src="/ensformules.png?width=500px" alt="">
+sont données respectivement par $\bar{\theta}=\left(\color{#B51700}{\neg}\color{#007100}{\phi}\color{#000} \right)$, $\bar{\theta}=\left(\color{#007100}{\phi} \color{#B51700}{\lor} \color{#007100}{\psi} \color{#000} \right)$, $\bar{\theta}=\left( \color{#007100}{\phi} \color{#B51700}{\land} \color{#007100}{\psi} \color{#000} \right)$, $\bar{\theta}=\left( \color{#007100}{\phi} \color{#B51700}{\rightarrow} \color{#007100}{\psi} \color{#000} \right)$, $\bar{\theta}=\left( \color{#007100}{\phi} \color{#B51700}{\leftrightarrow} \color{#007100} \psi  \color{#000} \right)$.</li>
+</ul>
+<p>Exemple :</p>
+<p>La linéarisation de cette formule $\phi$ donne :</p>
+<p><img src="/linearisationformule.png?width=600px" alt=""></p>
+<p>$$\displaystyle
+\bar{\phi} = \left({ \left( \color{#B51700}{\neg}\color{#000}  \left( \color{#007100}{P} \color{#B51700}{\lor} \color{#007100}{R}\color{#000}  \right) \right) \color{#B51700}{\land} \color{#000} \left( \color{#007100}{P} \color{#B51700}{\lor}\color{#000}  \left( \left( \color{#B51700}{\neg} \color{#007100}{R}\color{#000}  \right) \color{#B51700}{\rightarrow} \color{#000} \left( \left( \color{#B51700}{\neg} \color{#007100}{Q}\color{#000}  \right) \color{#B51700}{\leftrightarrow} \color{#007100}{P} \color{#000} \right) \right) \right)} \right)
+$$</p>
+<br>
+
+<div class="notices note" style="--title: 'note';">
+  <p style="display: none;">note</p>
+  <div class="notice-body">
+    <p>La <strong>syntaxe</strong>, c&rsquo;est l&rsquo;articulation des symboles. La <strong>sémantique</strong>, c&rsquo;est ce que ça raconte.</p>
+
+  </div>
+</div>
+
+
+<br>
+<p style="text-align:center;">
+<a href="../logique2" style="font-size:2em;">Suite : <b>la sémantique</b></a>
+</p>
 
 
 <footer class="footline">
@@ -2823,7 +2843,6 @@ Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
             
                 
                     
-                    
                 
                 
 
@@ -2837,8 +2856,53 @@ Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -3043,35 +3107,6 @@ Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
             
         
                     
@@ -3086,28 +3121,6 @@ Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3117,6 +3130,9 @@ Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -3182,6 +3198,7 @@ Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
             
                 
                     
+                    
                 
                 
 
@@ -3196,6 +3213,9 @@ Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -3357,6 +3377,7 @@ Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
             
                 
                     
+                    
                 
                 
 
@@ -3395,6 +3416,9 @@ Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
             
             
                 
+                    
+                        
+                        
                     
                 
                 

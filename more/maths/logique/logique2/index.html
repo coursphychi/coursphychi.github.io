@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1711107840" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1711107840" rel="stylesheet">
-    <link href="/css/hybrid.css?1711107840" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1711107840" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1711107840" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711107840" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1711107840" rel="stylesheet">
-    <link href="/css/theme.css?1711107840" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1711107840" rel="stylesheet">
+    <link href="/css/nucleus.css?1711242979" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1711242979" rel="stylesheet">
+    <link href="/css/hybrid.css?1711242979" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1711242979" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1711242979" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711242979" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1711242979" rel="stylesheet">
+    <link href="/css/theme.css?1711242979" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1711242979" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1711107840" rel="stylesheet">
+    <link href="/css/theme-blue.css?1711242979" rel="stylesheet">
     
-    <link href="/css/foo.css?1711107840" rel="stylesheet"><link href="/css/bar.css?1711107840" rel="stylesheet">
+    <link href="/css/foo.css?1711242979" rel="stylesheet"><link href="/css/bar.css?1711242979" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1711107840"></script>
+    <script src="/js/jquery-3.3.1.min.js?1711242979"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1711107840"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1711107840"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1711242979"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1711242979"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1711107840"></script>
+<script type="text/javascript" src="/js/search.js?1711242979"></script>
 
     
   </div>
@@ -1749,6 +1749,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
           
+            
+            
+          
         
         </ul>
       
@@ -2100,6 +2103,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         <li><a href="#substitution-de-sous-formules-équivalentes">Substitution de sous formules équivalentes</a></li>
         <li><a href="#jeux-dévaluation">Jeux d&rsquo;évaluation</a></li>
         <li><a href="#table-de-vérité">Table de vérité</a></li>
+        <li><a href="#tautologies-et-contradictions">Tautologies et contradictions</a></li>
+        <li><a href="#formes-normales">Formes normales</a></li>
+        <li><a href="#connecteurs-binaires-et-systèmes-complets-de-connecteurs">Connecteurs binaires et systèmes complets de connecteurs</a></li>
       </ul>
     </li>
   </ul>
@@ -2140,6 +2146,28 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   {
     color: #006C65;
   }
+  td, th {
+  text-align: center;
+  vertical-align: middle;
+}
+#preuve
+{
+    background-color:#EAEAEA;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+#def
+{
+    background-color:#DCEFFE;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+#theo
+{
+    background-color:#FBE1DE;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
 </style>
 <script>
 MathJax = {
@@ -2176,8 +2204,10 @@ MathJax = {
 <h3 id="modèle">Modèle</h3>
 <br>
 <p>La sémantique concerne l&rsquo;interprétation des formules. Le calcul propositionnel est très frustre à cet égard. Une variable propositionnelle vaut soit 1, soit 0, c&rsquo;est-à-dire qu&rsquo;elle est soit vraie, soit fausse. Et il en est de même pour une formule dont l&rsquo;interprétation se déduit de celles des variables et des règles qu&rsquo;impliquent les connecteurs.</p>
+<div id="def">
 <p>À partir de l&rsquo;ensemble des variables $VAR$, on peut construire une fonction $\delta$ qui associe une valeur de vérité à certains éléments de $VAR$ :<br>$\delta :\;VAR\rightarrow\set{0,1}$<br>
 $\delta$ est une <strong>distribution de valeurs de vérité</strong>.</p>
+</div>
 <p>$\delta$ permet de définir un <strong>modèle</strong> $\mathcal{M}$ du calcul propositionnel.</p>
 <p><img src="/semantique1.png?width=500px" alt=""></p>
 <p>Imaginons qu&rsquo;un ensemble de formules ne possèdent que deux variables $P$ et $Q$. On a alors 4 modèles différents possibles :</p>
@@ -2188,40 +2218,40 @@ $\delta$ est une <strong>distribution de valeurs de vérité</strong>.</p>
 <li>$\mathcal{M}_3$ pour lequel la distribution de valeur de vérité $\delta_3$ est définie par : $\delta_3(P) = 1$ et $\delta_3(Q)=0$</li>
 <li>$\mathcal{M}_4$ pour lequel la distribution de valeur de vérité $\delta_4$ est définie par : $\delta_4(P) = 1$ et $\delta_4(Q)=1$</li>
 </ul>
+<div id="def">
 <p>Pour un modèle $\mathcal{M}$, si $\delta(P)=1$, on note $\mathcal{M}\models P$. Cela signifie que $P$ est vraie dans le modèle $\mathcal{M}$.<br>
 À linverse, si $\delta(P)=0$, on écrira $\mathcal{M}\not\models P$.</p>
+</div>
+<br>
+<div id="theo">
 <p>Si  $\mathcal{M}\not\models P$ alors $\mathcal{M}\models \neg P$.</p>
+</div>
 <p>Exemple :<br>
 si $\mathcal{M}\models P,\neg Q,R$, cela signifie que dans le modèle $\mathcal{M}$, $P$ et $R$ sont vraies, mais $Q$ est fausse.</p>
 <br>
 <h3 id="évaluation-des-formules">Évaluation des formules</h3>
 <br>
 <p>Pour évaluer des formules, il faut pouvoir étendre la fonction de distribution de valeurs de vérité des seules variables propositionnelles à toutes les formules de $\mathcal{F}$. $\delta$ devient alors $\delta_\mathcal{F}$ et on construit $\delta_\mathcal{F}$ à partir de $\delta$ en utilisant les règles suivantes :</p>
+<div id="def">
 <ul>
-<li>
-<p>$\delta_\mathcal{F}(\phi) = \delta(\phi)$ si $\phi$ est une variable propositionnelle.</p>
-</li>
-<li>
-<p>$\delta_\mathcal{F}(\neg\phi) = 1- \delta_\mathcal{F}(\phi)$ (non $\phi$ est vraie seulement si $\phi$ est fausse).
-<img src="/formsemnot.png?width=150px" alt=""></p>
-</li>
-<li>
-<p>$\delta_\mathcal{F}(\phi \lor\psi) = \max\left(\delta_\mathcal{F}(\phi) ,\delta_\mathcal{F}(\psi) \right) $ ($\phi \lor\psi$ est toujours vraie sauf lorsque les deux sous-formules $\phi$ et $\psi$ sont toutes deux fausses).
-<img src="/formsemou.png?width=800px" alt=""></p>
-</li>
-<li>
-<p>$\delta_\mathcal{F}(\phi \land \psi) = \delta_\mathcal{F}(\phi) \cdot \delta_\mathcal{F}(\psi)$ ($\phi \land\psi$ est toujours fausse sauf lorsque les deux sous-formules $\phi$ et $\psi$ sont toutes deux vraies).
-<img src="/formsemet.png?width=800px" alt=""></p>
-</li>
-<li>
-<p>$\delta_\mathcal{F}(\phi \rightarrow \psi) = \max\left(1- \delta_\mathcal{F}(\phi) ,\delta_\mathcal{F}(\psi) \right)$ ($\phi \rightarrow \psi$ est toujours vraie sauf quand à la fois $\phi$ est vraie et $\psi$ est fausse).
-<img src="/formsemimp.png?width=800px" alt=""></p>
-</li>
-<li>
-<p>$\delta_\mathcal{F}(\phi \leftrightarrow \psi) = \max\left(\delta_\mathcal{F}(\phi) \cdot\delta_\mathcal{F}(\psi), (1-\delta_\mathcal{F}(\phi) )\cdot(1-\delta_\mathcal{F}(\psi) ) \right)$ ($\phi \leftrightarrow \psi$ est vraie lorsque $\phi$ et $\psi$ ont la même valeur de vérité).
-<img src="/formsemequ.png?width=800px" alt=""></p>
-</li>
+<li>$\delta_\mathcal{F}(\phi) = \delta(\phi)$ si $\phi$ est une variable propositionnelle.</li>
+<li>$\delta_\mathcal{F}(\neg\phi) = 1- \delta_\mathcal{F}(\phi)$ (non $\phi$ est vraie seulement si $\phi$ est fausse).
+<div style="position:relative; width:150px; max-width: 100%; margin-left: auto;margin-right: auto;">
+<img src="/formsemnot.png"></div></li>
+<li>$\delta_\mathcal{F}(\phi \lor\psi) = \max\left(\delta_\mathcal{F}(\phi) ,\delta_\mathcal{F}(\psi) \right) $ ($\phi \lor\psi$ est toujours vraie sauf lorsque les deux sous-formules $\phi$ et $\psi$ sont toutes deux fausses).
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;">
+<img src="/formsemou.png"></div></li>
+<li>$\delta_\mathcal{F}(\phi \land \psi) = \delta_\mathcal{F}(\phi) \cdot \delta_\mathcal{F}(\psi)$ ($\phi \land\psi$ est toujours fausse sauf lorsque les deux sous-formules $\phi$ et $\psi$ sont toutes deux vraies).
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;">
+<img src="/formsemet.png"></div></li>
+<li>$\delta_\mathcal{F}(\phi \rightarrow \psi) = \max\left(1- \delta_\mathcal{F}(\phi) ,\delta_\mathcal{F}(\psi) \right)$ ($\phi \rightarrow \psi$ est toujours vraie sauf quand à la fois $\phi$ est vraie et $\psi$ est fausse).
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;">
+<img src="/formsemimp.png"></div></li>
+<li>$\delta_\mathcal{F}(\phi \leftrightarrow \psi) = \max\left(\delta_\mathcal{F}(\phi) \cdot\delta_\mathcal{F}(\psi), (1-\delta_\mathcal{F}(\phi) )\cdot(1-\delta_\mathcal{F}(\psi) ) \right)$ ($\phi \leftrightarrow \psi$ est vraie lorsque $\phi$ et $\psi$ ont la même valeur de vérité).
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;">
+<img src="/formsemequ.png"></div></li>
 </ul>
+</div>
 <p>Avec nos petits coloriages, on peut maintenant s&rsquo;atteler à la valeur de vérité d&rsquo;une formule complexe dans un modèle donné.<br></p>
 <p>Soit le modèle $\mathcal{M}$ défini par $\mathcal{M}\models P,\neg Q, R$ et la formule $\phi$ qu&rsquo;on s&rsquo;est amusé à linéariser plus haut. On va partir des feuilles et remonter jusqu&rsquo;à la racine de l&rsquo;arbre.
 <img src="/gifverite.gif" alt=""></p>
@@ -2232,16 +2262,35 @@ La formule n&rsquo;est d&rsquo;ailleurs vraie que dans un seul des 8 modèles po
 <br>
 <h3 id="formules-logiquement-équivalentes">Formules logiquement équivalentes</h3>
 <br>
-<p>Une formule $\phi$ est <strong>satisfaite</strong> dans un modèle $\mathcal{M}$ si elle est vraie dans ce modèle. La distribution de valeur de vérité $\delta$ qui caractérise $\mathcal{M}$ vaut alors 1.<br>
+<div id="def">
+<p>Une formule $\phi$ est <b>satisfaite</b> dans un modèle $\mathcal{M}$ si elle est vraie dans ce modèle. La distribution de valeur de vérité $\delta$ qui caractérise $\mathcal{M}$ vaut alors 1.<br>
 $\mathcal{M}\models\phi$ signifie que $\delta_\mathcal{F}(\phi) = 1$ et $\mathcal{M}\not\models\phi$ signifie que $\delta_\mathcal{F}(\phi) = 0$.</p>
-<p>Deux formules $\phi$ et $\psi$ sont deux formules <strong>équivalentes</strong> ($\phi\equiv\psi$) ssi elles sont satisfaites dans les mêmes modèles (mêmes valeurs de vérité dans les mêmes modèles).<br></p>
-<p>Corollaire :<br>
-$\phi\equiv\psi$ ssi (pour tout modèle $\mathcal{M}$, $\mathcal{M}\models \phi\leftrightarrow \psi$).</p>
+</div>
+<br>
+<div id="def">
+<p>Deux formules $\phi$ et $\psi$ sont deux formules <strong>équivalentes</strong> ($\phi\equiv\psi$) ssi elles sont satisfaites dans les mêmes modèles (mêmes valeurs de vérité dans les mêmes modèles).</p>
+</div>
+
+<div class="notices info" style="--title: 'info';">
+  <p style="display: none;">info</p>
+  <div class="notice-body">
+    <p>$\equiv$ est une équivalence sémantique alors que $\leftrightarrow$ est une équivalence syntaxique, parfois appelée équivalence matérielle.</p>
+
+  </div>
+</div>
+
+
+<div id="theo">
+<p>$\phi\equiv\psi$ ssi (pour tout modèle $\mathcal{M}$, $\mathcal{M}\models \phi\leftrightarrow \psi$).</p>
+</div>
+<br>
+<div id="preuve">
 <p style="margin-bottom:-1.1em;">Preuve :</p>
 <ul>
 <li>Si les deux formules sont équivalentes dans un modèle, alors $\delta_\mathcal{F}(\phi)=\delta_\mathcal{F}(\psi)$ dans ce modèle. Et par conséquent $\delta_\mathcal{F}(\phi\leftrightarrow\psi)=1$.</li>
 <li>Inversement, si la formule $\phi\leftrightarrow\psi$ est vraie dans tout modèle, les valeurs que prennent $\phi$ et $\psi$ dans ces modèles sont les mêmes.</li>
 </ul>
+</div>
 <p style="margin-bottom:-1.1em;">La relation est&nbsp;:</p>
 <ul>
 <li><strong>réflexive</strong> : $\phi\equiv\phi$</li>
@@ -2252,28 +2301,33 @@ $\phi\equiv\psi$ ssi (pour tout modèle $\mathcal{M}$, $\mathcal{M}\models \phi\
 <br>
 <h3 id="théorie-et-conséquence-sémantique">Théorie et conséquence sémantique</h3>
 <br>
-<p>Une <strong>théorie</strong> $\mathcal{T}$ du calcul des propositions est un ensemble de formules : $\mathcal{T} \sube \mathcal{F}$.</p>
+<div id="def">
+<p>Une <b>théorie</b> $\mathcal{T}$ du calcul des propositions est un ensemble de formules : $\mathcal{T} \sube \mathcal{F}$.</p>
+</div>
+<br>
+<div id="def">
 <ul>
-<li>$\mathcal{T}$ est <strong>satisfaite</strong> dans le modèle $\mathcal{M}$ ($\mathcal{M}$ est un modèle de $\mathcal{T}$), noté $\mathcal{M}\models\mathcal{T}$, si pour toute formule $\phi$ de $\mathcal{T}$, $\mathcal{M}\models\phi$.</li>
-<li>$\mathcal{T}$  est <strong>satisfaisable</strong> ou <strong>consistante</strong> s&rsquo;il existe au moins un modèle $\mathcal{M}$ tel que $\mathcal{M}\models\mathcal{T}$.</li>
-<li>$\mathcal{T}$ est <strong>inconsistante</strong> si $\mathcal{T}$ n&rsquo;est pas satisfaisable.</li>
+<li>$\mathcal{T}$ est <b>satisfaite</b> dans le modèle $\mathcal{M}$ ($\mathcal{M}$ est un modèle de $\mathcal{T}$), noté $\mathcal{M}\models\mathcal{T}$, si pour toute formule $\phi$ de $\mathcal{T}$, $\mathcal{M}\models\phi$.</li>
+<li>$\mathcal{T}$  est <b>satisfaisable</b> ou <b>consistante</b> s'il existe au moins un modèle $\mathcal{M}$ tel que $\mathcal{M}\models\mathcal{T}$.</li>
+<li>$\mathcal{T}$ est <b>inconsistante</b> si $\mathcal{T}$ n'est pas satisfaisable.</li>
 </ul>
+</div>
 <p>Une théorie est inconsistante lorsqu&rsquo;elle se contredit. Elle dit alors quelque chose et son contraire, ce qui ne peut être vérifié dans aucun modèle.</p>
 <p>Comparons maintenant deux théories $\mathcal{T}$ et $\mathcal{T&rsquo;}$ :</p>
+<div id="def">
 <ul>
-<li>
-<p>$\mathcal{T&rsquo;}$ est une <strong>conséquence sémantique</strong> de $\mathcal{T}$, noté $\mathcal{T} \models \mathcal{T&rsquo;}$ si tout modèle satisfaisant $\mathcal{T}$ satisfait aussi $\mathcal{T&rsquo;}$.</p>
-</li>
-<li>
-<p>$\mathcal{T}$ et $\mathcal{T&rsquo;}$ sont deux <strong>théories équivalentes</strong>, noté $\mathcal{T} \equiv \mathcal{T&rsquo;}$, si elles ont exactement les mêmes modèles.</p>
-</li>
+<li>$\mathcal{T'}$ est une <b>conséquence sémantique</b> de $\mathcal{T}$, noté $\mathcal{T} \models \mathcal{T'}$ si tout modèle satisfaisant $\mathcal{T}$ satisfait aussi $\mathcal{T'}$.</li>
+<li>$\mathcal{T}$ et $\mathcal{T'}$ sont deux <b>théories équivalentes</b>, noté $\mathcal{T} \equiv \mathcal{T'}$, si elles ont exactement les mêmes modèles.</li>
 </ul>
+</div>
 <p>Plus une théorie raconte de choses, moins elle possède de modèles. Et si elle raconte trop de choses, elle finit par devenir inconsistante car plus aucun modèle ne peut la satisfaire.</p>
 <p>On écrit $\mathcal{T}\models\phi$ si la théorie $\mathcal{T&rsquo;}$ se réduit au singleton $\set{\phi}$.<br>
 Et $\models\phi$ est un raccourci pour $\empty \models \phi$ ce qui signifie que $\phi$ est une conséquence logique de la théorie vide. Or la théorie vide ne dit rien et est donc satisfaite dans tous les modèles. Cela revient donc à dire que $\phi$ est vraie dans tous les modèles. $\phi$ est appelée une <strong>tautologie</strong>.</p>
 <p><img src="/inclusiontheorie.png?width=500px" alt=""></p>
-<p>$\mathcal{T}\models\mathcal{T&rsquo;}$ ssi l&rsquo;ensemble des modèles de $\mathcal{T}$ est contenu dans l&rsquo;ensemble des modèles de $\mathcal{T&rsquo;}$.<br>
-En effet, $\mathcal{T&rsquo;}$ est une conséquence sémantique de $\mathcal{T}$ si elle est vraie partout où $\mathcal{T}$ est vraie.</p>
+<div id="theo">
+<p>$\mathcal{T}\models\mathcal{T&rsquo;}$ ssi l&rsquo;ensemble des modèles de $\mathcal{T}$ est contenu dans l&rsquo;ensemble des modèles de $\mathcal{T&rsquo;}$.</p>
+</div>
+<p>En effet, $\mathcal{T&rsquo;}$ est une conséquence sémantique de $\mathcal{T}$ si elle est vraie partout où $\mathcal{T}$ est vraie.</p>
 <p>Deux théories équivalentes ont exactement les mêmes modèles ($\mathcal{T}\equiv \mathcal{T&rsquo;}$ correspond à avoir à la fois $\mathcal{T}\models \mathcal{T&rsquo;}$ et $\mathcal{T&rsquo;}\models \mathcal{T}$), ce qui revient à dire qu&rsquo;il n&rsquo;existe pas de modèle pouvant les discriminer. Elles ne sont pas nécessairement égales (pas nécessairement le même ensemble de formules), mais elles sont égales sur le plan sémantique puisqu&rsquo;elles signifient la même chose.</p>
 
 <div class="notices info" style="--title: 'info';">
@@ -2285,37 +2339,25 @@ En effet, $\mathcal{T&rsquo;}$ est une conséquence sémantique de $\mathcal{T}$
 </div>
 
 
+<div id="theo">
 <ul>
-<li>
-<p>Si $\mathcal{T}$ est satisfaisable et $\mathcal{T&rsquo;}\sube\mathcal{T}$, alors $\mathcal{T&rsquo;}$ est également satisfaisable.<br>
+<li>Si $\mathcal{T}$ est satisfaisable et $\mathcal{T'}\sube\mathcal{T}$, alors $\mathcal{T'}$ est également satisfaisable.<br>
 En restreignant une théorie, on conserve la non contradiction.<br>
-Le contraire n&rsquo;est évidemment pas vrai. Si on étend une théorie (en ajoutant de nouvelles formules), on diminue le nombre de modèles qui la satisfait. Et on accroît ce nombre de modèles en enlevant des formules à la théorie, pour atteindre à la limite tous les modèles possibles lorsque la théorie devient vide.</p>
-</li>
-<li>
-<p>Si $\mathcal{T&rsquo;}$ est inconsistante et $\mathcal{T&rsquo;}\sube\mathcal{T}$, alors $\mathcal{T}$ est également inconsistante.<br>
-Étendre une théorie inconsistante ne peut pas la rendre satisfaisable.</p>
-</li>
-<li>
-<p>Si $\mathcal{T&rsquo;}\models\phi$ et $\mathcal{T&rsquo;}\sube\mathcal{T}$, alors $\mathcal{T}\models\phi$. Si $\phi$ est la conséquence d&rsquo;une théorie, alors elle est la conséquence de toute théorie qui étend celle-ci (puisque le nombre de modèles satisfaisant cette théorie étendue s&rsquo;est réduit et qu&rsquo;on ne peut donc pas y trouver un nouveau modèle où $\phi$ deviendrait fausse).</p>
-</li>
-<li>
-<p>$\mathcal{T}$ est inconsistante ssi $\mathcal{T}\models\phi\land\neg\phi$.</p>
-</li>
-<li>
-<p>$\mathcal{T}$ est inconsistante ssi pour toute formule $\phi$, $\mathcal{T}\models\phi$. En effet, la plus grande théorie possible ($\mathcal{F}$) contient toute formule $\phi$ et sa négation.</p>
-</li>
-<li>
-<p>$\mathcal{T}\models\phi$ ssi $\mathcal{T}\cup\set{\neg\phi}$ est inconsistante.<br>
-En effet, dire que $\phi$ est conséquence sémantique de $\mathcal{T}$, c&rsquo;est dire que $\phi$ est vraie dans tous les modèles de $\mathcal{T}$ et donc que $\neg\phi$ est fausse dans tous les modèles de $\mathcal{T}$. Impossible donc pour un modèle de satisfaire à la fois $\mathcal{T}$ et $\neg\phi$.<br>
-À l&rsquo;inverse, si $\mathcal{T}\cup\set{\neg\phi}$ est inconsistante, alors $\neg\phi$ est fausse dans tous les modèles de $\mathcal{T}$ et donc $\phi$ est vraie dans tous les modèles de $\mathcal{T}$. D&rsquo;où $\mathcal{T}\models\phi$.</p>
-</li>
-<li>
-<p>$\mathcal{T}\cup\set{\phi}\models\psi$ ssi $\mathcal{T}\models\phi\rightarrow\psi$.<br>
+Le contraire n'est évidemment pas vrai. Si on étend une théorie (en ajoutant de nouvelles formules), on diminue le nombre de modèles qui la satisfait. Et on accroît ce nombre de modèles en enlevant des formules à la théorie, pour atteindre à la limite tous les modèles possibles lorsque la théorie devient vide.</li>
+<li>Si $\mathcal{T'}$ est inconsistante et $\mathcal{T'}\sube\mathcal{T}$, alors $\mathcal{T}$ est également inconsistante.<br>
+Étendre une théorie inconsistante ne peut pas la rendre satisfaisable.</li>
+<li>Si $\mathcal{T'}\models\phi$ et $\mathcal{T'}\sube\mathcal{T}$, alors $\mathcal{T}\models\phi$. Si $\phi$ est la conséquence d'une théorie, alors elle est la conséquence de toute théorie qui étend celle-ci (puisque le nombre de modèles satisfaisant cette théorie étendue s'est réduit et qu'on ne peut donc pas y trouver un nouveau modèle où $\phi$ deviendrait fausse).</li>
+<li>$\mathcal{T}$ est inconsistante ssi $\mathcal{T}\models\phi\land\neg\phi$.</li>
+<li>$\mathcal{T}$ est inconsistante ssi pour toute formule $\phi$, $\mathcal{T}\models\phi$. En effet, la plus grande théorie possible ($\mathcal{F}$) contient toute formule $\phi$ et sa négation.</li>
+<li>$\mathcal{T}\models\phi$ ssi $\mathcal{T}\cup\set{\neg\phi}$ est inconsistante.<br>
+En effet, dire que $\phi$ est conséquence sémantique de $\mathcal{T}$, c'est dire que $\phi$ est vraie dans tous les modèles de $\mathcal{T}$ et donc que $\neg\phi$ est fausse dans tous les modèles de $\mathcal{T}$. Impossible donc pour un modèle de satisfaire à la fois $\mathcal{T}$ et $\neg\phi$.<br>
+À l'inverse, si $\mathcal{T}\cup\set{\neg\phi}$ est inconsistante, alors $\neg\phi$ est fausse dans tous les modèles de $\mathcal{T}$ et donc $\phi$ est vraie dans tous les modèles de $\mathcal{T}$. D'où $\mathcal{T}\models\phi$.</li>
+<li>$\mathcal{T}\cup\set{\phi}\models\psi$ ssi $\mathcal{T}\models\phi\rightarrow\psi$.<br>
 La seule possibilité pour que $\phi\rightarrow\psi$ soit fausse est si à la fois $\phi$ est vraie et $\psi$ est fausse.  Or si $\mathcal{T}\cup\set{\phi}\models\psi$, cela signifie que si $\phi$ est vraie dans un modèle, alors $\psi$ est nécessairement vraie dans ce même modèle.<br>
-À l&rsquo;inverse, si $\phi\rightarrow\psi$ est conséquence de $\mathcal{T}$, alors $\psi$ est vraie dans tous les modèles de $\mathcal{T}\cup\set{\phi}$ puisque $\phi\rightarrow\psi$ est vraie dans tous les modèles de $\mathcal{T}$.<br>
-En d&rsquo;autres termes, déduire $\phi\rightarrow\psi$ de nos hypothèses $\mathcal{T}$, c&rsquo;est la même chose que déduire $\psi$ en faisant l&rsquo;hypothèse supplémentaire qu&rsquo;on a $\phi$.</p>
-</li>
+À l'inverse, si $\phi\rightarrow\psi$ est conséquence de $\mathcal{T}$, alors $\psi$ est vraie dans tous les modèles de $\mathcal{T}\cup\set{\phi}$ puisque $\phi\rightarrow\psi$ est vraie dans tous les modèles de $\mathcal{T}$.<br>
+En d'autres termes, déduire $\phi\rightarrow\psi$ de nos hypothèses $\mathcal{T}$, c'est la même chose que déduire $\psi$ en faisant l'hypothèse supplémentaire qu'on a $\phi$.</li>
 </ul>
+</div>
 <br>
 <h3 id="substitution-de-sous-formules-équivalentes">Substitution de sous formules équivalentes</h3>
 <br>
@@ -2323,19 +2365,35 @@ En d&rsquo;autres termes, déduire $\phi\rightarrow\psi$ de nos hypothèses $\ma
 <p>Si la sous-formule &ldquo;greffée&rdquo; est équivalente à la sous-formule retirée, alors la nouvelle formule est équivalente à l&rsquo;originale.</p>
 <p>L&rsquo;intérêt des substitutions est de simplifier la formule pour rendre son interprétation plus facile.</p>
 <p>Une simplification forte (bien qu&rsquo;elle agrandisse l&rsquo;arbre) consiste à restreindre le nombre de symboles utilisés.</p>
-<p>On peut ainsi toujours transformer une formule $\phi$ par une formule $\phi_{\neg,\lor,\land}\equiv\phi$ avec tous ses connecteurs logiques dans $\set{\neg,\lor,\land}$.<br>
-Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ :</p>
+<div id="theo">
+<p>On peut ainsi toujours transformer une formule $\phi$ par une formule $\phi_{\neg,\lor,\land}\equiv\phi$ avec tous ses connecteurs logiques dans $\set{\neg,\lor,\land}$.</p>
+</div>
+<br>
+<div id="preuve"> 
+<p>Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ :</p>
 <p><img src="/substit1.png?width=700px" alt=""></p>
-<p>On peut aller encore plus loin en transformant une formule $\phi$ par une formule $\phi_{\neg,\lor}\equiv\phi$ avec tous ses connecteurs logiques dans $\set{\neg,\lor}$.</p>
-<p>Ou bien en transformant une formule $\phi$ par une formule $\phi_{\neg,\land}\equiv\phi$ avec tous ses connecteurs logiques dans $\set{\neg,\land}$.</p>
+</div>
+<br>
+<div id="theo">
+<p>On peut aller encore plus loin en transformant une formule $\phi$ par une formule $\phi_{\neg,\lor}\equiv\phi$ avec tous ses connecteurs logiques dans $\set{\neg,\lor}$.<br>
+Ou bien en transformant une formule $\phi$ par une formule $\phi_{\neg,\land}\equiv\phi$ avec tous ses connecteurs logiques dans $\set{\neg,\land}$.</p>
+</div>
+<br>
+<div id="preuve"> 
 <p>On utilise pour cela les deux substitutions suivantes :</p>
 <p><img src="/substit2.png?width=600px" alt=""></p>
+</div>
 <p>Dans l&rsquo;exemple suivant, on détermine une formule équivalente avec $\neg$ et $\lor$ comme seuls connecteurs logiques (et on élimine les doubles négations dans la dernière étape.</p>
 <p><img src="/gifsubstit.gif" alt=""></p>
 <br>
 <h3 id="jeux-dévaluation">Jeux d&rsquo;évaluation</h3>
 <br>
-<p>Ernst Zermelo a démontré que les jeux tour à tour à deux joueurs finis, à information parfaite (pas comme la bataille navale), sans hasard, et sans match nul, sont tous <strong>déterminés</strong>. Cela signifie qu&rsquo;un des deux joueurs a une <strong>stratégie gagnante</strong>.</p>
+<div id="theo">
+<p>Ernst Zermelo a démontré que les jeux tour à tour à deux joueurs finis, à information parfaite (pas comme la bataille navale), sans hasard, et sans match nul, sont tous <b>déterminés</b>.<br>
+Cela signifie qu&rsquo;un des deux joueurs a une <b>stratégie gagnante</b>.</p>
+</div>
+<br>
+<div id="preuve">
 <p>Pour pouver ce résultat, on va représenter toutes les configurations possibles dans le jeu par un arbre dont les nœuds sont étiquetés par un des deux joueurs (0 ou 1) et les arêtes sont ses coups possibles depuis cette position. Les feuilles de l&rsquo;arbre correspondent à des positions gagnantes, soit pour 0, soit pour 1. Puis on va décrire un algorithme permettant de déterminer lequel des deux joueurs a une stratégie gagnante sur une position donnée.</p>
 <p>On commence par colorier en <b style="color:#EE220C">rouge</b> les feuilles gagnantes pour <b style="color:#EE220C">0</b> et en <b style="color:#1DB100">vert</b> les feuilles gagnantes pour <b style="color:#1DB100">1</b>.</p>
 <p>Ensuite on regarde les prédécesseurs de ces feuilles :</p>
@@ -2355,6 +2413,7 @@ Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ 
 </ul>
 <p>On répète ensuite la procédure avec les prédécesseurs des nœuds que l&rsquo;on vient de colorer jusqu&rsquo;à remonter à la racine.</p>
 <p>Comme on finira fatalement par colorier ainsi chaque nœud de l&rsquo;arbre, on prouve qu&rsquo;il existe au moins une stratégie gagnante pour chacun des sous-arbres et pour le jeu complet.</p>
+</div>
 <p>Un petit exemple :</p>
 <p><img src="/gifarbrejeu.gif" alt=""></p>
 <p>Étant donné un modèle $\mathcal{M}$ et une formule $\phi \in \mathcal{F}$, la valeur que prend la formule dans le modèle peut être obtenue grâce à un jeu inventé par Jaakko Hintikka, noté $\mathbb{E}v(\mathcal{M},\phi)$ et appelé <strong>jeu d&rsquo;évaluation</strong>.</p>
@@ -2362,12 +2421,16 @@ Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ 
 <p>Les deux joueurs s&rsquo;appellent le <strong>V</strong>érificateur (<b style="color:#1DB100">V</b>) dont le but est de prouver que la formule est satisfaite dans le modèle ($\mathcal{M}\models\phi$) et le <strong>F</strong>alsificateur (<b style="color:#EE220C">F</b>) qui doit montrer que la formule est fausse ($\mathcal{M}\not\models\phi$).</p>
 <p>L&rsquo;arbre du jeu correspond à l&rsquo;arbre de la formule. Si un nœud est une disjonction $\lor$, c&rsquo;est au tour de <b style="color:#1DB100">V</b> et si c&rsquo;est une conjonction $\land$, c&rsquo;est au tour de <b style="color:#EE220C">F</b>. Si le nœud est une négation $\neg$, les deux joueurs échangent leur rôle. De plus, les propositions vraies correspondent à des positions gagnantes pour <b style="color:#1DB100">V</b> et les propositions fausses sont gagnantes pour <b style="color:#EE220C">F</b>.</p>
 <p>Grâce à ces règles, on obtient le théorème suivant :</p>
+<div id="theo">
 <ol>
 <li>$\mathcal{M}\models\phi$ ssi <b style="color:#1DB100">V</b> a une stratégie gagnante dans $\mathbb{E}v(\mathcal{M},\phi)$.</li>
+<br>
 <li>$\mathcal{M}\models\neg\phi$ ssi <b style="color:#EE220C">F</b> a une stratégie gagnante dans $\mathbb{E}v(\mathcal{M},\phi)$.</li>
 </ol>
+</div>
+<br>
+<div style="background-color:#EAEAEA;border-radius:10px;padding:10px">
 <p>Prouvons-le par induction sur la hauteur de la formule $\phi$ :<br></p>
-<blockquote>
 <ul>
 <li> hauteur $0$&nbsp;: correspond à une formule $\phi$ réduite à une variable propositionnelle. On vérifie alors tout de suite 1. et 2..</li>
 <li> hauteur $n+1$&nbsp;:</li>
@@ -2381,8 +2444,7 @@ Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ 
     C'est au tour de <b style="color:#1DB100">V</b> de jouer d'après les règles. Il n'a besoin que d'une branche gagnante pour rendre le nœud victorieux. Or si $\phi$ est vraie, c'est bien le cas&nbsp;: au moins une des sous-formules est vraie et donc au moins une branche victorieuse s'ouvre à <b style="color:#1DB100">V</b>.<br>
     Et une $\phi$ fausse implique que les deux sous-formules sont fausses aussi et donc victorieuses pour <b style="color:#EE220C">F</b>, ce qui donne le nœud $\lor$ à <b style="color:#EE220C">F</b>.</li>
     </ul>
-</ul>
-</blockquote>
+</ul></div>
 <p>Exemple : considérons la formule $\bar{\phi}=\neg\left(\left(\neg\left(\neg P\land\left(\left( Q\land \left( R\land\neg P\right)\right)\lor\left( Q\land\neg P\right)\right)\right)\land\left( P\land\left( R\lor \neg R\right)\right)\lor\left(( R\land Q\right)\right)\right)$ dont l&rsquo;arbre est représenté ci-dessous. Et on se donne le modèle $\mathcal{M}\models P,Q,\neg R$</p>
 <p><img src="/formjeu1.png?width=500px" alt=""></p>
 <p>On commence par colorier les feuilles conformément au modèle, puis on remplace chaque occurrence de $\lor$, $\land$, $\neg$ respectivement par les symboles <b style="color:#1DB100">V</b>, <b style="color:#EE220C">F</b> et <b  style="color:#0076BA">⇔</b>.</p>
@@ -2397,6 +2459,340 @@ Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ 
 <br>
 <h3 id="table-de-vérité">Table de vérité</h3>
 <br>
+<p>Une <strong>table de vérité</strong> est un tableau regroupant de manière synthétique tous les modèles d&rsquo;une fomrule donnée.</p>
+<p>Si la formule possède $n$ variables propositionnelles, le tableau contient $2^n$ lignes, une ligne par modèle.</p>
+<p>Exemple :<br>
+Construisons la table de vérité de $\phi := \left(\left(P\land\neg Q\right)\rightarrow\left(\neg\left( P\lor R\right) \leftrightarrow\neg Q\right)\right)$</p>
+<p><img src="/tabver1.png?width=400px" alt=""></p>
+<p><img src="/tabver2.png?width=700px" alt=""></p>
+<br>
+<h3 id="tautologies-et-contradictions">Tautologies et contradictions</h3>
+<br>
+<div id="def">
+Comme on l'a vu plus haut, $\phi$ est une <b>tautologie</b> si elle est vraie dans tous les modèles, ce qu'on note $\models \phi$.
+</div>
+<p>On écrit alors aussi : $\phi \equiv \top$</p>
+<p>Et rappelons le lien étroit entre la notion de tautologie et celle d&rsquo;équivalence $\leftrightarrow$ :<br></p>
+<div id="theo">
+$\phi\equiv \psi$ ssi $\phi\leftrightarrow\psi\equiv\top$
+</div>
+<br>
+<div id="def">
+$\phi$ est une <b>contradiction</b> ssi $\phi$ est une tautologie. On note alors $\phi\equiv\bot$.
+</div>
+<p>Une contradiction est fausse dans tout modèle. Elle n&rsquo;a donc pas de modèle ; une contradiction ne peut jamais avoir lieu.</p>
+<p>Tautologies importantes :</p>
+<table>
+<tr>
+<th scope="row" colspan="2">idempotence de la conjonction et de la disjonction</th>
+</tr>
+<tr>
+<td style="width:50%;">$(P\land P)\leftrightarrow P$</td><td>$(P\lor P)\leftrightarrow P$</td>
+</tr>
+</table>
+<br>
+<table>
+<tr>
+<th scope="row" colspan="3">commutativité de la conjonction, disjonction et de la double implication</th>
+</tr>
+<tr>
+<td style="width:33.33%;">$(P\lor Q) \leftrightarrow (Q\lor P)$</td><td style="width:33.33%;">$(P\land Q) \leftrightarrow (Q\land P)$</td><td style="width:33.33%;">$(P\leftrightarrow Q) \leftrightarrow (Q\leftrightarrow P)$</td>
+</tr>
+</table>
+<br>
+<table>
+<tr>
+<th scope="row" colspan="3">associativité de la disjonction, de la conjonction et de la double implication</th>
+</tr>
+<tr>
+<td style="width:33.33%;">$((P\lor Q) \lor R)\leftrightarrow (P\lor(Q\lor R))$</td><td style="width:33.33%;">$((P\land Q) \land R)\leftrightarrow (P\land(Q\land R))$</td><td style="width:33.33%;">$((P\leftrightarrow Q) \leftrightarrow R)\leftrightarrow (P\leftrightarrow(Q\leftrightarrow R))$</td>
+</tr>
+</table>
+<br>
+<table>
+<tr>
+<th scope="row" colspan="2">distributivité de la disjonction par rapport à la conjonction et réciproquement</th>
+</tr>
+<tr>
+<td style="width:50%;">$(P\lor (Q\land R))\leftrightarrow ((P\lor Q)\land (P\lor R))$</td><td>$(P\land (Q\lor R))\leftrightarrow ((P\land Q)\lor (P\land R))$</td>
+</tr>
+</table>
+<br>
+<table>
+<tr>
+<th scope="row" colspan="2">lois d'absorption</th>
+</tr>
+<tr>
+<td style="width:50%;">$(P\land(P\lor Q))\leftrightarrow P$</td><td>$(P\lor(P\land Q))\leftrightarrow P$</td>
+</tr>
+</table>
+<br>
+<table>
+<tr>
+<th scope="row" colspan="2">lois de De Morgan</th>
+</tr>
+<tr>
+<td style="width:50%;">$\neg (P\lor Q) \leftrightarrow (\neg P \land \neg Q)$</td><td>$\neg (P\land Q) \leftrightarrow (\neg P \lor \neg Q)$</td>
+</tr>
+</table>
+<br>
+<table>
+<tr>
+<th scope="row">contraposée</th>
+</tr>
+<tr>
+<td>$(P\rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P)$</td>
+</tr>
+</table>
+<br>
+<p>Un <strong>raisonnement</strong> consiste généralement à partir d&rsquo;une tautologie, la prémisse, et à aboutir à de nouvelles tautologies à partir d&rsquo;implications (une tautologie étant vraie dans tout modèle, elle implique nécessairement une autre tautologie).</p>
+<p>Dans un <strong>raisonnement par l&rsquo;absurde</strong> (preuve par contradiction), pour montrer que $\phi$ est une tautologie, on suppose que $\neg \phi$ est vraie dans au moins un modèle pour aboutir à une contradiction $\psi$ ($\psi\equiv\bot$). Dans les modèles où $\neg \phi$ est vraie, $\neg \phi \rightarrow \psi$ est également vraie. Or $\neg\phi\rightarrow\psi\equiv \neg\neg\phi\lor\psi \equiv \phi\lor\bot \equiv \phi$. Donc dans les modèles où $\neg\phi$ est vraie, $\phi$ est vraie. Par conséquent, il n&rsquo;y a pas de modèle où $\neg \phi$ est vraie. D&rsquo;où $\phi\equiv\top$.</p>
+<br>
+<h3 id="formes-normales">Formes normales</h3>
+<br>
+<p>Supposons que l&rsquo;on ait un nombre fini de variables propositionnelles $\set{P_1,P_2,\ldots,P_n}$.<br>
+On va construire une formule $\phi$ qui n&rsquo;est vraie que dans un modèle $\mathcal{M}$ associé à une distribution de vérité $\delta$ :<br>
+$\displaystyle \phi = (\epsilon_1 P_1\land \epsilon_2 P_2\land\cdots\land\epsilon_n P_n) = \bigwedge_{i=1}^n \epsilon_i P_i$ où $\epsilon_i$ désigne $\neg$ si $\delta(P_i) = 0$ et $\not \! \neg$ si $\delta(P_i) = 1$ (avec $\not \! \neg P= P$).</p>
+<p>La table de vérité aura bien des zéros partout sauf dans la ligne correspondant au modèle $\mathcal{M}$.</p>
+<p>Passons maintenant d&rsquo;une formule qui vérifie un seul modèle à une formule qui en vérifie plusieurs. Choisissons $\set{\mathcal{M}_i:i\in I}$ parmi les $2^n$ modèles possibles. En appelant $\phi$ la formule vraie dans $\mathcal{M}_i$, il suffit de former la formule suivante :<br>
+$\displaystyle \phi = \bigvee_{i\in I}\phi_i$</p>
+<div id="def"">
+Une formule $\phi$ est sous <b>forme normale disjonctive</b> si elle peut s'écrire&nbsp;:<br>
+<p>$\displaystyle \phi = \bigvee_{1≤i≤k} (\bigwedge_{1≤j≤n_i} \epsilon_{i,j}P_{i,j})$</p>
+</div>
+<p>On suppose ici que $\phi$ est satisfaite dans $k$ modèles, qu&rsquo;un modèle $i$ parmi ces $k$ possède $n_i$ variables, et que pour une variable $P_{i,j}$ parmi ces $n_i$, $\epsilon_{i,j}$ désigne soit $\neg$, soit $\not\neg$.</p>
+<div id="theo"">
+Pour toute formule $\phi$, il existe une formule $\psi$ sous forme normale disjonctive telle que $\phi\equiv \psi$
+</div>
+<br>
+<div id="preuve">
+Preuve : si $\phi$ est une contradiction, il suffit de prendre $\psi=P\land\neg P$ (n'importe quelle contradiction fait l'affaire) qui est bien sous une forme normale disjonctive.<br>
+Sinon, on construit $\phi$ à partir des modèles où elle est vraie comme expliqué plus haut.
+</div>
+<br>
+<div id="def">
+$\phi$ est sous une <b>forme normale conjonctive</b> si elle s'écrit&nbsp;:<br>
+<p>$\displaystyle \phi = \bigwedge_{1≤i≤k} (\bigvee_{1≤j≤n_i} \epsilon_{i,j}P_{i,j})$</p>
+</div>
+<br>
+<div id="theo">
+Pour toute formule $\phi$, il existe une formule $\psi$ sous forme normale conjonctive telle que $\phi\equiv \psi$.
+</div>
+<br>
+<div id="preuve">
+<ul>
+<li>Preuve sémantique&nbsp;:</li>
+<p>On va construire une formule sur le modèle de celle ayant aboutit à la forme normale disjonctive mais on va maintenant supposer qu&rsquo;on veut une formule $\psi$ qui soit vraie dans tout modèle à l&rsquo;exception de certains.<br>
+Considérons $\set{\mathcal{M}_i: i\in I}$ l&rsquo;ensemble des modèles dans lesquels $\phi$ est fausse. Si l&rsquo;ensemble est vide, $\phi$ est une tautologie et $\psi=\bigwedge_{1≤i≤k} (\bigvee_{1≤j≤n_i} P_{i,j})$ marche. Sinon, considérons pour chaque $i$ dans $I$, la formule :<br>
+$
+\begin{aligned}
+\psi_i &amp;= \neg(\epsilon_1 P_1\land\epsilon_2 P_2 \land\cdots \land \epsilon_k P_k)\\
+&amp;= (\epsilon_1 \neg P_1\lor\epsilon_2 \neg P_2 \lor\cdots \lor \epsilon_k \neg P_k)\\
+&amp;= \bigvee_{1≤j≤k}\bar{\epsilon}_j P_j
+\end{aligned}
+$<br>
+où $\bar{\epsilon}_i = \neg$ et $\epsilon_i = \not \!\neg $ ssi $\mathcal{M}_i \models P_i$ et inversement $\bar{\epsilon}_i = \not\! \neg$ et $\epsilon_i =  \neg$ ssi $\mathcal{M}_i \not\models P_i$.<br>
+Par construction, $\psi_i$ est vraie dans tous les modèles de $\phi$, à l&rsquo;exception de $\mathcal{M}_i$. Ainsi la formule $\psi = \bigwedge_{i\in I}\psi_i$ est vraie dans tous les modèles possibles, à l&rsquo;exception de tous les $\mathcal{M}_i$ pour $i$ dans $I$. $\psi$ est donc vraie dans tous les modèles de $\phi$ : $\mathcal{M}\models\phi$ ssi $\mathcal{M}\models\psi$, ce qui signifie bien que $\psi \equiv \phi$.</p>
+<li>Ébauchons une preuve syntaxique (par un jeu de réécriture)&nbsp;:</li>
+<ul>
+    <li>on commence par se débarrasser des connecteurs $\rightarrow$ et $\leftrightarrow$ pous n'avoir plus que $\lor$, $\land$ et $\neg$ et on se débarrasse des doubles négations,</li>
+    <li>on utilise les lois de De Morgan pour faire entrer les négations à l'intérieur des formules jusqu'à ce que tous les symboles de négation soient placés devant une variable,</li>
+    <li>on distribue la disjonction par rapport à la conjonction pour faire descendre les $\lor$ dans l'arbre de la formule jusqu'à ce qu'ils ne relient plus entre eux que des littéraux (des variables et leur négation).</li>
+</div>
+<blockquote>
+<p>Exemple : Soit $\phi = \neg((\neg P \rightarrow Q)\rightarrow \neg (Q\leftrightarrow P))$</p>
+<p>$\begin{aligned}
+\phi &amp;\equiv \neg ( \neg (\neg P \rightarrow Q ) \lor \neg ( Q \leftrightarrow P))\\
+&amp;\equiv \neg ( \neg ( \neg \neg P \lor Q ) \lor \neg ( Q \leftrightarrow P )\\
+&amp;\equiv \neg ( \neg (\neg\neg P\lor Q ) \lor \neg ( ( \neg Q \lor P ) \land ( \neg P \lor Q ) )\\
+&amp;\equiv \neg( \neg( P \lor Q ) \lor \neg ( ( \neg Q \lor P ) \land ( \neg P \lor Q ) )\\
+&amp;\equiv \neg \neg ( \lor Q ) \land \neg \neg ( ( \neg Q \lor P ) \land ( \neg P \lor Q ) ) \\
+&amp; \equiv ( P \lor Q ) \land ( ( \neg Q \lor P ) \land ( \neg P \lor Q ) ) \\
+&amp; \equiv ( P \lor Q ) \land ( \neg Q \lor P ) \land ( \neg P \lor Q )
+\end{aligned}
+$</p>
+</blockquote>
+<p>Et pour construire de la même manière une formule sous forme normale disjonctive, il suffit d&rsquo;utiliser à la fin la distribution de la conjonction par rapport à la distribution puisqu&rsquo;il s&rsquo;agit cette fois-ci de faire descendre $\land$ dans l&rsquo;arbre.</p>
+<br>
+<h3 id="connecteurs-binaires-et-systèmes-complets-de-connecteurs">Connecteurs binaires et systèmes complets de connecteurs</h3>
+<br>
+<p>Appelons $*$ un connecteur binaire quelconque. On a 4 modèles possibles à considérer et comme la valeur de $P*Q$ dans chacun de ces modèles peut être soit vraie, soit fausse, cela fait en tout $4^2$ tables de vérité possibles et donc 16 connecteurs binaires différents :</p>
+<table id="tabcondit">
+<tr>
+<th>P</th><th style="border-right: solid lightgrey 2px;">Q</th><th>$\bot$</th><th>$\not \!\lor$</th><th>$\not \! \leftarrow$</th><th>$\not \! \pi_1$</th><th>$\not \rightarrow$</th><th>$\not \! \pi_2$</th><th>$\not \! \leftrightarrow$</th><th>$\not \!\!\land$</th><th>$ \land$</th><th>$ \leftrightarrow$</th><th>$ \pi_2$</th><th>$ \rightarrow$</th><th>$ \pi_1$</th><th>$ \leftarrow$</th><th>$ \lor$</th><th>$ \top$</th>
+</tr>
+<tr>
+<td>0</td><td style="border-right:  solid lightgrey 2px;">0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td>
+</tr>
+<tr>
+<td>0</td><td style="border-right:  solid lightgrey 2px;">1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td>
+</tr>
+<tr>
+<td>1</td><td style="border-right:  solid lightgrey 2px;">0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td>
+</tr>
+<tr>
+<td>1</td><td style="border-right:  solid lightgrey 2px;">1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+</tr>
+</table>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Sélectionne toutes les cellules du tableau
+  var cellules = document.querySelectorAll('#tabcondit td');
+
+  // Parcourt chaque cellule pour vérifier son contenu
+  cellules.forEach(function(cellule) {
+    if(cellule.textContent === '0') {
+      // Si le contenu est zéro, définit le fond à gris
+      cellule.style.backgroundColor = '#F7C0B7';
+    } else {
+      // Sinon, définit le fond à blanc
+      cellule.style.backgroundColor = '#D2FBB5';
+    }
+  });
+});
+</script>
+<p>On retrouve ainsi les 4 connecteurs binaires du calcul des propositions ($\lor$, $\land$, $\rightarrow$, $\leftrightarrow$) mais aussi le <strong>dual</strong> de chacun d&rsquo;eux ($\not\!\lor$, $\not\!\!\land$, $\not\!\rightarrow$, $\not\!\leftrightarrow$) où $P\!\not \!* \;Q\equiv\neg(P*Q)$.<br>
+On trouve aussi l&rsquo;implication inverse $\leftarrow$ et son dual $\not\!\leftarrow$, le connecteur $\top$ qui vaut toujours 1 et son dual $\bot$ qui vaut 0 dans tout modèle.<br>
+Et on découvre enfin deux connecteurs $\pi_1$ qui donne à la formule la valeur de $P$ et $\pi_2$ qui lui donne la valeur de $Q$ et leurs duaux $\not\!\pi_1$ et $\not\!\pi_2$ qui donnent respectivement $\neg P$ et $\neg Q$.</p>
+<div id="theo">
+<p>Chaque connecteur peut être exprimé par une formule du calcul des propositions (c.-à-d. qu&rsquo;on peut les écrire à partir des 4 connecteurs binaires de base et la négation).</p>
+</div>
+<br>
+<div id="preuve">
+$P\;\bot \;Q \equiv P\leftrightarrow \neg P$<br>
+$P\not \! \lor \; Q \equiv \neg(P\lor Q)$<br>
+$P\not \! \rightarrow Q \equiv \neg(P\rightarrow Q)$<br>
+$P\!\not \! \pi_1 \;Q \equiv \neg P$<br>
+$P\,\not \! \leftarrow Q \equiv \neg(Q\rightarrow P)$<br>
+$P\!\not \! \pi_2 \;Q \equiv \neg Q$<br>
+$P\,\not \! \leftrightarrow Q \equiv \neg(P\leftrightarrow Q)$<br>
+$P\,\not \!\!  \land \;\; Q \equiv \neg(P\land Q)$<br>
+$P \leftarrow Q \equiv Q \rightarrow P$<br>
+$P \; \top \; Q \equiv P \leftrightarrow P$<br>
+$P\; \pi_1 \;Q \equiv P$<br>
+$P\; \pi_2 \;Q \equiv Q$<br>
+</div>
+<br>
+<div id="theo">
+<p>On peut généraliser à des connecteurs d&rsquo;arité quelconque. Toute formule $\gamma$ écrite avec ces connecteurs est équivalente à une formule du calcul des propositions.</p>
+</div>
+<br>
+<div id="preuve">
+<p>Il suffit de trouver une formule $\phi$ qui ait les mêmes modèles que $\gamma$.<br>
+Imaginons par exemple que les variables propositionnelles de $\gamma$ soient $P_1$, $P_2$, $P_3$ et $P_4$ et supposons que dans un modèle $\mathcal{M}$ de $\gamma$, $P_3$ soit fausse et les autres vraies, alors la formule suivante sera vraie dans le modèle $\mathcal{M}$ et seulement dans lui : $\phi_\mathcal{M}=\left(P_1\land P_2 \land \neg P_3 \land P_4\right)$.</p>
+<p>Construisons maintenant une formule $\phi$ vraie dans tous les modèles $\mathcal{M}_i$ tels que $\mathcal{M}_i \models \gamma$ en formant la disjonction des formules $\phi_{\mathcal{M}_i}$ : $\phi = \bigvee_{1≤i≤n}\phi_{\mathcal{M}_i}$.</p>
+<p>$\phi$ est vraie dans un modèle possible de $\gamma$ seulement si $\gamma$ est vraie dans ce modèle. On a donc bien $\phi\equiv\gamma$.</p>
+</div>
+<br>
+<div id="def">
+<p>Un ensemble de connecteurs est appelé <b>système complet de connecteurs</b> si pour toute formule $\phi \in \mathcal{F}$, il existe une formule $\gamma$ écrite seulement avec ces connecteurs et telle que $\phi\equiv\psi$.</p>
+<p>Ce système complet est dit <b>minimal</b> si tout ensemble plus petit de connecteurs n'est pas complet.</p>
+</div>
+<p>On a déjà montré que toute formule du calcul des propositions peut s&rsquo;écrire avec uniquement les connecteurs.</p>
+<p>On a déjà vu qu&rsquo;on pouvait écrire toute formule du calcul des propositions avec l&rsquo;ensemble de connecteurs $\set{\neg,\lor\land\rightarrow,\leftrightarrow}$ et plus avant, on a vu qu&rsquo;on pouvait écrire les autres connecteurs à partir de $\set{\neg,\lor}$ ou de $\set{\neg,\land}$.</p>
+<div id="theo">
+$\set{\neg,\lor,\land\rightarrow,\leftrightarrow}$, $\set{\neg,\lor}$ et $\set{\neg,\land}$ sont donc des systèmes complets de connecteurs.
+</div>
+<p>On voit tout de suite que $\set{\neg,\lor,\land\rightarrow,\leftrightarrow}$ n&rsquo;est pas minimal mais qu&rsquo;en est-il pour les deux autres ?</p>
+<div id="theo">
+$\set{\neg,\lor}$ et $\set{\neg,\land}$ sont des systèmes complets minimaux de connecteurs.
+</div>
+<br>
+<div id="preuve">
+<p style="margin-bottom:-1.1em;">Prouvons-le pour $\set{\neg,\lor}$ (il suffit d'intervertir $\lor$ et $\land$ pour obtenir l'autre preuve) en considérant toutes les réductions de l'ensemble possibles&nbsp;:</p>
+<ul>
+<li> $\set{}$ : les formules ne sont plus que des variables propositionnelles. Or une variable propositionnelle ne peut être équivalente à une formule comme $P\lor Q$ où $P$ et $Q$ sont deux variables différentes. Pour s'en convaincre, 
+<ul>
+<li>si $R=P$, on considère le modèle dans lequel $P$ est faux et $Q$ est vraie.</li>
+<li>si $R=Q$, on considère le modèle dans lequel $Q$ est faux et $P$ est vraie</li>
+<li>si $R\not = P,Q$, on considère n'importe quel modèle où $R$ est faux et $P$ est vraie</li>
+</ul>
+</li>
+<li> $\set{\neg}$ : dans ce cas les formules s'écrivent $\neg\cdots\neg R $. Si elle contient un nombre pair de négations, on retombe sur le cas précédent, sinon il suffit de trouver une formule du calcul des propositions qui ne puisse pas être équivalente à $\neg R$.  Et à nouveau $P\lor Q$ convient&nbsp;:
+<ul>
+<li>si $R=P$, il suffit d'un modèle où $P$ est vraie.</li>
+<li>si $R=Q$, il suffit d'un modèle où $Q$ est vraie.</li>
+<li>si $R\not = P,Q$,  il suffit d'un modèle où $R$ est vraie alors que $P$ est vraie.</li>
+</ul></li>
+<li>$\set{\lor}$ : montrons qu'on ne peut pas créer de formule équivalente à $\neg P$ avec ce connecteur. toutes les formules construisibles sont dans ce cas de la forme $(P_1\lor\cdots\lor P_k)$.<br>
+Raisonnons par l'absurde en supposant que $(P_1\lor\cdots\lor P_k)\equiv \neg P$. Il suffit de trouver un modèle où tous les $P_i$ et $P$ sont vraies pour aboutir à une contradiction.
+</li>
+</ul>
+</div>
+<p>On peut faire encore mieux avec un système minimal ne contenant qu&rsquo;un seul connecteur :</p>
+<div id="theo">
+$\set{\not\!\lor}$ et $\set{\not\!\!\land}$ sont des systèmes complets minimaux de connecteurs.
+</div>
+<p>On note parfois $\not\!\lor$ avec une flèche vers le bas $\downarrow$ appelée flèche de Peirce et $\not\!\!\land$ avec une flèche vers le haut $\uparrow$ ou une barre $\mid$ appelée barre de Sheffer.</p>
+<div id="preuve">
+<p>Prouvons que $\set{\not\!\lor}$ est un système minimal complet&nbsp;:</p>
+<p>Le caractère minimal ne faisant pas de doute, il suffit de montrer que $\set{\not\!\lor}$ est complet, c.-à-d. que pour toute formule $\phi \in \mathcal{F}$, il existe une formule équivalente $\psi$ écrite seulement avec $\not\!\lor$.</p>
+<p style="margin-bottom:-1.1em;">On va supposer que la formule $\phi$ ne contient que des négations et des disjonctions ($\set{\neg,\lor}$ est complet...) et on va raisonner par induction sur la hauteur de la formule&nbsp;:</p>
+<ul>
+<li> Si $\phi$ est de hauteur 0, alors $\phi=P$ et la formule $(P\not\!\lor \;P)\not\!\lor \;(P\not\!\lor \;P)$ convient puisque&nbsp;:<br>
+<p>$
+\begin{aligned}
+(P\not\!\lor \;P)\not\!\lor\;(P\not\!\lor \;P) &amp;\equiv \neg((P\not\!\lor \;P)\lor(P \not\!\lor \;P)\\
+&amp;\equiv \neg (P \not\!\lor \;P)\\
+&amp;\equiv \neg\neg(P\lor P)\\
+&amp;\equiv \neg\neg P\\
+&amp;\equiv P
+\end{aligned}
+$</p>
+</li>
+<li> On suppose maintenante que toutes les formules de hauteur $n$ peuvent s'écrire seulement avec $\not\!\lor$ et vérifions que c'est encore le cas pour les formules de hauteur $n+1$. Comme $\phi$ ne contient que $\neg$ et $\lor$, deux cas se présentent&nbsp;:
+<ul>
+<li>$\phi=\neg\varphi$&nbsp;: par hypothèse d'induction, $\varphi$ est équivalente à une formule $\psi'$ qui ne s'écrit qu'avec $\not\!\lor$. La formule $\psi=\psi' \not\!\lor \; \psi'$ convient&nbsp;:
+<p>$
+\begin{aligned}
+\psi&rsquo; \not\!\lor  \; \psi&rsquo; &amp;\equiv \neg(\psi&rsquo;\lor \psi&rsquo;)\\
+&amp;\equiv \neg \psi&rsquo;\\
+&amp;\equiv \neg \varphi\\
+&amp;\equiv \phi\\
+\end{aligned}
+$</p>
+</li>
+<li>$\phi=\phi_1\lor \phi_2$&nbsp;: par hypothèse d'induction, $\phi_1$ et $\phi_2$ sont équivalentes respectivement à $\psi_1$ et $\psi_2$ qui ne s'écrivent qu'avec $\not\!\lor$. La formule $(\psi_1 \not\!\lor \; \psi_2)\not\!\lor \; (\psi_1 \not\!\lor \;\psi_2)$ convient&nbsp;:
+<p>$
+\begin{aligned}
+(\psi_1 \not\!\lor \; \psi_2)\not\!\lor \;(\psi_1 \not\!\lor \;\psi_2) &amp;\equiv \neg((\psi_1 \not\!\lor \;\psi_2)\lor(\psi_1 \not\!\lor \;\psi_2)\\
+&amp;\equiv \neg (\psi_1 \not\!\lor \;\psi_2)\\
+&amp;\equiv \neg\neg(\psi_1\lor \psi_2)\\
+&amp;\equiv  \psi_1\lor\psi_2\\
+&amp;\equiv  \phi_1\lor\phi_2\\
+&amp;\equiv \phi
+\end{aligned}
+$</li></p>
+</ul>
+</ul>
+</div>
+
+<div class="notices note" style="--title: 'note';">
+  <p style="display: none;">note</p>
+  <div class="notice-body">
+    <p>C&rsquo;est ainsi qu&rsquo;un ordinateur peut être construit entièrement avec des portes logiques NAND ($\not\!\!\land)$ ou NOR ($\not\!\lor)$ qui sont dites universelles (il semblerait que l&rsquo;Apollo Guidance Computer qui servit à poser l&rsquo;homme sur la Lune pendant le programme Apollo était construit exclusivement avec des portes NOR).</p>
+
+  </div>
+</div>
+
+
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;border-radius:20px">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Agc_view.jpg/1280px-Agc_view.jpg" style="border-radius:20px;"></div>
+<br>
+
+<div class="notices note" style="--title: 'note';">
+  <p style="display: none;">note</p>
+  <div class="notice-body">
+    <p>Après la notion de <strong>modèle</strong>, on va maintenant s&rsquo;intéresser à la notion de <strong>preuve</strong>. Et ces deux notions seront réunies par le <strong>théorème de complétude</strong>.</p>
+
+  </div>
+</div>
+
+
+<br>
+<p style="text-align:center;">
+<a href="../logique3" style="font-size:2em;">Suite : <b>Théorie de la démonstration</b></a>
+</p>
 
 
 <footer class="footline">
@@ -3517,6 +3913,11 @@ Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ 
             
         
                     
+                        
+            
+            
+        
+                    
             
         
                     
@@ -3754,19 +4155,19 @@ Il suffit en effet de substituer les nœuds $\rightarrow$ et $\leftrightarrow$ 
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1711107840"></script>
-    <script src="/js/perfect-scrollbar.min.js?1711107840"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1711107840"></script>
-    <script src="/js/jquery.sticky.js?1711107840"></script>
-    <script src="/js/featherlight.min.js?1711107840"></script>
-    <script src="/js/highlight.pack.js?1711107840"></script>
+    <script src="/js/clipboard.min.js?1711242979"></script>
+    <script src="/js/perfect-scrollbar.min.js?1711242979"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1711242979"></script>
+    <script src="/js/jquery.sticky.js?1711242979"></script>
+    <script src="/js/featherlight.min.js?1711242979"></script>
+    <script src="/js/highlight.pack.js?1711242979"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1711107840"></script>
-    <script src="/js/learn.js?1711107840"></script>
-    <script src="/js/hugo-learn.js?1711107840"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1711242979"></script>
+    <script src="/js/learn.js?1711242979"></script>
+    <script src="/js/hugo-learn.js?1711242979"></script>
     
         
-            <script src="/mermaid/mermaid.js?1711107840"></script>
+            <script src="/mermaid/mermaid.js?1711242979"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

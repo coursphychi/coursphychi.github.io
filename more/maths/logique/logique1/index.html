@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1711107840" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1711107840" rel="stylesheet">
-    <link href="/css/hybrid.css?1711107840" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1711107840" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1711107840" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711107840" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1711107840" rel="stylesheet">
-    <link href="/css/theme.css?1711107840" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1711107840" rel="stylesheet">
+    <link href="/css/nucleus.css?1711242979" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1711242979" rel="stylesheet">
+    <link href="/css/hybrid.css?1711242979" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1711242979" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1711242979" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711242979" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1711242979" rel="stylesheet">
+    <link href="/css/theme.css?1711242979" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1711242979" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1711107840" rel="stylesheet">
+    <link href="/css/theme-blue.css?1711242979" rel="stylesheet">
     
-    <link href="/css/foo.css?1711107840" rel="stylesheet"><link href="/css/bar.css?1711107840" rel="stylesheet">
+    <link href="/css/foo.css?1711242979" rel="stylesheet"><link href="/css/bar.css?1711242979" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1711107840"></script>
+    <script src="/js/jquery-3.3.1.min.js?1711242979"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1711107840"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1711107840"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1711242979"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1711242979"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1711107840"></script>
+<script type="text/javascript" src="/js/search.js?1711242979"></script>
 
     
   </div>
@@ -1749,6 +1749,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
           
+            
+            
+          
         
         </ul>
       
@@ -2136,6 +2139,24 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   {
     color: #006C65;
   }
+  #preuve
+{
+    background-color:#EAEAEA;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+#def
+{
+    background-color:#DCEFFE;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+#theo
+{
+    background-color:#FBE1DE;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
 </style>
 <script>
 MathJax = {
@@ -2171,42 +2192,49 @@ MathJax = {
 <br>
 <h3 id="langage">Langage</h3>
 <br>
-<p style="margin-bottom:-1.1em;">Le langage du calcul des propositions est constitué </p>
+<div id="def">
+<p style="margin-bottom:-1.1em;">Le <b>langage</b> du calcul des propositions est constitué </p>
 <ul>
-<li>de variables propositionnelles $P$, $Q$, $R$,&hellip;,</li>
+<li>de variables propositionnelles $P$, $Q$, $R$,..., </li>
 <li>de connecteurs logiques $\neg, \lor, \land, \rightarrow, \leftrightarrow$</li>
 <li>et de parenthèses.</li>
 </ul>
+</div>
 <p>On désigna par $VAR=\Set{P,Q,R\dots}$ l&rsquo;ensemble des variables propositionnelles, potentiellement infini.</p>
+<div id="def">
 <ul>
-<li>
-<p>Le connectecteur logique $\neg$ est unaire (ou d&rsquo;arité 1) puisqu&rsquo;il transforme à lui seul une formule en une autre formule. C&rsquo;est le symbole de <strong>négation</strong> et il se dit <strong>non</strong>.</p>
-</li>
-<li>
-<p>Les autres connecteurs logiques sont binaires (d&rsquo;arité 2) puisqu&rsquo;ils lient deux formules en une nouvelle.</p>
+<li>Le connectecteur logique $\neg$ est unaire (ou d'arité 1) puisqu'il transforme à lui seul une formule en une autre formule. C'est le symbole de <b>négation</b> et il se dit <b>non</b>.</li>
+<li>Les autres connecteurs logiques sont binaires (d'arité 2) puisqu'ils lient deux formules en une nouvelle.</li>
 <ul>
-<li>$\lor$ est le symbole de <strong>disjonction</strong> (&quot;<strong>ou</strong>&quot;)</li>
-<li>$\land$ est le symbole de <strong>conjonction</strong> (&quot;<strong>et</strong>&quot;)</li>
-<li>$\rightarrow$ est le symbole d&rsquo;<strong>implication</strong> (&quot;<strong>implique</strong>&quot;)</li>
-<li>$\leftrightarrow$ est le symbole de <strong>double implication</strong> ou d&rsquo;<strong>équivalence</strong> (&quot;<strong>si et seulement si</strong>&quot; ou &ldquo;<strong>équivaut à</strong>&rdquo;)</li>
+    <li>$\lor$ est le symbole de <b>disjonction</b> ("<b>ou</b>")</li>
+    <li>$\land$ est le symbole de <b>conjonction</b> ("<b>et</b>")</li>
+    <li>$\rightarrow$ est le symbole d'<b>implication</b> ("<b>mplique</b>")</li>
+    <li>$\leftrightarrow$ est le symbole de <b>double implication</b> ou d'<b>équivalence</b> ("<b>si et seulement si</b>" ou "<b>équivaut à</b>")</li>
 </ul>
-<p>Le <strong>langage</strong> du calcul des propositions est alors l&rsquo;ensemble suivant : $\mathcal{L} = \Set{P,Q,R,\ldots,\neg,\lor,\land,\rightarrow,\leftrightarrow,(,)}$</p>
-</li>
 </ul>
+</div>
+<br>
+<div id="def">
+<p>Le <b>langage</b> du calcul des propositions est alors l&rsquo;ensemble suivant : $\mathcal{L} = VAR\cup\Set{\neg,\lor,\land,\rightarrow,\leftrightarrow,(,)}$</p>
+</div>
 <br>
 <h3 id="formules">Formules</h3>
 <br>
 <p>On peut représenter les formules du calcul propositionnel par des <strong>arbres</strong> dont les feuilles sont des variables propositionnelles et les nœuds sont des connecteurs.</p>
+<div id="def">
 <p style="margin-bottom:-1.1em;">L'ensemble $\mathcal{F}$ des formules du calcul propositionnel est le plus petit ensemble d'arbres qui</p>
 <ul>
 <li>contient chaque arbre réduit à sa racine qui est une variable propositionnelle.</li>
-<li>chaque fois qu&rsquo;il contient des formules $\phi$ et $\psi$ contient également  les formules suivantes :
-<img src="/ensformules.png?width=500px" alt=""></li>
+<li>chaque fois qu'il contient des formules $\phi$ et $\psi$ contient également  les formules suivantes&nbsp;:
+<div style="position:relative; width:500px; max-width: 100%; margin-left: auto;margin-right: auto;">
+<img src="/ensformules.png"></div>
+</li>
 </ul>
+</div>
 <p>La <strong>hauteur</strong> d&rsquo;une formule est la longueur de sa plus longue branche.</p>
 
-<div class="notices note" style="--title: 'note';">
-  <p style="display: none;">note</p>
+<div class="notices tip" style="--title: 'tip';">
+  <p style="display: none;">tip</p>
   <div class="notice-body">
     <p>C&rsquo;est une définition par <strong>récurrence</strong> (ou <strong>inductive</strong>) : on a d&rsquo;abord défini les feuilles, cas de base de hauteur 0, puis on a donné la recette pour passer d&rsquo;un arbre de hauteur $n$ à un arbre de hauteur $n+1$.</p>
 
@@ -2214,7 +2242,7 @@ MathJax = {
 </div>
 
 
-<p>Une sous formule d&rsquo;une formule $\phi$ est un sous-arbre de $\phi$ dont l&rsquo;un des nœuds de $\phi$ est la racine.</p>
+<p>Une <strong>sous formule</strong> d&rsquo;une formule $\phi$ est un sous-arbre de $\phi$ dont l&rsquo;un des nœuds de $\phi$ est la racine.</p>
 <p><img src="/sousformules.png?width=600px" alt=""></p>
 <p>La formule de hauteur 5 ci-dessus contient :</p>
 <ul>
@@ -2242,8 +2270,8 @@ sont données respectivement par $\bar{\theta}=\left(\color{#B51700}{\neg}\color
 $$</p>
 <br>
 
-<div class="notices info" style="--title: 'info';">
-  <p style="display: none;">info</p>
+<div class="notices note" style="--title: 'note';">
+  <p style="display: none;">note</p>
   <div class="notice-body">
     <p>La <strong>syntaxe</strong>, c&rsquo;est l&rsquo;articulation des symboles. La <strong>sémantique</strong>, c&rsquo;est ce que ça raconte.</p>
 
@@ -3375,6 +3403,11 @@ $$</p>
             
         
                     
+                        
+            
+            
+        
+                    
             
         
                     
@@ -3612,19 +3645,19 @@ $$</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1711107840"></script>
-    <script src="/js/perfect-scrollbar.min.js?1711107840"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1711107840"></script>
-    <script src="/js/jquery.sticky.js?1711107840"></script>
-    <script src="/js/featherlight.min.js?1711107840"></script>
-    <script src="/js/highlight.pack.js?1711107840"></script>
+    <script src="/js/clipboard.min.js?1711242979"></script>
+    <script src="/js/perfect-scrollbar.min.js?1711242979"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1711242979"></script>
+    <script src="/js/jquery.sticky.js?1711242979"></script>
+    <script src="/js/featherlight.min.js?1711242979"></script>
+    <script src="/js/highlight.pack.js?1711242979"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1711107840"></script>
-    <script src="/js/learn.js?1711107840"></script>
-    <script src="/js/hugo-learn.js?1711107840"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1711242979"></script>
+    <script src="/js/learn.js?1711242979"></script>
+    <script src="/js/hugo-learn.js?1711242979"></script>
     
         
-            <script src="/mermaid/mermaid.js?1711107840"></script>
+            <script src="/mermaid/mermaid.js?1711242979"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

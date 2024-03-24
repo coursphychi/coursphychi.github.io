@@ -16,7 +16,7 @@
       <description>note
 Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
 Calcul des propositions Le calcul des propositions (ou calcul propositionnel ou logique des propositions) permet de modéliser des raisonnements simples. Son pouvoir expressif est assez limité.
-Syntaxe Langage Le langage du calcul des propositions est constitué de variables propositionnelles $P$, $Q$, $R$,&amp;hellip;, de connecteurs logiques $\neg, \lor, \land, \rightarrow, \leftrightarrow$ et de parenthèses.</description>
+Syntaxe Langage Le langage du calcul des propositions est constitué de variables propositionnelles $P$, $Q$, $R$,..., de connecteurs logiques $\neg, \lor, \land, \rightarrow, \leftrightarrow$ et de parenthèses.</description>
     </item>
     <item>
       <title>Propositions - Sémantique</title>
@@ -26,6 +26,16 @@ Syntaxe Langage Le langage du calcul des propositions est constitué de variable
       <description>note
 Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
 Calcul des propositions Avant : la syntaxe Sémantique Modèle La sémantique concerne l&amp;rsquo;interprétation des formules. Le calcul propositionnel est très frustre à cet égard. Une variable propositionnelle vaut soit 1, soit 0, c&amp;rsquo;est-à-dire qu&amp;rsquo;elle est soit vraie, soit fausse. Et il en est de même pour une formule dont l&amp;rsquo;interprétation se déduit de celles des variables et des règles qu&amp;rsquo;impliquent les connecteurs.</description>
+    </item>
+    <item>
+      <title>Propositions - Preuve</title>
+      <link>https://coursphychi.github.io/more/maths/logique/logique3/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/logique/logique3/</guid>
+      <description>note
+Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
+Calcul des propositions Théorie de la démonstration Langage Le langage du calcul des propositions est constitué de variables propositionnelles $P$, $Q$, $R$,..., de connecteurs logiques $\neg, \lor, \land, \rightarrow, \leftrightarrow$ et de parenthèses. On désigna par $VAR=\Set{P,Q,R\dots}$ l&amp;rsquo;ensemble des variables propositionnelles, potentiellement infini.
+Le connectecteur logique $\neg$ est unaire (ou d&#39;arité 1) puisqu&#39;il transforme à lui seul une formule en une autre formule.</description>
     </item>
     <item>
       <title>Logique</title>
