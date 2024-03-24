@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1711244695" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1711244695" rel="stylesheet">
-    <link href="/css/hybrid.css?1711244695" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1711244695" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1711244695" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711244695" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1711244695" rel="stylesheet">
-    <link href="/css/theme.css?1711244695" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1711244695" rel="stylesheet">
+    <link href="/css/nucleus.css?1711281857" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1711281857" rel="stylesheet">
+    <link href="/css/hybrid.css?1711281857" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1711281857" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1711281857" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711281857" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1711281857" rel="stylesheet">
+    <link href="/css/theme.css?1711281857" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1711281857" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1711244695" rel="stylesheet">
+    <link href="/css/theme-blue.css?1711281857" rel="stylesheet">
     
-    <link href="/css/foo.css?1711244695" rel="stylesheet"><link href="/css/bar.css?1711244695" rel="stylesheet">
+    <link href="/css/foo.css?1711281857" rel="stylesheet"><link href="/css/bar.css?1711281857" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1711244695"></script>
+    <script src="/js/jquery-3.3.1.min.js?1711281857"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1711244695"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1711244695"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1711281857"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1711281857"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1711244695"></script>
+<script type="text/javascript" src="/js/search.js?1711281857"></script>
 
     
   </div>
@@ -2149,6 +2149,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   td, th {
   text-align: center;
   vertical-align: middle;
+  min-width: 3em;
 }
 #preuve
 {
@@ -2253,7 +2254,7 @@ si $\mathcal{M}\models P,\neg Q,R$, cela signifie que dans le modèle $\mathcal{
 </ul>
 </div>
 <p>Avec nos petits coloriages, on peut maintenant s&rsquo;atteler à la valeur de vérité d&rsquo;une formule complexe dans un modèle donné.<br></p>
-<p>Soit le modèle $\mathcal{M}$ défini par $\mathcal{M}\models P,\neg Q, R$ et la formule $\phi$ qu&rsquo;on s&rsquo;est amusé à linéariser plus haut. On va partir des feuilles et remonter jusqu&rsquo;à la racine de l&rsquo;arbre.
+<p>Soit le modèle $\mathcal{M}$ défini par $\mathcal{M}\models P,\neg Q, R$ et la formule $\phi$ qu&rsquo;on s&rsquo;est amusé à linéariser <a href="../logique1/#lin%C3%A9arisation-dune-formule">à la fin du chapitre sur la syntaxe</a>. On va partir des feuilles et remonter jusqu&rsquo;à la racine de l&rsquo;arbre.
 <img src="/gifverite.gif" alt=""></p>
 <p>Comme la racine est fausse, la formule $\phi$ est fausse dans ce modèle : $\mathcal{M}\not\models\phi$.<br>
 La formule n&rsquo;est d&rsquo;ailleurs vraie que dans un seul des 8 modèles possibles.
@@ -2482,6 +2483,7 @@ $\phi$ est une <b>contradiction</b> ssi $\phi$ est une tautologie. On note alors
 </div>
 <p>Une contradiction est fausse dans tout modèle. Elle n&rsquo;a donc pas de modèle ; une contradiction ne peut jamais avoir lieu.</p>
 <p>Tautologies importantes :</p>
+<div style="overflow-x: auto;">
 <table>
 <tr>
 <th scope="row" colspan="2">idempotence de la conjonction et de la disjonction</th>
@@ -2544,6 +2546,7 @@ $\phi$ est une <b>contradiction</b> ssi $\phi$ est une tautologie. On note alors
 <td>$(P\rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P)$</td>
 </tr>
 </table>
+</div>
 <br>
 <p>Un <strong>raisonnement</strong> consiste généralement à partir d&rsquo;une tautologie, la prémisse, et à aboutir à de nouvelles tautologies à partir d&rsquo;implications (une tautologie étant vraie dans tout modèle, elle implique nécessairement une autre tautologie).</p>
 <p>Dans un <strong>raisonnement par l&rsquo;absurde</strong> (preuve par contradiction), pour montrer que $\phi$ est une tautologie, on suppose que $\neg \phi$ est vraie dans au moins un modèle pour aboutir à une contradiction $\psi$ ($\psi\equiv\bot$). Dans les modèles où $\neg \phi$ est vraie, $\neg \phi \rightarrow \psi$ est également vraie. Or $\neg\phi\rightarrow\psi\equiv \neg\neg\phi\lor\psi \equiv \phi\lor\bot \equiv \phi$. Donc dans les modèles où $\neg\phi$ est vraie, $\phi$ est vraie. Par conséquent, il n&rsquo;y a pas de modèle où $\neg \phi$ est vraie. D&rsquo;où $\phi\equiv\top$.</p>
@@ -4154,19 +4157,19 @@ $</li></p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1711244695"></script>
-    <script src="/js/perfect-scrollbar.min.js?1711244695"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1711244695"></script>
-    <script src="/js/jquery.sticky.js?1711244695"></script>
-    <script src="/js/featherlight.min.js?1711244695"></script>
-    <script src="/js/highlight.pack.js?1711244695"></script>
+    <script src="/js/clipboard.min.js?1711281857"></script>
+    <script src="/js/perfect-scrollbar.min.js?1711281857"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1711281857"></script>
+    <script src="/js/jquery.sticky.js?1711281857"></script>
+    <script src="/js/featherlight.min.js?1711281857"></script>
+    <script src="/js/highlight.pack.js?1711281857"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1711244695"></script>
-    <script src="/js/learn.js?1711244695"></script>
-    <script src="/js/hugo-learn.js?1711244695"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1711281857"></script>
+    <script src="/js/learn.js?1711281857"></script>
+    <script src="/js/hugo-learn.js?1711281857"></script>
     
         
-            <script src="/mermaid/mermaid.js?1711244695"></script>
+            <script src="/mermaid/mermaid.js?1711281857"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
