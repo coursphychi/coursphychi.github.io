@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1711283575" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1711283575" rel="stylesheet">
-    <link href="/css/hybrid.css?1711283575" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1711283575" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1711283575" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711283575" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1711283575" rel="stylesheet">
-    <link href="/css/theme.css?1711283575" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1711283575" rel="stylesheet">
+    <link href="/css/nucleus.css?1711284313" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1711284313" rel="stylesheet">
+    <link href="/css/hybrid.css?1711284313" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1711284313" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1711284313" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711284313" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1711284313" rel="stylesheet">
+    <link href="/css/theme.css?1711284313" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1711284313" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1711283575" rel="stylesheet">
+    <link href="/css/theme-blue.css?1711284313" rel="stylesheet">
     
-    <link href="/css/foo.css?1711283575" rel="stylesheet"><link href="/css/bar.css?1711283575" rel="stylesheet">
+    <link href="/css/foo.css?1711284313" rel="stylesheet"><link href="/css/bar.css?1711284313" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1711283575"></script>
+    <script src="/js/jquery-3.3.1.min.js?1711284313"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1711283575"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1711283575"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1711284313"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1711284313"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1711283575"></script>
+<script type="text/javascript" src="/js/search.js?1711284313"></script>
 
     
   </div>
@@ -2584,16 +2584,19 @@ Pour toute formule $\phi$, il existe une formule $\psi$ sous forme normale conjo
 <ul>
 <li>Preuve sémantique&nbsp;:</li>
 <p>On va construire une formule sur le modèle de celle ayant aboutit à la forme normale disjonctive mais on va maintenant supposer qu&rsquo;on veut une formule $\psi$ qui soit vraie dans tout modèle à l&rsquo;exception de certains.<br>
-Considérons $\set{\mathcal{M}_i: i\in I}$ l&rsquo;ensemble des modèles dans lesquels $\phi$ est fausse. Si l&rsquo;ensemble est vide, $\phi$ est une tautologie et $\psi=\bigwedge_{1≤i≤k} (\bigvee_{1≤j≤n_i} P_{i,j})$ marche. Sinon, considérons pour chaque $i$ dans $I$, la formule :<br>
-$
+Considérons $\set{\mathcal{M}_i: i\in I}$ l&rsquo;ensemble des modèles dans lesquels $\phi$ est fausse. Si l&rsquo;ensemble est vide, $\phi$ est une tautologie et $\psi=\bigwedge_{1≤i≤k} (\bigvee_{1≤j≤n_i} P_{i,j})$ marche. Sinon, considérons pour chaque $i$ dans $I$, la formule :<br></p>
+<div style="overflow-x: auto;">
+<p>$
 \begin{aligned}
 \psi_i &amp;= \neg(\epsilon_1 P_1\land\epsilon_2 P_2 \land\cdots \land \epsilon_k P_k)\\
 &amp;= (\epsilon_1 \neg P_1\lor\epsilon_2 \neg P_2 \lor\cdots \lor \epsilon_k \neg P_k)\\
 &amp;= \bigvee_{1≤j≤k}\bar{\epsilon}_j P_j
 \end{aligned}
-$<br>
-où $\bar{\epsilon}_i = \neg$ et $\epsilon_i = \not \!\neg $ ssi $\mathcal{M}_i \models P_i$ et inversement $\bar{\epsilon}_i = \not\! \neg$ et $\epsilon_i =  \neg$ ssi $\mathcal{M}_i \not\models P_i$.<br>
-Par construction, $\psi_i$ est vraie dans tous les modèles de $\phi$, à l&rsquo;exception de $\mathcal{M}_i$. Ainsi la formule $\psi = \bigwedge_{i\in I}\psi_i$ est vraie dans tous les modèles possibles, à l&rsquo;exception de tous les $\mathcal{M}_i$ pour $i$ dans $I$. $\psi$ est donc vraie dans tous les modèles de $\phi$ : $\mathcal{M}\models\phi$ ssi $\mathcal{M}\models\psi$, ce qui signifie bien que $\psi \equiv \phi$.</p>
+$</p>
+</div>
+<br>
+où $\bar{\epsilon}\_i = \neg$ et $\epsilon_i = \not \\!\neg $ ssi $\mathcal{M}\_i \models P_i$ et inversement $\bar{\epsilon}\_i = \not\\! \neg$ et $\epsilon_i =  \neg$ ssi $\mathcal{M}\_i \not\models P_i$.<br>
+Par construction, $\psi_i$ est vraie dans tous les modèles de $\phi$, à l'exception de $\mathcal{M}\_i$. Ainsi la formule $\psi = \bigwedge_{i\in I}\psi_i$ est vraie dans tous les modèles possibles, à l'exception de tous les $\mathcal{M}\_i$ pour $i$ dans $I$. $\psi$ est donc vraie dans tous les modèles de $\phi$&nbsp;: $\mathcal{M}\models\phi$ ssi $\mathcal{M}\models\psi$, ce qui signifie bien que $\psi \equiv \phi$. 
 <li>Ébauchons une preuve syntaxique (par un jeu de réécriture)&nbsp;:</li>
 <ul>
     <li>on commence par se débarrasser des connecteurs $\rightarrow$ et $\leftrightarrow$ pous n'avoir plus que $\lor$, $\land$ et $\neg$ et on se débarrasse des doubles négations,</li>
@@ -2601,7 +2604,8 @@ Par construction, $\psi_i$ est vraie dans tous les modèles de $\phi$, à l&rsqu
     <li>on distribue la disjonction par rapport à la conjonction pour faire descendre les $\lor$ dans l'arbre de la formule jusqu'à ce qu'ils ne relient plus entre eux que des littéraux (des variables et leur négation).</li>
 </div>
 <blockquote>
-<p>Exemple : Soit $\phi = \neg((\neg P \rightarrow Q)\rightarrow \neg (Q\leftrightarrow P))$</p>
+Exemple : Soit $\phi = \neg((\neg P \rightarrow Q)\rightarrow \neg (Q\leftrightarrow P))$
+<div style="overflow-x: auto;">
 <p>$\begin{aligned}
 \phi &amp;\equiv \neg ( \neg (\neg P \rightarrow Q ) \lor \neg ( Q \leftrightarrow P))\\
 &amp;\equiv \neg ( \neg ( \neg \neg P \lor Q ) \lor \neg ( Q \leftrightarrow P )\\
@@ -2612,6 +2616,7 @@ Par construction, $\psi_i$ est vraie dans tous les modèles de $\phi$, à l&rsqu
 &amp; \equiv ( P \lor Q ) \land ( \neg Q \lor P ) \land ( \neg P \lor Q )
 \end{aligned}
 $</p>
+</div>
 </blockquote>
 <p>Et pour construire de la même manière une formule sous forme normale disjonctive, il suffit d&rsquo;utiliser à la fin la distribution de la conjonction par rapport à la distribution puisqu&rsquo;il s&rsquo;agit cette fois-ci de faire descendre $\land$ dans l&rsquo;arbre.</p>
 <br>
@@ -2732,6 +2737,7 @@ $\set{\not\!\lor}$ et $\set{\not\!\!\land}$ sont des systèmes complets minimaux
 <p style="margin-bottom:-1.1em;">On va supposer que la formule $\phi$ ne contient que des négations et des disjonctions ($\set{\neg,\lor}$ est complet...) et on va raisonner par induction sur la hauteur de la formule&nbsp;:</p>
 <ul>
 <li> Si $\phi$ est de hauteur 0, alors $\phi=P$ et la formule $(P\not\!\lor \;P)\not\!\lor \;(P\not\!\lor \;P)$ convient puisque&nbsp;:<br>
+<div style="overflow-x: auto;">
 <p>$
 \begin{aligned}
 (P\not\!\lor \;P)\not\!\lor\;(P\not\!\lor \;P) &amp;\equiv \neg((P\not\!\lor \;P)\lor(P \not\!\lor \;P)\\
@@ -2741,10 +2747,12 @@ $\set{\not\!\lor}$ et $\set{\not\!\!\land}$ sont des systèmes complets minimaux
 &amp;\equiv P
 \end{aligned}
 $</p>
+</div>
 </li>
 <li> On suppose maintenante que toutes les formules de hauteur $n$ peuvent s'écrire seulement avec $\not\!\lor$ et vérifions que c'est encore le cas pour les formules de hauteur $n+1$. Comme $\phi$ ne contient que $\neg$ et $\lor$, deux cas se présentent&nbsp;:
 <ul>
 <li>$\phi=\neg\varphi$&nbsp;: par hypothèse d'induction, $\varphi$ est équivalente à une formule $\psi'$ qui ne s'écrit qu'avec $\not\!\lor$. La formule $\psi=\psi' \not\!\lor \; \psi'$ convient&nbsp;:
+<div style="overflow-x: auto;">
 <p>$
 \begin{aligned}
 \psi&rsquo; \not\!\lor  \; \psi&rsquo; &amp;\equiv \neg(\psi&rsquo;\lor \psi&rsquo;)\\
@@ -2753,8 +2761,10 @@ $</p>
 &amp;\equiv \phi\\
 \end{aligned}
 $</p>
+</div>
 </li>
 <li>$\phi=\phi_1\lor \phi_2$&nbsp;: par hypothèse d'induction, $\phi_1$ et $\phi_2$ sont équivalentes respectivement à $\psi_1$ et $\psi_2$ qui ne s'écrivent qu'avec $\not\!\lor$. La formule $(\psi_1 \not\!\lor \; \psi_2)\not\!\lor \; (\psi_1 \not\!\lor \;\psi_2)$ convient&nbsp;:
+<div style="overflow-x: auto;">
 <p>$
 \begin{aligned}
 (\psi_1 \not\!\lor \; \psi_2)\not\!\lor \;(\psi_1 \not\!\lor \;\psi_2) &amp;\equiv \neg((\psi_1 \not\!\lor \;\psi_2)\lor(\psi_1 \not\!\lor \;\psi_2)\\
@@ -2764,7 +2774,9 @@ $</p>
 &amp;\equiv  \phi_1\lor\phi_2\\
 &amp;\equiv \phi
 \end{aligned}
-$</li></p>
+$</p>
+</div>
+</li>
 </ul>
 </ul>
 </div>
@@ -4157,19 +4169,19 @@ $</li></p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1711283575"></script>
-    <script src="/js/perfect-scrollbar.min.js?1711283575"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1711283575"></script>
-    <script src="/js/jquery.sticky.js?1711283575"></script>
-    <script src="/js/featherlight.min.js?1711283575"></script>
-    <script src="/js/highlight.pack.js?1711283575"></script>
+    <script src="/js/clipboard.min.js?1711284313"></script>
+    <script src="/js/perfect-scrollbar.min.js?1711284313"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1711284313"></script>
+    <script src="/js/jquery.sticky.js?1711284313"></script>
+    <script src="/js/featherlight.min.js?1711284313"></script>
+    <script src="/js/highlight.pack.js?1711284313"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1711283575"></script>
-    <script src="/js/learn.js?1711283575"></script>
-    <script src="/js/hugo-learn.js?1711283575"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1711284313"></script>
+    <script src="/js/learn.js?1711284313"></script>
+    <script src="/js/hugo-learn.js?1711284313"></script>
     
         
-            <script src="/mermaid/mermaid.js?1711283575"></script>
+            <script src="/mermaid/mermaid.js?1711284313"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
