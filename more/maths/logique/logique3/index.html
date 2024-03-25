@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1711312157" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1711312157" rel="stylesheet">
-    <link href="/css/hybrid.css?1711312157" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1711312157" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1711312157" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711312157" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1711312157" rel="stylesheet">
-    <link href="/css/theme.css?1711312157" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1711312157" rel="stylesheet">
+    <link href="/css/nucleus.css?1711400014" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1711400014" rel="stylesheet">
+    <link href="/css/hybrid.css?1711400014" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1711400014" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1711400014" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711400014" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1711400014" rel="stylesheet">
+    <link href="/css/theme.css?1711400014" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1711400014" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1711312157" rel="stylesheet">
+    <link href="/css/theme-blue.css?1711400014" rel="stylesheet">
     
-    <link href="/css/foo.css?1711312157" rel="stylesheet"><link href="/css/bar.css?1711312157" rel="stylesheet">
+    <link href="/css/foo.css?1711400014" rel="stylesheet"><link href="/css/bar.css?1711400014" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1711312157"></script>
+    <script src="/js/jquery-3.3.1.min.js?1711400014"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1711312157"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1711312157"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1711400014"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1711400014"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1711312157"></script>
+<script type="text/javascript" src="/js/search.js?1711400014"></script>
 
     
   </div>
@@ -2096,9 +2096,8 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   <ul>
     <li><a href="#théorie-de-la-démonstration">Théorie de la démonstration</a>
       <ul>
-        <li><a href="#langage">Langage</a></li>
-        <li><a href="#formules">Formules</a></li>
-        <li><a href="#linéarisation-dune-formule">Linéarisation d&rsquo;une formule</a></li>
+        <li><a href="#les-systèmes-axiomatiques">Les systèmes axiomatiques</a></li>
+        <li><a href="#la-déduction-naturelle">La déduction naturelle</a></li>
       </ul>
     </li>
   </ul>
@@ -2157,6 +2156,11 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     border-radius:10px;
     padding:5px 20px 5px 20px;
 }
+  td, th {
+  text-align: center;
+  vertical-align: middle;
+  min-width: 3em;
+}
 </style>
 <script>
 MathJax = {
@@ -2188,99 +2192,73 @@ MathJax = {
 <br>
 <h2 id="théorie-de-la-démonstration">Théorie de la démonstration</h2>
 <br>
-<h3 id="langage">Langage</h3>
-<br>
-<div id="def">
-<p style="margin-bottom:-1.1em;">Le <b>langage</b> du calcul des propositions est constitué </p>
+<p style="margin-bottom:-1.1em;">Une preuve ou une démonstration&nbsp;:</p>
 <ul>
-<li>de variables propositionnelles $P$, $Q$, $R$,..., </li>
-<li>de connecteurs logiques $\neg, \lor, \land, \rightarrow, \leftrightarrow$</li>
-<li>et de parenthèses.</li>
+<li>est de longueur finie</li>
+<li>est vérifiable mécaniquement,</li>
+<li>s&rsquo;appuie sur des hypothèses,</li>
+<li>aboutit à une conclusion.</li>
 </ul>
-</div>
-<p>On désigna par $VAR=\Set{P,Q,R\dots}$ l&rsquo;ensemble des variables propositionnelles, potentiellement infini.</p>
-<div id="def">
+<p>Une démonstration permet de mettre au jour non plus une vérité sémantique (qui fait intervenir les modèles d&rsquo;une théorie) mais syntaxique (qui s&rsquo;appuie sur un jeu de règles).</p>
+<p>On a vu que $\phi$ est une <strong>conséquence sémantique</strong> de la théorie $\mathcal{T}$, noté $\mathcal{T}\models \phi$, si $\phi$ est vraie dans tous les modèles de $\mathcal{T}$.</p>
+<p>On va maintenant se pencher sur la <strong>conséquence syntaxique</strong> de la théorie $\mathcal{T}$. $\phi$ est une conséquence syntaxique de $\mathcal{T}$, noté $\mathcal{T} \vdash \phi$, s&rsquo;il existe une démonstration de $\phi$ sur la base d&rsquo;hypothèses contenues dans la théorie $\mathcal{T}$. Plus de modèles ici, on ne s&rsquo;intéresse qu&rsquo;à la syntaxe. C&rsquo;est juste un jeu de réécriture.</p>
+<p>Comment ces deux conséquences sont-elles reliées ?</p>
+<p>On souhaite bien sûr que nos démonstrations aboutissent à des résultats ayant du sens et donc correspondant aux conséquences sémantiques. Et à l&rsquo;inverse, on souhaite qu&rsquo;une conséquence sémantique puisse se démontrer mécaniquement. On va donc être amené à choisir judicieusement  le système de règles de démonstrations afin d&rsquo;aboutir à l&rsquo;équivalence entre les deux conséquences : $\mathcal{T}\models \phi$ si et seulement si $\mathcal{T} \vdash \phi$. Et en particulier, on veut qu&rsquo;une formule soit une tautologie si et seulement si elle est prouvable sans hypothèse : $\models \phi$ ssi $\vdash \phi$.</p>
+<p style="margin-bottom:-1.1em;">On va distinguer trois familles de systèmes de démonstration différents pour le calcul des propositions&nbsp;:</p>
 <ul>
-<li>Le connectecteur logique $\neg$ est unaire (ou d'arité 1) puisqu'il transforme à lui seul une formule en une autre formule. C'est le symbole de <b>négation</b> et il se dit <b>non</b>.</li>
-<li>Les autres connecteurs logiques sont binaires (d'arité 2) puisqu'ils lient deux formules en une nouvelle.</li>
-<ul>
-    <li>$\lor$ est le symbole de <b>disjonction</b> ("<b>ou</b>")</li>
-    <li>$\land$ est le symbole de <b>conjonction</b> ("<b>et</b>")</li>
-    <li>$\rightarrow$ est le symbole d'<b>implication</b> ("<b>mplique</b>")</li>
-    <li>$\leftrightarrow$ est le symbole de <b>double implication</b> ou d'<b>équivalence</b> ("<b>si et seulement si</b>" ou "<b>équivaut à</b>")</li>
+<li>les <strong>systèmes axiomatiques</strong>,</li>
+<li>la <strong>déduction naturelle</strong>,</li>
+<li>le <strong>calcul des séquents</strong>.</li>
 </ul>
-</ul>
+<br>
+<h3 id="les-systèmes-axiomatiques">Les systèmes axiomatiques</h3>
+<br>
+<p>Ces systèmes reposent sur un petit nombre de vérités élémentaires, les <strong>axiomes</strong>, et sur des <strong>règles</strong> de construction qui préservent la vérité.<br>
+Les démonstrations obtenues sont concises mais très peu explicatives. Ça marche, mais on ne sait pas pourquoi&hellip;</p>
+<p>Exemple d&rsquo;un système axiomatique reposant sur le système complet de connecteur $\set{\neg,\rightarrow}$ et comportant 3 axiomes pour une seule règle :</p>
+<div style="overflow-x: auto;">
+<table>
+<tr>
+<th colspan="3">Axiomes</th>
+</tr>
+<tr>
+<td style="width:33.33%">$(1)\quad\phi\rightarrow (\psi\rightarrow\phi)$</td><td style="width:33.33%">$(2)\quad(\phi\rightarrow (\psi\rightarrow\theta))\rightarrow ((\phi\rightarrow\psi)\rightarrow(\phi\rightarrow\theta))$</td><td>$(3)\quad(\neg\psi\rightarrow \neg\phi) \rightarrow ((\neg \psi\rightarrow\phi)\rightarrow \psi)$</td>
+</tr>
+<tr>
+<th colspan="3">Règle</th>
+</tr>
+<tr>
+<td colspan="3"><i>modus ponens</i>&nbsp;: de $\phi$ et $\phi\rightarrow \psi$ on déduit $\psi$</td>
+</tr>
+</table>
 </div>
-<br>
-<div id="def">
-<p>Le <b>langage</b> du calcul des propositions est alors l&rsquo;ensemble suivant : $\mathcal{L} = VAR\cup\Set{\neg,\lor,\land,\rightarrow,\leftrightarrow,(,)}$</p>
-</div>
-<br>
-<h3 id="formules">Formules</h3>
-<br>
-<p>On peut représenter les formules du calcul propositionnel par des <strong>arbres</strong> dont les feuilles sont des variables propositionnelles et les nœuds sont des connecteurs.</p>
-<div id="def">
-<p style="margin-bottom:-1.1em;">L'ensemble $\mathcal{F}$ des formules du calcul propositionnel est le plus petit ensemble d'arbres qui</p>
+<p style="margin-bottom:-1.1em;">La déduction de $\phi$ à partir d'un ensemble de formules $\Gamma$ est une suite finie de formules $\langle \phi_1,\phi_2,\ldots,\phi_n\rangle$ telle que&nbsp;:</p>
 <ul>
-<li>contient chaque arbre réduit à sa racine qui est une variable propositionnelle.</li>
-<li>chaque fois qu'il contient des formules $\phi$ et $\psi$ contient également  les formules suivantes&nbsp;:
-<div style="position:relative; width:500px; max-width: 100%; margin-left: auto;margin-right: auto;">
-<img src="/ensformules.png"></div>
+<li>chaque $\phi_i$ vérifie une des trois conditions suivantes :
+<ul>
+<li>$\phi_i$ est un axiome,</li>
+<li>$\phi_i$ est une hypothèse ($\phi_i \in \Gamma$),</li>
+<li>$\phi_i$ est obtenue à partir de l&rsquo;application de la règle du <i>modus ponens</i> à deux formules $\phi_j$ et $\phi_k$ telles que $j,k≤i$.</li>
+</ul>
 </li>
+<li>$\phi_n=\phi$</li>
 </ul>
+<p style="margin-bottom:-0.5em;">Exemple de la démonstration de la formule $(\phi\rightarrow\phi)$ sans hypothèse&nbsp;:</p>
+<div style="overflow-x: auto;">
+<p>$
+\begin{array}{llr}
+(1)&amp; (\phi\rightarrow ((\phi\rightarrow \phi)\rightarrow\phi))\rightarrow ((\phi\rightarrow (\phi\rightarrow \phi))\rightarrow(\phi\rightarrow\phi)) &amp; \text{(axiome 2 avec } \psi = (\phi\rightarrow \phi) \text{ et }\theta = \phi )\\
+(2)&amp; \phi\rightarrow ((\phi\rightarrow \phi)\rightarrow\phi) &amp; \text{(axiome 1 avec } \psi = (\phi\rightarrow \phi) )\\
+(3)&amp;  (\phi\rightarrow (\phi\rightarrow \phi))\rightarrow(\phi\rightarrow\phi) &amp; \text{(\it{modus ponens} \text{ (1) - (2))}}\\
+(4)&amp; \phi\rightarrow (\phi\rightarrow \phi) &amp; \text{(axiome 1 avec } \psi = \phi )\\
+(5)&amp; \phi\rightarrow\phi &amp; \text{(\it{modus ponens} \text{ (3) - (4))}}
+\end{array}
+$</p>
 </div>
-<p>La <strong>hauteur</strong> d&rsquo;une formule est la longueur de sa plus longue branche.</p>
-
-<div class="notices tip" style="--title: 'tip';">
-  <p style="display: none;">tip</p>
-  <div class="notice-body">
-    <p>C&rsquo;est une définition par <strong>récurrence</strong> (ou <strong>inductive</strong>) : on a d&rsquo;abord défini les feuilles, cas de base de hauteur 0, puis on a donné la recette pour passer d&rsquo;un arbre de hauteur $n$ à un arbre de hauteur $n+1$.</p>
-
-  </div>
-</div>
-
-
-<p>Une <strong>sous formule</strong> d&rsquo;une formule $\phi$ est un sous-arbre de $\phi$ dont l&rsquo;un des nœuds de $\phi$ est la racine.</p>
-<p><img src="/sousformules.png?width=600px" alt=""></p>
-<p>La formule de hauteur 5 ci-dessus contient :</p>
-<ul>
-<li>5 feuilles, sous-formules de hauteur 0 (en vert),</li>
-<li>3 sous-formules de hauteur 1 (en rouge),</li>
-<li>2 sous-formules de hauteur 2 (en bleu),</li>
-<li>1 sous-formule de hauteur 3 (en rose),</li>
-<li>1 sous-formule de hauteur 4 (en jaune).</li>
-</ul>
-<p>Lorsqu&rsquo;une sous-formule apparaît plusieurs fois dans une formule, on dit qu&rsquo;elle a plusieurs <strong>occurences</strong>.</p>
+<p>On ne peut pas dire que la démonstration nous éclaire beaucoup sur la vérité de $\phi\rightarrow \phi$.</p>
 <br>
-<h3 id="linéarisation-dune-formule">Linéarisation d&rsquo;une formule</h3>
+<h3 id="la-déduction-naturelle">La déduction naturelle</h3>
 <br>
-<p>La linéarisation $\bar{\theta}$ d&rsquo;une formule $\theta$ peut s&rsquo;obtenir par induction :</p>
-<ul>
-<li>une feuille $\color{#007100}P$ se linéarise en $\color{#007100}P$ : $\bar{\theta}=\color{#007100}P$</li>
-<li>les linéarisations des sous-formules suivantes <img src="/ensformules.png?width=500px" alt="">
-sont données respectivement par $\bar{\theta}=\left(\color{#B51700}{\neg}\color{#007100}{\phi}\color{#000} \right)$, $\bar{\theta}=\left(\color{#007100}{\phi} \color{#B51700}{\lor} \color{#007100}{\psi} \color{#000} \right)$, $\bar{\theta}=\left( \color{#007100}{\phi} \color{#B51700}{\land} \color{#007100}{\psi} \color{#000} \right)$, $\bar{\theta}=\left( \color{#007100}{\phi} \color{#B51700}{\rightarrow} \color{#007100}{\psi} \color{#000} \right)$, $\bar{\theta}=\left( \color{#007100}{\phi} \color{#B51700}{\leftrightarrow} \color{#007100} \psi  \color{#000} \right)$.</li>
-</ul>
-<p>Exemple :</p>
-<p>La linéarisation de cette formule $\phi$ donne :</p>
-<p><img src="/linearisationformule.png?width=600px" alt=""></p>
-<p>$$\displaystyle
-\bar{\phi} = \left({ \left( \color{#B51700}{\neg}\color{#000}  \left( \color{#007100}{P} \color{#B51700}{\lor} \color{#007100}{R}\color{#000}  \right) \right) \color{#B51700}{\land} \color{#000} \left( \color{#007100}{P} \color{#B51700}{\lor}\color{#000}  \left( \left( \color{#B51700}{\neg} \color{#007100}{R}\color{#000}  \right) \color{#B51700}{\rightarrow} \color{#000} \left( \left( \color{#B51700}{\neg} \color{#007100}{Q}\color{#000}  \right) \color{#B51700}{\leftrightarrow} \color{#007100}{P} \color{#000} \right) \right) \right)} \right)
-$$</p>
-<br>
-
-<div class="notices note" style="--title: 'note';">
-  <p style="display: none;">note</p>
-  <div class="notice-body">
-    <p>La <strong>syntaxe</strong>, c&rsquo;est l&rsquo;articulation des symboles. La <strong>sémantique</strong>, c&rsquo;est ce que ça raconte.</p>
-
-  </div>
-</div>
-
-
-<br>
-<p style="text-align:center;">
-<a href="../logique2" style="font-size:2em;">Suite : <b>la sémantique</b></a>
-</p>
 
 
 <footer class="footline">
@@ -3643,19 +3621,19 @@ $$</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1711312157"></script>
-    <script src="/js/perfect-scrollbar.min.js?1711312157"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1711312157"></script>
-    <script src="/js/jquery.sticky.js?1711312157"></script>
-    <script src="/js/featherlight.min.js?1711312157"></script>
-    <script src="/js/highlight.pack.js?1711312157"></script>
+    <script src="/js/clipboard.min.js?1711400014"></script>
+    <script src="/js/perfect-scrollbar.min.js?1711400014"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1711400014"></script>
+    <script src="/js/jquery.sticky.js?1711400014"></script>
+    <script src="/js/featherlight.min.js?1711400014"></script>
+    <script src="/js/highlight.pack.js?1711400014"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1711312157"></script>
-    <script src="/js/learn.js?1711312157"></script>
-    <script src="/js/hugo-learn.js?1711312157"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1711400014"></script>
+    <script src="/js/learn.js?1711400014"></script>
+    <script src="/js/hugo-learn.js?1711400014"></script>
     
         
-            <script src="/mermaid/mermaid.js?1711312157"></script>
+            <script src="/mermaid/mermaid.js?1711400014"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
