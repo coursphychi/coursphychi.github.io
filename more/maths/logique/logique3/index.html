@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1711540664" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1711540664" rel="stylesheet">
-    <link href="/css/hybrid.css?1711540664" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1711540664" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1711540664" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711540664" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1711540664" rel="stylesheet">
-    <link href="/css/theme.css?1711540664" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1711540664" rel="stylesheet">
+    <link href="/css/nucleus.css?1711568863" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1711568863" rel="stylesheet">
+    <link href="/css/hybrid.css?1711568863" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1711568863" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1711568863" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711568863" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1711568863" rel="stylesheet">
+    <link href="/css/theme.css?1711568863" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1711568863" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1711540664" rel="stylesheet">
+    <link href="/css/theme-blue.css?1711568863" rel="stylesheet">
     
-    <link href="/css/foo.css?1711540664" rel="stylesheet"><link href="/css/bar.css?1711540664" rel="stylesheet">
+    <link href="/css/foo.css?1711568863" rel="stylesheet"><link href="/css/bar.css?1711568863" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1711540664"></script>
+    <script src="/js/jquery-3.3.1.min.js?1711568863"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1711540664"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1711540664"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1711568863"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1711568863"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1711540664"></script>
+<script type="text/javascript" src="/js/search.js?1711568863"></script>
 
     
   </div>
@@ -2161,6 +2161,10 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   vertical-align: middle;
   min-width: 3em;
 }
+#grosseformule 
+{
+    overflow-x: auto; 
+  }
 </style>
 <script>
 MathJax = {
@@ -2213,8 +2217,8 @@ MathJax = {
 <br>
 <h3 id="les-systèmes-axiomatiques">Les systèmes axiomatiques</h3>
 <br>
-<p>Ces systèmes reposent sur un petit nombre de vérités élémentaires, les <strong>axiomes</strong>, et sur des <strong>règles</strong> de construction qui préservent la vérité.<br>
-Les démonstrations obtenues sont concises mais très peu explicatives. Ça marche, mais on ne sait pas pourquoi&hellip;</p>
+<p>Les systèmes axiomatiques ou systèmes <strong>&ldquo;à la Hilbert&rdquo;</strong> reposent sur un petit nombre de vérités élémentaires, les <strong>axiomes</strong>, et sur des <strong>règles</strong> de construction qui préservent la vérité.<br>
+Les démonstrations obtenues sont concises mais très peu explicatives. Ça marche, mais on ne sait pas pourquoi, faute à leur manque de structure.</p>
 <p>Exemple d&rsquo;un système axiomatique reposant sur le système complet de connecteur $\set{\neg,\rightarrow}$ et comportant 3 axiomes pour une seule règle :</p>
 <div style="overflow-x: auto;">
 <table>
@@ -2259,7 +2263,312 @@ $</p>
 <br>
 <h3 id="la-déduction-naturelle">La déduction naturelle</h3>
 <br>
-
+<div id="def">
+<p style="margin-bottom:-0.5em;">Un <b>séquent</b>, noté $\Gamma\vdash\phi$, est un couple où&nbsp;:</p>
+<ul>
+<li>$\Gamma$ est un ensemble fini de formules,</li>
+<li>$\phi$ est une formule.</li>
+</ul>
+</div>
+<p style="margin-bottom:-0.5em;">Remarques&nbsp;:</p>
+<ul>
+<li>$\Gamma$ représente les hypothèses que l&rsquo;on veut utiliser.</li>
+<li>$\phi$ est la conclusion du séquent (la formule que l&rsquo;on veut démontrer).</li>
+<li>$\vdash$ se lit &ldquo;<strong>démontre</strong>&rdquo; ou &ldquo;<strong>prouve</strong>&rdquo;.</li>
+<li>On écrit $\vdash\phi$ si $\phi$ se démontre sans hypothèse ($\Gamma=\empty$).</li>
+</ul>
+<div id="def">
+<ul>
+<li>Un séquent est <b>prouvable</b> s'il peut être obtenu par une application finie de règles de démonstration.</li>
+<li>Une formule $\phi$ est prouvable si le séquent $\vdash\phi$ est prouvable.
+</ul>
+</div>
+<p>On écrit $\Gamma\nvdash\phi$ si $\Gamma\vdash\phi$ n&rsquo;est pas prouvable.</p>
+<p>La <strong>règle</strong> est la brique de base de la démonstration. Une démonstration est ainsi un assemblage de règles généralement représenté sous forme d&rsquo;arbre.</p>
+<p style="margin-bottom:-0.5em;">Chaque règle est composée&nbsp;:</p>
+<ul>
+<li>d&rsquo;un ensemble de <strong>prémisses</strong> (de 0 à 3), chacune étant un séquent.</li>
+<li>d&rsquo;un séquent <strong>conclusion</strong>.</li>
+<li>d&rsquo;une barre horizontale qui sépare les deux (on note le nom de la règle à droite de la barre).</li>
+</ul>
+<p style="margin-bottom:-0.5em;">Pour chaque connecteur logique, on a deux types de règles&nbsp;:</p>
+<ul>
+<li>les règles d&rsquo;introduction,</li>
+<li>et les règles d&rsquo;élimination.</li>
+</ul>
+<p>On va dans la suite considérer le système complet de connecteur $\set{\neg,\land,\lor,\rightarrow}$.</p>
+<p style="margin-bottom:-0.5em;">En dehors des <b>axiomes</b> représentés par le séquent $\phi \vdash\phi$, les règles peuvent être regroupées en deux catégories&nbsp;:</p>
+<ul>
+<li>les <b>règles logiques</b> (règles d&rsquo;introduction et d&rsquo;élimination des différents connecteurs).</li>
+<li>les <b>règles structurelles</b> permettant de manipuler les hypothèses. L&rsquo;affaiblissement permet d&rsquo;ajouter de nouvelles hypothèses et la contraction permet de fusionner deux occurrences de la même hypothèse.</li>
+</ul>
+<p>Règles de la <strong>logique minimale</strong> :</p>
+<div id="def">
+<ul>
+<li><b>Axiome</b><br>
+$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\;\scriptsize ax$}
+\UnaryInfC{$\phi\vdash\phi$}
+\end{prooftree}
+$
+<br>
+<br>
+Un séquent dont la conclusion est aussi l'hypothèse est prouvable.
+</li>
+<br>
+<li><b>Introduction de la conjonction</b><br>
+<br>
+$
+\begin{prooftree}
+\AxiomC{$\Gamma\vdash\phi$}
+\AxiomC{$\Gamma'\vdash\psi$}
+\RightLabel{$\;\scriptsize \land i$}
+\BinaryInfC{$\Gamma,\Gamma' \vdash\phi\land\psi$}
+\end{prooftree}
+$
+<br>
+<br>
+Si $\phi$ et $\psi$ sont prouvées, alors on prouve $\phi\land\psi$.
+</li>
+<br>
+<li><b>Élimination de la conjonction</b><br>
+<br>
+$
+\begin{array}{cc}
+\begin{prooftree}
+\AxiomC{$\Gamma\vdash\phi\land\psi$}
+\RightLabel{$\;\scriptsize \land e_g$}
+\UnaryInfC{$\Gamma \vdash\phi $}
+\end{prooftree}
+&
+\begin{prooftree}
+\AxiomC{$\Gamma\vdash\phi\land\psi$}
+\RightLabel{$\;\scriptsize \land e_d$}
+\UnaryInfC{$\Gamma \vdash\psi $}
+\end{prooftree}
+\end{array}
+$
+<br>
+<br>
+De $\phi\land\psi$, on peut déduire $\phi$ et $\psi$.
+</li>
+<br>
+<li><b>Introduction de la disjonction</b><br>
+<br>
+$
+\begin{array}{cc}
+\begin{prooftree}
+\AxiomC{$\Gamma\vdash\phi$}
+\RightLabel{$\;\scriptsize \lor i_g$}
+\UnaryInfC{$\Gamma \vdash \phi\lor\psi $}
+\end{prooftree}
+&
+\begin{prooftree}
+\AxiomC{$\Gamma\vdash\psi$}
+\RightLabel{$\;\scriptsize \lor i_d$}
+\UnaryInfC{$\Gamma \vdash \phi\lor\phi $}
+\end{prooftree}
+\end{array}
+$
+<br>
+<br>
+Si on a prouvé une formule, alors <i>a fortiori</i>, on a prouvé cette formule ou une autre.
+</li>
+<br>
+<li><b>Élimination de la disjonction</b><br>
+<br>
+$
+\begin{prooftree}
+\AxiomC{$\Gamma \vdash \phi \lor \psi$}
+\AxiomC{$\Gamma',\phi \vdash \theta$}
+\AxiomC{$\Gamma'',\psi \vdash \theta$}
+\RightLabel{$\;\scriptsize \lor e$}
+\TrinaryInfC{$\Gamma,\Gamma',\Gamma''\vdash \theta$}
+\end{prooftree}
+$
+<br>
+<br>
+Si on a prouvé $\phi\lor\psi$, alors pour prouver $\theta$, il suffit de prouver $\theta$ en supposant $\phi$ ou prouver $\theta$ en supposant $\psi$. 
+</li>
+<br>
+<li><b>Introduction de l'implication</b><br>
+<br>
+$
+\begin{prooftree}
+\AxiomC{$\Gamma,\phi\vdash\psi$}
+\RightLabel{$\;\scriptsize \rightarrow i$}
+\UnaryInfC{$\Gamma \vdash\phi\rightarrow\psi$}
+\end{prooftree}
+$
+<br>
+<br>
+Pour prouver $\phi\rightarrow \psi$, il suffit de prouver $\psi$ avec $\phi$ ajoutée aux hypothèses.
+</li>
+<br>
+<li><b>Élimination de l'implication</b> (<i>modus ponens</i>)<br>
+<br>
+$
+\begin{prooftree}
+\AxiomC{$\Gamma\vdash\phi\rightarrow\psi$}
+\AxiomC{$\Gamma'\vdash\phi$}
+\RightLabel{$\;\scriptsize \rightarrow e$}
+\BinaryInfC{$\Gamma,\Gamma'\vdash\psi$}
+\end{prooftree}
+$
+<br>
+<br>
+Si on a prouvé $\phi$ et $\phi\rightarrow\psi$, alors on a prouvé $\psi$.
+</li>
+<br>
+<li><b>Introduction de la négation</b><br>
+<br>
+$
+\begin{prooftree}
+\AxiomC{$\Gamma,\phi \vdash\bot$}
+\RightLabel{$\;\scriptsize \neg i$}
+\UnaryInfC{$\Gamma\vdash\neg\phi$}
+\end{prooftree}
+$
+<br>
+<br>
+Pour montrer $\neg\phi$, il suffit d'aboutir à une contradiction en supposant $\phi$.
+</li>
+<br>
+<li><b>Élimination de la négation</b><br>
+<br>
+$
+\begin{prooftree}
+\AxiomC{$\Gamma \vdash \neg\phi$}
+\AxiomC{$\Gamma' \vdash \phi$}
+\RightLabel{$\;\scriptsize \neg e$}
+\BinaryInfC{$\Gamma,\Gamma'\vdash \bot$}
+\end{prooftree}
+$
+<br>
+<br>
+Si on a prouvé à la fois $\phi$ et $\neg\phi$, alors on a prouvé une contradiction.
+</li>
+<br>
+<li><b>Affaiblissement</b><br>
+<br>
+$
+\begin{prooftree}
+\AxiomC{$\Gamma \vdash \phi$}
+\RightLabel{$\;\scriptsize aff$}
+\UnaryInfC{$\Gamma,\psi\vdash \phi$}
+\end{prooftree}
+$
+<br>
+<br>
+Si on peut prouver $\phi$ avec les hypothèses $\Gamma$, alors on peut prouver $\phi$ en ajoutant d'autres hypothèses à $\Gamma$ (il peut y avoir des hypothèses qui ne servent pas).
+</li>
+<br>
+<li><b>Contraction</b><br>
+<br>
+$
+\begin{prooftree}
+\AxiomC{$\Gamma,\psi,\psi \vdash \phi$}
+\RightLabel{$\;\scriptsize ctr$}
+\UnaryInfC{$\Gamma,\psi\vdash \phi$}
+\end{prooftree}
+$
+<br>
+<br>
+En effet l'ensemble d'hypothèses $\Gamma\cup\set{\phi,\phi}$ est en fait le même que $\Gamma\cup\set{\phi}$.
+</li>
+</ul>
+</div>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;border-radius:20px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<img src="/resumreglesminim.png" style="border-radius:20px">
+</div>
+<p style="margin-bottom:-0.5em;">Chaque règle peut être regardée comme un arbre simple qu'on regarde une fois n'est pas coutume de bas en haut. Le séquent conclusion est donc la racine et les prémisses sont les feuilles.</p>
+<ul>
+<li>L&rsquo;axiome n&rsquo;est qu&rsquo;une racine.</li>
+<li>Les éliminations de la conjonction, les introductions de la disjonctions, l&rsquo;introduction de l&rsquo;implication, l&rsquo;introduction de la négation, l&rsquo;affaiblissement et la contraction sont des arbres à une racine et une feuille.</li>
+<li>l&rsquo;introduction de la conjonction, l&rsquo;élimination de l&rsquo;implication et l&rsquo;élimination de la négation sont des arbres à une racine et deux feuilles.</li>
+<li>l&rsquo;élimination de la disjonction et un arbre à une racine et trois feuilles.</li>
+</ul>
+<p>Pour construire une preuve, on va assembler ces arbres.</p>
+<div id="def">
+<p>Une <b>déduction</b> (en logique minimale) dans le système de la déduction naturelle est un arbre fini dont les nœuds sont des séquents $\left(S_i\right)_{i≤k}$, et tel que pour chaque nœud $S_i$ de la déduction :</p>
+<ul>
+<li>$S_i$ est une feuille si et seulement si $S_i$ est un axiome,</li>
+<br>
+<li> si $S_i$ n'est pas une feuille, alors l'arbre dont $S_i$ est la racine et les enfants de $S_i$ sont les feuilles est une instance de l'une des règles du tableau.</li>
+</ul>
+<p>Une formule $\phi$ est déductible des hypothèses $\Gamma$ s&rsquo;il existe une déduction dont la racine soit le séquent $\Delta\vdash\phi$ pour un ensemble d&rsquo;hypothèses $\Delta \subseteq \Gamma$. On note alors $\Gamma\vdash_m \phi$.</p>
+</div>
+<br>
+<p>Exemples de preuves :</p>
+<div id="preuve">
+<p>Preuve que $(\phi\rightarrow (\psi\rightarrow\theta))\rightarrow ((\phi\rightarrow\psi)\rightarrow(\phi\rightarrow\theta))$ est bien un théorème du calcul des propositions revient à obtenir une déduction du séquent $\vdash_m \phi\rightarrow (\psi\rightarrow\theta))\rightarrow ((\phi\rightarrow\psi)\rightarrow(\phi\rightarrow\theta)$ :</p>
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\;\scriptsize ax$}
+\UnaryInfC{$\phi\rightarrow(\phi\rightarrow\theta)\vdash\phi(\psi\rightarrow\theta)$}
+\AxiomC{}
+\RightLabel{$\;\scriptsize ax$}
+\UnaryInfC{$\phi\vdash\phi$}
+\RightLabel{$\;\scriptsize \rightarrow e$}
+\BinaryInfC{$\phi\rightarrow(\psi\rightarrow\theta),\phi\vdash\psi\rightarrow\theta$}
+\AxiomC{}
+\RightLabel{$\;\scriptsize ax$}
+\UnaryInfC{$\phi\rightarrow\psi\vdash\phi\rightarrow\psi$}
+\AxiomC{}
+\RightLabel{$\;\scriptsize ax$}
+\UnaryInfC{$\phi\vdash\phi$}
+\RightLabel{$\;\scriptsize \rightarrow e$}
+\BinaryInfC{$\phi\rightarrow\psi,\phi\vdash\psi$}
+\RightLabel{$\;\scriptsize \rightarrow e$}
+\BinaryInfC{$\phi\rightarrow(\psi\rightarrow\theta),\phi\rightarrow\psi,\phi,\phi\vdash\theta$}
+\RightLabel{$\;\scriptsize ctr$}
+\UnaryInfC{$\phi\rightarrow(\psi\rightarrow\theta),\phi\rightarrow\psi,\phi\vdash\theta$}
+\RightLabel{$\;\scriptsize \rightarrow i$}
+\UnaryInfC{$\phi\rightarrow(\psi\rightarrow\theta),\phi\rightarrow\psi\vdash(\phi\rightarrow\theta)$}
+\RightLabel{$\;\scriptsize \rightarrow i$}
+\UnaryInfC{$\phi\rightarrow(\psi\rightarrow\theta)\vdash(\phi\rightarrow\psi)\rightarrow(\phi\rightarrow\theta)$}
+\RightLabel{$\;\scriptsize \rightarrow i$}
+\UnaryInfC{$\vdash (\phi\rightarrow(\psi\rightarrow\theta))\rightarrow((\phi\rightarrow\psi)\rightarrow(\phi\rightarrow\theta))$}
+\end{prooftree}
+\phantom{--------}
+$$
+</div>
+</div>
+<br>
+<div id="preuve">
+<p>Preuve que $\phi\rightarrow\neg\neg\phi$ est bien un théorème du calcul des propositions revient à obtenir une déduction du séquent $\vdash_m \phi\rightarrow\neg\neg\phi$ :</p>
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\;\scriptsize ax$}
+\UnaryInfC{$\neg\phi\vdash\neg\phi$}
+\AxiomC{}
+\RightLabel{$\;\scriptsize ax$}
+\UnaryInfC{$\phi\vdash\phi$}
+\RightLabel{$\;\scriptsize \neg e$}
+\BinaryInfC{$\neg\phi,\phi\vdash\bot$}
+\RightLabel{$\;\scriptsize \neg i$}
+\UnaryInfC{$\phi\vdash\neg\neg\phi$}
+\RightLabel{$\;\scriptsize \rightarrow i$}
+\UnaryInfC{$\vdash \phi\rightarrow\neg\neg\phi$}
+\end{prooftree}
+$$
+</div>
+</div>
+<p>Par contre, on ne peut pas prouver l&rsquo;implication inverse avec les règles de la logique minimale ($\nvdash_m \neg\neg\phi\rightarrow\phi$). On ne peut donc pas éliminer les doubles négations !<br>
+Il manque en fait une règle pour donner à notre système déductif le pouvoir expressif de la logique classique : la règle de l&rsquo;absurde classique.</p>
+<p>Pour raccourcir les preuves, on intègre les affaiblissements et contractions aux autres règles.<br></p>
+<div id="preuve">
+<p>Montrons que $\vdash_m \neg\phi\leftrightarrow (\phi\rightarrow\bot)$ :</p>
+<div style="position:relative; width:850px; max-width: 100%; margin-left: auto;margin-right: auto; overflow-x: auto; ">
+<img src="/ftropgrosse.png" style="width:800px">
+</div>
+</div>
 
 <footer class="footline">
 	
@@ -3621,19 +3930,19 @@ $</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1711540664"></script>
-    <script src="/js/perfect-scrollbar.min.js?1711540664"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1711540664"></script>
-    <script src="/js/jquery.sticky.js?1711540664"></script>
-    <script src="/js/featherlight.min.js?1711540664"></script>
-    <script src="/js/highlight.pack.js?1711540664"></script>
+    <script src="/js/clipboard.min.js?1711568863"></script>
+    <script src="/js/perfect-scrollbar.min.js?1711568863"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1711568863"></script>
+    <script src="/js/jquery.sticky.js?1711568863"></script>
+    <script src="/js/featherlight.min.js?1711568863"></script>
+    <script src="/js/highlight.pack.js?1711568863"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1711540664"></script>
-    <script src="/js/learn.js?1711540664"></script>
-    <script src="/js/hugo-learn.js?1711540664"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1711568863"></script>
+    <script src="/js/learn.js?1711568863"></script>
+    <script src="/js/hugo-learn.js?1711568863"></script>
     
         
-            <script src="/mermaid/mermaid.js?1711540664"></script>
+            <script src="/mermaid/mermaid.js?1711568863"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
