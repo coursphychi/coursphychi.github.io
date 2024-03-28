@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1711568863" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1711568863" rel="stylesheet">
-    <link href="/css/hybrid.css?1711568863" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1711568863" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1711568863" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711568863" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1711568863" rel="stylesheet">
-    <link href="/css/theme.css?1711568863" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1711568863" rel="stylesheet">
+    <link href="/css/nucleus.css?1711585281" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1711585281" rel="stylesheet">
+    <link href="/css/hybrid.css?1711585281" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1711585281" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1711585281" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711585281" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1711585281" rel="stylesheet">
+    <link href="/css/theme.css?1711585281" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1711585281" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1711568863" rel="stylesheet">
+    <link href="/css/theme-blue.css?1711585281" rel="stylesheet">
     
-    <link href="/css/foo.css?1711568863" rel="stylesheet"><link href="/css/bar.css?1711568863" rel="stylesheet">
+    <link href="/css/foo.css?1711585281" rel="stylesheet"><link href="/css/bar.css?1711585281" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1711568863"></script>
+    <script src="/js/jquery-3.3.1.min.js?1711585281"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1711568863"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1711568863"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1711585281"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1711585281"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1711568863"></script>
+<script type="text/javascript" src="/js/search.js?1711585281"></script>
 
     
   </div>
@@ -2483,7 +2483,7 @@ En effet l'ensemble d'hypothèses $\Gamma\cup\set{\phi,\phi}$ est en fait le mê
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;border-radius:20px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 <img src="/resumreglesminim.png" style="border-radius:20px">
 </div>
-<p style="margin-bottom:-0.5em;">Chaque règle peut être regardée comme un arbre simple qu'on regarde une fois n'est pas coutume de bas en haut. Le séquent conclusion est donc la racine et les prémisses sont les feuilles.</p>
+<p style="margin-bottom:-0.5em;">Chaque règle peut être regardée comme un arbre simple lu de haut en bas et dont la racine est en bas pour une fois. Le séquent conclusion est donc la racine et les prémisses sont les feuilles.</p>
 <ul>
 <li>L&rsquo;axiome n&rsquo;est qu&rsquo;une racine.</li>
 <li>Les éliminations de la conjonction, les introductions de la disjonctions, l&rsquo;introduction de l&rsquo;implication, l&rsquo;introduction de la négation, l&rsquo;affaiblissement et la contraction sont des arbres à une racine et une feuille.</li>
@@ -2503,7 +2503,7 @@ En effet l'ensemble d'hypothèses $\Gamma\cup\set{\phi,\phi}$ est en fait le mê
 <br>
 <p>Exemples de preuves :</p>
 <div id="preuve">
-<p>Preuve que $(\phi\rightarrow (\psi\rightarrow\theta))\rightarrow ((\phi\rightarrow\psi)\rightarrow(\phi\rightarrow\theta))$ est bien un théorème du calcul des propositions revient à obtenir une déduction du séquent $\vdash_m \phi\rightarrow (\psi\rightarrow\theta))\rightarrow ((\phi\rightarrow\psi)\rightarrow(\phi\rightarrow\theta)$ :</p>
+<p>Preuve que $(\phi\rightarrow (\psi\rightarrow\theta))\rightarrow ((\phi\rightarrow\psi)\rightarrow(\phi\rightarrow\theta))$ est bien un théorème du calcul des propositions revient à obtenir une déduction du séquent $\vdash_{\! m} \;\phi\rightarrow (\psi\rightarrow\theta))\rightarrow ((\phi\rightarrow\psi)\rightarrow(\phi\rightarrow\theta)$ :</p>
 <div id="grosseformule">
 $$
 \begin{prooftree}
@@ -2540,7 +2540,7 @@ $$
 </div>
 <br>
 <div id="preuve">
-<p>Preuve que $\phi\rightarrow\neg\neg\phi$ est bien un théorème du calcul des propositions revient à obtenir une déduction du séquent $\vdash_m \phi\rightarrow\neg\neg\phi$ :</p>
+<p>Preuve que $\phi\rightarrow\neg\neg\phi$ est bien un théorème du calcul des propositions revient à obtenir une déduction du séquent $\vdash_{\!m}\; \phi\rightarrow\neg\neg\phi$ :</p>
 <div id="grosseformule">
 $$
 \begin{prooftree}
@@ -2560,15 +2560,57 @@ $$
 $$
 </div>
 </div>
-<p>Par contre, on ne peut pas prouver l&rsquo;implication inverse avec les règles de la logique minimale ($\nvdash_m \neg\neg\phi\rightarrow\phi$). On ne peut donc pas éliminer les doubles négations !<br>
+<p>Par contre, on ne peut pas prouver l&rsquo;implication inverse avec les règles de la logique minimale ($\nvdash_{\!m} \neg\neg\phi\rightarrow\phi$). On ne peut donc pas éliminer les doubles négations !<br>
 Il manque en fait une règle pour donner à notre système déductif le pouvoir expressif de la logique classique : la règle de l&rsquo;absurde classique.</p>
-<p>Pour raccourcir les preuves, on intègre les affaiblissements et contractions aux autres règles.<br></p>
 <div id="preuve">
-<p>Montrons que $\vdash_m \neg\phi\leftrightarrow (\phi\rightarrow\bot)$ :</p>
-<div style="position:relative; width:850px; max-width: 100%; margin-left: auto;margin-right: auto; overflow-x: auto; ">
-<img src="/ftropgrosse.png" style="width:800px">
+<p>Montrons que $\vdash_{\!m} \,\neg\phi\leftrightarrow (\phi\rightarrow\bot)$ :</p>
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\phi\vdash\neg\phi$}
+\RightLabel{$\scriptsize\;aff$}
+\UnaryInfC{$\neg\phi,\phi\vdash\neg\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\phi\vdash \phi$}
+\RightLabel{$\scriptsize\;aff$}
+\UnaryInfC{$\neg\phi,\phi\vdash \phi$}
+\RightLabel{$\scriptsize\; \neg e$}
+\BinaryInfC{$\neg\phi,\phi,\neg\phi,\phi\vdash \bot$}
+\RightLabel{$\scriptsize\; ctr$}
+\UnaryInfC{$\neg\phi,\phi\vdash \bot$}
+\RightLabel{$\scriptsize\; \rightarrow i$}
+\UnaryInfC{$\neg\phi\vdash\phi\rightarrow \bot$}
+\RightLabel{$\scriptsize\; \rightarrow i$}
+\UnaryInfC{$\vdash\neg\phi\rightarrow(\phi\rightarrow \bot)$}
+\AxiomC{}
+\RightLabel{$\scriptsize\; ax$}
+ \UnaryInfC{$\phi\rightarrow\bot\vdash\phi\rightarrow\bot$}
+ \RightLabel{$\scriptsize\; aff$}
+ \UnaryInfC{$\phi\rightarrow\bot,\phi\vdash\phi\rightarrow\bot$}
+\AxiomC{}
+\RightLabel{$\scriptsize\; ax$}
+\UnaryInfC{$\phi\vdash\phi$}
+\RightLabel{$\scriptsize\; aff$}
+\UnaryInfC{$\phi\rightarrow\bot,\phi\vdash\phi$}
+\RightLabel{$\scriptsize\; \rightarrow e$}
+\BinaryInfC{$\phi\rightarrow\bot,\phi,\phi\rightarrow\bot,\phi\vdash\bot$}
+\RightLabel{$\scriptsize\; ctr$}
+\UnaryInfC{$\phi\rightarrow\bot,\phi\vdash\bot$}
+\RightLabel{$\scriptsize\; \neg i$}
+\UnaryInfC{$\phi\rightarrow\bot\vdash\neg\phi$}
+\RightLabel{$\scriptsize\; \rightarrow i$}
+\UnaryInfC{$\vdash(\phi\rightarrow\bot)\rightarrow\neg\phi$}
+\RightLabel{$\scriptsize\; \land i$}
+\BinaryInfC{$\vdash(\neg\phi\rightarrow(\phi\rightarrow\bot))\land(\phi\rightarrow\bot)\rightarrow\neg\phi))$}
+\end{prooftree}
+$$
 </div>
 </div>
+<p>Pour raccourcir les preuves, on va intégrer dorénavant les affaiblissements et contractions aux autres règles.<br></p>
+
 
 <footer class="footline">
 	
@@ -3930,19 +3972,19 @@ Il manque en fait une règle pour donner à notre système déductif le pouvoir 
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1711568863"></script>
-    <script src="/js/perfect-scrollbar.min.js?1711568863"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1711568863"></script>
-    <script src="/js/jquery.sticky.js?1711568863"></script>
-    <script src="/js/featherlight.min.js?1711568863"></script>
-    <script src="/js/highlight.pack.js?1711568863"></script>
+    <script src="/js/clipboard.min.js?1711585281"></script>
+    <script src="/js/perfect-scrollbar.min.js?1711585281"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1711585281"></script>
+    <script src="/js/jquery.sticky.js?1711585281"></script>
+    <script src="/js/featherlight.min.js?1711585281"></script>
+    <script src="/js/highlight.pack.js?1711585281"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1711568863"></script>
-    <script src="/js/learn.js?1711568863"></script>
-    <script src="/js/hugo-learn.js?1711568863"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1711585281"></script>
+    <script src="/js/learn.js?1711585281"></script>
+    <script src="/js/hugo-learn.js?1711585281"></script>
     
         
-            <script src="/mermaid/mermaid.js?1711568863"></script>
+            <script src="/mermaid/mermaid.js?1711585281"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
