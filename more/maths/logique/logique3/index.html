@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1711621427" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1711621427" rel="stylesheet">
-    <link href="/css/hybrid.css?1711621427" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1711621427" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1711621427" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711621427" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1711621427" rel="stylesheet">
-    <link href="/css/theme.css?1711621427" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1711621427" rel="stylesheet">
+    <link href="/css/nucleus.css?1711813858" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1711813858" rel="stylesheet">
+    <link href="/css/hybrid.css?1711813858" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1711813858" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1711813858" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711813858" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1711813858" rel="stylesheet">
+    <link href="/css/theme.css?1711813858" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1711813858" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1711621427" rel="stylesheet">
+    <link href="/css/theme-blue.css?1711813858" rel="stylesheet">
     
-    <link href="/css/foo.css?1711621427" rel="stylesheet"><link href="/css/bar.css?1711621427" rel="stylesheet">
+    <link href="/css/foo.css?1711813858" rel="stylesheet"><link href="/css/bar.css?1711813858" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1711621427"></script>
+    <script src="/js/jquery-3.3.1.min.js?1711813858"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1711621427"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1711621427"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1711813858"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1711813858"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1711621427"></script>
+<script type="text/javascript" src="/js/search.js?1711813858"></script>
 
     
   </div>
@@ -2212,6 +2212,9 @@ $</p>
 <li>les <b>règles logiques</b> (règles d&rsquo;introduction et d&rsquo;élimination des différents connecteurs).</li>
 <li>les <b>règles structurelles</b> permettant de manipuler les hypothèses. L&rsquo;affaiblissement permet d&rsquo;ajouter de nouvelles hypothèses et la contraction permet de fusionner deux occurrences de la même hypothèse.</li>
 </ul>
+<br>
+<h4 id="logique-minimale">Logique minimale</h4>
+<br>
 <p>Règles de la <strong>logique minimale</strong> :</p>
 <div id="def">
 <ul>
@@ -2521,6 +2524,364 @@ $$
 </div>
 </div>
 <p>Pour raccourcir les preuves, on va intégrer dorénavant les affaiblissements et contractions aux autres règles.<br></p>
+<p>La preuve repose sur une notion de <strong>conséquence</strong> puisque des hypothèses $\Gamma$ nous amènent à une conclusion $\phi$, mais elle diffère de la conséquence <strong>sémantique</strong> qui s&rsquo;appuie sur les modèles. La preuve ne s&rsquo;appuie que sur un enchaînement de règles, elle est <strong>syntaxique</strong>. De même que la notion de conséquence sémantique nous a amené à définir l&rsquo;équivalence sémantique, on va définir maintenant une équivalence au sens syntaxique.</p>
+<div id="def">
+<p>Deux formules $\phi$ et $\psi$ sont <strong>équivalentes</strong> pour la logique minimale si on a à la fois $\phi\vdash_{\!m}\psi$ et $\psi\vdash_{\!m}\phi$, et on écrit $\phi\equiv_m\psi$</p>
+</div>
+<br>
+<h4 id="logique-intuitionniste">Logique intuitionniste</h4>
+<br>
+<p>Certains raisonnements ne sont pas possibles avec la logique minimale. On va enrichir le pouvoir expressif de notre système déductif grâce à de nouvelles règles. Ces règles concernent la contradiction $\bot$, et plus précisément son élimination.</p>
+<div id="def">
+<p><strong>Absurdité intuitionniste</strong> (ou <strong>élimination de la contradiction</strong>)<br>
+<br>
+$
+\begin{prooftree}
+\AxiomC{$\Gamma\vdash\bot$}
+\RightLabel{$\;\scriptsize \bot e_i$}
+\UnaryInfC{$\Gamma\vdash\phi$}
+\end{prooftree}
+$
+<br>
+<br>
+Si une contradiction découle d&rsquo;un jeu d&rsquo;hypothèse, alors n&rsquo;importe quelle formule est démontrable avec ce jeu d&rsquo;hypothèses.</p>
+</div>
+<br>
+<p>On obtient ainsi un nouveau système déductif ; celui de la <strong>logique intuitionniste</strong>.</p>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;border-radius:20px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<img src="/resumreglesintui.png" style="border-radius:20px">
+</div>
+<p>La règle de l&rsquo;absurdité intuitionniste n&rsquo;est pas démontrable dans le cadre de la logique minimale. Les déductions qui utilisent cette règle ne sont donc pas possibles en logique minimale. Il existe par conséquent des formules qui sont des théorèmes en logique intuitionniste (des séquents démontrables), mais restent non prouvables en logique minimale.</p>
+<div id="def">
+<p>Deux formules $\phi$ et $\psi$ sont <strong>équivalentes</strong> pour la logique intuitionniste si on a à la fois $\phi\vdash_{\!i}\psi$ et $\psi\vdash_{\!i}\phi$, et on écrit $\phi\equiv_i\psi$.</p>
+</div>
+<br>
+<div id="preuve">
+Exemple de formule démontrable en logique intuitionniste et non démontrable en logique minimale&nbsp;: $\neg\neg(\neg\neg\phi\rightarrow\phi)$
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\neg\phi\vdash\neg\neg\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax+aff$}
+\UnaryInfC{$\phi,\neg\neg\phi\vdash\phi$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\phi\vdash\neg\neg\phi\rightarrow\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi)\vdash\neg(\neg\neg\phi\rightarrow\phi)$}
+\RightLabel{$\scriptsize\;\neg e$}
+\BinaryInfC{$\neg(\neg\neg\phi\rightarrow\phi),\phi\vdash\bot$}
+\RightLabel{$\scriptsize\;\neg i$}
+\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi)\vdash\neg\phi$}
+\RightLabel{$\scriptsize\;\neg e$}
+\BinaryInfC{$\neg\neg\phi,\neg(\neg\neg\phi\rightarrow\phi)\vdash\bot$}
+\RightLabel{$\scriptsize\;\bot e_i$}
+\UnaryInfC{$\neg\neg\phi,\neg(\neg\neg\phi\rightarrow\phi)\vdash\phi$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi)\vdash\neg\neg\phi\rightarrow\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi)\vdash\neg(\neg\neg\phi\rightarrow\phi)$}
+\RightLabel{$\scriptsize\;\neg e + ctr$}
+\BinaryInfC{$\neg(\neg\neg\phi\rightarrow\phi)\vdash\bot$}
+\RightLabel{$\scriptsize\;\neg i$}
+\UnaryInfC{$\vdash \neg\neg(\neg\neg\phi\rightarrow\phi)$}
+\end{prooftree}
+$$
+</div>
+</div>
+<br>
+<h4 id="la-logique-classique">La logique classique</h4>
+<br>
+<div id="def">
+<p><strong>Absurdité classique</strong><br>
+<br>
+$
+\begin{prooftree}
+\AxiomC{$\Gamma,\neg\phi\vdash\bot$}
+\RightLabel{$\;\scriptsize \bot e_c$}
+\UnaryInfC{$\Gamma\vdash\phi$}
+\end{prooftree}
+$
+<br>
+<br>
+Si une contradiction découle d&rsquo;un jeu d&rsquo;hypothèse auquel on ajoute la négation d&rsquo;une formule, alors la formule est démontrable à partir du jeu d&rsquo;hypothèses de départ.</p>
+</div>
+<br>
+<p>En ajoutant à la logique minimale non pas la règle de l&rsquo;absurdité intuitionniste mais cette règle de l&rsquo;absurdité classique, on obtient la <strong>logique classique</strong>.</p>
+<p>L&rsquo;absurdité classique n&rsquo;est démontrable ni en logique minimale, ni en logique intuitionniste, alors que l&rsquo;absurdité intuitionniste n&rsquo;est qu&rsquo;un cas particulier de l&rsquo;absurdité classique. Cela montre que la logique classique est un upgrade par rapport à la logique intuitionniste.
+<br></p>
+<div id="preuve">
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{$\Gamma\vdash\bot$}
+\RightLabel{$\scriptsize\;aff$}
+\UnaryInfC{$\Gamma,\neg\phi\vdash\bot$}
+\RightLabel{$\scriptsize\;\bot e_c$}
+\UnaryInfC{$\Gamma\vdash\phi$}
+\end{prooftree}
+$$
+</div>
+</div>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;border-radius:20px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<img src="/resumreglesclass.png" style="border-radius:20px">
+</div>
+<br>
+<p>Des raisonnements paraissant élémentaires comme la loi du tiers exclu ou l&rsquo;élimination des doubles négations deviennent enfin démontrables (ils ne l&rsquo;étaient pas en logique intuitionniste et <em>a fortiori</em> pas non plus en logique minimale.</p>
+<br> 
+<div id="preuve">
+<div id="grosseformule">
+<b>Loi du tiers exclu</b> $\vdash\phi\lor\neg\phi$
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg(\phi\lor\neg\phi)\vdash\neg(\phi\lor\neg\phi)$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\phi\vdash\phi$}
+\RightLabel{$\scriptsize\;\lor i_g$}
+\UnaryInfC{$\phi\vdash\phi\lor\neg\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg(\phi\lor\neg\phi)\vdash\neg(\phi\lor\neg\phi)$}
+\RightLabel{$\scriptsize\;\neg e$}
+\BinaryInfC{$\neg(\phi\lor\neg\phi),\phi\vdash\bot$}
+\RightLabel{$\scriptsize\;\neg i$}
+\UnaryInfC{$\neg(\phi\lor\neg\phi)\vdash\neg\phi$}
+\RightLabel{$\scriptsize\;\lor i_d$}
+\UnaryInfC{$\neg(\phi\lor\neg\phi)\vdash\phi\lor\neg\phi$}
+\RightLabel{$\scriptsize\;\neg e$}
+\BinaryInfC{$\neg(\phi\lor\neg\phi)\vdash\bot$}
+\RightLabel{$\scriptsize\;\bot e_c$}
+\UnaryInfC{$\vdash\phi\lor\neg\phi$}
+\end{prooftree}
+$$
+</div>
+</div>
+<br> 
+<div id="preuve">
+<b>Élimination des doubles négations</b> $\vdash\neg\neg\phi\rightarrow\phi$
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\neg\phi\vdash\neg\neg\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\phi\vdash \neg\phi$}
+\RightLabel{$\scriptsize\;\rightarrow e$}
+\BinaryInfC{$\neg\neg\phi,\neg\phi\vdash\bot$}
+\RightLabel{$\scriptsize\;\bot e_c$}
+\UnaryInfC{$\neg\neg\phi\vdash\phi$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\vdash\neg\neg\phi\rightarrow\phi$}
+\end{prooftree}
+$$
+</div>
+</div>
+<br> 
+<div id="preuve">
+Autre formule démontrable en logique classique et non en logique intuitionniste&nbsp;: la <b>loi de Peirce</b> $\vdash(\neg\phi\rightarrow\phi)\rightarrow\phi$
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\phi\vdash\neg\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\rightarrow\phi\vdash\neg\rightarrow\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\phi\vdash\neg\phi$}
+\RightLabel{$\scriptsize\;\rightarrow e$}
+\BinaryInfC{$\neg\phi\rightarrow\phi,\neg\phi\vdash\phi$}
+\RightLabel{$\scriptsize\;\neg e + ctr$}
+\BinaryInfC{$\neg\phi\rightarrow\phi,\neg\phi\vdash\bot$}
+\RightLabel{$\scriptsize\;\bot e_c$}
+\UnaryInfC{$\neg\phi\rightarrow\phi\vdash\phi$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\vdash(\neg\phi\rightarrow\phi)\rightarrow\phi$}
+\end{prooftree}
+$$
+</div>
+</div>
+<br> 
+<div id="preuve">
+Encore une pour la route&nbsp;: la <b>contraposition</b> $\vdash(\neg\psi\rightarrow\neg\phi)\rightarrow(\phi\rightarrow\psi)$
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\psi\rightarrow\neg\phi\vdash\neg\psi\rightarrow\neg\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\rightarrow\phi\vdash\neg\rightarrow\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\psi\vdash\neg\psi$}
+\RightLabel{$\scriptsize\;\rightarrow e$}
+\BinaryInfC{$\neg\psi\rightarrow\neg\phi,\neg\psi\vdash\neg\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\phi\vdash\phi$}
+\RightLabel{$\scriptsize\;\neg e$}
+\BinaryInfC{$\neg\psi\rightarrow\neg\phi,\neg\psi,\phi \vdash\bot$}
+\RightLabel{$\scriptsize\;\bot e_c$}
+\UnaryInfC{$\neg\psi\rightarrow\neg\phi,\phi \vdash\psi$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\neg\psi\rightarrow\neg\phi\vdash \phi \rightarrow\psi$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\vdash(\neg\psi\rightarrow\neg\phi)\rightarrow(\phi\rightarrow\psi)$}
+\end{prooftree}
+$$
+</div>
+</div>
+<br>
+<div id="theo">
+<br>On peut obtenir la logique classique à partir de la logique intuitionniste ou de la logique minimale en ajoutant différents axiomes&nbsp;:
+<ol>
+<li>logique classique = logique intuitionniste + <b>principe du tiers exclu</b></li>
+<li>logique classique = logique intuitionniste + <b>loi de Peirce</b></li>
+<li>logique classique = logique minimale + <b>élimination des doubles négations</b></li>
+<li>logique classique = logique minimale + <b>contraposition</b></li>
+</ol>
+</div>
+<br>
+<div id="preuve">
+Nous allons montré que les inclusions sont vérifiées dans les deux sens.
+<ul>
+<li>Pour le sens $\supset$, c'est déjà fait.<br>
+En effet, on a démontré plus haut que chacun des axiomes ajoutés peut se démontrer en logique classique sans hypothèse supplémentaire.</li>
+<br>
+<li> Sens $\subset$&nbsp;: il suffit de vérifier à chaque fois que la règle de l'absurde classique peut être obtenue à partir de la logique considérée à laquelle on a ajouté l'axiome.
+<br>
+<br>
+<ol>
+<li>logique classique $\subset$ logique intuitionniste + <span style="color:#970E53">principe du tiers exclu</span>&nbsp;:<br><br>
+<div id="grosseformule">
+$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\color{#970E53}\vdash\phi\lor\neg\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\phi\vdash\phi$}
+\AxiomC{$\Gamma,\neg\phi\vdash\bot$}
+\RightLabel{$\scriptsize\;\bot e_i$}
+\UnaryInfC{$\Gamma,\neg\phi\vdash\phi$}
+\RightLabel{$\scriptsize\;\lor e$}
+\TrinaryInfC{$\Gamma\vdash\phi$}
+\end{prooftree}
+$
+</div>
+</li>
+<br>
+<li>logique classique $\subset$ logique intuitionniste + <span style="color:#970E53">loi de Peirce</span>&nbsp;:<br><br>
+<div id="grosseformule">
+$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\color{#970E53}\neg\phi\rightarrow\phi\vdash\phi$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\vdash (\neg\phi\rightarrow\phi)\rightarrow\phi$}
+\AxiomC{$\Gamma,\neg\phi\vdash\bot$}
+\RightLabel{$\scriptsize\;\bot e_i$}
+\UnaryInfC{$\Gamma,\neg\phi\vdash\phi$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\Gamma\vdash \neg\phi\rightarrow\phi$}
+\RightLabel{$\scriptsize\;\lor e$}
+\BinaryInfC{$\Gamma\vdash\phi$}
+\end{prooftree}
+$
+</div>
+</li>
+<br>
+<li>logique classique $\subset$ logique minimale + <span style="color:#970E53">élimination des doubles négations</span>&nbsp;:<br><br>
+<div id="grosseformule">
+$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\color{#970E53}\vdash\neg\neg\phi\rightarrow\phi$}
+\AxiomC{$\Gamma,\neg\phi\vdash\bot$}
+\RightLabel{$\scriptsize\;\neg i$}
+\UnaryInfC{$\Gamma\vdash\neg\neg\phi$}
+\RightLabel{$\scriptsize\;\lor e$}
+\BinaryInfC{$\Gamma\vdash\phi$}
+\end{prooftree}
+$
+</div>
+</li>
+<br>
+<li>logique classique $\subset$ logique minimale + <span style="color:#970E53">contraposition</span><br>
+On va utiliser une instance de la contraposition où $\psi:=\phi$ et $\phi:=\neg\bot$&nbsp;:<br><br>
+<div id="grosseformule">
+$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\color{#970E53}\neg\phi\rightarrow\neg\neg\bot\vdash\neg\bot\rightarrow\phi$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\vdash (\neg\phi\rightarrow\neg\neg\bot)\rightarrow(\neg\bot\rightarrow\phi)$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\bot\vdash\bot$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\neg\bot\vdash\neg\bot$}
+\RightLabel{$\scriptsize\;\rightarrow e$}
+\BinaryInfC{$\bot,\neg\bot\vdash\bot$}
+\RightLabel{$\scriptsize\;\neg i$}
+\UnaryInfC{$\bot\vdash\neg\neg\bot$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\vdash \bot\rightarrow\neg\neg\bot$}
+\AxiomC{$\Gamma,\neg\phi\vdash\bot$}
+\RightLabel{$\scriptsize\;\rightarrow e$}
+\BinaryInfC{$\Gamma,\neg\phi\vdash\neg\neg\bot$}
+\RightLabel{$\scriptsize\;\rightarrow i$}
+\UnaryInfC{$\Gamma\vdash\neg\phi\rightarrow\neg\neg\bot$}
+\RightLabel{$\scriptsize\;\rightarrow e$}
+\BinaryInfC{$\Gamma\vdash\neg\bot\rightarrow\phi$}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$\bot\vdash\bot$}
+\RightLabel{$\scriptsize\;\neg i$}
+\UnaryInfC{$\vdash\neg\bot$}
+\RightLabel{$\scriptsize\;\rightarrow e$}
+\BinaryInfC{$\Gamma\vdash\phi$}
+\end{prooftree}
+$
+</div>
+</li>
+</ol>
+</ul>
+</div>
+
+<div class="notices info" style="--title: 'info';">
+  <p style="display: none;">info</p>
+  <div class="notice-body">
+    <p>La logique intuitionniste, contrairement à la logique classique, vise à obtenir des preuves <strong>constructives</strong>. Établir la vérité de $\phi$ ne suffit pas, il faut la construire étape par étape. Or les raisonnements par l&rsquo;absurde classique ne construisent pas réellement la vérité de $\phi$ puisqu&rsquo;ils se contentent d&rsquo;établir une contradiction mettant en jeu $\neg\phi$. De même, le tiers exclu nous affirme que $\phi=\psi\lor\neg\psi$ sans jamais établir la vérité de $\psi$ ou $\neg\psi$.<br>
+Exemple : prouvons qu&rsquo;il existe un couple de nombres irrationnels $(a,b)$ ($a,b\in\mathbb{R}\setminus \mathbb{Q}$) tels que $a^b$ soit rationnel ($a^b\in\mathbb{Q}$).<br>
+Sachant que $\sqrt{2}$ est irrationnel, on distingue deux cas :<br>
+si $\sqrt{2}^\sqrt{2}$ est rationnel, alors on prend $a=b=\sqrt{2}$<br>
+si $\sqrt{2}^\sqrt{2}$ est irrationnel, alors on prend $a=\sqrt{2}^\sqrt{2}$ et $b=\sqrt{2}$ puisqu&rsquo;ainsi $a^b=2$.<br>
+On a donc bien répondu à la question puisque d&rsquo;après le principe du tiers exclu, on est dans un cas ou dans l&rsquo;autre. Mais pour savoir laquelle des deux options est la bonne, il faudrait savoir si $\sqrt{2}^\sqrt{2}$ est rationnel ou non (et démontrer qu&rsquo;il ne l&rsquo;est pas est beaucoup plus lourd)&hellip;<br>
+En logique intuitionniste, si l&rsquo;on a réussi à démontrer le séquent $\vdash_{\! i}\phi\lor\psi$, c&rsquo;est qu&rsquo;on a démontré un des deux séquents $\vdash_{\! i}\phi$ ou $\vdash_{\! i}\psi$. Il n&rsquo;y a pas de vérité intermédiaire indéterminée.</p>
+
+  </div>
+</div>
+
+
 
 
 <footer class="footline">
@@ -3828,19 +4189,19 @@ $$
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1711621427"></script>
-    <script src="/js/perfect-scrollbar.min.js?1711621427"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1711621427"></script>
-    <script src="/js/jquery.sticky.js?1711621427"></script>
-    <script src="/js/featherlight.min.js?1711621427"></script>
-    <script src="/js/highlight.pack.js?1711621427"></script>
+    <script src="/js/clipboard.min.js?1711813858"></script>
+    <script src="/js/perfect-scrollbar.min.js?1711813858"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1711813858"></script>
+    <script src="/js/jquery.sticky.js?1711813858"></script>
+    <script src="/js/featherlight.min.js?1711813858"></script>
+    <script src="/js/highlight.pack.js?1711813858"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1711621427"></script>
-    <script src="/js/learn.js?1711621427"></script>
-    <script src="/js/hugo-learn.js?1711621427"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1711813858"></script>
+    <script src="/js/learn.js?1711813858"></script>
+    <script src="/js/hugo-learn.js?1711813858"></script>
     
         
-            <script src="/mermaid/mermaid.js?1711621427"></script>
+            <script src="/mermaid/mermaid.js?1711813858"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
