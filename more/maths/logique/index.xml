@@ -35,7 +35,7 @@ Calcul des propositions Avant : la syntaxe Sémantique Modèle La sémantique co
       <description>info
 Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
 Calcul des propositions Théorie de la démonstration Une preuve ou une démonstration&amp;nbsp;:
-est de longueur finie est vérifiable mécaniquement, s&amp;rsquo;appuie sur des hypothèses, aboutit à une conclusion. Une démonstration permet de mettre au jour non plus une vérité sémantique (qui fait intervenir les modèles d&amp;rsquo;une théorie) mais syntaxique (qui s&amp;rsquo;appuie sur un jeu de règles).</description>
+est de longueur finie, est vérifiable mécaniquement, s&amp;rsquo;appuie sur des hypothèses, aboutit à une conclusion. Une démonstration permet de mettre au jour une vérité syntaxique (s&amp;rsquo;appuyant sur un jeu de règles) plutôt que sémantique (faisant intervenir les modèles d&amp;rsquo;une théorie).</description>
     </item>
     <item>
       <title>Logique</title>
