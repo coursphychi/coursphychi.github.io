@@ -356,7 +356,7 @@ Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pend
       <link>https://coursphychi.github.io/2nde/mole/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/mole/</guid>
-      <description> Quantité de matière Présentation
+      <description>Quantité de matière Présentation
 Définition Quantité de matière d’une espèce chimique
 Grandeur, exprimée en moles, utilisée pour dénombrer les entités d’une espèce chimique dans un échantillon de matière, une mole étant définie comme un ensemble d’exactement $6,02214076\times10^{23}$ entités.
 Documents TP - Bouteille bleue </description>
@@ -449,7 +449,8 @@ la réaction chimique Présentation
 Réaction chimique
 Modèle introduit pour rendre compte d’observations et de mesures effectuées lors de transformations chimiques pouvant différer par les conditions de leur réalisation (température, pression, composition du mélange initial), mais partageant les mêmes réactifs, les mêmes produits et les mêmes proportions dans lesquelles ceux-ci sont convertis.
 L’équation de la réaction permet de réaliser le bilan de matière d’une transformation.
-Exemple :</description>
+Exemple :
+L’action d’acide chlorhydrique sur du magnésium solide peut être modélisée par une réaction dont l’équation est : $\ce{Mg(s) + 2H+(aq) = Mg^2+(aq) + H2(g)}$</description>
     </item>
     <item>
       <title>Chaos</title>
@@ -494,7 +495,7 @@ Interpréter les échanges d’énergie entre la matière et la lumière à l’
       <link>https://coursphychi.github.io/2nde/mouvement/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/mouvement/</guid>
-      <description> Décrire un mouvement Présentation
+      <description>Décrire un mouvement Présentation
 Documents Évaluation diagnostique Activité - Chronophotographie du vol d&amp;rsquo;un marteau TP - Réalisation d&amp;rsquo;un pointage vidéo - Correction Activité python - Décollage d&amp;rsquo;une fusée </description>
     </item>
     <item>
@@ -514,7 +515,7 @@ Mathématiquement, on dit qu’une fonction $f:\mathbb{R}\rightarrow\mathbb{R}$ 
       <link>https://coursphychi.github.io/2nde/inertie/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/inertie/</guid>
-      <description> Forces et principe d&amp;rsquo;inertie Présentation
+      <description>Forces et principe d&amp;rsquo;inertie Présentation
 Documents TP - Principe d&amp;rsquo;inertie + accroche + plus &amp;ldquo;beaux&amp;rdquo; dessins + appliquette Geogebra TP - Lien entre masse et poids + partie python Activité python - Chute libre d&amp;rsquo;une balle Simulation - Force gravitationnelle entre deux masses + tableur </description>
     </item>
     <item>
@@ -541,7 +542,7 @@ Documents et autre Exercice - Mesure historique de la vitesse du son dans l&amp;
       <link>https://coursphychi.github.io/2nde/lumiere/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/lumiere/</guid>
-      <description> Lumière et spectre Présentation
+      <description>Lumière et spectre Présentation
 Documents et autres TP - Lois de Snell-Descartes </description>
     </item>
     <item>
@@ -564,18 +565,34 @@ Carte mentale Savoir et savoir faire coeur
 Déterminer la fréquence du fondamental et des harmoniques à partir du spectre d’amplitude d’un signal sonore.. Définir et distinguer la notion de timbre et de hauteur. Exploiter la relation entre l&amp;rsquo;intensité acoustique et le niveau sonore et savoir se débrouiller avec les décibels (dB). Exploiter des informations relatives aux courbes de sensibilité de l’oreille humaine (fréquences audible, seuil d&amp;rsquo;audibilité, seuil de douleur, etc.</description>
     </item>
     <item>
+      <title>Image</title>
+      <link>https://coursphychi.github.io/1spe/lentilles/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/lentilles/</guid>
+      <description>Formation des images par une lentille convergente Présentation
+Documents et autres Act - Épicentre </description>
+    </item>
+    <item>
       <title>Lentilles</title>
       <link>https://coursphychi.github.io/2nde/lentille/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/lentille/</guid>
-      <description> Formation des images et lentille convergente Documents et autres TP - Lentille convergente et grandissement </description>
+      <description>Formation des images et lentille convergente Documents et autres TP - Lentille convergente et grandissement </description>
+    </item>
+    <item>
+      <title>Ondes mécaniques</title>
+      <link>https://coursphychi.github.io/1spe/ondes/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/ondes/</guid>
+      <description>Ondes mécaniques propgressives Présentation
+Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Act - Voix de cannard Simulation </description>
     </item>
     <item>
       <title>Électricité</title>
       <link>https://coursphychi.github.io/2nde/elec/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/elec/</guid>
-      <description> Électricité Présentation
+      <description>Électricité Présentation
 Documents Activité 1 - Caractéristique d&amp;rsquo;une thermistance + Tracé et régression linéaire + Correction Activité 2 - Comment fabriquer un thermomètre à partir d&amp;rsquo;une thermistance ? + Tracé de la courbe d&amp;rsquo;étalonnage Activité 3 - Circuit électrique au sein d’un bathythermographe + Correction </description>
     </item>
     <item>
