@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713141551" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713141551" rel="stylesheet">
-    <link href="/css/hybrid.css?1713141551" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713141551" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713141551" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713141551" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713141551" rel="stylesheet">
-    <link href="/css/theme.css?1713141551" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713141551" rel="stylesheet">
+    <link href="/css/nucleus.css?1713177135" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713177135" rel="stylesheet">
+    <link href="/css/hybrid.css?1713177135" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713177135" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713177135" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713177135" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713177135" rel="stylesheet">
+    <link href="/css/theme.css?1713177135" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713177135" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713141551" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713177135" rel="stylesheet">
     
-    <link href="/css/foo.css?1713141551" rel="stylesheet"><link href="/css/bar.css?1713141551" rel="stylesheet">
+    <link href="/css/foo.css?1713177135" rel="stylesheet"><link href="/css/bar.css?1713177135" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713141551"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713177135"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713141551"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713141551"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713177135"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713177135"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713141551"></script>
+<script type="text/javascript" src="/js/search.js?1713177135"></script>
 
     
   </div>
@@ -2937,21 +2937,24 @@ Toute tautologie est démontrable sans utiliser d&rsquo;hypothèse et à l&rsquo
 <p>Une preuve étant une suite finie de séquent, on va procéder par induction sur la longueur de la preuve.<br></p>
 <ul>
 <li>Si la preuve a une longueur 1, le séquent ne peut être qu'un axiome de la forme $\phi\vdash\phi$.<br>
-Reste à montrer que $\phi\models\phi$ est vraie. Mais c'est évident puisque par définition, $\phi\models\phi$ est vraie si $\phi$ est vraie dans chaque modèle où $\phi$ est vraie...<br>
+Reste à montrer que $\phi\models\phi$ est vraie. Et c'est bien sûr le cas&nbsp;: par définition, $\phi\models\phi$ est vraie si $\phi$ est vraie dans chaque modèle où $\phi$ est vraie...<br>
 <li>On suppose maintenant la propriété vraie pour toutes les preuves de longueur $n$.<br>
 Une preuve de longueur $n+1$ est une preuve de longueur $n$ à laquelle on ajoute un séquent qui est soit un axiome (on revient au cas précédent), soit une des règles.<br>
-Les règles ont été choisies pour que si le ou les séquents au-dessus de la barre horizontale de chaque règle correspondent à des conséquences sémantiques, alors le séquent sous la barre corresponde lui aussi à une conséquence sémantique. Or les prémisses sont bien des conséquences sémantiques par application de l'hypothèse d'induction (elles correspondent à des séquents de longueur $≤n$).<br>
-Montrons par exemple sur la règle d'élimination de l'implication $
+Il faut montrer que les règles ont été judicieusement choisies pour "conserver" la notion de conséquence sémantique entre els prémisses et la conclusion.<br>
+Ici, les prémisses sont bien des conséquences sémantiques par application de l'hypothèse d'induction (elles correspondent à des séquents de longueur $≤n$).<br>
+On doit maintenant vérifier sur chaque règle que le séquent conclusion est une conséquence sémantique des prémisses.<br>
+Montrons-le pour la règle d'élimination de l'implication
+$
 \begin{prooftree}
 \AxiomC{$\Gamma\vdash\phi\rightarrow\psi$}
 \AxiomC{$\Gamma'\vdash\phi$}
 \RightLabel{$\scriptsize\;\rightarrow e$}
 \BinaryInfC{$\Gamma,\Gamma'\vdash\psi$}
 \end{prooftree}
-$ que le séquent conclusion est une conséquence sémantique des prémisses&nbsp;: 
+$&nbsp;: 
 <br>
 Par hypothèse d'induction, on sait que $\Gamma\models\phi\rightarrow\psi$ et $\Gamma'\models\phi$. Donc dans les modèles de $\Gamma \cup \Gamma'$ (ensemble des modèles où les formules de $\Gamma$ et $\Gamma'$ sont vraies simultanément), à la fois $\phi\rightarrow\psi$ et $\phi$ sont vérifiées. Et comme lorsque $\phi$ est vraie, $\phi\rightarrow\psi$ n'est vraie que si $\psi$ est vraie, il en résulte que $\psi$ est vraie dans ces modèles&nbsp;: $\Gamma,\Gamma'\models\psi$.<br>
-Et il en va de même pour les autres règles...
+On peut montrer de manière équivalente que cela marche pour chaque règle...
 </li>
 </ul>
 </li>
@@ -3073,7 +3076,7 @@ On applique ensuite la règle du <i>modus ponens</i> pour obtenir $\set{P_1^{\ma
 <p>Supposons qu&rsquo;on ait passé en revue tous les autres cas pour finir de montrer que $\set{P_1^{\mathcal{M}},\ldots,P_n^{\mathcal{M}}} \vdash_{\!c}\phi^{\mathcal{M}}$.</p>
 <p>Nous allons maintenant prouver que pour toute formule $\phi$, si $\phi$ est une tautologie, alors $\phi$ est un théorème de la logique classique.<br>
 Soit $\phi$, une formule quelconque du calcul des propositions dont les variables sont $P_1,\ldots,P_n$. Et soit $\mathcal{M}$ un modèle possible de $\phi$. On a montré que $\set{P_1^{\mathcal{M}},\ldots,P_n^{\mathcal{M}}} \vdash_{\!c}\phi^{\mathcal{M}}$. Or $\mathcal{M}\models\phi$ est vérifié, donc $\phi^\mathcal{M}=\phi$. D&rsquo;où $\set{P_1^{\mathcal{M}},\ldots,P_n^{\mathcal{M}}} \vdash_{\!c}\phi$.<br>
-Comme ce résultat est valable pour n&rsquo;importe quel modèle, choisissons les modèles $\mathcal{M}$ et $\mathcal{M&rsquo;}$ qui distribuent les mêmes valeurs de vérité pour toutes les variables $P_i$ sauf $P_n$. $\mathcal{M}\models P_n$ alors que $\mathcal{M&rsquo;}\models \neg P_n$.<br>
+Si $\phi$ est une tautologie, ce résultat est valable pour n&rsquo;importe quel modèle. Choisissons les modèles $\mathcal{M}$ et $\mathcal{M&rsquo;}$ qui distribuent les mêmes valeurs de vérité pour toutes les variables $P_i$ sauf $P_n$. $\mathcal{M}\models P_n$ alors que $\mathcal{M&rsquo;}\models \neg P_n$.<br>
 On a à la fois $\set{P_1^{\mathcal{M}},\ldots,P_{n-1}^{\mathcal{M}},P_n^{\mathcal{M}}} \vdash_{\!c}\phi$ et $\set{P_1^{\mathcal{M&rsquo;}},\ldots,P_{n-1}^{\mathcal{M&rsquo;}},P_n^{\mathcal{M&rsquo;}}} \vdash_{\!c}\phi$.<br>
 D&rsquo;où $\set{P_1^{\mathcal{M}},\ldots,P_{n-1}^{\mathcal{M}},P_n} \vdash_{\!c}\phi$ et $\set{P_1^{\mathcal{M}},\ldots,P_{n-1}^{\mathcal{M}},\neg P_n} \vdash_{\!c}\phi$ qu&rsquo;on peut aussi écrire $\set{P_1^{\mathcal{M}},\ldots,P_{n-1}^{\mathcal{M}}},P_n \vdash_{\!c}\phi$ et $\set{P_1^{\mathcal{M}},\ldots,P_{n-1}^{\mathcal{M}}},\neg P_n \vdash_{\!c}\phi$.<br>
 Construisons la règle suivante en appliquant le tiers exclu :</p>
@@ -3091,9 +3094,8 @@ $$
 \end{prooftree}
 $$
 </div>
-En appliquant cette règle à notre cas, on obtient&nbsp;: $\set{P_1^{\mathcal{M}},\ldots,P_{n-1}^{\mathcal{M}}} \vdash_{\!c}\phi$ et ce résultat ne dépend pas du modèle $\mathcal{M}$.<br>
-En recommençant le même raisonnement, on obtient successivement&nbsp;: $\set{P_1^{\mathcal{M}},\ldots,P_{n-2}^{\mathcal{M}}} \vdash_{\!c}\phi, \set{P_1^{\mathcal{M}},\ldots,P_{n-3}^{\mathcal{M}}} \vdash_{\!c}\phi, \set{P_1^{\mathcal{M}},\ldots,P_{n-4}^{\mathcal{M}}} \vdash_{\!c}\phi,\ldots $<br>
-Cela donne en dernière étape $P_1\vdash_{\!c}\phi$ et $\neg P_1\vdash_{\!c}\phi$. D'où l'on déduit $\vdash_{\!c}\phi$ par application du tiers exclu.<br>
+En appliquant cette règle à notre cas, on obtient&nbsp;: $\set{P_1^{\mathcal{M}},\ldots,P_{n-1}^{\mathcal{M}}} \vdash_{\!c}\phi$ et à nouveau, ce résultat ne dépend pas du modèle $\mathcal{M}$. On peut donc recommencer le même raisonnement, ce qui donne successivement&nbsp;: $\set{P_1^{\mathcal{M}},\ldots,P_{n-2}^{\mathcal{M}}} \vdash_{\!c}\phi, \set{P_1^{\mathcal{M}},\ldots,P_{n-3}^{\mathcal{M}}} \vdash_{\!c}\phi, \set{P_1^{\mathcal{M}},\ldots,P_{n-4}^{\mathcal{M}}} \vdash_{\!c}\phi,\ldots $<br>
+Et en dernière étape, on obtient $P_1\vdash_{\!c}\phi$ et $\neg P_1\vdash_{\!c}\phi$. D'où l'on déduit $\vdash_{\!c}\phi$ par application du tiers exclu.<br>
 Nous avons donc bien réussi à prouver que $\models\phi$ implique $\vdash_{\!c}\phi$.
 <p>Il ne nous reste plus qu&rsquo;à montrer que pour toute formule $\phi$ et pour tout ensemble fini d&rsquo;hypothèses $\Gamma=\set{\psi_1,\ldots,\psi_k}$, $\Gamma\models\phi$ implique $\Gamma\vdash_{\!c}\phi$.<br>
 Il apparait immédiatement que $\Gamma\models\phi$ si et seulement si $\models(\psi_1\land\psi_2\land\ldots\land\psi_k)\rightarrow\phi $.<br>
@@ -4764,19 +4766,19 @@ Par exemple, prouver une instance du tiers exclu $\Gamma\vdash_{\!i}\phi\lor\neg
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713141551"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713141551"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713141551"></script>
-    <script src="/js/jquery.sticky.js?1713141551"></script>
-    <script src="/js/featherlight.min.js?1713141551"></script>
-    <script src="/js/highlight.pack.js?1713141551"></script>
+    <script src="/js/clipboard.min.js?1713177135"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713177135"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713177135"></script>
+    <script src="/js/jquery.sticky.js?1713177135"></script>
+    <script src="/js/featherlight.min.js?1713177135"></script>
+    <script src="/js/highlight.pack.js?1713177135"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713141551"></script>
-    <script src="/js/learn.js?1713141551"></script>
-    <script src="/js/hugo-learn.js?1713141551"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713177135"></script>
+    <script src="/js/learn.js?1713177135"></script>
+    <script src="/js/hugo-learn.js?1713177135"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713141551"></script>
+            <script src="/mermaid/mermaid.js?1713177135"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
