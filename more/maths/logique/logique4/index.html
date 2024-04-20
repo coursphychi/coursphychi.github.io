@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713633866" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713633866" rel="stylesheet">
-    <link href="/css/hybrid.css?1713633866" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713633866" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713633866" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713633866" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713633866" rel="stylesheet">
-    <link href="/css/theme.css?1713633866" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713633866" rel="stylesheet">
+    <link href="/css/nucleus.css?1713643939" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713643939" rel="stylesheet">
+    <link href="/css/hybrid.css?1713643939" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713643939" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713643939" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713643939" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713643939" rel="stylesheet">
+    <link href="/css/theme.css?1713643939" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713643939" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713633866" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713643939" rel="stylesheet">
     
-    <link href="/css/foo.css?1713633866" rel="stylesheet"><link href="/css/bar.css?1713633866" rel="stylesheet">
+    <link href="/css/foo.css?1713643939" rel="stylesheet"><link href="/css/bar.css?1713643939" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713633866"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713643939"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713633866"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713633866"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713643939"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713643939"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713633866"></script>
+<script type="text/javascript" src="/js/search.js?1713643939"></script>
 
     
   </div>
@@ -2072,6 +2072,8 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         <li><a href="#le-système-k">Le système K</a></li>
       </ul>
     </li>
+    <li><a href="#logique-modale-normale">Logique modale normale</a></li>
+    <li><a href="#quelques-axiomes-usuels">Quelques axiomes usuels</a></li>
   </ul>
 </nav>
     </div>
@@ -2337,15 +2339,12 @@ $$\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}} \phi$$</p>
 <div id="theo">
 <p>Soient $\phi$ une formule de profondeur modale nulle et $\mathcal{S}=(N,A)$ un système de transition.<br>
 Les affirmations suivantes sont équivalentes :</p>
-<p>$$
-\begin{array}{ll}
-(1)&amp;\mathcal{S}\Vdash^{\forall a,\forall\mathcal{V}} \phi\\
-(2)&amp;\text{il existe } a\in N \text{ tel que } \langle\mathcal{S},a\rangle\Vdash^{\forall \mathcal{V}}\phi\\
-(3)&amp;\text{pour } \mathcal{T}=(\set{a},\empty), \langle\mathcal{T},a\rangle\Vdash^{\forall \mathcal{V}}\phi\\
-(4)&amp;\phi \text{ est une tautologie du calcul des propositions}
-\end{array}
-$$</p>
-</ul>
+<ol>
+<li>$\mathcal{S}\Vdash^{\forall a,\forall\mathcal{V}} \phi$</li>
+<li>Il existe $a\in N$ tel que $\langle\mathcal{S},a\rangle\Vdash^{\forall \mathcal{V}}\phi$</li>
+<li>Pour $\mathcal{T}=(\set{a},\empty)$, $\langle\mathcal{T},a\rangle\Vdash^{\forall \mathcal{V}}\phi$</li>
+<li>$\phi$ est une tautologie du calcul des propositions</li>
+</ol>
 </div>
 <br>
 <div id="preuve">
@@ -2355,8 +2354,7 @@ $$</p>
 <li>Pour montrer $(3)\rightarrow(4)$, nous allons montrer la contraposée $\neg(4)\rightarrow\neg(3)$.<br>
 Supposons que $\phi$ n'est pas une tautologie du calcul des propositions. Il existe donc un modèle $\mathcal{M}$ pour lequel la formule est fausse. Équipons alors le système de transition $\mathcal{T}=(\set{a},\empty)$ de la valuation où pour chacune des variables propositionnelles $P$ apparaissant dans $\phi$, $a\in\mathcal{V}(P)$ si et seulement si $\mathcal{M}\models P$.<br>
 Par définition de la satisfaction locale d'une formule $\langle \mathcal{T},\mathcal{V},a\rangle\Vdash \phi$ ssi $\mathcal{M}\models\phi$.<br>
-Or comme il n'y a qu'un nœud dans le système $\mathcal{T}$, $\langle \mathcal{T},\mathcal{V},a\rangle\Vdash \phi$ ssi $\langle \mathcal{T},\mathcal{V}\rangle\Vdash^{\forall a} \phi$.<br>
-Comme notre hypothèse était que $\mathcal{M}\not\models\phi$, on en déduit à la fois $\langle \mathcal{T},\mathcal{V},a\rangle\nVdash \phi$ et $\langle \mathcal{T},\mathcal{V}\rangle\nVdash \phi$. Ce qui montre $\mathcal{T}\nVdash^{\forall a,\forall\mathcal{V}} \phi$.
+Comme notre hypothèse est que $\mathcal{M}\not\models\phi$, on en déduit que $\langle \mathcal{T},\mathcal{V},a\rangle\nVdash \phi$. On a donc trouvé une valuation qui contredit $(3)$.
 </li>
 <li>Pour montrer $(4)\rightarrow(1)$, on pass également par la contraposée $\neg(1)\rightarrow\neg(4)$.<br>
 On suppose que $\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}}\phi$ n'est pas satisfaite, et donc qu'il existe une valuation $\mathcal{V}$ et un nœud $a$ tels que $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\phi$. On définit le modèle du calcul des propositions $\mathcal{M}$ par $\mathcal{M}\models P$ si et seulement si $a\in\mathcal{V}(P)$, et ce pour chaque variable propositionnelle apparaissant dans $\phi$. On a donc $\mathcal{M}\not\models\phi$. Par conséquent, $\phi$ n'est pas une tautologie.
@@ -2365,20 +2363,18 @@ On suppose que $\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}}\phi$ n'est pas
 </div>
 <p><br><br></p>
 <div id="theo">
-<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :
-$$
-\begin{array}{ll}
-(1)&amp;\mathcal{S}\text{ est réflexif}\\
-(2)&amp;\text{Pour toute formule }\phi, \mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\phi\rightarrow\phi)
-\end{array}
-$$</p>
+<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
+<ol>
+<li>$\mathcal{S}$ est réflexif</li>
+<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\phi\rightarrow\phi)$</li>
+</ol>
 </div>
 <br>
 <div id="preuve">
 <ul>
 <li>$(1)\Rightarrow(2)$<br>
 Soit $I$ un singleton et $\mathcal{S}=(N,A)$ un système de transition <b>réflexif</b> étiqueté par $I$.<br>
-Si un nœud $a$ quelconque, pour une valuation quelconque, vérifie $a\Vdash\Box \phi$, alors par définition, pour tout $b$ tel que $a\rightarrow b$, $b\Vdash\phi$. Puisque $\mathcal{S}$ est réflexif, $a$ est lui-même un de ces $b$ et donc $a\Vdash\phi$.
+Si un nœud $a$ quelconque, pour une valuation quelconque, vérifie $a\Vdash\Box \phi$, alors par définition, pour tout $b$ tel que $a\longrightarrow b$, $b\Vdash\phi$. Puisque $\mathcal{S}$ est réflexif, $a$ est lui-même un de ces $b$ et donc $a\Vdash\phi$.
 </li>
 <li>$(2)\Rightarrow(1)$<br>
 Soit $I$ un singleton et $\mathcal{S}=(N,A)$ un système de transition étiqueté par $I$.<br>
@@ -2387,17 +2383,15 @@ Soit $I$ un singleton et $\mathcal{S}=(N,A)$ un système de transition étiquet�
 </div>
 <p><br><br></p>
 <div id="def">
-<p>Un système de transition est dit <b>famélique</b> si pour chacun de ses nœuds $a$, on a si $a\rightarrow b$ alors $a=b$.</p>
+<p>Un système de transition est dit <b>famélique</b> si pour chacun de ses nœuds $a$, on a si $a\longrightarrow b$ alors $a=b$.</p>
 </div>
 <br>
 <div id="theo">
-<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :
-$$
-\begin{array}{ll}
-(1)&amp;\mathcal{S}\text{ est famélique}\\
-(2)&amp;\text{Pour toute formule }\phi, \mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\phi\rightarrow\Box\phi)
-\end{array}
-$$</p>
+<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
+<ol>
+<li>$\mathcal{S}$ est famélique</li>
+<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\phi\rightarrow\Box\phi)$</li>
+</ol>
 </div>
 <br>
 <div id="preuve">
@@ -2429,49 +2423,45 @@ $\mathscr{C}\Vdash\Box(P\rightarrow Q)\rightarrow(\Box P\rightarrow \Box Q)$<br>
 <br>
 <div id="preuve">
 <p>Soient $\mathcal{S}$ un système de transition, $a$ un nœud de $\mathcal{S}$ et $\mathcal{V}$ une valuation quelconque.<br>
-Si $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box(P\rightarrow Q)$, alors pour tout $b$ tel que $a\rightarrow b$, $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash P\rightarrow Q$.<br>
+Si $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box(P\rightarrow Q)$, alors pour tout $b$ tel que $a\longrightarrow b$, $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash P\rightarrow Q$.<br>
 Pour montrer $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box P\rightarrow \Box Q$, il suffit de supposer $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box P$ et de montrer $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box Q$.<br>
-Or, si $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box P$, alors $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash P$ pour tout $b$ tel que $a\rightarrow b$. Et comme par hypothèse $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash P\rightarrow Q$, on en déduit $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash Q$.<br>
+Or, si $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box P$, alors $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash P$ pour tout $b$ tel que $a\longrightarrow b$. Et comme par hypothèse $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash P\rightarrow Q$, on en déduit $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash Q$.<br>
 Et comme c&rsquo;est vrai pour tout $b$ successeur de $a$, on en déduit $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box Q$.</p>
 </div>
 <p><br><br></p>
 <div id="theo">
-<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :
-$$
-\begin{array}{ll}
-(1)&amp;\mathcal{S}\text{ est transitif}\\
-(2)&amp;\text{Pour toute formule }\phi, \mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\phi\rightarrow \Box\Box\phi )
-\end{array}
-$$</p>
+<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
+<ol>
+<li>$\mathcal{S}$ est transitif</li>
+<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\phi\rightarrow \Box\Box\phi )$</li>
+</ol>
 </div>
 <br>
 <div id="preuve">
 <ul>
 <li>$(1)\Rightarrow(2)$<br>
 Soient $\mathcal{S}$ un système de transition transitif, $\mathcal{V}$ une valuation et $a$ un nœud.<br>
-Si $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\phi$ alors pour tout nœud $b$ tel que $a\rightarrow b$, $\langle\mathcal{S},\mathcal{V},b\rangle\Vdash\phi$.<br>
-Pour montrer $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box\phi$, il suffit de montrer que pour tout $c$ tel qu'il existe $b$ vérifiant $a\rightarrow b$ et $b\rightarrow c$, on a $\langle\mathcal{S},\mathcal{V},c\rangle\Vdash\phi$.<br>
-Or puisque $\mathcal{S}$ est transitif, $a\rightarrow b$ et $b\rightarrow c$ impliquent $a\rightarrow c$. D'où $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\phi$ entraîne $\langle\mathcal{S},\mathcal{V},c\rangle\Vdash\phi$.
+Si $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\phi$ alors pour tout nœud $b$ tel que $a\longrightarrow b$, $\langle\mathcal{S},\mathcal{V},b\rangle\Vdash\phi$.<br>
+Pour montrer $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box\phi$, il suffit de montrer que pour tout $c$ tel qu'il existe $b$ vérifiant $a\longrightarrow b$ et $b\longrightarrow c$, on a $\langle\mathcal{S},\mathcal{V},c\rangle\Vdash\phi$.<br>
+Or puisque $\mathcal{S}$ est transitif, $a\longrightarrow b$ et $b\longrightarrow c$ impliquent $a\longrightarrow c$. D'où $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\phi$ entraîne $\langle\mathcal{S},\mathcal{V},c\rangle\Vdash\phi$.
 </li>
 <li>$(2)\Rightarrow(1)$<br>
-Soit un système de transition non transitif $\mathcal{S}$ et soient $a$, $b$ et $c$ trois nœuds de $\mathcal{S}$ tels que $a\rightarrow b$, $b\rightarrow c$ et $a\not\rightarrow c$. Soit $\mathcal{V}$ une valuation qui vérifie $d\in\mathcal{V}(P)$ si et seulement si $a\rightarrow d$.<br>
+Soit un système de transition non transitif $\mathcal{S}$ et soient $a$, $b$ et $c$ trois nœuds de $\mathcal{S}$ tels que $a\longrightarrow b$, $b\longrightarrow c$ et $a\not\!\!\longrightarrow c$. Soit $\mathcal{V}$ une valuation qui vérifie $d\in\mathcal{V}(P)$ si et seulement si $a\rightarrow d$.<br>
 Pour $\phi=P$, nous obtenons donc à la fois $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\phi$ et $\langle\mathcal{S},\mathcal{V},c\rangle\nVdash\phi$ ce qui montre que $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Box\Box\phi$.
 </li>
 </ul>
 </div>
 <p><br><br></p>
 <div id="def">
-<p>Un système de transition est dit <b>dense</b> s&rsquo;il vérifie pour tout nœud $a$, $c$ : si $a\rightarrow c$, alors il existe $b$ tel que $a\rightarrow b$ et $b\rightarrow c$.</p>
+<p>Un système de transition est dit <b>dense</b> s&rsquo;il vérifie pour tout nœud $a$, $c$ : si $a\rightarrow c$, alors il existe $b$ tel que $a\longrightarrow b$ et $b\rightarrow c$.</p>
 </div>
 <br>
 <div id="theo">
-<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :
-$$
-\begin{array}{ll}
-(1)&amp;\mathcal{S}\text{ est dense}\\
-(2)&amp;\text{Pour toute formule }\phi, \mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\Box\phi\rightarrow \Box\phi)
-\end{array}
-$$</p>
+<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
+<ol>
+<li>$\mathcal{S}$ est dense</li>
+<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\Box\phi\rightarrow \Box\phi)$
+</ol>
 </div>
 <br>
 <div id="preuve">
@@ -2479,11 +2469,11 @@ $$</p>
 <li>$(1)\Rightarrow(2)$<br>
 Soient $\mathcal{S}$ un système de transition dense, $\mathcal{V}$ une valuation et $a$ un nœud.<br>
 Supposons que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box\phi$ est vérifié bet montrons que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\phi$ l'est également.<br>
-Soit $c$ un nœud vérifiant $a\rightarrow c$. $\mathcal{S}$ étant dense, il existe $b$ tel que $a\rightarrow b$ et $b\rightarrow c$. Par conséquent, l'hypothèse $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box\phi$ entraîne aussitôt $\langle\mathcal{S},\mathcal{V},c\rangle\Vdash \phi$.
+Soit $c$ un nœud vérifiant $a\longrightarrow c$. $\mathcal{S}$ étant dense, il existe $b$ tel que $a\longrightarrow b$ et $b\longrightarrow c$. Par conséquent, l'hypothèse $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box\phi$ entraîne aussitôt $\langle\mathcal{S},\mathcal{V},c\rangle\Vdash \phi$.
 </li>
 <li>$(2)\Rightarrow(1)$<br>
 Soit un système de transition non dense $\mathcal{S}$ qui vérifie $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\Box\phi\rightarrow \Box\phi)$ pour n'importe quelle formule $\phi$.<br>
-Comme $\mathcal{S}$ n'est pas dense, il existe deux nœuds $a$ et $c$ tels que $a\rightarrow c$ sans qu'aucun $b$ ne vérifie à la fois $a\rightarrow b$ et $b\rightarrow c$.<br>
+Comme $\mathcal{S}$ n'est pas dense, il existe deux nœuds $a$ et $c$ tels que $a\longrightarrow c$ sans qu'aucun $b$ ne vérifie à la fois $a\longrightarrow b$ et $b\longrightarrow c$.<br>
 Considérons la valuation $\mathcal{V}$ définie par $d\in\mathcal{V}(P)$ si et seulement si $d\neq c$.<br>
 Il s'en suit que si $\langle\mathcal{S},\mathcal{V},c\rangle\nVdash P$ alors $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Box P$, et pourtant $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box P$. D'où $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Box\Box P \rightarrow \Box P$, ce qui contredit l'hypothèse.
 </li>
@@ -2518,7 +2508,7 @@ $\phi$ est une <b>conséquence sémantique locale</b> de $\Gamma$ (noté $\Gamma
 <div id="preuve">
 <p>Soient $\mathcal{MOD}$ la classe de tous les modèles, $\Gamma=\set{P}$ et $\phi=\Box P$.<br>
 On a  $\Gamma\Vdash^{\forall a}_\mathcal{MOD}\phi$.<br>
-En effet, considérons un modèle quelconque $\langle\mathcal{S},\mathcal{V}\rangle$ qui vérifie $\langle\mathcal{S},\mathcal{V}\rangle\Vdash^{\forall a}\Gamma$, ce qui revient ici à affirmer que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash P$ est vraie pour tout nœud $a$. En particulier, pour tout nœud $b$ tel que $a\rightarrow b$, la relation $\langle\mathcal{S},\mathcal{V},b\rangle\Vdash P$ est vérifiée, ce qui signifie que tout nœud $a$ vérifie $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash \Box P$.</p>
+En effet, considérons un modèle quelconque $\langle\mathcal{S},\mathcal{V}\rangle$ qui vérifie $\langle\mathcal{S},\mathcal{V}\rangle\Vdash^{\forall a}\Gamma$, ce qui revient ici à affirmer que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash P$ est vraie pour tout nœud $a$. En particulier, pour tout nœud $b$ tel que $a\longrightarrow b$, la relation $\langle\mathcal{S},\mathcal{V},b\rangle\Vdash P$ est vérifiée, ce qui signifie que tout nœud $a$ vérifie $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash \Box P$.</p>
 <p>Par contre, il est facile de trouver un modèle où $\Gamma\Vdash_\mathcal{MOD}\phi$ est faux :</p>
 <div style="position:relative;margin-left:auto;margin-right:auto;width:500px;max-width:100%;">
 <img src="/preuvecsqsem.png">
@@ -2649,7 +2639,7 @@ Le Corrupteur ne peut pas jouer son deuxième coup et perd la partie.
 Le modèle $\mathcal{N}$ est défini par&nbsp;:
 <ul>
 <li>l'ensemble des nœuds est $\mathbb{N}$,</li>
-<li>de tout nœud $n\in\mathbb{N}$ part deux arcs&nbsp;: $n\rightarrow n+1$ et $n\rightarrow n+2$</li>
+<li>de tout nœud $n\in\mathbb{N}$ part deux arcs&nbsp;: $n\longrightarrow n+1$ et $n\longrightarrow n+2$</li>
 <li>$2n\Vdash P$ et $2n+1\nVdash P$</li>
 </ul>
 Le Duplicateur possède une stratégie gagnante qui consiste à tout moment de la partie&nbsp;:
@@ -2685,7 +2675,7 @@ De la sorte, le jeu continue indéfiniment.
 </div>
 <br>
 <div id="def">
-Soient $I$ un ensemble non vide, $phi$ une formule et $\text{\bf S}$ un système formel.<br>
+Soient $I$ un ensemble non vide, $\phi$ une formule et $\text{\bf S}$ un système formel.<br>
 Une <b>preuve</b> de la formule $\varphi$ dans le système formel $\text{\bf S}$ est une suite finie de formule $\langle\varphi_1,\varphi_2,\ldots,\varphi_n\rangle$ telle que&nbsp;:
 <ul>
 <li>$\varphi_n=\phi$</li>
@@ -2693,7 +2683,7 @@ Une <b>preuve</b> de la formule $\varphi$ dans le système formel $\text{\bf S}$
 <li>chaque $\varphi_l$ vérifie l'une des quatre conditions suivantes&nbsp;:
 <ul>
 <li>$\varphi_l \in \text{\bf S}$ ($\varphi_l$ est un axiome)</li>
-<li>$\varphi_l$ est obtenue par application de la règle du <i>modus ponnens</i> à deux formules d'indice inférieurs $\varphi_j$ et $\varphi_k$ où $j , k < l$ ($\varphi_j = \varphi_k\rightarrow\varphi_l$)</li>
+<li>$\varphi_l$ est obtenue par application de la règle du <i>modus ponens</i> à deux formules d'indice inférieurs $\varphi_j$ et $\varphi_k$ où $j , k < l$ ($\varphi_j = \varphi_k\rightarrow\varphi_l$)</li>
 <li>$\varphi_l = \varphi_k[\theta /P]$ où $k < l$ (substitution d'une variable $P$ quelconque par une formule $\theta$ quelconque dans une formule d'indice inférieure)</li>
 <li>$\varphi_l = [i]\varphi_j$ où $j < l$ ($\varphi_l$ est obtenue à partir de l'application de la règle de nécessitation appliquée à une formule d'indice inférieure pour une étiquette $i\in I$ quelconque)</li>
 </ul>
@@ -2740,14 +2730,68 @@ $$
 <br>
 <div id="def">
 <p>Soient $\text{\bf S}$ un système formel et $\Gamma$ un ensemble de formules appelées hypothèses.<br>
-On écrit $\Gamma\vdash_\text{\bf S} \phi$ s&rsquo;il existe un ensemble difini de formules $\set{\psi_1,\psi_2,\ldots,\psi_n}\subseteq\Gamma$ tel que la formule $(\psi_1\land\psi_2\land\ldots\land\psi_n)\rightarrow\phi$ puisse être prouvée dans le système formel $\text{\bf S}$. Autrement dit le séquent $\vdash_\text{\bf S}(\psi_1\land\psi_2\land\ldots\land\psi_n)\rightarrow\phi$ est vérifiée pour un nombre fini de formules bien choisies de $\Gamma$.</p>
+On écrit $\Gamma\vdash_\text{\bf S} \phi$ s&rsquo;il existe un ensemble fini de formules $\set{\psi_1,\psi_2,\ldots,\psi_n}\subseteq\Gamma$ tel que la formule $(\psi_1\land\psi_2\land\ldots\land\psi_n)\rightarrow\phi$ puisse être prouvée dans le système formel $\text{\bf S}$. Autrement dit le séquent $\vdash_\text{\bf S}(\psi_1\land\psi_2\land\ldots\land\psi_n)\rightarrow\phi$ est vérifiée pour un nombre fini de formules bien choisies de $\Gamma$.</p>
 </div>
 <br>
 <p>Attention, ici les hypothèses n&rsquo;ont pas le même sens qu&rsquo;en logique des propositions. En effet, pour prouver le séquent $\phi\vdash_\text{\bf S}\psi$, on ne peut pas ajouter $\phi$ aux axiomes et tenter d&rsquo;atteindre $\psi$ à partir des règles (<em>modus ponens</em>, substitution uniforme et nécessitation). Il faut ici réussir à prouver la formule $\phi\rightarrow\psi$ sur la base des seuls axiomes.</p>
 <p>Si on pouvait faire comme en logique des propositions, prouver $\phi\vdash_\text{\bf S}\Box\phi$ deviendrait évident : on place $\phi$ dans les axiomes et on applique la règle de nécessitation. Mais non, il faut pouvoir prouver $\vdash_\text{\bf S}\phi\rightarrow\Box\phi$ et comme on va le voir, dans le système $\text{\bf K}$, la formule $P\rightarrow\Box P$ n&rsquo;est pas prouvable ($P\nvdash_\text{\bf K}\Box P$).</p>
 <br>
 <h3 id="le-système-k">Le système K</h3>
-
+<br>
+<div id="def">
+<p>Le système $\text{\bf K}$ est le plus petit système formel qui contient :</p>
+<ul>
+<li>chaque tautologie du calcul des propositions,</li>
+<li>(K) : $\Box(P\rightarrow Q)\rightarrow (\Box P\rightarrow \Box Q)$</li>
+<li>(dual) : $\Diamond P\leftrightarrow\neg\Box\neg P$</li>
+</ul>
+</div>
+<p>Le système $\text{\bf K}$ est minimal en ce sens qu&rsquo;il est validé dans tout modèle.</p>
+<p>Pour tout modèle $\mathcal{M}=\langle\mathcal{S},\mathcal{V}\rangle$ et tout nœud $a$, si $a\Vdash\Box(P\rightarrow Q)$ et $a\Vdash\Box P$, cela signifie que pour tout nœud $b$ tel que $a\longrightarrow b$, $b\Vdash P\rightarrow Q$ et $b\Vdash P$, par conséquent $b\Vdash Q$ et donc $a\Vdash \Box Q$. Cela montre que l&rsquo;axiome (K) est valide dans tous les systèmes de transition.</p>
+<p>Cet axiome (K) est appelé <strong>axiome de distribution</strong> car il permet de distribuer l&rsquo;opérateur modal $\Box$ à l&rsquo;intérieur de l&rsquo;impliccation.</p>
+<p>L&rsquo;axiome (dual) permet de passer d&rsquo;un opérateur modal à l&rsquo;autre et est aussi valide dans tout sytème de transition (être sûr de la présence d&rsquo;un truc revient à ne pas être sûr de son absence).</p>
+<p>Mais ce système formel n&rsquo;est pas encore suffisamment riche pour contenir toutes les formules valides dans tous les modèles quels qu&rsquo;ils soient. Pour cela, il faudrait également considérer toutes les substitutions uniformes possibles (entre autre dans la formule (K)). On passe alors aux <strong>logiques modales</strong>.</p>
+<br>
+<h2 id="logique-modale-normale">Logique modale normale</h2>
+<br>
+<div id="def">
+<p>Une <b>logique modale normale</b> $\mathbb{L}$ est un ensemble de formules qui contient le système formel $\text{\bf K}$ et qui est clos par :</p>
+<ul>
+<li><i>modus ponens</i>
+$$
+\begin{prooftree}
+\AxiomC{$\phi$}
+\AxiomC{$\phi\rightarrow\psi$}
+\RightLabel{$\scriptsize\;mod.p.$}
+\BinaryInfC{$\psi$}
+\end{prooftree}
+$$
+</li>
+<li>substitution uniforme
+$$
+\begin{prooftree}
+\AxiomC{$\phi$}
+\RightLabel{$\scriptsize\;sub.$}
+\UnaryInfC{$\phi[\theta/P]$}
+\end{prooftree}
+$$
+</li>
+<li>nécessitation
+$$
+\begin{prooftree}
+\AxiomC{$\phi$}
+\RightLabel{$\scriptsize\;sub.$}
+\UnaryInfC{$\Box\phi$}
+\end{prooftree}
+$$
+</li>
+</ul>
+</div>
+<p>Toute logique modale normale contient chaque formule $\phi$ prouvable dans le système formel $\text{\bf K}$ (si $\vdash_\text{\bf K}\phi$ alors $\phi$ fait partie de toute logique modale normale).</p>
+<p>La plus petite logique modale normale est construite sur la base du système formel $\text{\bf K}$. On la note $\mathbb{L}_\text{\bf K}$. Le lien entre la logique normale $\mathbb{L}_\text{\bf K}$ et le système formel $\text{\bf K}$ est le suivant : $\phi \in \mathbb{L}_\text{\bf K}$ ssi $\vdash_\text{\bf K}\phi$.</p>
+<br>
+<h2 id="quelques-axiomes-usuels">Quelques axiomes usuels</h2>
+<br>
 
 <footer class="footline">
 	
@@ -4091,19 +4135,19 @@ On écrit $\Gamma\vdash_\text{\bf S} \phi$ s&rsquo;il existe un ensemble difini 
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713633866"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713633866"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713633866"></script>
-    <script src="/js/jquery.sticky.js?1713633866"></script>
-    <script src="/js/featherlight.min.js?1713633866"></script>
-    <script src="/js/highlight.pack.js?1713633866"></script>
+    <script src="/js/clipboard.min.js?1713643939"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713643939"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713643939"></script>
+    <script src="/js/jquery.sticky.js?1713643939"></script>
+    <script src="/js/featherlight.min.js?1713643939"></script>
+    <script src="/js/highlight.pack.js?1713643939"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713633866"></script>
-    <script src="/js/learn.js?1713633866"></script>
-    <script src="/js/hugo-learn.js?1713633866"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713643939"></script>
+    <script src="/js/learn.js?1713643939"></script>
+    <script src="/js/hugo-learn.js?1713643939"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713633866"></script>
+            <script src="/mermaid/mermaid.js?1713643939"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
