@@ -276,6 +276,15 @@ Le cercle répétiteur de Borda fut leur arme secrète.</description>
 L&amp;rsquo;intelligence arificielle (IA) est une discipline scientifique qui a vu officiellement le jour en 1956. Elle repose sur la conjecture selon laquelle toutes les fonctions cognitives, en particulier l&amp;rsquo;apprentissage, le raisonnement, le calcul, la perception, la mémorisation, voire la découverte scientifique ou la créativité artistique, peuvent être décrites avec une précision telle qu&amp;rsquo;il serait possible de les reproduire sur des ordinateurs.</description>
     </item>
     <item>
+      <title>Logique modale</title>
+      <link>https://coursphychi.github.io/more/maths/logique/logique4/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/logique/logique4/</guid>
+      <description>info
+Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
+Logique modale Une petite communauté de dragons vivent sur une île aux règles spéciales. Si un dragon apprend qu&amp;rsquo;il a les yeux bleus, c&amp;rsquo;est la honte et il doit partir le soir même. Mais les autres dragons n&amp;rsquo;ont pas le droit de lui dire et aucun de ces dragons n&amp;rsquo;a de reflet et ne peut donc constater la couleur de ses propres yeux.</description>
+    </item>
+    <item>
       <title>Probabilités / Statistiques</title>
       <link>https://coursphychi.github.io/more/maths/probastat/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
@@ -565,27 +574,11 @@ Carte mentale Savoir et savoir faire coeur
 Déterminer la fréquence du fondamental et des harmoniques à partir du spectre d’amplitude d’un signal sonore.. Définir et distinguer la notion de timbre et de hauteur. Exploiter la relation entre l&amp;rsquo;intensité acoustique et le niveau sonore et savoir se débrouiller avec les décibels (dB). Exploiter des informations relatives aux courbes de sensibilité de l’oreille humaine (fréquences audible, seuil d&amp;rsquo;audibilité, seuil de douleur, etc.</description>
     </item>
     <item>
-      <title>Image</title>
-      <link>https://coursphychi.github.io/1spe/lentilles/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      <guid>https://coursphychi.github.io/1spe/lentilles/</guid>
-      <description>Formation des images par une lentille convergente Présentation
-Documents et autres Act - Épicentre </description>
-    </item>
-    <item>
       <title>Lentilles</title>
       <link>https://coursphychi.github.io/2nde/lentille/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/lentille/</guid>
       <description>Formation des images et lentille convergente Documents et autres TP - Lentille convergente et grandissement Exos - Lumière et lentilles Applet Geogebra </description>
-    </item>
-    <item>
-      <title>Ondes mécaniques</title>
-      <link>https://coursphychi.github.io/1spe/ondes/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      <guid>https://coursphychi.github.io/1spe/ondes/</guid>
-      <description>Ondes mécaniques propgressives Présentation
-Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Act - Voix de cannard Simulation </description>
     </item>
     <item>
       <title>Électricité</title>
@@ -596,6 +589,14 @@ Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues A
 Documents Activité 1 - Caractéristique d&amp;rsquo;une thermistance + Tracé et régression linéaire + Correction Activité 2 - Comment fabriquer un thermomètre à partir d&amp;rsquo;une thermistance ? + Tracé de la courbe d&amp;rsquo;étalonnage Activité 3 - Circuit électrique au sein d’un bathythermographe + Correction </description>
     </item>
     <item>
+      <title>Ondes mécaniques</title>
+      <link>https://coursphychi.github.io/1spe/ondes/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/ondes/</guid>
+      <description>Ondes mécaniques propgressives Présentation
+Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Act - Voix de cannard Simulation </description>
+    </item>
+    <item>
       <title>Radioactivité</title>
       <link>https://coursphychi.github.io/tsti2d/radioact/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -604,6 +605,14 @@ Documents Activité 1 - Caractéristique d&amp;rsquo;une thermistance + Tracé e
 Expériences Désintégration radioactive de la classe + Tirage au sort TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours Estimez votre exposition annuelle à la radioactivité Activités Datation carbone 14 Déchets nucléaires Examen médical Exercice défaut de masse et énergie Savoir et savoir faire coeur
 Distinguer la radioactivité naturelle de la radioactivité artificielle.
 Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.</description>
+    </item>
+    <item>
+      <title>Image</title>
+      <link>https://coursphychi.github.io/1spe/lentilles/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/lentilles/</guid>
+      <description>Formation des images par une lentille convergente Présentation
+Documents et autres Act - Lentille et smartphone </description>
     </item>
     <item>
       <title>Pression</title>
