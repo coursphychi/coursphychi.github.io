@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713575097" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713575097" rel="stylesheet">
-    <link href="/css/hybrid.css?1713575097" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713575097" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713575097" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713575097" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713575097" rel="stylesheet">
-    <link href="/css/theme.css?1713575097" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713575097" rel="stylesheet">
+    <link href="/css/nucleus.css?1713633866" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713633866" rel="stylesheet">
+    <link href="/css/hybrid.css?1713633866" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713633866" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713633866" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713633866" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713633866" rel="stylesheet">
+    <link href="/css/theme.css?1713633866" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713633866" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713575097" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713633866" rel="stylesheet">
     
-    <link href="/css/foo.css?1713575097" rel="stylesheet"><link href="/css/bar.css?1713575097" rel="stylesheet">
+    <link href="/css/foo.css?1713633866" rel="stylesheet"><link href="/css/bar.css?1713633866" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713575097"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713633866"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713575097"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713575097"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713633866"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713633866"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713575097"></script>
+<script type="text/javascript" src="/js/search.js?1713633866"></script>
 
     
   </div>
@@ -2535,49 +2535,8 @@ $$
 <p>Par contre, on ne peut pas prouver l&rsquo;implication inverse avec les règles de la logique minimale ($\nvdash_{\!m} \neg\neg\phi\rightarrow\phi$). On ne peut donc pas éliminer les doubles négations (on verra plus loin qu&rsquo;il manque la règle de l&rsquo;absurdité classique pour y parvenir).</p>
 <div id="preuve">
 <p>Montrons que $\vdash_{\!m} \,\neg\phi\leftrightarrow (\phi\rightarrow\bot)$ :</p>
-<div id="grosseformule">
-$$
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg\phi\vdash\neg\phi$}
-\RightLabel{$\scriptsize\;aff$}
-\UnaryInfC{$\neg\phi,\phi\vdash\neg\phi$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\phi\vdash \phi$}
-\RightLabel{$\scriptsize\;aff$}
-\UnaryInfC{$\neg\phi,\phi\vdash \phi$}
-\RightLabel{$\scriptsize\; \neg e$}
-\BinaryInfC{$\neg\phi,\phi,\neg\phi,\phi\vdash \bot$}
-\RightLabel{$\scriptsize\; ctr$}
-\UnaryInfC{$\neg\phi,\phi\vdash \bot$}
-\RightLabel{$\scriptsize\; \rightarrow i$}
-\UnaryInfC{$\neg\phi\vdash\phi\rightarrow \bot$}
-\RightLabel{$\scriptsize\; \rightarrow i$}
-\UnaryInfC{$\vdash\neg\phi\rightarrow(\phi\rightarrow \bot)$}
-\AxiomC{}
-\RightLabel{$\scriptsize\; ax$}
- \UnaryInfC{$\phi\rightarrow\bot\vdash\phi\rightarrow\bot$}
- \RightLabel{$\scriptsize\; aff$}
- \UnaryInfC{$\phi\rightarrow\bot,\phi\vdash\phi\rightarrow\bot$}
-\AxiomC{}
-\RightLabel{$\scriptsize\; ax$}
-\UnaryInfC{$\phi\vdash\phi$}
-\RightLabel{$\scriptsize\; aff$}
-\UnaryInfC{$\phi\rightarrow\bot,\phi\vdash\phi$}
-\RightLabel{$\scriptsize\; \rightarrow e$}
-\BinaryInfC{$\phi\rightarrow\bot,\phi,\phi\rightarrow\bot,\phi\vdash\bot$}
-\RightLabel{$\scriptsize\; ctr$}
-\UnaryInfC{$\phi\rightarrow\bot,\phi\vdash\bot$}
-\RightLabel{$\scriptsize\; \neg i$}
-\UnaryInfC{$\phi\rightarrow\bot\vdash\neg\phi$}
-\RightLabel{$\scriptsize\; \rightarrow i$}
-\UnaryInfC{$\vdash(\phi\rightarrow\bot)\rightarrow\neg\phi$}
-\RightLabel{$\scriptsize\; \land i$}
-\BinaryInfC{$\vdash(\neg\phi\rightarrow(\phi\rightarrow\bot))\land(\phi\rightarrow\bot)\rightarrow\neg\phi))$}
-\end{prooftree}
-$$
+<div style="position:relative;width:620px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvedeb.png">
 </div>
 </div>
 <p>Rq : pour raccourcir les preuves, on va intégrer dorénavant les affaiblissements et contractions aux autres règles.<br></p>
@@ -2695,110 +2654,29 @@ $$
 <br> 
 <div id="preuve">
 <b>Loi du tiers exclu</b> $\vdash\phi\lor\neg\phi$
-<div id="grosseformule">
-$$
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg(\phi\lor\neg\phi)\vdash\neg(\phi\lor\neg\phi)$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\phi\vdash\phi$}
-\RightLabel{$\scriptsize\;\lor i_g$}
-\UnaryInfC{$\phi\vdash\phi\lor\neg\phi$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg(\phi\lor\neg\phi)\vdash\neg(\phi\lor\neg\phi)$}
-\RightLabel{$\scriptsize\;\neg e$}
-\BinaryInfC{$\neg(\phi\lor\neg\phi),\phi\vdash\bot$}
-\RightLabel{$\scriptsize\;\neg i$}
-\UnaryInfC{$\neg(\phi\lor\neg\phi)\vdash\neg\phi$}
-\RightLabel{$\scriptsize\;\lor i_d$}
-\UnaryInfC{$\neg(\phi\lor\neg\phi)\vdash\phi\lor\neg\phi$}
-\RightLabel{$\scriptsize\;\neg e$}
-\BinaryInfC{$\neg(\phi\lor\neg\phi)\vdash\bot$}
-\RightLabel{$\scriptsize\;\bot e_c$}
-\UnaryInfC{$\vdash\phi\lor\neg\phi$}
-\end{prooftree}
-$$
+<div style="position:relative;width:620px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvetiersexclu.png">
 </div>
 </div>
 <br> 
 <div id="preuve">
 <b>Élimination des doubles négations</b> $\vdash\neg\neg\phi\rightarrow\phi$
-<div id="grosseformule">
-$$
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg\neg\phi\vdash\neg\neg\phi$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg\phi\vdash \neg\phi$}
-\RightLabel{$\scriptsize\;\neg e$}
-\BinaryInfC{$\neg\neg\phi,\neg\phi\vdash\bot$}
-\RightLabel{$\scriptsize\;\bot e_c$}
-\UnaryInfC{$\neg\neg\phi\vdash\phi$}
-\RightLabel{$\scriptsize\;\rightarrow i$}
-\UnaryInfC{$\vdash\neg\neg\phi\rightarrow\phi$}
-\end{prooftree}
-$$
+<div style="position:relative;width:280px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvedbleneg.png">
 </div>
 </div>
 <br> 
 <div id="preuve">
 <b>Loi de Peirce</b> $\vdash(\neg\phi\rightarrow\phi)\rightarrow\phi$
-<div id="grosseformule">
-$$
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg\phi\vdash\neg\phi$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg\rightarrow\phi\vdash\neg\rightarrow\phi$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg\phi\vdash\neg\phi$}
-\RightLabel{$\scriptsize\;\rightarrow e$}
-\BinaryInfC{$\neg\phi\rightarrow\phi,\neg\phi\vdash\phi$}
-\RightLabel{$\scriptsize\;\neg e + ctr$}
-\BinaryInfC{$\neg\phi\rightarrow\phi,\neg\phi\vdash\bot$}
-\RightLabel{$\scriptsize\;\bot e_c$}
-\UnaryInfC{$\neg\phi\rightarrow\phi\vdash\phi$}
-\RightLabel{$\scriptsize\;\rightarrow i$}
-\UnaryInfC{$\vdash(\neg\phi\rightarrow\phi)\rightarrow\phi$}
-\end{prooftree}
-$$
+<div style="position:relative;width:440px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvepeirce.png">
 </div>
 </div>
 <br> 
 <div id="preuve">
 La <b>contraposition</b> $\vdash(\neg\psi\rightarrow\neg\phi)\rightarrow(\phi\rightarrow\psi)$
-<div id="grosseformule">
-$$
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg\psi\rightarrow\neg\phi\vdash\neg\psi\rightarrow\neg\phi$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg\psi\vdash\neg\psi$}
-\RightLabel{$\scriptsize\;\rightarrow e$}
-\BinaryInfC{$\neg\psi\rightarrow\neg\phi,\neg\psi\vdash\neg\phi$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\phi\vdash\phi$}
-\RightLabel{$\scriptsize\;\neg e$}
-\BinaryInfC{$\neg\psi\rightarrow\neg\phi,\neg\psi,\phi \vdash\bot$}
-\RightLabel{$\scriptsize\;\bot e_c$}
-\UnaryInfC{$\neg\psi\rightarrow\neg\phi,\phi \vdash\psi$}
-\RightLabel{$\scriptsize\;\rightarrow i$}
-\UnaryInfC{$\neg\psi\rightarrow\neg\phi\vdash \phi \rightarrow\psi$}
-\RightLabel{$\scriptsize\;\rightarrow i$}
-\UnaryInfC{$\vdash(\neg\psi\rightarrow\neg\phi)\rightarrow(\phi\rightarrow\psi)$}
-\end{prooftree}
-$$
+<div style="position:relative;width:450px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvecontrap.png">
 </div>
 </div>
 <br>
@@ -3009,25 +2887,8 @@ Considérons la règle suivante&nbsp;:<br>
 </ul>
 </li>
 </ul>
-<div id="grosseformule">
-$$
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax+aff$}
-\UnaryInfC{$\neg\psi_1,\psi_1\vdash\psi_1$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax+aff$}
-\UnaryInfC{$\neg\psi_1,\psi_1\vdash\neg\psi_1$}
-\RightLabel{$\scriptsize\;\bot e_i$}
-\BinaryInfC{$\neg\psi_1,\psi_1\vdash\bot$}
-\RightLabel{$\scriptsize\;\bot e_c$}
-\UnaryInfC{$\neg\psi_1,\psi_1\vdash\psi_2$}
-\RightLabel{$\scriptsize\;\rightarrow i$}
-\UnaryInfC{$\neg\psi_1\vdash\psi_1\rightarrow\psi_2$}
-\RightLabel{$\scriptsize\;\rightarrow i$}
-\UnaryInfC{$\vdash \neg\psi_1\rightarrow(\psi_1\rightarrow\psi_2)$}
-\end{prooftree}
-$$
+<div style="position:relative;width:400px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/grossepreuveformule1.png">
 </div>
 <ul>
 <ul>
@@ -3057,32 +2918,8 @@ Considérons la règle suivante&nbsp;:
 </ul>
 </li>
 </ul>
-<div id="grosseformule">
-$$
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\psi_1\land\neg\psi_2\vdash\psi_1\land\neg\psi_2$}
-\RightLabel{$\scriptsize\;\land e_d$}
-\UnaryInfC{$\psi_1\land\neg\psi_2\vdash\neg\psi_2$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\psi_1\land\neg\psi_2\vdash\psi_1\land\neg\psi_2$}
-\RightLabel{$\scriptsize\;\land e_g$}
-\UnaryInfC{$\psi_1\land\neg\psi_2\vdash\psi_1$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\psi_1\rightarrow\psi_2\vdash\psi_1\rightarrow\psi_2$}
-\RightLabel{$\scriptsize\;\rightarrow e$}
-\BinaryInfC{$\psi_1\land\neg\psi_2,\psi_1\rightarrow\psi_2\vdash\psi_2$}
-\RightLabel{$\scriptsize\;\neg e + ctr$}
-\BinaryInfC{$\psi_1\land\neg\psi_2,\psi_1\rightarrow\psi_2\vdash\bot$}
-\RightLabel{$\scriptsize\;\neg i$}
-\UnaryInfC{$\psi_1\land\neg\psi_2\vdash \neg(\psi_1\rightarrow\psi_2)$}
-\RightLabel{$\scriptsize\;\rightarrow i$}
-\UnaryInfC{$\vdash(\psi_1\land\neg\psi_2)\rightarrow \neg(\psi_1\rightarrow\psi_2)$}
-\end{prooftree}
-$$
+<div style="position:relative;width:700px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/grossepreuveformule2.png">
 </div>
 <ul>
 <ul>
@@ -3364,39 +3201,8 @@ Et la négation est interprétée comme l&rsquo;absence de preuve puisque puisqu
 <br>
 <div id="preuve">
 Preuve de $\vdash\neg\neg(\neg\neg\phi\rightarrow\phi)$&nbsp;:
-<div id="grosseformule">
-$$
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\phi\vdash\phi$}
-\RightLabel{$\scriptsize\;aff_g$}
-\UnaryInfC{$\phi,\neg\neg\phi\vdash\phi$}
-\RightLabel{$\scriptsize\;\rightarrow_d$}
-\UnaryInfC{$\phi\vdash\neg\neg\phi\rightarrow\phi$}
-\AxiomC{}
-\RightLabel{$\scriptsize\;ax$}
-\UnaryInfC{$\neg\neg\phi\rightarrow\phi\vdash\neg\neg\phi\rightarrow\phi$}
-\RightLabel{$\scriptsize\;\neg_g$}
-\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi),\neg\neg\phi\rightarrow\phi\vdash$}
-\RightLabel{$\scriptsize\;cut$}
-\BinaryInfC{$\neg(\neg\neg\phi\rightarrow\phi),\phi\vdash$}
-\RightLabel{$\scriptsize\;\neg_d$}
-\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi)\vdash\neg\phi$}
-\RightLabel{$\scriptsize\;\neg_g$}
-\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi),\neg\neg\phi\vdash$}
-\RightLabel{$\scriptsize\;aff_d$}
-\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi),\neg\neg\phi\vdash\phi$}
-\RightLabel{$\scriptsize\;\rightarrow_d$}
-\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi)\vdash\neg\neg\phi\rightarrow\phi$}
-\RightLabel{$\scriptsize\;\neg_g$}
-\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi),\neg(\neg\neg\phi\rightarrow\phi)\vdash$}
-\RightLabel{$\scriptsize\;ctr_g$}
-\UnaryInfC{$\neg(\neg\neg\phi\rightarrow\phi)\vdash$}
-\RightLabel{$\scriptsize\;\neg_d$}
-\UnaryInfC{$\vdash\neg\neg(\neg\neg\phi\rightarrow\phi)$}
-\end{prooftree}
-$$
+<div style="position:relative;width:450px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvedblenegsequent.png">
 </div>
 </div>
 <p>Chaque nœud de l&rsquo;arbre de preuve ne contient pas plus d&rsquo;une formule à droite du symbole du séquent, par contre la règle d&rsquo;affaiblissement à droite est utilisée, ce qui situe cette preuve dans le cadre de la logique intuitionniste mais pas de la logique minimale.</p>
@@ -4803,19 +4609,19 @@ Par exemple, prouver une instance du tiers exclu $\Gamma\vdash_{\!i}\phi\lor\neg
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713575097"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713575097"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713575097"></script>
-    <script src="/js/jquery.sticky.js?1713575097"></script>
-    <script src="/js/featherlight.min.js?1713575097"></script>
-    <script src="/js/highlight.pack.js?1713575097"></script>
+    <script src="/js/clipboard.min.js?1713633866"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713633866"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713633866"></script>
+    <script src="/js/jquery.sticky.js?1713633866"></script>
+    <script src="/js/featherlight.min.js?1713633866"></script>
+    <script src="/js/highlight.pack.js?1713633866"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713575097"></script>
-    <script src="/js/learn.js?1713575097"></script>
-    <script src="/js/hugo-learn.js?1713575097"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713633866"></script>
+    <script src="/js/learn.js?1713633866"></script>
+    <script src="/js/hugo-learn.js?1713633866"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713575097"></script>
+            <script src="/mermaid/mermaid.js?1713633866"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

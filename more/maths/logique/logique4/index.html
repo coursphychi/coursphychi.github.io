@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713575097" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713575097" rel="stylesheet">
-    <link href="/css/hybrid.css?1713575097" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713575097" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713575097" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713575097" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713575097" rel="stylesheet">
-    <link href="/css/theme.css?1713575097" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713575097" rel="stylesheet">
+    <link href="/css/nucleus.css?1713633866" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713633866" rel="stylesheet">
+    <link href="/css/hybrid.css?1713633866" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713633866" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713633866" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713633866" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713633866" rel="stylesheet">
+    <link href="/css/theme.css?1713633866" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713633866" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713575097" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713633866" rel="stylesheet">
     
-    <link href="/css/foo.css?1713575097" rel="stylesheet"><link href="/css/bar.css?1713575097" rel="stylesheet">
+    <link href="/css/foo.css?1713633866" rel="stylesheet"><link href="/css/bar.css?1713633866" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713575097"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713633866"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713575097"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713575097"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713633866"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713633866"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713575097"></script>
+<script type="text/javascript" src="/js/search.js?1713633866"></script>
 
     
   </div>
@@ -2065,7 +2065,11 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         <li><a href="#modèles-et-classes">Modèles et classes</a></li>
         <li><a href="#conséquences-sémantiques">Conséquences sémantiques</a></li>
         <li><a href="#théories-équivalence-et-bisimulation">Théories, équivalence et bisimulation</a></li>
-        <li><a href="#systèmes-logiques">Systèmes logiques</a></li>
+      </ul>
+    </li>
+    <li><a href="#systèmes-logiques">Systèmes logiques</a>
+      <ul>
+        <li><a href="#le-système-k">Le système K</a></li>
       </ul>
     </li>
   </ul>
@@ -2661,8 +2665,88 @@ De la sorte, le jeu continue indéfiniment.
 <p>Théorème de Henessy-Milner : $(\mathcal{M},a)\equiv(\mathcal{N},b)$ si et seulement si $\text{D}_{up}$ a une stratégie gagnante dans $\mathbb{Bis}((\mathcal{M},a),(\mathcal{N},b))$.</p>
 </div>
 <br>
-<h3 id="systèmes-logiques">Systèmes logiques</h3>
+<h2 id="systèmes-logiques">Systèmes logiques</h2>
 <br>
+<p>Nous cherchons l&rsquo;équivalent en logique modale des tautologies pour le calcul des propositions. Pour une classe $\mathscr{C}$ de systèmes de transition, on va appeler ça logique de la classe $\mathscr{C}$.</p>
+<div id="def">
+<p>La logique de la classe $\mathscr{C}$ est la classe de toutes les formules qui sont valides dans tous les systèmes de transition de $\mathscr{C}$ : $\text{Log}_\mathscr{C}=\set{\phi|\text{pour tout }\mathcal{S}\in\mathscr{C},\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}} \phi}$</p>
+</div>
+<br>
+<p>Cette logique doit contenir toutes les formules qui sont des tautologies du calcul des propositions puisque ces formule de profondeur modale nulle (pas d&rsquo;opérateurs modaux) sont nécessairement forcées en tout nœud de n&rsquo;importe quel modèle.</p>
+<p>Si la logique contient la formule $\phi$, elle doit aussi contenir $\Box\phi$. En effet, si $\phi$ est forcée en tout nœud, alors le successeur de tout nœud force aussi $\phi$. On appelle ça la <strong>nécessitation</strong> (ou généralisation) d&rsquo;une formule.</p>
+<p>De plus, si $\phi$ appartient à la logique, la satisfaction de $\phi$ en un nœud $a$ donné est indépendante de la valuation $\mathcal{V}$ (que $P$ soit vraie ou fausse, $P$ est forcée au nœud $a$). Par conséquent, que $\psi$ soit vraie ou fausse, la satisfaction de la formule $\phi[\psi/P]$ ne varie pas. Toutes <strong>substitutions uniformes</strong> opérées sur les variables d&rsquo;une formule appartenant à la logique sera aussi dans la logique.</p>
+<p>Enfin, la logique de la classe de tous les systèmes de transition est close par <em>modus ponens</em> ; si $\phi \rightarrow\psi$ et $\psi$ appartiennent toutes deux à la logique, alors $\psi$ également.</p>
+<p>Pour déterminer des nouvelles tautologies en calcul des propositions, on a utilisé des systèmes de déduction (à la Hilbert, déduction naturelle, calcul des séquents). La modalité complique un peu les choses et seul le système à la Hilbert va pouvoir s&rsquo;adapter facilement.</p>
+<div id="def">
+<ul>
+<li>Un <b>axiome</b> est une formule.</li>
+<li>Un <b>système formel</b> est un ensemble d'axiomes</li>
+</ul>
+</div>
+<br>
+<div id="def">
+Soient $I$ un ensemble non vide, $phi$ une formule et $\text{\bf S}$ un système formel.<br>
+Une <b>preuve</b> de la formule $\varphi$ dans le système formel $\text{\bf S}$ est une suite finie de formule $\langle\varphi_1,\varphi_2,\ldots,\varphi_n\rangle$ telle que&nbsp;:
+<ul>
+<li>$\varphi_n=\phi$</li>
+<br>
+<li>chaque $\varphi_l$ vérifie l'une des quatre conditions suivantes&nbsp;:
+<ul>
+<li>$\varphi_l \in \text{\bf S}$ ($\varphi_l$ est un axiome)</li>
+<li>$\varphi_l$ est obtenue par application de la règle du <i>modus ponnens</i> à deux formules d'indice inférieurs $\varphi_j$ et $\varphi_k$ où $j , k < l$ ($\varphi_j = \varphi_k\rightarrow\varphi_l$)</li>
+<li>$\varphi_l = \varphi_k[\theta /P]$ où $k < l$ (substitution d'une variable $P$ quelconque par une formule $\theta$ quelconque dans une formule d'indice inférieure)</li>
+<li>$\varphi_l = [i]\varphi_j$ où $j < l$ ($\varphi_l$ est obtenue à partir de l'application de la règle de nécessitation appliquée à une formule d'indice inférieure pour une étiquette $i\in I$ quelconque)</li>
+</ul>
+</li>
+</ul>
+</div>
+<br>
+<div id="preuve">
+<p>Exemple 1 :</p>
+<p>Si $\text{\bf S}$ désigne l&rsquo;ensemble des tautologies du calcul des propositions, alors la suite $\langle P\rightarrow(P\lor\neg P),\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q),\Box (\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q)),\Box (\Diamond  \phi\rightarrow(\Diamond \phi\rightarrow\lor\neg\Diamond \phi))\rangle$ est une preuve de $\Box (\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q)),\Box (\Diamond  \phi\rightarrow(\Diamond \phi\rightarrow\lor\neg\Diamond \phi)$ dans ce système.</p>
+<p>En effet :</p>
+<ul>
+<li>$\varphi_1=P\rightarrow(P\lor\neg P)$ est une tautologie du calcul des propositions et donc un axiome du sydtème formel $\text{\bf S}$,</li>
+<li>$\varphi_2 = \Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q) = P\rightarrow(P\lor\neg P)[\Diamond Q /P]$ (substitution de la formule $\Diamond Q$ à $P$ dans $\varphi_0$</li>
+<li>$\varphi_3 = \Box (\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q))$ est obtenu par nécessitation de $\varphi_1$.</li>
+<li>$\varphi_4 = \Box (\Diamond  \phi\rightarrow(\Diamond \phi\rightarrow\lor\neg\Diamond \phi) = \varphi_3[\phi/Q]$</li>
+</ul>
+<br>
+<p>C&rsquo;est plus élégant de représenter l&rsquo;enchaînement sous forme d&rsquo;arbre :</p>
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$P\rightarrow(P\lor\neg P)$}
+\RightLabel{$\scriptsize\;sub.$}
+\UnaryInfC{$\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q)$}
+\RightLabel{$\scriptsize\;nec.$}
+\UnaryInfC{$\Box (\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q))$}
+\RightLabel{$\scriptsize\;sub.$}
+\UnaryInfC{$\Box (\Diamond  \phi\rightarrow(\Diamond \phi\rightarrow\lor\neg\Diamond \phi)$}
+\end{prooftree}
+$$
+</div>
+</div>
+<br>
+<div id="preuve">
+<p>Exemple 2 :</p>
+<p>Si $\text{\bf S}$ désigne l&rsquo;ensemble des tautologies du calcul des propositions auquel on ajoute la formule $P\rightarrow\Diamond P$, alors l&rsquo;arbre ci-dessous décrit une preuve de $\Box(\phi\rightarrow\Diamond\Diamond\phi)$ dans ce système :</p>
+<div style="position:relative;width:1300px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/exple260.png">
+</div>
+</div>
+<br>
+<div id="def">
+<p>Soient $\text{\bf S}$ un système formel et $\Gamma$ un ensemble de formules appelées hypothèses.<br>
+On écrit $\Gamma\vdash_\text{\bf S} \phi$ s&rsquo;il existe un ensemble difini de formules $\set{\psi_1,\psi_2,\ldots,\psi_n}\subseteq\Gamma$ tel que la formule $(\psi_1\land\psi_2\land\ldots\land\psi_n)\rightarrow\phi$ puisse être prouvée dans le système formel $\text{\bf S}$. Autrement dit le séquent $\vdash_\text{\bf S}(\psi_1\land\psi_2\land\ldots\land\psi_n)\rightarrow\phi$ est vérifiée pour un nombre fini de formules bien choisies de $\Gamma$.</p>
+</div>
+<br>
+<p>Attention, ici les hypothèses n&rsquo;ont pas le même sens qu&rsquo;en logique des propositions. En effet, pour prouver le séquent $\phi\vdash_\text{\bf S}\psi$, on ne peut pas ajouter $\phi$ aux axiomes et tenter d&rsquo;atteindre $\psi$ à partir des règles (<em>modus ponens</em>, substitution uniforme et nécessitation). Il faut ici réussir à prouver la formule $\phi\rightarrow\psi$ sur la base des seuls axiomes.</p>
+<p>Si on pouvait faire comme en logique des propositions, prouver $\phi\vdash_\text{\bf S}\Box\phi$ deviendrait évident : on place $\phi$ dans les axiomes et on applique la règle de nécessitation. Mais non, il faut pouvoir prouver $\vdash_\text{\bf S}\phi\rightarrow\Box\phi$ et comme on va le voir, dans le système $\text{\bf K}$, la formule $P\rightarrow\Box P$ n&rsquo;est pas prouvable ($P\nvdash_\text{\bf K}\Box P$).</p>
+<br>
+<h3 id="le-système-k">Le système K</h3>
 
 
 <footer class="footline">
@@ -4007,19 +4091,19 @@ De la sorte, le jeu continue indéfiniment.
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713575097"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713575097"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713575097"></script>
-    <script src="/js/jquery.sticky.js?1713575097"></script>
-    <script src="/js/featherlight.min.js?1713575097"></script>
-    <script src="/js/highlight.pack.js?1713575097"></script>
+    <script src="/js/clipboard.min.js?1713633866"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713633866"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713633866"></script>
+    <script src="/js/jquery.sticky.js?1713633866"></script>
+    <script src="/js/featherlight.min.js?1713633866"></script>
+    <script src="/js/highlight.pack.js?1713633866"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713575097"></script>
-    <script src="/js/learn.js?1713575097"></script>
-    <script src="/js/hugo-learn.js?1713575097"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713633866"></script>
+    <script src="/js/learn.js?1713633866"></script>
+    <script src="/js/hugo-learn.js?1713633866"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713575097"></script>
+            <script src="/mermaid/mermaid.js?1713633866"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
