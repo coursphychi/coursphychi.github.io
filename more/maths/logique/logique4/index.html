@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713643939" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713643939" rel="stylesheet">
-    <link href="/css/hybrid.css?1713643939" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713643939" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713643939" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713643939" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713643939" rel="stylesheet">
-    <link href="/css/theme.css?1713643939" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713643939" rel="stylesheet">
+    <link href="/css/nucleus.css?1713655341" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713655341" rel="stylesheet">
+    <link href="/css/hybrid.css?1713655341" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713655341" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713655341" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713655341" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713655341" rel="stylesheet">
+    <link href="/css/theme.css?1713655341" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713655341" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713643939" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713655341" rel="stylesheet">
     
-    <link href="/css/foo.css?1713643939" rel="stylesheet"><link href="/css/bar.css?1713643939" rel="stylesheet">
+    <link href="/css/foo.css?1713655341" rel="stylesheet"><link href="/css/bar.css?1713655341" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713643939"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713655341"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713643939"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713643939"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713655341"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713655341"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713643939"></script>
+<script type="text/javascript" src="/js/search.js?1713655341"></script>
 
     
   </div>
@@ -2062,6 +2062,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <li><a href="#syntaxe">Syntaxe</a></li>
     <li><a href="#sémantique">Sémantique</a>
       <ul>
+        <li><a href="#système-de-transition">Système de transition</a></li>
+        <li><a href="#satisfaction">Satisfaction</a></li>
+        <li><a href="#exemple-des-dragons-aux-yeux-bleus">Exemple des dragons aux yeux bleus</a></li>
         <li><a href="#modèles-et-classes">Modèles et classes</a></li>
         <li><a href="#conséquences-sémantiques">Conséquences sémantiques</a></li>
         <li><a href="#théories-équivalence-et-bisimulation">Théories, équivalence et bisimulation</a></li>
@@ -2201,6 +2204,8 @@ On écrira alors $[i]$ et $\langle i \rangle$, où $i$ varie dans un ensemble $I
 <br>
 <h2 id="sémantique">Sémantique</h2>
 <br>
+<h3 id="système-de-transition">Système de transition</h3>
+<br>
 <p>On va utiliser les <strong>modèles de Kripke</strong>, c&rsquo;est-à-dire des graphes dirigés, pour interpréter les formules de la logique modale. Mais on se cantonnera ici à la logique classique (les interprétations de la négation et de l&rsquo;implication seront traditionnels et non intuitionnistes). Chaque nœud va correspondre à des <strong>mondes possibles</strong> qui sont ou non liés entre eux par des arcs.</p>
 <p>On appelle ces graphes dirigés des <strong>systèmes de transition</strong> :</p>
 <div id="def">
@@ -2216,8 +2221,13 @@ où $N$ est un ensemble non vide dont les éléments sont appelés nœuds
 <li><b>réflexif</b> si, pour tout $i\in I$ et pour tout $a\in N$, il vérifie $a\xrightarrow{i}a$&nbsp;;</li>
 <li><b>symétrique</b> si, pour tout $i\in I$ et pour tout $a,b\in N$, dès qu'il vérifie $a\xrightarrow{i}b$, il vérifie aussi $b\xrightarrow{i}a$&nbsp;;</li>
 <li><b>transitif</b> si, pour tout $i\in I$ et pour tout $a,b,c\in N$, dès qu'il vérifie à la fois $a\xrightarrow{i}b$ et $b\xrightarrow{i}c$, il vérifie aussi $a\xrightarrow{i}c$&nbsp;;</li>
+<li><b>famélique</b> si, pour tout $i\in I$ et pour tout $a,b\in N$, dès qu'il vérifie $a\xrightarrow{i} b$ alors $a=b$&nbsp;;</li>
+<li><b>dense</b>  si, pour tout $i\in I$ et pour tout $a,c\in N$, dès qu'il vérifie $a\xrightarrow{i} c$, alors il existe $b$ tel que $a\xrightarrow{i} b$ et $b\xrightarrow{i} c$&nbsp;;</li>
+<li><b>euclidien</b>  si, pour tout $i\in I$ et pour tout $a,b,c\in N$,  dès qu'il vérifie à la fois $a\xrightarrow{i} b$ et $a\xrightarrow{i} c$, alors il vérifie aussi $b\xrightarrow{i} c$.</li>
 </ul>
 </div>
+<br>
+<h3 id="satisfaction">Satisfaction</h3>
 <br>
 <p>Un système de transition se mue en <strong>modèle de la logique modale</strong> (modèle de Kripke) dès qu&rsquo;il est équipé d&rsquo;une valuation portant sur les variables étudiées. Une valuation indique pour chaque nœud du graphe les variables qui sont forcées en ce nœud.</p>
 <div id="def">
@@ -2256,8 +2266,10 @@ $$</p>
 <div id="def">
 <p>La satisfaction d&rsquo;une formule en un nœud $a$ d&rsquo;un système de transition $\mathcal{S}$ équipé d&rsquo;une valuation $\mathcal{V}$ dépend de ces trois ingrédients et on notera donc $\langle \mathcal{S},\mathcal{V},a\rangle\Vdash\phi$.</p>
 </div>
-<br>
+<p><br><br></p>
 <p>Revenons à nos dragons :</p>
+<h3 id="exemple-des-dragons-aux-yeux-bleus">Exemple des dragons aux yeux bleus</h3>
+<br>
 <div id="preuve">
 <p>les mondes possibles (les nœuds du graphe) vont correspondre aux différentes combinaisons possibles de couleurs d&rsquo;yeux pour les trois dragons $A$, $B$ et $C$. On a deux possibilités (yeux bleus ou non) pour chacun des trois dragons. Cela fait 8 mondes possibles.</p>
 <p>Les arcs entre mondes vont être étiquetés chacun par un des trois dragons et vont correspondre aux différents mondes que ce dragon pense possible depuis le monde où il est.</p>
@@ -2285,7 +2297,7 @@ Les deux dragons aux yeux bleus des mondes 7 ou 6 auraient fait de même.</p>
 La situation de départ correspondait donc au monde 8.</p>
 </div>
 <br>
-<p>On peut remarquer différentes équivalences :</p>
+<p>On peut remarquer en passant différentes équivalences :</p>
 <ul>
 <li>$a\Vdash\neg\color{#00AB8E}[A] \color{#000} \phi$ ssi $a\Vdash \color{#00AB8E}\langle A\rangle \color{#000} \neg \phi$<br>
 Pour A, ne pas savoir quelque chose est équivalent à croire possible sont contraire.</li>
@@ -2362,55 +2374,6 @@ On suppose que $\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}}\phi$ n'est pas
 </ul>
 </div>
 <p><br><br></p>
-<div id="theo">
-<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
-<ol>
-<li>$\mathcal{S}$ est réflexif</li>
-<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\phi\rightarrow\phi)$</li>
-</ol>
-</div>
-<br>
-<div id="preuve">
-<ul>
-<li>$(1)\Rightarrow(2)$<br>
-Soit $I$ un singleton et $\mathcal{S}=(N,A)$ un système de transition <b>réflexif</b> étiqueté par $I$.<br>
-Si un nœud $a$ quelconque, pour une valuation quelconque, vérifie $a\Vdash\Box \phi$, alors par définition, pour tout $b$ tel que $a\longrightarrow b$, $b\Vdash\phi$. Puisque $\mathcal{S}$ est réflexif, $a$ est lui-même un de ces $b$ et donc $a\Vdash\phi$.
-</li>
-<li>$(2)\Rightarrow(1)$<br>
-Soit $I$ un singleton et $\mathcal{S}=(N,A)$ un système de transition étiqueté par $I$.<br>
-</li>
-</ul>
-</div>
-<p><br><br></p>
-<div id="def">
-<p>Un système de transition est dit <b>famélique</b> si pour chacun de ses nœuds $a$, on a si $a\longrightarrow b$ alors $a=b$.</p>
-</div>
-<br>
-<div id="theo">
-<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
-<ol>
-<li>$\mathcal{S}$ est famélique</li>
-<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\phi\rightarrow\Box\phi)$</li>
-</ol>
-</div>
-<br>
-<div id="preuve">
-<ul>
-<li>$(1)\Rightarrow(2)$<br>
-Un système de transition $\mathcal{S}$ muni de la valuation $\mathcal{V}$ satisfait la formule $\phi\rightarrow\Box\phi$ au nœud $a$ si, $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\phi$ entraîne $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\phi$. Autrement dit, dès qu'une formule est satisfaite en un nœud, elle doit être satisfaite en chacun des successeurs de ce nœud.<br>
-Si le seul successeur possible d'un nœud est lui-même (système famélique), l'implication tient toujours. 
-</li>
-<li>$(2)\Rightarrow(1)$<br>
-Dans le cas où il existe un nœud $a$ possédant un successeur $b$ différent de lui-même, il suffit de considérer la formule $\phi=P$ et la valuation $\mathcal{V}$ qui vérifie $a\in\mathcal{V}(P)$ et $b\not\in\mathcal{V}(P)$ pour obtenir&nbsp;:<br>
-<ul>
-<li>$\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\phi$</li>
-<li>$\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Box\phi$</li>
-<li>$\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\phi\rightarrow\Box\phi$</li>
-</ul>
-</li>
-</ul>
-</div>
-<p><br><br></p>
 <div id="def">
 <p>Soit $\phi$ une formule et $\mathscr{C}$ une <b>classe</b> de systèmes de transition.<br>
 $\mathscr{C}\Vdash\phi$ ssi pour tout $\mathcal{S}\in\mathscr{C}, \mathcal{S}\Vdash^{\forall a,\forall\mathcal{V}}\phi$ ($\phi$ est valide dans tout système de la classe $\mathscr{C}$).</p>
@@ -2432,11 +2395,59 @@ Et comme c&rsquo;est vrai pour tout $b$ successeur de $a$, on en déduit $\langl
 <div id="theo">
 <p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
 <ol>
-<li>$\mathcal{S}$ est transitif</li>
+<li>$\mathcal{S}$ est <b>réflexif</b></li>
+<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\phi\rightarrow\phi)$</li>
+</ol>
+</div>
+<p><img src="/exrefl.png?width=500px" alt=""></p>
+<div id="preuve">
+<ul>
+<li>$(1)\Rightarrow(2)$<br>
+Si un nœud $a$ quelconque, pour une valuation quelconque, vérifie $a\Vdash\Box \phi$, alors par définition, pour tout $b$ tel que $a\longrightarrow b$, $b\Vdash\phi$. Puisque $\mathcal{S}$ est réflexif, $a$ est lui-même un de ces $b$ et donc $a\Vdash\phi$.
+</li>
+<li>$(2)\Rightarrow(1)$<br>
+Supposons que $\mathcal{S}$ ne soit pas réflexif. Il s'en suit qu'il existe un nœud $a$ tel que $a\,\,\not\!\!\longrightarrow a$. Soit $\phi=P$ une formule de hauteur nulle et $\mathcal{V}$ une valuation telle que $b\in\mathcal{V}(P)$ si et seulement si $a\longrightarrow b$. Par définition de $\mathcal{V}$, on a à la fois $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box P$ et $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash P$, donc $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash (\Box P\rightarrow P)$. Cela prouve ainsi que $\mathcal{S}\nvdash ^{\forall a,\forall\mathcal{V}}(\Box P\rightarrow P)$, ce qui contredit l'hypothèse.
+</li>
+</ul>
+</div>
+<br>
+<div id="def">
+<p>On note $\mathscr{C}_{ref.}$ la classe de tous les systèmes de transition réflexifs.</p>
+</div>
+<p><br><br></p>
+<div id="theo">
+<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
+<ol>
+<li>$\mathcal{S}$ est <b>famélique</b></li>
+<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\phi\rightarrow\Box\phi)$</li>
+</ol>
+</div>
+<p><img src="/exfame.png?width=400px" alt=""></p>
+<div id="preuve">
+<ul>
+<li>$(1)\Rightarrow(2)$<br>
+Un système de transition $\mathcal{S}$ muni de la valuation $\mathcal{V}$ satisfait la formule $\phi\rightarrow\Box\phi$ au nœud $a$ si, $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\phi$ entraîne $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\phi$. Autrement dit, dès qu'une formule est satisfaite en un nœud, elle doit être satisfaite en chacun des successeurs de ce nœud.<br>
+Si le seul successeur possible d'un nœud est lui-même (système famélique), l'implication tient toujours. 
+</li>
+<li>$(2)\Rightarrow(1)$<br>
+Dans le cas où il existe un nœud $a$ possédant un successeur $b$ différent de lui-même, il suffit de considérer la formule $\phi=P$ et la valuation $\mathcal{V}$ qui vérifie $a\in\mathcal{V}(P)$ et $b\not\in\mathcal{V}(P)$ pour obtenir&nbsp;:<br>
+<ul>
+<li>$\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\phi$</li>
+<li>$\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Box\phi$</li>
+<li>$\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\phi\rightarrow\Box\phi$</li>
+</ul>
+</li>
+</ul>
+</div>
+<p><br><br></p>
+<div id="theo">
+<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
+<ol>
+<li>$\mathcal{S}$ est <b>transitif</b></li>
 <li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\phi\rightarrow \Box\Box\phi )$</li>
 </ol>
 </div>
-<br>
+<p><img src="/extrans.png?width=700px" alt=""></p>
 <div id="preuve">
 <ul>
 <li>$(1)\Rightarrow(2)$<br>
@@ -2451,35 +2462,81 @@ Pour $\phi=P$, nous obtenons donc à la fois $\langle\mathcal{S},\mathcal{V},a\r
 </li>
 </ul>
 </div>
-<p><br><br></p>
-<div id="def">
-<p>Un système de transition est dit <b>dense</b> s&rsquo;il vérifie pour tout nœud $a$, $c$ : si $a\rightarrow c$, alors il existe $b$ tel que $a\longrightarrow b$ et $b\rightarrow c$.</p>
-</div>
 <br>
+<div id="def">
+<p>On note $\mathscr{C}_{tr.}$ la classe de tous les systèmes de transition transitifs.</p>
+</div>
+<p><br><br></p>
 <div id="theo">
 <p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
 <ol>
-<li>$\mathcal{S}$ est dense</li>
-<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\Box\phi\rightarrow \Box\phi)$
+<li>$\mathcal{S}$ est <b>symétrique</b></li>
+<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\phi\rightarrow \Box\Diamond\phi)$
 </ol>
 </div>
 <br>
+<p>On peut traduire $\Box\Diamond\phi$ par &ldquo;pour tout successeur possible, $\phi$ est vrai dans au moins un successeur&rdquo;.</p>
+<p><img src="/exsyme.png?width=500px" alt=""></p>
 <div id="preuve">
 <ul>
 <li>$(1)\Rightarrow(2)$<br>
-Soient $\mathcal{S}$ un système de transition dense, $\mathcal{V}$ une valuation et $a$ un nœud.<br>
-Supposons que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box\phi$ est vérifié bet montrons que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\phi$ l'est également.<br>
-Soit $c$ un nœud vérifiant $a\longrightarrow c$. $\mathcal{S}$ étant dense, il existe $b$ tel que $a\longrightarrow b$ et $b\longrightarrow c$. Par conséquent, l'hypothèse $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box\phi$ entraîne aussitôt $\langle\mathcal{S},\mathcal{V},c\rangle\Vdash \phi$.
+Soient $\mathcal{S}$ un système de transition symétrique, $\mathcal{V}$ une valuation et $a$ un nœud.<br>
+On suppose $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash \phi$. Pour tout nœud $a$, soit $a$ n'a pas de successeur et la formule $\phi\rightarrow \Box\Diamond\phi$ est trivialement vérifiée (toute formule commençant par $\Box$ est vraie en un nœud sans successeur), soit $a$ possède un ou plusieurs successeurs et chacun d'entre eux possède alors $a$ comme successeur par symétrie du graphe. Tous ces nœuds ont    donc au moins un successeur, $a$, où $\phi$ est vraie. Par conséquent, tous les successeurs de $a$ forcent $\Diamond \phi$. Et finalement, on a bien $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash \Box\Diamond\phi$.
 </li>
 <li>$(2)\Rightarrow(1)$<br>
-Soit un système de transition non dense $\mathcal{S}$ qui vérifie $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\Box\phi\rightarrow \Box\phi)$ pour n'importe quelle formule $\phi$.<br>
-Comme $\mathcal{S}$ n'est pas dense, il existe deux nœuds $a$ et $c$ tels que $a\longrightarrow c$ sans qu'aucun $b$ ne vérifie à la fois $a\longrightarrow b$ et $b\longrightarrow c$.<br>
-Considérons la valuation $\mathcal{V}$ définie par $d\in\mathcal{V}(P)$ si et seulement si $d\neq c$.<br>
-Il s'en suit que si $\langle\mathcal{S},\mathcal{V},c\rangle\nVdash P$ alors $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Box P$, et pourtant $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box P$. D'où $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Box\Box P \rightarrow \Box P$, ce qui contredit l'hypothèse.
+S'il existe deux nœuds $a$ et $b$ tels que $a\longrightarrow b$ mais $b\,\,\not\!\!\longrightarrow a$, il suffit de considérer une valuation telle que $a\Vdash P$ et $c\Vdash\neg P$ pour tout nœud $c$ tel que $b\longrightarrow c$ pour obtenir $a\nVdash P \rightarrow\Box\Diamond P$.
 </li>
 </ul>
 </div>
 <br>
+<div id="def">
+<p>On note $\mathscr{C}_{sym.}$ la classe de tous les systèmes de transition symétriques.</p>
+</div>
+<p><br><br></p>
+<div id="theo">
+<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
+<ol>
+<li>$\mathcal{S}$ est <b>dense</b></li>
+<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\Box\phi\rightarrow \Box\phi)$
+</ol>
+</div>
+<p><img src="/exdense.png?width=700px" alt=""></p>
+<div id="preuve">
+<ul>
+<li>$(1)\Rightarrow(2)$<br>
+Soient $\mathcal{S}$ un système de transition dense, $\mathcal{V}$ une valuation et $a$ un nœud.<br>
+Supposons que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box\phi$ est vérifié et montrons que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\phi$ l'est également.<br>
+Soit $c$ un nœud vérifiant $a\longrightarrow c$. $\mathcal{S}$ étant dense, il existe $b$ tel que $a\longrightarrow b$ et $b\longrightarrow c$. Par conséquent, l'hypothèse $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box\phi$ entraîne aussitôt $\langle\mathcal{S},\mathcal{V},c\rangle\Vdash \phi$.
+</li>
+<li>$(2)\Rightarrow(1)$<br>
+Soit un système de transition non dense $\mathcal{S}$ qui vérifie $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\Box\phi\rightarrow \Box\phi)$ pour n'importe quelle formule $\phi$.<br>
+Si $\mathcal{S}$ n'est pas dense, il existe deux nœuds $a$ et $c$ tels que $a\longrightarrow c$ sans qu'aucun $b$ ne vérifie à la fois $a\longrightarrow b$ et $b\longrightarrow c$.<br>
+Considérons la valuation $\mathcal{V}$ définie par $d\in\mathcal{V}(P)$ si et seulement si $d\neq c$.<br>
+Il s'en suit que si $\langle\mathcal{S},\mathcal{V},c\rangle\nVdash P$ alors $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Box P$, et pourtant $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Box\Box P$. D'où $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Box\Box P \rightarrow \Box P$.
+</li>
+</ul>
+</div>
+<p><br><br></p>
+<div id="theo">
+<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
+<ol>
+<li>$\mathcal{S}$ est <b>euclidien</b></li>
+<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Diamond\phi\rightarrow \Box\Diamond\phi)$
+</ol>
+</div>
+<p><img src="/exeucl.png?width=700px" alt=""></p>
+<div id="preuve">
+<ul>
+<li>$(1)\Rightarrow(2)$<br>
+Soient $\mathcal{S}$ un système de transition euclidien, $\mathcal{V}$ une valuation et $a$ un nœud.<br>
+S'il existe un nœud $c$ tel que $a\longrightarrow c$ et $\langle\mathcal{S},\mathcal{V},c\rangle\Vdash \phi$, alors pour tout nœud $b$ tel que $a\longrightarrow b$, il existe un nœud $d$, tel que $b\longrightarrow d$ et $\langle\mathcal{S},\mathcal{V},d\rangle\Vdash \phi$. En effet, il suffit de prendre $d=c$ puisque le caractère euclidien du graphe assure que de  $a\longrightarrow b$ et $a\longrightarrow c$, nous obtenons $b\longrightarrow c$.
+</li>
+<li>$(2)\Rightarrow(1)$<br>
+Si un système de transition n'est pas euclidien, il existe des nœuds $a$, $b$, $c$, avec $a\longrightarrow b$ et $a\longrightarrow c$, mais sans arc $b\longrightarrow c$, alors il suffit de considérer une valuation telle que $\langle\mathcal{S},\mathcal{V},c\rangle\Vdash P$ et pour tout nœud $d\neq c$, $\langle\mathcal{S},\mathcal{V},d\rangle\nVdash P$. On obtient ainsi $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash \Diamond P$, mais comme il n'y a pas d'arc de $b$ vers $c$, $\langle\mathcal{S},\mathcal{V},b\rangle\nVdash \Diamond P$ et par conséquent $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash \Box\Diamond P$.
+</li>
+</ul>
+</div>
+<p><br><br></p>
 <p>Soit $\Gamma$ un ensemble de formules. On écrit :</p>
 <ul>
 <li>
@@ -2654,7 +2711,7 @@ De la sorte, le jeu continue indéfiniment.
 <div id="theo">
 <p>Théorème de Henessy-Milner : $(\mathcal{M},a)\equiv(\mathcal{N},b)$ si et seulement si $\text{D}_{up}$ a une stratégie gagnante dans $\mathbb{Bis}((\mathcal{M},a),(\mathcal{N},b))$.</p>
 </div>
-<br>
+<p><br><br></p>
 <h2 id="systèmes-logiques">Systèmes logiques</h2>
 <br>
 <p>Nous cherchons l&rsquo;équivalent en logique modale des tautologies pour le calcul des propositions. Pour une classe $\mathscr{C}$ de systèmes de transition, on va appeler ça logique de la classe $\mathscr{C}$.</p>
@@ -4135,19 +4192,19 @@ $$
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713643939"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713643939"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713643939"></script>
-    <script src="/js/jquery.sticky.js?1713643939"></script>
-    <script src="/js/featherlight.min.js?1713643939"></script>
-    <script src="/js/highlight.pack.js?1713643939"></script>
+    <script src="/js/clipboard.min.js?1713655341"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713655341"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713655341"></script>
+    <script src="/js/jquery.sticky.js?1713655341"></script>
+    <script src="/js/featherlight.min.js?1713655341"></script>
+    <script src="/js/highlight.pack.js?1713655341"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713643939"></script>
-    <script src="/js/learn.js?1713643939"></script>
-    <script src="/js/hugo-learn.js?1713643939"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713655341"></script>
+    <script src="/js/learn.js?1713655341"></script>
+    <script src="/js/hugo-learn.js?1713655341"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713643939"></script>
+            <script src="/mermaid/mermaid.js?1713655341"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
