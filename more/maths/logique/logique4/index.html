@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713655341" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713655341" rel="stylesheet">
-    <link href="/css/hybrid.css?1713655341" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713655341" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713655341" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713655341" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713655341" rel="stylesheet">
-    <link href="/css/theme.css?1713655341" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713655341" rel="stylesheet">
+    <link href="/css/nucleus.css?1713751341" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713751341" rel="stylesheet">
+    <link href="/css/hybrid.css?1713751341" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713751341" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713751341" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713751341" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713751341" rel="stylesheet">
+    <link href="/css/theme.css?1713751341" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713751341" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713655341" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713751341" rel="stylesheet">
     
-    <link href="/css/foo.css?1713655341" rel="stylesheet"><link href="/css/bar.css?1713655341" rel="stylesheet">
+    <link href="/css/foo.css?1713751341" rel="stylesheet"><link href="/css/bar.css?1713751341" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713655341"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713751341"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713655341"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713655341"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713751341"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713751341"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713655341"></script>
+<script type="text/javascript" src="/js/search.js?1713751341"></script>
 
     
   </div>
@@ -2077,6 +2077,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     </li>
     <li><a href="#logique-modale-normale">Logique modale normale</a></li>
     <li><a href="#quelques-axiomes-usuels">Quelques axiomes usuels</a></li>
+    <li><a href="#quelques-systèmes-formels-et-logiques-usuels">Quelques systèmes formels et logiques usuels</a></li>
   </ul>
 </nav>
     </div>
@@ -2223,6 +2224,7 @@ où $N$ est un ensemble non vide dont les éléments sont appelés nœuds
 <li><b>transitif</b> si, pour tout $i\in I$ et pour tout $a,b,c\in N$, dès qu'il vérifie à la fois $a\xrightarrow{i}b$ et $b\xrightarrow{i}c$, il vérifie aussi $a\xrightarrow{i}c$&nbsp;;</li>
 <li><b>famélique</b> si, pour tout $i\in I$ et pour tout $a,b\in N$, dès qu'il vérifie $a\xrightarrow{i} b$ alors $a=b$&nbsp;;</li>
 <li><b>dense</b>  si, pour tout $i\in I$ et pour tout $a,c\in N$, dès qu'il vérifie $a\xrightarrow{i} c$, alors il existe $b$ tel que $a\xrightarrow{i} b$ et $b\xrightarrow{i} c$&nbsp;;</li>
+<li><b>non borné à droite</b>  si, pour tout $i\in I$ et pour tout $a\in N$, il existe un nœud $b\in N$ tel que $a\xrightarrow{i}b$&nbsp;;</li>
 <li><b>euclidien</b>  si, pour tout $i\in I$ et pour tout $a,b,c\in N$,  dès qu'il vérifie à la fois $a\xrightarrow{i} b$ et $a\xrightarrow{i} c$, alors il vérifie aussi $b\xrightarrow{i} c$.</li>
 </ul>
 </div>
@@ -2391,7 +2393,7 @@ Pour montrer $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box P\rightarrow \
 Or, si $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box P$, alors $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash P$ pour tout $b$ tel que $a\longrightarrow b$. Et comme par hypothèse $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash P\rightarrow Q$, on en déduit $\langle \mathcal{S},\mathcal{V}, b\rangle\Vdash Q$.<br>
 Et comme c&rsquo;est vrai pour tout $b$ successeur de $a$, on en déduit $\langle \mathcal{S},\mathcal{V}, a\rangle\Vdash\Box Q$.</p>
 </div>
-<p><br><br></p>
+<p><br><br id="refl"></p>
 <div id="theo">
 <p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
 <ol>
@@ -2439,7 +2441,7 @@ Dans le cas où il existe un nœud $a$ possédant un successeur $b$ différent d
 </li>
 </ul>
 </div>
-<p><br><br></p>
+<p><br><br id="trans"></p>
 <div id="theo">
 <p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
 <ol>
@@ -2466,7 +2468,7 @@ Pour $\phi=P$, nous obtenons donc à la fois $\langle\mathcal{S},\mathcal{V},a\r
 <div id="def">
 <p>On note $\mathscr{C}_{tr.}$ la classe de tous les systèmes de transition transitifs.</p>
 </div>
-<p><br><br></p>
+<p><br><br id="syme"></p>
 <div id="theo">
 <p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
 <ol>
@@ -2516,7 +2518,31 @@ Il s'en suit que si $\langle\mathcal{S},\mathcal{V},c\rangle\nVdash P$ alors $\l
 </li>
 </ul>
 </div>
-<p><br><br></p>
+<p><br><br id="nbd"></p>
+<div id="theo">
+<p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
+<ol>
+<li>$\mathcal{S}$ est <b>non borné à droite</b></li>
+<li>Pour toute formule $\phi$, $\mathcal{S}\Vdash^{\forall a, \forall \mathcal{V}}(\Box\phi\rightarrow \Diamond\phi)$
+</ol>
+</div>
+<p><img src="/exnbd.png?width=850px" alt=""></p>
+<div id="preuve">
+<ul>
+<li>$(1)\Rightarrow(2)$<br>
+Soient $\mathcal{S}$ un système de transition non borné à droite, $\mathcal{V}$ une valuation et $a$ un nœud.<br>
+On suppose que $a\Vdash\Box P$. La seule possibilité pour que $a\nVdash\Diamond P$, c'est que le nœud $a$ n'est aucun successeur or l'hypothèse que $\mathcal{S}$ est non broné à droite nous l'interdit, donc nécessairement $a\Vdash\Diamond P$.
+</li>
+<li>$(2)\Rightarrow(1)$<br>
+Si un système de transition n'est pas borné à droite, il existe un nœud $a$ sans successeur. Supposons une valuation $\mathcal{V}$ telle que seul $a\in \mathcal{V}(P)$. On a alors $a\Vdash \Box P$ mais aussi $a\nvdash \Diamond P$.
+</li>
+</ul>
+</div>
+<br>
+<div id="def">
+<p>On note $\mathscr{C}_{n.b.d.}$ la classe de tous les systèmes de transition non bornés à droite.</p>
+</div>
+<p><br><br id="eucl"></p>
 <div id="theo">
 <p>Pour tout système de transition $\mathcal{S}$, les affirmations suivantes sont équivalents :</p>
 <ol>
@@ -2552,21 +2578,21 @@ Même affirmation que la précédente mais pour une classe de systèmes de trans
 <h3 id="conséquences-sémantiques">Conséquences sémantiques</h3>
 <br>
 <div id="def">
-<p>Soient $\Gamma$ un ensemble de formules et $\mathcal{MOD}$ une classe de modèles (systèmes de transition associés à des valuations).<br>
-$\phi$ est une <b>conséquence sémantique globale</b> de $\Gamma$ (noté $\Gamma\Vdash^{\forall a}_\mathcal{MOD}\phi$) si et seulement si pour tout modèle $\langle\mathcal{S},\mathcal{V}\rangle \in \mathcal{MOD}$, si $\langle\mathcal{S},\mathcal{V}\rangle\Vdash^{\forall a}\Gamma$ alors $\langle\mathcal{S},\mathcal{V}\rangle\Vdash^{\forall a}\phi$</p>
+<p>Soient $\Gamma$ un ensemble de formules et $\mathscr{C}$ une classe de systèmes de transition.<br>
+$\phi$ est une <b>conséquence sémantique globale</b> de $\Gamma$ (noté $\Gamma\models^{\forall a}_\mathscr{C}\phi$) si et seulement si pour tout système de transition $\mathcal{S}\in \mathscr{C}$, et toute valuation $\mathcal{V}$, si $\langle\mathcal{S},\mathcal{V}\rangle\Vdash^{\forall a}\Gamma$ alors $\langle\mathcal{S},\mathcal{V}\rangle\Vdash^{\forall a}\phi$</p>
 </div>
 <p>Plus simplement, une formule est conséquence d&rsquo;un ensemble d&rsquo;hypothèses si chaque fois que ces hypothèses sont vraies dans un modèle de la classe considérée, alors cette formule est également vraie dans ce modèle.</p>
 <br>
 <div id="def">
-<p>Soient $\Gamma$ un ensemble de formules et $\mathcal{MOD}$ une classe de modèles (systèmes de transition associés à des valuations).<br>
-$\phi$ est une <b>conséquence sémantique locale</b> de $\Gamma$ (noté $\Gamma\Vdash_\mathcal{MOD}\phi$) si et seulement si pour tout modèle $\langle\mathcal{S},\mathcal{V}\rangle \in \mathcal{MOD}$, et tout nœud $a\in N$, si $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Gamma$ alors $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\phi$</p>
+<p>Soient $\Gamma$ un ensemble de formules et $\mathscr{C}$ une classe de systèmes de transition.<br>
+$\phi$ est une <b>conséquence sémantique locale</b> de $\Gamma$ (noté $\Gamma\models_\mathscr{C}\phi$) si et seulement si pour tout système de transition $\mathcal{S}\in \mathscr{C}$, toute valuation $\mathcal{V}$, et tout nœud $a\in N$, si $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Gamma$ alors $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\phi$</p>
 </div>
-<p>La conséquence sémantique locale est plus forte que la globale au sens où pour une classe de modèle $\mathcal{MOD}$, si $\Gamma\Vdash_\mathcal{MOD}\phi$ alors $\Gamma\Vdash^{\forall a}_\mathcal{MOD}\phi$. L&rsquo;inverse est généralement faux comme le montre l&rsquo;exemple suivant :</p>
+<p>La conséquence sémantique locale est plus forte que la globale au sens où si $\Gamma\models_\mathscr{C}\phi$ alors $\Gamma\models^{\forall a}_\mathscr{C}\phi$. L&rsquo;inverse est généralement faux comme le montre l&rsquo;exemple suivant :</p>
 <div id="preuve">
-<p>Soient $\mathcal{MOD}$ la classe de tous les modèles, $\Gamma=\set{P}$ et $\phi=\Box P$.<br>
-On a  $\Gamma\Vdash^{\forall a}_\mathcal{MOD}\phi$.<br>
+<p>Soient $\mathscr{C}$ la classe de tous les systèmes de transition, $\Gamma=\set{P}$ et $\phi=\Box P$.<br>
+On a  $\Gamma\models^{\forall a}_\mathscr{C}\phi$.<br>
 En effet, considérons un modèle quelconque $\langle\mathcal{S},\mathcal{V}\rangle$ qui vérifie $\langle\mathcal{S},\mathcal{V}\rangle\Vdash^{\forall a}\Gamma$, ce qui revient ici à affirmer que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash P$ est vraie pour tout nœud $a$. En particulier, pour tout nœud $b$ tel que $a\longrightarrow b$, la relation $\langle\mathcal{S},\mathcal{V},b\rangle\Vdash P$ est vérifiée, ce qui signifie que tout nœud $a$ vérifie $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash \Box P$.</p>
-<p>Par contre, il est facile de trouver un modèle où $\Gamma\Vdash_\mathcal{MOD}\phi$ est faux :</p>
+<p>Par contre, il est facile de trouver un modèle où $\Gamma\models_\mathscr{C}\phi$ est faux :</p>
 <div style="position:relative;margin-left:auto;margin-right:auto;width:500px;max-width:100%;">
 <img src="/preuvecsqsem.png">
 </div>
@@ -2584,23 +2610,23 @@ Dans ce modèle, on a $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash P$ et $\lan
 
 <p>Il existe un lien entre les deux conséquences sémantiques :</p>
 <div id="theo">
-<p>$\Gamma\Vdash^{\forall a}_\mathcal{MOD}\phi$ si et seulement si $\set{\Box^n\psi|n\in\mathbb{N},\psi\in\Gamma}\Vdash_\mathcal{MOD}\phi$ (où $\Box^n\psi = \underbrace{\Box\Box\ldots\Box}_{n}\psi$ si $n&gt;0$ et $\psi$ si $n =0$)</p>
+<p>$\Gamma\models^{\forall a}_\mathscr{C}\phi$ si et seulement si $\set{\Box^n\psi|n\in\mathbb{N},\psi\in\Gamma}\models_\mathscr{C}\phi$ (où $\Box^n\psi = \underbrace{\Box\Box\ldots\Box}_{n}\psi$ si $n&gt;0$ et $\psi$ si $n =0$)</p>
 </div>
 <p>$\Box^n$ permet en quelque sorte de généraliser la vérité d&rsquo;un nœud puisque dire qu&rsquo;on a $\Box^n\psi$ en $a$ implique que $\psi$ est vraie en tout nœud atteignable depuis $a$.</p>
 <div id="preuve">
 <ul>
 <li>$\Leftarrow$<br>
-Si on a $\Gamma$ en tout nœud, alors en un nœud $a$ quelconque, on a nécessairement $\Box^n\psi$ vraie pour tout $n$ et tout $\psi$ dans $\Gamma$. Or par hypothèse, cela implique que $\phi$ est vraie en ce nœud. Et comme la raisonnement ne dépendait pas du nœud $a$, cela montre que $\phi$ est vraie en tout nœud.
+Si on a $\Gamma$ en tout nœud, alors en un nœud $a$ quelconque, on a nécessairement $\Box^n\psi$ vraie pour tout $n$ et tout $\psi$ dans $\Gamma$. Or par hypothèse, cela implique que $\phi$ est vraie en ce nœud. Et comme la raisonnement ne dépend pas du nœud $a$, cela montre que $\phi$ est vraie en tout nœud.
 </li>
 <li>$\Rightarrow$<br>
-Démontrons la contraposée&nbsp;: si $\set{\Box^n\psi|n\in\mathbb{N},\psi\in\Gamma}\nVdash_\mathcal{MOD}\phi$ alors $\Gamma\nVdash^{\forall a}_\mathcal{MOD}\phi$.<br>
+Démontrons la contraposée&nbsp;: si $\set{\Box^n\psi|n\in\mathbb{N},\psi\in\Gamma}\not\models_\mathscr{C}\phi$ alors $\Gamma\not\models^{\forall a}_\mathscr{C}\phi$.<br>
 Soient $\mathcal{S}=(N,A)$ un système de transition, $\mathcal{V}$ une valuation et $a\in N$ un nœud, tels que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\set{\Box^n\psi|n\in\mathbb{N},\psi\in\Gamma}$ alors que $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\phi$.<br>
 Fabriquons le système de transition $\mathcal{T}=(N',A')$ qui correspond à la restriction de $\mathcal{S}$ à l'ensemble des nœuds accessibles depuis $a$ et munissons-le d'une valuation $\mathcal{V}'$ identique à $\mathcal{V}$ pour ces nœuds.<br>
-Par construction, dans le modèle $\langle\mathcal{T},\mathcal{V}'\rangle$ ainsi formé, $\psi$ est vraie en tout nœud&nbsp;: $\langle\mathcal{T},\mathcal{V}'\rangle\Vdash^{\forall a}\psi$. Cela entraîne que $\langle\mathcal{T},\mathcal{V}'\rangle\Vdash^{\forall a}\Gamma$, et pourtant $\langle\mathcal{T},\mathcal{V}',a\rangle\nVdash\phi$ par hypothèse, ce qui implique $\Gamma\nVdash^{\forall a}_\mathcal{MOD}\phi$.
+Par construction, dans le modèle $\langle\mathcal{T},\mathcal{V}'\rangle$ ainsi formé, $\psi$ est vraie en tout nœud&nbsp;: $\langle\mathcal{T},\mathcal{V}'\rangle\Vdash^{\forall a}\psi$. Cela entraîne que $\langle\mathcal{T},\mathcal{V}'\rangle\Vdash^{\forall a}\Gamma$, et pourtant $\langle\mathcal{T},\mathcal{V}',a\rangle\nVdash\phi$ par hypothèse, ce qui implique $\Gamma\not\models^{\forall a}_\mathscr{C}\phi$.
 </ul>
 </div>
 <br>
-<p>Si $\mathcal{MOD}_\phi$ et $\mathcal{MOD}_\psi$ désignent respectivement tous les modèles dans lesquels $\phi$ est vraie et tous ceux où $\psi$ est vraie, alors $\phi\Vdash^{\forall a}_\mathcal{MOD}\psi$ est équivalent à l&rsquo;inclusion $\mathcal{MOD}_\phi\subseteq\mathcal{MOD}_\psi$.<br> Donc si on a à la fois $\phi\Vdash^{\forall a}_\mathcal{MOD}\psi$ et $\psi\Vdash^{\forall a}_\mathcal{MOD}\phi$, alors $\mathcal{MOD}_\phi = \mathcal{MOD}_\psi$.</p>
+<p>Si $\mathscr{C}_\phi$ et $\mathscr{C}_\psi$ désignent respectivement tous les systèmes dans lesquels $\phi$ est vraie et tous ceux où $\psi$ est vraie, alors $\phi\models^{\forall a}_\mathscr{C}\psi$ est équivalent à l&rsquo;inclusion $\mathscr{C}_\phi\subseteq\mathscr{C}_\psi$.<br> Donc si on a à la fois $\phi\models^{\forall a}_\mathscr{C}\psi$ et $\psi\models^{\forall a}_\mathscr{C}\phi$, alors $\mathscr{C}_\phi = \mathscr{C}_\psi$.</p>
 <br>
 <h3 id="théories-équivalence-et-bisimulation">Théories, équivalence et bisimulation</h3>
 <br>
@@ -2640,7 +2666,7 @@ La <b>bisimulation</b> va nous permettre de reconnaître que ces modèles sont l
 <p>Plus besoin de passer en revue toutes les formules possibles pour déterminer si deux mondes sont ou non discernables&hellip;</p>
 <br>
 <div id="def">
-<p>Soient $\mathcal{M}=\langle\mathcal{S} et \mathcal{V}\rangle$ et  $\mathcal{N}=\langle\mathcal{T},\mathcal{W}\rangle$ deux modèles de la logique modale et soient $a\in N$ et $b\in M$ deux nœuds.</p>
+<p>Soient $\mathcal{M}=\langle\mathcal{S} , \mathcal{V}\rangle$ et  $\mathcal{N}=\langle\mathcal{T},\mathcal{W}\rangle$ deux modèles de la logique modale et soient $a\in N$ et $b\in M$ deux nœuds.</p>
 <p>Le jeu de bisimulation $\mathbb{Bis}((\mathcal{M},a),(\mathcal{N},b))$ est défini comme suit :</p>
 <ul>
 <li>il comprend deux joueurs appelés <b>Duplicateur</b> et <b>Corrupteur</b>. Le Duplicateur ($\text{D}_{up}$) cherche à montrer que les deux modèles sont localement bisimilaires, alors que le Corrupteur ($\text{C}_{or}$) au contraire charche à montrer qu'ils ne le sont pas.<br>
@@ -2720,20 +2746,24 @@ De la sorte, le jeu continue indéfiniment.
 </div>
 <br>
 <p>Cette logique doit contenir toutes les formules qui sont des tautologies du calcul des propositions puisque ces formule de profondeur modale nulle (pas d&rsquo;opérateurs modaux) sont nécessairement forcées en tout nœud de n&rsquo;importe quel modèle.</p>
-<p>Si la logique contient la formule $\phi$, elle doit aussi contenir $\Box\phi$. En effet, si $\phi$ est forcée en tout nœud, alors le successeur de tout nœud force aussi $\phi$. On appelle ça la <strong>nécessitation</strong> (ou généralisation) d&rsquo;une formule.</p>
-<p>De plus, si $\phi$ appartient à la logique, la satisfaction de $\phi$ en un nœud $a$ donné est indépendante de la valuation $\mathcal{V}$ (que $P$ soit vraie ou fausse, $P$ est forcée au nœud $a$). Par conséquent, que $\psi$ soit vraie ou fausse, la satisfaction de la formule $\phi[\psi/P]$ ne varie pas. Toutes <strong>substitutions uniformes</strong> opérées sur les variables d&rsquo;une formule appartenant à la logique sera aussi dans la logique.</p>
-<p>Enfin, la logique de la classe de tous les systèmes de transition est close par <em>modus ponens</em> ; si $\phi \rightarrow\psi$ et $\psi$ appartiennent toutes deux à la logique, alors $\psi$ également.</p>
+<ul>
+<li>Si la logique contient la formule $\phi$, elle doit aussi contenir $\Box\phi$. En effet, si $\phi$ est forcée en tout nœud, alors le successeur de tout nœud force aussi $\phi$. On appelle ça la <b>nécessitation</b> (ou généralisation) d'une formule.</li>
+<br>
+<li>De plus, si $\phi$ appartient à la logique, la satisfaction de $\phi$ en un nœud $a$ donné est indépendante de la valuation $\mathcal{V}$ (que $P$ soit vraie ou fausse, $P$ est forcée au nœud $a$). Par conséquent, que $\psi$ soit vraie ou fausse, la satisfaction de la formule $\phi[\psi/P]$ ne varie pas. Toutes <b>substitutions uniformes</b> opérées sur les variables d'une formule appartenant à la logique sera aussi dans la logique.</li>
+<br>
+<li>Enfin, la logique de la classe de tous les systèmes de transition est close par <b><i>modus ponens</i></b>&nbsp;; si $\phi \rightarrow\psi$ et $\psi$ appartiennent toutes deux à la logique, alors $\psi$ également. En effet, le <i>modus ponens</i> préserve la validité puisque si un modèle vérifie en un noud à la fois $\psi$ et $\psi\rightarrow\phi$, alors (par définition de l'interprétation de l'implication) il vérifie également $\phi$.</li>
+</ul>
 <p>Pour déterminer des nouvelles tautologies en calcul des propositions, on a utilisé des systèmes de déduction (à la Hilbert, déduction naturelle, calcul des séquents). La modalité complique un peu les choses et seul le système à la Hilbert va pouvoir s&rsquo;adapter facilement.</p>
 <div id="def">
 <ul>
 <li>Un <b>axiome</b> est une formule.</li>
-<li>Un <b>système formel</b> est un ensemble d'axiomes</li>
+<li>Un <b>système formel</b> est un ensemble d'axiomes.</li>
 </ul>
 </div>
 <br>
 <div id="def">
-Soient $I$ un ensemble non vide, $\phi$ une formule et $\text{\bf S}$ un système formel.<br>
-Une <b>preuve</b> de la formule $\varphi$ dans le système formel $\text{\bf S}$ est une suite finie de formule $\langle\varphi_1,\varphi_2,\ldots,\varphi_n\rangle$ telle que&nbsp;:
+<p>Soient $I$ un ensemble non vide, $\phi$ une formule et $\text{\bf S}$ un système formel.<br>
+Une <b>preuve</b> de la formule $\varphi$ dans le système formel $\text{\bf S}$ est une suite finie de formule $\langle\varphi_1,\varphi_2,\ldots,\varphi_n\rangle$ telle que :</p>
 <ul>
 <li>$\varphi_n=\phi$</li>
 <br>
@@ -2754,8 +2784,8 @@ Une <b>preuve</b> de la formule $\varphi$ dans le système formel $\text{\bf S}$
 <p>En effet :</p>
 <ul>
 <li>$\varphi_1=P\rightarrow(P\lor\neg P)$ est une tautologie du calcul des propositions et donc un axiome du sydtème formel $\text{\bf S}$,</li>
-<li>$\varphi_2 = \Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q) = P\rightarrow(P\lor\neg P)[\Diamond Q /P]$ (substitution de la formule $\Diamond Q$ à $P$ dans $\varphi_0$</li>
-<li>$\varphi_3 = \Box (\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q))$ est obtenu par nécessitation de $\varphi_1$.</li>
+<li>$\varphi_2 = \Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q) = P\rightarrow(P\lor\neg P)[\Diamond Q /P]$ est la substitution de la formule $\Diamond Q$ à $P$ dans $\varphi_0$,</li>
+<li>$\varphi_3 = \Box (\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q))$ est obtenu par nécessitation de $\varphi_1$,</li>
 <li>$\varphi_4 = \Box (\Diamond  \phi\rightarrow(\Diamond \phi\rightarrow\lor\neg\Diamond \phi) = \varphi_3[\phi/Q]$</li>
 </ul>
 <br>
@@ -2798,16 +2828,16 @@ On écrit $\Gamma\vdash_\text{\bf S} \phi$ s&rsquo;il existe un ensemble fini de
 <div id="def">
 <p>Le système $\text{\bf K}$ est le plus petit système formel qui contient :</p>
 <ul>
-<li>chaque tautologie du calcul des propositions,</li>
-<li>(K) : $\Box(P\rightarrow Q)\rightarrow (\Box P\rightarrow \Box Q)$</li>
-<li>(dual) : $\Diamond P\leftrightarrow\neg\Box\neg P$</li>
+<li>chaque tautologie du calcul des propositions</li>
+<li>$\text{(K)}$&nbsp;: $\Box(P\rightarrow Q)\rightarrow (\Box P\rightarrow \Box Q)$</li>
+<li>$\text{(dual)}$&nbsp;: $\Diamond P\leftrightarrow\neg\Box\neg P$</li>
 </ul>
 </div>
 <p>Le système $\text{\bf K}$ est minimal en ce sens qu&rsquo;il est validé dans tout modèle.</p>
 <p>Pour tout modèle $\mathcal{M}=\langle\mathcal{S},\mathcal{V}\rangle$ et tout nœud $a$, si $a\Vdash\Box(P\rightarrow Q)$ et $a\Vdash\Box P$, cela signifie que pour tout nœud $b$ tel que $a\longrightarrow b$, $b\Vdash P\rightarrow Q$ et $b\Vdash P$, par conséquent $b\Vdash Q$ et donc $a\Vdash \Box Q$. Cela montre que l&rsquo;axiome (K) est valide dans tous les systèmes de transition.</p>
-<p>Cet axiome (K) est appelé <strong>axiome de distribution</strong> car il permet de distribuer l&rsquo;opérateur modal $\Box$ à l&rsquo;intérieur de l&rsquo;impliccation.</p>
-<p>L&rsquo;axiome (dual) permet de passer d&rsquo;un opérateur modal à l&rsquo;autre et est aussi valide dans tout sytème de transition (être sûr de la présence d&rsquo;un truc revient à ne pas être sûr de son absence).</p>
-<p>Mais ce système formel n&rsquo;est pas encore suffisamment riche pour contenir toutes les formules valides dans tous les modèles quels qu&rsquo;ils soient. Pour cela, il faudrait également considérer toutes les substitutions uniformes possibles (entre autre dans la formule (K)). On passe alors aux <strong>logiques modales</strong>.</p>
+<p>Cet axiome $\text{(K)}$ est appelé <strong>axiome de distribution</strong> car il permet de distribuer l&rsquo;opérateur modal $\Box$ à l&rsquo;intérieur de l&rsquo;impliccation.</p>
+<p>L&rsquo;axiome $\text{(dual)}$ permet de passer d&rsquo;un opérateur modal à l&rsquo;autre et est aussi valide dans tout sytème de transition (être sûr de la présence d&rsquo;un truc revient à ne pas être sûr de son absence).</p>
+<p>Mais ce système formel n&rsquo;est pas encore suffisamment riche pour contenir toutes les formules valides dans tous les modèles quels qu&rsquo;ils soient. Pour cela, il faudrait également considérer toutes les substitutions uniformes possibles (entre autre dans la formule  $\text{(K)}$). On passe alors aux <strong>logiques modales</strong>.</p>
 <br>
 <h2 id="logique-modale-normale">Logique modale normale</h2>
 <br>
@@ -2837,7 +2867,7 @@ $$
 $$
 \begin{prooftree}
 \AxiomC{$\phi$}
-\RightLabel{$\scriptsize\;sub.$}
+\RightLabel{$\scriptsize\;nec.$}
 \UnaryInfC{$\Box\phi$}
 \end{prooftree}
 $$
@@ -2849,6 +2879,214 @@ $$
 <br>
 <h2 id="quelques-axiomes-usuels">Quelques axiomes usuels</h2>
 <br>
+<div id="def">
+<p>$\text{(K) :}$ $\Box(P\rightarrow S)\rightarrow(\Box P\rightarrow \Box Q)$</p>
+</div>
+<p>On l&rsquo;a vu, l&rsquo;axiome $\text{(K)}$ est à la base des logiques modales normales.</p>
+<br>
+<div id="def">
+<p>$\text{(D) :}$ $\Box P\rightarrow \Diamond P$</p>
+</div>
+<p>La formule $\text{(D)}$ dit que si quelque chose est nécessaire, alors elle doit être possible. On peut aussi l&rsquo;interpréter différemment dans d&rsquo;autres types de logiques que nous allons entrevoir ensuite : en logique déontique, la formule dit que quelque chose d&rsquo;obligatoire doit être permis ; en logique épistémique, elle dit que si je sais $P$, alors il est faux que je sache $\neg P$ ; et en logique doxastique, que si je crois que $P$, alors il est faux que je crois que $\neg P$.</p>
+<p><a href="./#nbd">Comme on l&rsquo;a vu plus haut</a>, un système de transition qui valide $\text{(D)}$ n&rsquo;admet <strong>pas d&rsquo;impasse</strong>. Autrement dit, les arcs doivent être <strong>non bornés à droite</strong>.</p>
+<br>
+<div id="def">
+<p>$\text{(T) :}$ $\Box P\rightarrow P$</p>
+</div>
+<p>La formule $\text{(T)}$ dit que si quelque chose est nécessaire, alors elle est.<br>
+En logique déontique : ce qui est obligatoire est.<br>
+En logique épistémique : si je sais $P$, alors $P$ est avéré.<br>
+En logique doxastique : si je crois que $P$, alors $P$ est également avéré.</p>
+<p>Et <a href="./#refl">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(T)}$ si et seulement si ce système est <strong>réflexif</strong>.</p>
+<br>
+<div id="def">
+<p>$\text{(B) :}$ $P\rightarrow \Box\Diamond P$</p>
+</div>
+<p>La formule $\text{(B)}$ dit que si quelque chose est vraie, alors il est nécessaire qu&rsquo;elle soit possible.<br>
+En logique déontique : ce qui est, est obligatoirement permis.<br>
+En logique épistémique : si je $P$ est avéré, alors je sais que je ne sais pas $\neg P$.<br>
+En logique doxastique : si $P$ est avéré, alors je crois que je ne crois pas $\neg P$.</p>
+<p>Et <a href="./#syme">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(B)}$ si et seulement si ce système est <strong>symétrique</strong>.</p>
+<br>
+<div id="def">
+<p>$\text{(4) :}$ $\Box P\rightarrow \Box\Box P$</p>
+</div>
+<p>La formule $\text{(4)}$ dit que si quelque chose est nécessaire, alors elle est nécessairement nécessaire.<br>
+En logique déontique : si quelque chose est obligatoire, c&rsquo;est obligatoire qu&rsquo;elle le soit.<br>
+En logique épistémique : si je sais $P$, alors je sais que je sais $P$. Et transitivement, on sait que l&rsquo;on sait que l&rsquo;on sait&hellip; Autrement dit, avec la formule (4) nous décrivons des agents parfaitement rationnel.<br></p>
+<p>Et <a href="./#trans">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(4)}$ si et seulement si ce système est <strong>transitif</strong>.</p>
+<br>
+<div id="def">
+<p>$\text{(5) :}$ $\Diamond P\rightarrow \Box\Diamond P$</p>
+</div>
+<p>La formule $\text{(5)}$ dit que s&rsquo;il n&rsquo;est pas nécessaire que quelque chose ne soit pas, alors elle est nécessaire.<br>
+En logique déontique : si quelque chose est permise, c&rsquo;est obligatoire qu&rsquo;elle soit permise.<br>
+En logique épistémique : si je ne sais pas quelque chose, alors je sais que je ne le sais pas. L&rsquo;interprétation épistémique décrit un agent parfaitement conscient de ce qu&rsquo;il ne sait pas.<br>
+En logique doxastique : si je ne crois pas quelsue chose, alors je crois que je ne le crois pas. L&rsquo;interprétation doxastique décrit un agent parfaitement conscient de ce qu&rsquo;il ne croit pas.</p>
+<p>Et <a href="./#eucl">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(5)}$ si et seulement si ce système est <strong>euclidien</strong>.</p>
+<br>
+<p>En prenant ensemble les formules $\text{(5)}$ et $\text{(T)}$, on regarde des systèmes de transition à la fois <strong>euclidiens</strong> et <strong>réflexifs</strong>. Or la conjonction de ces deux propriétés est équivalentes à la conjonction des trois propriétés d&rsquo;une relation d&rsquo;équivalence !</p>
+<div id="theo">
+<p>Un système de transition est à la fois <strong>euclidien</strong> et <strong>réflexif</strong> si et seulement si il est à la fois <strong>réflexif</strong>, <strong>symétrique</strong> et <strong>transitif</strong>.</p>
+</div>
+<p>Autrement dit, un graphe euclidien et réflexif est en fait ni plus ni moins qu&rsquo;un graphe dans lequel la relation d&rsquo;accessibilité est une <strong>relation d&rsquo;équivalence</strong> (relation définie par les trois propriétés réflexivité, symétrie et transitivité).</p>
+<div id="preuve">
+<ul>
+<li>$\Rightarrow$&nbsp;:<br>
+<ul>
+<li>réflexif&nbsp;: c'est immédiat</li>
+<li>symétrique&nbsp;: si on a un arc $a\longrightarrow b$, alors par réflexivité, on a aussi $a\longrightarrow a$, et le caractère euclidien impose donc $b\longrightarrow a$.</li>
+<li>transitif&nbsp;: supposons qu'on ait deux arcs $a\longrightarrow b$ et $b\longrightarrow c$. Comme on a montré la symétrie du graphe, on a aussi un arc $b\longrightarrow a$ et le caractère euclidien impose donc un arc $a\longrightarrow c$.
+</li>
+</ul>
+</li>
+<li>$\Leftarrow$&nbsp;:<br>
+<ul>
+<li>réflexif&nbsp;: c'est immédiat</li>
+<li>euclidien&nbsp;: supposons qu'on ait deux arcs $a\longrightarrow b$ et $a\longrightarrow c$. La symétrie donne un arc $b\longrightarrow a$ et la transitivité impose alors un arc $b\longrightarrow c$.</li>
+</ul>
+</li>
+</ul>
+</div>
+<br>
+<h2 id="quelques-systèmes-formels-et-logiques-usuels">Quelques systèmes formels et logiques usuels</h2>
+<br>
+<p>Par la suite, nous confonderons un système formel et la logique qu&rsquo;il induit par clôture. Les systèmes formels qu&rsquo;on va introduire sont tous des extensions du système $\text{\bf K}$.</p>
+<div id="def">
+<ul>
+<li>$\text{\bf K}$</li>
+<li>$\text{\bf KD}$&nbsp;: $\text{\bf K}\cup\set{\text{(D)}}$</li>
+<li>$\text{\bf KB}$&nbsp;: $\text{\bf K}\cup\set{\text{(B)}}$</li>
+<li>$\text{\bf KT}$&nbsp;: $\text{\bf K}\cup\set{\text{(T)}}$</li>
+<li>$\text{\bf K4}$&nbsp;: $\text{\bf K}\cup\set{\text{(4)}}$</li>
+<li>$\text{\bf KB4}$&nbsp;: $\text{\bf K}\cup\set{\text{(B),(4)}}$</li>
+<li>$\text{\bf KD4}$&nbsp;: $\text{\bf K}\cup\set{\text{(D),(4)}}$</li>
+<li>$\text{\bf KDB}$&nbsp;: $\text{\bf K}\cup\set{\text{(D),(B)}}$</li>
+<li>$\text{\bf KTB}$&nbsp;: $\text{\bf K}\cup\set{\text{(T),(B)}}$</li>
+<li>$\text{\bf S4} = \text{\bf KT4}$&nbsp;: $\text{\bf K}\cup\set{\text{(T),(4)}}$</li>
+<li>$\text{\bf S4} = \text{\bf KT5}$&nbsp;: $\text{\bf K}\cup\set{\text{(T),(5)}}$</li>
+</ul>
+</div>
+<p><br><br></p>
+<div id="def">
+<p>Soient $\text{\bf S}$ et $\text{\bf S&rsquo;}$ deux systèmes formels et $\phi$ une formule quelconque, $\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulement si $\vdash_\text{\bf S}\phi\rightarrow \,\vdash_\text{\bf S&rsquo;}\phi$</p>
+</div>
+<p>Cette relation est réflexive ($\text{\bf S}≤\text{\bf S}$) et transitive (si $\text{\bf S}≤\text{\bf S&rsquo;}$ et $\text{\bf S&rsquo;}≤\text{\bf S&rsquo;&rsquo;}$ alors $\text{\bf S}≤\text{\bf S&rsquo;&rsquo;}$).</p>
+<p>$\text{\bf S}≤\text{\bf S&rsquo;}$ se lit $\text{\bf S}$ <strong>se réduit à</strong> $\text{\bf S&rsquo;}$. Tout ce qui est prouvé à l&rsquo;aide de $\text{\bf S}$ peut également l&rsquo;être à l&rsquo;aide de $\text{\bf S&rsquo;}$.</p>
+<p>Si $\text{\bf S}$ se réduit à $\text{\bf S&rsquo;}$, cela signifie que $\text{\bf S}$ permet de prouver au moins autant de formules (appelées <strong>théorèmes</strong>) que $\text{\bf S&rsquo;}$ et par conséquent, que la classe des systèmes de transition dans lesquels tous les théorèmes de $\text{\bf S&rsquo;}$ sont valides est incluse dans celle des systèmes de transition qui tous valident les théorèmes de $\text{\bf S}$.<br></p>
+<p>Autrement dit,</p>
+<div id="theo">
+<p>si $\mathscr{C}_\text{\bf S}$ et $\mathscr{C}_\text{\bf S&rsquo;}$ désignent respectivement la classe de tous les systèmes de transition qui valident $\text{\bf S}$ et $\text{\bf S&rsquo;}$ :<br>
+$\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulment si $\mathscr{C}_\text{\bf S&rsquo;}\subseteq\mathscr{C}_\text{\bf S}$.</p>
+</div>
+<br>
+<div id="theo">
+<p>Lorsque $\text{\bf S}$ et $\text{\bf S&rsquo;}$ contiennent tous les deux le système formel $\text{\bf K}$, les logiques modales normales qu&rsquo;ils engendrent ($\mathbb{L}_\text{\bf S}$ et $\mathbb{L}_\text{\bf S&rsquo;}$) vérifient la relation suivante :<br>
+$\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulment si $\mathbb{L}_\text{\bf S&rsquo;}\subseteq\mathbb{L}_\text{\bf S}$.</p>
+</div>
+<p>On obtient alors immédiatement les réductions suivantes :</p>
+<div id="theo">
+<ul>
+<li>$\text{\bf K}≤\text{\bf K4}$</li>
+<li>$\text{\bf K}≤\text{\bf KB}$</li>
+<li>$\text{\bf K}≤\text{\bf KD}$</li>
+<li>$\text{\bf K4}≤\text{\bf KB4}$</li>
+<li>$\text{\bf K4}≤\text{\bf KD4}$</li>
+<li>$\text{\bf KB}≤\text{\bf KB4}$</li>
+<li>$\text{\bf KB}≤\text{\bf KDB}$</li>
+<li>$\text{\bf KD}≤\text{\bf KDB}$</li>
+<li>$\text{\bf KD}≤\text{\bf KD4}$</li>
+<li>$\text{\bf KT}≤\text{\bf KTB}$</li>
+<li>$\text{\bf KT}≤\text{\bf KT4}$</li>
+</ul>
+</div>
+<p>Montrons maintenant que :</p>
+<div id="theo">
+<p>$\text{\bf KD}≤\text{\bf KT}$</p>
+</div>
+<br>
+<div id="preuve">
+<p>Il suffit de montrer que la formule $\text{(D)}$ peut être prouvée grâce au système $\text{\bf KT}$, c&rsquo;est-à-dire : $\vdash_\text{\bf KT} \Box P\rightarrow\Diamond P$.</p>
+<div style="position:relative;width:1100px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvekdkt.png">
+</div>
+</div>
+<p>On en déduit immédiatement :</p>
+<div id="theo">
+<ul>
+<li>$\text{\bf KDB}≤\text{\bf KTB}$</li>
+<li>$\text{\bf KD4}≤\text{\bf KT4=S4}$</li>
+</ul>
+</div>
+<br>
+<p>On peut aussi montrer que :</p>
+<div id="theo">
+<p>$\text{\bf KTB}≤\text{\bf S5}$</p>
+</div>
+<br>
+<div id="preuve">
+<p>Il suffit de montrer que la formule $\text{(B)}$ peut être prouvée grâce au système $\text{\bf KT5}$, c&rsquo;est-à-dire : $\vdash_\text{\bf S5} P\rightarrow\Box\Diamond P$.</p>
+<p>Montrons d&rsquo;abord que $\vdash_\text{\bf KT}P\rightarrow\Diamond P$, ce qui montre également que $\vdash_\text{\bf KT5}P\rightarrow\Diamond P$.</p>
+<div style="position:relative;width:550px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvektbs51.png">
+</div>
+Puis utilisons ce résultat pour montrer que $\vdash_\text{\bf S5}P\rightarrow\Box\Diamond P$
+<div style="position:relative;width:800px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvektbs52.png">
+</div>
+</div>
+<br>
+<div id="theo">
+<p>$\text{\bf S4}≤\text{\bf S5}$</p>
+</div>
+<br>
+<div id="preuve">
+<p>Il suffit de montrer que la formule $\text{(4)}$ peut être prouvée grâce au système $\text{\bf KT5}$, c&rsquo;est-à-dire : $\vdash_\text{\bf S5} \Box P\rightarrow\Box\Box P$.<br></p>
+<p>On commence par montrer $\vdash_\text{\bf S5} \Box P\rightarrow\Box\Diamond\Box P$ en ajoutant juste une substitution au théorème précédant :</p>
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;th.$}
+\UnaryInfC{$ P\rightarrow\Box\Diamond P$}
+\RightLabel{$\scriptsize\;sub.$}
+\UnaryInfC{$ \Box P \rightarrow \Box\Diamond \Box P$}
+\end{prooftree}
+$$
+</div>
+On montre ensuite $\vdash_\text{\bf S5} \Diamond\Box P\rightarrow \Box P$
+<div style="position:relative;width:650px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuves4s51.png">
+</div>
+Puis on montre $\vdash_\text{\bf S5} \Box\Diamond\Box P\rightarrow \Box\Box P$
+<div style="position:relative;width:620px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuves4s52.png">
+</div>
+Pour enfin pouvoir conclure&nbsp;:
+<div style="position:relative;width:950px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuves4s53.png">
+</div>
+</div>
+<br>
+<div id="theo">
+<p>$\text{\bf KB4}≤\text{\bf S5}$</p>
+</div>
+<br>
+<div id="preuve">
+<p>Il faut montrer à la fois que :</p>
+<ul>
+<li>la formule $\text{(4)}$ peut être prouvée dans le système $\text{\bf S5}$ et on l'a fait dans la démonstration de la réduction de $\text{\bf S4}$ à $\text{\bf S5}$,</li>
+<li>la formule $\text{(B)}$ peut être prouvée dans le système $\text{\bf S5}$ et on l'a fait dans la démonstration de la réduction de $\text{\bf KTB}$ à $\text{\bf S5}$,</li>
+</ul>
+</div>
+<br>
+<p>Représentons tout ça graphiquement en utilisant le code suivant : une flèche allant de $\text{\bf S}$ à $\text{\bf S&rsquo;}$ signifie que la relation $\text{\bf S}≤\text{\bf S&rsquo;}$ est avérée ($\text{\bf S}$ se réduit à $\text{\bf S&rsquo;}$).</p>
+<p><img src="/compsystformels.png?width=800px" alt=""></p>
+<p>Et comme on l&rsquo;a vu, la réduction d&rsquo;un système formel à un autre implique l&rsquo;inclusion inverse entre les classes de tous les systèmes de transition qui valident ces systèmes formels.<br>
+Dans le graphique suivant, une flèche allant de $\mathscr{C}$ à $\mathscr{C&rsquo;}$ désigne donc l&rsquo;inclusion inverse $\mathscr{C}\supseteq\mathscr{C&rsquo;}$.</p>
+<p><img src="/compsysttrans.png?width=800px" alt=""></p>
+<p>On va maintenant chercher à faire correspondre une logique modale normale à chaque classe.</p>
+
 
 <footer class="footline">
 	
@@ -4192,19 +4430,19 @@ $$
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713655341"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713655341"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713655341"></script>
-    <script src="/js/jquery.sticky.js?1713655341"></script>
-    <script src="/js/featherlight.min.js?1713655341"></script>
-    <script src="/js/highlight.pack.js?1713655341"></script>
+    <script src="/js/clipboard.min.js?1713751341"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713751341"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713751341"></script>
+    <script src="/js/jquery.sticky.js?1713751341"></script>
+    <script src="/js/featherlight.min.js?1713751341"></script>
+    <script src="/js/highlight.pack.js?1713751341"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713655341"></script>
-    <script src="/js/learn.js?1713655341"></script>
-    <script src="/js/hugo-learn.js?1713655341"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713751341"></script>
+    <script src="/js/learn.js?1713751341"></script>
+    <script src="/js/hugo-learn.js?1713751341"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713655341"></script>
+            <script src="/mermaid/mermaid.js?1713751341"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
