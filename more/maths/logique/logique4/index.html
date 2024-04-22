@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713753951" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713753951" rel="stylesheet">
-    <link href="/css/hybrid.css?1713753951" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713753951" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713753951" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713753951" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713753951" rel="stylesheet">
-    <link href="/css/theme.css?1713753951" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713753951" rel="stylesheet">
+    <link href="/css/nucleus.css?1713799211" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713799211" rel="stylesheet">
+    <link href="/css/hybrid.css?1713799211" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713799211" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713799211" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713799211" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713799211" rel="stylesheet">
+    <link href="/css/theme.css?1713799211" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713799211" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713753951" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713799211" rel="stylesheet">
     
-    <link href="/css/foo.css?1713753951" rel="stylesheet"><link href="/css/bar.css?1713753951" rel="stylesheet">
+    <link href="/css/foo.css?1713799211" rel="stylesheet"><link href="/css/bar.css?1713799211" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713753951"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713799211"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713753951"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713753951"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713799211"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713799211"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713753951"></script>
+<script type="text/javascript" src="/js/search.js?1713799211"></script>
 
     
   </div>
@@ -2954,6 +2954,7 @@ En logique doxastique : si je ne crois pas quelsue chose, alors je crois que je
 <br>
 <p>Par la suite, nous confonderons un système formel et la logique qu&rsquo;il induit par clôture. Les systèmes formels qu&rsquo;on va introduire sont tous des extensions du système $\text{\bf K}$.</p>
 <div id="def">
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
 <ul>
 <li>$\text{\bf K}$</li>
 <li>$\text{\bf KD}$&nbsp;: $\text{\bf K}\cup\set{\text{(D)}}$</li>
@@ -2968,26 +2969,35 @@ En logique doxastique : si je ne crois pas quelsue chose, alors je crois que je
 <li>$\text{\bf S4} = \text{\bf KT5}$&nbsp;: $\text{\bf K}\cup\set{\text{(T),(5)}}$</li>
 </ul>
 </div>
+</div>
 <p><br><br></p>
 <div id="def">
-<p>Soient $\text{\bf S}$ et $\text{\bf S&rsquo;}$ deux systèmes formels et $\phi$ une formule quelconque, $\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulement si $\vdash_\text{\bf S}\phi\rightarrow \,\vdash_\text{\bf S&rsquo;}\phi$</p>
+<p>Soient $\text{\bf S}$ et $\text{\bf S&rsquo;}$ deux systèmes formels et $\phi$ une formule quelconque,<br></p>
+<p style="text-align:center;">
+$\text{\bf S}≤\text{\bf S'}$ si et seulement si $\vdash_\text{\bf S}\phi\rightarrow \,\vdash_\text{\bf S'}\phi$
+</p>
 </div>
 <p>Cette relation est réflexive ($\text{\bf S}≤\text{\bf S}$) et transitive (si $\text{\bf S}≤\text{\bf S&rsquo;}$ et $\text{\bf S&rsquo;}≤\text{\bf S&rsquo;&rsquo;}$ alors $\text{\bf S}≤\text{\bf S&rsquo;&rsquo;}$).</p>
 <p>$\text{\bf S}≤\text{\bf S&rsquo;}$ se lit $\text{\bf S}$ <strong>se réduit à</strong> $\text{\bf S&rsquo;}$. Tout ce qui est prouvé à l&rsquo;aide de $\text{\bf S}$ peut également l&rsquo;être à l&rsquo;aide de $\text{\bf S&rsquo;}$.</p>
 <p>Si $\text{\bf S}$ se réduit à $\text{\bf S&rsquo;}$, cela signifie que $\text{\bf S&rsquo;}$ permet de prouver au moins autant de formules (appelées <strong>théorèmes</strong>) que $\text{\bf S}$ et par conséquent, que la classe des systèmes de transition dans lesquels tous les théorèmes de $\text{\bf S&rsquo;}$ sont valides est incluse dans celle des systèmes de transition qui tous valident les théorèmes de $\text{\bf S}$ (c&rsquo;est plus dur de raconter plus de choses, ça restreint l&rsquo;ensemble des modèles possibles).<br></p>
 <p>Autrement dit,</p>
 <div id="theo">
-<p>si $\mathscr{C}_\text{\bf S}$ et $\mathscr{C}_\text{\bf S&rsquo;}$ désignent respectivement la classe de tous les systèmes de transition qui valident $\text{\bf S}$ et $\text{\bf S&rsquo;}$ :<br>
-$\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulment si $\mathscr{C}_\text{\bf S&rsquo;}\subseteq\mathscr{C}_\text{\bf S}$.</p>
+<p>si $\mathscr{C}_\text{\bf S}$ et $\mathscr{C}_\text{\bf S&rsquo;}$ désignent respectivement la classe de tous les systèmes de transition qui valident $\text{\bf S}$ et $\text{\bf S&rsquo;}$ :<br></p>
+<p style="text-align:center;">
+$\text{\bf S}≤\text{\bf S'}$ si et seulment si $\mathscr{C}\_\text{\bf S'}\subseteq\mathscr{C}\_\text{\bf S}$.
+</p>
 </div>
 <br>
 <p>Par contre, les logiques modales normales étant des ensembles de formules satisfaites, pour elles l&rsquo;inclusion est dans l&rsquo;autre sens :</p>
 <div id="theo">
-<p>Lorsque $\text{\bf S}$ et $\text{\bf S&rsquo;}$ contiennent tous les deux le système formel $\text{\bf K}$, les logiques modales normales qu&rsquo;ils engendrent ($\mathbb{L}_\text{\bf S}$ et $\mathbb{L}_\text{\bf S&rsquo;}$) vérifient la relation suivante :<br>
-$\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulment si $\mathbb{L}_\text{\bf S}\subseteq\mathbb{L}_\text{\bf S&rsquo;}$.</p>
+<p>Lorsque $\text{\bf S}$ et $\text{\bf S&rsquo;}$ contiennent tous les deux le système formel $\text{\bf K}$, les logiques modales normales qu&rsquo;ils engendrent ($\mathbb{L}_\text{\bf S}$ et $\mathbb{L}_\text{\bf S&rsquo;}$) vérifient la relation suivante :<br></p>
+<p style="text-align:center;">
+$\text{\bf S}≤\text{\bf S'}$ si et seulment si $\mathbb{L}\_\text{\bf S}\subseteq\mathbb{L}\_\text{\bf S'}$.
+</p>
 </div>
 <p>On obtient alors immédiatement les réductions suivantes :</p>
 <div id="theo">
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
 <ul>
 <li>$\text{\bf K}≤\text{\bf K4}$</li>
 <li>$\text{\bf K}≤\text{\bf KB}$</li>
@@ -3002,9 +3012,12 @@ $\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulment si $\mathbb{L}_\text{\bf S}\
 <li>$\text{\bf KT}≤\text{\bf KT4}$</li>
 </ul>
 </div>
+</div>
 <p>Montrons maintenant que :</p>
 <div id="theo">
-<p>$\text{\bf KD}≤\text{\bf KT}$</p>
+<p style="text-align:center">
+$\text{\bf KD}≤\text{\bf KT}$
+</p>
 </div>
 <br>
 <div id="preuve">
@@ -3015,15 +3028,19 @@ $\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulment si $\mathbb{L}_\text{\bf S}\
 </div>
 <p>On en déduit immédiatement :</p>
 <div id="theo">
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
 <ul>
 <li>$\text{\bf KDB}≤\text{\bf KTB}$</li>
 <li>$\text{\bf KD4}≤\text{\bf KT4=S4}$</li>
 </ul>
 </div>
+</div>
 <br>
 <p>On peut aussi montrer que :</p>
 <div id="theo">
-<p>$\text{\bf KTB}≤\text{\bf S5}$</p>
+<p style="text-align:center">
+$\text{\bf KTB}≤\text{\bf S5}$
+</p>
 </div>
 <br>
 <div id="preuve">
@@ -3039,7 +3056,9 @@ Puis utilisons ce résultat pour montrer que $\vdash_\text{\bf S5}P\rightarrow\B
 </div>
 <br>
 <div id="theo">
-<p>$\text{\bf S4}≤\text{\bf S5}$</p>
+<p style="text-align:center">
+$\text{\bf S4}≤\text{\bf S5}$
+</p>
 </div>
 <br>
 <div id="preuve">
@@ -3071,7 +3090,9 @@ Pour enfin pouvoir conclure&nbsp;:
 </div>
 <br>
 <div id="theo">
-<p>$\text{\bf KB4}≤\text{\bf S5}$</p>
+<p style="text-align:center">
+$\text{\bf KB4}≤\text{\bf S5}$
+</p>
 </div>
 <br>
 <div id="preuve">
@@ -3087,7 +3108,175 @@ Pour enfin pouvoir conclure&nbsp;:
 <p>Et comme on l&rsquo;a vu, la réduction d&rsquo;un système formel à un autre implique l&rsquo;inclusion inverse entre les classes de tous les systèmes de transition qui valident ces systèmes formels.<br>
 Dans le graphique suivant, une flèche allant de $\mathscr{C}$ à $\mathscr{C&rsquo;}$ désigne donc l&rsquo;inclusion inverse $\mathscr{C}\supseteq\mathscr{C&rsquo;}$.</p>
 <p><img src="/compsysttrans.png?width=600px" alt=""></p>
-<p>On va maintenant chercher à faire correspondre une logique modale normale à chaque classe.</p>
+<p>On va maintenant chercher à faire correspondre une logique modale normale à chaque classe de systèmes de transitions.</p>
+<div id="def">
+<p>Soit $\mathscr{C}$ une classe de systèmes de transition et $\mathbb{L}$ une logique modale normale, $\mathbb{L}$ est <b>solide</b> par rapport à la classe $\mathscr{C}$ (noté $\mathscr{C}$<b>-solide</b>) si pour toute formule $\phi$ et pour tout système de transition $\mathcal{S}$ de la classe $\mathscr{C}$, si $\vdash_\mathbb{L}\phi$ alors $\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}}\phi$.<br>
+Ce qu&rsquo;on peut aussi écrire :<br>
+$$\text{si } \vdash_\mathbb{L}\phi \text{ alors }\models_{\mathscr{C}}\phi$$</p>
+</div>
+<p>À chacune des onze classes, on peut faire correspondre une logique modale normale qui se trouve être solide pour cette classe.</p>
+<div id="theo">
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
+<ul>
+<li>si $\vdash_\text{\bf K}\phi$ alors $\models_{\mathscr{C}}\phi$</li>
+<li>si $\vdash_\text{\bf K4}\phi$ alors $\models_{\mathscr{C}_{tr.}}\phi$</li>
+<li>si $\vdash_\text{\bf KD}\phi$ alors $\models_{\mathscr{C}_{n.b.d.}}\phi$</li>
+<li>si $\vdash_\text{\bf KD4}\phi$ alors $\models_{\mathscr{C}_{tr.,n.b.d.}}\phi$</li>
+<li>si $\vdash_\text{\bf KT}\phi$ alors $\models_{\mathscr{C}_{ref.}}\phi$</li>
+<li>si $\vdash_\text{\bf S4}\phi$ alors $\models_{\mathscr{C}_{ref.,tr.}}\phi$</li>
+<li>si $\vdash_\text{\bf KB}\phi$ alors $\models_{\mathscr{C}_{sym.}}\phi$</li>
+<li>si $\vdash_\text{\bf KB4}\phi$ alors $\models_{\mathscr{C}_{sym.,tr.}}\phi$</li>
+<li>si $\vdash_\text{\bf KDB}\phi$ alors $\models_{\mathscr{C}_{sym.,n.b.d.}}\phi$</li>
+<li>si $\vdash_\text{\bf KTB}\phi$ alors $\models_{\mathscr{C}_{ref.,sym.}}\phi$</li>
+<li>si $\vdash_\text{\bf S5}\phi$ alors $\models_{\mathscr{C}_{ref.,sym.,tr.}}\phi$</li>
+</ul>
+</div>
+</div>
+<br>
+<div id="preuve">
+<p>On a déjà en fait déjà tout démontré.<br>
+En effet, on a montré que les axiomes de la logique normale minimale (tautologies du calcul des propositions, $\text{(K)}$ et $\text{(dual)}$) sont satisfaites en tout nœud et pour toute valuation de tous les systèmes de transitions. Et on a montré que les trois opérations utilisés pour les preuves (la nécéssitation, la substitution uniforme et le <i>modus ponens</i>) préservent la validité. Donc une formule prouvable dans $\text{\bf K}$ est valide dans tout système de transition ( $\text{\bf K}$ est $\mathscr{C}$-solide).</p>
+<p>Ensuite, on a montré que chacun des axiomes modaux supplémentaires ajoutés à $\text{\bf K}$ pour obtenir les autres logiques normales ont une validité limitée à une classe spécifique de systèmes de transition.</p>
+<ul>
+<li>$\text{(T)}$ est valide dans tout système de transition réflexif.</li>
+<li>$\text{(B)}$ est valide dans tout système de transition symétrique.</li>
+<li>$\text{(4)}$ est valide dans tout système de transition transitif.</li>
+<li>$\text{(D)}$ est valide dans tout système de transition non borné à droite.</li>
+<li>$\text{(4)}$ est valide dans tout système de transition euclidien.</li>
+</ul>
+<p>Et on a montré qu&rsquo;un graphe est à la fois réflexif et euclidien si et seulement si il est réflexif, symétrique et transitif.</p>
+</div>
+<p>On va représenter graphiquement par une flèche &ldquo;$\text{\bf X}\longrightarrow\mathscr{C}_x$&rdquo; la relation de solidité : &ldquo;si $\vdash_\text{\bf X}\phi$, alors $\models_{\mathscr{C}_x}\phi$&rdquo;.</p>
+<p><img src="/compsolide.png?width=1200px" alt=""></p>
+<p>On va essayer maintenant d&rsquo;associer les classe aux logiques, la sémantique à la syntaxe.</p>
+<div id="def">
+<p>Soit $\mathscr{C}$ une classe de systèmes de transition et $\mathbb{L}$ une logique modale normale.</p>
+<ul>
+<li>$\mathbb{L}$ est faiblement complète par rapport à la classe $\mathscr{C}$ (noté $\mathscr{C}$<b>-faiblement complète</b>) si pour toute formule $\phi$&nbsp;:<br>
+$$\text{si }\models_\mathscr{C}\phi \text{ alors } \vdash_\mathbb{L}\phi$$</li>
+<li>$\mathbb{L}$ est fortement complète par rapport à la classe $\mathscr{C}$ (noté $\mathscr{C}$<b>-fortement complète</b>) si pour toute formule $\phi$ et tout ensemble de formules $\Gamma$&nbsp;:<br>
+$$\text{si } \Gamma \models_\mathscr{C}\phi \text{ alors } \Gamma \vdash_\mathbb{L}\phi$$</li>
+</ul>
+</div>
+<br>
+<p>On a alors le théorème de forte complétude suivant :</p>
+<div id="theo">
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
+<ol>
+<li>si $\Gamma\models_{\mathscr{C}}\phi$ alors $\Gamma\vdash_\text{\bf K}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{tr.}}\phi$ alors $\Gamma\vdash_\text{\bf K4}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{n.b.d.}}\phi$ alors $\Gamma\vdash_\text{\bf KD}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{tr.,n.b.d.}}\phi$ alors $\Gamma\vdash_\text{\bf KD4}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{ref.}}\phi$ alors $\Gamma\vdash_\text{\bf KT}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{ref.,tr.}}\phi$ alors $\Gamma\vdash_\text{\bf S4}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{sym.}}\phi$ alors $\Gamma\vdash_\text{\bf KB}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{sym.,tr.}}\phi$ alors $\Gamma\vdash_\text{\bf KB4}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{sym.,n.b.d.}}\phi$ alors $\Gamma\vdash_\text{\bf KDB}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{ref.,sym.}}\phi$ alors $\Gamma\vdash_\text{\bf KTB}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{ref.,sym.,tr.}}\phi$ alors $\Gamma\vdash_\text{\bf S5}\phi$</li>
+</ol>
+</div>
+</div>
+<br>
+<p>Pour le démontrer on va avoir besoin de nouvelles définitions et de plusieurs lemmes.</p>
+<div id="def">
+<p>Soient $\text{\bf S}$ un système formel et $\Gamma$ un ensemble de formules,<br></p>
+<p style="text-align:center;">
+$\Gamma$ est $\text{\bf S}$<b>-consistant</b> si et seulement si $\Gamma\nvdash_\text{\bf S}\bot$.
+</p>
+Dans le cas contraire, $\Gamma$ est dit $\text{\bf S}$-inconsistant.
+</div>
+<br>
+<div id="theo">
+<b>Lemme existence</b>
+<p>Soient $\mathscr{C}$ une classe de système de transition et $\mathbb{L}$ une logique modale normale,<br></p>
+<p style="text-align:center;">
+$\mathbb{L}$ est $\mathscr{C}$-(fortement) complète si et seulement si pour tout $\Gamma\subseteq\mathbb{L}$ qui est $\mathbb{L}$-consistant, il existe $\mathcal{S}\in\mathscr{C},\mathcal{V}$ et $a$ tels que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Gamma$.
+</p>
+</div>
+<br>
+<div id="preuve">
+<ul>
+<li>$\Rightarrow$&nbsp;:<br>
+puisque $\mathbb{L}$ est $\mathscr{C}$-complète, un ensemble de formules quelconque $\mathbb{L}$-consistant $\Gamma\subseteq\mathbb{L}$ est nécessairement satisfaisable pour un système de transition de la classe $\mathscr{C}$. En effet, si ce n'était pas le cas, l'expression $\Gamma\models_\mathscr{C}\bot$ serait vraie, mais alors nous pourrions en déduire $\Gamma\vdash_\mathbb{L}\bot$ en utilisant la $\mathscr{C}$-complétude de $\mathbb{L}$.
+</li>
+<li>$\Leftarrow$&nbsp;:<br>
+montrons la contraposée. On suppose donc que $\mathbb{L}$ n'est pas $\mathscr{C}$-complète. Soit donc $\Gamma$ un ensemble de formules et $\phi$ une formule tels que $\Gamma\models_\mathscr{C}\phi$ mais $\Gamma\nvdash_\mathbb{L}\phi$. Il apparaît dès lors que $\Gamma\cup\set{\neg\phi}\nvdash_\mathbb{L}\bot$ est vérifiée, car $\Gamma\cup\set{\neg\phi}\vdash_\mathbb{L}\bot$ entraînerait $\Gamma\vdash_\mathbb{L}\neg\phi\rightarrow\bot$ puis, en passant par la contraposée, $\Gamma\vdash_\mathbb{L}\phi$. Par conséquent $\Gamma\cup\set{\neg\phi}$ est $\mathbb{L}$-consistant et pourtant, pour tout système de transition $\mathcal{S}\in\mathscr{C}$, $\mathcal{V}$ et $a$, $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Gamma\cup\set{\neg\phi}$.
+</li>
+</ul>
+</div>
+<p>L&rsquo;idée pour démontrer le théorème de complétude va donc être de chercher un modèle $\langle\mathcal{S},\mathcal{V}\rangle$ dont le système de transition fait partie de la classe considérée et un nœud $a$ tels que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Gamma$ où $\Gamma$ est un ensemble de formules $\mathbb{L}$-consistant.<br>
+On va construire un tel modèle en utilisant des ensembles de formules pour faire les nœuds de son système de transition ! La sémantique détourne ainsi la syntaxe à son profit.</p>
+<div id="def">
+<p>Soient $\mathbb{L}$ une logique modale normale et $\Gamma$ un ensemble de formules,<br></p>
+<p style="text-align:center;">
+$\Gamma$ est <b>maximal $\mathbb{L}$-consistant</b> (MC) si et seulement si $\Gamma\nvdash_\mathbb{L}\bot$ et pour tout ensemble $\Gamma \subsetneq \Gamma'$, $\Gamma'\vdash_\mathbb{L}\bot$.
+</p>
+</div>
+<p>Remarques :</p>
+<p style="margin-bottom:-1.1em;">si $\Gamma$ est maximal $\mathbb{L}$-consistant, alors&nbsp;:</p>
+<ul>
+<li>$\mathbb{L}\subseteq\Gamma$</li>
+<li>$\Gamma$ est clos par <i>modus ponens</i></li>
+<li>pour toute formule $\phi$, $\phi\in\Gamma$ ou $\neg\phi\in\Gamma$</li>
+<li>pour toutes formules $\phi$ et $\psi$, $\phi\lor\psi\in\Gamma$ si et seulement si $\phi\in\Gamma$ ou $\psi\in\Gamma$</li>
+</ul>
+<div id="theo">
+<b>Lemme Lindenbaum</b>
+<p style="text-align:center;">
+Si $\Gamma$ est $\mathbb{L}$-consistant, alors il existe $\Gamma_{max}$ maximal $\mathbb{L}$-consistant tel que $\Gamma\subseteq\Gamma_{max}$.
+</p>
+</div>
+<br>
+<div id="preuve">
+<p>Soit $(\phi_n)_{n\in\mathbb{N}}$ une énumération de toutes les formules. On définit :</p>
+<ul>
+<li>$\Gamma_0=\Gamma$</li>
+<li>
+$\Gamma_{n+1}=\begin{cases}\Gamma_n\cup\set{\phi_n} \text{ si } \Gamma_n\cup\set{\phi_n}\nvdash_\mathbb{L}\bot\\ \Gamma_n\cup\set{\neg\phi_n} \text{ sinon}\end{cases}$</li>
+<li>$\displaystyle \Gamma_{max}=\bigcup_{n\in\mathbb{N}}\Gamma_n$
+</ul>
+$\Gamma_{max}$ est $\mathbb{L}$-consistant car sinon il existerait un plus petit entier $n$ tel que $\Gamma_{n+1}\vdash_\mathbb{L}\bot$. Nous aurions alors $\Gamma_n\cup\set{\phi_n}\vdash_\mathbb{L}\bot$ et $\Gamma_n\cup\set{\neg\phi_n}\vdash_\mathbb{L}\bot$ par construction de $\Gamma_{max}$. En utilisant le raisonnement par l'absurde, nous obtenons à la fois $\Gamma_n\vdash_\mathbb{L}\phi_n$ et $\Gamma_n\vdash_\mathbb{L}\neg\phi_n$, ce qui entraîne $\Gamma_n\vdash_\mathbb{L}\bot$, contredisant la fait que par minimalité de l'entier $n$, $\Gamma_n$ est $\mathbb{L}$-consistant.
+<p>$\Gamma_{max}$ est maximal car sinon il existerait $\Gamma&rsquo;$ $\mathbb{L}$-consistant tel que $\Gamma_{max}\subsetneq\Gamma&rsquo;$. Dans ce cas, une formule quelconque $\psi$ telle que $\psi\in\Gamma&rsquo;\setminus\Gamma_{max}$ apparaîtrait dans l&rsquo;énumération $(\phi_n)_{n\in\mathbb{N}}$ de toutes les formules et il existerait ainsi un entier $n$ tel que $\psi=\phi_n$. Par construction de $\Gamma_{max}$, comme $\phi_n\not\in\Gamma_{max}$, $\Gamma_n\cup\set{\phi_n}\vdash_\mathbb{L}\bot$ est vérifiée. Donc $\Gamma_{max}\cup\set{\phi_n}\vdash_\mathbb{L}\bot$ ce qui entraîne $\Gamma&rsquo;\vdash_\mathbb{L}\bot$, contredisant la $\mathbb{L}$-consistance de $\Gamma&rsquo;$.</p>
+</div>
+<br>
+<div id="def">
+<p style="margin-bottom:-1.1em;">
+Soit $\mathbb{L}$ une logique modale normale, le <b>modèle canonique</b> $\mathcal{M}_\mathbb{L}$ est défini par $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ avec&nbsp;:
+</p>
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
+<ul>
+<li>$N_\mathbb{L}=\set{\Gamma|\Gamma\text{ maximal }\mathbb{L}\text{-consistant}}$</li>
+<li>$A_\mathbb{L}$ défini par $\Gamma\longrightarrow\Gamma'$ si et seulement si pour toute formule $\phi$, si $\phi\in\Gamma'$ alors $\Diamond\phi\in\Gamma$ (c.-à-d. $\Gamma\supseteq\set{\Diamond\phi : \phi\in\Gamma'}$)</li>
+<li>$\mathcal{V}_\mathbb{L}$ est défini par $\mathcal{V}_\mathbb{L}(P)=\set{\Gamma\in\N_\mathbb{L}|P\in\Gamma}$ (c.-à-d. $\Gamma\Vdash P$ si et seulement si $P\in\Gamma$)</li>
+</ul>
+</div>
+</div>
+<br>
+<div id="theo">
+<b>Lemme $\rightarrow$ et $\Box$</b>
+<p>Soit $\mathbb{L}$ une logique modale normale et $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ le modèle canonique associé à $\mathbb{L}$. Pour tout nœud $\Gamma,\Gamma&rsquo;\in N_\mathbb{L}$, on a :</p>
+<p style="text-align:center;">
+$\Gamma\longrightarrow\Gamma'$ si et seulement si pour toute formule $\phi$, si $\Box\phi\in\Gamma$ alors $\phi\in\Gamma'$.
+</p>
+</div>
+<br>
+<div id="theo">
+<b>Lemme $\rightarrow$ et $\Diamond$</b>
+<p>Soit $\mathbb{L}$ une logique modale normale et $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ le modèle canonique associé à $\mathbb{L}$. Pour tout nœud $\Gamma,\Gamma&rsquo;\in N_\mathbb{L}$ :</p>
+<p style="text-align:center;">
+Si $\Diamond\phi\in\Gamma$ alors il existe $\Gamma'$ tel que $\Gamma\longrightarrow\Gamma'$ et $\phi\in\Gamma'$.
+</p>
+</div>
+<br>
+<div id="theo">
+<b>Lemme vérité</b>
+<p>Soit $\mathbb{L}$ une logique modale normale et $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ le modèle canonique associé à $\mathbb{L}$. Pour tout nœud $\Gamma\in N_\mathbb{L}$ :</p>
+<p style="text-align:center;">
+$\langle\mathcal{M}_\mathbb{L},\Gamma\rangle\Vdash\phi$ si et seulement si $\phi\in\Gamma$
+</p>
+</div>
+<p><img src="/compcomplet.png?width=1200px" alt=""></p>
 
 
 <footer class="footline">
@@ -4432,19 +4621,19 @@ Dans le graphique suivant, une flèche allant de $\mathscr{C}$ à $\mathscr{C&rs
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713753951"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713753951"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713753951"></script>
-    <script src="/js/jquery.sticky.js?1713753951"></script>
-    <script src="/js/featherlight.min.js?1713753951"></script>
-    <script src="/js/highlight.pack.js?1713753951"></script>
+    <script src="/js/clipboard.min.js?1713799211"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713799211"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713799211"></script>
+    <script src="/js/jquery.sticky.js?1713799211"></script>
+    <script src="/js/featherlight.min.js?1713799211"></script>
+    <script src="/js/highlight.pack.js?1713799211"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713753951"></script>
-    <script src="/js/learn.js?1713753951"></script>
-    <script src="/js/hugo-learn.js?1713753951"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713799211"></script>
+    <script src="/js/learn.js?1713799211"></script>
+    <script src="/js/hugo-learn.js?1713799211"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713753951"></script>
+            <script src="/mermaid/mermaid.js?1713799211"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
