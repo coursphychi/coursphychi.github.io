@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713751341" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713751341" rel="stylesheet">
-    <link href="/css/hybrid.css?1713751341" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713751341" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713751341" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713751341" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713751341" rel="stylesheet">
-    <link href="/css/theme.css?1713751341" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713751341" rel="stylesheet">
+    <link href="/css/nucleus.css?1713753951" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713753951" rel="stylesheet">
+    <link href="/css/hybrid.css?1713753951" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713753951" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713753951" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713753951" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713753951" rel="stylesheet">
+    <link href="/css/theme.css?1713753951" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713753951" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713751341" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713753951" rel="stylesheet">
     
-    <link href="/css/foo.css?1713751341" rel="stylesheet"><link href="/css/bar.css?1713751341" rel="stylesheet">
+    <link href="/css/foo.css?1713753951" rel="stylesheet"><link href="/css/bar.css?1713753951" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713751341"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713753951"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713751341"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713751341"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713753951"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713753951"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713751341"></script>
+<script type="text/javascript" src="/js/search.js?1713753951"></script>
 
     
   </div>
@@ -2742,7 +2742,7 @@ De la sorte, le jeu continue indéfiniment.
 <br>
 <p>Nous cherchons l&rsquo;équivalent en logique modale des tautologies pour le calcul des propositions. Pour une classe $\mathscr{C}$ de systèmes de transition, on va appeler ça logique de la classe $\mathscr{C}$.</p>
 <div id="def">
-<p>La logique de la classe $\mathscr{C}$ est la classe de toutes les formules qui sont valides dans tous les systèmes de transition de $\mathscr{C}$ : $\text{Log}_\mathscr{C}=\set{\phi|\text{pour tout }\mathcal{S}\in\mathscr{C},\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}} \phi}$</p>
+<p>La logique de la classe $\mathscr{C}$ est la classe de toutes les formules qui sont valides dans tous les systèmes de transition de $\mathscr{C}$ : $\mathbb{Log}_\mathscr{C}=\set{\phi|\text{pour tout }\mathcal{S}\in\mathscr{C},\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}} \phi}$</p>
 </div>
 <br>
 <p>Cette logique doit contenir toutes les formules qui sont des tautologies du calcul des propositions puisque ces formule de profondeur modale nulle (pas d&rsquo;opérateurs modaux) sont nécessairement forcées en tout nœud de n&rsquo;importe quel modèle.</p>
@@ -2874,6 +2874,7 @@ $$
 </li>
 </ul>
 </div>
+<br>
 <p>Toute logique modale normale contient chaque formule $\phi$ prouvable dans le système formel $\text{\bf K}$ (si $\vdash_\text{\bf K}\phi$ alors $\phi$ fait partie de toute logique modale normale).</p>
 <p>La plus petite logique modale normale est construite sur la base du système formel $\text{\bf K}$. On la note $\mathbb{L}_\text{\bf K}$. Le lien entre la logique normale $\mathbb{L}_\text{\bf K}$ et le système formel $\text{\bf K}$ est le suivant : $\phi \in \mathbb{L}_\text{\bf K}$ ssi $\vdash_\text{\bf K}\phi$.</p>
 <br>
@@ -2973,16 +2974,17 @@ En logique doxastique : si je ne crois pas quelsue chose, alors je crois que je
 </div>
 <p>Cette relation est réflexive ($\text{\bf S}≤\text{\bf S}$) et transitive (si $\text{\bf S}≤\text{\bf S&rsquo;}$ et $\text{\bf S&rsquo;}≤\text{\bf S&rsquo;&rsquo;}$ alors $\text{\bf S}≤\text{\bf S&rsquo;&rsquo;}$).</p>
 <p>$\text{\bf S}≤\text{\bf S&rsquo;}$ se lit $\text{\bf S}$ <strong>se réduit à</strong> $\text{\bf S&rsquo;}$. Tout ce qui est prouvé à l&rsquo;aide de $\text{\bf S}$ peut également l&rsquo;être à l&rsquo;aide de $\text{\bf S&rsquo;}$.</p>
-<p>Si $\text{\bf S}$ se réduit à $\text{\bf S&rsquo;}$, cela signifie que $\text{\bf S}$ permet de prouver au moins autant de formules (appelées <strong>théorèmes</strong>) que $\text{\bf S&rsquo;}$ et par conséquent, que la classe des systèmes de transition dans lesquels tous les théorèmes de $\text{\bf S&rsquo;}$ sont valides est incluse dans celle des systèmes de transition qui tous valident les théorèmes de $\text{\bf S}$.<br></p>
+<p>Si $\text{\bf S}$ se réduit à $\text{\bf S&rsquo;}$, cela signifie que $\text{\bf S&rsquo;}$ permet de prouver au moins autant de formules (appelées <strong>théorèmes</strong>) que $\text{\bf S}$ et par conséquent, que la classe des systèmes de transition dans lesquels tous les théorèmes de $\text{\bf S&rsquo;}$ sont valides est incluse dans celle des systèmes de transition qui tous valident les théorèmes de $\text{\bf S}$ (c&rsquo;est plus dur de raconter plus de choses, ça restreint l&rsquo;ensemble des modèles possibles).<br></p>
 <p>Autrement dit,</p>
 <div id="theo">
 <p>si $\mathscr{C}_\text{\bf S}$ et $\mathscr{C}_\text{\bf S&rsquo;}$ désignent respectivement la classe de tous les systèmes de transition qui valident $\text{\bf S}$ et $\text{\bf S&rsquo;}$ :<br>
 $\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulment si $\mathscr{C}_\text{\bf S&rsquo;}\subseteq\mathscr{C}_\text{\bf S}$.</p>
 </div>
 <br>
+<p>Par contre, les logiques modales normales étant des ensembles de formules satisfaites, pour elles l&rsquo;inclusion est dans l&rsquo;autre sens :</p>
 <div id="theo">
 <p>Lorsque $\text{\bf S}$ et $\text{\bf S&rsquo;}$ contiennent tous les deux le système formel $\text{\bf K}$, les logiques modales normales qu&rsquo;ils engendrent ($\mathbb{L}_\text{\bf S}$ et $\mathbb{L}_\text{\bf S&rsquo;}$) vérifient la relation suivante :<br>
-$\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulment si $\mathbb{L}_\text{\bf S&rsquo;}\subseteq\mathbb{L}_\text{\bf S}$.</p>
+$\text{\bf S}≤\text{\bf S&rsquo;}$ si et seulment si $\mathbb{L}_\text{\bf S}\subseteq\mathbb{L}_\text{\bf S&rsquo;}$.</p>
 </div>
 <p>On obtient alors immédiatement les réductions suivantes :</p>
 <div id="theo">
@@ -3081,10 +3083,10 @@ Pour enfin pouvoir conclure&nbsp;:
 </div>
 <br>
 <p>Représentons tout ça graphiquement en utilisant le code suivant : une flèche allant de $\text{\bf S}$ à $\text{\bf S&rsquo;}$ signifie que la relation $\text{\bf S}≤\text{\bf S&rsquo;}$ est avérée ($\text{\bf S}$ se réduit à $\text{\bf S&rsquo;}$).</p>
-<p><img src="/compsystformels.png?width=800px" alt=""></p>
+<p><img src="/compsystformels.png?width=600px" alt=""></p>
 <p>Et comme on l&rsquo;a vu, la réduction d&rsquo;un système formel à un autre implique l&rsquo;inclusion inverse entre les classes de tous les systèmes de transition qui valident ces systèmes formels.<br>
 Dans le graphique suivant, une flèche allant de $\mathscr{C}$ à $\mathscr{C&rsquo;}$ désigne donc l&rsquo;inclusion inverse $\mathscr{C}\supseteq\mathscr{C&rsquo;}$.</p>
-<p><img src="/compsysttrans.png?width=800px" alt=""></p>
+<p><img src="/compsysttrans.png?width=600px" alt=""></p>
 <p>On va maintenant chercher à faire correspondre une logique modale normale à chaque classe.</p>
 
 
@@ -4430,19 +4432,19 @@ Dans le graphique suivant, une flèche allant de $\mathscr{C}$ à $\mathscr{C&rs
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713751341"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713751341"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713751341"></script>
-    <script src="/js/jquery.sticky.js?1713751341"></script>
-    <script src="/js/featherlight.min.js?1713751341"></script>
-    <script src="/js/highlight.pack.js?1713751341"></script>
+    <script src="/js/clipboard.min.js?1713753951"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713753951"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713753951"></script>
+    <script src="/js/jquery.sticky.js?1713753951"></script>
+    <script src="/js/featherlight.min.js?1713753951"></script>
+    <script src="/js/highlight.pack.js?1713753951"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713751341"></script>
-    <script src="/js/learn.js?1713751341"></script>
-    <script src="/js/hugo-learn.js?1713751341"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713753951"></script>
+    <script src="/js/learn.js?1713753951"></script>
+    <script src="/js/hugo-learn.js?1713753951"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713751341"></script>
+            <script src="/mermaid/mermaid.js?1713753951"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
