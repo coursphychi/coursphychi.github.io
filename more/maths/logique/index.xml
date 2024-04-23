@@ -37,6 +37,16 @@ Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Du
 Logique modale Une petite communauté de dragons vivent sur une île aux règles spéciales. Si un dragon apprend qu&amp;rsquo;il a les yeux bleus, c&amp;rsquo;est la honte et il doit partir le soir même. Mais les autres dragons n&amp;rsquo;ont pas le droit de lui dire et aucun de ces dragons n&amp;rsquo;a de reflet et ne peut donc constater la couleur de ses propres yeux.</description>
     </item>
     <item>
+      <title>Logique modale</title>
+      <link>https://coursphychi.github.io/more/maths/logique/logique5/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/logique/logique5/</guid>
+      <description>info
+Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
+Logique modale Avant : syntaxe et sémantique Systèmes logiques Nous cherchons l&amp;rsquo;équivalent en logique modale des tautologies pour le calcul des propositions. Pour une classe $\mathscr{C}$ de systèmes de transition, on va appeler ça logique de la classe $\mathscr{C}$.
+La logique de la classe $\mathscr{C}$ est la classe de toutes les formules qui sont valides dans tous les systèmes de transition de $\mathscr{C}$ : $\mathbb{Log}_\mathscr{C}=\set{\phi|\text{pour tout }\mathcal{S}\in\mathscr{C},\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}} \phi}$</description>
+    </item>
+    <item>
       <title>Propositions - Preuve</title>
       <link>https://coursphychi.github.io/more/maths/logique/logique3/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>

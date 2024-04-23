@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Lentilles - Cours Physique-Chimie</title>
+    <title>Logique modale - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/2nde/lentille/">
+  <body class="" data-url="/more/maths/logique/logique5/">
     <nav id="sidebar" class="">
 
 
@@ -142,7 +142,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/2nde/" title="2nde" class="dd-item
-        parent
+        
         
         
         ">
@@ -399,7 +399,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/2nde/lentille/" title="Lentilles" class="dd-item active">
+      <li data-nav-id="/2nde/lentille/" title="Lentilles" class="dd-item ">
         <a href="/2nde/lentille/">
         Lentilles
         
@@ -1393,7 +1393,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/" title="MORE" class="dd-item
-        
+        parent
         
         
         ">
@@ -1521,7 +1521,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/" title="Maths" class="dd-item
-        
+        parent
         
         
         ">
@@ -1685,7 +1685,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/logique/" title="Logique" class="dd-item
-        
+        parent
         
         
         ">
@@ -2053,7 +2053,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Lentilles
+                   Logique modale
                  
                   </span>
                 </div>
@@ -2062,7 +2062,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#documents-et-autres">Documents et autres</a></li>
+    <li><a href="#systèmes-logiques">Systèmes logiques</a>
+      <ul>
+        <li><a href="#le-système-k">Le système K</a></li>
+        <li><a href="#logique-modale-normale">Logique modale normale</a></li>
+        <li><a href="#quelques-axiomes-usuels">Quelques axiomes usuels</a></li>
+      </ul>
+    </li>
+    <li><a href="#quelques-systèmes-formels-et-logiques-usuels">Quelques systèmes formels et logiques usuels</a></li>
   </ul>
 </nav>
     </div>
@@ -2082,22 +2089,640 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<h1 id="formation-des-images-et-lentille-convergente">Formation des images et lentille convergente</h1>
-<p><a href="/cm-lentille.pdf"><img src="/cm-lentille.png" alt=""></a></p>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/zvWzX-wxseQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+<style>
+ #correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ #comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ #commsum
+  {
+    color: #004D80;
+  }
+ #correcsum
+  {
+    color: #006C65;
+  }
+  #preuve
+{
+    background-color:#EAEAEA;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+#def
+{
+    background-color:#DCEFFE;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+#theo
+{
+    background-color:#FBE1DE;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+  td, th {
+  text-align: center;
+  vertical-align: middle;
+  min-width: 3em;
+}
+#grosseformule 
+{
+    overflow-x: auto; 
+  }
+</style>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [ ['$', '$'], ['\\(', '\\)'] ]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script
+  type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<br>
+
+<div class="notices info" style="--title: 'info';">
+  <p style="display: none;">info</p>
+  <div class="notice-body">
+    <p>Ces pages sont des notes de lecture du livre <em>La logique pas à pas</em> de Jacques Duparc que je paraphrase allégrement.</p>
+
+  </div>
+</div>
+
+
+<br>
+<h1 id="logique-modale">Logique modale</h1>
+<p style="text-align:center;">
+<a href="../logique4" style="font-size:2em;">Avant : <b>syntaxe et sémantique</b></a>
+</p>
+<h2 id="systèmes-logiques">Systèmes logiques</h2>
+<br>
+<p>Nous cherchons l&rsquo;équivalent en logique modale des tautologies pour le calcul des propositions. Pour une classe $\mathscr{C}$ de systèmes de transition, on va appeler ça <strong>logique de la classe</strong> $\mathscr{C}$.</p>
+<div id="def">
+<p>La logique de la classe $\mathscr{C}$ est la classe de toutes les formules qui sont valides dans tous les systèmes de transition de $\mathscr{C}$ : $\mathbb{Log}_\mathscr{C}=\set{\phi|\text{pour tout }\mathcal{S}\in\mathscr{C},\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}} \phi}$</p>
 </div>
 <br>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/JX5SX7Y_oWc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-<br>
-<h2 id="documents-et-autres">Documents et autres</h2>
+<p>Cette logique doit contenir toutes les formules qui sont des tautologies du calcul des propositions puisque ces formule de profondeur modale nulle (pas d&rsquo;opérateurs modaux) sont nécessairement forcées en tout nœud de n&rsquo;importe quel modèle.</p>
 <ul>
-<li><a href="/tplentille.pdf"><strong>TP - Lentille convergente et grandissement</strong></a></li>
-<li><a href="/exoslumiere.pdf"><strong>Exos - Lumière et lentilles</strong></a></li>
-<li><a href="https://www.geogebra.org/m/e35g8zb7"><strong>Applet Geogebra</strong></a></li>
+<li>Si la logique contient la formule $\phi$, elle doit aussi contenir $\Box\phi$. En effet, si $\phi$ est forcée en tout nœud, alors le successeur de tout nœud force aussi $\phi$. On appelle ça la <b>nécessitation</b> (ou généralisation) d'une formule.</li>
+<br>
+<li>De plus, si $\phi$ appartient à la logique, la satisfaction de $\phi$ en un nœud $a$ donné est indépendante de la valuation $\mathcal{V}$ (que $P$ soit vraie ou fausse, $P$ est forcée au nœud $a$). Par conséquent, que $\psi$ soit vraie ou fausse, la satisfaction de la formule $\phi[\psi/P]$ ne varie pas. Toutes <b>substitutions uniformes</b> opérées sur les variables d'une formule appartenant à la logique sera aussi dans la logique.</li>
+<br>
+<li>Enfin, la logique de la classe de tous les systèmes de transition est close par <b><i>modus ponens</i></b>&nbsp;; si $\phi \rightarrow\psi$ et $\psi$ appartiennent toutes deux à la logique, alors $\psi$ également. En effet, le <i>modus ponens</i> préserve la validité puisque si un modèle vérifie en un noud à la fois $\psi$ et $\psi\rightarrow\phi$, alors (par définition de l'interprétation de l'implication) il vérifie également $\phi$.</li>
 </ul>
+<p>Pour déterminer des nouvelles tautologies en calcul des propositions, on a utilisé des systèmes de déduction (à la Hilbert, déduction naturelle, calcul des séquents). La modalité complique un peu les choses et seul le système à la Hilbert va pouvoir s&rsquo;adapter facilement.</p>
+<div id="def">
+<ul>
+<li>Un <b>axiome</b> est une formule.</li>
+<li>Un <b>système formel</b> est un ensemble d'axiomes.</li>
+</ul>
+</div>
+<br>
+<div id="def">
+<p>Soient $I$ un ensemble non vide, $\phi$ une formule et $\text{\bf S}$ un système formel.<br>
+Une <b>preuve</b> de la formule $\varphi$ dans le système formel $\text{\bf S}$ est une suite finie de formule $\langle\varphi_1,\varphi_2,\ldots,\varphi_n\rangle$ telle que :</p>
+<ul>
+<li>$\varphi_n=\phi$</li>
+<br>
+<li>chaque $\varphi_l$ vérifie l'une des quatre conditions suivantes&nbsp;:
+<ul>
+<li>$\varphi_l \in \text{\bf S}$ ($\varphi_l$ est un axiome)</li>
+<li>$\varphi_l$ est obtenue par application de la règle du <i>modus ponens</i> à deux formules d'indice inférieurs $\varphi_j$ et $\varphi_k$ où $j , k < l$ ($\varphi_j = \varphi_k\rightarrow\varphi_l$)</li>
+<li>$\varphi_l = \varphi_k[\theta /P]$ où $k < l$ (substitution d'une variable $P$ quelconque par une formule $\theta$ quelconque dans une formule d'indice inférieure)</li>
+<li>$\varphi_l = [i]\varphi_j$ où $j < l$ ($\varphi_l$ est obtenue à partir de l'application de la règle de nécessitation appliquée à une formule d'indice inférieure pour une étiquette $i\in I$ quelconque)</li>
+</ul>
+</li>
+</ul>
+</div>
+<br>
+<div id="preuve">
+<p>Exemple 1 :</p>
+<p>Si $\text{\bf S}$ désigne l&rsquo;ensemble des tautologies du calcul des propositions, alors la suite $\langle P\rightarrow(P\lor\neg P),\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q),\Box (\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q)),\Box (\Diamond  \phi\rightarrow(\Diamond \phi\rightarrow\lor\neg\Diamond \phi))\rangle$ est une preuve de $\Box (\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q)),\Box (\Diamond  \phi\rightarrow(\Diamond \phi\rightarrow\lor\neg\Diamond \phi)$ dans ce système.</p>
+<p>En effet :</p>
+<ul>
+<li>$\varphi_1=P\rightarrow(P\lor\neg P)$ est une tautologie du calcul des propositions et donc un axiome du sydtème formel $\text{\bf S}$,</li>
+<li>$\varphi_2 = \Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q) = P\rightarrow(P\lor\neg P)[\Diamond Q /P]$ est la substitution de la formule $\Diamond Q$ à $P$ dans $\varphi_0$,</li>
+<li>$\varphi_3 = \Box (\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q))$ est obtenu par nécessitation de $\varphi_1$,</li>
+<li>$\varphi_4 = \Box (\Diamond  \phi\rightarrow(\Diamond \phi\rightarrow\lor\neg\Diamond \phi) = \varphi_3[\phi/Q]$</li>
+</ul>
+<br>
+<p>C&rsquo;est plus élégant de représenter l&rsquo;enchaînement sous forme d&rsquo;arbre :</p>
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;ax$}
+\UnaryInfC{$P\rightarrow(P\lor\neg P)$}
+\RightLabel{$\scriptsize\;sub.$}
+\UnaryInfC{$\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q)$}
+\RightLabel{$\scriptsize\;nec.$}
+\UnaryInfC{$\Box (\Diamond  Q\rightarrow(\Diamond Q\rightarrow\lor\neg\Diamond Q))$}
+\RightLabel{$\scriptsize\;sub.$}
+\UnaryInfC{$\Box (\Diamond  \phi\rightarrow(\Diamond \phi\rightarrow\lor\neg\Diamond \phi)$}
+\end{prooftree}
+$$
+</div>
+</div>
+<br>
+<div id="preuve">
+<p>Exemple 2 :</p>
+<p>Si $\text{\bf S}$ désigne l&rsquo;ensemble des tautologies du calcul des propositions auquel on ajoute la formule $P\rightarrow\Diamond P$, alors l&rsquo;arbre ci-dessous décrit une preuve de $\Box(\phi\rightarrow\Diamond\Diamond\phi)$ dans ce système :</p>
+<div style="position:relative;width:1300px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/exple260.png">
+</div>
+</div>
+<br>
+<div id="def">
+<p>Soient $\text{\bf S}$ un système formel et $\Gamma$ un ensemble de formules appelées hypothèses.<br>
+On écrit $\Gamma\vdash_\text{\bf S} \phi$ s&rsquo;il existe un ensemble fini de formules $\set{\psi_1,\psi_2,\ldots,\psi_n}\subseteq\Gamma$ tel que la formule $(\psi_1\land\psi_2\land\ldots\land\psi_n)\rightarrow\phi$ puisse être prouvée dans le système formel $\text{\bf S}$. Autrement dit le séquent $\vdash_\text{\bf S}(\psi_1\land\psi_2\land\ldots\land\psi_n)\rightarrow\phi$ est vérifiée pour un nombre fini de formules bien choisies de $\Gamma$.</p>
+</div>
+<br>
+<p>Attention, ici les hypothèses n&rsquo;ont pas le même sens qu&rsquo;en logique des propositions. En effet, pour prouver le séquent $\phi\vdash_\text{\bf S}\psi$, on ne peut pas ajouter $\phi$ aux axiomes et tenter d&rsquo;atteindre $\psi$ à partir des règles (<em>modus ponens</em>, substitution uniforme et nécessitation). Il faut ici réussir à prouver la formule $\phi\rightarrow\psi$ sur la base des seuls axiomes.</p>
+<p>Si on pouvait faire comme en logique des propositions, prouver $\phi\vdash_\text{\bf S}\Box\phi$ deviendrait évident : on place $\phi$ dans les axiomes et on applique la règle de nécessitation. Mais non, il faut pouvoir prouver $\vdash_\text{\bf S}\phi\rightarrow\Box\phi$ et comme on va le voir, dans le système $\text{\bf K}$, la formule $P\rightarrow\Box P$ n&rsquo;est pas prouvable ($P\nvdash_\text{\bf K}\Box P$).</p>
+<br>
+<h3 id="le-système-k">Le système K</h3>
+<br>
+<div id="def">
+<p>Le système $\text{\bf K}$ est le plus petit système formel qui contient :</p>
+<ul>
+<li>chaque tautologie du calcul des propositions</li>
+<li>$\text{(K)}$&nbsp;: $\Box(P\rightarrow Q)\rightarrow (\Box P\rightarrow \Box Q)$</li>
+<li>$\text{(dual)}$&nbsp;: $\Diamond P\leftrightarrow\neg\Box\neg P$</li>
+</ul>
+</div>
+<p>Le système $\text{\bf K}$ est minimal en ce sens qu&rsquo;il est validé dans tout modèle.</p>
+<p>Pour tout modèle $\mathcal{M}=\langle\mathcal{S},\mathcal{V}\rangle$ et tout nœud $a$, si $a\Vdash\Box(P\rightarrow Q)$ et $a\Vdash\Box P$, cela signifie que pour tout nœud $b$ tel que $a\longrightarrow b$, $b\Vdash P\rightarrow Q$ et $b\Vdash P$, par conséquent $b\Vdash Q$ et donc $a\Vdash \Box Q$. Cela montre que l&rsquo;axiome (K) est valide dans tous les systèmes de transition.</p>
+<p>Cet axiome $\text{(K)}$ est appelé <strong>axiome de distribution</strong> car il permet de distribuer l&rsquo;opérateur modal $\Box$ à l&rsquo;intérieur de l&rsquo;implication.</p>
+<p>L&rsquo;axiome $\text{(dual)}$ permet de passer d&rsquo;un opérateur modal à l&rsquo;autre et est aussi valide dans tout sytème de transition (être sûr de la présence d&rsquo;un truc revient à ne pas être sûr de son absence, ou pour rester sur la structure du système de transition, dire qu&rsquo;il existe un chemin vers $P$ revient à ne pas dire que tous les chemins vont vers $\neg P$). On obtient son pendant $\Box P \leftrightarrow \neg\Diamond\neg P$ (si tous les chemins mènent à $P$, il n&rsquo;existe pas de chemin menant à $\neg P$) en appliquant la négation de chaque côté de l&rsquo;équivalence, puis en substituant $\neg P$ à $P$ et enfin, en supprimant les doubles négations. Ces deux relations montrent bien que <strong>$\Diamond$ et $\Box$ sont deux opérateurs duaux</strong>.</p>
+<p>Mais ce système formel n&rsquo;est pas encore suffisamment riche pour contenir toutes les formules valides dans tous les modèles quels qu&rsquo;ils soient. Pour cela, il faudrait également considérer toutes les substitutions uniformes possibles (entre autre dans la formule  $\text{(K)}$). On passe alors aux <strong>logiques modales</strong>.</p>
+<br>
+<h3 id="logique-modale-normale">Logique modale normale</h3>
+<br>
+<div id="def">
+<p>Une <b>logique modale normale</b> $\mathbb{L}$ est un ensemble de formules qui contient le système formel $\text{\bf K}$ et qui est clos par :</p>
+<ul>
+<li><i>modus ponens</i>
+$$
+\begin{prooftree}
+\AxiomC{$\phi$}
+\AxiomC{$\phi\rightarrow\psi$}
+\RightLabel{$\scriptsize\;mod.p.$}
+\BinaryInfC{$\psi$}
+\end{prooftree}
+$$
+</li>
+<li>substitution uniforme
+$$
+\begin{prooftree}
+\AxiomC{$\phi$}
+\RightLabel{$\scriptsize\;sub.$}
+\UnaryInfC{$\phi[\theta/P]$}
+\end{prooftree}
+$$
+</li>
+<li>nécessitation
+$$
+\begin{prooftree}
+\AxiomC{$\phi$}
+\RightLabel{$\scriptsize\;nec.$}
+\UnaryInfC{$\Box\phi$}
+\end{prooftree}
+$$
+</li>
+</ul>
+</div>
+<br>
+<p>Toute logique modale normale contient chaque formule $\phi$ prouvable dans le système formel $\text{\bf K}$ (si $\vdash_\text{\bf K}\phi$ alors $\phi$ fait partie de toute logique modale normale).</p>
+<p>La plus petite logique modale normale est construite sur la base du système formel $\text{\bf K}$. On la note $\mathbb{L}_\text{\bf K}$. Le lien entre la logique normale $\mathbb{L}_\text{\bf K}$ et le système formel $\text{\bf K}$ est le suivant : $\phi \in \mathbb{L}_\text{\bf K}$ ssi $\vdash_\text{\bf K}\phi$.</p>
+<br>
+<h3 id="quelques-axiomes-usuels">Quelques axiomes usuels</h3>
+<br>
+<div id="def">
+<p>$\text{(K) :}$ $\Box(P\rightarrow S)\rightarrow(\Box P\rightarrow \Box Q)$</p>
+</div>
+<p>On l&rsquo;a vu, l&rsquo;axiome $\text{(K)}$ est à la base des logiques modales normales.</p>
+<br>
+<div id="def">
+<p>$\text{(D) :}$ $\Box P\rightarrow \Diamond P$</p>
+</div>
+<p>La formule $\text{(D)}$ dit que si quelque chose est nécessaire, alors elle doit être possible. On peut aussi l&rsquo;interpréter différemment dans d&rsquo;autres types de logiques que nous allons entrevoir ensuite : en logique déontique, la formule dit que quelque chose d&rsquo;obligatoire doit être permis ; en logique épistémique, elle dit que si je sais $P$, alors il est faux que je sache $\neg P$ ; et en logique doxastique, que si je crois que $P$, alors il est faux que je crois que $\neg P$.</p>
+<p><a href="../logique4/#nbd">Comme on l&rsquo;a vu plus tôt</a>, un système de transition qui valide $\text{(D)}$ n&rsquo;admet <strong>pas d&rsquo;impasse</strong>. Autrement dit, les arcs doivent être <strong>non bornés à droite</strong>.</p>
+<br>
+<div id="def">
+<p>$\text{(T) :}$ $\Box P\rightarrow P$</p>
+</div>
+<p>La formule $\text{(T)}$ dit que si quelque chose est nécessaire, alors elle est.<br>
+En logique déontique : ce qui est obligatoire est.<br>
+En logique épistémique : si je sais $P$, alors $P$ est avéré.<br>
+En logique doxastique : si je crois que $P$, alors $P$ est également avéré.</p>
+<p>Et <a href="../logique4/#refl">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(T)}$ si et seulement si ce système est <strong>réflexif</strong>.</p>
+<br>
+<div id="def">
+<p>$\text{(B) :}$ $P\rightarrow \Box\Diamond P$</p>
+</div>
+<p>La formule $\text{(B)}$ dit que si quelque chose est vraie, alors il est nécessaire qu&rsquo;elle soit possible.<br>
+En logique déontique : ce qui est, est obligatoirement permis.<br>
+En logique épistémique : si je $P$ est avéré, alors je sais que je ne sais pas $\neg P$.<br>
+En logique doxastique : si $P$ est avéré, alors je crois que je ne crois pas $\neg P$.</p>
+<p>Et <a href="../logique4/#syme">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(B)}$ si et seulement si ce système est <strong>symétrique</strong>.</p>
+<br>
+<div id="def">
+<p>$\text{(4) :}$ $\Box P\rightarrow \Box\Box P$</p>
+</div>
+<p>La formule $\text{(4)}$ dit que si quelque chose est nécessaire, alors elle est nécessairement nécessaire.<br>
+En logique déontique : si quelque chose est obligatoire, c&rsquo;est obligatoire qu&rsquo;elle le soit.<br>
+En logique épistémique : si je sais $P$, alors je sais que je sais $P$. Et transitivement, on sait que l&rsquo;on sait que l&rsquo;on sait&hellip; Autrement dit, avec la formule (4) nous décrivons des agents parfaitement rationnel.<br></p>
+<p>Et <a href="../logique4/#trans">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(4)}$ si et seulement si ce système est <strong>transitif</strong>.</p>
+<br>
+<div id="def">
+<p>$\text{(5) :}$ $\Diamond P\rightarrow \Box\Diamond P$</p>
+</div>
+<p>La formule $\text{(5)}$ dit que s&rsquo;il n&rsquo;est pas nécessaire que quelque chose ne soit pas, alors elle est nécessaire.<br>
+En logique déontique : si quelque chose est permise, c&rsquo;est obligatoire qu&rsquo;elle soit permise.<br>
+En logique épistémique : si je ne sais pas quelque chose, alors je sais que je ne le sais pas. L&rsquo;interprétation épistémique décrit un agent parfaitement conscient de ce qu&rsquo;il ne sait pas.<br>
+En logique doxastique : si je ne crois pas quelsue chose, alors je crois que je ne le crois pas. L&rsquo;interprétation doxastique décrit un agent parfaitement conscient de ce qu&rsquo;il ne croit pas.</p>
+<p>Et <a href="../logique4/#eucl">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(5)}$ si et seulement si ce système est <strong>euclidien</strong>.</p>
+<br>
+<p>En prenant ensemble les formules $\text{(5)}$ et $\text{(T)}$, on regarde des systèmes de transition à la fois <strong>euclidiens</strong> et <strong>réflexifs</strong>. Or la conjonction de ces deux propriétés est équivalentes à la conjonction des trois propriétés d&rsquo;une relation d&rsquo;équivalence !</p>
+<div id="theo">
+<p>Un système de transition est à la fois <strong>euclidien</strong> et <strong>réflexif</strong> si et seulement si il est à la fois <strong>réflexif</strong>, <strong>symétrique</strong> et <strong>transitif</strong>.</p>
+</div>
+<p>Autrement dit, un graphe euclidien et réflexif est en fait ni plus ni moins qu&rsquo;un graphe dans lequel la relation d&rsquo;accessibilité est une <strong>relation d&rsquo;équivalence</strong> (relation définie par les trois propriétés réflexivité, symétrie et transitivité).</p>
+<div id="preuve">
+<ul>
+<li>$\Rightarrow$&nbsp;:<br>
+<ul>
+<li>réflexif&nbsp;: c'est immédiat</li>
+<li>symétrique&nbsp;: si on a un arc $a\longrightarrow b$, alors par réflexivité, on a aussi $a\longrightarrow a$, et le caractère euclidien impose donc $b\longrightarrow a$.</li>
+<li>transitif&nbsp;: supposons qu'on ait deux arcs $a\longrightarrow b$ et $b\longrightarrow c$. Comme on a montré la symétrie du graphe, on a aussi un arc $b\longrightarrow a$ et le caractère euclidien impose donc un arc $a\longrightarrow c$.
+</li>
+</ul>
+</li>
+<li>$\Leftarrow$&nbsp;:<br>
+<ul>
+<li>réflexif&nbsp;: c'est immédiat</li>
+<li>euclidien&nbsp;: supposons qu'on ait deux arcs $a\longrightarrow b$ et $a\longrightarrow c$. La symétrie donne un arc $b\longrightarrow a$ et la transitivité impose alors un arc $b\longrightarrow c$.</li>
+</ul>
+</li>
+</ul>
+</div>
+<br>
+<h2 id="quelques-systèmes-formels-et-logiques-usuels">Quelques systèmes formels et logiques usuels</h2>
+<br>
+<p>Par la suite, nous confonderons un système formel et la logique qu&rsquo;il induit par clôture. Les systèmes formels qu&rsquo;on va introduire sont tous des extensions du système $\text{\bf K}$.</p>
+<div id="def">
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
+<ul>
+<li>$\text{\bf K}$</li>
+<li>$\text{\bf KD}$&nbsp;: $\text{\bf K}\cup\set{\text{(D)}}$</li>
+<li>$\text{\bf KB}$&nbsp;: $\text{\bf K}\cup\set{\text{(B)}}$</li>
+<li>$\text{\bf KT}$&nbsp;: $\text{\bf K}\cup\set{\text{(T)}}$</li>
+<li>$\text{\bf K4}$&nbsp;: $\text{\bf K}\cup\set{\text{(4)}}$</li>
+<li>$\text{\bf KB4}$&nbsp;: $\text{\bf K}\cup\set{\text{(B),(4)}}$</li>
+<li>$\text{\bf KD4}$&nbsp;: $\text{\bf K}\cup\set{\text{(D),(4)}}$</li>
+<li>$\text{\bf KDB}$&nbsp;: $\text{\bf K}\cup\set{\text{(D),(B)}}$</li>
+<li>$\text{\bf KTB}$&nbsp;: $\text{\bf K}\cup\set{\text{(T),(B)}}$</li>
+<li>$\text{\bf S4} = \text{\bf KT4}$&nbsp;: $\text{\bf K}\cup\set{\text{(T),(4)}}$</li>
+<li>$\text{\bf S4} = \text{\bf KT5}$&nbsp;: $\text{\bf K}\cup\set{\text{(T),(5)}}$</li>
+</ul>
+</div>
+</div>
+<p><br><br></p>
+<div id="def">
+<p>Soient $\text{\bf S}$ et $\text{\bf S&rsquo;}$ deux systèmes formels et $\phi$ une formule quelconque,<br></p>
+<p style="text-align:center;">
+$\text{\bf S}≤\text{\bf S'}$ si et seulement si $\vdash_\text{\bf S}\phi\rightarrow \,\vdash_\text{\bf S'}\phi$
+</p>
+</div>
+<p>Cette relation est réflexive ($\text{\bf S}≤\text{\bf S}$) et transitive (si $\text{\bf S}≤\text{\bf S&rsquo;}$ et $\text{\bf S&rsquo;}≤\text{\bf S&rsquo;&rsquo;}$ alors $\text{\bf S}≤\text{\bf S&rsquo;&rsquo;}$).</p>
+<p>$\text{\bf S}≤\text{\bf S&rsquo;}$ se lit $\text{\bf S}$ <strong>se réduit à</strong> $\text{\bf S&rsquo;}$. Tout ce qui est prouvé à l&rsquo;aide de $\text{\bf S}$ peut également l&rsquo;être à l&rsquo;aide de $\text{\bf S&rsquo;}$.</p>
+<p>Si $\text{\bf S}$ se réduit à $\text{\bf S&rsquo;}$, cela signifie que $\text{\bf S&rsquo;}$ permet de prouver au moins autant de formules (appelées <strong>théorèmes</strong>) que $\text{\bf S}$ et par conséquent, que la classe des systèmes de transition dans lesquels tous les théorèmes de $\text{\bf S&rsquo;}$ sont valides est incluse dans celle des systèmes de transition qui tous valident les théorèmes de $\text{\bf S}$ (c&rsquo;est plus dur de raconter plus de choses, ça restreint l&rsquo;ensemble des modèles possibles).<br></p>
+<p>Autrement dit,</p>
+<div id="theo">
+<p>si $\mathscr{C}_\text{\bf S}$ et $\mathscr{C}_\text{\bf S&rsquo;}$ désignent respectivement la classe de tous les systèmes de transition qui valident $\text{\bf S}$ et $\text{\bf S&rsquo;}$ :<br></p>
+<p style="text-align:center;">
+$\text{\bf S}≤\text{\bf S'}$ si et seulment si $\mathscr{C}\_\text{\bf S'}\subseteq\mathscr{C}\_\text{\bf S}$.
+</p>
+</div>
+<br>
+<p>Par contre, les logiques modales normales étant des ensembles de formules satisfaites, pour elles l&rsquo;inclusion est dans l&rsquo;autre sens :</p>
+<div id="theo">
+<p>Lorsque $\text{\bf S}$ et $\text{\bf S&rsquo;}$ contiennent tous les deux le système formel $\text{\bf K}$, les logiques modales normales qu&rsquo;ils engendrent ($\mathbb{L}_\text{\bf S}$ et $\mathbb{L}_\text{\bf S&rsquo;}$) vérifient la relation suivante :<br></p>
+<p style="text-align:center;">
+$\text{\bf S}≤\text{\bf S'}$ si et seulment si $\mathbb{L}\_\text{\bf S}\subseteq\mathbb{L}\_\text{\bf S'}$.
+</p>
+</div>
+<p>On obtient alors immédiatement les réductions suivantes :</p>
+<div id="theo">
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
+<ul>
+<li>$\text{\bf K}≤\text{\bf K4}$</li>
+<li>$\text{\bf K}≤\text{\bf KB}$</li>
+<li>$\text{\bf K}≤\text{\bf KD}$</li>
+<li>$\text{\bf K4}≤\text{\bf KB4}$</li>
+<li>$\text{\bf K4}≤\text{\bf KD4}$</li>
+<li>$\text{\bf KB}≤\text{\bf KB4}$</li>
+<li>$\text{\bf KB}≤\text{\bf KDB}$</li>
+<li>$\text{\bf KD}≤\text{\bf KDB}$</li>
+<li>$\text{\bf KD}≤\text{\bf KD4}$</li>
+<li>$\text{\bf KT}≤\text{\bf KTB}$</li>
+<li>$\text{\bf KT}≤\text{\bf KT4}$</li>
+</ul>
+</div>
+</div>
+<p>Montrons maintenant que :</p>
+<div id="theo">
+<p style="text-align:center">
+$\text{\bf KD}≤\text{\bf KT}$
+</p>
+</div>
+<br>
+<div id="preuve">
+<p>Il suffit de montrer que la formule $\text{(D)}$ peut être prouvée grâce au système $\text{\bf KT}$, c&rsquo;est-à-dire : $\vdash_\text{\bf KT} \Box P\rightarrow\Diamond P$.</p>
+<div style="position:relative;width:1100px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvekdkt.png">
+</div>
+</div>
+<p>On en déduit immédiatement :</p>
+<div id="theo">
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
+<ul>
+<li>$\text{\bf KDB}≤\text{\bf KTB}$</li>
+<li>$\text{\bf KD4}≤\text{\bf KT4=S4}$</li>
+</ul>
+</div>
+</div>
+<br>
+<p>On peut aussi montrer que :</p>
+<div id="theo">
+<p style="text-align:center">
+$\text{\bf KTB}≤\text{\bf S5}$
+</p>
+</div>
+<br>
+<div id="preuve">
+<p>Il suffit de montrer que la formule $\text{(B)}$ peut être prouvée grâce au système $\text{\bf KT5}$, c&rsquo;est-à-dire : $\vdash_\text{\bf S5} P\rightarrow\Box\Diamond P$.</p>
+<p>Montrons d&rsquo;abord que $\vdash_\text{\bf KT}P\rightarrow\Diamond P$, ce qui montre également que $\vdash_\text{\bf KT5}P\rightarrow\Diamond P$.</p>
+<div style="position:relative;width:550px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvektbs51.png">
+</div>
+Puis utilisons ce résultat pour montrer que $\vdash_\text{\bf S5}P\rightarrow\Box\Diamond P$
+<div style="position:relative;width:800px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvektbs52.png">
+</div>
+</div>
+<br>
+<div id="theo">
+<p style="text-align:center">
+$\text{\bf S4}≤\text{\bf S5}$
+</p>
+</div>
+<br>
+<div id="preuve">
+<p>Il suffit de montrer que la formule $\text{(4)}$ peut être prouvée grâce au système $\text{\bf KT5}$, c&rsquo;est-à-dire : $\vdash_\text{\bf S5} \Box P\rightarrow\Box\Box P$.<br></p>
+<p>On commence par montrer $\vdash_\text{\bf S5} \Box P\rightarrow\Box\Diamond\Box P$ en ajoutant juste une substitution au théorème précédant :</p>
+<div id="grosseformule">
+$$
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\scriptsize\;th.$}
+\UnaryInfC{$ P\rightarrow\Box\Diamond P$}
+\RightLabel{$\scriptsize\;sub.$}
+\UnaryInfC{$ \Box P \rightarrow \Box\Diamond \Box P$}
+\end{prooftree}
+$$
+</div>
+On montre ensuite $\vdash_\text{\bf S5} \Diamond\Box P\rightarrow \Box P$
+<div style="position:relative;width:650px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuves4s51.png">
+</div>
+Puis on montre $\vdash_\text{\bf S5} \Box\Diamond\Box P\rightarrow \Box\Box P$
+<div style="position:relative;width:620px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuves4s52.png">
+</div>
+Pour enfin pouvoir conclure&nbsp;:
+<div style="position:relative;width:950px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuves4s53.png">
+</div>
+</div>
+<br>
+<div id="theo">
+<p style="text-align:center">
+$\text{\bf KB4}≤\text{\bf S5}$
+</p>
+</div>
+<br>
+<div id="preuve">
+<p>Il faut montrer à la fois que :</p>
+<ul>
+<li>la formule $\text{(4)}$ peut être prouvée dans le système $\text{\bf S5}$ et on l'a fait dans la démonstration de la réduction de $\text{\bf S4}$ à $\text{\bf S5}$,</li>
+<li>la formule $\text{(B)}$ peut être prouvée dans le système $\text{\bf S5}$ et on l'a fait dans la démonstration de la réduction de $\text{\bf KTB}$ à $\text{\bf S5}$,</li>
+</ul>
+</div>
+<br>
+<p>Représentons tout ça graphiquement en utilisant le code suivant : une flèche allant de $\text{\bf S}$ à $\text{\bf S&rsquo;}$ signifie que la relation $\text{\bf S}≤\text{\bf S&rsquo;}$ est avérée ($\text{\bf S}$ se réduit à $\text{\bf S&rsquo;}$).</p>
+<p><img src="/compsystformels.png?width=600px" alt=""></p>
+<p>Et comme on l&rsquo;a vu, la réduction d&rsquo;un système formel à un autre implique l&rsquo;inclusion inverse entre les classes de tous les systèmes de transition qui valident ces systèmes formels.<br>
+Dans le graphique suivant, une flèche allant de $\mathscr{C}$ à $\mathscr{C&rsquo;}$ désigne donc l&rsquo;inclusion inverse $\mathscr{C}\supseteq\mathscr{C&rsquo;}$.</p>
+<p><img src="/compsysttrans.png?width=600px" alt=""></p>
+<p>On va maintenant chercher à faire correspondre une logique modale normale à chaque classe de systèmes de transitions.</p>
+<div id="def">
+<p>Soit $\mathscr{C}$ une classe de systèmes de transition et $\mathbb{L}$ une logique modale normale, $\mathbb{L}$ est <b>solide</b> par rapport à la classe $\mathscr{C}$ (noté $\mathscr{C}$<b>-solide</b>) si pour toute formule $\phi$ et pour tout système de transition $\mathcal{S}$ de la classe $\mathscr{C}$, si $\vdash_\mathbb{L}\phi$ alors $\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}}\phi$.<br>
+Ce qu&rsquo;on peut aussi écrire :<br>
+$$\text{si } \vdash_\mathbb{L}\phi \text{ alors }\models_{\mathscr{C}}\phi$$</p>
+</div>
+<p>À chacune des onze classes, on peut faire correspondre une logique modale normale qui se trouve être solide pour cette classe.</p>
+<div id="theo">
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
+<ul>
+<li>si $\vdash_\text{\bf K}\phi$ alors $\models_{\mathscr{C}}\phi$</li>
+<li>si $\vdash_\text{\bf K4}\phi$ alors $\models_{\mathscr{C}_{tr.}}\phi$</li>
+<li>si $\vdash_\text{\bf KD}\phi$ alors $\models_{\mathscr{C}_{n.b.d.}}\phi$</li>
+<li>si $\vdash_\text{\bf KD4}\phi$ alors $\models_{\mathscr{C}_{tr.,n.b.d.}}\phi$</li>
+<li>si $\vdash_\text{\bf KT}\phi$ alors $\models_{\mathscr{C}_{ref.}}\phi$</li>
+<li>si $\vdash_\text{\bf S4}\phi$ alors $\models_{\mathscr{C}_{ref.,tr.}}\phi$</li>
+<li>si $\vdash_\text{\bf KB}\phi$ alors $\models_{\mathscr{C}_{sym.}}\phi$</li>
+<li>si $\vdash_\text{\bf KB4}\phi$ alors $\models_{\mathscr{C}_{sym.,tr.}}\phi$</li>
+<li>si $\vdash_\text{\bf KDB}\phi$ alors $\models_{\mathscr{C}_{sym.,n.b.d.}}\phi$</li>
+<li>si $\vdash_\text{\bf KTB}\phi$ alors $\models_{\mathscr{C}_{ref.,sym.}}\phi$</li>
+<li>si $\vdash_\text{\bf S5}\phi$ alors $\models_{\mathscr{C}_{ref.,sym.,tr.}}\phi$</li>
+</ul>
+</div>
+</div>
+<br>
+<div id="preuve">
+<p>On a déjà en fait déjà tout démontré.<br>
+En effet, on a montré que les axiomes de la logique normale minimale (tautologies du calcul des propositions, $\text{(K)}$ et $\text{(dual)}$) sont satisfaites en tout nœud et pour toute valuation de tous les systèmes de transitions. Et on a montré que les trois opérations utilisés pour les preuves (la nécéssitation, la substitution uniforme et le <i>modus ponens</i>) préservent la validité. Donc une formule prouvable dans $\text{\bf K}$ est valide dans tout système de transition ( $\text{\bf K}$ est $\mathscr{C}$-solide).</p>
+<p>Ensuite, on a montré que chacun des axiomes modaux supplémentaires ajoutés à $\text{\bf K}$ pour obtenir les autres logiques normales ont une validité limitée à une classe spécifique de systèmes de transition.</p>
+<ul>
+<li>$\text{(T)}$ est valide dans tout système de transition réflexif.</li>
+<li>$\text{(B)}$ est valide dans tout système de transition symétrique.</li>
+<li>$\text{(4)}$ est valide dans tout système de transition transitif.</li>
+<li>$\text{(D)}$ est valide dans tout système de transition non borné à droite.</li>
+<li>$\text{(4)}$ est valide dans tout système de transition euclidien.</li>
+</ul>
+<p>Et on a montré qu&rsquo;un graphe est à la fois réflexif et euclidien si et seulement si il est réflexif, symétrique et transitif.</p>
+</div>
+<p>On va représenter graphiquement par une flèche &ldquo;$\text{\bf X}\longrightarrow\mathscr{C}_x$&rdquo; la relation de solidité : &ldquo;si $\vdash_\text{\bf X}\phi$, alors $\models_{\mathscr{C}_x}\phi$&rdquo;.</p>
+<p><img src="/compsolide.png?width=1200px" alt=""></p>
+<p>On va essayer maintenant d&rsquo;associer les classe aux logiques, la sémantique à la syntaxe.</p>
+<div id="def">
+<p>Soit $\mathscr{C}$ une classe de systèmes de transition et $\mathbb{L}$ une logique modale normale.</p>
+<ul>
+<li>$\mathbb{L}$ est faiblement complète par rapport à la classe $\mathscr{C}$ (noté $\mathscr{C}$<b>-faiblement complète</b>) si pour toute formule $\phi$&nbsp;:<br>
+$$\text{si }\models_\mathscr{C}\phi \text{ alors } \vdash_\mathbb{L}\phi$$</li>
+<li>$\mathbb{L}$ est fortement complète par rapport à la classe $\mathscr{C}$ (noté $\mathscr{C}$<b>-fortement complète</b>) si pour toute formule $\phi$ et tout ensemble de formules $\Gamma$&nbsp;:<br>
+$$\text{si } \Gamma \models_\mathscr{C}\phi \text{ alors } \Gamma \vdash_\mathbb{L}\phi$$</li>
+</ul>
+</div>
+<br>
+<p>On a alors le théorème de forte complétude suivant :</p>
+<div id="theo">
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
+<ol>
+<li>si $\Gamma\models_{\mathscr{C}}\phi$ alors $\Gamma\vdash_\text{\bf K}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{tr.}}\phi$ alors $\Gamma\vdash_\text{\bf K4}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{n.b.d.}}\phi$ alors $\Gamma\vdash_\text{\bf KD}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{tr.,n.b.d.}}\phi$ alors $\Gamma\vdash_\text{\bf KD4}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{ref.}}\phi$ alors $\Gamma\vdash_\text{\bf KT}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{ref.,tr.}}\phi$ alors $\Gamma\vdash_\text{\bf S4}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{sym.}}\phi$ alors $\Gamma\vdash_\text{\bf KB}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{sym.,tr.}}\phi$ alors $\Gamma\vdash_\text{\bf KB4}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{sym.,n.b.d.}}\phi$ alors $\Gamma\vdash_\text{\bf KDB}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{ref.,sym.}}\phi$ alors $\Gamma\vdash_\text{\bf KTB}\phi$</li>
+<li>si $\Gamma\models_{\mathscr{C}_{ref.,sym.,tr.}}\phi$ alors $\Gamma\vdash_\text{\bf S5}\phi$</li>
+</ol>
+</div>
+</div>
+<br>
+<p>Pour le démontrer on va avoir besoin de nouvelles définitions et de plusieurs lemmes.</p>
+<div id="def">
+<p>Soient $\text{\bf S}$ un système formel et $\Gamma$ un ensemble de formules,<br></p>
+<p style="text-align:center;">
+$\Gamma$ est $\text{\bf S}$<b>-consistant</b> si et seulement si $\Gamma\nvdash_\text{\bf S}\bot$.
+</p>
+Dans le cas contraire, $\Gamma$ est dit $\text{\bf S}$-inconsistant.
+</div>
+<br>
+<div id="theo">
+<b>Lemme existence</b>
+<p>Soient $\mathscr{C}$ une classe de système de transition et $\mathbb{L}$ une logique modale normale,<br></p>
+<p style="text-align:center;">
+$\mathbb{L}$ est $\mathscr{C}$-(fortement) complète si et seulement si pour tout $\Gamma\subseteq\mathbb{L}$ qui est $\mathbb{L}$-consistant, il existe $\mathcal{S}\in\mathscr{C},\mathcal{V}$ et $a$ tels que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Gamma$.
+</p>
+</div>
+<br>
+<div id="preuve">
+<ul>
+<li>$\Rightarrow$&nbsp;:<br>
+puisque $\mathbb{L}$ est $\mathscr{C}$-complète, un ensemble de formules quelconque $\mathbb{L}$-consistant $\Gamma\subseteq\mathbb{L}$ est nécessairement satisfaisable pour un système de transition de la classe $\mathscr{C}$. En effet, si ce n'était pas le cas, l'expression $\Gamma\models_\mathscr{C}\bot$ serait vraie, mais alors nous pourrions en déduire $\Gamma\vdash_\mathbb{L}\bot$ en utilisant la $\mathscr{C}$-complétude de $\mathbb{L}$.
+</li>
+<li>$\Leftarrow$&nbsp;:<br>
+montrons la contraposée. On suppose donc que $\mathbb{L}$ n'est pas $\mathscr{C}$-complète. Soit donc $\Gamma$ un ensemble de formules et $\phi$ une formule tels que $\Gamma\models_\mathscr{C}\phi$ mais $\Gamma\nvdash_\mathbb{L}\phi$. Il apparaît dès lors que $\Gamma\cup\set{\neg\phi}\nvdash_\mathbb{L}\bot$ est vérifiée, car $\Gamma\cup\set{\neg\phi}\vdash_\mathbb{L}\bot$ entraînerait $\Gamma\vdash_\mathbb{L}\neg\phi\rightarrow\bot$ puis, en passant par la contraposée, $\Gamma\vdash_\mathbb{L}\phi$. Par conséquent $\Gamma\cup\set{\neg\phi}$ est $\mathbb{L}$-consistant et pourtant, pour tout système de transition $\mathcal{S}\in\mathscr{C}$, $\mathcal{V}$ et $a$, $\langle\mathcal{S},\mathcal{V},a\rangle\nVdash\Gamma\cup\set{\neg\phi}$.
+</li>
+</ul>
+</div>
+<br>
+<p>L&rsquo;idée pour démontrer le théorème de complétude va donc être de chercher un modèle $\langle\mathcal{S},\mathcal{V}\rangle$ dont le système de transition fait partie de la classe considérée et un nœud $a$ tels que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Gamma$ où $\Gamma$ est un ensemble de formules $\mathbb{L}$-consistant.<br>
+On va mettre au point un tel modèle en modelant les nœuds de son système de distribution directement à partir d&rsquo;ensembles de formules ! La sémantique détourne ainsi la syntaxe à son profit en donnant vie à une sorte de Golem syntaxique.</p>
+<br>
+<div id="def">
+<p>Soient $\mathbb{L}$ une logique modale normale et $\Gamma$ un ensemble de formules,<br></p>
+<p style="text-align:center;">
+$\Gamma$ est <b>maximal $\mathbb{L}$-consistant</b> (MC) si et seulement si $\Gamma\nvdash_\mathbb{L}\bot$ et pour tout ensemble $\Gamma \subsetneq \Gamma'$, $\Gamma'\vdash_\mathbb{L}\bot$.
+</p>
+</div>
+<p>Remarques :</p>
+<p style="margin-bottom:-1.1em;">si $\Gamma$ est maximal $\mathbb{L}$-consistant, alors&nbsp;:</p>
+<ul>
+<li>$\mathbb{L}\subseteq\Gamma$</li>
+<li>$\Gamma$ est clos par <i>modus ponens</i></li>
+<li>pour toute formule $\phi$, $\phi\in\Gamma$ ou $\neg\phi\in\Gamma$</li>
+<li>pour toutes formules $\phi$ et $\psi$, $\phi\lor\psi\in\Gamma$ si et seulement si $\phi\in\Gamma$ ou $\psi\in\Gamma$</li>
+</ul>
+<div id="theo">
+<b>Lemme de Lindenbaum</b>
+<p style="text-align:center;">
+Si $\Gamma$ est $\mathbb{L}$-consistant, alors il existe $\Gamma_{max}$ maximal $\mathbb{L}$-consistant tel que $\Gamma\subseteq\Gamma_{max}$.
+</p>
+</div>
+<br>
+<div id="preuve">
+<p>Soit $(\phi_n)_{n\in\mathbb{N}}$ une énumération de toutes les formules. On définit :</p>
+<ul>
+<li>$\Gamma_0=\Gamma$</li>
+<li>
+$\Gamma_{n+1}=\begin{cases}\Gamma_n\cup\set{\phi_n} \text{ si } \Gamma_n\cup\set{\phi_n}\nvdash_\mathbb{L}\bot\\ \Gamma_n\cup\set{\neg\phi_n} \text{ sinon}\end{cases}$</li>
+<li>$\displaystyle \Gamma_{max}=\bigcup_{n\in\mathbb{N}}\Gamma_n$
+</ul>
+$\Gamma_{max}$ est $\mathbb{L}$-consistant car sinon il existerait un plus petit entier $n$ tel que $\Gamma_{n+1}\vdash_\mathbb{L}\bot$. Nous aurions alors $\Gamma_n\cup\set{\phi_n}\vdash_\mathbb{L}\bot$ et $\Gamma_n\cup\set{\neg\phi_n}\vdash_\mathbb{L}\bot$ par construction de $\Gamma_{max}$. En utilisant le raisonnement par l'absurde, nous obtenons à la fois $\Gamma_n\vdash_\mathbb{L}\phi_n$ et $\Gamma_n\vdash_\mathbb{L}\neg\phi_n$, ce qui entraîne $\Gamma_n\vdash_\mathbb{L}\bot$, contredisant la fait que par minimalité de l'entier $n$, $\Gamma_n$ est $\mathbb{L}$-consistant.
+<p>$\Gamma_{max}$ est maximal car sinon il existerait $\Gamma&rsquo;$ $\mathbb{L}$-consistant tel que $\Gamma_{max}\subsetneq\Gamma&rsquo;$. Dans ce cas, une formule quelconque $\psi$ telle que $\psi\in\Gamma&rsquo;\setminus\Gamma_{max}$ apparaîtrait dans l&rsquo;énumération $(\phi_n)_{n\in\mathbb{N}}$ de toutes les formules et il existerait ainsi un entier $n$ tel que $\psi=\phi_n$. Par construction de $\Gamma_{max}$, comme $\phi_n\not\in\Gamma_{max}$, $\Gamma_n\cup\set{\phi_n}\vdash_\mathbb{L}\bot$ est vérifiée. Donc $\Gamma_{max}\cup\set{\phi_n}\vdash_\mathbb{L}\bot$ ce qui entraîne $\Gamma&rsquo;\vdash_\mathbb{L}\bot$, contredisant la $\mathbb{L}$-consistance de $\Gamma&rsquo;$.</p>
+</div>
+<br>
+<div id="def">
+<p style="margin-bottom:-1.1em;">
+Soit $\mathbb{L}$ une logique modale normale, le <b>modèle canonique</b> $\mathcal{M}_\mathbb{L}$ est défini par $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ avec&nbsp;:
+</p>
+<div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
+<ul>
+<li>$N_\mathbb{L}=\set{\Gamma|\Gamma\text{ maximal }\mathbb{L}\text{-consistant}}$</li>
+<li>$A_\mathbb{L}$ défini par $\Gamma\longrightarrow\Gamma'$ si et seulement si pour toute formule $\phi$, si $\phi\in\Gamma'$ alors $\Diamond\phi\in\Gamma$ (c.-à-d. $\Gamma\supseteq\set{\Diamond\phi : \phi\in\Gamma'}$)</li>
+<li>$\mathcal{V}_\mathbb{L}$ est défini par $\mathcal{V}_\mathbb{L}(P)=\set{\Gamma\in\N_\mathbb{L}|P\in\Gamma}$ (c.-à-d. $\Gamma\Vdash P$ si et seulement si $P\in\Gamma$)</li>
+</ul>
+</div>
+</div>
+<br>
+<div id="theo">
+<b>Lemme ($\rightarrow$ et $\Box$)</b>
+<p>Soit $\mathbb{L}$ une logique modale normale et $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ le modèle canonique associé à $\mathbb{L}$. Pour tout nœud $\Gamma,\Gamma&rsquo;\in N_\mathbb{L}$, on a :</p>
+<p style="text-align:center;">
+$\Gamma\longrightarrow\Gamma'$ si et seulement si pour toute formule $\phi$, si $\Box\phi\in\Gamma$ alors $\phi\in\Gamma'$.
+</p>
+</div>
+<br>
+<div id="preuve">
+<ul>
+<li>$\Rightarrow$&nbsp;:<br>
+Raisonnons par l'absurde en supposant $\Box\phi\in\Gamma$ et $\phi\not\in\Gamma'$. Par maximale $\mathbb{L}$-consistance de $\Gamma'$, $\neg\phi\in\Gamma'$. Par définition de l'arc $\Gamma\longrightarrow\Gamma'$, $\Diamond\neg\phi\in\Gamma$ et puisque $\Gamma$ est consistant, $\neg\Diamond\neg\phi\not\in\Gamma$, d'où $\Box\phi\not\in\Gamma$ (où on a utilisé la dualité entre $\Diamond$ et $\Box$). Contradiction.
+</li>
+<li>$\Leftarrow$&nbsp;:<br>
+Soit $\phi\in\Gamma'$. Raisonnons par l'absurde en supposant $\Diamond\phi\not\in\Gamma$ (ce qui signifie que $\Gamma\,\,\not\!\!\longrightarrow\Gamma'$). Alors par maximale $\mathbb{L}$-consistance $\neg\Diamond\phi\in\Gamma$, par conséquent $\neg\Diamond\neg\neg\phi\in\Gamma$ et donc $\Box\neg\phi\in\Gamma$ (où on a utilisé la dualité entre $\Diamond$ et $\Box$). Par hypothèse, $\Box\neg\phi\in\Gamma$ entraîne $\neg\phi\in\Gamma'$, ce qui contredit la $\mathbb{L}$-consistance de $\Gamma'$.
+</li>
+</ul>
+</div>
+<br>
+<div id="theo">
+<b>Lemme ($\rightarrow$ et $\Diamond$)</b>
+<p>Soit $\mathbb{L}$ une logique modale normale et $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ le modèle canonique associé à $\mathbb{L}$. Pour tout nœud $\Gamma,\Gamma&rsquo;\in N_\mathbb{L}$ :</p>
+<p style="text-align:center;">
+Si $\Diamond\phi\in\Gamma$ alors il existe $\Gamma'$ tel que $\Gamma\longrightarrow\Gamma'$ et $\phi\in\Gamma'$.
+</p>
+</div>
+<br>
+<div id="preuve">
+<p>Supposons $\Diamond\phi\in\Gamma$. Pour obtenir $\Gamma&rsquo;$, on construit d&rsquo;abord $\Theta=\set{\phi}\cup\set{\psi|\Box\psi\in\Gamma}$. Cet ensemble est consistant car sinon il existerait $\psi_1,\ldots,\psi_k\in\Theta$ tels que $\vdash_\mathbb{L}(\psi_1\land\ldots\land\psi_k)\rightarrow\neg\phi$. Par nécessitation, $\vdash_\mathbb{L}\Box((\psi_1\land\ldots\land\psi_k)\rightarrow\neg\phi)$. Et par distributivité (utilisation de l&rsquo;axiome $\text{(K)}$) $\vdash_\mathbb{L}\Box(\psi_1\land\ldots\land\psi_k)\rightarrow\Box\neg\phi$. Et puisque dans toute logique normale $\vdash_\mathbb{L}(\Box\psi_1\land\ldots\land\Box\psi_k)\rightarrow\Box(\psi_1\land\ldots\land\psi_k)$, on obtient finalement $\vdash_\mathbb{L}(\Box\psi_1\land\ldots\land\Box\psi_k)\rightarrow\Box\neg\phi$. Par conséquent $\Gamma\vdash_\mathbb{L}\Box\neg\phi$, ce qui implique que $\Box\neg\phi\in\Gamma$ par maximalité, et donc également $\neg\Diamond\phi\in\Gamma$ (par dualité). Or par hypothèse, $\Diamond\phi\in\Gamma$, ce qui entraîne l&rsquo;inconsistance de $\Gamma$. Contradiction.<br>
+Comme on vient de montrer que l&rsquo;ensemble $\Theta=\set{\phi}\cup\set{\psi|\Box\psi\in\Gamma}$ est $\mathbb{L}$-consistant, il suffit de prendre pour $\Gamma&rsquo;$ l&rsquo;ensemble $\Theta_{max}$ maximal $\mathbb{L}$-consistant donné par le lemme de Lindenbaum tel que $\Theta\subseteq\Theta_{max}$. On a bien ainsi un nœud de $N_\mathbb{L}$ contenant $\phi$.</p>
+</div>
+<br>
+<div id="theo">
+<b>Lemme de vérité</b>
+<p>Soit $\mathbb{L}$ une logique modale normale et $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ le modèle canonique associé à $\mathbb{L}$. Pour tout nœud $\Gamma\in N_\mathbb{L}$ :</p>
+<p style="text-align:center;">
+$\langle\mathcal{M}_\mathbb{L},\Gamma\rangle\Vdash\phi$ si et seulement si $\phi\in\Gamma$
+</p>
+</div>
+<p><img src="/compcomplet.png?width=1200px" alt=""></p>
 
 
 <footer class="footline">
@@ -2135,6 +2760,8 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
+                        
+                        
                     
                 
                 
@@ -2148,9 +2775,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -2328,7 +2952,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
-                    
                 
                 
 
@@ -2344,9 +2967,6 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -2968,6 +3588,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
+                    
                     
                 
                 
@@ -2984,6 +3605,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
+                        
+                        
+                    
                 
                 
 
@@ -3048,6 +3672,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
                 
                     
+                    
                 
                 
 
@@ -3062,6 +3687,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -3167,6 +3795,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
+                    
                     
                 
                 
@@ -3216,6 +3845,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
                 
+                    
+                        
+                        
                     
                 
                 
