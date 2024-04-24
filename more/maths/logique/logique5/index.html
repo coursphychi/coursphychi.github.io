@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713923002" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713923002" rel="stylesheet">
-    <link href="/css/hybrid.css?1713923002" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713923002" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713923002" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713923002" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713923002" rel="stylesheet">
-    <link href="/css/theme.css?1713923002" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713923002" rel="stylesheet">
+    <link href="/css/nucleus.css?1713993688" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713993688" rel="stylesheet">
+    <link href="/css/hybrid.css?1713993688" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713993688" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713993688" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713993688" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713993688" rel="stylesheet">
+    <link href="/css/theme.css?1713993688" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713993688" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713923002" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713993688" rel="stylesheet">
     
-    <link href="/css/foo.css?1713923002" rel="stylesheet"><link href="/css/bar.css?1713923002" rel="stylesheet">
+    <link href="/css/foo.css?1713993688" rel="stylesheet"><link href="/css/bar.css?1713993688" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713923002"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713993688"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713923002"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713923002"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713993688"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713993688"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713923002"></script>
+<script type="text/javascript" src="/js/search.js?1713993688"></script>
 
     
   </div>
@@ -2065,7 +2065,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#systèmes-logiques">Systèmes logiques</a>
+    <li><a href="#axiomatiquenbsp-les-systèmes-logiques">Axiomatique : les systèmes logiques</a>
       <ul>
         <li><a href="#le-système-k">Le système K</a></li>
         <li><a href="#logique-modale-normale">Logique modale normale</a></li>
@@ -2169,11 +2169,11 @@ MathJax = {
 <p style="text-align:center;">
 <a href="../logique4" style="font-size:2em;">Avant : <b>syntaxe et sémantique</b></a>
 </p>
-<h2 id="systèmes-logiques">Systèmes logiques</h2>
+<h2 id="axiomatiquenbsp-les-systèmes-logiques">Axiomatique : les systèmes logiques</h2>
 <br>
-<p>Nous cherchons l&rsquo;équivalent en logique modale des tautologies pour le calcul des propositions. Pour une classe $\mathscr{C}$ de systèmes de transition, on va appeler ça <strong>logique de la classe</strong> $\mathscr{C}$.</p>
+<p>Nous cherchons l&rsquo;équivalent en logique modale des tautologies pour le calcul des propositions ; des formules vraies dans tous les modèles, ou plutôt dans toute une classe de modèles car comme on va le voir, la topologie d&rsquo;un modèle contraint la vérité à l&rsquo;intérieur de celui-ci.</p>
 <div id="def">
-<p>La logique de la classe $\mathscr{C}$ est la classe de toutes les formules qui sont valides dans tous les systèmes de transition de $\mathscr{C}$ : $\mathbb{Log}_\mathscr{C}=\set{\phi|\text{pour tout }\mathcal{S}\in\mathscr{C},\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}} \phi}$</p>
+<p>La <b>logique de la classe $\mathscr{C}$</b> est la classe de toutes les formules qui sont valides dans tous les systèmes de transition de $\mathscr{C}$ : $\mathbb{Log}_\mathscr{C}=\set{\phi|\text{pour tout }\mathcal{S}\in\mathscr{C},\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}} \phi}$</p>
 </div>
 <br>
 <p>Cette logique doit contenir toutes les formules qui sont des tautologies du calcul des propositions puisque ces formule de profondeur modale nulle (pas d&rsquo;opérateurs modaux) sont nécessairement forcées en tout nœud de n&rsquo;importe quel modèle.</p>
@@ -2274,7 +2274,7 @@ On écrit $\Gamma\vdash_\text{\bf S} \phi$ s&rsquo;il existe un ensemble fini de
 Dans ce modèle, on a $a\Vdash P$ mais aussi $a\nVdash \Box P$ et par conséquent $a\nVdash P\rightarrow\Box P$.
 </div>
 <br>
-<p>Cet axiome $\text{(K)}$ est appelé <strong>axiome de distribution</strong> car il permet de distribuer l&rsquo;opérateur modal $\Box$ à l&rsquo;intérieur de l&rsquo;implication. On l&rsquo;appelle aussi parfois axiome d&rsquo;omniscience logique car il stipule quesi un agent sait que $P$ implique $Q$, alors s’il sait également que $P$ il doit savoir que $Q$. En d’autres termes, l&rsquo;agent doit connaître toutes les conséquences logiques de ce que nous savons déjà.</p>
+<p>Cet axiome $\text{(K)}$ (K en l&rsquo;honneur de Kripke) est appelé <strong>axiome de distribution</strong> car il permet de distribuer l&rsquo;opérateur modal $\Box$ à l&rsquo;intérieur de l&rsquo;implication. On l&rsquo;appelle aussi parfois axiome d&rsquo;omniscience logique car il stipule quesi un agent sait que $P$ implique $Q$, alors s’il sait également que $P$ il doit savoir que $Q$. En d’autres termes, l&rsquo;agent doit connaître toutes les conséquences logiques de ce que nous savons déjà.</p>
 <p>L&rsquo;axiome $\text{(dual)}$ permet, lui, de passer d&rsquo;un opérateur modal à l&rsquo;autre et est aussi valide dans tout sytème de transition (être sûr de la présence d&rsquo;un truc revient à ne pas être sûr de son absence, ou pour rester sur la structure du système de transition, dire qu&rsquo;il existe un chemin vers $P$ revient à ne pas dire que tous les chemins vont vers $\neg P$).<br>
 La relation sœur permettant de passer de l&rsquo;opérateur boite à l&rsquo;opérateur diamant $\Box P \leftrightarrow \neg\Diamond\neg P$ (si tous les chemins mènent à $P$, il n&rsquo;existe pas de chemin menant à $\neg P$) est elle aussi vraie partout.<br>
 Ces deux relations soulignent bien la nature duale des opérateurs $\Diamond$ et $\Box$.</p>
@@ -2571,13 +2571,14 @@ $\text{\bf KB4}≤\text{\bf S5}$
 <p>Et comme on l&rsquo;a vu, la réduction d&rsquo;un système formel à un autre implique l&rsquo;inclusion inverse entre les classes de tous les systèmes de transition qui valident ces systèmes formels.<br>
 Dans le graphique suivant, une flèche allant de $\mathscr{C}$ à $\mathscr{C&rsquo;}$ désigne donc l&rsquo;inclusion inverse $\mathscr{C}\supseteq\mathscr{C&rsquo;}$.</p>
 <p><img src="/compsysttrans.png?width=600px" alt=""></p>
+<p>Le projet est maintenant de préciser le rapport entre axiomatique et sémantique. Et l&rsquo;espoir est que l&rsquo;ensemble des formules valides sur les structures d&rsquo;un certain type soit identique à l&rsquo;ensemble des axiomes et théorèmes d&rsquo;un certain système (ce qu&rsquo;on a appelé une logique modale), car ainsi la validité formera une interprétation du système. Mais pour obtenir cette adéquation entre sémantique et axiomatique, il faut d&rsquo;une part obtenir la <strong>correction</strong> (ou solidité, soundness en anglais) du système (toutes les formules prouvables sont vraies), et sa réciproque, la <strong>complétude</strong> (toutes les formules vraies sont prouvables).</p>
 <p>On va maintenant chercher à faire correspondre une logique modale normale à chaque classe de systèmes de transitions.</p>
 <div id="def">
-<p>Soit $\mathscr{C}$ une classe de systèmes de transition et $\mathbb{L}$ une logique modale normale, $\mathbb{L}$ est <b>solide</b> par rapport à la classe $\mathscr{C}$ (noté $\mathscr{C}$<b>-solide</b>) si pour toute formule $\phi$ et pour tout système de transition $\mathcal{S}$ de la classe $\mathscr{C}$, si $\vdash_\mathbb{L}\phi$ alors $\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}}\phi$.<br>
+<p>Soit $\mathscr{C}$ une classe de systèmes de transition et $\mathbb{L}$ une logique modale normale, $\mathbb{L}$ est <b>correcte</b> par rapport à la classe $\mathscr{C}$ (noté $\mathscr{C}$<b>-correcte</b>) si pour toute formule $\phi$ et pour tout système de transition $\mathcal{S}$ de la classe $\mathscr{C}$, si $\vdash_\mathbb{L}\phi$ alors $\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}}\phi$.<br>
 Ce qu&rsquo;on peut aussi écrire :<br>
 $$\text{si } \vdash_\mathbb{L}\phi \text{ alors }\models_{\mathscr{C}}\phi$$</p>
 </div>
-<p>À chacune des onze classes, on peut faire correspondre une logique modale normale qui se trouve être solide pour cette classe.</p>
+<p>À chacune des onze classes, on peut faire correspondre une logique modale normale qui se trouve être correcte pour cette classe.</p>
 <div id="theo">
 <div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
 <ul>
@@ -2598,7 +2599,7 @@ $$\text{si } \vdash_\mathbb{L}\phi \text{ alors }\models_{\mathscr{C}}\phi$$</p>
 <br>
 <div id="preuve">
 <p>On a déjà en fait déjà tout démontré.<br>
-En effet, on a montré que les axiomes de la logique normale minimale (tautologies du calcul des propositions, $\text{(K)}$ et $\text{(dual)}$) sont satisfaites en tout nœud et pour toute valuation de tous les systèmes de transitions. Et on a montré que les trois opérations utilisés pour les preuves (la nécéssitation, la substitution uniforme et le <i>modus ponens</i>) préservent la validité. Donc une formule prouvable dans $\text{\bf K}$ est valide dans tout système de transition ( $\text{\bf K}$ est $\mathscr{C}$-solide).</p>
+En effet, on a montré que les axiomes de la logique normale minimale (tautologies du calcul des propositions, $\text{(K)}$ et $\text{(dual)}$) sont satisfaites en tout nœud et pour toute valuation de tous les systèmes de transitions. Et on a montré que les trois opérations utilisés pour les preuves (la nécéssitation, la substitution uniforme et le <i>modus ponens</i>) préservent la validité. Donc une formule prouvable dans $\text{\bf K}$ est valide dans tout système de transition ( $\text{\bf K}$ est $\mathscr{C}$-correcte).</p>
 <p>Ensuite, on a montré que chacun des axiomes modaux supplémentaires ajoutés à $\text{\bf K}$ pour obtenir les autres logiques normales ont une validité limitée à une classe spécifique de systèmes de transition.</p>
 <ul>
 <li>$\text{(T)}$ est valide dans tout système de transition réflexif.</li>
@@ -2609,7 +2610,7 @@ En effet, on a montré que les axiomes de la logique normale minimale (tautologi
 </ul>
 <p>Et on a montré qu&rsquo;un graphe est à la fois réflexif et euclidien si et seulement si il est réflexif, symétrique et transitif.</p>
 </div>
-<p>On représente graphiquement par une flèche &ldquo;$\text{\bf X}\longrightarrow\mathscr{C}_x$&rdquo; la relation de solidité : &ldquo;si $\vdash_\text{\bf X}\phi$, alors $\models_{\mathscr{C}_x}\phi$&rdquo;.</p>
+<p>On représente graphiquement par une flèche &ldquo;$\text{\bf X}\longrightarrow\mathscr{C}_x$&rdquo; la relation de correction : &ldquo;si $\vdash_\text{\bf X}\phi$, alors $\models_{\mathscr{C}_x}\phi$&rdquo;.</p>
 <p><img src="/compsolide.png?width=1200px" alt=""></p>
 <p>On va essayer maintenant d&rsquo;associer les classe aux logiques, la sémantique à la syntaxe.</p>
 <div id="def">
@@ -4181,19 +4182,19 @@ Conséquence de 2. et 5. et 7.
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713923002"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713923002"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713923002"></script>
-    <script src="/js/jquery.sticky.js?1713923002"></script>
-    <script src="/js/featherlight.min.js?1713923002"></script>
-    <script src="/js/highlight.pack.js?1713923002"></script>
+    <script src="/js/clipboard.min.js?1713993688"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713993688"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713993688"></script>
+    <script src="/js/jquery.sticky.js?1713993688"></script>
+    <script src="/js/featherlight.min.js?1713993688"></script>
+    <script src="/js/highlight.pack.js?1713993688"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713923002"></script>
-    <script src="/js/learn.js?1713923002"></script>
-    <script src="/js/hugo-learn.js?1713923002"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713993688"></script>
+    <script src="/js/learn.js?1713993688"></script>
+    <script src="/js/hugo-learn.js?1713993688"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713923002"></script>
+            <script src="/mermaid/mermaid.js?1713993688"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

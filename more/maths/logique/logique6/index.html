@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713923002" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713923002" rel="stylesheet">
-    <link href="/css/hybrid.css?1713923002" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713923002" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713923002" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713923002" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713923002" rel="stylesheet">
-    <link href="/css/theme.css?1713923002" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713923002" rel="stylesheet">
+    <link href="/css/nucleus.css?1713993688" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713993688" rel="stylesheet">
+    <link href="/css/hybrid.css?1713993688" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713993688" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713993688" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713993688" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713993688" rel="stylesheet">
+    <link href="/css/theme.css?1713993688" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713993688" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713923002" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713993688" rel="stylesheet">
     
-    <link href="/css/foo.css?1713923002" rel="stylesheet"><link href="/css/bar.css?1713923002" rel="stylesheet">
+    <link href="/css/foo.css?1713993688" rel="stylesheet"><link href="/css/bar.css?1713993688" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713923002"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713993688"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713923002"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713923002"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713993688"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713993688"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713923002"></script>
+<script type="text/javascript" src="/js/search.js?1713993688"></script>
 
     
   </div>
@@ -2068,6 +2068,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <li><a href="#les-différentes-logiques-modales">Les différentes logiques modales</a>
       <ul>
         <li><a href="#la-logique-aléthique">La logique aléthique</a></li>
+        <li><a href="#la-logique-déontique">La logique déontique</a></li>
       </ul>
     </li>
   </ul>
@@ -2166,8 +2167,10 @@ MathJax = {
 <p style="text-align:center;">
 <a href="../logique5" style="font-size:2em;">Avant : <b>les systèmes logiques</b></a>
 </p>
+<br>
 <h2 id="les-différentes-logiques-modales">Les différentes logiques modales</h2>
-<p>La boîte peut servir à exprimer qu&rsquo;un agent sait quelque chose et son dual (le diamant) exprime alors le fait que cet agent croit possible cette même chose. D&rsquo;autres emplois sont courants. Et certains emplois ne rattachent pas les opérateurs modaux à un agent. C&rsquo;est le cas de la logique aléthique et la logique déontique.</p>
+<br>
+<p>On cherche maintenant à incarner la logique modale avec des interprétations précises des opérateurs modaux. La boîte peut servir à exprimer qu&rsquo;un agent sait quelque chose et son dual (le diamant) exprime alors le fait que cet agent croit seulement possible cette même chose, on est alors dans une logique épistémique (logique de la connaissance) et c&rsquo;est principalement cette version qu&rsquo;on a utilisé jusqu&rsquo;ici pour donner corps à la théorie. Mais d&rsquo;autres emplois sont courants et certains ne rattachent pas les opérateurs modaux à un agent. C&rsquo;est le cas de la logique aléthique et la logique déontique. On verra aussi qu&rsquo;en fonction des interprétations, certains axiomes sont plus naturels que d&rsquo;autres et donc que ces différentes logiques modales s&rsquo;épanouissent dans des univers aux structures spécifiques (avec des topologies des modèles différentes).</p>
 <br>
 <h3 id="la-logique-aléthique">La logique aléthique</h3>
 <p>La logique modale est dite <strong>aléthique</strong> lorsque les opérateurs modaux traduisent la nécessité et la possibilité.</p>
@@ -2178,21 +2181,67 @@ MathJax = {
 <ul>
 <li>Deux proposition <b>contradictoires</b> ne sont jamais ni vraies, ni fausses en même temps.
 <li>Deux propositions <b>contraires</b> ne sont jamais vraies en même temps, mais peuvent être fausses en même temps.
-<li> Deux propositions <b>sous-contraires</b> ne sont jamais fausses en même temps, mais peuvent être vraies en même temps.
+<li>Deux propositions <b>sous-contraires</b> ne sont jamais fausses en même temps, mais peuvent être vraies en même temps.
 </ul>
-<p>l&rsquo;axiome $\text{(K)}=\Box(P\rightarrow Q)\rightarrow(\Box P\rightarrow\Box Q)$ se traduit par &ldquo;s&rsquo;il est nécessaire que $P$ entraîne $Q$, alors si $P$ est nécessaire, $Q$ est nécessaire également.&rdquo;</p>
-<p>Parmi les autres axiomes envisagés, deux semblent plus évidents dans cette acception de la modalité :</p>
+<p>L&rsquo;axiome $\text{(K)}=\Box(P\rightarrow Q)\rightarrow(\Box P\rightarrow\Box Q)$, qui rappelons-le est vrai dans tout système, se traduit en logique aléthique par &ldquo;s&rsquo;il est nécessaire que $P$ entraîne $Q$, alors si $P$ est nécessaire, $Q$ est nécessaire également.&rdquo;</p>
+<p>Parmi les autres axiomes qu&rsquo;on a pu rencontrer, deux semblent plus adaptés à cette interprétation de la modalité :</p>
 <ul>
-<li>l'axiome $\text{(T)}=\Box P\rightarrow P$&nbsp;: "s'il est nécessaire que $P$, alors $P$ est réalisée".</li>
-<li>l'axiome $\text{(B)}= P\rightarrow \Box\Diamond P$&nbsp;: "si $P$ est réalisée, alors il est nécessaire que $P$ soit possible".</li>
+<li>l'axiome $\text{(T)}=\Box P\rightarrow P$&nbsp;: "s'il est nécessaire que $P$, alors $P$ est réalisée" (les logiciens du Moyen Âge, déjà, employaient la formule <i>ab necesse esse</i>).</li>
+<li>l'axiome $\text{(B)}= P\rightarrow \Box\Diamond P$&nbsp;: "si $P$ est réalisée, alors il est nécessaire que $P$ soit possible" (cela semble en effet assez naturel).
+</li>
 </ul>
-<p>Une forme équivalente de $\text{(B)}$ le rend plus évident : $P\rightarrow\Box\Diamond P\equiv P\rightarrow \neg\Diamond\Box\neg P$, qui se traduit par &ldquo;si quelque chose est réalisée, alors il n&rsquo;est pas possible que son contraire soit nécessaire&rdquo;.</p>
 <p>Le système logique normale adapté à la logique aléthique semble donc être $\text{\bf KBT}$ et la classe de modèles adaptée est donc celle des systèmes de transition à la fois réflexifs et symétriques.</p>
 <p>Aristote est à l&rsquo;origine de la logique aléthique et il en donne un exemple célèbre dans <em>De l&rsquo;interprétation</em> :</p>
 <blockquote>
 <p>Nécessairement il y aura demain une bataille navale ou il n&rsquo;y en aura pas. Mais il n&rsquo;est pas nécessaire qu&rsquo;il y ait demain une bataille navale, pas plus qu&rsquo;il n&rsquo;est nécessaire qu&rsquo;il n&rsquo;y en ait pas. Mais qu&rsquo;il y ait ou qu&rsquo;il n&rsquo;y ait pas demain une bataille navale, voilà qui est nécessaire.</p>
 </blockquote>
-<p>En appelant $\phi$ la proposition &ldquo;il y aura une bataille navale demain&rdquo;, la première et troisième phrase se traduisent par la même formule, $\Box(\phi\lor\neg\phi)$, alors que la deuxième phrase se traduit par $\neg\Box\phi\land\neg\Box\neg\phi$.</p>
+<p>En appelant $P$ l&rsquo;affirmation &ldquo;il y aura une bataille navale demain&rdquo;, la première et troisième phrase se traduisent par la même formule, $\Box(P\lor\neg P)$, alors que la deuxième phrase se traduit par $\neg\Box P\land\neg\Box\neg P$.</p>
+<p>Modèle représentant les deux mondes possibles (avec ou sans bataille navale) et où les deux propositions sont vérifiées en chaque nœud.</p>
+<p><img src="/batnavale.png?width=400px" alt=""></p>
+<p>La logique modale &ldquo;moderne&rdquo; a elle aussi d&rsquo;abord été aléthique puisqu&rsquo;elle née du désir de C.I. Lewis, en 1913, de renforcer l&rsquo;implication matérielle $P\rightarrow Q$. Il a voulu lui substituer une implication stricte qui s&rsquo;avéra finalement une implication matérielle renforcée du caractère de la nécessité. Et l&rsquo;étude de l&rsquo;implication stricte revenait donc à celle de la logique aléthique. La logique modale s&rsquo;est ensuite développée de manière purement axiomatique jusqu&rsquo;au début des années 60, où S. Kripke introduit l&rsquo;idée des mondes possibles pour créer une sémantique à la logique modale.</p>
+<p>Mais revenons à l&rsquo;implication. La formule $(P\rightarrow Q)\lor(Q\rightarrow P)$ est une tautologie du calcul des propositions. Cela signifie que pour deux propositions quelconques, il y en a toujours une qui implique l&rsquo;autre, ce qui paraît absurde puisque les propositions peuvent être totalement indépendantes.<br>
+Avec l&rsquo;implication stricte (implication ordinaire renforcée de la nécessité), le paradoxe disparaît car $\Box(P\rightarrow Q)\lor\Box(Q\rightarrow B)$ n&rsquo;est pas valide. En effet, aucun des mondes du modèle ci-dessous ne satisfait la formule.</p>
+<p><img src="/implicationstricte.png?width=450px" alt=""></p>
+<br>
+<h3 id="la-logique-déontique">La logique déontique</h3>
+<br>
+<p>Cette logique porte sur l&rsquo;<strong>obligation</strong> ou la <strong>permission</strong>.</p>
+<p><img src="/partitionalethique.png?width=600px" alt=""></p>
+<p><img src="/hexadeontique.png?width=750px" alt=""></p>
+<p style="margin-bottom:-1.1em;">Les deux principes de la logique aléthique (les deux axiomes choisis) deviennent clairement faux en logique déontique&nbsp;:</p>
+<ul>
+<li>$\Box P\rightarrow P$&nbsp;: si $P$ est obligatoire, alors $P$ est vraie. C'est le caractère propre de l'obligation de pouvoir être transgressé, ce ne serait pas sinon une obligation mais une nécessité.
+<li>$P\rightarrow \Box\Diamond P$&nbsp;: si $P$ est vraie, alors $P$ doit être permise. Des choses non permises arrivent. Considérer la propositions vraies revient d'ailleurs à tomber dans le sophisme naturaliste qui stipule que tout ce qui est naturel est bon ("il n'y a pas de vêtements dans la nature, donc il ne faut pas autoriser les vêtements").
+</ul>
+<p>Mais quel formule est alors adapté à la logique déontique ? L&rsquo;axiome $\text{(D)}=\Box P\rightarrow\Diamond P$ affirmant que &ldquo;si quelque chose est obligatoire, alors elle est permise&rdquo;, semble naturellement adapté. En triturant un peu la formule, on obtient $\Box P\rightarrow\Diamond P\equiv\neg\Box P\lor\Diamond P\equiv\Diamond\neg P\lor\Diamond P$ &ldquo;soit c&rsquo;est permis de faire une chose, soit c&rsquo;est permis de ne pas la faire&rdquo;. Ou encore : $\Diamond\neg P\lor\Diamond P\equiv \neg\Box P\lor\neg\Box\neg P\equiv\neg (\Box P\land\Box\neg P)$ &ldquo;ne peuvent être obligatoire à la fois une chose et son contraire&rdquo;. Tout cela semble plutôt évident.</p>
+<p>Le système formel correspondant est donc $\text{\bf KD}$ et la classe de systèmes de transition associée est $\mathscr{C}_{n.b.d.}$. La raison de cette topologie ouverte, avec des mondes qui ont tous un échappatoire est qu&rsquo;une impasse est par construction un monde ou rien n&rsquo;est permis !</p>
+<p>Plusieurs paradoxes découlent de cette formalisation de l&rsquo;obligation et de la permission comme le <strong>paradoxe de Ross</strong>. Une forme du paradoxe repose sur le fait que l&rsquo;énoncé &ldquo;Il est obligatoire de poster la lettre&rdquo; ($\Box P$ où $P$ correspond à poster la lettre) entraîne &ldquo;il est obligatoire de poster la lettre ou de la brûler&rdquo; ($\Box(P\lor B)$ où $B$ correpond à brûler la lettre). En effet $\Box P\rightarrow \Box(P\lor B)$ est prouvable sans hypothèse dans cette logique déontique et donc vérifié en tout nœud de tout modèle de Kripke non borné à droite (en fait, l&rsquo;axiome $\text{(D)}$ n&rsquo;est même pas nécessaire à la preuve).</p>
+<div id="preuve">
+<p>On part de la tautologie $P\rightarrow (P\lor Q)$ et de l&rsquo;axiome $\text{(K)}$ :</p>
+<div style="position:relative;width:600px;max-width:100%;margin-left:auto;margin-right:auto">
+<img src="/preuveross.png">
+</div>
+</div>
+<p>Il est bizarre que l&rsquo;obligation de poster une lettre implique une obligation de la poster ou de la brûler (on peut supposer que la brûler est interdit&hellip;), implication qu&rsquo;on peut satisfaire en brûlant bel et bien la lettre ! L&rsquo;affaiblissement de $P$ en $P\lor B$ semble donc poser problème.</p>
+<p>De même, on rencontre un problème en affaiblissant une conjonction comme le montre le <strong>paradoxe du Bon Samaritain</strong> : l&rsquo;énoncé &ldquo;il est obligatoire qu&rsquo;Alice aide Bob qui a été volé&rdquo; peut se traduire par $\Box(A\land B)$ où $A$ est &ldquo;Alice aide Bob&rdquo; et $B$ est &ldquo;Bob a été volé&rdquo;. Le problème est que $\Box(A\land B)\rightarrow\Box B$ est prouvable dans le système $\text{\bf KD}$ (à nouveau, $\text{(D)}$ n&rsquo;est pas nécessaire à la preuve).</p>
+<div id="preuve">
+<p>On part de la tautologie $P\rightarrow (P\lor Q)$ et de l&rsquo;axiome $\text{(K)}$ :</p>
+<div style="position:relative;width:620px;max-width:100%;margin-left:auto;margin-right:auto">
+<img src="/preuvesamaritain.png">
+</div>
+</div>
+<p>Donc si aider le Bob victime d&rsquo;un vol est obligatoire, il devient alors aussi obligatoire que Bob soit volé. Bob ne semble pas ravi de la situation.</p>
+<p>Un façon de se sortir de ces pièges est de maintenir une séparation stricte entre les descriptions des faits et les prescriptions déontiques. Cela évite d&rsquo;inférer des faits (comme l&rsquo;existence d&rsquo;une victime) à partir des obligations morales ou légales.</p>
+<p>Le <strong>dilemme du libre choix</strong> repose sur une hypothèse bénine aux conséquences dramatiques. &ldquo;Tu peux soit dormir sur le sofa soit dans la chambre d&rsquo;amis&rdquo; semble impliquer que &ldquo;tu peux dormir sur le sofa et tu peux dormir dans la chambre d&rsquo;amis&rdquo;. On imagine ainsi que l&rsquo;implication $\Diamond(A\lor B)\rightarrow(\Diamond A\land\Diamond B)$ soit prouvable dans le système. Mais ce n&rsquo;est pas le cas (voir ci-dessous). Qu&rsquo;à cela ne tienne ! Ajoutons-là aux hypothèses. Cela serait dommage de se passer d&rsquo;une implication si naturelle&hellip; Mais là, patatras, tout devient possible ! Imaginons en effet qu&rsquo;il existe une quelconque possibilité $\Diamond A$, alors $\Diamond (A\lor B)$ aussi est vrai et ce quel que soit $B$ (s&rsquo;il ya un monde accessible où $A$ est vrai, alors dans même monde, $A\lor B$ est vrai) et grâce à notre super nouvel axiome, on déduit la vérité $\Diamond A\land\Diamond B$ qui se réduit à celle de $\Diamond B$ (puisque par hypothèse $\Diamond A$ est vrai). On a finalement $\Diamond A\rightarrow \Diamond B$ pour tout $B$. La possibilité de $A$ rend tout possible grâce à cet axiome diabolique.</p>
+<div id="preuve">
+<p>On prouve que $\Diamond(A\lor B)\rightarrow(\Diamond A\land\Diamond B)$ n&rsquo;est pas prouvable dans le système $\text{\bf KD}$ en trouvant un modèle appartenant à $\mathscr{C}_{n.b.d.}$ et tel qu&rsquo;au moins un de ses nœuds ne satisfait pas la formule.</p>
+<div style="position:relative;width:500px;max-width:100%;margin-left:auto;margin-right:auto">
+<img src="/preuvelibrechoix.png">
+</div>
+</div>
+<br>
+<p>Un dernier pour la route : le <strong>dilemme de Sartre</strong>. Le dilemme de Sartre décrit l&rsquo;impossibilité de représenter en logique déontique standard un conflit d&rsquo;obligations (à cause de l&rsquo;axiome $\text{(D)}$). Son nom vient du dilemme présenté dans L&rsquo;existentialisme est un humanisme. C&rsquo;est par exemple la situation dans laquelle se retrouve Jephté dans la Bible lorsqu&rsquo;il promet à Dieu de sacrifier le premier être vivant qu&rsquo;il croise s&rsquo;il gagne la guerre. Il gagne la guerre et croise sa fille (c&rsquo;est ballot). On a bien conflit d&rsquo;obligations puisque l&rsquo;obligation de ne pas tuer sa fille doit bien figurer quelque part aussi&hellip; On a donc une situation où il est obligatoire de faire une chose $\Box A$ et aussi obligatoire de ne pas la faire $\Box \neg A$. Or $\Box A\rightarrow \Diamond A$ d&rsquo;après $\text{(D)}$ et par dualité, on obtient $\Box A\rightarrow \neg \Box\neg A$. La situation de départ, bien qu&rsquo;envisageable aboutit à une inconsistance interdisant donc même son existence dans ce système formel.</p>
+<p>Malgré ses petits défauts, la logique déontique est utilisée en informatique</p>
 
 
 <footer class="footline">
@@ -3547,19 +3596,19 @@ MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713923002"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713923002"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713923002"></script>
-    <script src="/js/jquery.sticky.js?1713923002"></script>
-    <script src="/js/featherlight.min.js?1713923002"></script>
-    <script src="/js/highlight.pack.js?1713923002"></script>
+    <script src="/js/clipboard.min.js?1713993688"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713993688"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713993688"></script>
+    <script src="/js/jquery.sticky.js?1713993688"></script>
+    <script src="/js/featherlight.min.js?1713993688"></script>
+    <script src="/js/highlight.pack.js?1713993688"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713923002"></script>
-    <script src="/js/learn.js?1713923002"></script>
-    <script src="/js/hugo-learn.js?1713923002"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713993688"></script>
+    <script src="/js/learn.js?1713993688"></script>
+    <script src="/js/hugo-learn.js?1713993688"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713923002"></script>
+            <script src="/mermaid/mermaid.js?1713993688"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

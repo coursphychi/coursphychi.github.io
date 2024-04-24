@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713923002" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713923002" rel="stylesheet">
-    <link href="/css/hybrid.css?1713923002" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713923002" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713923002" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713923002" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713923002" rel="stylesheet">
-    <link href="/css/theme.css?1713923002" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713923002" rel="stylesheet">
+    <link href="/css/nucleus.css?1713993688" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713993688" rel="stylesheet">
+    <link href="/css/hybrid.css?1713993688" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713993688" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713993688" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713993688" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713993688" rel="stylesheet">
+    <link href="/css/theme.css?1713993688" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713993688" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713923002" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713993688" rel="stylesheet">
     
-    <link href="/css/foo.css?1713923002" rel="stylesheet"><link href="/css/bar.css?1713923002" rel="stylesheet">
+    <link href="/css/foo.css?1713993688" rel="stylesheet"><link href="/css/bar.css?1713993688" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713923002"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713993688"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713923002"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713923002"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713993688"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713993688"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713923002"></script>
+<script type="text/javascript" src="/js/search.js?1713993688"></script>
 
     
   </div>
@@ -2829,17 +2829,12 @@ Un autre grief contre la logique classique concerne l&rsquo;implication matérie
 <br>
 <p>Les règles de la logique classique permettent de faire coïncider les notions de conséquence syntaxique et de conséquence sémantique.</p>
 <div id="theo">
-<p>Théorème de <b>complétude</b> de la logique classique :</p>
+<p><b>Correction</b> de la logique classique :</p>
 <p>Soient $\Gamma$ un ensemble fini de formules et $\phi$ une formule du calcul des propositions,<br>
-$\Gamma\models\phi$ ssi $\Gamma\vdash_{\!c}\phi$</p>
-<p>Corollaire :
-$\models\phi$ ssi $\vdash_{\!c}\phi$<br>
-Toute tautologie est démontrable sans utiliser d&rsquo;hypothèse et à l&rsquo;inverse, toute formule démontrable sans hypothèse est une tautologie.</p>
+Si $\Gamma\vdash_{\!c}\phi$ alors $\Gamma\models\phi$</p>
 </div>
 <br>
 <div id="preuve">
-<ul>
-<li>$\Gamma \vdash_{\!c}\phi$ implique $\Gamma\models\phi$<br>
 <p>Une preuve étant une suite finie de séquent, on va procéder par induction sur la longueur de la preuve.<br></p>
 <ul>
 <li>Si la preuve a une longueur 1, le séquent ne peut être qu'un axiome de la forme $\phi\vdash\phi$.<br>
@@ -2863,9 +2858,18 @@ Par hypothèse d'induction, on sait que $\Gamma\models\phi\rightarrow\psi$ et $\
 On peut montrer de manière équivalente que cela marche pour chaque règle...
 </li>
 </ul>
-</li>
+</div>
 <br>
-<li>$\Gamma\models\phi$ implique $\Gamma\vdash_{\!c}\phi$
+<p>Une conséquence de la correction de la logique classique est que pour toute théorie finie $\Gamma$ et pour tout modèle $\mathcal{M}$ de cette théorie, si une formule est démontrable à partir des hypothèses $\Gamma$, alors elle est vraie dans $\mathcal{M}$.<br>
+Tout ce que l&rsquo;on peut déduire syntaxiquement d&rsquo;une théorie est vrai dans un modèle quelconque de cette théorie.</p>
+<br>
+<div id="theo">
+<p><b>Complétude</b> de la logique classique :</p>
+<p>Soient $\Gamma$ un ensemble fini de formules et $\phi$ une formule du calcul des propositions,<br>
+Si $\Gamma\models\phi$ alors $\Gamma\vdash_{\!c}\phi$</p>
+</div>
+<br>
+<div id="preuve">
 <p>Soit $\phi$, une formule quelconque du calcul des propositions dont les variables sont parmis $\set{P_1,\ldots,P_n}$, et $\mathcal{M}$, un modèle possible de $\phi$. On note :</p>
 <ul>
 <li> $P_i^\mathcal{M} = P_i$ si $P_i$ est vraie dans $\mathcal{M}$,</li>
@@ -2967,7 +2971,21 @@ Il apparait immédiatement que $\Gamma\models\phi$ si et seulement si $\models(\
 Le résultat précédent sur les tautologies nous permet de déduire que $\vdash_{\!c}(\psi_1\land\psi_2\land\ldots\land\psi_k)\rightarrow \phi$.<br>
 Il est évident par ailleurs que $\Gamma\vdash_{\!c}(\psi_1\land\psi_2\land\ldots\land\psi_k)$.<br>
 Par <i>modus ponens</i>, on obtient donc $\Gamma\vdash_{\!c}\phi$.</p>
-</li></ul>
+</div>
+
+<div class="notices tip" style="--title: 'tip';">
+  <p style="display: none;">tip</p>
+  <div class="notice-body">
+    <p>De façon informelle, la correction stipule que toute formule prouvable est vraie, alors que la complétude, de son côté, affirme que toutes les formules vraies sont prouvables.</p>
+
+  </div>
+</div>
+
+
+<div id="theo">
+<p>Corollaire :<br></p>
+<p>$\models\phi$ ssi $\vdash_{\!c}\phi$<br>
+Toute tautologie est démontrable sans utiliser d&rsquo;hypothèse et à l&rsquo;inverse, toute formule démontrable sans hypothèse est une tautologie.</p>
 </div>
 <br>
 <div id="theo">
@@ -2976,8 +2994,6 @@ Par <i>modus ponens</i>, on obtient donc $\Gamma\vdash_{\!c}\phi$.</p>
 $\Gamma\equiv\psi$ ssi $\Gamma\equiv_c\psi$</p>
 </div>
 <br>
-<p>Une conséquence du théorème de complétude est que pour toute théorie finie $\Gamma$ et pour tout modèle $\mathcal{M}$ de cette théorie, si une formule est démontrable à partir des hypothèses $\Gamma$, alors elle est vraie dans $\mathcal{M}$.<br>
-Tout ce que l&rsquo;on peut déduire syntaxiquement d&rsquo;une théorie est vrai dans un modèle quelconque de cette théorie.</p>
 <p>On a montré finalement que <strong>la sémantique du calcul des propositions correspond à la logique classique</strong>. On peut d&rsquo;ailleurs parler de &ldquo;sémantique classique&rdquo;. Mais qu&rsquo;en est-il de la logique intuitionniste ? Peut-on définir une sémantique qui lui soit adaptée afin d&rsquo;obtenir un théorème de complétude pour la logique intuitionniste ?<br>
 Oui, grâce aux modèles de Kripke.</p>
 <br>
@@ -3067,7 +3083,7 @@ Ce modèle ne réalise ni le tiers exclu $(P\lor\neg P)$, ni l&rsquo;éliminatio
 <p>Cela permet de constater l&rsquo;adaptation des modèles de Kripke à la logique intuitionniste ; il peut exister des modèles où ni $\phi$, ni $\neg\phi$ ne sont établis comme vrais.</p>
 <br>
 <div id="theo">
-<p><b>Théorème de complétude de la logique intuitionniste</b> :</p>
+<p><b>Correction et complétude de la logique intuitionniste</b> :</p>
 <p>Soient $\Gamma$ un ensemble fini de formules et $\phi$ une formule du calcul des propositions,<br>
 $\Gamma\Vdash_i\phi$ ssi $\Gamma\vdash_{\!i} \phi$</p>
 </div>
@@ -3081,7 +3097,7 @@ $\Gamma\Vdash_i\phi$ ssi $\Gamma\vdash_{\!i} \phi$</p>
 <p>La condition de forcing de la négation devient alors $\alpha\Vdash\neg\phi$ ssi $\alpha\Vdash\phi\rightarrow\bot$ (pour tout nœud $\beta$ de $\mathcal{T}_\mathcal{K}$ tel que $\alpha≤\beta$, si $\beta\Vdash\phi$ alors $\beta\Vdash\bot$).</p>
 <p>On obtient cette fois-ci :</p>
 <div id="theo">
-<p><b>Théorème de complétude de la logique minimale</b> :</p>
+<p><b>Correction et complétude de la logique minimale</b> :</p>
 <p>Soient $\Gamma$ un ensemble fini de formules et $\phi$ une formule du calcul des propositions,<br>
 $\Gamma\Vdash_m\phi$ ssi $\Gamma\vdash_{\!m} \phi$</p>
 <p>D&rsquo;où découle $\Vdash_m\phi$ ssi $\vdash_{\!m} \phi$</p>
@@ -4626,19 +4642,19 @@ Par exemple, prouver une instance du tiers exclu $\Gamma\vdash_{\!i}\phi\lor\neg
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713923002"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713923002"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713923002"></script>
-    <script src="/js/jquery.sticky.js?1713923002"></script>
-    <script src="/js/featherlight.min.js?1713923002"></script>
-    <script src="/js/highlight.pack.js?1713923002"></script>
+    <script src="/js/clipboard.min.js?1713993688"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713993688"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713993688"></script>
+    <script src="/js/jquery.sticky.js?1713993688"></script>
+    <script src="/js/featherlight.min.js?1713993688"></script>
+    <script src="/js/highlight.pack.js?1713993688"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713923002"></script>
-    <script src="/js/learn.js?1713923002"></script>
-    <script src="/js/hugo-learn.js?1713923002"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713993688"></script>
+    <script src="/js/learn.js?1713993688"></script>
+    <script src="/js/hugo-learn.js?1713993688"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713923002"></script>
+            <script src="/mermaid/mermaid.js?1713993688"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

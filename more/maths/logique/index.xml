@@ -43,8 +43,7 @@ Logique modale Une petite communauté de dragons vivent sur une île aux règles
       <guid>https://coursphychi.github.io/more/maths/logique/logique5/</guid>
       <description>info
 Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
-Logique modale Avant : syntaxe et sémantique Systèmes logiques Nous cherchons l&amp;rsquo;équivalent en logique modale des tautologies pour le calcul des propositions. Pour une classe $\mathscr{C}$ de systèmes de transition, on va appeler ça logique de la classe $\mathscr{C}$.
-La logique de la classe $\mathscr{C}$ est la classe de toutes les formules qui sont valides dans tous les systèmes de transition de $\mathscr{C}$ : $\mathbb{Log}_\mathscr{C}=\set{\phi|\text{pour tout }\mathcal{S}\in\mathscr{C},\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}} \phi}$</description>
+Logique modale Avant : syntaxe et sémantique Axiomatique : les systèmes logiques Nous cherchons l&amp;rsquo;équivalent en logique modale des tautologies pour le calcul des propositions ; des formules vraies dans tous les modèles, ou plutôt dans toute une classe de modèles car comme on va le voir, la topologie d&amp;rsquo;un modèle contraint la vérité à l&amp;rsquo;intérieur de celui-ci.</description>
     </item>
     <item>
       <title>Logique modale</title>
@@ -53,7 +52,7 @@ La logique de la classe $\mathscr{C}$ est la classe de toutes les formules qui s
       <guid>https://coursphychi.github.io/more/maths/logique/logique6/</guid>
       <description>info
 Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
-Logique modale Avant : les systèmes logiques Les différentes logiques modales La boîte peut servir à exprimer qu&amp;rsquo;un agent sait quelque chose et son dual (le diamant) exprime alors le fait que cet agent croit possible cette même chose. D&amp;rsquo;autres emplois sont courants. Et certains emplois ne rattachent pas les opérateurs modaux à un agent.</description>
+Logique modale Avant : les systèmes logiques Les différentes logiques modales On cherche maintenant à incarner la logique modale avec des interprétations précises des opérateurs modaux. La boîte peut servir à exprimer qu&amp;rsquo;un agent sait quelque chose et son dual (le diamant) exprime alors le fait que cet agent croit seulement possible cette même chose, on est alors dans une logique épistémique (logique de la connaissance) et c&amp;rsquo;est principalement cette version qu&amp;rsquo;on a utilisé jusqu&amp;rsquo;ici pour donner corps à la théorie.</description>
     </item>
     <item>
       <title>Propositions - Preuve</title>
