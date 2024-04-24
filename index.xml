@@ -295,6 +295,15 @@ Logique modale Avant : syntaxe et sémantique Systèmes logiques Nous cherchons 
 La logique de la classe $\mathscr{C}$ est la classe de toutes les formules qui sont valides dans tous les systèmes de transition de $\mathscr{C}$ : $\mathbb{Log}_\mathscr{C}=\set{\phi|\text{pour tout }\mathcal{S}\in\mathscr{C},\mathcal{S}\Vdash^{\forall a,\forall \mathcal{V}} \phi}$</description>
     </item>
     <item>
+      <title>Logique modale</title>
+      <link>https://coursphychi.github.io/more/maths/logique/logique6/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/logique/logique6/</guid>
+      <description>info
+Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
+Logique modale Avant : les systèmes logiques Les différentes logiques modales La boîte peut servir à exprimer qu&amp;rsquo;un agent sait quelque chose et son dual (le diamant) exprime alors le fait que cet agent croit possible cette même chose. D&amp;rsquo;autres emplois sont courants. Et certains emplois ne rattachent pas les opérateurs modaux à un agent.</description>
+    </item>
+    <item>
       <title>Probabilités / Statistiques</title>
       <link>https://coursphychi.github.io/more/maths/probastat/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>

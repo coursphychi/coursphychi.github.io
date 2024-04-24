@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713832442" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713832442" rel="stylesheet">
-    <link href="/css/hybrid.css?1713832442" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713832442" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713832442" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713832442" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713832442" rel="stylesheet">
-    <link href="/css/theme.css?1713832442" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713832442" rel="stylesheet">
+    <link href="/css/nucleus.css?1713922861" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1713922861" rel="stylesheet">
+    <link href="/css/hybrid.css?1713922861" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1713922861" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1713922861" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713922861" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1713922861" rel="stylesheet">
+    <link href="/css/theme.css?1713922861" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1713922861" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713832442" rel="stylesheet">
+    <link href="/css/theme-blue.css?1713922861" rel="stylesheet">
     
-    <link href="/css/foo.css?1713832442" rel="stylesheet"><link href="/css/bar.css?1713832442" rel="stylesheet">
+    <link href="/css/foo.css?1713922861" rel="stylesheet"><link href="/css/bar.css?1713922861" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713832442"></script>
+    <script src="/js/jquery-3.3.1.min.js?1713922861"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713832442"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713832442"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1713922861"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1713922861"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713832442"></script>
+<script type="text/javascript" src="/js/search.js?1713922861"></script>
 
     
   </div>
@@ -1720,6 +1720,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
           
+            
+            
+          
         
         </ul>
       
@@ -2262,9 +2265,19 @@ On écrit $\Gamma\vdash_\text{\bf S} \phi$ s&rsquo;il existe un ensemble fini de
 </ul>
 </div>
 <p>Le système $\text{\bf K}$ est minimal en ce sens qu&rsquo;il est validé dans tout modèle.</p>
-<p>Pour tout modèle $\mathcal{M}=\langle\mathcal{S},\mathcal{V}\rangle$ et tout nœud $a$, si $a\Vdash\Box(P\rightarrow Q)$ et $a\Vdash\Box P$, cela signifie que pour tout nœud $b$ tel que $a\longrightarrow b$, $b\Vdash P\rightarrow Q$ et $b\Vdash P$, par conséquent $b\Vdash Q$ et donc $a\Vdash \Box Q$. Cela montre que l&rsquo;axiome (K) est valide dans tous les systèmes de transition.</p>
-<p>Cet axiome $\text{(K)}$ est appelé <strong>axiome de distribution</strong> car il permet de distribuer l&rsquo;opérateur modal $\Box$ à l&rsquo;intérieur de l&rsquo;implication.</p>
-<p>L&rsquo;axiome $\text{(dual)}$ permet de passer d&rsquo;un opérateur modal à l&rsquo;autre et est aussi valide dans tout sytème de transition (être sûr de la présence d&rsquo;un truc revient à ne pas être sûr de son absence, ou pour rester sur la structure du système de transition, dire qu&rsquo;il existe un chemin vers $P$ revient à ne pas dire que tous les chemins vont vers $\neg P$). On obtient son pendant $\Box P \leftrightarrow \neg\Diamond\neg P$ (si tous les chemins mènent à $P$, il n&rsquo;existe pas de chemin menant à $\neg P$) en appliquant la négation de chaque côté de l&rsquo;équivalence, puis en substituant $\neg P$ à $P$ et enfin, en supprimant les doubles négations. Ces deux relations montrent bien que <strong>$\Diamond$ et $\Box$ sont deux opérateurs duaux</strong>.</p>
+<p>Pour tout modèle $\mathcal{M}=\langle\mathcal{S},\mathcal{V}\rangle$ et tout nœud $a$, si $a\Vdash\Box(P\rightarrow Q)$ et $a\Vdash\Box P$, cela signifie que pour tout nœud $b$ tel que $a\longrightarrow b$, $b\Vdash P\rightarrow Q$ et $b\Vdash P$, par conséquent $b\Vdash Q$ et donc $a\Vdash \Box Q$. Cela montre que l&rsquo;axiome $\text{(K)}$ est valide dans tous les systèmes de transition.</p>
+<div id="preuve">
+<p>Pour montrer que $P\rightarrow\Box P$ n&rsquo;est pas prouvable dans $\text{\bf K}$, il suffit donc de présenter un modèle (et le système $\text{\bf K}$ autorise tous les systèmes de transition) où l&rsquo;implication est fausse pour au moins un nœud. Or on a déjà vu un tel modèle :</p>
+<div style="position:relative;margin-left:auto;margin-right:auto;width:500px;max-width:100%;">
+<img src="/preuvecsqsem.png">
+</div>
+Dans ce modèle, on a $a\Vdash P$ mais aussi $a\nVdash \Box P$ et par conséquent $a\nVdash P\rightarrow\Box P$.
+</div>
+<br>
+<p>Cet axiome $\text{(K)}$ est appelé <strong>axiome de distribution</strong> car il permet de distribuer l&rsquo;opérateur modal $\Box$ à l&rsquo;intérieur de l&rsquo;implication. On l&rsquo;appelle aussi parfois axiome d&rsquo;omniscience logique car il stipule quesi un agent sait que $P$ implique $Q$, alors s’il sait également que $P$ il doit savoir que $Q$. En d’autres termes, l&rsquo;agent doit connaître toutes les conséquences logiques de ce que nous savons déjà.</p>
+<p>L&rsquo;axiome $\text{(dual)}$ permet, lui, de passer d&rsquo;un opérateur modal à l&rsquo;autre et est aussi valide dans tout sytème de transition (être sûr de la présence d&rsquo;un truc revient à ne pas être sûr de son absence, ou pour rester sur la structure du système de transition, dire qu&rsquo;il existe un chemin vers $P$ revient à ne pas dire que tous les chemins vont vers $\neg P$).<br>
+La relation sœur permettant de passer de l&rsquo;opérateur boite à l&rsquo;opérateur diamant $\Box P \leftrightarrow \neg\Diamond\neg P$ (si tous les chemins mènent à $P$, il n&rsquo;existe pas de chemin menant à $\neg P$) est elle aussi vraie partout.<br>
+Ces deux relations soulignent bien la nature duale des opérateurs $\Diamond$ et $\Box$.</p>
 <p>Mais ce système formel n&rsquo;est pas encore suffisamment riche pour contenir toutes les formules valides dans tous les modèles quels qu&rsquo;ils soient. Pour cela, il faudrait également considérer toutes les substitutions uniformes possibles (entre autre dans la formule  $\text{(K)}$). On passe alors aux <strong>logiques modales</strong>.</p>
 <br>
 <h3 id="logique-modale-normale">Logique modale normale</h3>
@@ -2316,17 +2329,18 @@ $$
 <div id="def">
 <p>$\text{(D) :}$ $\Box P\rightarrow \Diamond P$</p>
 </div>
-<p>La formule $\text{(D)}$ dit que si quelque chose est nécessaire, alors elle doit être possible. On peut aussi l&rsquo;interpréter différemment dans d&rsquo;autres types de logiques que nous allons entrevoir ensuite : en logique déontique, la formule dit que quelque chose d&rsquo;obligatoire doit être permis ; en logique épistémique, elle dit que si je sais $P$, alors il est faux que je sache $\neg P$ ; et en logique doxastique, que si je crois que $P$, alors il est faux que je crois que $\neg P$.</p>
+<p>La formule $\text{(D)}$ dit que si quelque chose est nécessaire, alors elle doit être possible. On peut aussi l&rsquo;interpréter différemment dans d&rsquo;autres types de logiques que nous allons entrevoir ensuite : en logique déontique, la formule dit que quelque chose d&rsquo;obligatoire doit être permis ; en logique épistémique, elle dit que si je sais $P$, alors il est faux que je sache $\neg P$ ; et en logique doxastique, que si je crois que $P$, alors il est faux que je crois que $\neg P$.<br>
+$\text{(D)}$ est parfois appelé axiome de consistance.</p>
 <p><a href="../logique4/#nbd">Comme on l&rsquo;a vu plus tôt</a>, un système de transition qui valide $\text{(D)}$ n&rsquo;admet <strong>pas d&rsquo;impasse</strong>. Autrement dit, les arcs doivent être <strong>non bornés à droite</strong>.</p>
 <br>
 <div id="def">
 <p>$\text{(T) :}$ $\Box P\rightarrow P$</p>
 </div>
-<p>La formule $\text{(T)}$ dit que si quelque chose est nécessaire, alors elle est.<br>
+<p>La formule $\text{(T)}$ dit que si quelque chose est nécessaire, alors elle est. On l&rsquo;appelle parfois axiome de factivité.<br>
 En logique déontique : ce qui est obligatoire est.<br>
 En logique épistémique : si je sais $P$, alors $P$ est avéré.<br>
 En logique doxastique : si je crois que $P$, alors $P$ est également avéré.</p>
-<p>Et <a href="../logique4/#refl">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(T)}$ si et seulement si ce système est <strong>réflexif</strong>.</p>
+<p>Et <a href="../logique4/#refl">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(T)}$ si et seulement si ce système est <strong>réflexif</strong>. $\text{(T)}$ est donc aussi l&rsquo;axiome de réflexivité.</p>
 <br>
 <div id="def">
 <p>$\text{(B) :}$ $P\rightarrow \Box\Diamond P$</p>
@@ -2335,15 +2349,16 @@ En logique doxastique : si je crois que $P$, alors $P$ est également avéré.<
 En logique déontique : ce qui est, est obligatoirement permis.<br>
 En logique épistémique : si je $P$ est avéré, alors je sais que je ne sais pas $\neg P$.<br>
 En logique doxastique : si $P$ est avéré, alors je crois que je ne crois pas $\neg P$.</p>
-<p>Et <a href="../logique4/#syme">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(B)}$ si et seulement si ce système est <strong>symétrique</strong>.</p>
+<p>Et <a href="../logique4/#syme">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(B)}$ si et seulement si ce système est <strong>symétrique</strong>. $\text{(B)}$ est donc aussi l&rsquo;axiome de symétrie.</p>
 <br>
 <div id="def">
 <p>$\text{(4) :}$ $\Box P\rightarrow \Box\Box P$</p>
 </div>
 <p>La formule $\text{(4)}$ dit que si quelque chose est nécessaire, alors elle est nécessairement nécessaire.<br>
 En logique déontique : si quelque chose est obligatoire, c&rsquo;est obligatoire qu&rsquo;elle le soit.<br>
-En logique épistémique : si je sais $P$, alors je sais que je sais $P$. Et transitivement, on sait que l&rsquo;on sait que l&rsquo;on sait&hellip; Autrement dit, avec la formule (4) nous décrivons des agents parfaitement rationnel.<br></p>
-<p>Et <a href="../logique4/#trans">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(4)}$ si et seulement si ce système est <strong>transitif</strong>.</p>
+En logique épistémique : si je sais $P$, alors je sais que je sais $P$. Et transitivement, on sait que l&rsquo;on sait que l&rsquo;on sait&hellip; Autrement dit, avec la formule (4) nous décrivons des agents parfaitement rationnel.<br>
+On appelle parfois $\text{(4)}$ l&rsquo;axiome d&rsquo;introspection positive.</p>
+<p>Et <a href="../logique4/#trans">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(4)}$ si et seulement si ce système est <strong>transitif</strong>. $\text{(4)}$ est donc aussi l&rsquo;axiome de transitivité.</p>
 <br>
 <div id="def">
 <p>$\text{(5) :}$ $\Diamond P\rightarrow \Box\Diamond P$</p>
@@ -2351,8 +2366,9 @@ En logique épistémique : si je sais $P$, alors je sais que je sais $P$. Et tr
 <p>La formule $\text{(5)}$ dit que s&rsquo;il n&rsquo;est pas nécessaire que quelque chose ne soit pas, alors elle est nécessaire.<br>
 En logique déontique : si quelque chose est permise, c&rsquo;est obligatoire qu&rsquo;elle soit permise.<br>
 En logique épistémique : si je ne sais pas quelque chose, alors je sais que je ne le sais pas. L&rsquo;interprétation épistémique décrit un agent parfaitement conscient de ce qu&rsquo;il ne sait pas.<br>
-En logique doxastique : si je ne crois pas quelsue chose, alors je crois que je ne le crois pas. L&rsquo;interprétation doxastique décrit un agent parfaitement conscient de ce qu&rsquo;il ne croit pas.</p>
-<p>Et <a href="../logique4/#eucl">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(5)}$ si et seulement si ce système est <strong>euclidien</strong>.</p>
+En logique doxastique : si je ne crois pas quelsue chose, alors je crois que je ne le crois pas. L&rsquo;interprétation doxastique décrit un agent parfaitement conscient de ce qu&rsquo;il ne croit pas.<br>
+On appelle parfois $\text{(5)}$ l&rsquo;axiome d&rsquo;introspection négative.</p>
+<p>Et <a href="../logique4/#eucl">nous avons vu</a> qu&rsquo;un système de transition valide $\text{(5)}$ si et seulement si ce système est <strong>euclidien</strong>. $\text{(5)}$ est donc aussi l&rsquo;axiome d&rsquo;euclidité.</p>
 <br>
 <p>En prenant ensemble les formules $\text{(5)}$ et $\text{(T)}$, on regarde des systèmes de transition à la fois <strong>euclidiens</strong> et <strong>réflexifs</strong>. Or la conjonction de ces deux propriétés est équivalentes à la conjonction des trois propriétés d&rsquo;une relation d&rsquo;équivalence !</p>
 <div id="theo">
@@ -2377,7 +2393,7 @@ En logique doxastique : si je ne crois pas quelsue chose, alors je crois que je
 </li>
 </ul>
 </div>
-<br>
+<p><br><br></p>
 <h2 id="quelques-systèmes-formels-et-logiques-usuels">Quelques systèmes formels et logiques usuels</h2>
 <br>
 <p>Par la suite, nous confonderons un système formel et la logique qu&rsquo;il induit par clôture. Les systèmes formels qu&rsquo;on va introduire sont tous des extensions du système $\text{\bf K}$.</p>
@@ -2398,7 +2414,26 @@ En logique doxastique : si je ne crois pas quelsue chose, alors je crois que je
 </ul>
 </div>
 </div>
-<p><br><br></p>
+<br>
+<p>Convainquons-nous dans un premier temps que ces axiomes apportent bien quelque chose de plus en montrant par exemple que la logique $\text{\bf KB}$ ne permet pas de prouver l&rsquo;axiome $\text{(4)}$.</p>
+<div id="preuve">
+<p>Comme $\text{(B)}$ est vraie dans tout système de transition symétrique, il suffit de trouver un modèle symétrique où au moins un nœud ne satisfait pas $\text{(4)}=\Box P\rightarrow\Box\Box P$ pour montrer que $\text{\bf K4}\not\subseteq \text{\bf KB}$.</p>
+<div style="position:relative;width:350px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvekbpask4.png">
+</div>
+Comme $P$ est satisfait dans tout les successeurs de $a$, $a\Vdash\Box P$. Mais pour avoir $a\Vdash\Box\Box P$, il faudrait que tous les successeurs de $a$ satisfassent $\Box P$, or ce n'est pas le cas de $b$ (qui a pour successeur $a$ lui-même par symétrie et $a\nVdash P$). D'où $a\nVdash \Box\Box P$.
+</div>
+<br>
+<p>De même, montrons que $\text{\bf KTB}$ ne peut prouver ni $\text{(4)}$ ni $\text{(5)}$.</p>
+<div id="preuve">
+<p>$\text{(T)}$ et $\text{(B)}$ seront vraies ensemble dans tout système de transition à la fois réflexif et symétrique. Exhibons un tel modèle où au moins un nœud ne satisfait ni $\text{(4)}=\Box P\rightarrow\Box\Box P$ ni $\text{(5)}=\Diamond P\rightarrow\Box\Diamond P$.</p>
+<div style="position:relative;width:600px;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/preuvektbpas45.png">
+</div>
+On constate que dans ce modèle réflexif et symétrique, $a$ ne satisfait pas $\text{(4)}$ et $b$ ne satisfait pas une instance de $\text{(5)}$ où $P=\neg Q$.
+</div>
+<br>
+<p>Mais on va préférer dans la suite mettre au jour les inclusions inverses (qui contient qui) grâce à la notion de <strong>réduction</strong>.</p>
 <div id="def">
 <p>Soient $\text{\bf S}$ et $\text{\bf S&rsquo;}$ deux systèmes formels et $\phi$ une formule quelconque,<br></p>
 <p style="text-align:center;">
@@ -2574,7 +2609,7 @@ En effet, on a montré que les axiomes de la logique normale minimale (tautologi
 </ul>
 <p>Et on a montré qu&rsquo;un graphe est à la fois réflexif et euclidien si et seulement si il est réflexif, symétrique et transitif.</p>
 </div>
-<p>On va représenter graphiquement par une flèche &ldquo;$\text{\bf X}\longrightarrow\mathscr{C}_x$&rdquo; la relation de solidité : &ldquo;si $\vdash_\text{\bf X}\phi$, alors $\models_{\mathscr{C}_x}\phi$&rdquo;.</p>
+<p>On représente graphiquement par une flèche &ldquo;$\text{\bf X}\longrightarrow\mathscr{C}_x$&rdquo; la relation de solidité : &ldquo;si $\vdash_\text{\bf X}\phi$, alors $\models_{\mathscr{C}_x}\phi$&rdquo;.</p>
 <p><img src="/compsolide.png?width=1200px" alt=""></p>
 <p>On va essayer maintenant d&rsquo;associer les classe aux logiques, la sémantique à la syntaxe.</p>
 <div id="def">
@@ -2587,7 +2622,7 @@ $$\text{si } \Gamma \models_\mathscr{C}\phi \text{ alors } \Gamma \vdash_\mathbb
 </ul>
 </div>
 <br>
-<p>On a alors le théorème de forte complétude suivant :</p>
+<p>On a alors le <strong>théorème de forte complétude</strong> suivant :</p>
 <div id="theo">
 <div style="pos:relative;margin-right:auto;margin-left:auto;width:fit-content;">
 <ol>
@@ -2616,7 +2651,7 @@ Dans le cas contraire, $\Gamma$ est dit $\text{\bf S}$-inconsistant.
 </div>
 <br>
 <div id="theo">
-<b>Lemme existence</b>
+<b>Lemme d'existence</b>
 <p>Soient $\mathscr{C}$ une classe de système de transition et $\mathbb{L}$ une logique modale normale,<br></p>
 <p style="text-align:center;">
 $\mathbb{L}$ est $\mathscr{C}$-(fortement) complète si et seulement si pour tout $\Gamma\subseteq\mathbb{L}$ qui est $\mathbb{L}$-consistant, il existe $\mathcal{S}\in\mathscr{C},\mathcal{V}$ et $a$ tels que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Gamma$.
@@ -2684,7 +2719,7 @@ Soit $\mathbb{L}$ une logique modale normale, le <b>modèle canonique</b> $\math
 </div>
 <br>
 <div id="theo">
-<b>Lemme ($\rightarrow$ et $\Box$)</b>
+<b>Lemme ($\longrightarrow$ et $\Box$)</b>
 <p>Soit $\mathbb{L}$ une logique modale normale et $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ le modèle canonique associé à $\mathbb{L}$. Pour tout nœud $\Gamma,\Gamma&rsquo;\in N_\mathbb{L}$, on a :</p>
 <p style="text-align:center;">
 $\Gamma\longrightarrow\Gamma'$ si et seulement si pour toute formule $\phi$, si $\Box\phi\in\Gamma$ alors $\phi\in\Gamma'$.
@@ -2703,7 +2738,7 @@ Soit $\phi\in\Gamma'$. Raisonnons par l'absurde en supposant $\Diamond\phi\not\i
 </div>
 <br>
 <div id="theo">
-<b>Lemme ($\rightarrow$ et $\Diamond$)</b>
+<b>Lemme ($\longrightarrow$ et $\Diamond$)</b>
 <p>Soit $\mathbb{L}$ une logique modale normale et $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ le modèle canonique associé à $\mathbb{L}$. Pour tout nœud $\Gamma,\Gamma&rsquo;\in N_\mathbb{L}$ :</p>
 <p style="text-align:center;">
 Si $\Diamond\phi\in\Gamma$ alors il existe $\Gamma'$ tel que $\Gamma\longrightarrow\Gamma'$ et $\phi\in\Gamma'$.
@@ -2722,7 +2757,76 @@ Comme on vient de montrer que l&rsquo;ensemble $\Theta=\set{\phi}\cup\set{\psi|\
 $\langle\mathcal{M}_\mathbb{L},\Gamma\rangle\Vdash\phi$ si et seulement si $\phi\in\Gamma$
 </p>
 </div>
+<br>
+<div id="preuve">
+<p>La démonstration se fait par induction sur la hauteur de la formule $\phi$.</p>
+<ul>
+<li> si $ht(\phi)=0$, alors $\phi=\top$ ou $\phi=\bot$ ou $\phi$ est une variable propositionnelle et $\Gamma\Vdash\phi$ ssi $\phi\in\Gamma$ est la définition même de la valuation $\mathcal{V}_\mathbb{L}$.</li>
+<li> si $ht(\phi)=n+1$
+<ul>
+<li>si $\phi=\neg\psi$, alors $\Gamma\Vdash\neg\phi$ ssi $\Gamma\nVdash\psi$. Or par hypothèse d'induction $\Gamma\nVdash\psi$ ssi $\psi\not\in\Gamma$. Par maximalité de $\Gamma$, on obtient $\neg\psi\in\Gamma$.</li>
+<li>si $\phi=(\psi_1\lor\psi_2)$, alors $\Gamma\Vdash(\psi_1\lor\psi_2)$ ssi $\Gamma\Vdash\psi_1$ ou $\Gamma\Vdash\psi_2$.<br>
+Par hypothèse d'induction, $\Gamma\Vdash\psi_1$ ssi $\psi_1\in\Gamma$ et $\Gamma\Vdash\psi_2$ ssi $\psi_2\in\Gamma$. Et par maximalité de $\Gamma$, $\psi_1\in\Gamma$ ou $\psi_2\in\Gamma$ ssi $(\psi_1\lor\psi_2)\in\Gamma$.</li>
+<li>si $\phi=(\psi_1\land\psi_2)$, alors $\Gamma\Vdash(\psi_1\lor\psi_2)$ ssi $\Gamma\Vdash\psi_1$ et $\Gamma\Vdash\psi_2$.<br>
+Par hypothèse d'induction, $\Gamma\Vdash\psi_1$ ssi $\psi_1\in\Gamma$ et $\Gamma\Vdash\psi_2$ ssi $\psi_2\in\Gamma$. Or par $\mathbb{L}$-consistance, $\psi_1\in\Gamma$ et $\psi_2\in\Gamma$ ssi $(\psi_1\land\psi_2)\in\Gamma$.</li>
+<li>si $\phi=(\psi_1\rightarrow\psi_2)$. On déduit ce cas de $\neg\psi_1\lor\psi_2$.</li>
+<li>si $\phi=(\psi_1\leftrightarrow\psi_2)$. On déduit ce cas de $(\psi_1\rightarrow\psi_2)\land(\psi_2\rightarrow\psi_1)$.</li>
+<li>si $\phi=\Diamond\psi$, alors $\Gamma\Vdash\Diamond \psi$ ssi il existe $\Gamma',\Gamma\longrightarrow\Gamma'$ et $\Gamma'\Vdash\psi$. Or par hypothèse d'induction $\Gamma'\Vdash\psi$ ssi $\psi\in\Gamma'$. Finalement, par définition de la relation $\Gamma\longrightarrow\Gamma'$ et par le lemme ($\longrightarrow$ et $\Diamond$) $\psi\in\Gamma'$ ssi $\Diamond\psi\in\Gamma$.</li>
+<li>si $\phi=\Box\psi$, alors $\Gamma\Vdash\Box\phi$ ssi $\Gamma\Vdash\neg\Diamond\neg\psi$ ssi $\neg\Diamond\neg\psi\in\Gamma$ ssi $\Box\psi\in\Gamma$ (par maximal $\mathbb{L}$-consistance).</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Nous voilà parés pour démontrer la complétude forte des onze logiques normales décrites grâce au modèle canonique de chacune.</p>
+<div id="preuve">
+<p>Le lemme d&rsquo;existence nous dit que $\mathbb{L}$ est $\mathscr{C}$-fortement complète ssi pour tout $\Gamma\subseteq\mathbb{L}$, $\mathbb{L}$-consistant, il existe $\mathcal{S}\in\mathscr{C}$, $\mathcal{V}$ et $a$ tels que $\langle\mathcal{S},\mathcal{V},a\rangle\Vdash\Gamma$.</p>
+<p>Pour chaque logique normale, nous allons choisir le modèle canonique $\mathcal{M}_\mathbb{L}=\langle N_\mathbb{L},A_\mathbb{L},\mathcal{V}_\mathbb{L}\rangle$ associé. Et pour le nœud $a$, nous allons prendre $\Gamma_{max}$. Le lemme de vérité nous dit alors que $\langle\mathcal{M}_\mathbb{L},\Gamma_{max}\rangle\Vdash\phi$ ssi $\phi\in\Gamma_{max}$. En conséquence, puisque $\Gamma\subseteq\Gamma_{max}$, il ressort que $\langle\mathcal{M}_\mathbb{L},\Gamma_{max}\rangle\Vdash\Gamma$.</p>
+<p>Il ne reste plus qu&rsquo;à vérifier à chaque fois que le modèle canonique est bien construit sur la base d&rsquo;un système de transition de la classe $\mathscr{C}$ considérée.</p>
+<ol>
+<li>$\mathcal{M}_\text{\bf K}\in\mathscr{C}$&nbsp;: comme $\mathscr{C}$ désigne la classe de tous les systèmes de transition, il n'ya rien à montrer.</li>
+<li>$\mathcal{M}_\text{\bf K4}\in\mathscr{C}_{tr.}$&nbsp;:<br>
+il faut montrer que pour tout nœud $\Xi_1$, $\Xi_2$ et $\Xi_3$ de $\mathcal{M}_\text{\bf K4}$, si $\Xi_1\longrightarrow \Xi_2$ et $\Xi_2\longrightarrow \Xi_3$, alors $\Xi_1\longrightarrow \Xi_3$.<br>
+La formule $\text{(4)}=\Box p\rightarrow\Box\Box P$ est équivalente (par dualité) à la formule $\neg\Diamond\neg P\rightarrow\neg\Diamond\neg\neg\Diamond\neg P$ elle même équivalente à $\Diamond\Diamond\neg P\rightarrow\Diamond\neg P$ (en passant par la contraposée et en éliminant les doubles négations). Comme $\Diamond\Diamond\neg P\rightarrow\Diamond\neg P\in\Gamma$, on a aussi $\Diamond\Diamond\neg P\rightarrow\Diamond\neg P\in\Xi_1$ et puisque $\Xi_1$ est clos par substitution uniforme, $\Diamond\Diamond\neg \neg\phi\rightarrow\Diamond\neg \neg\phi\in\Xi_1$. Et donc chaque formule $\Diamond\Diamond\rightarrow\Diamond$ appartient à $\Xi_1$.<br>
+Par définition de $\Xi_1\longrightarrow \Xi_2$ et $\Xi_2\longrightarrow \Xi_3$, pour une formule $\phi$ quelconque, si $\phi\in\Xi_3$, alors $\Diamond\phi\in\Xi_2$ et $\Diamond\Diamond\phi\in\Xi_1$. Et comme $\Xi_1$ est clos par <i>modus ponens</i>, si à la fois $\Diamond\Diamond\phi\in\Xi_1$ et $\Diamond\Diamond\phi\rightarrow\Diamond\phi\in\Xi_1$, alors $\Diamond\phi\in\Xi_1$. Cela prouve que pour toute formule $\phi$, si $\phi\in\Xi_3$, alors $\Diamond\phi\in\Xi_1$, et par conséquent $\Xi_1\longrightarrow\Xi_3$.
+</li>
+<li>$\mathcal{M}_\text{\bf KD}\in\mathscr{C}_{n.b.d.}$&nbsp;:<br>
+il faut montrer que pour tout nœud $\Xi_1$ de $\mathcal{M}_\text{\bf KD}$, il existe $\Xi_2$ tel que $\Xi_1\longrightarrow \Xi_2$.<br>
+D'après le lemme ($\longrightarrow$ et $\Diamond$), si $\Diamond\phi\in\Xi_1$, alors il existe $\Xi_2$ tel que $\Xi_1\longrightarrow \Xi_2$ et $\phi\in\Xi_2$. Or l'axiome $\text{(D)}$ dit précisément $\Box P\rightarrow\Diamond P$. Comme $\Xi_1$ est clos par substitution uniforme, la formule $\Box\top\rightarrow\Diamond\top$ est dans $\Xi_1$. Or $\Xi_1$ vérifie nécessairement $\Box\top$ (car une tautologie est vraie partout) et comme $\Xi_1$ est clos par <i>modus ponens</i>, $\Diamond\top\in\Xi_1$, et donc d'après le lemme ($\longrightarrow$ et $\Diamond$), il existe $\Xi_2$ tel que $\Xi_1\longrightarrow \Xi_2$ et $\top\in\Xi_2$.
+</li>
+<li>$\mathcal{M}_\text{\bf KD4}\in\mathscr{C}_{tr.,n.b.d.}$&nbsp;:<br>
+Conséquence de 2. et 3.
+</li>
+<li>$\mathcal{M}_\text{\bf KT}\in\mathscr{C}_{ref.}$&nbsp;:<br>
+Il faut montrer que $\Xi\longrightarrow \Xi$ est vérifié pour tout nœud $\Xi$ de $\mathcal{M}_\text{\bf KT}$.<br>
+La formule $\text{(T)}=\Box P\rightarrow P$ est équivalente à $\neg\Diamond\neg P\rightarrow P$ et par contraposition à $\neg P\rightarrow\diamond\neg P$. Comme $\Xi$ est clos par substitution uniforme, la formule $\neg \neg \phi\rightarrow\diamond\neg \neg\phi$ est dans $\Xi$ et donc $\phi\rightarrow\Diamond\phi$ est dans $\Xi$. La cloture par <i>modus ponens</i> permet alors de déduire que pour toute formule $\phi\in\Xi$, $\Diamond\phi\in\Xi$, ce qui est la condition nécessaire à la relation $\Xi\longrightarrow \Xi$.
+</li>
+<li>$\mathcal{M}_\text{\bf S4}\in\mathscr{C}_{ref.,tr.}$&nbsp;:<br>
+Conséquence de 2. et 5.
+</li>
+<li>$\mathcal{M}_\text{\bf KB}\in\mathscr{C}_{sym.}$&nbsp;:<br>
+il faut montrer que pour tout couple de nœuds $\Xi_1$ et $\Xi_2$ de $\mathcal{M}_\text{\bf KB}$, $\Xi_1\longrightarrow \Xi_2$ alors $\Xi_2\longrightarrow \Xi_1$.<br>
+$\text{(B)}= P\rightarrow \Box\Diamond P$ . Comme $\Xi_1$ est clos par substitution uniforme, les formules $\phi\rightarrow\Box\Diamond\phi$ sont dans $\Xi_1$. La cloture par <i>modus ponens</i> de $\Xi_1$ nous dit alors que si $\phi\in\Xi_1$, alors $\Box\Diamond\phi\in\Xi_1$. Or d'après le lemme ($\longrightarrow$ et $\Box$), si $\Xi_1\longrightarrow\Xi_2$ alors pour toute formule $\phi$, si $\Box\phi\in\Xi_1$, alors $\phi\in\Xi_2$. Par conséquent, pour tout $\phi\in\Xi_1$, $\Diamond\phi\in\Xi_2$, ce qui est la condition nécessaire pour définir $\Xi_2\longrightarrow\Xi_1$.
+</li>
+<li>$\mathcal{M}_\text{\bf KB4}\in\mathscr{C}_{sym.tr.}$&nbsp;:<br>
+Conséquence de 2. et 7.
+</li>
+<li>$\mathcal{M}_\text{\bf KDB}\in\mathscr{C}_{sym.,n.b.d.}$&nbsp;:<br>
+Conséquence de 3. et 7.
+</li>
+<li>$\mathcal{M}_\text{\bf KTB}\in\mathscr{C}_{ref.sym.}$&nbsp;:<br>
+Conséquence de 5. et 7.
+</li>
+<li>$\mathcal{M}_\text{\bf S5}\in\mathscr{C}_{ref.,sym.tr.}$&nbsp;:<br>
+Conséquence de 2. et 5. et 7.
+</li>
+</ol>
+</div>
+<p>On représente graphiquement par une flèche &ldquo;$\mathscr{C}_x\longrightarrow\text{\bf X}$&rdquo; la relation de forte-complétude : &ldquo;si $\Gamma\models_{\mathscr{C}_x}\phi$, alors $\Gamma\vdash_\text{\bf X}\phi$&rdquo;.</p>
 <p><img src="/compcomplet.png?width=1200px" alt=""></p>
+<br>
+<p style="text-align:center;">
+<a href="../logique6" style="font-size:2em;">Suite : <b>Différentes logiques modales</b></a>
+</p>
 
 
 <footer class="footline">
@@ -3835,6 +3939,11 @@ $\langle\mathcal{M}_\mathbb{L},\Gamma\rangle\Vdash\phi$ si et seulement si $\phi
             
         
                     
+                        
+            
+            
+        
+                    
             
         
                     
@@ -4072,19 +4181,19 @@ $\langle\mathcal{M}_\mathbb{L},\Gamma\rangle\Vdash\phi$ si et seulement si $\phi
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713832442"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713832442"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713832442"></script>
-    <script src="/js/jquery.sticky.js?1713832442"></script>
-    <script src="/js/featherlight.min.js?1713832442"></script>
-    <script src="/js/highlight.pack.js?1713832442"></script>
+    <script src="/js/clipboard.min.js?1713922861"></script>
+    <script src="/js/perfect-scrollbar.min.js?1713922861"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1713922861"></script>
+    <script src="/js/jquery.sticky.js?1713922861"></script>
+    <script src="/js/featherlight.min.js?1713922861"></script>
+    <script src="/js/highlight.pack.js?1713922861"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713832442"></script>
-    <script src="/js/learn.js?1713832442"></script>
-    <script src="/js/hugo-learn.js?1713832442"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1713922861"></script>
+    <script src="/js/learn.js?1713922861"></script>
+    <script src="/js/hugo-learn.js?1713922861"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713832442"></script>
+            <script src="/mermaid/mermaid.js?1713922861"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
