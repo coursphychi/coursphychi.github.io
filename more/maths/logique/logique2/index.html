@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1713994760" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1713994760" rel="stylesheet">
-    <link href="/css/hybrid.css?1713994760" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1713994760" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1713994760" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713994760" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1713994760" rel="stylesheet">
-    <link href="/css/theme.css?1713994760" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1713994760" rel="stylesheet">
+    <link href="/css/nucleus.css?1714060634" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1714060634" rel="stylesheet">
+    <link href="/css/hybrid.css?1714060634" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1714060634" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1714060634" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714060634" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1714060634" rel="stylesheet">
+    <link href="/css/theme.css?1714060634" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1714060634" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1713994760" rel="stylesheet">
+    <link href="/css/theme-blue.css?1714060634" rel="stylesheet">
     
-    <link href="/css/foo.css?1713994760" rel="stylesheet"><link href="/css/bar.css?1713994760" rel="stylesheet">
+    <link href="/css/foo.css?1714060634" rel="stylesheet"><link href="/css/bar.css?1714060634" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1713994760"></script>
+    <script src="/js/jquery-3.3.1.min.js?1714060634"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1713994760"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1713994760"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1714060634"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1714060634"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1713994760"></script>
+<script type="text/javascript" src="/js/search.js?1714060634"></script>
 
     
   </div>
@@ -2532,7 +2532,7 @@ $\displaystyle \phi = \bigvee_{i\in I}\phi_i$</p>
 Une formule $\phi$ est sous <b>forme normale disjonctive</b> si elle peut s'écrire&nbsp;:<br>
 <p>$\displaystyle \phi = \bigvee_{1≤i≤k} (\bigwedge_{1≤j≤n_i} \epsilon_{i,j}P_{i,j})$</p>
 </div>
-<p>On suppose ici que $\phi$ est satisfaite dans $k$ modèles, qu&rsquo;un modèle $i$ parmi ces $k$ possède $n_i$ variables, et que pour une variable $P_{i,j}$ parmi ces $n_i$, $\epsilon_{i,j}$ désigne soit $\neg$, soit $\not\neg$.</p>
+<p>On suppose ici que $\phi$ est satisfaite dans $k$ modèles, qu&rsquo;un modèle $i$ parmi ces $k$ possède $n_i$ variables, et que pour une variable $P_{i,j}$ parmi ces $n_i$, $\epsilon_{i,j}$ désigne soit $\neg$, soit $\not\!\neg$.</p>
 <div id="theo"">
 Pour toute formule $\phi$, il existe une formule $\psi$ sous forme normale disjonctive telle que $\phi\equiv \psi$
 </div>
@@ -2589,6 +2589,17 @@ $</p>
 </div>
 </blockquote>
 <p>Et pour construire de la même manière une formule sous forme normale disjonctive, il suffit d&rsquo;utiliser à la fin la distribution de la conjonction par rapport à la distribution puisqu&rsquo;il s&rsquo;agit cette fois-ci de faire descendre $\land$ dans l&rsquo;arbre.</p>
+
+<div class="notices tip" style="--title: 'tip';">
+  <p style="display: none;">tip</p>
+  <div class="notice-body">
+    <p>Sans stratégie, <strong>tester la validité</strong> d&rsquo;une formule revient à vérifier sa véracité pour chaque combinaison des valeurs des variables, ce qui va dépendre exponentiellement du nombre de variables (et cela devient vite impraticable). L&rsquo;équivalence entre le tableau de vérité de la formule et sa forme normale conjonctive ($\phi=\bigwedge_{i}\phi_i$) permet un test syntaxique rapide de la validité. Pour vérifier que chaque $\phi_i$ est une tautologie, il suffit de s&rsquo;assurer de la présence dans chaque $\phi_i=\bigvee_j P_j$ d&rsquo;une couple contradictoire $P_j$ et $\neg P_j$.<br>
+Et pour un <strong>test de satisfabilité</strong>, la forme normale disjonctive $\phi=\bigvee_j \phi_i$ est plus adaptée. On va à nouveau tester la présence d&rsquo;un couple de variables contradictoire dans les $\phi_i=\bigwedge_{j}P_j$. Si on revient bredouille pour au moins un $i$ alors la formule est satisfaisable.</p>
+
+  </div>
+</div>
+
+
 <br>
 <h3 id="connecteurs-binaires-et-systèmes-complets-de-connecteurs">Connecteurs binaires et systèmes complets de connecteurs</h3>
 <br>
@@ -4133,19 +4144,19 @@ $</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1713994760"></script>
-    <script src="/js/perfect-scrollbar.min.js?1713994760"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1713994760"></script>
-    <script src="/js/jquery.sticky.js?1713994760"></script>
-    <script src="/js/featherlight.min.js?1713994760"></script>
-    <script src="/js/highlight.pack.js?1713994760"></script>
+    <script src="/js/clipboard.min.js?1714060634"></script>
+    <script src="/js/perfect-scrollbar.min.js?1714060634"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1714060634"></script>
+    <script src="/js/jquery.sticky.js?1714060634"></script>
+    <script src="/js/featherlight.min.js?1714060634"></script>
+    <script src="/js/highlight.pack.js?1714060634"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1713994760"></script>
-    <script src="/js/learn.js?1713994760"></script>
-    <script src="/js/hugo-learn.js?1713994760"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1714060634"></script>
+    <script src="/js/learn.js?1714060634"></script>
+    <script src="/js/hugo-learn.js?1714060634"></script>
     
         
-            <script src="/mermaid/mermaid.js?1713994760"></script>
+            <script src="/mermaid/mermaid.js?1714060634"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
