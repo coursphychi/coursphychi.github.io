@@ -52,7 +52,7 @@ Logique modale Avant : syntaxe et sémantique Axiomatique : les systèmes logiq
       <guid>https://coursphychi.github.io/more/maths/logique/logique6/</guid>
       <description>info
 Ces pages sont des notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
-Logique modale Avant : les systèmes logiques Petit condensé sur la logique modale&amp;nbsp;: Un &amp;ldquo;monde possible&amp;rdquo; en logique modale est une configuration spécifique des valeurs de vérité des variables considérées. Il correspond à un modèle du calcul des propositions (à une ligne d&amp;rsquo;une table de vérité). En logique modale, ces mondes possibles sont connectés entre eux par des relations d&amp;rsquo;accessibilité, et les opérateurs de modalité permettent d&amp;rsquo;explorer ces relations.</description>
+Logique modale Avant : les systèmes logiques Petit condensé sur la logique modale&amp;nbsp;: En logique modale, un &amp;ldquo;monde possible&amp;rdquo; est une configuration spécifique des valeurs de vérité des variables considérées. Il correspond à un modèle du calcul des propositions (à une ligne d&amp;rsquo;une table de vérité). Ces mondes possibles sont connectés entre eux par des relations d&amp;rsquo;accessibilité, et les opérateurs de modalité permettent d&amp;rsquo;explorer ces relations.</description>
     </item>
     <item>
       <title>Propositions - Preuve</title>
