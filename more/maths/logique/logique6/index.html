@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1714326756" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1714326756" rel="stylesheet">
-    <link href="/css/hybrid.css?1714326756" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1714326756" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1714326756" rel="stylesheet">
-    <link href="/css/auto-complete.css?1714326756" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1714326756" rel="stylesheet">
-    <link href="/css/theme.css?1714326756" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1714326756" rel="stylesheet">
+    <link href="/css/nucleus.css?1714597821" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1714597821" rel="stylesheet">
+    <link href="/css/hybrid.css?1714597821" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1714597821" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1714597821" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714597821" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1714597821" rel="stylesheet">
+    <link href="/css/theme.css?1714597821" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1714597821" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1714326756" rel="stylesheet">
+    <link href="/css/theme-blue.css?1714597821" rel="stylesheet">
     
-    <link href="/css/foo.css?1714326756" rel="stylesheet"><link href="/css/bar.css?1714326756" rel="stylesheet">
+    <link href="/css/foo.css?1714597821" rel="stylesheet"><link href="/css/bar.css?1714597821" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1714326756"></script>
+    <script src="/js/jquery-3.3.1.min.js?1714597821"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1714326756"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1714326756"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1714597821"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1714597821"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1714326756"></script>
+<script type="text/javascript" src="/js/search.js?1714597821"></script>
 
     
   </div>
@@ -2339,13 +2339,18 @@ Dans la logique temporelle linéaire (LTL), les instants s&rsquo;enchaînent en 
 <img src="/godprouve.png" style="border-radius:10px;">
 </div>
 <p>Le <strong>premier théorème d&rsquo;incomplétude de Gödel</strong> s&rsquo;appuie sur une formule affirmant sa propre non prouvabilité $\neg\Box\phi\leftrightarrow \phi$. Si on peut démontrer la formule $\neg\Box\phi\leftrightarrow \phi$ dans un système donné, alors on prouve qu&rsquo;il existe une formule non démontrable et pourtant vraie, ce qui impose l&rsquo;incomplétude du système.</p>
-<p>Le théorème de Löb stipule que les formules dont on peut prouver que $\Box\phi\rightarrow\phi$ sont les formules prouvables : $\Box(\Box\phi\rightarrow\phi)\rightarrow\Box\phi$.</p>
-<p>La logique de la prouvabilité de Gödel-Löb consiste à partir du système $\text{\bf K}$ (d&rsquo;ailleurs la formule $\text{K}$ ne décrit ici rien d&rsquo;autre que le <em>modus ponens</em> ; si j&rsquo;ai une preuve de $\phi\rightarrow\psi$ et une preuve de $\phi$, alors j&rsquo;ai une preuve de $\psi$) auquel on ajoute l&rsquo;axiome $\text{(4)}=\Box P\rightarrow \Box\Box P$ (si j&rsquo;ai une preuve de $P$, alors j&rsquo;ai une preuve du fait que j&rsquo;ai une preuve de $P$) ainsi que le théorème de Löb ($\text{GL}$).</p>
+<div id="theo">
+<p>Le <b>théorème de Löb</b> stipule que les formules dont on peut prouver que $\Box\phi\rightarrow\phi$ sont les formules prouvables :</p>
+<div style="position:relative;width:fit-content;margin-right:auto;margin-left:auto">
+$\Box(\Box\phi\rightarrow\phi)\rightarrow\Box\phi$.
+</div>
 <br>
+</div>
+<p>La logique de la prouvabilité de Gödel-Löb consiste à partir du système $\text{\bf K}$ (d&rsquo;ailleurs la formule $\text{K}$ ne décrit ici rien d&rsquo;autre que le <em>modus ponens</em> ; si j&rsquo;ai une preuve de $\phi\rightarrow\psi$ et une preuve de $\phi$, alors j&rsquo;ai une preuve de $\psi$) auquel on ajoute l&rsquo;axiome $\text{(4)}=\Box P\rightarrow \Box\Box P$ (si j&rsquo;ai une preuve de $P$, alors j&rsquo;ai une preuve du fait que j&rsquo;ai une preuve de $P$) ainsi que le théorème de Löb ($\text{L}$).</p>
 <div id="theo">
 <p>En appelant $\mathscr{C}_{tr.,b.d.}$ la classe des modèles de Kripke à la fois transitifs et bornés à droite (sans suite infinie de mondes), alors on a le résultat suivant :</p>
 <div style="position:relative;width:fit-content;margin-right:auto;margin-left:auto">
-$ \Gamma\vdash_\text{\bf K4GL} \phi$ si et seulement si $\Gamma\Vdash_{\mathscr{C}_{tr.,b.d.}}\phi$
+$ \Gamma\vdash_\text{\bf GL} \phi$ si et seulement si $\Gamma\Vdash_{\mathscr{C}_{tr.,b.d.}}\phi$
 </div>
 <br>
 </div>
@@ -3702,19 +3707,19 @@ $ \Gamma\vdash_\text{\bf K4GL} \phi$ si et seulement si $\Gamma\Vdash_{\mathscr{
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1714326756"></script>
-    <script src="/js/perfect-scrollbar.min.js?1714326756"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1714326756"></script>
-    <script src="/js/jquery.sticky.js?1714326756"></script>
-    <script src="/js/featherlight.min.js?1714326756"></script>
-    <script src="/js/highlight.pack.js?1714326756"></script>
+    <script src="/js/clipboard.min.js?1714597821"></script>
+    <script src="/js/perfect-scrollbar.min.js?1714597821"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1714597821"></script>
+    <script src="/js/jquery.sticky.js?1714597821"></script>
+    <script src="/js/featherlight.min.js?1714597821"></script>
+    <script src="/js/highlight.pack.js?1714597821"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1714326756"></script>
-    <script src="/js/learn.js?1714326756"></script>
-    <script src="/js/hugo-learn.js?1714326756"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1714597821"></script>
+    <script src="/js/learn.js?1714597821"></script>
+    <script src="/js/hugo-learn.js?1714597821"></script>
     
         
-            <script src="/mermaid/mermaid.js?1714326756"></script>
+            <script src="/mermaid/mermaid.js?1714597821"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
