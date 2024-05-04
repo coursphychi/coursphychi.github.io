@@ -277,6 +277,14 @@ L&amp;rsquo;intelligence arificielle (IA) est une discipline scientifique qui a 
     </item>
     <item>
       <title>Logique modale</title>
+      <link>https://coursphychi.github.io/more/maths/logique/godel/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/logique/godel/</guid>
+      <description>Il y a différentes logiques de la prouvabilité dont celle de Gödel-Löb. $\Box\phi$ y est interprétée comme &amp;ldquo;la formule $\phi$ est prouvable&amp;rdquo;.
+Toute formule peut être codée par un entier (il suffit par exemple de regarder le code binaire du fichier de traitement de texte où cette formule est écrite et d&amp;rsquo;ajouter &amp;ldquo;1&amp;rdquo; à gauche du code pour éviter la perte éventuelle de zéros non significatifs). De même, on peut coder un arbre de preuve (puisqu&amp;rsquo;il peut lui-même s&amp;rsquo;écrire avec un logiciel de traitement de texte).</description>
+    </item>
+    <item>
+      <title>Logique modale</title>
       <link>https://coursphychi.github.io/more/maths/logique/logique4/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/logique/logique4/</guid>
