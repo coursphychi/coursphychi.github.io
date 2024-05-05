@@ -53,16 +53,10 @@
     <loc>https://coursphychi.github.io/1es/matiere/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
-    <loc>https://coursphychi.github.io/more/maths/</loc>
-    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url><url>
     <loc>https://coursphychi.github.io/more/physique/meca/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
-    <loc>https://coursphychi.github.io/more/physique/</loc>
-    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url><url>
-    <loc>https://coursphychi.github.io/more/maths/logique/logique1/</loc>
+    <loc>https://coursphychi.github.io/more/logique/logique1/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
     <loc>https://coursphychi.github.io/tes/climat/</loc>
@@ -92,13 +86,16 @@
     <loc>https://coursphychi.github.io/1es/soleil/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
+    <loc>https://coursphychi.github.io/more/maths/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
+  </url><url>
     <loc>https://coursphychi.github.io/more/physique/optique/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
     <loc>https://coursphychi.github.io/more/info/ordinateur/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
-    <loc>https://coursphychi.github.io/more/maths/logique/logique2/</loc>
+    <loc>https://coursphychi.github.io/more/logique/logique2/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
     <loc>https://coursphychi.github.io/more/maths/geometrie/geo1/</loc>
@@ -125,16 +122,19 @@
     <loc>https://coursphychi.github.io/1es/terre/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
-    <loc>https://coursphychi.github.io/more/maths/logique/godel/</loc>
+    <loc>https://coursphychi.github.io/more/logique/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
-    <loc>https://coursphychi.github.io/more/maths/logique/logique4/</loc>
+    <loc>https://coursphychi.github.io/more/logique/godel/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
-    <loc>https://coursphychi.github.io/more/maths/logique/logique5/</loc>
+    <loc>https://coursphychi.github.io/more/logique/logique4/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
-    <loc>https://coursphychi.github.io/more/maths/logique/logique6/</loc>
+    <loc>https://coursphychi.github.io/more/logique/logique5/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
+  </url><url>
+    <loc>https://coursphychi.github.io/more/logique/logique6/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
     <loc>https://coursphychi.github.io/tes/vivant/demographie/</loc>
@@ -143,7 +143,7 @@
     <loc>https://coursphychi.github.io/more/maths/probastat/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
-    <loc>https://coursphychi.github.io/more/maths/logique/logique3/</loc>
+    <loc>https://coursphychi.github.io/more/logique/logique3/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
     <loc>https://coursphychi.github.io/more/physique/relatres/</loc>
@@ -167,6 +167,9 @@
     <loc>https://coursphychi.github.io/more/maths/geometrie/geo3/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
+    <loc>https://coursphychi.github.io/more/physique/</loc>
+    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
+  </url><url>
     <loc>https://coursphychi.github.io/more/physique/relatge/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
@@ -188,7 +191,7 @@
     <loc>https://coursphychi.github.io/tes/vivant/ia/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
-    <loc>https://coursphychi.github.io/more/maths/logique/logique-c/</loc>
+    <loc>https://coursphychi.github.io/more/logique/logique-c/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
     <loc>https://coursphychi.github.io/more/physique/quantique/</loc>
@@ -225,9 +228,6 @@
     <lastmod>2021-03-06T14:23:56+01:00</lastmod>
   </url><url>
     <loc>https://coursphychi.github.io/more/physique/chaos/</loc>
-    <lastmod>2021-03-06T14:20:50+01:00</lastmod>
-  </url><url>
-    <loc>https://coursphychi.github.io/more/maths/logique/</loc>
     <lastmod>2021-03-06T14:20:50+01:00</lastmod>
   </url><url>
     <loc>https://coursphychi.github.io/more/</loc>
