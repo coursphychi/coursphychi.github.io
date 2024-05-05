@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1714932515" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1714932515" rel="stylesheet">
-    <link href="/css/hybrid.css?1714932515" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1714932515" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1714932515" rel="stylesheet">
-    <link href="/css/auto-complete.css?1714932515" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1714932515" rel="stylesheet">
-    <link href="/css/theme.css?1714932515" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1714932515" rel="stylesheet">
+    <link href="/css/nucleus.css?1714939907" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1714939907" rel="stylesheet">
+    <link href="/css/hybrid.css?1714939907" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1714939907" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1714939907" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714939907" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1714939907" rel="stylesheet">
+    <link href="/css/theme.css?1714939907" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1714939907" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1714932515" rel="stylesheet">
+    <link href="/css/theme-blue.css?1714939907" rel="stylesheet">
     
-    <link href="/css/foo.css?1714932515" rel="stylesheet"><link href="/css/bar.css?1714932515" rel="stylesheet">
+    <link href="/css/foo.css?1714939907" rel="stylesheet"><link href="/css/bar.css?1714939907" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1714932515"></script>
+    <script src="/js/jquery-3.3.1.min.js?1714939907"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1714932515"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1714932515"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1714939907"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1714939907"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1714932515"></script>
+<script type="text/javascript" src="/js/search.js?1714939907"></script>
 
     
   </div>
@@ -2070,12 +2070,12 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   <ul>
     <li>
       <ul>
-        <li><a href="#bibliothécaire-vs-agriculteur">Bibliothécaire vs agriculteur</a></li>
+        <li><a href="#bibliothécaire-vs-agriculteuract1bayespdf"><a href="/act1bayes.pdf">Bibliothécaire vs agriculteur</a></a></li>
         <li><a href="#le-paradoxe-des-deux-enfants">Le paradoxe des deux enfants</a></li>
         <li><a href="#problème-de-monty-hall">Problème de Monty Hall</a></li>
         <li><a href="#largument-de-lapocalypse">L&rsquo;argument de l&rsquo;Apocalypse</a></li>
         <li><a href="#bayes-et-cote">Bayes et cote</a></li>
-        <li><a href="#inférence-bayésienne-et-diagnostic-médical">Inférence bayésienne et diagnostic médical</a></li>
+        <li><a href="#inférence-bayésienne-et-diagnostic-médicalact2bayespdf"><a href="/act2bayes.pdf">Inférence bayésienne et diagnostic médical</a></a></li>
       </ul>
     </li>
   </ul>
@@ -2117,6 +2117,10 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   {
     color: #006C65;
   }
+  #grosseformule 
+{
+    overflow-x: auto; 
+  }
 </style>
 <h1 id="inférences-bayésiennes">Inférences bayésiennes</h1>
 <p>L&rsquo;intelligence artificielle vise à simuler l&rsquo;intelligence humaine. Mais la compréhension du fonctionnement de notre cerveau en est elle-même encore qu&rsquo;à ses prémices.<br></p>
@@ -2139,7 +2143,8 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 </div>
 
 </div>
-<h3 id="bibliothécaire-vs-agriculteur">Bibliothécaire vs agriculteur</h3>
+<br>
+<h3 id="bibliothécaire-vs-agriculteuract1bayespdf"><a href="/act1bayes.pdf">Bibliothécaire vs agriculteur</a></h3>
 <p>On trouve dans le livre &ldquo;<em>Système 1 / Système 2. Les deux vitesses de la pensée</em>&rdquo; du prix Nobel d&rsquo;économie Daniel Kahneman une expérience illustrant ce que peut nous apporter une meilleur familiarité avec le bayésianisme.</p>
 <p>L&rsquo;expérience consistait à présenter à un amphi le portrait suivant :</p>
 <p style="border:solid 4px gray;padding:10px">
@@ -2161,10 +2166,11 @@ Ici, cela correspond à un Steve agriculteur puisqu&rsquo;on suppose qu&rsquo;il
 <p>Le portrait de Steve est l&rsquo;information nouvelle apportée $I$, elle modifie la plausibilité que Steve soit bibliothécaire tel un curseur qui va tirer la probabilité dans un sens ou dans l&rsquo;autre. La probabilité de l&rsquo;information $I$ est notée $\textcolor{#1DB100}{P(I)}$.</p>
 <p>La <strong>probabilité <em>a posteriori</em></strong> correspond alors à la probabilité de $H$ sachant  $I$, qu&rsquo;on note $\textcolor{#CB297B}{P(H|I)}$ (une fois qu&rsquo;on a connaissance de l&rsquo;information $I$, que devient la probabilité de $H$).</p>
 <p>C&rsquo;est le <strong>théorème de Bayes</strong> qui va nous permettre de <strong>mettre à jour</strong> la probabilité <em>a priori</em> pour obtenir la probabilité <em>a posteriori</em> :</p>
-<div style="position:relative;border:solid 4px red;padding:10px;margin-left:auto;margin-right:auto; width:min-content">
-$$
+<div style="position:relative;border:solid 4px red;padding:10px;margin-left:auto;margin-right:auto; width:fit-content;max-width:100%;">
+$
+\displaystyle
 \textcolor{#CB297B}{P(H|I)}=\frac{ \textcolor{#FF644E}{P(I|H)}\times \textcolor{#0076BA}{P(H)}}{\textcolor{#1DB100}{P(I)}}=\frac{ \textcolor{#FF644E}{P(I|H)}\times \textcolor{#0076BA}{P(H)}}{ \textcolor{#FF644E}{P(I|H)}\times \textcolor{#0076BA}{P(H)} + \textcolor{#00A89D}{P(I|\overline{H})} \times \textcolor{#56C1FF}{P(\overline{H})}}
-$$
+$
 </div>
 <ul>
 <li>
@@ -2315,13 +2321,15 @@ Vous vous retrouvez dans une de ces boites et on vous demande s&rsquo;il y a 10 
 <summary id="correcsum">
 Correction (cliquer pour afficher)</summary>
 <blockquote id="correc">
-$$\begin{aligned}
-P(\text{Pile}|7)&=\frac{P(7|\text{Pile})P(\text{pile})}{P(7|\text{Pile})P(\text{pile})+P(7|\text{face})P(\text{face})}\\\\
-&=\frac{1/10\times 1/2}{1/10\times 1/2 + 1/100\times 1/2}\\\\
-&=\frac{10}{11}\\\\
-&=91\%
+<p>$$
+\color{#006C65}
+\begin{aligned}
+P(\text{Pile}|7)&amp;=\frac{P(7|\text{Pile})P(\text{pile})}{P(7|\text{Pile})P(\text{pile})+P(7|\text{face})P(\text{face})}\\
+&amp;=\frac{1/10\times 1/2}{1/10\times 1/2 + 1/100\times 1/2}\\
+&amp;=\frac{10}{11}\\
+&amp;=91\%
 \end{aligned}
-$$
+$$</p>
 </blockquote>
 </details>
 <br>
@@ -2380,7 +2388,7 @@ La cote de $H$ sachant $I$ vaut la cote de $H$ multipliée par le facteur de Bay
 <p><span style="font-size: 1.1rem;color: #999;">Reprenez la première questions du paradoxe des deux filles en utilisant les cotes.</span></p>
 </blockquote>
 <br>
-<h3 id="inférence-bayésienne-et-diagnostic-médical">Inférence bayésienne et diagnostic médical</h3>
+<h3 id="inférence-bayésienne-et-diagnostic-médicalact2bayespdf"><a href="/act2bayes.pdf">Inférence bayésienne et diagnostic médical</a></h3>
 <p>Le psychologue Gerd Gigerenzer présente le problème suivant dans un séminaire de statistique à des gynécologues en activité :</p>
 <p style="border:solid 4px gray;padding:10px">
 <em>Une femme de 50 ans sans symptôme passe une mammographie de routine. L'examen se révèle positif. Alarmée, elle veut savoir avec quelle certitude cela implique qu'elle a un cancer du sein.<br>À part le résultat du test, vous ne savez rien sur cette femme.<br>La prévalence des cancers du sein est de 1% chez les femmes de cet âge.<br>La sensibilité du test est de 90%.<br>Et sa spécificité est de 91%.<br><br>
@@ -2437,21 +2445,30 @@ Tout ce qu&rsquo;il fait, c&rsquo;est <strong>mettre à jour</strong> les chance
 </div>
 
 
-<p>Que vaut le facteur de Bayes dans cet exemple ?
-$$
+<blockquote>
+<p>Que vaut le facteur de Bayes dans cet exemple ?<br></p>
+</blockquote>
+<details>
+<summary id="correcsum">
+Réponse (cliquer pour afficher)</summary>
+<blockquote id="correc">
+$\displaystyle
 \frac{P(+|\text{Cancer})}{P(+|\overline{\text{Cancer}})}=\frac{\text{probabilité de vrais positifs}}{\text{probabilité de faux positifs}}=\frac{\text{sensibilité}}{\text{1-spécificité}}
-$$
-Le théorème de Bayes version cote devient donc :</p>
-<div style="position:relative;border:solid 4px black;padding:20px;margin-left:auto;margin-right:auto; width:min-content;text-align:center">
-<p>$$
+$
+</blockquote>
+</details>
+<p>Le théorème de Bayes version cote devient donc :</p>
+<div style="position:relative;border:solid 4px black;padding:20px;margin-left:auto;margin-right:auto; width:fit-content;max-width:100%;text-align:center">
+<p>$\displaystyle
 cote(\text{cancer}|+)=\frac{\text{sensibilité}}{\text{1-spécificité}}\times cote(\text{cancer})
-$$</p>
+$</p>
 </div>
 <blockquote>
 <p><span style="font-size: 1.1rem;color: #999;">Quelle est la bonne réponse (les cotes permettent de l&rsquo;estimer facilement) ?</span></p>
 </blockquote>
 <p>Plus de la moitié des docteurs présents ont choisi la réponse A, ce qui est très à côté de la plaque, et seulement 1 sur 5 ont choisi la bonne réponse&hellip;</p>
 <p>Changeons la prévalence à 10 % :</p>
+<div>
 <table>
 <tr>
 <th>prévalence</th> <td> 10% </td>
@@ -2463,6 +2480,7 @@ $$</p>
 <th>spécificité</th> <td> 91% </td>
 </tr>
 </table>
+</div>
 <blockquote>
 <p><span style="font-size: 1.1rem;color: #999;">Que devient la probabilité d&rsquo;avoir un cancer en cas de test positif ?</span></p>
 </blockquote>
@@ -2505,7 +2523,7 @@ $$</p>
 <p><span style="font-size: 1.1rem;color: #999;">Et si on passe un second test négatif ?</span></p>
 </blockquote>
 <br>
-<h4 id="moustiques">Moustiques</h4>
+<h4 id="moustiquesact3bayespdf"><a href="/act3bayes.pdf">Moustiques</a></h4>
 <p>Trois maladies virales peuvent être transmises par les moustiques :</p>
 <ul>
 <li>dengue</li>
@@ -2563,10 +2581,10 @@ au diagnostic. Pour cela, on va s’appuyer sur des données obtenues chez des p
 </table>
 <br>
 <p>À partir de ces données, on veut déterminer les probabilités de chaque maladie selon les symptômes présentés et dans des conditions différentes.<br>
-La forme du théorème de Bayes la plus pratique est dans ce cas :
-$$
+La forme du théorème de Bayes la plus pratique est dans ce cas :</p>
+<p>$\displaystyle
 P(\text{maladie}|\text{symptômes})=\frac{P(\text{symptômes}|\text{maladie})\times P(\text{maladie})}{P(\text{symptômes})}
-$$</p>
+$</p>
 <blockquote>
 <p>Vous êtes internes au service de maladies infectieuses du CHU de Limoges et une personne se présente avec à la fois de la fièvre, pas de courbatures et des douleurs oculaires. La personne revient d’un pays dans lequel aucune des trois maladies n’est épidémique. On considère donc a priori que les trois maladies sont équiprobables.</p>
 <ul>
@@ -2598,7 +2616,7 @@ Le filtre de détection des spams ne connaît pas à l’avance les probabilité
 L’apprentissage se fait à partir de l’observation du comportement des utilisateurs, qui doivent indiquer manuellement si un message est un spam ou non. Pour chaque mot de chaque message « appris », le filtre ajustera les probabilités de rencontrer ce mot dans un spam ou dans un courrier légitime et le stockera dans sa base de données.<br><br>
 On note $P(M|S)$  la probabilité qu’un spam contienne le mot $M$ et $P(M|\overline{S})$  la probabilité qu’un courrier légitime contienne le mot $M$. Ces deux probabilités sont estimées au cours de la phase d’apprentissage, tout comme la probabilité $P(S)$ qu’un message quelconque soit un spam (analogue à la prévalence $P(\text{maladie})$  dans le test médical).<br><br>
 Une fois ces valeurs déterminées, la formule de Bayes permet de calculer la probabilité qu’un message donné soit un spam sachant qu’il contient le mot $M$ selon la formule :<br>
-$$P(S|M)=\frac{P(M\cap S)}{P(M)}=\frac{P(M|S)P(S)}{P(M|S)P(S)+P(M|\bar{S})P(\bar{S})}$$
+$\displaystyle P(S|M)=\frac{P(M\cap S)}{P(M)}=\frac{P(M|S)P(S)}{P(M|S)P(S)+P(M|\bar{S})P(\bar{S})}$<br>
 Cette probabilité est comparée à un seuil ; si elle est supérieure au seuil,
 le filtre classera ce message dans les spams.<br><br>
 Dans la réalité, on travaille non pas sur un seul mot $M$, mais sur un stock de mots, en faisant l&rsquo;hypothèse naïve que les mots présents dans un message sont indépendants les uns des autres. Cela est faux dans les langages naturels, où par exemple la probabilité de trouver un adjectif est influencée par celle de trouver un nom. De plus, cette technique
@@ -3971,19 +3989,19 @@ des mots, alors qu’il a une incidence sur la présence simultanée de certains
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1714932515"></script>
-    <script src="/js/perfect-scrollbar.min.js?1714932515"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1714932515"></script>
-    <script src="/js/jquery.sticky.js?1714932515"></script>
-    <script src="/js/featherlight.min.js?1714932515"></script>
-    <script src="/js/highlight.pack.js?1714932515"></script>
+    <script src="/js/clipboard.min.js?1714939907"></script>
+    <script src="/js/perfect-scrollbar.min.js?1714939907"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1714939907"></script>
+    <script src="/js/jquery.sticky.js?1714939907"></script>
+    <script src="/js/featherlight.min.js?1714939907"></script>
+    <script src="/js/highlight.pack.js?1714939907"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1714932515"></script>
-    <script src="/js/learn.js?1714932515"></script>
-    <script src="/js/hugo-learn.js?1714932515"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1714939907"></script>
+    <script src="/js/learn.js?1714939907"></script>
+    <script src="/js/hugo-learn.js?1714939907"></script>
     
         
-            <script src="/mermaid/mermaid.js?1714932515"></script>
+            <script src="/mermaid/mermaid.js?1714939907"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
