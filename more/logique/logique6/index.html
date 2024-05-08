@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1715121209" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1715121209" rel="stylesheet">
-    <link href="/css/hybrid.css?1715121209" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1715121209" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1715121209" rel="stylesheet">
-    <link href="/css/auto-complete.css?1715121209" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1715121209" rel="stylesheet">
-    <link href="/css/theme.css?1715121209" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1715121209" rel="stylesheet">
+    <link href="/css/nucleus.css?1715170196" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1715170196" rel="stylesheet">
+    <link href="/css/hybrid.css?1715170196" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1715170196" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1715170196" rel="stylesheet">
+    <link href="/css/auto-complete.css?1715170196" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1715170196" rel="stylesheet">
+    <link href="/css/theme.css?1715170196" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1715170196" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1715121209" rel="stylesheet">
+    <link href="/css/theme-blue.css?1715170196" rel="stylesheet">
     
-    <link href="/css/foo.css?1715121209" rel="stylesheet"><link href="/css/bar.css?1715121209" rel="stylesheet">
+    <link href="/css/foo.css?1715170196" rel="stylesheet"><link href="/css/bar.css?1715170196" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1715121209"></script>
+    <script src="/js/jquery-3.3.1.min.js?1715170196"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1715121209"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1715121209"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1715170196"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1715170196"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1715121209"></script>
+<script type="text/javascript" src="/js/search.js?1715170196"></script>
 
     
   </div>
@@ -2212,7 +2212,7 @@ MathJax = {
 <img src="/resumodal.png" style="border-radius:10px;">
 </div>
 L'un des objectifs fondamentaux des systèmes logiques est de fournir un cadre où les propositions peuvent être systématiquement et formellement prouvées ou réfutées. On cherche au final une recette pour mettre à jour les tautologies de la théorie, les vérités absolues, les formules validées dans tout modèle. Cette exigence conduit à une axiomatisation, l'établissement d'un ensemble de règles d'inférences et de principes de base pour forger une machine à produire du vrai.<br>
-Avec pour axiomes les tautologies du calcul des propositions auxquelles on ajoute l'axiome modal $\text{(K)}$, et les règles de nécessitation, de substitution uniforme et de <i>modus ponens</i> pour assurer la cohérence de la machinerie, on se retrouve avec la <b>logique modale normale</b> de base $\mathbb{L}_\text{\bf K}$ qui permet de produire l'ensemble des formules universellement vraies. Toute formule obtenue dans $\mathbb{L}_\text{\bf K}$ est vraie dans tout monde possible de toute structure de Kripke, et inversement. On dit alors qu'il y a <b>correction</b> et <b>complétude</b> entre le système formel et les modèles associés&nbsp;: $\vdash_\text{\bf K}\phi$ ssi $\Vdash_\mathscr{C}\phi$ où $\vdash_\text{\bf K}\phi$ dit que $\phi$ a été prouvée dans $\mathbb{L}_\text{\bf K}$, et $\Vdash_\mathscr{C}\phi$ dit que $\phi$ est valide (vraie dans tout monde) pour tout modèle de la classe $\mathscr{C}$ qui désigne l'ensemble des systèmes de transition.<br>
+Avec pour axiomes les tautologies du calcul des propositions auxquelles on ajoute l'axiome modal $\text{(K)}$ (qui distribue $\Box$ dans une implication), et les règles de nécessitation (si $\vdash\phi$, alors on a aussi $\vdash\Box\phi$), de substitution uniforme (une formule prouvable où toute occurence d'une proposition est remplacée par une même formule quelconque est tout autant prouvable) et de <i>modus ponens</i> pour assurer la cohérence de la machinerie, on se retrouve avec la <b>logique modale normale</b> de base $\mathbf{K}$ qui permet de produire l'ensemble des formules universellement vraies. Toute formule obtenue dans $\mathbf{K}$ est vraie dans tout monde possible de toute structure de Kripke, et inversement. On dit alors qu'il y a <b>correction</b> et <b>complétude</b> entre le système formel et les modèles associés&nbsp;: $\vdash_\text{\bf K}\phi$ ssi $\Vdash_\mathscr{C}\phi$ où $\vdash_\text{\bf K}\phi$ dit que $\phi$ a été prouvée dans $\mathbf{K}$, et $\Vdash_\mathscr{C}\phi$ dit que $\phi$ est valide (vraie dans tout monde) pour tout modèle de la classe $\mathscr{C}$ qui désigne l'ensemble des systèmes de transition.<br>
 En ajoutant de nouveaux axiomes modaux au système formel, on ajoute par là même des contraintes aux modèles associés (les graphes gagnent de nouvelles propriétés). À chaque jeu d'axiomes va correspondre une certaine classe de systèmes de transition où la vérité pourra se déployer. En ajoutant l'axiome $\text{(B)}=P\rightarrow \Box\Diamond P$, par exemple, la validité des formules obtenues sera limitée aux graphes non orientés $\mathscr{C}_{sym.}$ puisque l'axiome $\text{(B)}$ ajoute la symétrie aux structures.
 </div>
 <br>
@@ -2303,7 +2303,7 @@ La logique déontique vise à proposer un guide éthique, des normes à suivre, 
 <img src="/pandoross.png" style="border-radius:10px;">
 </div>
 <p>Le <strong>dilemme du libre choix</strong> (aussi dû à Ross) est une autre curiosité qui voit une hypothèse d&rsquo;allure bénine se transformer en boîte de Pandore.<br>
-&ldquo;Tu peux soit dormir sur le sofa soit dans la chambre d&rsquo;amis&rdquo; semble impliquer que &ldquo;tu peux dormir sur le sofa et tu peux dormir dans la chambre d&rsquo;amis&rdquo;. On imagine ainsi que l&rsquo;implication $\Diamond(A\lor B)\rightarrow(\Diamond A\land\Diamond B)$ est prouvable dans le système. Mais ce n&rsquo;est pas le cas (voir ci-dessous). Qu&rsquo;à cela ne tienne ! Ajoutons-là aux hypothèses. Cela serait dommage de se passer d&rsquo;une implication si naturelle&hellip; Mais là, patatras, tout devient possible ! Imaginons en effet qu&rsquo;il existe une quelconque possibilité $\Diamond A$, alors $\Diamond (A\lor B)$ aussi est vraie et ce quel que soit $B$ (s&rsquo;il ya un monde accessible où $A$ est vraie, alors dans ce même monde, $A\lor B$ est vraie) et grâce à notre pernicieux nouvel axiome, on déduit la vérité de $\Diamond A\land\Diamond B$ qui se réduit à celle de $\Diamond B$ (puisque par hypothèse $\Diamond A$ est vraie). On a finalement $\Diamond A\rightarrow \Diamond B$ pour tout $B$. La possibilité de $A$ rend tout possible grâce à cet axiome diabolique.</p>
+&ldquo;Tu peux soit dormir sur le sofa soit dans la chambre d&rsquo;amis&rdquo; semble impliquer que &ldquo;tu peux dormir sur le sofa et tu peux dormir dans la chambre d&rsquo;amis&rdquo;. On imagine ainsi que l&rsquo;implication $\Diamond(A\lor B)\rightarrow(\Diamond A\land\Diamond B)$ est prouvable dans le système. Mais ce n&rsquo;est pas le cas (voir ci-dessous). Qu&rsquo;à cela ne tienne ! Ajoutons-là aux hypothèses. Cela serait dommage de se passer d&rsquo;une implication si naturelle&hellip; Mais là, patatras, tout devient possible ! Imaginons en effet qu&rsquo;il existe une quelconque possibilité $\Diamond A$, alors $\Diamond (A\lor B)$ aussi est vraie, et ce quel que soit $B$ (s&rsquo;il ya un monde accessible où $A$ est vraie, alors dans ce même monde, $A\lor B$ est vraie) et grâce à notre pernicieux nouvel axiome, on déduit la vérité de $\Diamond A\land\Diamond B$ qui se réduit à celle de $\Diamond B$ (puisque par hypothèse $\Diamond A$ est vraie). On a finalement $\Diamond A\rightarrow \Diamond B$ pour tout $B$. La possibilité de $A$ rend tout possible grâce à cet axiome diabolique.</p>
 <div id="preuve">
 <p>On prouve que $\Diamond(A\lor B)\rightarrow(\Diamond A\land\Diamond B)$ n&rsquo;est pas prouvable dans le système $\text{\bf KD}$ en trouvant un modèle appartenant à $\mathscr{C}_{n.b.d.}$ et tel qu&rsquo;au moins un de ses nœuds ne satisfait pas la formule.</p>
 <div style="position:relative;width:500px;max-width:100%;margin-left:auto;margin-right:auto">
@@ -2338,7 +2338,7 @@ Deux jeux d&rsquo;axiomes équivalents permettent d&rsquo;obtenir $\text{\bf S5}
 <p>Les axiomes doivent être vérifiés dans tous les mondes possibles. Ainsi $\text{(T)}=[i]P\rightarrow P$ signifie que dans un monde quelconque, si l&rsquo;agent $i$ sait que $P$, alors $P$ est vrai dans ce monde (l&rsquo;agent ne sait que des choses vraies). Et il faut aussi que soit réalisée $\text{(5)}=\neg[i]P\rightarrow[i]\neg[i]P$, ce qui signifie que si l&rsquo;agent $i$ ne sait pas quelque chose, alors il sait qu&rsquo;il ne le sait pas. C&rsquo;est le principe d&rsquo;<strong>introspection négative</strong>.</p>
 <p>L&rsquo;agent de la logique $\text{\bf S5}$ est une sorte d&rsquo;agent idéal pour lequel l&rsquo;accès à la connaissance est maximal (sans qu&rsquo;il ne sache tout pour autant). Il n&rsquo;est tellement pas humain qu&rsquo;il ne peut pas croire</p>
 <p>On place parfois l&rsquo;agent dans une logique inférieure, $\text{\bf S4}$, qui perd la symétrie (et donc l&rsquo;indistingabilité !). L&rsquo;introspection négative disparaît alors et est remplacée par l&rsquo;<strong>introspection positive</strong> $\text{(4)}:[i]P\rightarrow [i][i] P$ où si l&rsquo;agent sait quelque chose, alors il sait qu&rsquo;il sait. Mine de rien, ça lui limite pas mal l&rsquo;accès à la connaissance par rapport à l&rsquo;autre introspection. L&rsquo;agent reste idéal en ce qu&rsquo;il conserve une omniscience logique totale, mais il peut vivre dans un monde ou il peut croire possible qu&rsquo;il sait quelque chose qu&rsquo;il ne sait pas (la honte).</p>
-<p>Dans $\text{\bf S4}$, l&rsquo;accessibilité n&rsquo;est plus nécessairement réciproque entre les mondes. Cela introduit une hiérarchie ou un ordre entre ces mondes, où certains mondes peuvent être considérés comme des extensions ou des raffinements d&rsquo;autres, des mondes &ldquo;plus informés&rdquo;. C&rsquo;est pertinent pour modéliser la communication dans des réseau où l&rsquo;information n&rsquo;est pas toujours réciproquement échangée (dès que les canaux sont asymétriques comme c&rsquo;est le cas dans la plupart des structures hiérarchiques).<br>
+<p>Dans $\text{\bf S4}$, l&rsquo;accessibilité n&rsquo;est plus nécessairement réciproque entre les mondes. Cela introduit une hiérarchie, un ordre où certains mondes peuvent être considérés comme des extensions ou des raffinements d&rsquo;autres, des mondes &ldquo;plus informés&rdquo;. C&rsquo;est pertinent pour modéliser la communication dans des réseau où l&rsquo;information n&rsquo;est pas toujours réciproquement échangée (dès que les canaux sont asymétriques comme c&rsquo;est le cas dans la plupart des structures hiérarchiques).<br>
 Couplé à une logique temporelle, cela permet de modéliser un apprentissage progressif où l&rsquo;aquisition d&rsquo;information se fait de manière séquentielle ou cumulative. En robotique ou en intelligence artificielle, cela permet dans la même veine de modéliser des processus de planification où chaque décision ou action mène à un nouvel état du monde qui intègre toutes les connaissances et conséquences des actions précédentes.</p>
 <p><br><br></p>
 <h3 id="logique-temporelle">Logique temporelle</h3>
@@ -2369,7 +2369,7 @@ Dans la logique temporelle linéaire (LTL), les instants s&rsquo;enchaînent en 
 <br>
 <p>Souhaitant éprouver la stabilité de l&rsquo;édifice mathématique, en particulier l&rsquo;arithmétique (la science des nombres, le cœur des maths), Gödel a imaginé une méthode astucieuse, une sorte de hack qui lui permit de plonger les énoncés logiques dans le champ de l&rsquo;arithmétique (en particulier sur l&rsquo;Arithmétique de Peano $\text{PA}$, une théorie - ensemble d&rsquo;axiomes - en logique du premier ordre dont l&rsquo;arithmétique des entiers est un modèle). En associant à chaque formule un numéro (le numéro de Gödel ou code de Gödel), noté $\ulcorner\phi\urcorner$, il a permis aux nombres de parler d&rsquo;eux-mêmes dans une sorte d&rsquo;épanchement psychanalytique.</p>
 <p>Ce qui semblait à l&rsquo;époque un processus éminemment complexe est devenu trivial à l&rsquo;ère de l&rsquo;informatique. Pour associer un nombre unique à une formule, il suffit par exemple de regarder le code binaire du fichier de traitement de texte où la formule est écrite (et d&rsquo;ajouter éventuellement un &ldquo;1&rdquo; au début si ça commence par des &ldquo;0&rdquo;).</p>
-<p>On peut même coder sans problème un arbre de preuve complet (tout ce qu&rsquo;on peut écrire dans un traitement de texte finalement). Dès lors, une formule peut très bien parler du fait qu&rsquo;une autre formule est démontrable puisqu&rsquo;il s&rsquo;agit de dire qu&rsquo;il existe un entier possédant les propriétés qui le caractérisent comme étant le code d&rsquo;une preuve de cette formule. C&rsquo;est ce que fait la formule $\Box\phi$ où l&rsquo;opérateur de modalité $\Box$ prend alors le sens de &ldquo;est prouvable&rdquo; (elle équivaut à la fameuse formule de Gödel $G\leftrightarrow\neg\text{Bew}(\ulcorner G\urcorner)$, $\Box$ correspondant à $\text{Bew}(x)$).</p>
+<p>On peut même coder sans problème un arbre de preuve complet (tout ce qu&rsquo;on peut écrire dans un traitement de texte finalement). Dès lors, une formule peut très bien parler du fait qu&rsquo;une autre formule est démontrable puisqu&rsquo;il s&rsquo;agit de dire qu&rsquo;il existe un entier possédant les propriétés qui le caractérisent comme étant le code d&rsquo;une preuve de cette formule. C&rsquo;est ce que fait la formule $\Box\phi$ où l&rsquo;opérateur de modalité $\Box$ prend alors le sens de &ldquo;est prouvable&rdquo; (elle équivaut à la fameuse formule de Gödel $G\leftrightarrow\neg\text{Bew}(\ulcorner G\urcorner)$, $\Box$ correspondant à $\text{Bew}(x)$, &ldquo;bew&rdquo; étant le début du mot allemand beweisbar qui signifie prouvable).</p>
 <div style="position:relative;width:500px;max-width:100%;margin-right:auto;margin-left:auto;border-radius:10px">
 <img src="/godprouve.png" style="border-radius:10px;">
 </div>
@@ -2515,7 +2515,7 @@ Par transitivité, $a \longrightarrow a''$. Or si on retourne à l'affirmation $
 <p>Si $\models_{\mathscr{C}_{\text{arbres finis}}}\phi$, alors $\vdash_\text{\bf GL} \phi$.</p>
 </div>
 <br>
-<p>Comme entrevu plus haut, l&rsquo;opérateur de modalité peut s&rsquo;interpréter comme la formule arithmétique due à Gödel $\text{Bew}(x)$. Il s&rsquo;agit plus précisément d&rsquo;une formule de l&rsquo;Arithmétique de Peano $\text{\bf PA}$. Il se trouve qu&rsquo;on peut traduire toute formule de la logique modale dans $\text{\bf PA}$ et on montre alors que tout théorème de $\text{\bf GL}$ est prouvable dans $\text{\bf PA}$. C&rsquo;est ce qu&rsquo;on peut appeler la <strong>correction arithmétique</strong> de $\text{\bf GL}$. Et mieux, Solovay a prouvé aussi sa <strong>complétude arithmétique</strong> ; toute formule prouvable de l&rsquo;arithmétique est un théorème de $\text{\bf GL}$.</p>
+<p>Comme entrevu plus haut, l&rsquo;opérateur de modalité peut s&rsquo;interpréter comme la formule arithmétique de Gödel $\text{Bew}(x)$. Il s&rsquo;agit plus précisément d&rsquo;une formule de l&rsquo;Arithmétique de Peano $\mathbf{PA}$. Il se trouve qu&rsquo;on peut traduire toute formule de la logique modale dans $\text{\bf PA}$ et on montre alors que tout théorème de $\text{\bf GL}$ est prouvable dans $\text{\bf PA}$. C&rsquo;est ce qu&rsquo;on peut appeler la <strong>correction arithmétique</strong> de $\text{\bf GL}$. Et mieux, Solovay a prouvé aussi sa <strong>complétude arithmétique</strong> ; toute formule prouvable de l&rsquo;arithmétique est un théorème de $\text{\bf GL}$.</p>
 
 
 <footer class="footline">
@@ -3893,19 +3893,19 @@ Par transitivité, $a \longrightarrow a''$. Or si on retourne à l'affirmation $
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1715121209"></script>
-    <script src="/js/perfect-scrollbar.min.js?1715121209"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1715121209"></script>
-    <script src="/js/jquery.sticky.js?1715121209"></script>
-    <script src="/js/featherlight.min.js?1715121209"></script>
-    <script src="/js/highlight.pack.js?1715121209"></script>
+    <script src="/js/clipboard.min.js?1715170196"></script>
+    <script src="/js/perfect-scrollbar.min.js?1715170196"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1715170196"></script>
+    <script src="/js/jquery.sticky.js?1715170196"></script>
+    <script src="/js/featherlight.min.js?1715170196"></script>
+    <script src="/js/highlight.pack.js?1715170196"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1715121209"></script>
-    <script src="/js/learn.js?1715121209"></script>
-    <script src="/js/hugo-learn.js?1715121209"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1715170196"></script>
+    <script src="/js/learn.js?1715170196"></script>
+    <script src="/js/hugo-learn.js?1715170196"></script>
     
         
-            <script src="/mermaid/mermaid.js?1715121209"></script>
+            <script src="/mermaid/mermaid.js?1715170196"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
