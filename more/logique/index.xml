@@ -15,7 +15,7 @@
       <guid>https://coursphychi.github.io/more/logique/logique1/</guid>
       <description>info
 Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
-Calcul des propositions Syntaxe Sémantique Preuve Le calcul des propositions (ou calcul propositionnel ou logique des propositions) permet de modéliser des raisonnements simples. Son pouvoir expressif est assez limité mais en tant que base des logiques plus évoluées, son rôle est néanmoins capital.
+Calcul des propositions Syntaxe Sémantique Preuve Le calcul des propositions (ou calcul propositionnel ou logique des propositions) permet de modéliser des raisonnements simples. Son pouvoir expressif est assez limité mais c&amp;rsquo;est sur ses fondations que se construisent les logiques plus évoluées.
 Syntaxe Langage Le langage du calcul des propositions est constitué de variables propositionnelles $P$, $Q$, $R$,.</description>
     </item>
     <item>
