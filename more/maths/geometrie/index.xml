@@ -4,7 +4,7 @@
     <title>Géométrie on Cours Physique-Chimie</title>
     <link>https://coursphychi.github.io/more/maths/geometrie/</link>
     <description>Recent content in Géométrie on Cours Physique-Chimie</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>fr</language>
     <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate>
     <atom:link href="https://coursphychi.github.io/more/maths/geometrie/index.xml" rel="self" type="application/rss+xml" />
@@ -13,19 +13,14 @@
       <link>https://coursphychi.github.io/more/maths/geometrie/geo1/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo1/</guid>
-      <description>Le triangle Pythagore Pythagore a vécu à Samos (une île grecque) au 6e siècle avant notre ère. Malgré le nom qu&amp;rsquo;on lui donne, le théorème de Pythagore était connu et utilisé par les Babyloniens et les Indiens des siècles avant Pythagore. Mais peut-être que Pythagore a été le premier à l&amp;rsquo;introduire en Grèce et cela a suffi à lui octroyer une reconnaissance éternelle.
-Théorème de Pythagore :
-Si un triangle est rectangle, alors le carré de la longueur de l’hypoténuse est égal à la somme des carrés des longueurs des deux autres côtés.</description>
+      <description>Le triangle Pythagore Pythagore a vécu à Samos (une île grecque) au 6e siècle avant notre ère. Malgré le nom qu&amp;rsquo;on lui donne, le théorème de Pythagore était connu et utilisé par les Babyloniens et les Indiens des siècles avant Pythagore. Mais peut-être que Pythagore a été le premier à l&amp;rsquo;introduire en Grèce et cela a suffi à lui octroyer une reconnaissance éternelle.&#xA;Théorème de Pythagore :&#xA;Si un triangle est rectangle, alors le carré de la longueur de l’hypoténuse est égal à la somme des carrés des longueurs des deux autres côtés.</description>
     </item>
     <item>
       <title>Cercle et Trigo</title>
       <link>https://coursphychi.github.io/more/maths/geometrie/geo2/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo2/</guid>
-      <description>Cercle et triangle Trigonométrie La loi des sinus a contribué à la définition du mètre, la première unité &amp;ldquo;universelle&amp;rdquo; lors de la révolution française.
-Delambre et Méchain furent missionner pour mesurer le plus précisément possible un bout de méridien entre Dunkerque et Barcelone, la toute neuve définition du mètre étant :
-un mètre est la dix millionième partie d&amp;rsquo;un quart de méridien terrestre
-Le cercle répétiteur de Borda fut leur arme secrète.</description>
+      <description>Cercle et triangle Trigonométrie La loi des sinus a contribué à la définition du mètre, la première unité &amp;ldquo;universelle&amp;rdquo; lors de la révolution française.&#xA;Delambre et Méchain furent missionner pour mesurer le plus précisément possible un bout de méridien entre Dunkerque et Barcelone, la toute neuve définition du mètre étant :&#xA;un mètre est la dix millionième partie d&amp;rsquo;un quart de méridien terrestre&#xA;Le cercle répétiteur de Borda fut leur arme secrète.</description>
     </item>
     <item>
       <title>Aires et Volumes</title>
@@ -39,21 +34,14 @@ Le cercle répétiteur de Borda fut leur arme secrète.</description>
       <link>https://coursphychi.github.io/more/maths/geometrie/geo4/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo4/</guid>
-      <description>Curse of dimensionality L&amp;rsquo;expression Curse of dimensionality vient de l&amp;rsquo;américain Richard Bellman alors qu&amp;rsquo;il considérait des problèmes en programmation dynamique (qu&amp;rsquo;il inventa en 1953). La traduction française, Fléau de la dimension, fait un peu bizarre&amp;hellip;
-Mais qu&amp;rsquo;est-ce donc que ce &amp;ldquo;fléau&amp;rdquo; ?
-Le volume d&amp;rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$. Jusque là, ça va.
-Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;
-à 1D, la boule se réduit à un segment de longueur $R$.</description>
+      <description>Curse of dimensionality L&amp;rsquo;expression Curse of dimensionality vient de l&amp;rsquo;américain Richard Bellman alors qu&amp;rsquo;il considérait des problèmes en programmation dynamique (qu&amp;rsquo;il inventa en 1953). La traduction française, Fléau de la dimension, fait un peu bizarre&amp;hellip;&#xA;Mais qu&amp;rsquo;est-ce donc que ce &amp;ldquo;fléau&amp;rdquo; ?&#xA;Le volume d&amp;rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$. Jusque là, ça va.&#xA;Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;&#xA;à 1D, la boule se réduit à un segment de longueur $R$.</description>
     </item>
     <item>
       <title>Poursuites</title>
       <link>https://coursphychi.github.io/more/maths/geometrie/geo5/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo5/</guid>
-      <description>Poursuites note
-Cette page est très inspirée du livre Chases and Escapes The Mathematics of Pursuit and Evasion de Paul Nahin.
-Paradoxe d&amp;rsquo;Achille et de la tortue Dans La Physique, Aristote rapporte les célèbres paradoxes de Zénon d&amp;rsquo;Élée dont celui d&amp;rsquo;Achille et la tortue. :
-Celui qui court le plus lentement ne sera jamais rattrapé par le plus rapide. Car le poursuivant doit d&amp;rsquo;abord atteindre le point d&amp;rsquo;où est parti le poursuivi, si bien que le plus lent doit toujours avoir une longueur d&amp;rsquo;avance.</description>
+      <description>Poursuites note&#xA;Cette page est *très* inspirée du livre *Chases and Escapes The Mathematics of Pursuit and Evasion* de Paul Nahin. Paradoxe d&amp;rsquo;Achille et de la tortue Dans La Physique, Aristote rapporte les célèbres paradoxes de Zénon d&amp;rsquo;Élée dont celui d&amp;rsquo;Achille et la tortue. :&#xA;Celui qui court le plus lentement ne sera jamais rattrapé par le plus rapide. Car le poursuivant doit d&amp;rsquo;abord atteindre le point d&amp;rsquo;où est parti le poursuivi, si bien que le plus lent doit toujours avoir une longueur d&amp;rsquo;avance.</description>
     </item>
   </channel>
 </rss>

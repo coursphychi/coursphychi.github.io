@@ -4,30 +4,23 @@
     <title>Cours de physique-chimie on Cours Physique-Chimie</title>
     <link>https://coursphychi.github.io/</link>
     <description>Recent content in Cours de physique-chimie on Cours Physique-Chimie</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 06 Mar 2021 14:23:56 +0100</lastBuildDate>
     <atom:link href="https://coursphychi.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Corps purs et mélanges</title>
       <link>https://coursphychi.github.io/2nde/melanges/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/melanges/</guid>
-      <description>Corps purs et mélanges Présentation
-Définitions Échelles de description de la matière Entité chimique
-Objet pouvant être dénombré. Les atomes isolés, les ions, les molécules sont des entités chimiques. Une entité peut être décrite au moyen d’une formule chimique.
-Échelle microscopique
-Échelle de description rassemblant un nombre restreint d’entités, notamment adaptée à l’étude de la structure et aux propriétés des entités chimiques.
-Échelle macroscopique
-Échelle de description rassemblant un nombre suffisamment élevé d’entités pour que des grandeurs comme la pression, la température, la masse volumique, etc.</description>
+      <description>Corps purs et mélanges Présentation&#xA;Définitions Échelles de description de la matière Entité chimique&#xA;Objet pouvant être dénombré. Les atomes isolés, les ions, les molécules sont des entités chimiques. Une entité peut être décrite au moyen d’une formule chimique.&#xA;Échelle microscopique&#xA;Échelle de description rassemblant un nombre restreint d’entités, notamment adaptée à l’étude de la structure et aux propriétés des entités chimiques.&#xA;Échelle macroscopique&#xA;Échelle de description rassemblant un nombre suffisamment élevé d’entités pour que des grandeurs comme la pression, la température, la masse volumique, etc.</description>
     </item>
     <item>
       <title>Lance-balle</title>
       <link>https://coursphychi.github.io/colles/lanceballe/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/lanceballe/</guid>
-      <description>Lance-balle Un lanceur de balle est fixé au sol mais le canon est libre de pivoter autour d’un axe horizontal. Le lanceur envoie ses projectiles avec toujours la même vitesse initiale $v_0$ mais avec un angle aléatoire distribué uniformément entre 0° et 180°.
-Selon vous, chaque secteur découpant l&amp;rsquo;axe $x$ de manière régulière va-t-il recevoir autant de balles ? Si non, comment supposeriez-vous que la densité d&amp;rsquo;impacts $\frac{dN}{dx}$ sur un petit intervalle $dx$ évolue en fonction de $x$ ?</description>
+      <description>Lance-balle Un lanceur de balle est fixé au sol mais le canon est libre de pivoter autour d’un axe horizontal. Le lanceur envoie ses projectiles avec toujours la même vitesse initiale $v_0$ mais avec un angle aléatoire distribué uniformément entre 0° et 180°.&#xA;Selon vous, chaque secteur découpant l&amp;rsquo;axe $x$ de manière régulière va-t-il recevoir autant de balles ? Si non, comment supposeriez-vous que la densité d&amp;rsquo;impacts $\frac{dN}{dx}$ sur un petit intervalle $dx$ évolue en fonction de $x$ ?</description>
     </item>
     <item>
       <title>Lentilles</title>
@@ -48,75 +41,56 @@ Selon vous, chaque secteur découpant l&amp;rsquo;axe $x$ de manière régulièr
       <link>https://coursphychi.github.io/colles/onde/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/onde/</guid>
-      <description>Onde Inspecter le code ci-dessous :
-Combien de périodes observe-t-on pendant l&amp;rsquo;animation ? Modifier le code pour visualiser 10 périodes. Imaginons qu&amp;rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.
-Quel sera le retard temporel de l&amp;rsquo;anneau i par rapport à l&amp;rsquo;anneau 0 ? Faire en sorte que l&amp;rsquo;animation montre une telle onde en modifiant la ligne 62. Que vaut alors la longueur d&amp;rsquo;onde $\lambda$ ?</description>
+      <description>Onde Inspecter le code ci-dessous :&#xA;Combien de périodes observe-t-on pendant l&amp;rsquo;animation ? Modifier le code pour visualiser 10 périodes. Imaginons qu&amp;rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.&#xA;Quel sera le retard temporel de l&amp;rsquo;anneau i par rapport à l&amp;rsquo;anneau 0 ? Faire en sorte que l&amp;rsquo;animation montre une telle onde en modifiant la ligne 62. Que vaut alors la longueur d&amp;rsquo;onde $\lambda$ ?</description>
     </item>
     <item>
       <title>Oscillateur</title>
       <link>https://coursphychi.github.io/colles/oscillsolide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/oscillsolide/</guid>
-      <description> Simulation d&amp;rsquo;un oscillateur mécanique Oscillateur amorti par frottement fluide :
-Faire les modifications nécessaires pour se placer dans le régime apériodique critique. Oscillateur amorti par frottement solide :
-Faire les modifications nécessaires pour étudier un oscillateur amorti par frottement solide plutôt que par frottement fluide.
-Analyser les graphes obtenus.
-Déterminer la variation entre deux élongations maximales consécutives du ressort.
-Correction Approche dynamique et énergétique </description>
+      <description> Simulation d&amp;rsquo;un oscillateur mécanique Oscillateur amorti par frottement fluide :&#xA;Faire les modifications nécessaires pour se placer dans le régime apériodique critique. Oscillateur amorti par frottement solide :&#xA;Faire les modifications nécessaires pour étudier un oscillateur amorti par frottement solide plutôt que par frottement fluide.&#xA;Analyser les graphes obtenus.&#xA;Déterminer la variation entre deux élongations maximales consécutives du ressort.&#xA;Correction Approche dynamique et énergétique </description>
     </item>
     <item>
       <title>Rappels chimie</title>
       <link>https://coursphychi.github.io/tsti2d/rappelschimie/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/rappelschimie/</guid>
-      <description>Rappels sur les solutions Présentation
-Pictogrammes Savoir et savoir faire coeur
-Calculer la masse molaire d&amp;rsquo;une molécule à partir de celles des atomes qui la constituent.
-Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à partir de la masse $m$ de l&amp;rsquo;espèce et de sa masse molaire $M$ : $\displaystyle n=\frac{m}{M}$ Déterminer une concentration massique $\displaystyle C_m=\frac{m}{V}$ et une concentration molaire $\displaystyle C=\frac{n}{V}$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une masse volumique $\rho$ : $m=\rho\times V$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration massique $C_m$ : $m=C_m\times V$ Déterminer une quantité de matière $n$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration molaire $C$ : $n=C\times V$ Donner le protocole d&amp;rsquo;une dissolution.</description>
+      <description>Rappels sur les solutions Présentation&#xA;Pictogrammes Savoir et savoir faire coeur&#xA;Calculer la masse molaire d&amp;rsquo;une molécule à partir de celles des atomes qui la constituent.&#xA;Calculer une quantité de matière $n$ d&amp;rsquo;une espèce chimique à partir de la masse $m$ de l&amp;rsquo;espèce et de sa masse molaire $M$ : $\displaystyle n=\frac{m}{M}$ Déterminer une concentration massique $\displaystyle C_m=\frac{m}{V}$ et une concentration molaire $\displaystyle C=\frac{n}{V}$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une masse volumique $\rho$ : $m=\rho\times V$ Déterminer une masse $m$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration massique $C_m$ : $m=C_m\times V$ Déterminer une quantité de matière $n$ à partir d&amp;rsquo;un volume $V$ et d&amp;rsquo;une concentration molaire $C$ : $n=C\times V$ Donner le protocole d&amp;rsquo;une dissolution.</description>
     </item>
     <item>
       <title>Réfraction</title>
       <link>https://coursphychi.github.io/colles/refraction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/refraction/</guid>
-      <description>Réfraction Le champ de l&amp;rsquo;image fait 7 carreaux de largeur en dehors de l&amp;rsquo;eau mais seulement 5 sous l&amp;rsquo;eau. L&amp;rsquo;exercice vise dans un premier temps à expliquer cette observation puis à déterminer la distance entre le mur et la caméra.
-Observerait-on la même chose en immergeant sa tête sous l&amp;rsquo;eau, les yeux ouverts ? Et avec un masque ? Correction Les carreaux ne nous apparaitraient pas plus grands si on ouvrait les yeux sous l&#39;eau.</description>
+      <description>Réfraction Le champ de l&amp;rsquo;image fait 7 carreaux de largeur en dehors de l&amp;rsquo;eau mais seulement 5 sous l&amp;rsquo;eau. L&amp;rsquo;exercice vise dans un premier temps à expliquer cette observation puis à déterminer la distance entre le mur et la caméra.&#xA;Observerait-on la même chose en immergeant sa tête sous l&amp;rsquo;eau, les yeux ouverts ? Et avec un masque ? Correction Les carreaux ne nous apparaitraient pas plus grands si on ouvrait les yeux sous l&#39;eau.</description>
     </item>
     <item>
       <title>Respiration</title>
       <link>https://coursphychi.github.io/colles/respiration/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/respiration/</guid>
-      <description>AP - Thermodynamique La respiration La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).
-On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.
-On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
+      <description>AP - Thermodynamique La respiration La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).&#xA;On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.&#xA;On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
     </item>
     <item>
       <title>Respiration</title>
       <link>https://coursphychi.github.io/colles/respiration_corr/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/respiration_corr/</guid>
-      <description>Correction La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).
-On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.
-On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
+      <description>Correction La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).&#xA;On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.&#xA;On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
     </item>
     <item>
       <title>Slinky</title>
       <link>https://coursphychi.github.io/colles/slinky/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/slinky/</guid>
-      <description>La chute du Slinky Quel doit être le mouvement du centre de masse du slinky ? Le code suivant modélise de manière très simplifiée le slinky en le décomposant en deux sous-systèmes : le premier est composé des n_haut premiers disques et le second des n_bas disques restants. Le cœur du code se situe de la ligne 48 à la ligne 66.
-En supposant que les deux sous-systèmes sont reliés par un ressort et que le sous-système du bas est immobile, faire un bilan des forces et exprimer ces forces sur chacun des sous-systèmes.</description>
+      <description>La chute du Slinky Quel doit être le mouvement du centre de masse du slinky ? Le code suivant modélise de manière très simplifiée le slinky en le décomposant en deux sous-systèmes : le premier est composé des n_haut premiers disques et le second des n_bas disques restants. Le cœur du code se situe de la ligne 48 à la ligne 66.&#xA;En supposant que les deux sous-systèmes sont reliés par un ressort et que le sous-système du bas est immobile, faire un bilan des forces et exprimer ces forces sur chacun des sous-systèmes.</description>
     </item>
     <item>
       <title>Tremplins</title>
       <link>https://coursphychi.github.io/colles/tremplins/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/tremplins/</guid>
-      <description>Course de tremplins Deux balles dévalent chacune un tremplin différent dont les points de départ et d&amp;rsquo;arrivée ont même altitude :
-Les différentes coordonnées sont données ci-dessous. Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s-2. La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.
-Questions préliminaires :
-Qulle balle atterrit le plus loin ? Quelle balle parcourt le moins de distance ?</description>
+      <description>Course de tremplins Deux balles dévalent chacune un tremplin différent dont les points de départ et d&amp;rsquo;arrivée ont même altitude :&#xA;Les différentes coordonnées sont données ci-dessous. Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s-2. La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.&#xA;Questions préliminaires :&#xA;Qulle balle atterrit le plus loin ? Quelle balle parcourt le moins de distance ?</description>
     </item>
     <item>
       <title>Algorithmique</title>
@@ -130,125 +104,84 @@ Qulle balle atterrit le plus loin ? Quelle balle parcourt le moins de distance�
       <link>https://coursphychi.github.io/more/logique/logique1/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/logique/logique1/</guid>
-      <description>info
-Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
-Calcul des propositions Syntaxe Sémantique Preuve Le calcul des propositions (ou calcul propositionnel ou logique des propositions) permet de modéliser des raisonnements simples. Son pouvoir expressif est assez limité mais c&amp;rsquo;est sur ses fondations que se construisent les logiques plus évoluées.
-Syntaxe Langage Le langage du calcul des propositions est constitué de variables propositionnelles $P$, $Q$, $R$,.</description>
+      <description>info&#xA;Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.&#xA;Calcul des propositions Syntaxe Sémantique Preuve Le calcul des propositions (ou calcul propositionnel ou logique des propositions) permet de modéliser des raisonnements simples. Son pouvoir expressif est assez limité mais c&amp;rsquo;est sur ses fondations que se construisent les logiques plus évoluées.&#xA;Syntaxe Langage Le langage du calcul des propositions est constitué de variables propositionnelles $P$, $Q$, $R$,.</description>
     </item>
     <item>
       <title>Mécanique</title>
       <link>https://coursphychi.github.io/more/physique/meca/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/meca/</guid>
-      <description>Mécanique Énergie cinétique et travail Une approche historique sur l&amp;rsquo;émergence du concept d&amp;rsquo;énergie en mécanique, de Descartes à Einstein.
-Pourquoi une énergie cinétique en $v^2$ ? Trois démonstrations de la formule de l&amp;rsquo;énergie cinétique.
-Je trouve la deuxième (celle de Johann Bernoulli) fabuleuse d&amp;rsquo;intuition géométrique (elle utilise l&amp;rsquo;escargot de Pythagore).
-Chute libre et paraboles Étudier la chute libre, c&amp;rsquo;est jouer avec des paraboles.
-Force de Coriolis La force de Coriolis n&amp;rsquo;est pas une force mais traduit juste la galère d&amp;rsquo;aller droit dans un référentiel tournant.</description>
+      <description>Mécanique Énergie cinétique et travail Une approche historique sur l&amp;rsquo;émergence du concept d&amp;rsquo;énergie en mécanique, de Descartes à Einstein.&#xA;Pourquoi une énergie cinétique en $v^2$ ? Trois démonstrations de la formule de l&amp;rsquo;énergie cinétique.&#xA;Je trouve la deuxième (celle de Johann Bernoulli) fabuleuse d&amp;rsquo;intuition géométrique (elle utilise l&amp;rsquo;escargot de Pythagore).&#xA;Chute libre et paraboles Étudier la chute libre, c&amp;rsquo;est jouer avec des paraboles.&#xA;Force de Coriolis La force de Coriolis n&amp;rsquo;est pas une force mais traduit juste la galère d&amp;rsquo;aller droit dans un référentiel tournant.</description>
     </item>
     <item>
       <title>Acide/Base</title>
       <link>https://coursphychi.github.io/tsti2d/acide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/acide/</guid>
-      <description>Réactions chimiques acido-basiques Présentation
-Expérience Vidéo : Questions : De quoi témoigne l&#39;élévation de la température du ballon&amp;nbsp;? D&#39;après le tableau suivant, que pouvez-vous dire de l&#39;évolution du pH de la solution aqueuse une fois que l&#39;ammoniac se dissout et réagit avec l&#39;eau&amp;nbsp;? Par conséquent, l&#39;ammoniac est-il une base ou un acide ? Comment expliquer le jaillisement de l&#39;eau dans la 1re expérience et la contraction du ballon dans la 2e&amp;nbsp;?</description>
+      <description>Réactions chimiques acido-basiques Présentation&#xA;Expérience Vidéo : Questions : De quoi témoigne l&#39;élévation de la température du ballon&amp;nbsp;? D&#39;après le tableau suivant, que pouvez-vous dire de l&#39;évolution du pH de la solution aqueuse une fois que l&#39;ammoniac se dissout et réagit avec l&#39;eau&amp;nbsp;? Par conséquent, l&#39;ammoniac est-il une base ou un acide ? Comment expliquer le jaillisement de l&#39;eau dans la 1re expérience et la contraction du ballon dans la 2e&amp;nbsp;?</description>
     </item>
     <item>
       <title>Changements d&#39;état</title>
       <link>https://coursphychi.github.io/tsti2d/chgmtetat/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/chgmtetat/</guid>
-      <description>Changements d&amp;rsquo;état Présentation
-Rappels La température rend compte de l&amp;rsquo;agitation moléculaire.
-La température absolue se mesure en kelvins $K$ $(\pu{0^\circ C = 273,15 K})$.
-L&amp;rsquo;énergie interne $U$ d&amp;rsquo;un système se compose des énergies microscopiques cinétiques (agitation) et potentielles (interaction) des molécules qui le constituent.
-La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un solide ou d&amp;rsquo;un liquide est donnée par la formule suivante :
-$$\Delta U = m c \Delta\theta$$ où $m$ est la masse (en $\pu kg$)</description>
+      <description>Changements d&amp;rsquo;état Présentation&#xA;Rappels La température rend compte de l&amp;rsquo;agitation moléculaire.&#xA;La température absolue se mesure en kelvins $K$ $(\pu{0^\circ C = 273,15 K})$.&#xA;L&amp;rsquo;énergie interne $U$ d&amp;rsquo;un système se compose des énergies microscopiques cinétiques (agitation) et potentielles (interaction) des molécules qui le constituent.&#xA;La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un solide ou d&amp;rsquo;un liquide est donnée par la formule suivante :&#xA;$$\Delta U = m c \Delta\theta$$ où $m$ est la masse (en $\pu kg$)</description>
     </item>
     <item>
       <title>Piles</title>
       <link>https://coursphychi.github.io/tsti2d/piles/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/piles/</guid>
-      <description>Piles, accumulateurs et piles à combustible Présentation
-Rappels Réactions d&amp;rsquo;oxydoréduction : info
-Il y a échanges d&amp;rsquo;électrons lors d&amp;rsquo;une réaction d&amp;rsquo;oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques).
-Savoir et savoir faire coeur
-Équilibrer les demi-équations redox Déterminer une équation bilan à partir des demi-équations Décrire ce qui se passe à chaque électrode pendant une décharge et pendant une charge Lier une demi-équation à une électrode (cathode ou anode) Différentier et définir une pile, un accumulateur et une batterie Calculer l’énergie totale stockée Exploiter les principales caractéristiques des piles ou accumulateurs (tension à vide, capacité, énergies massique et volumique, nombre de cycles de charge et décharge) pour les utiliser dans des applications spécifiques.</description>
+      <description>Piles, accumulateurs et piles à combustible Présentation&#xA;Rappels Réactions d&amp;rsquo;oxydoréduction : info&#xA;Il y a échanges d&amp;rsquo;électrons lors d&amp;rsquo;une réaction d&amp;rsquo;oxydoréduction (alors que ce sont des échanges de protons dans les réactions acidobasiques).&#xA;Savoir et savoir faire coeur&#xA;Équilibrer les demi-équations redox Déterminer une équation bilan à partir des demi-équations Décrire ce qui se passe à chaque électrode pendant une décharge et pendant une charge Lier une demi-équation à une électrode (cathode ou anode) Différentier et définir une pile, un accumulateur et une batterie Calculer l’énergie totale stockée Exploiter les principales caractéristiques des piles ou accumulateurs (tension à vide, capacité, énergies massique et volumique, nombre de cycles de charge et décharge) pour les utiliser dans des applications spécifiques.</description>
     </item>
     <item>
       <title>Solutions</title>
       <link>https://coursphychi.github.io/2nde/solutions/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/solutions/</guid>
-      <description>Solutions Présentation
-Définitions Solution aqueuse
-Mélange homogène dans lequel l’eau est le constituant ultra-majoritaire. Elle y joue le rôle de solvant, les espèces chimiques dissoutes sont qualifiées de solutés.
-Exemple :
-Le vinaigre est, en première approximation, une solution aqueuse d’acide éthanoïque (soluté).
-Concentration en masse
-Masse d’une espèce chimique dissoute par litre de solution. La concentration en masse peut s’exprimer en g/L.
-Exemple :
-Une solution de chlorure de sodium de concentration en masse 10 g/L est obtenue en introduisant 10 g de chlorure de sodium dans une fiole jaugée de 1,0 L et en ajoutant de l’eau jusqu’à obtenir un volume final de mélange égal à 1,0 L.</description>
+      <description>Solutions Présentation&#xA;Définitions Solution aqueuse&#xA;Mélange homogène dans lequel l’eau est le constituant ultra-majoritaire. Elle y joue le rôle de solvant, les espèces chimiques dissoutes sont qualifiées de solutés.&#xA;Exemple :&#xA;Le vinaigre est, en première approximation, une solution aqueuse d’acide éthanoïque (soluté).&#xA;Concentration en masse&#xA;Masse d’une espèce chimique dissoute par litre de solution. La concentration en masse peut s’exprimer en g/L.&#xA;Exemple :&#xA;Une solution de chlorure de sodium de concentration en masse 10 g/L est obtenue en introduisant 10 g de chlorure de sodium dans une fiole jaugée de 1,0 L et en ajoutant de l’eau jusqu’à obtenir un volume final de mélange égal à 1,0 L.</description>
     </item>
     <item>
       <title>Arithmétique</title>
       <link>https://coursphychi.github.io/more/maths/arithmetique/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/arithmetique/</guid>
-      <description>Arithmétique et théorie des nombres : Infinis dénombrables et indénombrables Des entiers aux transcendants en passant par l&amp;rsquo;hypothèse du continu ($\aleph_0 = 2^{\aleph_1}$) :
-Numération De nombreux systèmes de numération à bases entières ont été utilisés par différents peuples et à différentes époques.
-Par exemple :
-système binaire (base 2) utilisé dans des langues d&amp;rsquo;Amérique du Sud et d&amp;rsquo;Océanie, et utilisé de nos jours en informatique.
-système quinaire (base 5) dont il reste des traces jusqu&amp;rsquo;au xxe siècle dans des langues africaines, mais aussi, partiellement, dans les notations tchouvache, suzhou, romaine et maya.</description>
+      <description>Arithmétique et théorie des nombres : Infinis dénombrables et indénombrables Des entiers aux transcendants en passant par l&amp;rsquo;hypothèse du continu ($\aleph_0 = 2^{\aleph_1}$) :&#xA;&amp;lt;div style=&amp;quot;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&amp;quot;&amp;gt; &amp;lt;iframe allow=&amp;quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&amp;quot; allowfullscreen=&amp;quot;allowfullscreen&amp;quot; loading=&amp;quot;eager&amp;quot; referrerpolicy=&amp;quot;strict-origin-when-cross-origin&amp;quot; src=&amp;quot;https://www.youtube.com/embed/0hB95JwlzBY?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&amp;quot; style=&amp;quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&amp;quot; title=&amp;quot;YouTube video&amp;quot; &amp;gt;&amp;lt;/iframe&amp;gt; &amp;lt;/div&amp;gt; Numération De nombreux systèmes de numération à bases entières ont été utilisés par différents peuples et à différentes époques.</description>
     </item>
     <item>
       <title>Optique</title>
       <link>https://coursphychi.github.io/more/physique/optique/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/optique/</guid>
-      <description> Optique Arcs-en-ciel La physique de l&amp;rsquo;arc-en-ciel avec des simulations en VPython.
-Lentilles Physique et maths des lentilles avec simulations VPython.
-Polarisation </description>
+      <description> Optique Arcs-en-ciel La physique de l&amp;rsquo;arc-en-ciel avec des simulations en VPython.&#xA;Lentilles Physique et maths des lentilles avec simulations VPython.&#xA;Polarisation </description>
     </item>
     <item>
       <title>Ordinateur</title>
       <link>https://coursphychi.github.io/more/info/ordinateur/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/info/ordinateur/</guid>
-      <description>Ordinateur Petite série de vidéo sur le fonctionnement simplifié d&amp;rsquo;un ordinateur.
-Source : &amp;ldquo;But how do it know?&amp;rdquo; de J. Clark Scott</description>
+      <description>Ordinateur Petite série de vidéo sur le fonctionnement simplifié d&amp;rsquo;un ordinateur.&#xA;Source : &amp;ldquo;But how do it know?&amp;rdquo; de J. Clark Scott</description>
     </item>
     <item>
       <title>Propositions - Sémantique</title>
       <link>https://coursphychi.github.io/more/logique/logique2/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/logique/logique2/</guid>
-      <description>info
-Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
-Calcul des propositions Syntaxe Sémantique Preuve Sémantique Modèle La sémantique concerne l&amp;rsquo;interprétation des formules. Le calcul propositionnel est très frustre à cet égard. Une variable propositionnelle vaut soit 1, soit 0, c&amp;rsquo;est-à-dire qu&amp;rsquo;elle est soit vraie, soit fausse. Et il en est de même pour une formule dont l&amp;rsquo;interprétation se déduit de celles des variables et des règles qu&amp;rsquo;impliquent les connecteurs.</description>
+      <description>info&#xA;Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.&#xA;Calcul des propositions Syntaxe Sémantique Preuve Sémantique Modèle La sémantique concerne l&amp;rsquo;interprétation des formules. Le calcul propositionnel est très frustre à cet égard. Une variable propositionnelle vaut soit 1, soit 0, c&amp;rsquo;est-à-dire qu&amp;rsquo;elle est soit vraie, soit fausse. Et il en est de même pour une formule dont l&amp;rsquo;interprétation se déduit de celles des variables et des règles qu&amp;rsquo;impliquent les connecteurs.</description>
     </item>
     <item>
       <title>Pythagore et Thalès</title>
       <link>https://coursphychi.github.io/more/maths/geometrie/geo1/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo1/</guid>
-      <description>Le triangle Pythagore Pythagore a vécu à Samos (une île grecque) au 6e siècle avant notre ère. Malgré le nom qu&amp;rsquo;on lui donne, le théorème de Pythagore était connu et utilisé par les Babyloniens et les Indiens des siècles avant Pythagore. Mais peut-être que Pythagore a été le premier à l&amp;rsquo;introduire en Grèce et cela a suffi à lui octroyer une reconnaissance éternelle.
-Théorème de Pythagore :
-Si un triangle est rectangle, alors le carré de la longueur de l’hypoténuse est égal à la somme des carrés des longueurs des deux autres côtés.</description>
+      <description>Le triangle Pythagore Pythagore a vécu à Samos (une île grecque) au 6e siècle avant notre ère. Malgré le nom qu&amp;rsquo;on lui donne, le théorème de Pythagore était connu et utilisé par les Babyloniens et les Indiens des siècles avant Pythagore. Mais peut-être que Pythagore a été le premier à l&amp;rsquo;introduire en Grèce et cela a suffi à lui octroyer une reconnaissance éternelle.&#xA;Théorème de Pythagore :&#xA;Si un triangle est rectangle, alors le carré de la longueur de l’hypoténuse est égal à la somme des carrés des longueurs des deux autres côtés.</description>
     </item>
     <item>
       <title>Entités chimiques</title>
       <link>https://coursphychi.github.io/2nde/atome/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/atome/</guid>
-      <description>Entités chimiques / Atome et Noyau Présentation
-Définitions Élément chimique
-Ensemble des atomes (isolés ou engagés dans un édifice polyatomique neutre ou chargé) et des ions monoatomiques comportant un même nombre de protons dans leur noyau.
-Exemple :
-Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite comportent des atomes de chlore ou des ions chlorure de même Z = 17, caractérisant l’élément chlore.
-Documents et autres Un peu de maths : ordre de grandeur, puissances de 10, multiples et sous-multiples TP - Identification d&amp;rsquo;un sel + Correction Activité - L&amp;rsquo;élément chimique Petits jeux pour se tester </description>
+      <description>Entités chimiques / Atome et Noyau Présentation&#xA;Définitions Élément chimique&#xA;Ensemble des atomes (isolés ou engagés dans un édifice polyatomique neutre ou chargé) et des ions monoatomiques comportant un même nombre de protons dans leur noyau.&#xA;Exemple :&#xA;Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite comportent des atomes de chlore ou des ions chlorure de même Z = 17, caractérisant l’élément chlore.&#xA;Documents et autres Un peu de maths : ordre de grandeur, puissances de 10, multiples et sous-multiples TP - Identification d&amp;rsquo;un sel + Correction Activité - L&amp;rsquo;élément chimique Petits jeux pour se tester </description>
     </item>
     <item>
       <title>Algèbre</title>
@@ -262,44 +195,35 @@ Documents et autres Un peu de maths : ordre de grandeur, puissances de 10, multi
       <link>https://coursphychi.github.io/more/maths/geometrie/geo2/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo2/</guid>
-      <description>Cercle et triangle Trigonométrie La loi des sinus a contribué à la définition du mètre, la première unité &amp;ldquo;universelle&amp;rdquo; lors de la révolution française.
-Delambre et Méchain furent missionner pour mesurer le plus précisément possible un bout de méridien entre Dunkerque et Barcelone, la toute neuve définition du mètre étant :
-un mètre est la dix millionième partie d&amp;rsquo;un quart de méridien terrestre
-Le cercle répétiteur de Borda fut leur arme secrète.</description>
+      <description>Cercle et triangle Trigonométrie La loi des sinus a contribué à la définition du mètre, la première unité &amp;ldquo;universelle&amp;rdquo; lors de la révolution française.&#xA;Delambre et Méchain furent missionner pour mesurer le plus précisément possible un bout de méridien entre Dunkerque et Barcelone, la toute neuve définition du mètre étant :&#xA;un mètre est la dix millionième partie d&amp;rsquo;un quart de méridien terrestre&#xA;Le cercle répétiteur de Borda fut leur arme secrète.</description>
     </item>
     <item>
       <title>IA</title>
       <link>https://coursphychi.github.io/more/info/ia/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/info/ia/</guid>
-      <description>Intelligence Artificielle Avant de parler d&amp;rsquo;intelligence artificielle, il convient de s&amp;rsquo;interroger sur le terme intelligence.
-L&amp;rsquo;intelligence arificielle (IA) est une discipline scientifique qui a vu officiellement le jour en 1956. Elle repose sur la conjecture selon laquelle toutes les fonctions cognitives, en particulier l&amp;rsquo;apprentissage, le raisonnement, le calcul, la perception, la mémorisation, voire la découverte scientifique ou la créativité artistique, peuvent être décrites avec une précision telle qu&amp;rsquo;il serait possible de les reproduire sur des ordinateurs.</description>
+      <description>Intelligence Artificielle Avant de parler d&amp;rsquo;intelligence artificielle, il convient de s&amp;rsquo;interroger sur le terme intelligence.&#xA;L&amp;rsquo;intelligence arificielle (IA) est une discipline scientifique qui a vu officiellement le jour en 1956. Elle repose sur la conjecture selon laquelle toutes les fonctions cognitives, en particulier l&amp;rsquo;apprentissage, le raisonnement, le calcul, la perception, la mémorisation, voire la découverte scientifique ou la créativité artistique, peuvent être décrites avec une précision telle qu&amp;rsquo;il serait possible de les reproduire sur des ordinateurs.</description>
     </item>
     <item>
       <title>Logique modale</title>
       <link>https://coursphychi.github.io/more/logique/godel/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/logique/godel/</guid>
-      <description>Il y a différentes logiques de la prouvabilité dont celle de Gödel-Löb. $\Box\phi$ y est interprétée comme &amp;ldquo;la formule $\phi$ est prouvable&amp;rdquo;.
-Toute formule peut être codée par un entier (il suffit par exemple de regarder le code binaire du fichier de traitement de texte où cette formule est écrite et d&amp;rsquo;ajouter &amp;ldquo;1&amp;rdquo; à gauche du code pour éviter la perte éventuelle de zéros non significatifs). De même, on peut coder un arbre de preuve (puisqu&amp;rsquo;il peut lui-même s&amp;rsquo;écrire avec un logiciel de traitement de texte).</description>
+      <description>Il y a différentes logiques de la prouvabilité dont celle de Gödel-Löb. $\Box\phi$ y est interprétée comme &amp;ldquo;la formule $\phi$ est prouvable&amp;rdquo;.&#xA;Toute formule peut être codée par un entier (il suffit par exemple de regarder le code binaire du fichier de traitement de texte où cette formule est écrite et d&amp;rsquo;ajouter &amp;ldquo;1&amp;rdquo; à gauche du code pour éviter la perte éventuelle de zéros non significatifs). De même, on peut coder un arbre de preuve (puisqu&amp;rsquo;il peut lui-même s&amp;rsquo;écrire avec un logiciel de traitement de texte).</description>
     </item>
     <item>
       <title>Logique modale</title>
       <link>https://coursphychi.github.io/more/logique/logique4/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/logique/logique4/</guid>
-      <description>info
-Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
-Logique modale Syntaxe et sémantique Systèmes logiques Différentes logiques modales Une petite communauté de dragons vivent sur une île aux règles spéciales. Si un dragon apprend qu&amp;rsquo;il a les yeux bleus, c&amp;rsquo;est la honte et il doit partir le soir même. Mais les autres dragons n&amp;rsquo;ont pas le droit de lui dire et aucun de ces dragons n&amp;rsquo;a de reflet et ne peut donc constater la couleur de ses propres yeux.</description>
+      <description>info&#xA;Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.&#xA;Logique modale Syntaxe et sémantique Systèmes logiques Différentes logiques modales Une petite communauté de dragons vivent sur une île aux règles spéciales. Si un dragon apprend qu&amp;rsquo;il a les yeux bleus, c&amp;rsquo;est la honte et il doit partir le soir même. Mais les autres dragons n&amp;rsquo;ont pas le droit de lui dire et aucun de ces dragons n&amp;rsquo;a de reflet et ne peut donc constater la couleur de ses propres yeux.</description>
     </item>
     <item>
       <title>Logique modale</title>
       <link>https://coursphychi.github.io/more/logique/logique5/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/logique/logique5/</guid>
-      <description>info
-Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
-Logique modale Syntaxe et sémantique Systèmes logiques Différentes logiques modales Axiomatique : les systèmes logiques Nous cherchons l&amp;rsquo;équivalent en logique modale des tautologies pour le calcul des propositions ; des formules vraies dans tous les modèles, ou plutôt dans toute une classe de modèles car comme on va le voir, la topologie d&amp;rsquo;un modèle contraint la vérité à l&amp;rsquo;intérieur de celui-ci.</description>
+      <description>info&#xA;Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.&#xA;Logique modale Syntaxe et sémantique Systèmes logiques Différentes logiques modales Axiomatique : les systèmes logiques Nous cherchons l&amp;rsquo;équivalent en logique modale des tautologies pour le calcul des propositions ; des formules vraies dans tous les modèles, ou plutôt dans toute une classe de modèles car comme on va le voir, la topologie d&amp;rsquo;un modèle contraint la vérité à l&amp;rsquo;intérieur de celui-ci.</description>
     </item>
     <item>
       <title>Logique modale</title>
@@ -313,52 +237,35 @@ Logique modale Syntaxe et sémantique Systèmes logiques Différentes logiques m
       <link>https://coursphychi.github.io/more/maths/probastat/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/probastat/</guid>
-      <description>Probabilités Loi Binomiale D&amp;rsquo;une épreuve de Bernoulli à la loi binomiale :
-Loi normale La célèbre gaussienne (ou courbe en cloche) :
-Densité de probabilités Nouvelle énigme permettant de parler des densités de probabilité :
-Quelle est la distance moyenne entre deux points pris au hasard sur un segment ?
-On peut vérifier la solution statistiquement avec un petit programme simplissime :
-Probabilités conditionnelles et Bayes Les probabilités conditionnelles au tribunal, chez le médecin et dans un vieux jeu télévisé américain :</description>
+      <description>Probabilités Loi Binomiale D&amp;rsquo;une épreuve de Bernoulli à la loi binomiale :&#xA;Loi normale La célèbre gaussienne (ou courbe en cloche) :&#xA;Densité de probabilités Nouvelle énigme permettant de parler des densités de probabilité :&#xA;Quelle est la distance moyenne entre deux points pris au hasard sur un segment ?&#xA;On peut vérifier la solution statistiquement avec un petit programme simplissime :&#xA;Probabilités conditionnelles et Bayes Les probabilités conditionnelles au tribunal, chez le médecin et dans un vieux jeu télévisé américain :</description>
     </item>
     <item>
       <title>Propositions - Preuve</title>
       <link>https://coursphychi.github.io/more/logique/logique3/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/logique/logique3/</guid>
-      <description>info
-Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.
-Calcul des propositions Syntaxe Sémantique Preuve Théorie de la démonstration Une preuve ou une démonstration&amp;nbsp;:
-est de longueur finie, est vérifiable mécaniquement, s&amp;rsquo;appuie sur des hypothèses, aboutit à une conclusion. Une démonstration permet de mettre au jour une vérité syntaxique (s&amp;rsquo;appuyant sur un jeu de règles) plutôt que sémantique (faisant intervenir les modèles d&amp;rsquo;une théorie).</description>
+      <description>info&#xA;Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.&#xA;Calcul des propositions Syntaxe Sémantique Preuve Théorie de la démonstration Une preuve ou une démonstration&amp;nbsp;:&#xA;est de longueur finie, est vérifiable mécaniquement, s&amp;rsquo;appuie sur des hypothèses, aboutit à une conclusion. Une démonstration permet de mettre au jour une vérité syntaxique (s&amp;rsquo;appuyant sur un jeu de règles) plutôt que sémantique (faisant intervenir les modèles d&amp;rsquo;une théorie).</description>
     </item>
     <item>
       <title>Relativité restreinte</title>
       <link>https://coursphychi.github.io/more/physique/relatres/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/relatres/</guid>
-      <description>Relativité restreinte Vision géométrique Série de vidéos sur la relativité restreinte avec un angle plutôt géométrique.
-Source : le génial petit livre &amp;ldquo;Very special relativity - An illustrated guide&amp;rdquo; de Sander Bais.
-FloatHeadPhysics communique bien dans la vidéo suivante la joie de la découverte d&amp;rsquo;un modèle explicatif simple.
-Ici, elle vient de ce merveilleux petit livre illustré : Relativity visualized de Lewis Caroll Epstein.
-Masse du photon Paradoxe des jumeaux Champ magnétique Il n&amp;rsquo;y a pas de champ magnétique, seulement un champ électrique et du mouvement.</description>
+      <description>Relativité restreinte Vision géométrique Série de vidéos sur la relativité restreinte avec un angle plutôt géométrique.&#xA;Source : le génial petit livre &amp;ldquo;Very special relativity - An illustrated guide&amp;rdquo; de Sander Bais.&#xA;FloatHeadPhysics communique bien dans la vidéo suivante la joie de la découverte d&amp;rsquo;un modèle explicatif simple.&#xA;Ici, elle vient de ce merveilleux petit livre illustré : Relativity visualized de Lewis Caroll Epstein.&#xA;Masse du photon Paradoxe des jumeaux Champ magnétique Il n&amp;rsquo;y a pas de champ magnétique, seulement un champ électrique et du mouvement.</description>
     </item>
     <item>
       <title>Combustions</title>
       <link>https://coursphychi.github.io/tsti2d/combustion/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/combustion/</guid>
-      <description>Combustions Présentation
-Rappels Un composé organique contient du carbone. Un hydrocarbure contient exclusivement du carbone et de l&amp;rsquo;hydrogène. Un alcane est un hydrocarbure saturé = les carbones ne sont liés entre eux que par des liaisons simples. Sa formule brute (s&amp;rsquo;il n&amp;rsquo;est pas cyclique) est $\ce{C_nH_{2n+2}}$. Un alcène est un hydrocarbure insaturé = la chaîne carbonée contient au moins une double liaison covalente. La formule brute d&amp;rsquo;un alcène non cyclique mono insaturé (une seule double liaison) est $\ce{C_nH_{2n}}$.</description>
+      <description>Combustions Présentation&#xA;Rappels Un composé organique contient du carbone. Un hydrocarbure contient exclusivement du carbone et de l&amp;rsquo;hydrogène. Un alcane est un hydrocarbure saturé = les carbones ne sont liés entre eux que par des liaisons simples. Sa formule brute (s&amp;rsquo;il n&amp;rsquo;est pas cyclique) est $\ce{C_nH_{2n+2}}$. Un alcène est un hydrocarbure insaturé = la chaîne carbonée contient au moins une double liaison covalente. La formule brute d&amp;rsquo;un alcène non cyclique mono insaturé (une seule double liaison) est $\ce{C_nH_{2n}}$.</description>
     </item>
     <item>
       <title>Cortège électronique</title>
       <link>https://coursphychi.github.io/2nde/lewis/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/lewis/</guid>
-      <description>Cortège électronique et stabilité Présentation
-Définitions Configuration électronique d’un atome
-Répartition des électrons d’un atome dans les différentes couches et sous-couches.
-Exemple :
-La configuration électronique de l’atome de sodium (numéro atomique Z = 11) est $\text{1s}^2\,\text{2s}^2\,\text{2p}^6\,\text{3s}^1$ à l’état fondamental. Cette configuration permet de retrouver la position de l’élément sodium dans le tableau périodique : il se situe dans la 3e période et la 1re colonne du bloc s, et par conséquent, la 1re colonne du tableau.</description>
+      <description>Cortège électronique et stabilité Présentation&#xA;Définitions Configuration électronique d’un atome&#xA;Répartition des électrons d’un atome dans les différentes couches et sous-couches.&#xA;Exemple :&#xA;La configuration électronique de l’atome de sodium (numéro atomique Z = 11) est $\text{1s}^2\,\text{2s}^2\,\text{2p}^6\,\text{3s}^1$ à l’état fondamental. Cette configuration permet de retrouver la position de l’élément sodium dans le tableau périodique : il se situe dans la 3e période et la 1re colonne du bloc s, et par conséquent, la 1re colonne du tableau.</description>
     </item>
     <item>
       <title>Aires et Volumes</title>
@@ -372,230 +279,168 @@ La configuration électronique de l’atome de sodium (numéro atomique Z = 11
       <link>https://coursphychi.github.io/more/physique/relatge/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/relatge/</guid>
-      <description>Relativité générale Le plus impressionnant livre sur la relativité générale est sans contexte à mes yeux &amp;ldquo;A Journey into Gravity and Spacetime&amp;rdquo; du génial John Archibald Wheeler. Il réussit le tour de force d&amp;rsquo;expliquer la relativité générale quasiment sans mathématiques tout en n&amp;rsquo;esquivant rien de la profondeur conceptuelle de la théorie, au contraire.
-Le livre démarre par un long poème dont les derniers vers dévoilent la notion au cœur de son explication, relation fondamentale de la topologie algébrique qui peut sembler de prime abord assez cryptique : le bord d&amp;rsquo;un bord est vide.</description>
+      <description>Relativité générale Le plus impressionnant livre sur la relativité générale est sans contexte à mes yeux &amp;ldquo;A Journey into Gravity and Spacetime&amp;rdquo; du génial John Archibald Wheeler. Il réussit le tour de force d&amp;rsquo;expliquer la relativité générale quasiment sans mathématiques tout en n&amp;rsquo;esquivant rien de la profondeur conceptuelle de la théorie, au contraire.&#xA;Le livre démarre par un long poème dont les derniers vers dévoilent la notion au cœur de son explication, relation fondamentale de la topologie algébrique qui peut sembler de prime abord assez cryptique : le bord d&amp;rsquo;un bord est vide.</description>
     </item>
     <item>
       <title>Énergie/Puissance</title>
       <link>https://coursphychi.github.io/tsti2d/egiepuiss/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/egiepuiss/</guid>
-      <description>Énergie / Puissance Présentation
-Rappels La variation d&amp;rsquo;énergie $\Delta E$ (en J) d&amp;rsquo;un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$ où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.
-Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à : $\displaystyle P = \frac{\Delta E}{\Delta t}$ Conversion à connaître et à savoir redémontrer :</description>
+      <description>Énergie / Puissance Présentation&#xA;Rappels La variation d&amp;rsquo;énergie $\Delta E$ (en J) d&amp;rsquo;un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$ où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.&#xA;Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à : $\displaystyle P = \frac{\Delta E}{\Delta t}$ Conversion à connaître et à savoir redémontrer :</description>
     </item>
     <item>
       <title>Quantité de matière</title>
       <link>https://coursphychi.github.io/2nde/mole/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/mole/</guid>
-      <description>Quantité de matière Présentation
-Définition Quantité de matière d’une espèce chimique
-Grandeur, exprimée en moles, utilisée pour dénombrer les entités d’une espèce chimique dans un échantillon de matière, une mole étant définie comme un ensemble d’exactement $6,02214076\times10^{23}$ entités.
-Documents TP - Bouteille bleue A mole of moles - xkcd </description>
+      <description>Quantité de matière Présentation&#xA;Définition Quantité de matière d’une espèce chimique&#xA;Grandeur, exprimée en moles, utilisée pour dénombrer les entités d’une espèce chimique dans un échantillon de matière, une mole étant définie comme un ensemble d’exactement $6,02214076\times10^{23}$ entités.&#xA;Documents TP - Bouteille bleue A mole of moles - xkcd </description>
     </item>
     <item>
       <title>Dimensions</title>
       <link>https://coursphychi.github.io/more/maths/geometrie/geo4/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo4/</guid>
-      <description>Curse of dimensionality L&amp;rsquo;expression Curse of dimensionality vient de l&amp;rsquo;américain Richard Bellman alors qu&amp;rsquo;il considérait des problèmes en programmation dynamique (qu&amp;rsquo;il inventa en 1953). La traduction française, Fléau de la dimension, fait un peu bizarre&amp;hellip;
-Mais qu&amp;rsquo;est-ce donc que ce &amp;ldquo;fléau&amp;rdquo; ?
-Le volume d&amp;rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$. Jusque là, ça va.
-Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;
-à 1D, la boule se réduit à un segment de longueur $R$.</description>
+      <description>Curse of dimensionality L&amp;rsquo;expression Curse of dimensionality vient de l&amp;rsquo;américain Richard Bellman alors qu&amp;rsquo;il considérait des problèmes en programmation dynamique (qu&amp;rsquo;il inventa en 1953). La traduction française, Fléau de la dimension, fait un peu bizarre&amp;hellip;&#xA;Mais qu&amp;rsquo;est-ce donc que ce &amp;ldquo;fléau&amp;rdquo; ?&#xA;Le volume d&amp;rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$. Jusque là, ça va.&#xA;Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;&#xA;à 1D, la boule se réduit à un segment de longueur $R$.</description>
     </item>
     <item>
       <title>Logique</title>
       <link>https://coursphychi.github.io/more/logique/logique-c/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/logique/logique-c/</guid>
-      <description>Logique Algèbre de Boole L&amp;rsquo;algèbre de Boole permet d&amp;rsquo;algébriser la logique.
-Logique des propositions L&amp;rsquo;implication $A\rightarrow B$ signifie que si $A$ est vraie alors $B$ est vraie.
-$A$ $B$ $A\rightarrow B$ 0 0 1 0 1 1 1 0 0 1 1 1 L&amp;rsquo;implication réciproque s&amp;rsquo;écrit $B\rightarrow A$. On peut la lire : $B$ est vraie seulement si $A$ est vraie.
-$A$ $B$ $B\rightarrow A$ 0 0 1 0 1 0 1 0 1 1 1 1 S&amp;rsquo;il y a conjonction entre l&amp;rsquo;implication ($B$ si $A$) et sa réciproque ($B$ seulement si $A$), ce qui s&amp;rsquo;écrit $(A\rightarrow B) \land (B\rightarrow A)$, alors les propositions $A$ et $B$ sont dites matériellement équivalentes $A \leftrightarrow B$.</description>
+      <description>Logique Algèbre de Boole L&amp;rsquo;algèbre de Boole permet d&amp;rsquo;algébriser la logique.&#xA;Logique des propositions L&amp;rsquo;implication $A\rightarrow B$ signifie que si $A$ est vraie alors $B$ est vraie.&#xA;$A$ $B$ $A\rightarrow B$ 0 0 1 0 1 1 1 0 0 1 1 1 L&amp;rsquo;implication réciproque s&amp;rsquo;écrit $B\rightarrow A$. On peut la lire : $B$ est vraie seulement si $A$ est vraie.&#xA;$A$ $B$ $B\rightarrow A$ 0 0 1 0 1 0 1 0 1 1 1 1 S&amp;rsquo;il y a conjonction entre l&amp;rsquo;implication ($B$ si $A$) et sa réciproque ($B$ seulement si $A$), ce qui s&amp;rsquo;écrit $(A\rightarrow B) \land (B\rightarrow A)$, alors les propositions $A$ et $B$ sont dites matériellement équivalentes $A \leftrightarrow B$.</description>
     </item>
     <item>
       <title>Mécanique quantique</title>
       <link>https://coursphychi.github.io/more/physique/quantique/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/quantique/</guid>
-      <description>Mécanique quantique Le paradoxe EPR (et plus généralement le concept d&amp;rsquo;intrication quantique) est le vortex autour duquel tourne les différentes interprétations de la quantique puisqu&amp;rsquo;il met en porte-à-faux nos deux explications les plus abouties du monde : la quantique et la relativité. La relativité est par nature une théorie locale alors que le paradoxe EPR démontre la non localité quantique.
-Un joli test de la non-localité quantique sans utiliser d&amp;rsquo;inégalités.</description>
+      <description>Mécanique quantique Le paradoxe EPR (et plus généralement le concept d&amp;rsquo;intrication quantique) est le vortex autour duquel tourne les différentes interprétations de la quantique puisqu&amp;rsquo;il met en porte-à-faux nos deux explications les plus abouties du monde : la quantique et la relativité. La relativité est par nature une théorie locale alors que le paradoxe EPR démontre la non localité quantique.&#xA;Un joli test de la non-localité quantique sans utiliser d&amp;rsquo;inégalités.</description>
     </item>
     <item>
       <title>Changement d&#39;état</title>
       <link>https://coursphychi.github.io/2nde/chgt_etat/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/chgt_etat/</guid>
-      <description>Transformation physique :
-les changements d&amp;rsquo;état Présentation
-info
-Le passage de l&amp;rsquo;état gazeux à l&amp;rsquo;état solide, la condensation, est parfois nommé : condensation, condensation solide, sublimation inverse, déposition, désublimation.
-Dans le language courant, le terme condensation ne désigne pas la même chose qu&amp;rsquo;en physique. On parle communément de condensation pour évoquer le passage de l&amp;rsquo;état gazeux à l&amp;rsquo;état liquide comme la rosée du matin ou la buée sur une vitre.</description>
+      <description>Transformation physique :&#xA;les changements d&amp;rsquo;état Présentation&#xA;info&#xA;Le passage de l&amp;rsquo;état gazeux à l&amp;rsquo;état solide, la condensation, est parfois nommé : condensation, condensation solide, sublimation inverse, déposition, désublimation.&#xA;Dans le language courant, le terme condensation ne désigne pas la même chose qu&amp;rsquo;en physique. On parle communément de condensation pour évoquer le passage de l&amp;rsquo;état gazeux à l&amp;rsquo;état liquide comme la rosée du matin ou la buée sur une vitre.</description>
     </item>
     <item>
       <title>Conduction thermique</title>
       <link>https://coursphychi.github.io/tsti2d/conduction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/conduction/</guid>
-      <description>Conduction thermique Présentation
-Rappels Les 3 modes de transferts thermiques sont&amp;nbsp;: la conduction&amp;nbsp;: agitation moléculaire qui se transmet de proche en proche dans un matériau. la convection&amp;nbsp;: mouvement d&#39;ensemble de la matière dans un fluide type air ou eau. le rayonnement&amp;nbsp;: transfert à distance, même dans le vide, par des ondes électromagnétiques ayant un spectre de type corps noir.
-C&#39;est comme ça que le soleil nous chauffe. Questions : Quel mode de transfert thermique est-il illustré dans cette expérience&amp;nbsp;?</description>
+      <description>Conduction thermique Présentation&#xA;Rappels Les 3 modes de transferts thermiques sont&amp;nbsp;: la conduction&amp;nbsp;: agitation moléculaire qui se transmet de proche en proche dans un matériau. la convection&amp;nbsp;: mouvement d&#39;ensemble de la matière dans un fluide type air ou eau. le rayonnement&amp;nbsp;: transfert à distance, même dans le vide, par des ondes électromagnétiques ayant un spectre de type corps noir.&#xA;C&#39;est comme ça que le soleil nous chauffe. Questions : Quel mode de transfert thermique est-il illustré dans cette expérience&amp;nbsp;?</description>
     </item>
     <item>
       <title>Physique statistique</title>
       <link>https://coursphychi.github.io/more/physique/phistat/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/phistat/</guid>
-      <description>Physique statistique Petite série de vidéo sur la physique statistique, de la définition de la température à l&amp;rsquo;entropie en passant par le facteur de Boltzmann et la loi de Planck :
-L&amp;rsquo;entropie est une notion passionnante qui ramifie dans différents champs.
-En théorie de l&amp;rsquo;information, Claude Shannon a appelé entropie la mesure de la quantité d&amp;rsquo;information contenu dans un message. Ramenée à la physique, l&amp;rsquo;entropie de Shannon mesure le nombre de questions binaires (dont la réponse est oui ou non) auxquelles il faudrait répondre pour spécifier le microétat du système pour un macroétat donné.</description>
+      <description>Physique statistique Petite série de vidéo sur la physique statistique, de la définition de la température à l&amp;rsquo;entropie en passant par le facteur de Boltzmann et la loi de Planck :&#xA;L&amp;rsquo;entropie est une notion passionnante qui ramifie dans différents champs.&#xA;En théorie de l&amp;rsquo;information, Claude Shannon a appelé entropie la mesure de la quantité d&amp;rsquo;information contenu dans un message. Ramenée à la physique, l&amp;rsquo;entropie de Shannon mesure le nombre de questions binaires (dont la réponse est oui ou non) auxquelles il faudrait répondre pour spécifier le microétat du système pour un macroétat donné.</description>
     </item>
     <item>
       <title>Poursuites</title>
       <link>https://coursphychi.github.io/more/maths/geometrie/geo5/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo5/</guid>
-      <description>Poursuites note
-Cette page est très inspirée du livre Chases and Escapes The Mathematics of Pursuit and Evasion de Paul Nahin.
-Paradoxe d&amp;rsquo;Achille et de la tortue Dans La Physique, Aristote rapporte les célèbres paradoxes de Zénon d&amp;rsquo;Élée dont celui d&amp;rsquo;Achille et la tortue. :
-Celui qui court le plus lentement ne sera jamais rattrapé par le plus rapide. Car le poursuivant doit d&amp;rsquo;abord atteindre le point d&amp;rsquo;où est parti le poursuivi, si bien que le plus lent doit toujours avoir une longueur d&amp;rsquo;avance.</description>
+      <description>Poursuites note&#xA;Cette page est *très* inspirée du livre *Chases and Escapes The Mathematics of Pursuit and Evasion* de Paul Nahin. Paradoxe d&amp;rsquo;Achille et de la tortue Dans La Physique, Aristote rapporte les célèbres paradoxes de Zénon d&amp;rsquo;Élée dont celui d&amp;rsquo;Achille et la tortue. :&#xA;Celui qui court le plus lentement ne sera jamais rattrapé par le plus rapide. Car le poursuivant doit d&amp;rsquo;abord atteindre le point d&amp;rsquo;où est parti le poursuivi, si bien que le plus lent doit toujours avoir une longueur d&amp;rsquo;avance.</description>
     </item>
     <item>
       <title>Théorie des jeux</title>
       <link>https://coursphychi.github.io/more/maths/jeux/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/jeux/</guid>
-      <description>Un peu de théorie des jeux note
-Cette page est très inspirée du livre Chases and Escapes The Mathematics of Pursuit and Evasion de Paul Nahin.
-Attaque - Défense Un petit problème mathématique qui fleure bon la Guerre Froide :
-Deux bombardiers bleus sont en mission. L&amp;rsquo;un transporte une bombe H et l&amp;rsquo;autre des équipements pour brouiller les radars. Leur plan de vol est tel qu&amp;rsquo;un des deux bombardiers est mieux protégé par les mitrailleuses de l&amp;rsquo;autre.</description>
+      <description>Un peu de théorie des jeux note&#xA;Cette page est très inspirée du livre Chases and Escapes The Mathematics of Pursuit and Evasion de Paul Nahin.&#xA;Attaque - Défense Un petit problème mathématique qui fleure bon la Guerre Froide :&#xA;Deux bombardiers bleus sont en mission. L&amp;rsquo;un transporte une bombe H et l&amp;rsquo;autre des équipements pour brouiller les radars. Leur plan de vol est tel qu&amp;rsquo;un des deux bombardiers est mieux protégé par les mitrailleuses de l&amp;rsquo;autre.</description>
     </item>
     <item>
       <title>Réaction chimique</title>
       <link>https://coursphychi.github.io/2nde/reaction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/reaction/</guid>
-      <description>Transformation chimique :
-la réaction chimique Présentation
-Réaction chimique
-Modèle introduit pour rendre compte d’observations et de mesures effectuées lors de transformations chimiques pouvant différer par les conditions de leur réalisation (température, pression, composition du mélange initial), mais partageant les mêmes réactifs, les mêmes produits et les mêmes proportions dans lesquelles ceux-ci sont convertis.
-L’équation de la réaction permet de réaliser le bilan de matière d’une transformation.
-Exemple :
-L’action d’acide chlorhydrique sur du magnésium solide peut être modélisée par une réaction dont l’équation est : $\ce{Mg(s) + 2H+(aq) = Mg^2+(aq) + H2(g)}$</description>
+      <description>Transformation chimique :&#xA;la réaction chimique Présentation&#xA;Réaction chimique&#xA;Modèle introduit pour rendre compte d’observations et de mesures effectuées lors de transformations chimiques pouvant différer par les conditions de leur réalisation (température, pression, composition du mélange initial), mais partageant les mêmes réactifs, les mêmes produits et les mêmes proportions dans lesquelles ceux-ci sont convertis.&#xA;L’équation de la réaction permet de réaliser le bilan de matière d’une transformation.&#xA;Exemple :&#xA;L’action d’acide chlorhydrique sur du magnésium solide peut être modélisée par une réaction dont l’équation est : $\ce{Mg(s) + 2H+(aq) = Mg^2+(aq) + H2(g)}$</description>
     </item>
     <item>
       <title>Chaos</title>
       <link>https://coursphychi.github.io/more/physique/chaos/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/chaos/</guid>
-      <description>Chaos Au confin des maths et de la physique, une des plus belle chose qui soit : le chaos (avec son cheptel de fractales et d&amp;rsquo;attracteurs étranges). Le chaos n&amp;rsquo;a pas grand chose à voir avec son image &amp;ldquo;grand public&amp;rdquo; puisqu&amp;rsquo;il est finalement très organisé. Mais timide, il le cache bien&amp;hellip;
-L&amp;rsquo;intégration du système d&amp;rsquo;équations différentielles suivant donne le fameux attracteur de Lorenz avec sa forme caractéristique de papillon : $$\begin{cases}x&amp;rsquo;=\sigma(y-x)\\y&amp;rsquo;=\rho x-y-xz\\z&amp;rsquo;=xy-\beta \end{cases}$$ Avec les valeurs de paramètres suivantes : $$\begin{cases}\sigma = 3\\\rho = 26.</description>
+      <description>Chaos Au confin des maths et de la physique, une des plus belle chose qui soit : le chaos (avec son cheptel de fractales et d&amp;rsquo;attracteurs étranges). Le chaos n&amp;rsquo;a pas grand chose à voir avec son image &amp;ldquo;grand public&amp;rdquo; puisqu&amp;rsquo;il est finalement très organisé. Mais timide, il le cache bien&amp;hellip;&#xA;L&amp;rsquo;intégration du système d&amp;rsquo;équations différentielles suivant donne le fameux attracteur de Lorenz avec sa forme caractéristique de papillon : $$\begin{cases}x&amp;rsquo;=\sigma(y-x)\\y&amp;rsquo;=\rho x-y-xz\\z&amp;rsquo;=xy-\beta \end{cases}$$ Avec les valeurs de paramètres suivantes : $$\begin{cases}\sigma = 3\\\rho = 26.</description>
     </item>
     <item>
       <title>Puissance électrique</title>
       <link>https://coursphychi.github.io/tsti2d/puisselec/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/puisselec/</guid>
-      <description>Puissance en régime sinusoïdal Présentation
-Rappels En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;: La tension et l&#39;intensité moyenne. Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;: La tension et l&#39;intensité efficace. Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;? $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$ Savoir et savoir faire coeur
-Savoir définir la puissance apparente $S$. Savoir que la puissance apparente est une grandeur de dimensionnement d&amp;rsquo;une installation ou d&amp;rsquo;un équipement électrique.</description>
+      <description>Puissance en régime sinusoïdal Présentation&#xA;Rappels En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;: La tension et l&#39;intensité moyenne. Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;: La tension et l&#39;intensité efficace. Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;? $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$ Savoir et savoir faire coeur&#xA;Savoir définir la puissance apparente $S$. Savoir que la puissance apparente est une grandeur de dimensionnement d&amp;rsquo;une installation ou d&amp;rsquo;un équipement électrique.</description>
     </item>
     <item>
       <title>Curiosités</title>
       <link>https://coursphychi.github.io/more/physique/jeux/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/jeux/</guid>
-      <description>Curiosités La toupie tippe-top La toupie tippe-top se redresse semblant braver les lois physiques. C&amp;rsquo;est le couple des forces de frottement qui est responsable de cette bizarrerie.
-Wolfgang Pauli et Niels Bohr, deux immenses physiciens au cœur de la révolution quantique, regardant une toupie tippe-top se relever.
-Comme le centre de masse s&amp;rsquo;est élevé, on a envie de s&amp;rsquo;inquiéter pour la conservation de l&amp;rsquo;énergie Mais il ne faut pas !</description>
+      <description>Curiosités La toupie tippe-top La toupie tippe-top se redresse semblant braver les lois physiques. C&amp;rsquo;est le couple des forces de frottement qui est responsable de cette bizarrerie.&#xA;Wolfgang Pauli et Niels Bohr, deux immenses physiciens au cœur de la révolution quantique, regardant une toupie tippe-top se relever.&#xA;Comme le centre de masse s&amp;rsquo;est élevé, on a envie de s&amp;rsquo;inquiéter pour la conservation de l&amp;rsquo;énergie Mais il ne faut pas !</description>
     </item>
     <item>
       <title>Lumière</title>
       <link>https://coursphychi.github.io/tsti2d/lumiere/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/lumiere/</guid>
-      <description>Énergie transportée par la lumière Présentation
-Rappels Lien entre la fréquence $f$ et la longueur d&#39;onde $\lambda$&amp;nbsp;? $$\lambda=\frac{c}{f}$$ Où $c$ est la célérité (vitesse) de la lumière
-$c = \pu{3,0*10^8 m*s-1}$ Étendu en longueurs d&#39;ondes de la partie visible du spectre électromagnétique&amp;nbsp;? Simulations Photons et niveaux d&amp;rsquo;énergie (spectres) : applet Geogebra
-Tracé d&amp;rsquo;une caractéristique : applet Geogebra + activité
-Savoir et savoir faire coeur
-Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon.</description>
+      <description>Énergie transportée par la lumière Présentation&#xA;Rappels Lien entre la fréquence $f$ et la longueur d&#39;onde $\lambda$&amp;nbsp;? $$\lambda=\frac{c}{f}$$ Où $c$ est la célérité (vitesse) de la lumière&#xA;$c = \pu{3,0*10^8 m*s-1}$ Étendu en longueurs d&#39;ondes de la partie visible du spectre électromagnétique&amp;nbsp;? Simulations Photons et niveaux d&amp;rsquo;énergie (spectres) : applet Geogebra&#xA;Tracé d&amp;rsquo;une caractéristique : applet Geogebra + activité&#xA;Savoir et savoir faire coeur&#xA;Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon.</description>
     </item>
     <item>
       <title>Mouvement</title>
       <link>https://coursphychi.github.io/2nde/mouvement/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/mouvement/</guid>
-      <description>Décrire un mouvement Présentation
-Documents Évaluation diagnostique Activité - Chronophotographie du vol d&amp;rsquo;un marteau TP - Réalisation d&amp;rsquo;un pointage vidéo - Correction Activité python - Décollage d&amp;rsquo;une fusée </description>
+      <description>Décrire un mouvement Présentation&#xA;Documents Évaluation diagnostique Activité - Chronophotographie du vol d&amp;rsquo;un marteau TP - Réalisation d&amp;rsquo;un pointage vidéo - Correction Activité python - Décollage d&amp;rsquo;une fusée </description>
     </item>
     <item>
       <title>Signaux</title>
       <link>https://coursphychi.github.io/tsti2d/signaux/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/signaux/</guid>
-      <description>Signaux Présentation
-Rappels Un signal est une quantité qui dépend du temps.
-Mathématiquement, un signal est modélisé par une fonction $t\mapsto f(t)$ qui à chaque instant $t\in \mathbb{R}$ associe une valeur $f(t)$.
-Qu&#39;est-ce qu&#39;un signal périodique&amp;nbsp;? Un signal périodique est un signal qui se répète à l&#39;identique dans le temps.
-La durée d&#39;une répétition est appelée période et est notée $T$ (unité de base : la seconde).
-Mathématiquement, on dit qu’une fonction $f:\mathbb{R}\rightarrow\mathbb{R}$ est périodique de période $T&gt;0$ lorsque la relation $f(t+T)=f(t)$ est satisfaite pour tout $t\in\mathbb{R}$.</description>
+      <description>Signaux Présentation&#xA;Rappels Un signal est une quantité qui dépend du temps.&#xA;Mathématiquement, un signal est modélisé par une fonction $t\mapsto f(t)$ qui à chaque instant $t\in \mathbb{R}$ associe une valeur $f(t)$.&#xA;Qu&#39;est-ce qu&#39;un signal périodique&amp;nbsp;? Un signal périodique est un signal qui se répète à l&#39;identique dans le temps.&#xA;La durée d&#39;une répétition est appelée période et est notée $T$ (unité de base : la seconde).&#xA;Mathématiquement, on dit qu’une fonction $f:\mathbb{R}\rightarrow\mathbb{R}$ est périodique de période $T&gt;0$ lorsque la relation $f(t+T)=f(t)$ est satisfaite pour tout $t\in\mathbb{R}$.</description>
     </item>
     <item>
       <title>Inertie</title>
       <link>https://coursphychi.github.io/2nde/inertie/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/inertie/</guid>
-      <description>Forces et principe d&amp;rsquo;inertie Présentation
-Documents TP - Principe d&amp;rsquo;inertie + accroche + plus &amp;ldquo;beaux&amp;rdquo; dessins + appliquette Geogebra TP - Lien entre masse et poids + partie python Activité python - Chute libre d&amp;rsquo;une balle Simulation - Force gravitationnelle entre deux masses + tableur </description>
+      <description>Forces et principe d&amp;rsquo;inertie Présentation&#xA;Documents TP - Principe d&amp;rsquo;inertie + accroche + plus &amp;ldquo;beaux&amp;rdquo; dessins + appliquette Geogebra TP - Lien entre masse et poids + partie python Activité python - Chute libre d&amp;rsquo;une balle Simulation - Force gravitationnelle entre deux masses + tableur </description>
     </item>
     <item>
       <title>Incertitudes</title>
       <link>https://coursphychi.github.io/tsti2d/incertitudes/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/incertitudes/</guid>
-      <description>Incertitudes Petite expérience Qui a le plus faible temps de réaction ? Comment être sûr ?
-Utilisation de la calculette Calcul de la moyenne et de l&amp;rsquo;écart-type expérimental :
-Petites vidéos expliquant les manips sur les différentes calculettes.
-Savoir et savoir faire coeur
-Procéder à l’évaluation d’une incertitude-type par une approche statistique (type A). Savoir utiliser sa calculette pour déterminer la moyenne et l&amp;rsquo;écart-type expérimental d&amp;rsquo;une série de données. Procéder à l’évaluation d’une incertitude-type associée à une mesure unique en exploitant une relation fournie (type B).</description>
+      <description>Incertitudes Petite expérience Qui a le plus faible temps de réaction ? Comment être sûr ?&#xA;Utilisation de la calculette Calcul de la moyenne et de l&amp;rsquo;écart-type expérimental :&#xA;Petites vidéos expliquant les manips sur les différentes calculettes.&#xA;Savoir et savoir faire coeur&#xA;Procéder à l’évaluation d’une incertitude-type par une approche statistique (type A). Savoir utiliser sa calculette pour déterminer la moyenne et l&amp;rsquo;écart-type expérimental d&amp;rsquo;une série de données. Procéder à l’évaluation d’une incertitude-type associée à une mesure unique en exploitant une relation fournie (type B).</description>
     </item>
     <item>
       <title>Son</title>
       <link>https://coursphychi.github.io/2nde/son/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/son/</guid>
-      <description>Signal sonore Présentation
-Documents et autre Exercice - Mesure historique de la vitesse du son dans l&amp;rsquo;eau Exercice - Sonar TP - Mesure de la vitesse du son TP - Analyse d&amp;rsquo;un son musical Webapplication permettant l&amp;rsquo;obtention d&amp;rsquo;un oscillogramme depuis le son du micro </description>
+      <description>Signal sonore Présentation&#xA;Documents et autre Exercice - Mesure historique de la vitesse du son dans l&amp;rsquo;eau Exercice - Sonar TP - Mesure de la vitesse du son TP - Analyse d&amp;rsquo;un son musical Webapplication permettant l&amp;rsquo;obtention d&amp;rsquo;un oscillogramme depuis le son du micro </description>
     </item>
     <item>
       <title>Lumière</title>
       <link>https://coursphychi.github.io/2nde/lumiere/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/lumiere/</guid>
-      <description>Lumière et spectre Présentation
-Documents et autres TP - Lois de Snell-Descartes </description>
+      <description>Lumière et spectre Présentation&#xA;Documents et autres TP - Lois de Snell-Descartes </description>
     </item>
     <item>
       <title>Mécanique</title>
       <link>https://coursphychi.github.io/tsti2d/mecanique/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/mecanique/</guid>
-      <description>Mécanique Présentation méca 1re partie
-Présentation méca 2e partie (rotations)
-Savoir et savoir faire coeur
-Déterminer la résultante des forces appliquées à un système dont le mouvement est rectiligne à partir de l’accélération en utilisant le principe fondamental de la mécanique (PFD). Déterminer les caractéristiques de l’accélération d’un système dans le cas d’un mouvement rectiligne à partir des forces extérieures appliquées en utilisant le PFD. Exploiter numériquement des résultats expérimentaux pour valider le modèle de la chute libre.</description>
+      <description>Mécanique Présentation méca 1re partie&#xA;Présentation méca 2e partie (rotations)&#xA;Savoir et savoir faire coeur&#xA;Déterminer la résultante des forces appliquées à un système dont le mouvement est rectiligne à partir de l’accélération en utilisant le principe fondamental de la mécanique (PFD). Déterminer les caractéristiques de l’accélération d’un système dans le cas d’un mouvement rectiligne à partir des forces extérieures appliquées en utilisant le PFD. Exploiter numériquement des résultats expérimentaux pour valider le modèle de la chute libre.</description>
     </item>
     <item>
       <title>Son</title>
       <link>https://coursphychi.github.io/tsti2d/son/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/son/</guid>
-      <description>Ondes sonores Présentation
-Carte mentale Savoir et savoir faire coeur
-Déterminer la fréquence du fondamental et des harmoniques à partir du spectre d’amplitude d’un signal sonore.. Définir et distinguer la notion de timbre et de hauteur. Exploiter la relation entre l&amp;rsquo;intensité acoustique et le niveau sonore et savoir se débrouiller avec les décibels (dB). Exploiter des informations relatives aux courbes de sensibilité de l’oreille humaine (fréquences audible, seuil d&amp;rsquo;audibilité, seuil de douleur, etc.</description>
+      <description>Ondes sonores Présentation&#xA;Carte mentale Savoir et savoir faire coeur&#xA;Déterminer la fréquence du fondamental et des harmoniques à partir du spectre d’amplitude d’un signal sonore.. Définir et distinguer la notion de timbre et de hauteur. Exploiter la relation entre l&amp;rsquo;intensité acoustique et le niveau sonore et savoir se débrouiller avec les décibels (dB). Exploiter des informations relatives aux courbes de sensibilité de l’oreille humaine (fréquences audible, seuil d&amp;rsquo;audibilité, seuil de douleur, etc.</description>
     </item>
     <item>
       <title>Lentilles</title>
@@ -609,60 +454,42 @@ Déterminer la fréquence du fondamental et des harmoniques à partir du spectre
       <link>https://coursphychi.github.io/2nde/elec/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/elec/</guid>
-      <description>Électricité Présentation
-Documents Activité 1 - Caractéristique d&amp;rsquo;une thermistance + Tracé et régression linéaire + Correction Activité 2 - Comment fabriquer un thermomètre à partir d&amp;rsquo;une thermistance ? + Tracé de la courbe d&amp;rsquo;étalonnage Activité 3 - Circuit électrique au sein d’un bathythermographe + Correction </description>
+      <description>Électricité Présentation&#xA;Documents Activité 1 - Caractéristique d&amp;rsquo;une thermistance + Tracé et régression linéaire + Correction Activité 2 - Comment fabriquer un thermomètre à partir d&amp;rsquo;une thermistance ? + Tracé de la courbe d&amp;rsquo;étalonnage Activité 3 - Circuit électrique au sein d’un bathythermographe + Correction </description>
     </item>
     <item>
       <title>Ondes mécaniques</title>
       <link>https://coursphychi.github.io/1spe/ondes/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/ondes/</guid>
-      <description>Ondes mécaniques progressives Présentation
-Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Act - Voix de cannard Simulation </description>
+      <description>Ondes mécaniques progressives Présentation&#xA;Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Act - Voix de cannard Simulation </description>
     </item>
     <item>
       <title>Radioactivité</title>
       <link>https://coursphychi.github.io/tsti2d/radioact/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/radioact/</guid>
-      <description>Radioactivité Présentation
-Expériences Désintégration radioactive de la classe + Tirage au sort TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours Estimez votre exposition annuelle à la radioactivité Activités Datation carbone 14 Déchets nucléaires Examen médical Exercice défaut de masse et énergie Savoir et savoir faire coeur
-Distinguer la radioactivité naturelle de la radioactivité artificielle.
-Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.</description>
+      <description>Radioactivité Présentation&#xA;Expériences Désintégration radioactive de la classe + Tirage au sort TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours Estimez votre exposition annuelle à la radioactivité Activités Datation carbone 14 Déchets nucléaires Examen médical Exercice défaut de masse et énergie Savoir et savoir faire coeur&#xA;Distinguer la radioactivité naturelle de la radioactivité artificielle.&#xA;Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.</description>
     </item>
     <item>
       <title>Image</title>
       <link>https://coursphychi.github.io/1spe/lentilles/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/lentilles/</guid>
-      <description>Formation des images par une lentille convergente Présentation
-Documents et autres Act - Lentille et smartphone Act - Appareil réflexe </description>
+      <description>Formation des images par une lentille convergente Présentation&#xA;Documents et autres Act - Lentille et smartphone Act - Appareil réflexe </description>
     </item>
     <item>
       <title>Pression</title>
       <link>https://coursphychi.github.io/tsti2d/pression/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/pression/</guid>
-      <description>Pression et statique des fluides Présentation
-Savoir et savoir faire coeur
-Définir la pression exercée sur une surface à partir de la résultante des forces pressantes appliquées.
-Distinguer la pression absolue de la pression relative.
-Citer et exploiter le principe fondamental de l&amp;rsquo;hydrostatique.
-piege
-Le principe fondamental de l&amp;rsquo;hydrostatique peut s&amp;rsquo;écrire différemment suivant l&amp;rsquo;orientation des axes (parle-t-on de la hauteur ou de la profondeur ?) et suivant si on considère les élévations $z$ ou leur écart $\Delta z = z_2-z_1 = h$.</description>
+      <description>Pression et statique des fluides Présentation&#xA;Savoir et savoir faire coeur&#xA;Définir la pression exercée sur une surface à partir de la résultante des forces pressantes appliquées.&#xA;Distinguer la pression absolue de la pression relative.&#xA;Citer et exploiter le principe fondamental de l&amp;rsquo;hydrostatique.&#xA;piege&#xA;Le principe fondamental de l&amp;rsquo;hydrostatique peut s&amp;rsquo;écrire différemment suivant l&amp;rsquo;orientation des axes (parle-t-on de la hauteur ou de la profondeur ?) et suivant si on considère les élévations $z$ ou leur écart $\Delta z = z_2-z_1 = h$.</description>
     </item>
     <item>
       <title>Transport de l&#39;électricité</title>
       <link>https://coursphychi.github.io/tsti2d/transport/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/transport/</guid>
-      <description>Transport de l&amp;rsquo;électricité Présentation
-Savoir et savoir faire coeur
-Savoir schématiser l’organisation du transport et de la distribution de l’énergie électrique pour une ligne monophasée.
-Distinguer et citer les caractéristiques essentielles du réseau de distribution électrique.
-Relier qualitativement le facteur de puissance d’un équipement de puissance donnée aux pertes dans les lignes d’alimentation.
-Citer les rôles du transformateur (élévation de tension, diminution de tension, isolation galvanique).
-Relier qualitativement l’augmentation, pour une charge donnée, de la tension de distribution à la diminution des pertes dans les lignes d’alimentation.</description>
+      <description>Transport de l&amp;rsquo;électricité Présentation&#xA;Savoir et savoir faire coeur&#xA;Savoir schématiser l’organisation du transport et de la distribution de l’énergie électrique pour une ligne monophasée.&#xA;Distinguer et citer les caractéristiques essentielles du réseau de distribution électrique.&#xA;Relier qualitativement le facteur de puissance d’un équipement de puissance donnée aux pertes dans les lignes d’alimentation.&#xA;Citer les rôles du transformateur (élévation de tension, diminution de tension, isolation galvanique).&#xA;Relier qualitativement l’augmentation, pour une charge donnée, de la tension de distribution à la diminution des pertes dans les lignes d’alimentation.</description>
     </item>
   </channel>
 </rss>

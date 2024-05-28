@@ -4,7 +4,7 @@
     <title>Maths on Cours Physique-Chimie</title>
     <link>https://coursphychi.github.io/more/maths/</link>
     <description>Recent content in Maths on Cours Physique-Chimie</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>fr</language>
     <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate>
     <atom:link href="https://coursphychi.github.io/more/maths/index.xml" rel="self" type="application/rss+xml" />
@@ -13,11 +13,7 @@
       <link>https://coursphychi.github.io/more/maths/arithmetique/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/arithmetique/</guid>
-      <description>Arithmétique et théorie des nombres : Infinis dénombrables et indénombrables Des entiers aux transcendants en passant par l&amp;rsquo;hypothèse du continu ($\aleph_0 = 2^{\aleph_1}$) :
-Numération De nombreux systèmes de numération à bases entières ont été utilisés par différents peuples et à différentes époques.
-Par exemple :
-système binaire (base 2) utilisé dans des langues d&amp;rsquo;Amérique du Sud et d&amp;rsquo;Océanie, et utilisé de nos jours en informatique.
-système quinaire (base 5) dont il reste des traces jusqu&amp;rsquo;au xxe siècle dans des langues africaines, mais aussi, partiellement, dans les notations tchouvache, suzhou, romaine et maya.</description>
+      <description>Arithmétique et théorie des nombres : Infinis dénombrables et indénombrables Des entiers aux transcendants en passant par l&amp;rsquo;hypothèse du continu ($\aleph_0 = 2^{\aleph_1}$) :&#xA;&amp;lt;div style=&amp;quot;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&amp;quot;&amp;gt; &amp;lt;iframe allow=&amp;quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&amp;quot; allowfullscreen=&amp;quot;allowfullscreen&amp;quot; loading=&amp;quot;eager&amp;quot; referrerpolicy=&amp;quot;strict-origin-when-cross-origin&amp;quot; src=&amp;quot;https://www.youtube.com/embed/0hB95JwlzBY?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&amp;quot; style=&amp;quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&amp;quot; title=&amp;quot;YouTube video&amp;quot; &amp;gt;&amp;lt;/iframe&amp;gt; &amp;lt;/div&amp;gt; Numération De nombreux systèmes de numération à bases entières ont été utilisés par différents peuples et à différentes époques.</description>
     </item>
     <item>
       <title>Algèbre</title>
@@ -31,22 +27,14 @@ système quinaire (base 5) dont il reste des traces jusqu&amp;rsquo;au xxe sièc
       <link>https://coursphychi.github.io/more/maths/probastat/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/probastat/</guid>
-      <description>Probabilités Loi Binomiale D&amp;rsquo;une épreuve de Bernoulli à la loi binomiale :
-Loi normale La célèbre gaussienne (ou courbe en cloche) :
-Densité de probabilités Nouvelle énigme permettant de parler des densités de probabilité :
-Quelle est la distance moyenne entre deux points pris au hasard sur un segment ?
-On peut vérifier la solution statistiquement avec un petit programme simplissime :
-Probabilités conditionnelles et Bayes Les probabilités conditionnelles au tribunal, chez le médecin et dans un vieux jeu télévisé américain :</description>
+      <description>Probabilités Loi Binomiale D&amp;rsquo;une épreuve de Bernoulli à la loi binomiale :&#xA;Loi normale La célèbre gaussienne (ou courbe en cloche) :&#xA;Densité de probabilités Nouvelle énigme permettant de parler des densités de probabilité :&#xA;Quelle est la distance moyenne entre deux points pris au hasard sur un segment ?&#xA;On peut vérifier la solution statistiquement avec un petit programme simplissime :&#xA;Probabilités conditionnelles et Bayes Les probabilités conditionnelles au tribunal, chez le médecin et dans un vieux jeu télévisé américain :</description>
     </item>
     <item>
       <title>Théorie des jeux</title>
       <link>https://coursphychi.github.io/more/maths/jeux/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/jeux/</guid>
-      <description>Un peu de théorie des jeux note
-Cette page est très inspirée du livre Chases and Escapes The Mathematics of Pursuit and Evasion de Paul Nahin.
-Attaque - Défense Un petit problème mathématique qui fleure bon la Guerre Froide :
-Deux bombardiers bleus sont en mission. L&amp;rsquo;un transporte une bombe H et l&amp;rsquo;autre des équipements pour brouiller les radars. Leur plan de vol est tel qu&amp;rsquo;un des deux bombardiers est mieux protégé par les mitrailleuses de l&amp;rsquo;autre.</description>
+      <description>Un peu de théorie des jeux note&#xA;Cette page est très inspirée du livre Chases and Escapes The Mathematics of Pursuit and Evasion de Paul Nahin.&#xA;Attaque - Défense Un petit problème mathématique qui fleure bon la Guerre Froide :&#xA;Deux bombardiers bleus sont en mission. L&amp;rsquo;un transporte une bombe H et l&amp;rsquo;autre des équipements pour brouiller les radars. Leur plan de vol est tel qu&amp;rsquo;un des deux bombardiers est mieux protégé par les mitrailleuses de l&amp;rsquo;autre.</description>
     </item>
   </channel>
 </rss>

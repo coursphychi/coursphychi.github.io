@@ -4,17 +4,16 @@
     <title>Colles on Cours Physique-Chimie</title>
     <link>https://coursphychi.github.io/colles/</link>
     <description>Recent content in Colles on Cours Physique-Chimie</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>fr</language>
-    <lastBuildDate>Sat, 06 Mar 2021 14:20:50 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 06 Mar 2021 14:23:56 +0100</lastBuildDate>
     <atom:link href="https://coursphychi.github.io/colles/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lance-balle</title>
       <link>https://coursphychi.github.io/colles/lanceballe/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/lanceballe/</guid>
-      <description>Lance-balle Un lanceur de balle est fixé au sol mais le canon est libre de pivoter autour d’un axe horizontal. Le lanceur envoie ses projectiles avec toujours la même vitesse initiale $v_0$ mais avec un angle aléatoire distribué uniformément entre 0° et 180°.
-Selon vous, chaque secteur découpant l&amp;rsquo;axe $x$ de manière régulière va-t-il recevoir autant de balles ? Si non, comment supposeriez-vous que la densité d&amp;rsquo;impacts $\frac{dN}{dx}$ sur un petit intervalle $dx$ évolue en fonction de $x$ ?</description>
+      <description>Lance-balle Un lanceur de balle est fixé au sol mais le canon est libre de pivoter autour d’un axe horizontal. Le lanceur envoie ses projectiles avec toujours la même vitesse initiale $v_0$ mais avec un angle aléatoire distribué uniformément entre 0° et 180°.&#xA;Selon vous, chaque secteur découpant l&amp;rsquo;axe $x$ de manière régulière va-t-il recevoir autant de balles ? Si non, comment supposeriez-vous que la densité d&amp;rsquo;impacts $\frac{dN}{dx}$ sur un petit intervalle $dx$ évolue en fonction de $x$ ?</description>
     </item>
     <item>
       <title>Lentilles</title>
@@ -35,65 +34,49 @@ Selon vous, chaque secteur découpant l&amp;rsquo;axe $x$ de manière régulièr
       <link>https://coursphychi.github.io/colles/onde/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/onde/</guid>
-      <description>Onde Inspecter le code ci-dessous :
-Combien de périodes observe-t-on pendant l&amp;rsquo;animation ? Modifier le code pour visualiser 10 périodes. Imaginons qu&amp;rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.
-Quel sera le retard temporel de l&amp;rsquo;anneau i par rapport à l&amp;rsquo;anneau 0 ? Faire en sorte que l&amp;rsquo;animation montre une telle onde en modifiant la ligne 62. Que vaut alors la longueur d&amp;rsquo;onde $\lambda$ ?</description>
+      <description>Onde Inspecter le code ci-dessous :&#xA;Combien de périodes observe-t-on pendant l&amp;rsquo;animation ? Modifier le code pour visualiser 10 périodes. Imaginons qu&amp;rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.&#xA;Quel sera le retard temporel de l&amp;rsquo;anneau i par rapport à l&amp;rsquo;anneau 0 ? Faire en sorte que l&amp;rsquo;animation montre une telle onde en modifiant la ligne 62. Que vaut alors la longueur d&amp;rsquo;onde $\lambda$ ?</description>
     </item>
     <item>
       <title>Oscillateur</title>
       <link>https://coursphychi.github.io/colles/oscillsolide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/oscillsolide/</guid>
-      <description> Simulation d&amp;rsquo;un oscillateur mécanique Oscillateur amorti par frottement fluide :
-Faire les modifications nécessaires pour se placer dans le régime apériodique critique. Oscillateur amorti par frottement solide :
-Faire les modifications nécessaires pour étudier un oscillateur amorti par frottement solide plutôt que par frottement fluide.
-Analyser les graphes obtenus.
-Déterminer la variation entre deux élongations maximales consécutives du ressort.
-Correction Approche dynamique et énergétique </description>
+      <description> Simulation d&amp;rsquo;un oscillateur mécanique Oscillateur amorti par frottement fluide :&#xA;Faire les modifications nécessaires pour se placer dans le régime apériodique critique. Oscillateur amorti par frottement solide :&#xA;Faire les modifications nécessaires pour étudier un oscillateur amorti par frottement solide plutôt que par frottement fluide.&#xA;Analyser les graphes obtenus.&#xA;Déterminer la variation entre deux élongations maximales consécutives du ressort.&#xA;Correction Approche dynamique et énergétique </description>
     </item>
     <item>
       <title>Réfraction</title>
       <link>https://coursphychi.github.io/colles/refraction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/refraction/</guid>
-      <description>Réfraction Le champ de l&amp;rsquo;image fait 7 carreaux de largeur en dehors de l&amp;rsquo;eau mais seulement 5 sous l&amp;rsquo;eau. L&amp;rsquo;exercice vise dans un premier temps à expliquer cette observation puis à déterminer la distance entre le mur et la caméra.
-Observerait-on la même chose en immergeant sa tête sous l&amp;rsquo;eau, les yeux ouverts ? Et avec un masque ? Correction Les carreaux ne nous apparaitraient pas plus grands si on ouvrait les yeux sous l&#39;eau.</description>
+      <description>Réfraction Le champ de l&amp;rsquo;image fait 7 carreaux de largeur en dehors de l&amp;rsquo;eau mais seulement 5 sous l&amp;rsquo;eau. L&amp;rsquo;exercice vise dans un premier temps à expliquer cette observation puis à déterminer la distance entre le mur et la caméra.&#xA;Observerait-on la même chose en immergeant sa tête sous l&amp;rsquo;eau, les yeux ouverts ? Et avec un masque ? Correction Les carreaux ne nous apparaitraient pas plus grands si on ouvrait les yeux sous l&#39;eau.</description>
     </item>
     <item>
       <title>Respiration</title>
       <link>https://coursphychi.github.io/colles/respiration/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/respiration/</guid>
-      <description>AP - Thermodynamique La respiration La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).
-On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.
-On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
+      <description>AP - Thermodynamique La respiration La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).&#xA;On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.&#xA;On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
     </item>
     <item>
       <title>Respiration</title>
       <link>https://coursphychi.github.io/colles/respiration_corr/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/respiration_corr/</guid>
-      <description>Correction La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).
-On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.
-On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
+      <description>Correction La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).&#xA;On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.&#xA;On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
     </item>
     <item>
       <title>Slinky</title>
       <link>https://coursphychi.github.io/colles/slinky/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/slinky/</guid>
-      <description>La chute du Slinky Quel doit être le mouvement du centre de masse du slinky ? Le code suivant modélise de manière très simplifiée le slinky en le décomposant en deux sous-systèmes : le premier est composé des n_haut premiers disques et le second des n_bas disques restants. Le cœur du code se situe de la ligne 48 à la ligne 66.
-En supposant que les deux sous-systèmes sont reliés par un ressort et que le sous-système du bas est immobile, faire un bilan des forces et exprimer ces forces sur chacun des sous-systèmes.</description>
+      <description>La chute du Slinky Quel doit être le mouvement du centre de masse du slinky ? Le code suivant modélise de manière très simplifiée le slinky en le décomposant en deux sous-systèmes : le premier est composé des n_haut premiers disques et le second des n_bas disques restants. Le cœur du code se situe de la ligne 48 à la ligne 66.&#xA;En supposant que les deux sous-systèmes sont reliés par un ressort et que le sous-système du bas est immobile, faire un bilan des forces et exprimer ces forces sur chacun des sous-systèmes.</description>
     </item>
     <item>
       <title>Tremplins</title>
       <link>https://coursphychi.github.io/colles/tremplins/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/tremplins/</guid>
-      <description>Course de tremplins Deux balles dévalent chacune un tremplin différent dont les points de départ et d&amp;rsquo;arrivée ont même altitude :
-Les différentes coordonnées sont données ci-dessous. Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s-2. La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.
-Questions préliminaires :
-Qulle balle atterrit le plus loin ? Quelle balle parcourt le moins de distance ?</description>
+      <description>Course de tremplins Deux balles dévalent chacune un tremplin différent dont les points de départ et d&amp;rsquo;arrivée ont même altitude :&#xA;Les différentes coordonnées sont données ci-dessous. Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s-2. La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.&#xA;Questions préliminaires :&#xA;Qulle balle atterrit le plus loin ? Quelle balle parcourt le moins de distance ?</description>
     </item>
   </channel>
 </rss>
