@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1716934713" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1716934713" rel="stylesheet">
-    <link href="/css/hybrid.css?1716934713" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1716934713" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1716934713" rel="stylesheet">
-    <link href="/css/auto-complete.css?1716934713" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1716934713" rel="stylesheet">
-    <link href="/css/theme.css?1716934713" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1716934713" rel="stylesheet">
+    <link href="/css/nucleus.css?1716939454" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1716939454" rel="stylesheet">
+    <link href="/css/hybrid.css?1716939454" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1716939454" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1716939454" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716939454" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1716939454" rel="stylesheet">
+    <link href="/css/theme.css?1716939454" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1716939454" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1716934713" rel="stylesheet">
+    <link href="/css/theme-blue.css?1716939454" rel="stylesheet">
     
-    <link href="/css/foo.css?1716934713" rel="stylesheet"><link href="/css/bar.css?1716934713" rel="stylesheet">
+    <link href="/css/foo.css?1716939454" rel="stylesheet"><link href="/css/bar.css?1716939454" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1716934713"></script>
+    <script src="/js/jquery-3.3.1.min.js?1716939454"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1716934713"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1716934713"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1716939454"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1716939454"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1716934713"></script>
+<script type="text/javascript" src="/js/search.js?1716939454"></script>
 
     
   </div>
@@ -2147,6 +2147,23 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 </div>
 
 
+
+<div class="notices piege" style="--title: 'piege';">
+  <p style="display: none;">piege</p>
+  <div class="notice-body">
+    <p>On a vu que la puissance dissipée par effet Joule s&rsquo;écrit $P_J = RI^2$. Cette formule s&rsquo;obtient en écrivant que la puissance électrique dissipée par un dipôle ohmique est $P_J=U_R\times I = R\times I\times I$ où on a utilisé la loi d&rsquo;Ohm aux bornes du dipôle ohmique $U_R = R\times I$.<br>
+Pour une puissance transportée $P=UI$ donnée, minimiser les pertes $P_J$ suppose donc de minimiser $I$ (et $R$).<br>
+Mais on aurait aussi très bien pu remplacer $I$ par $\frac{U_R}{R}$ dans la formule de la puissance dissipée par effet Joule pour obtenir $P_J=\frac{U_R^2}{R}$. Cela semble alors imposer une conclusion inverse que précédemment ; il faudrait diminuer $U$ et augmenter $R$.<br><br>
+Mais alors, il faut augmenter ou diminuer $U$ ? 🤔<br><br>
+Comme on a bien fait attention de l&rsquo;indiquer, il s&rsquo;agit de $U_R$ (la tension aux bornes de la résistance) dans la formule de $P_J$, et non de $U$ (la tension de la ligne électrique) qui est la tension qu&rsquo;on utilise dans le calcul de la puissance $P=UI$ transportée.<br>
+Montrons sur un exemple qu&rsquo;en utilisant la formule $P_J=\frac{U_R^2}{R}$, on aboutit bien encore à la conclusion qu&rsquo;<strong>il faut augmenter $U$ pour diminuer les pertes</strong>.<br><br>
+Imaginons  une ligne électrique sous une tension efficace de $\pu{1000 V}$ et traversée par une intensité efficace de $\pu{10 A}$ qui transporte donc une puissance de $\pu{10 kW}$ (on suppose ici pour simplifier que le facteur de puissance vaut 1). Pour un tronçon de câble présentant une résistance de $\pu{1 \Omega}$, la chute de tension $U_R$ vaut $R\times I = \pu{10 V}$, soit 1% de la tension de la ligne. Cela représente une puissance dissipée valant $P_J=\frac{U_R^2}{R}=\pu{100 W}$, 1% de la puissance transportée.<br>
+Si on élève la tension d&rsquo;un facteur 100, on se retrouve avec une intensité divisée par 100 (on transporte toujours la même puissance $U\times I$). La chute de tension $U_R$ vaut alors $\pu{0,1 V}$ et $P_J$ passe à seulement $\frac{0,1^2}{1}=\pu{10 mW}$, donc seulement un millionième de la puissance transportée.<br></p>
+
+  </div>
+</div>
+
+
 <br>
 <h2 id="documents-sur-la-sécurité-électrique">Documents sur la sécurité électrique</h2>
 <ul>
@@ -3648,19 +3665,19 @@ Dans une salle de TP, la valeur efficace de la tension de sécurité vaut&nbsp;:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1716934713"></script>
-    <script src="/js/perfect-scrollbar.min.js?1716934713"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1716934713"></script>
-    <script src="/js/jquery.sticky.js?1716934713"></script>
-    <script src="/js/featherlight.min.js?1716934713"></script>
-    <script src="/js/highlight.pack.js?1716934713"></script>
+    <script src="/js/clipboard.min.js?1716939454"></script>
+    <script src="/js/perfect-scrollbar.min.js?1716939454"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1716939454"></script>
+    <script src="/js/jquery.sticky.js?1716939454"></script>
+    <script src="/js/featherlight.min.js?1716939454"></script>
+    <script src="/js/highlight.pack.js?1716939454"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1716934713"></script>
-    <script src="/js/learn.js?1716934713"></script>
-    <script src="/js/hugo-learn.js?1716934713"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1716939454"></script>
+    <script src="/js/learn.js?1716939454"></script>
+    <script src="/js/hugo-learn.js?1716939454"></script>
     
         
-            <script src="/mermaid/mermaid.js?1716934713"></script>
+            <script src="/mermaid/mermaid.js?1716939454"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
