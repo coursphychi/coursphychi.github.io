@@ -658,6 +658,13 @@
 	"content": "Pression et statique des fluides Présentation\nSavoir et savoir faire coeur\nDéfinir la pression exercée sur une surface à partir de la résultante des forces pressantes appliquées.\nDistinguer la pression absolue de la pression relative.\nCiter et exploiter le principe fondamental de l\u0026rsquo;hydrostatique.\npiege\nLe principe fondamental de l\u0026rsquo;hydrostatique peut s\u0026rsquo;écrire différemment suivant l\u0026rsquo;orientation des axes (parle-t-on de la hauteur ou de la profondeur ?) et suivant si on considère les élévations $z$ ou leur écart $\\Delta z = z_2-z_1 = h$.\n$\\uparrow$ Ainsi, avec un axe dirigé vers le haut, $z_2$ est au-dessus de $z_1$. Et on a :\n$P_1 + \\rho g z_1 = P_2 + \\rho g z_2$\n$\\Rightarrow P_2 - P_1 = -\\rho g (z_2-z_1) \\Leftrightarrow \\Delta P = -\\rho g h$ (plus on est haut, plus la pression diminue).\n$\\downarrow$ Si l\u0026rsquo;axe vertical est vers le bas, $h$ désignant alors la profondeur ($z_2$ en dessous de $z_1$ pour un $h=\\Delta z \u0026gt;0$) et $\\Delta P = P_2-P_1$ désigne maintenant l\u0026rsquo;élévation de pression en fonction de la profondeur. On a alors :\n$\\Delta P = \\rho g h$ (plus on est profond, plus la pression augmente).\nActivité Canalisations Exercice Nautile TP Principe fondamental de l\u0026rsquo;hydrostatique Simulation expérience "
 },
 {
+	"uri": "https://coursphychi.github.io/1spe/couleurs/",
+	"title": "Couleurs",
+	"tags": [],
+	"description": "",
+	"content": "Couleurs Présentation\nDocuments et autres TP couleurs "
+},
+{
 	"uri": "https://coursphychi.github.io/tsti2d/transport/",
 	"title": "Transport de l&#39;électricité",
 	"tags": [],
@@ -669,7 +676,7 @@
 	"title": "Colles",
 	"tags": [],
 	"description": "",
-	"content": "Colles de physique-chimie TSI1 Onde Réfraction Lentilles : démonstrations Lentilles : modéliser le flou Lance-balle Slinky Oscillateur harmonique à frottement solide Tremplins Respiration + Correction Colles de physique-chimie TSTI2D Conduction thermique Course de glaçons Salle de classe Igloo Puissance en régime sinusoïdal\nÉnergie lumineuse\nSignaux 1er sujet 2e sujet 3e sujet Radiotélescope Canal 16 Mécanique et incertitudes Freinage d\u0026rsquo;un camion Enola Gay Changer une roue Grande roue Ondes sonores Salle de concert Cor des Alpes Tuyau d\u0026rsquo;orgue Avertisseur sonore Drones Bouchons Pression Densimètre et fontaine de Héron Très chouette explication (+ une autre fontaine)\n"
+	"content": "Colles de physique-chimie TSI1 Onde Réfraction Lentilles : démonstrations Lentilles : modéliser le flou Lance-balle Slinky Oscillateur harmonique à frottement solide Tremplins Respiration + Correction Colles de physique-chimie TSTI2D Conduction thermique Course de glaçons Salle de classe Igloo Puissance en régime sinusoïdal\nÉnergie lumineuse\nSignaux 1er sujet 2e sujet 3e sujet Radiotélescope Canal 16 Mécanique et incertitudes Freinage d\u0026rsquo;un camion Enola Gay Changer une roue Grande roue Ondes sonores Salle de concert Cor des Alpes Tuyau d\u0026rsquo;orgue Avertisseur sonore Drones Bouchons Pression Densimètre et fontaine de Héron Très chouette explication (+ une autre fontaine)\nUn évier à base de pailles Source : Visual feast\n"
 },
 {
 	"uri": "https://coursphychi.github.io/",
