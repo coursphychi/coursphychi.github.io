@@ -51,6 +51,13 @@
       <description> Simulation d&amp;rsquo;un oscillateur mécanique Oscillateur amorti par frottement fluide :&#xA;Faire les modifications nécessaires pour se placer dans le régime apériodique critique. Oscillateur amorti par frottement solide :&#xA;Faire les modifications nécessaires pour étudier un oscillateur amorti par frottement solide plutôt que par frottement fluide.&#xA;Analyser les graphes obtenus.&#xA;Déterminer la variation entre deux élongations maximales consécutives du ressort.&#xA;Correction Approche dynamique et énergétique </description>
     </item>
     <item>
+      <title>Quantité de matière</title>
+      <link>https://coursphychi.github.io/1spe/moles/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/moles/</guid>
+      <description>Composition du système initial Les grandeurs à connaître en chimie&#xA;Concentration en quantité de matière&#xA;Quantité de matière d’une espèce chimique dissoute par litre de solution.&#xA;La concentration en quantité de matière peut s’exprimer en $\pu{mol*L-1}$.&#xA;Exemple :&#xA;Une solution de glucose de concentration en quantité de matière $\pu{0,10 mol*L-1}$ est obtenue en introduisant $\pu{0,10 mol}$ de glucose dans une fiole jaugée de $\pu{1,0 L}$ et en ajoutant de l’eau jusqu’à obtenir un volume final de mélange égal à $\pu{1,0 L}$.</description>
+    </item>
+    <item>
       <title>Rappels chimie</title>
       <link>https://coursphychi.github.io/tsti2d/rappelschimie/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -377,7 +384,7 @@
       <link>https://coursphychi.github.io/1spe/synthese/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/synthese/</guid>
-      <description>Synthèses d’espèces chimiques organiques Présentation&#xA;Documents et autres TP - Synthèse de l&amp;rsquo;acide benzoïque Schéma montage chauffage à reflux Schéma chromatographie sur couche mince </description>
+      <description>Synthèses d’espèces chimiques organiques Lavage&#xA;Après une extraction liquide-liquide il peut rester dans la phase organique des impuretés faiblement solubles dans le solvant organique et solubles dans l&amp;rsquo;eau.&#xA;Elles peuvent être éliminées par un lavage réalisé en ajoutant de l&amp;rsquo;eau distillée à la phase organique dans une ampoule à décanter.&#xA;La phase aqueuse contenant les impuretés est ensuite séparée puis éliminée.&#xA;Distillation rapide&#xA;Après avoir isolé la phase organique contenant uniquement le produit d&amp;rsquo;intérêt, on peut éliminer le solvant grâce à une distillation rapide.</description>
     </item>
     <item>
       <title>Curiosités</title>
