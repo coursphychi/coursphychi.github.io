@@ -158,7 +158,7 @@
 	"title": "Avancement",
 	"tags": [],
 	"description": "",
-	"content": "Avancement Présentation\nDocuments et autres Exos - Avancement + correction "
+	"content": "Avancement Présentation\nAvancement\nGrandeur extensive décrivant la progression d’une transformation chimique modélisée par une réaction.\nAvancement maximal\nAvancement associé à la disparition totale du réactif limitant.\nTaux d’avancement\nRapport de la valeur finale de l’avancement sur celle de l’avancement maximal : $\\tau = \\frac{x_{final}}{x_{max}}$\nTransformation totale ou non totale\nUne transformation est dite totale si le taux d’avancement final est égal à 1. S’il est inférieur à 1 ($x_{final}\u0026lt;x_{max}$), la transformation est dite non-totale. A l’état final d’une transformation totale, au moins une des espèces chimiques présentes à l’état initial a disparu.\nnote\nDeux raisons peuvent rendre une transformation non totale : interruption de son évolution avant que l’état final ne soit atteint ou atteinte d’un équilibre chimique dans l’état final. Ce second cas est abordé en classe de terminale.\nDocuments et autres Exos - Avancement + correction "
 },
 {
 	"uri": "https://coursphychi.github.io/tsti2d/chgmtetat/",
