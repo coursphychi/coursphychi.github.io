@@ -23,6 +23,20 @@
       <description>Avancement Présentation&#xA;Avancement&#xA;Grandeur extensive décrivant la progression d’une transformation chimique modélisée par une réaction.&#xA;Avancement maximal&#xA;Avancement associé à la disparition totale du réactif limitant.&#xA;Taux d’avancement&#xA;Rapport de la valeur finale de l’avancement sur celle de l’avancement maximal : $\tau = \frac{x_{final}}{x_{max}}$&#xA;Transformation totale ou non totale&#xA;Une transformation est dite totale si le taux d’avancement final est égal à 1. S’il est inférieur à 1 ($x_{final}&amp;lt;x_{max}$), la transformation est dite non-totale.</description>
     </item>
     <item>
+      <title>Oxydo-réduction</title>
+      <link>https://coursphychi.github.io/1spe/oxydo/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/oxydo/</guid>
+      <description>Oxydo-réduction Présentation&#xA;Demi-équation électronique&#xA;Une demi-équation électronique met en évidence, de manière formelle, l’existence d’un transfert d’électron(s) au cours d’une transformation convertissant l’oxydant d’un couple en son réducteur conjugué (ou l’inverse). La demi-équation ne modélise pas le déroulement microscopique de cet échange, mais illustre, à l’échelle macroscopique, les proportions dans lesquelles il s’opère.&#xA;Exemple :&#xA;La demi-équation électronique associée au couple $\left(\ce{Cr2O7^2-/Cr^3+}\right)$, montre que 3 moles d’électrons sont échangées par mole de chrome converti :</description>
+    </item>
+    <item>
+      <title>Titrage</title>
+      <link>https://coursphychi.github.io/1spe/titrage/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/titrage/</guid>
+      <description>Titrage Présentation&#xA;Dosage par titrage&#xA;Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’« acido-basique », « par oxydoréduction » ou « par précipitation » selon la nature de la réaction support.&#xA;En première, on ne verra que des dosages par oxydo-réduction (la réaction support du titrage est une oxydo-réduction) avec suivi colorimétrique.</description>
+    </item>
+    <item>
       <title>Synthèse</title>
       <link>https://coursphychi.github.io/1spe/synthese/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -34,7 +48,7 @@
       <link>https://coursphychi.github.io/1spe/ondes/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/ondes/</guid>
-      <description>Ondes mécaniques progressives Présentation&#xA;Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Act - Voix de cannard Simulation </description>
+      <description>Ondes mécaniques progressives Présentation&#xA;Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Simulation </description>
     </item>
     <item>
       <title>Image</title>

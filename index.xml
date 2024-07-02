@@ -198,6 +198,13 @@
       <description>Entités chimiques / Atome et Noyau Présentation&#xA;Définitions Élément chimique&#xA;Ensemble des atomes (isolés ou engagés dans un édifice polyatomique neutre ou chargé) et des ions monoatomiques comportant un même nombre de protons dans leur noyau.&#xA;Exemple :&#xA;Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite comportent des atomes de chlore ou des ions chlorure de même Z = 17, caractérisant l’élément chlore.&#xA;Documents et autres Un peu de maths : ordre de grandeur, puissances de 10, multiples et sous-multiples TP - Identification d&amp;rsquo;un sel + Correction Activité - L&amp;rsquo;élément chimique Petits jeux pour se tester </description>
     </item>
     <item>
+      <title>Oxydo-réduction</title>
+      <link>https://coursphychi.github.io/1spe/oxydo/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/oxydo/</guid>
+      <description>Oxydo-réduction Présentation&#xA;Demi-équation électronique&#xA;Une demi-équation électronique met en évidence, de manière formelle, l’existence d’un transfert d’électron(s) au cours d’une transformation convertissant l’oxydant d’un couple en son réducteur conjugué (ou l’inverse). La demi-équation ne modélise pas le déroulement microscopique de cet échange, mais illustre, à l’échelle macroscopique, les proportions dans lesquelles il s’opère.&#xA;Exemple :&#xA;La demi-équation électronique associée au couple $\left(\ce{Cr2O7^2-/Cr^3+}\right)$, montre que 3 moles d’électrons sont échangées par mole de chrome converti :</description>
+    </item>
+    <item>
       <title>Algèbre</title>
       <link>https://coursphychi.github.io/more/maths/algebre/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
@@ -280,6 +287,13 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/lewis/</guid>
       <description>Cortège électronique et stabilité Présentation&#xA;Définitions Configuration électronique d’un atome&#xA;Répartition des électrons d’un atome dans les différentes couches et sous-couches.&#xA;Exemple :&#xA;La configuration électronique de l’atome de sodium (numéro atomique Z = 11) est $\text{1s}^2\,\text{2s}^2\,\text{2p}^6\,\text{3s}^1$ à l’état fondamental. Cette configuration permet de retrouver la position de l’élément sodium dans le tableau périodique : il se situe dans la 3e période et la 1re colonne du bloc s, et par conséquent, la 1re colonne du tableau.</description>
+    </item>
+    <item>
+      <title>Titrage</title>
+      <link>https://coursphychi.github.io/1spe/titrage/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/titrage/</guid>
+      <description>Titrage Présentation&#xA;Dosage par titrage&#xA;Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’« acido-basique », « par oxydoréduction » ou « par précipitation » selon la nature de la réaction support.&#xA;En première, on ne verra que des dosages par oxydo-réduction (la réaction support du titrage est une oxydo-réduction) avec suivi colorimétrique.</description>
     </item>
     <item>
       <title>Aires et Volumes</title>
@@ -482,7 +496,7 @@
       <link>https://coursphychi.github.io/1spe/ondes/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/ondes/</guid>
-      <description>Ondes mécaniques progressives Présentation&#xA;Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Act - Voix de cannard Simulation </description>
+      <description>Ondes mécaniques progressives Présentation&#xA;Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Simulation </description>
     </item>
     <item>
       <title>Radioactivité</title>
