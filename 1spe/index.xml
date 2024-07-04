@@ -37,6 +37,20 @@
       <description>Titrage Présentation&#xA;Dosage par titrage&#xA;Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’« acido-basique », « par oxydoréduction » ou « par précipitation » selon la nature de la réaction support.&#xA;En première, on ne verra que des dosages par oxydo-réduction (la réaction support du titrage est une oxydo-réduction) avec suivi colorimétrique.</description>
     </item>
     <item>
+      <title>Lewis</title>
+      <link>https://coursphychi.github.io/1spe/lewis/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/lewis/</guid>
+      <description>De la structure à la polarité d&amp;rsquo;une entité Présentation&#xA;Schéma de Lewis d’une entité chimique&#xA;Modèle de représentation de la structure électronique de valence d’entités au moyen de lettres (symbole des éléments chimiques), traits (doublets liants et doublets non liants), lacunes électroniques et charges formelles.&#xA;Charge formelle&#xA;Charge portée par un atome après partage équitable de chaque doublet liant, la charge formelle étant obtenue par comparaison entre le nombre d’électrons de valence à l’état fondamental et celui obtenu après partage.</description>
+    </item>
+    <item>
+      <title>Cohésion</title>
+      <link>https://coursphychi.github.io/1spe/cohsion/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/cohsion/</guid>
+      <description>De la structure des entités à la cohésion et à la solubilité/miscibilité d’espèces chimiques Présentation&#xA;Cohésion dans une espèce chimique solide ou liquide&#xA;L’existence d’un volume propre pour un liquide ou un solide, à température et de pression données, est modélisée par des forces attractives entre entités, d’origine électrostatique, de courte portée et n’impliquant pas de mise en commun d’électrons : interaction entre deux ions, entre un ion et une entité polaire, entre deux entités polaires, entre deux entités polarisables.</description>
+    </item>
+    <item>
       <title>Synthèse</title>
       <link>https://coursphychi.github.io/1spe/synthese/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>

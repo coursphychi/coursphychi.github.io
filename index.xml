@@ -317,6 +317,13 @@
       <description>Énergie / Puissance Présentation&#xA;Rappels La variation d&amp;rsquo;énergie $\Delta E$ (en J) d&amp;rsquo;un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$ où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.&#xA;Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à : $\displaystyle P = \frac{\Delta E}{\Delta t}$ Conversion à connaître et à savoir redémontrer :</description>
     </item>
     <item>
+      <title>Lewis</title>
+      <link>https://coursphychi.github.io/1spe/lewis/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/lewis/</guid>
+      <description>De la structure à la polarité d&amp;rsquo;une entité Présentation&#xA;Schéma de Lewis d’une entité chimique&#xA;Modèle de représentation de la structure électronique de valence d’entités au moyen de lettres (symbole des éléments chimiques), traits (doublets liants et doublets non liants), lacunes électroniques et charges formelles.&#xA;Charge formelle&#xA;Charge portée par un atome après partage équitable de chaque doublet liant, la charge formelle étant obtenue par comparaison entre le nombre d’électrons de valence à l’état fondamental et celui obtenu après partage.</description>
+    </item>
+    <item>
       <title>Quantité de matière</title>
       <link>https://coursphychi.github.io/2nde/mole/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -350,6 +357,13 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/chgt_etat/</guid>
       <description>Transformation physique :&#xA;les changements d&amp;rsquo;état Présentation&#xA;info&#xA;Le passage de l&amp;rsquo;état gazeux à l&amp;rsquo;état solide, la condensation, est parfois nommé : condensation, condensation solide, sublimation inverse, déposition, désublimation.&#xA;Dans le language courant, le terme condensation ne désigne pas la même chose qu&amp;rsquo;en physique. On parle communément de condensation pour évoquer le passage de l&amp;rsquo;état gazeux à l&amp;rsquo;état liquide comme la rosée du matin ou la buée sur une vitre.</description>
+    </item>
+    <item>
+      <title>Cohésion</title>
+      <link>https://coursphychi.github.io/1spe/cohsion/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/cohsion/</guid>
+      <description>De la structure des entités à la cohésion et à la solubilité/miscibilité d’espèces chimiques Présentation&#xA;Cohésion dans une espèce chimique solide ou liquide&#xA;L’existence d’un volume propre pour un liquide ou un solide, à température et de pression données, est modélisée par des forces attractives entre entités, d’origine électrostatique, de courte portée et n’impliquant pas de mise en commun d’électrons : interaction entre deux ions, entre un ion et une entité polaire, entre deux entités polaires, entre deux entités polarisables.</description>
     </item>
     <item>
       <title>Conduction thermique</title>
