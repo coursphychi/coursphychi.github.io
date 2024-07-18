@@ -72,25 +72,39 @@
       <description>Combustions Présentation</description>
     </item>
     <item>
+      <title>Interactions et champs</title>
+      <link>https://coursphychi.github.io/1spe/champs/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/champs/</guid>
+      <description>Interactions et champs Présentation&#xA;Documents et autres Activité - Anguilles Activité - Dessiner des champs Animations : Ballons et électricité statique Chataîgne Loi de Coulomb Force gravitationnelle Champ électrostatique </description>
+    </item>
+    <item>
+      <title>Pression</title>
+      <link>https://coursphychi.github.io/1spe/pression/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/pression/</guid>
+      <description>Avancement Présentation&#xA;Documents et autres Exos - Avancement + correction Animation - Pression hydrostatique </description>
+    </item>
+    <item>
       <title>Ondes mécaniques</title>
       <link>https://coursphychi.github.io/1spe/ondes/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/ondes/</guid>
-      <description>Ondes mécaniques progressives Présentation&#xA;Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Simulation </description>
+      <description>Ondes mécaniques progressives Présentation&#xA;Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Simulation d&amp;rsquo;une onde sur une corde Simulation d&amp;rsquo;une onde sonore </description>
     </item>
     <item>
       <title>Image</title>
       <link>https://coursphychi.github.io/1spe/lentilles/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/lentilles/</guid>
-      <description>Formation des images par une lentille convergente Présentation&#xA;Documents et autres Act - Lentille et smartphone Act - Appareil réflexe </description>
+      <description>Formation des images par une lentille convergente Présentation&#xA;Documents et autres Act - Lentille et smartphone Act - Appareil réflexe Animations interactives </description>
     </item>
     <item>
       <title>Couleurs</title>
       <link>https://coursphychi.github.io/1spe/couleurs/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/couleurs/</guid>
-      <description>Couleurs Présentation&#xA;Documents et autres TP couleurs </description>
+      <description>Couleurs Présentation&#xA;Documents et autres TP couleurs Animation - Vision des couleurs et filtre </description>
     </item>
   </channel>
 </rss>

@@ -471,11 +471,25 @@
       <description>Forces et principe d&amp;rsquo;inertie Présentation&#xA;Documents TP - Principe d&amp;rsquo;inertie + accroche + plus &amp;ldquo;beaux&amp;rdquo; dessins + appliquette Geogebra TP - Lien entre masse et poids + partie python Activité python - Chute libre d&amp;rsquo;une balle Simulation - Force gravitationnelle entre deux masses + tableur </description>
     </item>
     <item>
+      <title>Interactions et champs</title>
+      <link>https://coursphychi.github.io/1spe/champs/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/champs/</guid>
+      <description>Interactions et champs Présentation&#xA;Documents et autres Activité - Anguilles Activité - Dessiner des champs Animations : Ballons et électricité statique Chataîgne Loi de Coulomb Force gravitationnelle Champ électrostatique </description>
+    </item>
+    <item>
       <title>Incertitudes</title>
       <link>https://coursphychi.github.io/tsti2d/incertitudes/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/incertitudes/</guid>
       <description>Incertitudes Petite expérience Qui a le plus faible temps de réaction ? Comment être sûr ?&#xA;Utilisation de la calculette Calcul de la moyenne et de l&amp;rsquo;écart-type expérimental :&#xA;Petites vidéos expliquant les manips sur les différentes calculettes.&#xA;Savoir et savoir faire coeur&#xA;Procéder à l’évaluation d’une incertitude-type par une approche statistique (type A). Savoir utiliser sa calculette pour déterminer la moyenne et l&amp;rsquo;écart-type expérimental d&amp;rsquo;une série de données. Procéder à l’évaluation d’une incertitude-type associée à une mesure unique en exploitant une relation fournie (type B).</description>
+    </item>
+    <item>
+      <title>Pression</title>
+      <link>https://coursphychi.github.io/1spe/pression/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/pression/</guid>
+      <description>Avancement Présentation&#xA;Documents et autres Exos - Avancement + correction Animation - Pression hydrostatique </description>
     </item>
     <item>
       <title>Son</title>
@@ -524,21 +538,21 @@
       <link>https://coursphychi.github.io/1spe/ondes/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/ondes/</guid>
-      <description>Ondes mécaniques progressives Présentation&#xA;Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Simulation </description>
+      <description>Ondes mécaniques progressives Présentation&#xA;Documents et autres Act - Épicentre + notebook Python Act - Piscine à vagues Simulation d&amp;rsquo;une onde sur une corde Simulation d&amp;rsquo;une onde sonore </description>
     </item>
     <item>
       <title>Radioactivité</title>
       <link>https://coursphychi.github.io/tsti2d/radioact/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/radioact/</guid>
-      <description>Radioactivité Présentation&#xA;Expériences Désintégration radioactive de la classe + Tirage au sort TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours Estimez votre exposition annuelle à la radioactivité Activités Datation carbone 14 Déchets nucléaires Examen médical Exercice défaut de masse et énergie Savoir et savoir faire coeur&#xA;Distinguer la radioactivité naturelle de la radioactivité artificielle.&#xA;Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.</description>
+      <description>Radioactivité Présentation&#xA;Expériences Désintégration radioactive de la classe + Tirage au sort TP durée de vie d&amp;rsquo;une bulle + Notebook Python pour la régression linéaire + vidéo de secours Estimez votre exposition annuelle à la radioactivité Activités Datation carbone 14 Déchets nucléaires Examen médical Exercice défaut de masse et énergie Animation interactive Savoir et savoir faire coeur&#xA;Distinguer la radioactivité naturelle de la radioactivité artificielle.&#xA;Citer les différents types de rayonnement radioactif et préciser la nature des particules émises.</description>
     </item>
     <item>
       <title>Image</title>
       <link>https://coursphychi.github.io/1spe/lentilles/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/lentilles/</guid>
-      <description>Formation des images par une lentille convergente Présentation&#xA;Documents et autres Act - Lentille et smartphone Act - Appareil réflexe </description>
+      <description>Formation des images par une lentille convergente Présentation&#xA;Documents et autres Act - Lentille et smartphone Act - Appareil réflexe Animations interactives </description>
     </item>
     <item>
       <title>Pression</title>
@@ -552,7 +566,7 @@
       <link>https://coursphychi.github.io/1spe/couleurs/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/couleurs/</guid>
-      <description>Couleurs Présentation&#xA;Documents et autres TP couleurs </description>
+      <description>Couleurs Présentation&#xA;Documents et autres TP couleurs Animation - Vision des couleurs et filtre </description>
     </item>
     <item>
       <title>Transport de l&#39;électricité</title>
