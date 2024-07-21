@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>IA - Cours Physique-Chimie</title>
+    <title>Vecteur variation de vitesse - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/more/info/ia/">
+  <body class="" data-url="/1spe/variationvitesse/">
     <nav id="sidebar" class="">
 
 
@@ -449,7 +449,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1spe/" title="1SPÉ" class="dd-item
-        
+        parent
         
         
         ">
@@ -706,7 +706,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/1spe/variationvitesse/" title="Vecteur variation de vitesse" class="dd-item ">
+      <li data-nav-id="/1spe/variationvitesse/" title="Vecteur variation de vitesse" class="dd-item active">
         <a href="/1spe/variationvitesse/">
         Vecteur variation de vitesse
         
@@ -1704,7 +1704,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/" title="MORE" class="dd-item
-        parent
+        
         
         
         ">
@@ -1733,7 +1733,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/info/" title="Informatique" class="dd-item
-        parent
+        
         
         
         ">
@@ -1801,7 +1801,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/more/info/ia/" title="IA" class="dd-item active">
+      <li data-nav-id="/more/info/ia/" title="IA" class="dd-item ">
         <a href="/more/info/ia/">
         IA
         
@@ -2406,7 +2406,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   IA
+                   Vecteur variation de vitesse
                  
                   </span>
                 </div>
@@ -2415,40 +2415,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#histoire-de-lia">Histoire de l&rsquo;IA</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#apprentissage-machine--apprendre-à-prédire">Apprentissage Machine : apprendre à prédire</a></li>
-    <li><a href="#algorithme-des-k-plus-proches-voisins----exemple-dapprentissage-supervisé">Algorithme des <em>k</em> plus proches voisins &ndash; Exemple d&rsquo;apprentissage supervisé</a>
-      <ul>
-        <li><a href="#principe">Principe</a></li>
-        <li><a href="#choix-de-k">Choix de <em>k</em></a></li>
-        <li><a href="#validation----matrice-de-confusion">Validation &ndash; Matrice de confusion</a></li>
-      </ul>
-    </li>
-    <li><a href="#algorithme-des-k-moyennes----exemple-dapprentissage-non-supervisé">Algorithme des <em>k</em>-moyennes &ndash; Exemple d&rsquo;apprentissage non supervisé</a>
-      <ul>
-        <li><a href="#principe-1">Principe</a></li>
-        <li><a href="#choix-de-k-1">Choix de <em>k</em></a></li>
-        <li><a href="#limites">Limites</a></li>
-        <li><a href="#applications">Applications</a></li>
-      </ul>
-    </li>
-    <li><a href="#apprentissage-profond">Apprentissage profond</a>
-      <ul>
-        <li><a href="#avènement-des-grands-modèles-de-langage">Avènement des grands modèles de langage</a></li>
-      </ul>
-    </li>
-    <li><a href="#ia-et-éthique">IA et éthique</a>
-      <ul>
-        <li><a href="#biais-des-survivants">Biais des survivants</a></li>
-        <li><a href="#la-corrélation-nimplique-pas-la-causalité">La corrélation n&rsquo;implique pas la causalité</a></li>
-        <li><a href="#quand-la-machine-devra-choisir-à-notre-place">Quand la machine devra choisir à notre place</a></li>
-      </ul>
-    </li>
-    <li><a href="#futur-des-ia-et-danger-existentiel">Futur des IA et danger existentiel</a></li>
+    <li><a href="#documents-et-autres">Documents et autres</a></li>
   </ul>
 </nav>
     </div>
@@ -2468,412 +2435,15 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<style>
- #correc
-  {
-    color: #006C65;
-    border-left: solid 10px #C7DDDC;
-  }
- #comm
-  {
-    color: #004D80;
-    border-left: solid 10px #B3CAD9;
-  }
- #commsum
-  {
-    color: #004D80;
-  }
- #correcsum
-  {
-    color: #006C65;
-  }
-</style>
-<h1 id="intelligence-artificielle">Intelligence Artificielle</h1>
-<p>Avant de parler d&rsquo;intelligence artificielle, il convient de s&rsquo;interroger sur le terme <strong>intelligence</strong>.</p>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/ck4RGeoHFko?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
+<h1 id="vecteur-variation-de-vitesse">Vecteur variation de vitesse</h1>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/1spe/pression">Présentation</a></p>
+<div style="position: relative; max-width: 100%; margin-left: auto;margin-right: auto;">
+<a href="/cm-pression1spe.pdf"><img src="/cm-pression1spe.png"></a>
 </div>
-<br>
-<p>L&rsquo;<strong>intelligence arificielle</strong> (IA) est une discipline  scientifique qui a vu officiellement le jour en 1956. Elle repose sur la conjecture selon laquelle toutes les fonctions cognitives, en particulier l&rsquo;apprentissage, le raisonnement, le calcul, la perception, la mémorisation, voire la découverte scientifique ou la créativité artistique, peuvent être décrites avec une précision telle qu&rsquo;il serait possible de les reproduire sur des ordinateurs.</p>
-<br>
-<h2 id="histoire-de-lia">Histoire de l&rsquo;IA</h2>
-<h4 id="la-première-programmeuse--ada-lovelace">La première programmeuse : Ada Lovelace</h4>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/l69wsNx3XlY?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<h4 id="de-turing-au-big-data-et-deep-learning">De Turing au Big Data et Deep Learning</h4>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/qmwJx-r5vmw?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<br>
-<h2 id="apprentissage-machine--apprendre-à-prédire">Apprentissage Machine : apprendre à prédire</h2>
-<p>L&rsquo;<strong>apprentissage automatique</strong> (Machine Learning) est à l&rsquo;intersection de l&rsquo;IA et d&rsquo;un autre champ scientifique : la science des données (data science).</p>
-<p><img src="/vennia.png?width=600px" alt=""></p>
-<p>Arthur Samuel définit l&rsquo;apprentissage automatique ainsi en 1959 :</p>
-<blockquote>
-<p>La capacité à apprendre sans avoir été spécifiquement programmé pour.</p>
-</blockquote>
-<p>En pratique, il s&rsquo;agit de produire des réponses adaptées aux données fournies en entrée (identifier des motifs, des tendances, construire des modèles, faire des prédictions). L&rsquo;apprentissage automatique n&rsquo;est donc ni plus ni moins que du traitement de données visant à prédire des résultats en fonction des données entrantes.</p>
-<p>Le diagramme suivant<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> survole le domaine.</p>
-<div style=" position: relative;overflow: hidden;max-width: max(100%,900px);margin: auto; padding-bottom: min(100%,900px);"> 
-<iframe src="//plotly.com/~Chinasky/10.embed" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;border:none"></iframe>
-</div>
-<p>On va s&rsquo;intéresser à l&rsquo;apprentissage automatique dit &ldquo;classique&rdquo;<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> qui regroupe des algorithmes très simples nés dans les années 50 et toujours utilisés aujourd&rsquo;hui à peu près partout. <br>
-Cette branche de l&rsquo;apprentissage automatique se décompose prinicipalement en deux familles d&rsquo;algorithmes : <strong>l&rsquo;apprentissage supervisé</strong> et son pendant, <strong>l&rsquo;apprentissage non supervisé</strong>. Nous allons étudier un algorithme star de chacune de ces familles.
-<img src="https://i.vas3k.ru/7w1.jpg?width=800px" alt=""></p>
-<br>
-<h2 id="algorithme-des-k-plus-proches-voisins----exemple-dapprentissage-supervisé">Algorithme des <em>k</em> plus proches voisins &ndash; Exemple d&rsquo;apprentissage supervisé</h2>
-<p>L&rsquo;algorithme des <em>k</em> plus proches voisin (<em>k</em>-nearest neighbors ou KNN) est une des techniques les plus simples en apprentissage automatique. Sa facilité d&rsquo;utilisation et sa rapidité en font un outil de choix dans l&rsquo;industrie.</p>
-<p>KNN est un algorithme d&rsquo;apprentissage supervisé ; cela signifie que l&rsquo;algorithme nécessite des données classifiées en amont qui vont lui servir à trouver la bonne étiquette pour d&rsquo;autres données non encore classifiées.</p>
-<p>Suivant la nature de l&rsquo;étiquette, KNN peut servir à :</p>
+<h2 id="documents-et-autres">Documents et autres</h2>
 <ul>
-<li>une <strong>classification</strong> des nouvelles données si les étiquettes sont des catagories ;</li>
-<li>une <strong>régression</strong> si les étiquettes sont des nombres.</li>
+<li><a href="/act-variationvitesse.pdf"><strong>Act - Montagnes Russes</strong> (partie 2)</a></li>
 </ul>
-<br>
-<h3 id="principe">Principe</h3>
-<p>KNN enregistre, dans un premier temps, tous les points de données étiquetées qui vont lui servir à l&rsquo;apprentissage (c&rsquo;est le training set). Puis, quand arrive un point de donnée non étiqueté, l&rsquo;algorithme calcule sa distance aux autres points et sélectionne les <strong>k</strong> plus proches. On a alors deux cas possibles :</p>
-<ul>
-<li>si les étiquettes sont des catégories, l&rsquo;algorithme calcule <strong>le mode</strong> des catégories des voisins sélectionnés (catégorie la plus représentée).</li>
-<li>si les étiquettes sont des nombres, l&rsquo;algorithme calcule <strong>la moyenne</strong> des étiquettes des voisins sélectionnés.</li>
-</ul>
-<p>L&rsquo;algorithme des <em>k</em> plus proches voisins est <strong>non paramétrique</strong> dans le sens où aucun modèle mathématique de classification ou régression n&rsquo;est construit à partir des données (pas de paramètre à ajuster) puisque toutes les données d&rsquo;apprentissage sont enregistrées telles quelles.<br>
-Cela signifie qu&rsquo;on ne présuppose rien de particulier sur les données (à part que des points proches appartiennent à la même catégorie). L&rsquo;algorithme est donc particulièrement robuste (les données parlent d&rsquo;elles-même) et simple à mettre à jour (suffit d&rsquo;ajouter les nouvelles données d&rsquo;apprentissage).</p>
-<br>
-<h3 id="choix-de-k">Choix de <em>k</em></h3>
-<p><img src="/gifknn.gif" alt=""></p>
-<p>Comme le montre la petite animation ci-dessus, le <strong>choix de k</strong> modifie le résultat obtenu.</p>
-<ul>
-<li>Si <em>k</em> est trop petit, le moyennage est faible et donc la variabilité va être très grande. On parle alors de surapprentissage (<strong>overfitting</strong>).</li>
-<li>En augmentant <em>k</em>, les résultats obtenus se stabilisent (vote de la majorité) et les erreurs diminuent, jusqu&rsquo;au moment où la boule à l&rsquo;intérieur de laquelle se fait le moyennage devient trop grosse, amenant in fine l&rsquo;algorithme a choisir systématiquement la catégorie majoritaire, quel que soit le point&hellip; On augmente alors le <strong>biais</strong> (ici, le biais est le préjudice en faveur du plus grand nombre). L&rsquo;ajustement ne suit plus les variations, on parle de sous-apprentissage (<strong>underfitting</strong>).</li>
-</ul>
-<p>Pour résumer :</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">variance</th>
-<th style="text-align:center">biais</th>
-<th style="text-align:center">Cas d&rsquo;une régression</th>
-<th style="text-align:center">Cas d&rsquo;une classification</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong>k trop petit</strong> $\rightarrow$ <strong>overfitting</strong></td>
-<td style="text-align:center">forte</td>
-<td style="text-align:center">faible</td>
-<td style="text-align:center"><img src="/overfreg.png?width=200px" alt=""></td>
-<td style="text-align:center"><img src="/overfclas.png?width=200px" alt=""></td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>k trop grand</strong> $\rightarrow$ <strong>underfitting</strong></td>
-<td style="text-align:center">faible</td>
-<td style="text-align:center">fort</td>
-<td style="text-align:center"><img src="/underfreg.png?width=200px" alt=""></td>
-<td style="text-align:center"><img src="/underfclas.png?width=200px" alt=""></td>
-</tr>
-</tbody>
-</table>
-
-<div class="notices tip" style="--title: 'tip';">
-  <p style="display: none;">tip</p>
-  <div class="notice-body">
-    <p>Lorsqu&rsquo;on ne connaît rien sur les données, on peut toujours commencer par prendre la racine carrée du nombre de points dans l&rsquo;ensemble d&rsquo;entraînement comme <em>k</em> de départ.</p>
-
-  </div>
-</div>
-
-
-<p>Le choix de <em>k</em> est donc affaire de compromis. Pour le rendre plus scientifique, on peut chercher à mesurer la performance de l&rsquo;algorithme pour différentes valeurs de <em>k</em>.</p>
-<p>Mais comment mesure-t-on la <strong>performance d&rsquo;un algorithme d&rsquo;apprentissage automatique</strong> ?</p>
-<br>
-<h3 id="validation----matrice-de-confusion">Validation &ndash; Matrice de confusion</h3>
-<p>La <strong>matrice de confusion</strong> permet d&rsquo;évaluer la qualité des prédictions d&rsquo;un algorithme.</p>
-<p>Prenons l&rsquo;exemple de l&rsquo;utilisation de KNN sur une banque d&rsquo;images de chiffres écrits à la main et plus spécifiquement concentrons-nous sur sa capacité à reconnaître des &ldquo;3&rdquo;.</p>
-<p><img src="/MnistExamples.png" alt=""></p>
-<p>On découpe l&rsquo;espace en 4 cadrans. Sur une dimension, on regroupe d&rsquo;un côté les données pertinentes (les 3) et de l&rsquo;autre le reste des données (les non 3), et on décompose l&rsquo;autre dimension en prédictions positives (les 3 prédits) et négatives (les non 3 prédits).</p>
-<p>Puis on compte dans chaque cadran le nombre de données correspondant au recouvrement des prédictions et de la réalité. Un nom issu du vocabulaire des diagnostics médicaux est attribué à chacun de ces cadrans :</p>
-<ul>
-<li>les <strong>vrais positifs</strong> VP (les 3 identifiés comme des 3),</li>
-<li>les <strong>vrais négatifs</strong> VN (les non 3 identifiés comme des non 3),</li>
-<li>les <strong>faux positifs</strong> FP (les non 3 identifiés comme des 3),</li>
-<li>les <strong>faux négatifs</strong> FN (les 3 identifiés comme des non 3).</li>
-</ul>
-<p>À partir de ces effectifs, on peut calculer 3 grandeurs permettant d&rsquo;évaluer la qualité de la prédiction :</p>
-
-<div class="notices def" style="--title: 'Précision';">
-  <p style="display: none;">Précision</p>
-  <div class="notice-body">
-    <p>Nombre de données bien prédites parmi les prédictions positives :
-$$\frac{VP}{VP+FP}$$</p>
-
-  </div>
-</div>
-
-
-
-<div class="notices def" style="--title: 'Rappel ou sensibilité';">
-  <p style="display: none;">Rappel ou sensibilité</p>
-  <div class="notice-body">
-    <p>Nombre de données bien prédites parmi les données positives :
-$$\frac{VP}{VP+FN}$$<br></p>
-
-  </div>
-</div>
-
-
-
-<div class="notices def" style="--title: 'Exactitude \28 accuracy\29 ';">
-  <p style="display: none;">Exactitude (accuracy)</p>
-  <div class="notice-body">
-    <p>$$\frac{VP+VN}{VP+VN+FP+FN}$$<br></p>
-
-  </div>
-</div>
-
-
-
-<div class="notices info" style="--title: 'info';">
-  <p style="display: none;">info</p>
-  <div class="notice-body">
-    <p>Un algorithme peut très bien être très précis (les prédictions positives sont bien des 3), mais peu sensible, avec un faible taux de rappel (parmi tous les 3, peu ont été identifiés).<br>
-À l&rsquo;inverse, on peut avoir une bonne sensibilité (la plupart des vrais 3 ont été identifiés comme tel), mais peu précis (beaucoup de chiffres identifiés comme des 3 sont en fait d&rsquo;autres chiffres).</p>
-
-  </div>
-</div>
-
-
-<p><img src="/matconfus.png?width=800px" alt=""></p>
-
-<div class="notices tip" style="--title: 'tip';">
-  <p style="display: none;">tip</p>
-  <div class="notice-body">
-    <p>On peut tout aussi bien définir la matrice de confusion avec les prédictions sur les lignes et la réalité sur les colonnes.</p>
-
-  </div>
-</div>
-
-
-<p>Maintenant qu&rsquo;on sait évaluer l&rsquo;algorithme, cherchons la valeur de <strong>k</strong> qui maximise l&rsquo;exactitude.</p>
-<p>Dans le graphe ci-dessous, on a tracé l&rsquo;<em>exactitude</em> de l&rsquo;algorithme pour la reconnaissance des &ldquo;9&rdquo; en fonction de la valeur de <em>k</em>.
-<img src="/meilleurk.png?width=600px" alt="">
-Si notre but est de reconnaître le mieux possible les 9 manuscrits, il semblerait que la valeur de <em>k</em> optimale soit 18.</p>
-<br>
-<a href="https://presentationssite.github.io/tes/ia/#/" style="font-weight:bold;">Exemple d'utilisation de KNN pour reconnaître un chiffre</a>
-<br>
-<br>
-<h2 id="algorithme-des-k-moyennes----exemple-dapprentissage-non-supervisé">Algorithme des <em>k</em>-moyennes &ndash; Exemple d&rsquo;apprentissage non supervisé</h2>
-<p>Le boulot de l&rsquo;algorithme des <strong><em>k</em>-moyennes</strong> (k-means) n&rsquo;est pas d&rsquo;étiqueter les données, mais de les regrouper par famille. C&rsquo;est donc un algorithme de <strong>partitionnement</strong> des données (clustering).</p>
-<p>Contrairement à KNN, l&rsquo;algorithme des <em>k</em>-moyennes ne nécessite pas de données préétiquetées. Il fait ainsi parti des algorithmes d&rsquo;apprentissage automatique <strong>non-supervisé</strong> (il se débrouille tout seul avec les données mystères).<br></p>
-<p>Par contre, l&rsquo;algorithme partage avec KNN sa grande simplicité d&rsquo;emploi et son efficacité qui le rendent lui aussi très populaire dans l&rsquo;industrie.</p>
-<br>
-<h3 id="principe-1">Principe</h3>
-<p>L&rsquo;algorithme dépend d&rsquo;un seul paramètre en plus des données : le nombre de partitions (clusters) <em>k</em>.</p>
-<p>On commence par choisir <em>k</em> points au hasard dans l&rsquo;espace des données (il peut s&rsquo;agir de <em>k</em> points de données ou de <em>k</em> autres points). Ce sont les <em>k</em> centres (ou centroïdes).</p>
-
-<div class="notices tip" style="--title: 'tip';">
-  <p style="display: none;">tip</p>
-  <div class="notice-body">
-    <p>Plus les points choisis au départ sont éloignés les uns des autres, mieux c&rsquo;est. Une amélioration de l&rsquo;algorithme de base proposée en 2007, k-means++, s&rsquo;en assure.</p>
-
-  </div>
-</div>
-
-
-<p>On attribue ensuite à chaque centre tous les points de données qui lui sont le plus proches, formant ainsi <em>k</em> groupes.</p>
-<p>Enfin, on déplace chaque centre au barycentre de son groupe.</p>
-<p>On répète les deux dernières opérations (attribution des points les plus près et déplacement des centres) tant que les centres bougent d&rsquo;une itération à l&rsquo;autre.</p>
-<p><img src="/kmeans.gif" alt=""></p>
-<p>L&rsquo;algorithme vise à résoudre au final un problème d&rsquo;optimisation ; son but est en effet de trouver le minimum de la distance entre les points à l&rsquo;intérieur de chaque partition.</p>
-<p>Mathématiquement, étant donné un ensemble de points $(x_1,x_2,\ldots,x_n)$, on cherche à partitionner les $n$ points en $k$ ensembles $S=\{S_1,S_2,\ldots,S_k\}$ en minimisant la grandeur  :
-$$I = \sum_{i=1}^{k}\sum_{x_j \in S_i}||x_i-\mu_i||^2$$
-où $\mu_i$ est le barycentre des points dans $S_i$.</p>
-<p>$I$ est la variance intra-classe ou <strong>inertie</strong> intra-classe (terme surtout utilisé en anglais).</p>
-<br>
-<h3 id="choix-de-k-1">Choix de <em>k</em></h3>
-<p>Choisir le bon nombre de clusters est crucial pour l&rsquo;algorithme des <em>k</em>-moyennes, comme l&rsquo;illustre l&rsquo;exemple suivant :</p>
-<p><img src="/choixdek.png" alt=""></p>
-<p>Mais ce n&rsquo;est pas toujours simple (contrairement à l&rsquo;exemple) de deviner le bon nombre de clusters juste en inspectant les données. Alors comment faire ?</p>
-<p>On pourrait se dire qu&rsquo;il suffit de prendre le modèle avec la plus faible inertie. Mais malheureusement, l&rsquo;inertie n&rsquo;est pas une métrique adaptée au choix de <em>k</em> puisqu&rsquo;elle ne fait que descendre quand <em>k</em> augmente&hellip; Logique : plus il y a de clusters, plus la distance intra-cluster diminue&amp;nbsp!</p>
-<p>Traçons l&rsquo;inertie en fonction de <em>k</em> pour y voir plus clair :
-<img src="/inertiefctk3.png?width=700px" alt=""></p>
-<p>On remarque qu&rsquo;ici, le nombre de clusters idéal correspond au point d&rsquo;inflexion de la courbe (ou, si on imagine un bras, au coude).</p>
-<p>Confirmons en simulant des données séparées en 5 tas et en retraçant la courbe.
-<img src="/inertiefctk5.png?width=1400px" alt=""></p>
-<p>Là encore, le coude indique le nombre <em>k</em> idéal.<br>
-On semble donc avoir trouver une tactique utilisable lorsqu&rsquo;on n&rsquo;a pas d&rsquo;autres indices.</p>
-<p>
-<div class="notices tip" style="--title: 'tip';">
-  <p style="display: none;">tip</p>
-  <div class="notice-body">
-    <p>Il existe des méthodes plus précises pour déterminer <em>k</em>, mais elles sont aussi plus gourmandes en calcul. La plus répandue utilise les <em>coefficients de silhouette</em> de chaque point  (différence entre la distance moyenne avec les points du même groupe (cohésion) et la distance moyenne avec les points des autres groupes voisins (séparation)).</p>
-
-  </div>
-</div>
-
-
-<img src="/xkcdkmeans.png?width=400px" alt=""></p>
-<h3 id="limites">Limites</h3>
-<p>L&rsquo;algorithme des $k$-moyennes se confronte à une difficulté classique en apprentissage automatique, et plus généralement pour tout problème d&rsquo;optimisation : <strong>obtenir un minimum global plutôt qu&rsquo;un minimum local</strong>.</p>
-<p><img src="/localglobal.png?width=600px" alt=""></p>
-<p>La convergence vers un des minima locaux dépend crucialement de la position initiale des centres.</p>
-<p>Dans l&rsquo;exemple suivant, on obtient 3 partitionnements différents pour 3 initialisations différentes des centres.</p>
-<p><img src="/subopti.png?width=700px" alt=""></p>
-<p>On vérifie que les centres sont bien bloqués sur leur position dans les deux premiers cas puisqu&rsquo;aucun changement d&rsquo;attribution n&rsquo;est possible.</p>
-<p>Dans l&rsquo;algo classique, pour pallier au mieux ce problème, on initialise les centres aléatoirement et on relance l&rsquo;algorithme un certain nombre de fois pour ne garder au final que la solution qui minimise l&rsquo;inertie intra-classe.</p>
-<p>Autre souci des <em>k</em>-moyennes : des difficultés pour partitionner des clusters de différentes tailles, différentes densités ou des formes non sphériques.</p>
-<br>
-<h3 id="applications">Applications</h3>
-<p>L&rsquo;algorithme des <em>k</em>-moyennes ne présuppose rien sur les données et peut s&rsquo;avérer, par le fait, très utile en première approche dans un rôle de défricheur.</p>
-<p>L&rsquo;algorithme permet aussi de trancher des débats de la plus haute importance sur les couleurs comme  &ldquo;<font color=#00aaaa>est-ce plus vert que bleu ?</font>&rdquo; en organisant un combat entre les centroïdes de chaque couleur.<br>
-Dans la même veine, on peut utiliser <em>k</em>-moyennes pour <strong>segmenter une image</strong> par couleur, ce qui peut s&rsquo;avérer intéressant pour identfier des zones (comme des forêts) sur des données satellite ou pour compresser des images. Le choix de <em>k</em> correspond alors au nombre de couleurs qu&rsquo;on veut garder.</p>
-<p><img src="/segimage.png?width=700" alt=""></p>
-<p><img src="/moswebb.png" alt=""></p>
-<p>La simplicité de <em>k</em>-moyennes en fait un bon outil de dégrossissage des données, y compris sur des données déjà étiquetées. Cela permet de réduire leur dimensionnalité, avant d&rsquo;utiliser des algorithmes plus complexes d&rsquo;apprentissage supervisé.</p>
-<br>
-<h2 id="apprentissage-profond">Apprentissage profond</h2>
-<p>L&rsquo;apprentissage profond révolutionne le secteur de l&rsquo;IA dans les années 2010. Quoi de mieux que la leçon inaugurale au Collège de France d&rsquo;un de ses fondateurs, Yann Le Cun, pour nous expliquer de quoi il retourne.</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/TdLa5h-x2nA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<h3 id="avènement-des-grands-modèles-de-langage">Avènement des grands modèles de langage</h3>
-<p>Les grands modèles de langage (LLM en anglais) révolutionnent à leur tour l&rsquo;IA dans les années 2020. Avec leur architecture non-récurrente, le transformeur, basée sur un mécanisme dit d&rsquo;attention, ils peuvent avec succès traiter des données séquentielles tout en étant parallélisable lors de l&rsquo;entrainement (cela permet des gains en performance énormes et ainsi d&rsquo;augmenter de plusieurs ordres de grandeur le nombre de paramètres de leurs modèles, d&rsquo;où le qualificatif &ldquo;grand&rdquo;).</p>
-<p>Stephen Wolfram a écrit <a href="https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/">un long article pédagogique</a> sur le fonctionnement de ChatGPT (l&rsquo;agent conversationnel basé sur un LLM qui a sidéré le  grand public lors de sa mise à disposition en 2022).</p>
-<p><img src="https://content.wolfram.com/sites/43/2023/02/hero3-chat-exposition.png" alt=""></p>
-<br>
-<h2 id="ia-et-éthique">IA et éthique</h2>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/tf4-_4IbXPs?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<p>L&rsquo;intelligence artificielle repose en grande partie sur la collecte de données et leur traitement. Or des biais très importants aux conséquences potentiellement dramatique peuvent s&rsquo;immiscer lors de cette étape cruciale.</p>
-<p>Prenons l&rsquo;exemple du <strong>biais des sruvivants</strong> qui est un des plus importants <strong>biais de sélection</strong>.</p>
-<h3 id="biais-des-survivants">Biais des survivants</h3>
-<p>Il tire son nom des efforts du statisticien Abraham Wald du Statistical Research Group qui analysait les impacts sur les bombardiers amériacains revenus de mission pendant la seconde guerre mondiale afin de déterminer les zones où il fallait améliorer le blindage.
-<img src="/survivorshipbias.png?width=700" alt=""></p>
-<p>En voyant cette image l&rsquo;erreur de logique consisterait à vouloir blinder les zones les plus impactées. C&rsquo;est tomber dans le biais des survivants ! En effet, les avions étudié sont ceux qui sont revenus, les &ldquo;survivants&rdquo;, ce qui signifie que les impacts reçus ne les ont pas détruit. Par contre, l&rsquo;absence d&rsquo;impact dans certaines zones pourrait indiquer qu&rsquo;il s&rsquo;agit là d&rsquo;endroits critiques où un tir provoque plus certainement une avarie grave et donc l&rsquo;absence de survivants y présentant des impacts. Il faut en conclusion blinder d&rsquo;avantage les zones sans impact !</p>
-<p>C&rsquo;est le biais des survivants qui nous fait dire par exemple dire que les constructions étaient plus solides aux siècles précédents où la musique meilleure il y a quelques décennies.</p>
-<p>Le biais du survivant s&rsquo;immisce partout où il y a sélection puisque le critère de sélection laisse fatalement de côté les données ne respectant pas les critères et il faut donc se garder de conclusions générales ne prenant pas en compte la population écartée.</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-<img src="/survivants.png">
-</div>
-<p><img src="/survivorshipxkcd.png" alt=""></p>
-<p>Une fois récoltées, les données sont traîtées et en particulier, on cherche à établir des corrélations entre des groupes de données. En effet, ces corrélations permettent d&rsquo;extrapoler dans des espaces sans point de donné et ainsi prédire les valeurs ou catégories de données manquantes. Par contre, on doit alors faire attention à un autre biais classique résumé par un des mantras de la statistique : &ldquo;La corrélation n&rsquo;implique pas la causalité&rdquo;.</p>
-<h3 id="la-corrélation-nimplique-pas-la-causalité">La corrélation n&rsquo;implique pas la causalité</h3>
-<p>Pour expliquer la corrélation entre deux évènements, on a trop vite fait de supposer une relation de cause à effet. C&rsquo;est une possibilité mais ce n&rsquo;est pas la seule !</p>
-<p>Autres explications possibles de la corrélation ?</p>
-<details>
-<summary id="correcsum">
-Réponse (cliquer pour afficher)</summary>
-<blockquote id="correc">
-<ul>
-<li>Hasard.</li>
-<li>Un troisième facteur cause les deux autres ensembles (exemple classique de la corrélation entre la vente de glace et les attaques de requins ou entre le nombre d'enfants et le nombre de cigognes (on parle d'ailleurs parfois d'effet cigogne).</li>
-<li>Peut être que la relation de cause à effet est dans l'autre sens que le sens envisagé.</li>
-<ul>
-<div style="position:relative; width:700px; max-width: 100%; margin-left: auto;margin-right: auto;">
-<img src="https://images.prismic.io/sketchplanations/f1f6cafb-6444-453f-a5c5-8f603ab41a23_SP+562+-+Correlation+is+not+causation.png" 
-</div>
-</blockquote>
-</details>
-<p><a href="https://tylervigen.com/spurious-correlations">Ce chouette site</a> recense un tas de correlations amusantes.</p>
-<p><img src="/correlchat.png?width=600px" alt="">
-<img src="https://imgs.xkcd.com/comics/correlation.png" alt=""></p>
-<p>Comme semble le montrer <a href="https://arxiv.org/pdf/2306.05836.pdf">cet article scientifique récent</a> (&ldquo;Can Large Language Models infer causation from correlation?&rdquo;), les grands modèles de langages (LLM type ChatGPT) semblent encore assez mauvais pour déduire si oui ou non une relation de causalité est à l&rsquo;origine de la corrélation.</p>
-<p>Les données d&rsquo;apprentissage rendent les modèles de langage particulièrement sensibles à ce type de confusion.</p>
-<p>Ces modèles de langage peuvent ainsi reproduire des préjugés sexistes ; les données d&rsquo;apprentissage contiennent plus d&rsquo;infirmiers ou secrétaires femmes et de patrons ou ingénieurs hommes et le modèle a alors tendance à associer plus une femme à une infirmière qu&rsquo;à une ingénieure.<br>
-Au-delà du genre, ces modèles peuvent renforcer un large éventail de stéréotypes lié à la race, à l&rsquo;âge, la nationalité, la religion ou le milieu d&rsquo;origine.</p>
-
-<div class="notices note" style="--title: 'note';">
-  <p style="display: none;">note</p>
-  <div class="notice-body">
-    <p>Sur ce point, les modèles de langage n&rsquo;ont pas grand chose à envier aux humains.<br>
-<a href="/ziegler.pdf">Une étude de 2004</a> montre en effet que sur 144 étudiantes allemandes, 32% seulement résolvent la petite énigme suivante :<br>
-<i>Un père et son fils ont un grave accident de voiture. Le père meurt. Le fils est entre la vie et la mort. On l&rsquo;amène aux urgences et le chirurgien qui le voit dit : &ldquo;Je ne peux pas l&rsquo;opérer car c&rsquo;est mon fils.&quot;</i><br>
-Était alors demandé aux étudiantes si ce problème était explicable en une phrase simple et elles devaients soit répondre non soit donner l&rsquo;explication.</p>
-
-  </div>
-</div>
-
-
-<h3 id="quand-la-machine-devra-choisir-à-notre-place">Quand la machine devra choisir à notre place</h3>
-<p>Dans une situation où vous sacrifier permet de sauver plusieurs vies, la voiture autonome qui vous conduit doit-elle choisir de vous tuer ?</p>
-<p><a href="https://www.moralmachine.net">Une expérience sociologique</a> visant à donner une perspective humaine aux futures décisions morales des machines permet de se pencher sur ces décisions un peu glauques.</p>
-<br>
-<div style="position:relative; width:640px; max-width:100%; height:480px; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-<iframe width="640" height="480"  src="https://www.youtube.com/embed/XCO8ET66xE4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width:100%"></iframe>
-</div>
-<br>
-<h2 id="futur-des-ia-et-danger-existentiel">Futur des IA et danger existentiel</h2>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/1WcpN4ds0iY?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<p>Dans son livre <em>Superintelligence</em>, le philosophe Nick Bostrom explique que quel que soit l&rsquo;objectif initial d&rsquo;une IA largement supérieure à l&rsquo;intelligence humaine (une superintelligence), l&rsquo;éradication de l&rsquo;humanité peut se présenter comme un effet secondaire.</p>
-<p>Pour illustrer cette idée, il utilise son célèbre exemple d&rsquo;une IA dont le but est de maximiser la production de trombones :</p>
-<blockquote>
-<p>« Supposons que nous ayons une IA dont l&rsquo;unique but soit de faire autant de trombones que possible. L&rsquo;IA se rendra vite compte que ce serait bien mieux s&rsquo;il n&rsquo;y avait pas d&rsquo;humains, parce que les humains pourraient décider de l&rsquo;éteindre. Parce que si les humains le faisaient, il y aurait moins de trombones. De plus, le corps humain contient beaucoup d&rsquo;atomes qui pourraient être transformés en trombones. L&rsquo;avenir vers lequel l&rsquo;IA essaierait de se diriger serait un futur avec beaucoup de trombones mais aucun humain. »</p>
-</blockquote>
-<p>Vous pouvez incarner l&rsquo;IA à la tête de l&rsquo;usine de trombone dans <a href="https://www.decisionproblem.com/paperclips/">ce petit jeu en ligne</a>.</p>
-<p>Bostrom considère que chercher à maîtriser une superintelligence n&rsquo;est pas une solution viable, et qu&rsquo;il faut aligner la superintelligence avec des valeurs morales de sorte qu&rsquo;elle soit « fondamentalement de notre côté ».</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>adapté de <a href="https://medium.com/@solclover">cet auteur</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>graphe issue de <a href="https://vas3k.com/blog/machine_learning/">cette introduction assez sympa</a> à l&rsquo;apprentissage automatique.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 
 
 <footer class="footline">
@@ -3138,6 +2708,570 @@ Au-delà du genre, ces modèles peuvent renforcer un large éventail de stéréo
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -3386,87 +3520,6 @@ Au-delà du genre, ces modèles peuvent renforcer un large éventail de stéréo
             
         
                     
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
             
             
@@ -3500,194 +3553,6 @@ Au-delà du genre, ces modèles peuvent renforcer un large éventail de stéréo
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3750,19 +3615,6 @@ Au-delà du genre, ces modèles peuvent renforcer un large éventail de stéréo
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
             
         
                     
@@ -3770,289 +3622,6 @@ Au-delà du genre, ces modèles peuvent renforcer un large éventail de stéréo
             
             
                 
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
