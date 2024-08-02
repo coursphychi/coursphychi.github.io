@@ -195,7 +195,7 @@
       <link>https://coursphychi.github.io/2nde/atome/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/atome/</guid>
-      <description>Entités chimiques / Atome et Noyau Présentation&#xA;Définitions Élément chimique&#xA;Ensemble des atomes (isolés ou engagés dans un édifice polyatomique neutre ou chargé) et des ions monoatomiques comportant un même nombre de protons dans leur noyau.&#xA;Exemple :&#xA;Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite comportent des atomes de chlore ou des ions chlorure de même Z = 17, caractérisant l’élément chlore.&#xA;Documents et autres Un peu de maths : ordre de grandeur, puissances de 10, multiples et sous-multiples TP - Identification d&amp;rsquo;un sel + Correction Activité - L&amp;rsquo;élément chimique Petits jeux pour se tester </description>
+      <description> Entités chimiques / Atome et Noyau Présentation&#xA;Définitions Élément chimique&#xA;Ensemble des atomes (isolés ou engagés dans un édifice polyatomique neutre ou chargé) et des ions monoatomiques comportant un même nombre de protons dans leur noyau.&#xA;Exemple :&#xA;Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite comportent des atomes de chlore ou des ions chlorure de même Z = 17, caractérisant l’élément chlore.&#xA;Documents et autres Un peu de maths : ordre de grandeur, puissances de 10, multiples et sous-multiples TP Identification d&#39;un sel + Correction Activité L&#39;élément chimique Petits jeux pour se tester </description>
     </item>
     <item>
       <title>Oxydo-réduction</title>
@@ -328,7 +328,7 @@
       <link>https://coursphychi.github.io/2nde/mole/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/mole/</guid>
-      <description>Quantité de matière Présentation&#xA;Définition Quantité de matière d’une espèce chimique&#xA;Grandeur, exprimée en moles, utilisée pour dénombrer les entités d’une espèce chimique dans un échantillon de matière, une mole étant définie comme un ensemble d’exactement $6,02214076\times10^{23}$ entités.&#xA;Documents TP - Bouteille bleue A mole of moles - xkcd </description>
+      <description> Quantité de matière Présentation&#xA;Définition Quantité de matière d’une espèce chimique&#xA;Grandeur, exprimée en moles, utilisée pour dénombrer les entités d’une espèce chimique dans un échantillon de matière, une mole étant définie comme un ensemble d’exactement $6,02214076\times10^{23}$ entités.&#xA;Documents TP Bouteille bleue A mole of moles - xkcd </description>
     </item>
     <item>
       <title>Dimensions</title>
@@ -405,7 +405,7 @@
       <link>https://coursphychi.github.io/2nde/reaction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/reaction/</guid>
-      <description>Transformation chimique :&#xA;la réaction chimique Présentation&#xA;Réaction chimique&#xA;Modèle introduit pour rendre compte d’observations et de mesures effectuées lors de transformations chimiques pouvant différer par les conditions de leur réalisation (température, pression, composition du mélange initial), mais partageant les mêmes réactifs, les mêmes produits et les mêmes proportions dans lesquelles ceux-ci sont convertis.&#xA;L’équation de la réaction permet de réaliser le bilan de matière d’une transformation.&#xA;Exemple :&#xA;L’action d’acide chlorhydrique sur du magnésium solide peut être modélisée par une réaction dont l’équation est : $\ce{Mg(s) + 2H+(aq) = Mg^2+(aq) + H2(g)}$</description>
+      <description>Transformation chimique :&#xA;la réaction chimique Présentation&#xA;Réaction chimique&#xA;Modèle introduit pour rendre compte d’observations et de mesures effectuées lors de transformations chimiques pouvant différer par les conditions de leur réalisation (température, pression, composition du mélange initial), mais partageant les mêmes réactifs, les mêmes produits et les mêmes proportions dans lesquelles ceux-ci sont convertis.&#xA;L’équation de la réaction permet de réaliser le bilan de matière d’une transformation.&#xA;Exemple :</description>
     </item>
     <item>
       <title>Chaos</title>
@@ -447,7 +447,7 @@
       <link>https://coursphychi.github.io/2nde/mouvement/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/mouvement/</guid>
-      <description>Décrire un mouvement Présentation&#xA;Documents Évaluation diagnostique Activité - Chronophotographie du vol d&amp;rsquo;un marteau TP - Réalisation d&amp;rsquo;un pointage vidéo - Correction Activité python - Décollage d&amp;rsquo;une fusée </description>
+      <description> Décrire un mouvement Présentation&#xA;Documents Test Évaluation diagnostique Activité Chronophotographie du vol d&#39;un marteau Décollage d&#39;une fusée (Python) TP Réalisation d&#39;un pointage vidéo (qrcode du petit tuto) </description>
     </item>
     <item>
       <title>Signaux</title>
@@ -468,14 +468,14 @@
       <link>https://coursphychi.github.io/2nde/inertie/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/inertie/</guid>
-      <description>Forces et principe d&amp;rsquo;inertie Présentation&#xA;Documents TP - Principe d&amp;rsquo;inertie + accroche + plus &amp;ldquo;beaux&amp;rdquo; dessins + appliquette Geogebra TP - Lien entre masse et poids + partie python Activité python - Chute libre d&amp;rsquo;une balle Simulation - Force gravitationnelle entre deux masses + tableur </description>
+      <description> Forces et principe d&amp;rsquo;inertie Présentation&#xA;Documents TP Principe d&#39;inertie + Accroche + Appliquette Geogebra Lien entre masse et poids + Partie python Activité Chute libre d&#39;une balle (Python) Simulation Force gravitationnelle entre deux masses + Tableur </description>
     </item>
     <item>
       <title>Interactions et champs</title>
       <link>https://coursphychi.github.io/1spe/champs/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/champs/</guid>
-      <description>Interactions et champs Présentation&#xA;Documents et autres Activités : Anguilles Dessiner des champs Animations : Ballons et électricité statique Chataîgne Loi de Coulomb Force gravitationnelle Champ électrostatique Article sur la triboélectricité et son utilisation dans les photocopieurs (2012) </description>
+      <description> Interactions et champs Présentation&#xA;Documents et autres Activités Anguilles Dessiner des champs Animations Ballons et électricité statique Chataîgne Loi de Coulomb Force gravitationnelle Champ électrostatique Article Triboélectricité et son utilisation dans les photocopieurs (2012) </description>
     </item>
     <item>
       <title>Incertitudes</title>
@@ -489,21 +489,21 @@
       <link>https://coursphychi.github.io/1spe/pression/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/pression/</guid>
-      <description>Description d&amp;rsquo;un fluide au repos Présentation&#xA;Documents et autres Activité : Fosse de plongée Ballon-sonde (partie 3) Exos - Statique des fluides Simulations expériences : Loi fondamentale de la statique des fluides Loi de Mariotte </description>
+      <description> Description d&amp;rsquo;un fluide au repos Présentation&#xA;Documents et autres Activités Fosse de plongée Ballon-sonde (partie 3) Exos Statique des fluides Simulation Loi fondamentale de la statique des fluides Loi de Mariotte </description>
     </item>
     <item>
       <title>Son</title>
       <link>https://coursphychi.github.io/2nde/son/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/son/</guid>
-      <description>Signal sonore Présentation&#xA;Documents et autre Exercice - Mesure historique de la vitesse du son dans l&amp;rsquo;eau Exercice - Sonar TP - Mesure de la vitesse du son TP - Analyse d&amp;rsquo;un son musical Webapplication permettant l&amp;rsquo;obtention d&amp;rsquo;un oscillogramme depuis le son du micro </description>
+      <description> Signal sonore Présentation&#xA;Documents et autre Exercices Mesure historique de la vitesse du son dans l&#39;eau Sonar TP Mesure de la vitesse du son Analyse d&#39;un son musical Webapplication Obtention d&#39;un oscillogramme depuis le son du micro </description>
     </item>
     <item>
       <title>Lumière</title>
       <link>https://coursphychi.github.io/2nde/lumiere/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/lumiere/</guid>
-      <description>Lumière et spectre Présentation&#xA;Documents et autres TP - Lois de Snell-Descartes </description>
+      <description> Lumière et spectre Présentation&#xA;Documents et autres TP Lois de Snell-Descartes </description>
     </item>
     <item>
       <title>Mécanique</title>
@@ -531,42 +531,42 @@
       <link>https://coursphychi.github.io/1spe/variationvitesse/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/variationvitesse/</guid>
-      <description>Vecteur variation de vitesse Présentation&#xA;Documents et autres Activités : Montagnes Russes (partie 2) Ballon-sonde (partie 2) TP Python - Chute libre </description>
+      <description> Vecteur variation de vitesse Présentation&#xA;Documents et autres Activités Montagnes Russes (partie 2) Ballon-sonde (partie 2) TP Chute libre (Python) </description>
     </item>
     <item>
       <title>Énergie électrique</title>
       <link>https://coursphychi.github.io/1spe/elec/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/elec/</guid>
-      <description>Énergie électrique Présentation&#xA;Documents et autres Activités : Électroménager Une éolienne à la maison Voiture électrique Simulation - conversion d&amp;rsquo;énergie </description>
+      <description> Énergie électrique Présentation&#xA;Documents et autres Activités Électroménager Une éolienne à la maison Voiture électrique Simulation Conversion d&#39;énergie </description>
     </item>
     <item>
       <title>Lentilles</title>
       <link>https://coursphychi.github.io/2nde/lentille/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/lentille/</guid>
-      <description>Formation des images et lentille convergente Documents et autres TP - Lentille convergente et grandissement Exos - Lumière et lentilles Applet Geogebra </description>
+      <description> Formation des images et lentille convergente Documents et autres TP Lentille convergente et grandissement Exos Lumière et lentilles Animation Lentille convergente </description>
     </item>
     <item>
       <title>Électricité</title>
       <link>https://coursphychi.github.io/2nde/elec/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/elec/</guid>
-      <description>Électricité Présentation&#xA;Documents Activité 1 - Caractéristique d&amp;rsquo;une thermistance + Tracé et régression linéaire + Correction Activité 2 - Comment fabriquer un thermomètre à partir d&amp;rsquo;une thermistance ? + Tracé de la courbe d&amp;rsquo;étalonnage Activité 3 - Circuit électrique au sein d’un bathythermographe + Correction </description>
+      <description> Électricité Présentation&#xA;Documents Activités Caractéristique d&#39;une thermistance + Tracé et régression linéaire Comment fabriquer un thermomètre à partir d&#39;une thermistance ? + Tracé de la courbe d&#39;étalonnage Circuit électrique au sein d’un bathythermographe </description>
     </item>
     <item>
       <title>Énergie mécanique</title>
       <link>https://coursphychi.github.io/1spe/egiemeca/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/egiemeca/</guid>
-      <description>Énergie mécanique Présentation&#xA;Documents et autres Activités : Montagnes Russes (partie 3) Ski de vitesse </description>
+      <description> Énergie mécanique Présentation&#xA;Documents et autres Activités Montagnes Russes (partie 3) Ski de vitesse </description>
     </item>
     <item>
       <title>Ondes mécaniques</title>
       <link>https://coursphychi.github.io/1spe/ondes/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/ondes/</guid>
-      <description>Ondes mécaniques progressives Présentation&#xA;Documents et autres Activités : Épicentre + notebook Python Piscine à vagues Simulations : Onde sur une corde Onde sonore TP - mesure d&amp;rsquo;une célérité par deux méthodes et incertitudes </description>
+      <description> Ondes mécaniques progressives Présentation&#xA;Documents et autres Activités Épicentre + notebook Python Piscine à vagues Simulations Onde sur une corde Onde sonore TP Mesure d&#39;une célérité par deux méthodes et incertitudes </description>
     </item>
     <item>
       <title>Radioactivité</title>
@@ -580,7 +580,7 @@
       <link>https://coursphychi.github.io/1spe/lentilles/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/lentilles/</guid>
-      <description>Formation des images par une lentille convergente Présentation&#xA;Documents et autres Activités : Lentille et smartphone Appareil réflexe Animations interactives </description>
+      <description> Formation des images par une lentille convergente Présentation&#xA;Documents et autres Activités Lentille et smartphone Appareil réflexe Animation Lentille convergente </description>
     </item>
     <item>
       <title>Pression</title>
@@ -594,7 +594,7 @@
       <link>https://coursphychi.github.io/1spe/couleurs/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/couleurs/</guid>
-      <description>Couleurs Présentation&#xA;Documents et autres TP couleurs Animation - Vision des couleurs et filtre </description>
+      <description> Couleurs Présentation&#xA;Documents et autres TP Couleurs Appliquettes Vision des couleurs et filtre Couleur d&#39;un objet Superposition de filtres </description>
     </item>
     <item>
       <title>Transport de l&#39;électricité</title>
@@ -608,7 +608,7 @@
       <link>https://coursphychi.github.io/1spe/photon/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/photon/</guid>
-      <description>Modèles ondulatoire et particulaire de la lumière Présentation&#xA;Documents et autres Activités : Feu d&amp;rsquo;artifice (partie 3) Superamas Laniakea + vidéo Protection solaire (partie 1 et 2) Applet Geogebra </description>
+      <description> Modèles ondulatoire et particulaire de la lumière Présentation&#xA;Documents et autres Activités Feu d&#39;artifice (partie 3) Superamas Laniakea + vidéo Protection solaire (partie 1 et 2) Geogebra Appliquette niveaux d&#39;énergie </description>
     </item>
   </channel>
 </rss>
