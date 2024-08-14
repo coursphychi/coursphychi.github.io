@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1723574232" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1723574232" rel="stylesheet">
-    <link href="/css/hybrid.css?1723574232" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1723574232" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1723574232" rel="stylesheet">
-    <link href="/css/auto-complete.css?1723574232" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1723574232" rel="stylesheet">
-    <link href="/css/theme.css?1723574232" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1723574232" rel="stylesheet">
+    <link href="/css/nucleus.css?1723641931" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1723641931" rel="stylesheet">
+    <link href="/css/hybrid.css?1723641931" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1723641931" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1723641931" rel="stylesheet">
+    <link href="/css/auto-complete.css?1723641931" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1723641931" rel="stylesheet">
+    <link href="/css/theme.css?1723641931" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1723641931" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1723574232" rel="stylesheet">
+    <link href="/css/theme-blue.css?1723641931" rel="stylesheet">
     
-    <link href="/css/foo.css?1723574232" rel="stylesheet"><link href="/css/bar.css?1723574232" rel="stylesheet">
+    <link href="/css/foo.css?1723641931" rel="stylesheet"><link href="/css/bar.css?1723641931" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1723574232"></script>
+    <script src="/js/jquery-3.3.1.min.js?1723641931"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1723574232"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1723574232"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1723641931"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1723641931"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1723574232"></script>
+<script type="text/javascript" src="/js/search.js?1723641931"></script>
 
     
   </div>
@@ -2476,6 +2476,11 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <li><a href="#test-dhypothèse">Test d&rsquo;hypothèse</a></li>
     <li><a href="#analyse-en-composante-principale">Analyse en composante principale</a></li>
     <li><a href="#p-hacking">p-hacking</a></li>
+    <li><a href="#pourquoi-n-1-">Pourquoi n-1 ?</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -2514,6 +2519,10 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   {
     color: #006C65;
   }
+  #grosseformule 
+{
+    overflow-x: auto; 
+}
 </style>
 <h1 id="probabilités">Probabilités</h1>
 <h2 id="loi-binomiale">Loi Binomiale</h2>
@@ -2749,6 +2758,30 @@ C&rsquo;est un exemple particulièrement frappant, mais d’une certaine manièr
 <p><img src="https://imgs.xkcd.com/comics/significant.png" alt=""></p>
 <p>Comme on l&rsquo;a vu sur les <a href="../geometrie/geo4/#the-average-man">espaces de données à grande dimension </a>, plus on a d&rsquo;axes (de catégories, d&rsquo;entrées,&hellip;), plus on a de chance d&rsquo;obtenir un résultat hors norme sur au moins l&rsquo;un d&rsquo;eux.</p>
 <p>Ce <a href="https://tylervigen.com/spurious-correlations">chouette site</a> met le phénomène à profit pour débusquer des corrélations amusantes (avec pour chacune des p-values inférieures à 1%&hellip;).</p>
+<br>
+<h2 id="pourquoi-n-1-">Pourquoi n-1 ?</h2>
+<p>L&rsquo;<b>écart-type</b> pour une variable quantitative dont les relevés $(x_1,\ldots,x_n)$ sont pris sur la population complète (avec pour moyenne $\mu$) est donné par la racine carrée de la variance :<br>
+$$\sigma = \sqrt{V}=\sqrt{\frac{1}{n}\sum_{i=1}^n (x_i-\mu)^2}$$</p>
+<p>Mais si les relevés ne concernent qu&rsquo;un échantillon de la population et non la population complète (ce qui est le cas pour une série de mesures expérimentales), on passe des probas aux stats et on a alors besoin d&rsquo;un estimateur de l&rsquo;écart-type ($\sigma\rightarrow S$).<br>
+Et l&rsquo;estimateur de l&rsquo;écart-type non biaisé (aussi appelé écart-type expérimental) est donné par :<br>
+$$S_{n-1} = \sqrt{V}=\sqrt{\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})^2}$$</p>
+<h4 id="pourquoi-non-biaisénbsp-et-doù-vient-le--1nbsp">Pourquoi &ldquo;non biaisé&rdquo; ? Et d&rsquo;où vient le &ldquo;-1&rdquo; ?</h4>
+<p>Notre problème et qu&rsquo;on ne connaît plus la valeur vraie de la moyenne $\mu$ mais seulement son estimation $m=\frac{1}{n}\sum_{i=1}^n x_i$.</p>
+<p>En substituant $m$ à $\mu$ dans la variance, on biaise son espérance&hellip;<br>
+En effet :</p>
+<div id="grosseformule">
+$$
+\begin{aligned}
+E\left(\frac{1}{n}\sum_{i=1}^n (x_i-m)^2\right) &= E \left( \frac{1}{n}\sum_{i=1}^n x_i^2 - m^2 \right) &&\text{car } -2 \sum_{i=1}^n x_i\times m = -2\sum_{i=1}^n m^2\\
+& = \frac{1}{n}\sum_{i=1}^n E(x_i^2)-E(m^2)\\
+& = E(x^2)-E(m^2) &&\text{car }E(x_i)=E(x)\text{ ne dépend pas de }i\\
+&= \left(V(x)+E(x)^2\right)-\left(V(m)+E(m)^2\right)&&\text{car }V(x)=E(x^2)-E(x)^2\\
+&= \left(V(x)+E(x)^2\right)-\left(\frac{1}{n}V(x)+E(x)^2\right)&&\text{car }V(m)=\frac{1}{n}V(x)\\
+&= \frac{n-1}{n}V(x)
+\end{aligned}
+$$
+</div>
+<p>Par conséquent, on multiplie par $\frac{n-1}{n}$ pour se débarrasser du biais&hellip;</p>
 
 
 <footer class="footline">
@@ -4398,16 +4431,16 @@ C&rsquo;est un exemple particulièrement frappant, mais d’une certaine manièr
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1723574232"></script>
-    <script src="/js/perfect-scrollbar.min.js?1723574232"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1723574232"></script>
-    <script src="/js/jquery.sticky.js?1723574232"></script>
-    <script src="/js/featherlight.min.js?1723574232"></script>
-    <script src="/js/highlight.pack.js?1723574232"></script>
+    <script src="/js/clipboard.min.js?1723641931"></script>
+    <script src="/js/perfect-scrollbar.min.js?1723641931"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1723641931"></script>
+    <script src="/js/jquery.sticky.js?1723641931"></script>
+    <script src="/js/featherlight.min.js?1723641931"></script>
+    <script src="/js/highlight.pack.js?1723641931"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1723574232"></script>
-    <script src="/js/learn.js?1723574232"></script>
-    <script src="/js/hugo-learn.js?1723574232"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1723641931"></script>
+    <script src="/js/learn.js?1723641931"></script>
+    <script src="/js/hugo-learn.js?1723641931"></script>
     
     
 
