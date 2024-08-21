@@ -23,6 +23,13 @@
       <description>Algèbre Équations Jusque là, rien de bien folichon&amp;hellip; Mais si on libère la variable de nos polynômes en lui permettant de se balader dans l&amp;rsquo;espace des complexes, tout devient plus sympa. Déjà, plus d&amp;rsquo;histoires de 0, 1 ou 2 solutions pour un polynôme de degré 2&amp;hellip; En complexe, un polynôme de degré 2 a toujours 2 solutions. C&amp;rsquo;est quand même plus propre comme ça. Et d&amp;rsquo;ailleurs, un polynôme de degré n a toujours n racines et peut donc se factoriser en n polynômes de degré 1.</description>
     </item>
     <item>
+      <title>Analyse en composantes principales</title>
+      <link>https://coursphychi.github.io/more/maths/pca/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/maths/pca/</guid>
+      <description>Analyse en composantes principales Détaillons un exemple sur le modèle de celui des prénoms dans la vidéo.&#xA;L&amp;rsquo;idée ici est de récupérer plein de séries de données départementales disparates sur le site de l&amp;rsquo;INSEE pour voir si les composantes principales font ou non ressurgir une géographie identifiable de ce brouillard de chiffres.&#xA;Cherchant à étudier la variabilité entre départements, à faire ressortir leurs spécificités, j&amp;rsquo;ai choisi de n&amp;rsquo;avoir que des données sous forme de taux quitte à rendre relative certaines données brutes en divisant par la population du département.</description>
+    </item>
+    <item>
       <title>Probabilités / Statistiques</title>
       <link>https://coursphychi.github.io/more/maths/probastat/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
