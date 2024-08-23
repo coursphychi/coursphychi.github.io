@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1724440383" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1724440383" rel="stylesheet">
-    <link href="/css/hybrid.css?1724440383" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1724440383" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1724440383" rel="stylesheet">
-    <link href="/css/auto-complete.css?1724440383" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1724440383" rel="stylesheet">
-    <link href="/css/theme.css?1724440383" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1724440383" rel="stylesheet">
+    <link href="/css/nucleus.css?1724441716" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1724441716" rel="stylesheet">
+    <link href="/css/hybrid.css?1724441716" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1724441716" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1724441716" rel="stylesheet">
+    <link href="/css/auto-complete.css?1724441716" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1724441716" rel="stylesheet">
+    <link href="/css/theme.css?1724441716" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1724441716" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1724440383" rel="stylesheet">
+    <link href="/css/theme-blue.css?1724441716" rel="stylesheet">
     
-    <link href="/css/foo.css?1724440383" rel="stylesheet"><link href="/css/bar.css?1724440383" rel="stylesheet">
+    <link href="/css/foo.css?1724441716" rel="stylesheet"><link href="/css/bar.css?1724441716" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1724440383"></script>
+    <script src="/js/jquery-3.3.1.min.js?1724441716"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1724440383"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1724440383"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1724441716"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1724441716"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1724440383"></script>
+<script type="text/javascript" src="/js/search.js?1724441716"></script>
 
     
   </div>
@@ -2459,7 +2459,11 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#les-axes-qui-tiraillent-la-france">Les axes qui tiraillent la France</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -2540,6 +2544,7 @@ replaceIframesWithImages();
 
 </div>
 <br>
+<h2 id="les-axes-qui-tiraillent-la-france">Les axes qui tiraillent la France</h2>
 <p>Détaillons un exemple sur le modèle de celui des prénoms dans la vidéo.</p>
 <p>L&rsquo;idée ici est de récupérer plein de séries de données départementales disparates sur le <a href="https://www.insee.fr/fr/statistiques?taille=100&amp;debut=0&amp;idprec=2012683&amp;categorie=4&amp;geo=COMPRD-1">site de l&rsquo;INSEE</a> pour voir si les composantes principales font ou non ressurgir une géographie identifiable de ce brouillard de chiffres.</p>
 <p>Cherchant à étudier la variabilité entre départements, à faire ressortir leurs spécificités, on choisit ici de n&rsquo;avoir que des données sous forme de taux quitte à rendre relative certaines données brutes en divisant par la population du département. Certes, un vecteur associant les variables non relatives aurait probablement constitué la 1<sup>re</sup> composante principale puisque la démographie explique alors une large part de la variance, et comme chaque composante est orthogonale aux suivantes, cela aurait peut-être éliminé ce biais dès la 2<sup>e</sup> composante&hellip; Mais autant s&rsquo;en débarrasser dans les données pour éviter toute confusion.</p>
@@ -2711,6 +2716,19 @@ La différence de mode de vie entre ces environnements semblent donc responsable
 <p>La septième composante a pour extrémités la proportion d&rsquo;écoles privées d&rsquo;un côté et les mariages de même sexe de l&rsquo;autre. L&rsquo;opposition est amusante mais le reste du vecteur ne semble pas vouloir se prêter à des interprétations faciles pas plus que la répartition géographique (au-delà de la zone bretonne au sens large ou le privé est surreprésenté).</p>
 <iframe src="/plotly_graph_comp7_carte.html" width="100%" height="920px" style="border:none;"></iframe>
 <iframe src="/plotly_graph_comp7_histo.html" width="100%" height="600px" style="border:none;"></iframe>
+<br>
+<br>
+<p>À la louche ou plutôt au godet d&rsquo;une pelleteuse, on a donc les axes de séparation territoriaux suivant (à l&rsquo;échelle des départements), par ordre de pertinence :</p>
+<ul>
+<li>Ville contre campagne</li>
+<li>Riches contre pauvres</li>
+<li>Ouvriers contre employés</li>
+<li>Paris contre le reste</li>
+<li>Extrême gauche contre extrême droite</li>
+<li>Droite historique contre le reste</li>
+<li>Religieux contre mariage pour tous</li>
+</ul>
+
 
 <footer class="footline">
 	
@@ -4360,16 +4378,16 @@ La différence de mode de vie entre ces environnements semblent donc responsable
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1724440383"></script>
-    <script src="/js/perfect-scrollbar.min.js?1724440383"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1724440383"></script>
-    <script src="/js/jquery.sticky.js?1724440383"></script>
-    <script src="/js/featherlight.min.js?1724440383"></script>
-    <script src="/js/highlight.pack.js?1724440383"></script>
+    <script src="/js/clipboard.min.js?1724441716"></script>
+    <script src="/js/perfect-scrollbar.min.js?1724441716"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1724441716"></script>
+    <script src="/js/jquery.sticky.js?1724441716"></script>
+    <script src="/js/featherlight.min.js?1724441716"></script>
+    <script src="/js/highlight.pack.js?1724441716"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1724440383"></script>
-    <script src="/js/learn.js?1724440383"></script>
-    <script src="/js/hugo-learn.js?1724440383"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1724441716"></script>
+    <script src="/js/learn.js?1724441716"></script>
+    <script src="/js/hugo-learn.js?1724441716"></script>
     
     
 
