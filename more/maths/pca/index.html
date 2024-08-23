@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1724438597" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1724438597" rel="stylesheet">
-    <link href="/css/hybrid.css?1724438597" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1724438597" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1724438597" rel="stylesheet">
-    <link href="/css/auto-complete.css?1724438597" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1724438597" rel="stylesheet">
-    <link href="/css/theme.css?1724438597" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1724438597" rel="stylesheet">
+    <link href="/css/nucleus.css?1724440383" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1724440383" rel="stylesheet">
+    <link href="/css/hybrid.css?1724440383" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1724440383" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1724440383" rel="stylesheet">
+    <link href="/css/auto-complete.css?1724440383" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1724440383" rel="stylesheet">
+    <link href="/css/theme.css?1724440383" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1724440383" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1724438597" rel="stylesheet">
+    <link href="/css/theme-blue.css?1724440383" rel="stylesheet">
     
-    <link href="/css/foo.css?1724438597" rel="stylesheet"><link href="/css/bar.css?1724438597" rel="stylesheet">
+    <link href="/css/foo.css?1724440383" rel="stylesheet"><link href="/css/bar.css?1724440383" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1724438597"></script>
+    <script src="/js/jquery-3.3.1.min.js?1724440383"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1724438597"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1724438597"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1724440383"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1724440383"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1724438597"></script>
+<script type="text/javascript" src="/js/search.js?1724440383"></script>
 
     
   </div>
@@ -2678,7 +2678,7 @@ replaceIframesWithImages();
 La différence de mode de vie entre ces environnements semblent donc responsable des plus fortes différentiations entre départements sur le lot de variables choisis.</p>
 <p>On peut renforcer cette interprétation en vérifiant comment une nouvelle variable &ldquo;Part de la population française en 2017 vivant dans une unité urbaine&rdquo; score sur un plan formé par les deux premières composantes.</p>
 <iframe src="/plotly_graph_popurbaine.html" width="100%" height="1000px" style="border:none;"></iframe>
-<p>La variable &ldquo;population urbaine&rdquo; représenté par un trait rouge a bien une direction proche de celle de la composante 1 (on a aussi placé les départements dans ce plan en les coloriant en fonction de leur population urbaine).</p>
+<p>La variable &ldquo;population urbaine&rdquo; représenté par un trait rouge a bien une direction proche de celle de la composante 1 et lui est donc fortement corrélée (on a aussi placé les départements dans ce plan en les coloriant en fonction de leur population urbaine).</p>
 <iframe src="/plotly_graph_comp1_histo.html" width="100%" height="600px" style="border:none;"></iframe>
 <p>Une fois cette opposition ville-campagne retirée, que reste-t-il pour expliquer les 60% de variance résiduelle entre départements ?</p>
 <p>D&rsquo;après la deuxième composante, l&rsquo;axe sur lequel les valeurs des départements s&rsquo;étalent le plus semble correspondre à une dimension socio-économique. Cela semble montrer que la répartition des richesses est très disparates sur le territoire à l&rsquo;échelle des départements ; certains concentrent les marqueurs de richesse et d&rsquo;autres accumulent les stigmates de la pauvreté.</p>
@@ -2693,11 +2693,12 @@ La différence de mode de vie entre ces environnements semblent donc responsable
 <p>La cinquième composante semble très politique avec un axe allant de Mélenchon à Zemmour-Le Pen.</p>
 <iframe src="/plotly_graph_comp5_carte.html" width="100%" height="920px" style="border:none;"></iframe>
 <iframe src="/plotly_graph_comp5_histo.html" width="100%" height="600px" style="border:none;"></iframe>
-<p>Détaillons un peu Paris qui score très fort (négativement) en regardant la valeur de chaque catégorie statistique normalisée (placées dans le même ordre que la composante 5).</p>
+<p>Paris score bizarrement très fort négativement bien que le vote pour l&rsquo;extrême droite y soit plus rare qu&rsquo;ailleurs.</p>
+<p>Détaillons les valeurs pour chaque catégorie statistique normalisée à Paris (on a conservé l&rsquo;ordre des charges de la composante 5).</p>
 <iframe src="/plotly_graph_paris.html" width="100%" height="700px" style="border:none;"></iframe>
 <p>Et après multiplication par les charges de la composante 5, voilà ce que deviennent ces valeurs.</p>
   <iframe src="/plotly_graph_paris_composante5.html" width="100%" height="700px" style="border:none;"></iframe>
-<p>Et en sommant toutes ces projections, ce qui revient à faire le produit scalaire entre Paris et la composante 5, on obtient bien la valeur d&rsquo;environ -3,8 attribuée à Paris dans la carte de la composante 5.</p>
+<p>Et en sommant toutes ces valeurs, on obtient la projection de Paris et la composante 5. Le résultat d&rsquo;environ -3,8 est bien celui attribuée à Paris dans la carte de la composante. On voit ainsi que les variables politiques ne sont pas celles qui participent au score de Paris.</p>
 <p>La sixième composante oppose bizarrement le vote Pécresse aux mariages&hellip; Et fait ressortir géographiquement le centre par rapport aux bords.</p>
 <iframe src="/plotly_graph_comp6_carte.html" width="100%" height="920px" style="border:none;"></iframe>
 <iframe src="/plotly_graph_comp6_histo.html" width="100%" height="600px" style="border:none;"></iframe>
@@ -4359,16 +4360,16 @@ La différence de mode de vie entre ces environnements semblent donc responsable
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1724438597"></script>
-    <script src="/js/perfect-scrollbar.min.js?1724438597"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1724438597"></script>
-    <script src="/js/jquery.sticky.js?1724438597"></script>
-    <script src="/js/featherlight.min.js?1724438597"></script>
-    <script src="/js/highlight.pack.js?1724438597"></script>
+    <script src="/js/clipboard.min.js?1724440383"></script>
+    <script src="/js/perfect-scrollbar.min.js?1724440383"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1724440383"></script>
+    <script src="/js/jquery.sticky.js?1724440383"></script>
+    <script src="/js/featherlight.min.js?1724440383"></script>
+    <script src="/js/highlight.pack.js?1724440383"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1724438597"></script>
-    <script src="/js/learn.js?1724438597"></script>
-    <script src="/js/hugo-learn.js?1724438597"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1724440383"></script>
+    <script src="/js/learn.js?1724440383"></script>
+    <script src="/js/hugo-learn.js?1724440383"></script>
     
     
 
