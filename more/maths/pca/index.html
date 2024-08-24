@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1724494847" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1724494847" rel="stylesheet">
-    <link href="/css/hybrid.css?1724494847" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1724494847" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1724494847" rel="stylesheet">
-    <link href="/css/auto-complete.css?1724494847" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1724494847" rel="stylesheet">
-    <link href="/css/theme.css?1724494847" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1724494847" rel="stylesheet">
+    <link href="/css/nucleus.css?1724495899" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1724495899" rel="stylesheet">
+    <link href="/css/hybrid.css?1724495899" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1724495899" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1724495899" rel="stylesheet">
+    <link href="/css/auto-complete.css?1724495899" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1724495899" rel="stylesheet">
+    <link href="/css/theme.css?1724495899" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1724495899" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1724494847" rel="stylesheet">
+    <link href="/css/theme-blue.css?1724495899" rel="stylesheet">
     
-    <link href="/css/foo.css?1724494847" rel="stylesheet"><link href="/css/bar.css?1724494847" rel="stylesheet">
+    <link href="/css/foo.css?1724495899" rel="stylesheet"><link href="/css/bar.css?1724495899" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1724494847"></script>
+    <script src="/js/jquery-3.3.1.min.js?1724495899"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1724494847"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1724494847"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1724495899"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1724495899"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1724494847"></script>
+<script type="text/javascript" src="/js/search.js?1724495899"></script>
 
     
   </div>
@@ -2546,7 +2546,7 @@ replaceIframesWithImages();
 <br>
 <h2 id="les-axes-qui-tiraillent-territorialement-la-france">Les axes qui tiraillent territorialement la France</h2>
 <p>Détaillons un exemple sur le modèle de celui des prénoms dans la vidéo.</p>
-<p>L&rsquo;idée ici est de récupérer plein de séries de données départementales disparates sur le <a href="https://www.insee.fr/fr/statistiques?taille=100&amp;debut=0&amp;idprec=2012683&amp;categorie=4&amp;geo=COMPRD-1">site de l&rsquo;INSEE</a> pour voir si les composantes principales font ou non ressurgir une géographie identifiable de ce brouillard de chiffres.</p>
+<p>L&rsquo;idée ici est de récupérer plein de séries de données départementales disparates sur le <a href="https://www.insee.fr/fr/statistiques?taille=100&amp;debut=0&amp;idprec=2012683&amp;categorie=4&amp;geo=COMPRD-1">site de l&rsquo;INSEE</a> pour voir si les composantes principales font ou non ressurgir une géographie identifiable de ce brouillard de chiffres. On peut alors s&rsquo;amuser à balbutier des interprétations pour ces axes de différentiation territoriaux et probablement irriter ainsi fortement tout sociologue un tant soit peu éduqué. C&rsquo;est la magie même de l&rsquo;ACP de permettre à un quidam de se prendre pour un sociologue.</p>
 <p>Cherchant à étudier la variabilité entre départements, à faire ressortir leurs spécificités, on choisit ici de n&rsquo;avoir que des données sous forme de taux quitte à rendre relative certaines données brutes en divisant par la population du département. Certes, un vecteur associant les variables non relatives aurait probablement constitué la 1<sup>re</sup> composante principale puisque la démographie explique alors une large part de la variance, et comme chaque composante est orthogonale aux suivantes, cela aurait peut-être éliminé ce biais dès la 2<sup>e</sup> composante&hellip; Mais autant s&rsquo;en débarrasser dans les données pour éviter toute confusion.</p>
 <p>Un tableau de 96 lignes (les départements métropolitains) et 51 colonnes (code du département + nom du département + 49 variables statistiques) constitue les données de base. Un export en <code>.csv</code> (<a href="/tableau_insee.csv">accès au fichier</a>) et direction Pandas.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
@@ -2626,8 +2626,8 @@ replaceIframesWithImages();
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Afficher le graphique</span>
 </span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>show()
 </span></span></code></pre></div><iframe src="/plotly_graph_scree.html" width="100%" height="800px" style="border:none;"></iframe>
-<p>On constate que la première composante explique presque 40% de la variance et qu&rsquo;arrivé à la 6<sup>e</sup>, on dépasse 80% d&rsquo;explication.</p>
-<p>Affichons les différentes valeurs de la 1<sup>re</sup> composante sur la carte de France. Les départements scorant positivement fort sur cette composante apparaisse jaune et ceux scorant le plus négativement sont en bleu.</p>
+<p>On constate que la 1<sup>re</sup> composante explique presque 40% de la variance et qu&rsquo;arrivé à la 6<sup>e</sup>, on dépasse 80% d&rsquo;explication.</p>
+<p>Affichons les valeurs de la première composante sur une carte de France. Les départements scorant positivement fort sur cette composante apparaisse jaune et ceux scorant le plus négativement sont en bleu.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> plotly.express <span style="color:#66d9ef">as</span> px
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Ajouter les codes départements et leurs noms à la dataframe des composantes principales</span>
@@ -2692,7 +2692,7 @@ replaceIframesWithImages();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Afficher le graphique</span>
 </span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>show()
-</span></span></code></pre></div><p>On retrouve bien des marqueurs de l&rsquo;urbanité opposés à ceux de la ruralité.<br>
+</span></span></code></pre></div><p>Les marqueurs de l’urbanité sont bien opposés à ceux de la ruralité.<br>
 Les différences de mode de vie entre ces environnements semblent donc responsables du plus gros de la distinction entre départements (du moins pour le lot de variables choisis qui sont malgré tout très disparates).</p>
 <p>On peut renforcer cette interprétation en vérifiant comment une nouvelle variable, la &ldquo;part de la population vivant dans une unité urbaine en 2017&rdquo; score sur un plan formé par les deux premières composantes.</p>
 <iframe src="/plotly_graph_popurbaine.html" width="100%" height="1000px" style="border:none;"></iframe>
@@ -4391,16 +4391,16 @@ Les différences de mode de vie entre ces environnements semblent donc responsab
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1724494847"></script>
-    <script src="/js/perfect-scrollbar.min.js?1724494847"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1724494847"></script>
-    <script src="/js/jquery.sticky.js?1724494847"></script>
-    <script src="/js/featherlight.min.js?1724494847"></script>
-    <script src="/js/highlight.pack.js?1724494847"></script>
+    <script src="/js/clipboard.min.js?1724495899"></script>
+    <script src="/js/perfect-scrollbar.min.js?1724495899"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1724495899"></script>
+    <script src="/js/jquery.sticky.js?1724495899"></script>
+    <script src="/js/featherlight.min.js?1724495899"></script>
+    <script src="/js/highlight.pack.js?1724495899"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1724494847"></script>
-    <script src="/js/learn.js?1724494847"></script>
-    <script src="/js/hugo-learn.js?1724494847"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1724495899"></script>
+    <script src="/js/learn.js?1724495899"></script>
+    <script src="/js/hugo-learn.js?1724495899"></script>
     
     
 

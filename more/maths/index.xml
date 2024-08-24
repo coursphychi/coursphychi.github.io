@@ -27,7 +27,7 @@
       <link>https://coursphychi.github.io/more/maths/pca/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/pca/</guid>
-      <description>Analyse en composantes principales Les axes qui tiraillent territorialement la France Détaillons un exemple sur le modèle de celui des prénoms dans la vidéo.&#xA;L&amp;rsquo;idée ici est de récupérer plein de séries de données départementales disparates sur le site de l&amp;rsquo;INSEE pour voir si les composantes principales font ou non ressurgir une géographie identifiable de ce brouillard de chiffres.&#xA;Cherchant à étudier la variabilité entre départements, à faire ressortir leurs spécificités, on choisit ici de n&amp;rsquo;avoir que des données sous forme de taux quitte à rendre relative certaines données brutes en divisant par la population du département.</description>
+      <description>Analyse en composantes principales Les axes qui tiraillent territorialement la France Détaillons un exemple sur le modèle de celui des prénoms dans la vidéo.&#xA;L&amp;rsquo;idée ici est de récupérer plein de séries de données départementales disparates sur le site de l&amp;rsquo;INSEE pour voir si les composantes principales font ou non ressurgir une géographie identifiable de ce brouillard de chiffres. On peut alors s&amp;rsquo;amuser à balbutier des interprétations pour ces axes de différentiation territoriaux et probablement irriter ainsi fortement tout sociologue un tant soit peu éduqué.</description>
     </item>
     <item>
       <title>Probabilités / Statistiques</title>
