@@ -342,7 +342,7 @@
       <link>https://coursphychi.github.io/more/maths/geometrie/geo4/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/geometrie/geo4/</guid>
-      <description>Curse of dimensionality L&amp;rsquo;expression Curse of dimensionality (Fléau de la dimension dans sa traduction française) vient de l&amp;rsquo;américain Richard Bellman alors qu&amp;rsquo;il considérait des problèmes en programmation dynamique (qu&amp;rsquo;il inventa en 1953).&#xA;Mais qu&amp;rsquo;est-ce donc que ce &amp;ldquo;fléau&amp;rdquo; ?&#xA;Le volume d&amp;rsquo;un cube de côté $a$ à $n$ dimensions vaut $a^n$. Jusque là, ça va.&#xA;Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;&#xA;à 1D, la boule se réduit à un segment de longueur $R$.</description>
+      <description>Curse of dimensionality L&amp;rsquo;expression Curse of dimensionality (Fléau de la dimension dans sa traduction française) vient de l&amp;rsquo;américain Richard Bellman alors qu&amp;rsquo;il considérait des problèmes en programmation dynamique (qu&amp;rsquo;il inventa en 1953).&#xA;Mais qu&amp;rsquo;est-ce donc que ce &amp;ldquo;fléau&amp;rdquo; ?&#xA;Le volume d&amp;rsquo;un cube de côté $a$ dans un espace à $n$ dimensions vaut $a^n$. Jusque là, ça va.&#xA;Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;&#xA;à 1D, la boule se réduit à un segment de longueur $R$.</description>
     </item>
     <item>
       <title>Logique</title>
