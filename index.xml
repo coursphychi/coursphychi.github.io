@@ -167,7 +167,7 @@
       <link>https://coursphychi.github.io/more/physique/electromag/</link>
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/physique/electromag/</guid>
-      <description> Électromagnétisme Rayonnement </description>
+      <description>Électromagnétisme Rayonnement Code Python pour cette dernière vidéo : import numpy as np import matplotlib.pyplot as plt from scipy.optimize import fsolve import os x0 = 0.2 def beta_function(t): return np.array([0.,-x0*c*np.sin(np.pi*t),0]) def beta_dot_function(t): return np.array([0,-x0*c*np.pi*np.cos(np.pi*t),0]) c = 1 def r_0(t): return np.array([float(0.),float(x0*c/np.pi*np.cos(np.pi*t)),0]) def determinetprime(r,r_0,t): &#34;&#34;&#34; r_0(t_prime) est la fonction donnant la position au cours du temps r est le point où on cherche la valeur du champ &#34;&#34;&#34; def func(t_prime): return t - t_prime - np.</description>
     </item>
     <item>
       <title>Optique</title>
