@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Probabilités / Statistiques - Cours Physique-Chimie</title>
+    <title>Électromagnétisme - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/more/maths/probastat/">
+  <body class="" data-url="/more/physique/electromag/">
     <nav id="sidebar" class="">
 
 
@@ -1875,7 +1875,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/maths/" title="Maths" class="dd-item
-        parent
+        
         
         
         ">
@@ -1999,7 +1999,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/more/maths/probastat/" title="Probabilités / Statistiques" class="dd-item active">
+      <li data-nav-id="/more/maths/probastat/" title="Probabilités / Statistiques" class="dd-item ">
         <a href="/more/maths/probastat/">
         Probabilités / Statistiques
         
@@ -2147,7 +2147,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/physique/" title="Physique" class="dd-item
-        
+        parent
         
         
         ">
@@ -2194,7 +2194,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/more/physique/electromag/" title="Électromagnétisme" class="dd-item ">
+      <li data-nav-id="/more/physique/electromag/" title="Électromagnétisme" class="dd-item active">
         <a href="/more/physique/electromag/">
         Électromagnétisme
         
@@ -2473,7 +2473,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Probabilités / Statistiques
+                   Électromagnétisme
                  
                   </span>
                 </div>
@@ -2482,29 +2482,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#loi-binomiale">Loi Binomiale</a></li>
-    <li><a href="#loi-normale">Loi normale</a></li>
-    <li><a href="#densité-de-probabilités">Densité de probabilités</a></li>
-    <li><a href="#probabilités-conditionnelles-et-bayes">Probabilités conditionnelles et Bayes</a></li>
-    <li><a href="#chaînes-de-markov">Chaînes de Markov</a></li>
-    <li><a href="#curiosités-et-énigmes">Curiosités et énigmes</a>
-      <ul>
-        <li><a href="#spaghetti-et-inégalité-triangulaire">Spaghetti et inégalité triangulaire</a></li>
-        <li><a href="#anniversaires-simultanés">Anniversaires simultanés</a></li>
-        <li><a href="#paradoxe-des-deux-enfants">Paradoxe des deux enfants</a></li>
-      </ul>
-    </li>
-    <li><a href="#les-différentes-moyennes">Les différentes moyennes</a></li>
-    <li><a href="#monte-carlo">Monte Carlo</a></li>
-    <li><a href="#paradoxe-de-simpson">Paradoxe de Simpson</a></li>
-    <li><a href="#test-dhypothèse">Test d&rsquo;hypothèse</a></li>
-    <li><a href="#analyse-en-composante-principale">Analyse en composante principale</a></li>
-    <li><a href="#p-hacking">p-hacking</a></li>
-    <li><a href="#pourquoi-n-1-">Pourquoi n-1 ?</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
+    <li><a href="#rayonnement">Rayonnement</a></li>
   </ul>
 </nav>
     </div>
@@ -2543,272 +2521,31 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   {
     color: #006C65;
   }
-  #grosseformule 
-{
-    overflow-x: auto; 
-}
 </style>
-<h1 id="probabilités">Probabilités</h1>
-<h2 id="loi-binomiale">Loi Binomiale</h2>
-<p>D&rsquo;une épreuve de Bernoulli à la loi binomiale :</p>
-<br>
+<h1 id="électromagnétisme">Électromagnétisme</h1>
+<h2 id="rayonnement">Rayonnement</h2>
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 
 
     
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/zkfa9uAy1yM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/jqwOif-TwrM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
       ></iframe>
     </div>
 
 </div>
 <br>
-<h2 id="loi-normale">Loi normale</h2>
-<p>La célèbre gaussienne (ou courbe en cloche) :</p>
+<video width="640" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <source src="/allerretour.mp4" type="video/mp4">
+</video>
 <br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/H_r7iDhANl0?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
+<video width="640" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <source src="/gostop.mp4" type="video/mp4">
+</video>
 <br>
-<h2 id="densité-de-probabilités">Densité de probabilités</h2>
-<p>Nouvelle énigme permettant de parler des densités de probabilité :</p>
-<p>Quelle est la distance moyenne entre deux points pris au hasard sur un segment ?</p>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/XLYXqpl9Z0s?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<p>On peut vérifier la solution statistiquement avec un petit programme simplissime :</p>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;">
-<iframe src="https://trinket.io/embed/python/5354f08fd4?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-</div>
-<br>
-<h2 id="probabilités-conditionnelles-et-bayes">Probabilités conditionnelles et Bayes</h2>
-<p>Les probabilités conditionnelles au tribunal, chez le médecin et dans un vieux jeu télévisé américain :</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/J94PPS0qkAw?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<p><img src="https://imgs.xkcd.com/comics/monty_hall.png" alt=""></p>
-<br>
-<h2 id="chaînes-de-markov">Chaînes de Markov</h2>
-<p>Le jeu de Penney a d&rsquo;étonnantes propriétés. Les chaînes de Markov aident à le démystifier :</p>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/mIN9AWYKtjc?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<h2 id="curiosités-et-énigmes">Curiosités et énigmes</h2>
-<h3 id="spaghetti-et-inégalité-triangulaire">Spaghetti et inégalité triangulaire</h3>
-<p>Une petite énigme à base d&rsquo;inégalité triangulaire :</p>
-<p>Quelle est la probabilité de pouvoir faire un triangle avec les 3 bouts obtenus en cassant aléatoirement un spaghetti en deux endroits ?</p>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/EdRzfn3ctK8?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<h3 id="anniversaires-simultanés">Anniversaires simultanés</h3>
-<p>Quelle est la probabilité que deux élèves d&rsquo;une classe est un anniversaire le même jour ?</p>
-<p>Lorsqu&rsquo;on n&rsquo;a jamais fait le calcul ou entendu parler du résultat, notre intuition nous amène généralement à soupçonner une probabilité bien plus petite qu&rsquo;elle ne l&rsquo;est.<br>
-C&rsquo;est d&rsquo;ailleurs assez fréquent que notre intuition soit aux fraises lorsqu&rsquo;il s&rsquo;agit d&rsquo;estimer une probabilité ou expliquer des statistiques (voir le paradoxe de Simpson plus bas).</p>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/1Wpajb8Dk04?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<h3 id="paradoxe-des-deux-enfants">Paradoxe des deux enfants</h3>
-<p>Le paradoxe des deux enfants repose grandement sur la formulation et provoque encore parfois des débats passionnés.</p>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/MeoIzbjC_HM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;">
-<iframe src="https://trinket.io/embed/python/4dae14528c?toggleCode=true" width="100%" height="500" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-</div>
-<br>
-<hr>
-<p>
-<div class="notices tip" style="--title: 'tip';">
-  <p style="display: none;">tip</p>
-  <div class="notice-body">
-    <p>Les probabilités sont des calculs a priori, visant à prédire les issues d’évènements n’ayant pas encore eu lieu, alors que les statistiques sont des calculs a posteriori qui analysent les issues d’évènements déjà réalisés.</p>
-
-  </div>
-</div>
-
-
-<span id="stat"></span></p>
-<hr>
-<h1> Statistiques </h1>
-<h2 id="les-différentes-moyennes">Les différentes moyennes</h2>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/v5NTpB6DGbQ?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<h2 id="monte-carlo">Monte Carlo</h2>
-<p>Dans la duxième partie de la vidéo, on cherche à répondre à la grande question suivante : comment s&rsquo;assurer d&rsquo;avoir suffisamment d&rsquo;échantillons pour obtenir des statistiques fiables ? Ou plus prosaïquement : à partir de combien est-ce suffisant ? On utilise d&rsquo;abord les propriétés de la loi normale puis on construit un estimateur à partir de l&rsquo;<strong>inégalité de Bienaymé-Tchebychev</strong>.</p>
-<br>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/t1X1Agp1CWA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<h2 id="paradoxe-de-simpson">Paradoxe de Simpson</h2>
-<p>Ce paradoxe a fait des dégâts lors de la campagne de vaccination pour le Covid. Les chiffres de la vidéo sont proches des chiffres communiqués par l&rsquo;état d&rsquo;Israël qui était un des premiers pays à pouvoir vacciner.</p>
-<p><a href="https://www.covid-datascience.com/post/israeli-data-how-can-efficacy-vs-severe-disease-be-strong-when-60-of-hospitalized-are-vaccinated">L&rsquo;article</a> qui a servi en partie pour la vidéo.</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Bu3znAquSuk?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<h2 id="test-dhypothèse">Test d&rsquo;hypothèse</h2>
-<p>Les statistiques au service de la prise de décision en science.</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/9TxSmOK6GWA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<br>
-<h2 id="analyse-en-composante-principale">Analyse en composante principale</h2>
-<p>L&rsquo;analyse en composante principale permet de faire parler les données.</p>
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
-
-    
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/sRMplEDuEig?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
-      ></iframe>
-    </div>
-
-</div>
-<p><a href="../pca/"><strong>Un autre exemple + tuto.</strong></a></p>
-<br>
-<h2 id="p-hacking">p-hacking</h2>
-
-<div class="notices def" style="--title: 'Extrait traduit du livre \27 Everything is predictable\27  de Tom Chivers';">
-  <p style="display: none;">Extrait traduit du livre &#39;Everything is predictable&#39; de Tom Chivers</p>
-  <div class="notice-body">
-    <p>Peut-être que l’exemple le plus célèbre est celui du scientifique de l&rsquo;alimentation Brian Wansink, une star de l’Université Cornell qui a reçu des millions de dollars de financement du gouvernement fédéral américain sous l’administration Obama. Il a publié beaucoup d’études sur notre comportement alimentaire, notamment une sur la façon dont les hommes mangent plus en compagnie de femmes (probablement pour les impressionner) ; une autre sur comment donner des noms plus “attractifs” aux légumes (appeler les carottes “carottes à vision X-ray,” par exemple) permet que les enfants d’école primaire en mangent deux fois plus.
-<br><br>
-Puis, en 2016, il a commis l’erreur de publier un billet de blog intitulé &ldquo;The Grad Student Who Never Said &lsquo;No.&rsquo;&rdquo;.
-<br><br>
-L’étudiante en question était une doctorante turque. Lorsqu’elle est arrivée à Cornell, Wansink “lui a donné un ensemble de données d’une étude autofinancée, sans résultats probants” - une étude qui examinait le comportement alimentaire dans un buffet italien à volonté pendant un mois. Selon ses propres termes, il lui a dit : “Cela nous a coûté beaucoup de temps et  d&rsquo;argent à collecter. Il doit y avoir quelque chose ici que nous pouvons sauver parce que cet ensemble de données est cool (riche et unique).” L’étudiante s’est donc mise au travail et a découpé l’ensemble de données de nombreuses façons différentes. Et, inévitablement, elle a trouvé de nombreuses corrélations p &lt; 0,05 - suffisamment pour qu&rsquo;elle et Wansink publient cinq articles (y compris l’article “les hommes mangent trop pour impressionner les femmes”).
-<br><br>
-Cela a éveillé la suspicion de certains scientifiques et journalistes scientifiques, et ils ont commencé à passer au crible les autres recherches de Wansink. De plus, Stephanie Lee, une journaliste scientifique de BuzzFeed, a mis la main sur ses emails, dans lesquels - il s’est avéré - il demanda à sa doctorante de découper les données en “mâles, femelles, mangeurs de déjeuner, mangeurs de dîner, personnes mangeant seules, personnes mangeant en groupe de 2, personnes mangeant en groupe de 2+, personnes commandant de l’alcool, personnes commandant des boissons non alcoolisées, personnes restant près du buffet, personnes s’asseyant loin, etc.” pour “essorer le jeu de données jusqu&rsquo;à en extraire tous les résultats significatifs possibles” et faire en sorte que cela “devienne viral à grande échelle.”
-<br><br>
-En conséquence, dix-huit des articles de Wansink ont été rétractés ; sept ont reçu des &ldquo;expressions of concern” que les revues ajoutent aux études qu’elles ne pensent pas pouvoir être totalement fiables, mais qu’elles ne sont pas prêtes à rétracter complètement ; et quinze ont été corrigés. Wansink, entre-temps, a démissionné de Cornell en 2019, après que l’université a conclu qu’il avait commis une faute scientifique et lui a interdit l’enseignement et la recherche.
-<br><br>
-C&rsquo;est un exemple particulièrement frappant, mais d’une certaine manière Wansink a eu la malchance d’être détruit publiquement pour quelque chose qui était presque une pratique standard. Le p-hacking se produit tout le temps, de manière beaucoup moins dramatique - et beaucoup de scientifiques n’ont absolument aucune idée qu’ils font quelque chose de mal. Daryl Bem, dans un chapitre d&rsquo;un livre de 1987 écrit comme un guide pour aider les étudiants à publier leurs recherches, a écrit qu’il “y a deux articles que vous pouvez écrire : l’article que vous aviez prévu d’écrire lorsque vous avez conçu votre étude ; l’article qui a le plus de sens maintenant que vous avez vu les résultats. La bonne réponse est le second.” Il a appelé les chercheurs à “analyser les sexes séparément, créer de nouveaux index composites… réorganiser les données pour les mettre en relief de manière plus audacieuse… Les données peuvent être suffisamment solides pour justifier de recentrer votre article autour des nouvelles découvertes et de subordonner ou même d’ignorer vos hypothèses originales.&rdquo;</p>
-
-  </div>
-</div>
-
-
-<p><img src="https://imgs.xkcd.com/comics/significant.png" alt=""></p>
-<p>Comme on l&rsquo;a vu sur les <a href="../geometrie/geo4/#the-average-man">espaces de données à grande dimension </a>, plus on a d&rsquo;axes (de catégories, d&rsquo;entrées,&hellip;), plus on a de chance d&rsquo;obtenir un résultat hors norme sur au moins l&rsquo;un d&rsquo;eux.</p>
-<p>Ce <a href="https://tylervigen.com/spurious-correlations">chouette site</a> met le phénomène à profit pour débusquer des corrélations amusantes (avec pour chacune des p-values inférieures à 1%&hellip;).</p>
-<br>
-<h2 id="pourquoi-n-1-">Pourquoi n-1 ?</h2>
-<p>L&rsquo;<b>écart-type</b> pour une variable quantitative dont les relevés $(x_1,\ldots,x_N)$ sont pris sur la population complète (avec pour moyenne $\mu$) est donné par la racine carrée de la variance :<br>
-$$\sigma = \sqrt{V}=\sqrt{\frac{1}{N}\sum_{i=1}^N (x_i-\mu)^2}$$</p>
-<p>Mais si les relevés ne concernent qu&rsquo;un échantillon $n&lt;N$ de la population et non la population complète (ce qui est le cas pour une série de mesures expérimentales), on passe des probas aux stats et on a alors besoin d&rsquo;un estimateur de l&rsquo;écart-type ($\sigma\rightarrow S$).</p>
-<p>L&rsquo;<b>estimateur de l&rsquo;écart-type non biaisé</b> (aussi appelé écart-type expérimental) est alors donné par :<br></p>
-<div id="grosseformule" style="border:solid 2px red;width:fit-content;margin:auto;padding-left:20px;padding-right:20px">
-$$S_{n-1} =\sqrt{\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})^2}$$
-</div>
-<h4 id="pourquoi-non-biaisénbsp-et-doù-vient-le--1nbsp">Pourquoi &ldquo;non biaisé&rdquo; ? Et d&rsquo;où vient le &ldquo;-1&rdquo; ?</h4>
-<p>Notre problème est qu&rsquo;on ne connaît plus la valeur vraie de la moyenne $\mu$ mais seulement son estimation $m=\frac{1}{n}\sum_{i=1}^n x_i$.</p>
-<p>Et en substituant $m$ à $\mu$ dans la variance, on biaise son espérance&hellip;<br>
-En effet :</p>
-<div id="grosseformule">
-$$
-\begin{aligned}
-E\left(\frac{1}{n}\sum_{i=1}^n (x_i-m)^2\right) &= E \left( \frac{1}{n}\sum_{i=1}^n x_i^2 - m^2 \right) &&\text{car } -2 \frac{1}{n}\sum_{i=1}^n x_i\times m = -2  m^2\\
-& = \frac{1}{n}\sum_{i=1}^n E(x_i^2)-E(m^2)\\
-& = E(x^2)-E(m^2) &&\text{car }E(x_i)=E(x)\text{ ne dépend pas de }i\\
-&= \left(V(x)+E(x)^2\right)-\left(V(m)+E(m)^2\right)&&\text{car }V(x)=E(x^2)-E(x)^2\\
-&= \left(V(x)+E(x)^2\right)-\left(\frac{1}{n}V(x)+E(x)^2\right)&&\text{car }V(m)=\frac{1}{n}V(x)\\
-&= \frac{n-1}{n}V(x)
-\end{aligned}
-$$
-</div>
-<p>Par conséquent, on multiplie par $\frac{n}{n-1}$ pour se débarrasser du biais&hellip;</p>
-
+<video width="640" controls loop style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <source src="/oscill2.mp4" type="video/mp4">
+</video>
 
 <footer class="footline">
 	
@@ -4025,7 +3762,6 @@ $$
             
                 
                     
-                    
                 
                 
 
@@ -4040,9 +3776,6 @@ $$
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -4122,7 +3855,6 @@ $$
             
                 
                     
-                    
                 
                 
 
@@ -4138,9 +3870,6 @@ $$
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -4239,6 +3968,7 @@ $$
             
                 
                     
+                    
                 
                 
 
@@ -4251,6 +3981,9 @@ $$
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -4268,6 +4001,7 @@ $$
             
                 
                     
+                    
                 
                 
 
@@ -4283,6 +4017,9 @@ $$
             
             
                 
+                    
+                        
+                        
                     
                 
                 
