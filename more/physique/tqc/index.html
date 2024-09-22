@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Calcul des propositions - Cours Physique-Chimie</title>
+    <title>Théorie quantique des champs - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/more/logique/logique1/">
+  <body class="" data-url="/more/physique/tqc/">
     <nav id="sidebar" class="">
 
 
@@ -2072,7 +2072,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/logique/" title="Logique" class="dd-item
-        parent
+        
         
         
         ">
@@ -2098,7 +2098,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/more/logique/logique1/" title="Calcul des propositions" class="dd-item active">
+      <li data-nav-id="/more/logique/logique1/" title="Calcul des propositions" class="dd-item ">
         <a href="/more/logique/logique1/">
         Calcul des propositions
         
@@ -2168,7 +2168,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/physique/" title="Physique" class="dd-item
-        
+        parent
         
         
         ">
@@ -2497,7 +2497,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Calcul des propositions
+                   Théorie quantique des champs
                  
                   </span>
                 </div>
@@ -2506,11 +2506,10 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#syntaxe">Syntaxe</a>
+    <li><a href="#partie-1--un-univers-doscillateurs-harmoniques">Partie 1 : un univers d&rsquo;oscillateurs harmoniques</a>
       <ul>
-        <li><a href="#langage">Langage</a></li>
-        <li><a href="#formules">Formules</a></li>
-        <li><a href="#linéarisation-dune-formule">Linéarisation d&rsquo;une formule</a></li>
+        <li><a href="#lagrangien-et-principe-de-moindre-action">Lagrangien et principe de moindre action</a></li>
+        <li><a href="#les-oscillateurs-harmoniques">Les oscillateurs harmoniques</a></li>
       </ul>
     </li>
   </ul>
@@ -2551,7 +2550,11 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   {
     color: #006C65;
   }
-  #preuve
+  #grosseformule 
+{
+    overflow-x: auto; 
+}
+#preuve
 {
     background-color:#EAEAEA;
     border-radius:10px;
@@ -2569,153 +2572,219 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     border-radius:10px;
     padding:5px 20px 5px 20px;
 }
-table {
-  border-collapse: collapse;
-  border: 0;
+h2
+{
+color:#970E53 !important;
 }
-td, th {
-  border-collapse: collapse;
-  text-align: center;
-  vertical-align: middle;
+h3
+{
+color:#004D80 !important;
 }
 </style>
-<script>
-MathJax = {
-  tex: {
-    inlineMath: [ ['$', '$'], ['\\(', '\\)'] ]
-  },
-  svg: {
-    fontCache: 'global'
-  }
-};
-</script>
-<script
-  type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-</script>
-<br>
-<div style="position:relative; width:200px; max-width: 100%; margin-left: auto;margin-right: auto;border-radius:10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-<img src="/duparc.png" style="border-radius:10px;">
-</div>
-
-<div class="notices info" style="--title: 'info';">
-  <p style="display: none;">info</p>
-  <div class="notice-body">
-    <p>Notes de lecture du livre <em>La logique pas à pas</em> de Jacques Duparc que je paraphrase allégrement.</p>
-
-  </div>
-</div>
-
-
-<br>
-<h1 id="calcul-des-propositions">Calcul des propositions</h1>
-<div style="overflow-x: auto;">
-<table>
-  <tr>
-    <th><a href="../logique1/">Syntaxe</a></th>
-    <th><a href="../logique2/">Sémantique</a></th>
-    <th><a href="../logique3/">Preuve</a></th>
-  </tr>
-</table>
-</div>
-<br>
-<p>Le calcul des propositions (ou <strong>calcul propositionnel</strong> ou <strong>logique des propositions</strong>) permet de modéliser des raisonnements simples. Son pouvoir expressif est assez limité mais c&rsquo;est sur ses fondations que se construisent les logiques plus évoluées.</p>
-<br>
-<h2 id="syntaxe">Syntaxe</h2>
-<br>
-<h3 id="langage">Langage</h3>
-<br>
-<div id="def">
-<p style="margin-bottom:-1.1em;">Le <b>langage</b> du calcul des propositions est constitué </p>
-<ul>
-<li>de variables propositionnelles $P$, $Q$, $R$,..., </li>
-<li>de connecteurs logiques $\neg, \lor, \land, \rightarrow, \leftrightarrow$</li>
-<li>et de parenthèses.</li>
-</ul>
-</div>
-<p>On désigna par $VAR=\Set{P,Q,R\dots}$ l&rsquo;ensemble des variables propositionnelles, potentiellement infini.</p>
-<div id="def">
-<ul>
-<li>Le connectecteur logique $\neg$ est unaire (ou d'arité 1) puisqu'il transforme à lui seul une formule en une autre formule. C'est le symbole de <b>négation</b> et il se dit <b>non</b>.</li>
-<li>Les autres connecteurs logiques sont binaires (d'arité 2) puisqu'ils lient deux formules en une nouvelle.</li>
-<ul>
-    <li>$\lor$ est le symbole de <b>disjonction</b> ("<b>ou</b>")</li>
-    <li>$\land$ est le symbole de <b>conjonction</b> ("<b>et</b>")</li>
-    <li>$\rightarrow$ est le symbole d'<b>implication</b> ("<b>mplique</b>")</li>
-    <li>$\leftrightarrow$ est le symbole de <b>double implication</b> ou d'<b>équivalence</b> ("<b>si et seulement si</b>" ou "<b>équivaut à</b>")</li>
-</ul>
-</ul>
-</div>
-<br>
-<div id="def">
-<p>Le <b>langage</b> du calcul des propositions est alors l&rsquo;ensemble suivant : $\mathcal{L} = VAR\cup\Set{\neg,\lor,\land,\rightarrow,\leftrightarrow,(,)}$</p>
-</div>
-<br>
-<h3 id="formules">Formules</h3>
-<br>
-<p>On peut représenter les formules du calcul propositionnel par des <strong>arbres</strong> dont les feuilles sont des variables propositionnelles et les nœuds sont des connecteurs.</p>
-<div id="def">
-<p style="margin-bottom:-1.1em;">L'ensemble $\mathcal{F}$ des formules du calcul propositionnel est le plus petit ensemble d'arbres qui</p>
-<ul>
-<li>contient chaque arbre réduit à sa racine qui est une variable propositionnelle.</li>
-<li>chaque fois qu'il contient des formules $\phi$ et $\psi$ contient également  les formules suivantes&nbsp;:
-<div style="position:relative; width:500px; max-width: 100%; margin-left: auto;margin-right: auto;">
-<img src="/ensformules.png"></div>
-</li>
-</ul>
-</div>
-<p>La <strong>hauteur</strong> d&rsquo;une formule est la longueur de sa plus longue branche.</p>
-
-<div class="notices tip" style="--title: 'tip';">
-  <p style="display: none;">tip</p>
-  <div class="notice-body">
-    <p>C&rsquo;est une définition par <strong>récurrence</strong> (ou <strong>inductive</strong>) : on a d&rsquo;abord défini les feuilles, cas de base de hauteur 0, puis on a donné la recette pour passer d&rsquo;un arbre de hauteur $n$ à un arbre de hauteur $n+1$.</p>
-
-  </div>
-</div>
-
-
-<p>Une <strong>sous formule</strong> d&rsquo;une formule $\phi$ est un sous-arbre de $\phi$ dont l&rsquo;un des nœuds de $\phi$ est la racine.</p>
-<p><img src="/sousformules.png?width=600px" alt=""></p>
-<p>La formule de hauteur 5 ci-dessus contient :</p>
-<ul>
-<li>5 feuilles, sous-formules de hauteur 0 (en vert),</li>
-<li>3 sous-formules de hauteur 1 (en rouge),</li>
-<li>2 sous-formules de hauteur 2 (en bleu),</li>
-<li>1 sous-formule de hauteur 3 (en rose),</li>
-<li>1 sous-formule de hauteur 4 (en jaune).</li>
-</ul>
-<p>Lorsqu&rsquo;une sous-formule apparaît plusieurs fois dans une formule, on dit qu&rsquo;elle a plusieurs <strong>occurences</strong>.</p>
-<br>
-<h3 id="linéarisation-dune-formule">Linéarisation d&rsquo;une formule</h3>
-<br>
-<p>La linéarisation d&rsquo;une formule $\theta$ peut s&rsquo;obtenir par induction :</p>
-<ul>
-<li>une feuille $\color{#007100}P$ se linéarise en $\color{#007100}P$ : $\theta=\color{#007100}P$</li>
-<li>les linéarisations des sous-formules suivantes <img src="/ensformules.png?width=500px" alt="">
-sont données respectivement par $\theta=\left(\color{#B51700}{\neg}\color{#007100}{\phi}\color{#000} \right)$, $\theta=\left(\color{#007100}{\phi} \color{#B51700}{\lor} \color{#007100}{\psi} \color{#000} \right)$, $\theta=\left( \color{#007100}{\phi} \color{#B51700}{\land} \color{#007100}{\psi} \color{#000} \right)$, $\theta=\left( \color{#007100}{\phi} \color{#B51700}{\rightarrow} \color{#007100}{\psi} \color{#000} \right)$, $\theta=\left( \color{#007100}{\phi} \color{#B51700}{\leftrightarrow} \color{#007100} \psi  \color{#000} \right)$.</li>
-</ul>
-<p>Exemple :</p>
-<p>La linéarisation de cette formule $\phi$ donne :</p>
-<p><img src="/linearisationformule.png?width=600px" alt=""></p>
-<p>$$\displaystyle
-\phi =  ( \color{#B51700}{\neg}\color{#000}  ( \color{#007100}{P} \color{#B51700}{\lor} \color{#007100}{R}\color{#000}  ) ) \color{#B51700}{\land} \color{#000} (\color{#007100}{P} \color{#B51700}{\lor}\color{#000}  ( ( \color{#B51700}{\neg} \color{#007100}{R}\color{#000}  ) \color{#B51700}{\rightarrow} \color{#000}( ( \color{#B51700}{\neg} \color{#007100}{Q}\color{#000} ) \color{#B51700}{\leftrightarrow} \color{#007100}{P} \color{#000} ) ))
-$$</p>
-<br>
+<h1 id="théorie-quantique-des-champs">Théorie quantique des champs</h1>
 
 <div class="notices note" style="--title: 'note';">
   <p style="display: none;">note</p>
   <div class="notice-body">
-    <p>La <strong>syntaxe</strong>, c&rsquo;est l&rsquo;articulation des symboles. La <strong>sémantique</strong>, c&rsquo;est ce que ça raconte.</p>
+    <p>Notes de lecture du livre <em>Quantum field theory for the gifted amateur</em> de Thomas Lancaster et Stephen Blundell.</p>
 
   </div>
 </div>
 
 
 <br>
-<p style="text-align:center;">
-<a href="../logique2" style="font-size:2em;">Suite : <b>la sémantique</b></a>
-</p>
+<blockquote>
+<p>Toute particule et toute onde dans l&rsquo;univers sont simplement une excitation d&rsquo;un champ quantique défini à travers tout l&rsquo;espace et le temps.</p>
+</blockquote>
+<p>La théorie quantique des champs (TQC) est actuellement la meilleure théorie pour expliquer l&rsquo;univers qui nous entoure et la théorie testée avec la plus grande précision.</p>
+<br>
+<h2 id="partie-1--un-univers-doscillateurs-harmoniques">Partie 1 : un univers d&rsquo;oscillateurs harmoniques</h2>
+<h3 id="lagrangien-et-principe-de-moindre-action">Lagrangien et principe de moindre action</h3>
+<p><img src="/tqctraj.png?width=500px" alt=""></p>
+<p>La détermination de la trajectoire $x(t)$ d&rsquo;une particule entre A et B par intégration de la 2<sup>e</sup> loi de Newton, $F=m\ddot{x}$, ne cadre pas avec les enseignements de la mécanique quantique. Car si on peut bien mesurer la particule en A à $t=0$ et en B à $t=\tau$, un voile impénétrable nous empèche de savoir précisément ce qui s&rsquo;est passé entre les deux. Une équation différentielle ne semble donc pas un point de départ prometteur pour calculer $x(t)$&hellip;</p>
+<p>Concentrons-nous sur les variations de l&rsquo;énergie cinétique $T$ et l&rsquo;énergie potentielle $V$ le long de la trajectoire. L&rsquo;énergie totale $E=T+V$ doit être une constante du mouvement de la particule mais l&rsquo;équilibre entre les deux types d&rsquo;énergie peut varier.<br>
+Notons $\displaystyle\bar{T}=\frac{1}{\tau}\int_0^\tau\frac{1}{2}m[\dot{x}(t)]^2 dt$ l&rsquo;énergie cinétique moyenne sur la trajectoire et $\displaystyle\bar{V}=\frac{1}{\tau}\int_0^\tau V[x(t)] dt$, l&rsquo;énergie potentielle moyenne. On a bien sûr $E=\bar{E}=\bar{T}+\bar{V}$.<br>
+Mathématiquement, $\bar{T}$ et $\bar{V}$ sont des fonctionnelles. Là où des fonctions se nourrissent de nombres pour produire des nombres, les fonctionnelles produisent des nombres à partir de fonctions ($\bar{T}$ produit un nombre à partir de $\dot{x}(t)$ et $\bar{V}$ à partir de $x(t)$).</p>
+<div id="preuve">
+<p>La dérivée fonctionnelle de $F[f(x)]$ nous dit comment le nombre produit par la fonctionnelle varie lorsqu&rsquo;on change légèrement la fonction $f(x)$ qu&rsquo;elle machouille :<br>
+$$
+\frac{\delta F}{\delta f(x)}=\lim_{\epsilon\to 0}\frac{F[f(x&rsquo;)+\epsilon\delta(x-x&rsquo;)]-F[f(x&rsquo;)]}{\epsilon}
+$$</p>
+<details>
+<summary><a style="color:#004D80">Dérivées fonctionnelles utilisées dans la suite&nbsp;:</a></summary>
+<ul>
+<li>$F[f]=\int_a^b g[f(x)]\mathrm{d}x$ avec $g'=\mathrm{d}g/\mathrm{d}f$
+<p>$$
+\begin{aligned}
+\frac{\delta F[f]}{\delta f(x_0)}&amp;=\lim_{\epsilon \to 0}\frac{1}{\epsilon}\left[\int g[f(x)+\epsilon \delta(x-x_0)]dx-\int g[f(x)]\mathrm{d}x\right]\\
+&amp;=\lim_{\epsilon \to 0}\frac{1}{\epsilon}\left[\int (g[f(x)+\epsilon\delta(x-x_0)g&rsquo;[f(x)])\mathrm{d}x - \int g[f(x)]\mathrm{d}x\right]\\
+&amp;=\int \delta(x-x_0) g&rsquo;[f(x)] \mathrm{d}x\\
+&amp;= g&rsquo;[f(x_0)]
+\end{aligned}
+$$</p>
+<p>On détermine ainsi que $\displaystyle \frac{\delta \bar{V}[x]}{\delta x(t)}=\frac{1}{\tau}V&rsquo;[x(t)]$.</p>
+</li>
+<li>
+<p>$F[f]=\int g(f&rsquo;)\mathrm{d}y$ avec $f&rsquo;=\mathrm{d}f/\mathrm{d}y$</p>
+<p>$$\frac{\delta F[f]}{\delta f(x)}=\lim_{\epsilon \to 0}\frac{1}{\epsilon}\left[\int dy \,g\!\left( \frac{\partial}{\partial y}[f(y)+\epsilon \delta(y-x)]\right) - \int dy \,g\!\left(\frac{\partial f}{\partial y}\right)\right]$$</p>
+<p>Par un développement de Taylor au premier ordre, on obtient :</p>
+<p>$$g\left(\frac{\partial}{\partial y}[f(y)+\epsilon\delta(y-x)]\right)=f(f&rsquo;+\epsilon\delta&rsquo;(y-x))\approx g(f&rsquo;)+\epsilon\delta&rsquo;(y-x)\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d} f&rsquo;}$$</p>
+<p>On aboutit à :</p>
+<p>$$\frac{\delta F[f]}{\delta f(x)}=\int \mathrm{d}y \delta&rsquo;(y-x)\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d} f&rsquo;}$$</p>
+<p>On utilise alors une intégration par partie :</p>
+<p>$$\int \mathrm{d}y\, \delta&rsquo;(y-x)\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d} f&rsquo;}=\left[\delta(y-x)\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d} f&rsquo;}\right]-\int \mathrm{d}y \,\delta(y-x)\frac{\mathrm{d}}{\mathrm{d} y}\left(\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d}f&rsquo;}\right)$$</p>
+<p>Si $x$ se balade sur l&rsquo;intervalle d&rsquo;intégration, le terme entre crochets est de mesure nulle et on obtient finalement :</p>
+<p>$$\frac{\delta F[f]}{\delta f(x)}=-\frac{\mathrm{d}}{\mathrm{d} x}\left(\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d}f&rsquo;}\right)$$</p>
+<p>On détermine ainsi que $\displaystyle \frac{\delta \bar{T}[x]}{\delta x(t)}=-\frac{m\ddot{x}}{\tau}$.</p>
+<p>D&rsquo;autre part, si on a $F[\phi]=\int\left(\frac{\partial\phi}{\partial y}\right)^2\mathrm{d}y$, on obtient $\displaystyle \frac{\delta F[\phi]}{\delta\phi(x)}=-2\frac{\partial^2\phi}{\partial x^2}$.</p>
+<p>Résultat qui se généralise à 3 dimensions pour donner un résultat très utile :</p>
+<p>Si $\displaystyle I=\int(\nabla\phi)^2\mathrm{d}^3 x$, alors $\displaystyle\frac{\delta I}{\delta\phi}=-2\nabla^2\phi$.</p>
+</li>
+</ul>
+</details>
+<br>
+</div>
+<p>On peut maintenant vérifier comment $\bar{T}$ et $\bar{V}$ varient lorsque la trajectoire $x(t)$ est un peu modifiée :
+$$
+\frac{\delta \bar{V}[x]}{\delta x(t)}=\frac{V&rsquo;[x(t)]}{\tau}\qquad \qquad\frac{\delta \bar{T}[x]}{\delta x(t)}=-\frac{m\ddot{x}}{\tau}
+$$</p>
+<p>Or d&rsquo;après la 2<sup>e</sup> loi de Newton, la trajectoire classique correspond à $m\ddot{x}=-dV/dx$ et d&rsquo;après ce qui précède, cela entraîne que $\displaystyle \frac{\delta \bar{V}[x]}{\delta x(t)}=\frac{\delta \bar{T}[x]}{\delta x(t)}$.</p>
+<p>On en conclut que pour une légère déviation autour de la trajectoire classique, l&rsquo;énergie potentielle moyenne et l&rsquo;énergie cinétique moyenne vont varier ensemble (généralement augmenter) et de la même valeur !</p>
+<p>Cela peut se réécrire $\displaystyle \frac{\delta }{\delta x(t)}(\bar{T}[x]- \bar{V}[x])=0$.</p>
+<p>La <strong>différence</strong> entre les deux énergies moyennes est <em>stationnaire</em> près de la trajectoire classique.</p>
+<p>On décide alors de donner un nom à cette différence entre énergie cinétique et potentielle : le <strong>lagrangien</strong> $L$.</p>
+<div id="def">
+$$ L=T-V $$
+</div>
+<p>L&rsquo;intégrale du lagrangien sur le temps définit l&rsquo;<strong>action</strong> $S$.</p>
+<div id="def">
+$$ S=\int_0^\tau L \mathrm{d}t $$
+</div>
+<p>Ces deux nouvelles grandeurs vont nous permettre de réécrire de manière synthétique ce qu&rsquo;on a découvert jusque-là.<br>
+$\displaystyle S=\int_0^\tau(T-V)\mathrm{d}t = \tau(\bar{T}[x]-\bar{V}[x])$, et donc</p>
+<div id="theo">
+$$ \frac{\delta S}{\delta x(t)} = 0 $$
+<p>C&rsquo;est le <strong>principe de moindre action</strong> de Hamilton.
+<br></p>
+</div>
+<br>
+<div id="preuve">
+<p><b>Équations d&rsquo;Euler-Lagrange</b> :</p>
+<p>Le lagrangien $L$ peut s&rsquo;écrire comme une fonction à la fois de la position et de la vitesse $L(x(t),\dot{x}(t))$. Le principe de moindre action donne alors :</p>
+<div style="position:relative;margin:auto;border:1px solid black;width:fit-content;padding:5px 20px 0px 20px;">
+$$
+ \frac{\delta L}{\delta x(t)}-\frac{\mathrm{d}}{\mathrm{d}t}\frac{\delta L}{\delta\dot{x}(t)} = 0
+$$
+</div>
+<details>
+<summary><a style="color:#004D80">Démonstration&nbsp;:</a></summary>
+<p>$$
+\begin{aligned}
+\frac{\partial S}{\partial x(t)} &amp; = \int \mathrm{d}u\left[\frac{\partial L}{\partial x(u)}\frac{\partial x(u)}{\partial x(t)}+\frac{\partial L}{\partial \dot{x}(u)}\frac{\partial \dot{x}(u)}{\partial x(t)}\right]\\
+&amp; = \int \mathrm{d}u\left[\frac{\partial L}{\partial x(u)}\delta(u-t)+\frac{\partial L}{\partial \dot{x}(u)}\frac{\mathrm{d}}{\mathrm{d}t}\delta(u-t)\right]\\
+&amp;=\frac{\partial L}{\partial x(t)}+\left[\delta(u-t)\frac{\delta L}{\delta \dot{x}(u)}\right]_{t_i}^{t_f}-\int \mathrm{d}u\,\delta(u-t)\frac{\mathrm{d}}{\mathrm{d}t}\frac{\delta L}{\delta\dot{x}(u)}\\
+&amp;=\frac{\delta L}{\delta x(t)}-\frac{\mathrm{d}}{\mathrm{d}t}\frac{\delta L}{\delta\dot{x}(t)}
+\end{aligned}
+$$</p>
+</details>
+<br>
+</div>
+<p>On introduit aussi la densité lagrangienne $\mathcal{L}$ :</p>
+<div id="def">
+$$ L=\int \mathscr{d}x\,\mathcal{L} $$
+<p>$$ S=\int \mathscr{d}t\,\mathscr{d}x\,\mathcal{L} $$</p>
+</div>
+<p>Plaçons-nous désormais dans un cadre relativiste : le lagrangien dépend maintenant d&rsquo;une fonction $\phi(x)$ où $x$ est un point de l&rsquo;espace-temps dont la dérivée est le 4-vecteur $\partial_\mu\phi$.</p>
+<p>L&rsquo;action devient :</p>
+<p>$$S=\int \mathrm{d}^4 x\mathcal{L}(\phi,\partial_\mu\phi)$$</p>
+<p>Le principe de moindre action fournit maintenant une version quadrivectorielle des équations d&rsquo;Euler-Lagrange :</p>
+<div id="theo">
+$$
+ \frac{\delta S}{\delta \phi} = \frac{\delta L}{\delta \phi}-\partial_\mu\left(\frac{\partial\mathcal{L}}{\partial(\partial_\mu\phi)}\right) = 0
+$$
+</div>
+<br>
+<h3 id="les-oscillateurs-harmoniques">Les oscillateurs harmoniques</h3>
+<blockquote>
+<p><strong>Première quantification</strong> : les particules se comportent comme des ondes.<br>
+<strong>Seconde quantification</strong> : les ondes se comportent comme des particules.</p>
+</blockquote>
+<p><img src="/tqcoh.png?width=100px" alt=""></p>
+<p>Partons d&rsquo;une masse $m$ accrochée à un ressort de constante de raideur $K$. La quantité de mouvement de la masse est donnée par $p=m\dot{x}$. L&rsquo;énergie totale $E$ vaut la somme de l&rsquo;énergie cinétique $p^2/2m$ et de l&rsquo;énergie potentielle $\frac{1}{2}Kx^2$.<br>
+En mécanique quantique, on remplace $p$ par l&rsquo;opérateur impulsion $-i\hbar\partial /\partial x$ et on obtient alors l&rsquo;équation de Schrödinger d&rsquo;un oscillateur harmonique :
+$$\left(-\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}+\frac{1}{2}K x^2\right)\psi=E\psi$$</p>
+<p>Les solutions sont données par :</p>
+<p>$$\psi_n(\xi)=\frac{1}{\sqrt{2^n n!}}\left(\frac{m\omega}{\pi\hbar}\right)^{1/4}H_n(\xi)e^{-\xi^2/2}$$</p>
+<p>où les $H_n(\xi)$ sont des polynômes de Hermite et où $\xi=\sqrt{m\omega/\hbar x}$</p>
+<p><img src="/tqcohniveaux.png?width=800px" alt=""></p>
+<p>Si ces fonctions propres ressemblent pas mal à des ondes, les valeurs propres $E_n=\left(n+\frac{1}{2}\right)\hbar\omega$ (avec $\omega=\sqrt{K/m}$) se rangent, elles, plutôt du côté particules. On remarque que pour $n=0$, l&rsquo;énergie n&rsquo;est pas nulle mais vaut $\hbar\omega/2$. C&rsquo;est l&rsquo;<strong>énergie de point zéro</strong>.</p>
+<p>Ajouter un quantum d&rsquo;énergie $\hbar\omega$ permet de monter d&rsquo;un barreau l&rsquo;échelle des énergies, ce que l&rsquo;on a bien envie de modéliser par l&rsquo;absorption d&rsquo;une particule. On peut formaliser ça élégamment (et sans se salir les mains avec les polynômes de Hermite).<br>
+On part de l&rsquo;Hamiltonien de l&rsquo;oscillateur harmonique :</p>
+<p>$$\hat{H}=\frac{\hat{p}^2}{2m}+\frac{1}{2}m\omega^2\hat{x}^2$$</p>
+<p>où on a réexprimé la constante de raideur : $K=m\omega^2$.</p>
+<p>L&rsquo;Hamiltonien semble vouloir être factorisé en $\frac{1}{2}m\omega^2\left(\hat{x}-\frac{i}{m\omega}\hat{p}\right)\left(\hat{x}+\frac{i}{m\omega}\hat{p}\right)$, mais un problème se dresse : $\hat{x}$ et $\hat{p}$ ne commutent pas ! En effet, $\left[\hat{x},\hat{p}\right]\equiv \hat{x}\hat{p}-\hat{p}\hat{x}=i\hbar$.<br>
+Par conséquent :</p>
+<p>$$\frac{1}{2}m\omega^2\left(\hat{x}-\frac{i}{m\omega}\hat{p}\right)\left(\hat{x}+\frac{i}{m\omega}\hat{p}\right)=\frac{1}{2}m\omega^2\hat{x}^2+\frac{\hat{p}^2}{2m}+\frac{i\omega}{2}[\hat{x},\hat{p}]$$</p>
+<p>Plutôt que $\hat{H}$, on obtient donc $\hat{H} -\frac{\hbar\omega}{2}$, l&rsquo;Hamiltonien corrigé de l&rsquo;énergie de point zéro. Cela ne semble pas un problème indépassable.</p>
+<p>Les deux opérateurs $\hat{x}-\frac{i}{m\omega}\hat{p}$ et $\hat{x}+\frac{i}{m\omega}\hat{p}$ semblent voués à jouer un rôle important dans cette histoire. Ils sont adjoints l&rsquo;un de l&rsquo;autre (puisque $\hat{x}$ et $\hat{p}$ sont hermitiens) ce qui leur interdit d&rsquo;être eux-mêmes hermitiens et donc de correspondre à une quelconque observable.<br>
+Après un petit toilettage, introduisons les <strong>opérateurs d&rsquo;échelle</strong> :</p>
+<div id="def">
+<p>$$\hat{a}=\sqrt{\frac{m\omega}{2\hbar}}\left(\hat{x}+\frac{i}{m\omega}\hat{p}\right)$$</p>
+<p>$$\hat{a}^\dagger=\sqrt{\frac{m\omega}{2\hbar}}\left(\hat{x}-\frac{i}{m\omega}\hat{p}\right)$$</p>
+</div>
+<br>
+<div id="theo">
+<p>$$[\hat{a},\hat{a}^\dagger]=1$$</p>
+</div>
+<p>On peut inverser les définitions de $\hat{a}$ et $\hat{a}^\dagger$ pour obtenir :</p>
+<div id="def">
+<p>$$\hat{x}=\sqrt{\frac{\hbar}{2m\omega}}\left(\hat{a}+\hat{a}^\dagger\right)$$</p>
+<p>$$\hat{p}=-i\sqrt{\frac{\hbar m \omega}{2}}\left(\hat{a}-\hat{a}^\dagger\right)$$</p>
+</div>
+<p>Et l&rsquo;Hamiltonien devient :</p>
+<p>$$\hat{H}=\hbar\omega\left(\hat{a}^\dagger\hat{a}+\frac{1}{2}\right)$$</p>
+<p>Appelons $|n\rangle$ un état propre de $\hat{a}^\dagger\hat{a}$ pour une valeur propre $n$. Alors $|n\rangle$ sera aussi vecteur propre de $\hat{H}$ mais pour une valeur propre $\hbar\omega(n+\frac{1}{2})$. Si $n$ vaut 0, 1, 2, &hellip;., on aura bien retrouvé les valeurs propres d&rsquo;un oscillateur harmonique !</p>
+<div id="preuve">
+<p>Montrons d&rsquo;abord que $n≥0$ :</p>
+<p>$$n=\langle n|\hat{a}^\dagger\hat{a}|n\rangle = |\hat{a}|n\rangle|^2≥0$$</p>
+<p>Montrons ensuite que $n$ ne prend que des valeurs entières.<br>
+On commence par définir l&rsquo;<strong>opérateur nombre</strong> de quantas de vibration $\hat{n} = \hat{a}^\dagger\hat{a}$. On a alors $\hat{n}|n\rangle = n|n\rangle$.<br>
+Nombre de quoi ? $n$ correspond au numéro du barreau d&rsquo;échelle atteint et donc au nombre de quanta d&rsquo;énergie $\hbar\omega$ qu&rsquo;il a fallut ajoutés au système dans son état fondamental.</p>
+<p>On peut réécrire l&rsquo;Hamiltonien $\hat{H}=\hbar\omega\left(\hat{n}+\frac{1}{2}\right)$. Et donc $\hat{H}|n\rangle = \left(\hat{n}+\frac{1}{2}\right) \hbar\omega |n\rangle$. $|n\rangle$ est ainsi un raccourci simple pour les vilains $\psi_n(\xi)$.</p>
+<p>De $[\hat{a},\hat{a}^\dagger]=1$, on déduit $\hat{a}\hat{a}^\dagger = 1 +\hat{a}^\dagger\hat{a}=1+\hat{n}$ et donc $\hat{n}\hat{a}^\dagger = \hat{a}^\dagger\hat{a}\hat{a}^\dagger|n\rangle=\hat{a}^\dagger(1+\hat{n})|n\rangle=(n+1)\hat{a}^\dagger|n\rangle$. Par conséquent, $\hat{a}^\dagger|n\rangle$ est un état propre de $\hat{H}$ pour une valeur propre un rang au-dessus de celle de $|n\rangle$. $\hat{a}^\dagger$ a donc pour effet d&rsquo;ajouter un quantum d&rsquo;énergie ! C&rsquo;est l&rsquo;<strong>opérateur de création</strong>.</p>
+<p>En utilisant la relation de commutation $[\hat{n},\hat{a}]=\hat{n}\hat{a}-\hat{a}\hat{n}=\hat{a}^\dagger\hat{a}\hat{a}-{\color{#970E53}\hat{a}\hat{a}^\dagger}\hat{a}=\hat{a}^\dagger\hat{a}\hat{a}-{\color{#970E53}(1+\hat{a}^\dagger\hat{a})}\hat{a}=-\hat{a}$, on obtient $\hat{n}\hat{a}|n\rangle = (-\hat{a}+\hat{a}\hat{n})|n\rangle=(n-1)\hat{a}|n\rangle$.<br>
+$\hat{a}|n\rangle$ est un état propre de $\hat{H}$ pour une valeur propre un rang en-dessous de celle de $|n\rangle$.$\hat{a}$ fait donc descendre d&rsquo;un étage. C&rsquo;est l&rsquo;<strong>opérateur d&rsquo;annihilation</strong>.</p>
+</div>
+<p>Après normalisation, on obtient :</p>
+<div id="theo">
+<p>$$\hat{a}|n\rangle = \sqrt{n}|n-1\rangle$$</p>
+<p>$$\hat{a}^\dagger|n\rangle = \sqrt{n+1}|n+1\rangle$$</p>
+</div>
+<br>
+<div id="preuve">
+<br>
+<details>
+<summary><a style="color:#004D80">Preuve :</a></summary>
+<p>On a montré que $\hat{a}|n\rangle$ est proportionnel à $|n-1\rangle$ : $\hat{a}|n\rangle=k|n-1\rangle$.<br>
+Prenons la norme de cet état : $|a|n\rangle|^2 = \langle n|\hat{a}^\dagger\hat{a}|n\rangle=|k|^2\langle n-1|n-1\rangle=|k|^2$ (vu que les états propres de l&rsquo;oscillateur harmonique sont normalisés).<br>
+Mais on peut remarquer aussi que $\langle n|\hat{a}^\dagger\hat{a}|n\rangle=\langle n|\hat{n}|n\rangle =n$.<br>
+On obtient par conséquent $k=\sqrt{n}$ (cela suppose $k$ réel mais comme les états sont définis à une phase près, on peut toujours choisir la phase afin que $k$ soit bien réel).<br>
+On a aussi montré que $\hat{a}^\dagger=c|n+1\rangle$ et $|a^\dagger|n\rangle|^2 = \langle n|\hat{a}\hat{a}^\dagger|n\rangle=|c|^2\langle n+1|n+1\rangle=|c|^2$.<br>
+Et comme $\hat{a}\hat{a}^\dagger=1+\hat{n}$, $\langle n|\hat{a}\hat{a}^\dagger|n\rangle=\langle n|1+\hat{n}|n\rangle=n+1$.<br>
+Et donc $c=\sqrt{n+1}$</p>
+</details>
+<br>
+</div>
+<p>En appliquant de manière répétée l&rsquo;opérateur $\hat{a}$ à $|n\rangle$, on finit sur $|0\rangle$ et on ne peut pas descendre plus bas puisque $\hat{a}|0\rangle=0$. $|0\rangle$ est bien l&rsquo;état fondamental de l&rsquo;oscillateur harmonique.</p>
+<p><img src="/tqcechelle.png?width=300px" alt=""></p>
+<p>Et on retrouve aussi l&rsquo;énergie de point zéro $E_0=\frac{1}{2}\hbar\omega$ :</p>
+<p>$$\displaystyle\hat{H}|0\rangle=\hbar\omega\left(\hat{n}+\frac{1}{2}\right)|0\rangle=\frac{1}{2}\hbar\omega|0\rangle$$</p>
+<p>Montons maintenant les barreaux de l&rsquo;échelle en créant à chaque fois ce qui a tout l&rsquo;air d&rsquo;une particule d&rsquo;énergie $\hbar\omega$ :<br>
+$\displaystyle\hat{a}^\dagger|0\rangle=|1\rangle$,<br>
+$\displaystyle\hat{a}^\dagger|1\rangle=\sqrt{2}|2\rangle \rightarrow |2\rangle=\frac{(\hat{a}^\dagger)^2}{\sqrt{2}}|0\rangle$,<br>
+$\displaystyle\hat{a}^\dagger|2\rangle=\sqrt{3}|3\rangle \rightarrow |3\rangle=\frac{(\hat{a}^\dagger)^3}{\sqrt{3\times 2}}|0\rangle$&hellip;<br>
+Et en généralisant, $\displaystyle |n\rangle=\frac{(\hat{a}^\dagger)^n}{\sqrt{n!}}|0\rangle$.</p>
+<p>Le problème ondulatoire de départ a spontanément produit des particules !</p>
 
 
 <footer class="footline">
@@ -4077,7 +4146,6 @@ $$</p>
             
                 
                     
-                    
                 
                 
 
@@ -4090,36 +4158,6 @@ $$</p>
             
             
                 
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-        
-                    
-                        
-            
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -4145,6 +4183,32 @@ $$</p>
                         
             
             
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
+                        
+            
+            
         
                     
                         
@@ -4159,6 +4223,7 @@ $$</p>
             
             
                 
+                    
                     
                 
                 
@@ -4172,6 +4237,9 @@ $$</p>
             
             
                 
+                    
+                        
+                        
                     
                 
                 
