@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1727038818" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1727038818" rel="stylesheet">
-    <link href="/css/hybrid.css?1727038818" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1727038818" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1727038818" rel="stylesheet">
-    <link href="/css/auto-complete.css?1727038818" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1727038818" rel="stylesheet">
-    <link href="/css/theme.css?1727038818" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1727038818" rel="stylesheet">
+    <link href="/css/nucleus.css?1727211713" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1727211713" rel="stylesheet">
+    <link href="/css/hybrid.css?1727211713" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1727211713" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1727211713" rel="stylesheet">
+    <link href="/css/auto-complete.css?1727211713" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1727211713" rel="stylesheet">
+    <link href="/css/theme.css?1727211713" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1727211713" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1727038818" rel="stylesheet">
+    <link href="/css/theme-blue.css?1727211713" rel="stylesheet">
     
-    <link href="/css/foo.css?1727038818" rel="stylesheet"><link href="/css/bar.css?1727038818" rel="stylesheet">
+    <link href="/css/foo.css?1727211713" rel="stylesheet"><link href="/css/bar.css?1727211713" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1727038818"></script>
+    <script src="/js/jquery-3.3.1.min.js?1727211713"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1727038818"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1727038818"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1727211713"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1727211713"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1727038818"></script>
+<script type="text/javascript" src="/js/search.js?1727211713"></script>
 
     
   </div>
@@ -2510,6 +2510,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
       <ul>
         <li><a href="#lagrangien-et-principe-de-moindre-action">Lagrangien et principe de moindre action</a></li>
         <li><a href="#les-oscillateurs-harmoniques">Les oscillateurs harmoniques</a></li>
+        <li><a href="#représentation-en-nombre-doccupation">Représentation en nombre d’occupation</a></li>
       </ul>
     </li>
   </ul>
@@ -2718,7 +2719,7 @@ $$
 En mécanique quantique, on remplace $p$ par l&rsquo;opérateur impulsion $-i\hbar\partial /\partial x$ et on obtient alors l&rsquo;équation de Schrödinger d&rsquo;un oscillateur harmonique :
 $$\left(-\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}+\frac{1}{2}K x^2\right)\psi=E\psi$$</p>
 <p>Les solutions sont données par :</p>
-<p>$$\psi_n(\xi)=\frac{1}{\sqrt{2^n n!}}\left(\frac{m\omega}{\pi\hbar}\right)^{1/4}H_n(\xi)e^{-\xi^2/2}$$</p>
+<p>$$\psi_n(\xi)=\frac{1}{\sqrt{2^n n!}}\left(\frac{m\omega}{\pi\hbar}\right)^{1/4}H_n(\xi)\rm{e}^{-\xi^2/2}$$</p>
 <p>où les $H_n(\xi)$ sont des polynômes de Hermite et où $\xi=\sqrt{m\omega/\hbar x}$</p>
 <p><img src="/tqcohniveaux.png?width=800px" alt=""></p>
 <p>Si ces fonctions propres ressemblent pas mal à des ondes, les valeurs propres $E_n=\left(n+\frac{1}{2}\right)\hbar\omega$ (avec $\omega=\sqrt{K/m}$) se rangent, elles, plutôt du côté particules. On remarque que pour $n=0$, l&rsquo;énergie n&rsquo;est pas nulle mais vaut $\hbar\omega/2$. C&rsquo;est l&rsquo;<strong>énergie de point zéro</strong>.</p>
@@ -2726,15 +2727,15 @@ $$\left(-\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}+\frac{1}{2}K x^2\righ
 On part de l&rsquo;Hamiltonien de l&rsquo;oscillateur harmonique :</p>
 <p>$$\hat{H}=\frac{\hat{p}^2}{2m}+\frac{1}{2}m\omega^2\hat{x}^2$$</p>
 <p>où on a réexprimé la constante de raideur : $K=m\omega^2$.</p>
-<p>L&rsquo;Hamiltonien semble vouloir être factorisé en $\frac{1}{2}m\omega^2\left(\hat{x}-\frac{i}{m\omega}\hat{p}\right)\left(\hat{x}+\frac{i}{m\omega}\hat{p}\right)$, mais un problème se dresse : $\hat{x}$ et $\hat{p}$ ne commutent pas ! En effet, $\left[\hat{x},\hat{p}\right]\equiv \hat{x}\hat{p}-\hat{p}\hat{x}=i\hbar$.<br>
+<p>L&rsquo;Hamiltonien semble vouloir être factorisé en $\frac{1}{2}m\omega^2\left(\hat{x}-\frac{\mathrm{i}}{m\omega}\hat{p}\right)\left(\hat{x}+\frac{\mathrm{i}}{m\omega}\hat{p}\right)$, mais un problème se dresse : $\hat{x}$ et $\hat{p}$ ne commutent pas ! En effet, $\left[\hat{x},\hat{p}\right]\equiv \hat{x}\hat{p}-\hat{p}\hat{x}=\mathrm{i}\hbar$.<br>
 Par conséquent :</p>
-<p>$$\frac{1}{2}m\omega^2\left(\hat{x}-\frac{i}{m\omega}\hat{p}\right)\left(\hat{x}+\frac{i}{m\omega}\hat{p}\right)=\frac{1}{2}m\omega^2\hat{x}^2+\frac{\hat{p}^2}{2m}+\frac{i\omega}{2}[\hat{x},\hat{p}]$$</p>
+<p>$$\frac{1}{2}m\omega^2\left(\hat{x}-\frac{\mathrm{i}}{m\omega}\hat{p}\right)\left(\hat{x}+\frac{\mathrm{i}}{m\omega}\hat{p}\right)=\frac{1}{2}m\omega^2\hat{x}^2+\frac{\hat{p}^2}{2m}+\frac{\mathrm{i}\omega}{2}[\hat{x},\hat{p}]$$</p>
 <p>Plutôt que $\hat{H}$, on obtient donc $\hat{H} -\frac{\hbar\omega}{2}$, l&rsquo;Hamiltonien corrigé de l&rsquo;énergie de point zéro. Cela ne semble pas un problème indépassable.</p>
-<p>Les deux opérateurs $\hat{x}-\frac{i}{m\omega}\hat{p}$ et $\hat{x}+\frac{i}{m\omega}\hat{p}$ semblent voués à jouer un rôle important dans cette histoire. Ils sont adjoints l&rsquo;un de l&rsquo;autre (puisque $\hat{x}$ et $\hat{p}$ sont hermitiens) ce qui leur interdit d&rsquo;être eux-mêmes hermitiens et donc de correspondre à une quelconque observable.<br>
+<p>Les deux opérateurs $\hat{x}-\frac{\mathrm{i}}{m\omega}\hat{p}$ et $\hat{x}+\frac{\mathrm{i}}{m\omega}\hat{p}$ semblent voués à jouer un rôle important dans cette histoire. Ils sont adjoints l&rsquo;un de l&rsquo;autre (puisque $\hat{x}$ et $\hat{p}$ sont hermitiens) ce qui leur interdit d&rsquo;être eux-mêmes hermitiens et donc de correspondre à une quelconque observable.<br>
 Après un petit toilettage, introduisons les <strong>opérateurs d&rsquo;échelle</strong> :</p>
 <div id="def">
-<p>$$\hat{a}=\sqrt{\frac{m\omega}{2\hbar}}\left(\hat{x}+\frac{i}{m\omega}\hat{p}\right)$$</p>
-<p>$$\hat{a}^\dagger=\sqrt{\frac{m\omega}{2\hbar}}\left(\hat{x}-\frac{i}{m\omega}\hat{p}\right)$$</p>
+<p>$$\hat{a}=\sqrt{\frac{m\omega}{2\hbar}}\left(\hat{x}+\frac{\mathrm{i}}{m\omega}\hat{p}\right)$$</p>
+<p>$$\hat{a}^\dagger=\sqrt{\frac{m\omega}{2\hbar}}\left(\hat{x}-\frac{\mathrm{i}}{m\omega}\hat{p}\right)$$</p>
 </div>
 <br>
 <div id="theo">
@@ -2743,7 +2744,7 @@ Après un petit toilettage, introduisons les <strong>opérateurs d&rsquo;échell
 <p>On peut inverser les définitions de $\hat{a}$ et $\hat{a}^\dagger$ pour obtenir :</p>
 <div id="def">
 <p>$$\hat{x}=\sqrt{\frac{\hbar}{2m\omega}}\left(\hat{a}+\hat{a}^\dagger\right)$$</p>
-<p>$$\hat{p}=-i\sqrt{\frac{\hbar m \omega}{2}}\left(\hat{a}-\hat{a}^\dagger\right)$$</p>
+<p>$$\hat{p}=-\mathrm{i}\sqrt{\frac{\hbar m \omega}{2}}\left(\hat{a}-\hat{a}^\dagger\right)$$</p>
 </div>
 <p>Et l&rsquo;Hamiltonien devient :</p>
 <p>$$\hat{H}=\hbar\omega\left(\hat{a}^\dagger\hat{a}+\frac{1}{2}\right)$$</p>
@@ -2766,7 +2767,6 @@ $\hat{a}|n\rangle$ est un état propre de $\hat{H}$ pour une valeur propre un ra
 </div>
 <br>
 <div id="preuve">
-<br>
 <details>
 <summary><a style="color:#004D80">Preuve :</a></summary>
 <p>On a montré que $\hat{a}|n\rangle$ est proportionnel à $|n-1\rangle$ : $\hat{a}|n\rangle=k|n-1\rangle$.<br>
@@ -2777,7 +2777,6 @@ On a aussi montré que $\hat{a}^\dagger=c|n+1\rangle$ et $|a^\dagger|n\rangle|^2
 Et comme $\hat{a}\hat{a}^\dagger=1+\hat{n}$, $\langle n|\hat{a}\hat{a}^\dagger|n\rangle=\langle n|1+\hat{n}|n\rangle=n+1$.<br>
 Et donc $c=\sqrt{n+1}$</p>
 </details>
-<br>
 </div>
 <p>En appliquant de manière répétée l&rsquo;opérateur $\hat{a}$ à $|n\rangle$, on finit sur $|0\rangle$ et on ne peut pas descendre plus bas puisque $\hat{a}|0\rangle=0$. $|0\rangle$ est bien l&rsquo;état fondamental de l&rsquo;oscillateur harmonique.</p>
 <p><img src="/tqcechelle.png?width=300px" alt=""></p>
@@ -2789,6 +2788,53 @@ $\displaystyle\hat{a}^\dagger|1\rangle=\sqrt{2}|2\rangle \rightarrow |2\rangle=\
 $\displaystyle\hat{a}^\dagger|2\rangle=\sqrt{3}|3\rangle \rightarrow |3\rangle=\frac{(\hat{a}^\dagger)^3}{\sqrt{3\times 2}}|0\rangle$&hellip;<br>
 Et en généralisant, $\displaystyle |n\rangle=\frac{(\hat{a}^\dagger)^n}{\sqrt{n!}}|0\rangle$.</p>
 <p>Le problème ondulatoire de départ a spontanément produit des particules !</p>
+<br>
+<p>Supposons maintenant qu&rsquo;on ait affaire à un troupeau de $N$ oscillateurs harmoniques indépendants, sans couplage. L&rsquo;Hamiltonien devient $\displaystyle \hat{H}=\sum_{k=1}^N\hat{H}_k$ qu&rsquo;on peut réécrire :</p>
+<div id="def">
+<p>$$\displaystyle \hat{H}=\sum_{k=1}^N\hbar\omega_k\left(\hat{a}^\dagger_k\hat{a}_k+\frac{1}{2}\right)$$</p>
+</div>
+<br>
+<div id="def">
+<p>Un état général du système est donné par $|n_1,n_2,\cdots,n_N\rangle$. C&rsquo;est la <strong>représentation en nombre d&rsquo;occupation</strong>. Et on a :</p>
+<p>$$|n_1,n_2,\cdots,n_N\rangle=\frac{1}{\sqrt{n_1 !n_2 !\cdots n_N !}}(\hat{a}_1^\dagger)^{n_1}(\hat{a}_2^\dagger)^{n_2}\cdots (\hat{a}_N^\dagger)^{n_N}|0,0,\cdots,0\rangle$$</p>
+<p>Ou de manière plus succincte :</p>
+<p>$$|{n_k}\rangle=\prod_k\frac{1}{\sqrt{n_k !}}(\hat{a}^\dagger_k)^{n_k}|0\rangle$$</p>
+</div>
+<p>Couplons maintenant tous ces petits ressorts.</p>
+<p><img src="/tqcohcoupled.png?width=1000px" alt=""></p>
+<p>L&rsquo;Hamiltonien qui tient compte de l&rsquo;interaction entre les oscillateurs s&rsquo;écrit :</p>
+<p>$$\hat{H}=\sum_j\frac{\hat{p}_j^2}{2m}+\frac{1}{2}K(\hat{x}_{j+1}-\hat{x}_j)^2$$</p>
+<p>Les excitations de ce système se comportent exactement comme un jeu d&rsquo;oscillateurs indépendants. Par quel miracle ? La transformée de Fourier permet de diagonaliser l&rsquo;Hamiltonien. En effet, si les masses sont bien couplées dans l&rsquo;espace réel, les excitations se découplent dans l&rsquo;espace réciproque.</p>
+<p>En supposant que les oscillateurs sont séparés d&rsquo;une distance $a$, les transformées de Fourier de $x_j$ et $p_j$ s&rsquo;écrivent :</p>
+<p>$$x_j = \frac{1}{\sqrt{N}}\sum_k \tilde{x}_k \mathrm{z}^{\mathrm{i}kja}\qquad\qquad p_j = \frac{1}{\sqrt{N}}\sum_k \tilde{p}_k \mathrm{e}^{\mathrm{i}kja}$$</p>
+<p>où $\tilde{x}_k$ et $\tilde{p}_k$ sont les nouveaux opérateurs dans l&rsquo;espace des modes de Fourier.</p>
+<p>En substituant dans l&rsquo;Hamiltonien, on obtient :</p>
+<p>$$\hat{H}=\sum_k\left[\frac{1}{2m}\hat{p}_k\hat{p}_{-k}+\frac{1}{2}m\omega_k^2\hat{x}_k\hat{x}_{-k}\right]$$</p>
+<p>où on a laissé tomber les tildes et où $\omega_k^2=(4K/m)\sin^2(ka/2)$.</p>
+<p>Chaque mode de Fourier $k$ se comporte donc comme un oscillateur harmonique indépendant.</p>
+<p>On peut à nouveau introduire des opérateurs de création et d&rsquo;annihilation $\displaystyle \hat{a}_k = \sqrt{\frac{m\omega_k}{2\hbar}}\left(\hat{x}_k+\frac{\mathrm{i}}{m\omega_k}\hat{p}_k\right)$ et $\displaystyle \hat{a}^\dagger_k = \sqrt{\frac{m\omega_k}{2\hbar}}\left(\hat{x}_{-k}-\frac{\mathrm{i}}{m\omega_k}\hat{p}_{-k}\right)$ pour obtenir finalement :</p>
+<div id="def">
+<p>$$\hat{H}=\sum_{k=1}^N\hbar\omega_k\left(\hat{a}_k^\dagger\hat{a}_k+\frac{1}{2}\right)$$</p>
+<p>On appelle ces modes étiquetés par le vecteur d&rsquo;onde $k$ des <strong>phonons</strong>. Et chacun de ces phonons peut porter des multiples entiers du quantum d&rsquo;énergie $\hbar\omega_k$.</p>
+</div>
+<p>Les paquets d&rsquo;énergie que peut accepter le phonon ressemblent à des particules. Pourquoi alors ne pas considérer les phonons eux-mêmes comme des particules.</p>
+<p>C&rsquo;est le cœur de la seconde quantification : un problème ondulatoire a une solution sous forme d&rsquo;oscillateurs et produit donc des particules.</p>
+<br>
+<h3 id="représentation-en-nombre-doccupation">Représentation en nombre d’occupation</h3>
+<p>On va se débarrasser des fonctions d&rsquo;ondes, en passant de la représentation $(x,p)$ à un nouveau type de représentation.</p>
+<p>On place une particule dans une boite de taille $L$ (on prend dans la suite $\hbar=1$).</p>
+<p>L&rsquo;opérateur impulsion $\hat{p}$ pour un mouvement dans la direction $x$ est $\hat{p}=-\mathrm{i}\frac{\partial}{\partial x}$. Les solutions de l&rsquo;équation de Schrödinger pour la particule dans la boite sont les états propres de l&rsquo;opérateur impulsion, les ondes planes $\psi(x)=\frac{1}{\sqrt{L}}\mathrm{e}^{\mathrm{i}px}$. Utiliser des conditions aux limites périodiques ($\psi(x+L)=\psi(x)$) entraîne que $\mathrm{e}^{\mathrm{i}p(x+L)}={\mathrm{e}}^{\mathrm{i}px}$ et implique donc que $\mathrm{e}^{\mathrm{i}pL}=1$. Satisfaire la condition nécessite que $pL=2\pi m$ avec $m$ entier. Cela impose donc une quantification des états d&rsquo;impulsion que peut prendre la particule dans la boite :</p>
+<p>$$p_m = \frac{2\pi m}{L}$$</p>
+<p>Si on a plusieurs particules sans interaction dans la boite, l&rsquo;énergie totale est donnée par $\sum_m n_{p_m}E_{p_m}$ où $n_{p_m}$ est le nombre de particules dans l&rsquo;état $|p_m\rangle$.</p>
+<p>Plutôt que de noter un état à plusieurs particules identiques de cette façon $|p_1 p_2 p_1 p_3 p_5\rangle$ (ici pour 5 particules), on va juste lister le nombre de particules dans chacun des états, ce qui donne pour l&rsquo;exemple précédent $|21101\rangle$. On dit qu&rsquo;on passe alors à une <strong>représentation en nombre d&rsquo;occupation</strong> qu&rsquo;on a déjà rencontrer dans le chapitre précédent.</p>
+<p>Agir avec l&rsquo;Hamiltonien sur un état dans la représentation en nombre d&rsquo;occupation permet d&rsquo;obtenir l&rsquo;énergie vue un peu plus haut :</p>
+<p>$$\hat{H}|n_1n_2n_3\ldots\rangle=\left[\sum_m n_{p_m}E_{p_m}\right]|n_1n_2n_3\ldots\rangle$$</p>
+<p>On retrouve une structure en niveaux d&rsquo;énergie similaire à celle d&rsquo;un système de $N$ oscillateurs harmoniques indépendants différents (en laissant tomber l&rsquo;énergie de point zéro, on trouverait effectivement une énergie totale valant $E=\sum_{k=1}^N n_k \hbar\omega_k$). Dans les deux cas, on somme pour chaque mode (chaque niveau d&rsquo;énergie), le nombre de quanta qu&rsquo;il contient.</p>
+<p>Dans le cas d&rsquo;une collection d&rsquo;oscillateurs harmoniques, on a vu dans le chapitre précédent qu&rsquo;on peut se débarrasser de quasiment tous les vecteurs d&rsquo;état (excepté le vide $|0\rangle$) grâce à l&rsquo;opérateur de création :</p>
+<div id="def">
+<p>$$|n_1 n_2\ldots\rangle = \prod_k\frac{1}{(n_k !)^{\frac{1}{2}}}(\hat{a}_k^\dagger)^{n_k}|0\rangle$$</p>
+</div>
+<p>On crée ainsi un état général de plusieurs oscillateurs harmoniques en agissant sur l&rsquo;état de vide. Mais on veut aller plus loin qu&rsquo;une une création de quanta dans des oscillateurs&hellip; L&rsquo;ambition est une création de particules dans des états d&rsquo;impulsion donnés. On veut un opérateur de création $\hat{a}^\dagger_{p_m}$ pour faire naître une particule dans l&rsquo;état d&rsquo;impulsion $|p_m\rangle$. Peut-on juste changer $k$ en $p_m$ pour passer de la création d&rsquo;un quantum dans l&rsquo;oscillateur $k$ à une particule dans l&rsquo;état d&rsquo;impulsion $|p_m\rangle$ ? Presque&hellip; Juste une petite question de symétrie à régler.</p>
 
 
 <footer class="footline">
@@ -4476,16 +4522,16 @@ Et en généralisant, $\displaystyle |n\rangle=\frac{(\hat{a}^\dagger)^n}{\sqrt{
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1727038818"></script>
-    <script src="/js/perfect-scrollbar.min.js?1727038818"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1727038818"></script>
-    <script src="/js/jquery.sticky.js?1727038818"></script>
-    <script src="/js/featherlight.min.js?1727038818"></script>
-    <script src="/js/highlight.pack.js?1727038818"></script>
+    <script src="/js/clipboard.min.js?1727211713"></script>
+    <script src="/js/perfect-scrollbar.min.js?1727211713"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1727211713"></script>
+    <script src="/js/jquery.sticky.js?1727211713"></script>
+    <script src="/js/featherlight.min.js?1727211713"></script>
+    <script src="/js/highlight.pack.js?1727211713"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1727038818"></script>
-    <script src="/js/learn.js?1727038818"></script>
-    <script src="/js/hugo-learn.js?1727038818"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1727211713"></script>
+    <script src="/js/learn.js?1727211713"></script>
+    <script src="/js/hugo-learn.js?1727211713"></script>
     
     
 
