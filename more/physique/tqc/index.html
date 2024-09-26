@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1727359143" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1727359143" rel="stylesheet">
-    <link href="/css/hybrid.css?1727359143" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1727359143" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1727359143" rel="stylesheet">
-    <link href="/css/auto-complete.css?1727359143" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1727359143" rel="stylesheet">
-    <link href="/css/theme.css?1727359143" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1727359143" rel="stylesheet">
+    <link href="/css/nucleus.css?1727386129" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1727386129" rel="stylesheet">
+    <link href="/css/hybrid.css?1727386129" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1727386129" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1727386129" rel="stylesheet">
+    <link href="/css/auto-complete.css?1727386129" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1727386129" rel="stylesheet">
+    <link href="/css/theme.css?1727386129" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1727386129" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1727359143" rel="stylesheet">
+    <link href="/css/theme-blue.css?1727386129" rel="stylesheet">
     
-    <link href="/css/foo.css?1727359143" rel="stylesheet"><link href="/css/bar.css?1727359143" rel="stylesheet">
+    <link href="/css/foo.css?1727386129" rel="stylesheet"><link href="/css/bar.css?1727386129" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1727359143"></script>
+    <script src="/js/jquery-3.3.1.min.js?1727386129"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1727359143"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1727359143"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1727386129"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1727386129"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1727359143"></script>
+<script type="text/javascript" src="/js/search.js?1727386129"></script>
 
     
   </div>
@@ -2604,34 +2604,46 @@ color:#004D80 !important;
 Notons $\displaystyle\bar{T}=\frac{1}{\tau}\int_0^\tau\frac{1}{2}m[\dot{x}(t)]^2 dt$ l&rsquo;énergie cinétique moyenne sur la trajectoire et $\displaystyle\bar{V}=\frac{1}{\tau}\int_0^\tau V[x(t)] dt$, l&rsquo;énergie potentielle moyenne. On a bien sûr $E=\bar{E}=\bar{T}+\bar{V}$.<br>
 Mathématiquement, $\bar{T}$ et $\bar{V}$ sont des fonctionnelles. Là où des fonctions se nourrissent de nombres pour produire des nombres, les fonctionnelles produisent des nombres à partir de fonctions ($\bar{T}$ produit un nombre à partir de $\dot{x}(t)$ et $\bar{V}$ à partir de $x(t)$).</p>
 <div id="preuve">
-<p>La dérivée fonctionnelle de $F[f(x)]$ nous dit comment le nombre produit par la fonctionnelle varie lorsqu&rsquo;on change légèrement la fonction $f(x)$ qu&rsquo;elle machouille :<br>
+<p>La dérivée fonctionnelle de $F[f(x)]$ nous dit comment le nombre produit par la fonctionnelle varie lorsqu&rsquo;on change légèrement la fonction $f(x)$ qu&rsquo;elle machouille :<br></p>
+<div id="grosseformule">
 $$
-\frac{\delta F}{\delta f(x)}=\lim_{\epsilon\to 0}\frac{F[f(x&rsquo;)+\epsilon\delta(x-x&rsquo;)]-F[f(x&rsquo;)]}{\epsilon}
-$$</p>
+\frac{\delta F}{\delta f(x)}=\lim_{\epsilon\to 0}\frac{F[f(x')+\epsilon\delta(x-x')]-F[f(x')]}{\epsilon}
+$$
+</div>
 <details>
 <summary><a style="color:#004D80">Dérivées fonctionnelles utilisées dans la suite&nbsp;:</a></summary>
 <ul>
 <li>$F[f]=\int_a^b g[f(x)]\mathrm{d}x$ avec $g'=\mathrm{d}g/\mathrm{d}f$
-<p>$$
+<div id="grosseformule">
+$$
 \begin{aligned}
-\frac{\delta F[f]}{\delta f(x_0)}&amp;=\lim_{\epsilon \to 0}\frac{1}{\epsilon}\left[\int g[f(x)+\epsilon \delta(x-x_0)]dx-\int g[f(x)]\mathrm{d}x\right]\\
-&amp;=\lim_{\epsilon \to 0}\frac{1}{\epsilon}\left[\int (g[f(x)+\epsilon\delta(x-x_0)g&rsquo;[f(x)])\mathrm{d}x - \int g[f(x)]\mathrm{d}x\right]\\
-&amp;=\int \delta(x-x_0) g&rsquo;[f(x)] \mathrm{d}x\\
-&amp;= g&rsquo;[f(x_0)]
+\frac{\delta F[f]}{\delta f(x_0)}&=\lim_{\epsilon \to 0}\frac{1}{\epsilon}\left[\int g[f(x)+\epsilon \delta(x-x_0)]dx-\int g[f(x)]\mathrm{d}x\right]\\\\
+&=\lim_{\epsilon \to 0}\frac{1}{\epsilon}\left[\int (g[f(x)+\epsilon\delta(x-x_0)g'[f(x)])\mathrm{d}x - \int g[f(x)]\mathrm{d}x\right]\\\\
+&=\int \delta(x-x_0) g'[f(x)] \mathrm{d}x\\\\
+&= g'[f(x_0)]
 \end{aligned}
-$$</p>
+$$
+</div>
 <p>On détermine ainsi que $\displaystyle \frac{\delta \bar{V}[x]}{\delta x(t)}=\frac{1}{\tau}V&rsquo;[x(t)]$.</p>
 </li>
 <li>
 <p>$F[f]=\int g(f&rsquo;)\mathrm{d}y$ avec $f&rsquo;=\mathrm{d}f/\mathrm{d}y$</p>
-<p>$$\frac{\delta F[f]}{\delta f(x)}=\lim_{\epsilon \to 0}\frac{1}{\epsilon}\left[\int dy \,g\!\left( \frac{\partial}{\partial y}[f(y)+\epsilon \delta(y-x)]\right) - \int dy \,g\!\left(\frac{\partial f}{\partial y}\right)\right]$$</p>
+<div id="grosseformule">
+$$\frac{\delta F[f]}{\delta f(x)}=\lim_{\epsilon \to 0}\frac{1}{\epsilon}\left[\int dy \,g\!\left( \frac{\partial}{\partial y}[f(y)+\epsilon \delta(y-x)]\right) - \int dy \,g\!\left(\frac{\partial f}{\partial y}\right)\right]$$
+</div>
 <p>Par un développement de Taylor au premier ordre, on obtient :</p>
-<p>$$g\left(\frac{\partial}{\partial y}[f(y)+\epsilon\delta(y-x)]\right)=f(f&rsquo;+\epsilon\delta&rsquo;(y-x))\approx g(f&rsquo;)+\epsilon\delta&rsquo;(y-x)\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d} f&rsquo;}$$</p>
+<div id="grosseformule">
+$$g\left(\frac{\partial}{\partial y}[f(y)+\epsilon\delta(y-x)]\right)=f(f'+\epsilon\delta'(y-x))\approx g(f')+\epsilon\delta'(y-x)\frac{\mathrm{d}g(f')}{\mathrm{d} f'}$$
+</div>
 <p>On aboutit à :</p>
-<p>$$\frac{\delta F[f]}{\delta f(x)}=\int \mathrm{d}y \delta&rsquo;(y-x)\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d} f&rsquo;}$$</p>
-<p>On utilise alors une intégration par partie :</p>
-<p>$$\int \mathrm{d}y\, \delta&rsquo;(y-x)\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d} f&rsquo;}=\left[\delta(y-x)\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d} f&rsquo;}\right]-\int \mathrm{d}y \,\delta(y-x)\frac{\mathrm{d}}{\mathrm{d} y}\left(\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d}f&rsquo;}\right)$$</p>
-<p>Si $x$ se balade sur l&rsquo;intervalle d&rsquo;intégration, le terme entre crochets est de mesure nulle et on obtient finalement :</p>
+<div id="grosseformule">
+$$\frac{\delta F[f]}{\delta f(x)}=\int \mathrm{d}y \delta'(y-x)\frac{\mathrm{d}g(f')}{\mathrm{d} f'}$$
+</div>
+On utilise alors une intégration par partie&nbsp;:
+<div id="grosseformule">
+$$\int \mathrm{d}y\, \delta'(y-x)\frac{\mathrm{d}g(f')}{\mathrm{d} f'}=\left[\delta(y-x)\frac{\mathrm{d}g(f')}{\mathrm{d} f'}\right]-\int \mathrm{d}y \,\delta(y-x)\frac{\mathrm{d}}{\mathrm{d} y}\left(\frac{\mathrm{d}g(f')}{\mathrm{d}f'}\right)$$
+</div>
+Si $x$ se balade sur l'intervalle d'intégration, le terme entre crochets est de mesure nulle et on obtient finalement&nbsp;:
 <p>$$\frac{\delta F[f]}{\delta f(x)}=-\frac{\mathrm{d}}{\mathrm{d} x}\left(\frac{\mathrm{d}g(f&rsquo;)}{\mathrm{d}f&rsquo;}\right)$$</p>
 <p>On détermine ainsi que $\displaystyle \frac{\delta \bar{T}[x]}{\delta x(t)}=-\frac{m\ddot{x}}{\tau}$.</p>
 <p>D&rsquo;autre part, si on a $F[\phi]=\int\left(\frac{\partial\phi}{\partial y}\right)^2\mathrm{d}y$, on obtient $\displaystyle \frac{\delta F[\phi]}{\delta\phi(x)}=-2\frac{\partial^2\phi}{\partial x^2}$.</p>
@@ -2642,10 +2654,12 @@ $$</p>
 </details>
 <br>
 </div>
-<p>On peut maintenant vérifier comment $\bar{T}$ et $\bar{V}$ varient lorsque la trajectoire $x(t)$ est un peu modifiée :
+<p>On peut maintenant vérifier comment $\bar{T}$ et $\bar{V}$ varient lorsque la trajectoire $x(t)$ est un peu modifiée :</p>
+<div id="grosseformule">
 $$
-\frac{\delta \bar{V}[x]}{\delta x(t)}=\frac{V&rsquo;[x(t)]}{\tau}\qquad \qquad\frac{\delta \bar{T}[x]}{\delta x(t)}=-\frac{m\ddot{x}}{\tau}
-$$</p>
+\frac{\delta \bar{V}[x]}{\delta x(t)}=\frac{V'[x(t)]}{\tau}\qquad \qquad\frac{\delta \bar{T}[x]}{\delta x(t)}=-\frac{m\ddot{x}}{\tau}
+$$
+</div>
 <p>Or d&rsquo;après la 2<sup>e</sup> loi de Newton, la trajectoire classique correspond à $m\ddot{x}=-dV/dx$ et d&rsquo;après ce qui précède, cela entraîne que $\displaystyle \frac{\delta \bar{V}[x]}{\delta x(t)}=\frac{\delta \bar{T}[x]}{\delta x(t)}$.</p>
 <p>On en conclut que pour une légère déviation autour de la trajectoire classique, l&rsquo;énergie potentielle moyenne et l&rsquo;énergie cinétique moyenne vont varier ensemble (généralement augmenter) et de la même valeur !</p>
 <p>Cela peut se réécrire $\displaystyle \frac{\delta }{\delta x(t)}(\bar{T}[x]- \bar{V}[x])=0$.</p>
@@ -2676,14 +2690,16 @@ $$
 </div>
 <details>
 <summary><a style="color:#004D80">Démonstration&nbsp;:</a></summary>
-<p>$$
+<div id="grosseformule">
+$$
 \begin{aligned}
-\frac{\partial S}{\partial x(t)} &amp; = \int \mathrm{d}u\left[\frac{\partial L}{\partial x(u)}\frac{\partial x(u)}{\partial x(t)}+\frac{\partial L}{\partial \dot{x}(u)}\frac{\partial \dot{x}(u)}{\partial x(t)}\right]\\
-&amp; = \int \mathrm{d}u\left[\frac{\partial L}{\partial x(u)}\delta(u-t)+\frac{\partial L}{\partial \dot{x}(u)}\frac{\mathrm{d}}{\mathrm{d}t}\delta(u-t)\right]\\
-&amp;=\frac{\partial L}{\partial x(t)}+\left[\delta(u-t)\frac{\delta L}{\delta \dot{x}(u)}\right]_{t_i}^{t_f}-\int \mathrm{d}u\,\delta(u-t)\frac{\mathrm{d}}{\mathrm{d}t}\frac{\delta L}{\delta\dot{x}(u)}\\
-&amp;=\frac{\delta L}{\delta x(t)}-\frac{\mathrm{d}}{\mathrm{d}t}\frac{\delta L}{\delta\dot{x}(t)}
+\frac{\partial S}{\partial x(t)} & = \int \mathrm{d}u\left[\frac{\partial L}{\partial x(u)}\frac{\partial x(u)}{\partial x(t)}+\frac{\partial L}{\partial \dot{x}(u)}\frac{\partial \dot{x}(u)}{\partial x(t)}\right]\\\\
+& = \int \mathrm{d}u\left[\frac{\partial L}{\partial x(u)}\delta(u-t)+\frac{\partial L}{\partial \dot{x}(u)}\frac{\mathrm{d}}{\mathrm{d}t}\delta(u-t)\right]\\\\
+&=\frac{\partial L}{\partial x(t)}+\left[\delta(u-t)\frac{\delta L}{\delta \dot{x}(u)}\right]_{t_i}^{t_f}-\int \mathrm{d}u\,\delta(u-t)\frac{\mathrm{d}}{\mathrm{d}t}\frac{\delta L}{\delta\dot{x}(u)}\\\\
+&=\frac{\delta L}{\delta x(t)}-\frac{\mathrm{d}}{\mathrm{d}t}\frac{\delta L}{\delta\dot{x}(t)}
 \end{aligned}
-$$</p>
+$$
+</div>
 </details>
 <br>
 </div>
@@ -2726,8 +2742,10 @@ On part de l&rsquo;Hamiltonien de l&rsquo;oscillateur harmonique :</p>
 <p>où on a réexprimé la constante de raideur : $K=m\omega^2$.</p>
 <p>L&rsquo;Hamiltonien semble vouloir être factorisé en $\frac{1}{2}m\omega^2\left(\hat{x}-\frac{\mathrm{i}}{m\omega}\hat{p}\right)\left(\hat{x}+\frac{\mathrm{i}}{m\omega}\hat{p}\right)$, mais un problème se dresse : $\hat{x}$ et $\hat{p}$ ne commutent pas ! En effet, $\left[\hat{x},\hat{p}\right]\equiv \hat{x}\hat{p}-\hat{p}\hat{x}=\mathrm{i}\hbar$.<br>
 Par conséquent :</p>
-<p>$$\frac{1}{2}m\omega^2\left(\hat{x}-\frac{\mathrm{i}}{m\omega}\hat{p}\right)\left(\hat{x}+\frac{\mathrm{i}}{m\omega}\hat{p}\right)=\frac{1}{2}m\omega^2\hat{x}^2+\frac{\hat{p}^2}{2m}+\frac{\mathrm{i}\omega}{2}[\hat{x},\hat{p}]$$</p>
-<p>Plutôt que $\hat{H}$, on obtient donc $\hat{H} -\frac{\hbar\omega}{2}$, l&rsquo;Hamiltonien corrigé de l&rsquo;énergie de point zéro. Cela ne semble pas un problème indépassable.</p>
+<div id="grosseformule">
+$$\frac{1}{2}m\omega^2\left(\hat{x}-\frac{\mathrm{i}}{m\omega}\hat{p}\right)\left(\hat{x}+\frac{\mathrm{i}}{m\omega}\hat{p}\right)=\frac{1}{2}m\omega^2\hat{x}^2+\frac{\hat{p}^2}{2m}+\frac{\mathrm{i}\omega}{2}[\hat{x},\hat{p}]$$
+</div>
+Plutôt que $\hat{H}$, on obtient donc $\hat{H} -\frac{\hbar\omega}{2}$, l'Hamiltonien corrigé de l'énergie de point zéro. Cela ne semble pas un problème indépassable.
 <p>Les deux opérateurs $\hat{x}-\frac{\mathrm{i}}{m\omega}\hat{p}$ et $\hat{x}+\frac{\mathrm{i}}{m\omega}\hat{p}$ semblent voués à jouer un rôle important dans cette histoire. Ils sont adjoints l&rsquo;un de l&rsquo;autre (puisque $\hat{x}$ et $\hat{p}$ sont hermitiens) ce qui leur interdit d&rsquo;être eux-mêmes hermitiens et donc de correspondre à une quelconque observable.<br>
 Après un petit toilettage, introduisons les <strong>opérateurs d&rsquo;échelle</strong> :</p>
 <div id="def">
@@ -2788,13 +2806,15 @@ Et en généralisant, $\displaystyle |n\rangle=\frac{(\hat{a}^\dagger)^n}{\sqrt{
 <br>
 <p>Supposons maintenant qu&rsquo;on ait affaire à un troupeau de $N$ oscillateurs harmoniques indépendants, sans couplage. L&rsquo;Hamiltonien devient $\displaystyle \hat{H}=\sum_{k=1}^N\hat{H}_k$ qu&rsquo;on peut réécrire :</p>
 <div id="def">
-<p>$$\displaystyle \hat{H}=\sum_{k=1}^N\hbar\omega_k\left(\hat{a}^\dagger_k\hat{a}_k+\frac{1}{2}\right)$$</p>
+<p>$$\displaystyle \hat{H}=\sum_{k=1}^N\hbar\omega_k\left(\hat{a}^\dagger_k\hat{a}^{\phantom{\dagger}}_k+\frac{1}{2}\right)$$</p>
 </div>
 <br>
 <div id="def">
 <p>Un état général du système est donné par $|n_1,n_2,\cdots,n_N\rangle$. C&rsquo;est la <strong>représentation en nombre d&rsquo;occupation</strong>. Et on a :</p>
-<p>$$|n_1,n_2,\cdots,n_N\rangle=\frac{1}{\sqrt{n_1 !n_2 !\cdots n_N !}}(\hat{a}_1^\dagger)^{n_1}(\hat{a}_2^\dagger)^{n_2}\cdots (\hat{a}_N^\dagger)^{n_N}|0,0,\cdots,0\rangle$$</p>
-<p>Ou de manière plus succincte :</p>
+<div id="grosseformule">
+$$|n_1,n_2,\cdots,n_N\rangle=\frac{1}{\sqrt{n_1 !n_2 !\cdots n_N !}}(\hat{a}_1^\dagger)^{n_1}(\hat{a}_2^\dagger)^{n_2}\cdots (\hat{a}_N^\dagger)^{n_N}|0,0,\cdots,0\rangle$$
+</div>
+Ou de manière plus succincte&nbsp;:
 <p>$$|{n_k}\rangle=\prod_k\frac{1}{\sqrt{n_k !}}(\hat{a}^\dagger_k)^{n_k}|0\rangle$$</p>
 </div>
 <p>Couplons maintenant tous ces petits ressorts.</p>
@@ -2803,19 +2823,21 @@ Et en généralisant, $\displaystyle |n\rangle=\frac{(\hat{a}^\dagger)^n}{\sqrt{
 <p>$$\hat{H}=\sum_j\frac{\hat{p}_j^2}{2m}+\frac{1}{2}K(\hat{x}_{j+1}-\hat{x}_j)^2$$</p>
 <p>Les excitations de ce système se comportent exactement comme un jeu d&rsquo;oscillateurs indépendants. Par quel miracle ? La transformée de Fourier permet de diagonaliser l&rsquo;Hamiltonien. En effet, si les masses sont bien couplées dans l&rsquo;espace réel, les excitations se découplent dans l&rsquo;espace réciproque.</p>
 <p>En supposant que les oscillateurs sont séparés d&rsquo;une distance $a$, les transformées de Fourier de $x_j$ et $p_j$ s&rsquo;écrivent :</p>
-<p>$$x_j = \frac{1}{\sqrt{N}}\sum_k \tilde{x}_k \mathrm{z}^{\mathrm{i}kja}\qquad\qquad p_j = \frac{1}{\sqrt{N}}\sum_k \tilde{p}_k \mathrm{e}^{\mathrm{i}kja}$$</p>
-<p>où $\tilde{x}_k$ et $\tilde{p}_k$ sont les nouveaux opérateurs dans l&rsquo;espace des modes de Fourier.</p>
+<div id="grosseformule">
+$$x_j = \frac{1}{\sqrt{N}}\sum_k \tilde{x}_k \mathrm{e}^{\mathrm{i}kja}\qquad\qquad p_j = \frac{1}{\sqrt{N}}\sum_k \tilde{p}_k \mathrm{e}^{\mathrm{i}kja}$$
+</div>
+où $\tilde{x}_k$ et $\tilde{p}_k$ sont les nouveaux opérateurs dans l'espace des modes de Fourier.
 <p>En substituant dans l&rsquo;Hamiltonien, on obtient :</p>
 <p>$$\hat{H}=\sum_k\left[\frac{1}{2m}\hat{p}_k\hat{p}_{-k}+\frac{1}{2}m\omega_k^2\hat{x}_k\hat{x}_{-k}\right]$$</p>
 <p>où on a laissé tomber les tildes et où $\omega_k^2=(4K/m)\sin^2(ka/2)$.</p>
 <p>Chaque mode de Fourier $k$ se comporte donc comme un oscillateur harmonique indépendant.</p>
 <p>On peut à nouveau introduire des opérateurs de création et d&rsquo;annihilation $\displaystyle \hat{a}_k = \sqrt{\frac{m\omega_k}{2\hbar}}\left(\hat{x}_k+\frac{\mathrm{i}}{m\omega_k}\hat{p}_k\right)$ et $\displaystyle \hat{a}^\dagger_k = \sqrt{\frac{m\omega_k}{2\hbar}}\left(\hat{x}_{-k}-\frac{\mathrm{i}}{m\omega_k}\hat{p}_{-k}\right)$ pour obtenir finalement :</p>
 <div id="def">
-<p>$$\hat{H}=\sum_{k=1}^N\hbar\omega_k\left(\hat{a}_k^\dagger\hat{a}_k+\frac{1}{2}\right)$$</p>
+<p>$$\hat{H}=\sum_{k=1}^N\hbar\omega_k\left(\hat{a}_k^\dagger\hat{a}^{\phantom{\dagger}}_k+\frac{1}{2}\right)$$</p>
 <p>On appelle ces modes étiquetés par le vecteur d&rsquo;onde $k$ des <strong>phonons</strong>. Et chacun de ces phonons peut porter des multiples entiers du quantum d&rsquo;énergie $\hbar\omega_k$.</p>
 </div>
-<p>Les paquets d&rsquo;énergie que peut accepter le phonon ressemblent à des particules. Pourquoi alors ne pas considérer les phonons eux-mêmes comme des particules.</p>
-<p>C&rsquo;est le cœur de la seconde quantification : un problème ondulatoire a une solution sous forme d&rsquo;oscillateurs et produit donc des particules.</p>
+<p>Les paquets d&rsquo;énergie que peut accepter le phonon ressemblent à des particules. Pourquoi alors ne pas considérer les phonons eux-mêmes comme des particules ?</p>
+<p>C&rsquo;est le cœur de la seconde quantification : un problème ondulatoire peut s&rsquo;exprimer comme une collection d&rsquo;oscillateurs et produit donc des particules.</p>
 <br>
 <h3 id="représentation-en-nombre-doccupation">Représentation en nombre d’occupation</h3>
 <p>On va se débarrasser des fonctions d&rsquo;ondes, en passant de la représentation $(x,p)$ à un nouveau type de représentation.</p>
@@ -2825,8 +2847,10 @@ Et en généralisant, $\displaystyle |n\rangle=\frac{(\hat{a}^\dagger)^n}{\sqrt{
 <p>Si on a plusieurs particules sans interaction dans la boite, l&rsquo;énergie totale est donnée par $\sum_m n_{p_m}E_{p_m}$ où $n_{p_m}$ est le nombre de particules dans l&rsquo;état $|p_m\rangle$.</p>
 <p>Plutôt que de noter un état à plusieurs particules identiques de cette façon $|p_1 p_2 p_1 p_3 p_5\rangle$ (ici pour 5 particules), on va juste lister le nombre de particules dans chacun des états, ce qui donne pour l&rsquo;exemple précédent $|21101\rangle$. On dit qu&rsquo;on passe alors à une <strong>représentation en nombre d&rsquo;occupation</strong> qu&rsquo;on a déjà rencontrer dans le chapitre précédent.</p>
 <p>Agir avec l&rsquo;Hamiltonien sur un état dans la représentation en nombre d&rsquo;occupation permet d&rsquo;obtenir l&rsquo;énergie vue un peu plus haut :</p>
-<p>$$\hat{H}|n_1n_2n_3\ldots\rangle=\left[\sum_m n_{p_m}E_{p_m}\right]|n_1n_2n_3\ldots\rangle$$</p>
-<p>On retrouve une structure en niveaux d&rsquo;énergie similaire à celle d&rsquo;un système de $N$ oscillateurs harmoniques indépendants différents (en laissant tomber l&rsquo;énergie de point zéro, on trouverait effectivement une énergie totale valant $E=\sum_{k=1}^N n_k \hbar\omega_k$). Dans les deux cas, on somme pour chaque mode (chaque niveau d&rsquo;énergie), le nombre de quanta qu&rsquo;il contient.</p>
+<div id="grosseformule">
+$$\hat{H}|n_1n_2n_3\ldots\rangle=\left[\sum_m n_{p_m}E_{p_m}\right]|n_1n_2n_3\ldots\rangle$$
+</div>
+On retrouve une structure en niveaux d'énergie similaire à celle d'un système de $N$ oscillateurs harmoniques indépendants différents (en laissant tomber l'énergie de point zéro, on trouverait effectivement une énergie totale valant $E=\sum_{k=1}^N n_k \hbar\omega_k$). Dans les deux cas, on somme pour chaque mode (chaque niveau d'énergie), le nombre de quanta qu'il contient.
 <p>Dans le cas d&rsquo;une collection d&rsquo;oscillateurs harmoniques, on a vu dans le chapitre précédent qu&rsquo;on peut se débarrasser de quasiment tous les vecteurs d&rsquo;état (excepté le vide $|0\rangle$) grâce à l&rsquo;opérateur de création :</p>
 <div id="def">
 <p>$$|n_1 n_2\ldots\rangle = \prod_k\frac{1}{(n_k !)^{\frac{1}{2}}}(\hat{a}_k^\dagger)^{n_k}|0\rangle$$</p>
@@ -4514,16 +4538,16 @@ Et en généralisant, $\displaystyle |n\rangle=\frac{(\hat{a}^\dagger)^n}{\sqrt{
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1727359143"></script>
-    <script src="/js/perfect-scrollbar.min.js?1727359143"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1727359143"></script>
-    <script src="/js/jquery.sticky.js?1727359143"></script>
-    <script src="/js/featherlight.min.js?1727359143"></script>
-    <script src="/js/highlight.pack.js?1727359143"></script>
+    <script src="/js/clipboard.min.js?1727386129"></script>
+    <script src="/js/perfect-scrollbar.min.js?1727386129"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1727386129"></script>
+    <script src="/js/jquery.sticky.js?1727386129"></script>
+    <script src="/js/featherlight.min.js?1727386129"></script>
+    <script src="/js/highlight.pack.js?1727386129"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1727359143"></script>
-    <script src="/js/learn.js?1727359143"></script>
-    <script src="/js/hugo-learn.js?1727359143"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1727386129"></script>
+    <script src="/js/learn.js?1727386129"></script>
+    <script src="/js/hugo-learn.js?1727386129"></script>
     
     
 
