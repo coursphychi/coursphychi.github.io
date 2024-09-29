@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1727622478" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1727622478" rel="stylesheet">
-    <link href="/css/hybrid.css?1727622478" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1727622478" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1727622478" rel="stylesheet">
-    <link href="/css/auto-complete.css?1727622478" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1727622478" rel="stylesheet">
-    <link href="/css/theme.css?1727622478" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1727622478" rel="stylesheet">
+    <link href="/css/nucleus.css?1727644941" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1727644941" rel="stylesheet">
+    <link href="/css/hybrid.css?1727644941" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1727644941" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1727644941" rel="stylesheet">
+    <link href="/css/auto-complete.css?1727644941" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1727644941" rel="stylesheet">
+    <link href="/css/theme.css?1727644941" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1727644941" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1727622478" rel="stylesheet">
+    <link href="/css/theme-blue.css?1727644941" rel="stylesheet">
     
-    <link href="/css/foo.css?1727622478" rel="stylesheet"><link href="/css/bar.css?1727622478" rel="stylesheet">
+    <link href="/css/foo.css?1727644941" rel="stylesheet"><link href="/css/bar.css?1727644941" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1727622478"></script>
+    <script src="/js/jquery-3.3.1.min.js?1727644941"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1727622478"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1727622478"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1727644941"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1727644941"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1727622478"></script>
+<script type="text/javascript" src="/js/search.js?1727644941"></script>
 
     
   </div>
@@ -2894,12 +2894,14 @@ On retrouve une structure en niveaux d'énergie similaire à celle d'un système
 <li>Enfin, l&rsquo;ordre d&rsquo;ajout des particules ne modifie pas l&rsquo;état final obtenu : $\hat{a}^\dagger_{p_1}\hat{a}^\dagger_{p_2}|0\rangle=\hat{a}^\dagger_{p_2}\hat{a}^\dagger_{p_1}|0\rangle=|1_{p_1}1_{p_2}\rangle$.</li>
 </ul>
 <p>Action des opérateurs sur un état général :</p>
+<div id="grosseformule">
 <p>$$
 \begin{aligned}
 &amp;\hat{a}_i^\dagger |n_1\cdots n_i\cdots\rangle = \sqrt{n_i+1}|n_1\cdots n_i+1\cdots\rangle\\
 &amp;\hat{a}_i |n_1\cdots n_i\cdots\rangle = \sqrt{n_i}|n_1\cdots n_i-1\cdots\rangle
 \end{aligned}
 $$</p>
+</div>
 <p><strong>Cas 2 : $\lambda=-1$, les fermions</strong></p>
 <p>On va noter les opérateurs des fermions $\hat{c}_i^\dagger$ pour les différentier de ceux des bosons.</p>
 <div id="theo">
@@ -2912,12 +2914,14 @@ $$</p>
 </div>
 <p>On a aussi $\left\{\hat{c}_i,\hat{c}_j\right\}=0$ et on définit $\left\{\hat{c}_i,\hat{c}_j^\dagger\right\}=\delta_{ij}$ pour pouvoir appliquer ici aussi l&rsquo;analogie avec les oscillateurs harmoniques. Mais gare maintenant à l&rsquo;ordre des opérateurs qui n&rsquo;est plus indifférent !</p>
 <p>Action des opérateurs sur un état général :</p>
+<div id="grosseformule">
 <p>$$
 \begin{aligned}
 &amp;\hat{c}_i^\dagger |n_1\cdots n_i\cdots\rangle = (-1)^{\sum_i}\sqrt{1-n_i}|n_1\cdots n_i+1\cdots\rangle\\
 &amp;\hat{c}_i  |n_1\cdots n_i\cdots\rangle = (-1)^{\sum_i}\sqrt{n_i}|n_1\cdots n_i-1\cdots\rangle
 \end{aligned}
 $$</p>
+</div>
 <p>Où $(-1)^{\sum_i}=(-1)^{n_1+n_2+\cdots+n_{i-1}}$. Cela donne un facteur $(-1)$ pour chaque particule placée à gauche de l&rsquo;état étiqueté par $n_i$ dans le vecteur d&rsquo;état.</p>
   <br>
 <p>On était jusque-là confiné dans une boite, mais que se passe-t-il si on écarte ses murs infiniment ? On passe alors à la <strong>limite du continu</strong>. Le symbole de Kronecker $\delta_{ij}$ des commutateurs devient une fonction delta de Dirac $\delta^{(3)}(\boldsymbol{p})$ et les sommes discrètes deviennent des intégrales.</p>
@@ -2931,19 +2935,34 @@ $$</p>
 </div>
 <br>
 <div id="preuve">
-<p>Montrons que cette nouvelle formulation marche bien en retrouvant à partir d&rsquo;elle les bonnes fonctions d&rsquo;onde dans l&rsquo;espace des positions :</p>
-<p>Pour des états à une seule particule, $\langle \boldsymbol{p}|\boldsymbol{p&rsquo;}\rangle=\langle 0|\hat{a}_\boldsymbol{p}\hat{a}^\dagger_\boldsymbol{p&rsquo;}|0\rangle$.<br>
-Avec les relations de commutation, on obtient $\langle \boldsymbol{p}|\boldsymbol{p&rsquo;}\rangle=\langle 0|\left[\delta^{(3)}(\boldsymbol{p}-\boldsymbol{p&rsquo;})\pm \hat{a}^\dagger_\boldsymbol{p&rsquo;}\hat{a}_\boldsymbol{p} \right]|0\rangle=\delta^{(3)}(\boldsymbol{p}-\boldsymbol{p&rsquo;})$.</p>
-<p>Vérifions que c&rsquo;est la relation attendue en passant en représentation position :<br>
-par un changement de base, $|\boldsymbol{x}\rangle = \int\mathrm{d}q\,\phi^*_\boldsymbol{q}(\boldsymbol{x})|\boldsymbol{q}\rangle$</p>
+<p>Pour montrer que cette nouvelle formulation est correcte, on va retrouver à partir d&rsquo;elle les bonnes fonctions d&rsquo;onde dans l&rsquo;espace des positions.</p>
+<p>Pour des états à une seule particule, on a :</p>
+<div id="grosseformule">
+<p>$$\langle \boldsymbol{p}|\boldsymbol{p&rsquo;}\rangle=\langle 0|\hat{a}_\boldsymbol{p}\hat{a}^\dagger_\boldsymbol{p&rsquo;}|0\rangle$$</p>
+</div>
+<p>Et avec les relations de commutation, on obtient :</p>
+<div id="grosseformule">
+<p>$$\langle \boldsymbol{p}|\boldsymbol{p&rsquo;}\rangle=\langle 0|\left[\delta^{(3)}(\boldsymbol{p}-\boldsymbol{p&rsquo;})\pm \hat{a}^\dagger_\boldsymbol{p&rsquo;}\hat{a}_\boldsymbol{p} \right]|0\rangle=\delta^{(3)}(\boldsymbol{p}-\boldsymbol{p&rsquo;})$$</p>
+</div>
+<p>Vérifions que c&rsquo;est la relation attendue en passant en représentation position.</p>
+<p>Par un changement de base, $|\boldsymbol{x}\rangle = \int\mathrm{d}q\,\phi^*_\boldsymbol{q}(\boldsymbol{x})|\boldsymbol{q}\rangle$</p>
 <details>
 <summary><a style="color:#004D80">changement de base</a></summary>
 <p>L&rsquo;état $|\boldsymbol{x}\rangle$ peut s&rsquo;écrire dans une nouvelle base en utilisant la relation de fermeture $1=\int\mathrm{d}^3q\,|\boldsymbol{q}\rangle\langle\boldsymbol{q}|$ de telle sorte que $|\boldsymbol{x}\rangle = \int\mathrm{d}^3q\,|\boldsymbol{q}\rangle\langle\boldsymbol{q}|\boldsymbol{x}\rangle$. Et comme $\langle\boldsymbol{x}|\boldsymbol{q}\rangle=\phi_\boldsymbol{q}(\boldsymbol{x})$ et $\langle\boldsymbol{q}|\boldsymbol{x}\rangle=\phi^*_\boldsymbol{q}(\boldsymbol{x})$, on obtient bien $|\boldsymbol{x}\rangle = \int\mathrm{d}q\,\phi^*_\boldsymbol{q}(\boldsymbol{x})|\boldsymbol{q}\rangle$.</p>
 </details>
-<p>Cela donne $\langle \boldsymbol{x}|\boldsymbol{p}\rangle = \int\mathrm{d}^3q\,\phi_\boldsymbol{q}(\boldsymbol{x})\langle\boldsymbol{q}|\boldsymbol{p}\rangle=\phi_\boldsymbol{p}(\boldsymbol{x})$. C&rsquo;est bien ce qui était attendu, mais rien de bien folichon.</p>
+<p>Cela donne $\langle \boldsymbol{x}|\boldsymbol{p}\rangle = \int\mathrm{d}^3q\,\phi_\boldsymbol{q}(\boldsymbol{x})\langle\boldsymbol{q}|\boldsymbol{p}\rangle=\phi_\boldsymbol{p}(\boldsymbol{x})$.<br>
+C&rsquo;est bien ce qui était attendu, mais rien de bien folichon.</p>
 <p>Passons maintenant au cas d&rsquo;un état à deux particules : $\langle \boldsymbol{p&rsquo;}\boldsymbol{q&rsquo;}|\boldsymbol{q}\boldsymbol{p}\rangle=\langle 0|\hat{a}_\boldsymbol{p&rsquo;}\hat{a}_\boldsymbol{q&rsquo;}\hat{a}^\dagger_\boldsymbol{q}\hat{a}^\dagger_\boldsymbol{p}|0\rangle$.<br>
 Par utilisation des relations de commutation, on arrive à $\langle \boldsymbol{p&rsquo;}\boldsymbol{q&rsquo;}|\boldsymbol{q}\boldsymbol{p}\rangle=\delta^{(3)}(\boldsymbol{p&rsquo;}-\boldsymbol{p})\delta^{(3)}(\boldsymbol{q&rsquo;}-\boldsymbol{q})\pm\delta^{(3)}(\boldsymbol{p&rsquo;}-\boldsymbol{q})\delta^{(3)}(\boldsymbol{q&rsquo;}-\boldsymbol{p})$ avec le signe plus pour les bosons et moins pour les fermions.<br>
-Déterminons à nouveau la fonction d&rsquo;onde dans l&rsquo;espace des positions grâce au changement de base $|\boldsymbol{x}\boldsymbol{y}\rangle = \frac{1}{\sqrt{2!}}\int \mathrm{d}^3p&rsquo;\mathrm{d}^3 q&rsquo; \phi^*_\boldsymbol{p&rsquo;}(\boldsymbol{x})\phi^*_\boldsymbol{q&rsquo;}(\boldsymbol{y})|\boldsymbol{p&rsquo;}\boldsymbol{q&rsquo;}\rangle$ où le facteur $\frac{1}{\sqrt{2!}}$ compense le double comptage $q&rsquo;p&rsquo;$/$p&rsquo;q&rsquo;$ dû au fait que la somme n&rsquo;est pas restreinte. Cela donne $ \frac{1}{\sqrt{2!}}\int \mathrm{d}^3p&rsquo;\mathrm{d}^3 q&rsquo; \phi_\boldsymbol{p&rsquo;}(\boldsymbol{x})\phi_\boldsymbol{q&rsquo;}(\boldsymbol{y}) \langle \boldsymbol{p&rsquo;}\boldsymbol{q&rsquo;}|\boldsymbol{p}\boldsymbol{q}\rangle = \frac{1}{\sqrt{2!}}[\phi_\boldsymbol{p}(\boldsymbol{x})\phi_\boldsymbol{q}(\boldsymbol{y})\pm \phi_\boldsymbol{q}(\boldsymbol{x})\phi_\boldsymbol{p}(\boldsymbol{y})]$ ce qui est bien l&rsquo;expression d&rsquo;un état à deux particules !</p>
+Déterminons à nouveau la fonction d&rsquo;onde dans l&rsquo;espace des positions grâce au changement de base :</p>
+<div id="grosseformule">
+<p>$$|\boldsymbol{x}\boldsymbol{y}\rangle = \frac{1}{\sqrt{2!}}\int \mathrm{d}^3p&rsquo;\mathrm{d}^3 q&rsquo; \phi^*_\boldsymbol{p&rsquo;}(\boldsymbol{x})\phi^*_\boldsymbol{q&rsquo;}(\boldsymbol{y})|\boldsymbol{p&rsquo;}\boldsymbol{q&rsquo;}\rangle$$</p>
+</div>
+<p>où le facteur $\frac{1}{\sqrt{2!}}$ compense le double comptage $q&rsquo;p&rsquo;$/$p&rsquo;q&rsquo;$ dû au fait que la somme n&rsquo;est pas restreinte. Cela donne :</p>
+<div id="grosseformule">
+<p>$$ \frac{1}{\sqrt{2!}}\int \mathrm{d}^3p&rsquo;\mathrm{d}^3 q&rsquo; \phi_\boldsymbol{p&rsquo;}(\boldsymbol{x})\phi_\boldsymbol{q&rsquo;}(\boldsymbol{y}) \langle \boldsymbol{p&rsquo;}\boldsymbol{q&rsquo;}|\boldsymbol{p}\boldsymbol{q}\rangle = \frac{1}{\sqrt{2!}}[\phi_\boldsymbol{p}(\boldsymbol{x})\phi_\boldsymbol{q}(\boldsymbol{y})\pm \phi_\boldsymbol{q}(\boldsymbol{x})\phi_\boldsymbol{p}(\boldsymbol{y})]$$</p>
+</div>
+<p>On retrouve l&rsquo;expression d&rsquo;un état à deux particules !</p>
 </div>
 <p>Cette nouvelle formulation de la mécanique quantique semble donc valide et dans la suite, elle va porter ses fruits.</p>
 <br>
@@ -2983,7 +3002,7 @@ Et on a aussi $\int\mathrm{d}^3 x\,\mathrm{e}^{-\mathrm{i}\boldsymbol{p}\cdot\bo
 <p>$$\hat{A} = \sum_{\alpha\beta}\mathcal{A}_{\alpha\beta}\hat{a}^\dagger_\alpha\hat{a}_\beta$$</p>
 </div>
 <p>Les éléments de matrice $\mathcal{A}_{\alpha\beta}$ sont les mêmes qu&rsquo;au-dessus et ils continuent à représenter l&rsquo;ensemble des transformations possibles d&rsquo;une particule seule. Mais $\hat{A}$ opère bien sur un état à plusieurs particules. $\hat{A}$ est en effet une somme sur toutes les transformations d&rsquo;un état $|\beta\rangle$ vers un état $|\alpha\rangle$ où on commence par utiliser $\hat{a}_\beta$ pour retirer une particule dans l&rsquo;état $|\beta\rangle$, on multiplie par l&rsquo;élément de matrice $\mathcal{A}_{\alpha\beta}$ correspondant à la transition vers le nouvel état, et enfin on utilise $\hat{a}^\dagger_\beta$ pour placer la particules dans l&rsquo;état final $|\alpha\rangle$.</p>
-<p><img src="/tqcopchamp.png?width=200px" alt=""></p>
+<p><img src="/tqcopchamp.png?width=150px" alt=""></p>
 
 
 <footer class="footline">
@@ -4666,16 +4685,16 @@ Et on a aussi $\int\mathrm{d}^3 x\,\mathrm{e}^{-\mathrm{i}\boldsymbol{p}\cdot\bo
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1727622478"></script>
-    <script src="/js/perfect-scrollbar.min.js?1727622478"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1727622478"></script>
-    <script src="/js/jquery.sticky.js?1727622478"></script>
-    <script src="/js/featherlight.min.js?1727622478"></script>
-    <script src="/js/highlight.pack.js?1727622478"></script>
+    <script src="/js/clipboard.min.js?1727644941"></script>
+    <script src="/js/perfect-scrollbar.min.js?1727644941"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1727644941"></script>
+    <script src="/js/jquery.sticky.js?1727644941"></script>
+    <script src="/js/featherlight.min.js?1727644941"></script>
+    <script src="/js/highlight.pack.js?1727644941"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1727622478"></script>
-    <script src="/js/learn.js?1727622478"></script>
-    <script src="/js/hugo-learn.js?1727622478"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1727644941"></script>
+    <script src="/js/learn.js?1727644941"></script>
+    <script src="/js/hugo-learn.js?1727644941"></script>
     
     
 
