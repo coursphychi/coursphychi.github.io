@@ -121,6 +121,13 @@
       <description>Mécanique Énergie cinétique et travail Une approche historique sur l&amp;rsquo;émergence du concept d&amp;rsquo;énergie en mécanique, de Descartes à Einstein.&#xA;Pourquoi une énergie cinétique en $v^2$ ? Trois démonstrations de la formule de l&amp;rsquo;énergie cinétique.&#xA;Je trouve la deuxième (celle de Johann Bernoulli) fabuleuse d&amp;rsquo;intuition géométrique (elle utilise l&amp;rsquo;escargot de Pythagore).&#xA;Chute libre et paraboles Étudier la chute libre, c&amp;rsquo;est jouer avec des paraboles.&#xA;Force de Coriolis La force de Coriolis n&amp;rsquo;est pas une force mais traduit juste la galère d&amp;rsquo;aller droit dans un référentiel tournant.</description>
     </item>
     <item>
+      <title>TQC1</title>
+      <link>https://coursphychi.github.io/more/physique/tqc/tqc1/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/physique/tqc/tqc1/</guid>
+      <description>Théorie quantique des champs note&#xA;Notes de lecture du livre Quantum field theory for the gifted amateur de Thomas Lancaster et Stephen Blundell.&#xA;Partie 1 : un univers d&amp;rsquo;oscillateurs harmoniques Lagrangien et principe de moindre action La détermination de la trajectoire $x(t)$ d&amp;rsquo;une particule entre A et B par intégration de la 2e loi de Newton, $F=m\ddot{x}$, ne cadre pas avec les enseignements de la mécanique quantique. Car si on peut bien mesurer la particule en A à $t=0$ et en B à $t=\tau$, un voile impénétrable nous empèche de savoir précisément ce qui s&amp;rsquo;est passé entre les deux.</description>
+    </item>
+    <item>
       <title>Acide/Base</title>
       <link>https://coursphychi.github.io/tsti2d/acide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -406,13 +413,6 @@
       <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
       <guid>https://coursphychi.github.io/more/maths/jeux/</guid>
       <description>Un peu de théorie des jeux note&#xA;Cette page est très inspirée du livre Chases and Escapes The Mathematics of Pursuit and Evasion de Paul Nahin.&#xA;Attaque - Défense Un petit problème mathématique qui fleure bon la Guerre Froide :&#xA;Deux bombardiers bleus sont en mission. L&amp;rsquo;un transporte une bombe H et l&amp;rsquo;autre des équipements pour brouiller les radars. Leur plan de vol est tel qu&amp;rsquo;un des deux bombardiers est mieux protégé par les mitrailleuses de l&amp;rsquo;autre.</description>
-    </item>
-    <item>
-      <title>Théorie quantique des champs</title>
-      <link>https://coursphychi.github.io/more/physique/tqc/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/tqc/</guid>
-      <description>Théorie quantique des champs note&#xA;Notes de lecture du livre Quantum field theory for the gifted amateur de Thomas Lancaster et Stephen Blundell.&#xA;Toute particule et toute onde dans l&amp;rsquo;univers sont simplement une excitation d&amp;rsquo;un champ quantique défini à travers tout l&amp;rsquo;espace et le temps.&#xA;La théorie quantique des champs (TQC) est actuellement la meilleure théorie pour expliquer l&amp;rsquo;univers qui nous entoure et la théorie testée avec la plus grande précision.</description>
     </item>
     <item>
       <title>Entités organiques</title>
