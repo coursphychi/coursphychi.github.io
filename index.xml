@@ -41,7 +41,7 @@
       <link>https://coursphychi.github.io/colles/onde/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/onde/</guid>
-      <description>Onde Inspecter le code ci-dessous :&#xA;Combien de périodes observe-t-on pendant l&amp;rsquo;animation ? Modifier le code pour visualiser 10 périodes. Imaginons qu&amp;rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.&#xA;Quel sera le retard temporel de l&amp;rsquo;anneau i par rapport à l&amp;rsquo;anneau 0 ? Faire en sorte que l&amp;rsquo;animation montre une telle onde en modifiant la ligne 62. Que vaut alors la longueur d&amp;rsquo;onde $\lambda$ ?</description>
+      <description>Onde Inspecter le code ci-dessous :&#xA;Combien de périodes observe-t-on pendant l&amp;rsquo;animation ? Modifier le code pour visualiser 10 périodes. Imaginons qu&amp;rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.&#xA;Quel sera le retard temporel de l&amp;rsquo;anneau i par rapport à l&amp;rsquo;anneau 0 ? Faire en sorte que l&amp;rsquo;animation montre une telle onde en modifiant la ligne 64. Que vaut alors la longueur d&amp;rsquo;onde $\lambda$ ?</description>
     </item>
     <item>
       <title>Oscillateur</title>
