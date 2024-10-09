@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1728487883" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1728487883" rel="stylesheet">
-    <link href="/css/hybrid.css?1728487883" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1728487883" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1728487883" rel="stylesheet">
-    <link href="/css/auto-complete.css?1728487883" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1728487883" rel="stylesheet">
-    <link href="/css/theme.css?1728487883" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1728487883" rel="stylesheet">
+    <link href="/css/nucleus.css?1728488157" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1728488157" rel="stylesheet">
+    <link href="/css/hybrid.css?1728488157" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1728488157" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1728488157" rel="stylesheet">
+    <link href="/css/auto-complete.css?1728488157" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1728488157" rel="stylesheet">
+    <link href="/css/theme.css?1728488157" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1728488157" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1728487883" rel="stylesheet">
+    <link href="/css/theme-blue.css?1728488157" rel="stylesheet">
     
-    <link href="/css/foo.css?1728487883" rel="stylesheet"><link href="/css/bar.css?1728487883" rel="stylesheet">
+    <link href="/css/foo.css?1728488157" rel="stylesheet"><link href="/css/bar.css?1728488157" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1728487883"></script>
+    <script src="/js/jquery-3.3.1.min.js?1728488157"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1728487883"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1728487883"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1728488157"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1728488157"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1728487883"></script>
+<script type="text/javascript" src="/js/search.js?1728488157"></script>
 
     
   </div>
@@ -3168,17 +3168,23 @@ Pour la promotion seconde quantification de $\mathcal{A}_{\alpha\beta\gamma\delt
 <p>$$Â =
 \sum_{\alpha\beta\gamma\delta} A_{\alpha\beta\gamma\delta} \hat{a}^\dagger_\alpha \hat{a}^\dagger_\beta \hat{a}_\gamma \hat{a}_\delta$$</p>
 <p>L&rsquo;opérateurs à deux particules typique est le potentiel $\hat{V}$. Et il sera le plus souvent fonction des coordonnées spatiales. Son expression impliquant les opérateurs de champ est alors :</p>
+<div id="grosseformule">
 <p>$$\hat{V} =
 \frac{1}{2}
 \int \mathrm{d}^3 x\, \mathrm{d}^3 y \, \hat{\psi}^\dagger(\boldsymbol{x}) \hat{\psi}^\dagger(\boldsymbol{y}) V(\boldsymbol{x}, \boldsymbol{y}) \hat{\psi}(\boldsymbol{y}) \hat{\psi}(\boldsymbol{x})$$</p>
+</div>
 <p>Le $\frac{1}{2}$ compense le double comptage des interactions. L&rsquo;ordre des opérateurs n&rsquo;est pas anodin ! Celui utilisé est appelé <strong>ordre normal</strong> et sa vertu principale est d&rsquo;assurer que l&rsquo;opérateur $\hat{V}$ ait une valeur moyenne prédite (espérance quantique) nulle pour l&rsquo;état de vide ($\langle 0|\hat{V}|0\rangle=0$).</p>
 <p>On restreint le potentiel à la forme $V(\boldsymbol{x}-\boldsymbol{y})$ ne dépendant que de la séparation relative des particules (cela va garantir la conservation de l&rsquo;impulsion dans l&rsquo;interaction) et on décompose en modes d&rsquo;impulsion les opérateurs champ :</p>
+<div id="grosseformule">
 <p>$$
 \hat{V} = \frac{1}{2\mathcal{V}^2} \int \mathrm{d}^3x \,\mathrm{d}^3 y \!\!\sum_{\boldsymbol{p}_1 \boldsymbol{p}_2 \boldsymbol{p}_3 \boldsymbol{p}_4} \mathrm{e}^{\mathrm{i}(-\boldsymbol{p}_1 \cdot \boldsymbol{x} - \boldsymbol{p}_2 \cdot \boldsymbol{y} + \boldsymbol{p}_3 \cdot \boldsymbol{y} + \boldsymbol{p}_4 \cdot \boldsymbol{x})}
 \hat{a}^\dagger_{\boldsymbol{p}_1} \hat{a}^\dagger_{\boldsymbol{p}_2} V(\boldsymbol{x} - \boldsymbol{y}) \hat{a}_{\boldsymbol{p}_3} \hat{a}_{\boldsymbol{p}_4}
 $$</p>
+</div>
 <p>Changement de variables et jeu sur les indices aboutissent à :</p>
+<div id="grosseformule">
 <p>$$\hat{V} = \frac{1}{2} \sum_{\boldsymbol{p}_1 \boldsymbol{p}_2 \boldsymbol{q}} \tilde{V}_{\boldsymbol{q}} \,\hat{a}^\dagger_{\boldsymbol{p}_1 + \boldsymbol{q}} \hat{a}^\dagger_{\boldsymbol{p}_2 - \boldsymbol{q}} \hat{a}_{\boldsymbol{p}_2} \hat{a}_{\boldsymbol{p}_1}$$</p>
+</div>
 <p>où $\tilde{V}_\boldsymbol{q}$ est la transformée de Fourier du potentiel.</p>
 <p>La formule peut s&rsquo;interpréter comme une diffusion dans l&rsquo;espace des impulsions qui se représente conventionnellement par un dessin appelé <strong>diagramme de Feynman</strong>.</p>
 <p><img src="/tqcfeyn1.png?width=400px" alt=""></p>
@@ -3187,11 +3193,17 @@ $$</p>
 <h4 id="modèle-de-hubbard">Modèle de Hubbard</h4>
 <p>Le modèle de Hubbard est central en matière condensée. Il permet de capturer les implications physiques de la compétition entre énergie cinétique (qui favorise la délocalisation des électrons) et énergie potentielle (qui favorise leur localisation).</p>
 <p>L&rsquo;Hamiltonien du modèle de Hubbard est construit à partir de nos deux ingrédients précédents : l&rsquo;Hamiltonien du modèle de liaisons fortes pour modéliser l&rsquo;énergie cinétique et le potentiel à deux particules pour modéliser les interactions electron-electron :</p>
+<div id="grosseformule">
 <p>$$\hat{H} = \sum_{ij} \left(-t_{ij} \hat{c}^\dagger_i \hat{c}_j\right) + \frac{1}{2} \sum_{ijkl} \hat{c}^\dagger_i \hat{c}^\dagger_j V_{ijkl} \hat{c}_k \hat{c}_l$$</p>
+</div>
 <p>Et comme les électrons possèdent un spin $\sigma$ qui peut pointer soit vers le haut ($|\uparrow\rangle$), soit vers le bas ($|\downarrow\rangle$), l&rsquo;Hamiltonien devient :</p>
+<div id="grosseformule">
 <p>$$\hat{H} = \sum_{ij\sigma} (-t_{ij}) \hat{c}^\dagger_{i\sigma} \hat{c}_{j\sigma} + \frac{1}{2} \sum_{ijkl\sigma\sigma&rsquo;} \hat{c}^\dagger_{i\sigma} \hat{c}^\dagger_{j\sigma&rsquo;} V_{ijkl} \hat{c}_{k\sigma&rsquo;} \hat{c}_{l\sigma}$$</p>
+</div>
 <p>On suppose ici que les spins ne peuvent pas basculer. Comme l&rsquo;interaction entre électrons vient de l&rsquo;interaction de Coulomb, elle est indépendante de l&rsquo;orientation du spin. Mais pour simplifier, on supposera que l&rsquo;interaction coulombienne n&rsquo;est notable que lorsque les électrons sont sur le même site. Les électrons interagissent donc via une énergie potentielle constante $U=V_{iiii}$. Mais comme le principe de Pauli impose que deux électrons sur le même site aient des spins opposés, l&rsquo;Hamiltonien devient :</p>
+<div id="grosseformule">
 <p>$$\hat{H} = \sum_{ij\sigma} (-t_{ij}) \hat{c}^\dagger_{i\sigma} \hat{c}_{j\sigma} + U \sum_i \hat{n}_{i\uparrow} \hat{n}_{i\downarrow}$$</p>
+</div>
 <p>Bien que simple d&rsquo;allure, obtenir les états propres est souvent une tâche complexe et ceux-ci sont généralement fortement corrélés.</p>
 <div id="preuve">
 <p>Simplifions à l&rsquo;extrême avec un réseau de seulement deux sites, et un seul électron avec un spin haut $|\uparrow\rangle$. L&rsquo;électron peut être soit sur le premier site, ce que l&rsquo;on note $|\uparrow,0\rangle$ (spin haut sur le site 1, rien sur le site 2), soit sur le second $|0,\uparrow\rangle$ (rien sur le site 1, spin haut sur le site 2).<br>
@@ -4951,16 +4963,16 @@ Et le deuxième terme donne $-t\hat{c}^\dagger_{2\downarrow} \hat{c}_{1\downarro
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1728487883"></script>
-    <script src="/js/perfect-scrollbar.min.js?1728487883"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1728487883"></script>
-    <script src="/js/jquery.sticky.js?1728487883"></script>
-    <script src="/js/featherlight.min.js?1728487883"></script>
-    <script src="/js/highlight.pack.js?1728487883"></script>
+    <script src="/js/clipboard.min.js?1728488157"></script>
+    <script src="/js/perfect-scrollbar.min.js?1728488157"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1728488157"></script>
+    <script src="/js/jquery.sticky.js?1728488157"></script>
+    <script src="/js/featherlight.min.js?1728488157"></script>
+    <script src="/js/highlight.pack.js?1728488157"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1728487883"></script>
-    <script src="/js/learn.js?1728487883"></script>
-    <script src="/js/hugo-learn.js?1728487883"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1728488157"></script>
+    <script src="/js/learn.js?1728488157"></script>
+    <script src="/js/hugo-learn.js?1728488157"></script>
     
     
 
