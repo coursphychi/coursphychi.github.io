@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1728270176" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1728270176" rel="stylesheet">
-    <link href="/css/hybrid.css?1728270176" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1728270176" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1728270176" rel="stylesheet">
-    <link href="/css/auto-complete.css?1728270176" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1728270176" rel="stylesheet">
-    <link href="/css/theme.css?1728270176" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1728270176" rel="stylesheet">
+    <link href="/css/nucleus.css?1728466195" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1728466195" rel="stylesheet">
+    <link href="/css/hybrid.css?1728466195" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1728466195" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1728466195" rel="stylesheet">
+    <link href="/css/auto-complete.css?1728466195" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1728466195" rel="stylesheet">
+    <link href="/css/theme.css?1728466195" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1728466195" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1728270176" rel="stylesheet">
+    <link href="/css/theme-blue.css?1728466195" rel="stylesheet">
     
-    <link href="/css/foo.css?1728270176" rel="stylesheet"><link href="/css/bar.css?1728270176" rel="stylesheet">
+    <link href="/css/foo.css?1728466195" rel="stylesheet"><link href="/css/bar.css?1728466195" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1728270176"></script>
+    <script src="/js/jquery-3.3.1.min.js?1728466195"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1728270176"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1728270176"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1728466195"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1728466195"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1728270176"></script>
+<script type="text/javascript" src="/js/search.js?1728466195"></script>
 
     
   </div>
@@ -2929,6 +2929,7 @@ On retrouve une structure en niveaux d'énergie similaire à celle d'un système
 <li>Enfin, l&rsquo;ordre d&rsquo;ajout des particules ne modifie pas l&rsquo;état final obtenu : $\hat{a}^\dagger_{p_1}\hat{a}^\dagger_{p_2}|0\rangle=\hat{a}^\dagger_{p_2}\hat{a}^\dagger_{p_1}|0\rangle=|1_{p_1}1_{p_2}\rangle$.</li>
 </ul>
 <p>Action des opérateurs sur un état général :</p>
+<div id="theo">
 <div id="grosseformule">
 <p>$$
 \begin{aligned}
@@ -2936,6 +2937,7 @@ On retrouve une structure en niveaux d'énergie similaire à celle d'un système
 &amp;\hat{a}_i |n_1\cdots n_i\cdots\rangle = \sqrt{n_i}|n_1\cdots n_i-1\cdots\rangle
 \end{aligned}
 $$</p>
+</div>
 </div>
 <p><strong>Cas 2 : $\lambda=-1$, les fermions</strong></p>
 <p>On va noter les opérateurs des fermions $\hat{c}_i^\dagger$ pour les différentier de ceux des bosons.</p>
@@ -2949,6 +2951,7 @@ $$</p>
 </div>
 <p>On a aussi $\left\{\hat{c}_i,\hat{c}_j\right\}=0$ et on définit $\left\{\hat{c}_i,\hat{c}_j^\dagger\right\}=\delta_{ij}$ pour pouvoir appliquer ici aussi l&rsquo;analogie avec les oscillateurs harmoniques. Mais gare maintenant à l&rsquo;ordre des opérateurs qui n&rsquo;est plus indifférent !</p>
 <p>Action des opérateurs sur un état général :</p>
+<div id="theo">
 <div id="grosseformule">
 <p>$$
 \begin{aligned}
@@ -2957,8 +2960,25 @@ $$</p>
 \end{aligned}
 $$</p>
 </div>
+</div>
 <p>Où $(-1)^{\sum_i}=(-1)^{n_1+n_2+\cdots+n_{i-1}}$. Cela donne un facteur $(-1)$ pour chaque particule placée à gauche de l&rsquo;état étiqueté par $n_i$ dans le vecteur d&rsquo;état.</p>
-  <br>
+<div id="preuve">
+<details>
+<summary><a>Prenons un exemple pour s'aguerrir et vérifier la formule.</a></summary>
+<p>Pour échanger de place de particules, on va leur faire suivre le processus suivant $|110\rangle\rightarrow|101\rangle\rightarrow|011\rangle\rightarrow|110\rangle$.</p>
+<p>Bouger une particule de place consiste à détruire la particule à un endroit et à la créer à un autre.<br>
+Déplacer une particule de l&rsquo;état 2 vers l&rsquo;état 3 s&rsquo;écrit donc $\hat{a}^\dagger_{3}\hat{a}_2|110\rangle$. L&rsquo;enchaînement total proposé peut être décrit par l&rsquo;enchaînement $\hat{a}^\dagger_{1}\hat{a}_3\hat{a}^\dagger_{2}\hat{a}_1\hat{a}^\dagger_{3}\hat{a}_2|110\rangle$. Et le résultat est sensé être $\pm|110\rangle$ ($+$ pour des bosons et $-$ pour des fermions).</p>
+<p>Vérifions que les relations de commutation donnent les bons résultats. S&rsquo;il s&rsquo;agit de bosons, on peut échanger de place deux opérateurs agissant sur des états différents ($[\hat{a}_i,\hat{a}_j]=0$).</p>
+<p>$\hat{a}^\dagger_{1}\hat{a}_3\hat{a}^\dagger_{2}\hat{a}_1\hat{a}^\dagger_{3}\hat{a}_2|110\rangle=\hat{a}_3\hat{a}^\dagger_{3}\hat{a}^\dagger_{1}\hat{a}_1\hat{a}^\dagger_{2}\hat{a}_2|110\rangle$</p>
+<p>Comme $\hat{a}^\dagger_i\hat{a}_i=\hat{n}_i$, l&rsquo;opérateur nombre qui compte le nombre de particules dans l&rsquo;état $i$, on obtient :</p>
+<p>$\hat{a}_3\hat{a}^\dagger_{3}\hat{a}^\dagger_{1}\hat{a}_1\hat{a}^\dagger_{2}\hat{a}_2|110\rangle=\hat{a}_3\hat{a}^\dagger_{3}\hat{n}_1\hat{n}_2|110\rangle =(1)\times(1)\times \hat{a}_3\hat{a}^\dagger_{3}|110\rangle$</p>
+<p>En utilisant $[\hat{a}_3,\hat{a}^\dagger_3]=1$, on obtient :</p>
+<p>$\hat{a}_3\hat{a}^\dagger_{3}|110\rangle=(1+\hat{n}_3)|110\rangle = |110\rangle + 0 =|110\rangle$</p>
+<p>Passons aux fermions. L&rsquo;échange entre deux particules s&rsquo;accompagne maintenant d&rsquo;un changement de signe.</p>
+<p>$\hat{c}^\dagger_{1}\hat{c}_3\hat{c}^\dagger_{2}\hat{c}_1\hat{c}^\dagger_{3}\hat{c}_2|110\rangle = -\hat{c}_3\hat{c}^\dagger_{3}\hat{c}^\dagger_{1}\hat{c}_1\hat{c}^\dagger_{2}\hat{c}_2|110\rangle$ car on compte un nombre impair d&rsquo;échanges. Et $-\hat{c}_3\hat{c}^\dagger_{3}\hat{c}^\dagger_{1}\hat{c}_1\hat{c}^\dagger_{2}\hat{c}_2|110\rangle = -(1-\hat{n}_3)|110\rangle = -|110\rangle$.</p>
+</details>
+</div>
+<br>  
 <p>On était jusque-là confiné dans une boite, mais que se passe-t-il si on écarte ses murs infiniment ? On passe alors à la <strong>limite du continu</strong>. Le symbole de Kronecker $\delta_{ij}$ des commutateurs devient une fonction delta de Dirac $\delta^{(3)}(\boldsymbol{p})$ et les sommes discrètes deviennent des intégrales.</p>
 <p>Le commutateur se transforme donc en :</p>
 <div id="theo">
@@ -3163,7 +3183,58 @@ $$</p>
 <p>Pour réussir à évaluer l&rsquo;énergie facilement, l&rsquo;idée est de transformer toutes les combinaisons d&rsquo;opérateurs en opérateurs nombre. Mais on se heurte à la non diagonalité du potentiel (les problèmes impliquant une énergie potentielle ne peuvent généralement pas être résolus de manière exacte). Malgré cela, le potentiel à deux particules peut nous mener à des richesses physiques insoupçonnées (magnétisme, superfluidité, supraconductivité,&hellip;).</p>
 <h4 id="modèle-de-hubbard">Modèle de Hubbard</h4>
 <p>Le modèle de Hubbard est central en matière condensée car il permet de capturer les implications physiques de la compétition entre énergie cinétique (qui favorise la délocalisation des électrons) et énergie potentielle (qui favorise leur localisation).</p>
-
+<p>L&rsquo;Hamiltonien du modèle de Hubbard est construit à partir de nos deux ingrédients précédents : un Hamiltonien du modèle de liaisons fortes pour modéliser l&rsquo;énergie cinétique et potentiel à deux particules pour modéliser les interactions electron-electron :</p>
+<p>$$\hat{H} = \sum_{ij} \left(-t_{ij} \hat{c}^\dagger_i \hat{c}_j\right) + \frac{1}{2} \sum_{ijkl} \hat{c}^\dagger_i \hat{c}^\dagger_j V_{ijkl} \hat{c}_k \hat{c}_l$$</p>
+<p>Et comme les électrons possèdent un spin $\sigma$ qui peut pointer soit vers le haut ($|\uparrow\rangle$), soit vers le bas ($|\downarrow\rangle$), l&rsquo;Hamiltonien devient :</p>
+<p>$$\hat{H} = \sum_{ij\sigma} (-t_{ij}) \hat{c}^\dagger_{i\sigma} \hat{c}_{j\sigma} + \frac{1}{2} \sum_{ijkl\sigma\sigma&rsquo;} \hat{c}^\dagger_{i\sigma} \hat{c}^\dagger_{j\sigma&rsquo;} V_{ijkl} \hat{c}_{k\sigma&rsquo;} \hat{c}_{l\sigma}$$</p>
+<p>On suppose que les spins ne peuvent pas basculer. Comme l&rsquo;interaction entre électrons vient de l&rsquo;interaction de Coulomb, elle est indépendante de l&rsquo;orientation du spin. Mais pour simplifier, on supposera que l&rsquo;interaction coulombienne n&rsquo;est notable que lorsque les électrons sont sur le même site. Les électrons interagissent donc via une énergie potentielle constante $U=V_{iiii}$. Mais comme le principe de Pauli impose que deux électrons sur le même site aient des spins opposés, l&rsquo;Hamiltonien devient :</p>
+<p>$$\hat{H} = \sum_{ij\sigma} (-t_{ij}) \hat{c}^\dagger_{i\sigma} \hat{c}_{j\sigma} + U \sum_i \hat{n}_{i\uparrow} \hat{n}_{i\downarrow}$$</p>
+<p>Bien que simple d&rsquo;allure, en obtenir des états propres est souvent complexes et ceux-ci sont généralement fortement corrélés. Ne considérer que des sauts vers les plus proches voisins est généralement suffisant.</p>
+<div id="preuve">
+<p>Simplifions à l&rsquo;extrême avec un réseau de seulement deux sites, et un seul électron avec un spin haut $|\uparrow\rangle$. L&rsquo;électron peut être soit sur le premier site, ce que l&rsquo;on note $|\uparrow,0\rangle$ (spin haut sur le site 1, rien sur le site 2), soit sur le second $|0,\uparrow\rangle$ (rien sur le site 1, spin haut sur le site 2).<br>
+Un état général est une combinaison de ces deux états $|\psi\rangle = a|\uparrow,0\rangle+b|0,\uparrow\rangle$ et l&rsquo;Hamiltonien de Hubbard peut s&rsquo;écrire :</p>
+<p>$
+\displaystyle
+\hat{H} =
+\begin{pmatrix}
+0 &amp; -t \\
+-t &amp; 0
+\end{pmatrix}
+$</p>
+<p>En diagonalisant, on obtient un état fondamental $|\psi\rangle=\frac{1}{\sqrt{2}}(|\uparrow,0\rangle+|0,\uparrow\rangle )$ pour une énergie $E=-t$, et un état excité $|\psi\rangle=\frac{1}{\sqrt{2}}(|\uparrow,0\rangle-|0,\uparrow\rangle )$ pour une énergie $E=t$.</p>
+<p>Ajoutons un électron dans le système. S&rsquo;il a le même spin, la solution est simplement $|\uparrow,\uparrow\rangle$ et l&rsquo;énergie associée est $E=0$ (pas d&rsquo;interaction possible puisque les deux électrons ne peuvent pas occuper le même site et ils ne peuvent pas sauter d&rsquo;un site à l&rsquo;autre, ils sont bloqués).<br></p>
+<details>
+<summary>
+<a>Montrons-le par le calcul&nbsp;:</a>
+</summary>
+Pour le terme d'énergie potentiel, on obtient bien 0 puisque $U (\hat{n}\_{1\uparrow} \hat{n}\_{1\downarrow}+\hat{n}\_{2\uparrow} \hat{n}\_{2\downarrow})|\uparrow,\uparrow\rangle=U(1\times 0+0\times 1)|\uparrow,\uparrow\rangle = 0$.<br>
+Et pour le terme cinétique, on ne garde que les termes de spin haut de l'Hamiltonien&nbsp;: $-t (\hat{c}^\dagger_{1\uparrow} \hat{c}_{2\uparrow}+\hat{c}^\dagger_{2\uparrow} \hat{c}_{1\uparrow})$. Et on réécrit $|\uparrow,\uparrow\rangle$ comme $\hat{c}^\dagger_{1\uparrow}\hat{c}^\dagger_{2\uparrow}|0\rangle$.<br>
+$-t (\hat{c}^\dagger_{1\uparrow} \hat{c}\_{2\uparrow}+\hat{c}^\dagger_{2\uparrow} \hat{c}_{1\uparrow})\hat{c}^\dagger_{1\uparrow}\hat{c}^\dagger_{2\uparrow}|0\rangle=-t \hat{c}^\dagger_{1\uparrow} \hat{c}_{2\uparrow}\hat{c}^\dagger_{1\uparrow}\hat{c}^\dagger_{2\uparrow}|0\rangle-t\hat{c}^\dagger_{2\uparrow} \hat{c}_{1\uparrow}\hat{c}^\dagger_{1\uparrow}\hat{c}^\dagger_{2\uparrow}|0\rangle=t \hat{c}^\dagger_{1\uparrow} \hat{c}_{2\uparrow}\hat{c}^\dagger_{2\uparrow}\hat{c}^\dagger_{1\uparrow}|0\rangle-t\hat{c}^\dagger_{2\uparrow} \hat{c}_{1\uparrow}\hat{c}^\dagger_{1\uparrow}\hat{c}^\dagger_{2\uparrow}|0\rangle=t \hat{c}^\dagger_{1\uparrow}(1-\hat{n}_{2\uparrow})\hat{c}^\dagger_{1\uparrow}|0\rangle-t\hat{c}^\dagger_{2\uparrow}(1-\hat{n}_{1\uparrow})\hat{c}^\dagger_{2\uparrow}|0\rangle = t  \cancel{\hat{c}^\dagger_{1\uparrow}  \hat{c}^\dagger_{1\uparrow} }|0\rangle - t\hat{c}^\dagger_{1\uparrow}\cancel{\hat{n}_{2\uparrow}|\uparrow,0\rangle}- t\cancel{\hat{c}^\dagger_{2\uparrow}\hat{c}^\dagger_{2\uparrow}}|0\rangle+t\hat{c}^\dagger_{2\uparrow}\cancel{\hat{n}_{1\uparrow}|0,\uparrow\rangle}=0$
+</details>
+<p>S&rsquo;ils sont de spins opposés, une base possible est $\{|\uparrow\downarrow,0\rangle,|\uparrow,\downarrow\rangle,|\downarrow,\uparrow\rangle,|0,\uparrow\downarrow\rangle\}$. Et dans cette base, l&rsquo;Hamiltonien de Hubbard s&rsquo;écrit :</p>
+<p>$
+\displaystyle
+\hat{H} =
+\begin{pmatrix}
+U &amp; -t &amp; t &amp; 0 \\
+-t &amp; 0 &amp; 0 &amp; -t \\
+t &amp; 0 &amp; 0 &amp; -t \\
+0 &amp; -t &amp; t &amp; U
+\end{pmatrix}
+$</p>
+<details>
+<summary>
+<a>Détaillons juste l'action de l'Hamiltonien sur $|\uparrow\downarrow,0\rangle$ pour s'en convaincre.</a>
+</summary>
+<p>Terme potentiel : $U \hat{n}_{1\uparrow}\hat{n}_{1\downarrow}|\uparrow\downarrow,0\rangle = U\times 1\times 1=U$ et $U \hat{n}_{2\uparrow}\hat{n}_{2\downarrow}|\uparrow\downarrow,0\rangle = U\times 0\times 0=0$ (puisque l&rsquo;opérateur $\hat{n}$ ne fait que compter le nombres de particules dans un site donné).</p>
+<p>Terme cinétique : comme $i$ et $j$ doivent être différents, on a 4 termes dans la somme $(-t) \hat{c}^\dagger_{1\uparrow} \hat{c}_{2\uparrow}+(-t) \hat{c}^\dagger_{2\uparrow} \hat{c}_{1\uparrow}+(-t) \hat{c}^\dagger_{1\downarrow} \hat{c}_{2\downarrow}+(-t) \hat{c}^\dagger_{2\downarrow} \hat{c}_{1\downarrow}$.<br>
+Seuls les deux termes contenant un opérateur d&rsquo;annihilation sur le site 1 ne donneront pas un résultat nul. Il nous reste $-t(\hat{c}^\dagger_{2\uparrow} \hat{c}_{1\uparrow} +\hat{c}^\dagger_{2\downarrow} \hat{c}_{1\downarrow})$.<br>
+Appliquons cette somme d&rsquo;opérateurs à $|\uparrow\downarrow,0\rangle$ qu&rsquo;on peut aussi écrire $\hat{c}^\dagger_{1\uparrow}\hat{c}^\dagger_{1\downarrow}|0\rangle$. <br>
+Le permier terme nous donne $-t\hat{c}^\dagger_{2\uparrow} \hat{c}_{1\uparrow} \hat{c}^\dagger_{1\uparrow}\hat{c}^\dagger_{1\downarrow}|0\rangle=-t\hat{c}^\dagger_{2\uparrow} (1-\hat{n}_{1\uparrow})\hat{c}^\dagger_{1\downarrow}|0\rangle=-t\hat{c}^\dagger_{2\uparrow}\hat{c}^\dagger_{1\downarrow}|0\rangle+t\hat{c}^\dagger_{2\uparrow} \cancel{\hat{n}_{1\uparrow}|\downarrow,0\rangle}=-t\hat{c}^\dagger_{2\uparrow}|\downarrow,0\rangle=t|\downarrow,\uparrow\rangle$. Le dernier changement de signe venant du fait qu&rsquo;il y ait un fermion à gauche de celui créé dans l&rsquo;état 2 ($(-1)^{n_1+n_2+\cdots+n_{i-1}}=(-1)^1=-1$).<br>
+Et le deuxième terme donne $-t\hat{c}^\dagger_{2\downarrow} \hat{c}_{1\downarrow}\hat{c}^\dagger_{1\uparrow}\hat{c}^\dagger_{1\downarrow}|0\rangle=t\hat{c}^\dagger_{2\downarrow} \hat{c}_{1\downarrow}\hat{c}^\dagger_{1\downarrow}\hat{c}^\dagger_{1\uparrow}|0\rangle=t\hat{c}^\dagger_{2\downarrow} (1-\hat{n}_{1\downarrow})\hat{c}^\dagger_{1\uparrow}|0\rangle=t\hat{c}^\dagger_{2\downarrow}\hat{c}^\dagger_{1\uparrow}|0\rangle-t\hat{c}^\dagger_{2\downarrow}\cancel{\hat{n}_{1\downarrow}|\uparrow,0\rangle}=-t|\uparrow,\downarrow\rangle$.</p>
+</details>
+<p>La matrice peut se diagonaliser et l&rsquo;état fondamental s&rsquo;écrit $|\psi\rangle = N(|\uparrow\downarrow,0\rangle+W|\uparrow,\downarrow\rangle-W|\downarrow\uparrow,0\rangle+|0,\uparrow\downarrow\rangle)$ où $N$ est une constante de normalisation et $W=\frac{U}{4t}+\frac{1}{4t}\sqrt{U^2+16t^2}$ pour une énergie $E=\frac{U}{2}-\frac{1}{2}\sqrt{U^2+16t^2}$.</p>
+</div>
 
 <footer class="footline">
 	
@@ -4867,16 +4938,16 @@ $$</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1728270176"></script>
-    <script src="/js/perfect-scrollbar.min.js?1728270176"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1728270176"></script>
-    <script src="/js/jquery.sticky.js?1728270176"></script>
-    <script src="/js/featherlight.min.js?1728270176"></script>
-    <script src="/js/highlight.pack.js?1728270176"></script>
+    <script src="/js/clipboard.min.js?1728466195"></script>
+    <script src="/js/perfect-scrollbar.min.js?1728466195"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1728466195"></script>
+    <script src="/js/jquery.sticky.js?1728466195"></script>
+    <script src="/js/featherlight.min.js?1728466195"></script>
+    <script src="/js/highlight.pack.js?1728466195"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1728270176"></script>
-    <script src="/js/learn.js?1728270176"></script>
-    <script src="/js/hugo-learn.js?1728270176"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1728466195"></script>
+    <script src="/js/learn.js?1728466195"></script>
+    <script src="/js/hugo-learn.js?1728466195"></script>
     
     
 
