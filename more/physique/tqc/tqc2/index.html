@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Énergie/Puissance - Cours Physique-Chimie</title>
+    <title>TQC-2 - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/tsti2d/egiepuiss/">
+  <body class="" data-url="/more/physique/tqc/tqc2/">
     <nav id="sidebar" class="">
 
 
@@ -1395,7 +1395,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/tsti2d/" title="TSTI2D" class="dd-item
-        parent
+        
         
         
         ">
@@ -1526,7 +1526,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/tsti2d/egiepuiss/" title="Énergie/Puissance" class="dd-item active">
+      <li data-nav-id="/tsti2d/egiepuiss/" title="Énergie/Puissance" class="dd-item ">
         <a href="/tsti2d/egiepuiss/">
         Énergie/Puissance
         
@@ -1765,7 +1765,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/" title="MORE" class="dd-item
-        
+        parent
         
         
         ">
@@ -2165,7 +2165,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/physique/" title="Physique" class="dd-item
-        
+        parent
         
         
         ">
@@ -2320,7 +2320,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/more/physique/tqc/" title="Théorie quantique des champs" class="dd-item
-        
+        parent
         
         
         ">
@@ -2535,7 +2535,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Énergie/Puissance
+                   TQC-2
                  
                   </span>
                 </div>
@@ -2544,10 +2544,11 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#rappels">Rappels</a></li>
-    <li><a href="#savoir-et-savoir-faire">Savoir et savoir faire</a></li>
-    <li><a href="#tp-python">TP Python</a></li>
-    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#partie-2--choisir-le-bon-lagrangien">Partie 2 : choisir le bon lagrangien</a>
+      <ul>
+        <li><a href="#systèmes-continus">Systèmes continus</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -2567,149 +2568,88 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<h1 id="énergie--puissance">Énergie / Puissance</h1>
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tsti/egie">Présentation</a></p>
-<br>
-<h2 id="rappels">Rappels</h2>
-<p>La <b>variation d&rsquo;énergie</b> $\Delta E$ (en J) d&rsquo;un système pendant $\Delta t$ (en s) est donnée par :
-<br></p>
-<div style="display: flex;justify-content: center;">
-<div style = "border:solid red 3px;width:max-content;padding: 10px 10px 7px 10px;">
-$\displaystyle \Delta E = P\times \Delta t$
-</div></div>
-<p>où $P$ (en W) est la <b>puissance moyenne</b> reçue ou fournie par le système pendant $\Delta t$.</p>
-<p>Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à :
-<br></p>
-<div style="display: flex;justify-content: center;">
-<div style = "border:solid blue 3px;width:max-content;padding: 10px 10px 10px 10px;">
-$\displaystyle P = \frac{\Delta E}{\Delta t}$
-</div></div>
-<p>Conversion à connaître et à savoir redémontrer :</p>
-<div style="display: flex;justify-content: center;">
-<div style = "border:solid green 3px;width:max-content;padding: 10px 10px 10px 10px;">
-$\pu{1 kWh = 3,6 MJ}$
-</div></div>
-<p>Définition du <b>rendement</b> (noté $r$ ou $\eta$) :<br>
-Ratio de la puissance utile  $P_{utile}$  par rapport à la puissance fournie ou absorbée $P_{fournie}$.<br>
-On peut aussi définir le rendement à partir des énergies (utile et fournie).</p>
-<div style="display: flex;justify-content: center;">
-<div style = "border:solid #CB297B 3px;width:max-content;padding: 10px 10px 10px 10px;">
-$\displaystyle \eta = \frac{P_{utile}}{P_{fournie}} = \frac{E_{utile}}{E_{fournie}}$
-</div></div>
-<br>
-<h2 id="savoir-et-savoir-faire">Savoir et savoir faire</h2>
+<style>
+ #correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ #comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ #commsum
+  {
+    color: #004D80;
+  }
+ #correcsum
+  {
+    color: #006C65;
+  }
+  #grosseformule 
+{
+    overflow-x: auto; 
+}
+#preuve
+{
+    background-color:#EAEAEA;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+#def
+{
+    background-color:#DCEFFE;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+#theo
+{
+    background-color:#FBE1DE;
+    border-radius:10px;
+    padding:5px 20px 5px 20px;
+}
+h2
+{
+color:#970E53 !important;
+}
+h3
+{
+color:#004D80 !important;
+}
+</style>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [ ['$', '$'], ['\\(', '\\)'] ]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script
+  type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+<h1 id="théorie-quantique-des-champs">Théorie quantique des champs</h1>
 
-<div class="notices coeur" style="--title: 'coeur';">
-  <p style="display: none;">coeur</p>
+<div class="notices note" style="--title: 'note';">
+  <p style="display: none;">note</p>
   <div class="notice-body">
-    <p><input type="checkbox"> Déterminer une <strong>puissance instantanée</strong> à partir d&rsquo;une courbe d&rsquo;énergie.<br><br>
-<input type="checkbox"> Déterminer une <strong>énergie</strong> à partir d&rsquo;une courbe de puissance.<br><br>
-<input type="checkbox"> Calculer un <strong>rendement</strong>.</p>
+    <p>Notes de lecture du livre <em>Quantum field theory for the gifted amateur</em> de Thomas Lancaster et Stephen Blundell.</p>
 
   </div>
 </div>
 
 
+<p style="font-size:1.2em;text-align:center;font-weight:bold;"><a href="../">Retour sommaire</a></p>
 <br>
-<h2 id="tp-python">TP Python</h2>
-<p><a href="https://colab.research.google.com/drive/1Spnaf9eOirMYTT5JxFcRUcGbLXnR0nuJ?usp=sharing"><strong>Lien vers le notebook Colab</strong></a> contenant les consignes et les codes à compléter (il faut se connecter à un compte google pour pouvoir exécuter le code).</p>
+<h2 id="partie-2--choisir-le-bon-lagrangien">Partie 2 : choisir le bon lagrangien</h2>
+<h3 id="systèmes-continus">Systèmes continus</h3>
 <br>
-<h2 id="quiz">Quiz</h2>
-
-<div class='quizdown'>
-  
-
----
-primary_color: steelblue
-secondary_color: "#f2f2f2"
-text_color: black
-shuffle_questions: false
-
----
-
-##
-
-Une ampolue à LED d'une puissance de $\pu{4,0 W}$ reste allumée pendant $\pu{12 h}$. L'énergie consommée vaut&nbsp;:
-
-- [x] $\pu{1,7E5 J}$
-- [x] $\pu{48 Wh}$  
-- [ ] $\pu{48 J}$
-
-
-##
-
-L'énergie consommée par un dispositif est modélisée par la fonction $e(t)=E_M(1+\sin(\omega t))$ où $E_M$ est une constante. La puissance instantanée est alors donnée par&nbsp;:
-
-- [x] $p(t)=E_M\omega\cos(\omega t)$
-- [ ] $p(t)=E_M(1+\cos(\omega t))$  
-- [ ] $p(t)=E_M\cos(\omega t)$
-
-
-
-##
-
-On a enregistré l'évolution de l'énergie fournie par un système électromécanique au cours du temps&nbsp;:
-
-![](/tabenergie.png)
-
-La valeur de la puissance moyenne sur un intervalle de 1 minute vaut&nbsp;:
-
-
-- [x] $\pu{2,0 W}$
-- [ ] $\pu{120 W}$
-- [ ] $\pu{582 W}$
-
-
-
-##
-
-On a enregistré l'évolution de l'énergie fournie par un système électromécanique au cours du temps&nbsp;:
-
-![](/tabenergie.png)
-
-Pour l'intervalle de temps [50 s ; 60 s], la puissance est égale à&nbsp;:
-
-
-- [ ] $\pu{55 W}$
-- [ ] $\pu{120 W}$
-- [x] $\pu{0 W}$
-
-
-##
-
-On a enregistré l'évolution de l'énergie fournie par un système électromécanique au cours du temps&nbsp;:
-
-![](/tabenergie.png)
-
-La puissance est maximale&nbsp;:
-
-- [x] pour l'intervalle [0 s ; 10 s]
-- [ ] pour l'intervalle [10 s ; 20 s]
-- [ ] pour l'intervalle [20 s ; 30 s]
-
-
-##
-
-Une éolienne en mer absorbe une puissance moyenne de $\pu{5,0 MW}$ et fournit une puissance électrique moyenne de $\pu{2,0 MW}$. Son rendement vaut&nbsp;:
-
-- [x] 40%
-- [x] 0,40
-- [ ] 2,5%
-
-##
-
-Pour une vitesse du vent de $\pu{10 m*s-1}$, une éolienne domestique a un rendement de 34%.<br>
-Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&nbsp;:
-
-- [ ] $\pu{150 kW}$
-- [x] $\pu{1,7 kW}$
-- [ ] $\pu{0,15 kW}$
-
-
-
-</div>
-
-
+<p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../tqc3">Chapitre suivant</a></p>
+<p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../">Sommaire</a></p>
 
 <footer class="footline">
 	
@@ -3582,7 +3522,6 @@ Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&n
             
                 
                     
-                    
                 
                 
 
@@ -3595,9 +3534,6 @@ Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&n
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -3679,7 +3615,6 @@ Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&n
             
                 
                     
-                    
                 
                 
 
@@ -3695,9 +3630,6 @@ Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&n
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -3862,6 +3794,7 @@ Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&n
             
                 
                     
+                    
                 
                 
 
@@ -3876,6 +3809,9 @@ Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&n
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -4147,6 +4083,7 @@ Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&n
             
                 
                     
+                    
                 
                 
 
@@ -4161,6 +4098,9 @@ Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&n
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -4258,6 +4198,7 @@ Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&n
             
                 
                     
+                    
                 
                 
 
@@ -4283,6 +4224,9 @@ Si la puissance absorbée vaut $\pu{5,0 kW}$, la puissance utile est égale à&n
             
             
                 
+                    
+                        
+                        
                     
                 
                 

@@ -15,5 +15,12 @@
       <guid>https://coursphychi.github.io/more/physique/tqc/tqc1/</guid>
       <description>Théorie quantique des champs note&#xA;Notes de lecture du livre Quantum field theory for the gifted amateur de Thomas Lancaster et Stephen Blundell.&#xA;Partie 1 : un univers d&amp;rsquo;oscillateurs harmoniques Lagrangien et principe de moindre action La détermination de la trajectoire $x(t)$ d&amp;rsquo;une particule entre A et B par intégration de la 2e loi de Newton, $F=m\ddot{x}$, ne cadre pas avec les enseignements de la mécanique quantique. Car si on peut bien mesurer la particule en A à $t=0$ et en B à $t=\tau$, un voile impénétrable nous empèche de savoir précisément ce qui s&amp;rsquo;est passé entre les deux.</description>
     </item>
+    <item>
+      <title>TQC-2</title>
+      <link>https://coursphychi.github.io/more/physique/tqc/tqc2/</link>
+      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
+      <guid>https://coursphychi.github.io/more/physique/tqc/tqc2/</guid>
+      <description>Théorie quantique des champs note&#xA;Notes de lecture du livre Quantum field theory for the gifted amateur de Thomas Lancaster et Stephen Blundell.&#xA;Retour sommaire&#xA;Partie 2 : choisir le bon lagrangien Systèmes continus Chapitre suivant&#xA;Sommaire</description>
+    </item>
   </channel>
 </rss>
