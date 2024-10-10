@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1728488157" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1728488157" rel="stylesheet">
-    <link href="/css/hybrid.css?1728488157" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1728488157" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1728488157" rel="stylesheet">
-    <link href="/css/auto-complete.css?1728488157" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1728488157" rel="stylesheet">
-    <link href="/css/theme.css?1728488157" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1728488157" rel="stylesheet">
+    <link href="/css/nucleus.css?1728589428" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1728589428" rel="stylesheet">
+    <link href="/css/hybrid.css?1728589428" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1728589428" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1728589428" rel="stylesheet">
+    <link href="/css/auto-complete.css?1728589428" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1728589428" rel="stylesheet">
+    <link href="/css/theme.css?1728589428" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1728589428" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1728488157" rel="stylesheet">
+    <link href="/css/theme-blue.css?1728589428" rel="stylesheet">
     
-    <link href="/css/foo.css?1728488157" rel="stylesheet"><link href="/css/bar.css?1728488157" rel="stylesheet">
+    <link href="/css/foo.css?1728589428" rel="stylesheet"><link href="/css/bar.css?1728589428" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1728488157"></script>
+    <script src="/js/jquery-3.3.1.min.js?1728589428"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1728488157"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1728488157"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1728589428"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1728589428"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1728488157"></script>
+<script type="text/javascript" src="/js/search.js?1728589428"></script>
 
     
   </div>
@@ -2544,9 +2544,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#partie-2--choisir-le-bon-lagrangien">Partie 2 : choisir le bon lagrangien</a>
+    <li><a href="#partie-2--le-bon-lagrangien">Partie 2 : le bon lagrangien</a>
       <ul>
-        <li><a href="#systèmes-continus">Systèmes continus</a></li>
+        <li><a href="#théorie-des-champs-classiques">Théorie des champs classiques</a></li>
       </ul>
     </li>
   </ul>
@@ -2637,7 +2637,7 @@ MathJax = {
 <div class="notices note" style="--title: 'note';">
   <p style="display: none;">note</p>
   <div class="notice-body">
-    <p>Notes de lecture du livre <em>Quantum field theory for the gifted amateur</em> de Thomas Lancaster et Stephen Blundell.</p>
+    <p>Notes de lecture du livre <em>Quantum field theory for the gifted amateur</em> de Thomas Lancaster et Stephen Blundell. Très souvent une simple traduction tant que je ne vois pas comment me réapproprier le contenu.</p>
 
   </div>
 </div>
@@ -2645,8 +2645,80 @@ MathJax = {
 
 <p style="font-size:1.2em;text-align:center;font-weight:bold;"><a href="../">Retour sommaire</a></p>
 <br>
-<h2 id="partie-2--choisir-le-bon-lagrangien">Partie 2 : choisir le bon lagrangien</h2>
-<h3 id="systèmes-continus">Systèmes continus</h3>
+<h2 id="partie-2--le-bon-lagrangien">Partie 2 : le bon lagrangien</h2>
+<p>Commençons par revenir sur la mécanique du 19<sup>e</sup> siècle, en particulier, le passage de la mécanique lagrangienne à la mécanique hamiltonienne pour constater sa similarité avec la mécanique quantique avant de présenter la théorie classique des champs.</p>
+<h3 id="théorie-des-champs-classiques">Théorie des champs classiques</h3>
+<p>Le taux de variation du Lagrangien est donné par :</p>
+<p>$$\frac{dL}{dt} = \frac{\partial L}{\partial q_i} \dot{q}_i + \frac{\partial L}{\partial \dot{q}_i} \ddot{q}_i$$</p>
+<p>Et en utilisant les équations d&rsquo;Euler-Lagrange, on obtient :</p>
+<div id="grosseformule">
+<p>$$\frac{dL}{dt} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}_i} \right) \dot{q}_i + \frac{\partial L}{\partial \dot{q}_i} \ddot{q}_i = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}_i} \dot{q}_i \right)$$</p>
+</div>
+<p>Cela permet de définir le moment canonique conjugué $p_i$ :</p>
+<p>$$p_i = \frac{\partial L}{\partial \dot{q}_i}$$</p>
+<p>On peut alors réécrire l&rsquo;équation précédente pour lui donner la forme d&rsquo;une équation de conservation :</p>
+<div id="grosseformule">
+<p>$$
+\frac{d}{dt} (p_i \dot{q}_i - L) = 0
+$$</p>
+</div>
+<p>On appelle <strong>Hamiltonien $H$</strong> la quantité conservée et on montrera plus loin qu&rsquo;elle correspond à l&rsquo;énergie du système :</p>
+<p>$$H = p_i \dot{q}_i - L$$</p>
+<p>Faisons varier $H$ :</p>
+<div id="grosseformule">
+<p>$$
+\begin{aligned}
+\delta H &amp;= p_i \delta \dot{q}_i + \delta p_i \dot{q}_i - \frac{\partial L}{\partial q_i} \delta q_i - \frac{\partial L}{\partial \dot{q}_i} \delta \dot{q}_i\\
+&amp;= \delta\dot{q}_i\left(\cancel{p_i - \frac{\partial L}{\partial \dot{q}_i}}\right)+ \delta p_i \dot{q}_i - \frac{\partial L}{\partial q_i} \delta q_i \\
+&amp;=\delta p_i \dot{q}_i -\frac{\partial L}{\partial q_i}\delta q_i \\
+&amp;=\delta p_i {\color{#D41876}\dot{q}_i} - {\color{#0076BA}\dot{p}_i}\delta q_i
+\end{aligned}
+$$</p>
+</div>
+<p>Et comme $H$ ne dépend que de $q_i$ et $p_i$, on a :</p>
+ <div id="grosseformule">
+<p>$$
+\delta H = {\color{#0076BA}\frac{\partial H}{\partial q_i}} \delta q_i + {\color{#D41876}\frac{\partial H}{\partial p_i}} \delta p_i
+$$</p>
+</div>
+<p>Par identification, on obtient les équations d&rsquo;Hamilton qui permettent de déterminer les équations du mouvement du système d&rsquo;une nouvelle façon :</p>
+ <div id="grosseformule">
+<p>$$
+{\color{#0076BA} \frac{\partial H}{\partial p_i} = \dot{q}_i} \qquad {\color{#D41876}\frac{\partial H}{\partial q_i} = -\dot{p}_i}
+$$</p>
+</div>
+<p>Définissons maintenant le <strong>crochet de Poisson $\{A,B\}$</strong> :</p>
+ <div id="grosseformule">
+<p>$$
+\{A, B\} = \frac{\partial A}{\partial q_i} \frac{\partial B}{\partial p_i} - \frac{\partial A}{\partial p_i} \frac{\partial B}{\partial q_i}
+$$</p>
+</div>
+<p>Puis considérons une fonction $F$ des coordonnées généralisées $q_i$ et $p_i$. Le taux de variation de $F$ est donné par :</p>
+ <div id="grosseformule">
+<p>$$
+\begin{aligned}
+\frac{\mathrm{d}F}{\mathrm{d}t} &amp;= \frac{\partial F}{\partial t} + \frac{\partial F}{\partial q_i}{\color{#0076BA}-\dot{q}_i} +  \frac{\partial F}{\partial p_i}{\color{#D41876}\dot{p}_i}\\
+&amp;= \frac{\partial F}{\partial t} + \frac{\partial F}{\partial q_i}({\color{#0076BA}-\frac{\partial H}{\partial p_i}}) +  \frac{\partial F}{\partial p_i}{\color{#D41876}\frac{\partial H}{\partial q_i}}\\
+&amp;=\frac{\partial F}{\partial t} + \{F, H\}
+\end{aligned}
+$$</p>
+</div>
+<p>Et si $F$ n&rsquo;est pas une fonction du temps :</p>
+ <div id="grosseformule">
+<p>$$
+\frac{dF}{dt} = \{F, H\}
+$$</p>
+<p>Sonc si $\{F, H\}=0$, alors $F$ est une constante du mouvement !</p>
+</div>
+<div id="preuve">
+<p>Il y a une interprétation géométrique à cette relation.</p>
+<div style="position:relative;margin:auto;width:400px;max-width:100%;">
+<img src="/tqcpoisson.png">
+</div>
+<p>Si $F=F(\boldsymbol{q},\boldsymbol{p})$, alors le vecteur $(\dot{\boldsymbol{q}},\dot{\boldsymbol{p}})=(\partial H/\partial\boldsymbol{p},-\partial H/\partial \boldsymbol{q})$ est tangent à la surface $F(\boldsymbol{q},\boldsymbol{p})=$ constante. En effet $\boldsymbol{\nabla} F \cdot (\dot{\boldsymbol{q}}, \dot{\boldsymbol{p}}) = \left(\frac{\partial F}{\partial \boldsymbol{q}},\frac{\partial F}{\partial \boldsymbol{p}}\right)\cdot (\dot{\boldsymbol{q}},\dot{\boldsymbol{p}})= \frac{\partial F}{\partial q_i} \frac{\partial H}{\partial p_i} - \frac{\partial F}{\partial p_i} \frac{\partial H}{\partial q_i}=\{F,H\}=0$.<br>
+Et de même, $(\dot{\boldsymbol{q}},\dot{\boldsymbol{p}})$ est tangent à la surface $H(\boldsymbol{q},\boldsymbol{p})=$ constante puisque $\boldsymbol{\nabla} H \cdot (\dot{\boldsymbol{q}}, \dot{\boldsymbol{p}}) = \left(\frac{\partial H}{\partial \boldsymbol{q}},\frac{\partial H}{\partial \boldsymbol{p}}\right)\cdot (\dot{\boldsymbol{q}},\dot{\boldsymbol{p}})= -\dot{\boldsymbol{p}}\cdot\dot{\boldsymbol{q}}+\dot{\boldsymbol{q}}\cdot\dot{\boldsymbol{p}}=0$</p>
+</div>
+<p>Le lien entre crochet de Poisson et loi de conservation rappelle bien sûr le rôle du commutateur en mécanique quantique et incite à dresser un parallèle entre crochet de Poisson et commutateur.</p>
 <br>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../tqc3">Chapitre suivant</a></p>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../">Sommaire</a></p>
@@ -4358,16 +4430,16 @@ MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1728488157"></script>
-    <script src="/js/perfect-scrollbar.min.js?1728488157"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1728488157"></script>
-    <script src="/js/jquery.sticky.js?1728488157"></script>
-    <script src="/js/featherlight.min.js?1728488157"></script>
-    <script src="/js/highlight.pack.js?1728488157"></script>
+    <script src="/js/clipboard.min.js?1728589428"></script>
+    <script src="/js/perfect-scrollbar.min.js?1728589428"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1728589428"></script>
+    <script src="/js/jquery.sticky.js?1728589428"></script>
+    <script src="/js/featherlight.min.js?1728589428"></script>
+    <script src="/js/highlight.pack.js?1728589428"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1728488157"></script>
-    <script src="/js/learn.js?1728488157"></script>
-    <script src="/js/hugo-learn.js?1728488157"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1728589428"></script>
+    <script src="/js/learn.js?1728589428"></script>
+    <script src="/js/hugo-learn.js?1728589428"></script>
     
     
 
