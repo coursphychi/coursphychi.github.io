@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1728674148" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1728674148" rel="stylesheet">
-    <link href="/css/hybrid.css?1728674148" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1728674148" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1728674148" rel="stylesheet">
-    <link href="/css/auto-complete.css?1728674148" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1728674148" rel="stylesheet">
-    <link href="/css/theme.css?1728674148" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1728674148" rel="stylesheet">
+    <link href="/css/nucleus.css?1728728129" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1728728129" rel="stylesheet">
+    <link href="/css/hybrid.css?1728728129" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1728728129" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1728728129" rel="stylesheet">
+    <link href="/css/auto-complete.css?1728728129" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1728728129" rel="stylesheet">
+    <link href="/css/theme.css?1728728129" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1728728129" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1728674148" rel="stylesheet">
+    <link href="/css/theme-blue.css?1728728129" rel="stylesheet">
     
-    <link href="/css/foo.css?1728674148" rel="stylesheet"><link href="/css/bar.css?1728674148" rel="stylesheet">
+    <link href="/css/foo.css?1728728129" rel="stylesheet"><link href="/css/bar.css?1728728129" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1728674148"></script>
+    <script src="/js/jquery-3.3.1.min.js?1728728129"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1728674148"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1728674148"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1728728129"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1728728129"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1728674148"></script>
+<script type="text/javascript" src="/js/search.js?1728728129"></script>
 
     
   </div>
@@ -2730,7 +2730,64 @@ $$</p>
 <p>Si $F=F(\boldsymbol{q},\boldsymbol{p})$, alors le vecteur $(\dot{\boldsymbol{q}},\dot{\boldsymbol{p}})=\left(\frac{\partial H}{\partial\boldsymbol{p}},-\frac{\partial H}{\partial \boldsymbol{q}}\right)$ est tangent à la surface $F(\boldsymbol{q},\boldsymbol{p})=$ constante. En effet $\boldsymbol{\nabla} F \cdot (\dot{\boldsymbol{q}}, \dot{\boldsymbol{p}}) = \left(\frac{\partial F}{\partial \boldsymbol{q}},\frac{\partial F}{\partial \boldsymbol{p}}\right)\cdot (\dot{\boldsymbol{q}},\dot{\boldsymbol{p}})= \frac{\partial F}{\partial q_i} \frac{\partial H}{\partial p_i} - \frac{\partial F}{\partial p_i} \frac{\partial H}{\partial q_i}=\{F,H\}=0$.</p>
 <p>Et de même, $(\dot{\boldsymbol{q}},\dot{\boldsymbol{p}})$ est tangent à la surface $H(\boldsymbol{q},\boldsymbol{p})=$ constante puisque $\boldsymbol{\nabla} H \cdot (\dot{\boldsymbol{q}}, \dot{\boldsymbol{p}}) = \left(\frac{\partial H}{\partial \boldsymbol{q}},\frac{\partial H}{\partial \boldsymbol{p}}\right)\cdot (\dot{\boldsymbol{q}},\dot{\boldsymbol{p}})= -\dot{\boldsymbol{p}}\cdot\dot{\boldsymbol{q}}+\dot{\boldsymbol{q}}\cdot\dot{\boldsymbol{p}}=0$</p>
 </div>
-<p>Le lien entre crochet de Poisson et loi de conservation rappelle bien sûr le rôle du commutateur en mécanique quantique et incite à dresser un parallèle entre crochet de Poisson et commutateur.</p>
+<p>Le lien entre crochets de Poisson et loi de conservation rappelle bien sûr le rôle du commutateur en mécanique quantique.<br>
+Le taux de variation de l&rsquo;espérance quantique de l&rsquo;opérateur $\hat{F}$ est en effet donné par :</p>
+ <div id="grosseformule">
+<p>$$
+\frac{d \langle \hat{F} \rangle}{dt} = \frac{1}{i \hbar} \langle [\hat{F}, \hat{H}] \rangle
+$$</p>
+</div>
+<p>Le parallélisme entre mécanique quantique et formalisme hamiltonien pousse donc à jeter le pont suivant entre les deux :</p>
+ <div id="grosseformule">
+<p>$$
+\{ A, B \} \rightarrow \frac{1}{\mathrm{i} \hbar} \langle [\hat{A}, \hat{B}] \rangle
+$$</p>
+</div>
+<div id="preuve">
+<p>Vérifions le parallèle pour le couple position, moment conjugué (ou impulsion) :</p>
+ <div id="grosseformule">
+<p>$$
+\begin{aligned}
+\{ q_j, p_k \} &amp;= \frac{\partial q_j}{\partial q_i}\frac{\partial p_k}{\partial p_i}-\frac{\partial p_j}{\partial q_i}\frac{\partial q_k}{\partial p_i}\\
+&amp;= \delta_{ij}\delta_{ik}-0\times 0\\
+&amp;= \delta_{jk}\\
+\end{aligned}
+$$</p>
+<p>Ce qui donnerait avec le pont $[\hat{q}_j,\hat{p}_k]=\mathrm{i}\hbar\delta_{jk}$ qui est bien la relation quantique.</p>
+</div>
+</div>
+<p>Faisons entrer dans la danse la relativité restreinte et cherchons le Lagrangien d&rsquo;une particule libre de masse $m$.<br>
+L&rsquo;action $S=\int_{t_1}^{t_2} L \mathrm{d}t$ de la particule se doit d&rsquo;être invariante de Lorentz. Le passage de $\mathrm{d}t$ au temps propre $\mathrm{d}\tau=\frac{\mathrm{d}t}{\gamma}$ (le seul véritable invariant) semble s&rsquo;imposer : $S = \int_{\tau_1}^{\tau_2}L\gamma\mathrm{d}\tau$.<br>
+$L\gamma$ doit alors à son tour être invariant de Lorentz et on peut écrire $L=\frac{K}{\gamma}$ où $K$ est une constante. Or on sait qu&rsquo;aux petites vitesses, on doit retrouver $L=\frac{1}{2}mv^2\, (+\text{cste})$. Et comme $\gamma^{-1} \approx 1 - \frac{1}{2} \frac{v^2}{c^2} $ lorsque $v\ll c$, on obtient $K\left(1-\frac{1}{2}\left(\frac{v^2}{c^2}\right)\right)=\frac{1}{2}mv^2+\text{cste}$. Cela impose $K=-mc^2$. Et finalement :</p>
+<div id="theo">
+ <div id="grosseformule">
+<p>$$
+S=-mc^2\int_{\tau_1}^{\tau_2}\mathrm{d}\tau=-mc\int_a^b \mathrm{d}s
+$$</p>
+<p style="text-align:center;">avec $\mathrm{d}s=\sqrt{c^2\mathrm{d}t^2-\mathrm{d}x^2-\mathrm{d}y^2-\mathrm{d}z^2}$</p>
+</div>
+</div>
+<p>Par principe de moindre action $\delta S = 0$ or $\delta \int_a^b \mathrm{d}s=0$ est maximum le long d&rsquo;une ligne droite. On retrouve donc que la trajectoire d&rsquo;une particule libre est une ligne droite.</p>
+<div id="preuve">
+<div style="position:relative;margin-left:auto;margin-right:auto;width:200px;max-width:100%;margin-bottom:-40px;margin-top:-40px;">
+<img src="/tqclgchem.png">
+</div>
+<p>Il est par exemple facile de se convaincre mathématiquement que le chemin purement temporel joignant A à B est le plus long possible puisque $c\mathrm{d}t&gt;\sqrt{c^2\mathrm{d}t^2-\mathrm{d}x^2}$ (c&rsquo;est la magie de la métrique minkowskienne).</p>
+</div>
+<p>On en déduit l&rsquo;expression du moment conjugué d&rsquo;une particule libre (sa quantité de mouvement) :</p>
+<div id="grosseformule">
+<p>$$
+\boldsymbol{p}=\frac{\partial L}{\partial \boldsymbol{v}}=\frac{\partial }{\partial \boldsymbol{v}}\left( -mc^2\sqrt{1-v^2/c^2}\right)=\gamma m  \boldsymbol{v}
+$$</p>
+</div>
+<p>Et son énergie :</p>
+<div id="grosseformule">
+<p>$$
+E=H=\boldsymbol{p}\cdot\boldsymbol{v}-L=\gamma m v^2 +\frac{mc^2}{\gamma}=\gamma m c^2\left[\frac{v^2}{c^2}+\left(1-\frac{v^2}{c^2}\right)\right]=\gamma m c^2
+$$</p>
+</div>
+<p>En relativité restreinte, on assemble l&rsquo;énergie et le moment en un quadrivecteur $p^\mu=(\frac{E}{c},\boldsymbol{p})$ (ou $p_\mu=(\frac{E}{c},-\boldsymbol{p})$).</p>
+<p>Donnons une charge $q$ à notre particule et couplons-la à un champ électromagnétique.</p>
 <br>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../tqc3">Chapitre suivant</a></p>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../">Sommaire</a></p>
@@ -4442,16 +4499,16 @@ $$</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1728674148"></script>
-    <script src="/js/perfect-scrollbar.min.js?1728674148"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1728674148"></script>
-    <script src="/js/jquery.sticky.js?1728674148"></script>
-    <script src="/js/featherlight.min.js?1728674148"></script>
-    <script src="/js/highlight.pack.js?1728674148"></script>
+    <script src="/js/clipboard.min.js?1728728129"></script>
+    <script src="/js/perfect-scrollbar.min.js?1728728129"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1728728129"></script>
+    <script src="/js/jquery.sticky.js?1728728129"></script>
+    <script src="/js/featherlight.min.js?1728728129"></script>
+    <script src="/js/highlight.pack.js?1728728129"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1728674148"></script>
-    <script src="/js/learn.js?1728674148"></script>
-    <script src="/js/hugo-learn.js?1728674148"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1728728129"></script>
+    <script src="/js/learn.js?1728728129"></script>
+    <script src="/js/hugo-learn.js?1728728129"></script>
     
     
 
