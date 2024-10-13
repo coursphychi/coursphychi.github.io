@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1728728129" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1728728129" rel="stylesheet">
-    <link href="/css/hybrid.css?1728728129" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1728728129" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1728728129" rel="stylesheet">
-    <link href="/css/auto-complete.css?1728728129" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1728728129" rel="stylesheet">
-    <link href="/css/theme.css?1728728129" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1728728129" rel="stylesheet">
+    <link href="/css/nucleus.css?1728850464" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1728850464" rel="stylesheet">
+    <link href="/css/hybrid.css?1728850464" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1728850464" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1728850464" rel="stylesheet">
+    <link href="/css/auto-complete.css?1728850464" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1728850464" rel="stylesheet">
+    <link href="/css/theme.css?1728850464" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1728850464" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1728728129" rel="stylesheet">
+    <link href="/css/theme-blue.css?1728850464" rel="stylesheet">
     
-    <link href="/css/foo.css?1728728129" rel="stylesheet"><link href="/css/bar.css?1728728129" rel="stylesheet">
+    <link href="/css/foo.css?1728850464" rel="stylesheet"><link href="/css/bar.css?1728850464" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1728728129"></script>
+    <script src="/js/jquery-3.3.1.min.js?1728850464"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1728728129"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1728728129"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1728850464"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1728850464"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1728728129"></script>
+<script type="text/javascript" src="/js/search.js?1728850464"></script>
 
     
   </div>
@@ -2544,9 +2544,10 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#partie-2--le-bon-lagrangien">Partie 2 : le bon lagrangien</a>
+    <li><a href="#partie-2--le-bon-lagrangien">Partie 2 : le bon Lagrangien</a>
       <ul>
         <li><a href="#théorie-classique-des-champs">Théorie classique des champs</a></li>
+        <li><a href="#mécanique-quantique-relativiste-première-tentative">Mécanique quantique relativiste, première tentative</a></li>
       </ul>
     </li>
   </ul>
@@ -2617,6 +2618,10 @@ h3
 {
 color:#004D80 !important;
 }
+ul
+{
+margin-top:-0.5em;
+}
 </style>
 <script>
 MathJax = {
@@ -2637,7 +2642,8 @@ MathJax = {
 <div class="notices note" style="--title: 'note';">
   <p style="display: none;">note</p>
   <div class="notice-body">
-    <p>Notes de lecture du livre <em>Quantum field theory for the gifted amateur</em> de Thomas Lancaster et Stephen Blundell. Très souvent une simple traduction.</p>
+    <p>Notes de lecture du livre <em>Quantum field theory for the gifted amateur</em> de Thomas Lancaster et Stephen Blundell. Très souvent une simple traduction.<br>
+Le premier encadré gris est issu de <em>No-Nonsense Classical Mechanics</em> de Jakob Schwichtenberg.</p>
 
   </div>
 </div>
@@ -2645,9 +2651,10 @@ MathJax = {
 
 <p style="font-size:1.2em;text-align:center;font-weight:bold;"><a href="../">Retour sommaire</a></p>
 <br>
-<h2 id="partie-2--le-bon-lagrangien">Partie 2 : le bon lagrangien</h2>
-<p>Commençons par revenir sur la mécanique du 19<sup>e</sup> siècle, en particulier, le passage de la mécanique lagrangienne à la mécanique hamiltonienne pour constater sa similarité avec la mécanique quantique avant de présenter la théorie classique des champs.</p>
+<h2 id="partie-2--le-bon-lagrangien">Partie 2 : le bon Lagrangien</h2>
+<p>Revenons dans un premier temps à la mécanique du 19<sup>e</sup> siècle, en particulier la mécanique hamiltonienne pour constater sa similarité avec la mécanique quantique avant de présenter la théorie classique des champs.</p>
 <h3 id="théorie-classique-des-champs">Théorie classique des champs</h3>
+<h4 id="du-lagrangien-à-lhamiltonien">Du Lagrangien à l&rsquo;Hamiltonien</h4>
 <p>Le taux de variation du Lagrangien est donné par :</p>
 <p>$$\frac{dL}{dt} = \frac{\partial L}{\partial q_i} \dot{q}_i + \frac{\partial L}{\partial \dot{q}_i} \ddot{q}_i$$</p>
 <p>Et en utilisant les équations d&rsquo;Euler-Lagrange, on obtient :</p>
@@ -2669,6 +2676,21 @@ $$</p>
 <p>On appelle <strong>Hamiltonien $H$</strong> la quantité conservée et on montrera plus loin qu&rsquo;elle correspond à l&rsquo;énergie du système :</p>
 <div id="def">
 <p>$$H = p_i \dot{q}_i - L$$</p>
+</div>
+<br>
+<div id="preuve">
+<p>Le passage de $L$ à $H$ correspond mathématiquement à une transformation de Legendre.</p>
+<p>La transformation de Legendre permet d&rsquo;encoder différemment l&rsquo;information d&rsquo;une fonction. En particulier, elle permet de changer la dépendance en une coordonnée en sa coordonnée conjuguée. Ici, elle va nous permettre de passer de $\dot{q}$ à $p$.</p>
+<p>Imaginons une fonction $L(v)$ convexe et calculons la pente $p(v)=\frac{\partial L(v)}{\partial v}$ (un fonction convexe voit sa pente croître de manière monotone ce qui implique que $p$ et $v$ sont en bijection (si la fonction est concave, il suffit de considérer son opposée)).</p>
+<p>On peut aussi écrire que la fonction de départ est la primitve de sa pente : $L(v)=\int_0^vp(v&rsquo;)\mathrm{d}v&rsquo;$. $L(v)$ devient ainsi l&rsquo;aire sous la courbe définie par la pente $p(v)$.</p>
+<p>Mais comme on s&rsquo;est assuré grâce à la convexité de $L$ qu&rsquo;à chaque $v$ corresponde un et un unique $p$, on peut aussi considérer la fonction $v(p)$.</p>
+<p>Appelons $H(p)$ l&rsquo;aire sous la courbe de $v(p)$ : $H(p)\equiv\int_0^p v(p&rsquo;)\mathrm{d}p&rsquo;$.</p>
+<p>On peut voir sur le schéma suivant que ces deux aires ont un lien très simple : leur somme vaut $p\times v$ !</p>
+<div style="position:relative;margin-left:auto;margin-right:auto;width:700px;max-width:100%;margin-bottom:-40px;margin-top:-40px;">
+<img src="/tqclegendre.png">
+</div>
+<p>On a ainsi $H(p) = pv - L(v)$.</p>
+<p>Par conséquent, la transformée de Legendre du Lagrangien $L(q,\dot{q})$ par rapport à $\dot{q}$ est donnée par $H(q,p)=p\dot{q}(p)-L(q,\dot{q})$ en appelant $p$ la pente $\frac{\partial L}{\partial\dot{q}}$.</p>
 </div>
 <p>Faisons varier $H$ :</p>
 <div id="grosseformule">
@@ -2721,7 +2743,7 @@ $$</p>
 $$</p>
 </div>
 </div>
-<p>Sonc si $\{F, H\}=0$, alors $F$ est une constante du mouvement !</p>
+<p>Donc si $\{F, H\}=0$, alors $F$ est une constante du mouvement !</p>
 <div id="preuve">
 <p>Il y a une interprétation géométrique à cette relation.</p>
 <div style="position:relative;margin:auto;width:400px;max-width:100%;">
@@ -2737,14 +2759,14 @@ Le taux de variation de l&rsquo;espérance quantique de l&rsquo;opérateur $\hat
 \frac{d \langle \hat{F} \rangle}{dt} = \frac{1}{i \hbar} \langle [\hat{F}, \hat{H}] \rangle
 $$</p>
 </div>
-<p>Le parallélisme entre mécanique quantique et formalisme hamiltonien pousse donc à jeter le pont suivant entre les deux :</p>
+<p>Le parallélisme entre mécanique quantique et formalisme hamiltonien pousse à jeter un pont entre les deux :</p>
  <div id="grosseformule">
 <p>$$
 \{ A, B \} \rightarrow \frac{1}{\mathrm{i} \hbar} \langle [\hat{A}, \hat{B}] \rangle
 $$</p>
 </div>
 <div id="preuve">
-<p>Vérifions le parallèle pour le couple position, moment conjugué (ou impulsion) :</p>
+<p>Vérifions le parallèle pour le couple (position, moment conjugué) :</p>
  <div id="grosseformule">
 <p>$$
 \begin{aligned}
@@ -2753,12 +2775,14 @@ $$</p>
 &amp;= \delta_{jk}\\
 \end{aligned}
 $$</p>
-<p>Ce qui donnerait avec le pont $[\hat{q}_j,\hat{p}_k]=\mathrm{i}\hbar\delta_{jk}$ qui est bien la relation quantique.</p>
+<p>Ce qui donnerait avec le pont $[\hat{q}_j,\hat{p}_k]=\mathrm{i}\hbar\delta_{jk}$ qui est bien le commutateur quantique entre position et impulsion.</p>
 </div>
 </div>
-<p>Faisons entrer dans la danse la relativité restreinte et cherchons le Lagrangien d&rsquo;une particule libre de masse $m$.<br>
-L&rsquo;action $S=\int_{t_1}^{t_2} L \mathrm{d}t$ de la particule se doit d&rsquo;être invariante de Lorentz. Le passage de $\mathrm{d}t$ au temps propre $\mathrm{d}\tau=\frac{\mathrm{d}t}{\gamma}$ (le seul véritable invariant) semble s&rsquo;imposer : $S = \int_{\tau_1}^{\tau_2}L\gamma\mathrm{d}\tau$.<br>
-$L\gamma$ doit alors à son tour être invariant de Lorentz et on peut écrire $L=\frac{K}{\gamma}$ où $K$ est une constante. Or on sait qu&rsquo;aux petites vitesses, on doit retrouver $L=\frac{1}{2}mv^2\, (+\text{cste})$. Et comme $\gamma^{-1} \approx 1 - \frac{1}{2} \frac{v^2}{c^2} $ lorsque $v\ll c$, on obtient $K\left(1-\frac{1}{2}\left(\frac{v^2}{c^2}\right)\right)=\frac{1}{2}mv^2+\text{cste}$. Cela impose $K=-mc^2$. Et finalement :</p>
+<br>
+<h4 id="en-relativité-restreinte">En relativité restreinte</h4>
+<p>Cherchons le Lagrangien d&rsquo;une particule libre de masse $m$ dans le cadre de la relativité restreinte.<br>
+L&rsquo;action $S=\int_{t_1}^{t_2} L \mathrm{d}t$ de la particule se doit d&rsquo;être invariante de Lorentz. L&rsquo;introduction du temps propre $\mathrm{d}\tau=\frac{\mathrm{d}t}{\gamma}$ (le seul véritable invariant) semble s&rsquo;imposer : $S = \int_{\tau_1}^{\tau_2}L\gamma\mathrm{d}\tau$.<br>
+$L\gamma$ doit alors à son tour être invariant de Lorentz et on ne voit pas vraiment d&rsquo;autre possibilité que d&rsquo;être constant, d&rsquo;où $L=\frac{K}{\gamma}$ où $K$ est une constante. Or on sait qu&rsquo;aux petites vitesses, on doit retrouver $L=\frac{1}{2}mv^2\, (+\text{cste})$, et comme $\gamma^{-1} \approx 1 - \frac{1}{2} \frac{v^2}{c^2} $ lorsque $v\ll c$, on obtient $K\left(1-\frac{1}{2}\left(\frac{v^2}{c^2}\right)\right)=\frac{1}{2}mv^2+\text{cste}$. Cela impose $K=-mc^2$. Et finalement :</p>
 <div id="theo">
  <div id="grosseformule">
 <p>$$
@@ -2772,7 +2796,7 @@ $$</p>
 <div style="position:relative;margin-left:auto;margin-right:auto;width:200px;max-width:100%;margin-bottom:-40px;margin-top:-40px;">
 <img src="/tqclgchem.png">
 </div>
-<p>Il est par exemple facile de se convaincre mathématiquement que le chemin purement temporel joignant A à B est le plus long possible puisque $c\mathrm{d}t&gt;\sqrt{c^2\mathrm{d}t^2-\mathrm{d}x^2}$ (c&rsquo;est la magie de la métrique minkowskienne).</p>
+<p>Il est par exemple facile de se convaincre mathématiquement que le chemin purement temporel joignant A à B est le plus long possible puisque $c\mathrm{d}t&gt;\sqrt{c^2\mathrm{d}t^2-\mathrm{d}x^2}$ (c&rsquo;est la magie de la métrique minkowskienne que de rendre plus long un chemin sans détour).</p>
 </div>
 <p>On en déduit l&rsquo;expression du moment conjugué d&rsquo;une particule libre (sa quantité de mouvement) :</p>
 <div id="grosseformule">
@@ -2787,7 +2811,403 @@ E=H=\boldsymbol{p}\cdot\boldsymbol{v}-L=\gamma m v^2 +\frac{mc^2}{\gamma}=\gamma
 $$</p>
 </div>
 <p>En relativité restreinte, on assemble l&rsquo;énergie et le moment en un quadrivecteur $p^\mu=(\frac{E}{c},\boldsymbol{p})$ (ou $p_\mu=(\frac{E}{c},-\boldsymbol{p})$).</p>
-<p>Donnons une charge $q$ à notre particule et couplons-la à un champ électromagnétique.</p>
+<br>
+<h4 id="particule-chargée-dans-un-champ-électromagnétique">Particule chargée dans un champ électromagnétique</h4>
+<p>Donnons une charge $q$ à notre particule et couplons-la à un champ électromagnétique. Ce dernier peut être décrit par un champ quadrivectoriel $A^\mu(x)=\left(\frac{V(x)}{c},\boldsymbol{A}(x)\right)$ où $V(x)$ est le potentiel électrique (scalaire) et $\boldsymbol{A}(x)$ est le potentiel magnétique (vectoriel). L&rsquo;interaction avec le champ correspond à une énergie $-qA_\mu\mathrm{d}x^\mu$ et donc l&rsquo;action s&rsquo;écrit :</p>
+<div id="grosseformule">
+<p>$$
+S = \int_{t_1}^{t_2} \left( - \frac{mc^2}{\gamma} + q\boldsymbol{A} \cdot \boldsymbol{v} - qV \right) dt
+$$</p>
+</div>
+<p>Le Lagrangien est l&rsquo;intégrande et donc le moment canonique conjugué est donné par :</p>
+<div id="grosseformule">
+<p>$$
+\boldsymbol{p} = \frac{\partial L}{\partial \boldsymbol{v}} = \gamma m \boldsymbol{v} + q\boldsymbol{A}
+$$</p>
+</div>
+<div id="preuve">
+<p>Système d’unités utilisées en TQC :</p>
+<ul>
+<li><b>unités de Lorentz-Heaviside</b><br>
+Elles simplifient l&rsquo;écriture des équations de l&rsquo;électromagnétisme en posant :
+<br>
+$$
+\mu_0=\epsilon_0=1
+$$
+<br>
+Les équations de Maxwell deviennent :</li>
+</ul>
+<div id="grosseformule">
+<p>$$
+\begin{array}{ll}
+\boldsymbol{\nabla} \cdot \boldsymbol{E} = \rho &amp;\boldsymbol{\nabla} \times \boldsymbol{E} = -\frac{1}{c}\frac{\partial \boldsymbol{B}}{\partial t}\\ \boldsymbol{\nabla} \cdot \boldsymbol{B} = 0 &amp;\boldsymbol{\nabla} \times \boldsymbol{B} = \frac{1}{c}\left( \boldsymbol{J} + \frac{\partial \boldsymbol{E}}{\partial t}\right)
+\end{array}
+$$</p>
+</div>
+<ul>
+<li><b>unités naturelles</b><br>
+Comme les vitesses s&rsquo;expriment en fraction de $c$ et les spins en unités de $\hbar$, il est plus commode de les utiliser comme étalon de mesure en posant :</li>
+</ul>
+<p>$$
+\hbar=c=1
+$$</p>
+</div>
+<p>On définit le tenseur antisymétrique de second rang $F_{\mu\nu}$ comme :</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+F_{\mu \nu} = \partial_{\mu} A_{\nu} - \partial_{\nu} A_{\mu}
+$$</p>
+</div>
+</div>
+<p>C&rsquo;est le <strong>tenseur du champ électromagnétique</strong>  (il ressemble à un rotationnel à 4 dimensions). Ses éléments contiennent les composantes des champs $\boldsymbol{E}$ et $\boldsymbol{B}$ :</p>
+<div id="grosseformule">
+<p>$$
+F_{\mu \nu} = \begin{pmatrix}
+0 &amp;\color{#D41876} E_1 &amp; \color{#D41876}E_2 &amp; \color{#D41876}E_3 \\
+\color{#D41876}-E_1 &amp; 0 &amp; \color{#0076BA}-B_3 &amp; \color{#0076BA}B_2 \\
+\color{#D41876}-E_2 &amp;\color{#0076BA} B_3 &amp; 0 &amp;\color{#0076BA} -B_1 \\
+\color{#D41876}-E_3 &amp;\color{#0076BA} -B_2 &amp;\color{#0076BA} B_1 &amp; 0
+\end{pmatrix}
+$$</p>
+</div>
+<div id="grosseformule">
+<p>$$
+F^{\mu \nu} = \begin{pmatrix}
+0 &amp; \color{#D41876}{-E_1} &amp; \color{#D41876}-E_2 &amp; \color{#D41876}-E_3 \\
+\color{#D41876}E_1 &amp; 0 &amp;\color{#0076BA} -B_3 &amp; \color{#0076BA}B_2 \\
+\color{#D41876}E_2 &amp;\color{#0076BA} B_3 &amp; 0 &amp;\color{#0076BA} -B_1 \\
+\color{#D41876}E_3 &amp;\color{#0076BA} -B_2 &amp; \color{#0076BA}B_1 &amp; 0
+\end{pmatrix}
+$$</p>
+</div>
+<p>Et donc ${\color{#D41876}E^i}=-F^{0i}=F^{i0}$, et ${\color{#0076BA}B^i}=-\frac{1}{2}\varepsilon^{ijk}F^{jk}$ où $\varepsilon^{ijk}$ est le symbole de Levi-Civita.</p>
+<p>On cherche à nouveau un invariant de Lorentz pour le Lagrangien du champ, ce qui nous amène logiquement au produit scalaire du tenseur champ :</p>
+<div id="grosseformule">
+<p>$$
+F_{\mu \nu} F^{\mu \nu} = 2({\color{#0076BA}\boldsymbol{B}}^2 - {\color{#D41876}\boldsymbol{E}}^2)
+$$</p>
+</div>
+<p>Et le Lagrangien peut s&rsquo;écrire ainsi :</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+L = -\frac{1}{4} \int \mathrm{d}^3 x \, F_{\mu \nu} F^{\mu \nu}
+$$</p>
+</div>
+</div>
+<p>Le facteur $1/4$ se justifiera par la suite.</p>
+<p>Enfin, la conservation <em>locale</em> de la charge s&rsquo;exprime par l&rsquo;<strong>équation de continuité</strong> :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\frac{\partial \rho}{\partial t} + \boldsymbol{\nabla} \cdot \boldsymbol{J} = \partial_{\mu} J^{\mu} = 0
+$$</p>
+</div>
+</div>
+<br>
+<h4 id="champs-classiques">Champs classiques</h4>
+<p>Un champ classique est une bestiole qui se nourrit d&rsquo;une position dans l&rsquo;espace-temps et qui pond l&rsquo;amplitude du champ en ce point. La sortie peut être un scalaire (ex : température), un nombre complexe, un vecteur (ex : champ magnétique), un tenseur (ex : $F_{\mu\nu}(x)$) ou tout objet plus complexe. On obtient alors respectivement un <strong>champ scalaire</strong>, un <strong>champ scalaire complexe</strong>, un <strong>champ vectoriel</strong>, un <strong>champ tensoriel</strong>, etc.</p>
+<p>Les champs sont définis <em>localement</em>.</p>
+<br>
+<h4 id="densité-lagrangienne-et-hamiltonienne">Densité lagrangienne et hamiltonienne</h4>
+<p>Le but ici est de formuler des Lagrangiens et Hamiltoniens dans le langage des champs classiques.</p>
+<div id="preuve">
+<p>Dans le cas d&rsquo;un réseau linéaire discret de ressorts de constante de raideur $K$ et de masselottes de masses $m$ séparées d&rsquo;une longueur $\ell$, on avait écrit l&rsquo;Hamiltonien suivant :</p>
+<div id="grosseformule">
+<p>$$
+H = \sum_j \frac{p_j^2}{2m} + \frac{1}{2} K(q_{j+1} - q_j)^2
+$$</p>
+</div>
+<p>Et le Lagrangien :</p>
+<div id="grosseformule">
+<p>$$
+L = \sum_j \frac{p_j^2}{2m} - \frac{1}{2} K(q_{j+1} - q_j)^2
+$$</p>
+</div>
+<p>On passe à la limite continue :</p>
+<div id="grosseformule">
+<p>$$
+\begin{aligned}
+\ell &amp;\rightarrow 0\\
+q_j &amp;\rightarrow \phi(x,t)\\
+\sum_j &amp;\rightarrow \frac{1}{\ell}\int\mathrm{d}x\\
+\frac{q_{j+1}-q_j}{\ell} &amp;\rightarrow \frac{\partial \phi(x,t)}{\partial x}
+\end{aligned}
+$$</p>
+</div>
+<p>On obtient :</p>
+<div id="grosseformule">
+<p>$$
+H = \int \mathrm{d}^3x \left[\frac{1}{2} \rho \left( \frac{\partial \phi}{\partial t} \right)^2 + \frac{1}{2} \mathcal{T} \left(\boldsymbol{\nabla}\phi \right)^2 \right]
+$$</p>
+</div>
+<div id="grosseformule">
+<p>$$
+L = \int \mathrm{d}^3x \left[\frac{1}{2} \rho \left( \frac{\partial \phi}{\partial t} \right)^2 - \frac{1}{2} \mathcal{T} \left( \boldsymbol{\nabla} \phi \right)^2 \right]
+$$</p>
+</div>
+<p>On a introduit la masse linéique $\rho=m/\ell$ et la tension du ressort $\mathcal{T}=K\ell$.</p>
+</div>
+<p>Définissons les densités hamiltonienne et lagrangienne comme :</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+H = \int \mathrm{d}^3x \, \mathcal{H}
+$$</p>
+</div>
+</div>
+<br>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+L = \int \mathrm{d}^3x \, \mathcal{L}
+$$</p>
+</div>
+</div>
+<p>$\mathcal{H}$ et $\mathcal{L}$ sont généralement fonction de $\phi$, $\dot{\phi}$ et $\phi&rsquo;$.</p>
+<p>Définissons le moment conjugué $\pi(x)$ à partir de la dérivée fonctionnelle :</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+\pi(x) = \frac{\delta L}{\delta \dot{\phi}} = \frac{\partial \mathcal{L}}{\partial \dot{\phi}}
+$$</p>
+</div>
+</div>
+<p>Cela permet de relier $\mathcal{H}$ et $\mathcal{L}$ :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\mathcal{H} = \pi \dot{\phi} - \mathcal{L}
+$$</p>
+</div>
+</div>
+<br>
+<div id="preuve">
+<p>Dans le cas de l&rsquo;exemple masselottes-ressorts, on obtient :</p>
+<div id="grosseformule">
+<p>$$
+\mathcal{L}=\frac{1}{2}\rho\left(\frac{\partial\phi}{\partial t}\right)^2-\frac{1}{2}\mathcal{T}(\boldsymbol{\nabla}\phi)^2
+$$</p>
+</div>
+<div id="grosseformule">
+<p>$$
+\mathcal{H}=\frac{1}{2}\rho\left(\frac{\partial\phi}{\partial t}\right)^2+\frac{1}{2}\mathcal{T}(\boldsymbol{\nabla}\phi)^2
+$$</p>
+</div>
+<div id="grosseformule">
+<p>$$
+\pi=\rho\frac{\partial\phi}{\partial t}
+$$</p>
+</div>
+</div>
+<p>Le principe de moindre action $\delta S = 0$ sur $S=\int\mathrm{d}^4x\mathcal{L}(\phi,\partial_\mu\phi)$ donne la version quadridimensionnelle des équations d&rsquo;Euler-Lagrange :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) = 0
+$$</p>
+</div>
+</div>
+<br>
+<div id="preuve">
+<p>Regardons ce que cela donne pour le champ électromagnétique.</p>
+<div id="grosseformule">
+<p>$$
+\mathcal{L} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}=\frac{1}{2}  (\boldsymbol{E}^2 -  \boldsymbol{B}^2)
+$$</p>
+</div>
+<p>En l&rsquo;absence de potentiel électrique ($V=0$), on a $A^\mu=(0,\boldsymbol{A})$ et donc $E^i=F^{i0}=\partial^iA^0-\partial^0 A^i=-\partial^0 A^i$.<br>
+Par conséquent $\mathcal{L} =\frac{1}{2}  (\boldsymbol{E}^2 -  \boldsymbol{B}^2)=\frac{1}{2}(\dot{\boldsymbol{A}}^2 -  \boldsymbol{B}^2)$.<br>
+Et le moment conjugué est $\pi^i=\partial\mathcal{L}/\partial(\partial_0A_i)$ (puisqu&rsquo;ici $\phi=A$) et donc $\boldsymbol{\pi}=-\dot{\boldsymbol{A}}=\boldsymbol{E}$, ce qui donne :</p>
+<div id="grosseformule">
+<p>$$
+\mathcal{H} = \pi^i\dot{A}_i-\mathcal{L} =  \frac{1}{2} \left( \boldsymbol{E}^2 + \boldsymbol{B}^2 \right)
+$$</p>
+</div>
+<p>Et les équations d&rsquo;Euler-Lagrange donnent :</p>
+<div id="grosseformule">
+<p>$$
+\frac{\partial \mathcal{L}}{\partial A_\mu} - \partial_\lambda \left( \frac{\partial \mathcal{L}}{\partial (\partial_\lambda A_\mu)} \right) = 0
+$$</p>
+</div>
+<p>Le premier terme est nul puisque $\mathcal{L}=\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$ ne contient que des dérivées de $A_\mu$. Et en réécrivant le second terme comme $\partial_\lambda F^{\lambda\mu}$, on obtient :</p>
+<div id="grosseformule">
+<p>$$
+\partial_\lambda F^{\lambda\mu} = 0
+$$</p>
+</div>
+<p>Écriture compacte des deux équations de Maxwell inhomogènes dans le vide ($\boldsymbol{\nabla}\cdot\boldsymbol{E}=0$ et $\boldsymbol{\nabla}\times\boldsymbol{B}=\dot{\boldsymbol{E}}$).</p>
+<p>En couplant linéairement le quadrivecteur densité de courant $J^\mu=(\rho,\boldsymbol{J})$ au champ électromagnétique, on obtient un nouveau Lagrangien :</p>
+<div id="grosseformule">
+<p>$$
+\mathcal{L} = -\frac{1}{4} F_{\mu\nu}F^{\mu\nu} - J^\mu A_\mu
+$$</p>
+</div>
+<p>On a maintenant</p>
+<div id="grosseformule">
+<p>$$
+\frac{\partial \mathcal{L}}{\partial A_\mu} = - J^\mu
+$$</p>
+</div>
+<p>Et donc</p>
+<div id="grosseformule">
+<p>$$
+\partial_\lambda F^{\lambda\mu} = J^\mu
+$$</p>
+</div>
+<p>On retrouve les deux équations de Maxwell inhomogènes avec charges ($\boldsymbol{\nabla}\cdot\boldsymbol{E}=\rho$ et $\boldsymbol{\nabla}\times\boldsymbol{B}=\boldsymbol{J}+\dot{\boldsymbol{E}}$).</p>
+<p>Le facteur $1/4$ dans le Lagrangien se justifie donc a posteriori par le fait qu&rsquo;il nous ait donné les bonnes équations.</p>
+</div>
+<p>La résolution des équations d&rsquo;Euler-Lagrange va produire tous les <em>modes d&rsquo;oscillations</em> et donc les vecteurs d&rsquo;onde autorisés, c&rsquo;est-à-dire les valeurs particulières $k_n$ qui survivent à la dissipation. Par principe de superposition, l&rsquo;onde la plus générale est faite de la somme pondérée des différents modes possibles :</p>
+<div id="grosseformule">
+<p>$$
+\phi(x, t) = \sum_{\boldsymbol{k}_n} a_{\boldsymbol{k}_n} \mathrm{e}^{-\mathrm{i}(\omega t - \boldsymbol{k}_n \cdot \boldsymbol{x})}
+$$</p>
+</div>
+<p>Or on sait maintenant interpréter ces modes normaux comme des oscillateurs harmoniques qui peuvent donc être quantifiés, aboutissant à des solutions sous forme de particules.</p>
+<br>
+<h3 id="mécanique-quantique-relativiste-première-tentative">Mécanique quantique relativiste, première tentative</h3>
+<h4 id="equation-de-klein-gordon">Equation de Klein-Gordon</h4>
+<p>Rappelons la chaîne logique derrière l&rsquo;équation de Schrödinger (cadre : particule libre en mécanique quantique non-relativiste) :</p>
+<ul>
+<li>on part de la relation de dispersion qui lie énergie et impulsion de la particule : $E=\frac{\boldsymbol{p}^2}{2m}$ ;</li>
+<li>on transforme $E$ et $\boldsymbol{p}$ en opérateurs : $E\rightarrow\hat{E}$ et $\boldsymbol{p}\rightarrow \hat{\boldsymbol{p}}$ ;</li>
+<li>on substitue $\hat{E}=\mathrm{i}\hbar\frac{\partial}{\partial t}$ et $\hat{\boldsymbol{p}}=-\mathrm{i}\hbar\boldsymbol{\nabla}$ ;</li>
+<li>on obtient l&rsquo;équation de Schrödinger :</li>
+</ul>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\mathrm{i} \hbar \frac{\partial \varphi(x,t)}{\partial t} = - \frac{\hbar^2}{2m} \boldsymbol{\nabla}^2 \varphi(\boldsymbol{x},t)
+$$</p>
+</div>
+</div>
+<p>$\phi(\boldsymbol{x},t)$ est la fonction d&rsquo;onde. Les solutions de l&rsquo;équation sont des ondes planes $\boldsymbol{x}=N\mathrm{e}^{-\mathrm{i}(\omega t-\boldsymbol{k}\cdot\boldsymbol{x})}$ où $N$ est une constante de normalisation (il s&rsquo;agit ici d&rsquo;une <strong>onde incidente</strong>). On peut réécrire la solution sous forme quadrivectorielle $\phi(x)=\mathrm{e}^{-\mathrm{i} p\cdot x}$.</p>
+<p>Appliquons les opérateurs impulsion et énergie sur la solution :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\begin{aligned}
+\hat{\boldsymbol{p}}\phi(\boldsymbol{x},t)=\hbar\boldsymbol{k}\phi(\boldsymbol{x},t)\\
+\hat{E}\phi(\boldsymbol{x},t)=\hbar\omega\phi(\boldsymbol{x},t)
+\end{aligned}
+$$</p>
+</div>
+</div>
+<p>Une onde incidente a donc une impulsion et une énergie positives.</p>
+<p>Pour obtenir une équation d&rsquo;onde relativiste, on va tenter le même cheminement.<br>
+L&rsquo;équation de dispersion d&rsquo;une particule relativiste est donnée par :</p>
+<div id="grosseformule">
+<p>$$
+E = \left( \boldsymbol{p}^2 c^2 + m^2 c^4 \right)^{\frac{1}{2}}
+$$</p>
+</div>
+<p>Et avec les même substitutions ($E\rightarrow\hat{E}=\mathrm{i}\hbar\frac{\partial}{\partial t}$ et $\boldsymbol{p}\rightarrow \hat{\boldsymbol{p}}=-\mathrm{i}\hbar\boldsymbol{\nabla}$), on obtient :</p>
+<div id="grosseformule">
+<p>$$
+\mathrm{i} \hbar \frac{\partial \phi}{\partial t} = \left( -\hbar^2 c^2 \boldsymbol{\nabla}^2 + m^2 c^4 \right)^{\frac{1}{2}} \phi
+$$</p>
+</div>
+<p>Deux problèmes :</p>
+<ul>
+<li>l&rsquo;équation n&rsquo;a pas l&rsquo;air covariante,</li>
+<li>que faire avec la racine carrée ? Comment prend-on la racine carrée d&rsquo;un opérateur différentiel ?</li>
+</ul>
+<p>Esquivons les deux problème en partant du carré de la relation de dispersion. On obtient maintenant :</p>
+<div id="grosseformule">
+<p>$$
+-\hbar^2 \frac{\partial^2 \phi}{\partial t^2} = \left( -\hbar^2 c^2 \boldsymbol{\nabla}^2 + m^2 c^4 \right) \phi
+$$</p>
+</div>
+<p>Il s&rsquo;agit de l&rsquo;<strong>équation de Klein-Gordon</strong>. Par soucis de clarté, on repart en unités naturelles ($\hbar=c=1$) :</p>
+<div id="grosseformule">
+<p>$$
+-\frac{\partial^2 \phi(x, t)}{\partial t^2} = \left( -\boldsymbol{\nabla}^2 + m^2 \right) \phi(\boldsymbol{x}, t)
+$$</p>
+</div>
+<p>Tout semble maintenant joliment covariant. En notant $\partial^2=\partial_\mu\partial^\mu=\frac{\partial^2}{\partial t^2}-\boldsymbol{\nabla}^2$, on peut réécrire joliment l&rsquo;équation de Klein-Gordon :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+(\partial^2 + m^2)\phi(x)=0
+$$</p>
+</div>
+</div>
+<p>Pour résoudre l&rsquo;équation, tentons la solution $\phi(\boldsymbol{x},t)=N\mathrm{e}^{-\mathrm{i}Et+\mathrm{i}\boldsymbol{p}\cdot\boldsymbol{x}}=N\mathrm{e}^{-\mathrm{i}p\cdot x}$ (en unités naturelles, $\boldsymbol{k}=\boldsymbol{p}$ et $\omega=E$ et comme on est plus intéressé par l&rsquo;énergie et l&rsquo;impulsion des particules, ce sont eux qu&rsquo;on utilise).</p>
+<p>En substituant dans l&rsquo;équation, on retrouve bien la relation de dispersion $E^2=\boldsymbol{p}^2+m^2$. $\phi$ est donc bien une solution et tout semble parfait jusqu&rsquo;au moment où on constate que pour obtenir l&rsquo;énergie de la particule, il faut prendre la racine carrée de l&rsquo;équation de dispersion, mais alors deux solutions coexistent : $E=\pm(\boldsymbol{p}^2+m^2)^{\frac{1}{2}}$. Peut-on juste ignorer la solution négative en arguant qu&rsquo;elle est non physique ?</p>
+<br>
+<h4 id="courants-de-probabilité-et-densités">Courants de probabilité et densités</h4>
+<p>Schrödinger a découvert l&rsquo;équation de Klein-Gordon le premier, mais il la vite rejetée. La raison ? Elle aboutit à des densités de probabilité possiblement négatives&hellip;</p>
+<p>La densité de probabilité $\rho$ et le courant de probabilité $\boldsymbol{j}$ obéissent à l&rsquo;équation de continuité :</p>
+<div id="grosseformule">
+<p>$$
+\frac{\partial \rho}{\partial t} +\boldsymbol{\nabla} \cdot \boldsymbol{j}  = 0
+$$</p>
+</div>
+<p>Ou en notation quadrivectorielle :</p>
+<p>$$
+\partial_\mu j^\mu = 0
+$$</p>
+<p>La partie spatiale est donnée par :</p>
+<div id="grosseformule">
+<p>$$
+\boldsymbol{j}(x) = -\mathrm{i} \left[ \phi^*(x) \boldsymbol{\nabla} \phi(x) - \phi(x) \boldsymbol{\nabla} \phi^*(x) \right]
+$$</p>
+</div>
+<p>Pour que l&rsquo;équation de continuité soit respectée, il faut donc que la partie temporelle s&rsquo;écrive :</p>
+<div id="grosseformule">
+<p>$$
+\rho(x) = \mathrm{i} \left[ \phi^*(x) \frac{\partial \phi(x)}{\partial t} - \frac{\partial \phi^*(x)}{\partial t} \phi(x) \right]
+$$</p>
+</div>
+<p>Le courant de probabilité quadrivectoriel est donc :</p>
+<div id="grosseformule">
+<p>$$
+j^\mu(x) = \mathrm{i} \left[ \phi^*(x) \partial^\mu \phi(x) - \phi(x) \partial^\mu \phi^*(x) \right]
+$$</p>
+</div>
+<p>En substituant la solution $\phi(x)=N\mathrm{e}^{-\mathrm{i}p\cdot x}$, on obtient une composante temporelle de la probabilité de courant (la densité de probabilité) à l&rsquo;allure inquiétante :</p>
+<div id="grosseformule">
+<p>$$
+j^0 = \rho = 2|N|^2 E
+$$</p>
+</div>
+<p>Comme $E$ peut être négative, $\rho$ aussi, or une probabilité négative n&rsquo;a aucun sens !</p>
+<br>
+<h4 id="linterprétation-de-feynman-des-énergies-négatives">L&rsquo;interprétation de Feynman des énergies négatives</h4>
+<div id="grosseformule">
+<p>$$
+\begin{aligned}
+J^\mu_{\text{em}} &amp;= (+q)^2 |N|^2 p^\mu\\
+&amp;=  (+q)^2 |N|^2 (E, \boldsymbol{p})
+\end{aligned}
+$$</p>
+</div>
+<div id="grosseformule">
+<p>$$
+J^\mu_{\text{em}} = (-q)^2 |N|^2 (E, -\boldsymbol{p})
+$$</p>
+</div>
+<div id="grosseformule">
+<p>$$
+\phi(x) = \left[
+\begin{array}{c}
+\text{Particule reçue} \\
+\text{d&rsquo;énergie positive} \\
+\propto \mathrm{e}^{-\mathrm{i}(Et - \boldsymbol{p} \cdot \boldsymbol{x})}
+\end{array}
+\right]
++
+\left[
+\begin{array}{c}
+\text{Antiparticule émise} \\
+\text{d&rsquo;énergie positive} \\
+\propto \mathrm{e}^{+\mathrm{i}(Et - \boldsymbol{p} \cdot \boldsymbol{x})}
+\end{array}
+\right]
+$$</p>
+</div>
 <br>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../tqc3">Chapitre suivant</a></p>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../">Sommaire</a></p>
@@ -4499,16 +4919,16 @@ $$</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1728728129"></script>
-    <script src="/js/perfect-scrollbar.min.js?1728728129"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1728728129"></script>
-    <script src="/js/jquery.sticky.js?1728728129"></script>
-    <script src="/js/featherlight.min.js?1728728129"></script>
-    <script src="/js/highlight.pack.js?1728728129"></script>
+    <script src="/js/clipboard.min.js?1728850464"></script>
+    <script src="/js/perfect-scrollbar.min.js?1728850464"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1728850464"></script>
+    <script src="/js/jquery.sticky.js?1728850464"></script>
+    <script src="/js/featherlight.min.js?1728850464"></script>
+    <script src="/js/highlight.pack.js?1728850464"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1728728129"></script>
-    <script src="/js/learn.js?1728728129"></script>
-    <script src="/js/hugo-learn.js?1728728129"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1728850464"></script>
+    <script src="/js/learn.js?1728850464"></script>
+    <script src="/js/hugo-learn.js?1728850464"></script>
     
     
 
