@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1728850464" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1728850464" rel="stylesheet">
-    <link href="/css/hybrid.css?1728850464" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1728850464" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1728850464" rel="stylesheet">
-    <link href="/css/auto-complete.css?1728850464" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1728850464" rel="stylesheet">
-    <link href="/css/theme.css?1728850464" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1728850464" rel="stylesheet">
+    <link href="/css/nucleus.css?1728884730" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1728884730" rel="stylesheet">
+    <link href="/css/hybrid.css?1728884730" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1728884730" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1728884730" rel="stylesheet">
+    <link href="/css/auto-complete.css?1728884730" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1728884730" rel="stylesheet">
+    <link href="/css/theme.css?1728884730" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1728884730" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1728850464" rel="stylesheet">
+    <link href="/css/theme-blue.css?1728884730" rel="stylesheet">
     
-    <link href="/css/foo.css?1728850464" rel="stylesheet"><link href="/css/bar.css?1728850464" rel="stylesheet">
+    <link href="/css/foo.css?1728884730" rel="stylesheet"><link href="/css/bar.css?1728884730" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1728850464"></script>
+    <script src="/js/jquery-3.3.1.min.js?1728884730"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1728850464"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1728850464"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1728884730"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1728884730"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1728850464"></script>
+<script type="text/javascript" src="/js/search.js?1728884730"></script>
 
     
   </div>
@@ -2548,6 +2548,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
       <ul>
         <li><a href="#théorie-classique-des-champs">Théorie classique des champs</a></li>
         <li><a href="#mécanique-quantique-relativiste-première-tentative">Mécanique quantique relativiste, première tentative</a></li>
+        <li><a href="#quelques-lagrangiens">Quelques Lagrangiens</a></li>
       </ul>
     </li>
   </ul>
@@ -3176,19 +3177,20 @@ $$</p>
 <p>Comme $E$ peut être négative, $\rho$ aussi, or une probabilité négative n&rsquo;a aucun sens !</p>
 <br>
 <h4 id="linterprétation-de-feynman-des-énergies-négatives">L&rsquo;interprétation de Feynman des énergies négatives</h4>
+<p>Feynman a proposé une interprétation audacieuse des états à énergies négatives solutions de l&rsquo;équation de Klein-Gordon : il s&rsquo;agirait de particules remontant le temps ! On appelle ces particules <strong>antiparticules</strong>.</p>
+<p>Considérons l&rsquo;équation classique gouvernant le mouvement d&rsquo;une particule chargée dans un champ électromagnétique :</p>
 <div id="grosseformule">
 <p>$$
-\begin{aligned}
-J^\mu_{\text{em}} &amp;= (+q)^2 |N|^2 p^\mu\\
-&amp;=  (+q)^2 |N|^2 (E, \boldsymbol{p})
-\end{aligned}
+m \frac{\mathrm{d}^2 x^\mu}{\mathrm{d}\tau^2} = q F^{\mu\nu} \frac{\mathrm{d}x_\nu}{\mathrm{d}\tau}​
 $$</p>
 </div>
-<div id="grosseformule">
-<p>$$
-J^\mu_{\text{em}} = (-q)^2 |N|^2 (E, -\boldsymbol{p})
-$$</p>
+<p>Changer le signe du temps propre $\tau$ dans l&rsquo;équation a la même conséquence que changer le signe de la charge $q$. Donc une particule remontant le temps est équivalente a une particule de charge opposée avec un temps s&rsquo;écoulant normalement.</p>
+<p>Pour nos solutions de la forme $\mathrm{e}^{-\mathrm{i}(Et-\boldsymbol{p}\cdot\boldsymbol{x})}$ (avec $E&lt;0$), changer $t\rightarrow -t$ doit être compensé par $E\rightarrow -E$ pour rétablir le sens normal d&rsquo;écoulement du temps. Mais le reversement du temps touche aussi l&rsquo;impulsion $\boldsymbol{p}\rightarrow\boldsymbol{-p}$. Cela donne au final $\mathrm{e}^{-\mathrm{i}(Et+\boldsymbol{p}\cdot\boldsymbol{x})}$ avec $E&gt;0$. La particule incidente d&rsquo;énergie négative devient une particule émise d&rsquo;énergie positive.</p>
+<p>On sait maintenant gérer les énergies négatives : une particule d&rsquo;énergie négative se transforme en antiparticule d&rsquo;énergie positive en changeant le signe de la charge et de l&rsquo;impulsion tridimensionnelle.</p>
+<div style="position:relative;margin-left:auto;margin-right:auto;width:700px;max-width:100%;margin-bottom:-40px;margin-top:-40px;">
+<img src="/tqcantipart.png">
 </div>
+<p>Une solution générale de l&rsquo;équation de Klein-Gordon pour une énergie positive particulière est donnée par la superposition de deux états :</p>
 <div id="grosseformule">
 <p>$$
 \phi(x) = \left[
@@ -3208,6 +3210,10 @@ $$</p>
 \right]
 $$</p>
 </div>
+<br>
+<h3 id="quelques-lagrangiens">Quelques Lagrangiens</h3>
+<h4 id="champ-scalaire-sans-masse">Champ scalaire sans masse</h4>
+<p>Un champ scalaire $\phi(x)$ assigne une amplitude scalaire à toute position $x$ de l&rsquo;espace-temps.</p>
 <br>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../tqc3">Chapitre suivant</a></p>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../">Sommaire</a></p>
@@ -4919,16 +4925,16 @@ $$</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1728850464"></script>
-    <script src="/js/perfect-scrollbar.min.js?1728850464"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1728850464"></script>
-    <script src="/js/jquery.sticky.js?1728850464"></script>
-    <script src="/js/featherlight.min.js?1728850464"></script>
-    <script src="/js/highlight.pack.js?1728850464"></script>
+    <script src="/js/clipboard.min.js?1728884730"></script>
+    <script src="/js/perfect-scrollbar.min.js?1728884730"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1728884730"></script>
+    <script src="/js/jquery.sticky.js?1728884730"></script>
+    <script src="/js/featherlight.min.js?1728884730"></script>
+    <script src="/js/highlight.pack.js?1728884730"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1728850464"></script>
-    <script src="/js/learn.js?1728850464"></script>
-    <script src="/js/hugo-learn.js?1728850464"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1728884730"></script>
+    <script src="/js/learn.js?1728884730"></script>
+    <script src="/js/hugo-learn.js?1728884730"></script>
     
     
 
