@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1729089638" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1729089638" rel="stylesheet">
-    <link href="/css/hybrid.css?1729089638" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1729089638" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1729089638" rel="stylesheet">
-    <link href="/css/auto-complete.css?1729089638" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1729089638" rel="stylesheet">
-    <link href="/css/theme.css?1729089638" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1729089638" rel="stylesheet">
+    <link href="/css/nucleus.css?1729435769" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1729435769" rel="stylesheet">
+    <link href="/css/hybrid.css?1729435769" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1729435769" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1729435769" rel="stylesheet">
+    <link href="/css/auto-complete.css?1729435769" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1729435769" rel="stylesheet">
+    <link href="/css/theme.css?1729435769" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1729435769" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1729089638" rel="stylesheet">
+    <link href="/css/theme-blue.css?1729435769" rel="stylesheet">
     
-    <link href="/css/foo.css?1729089638" rel="stylesheet"><link href="/css/bar.css?1729089638" rel="stylesheet">
+    <link href="/css/foo.css?1729435769" rel="stylesheet"><link href="/css/bar.css?1729435769" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1729089638"></script>
+    <script src="/js/jquery-3.3.1.min.js?1729435769"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1729089638"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1729089638"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1729435769"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1729435769"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1729089638"></script>
+<script type="text/javascript" src="/js/search.js?1729435769"></script>
 
     
   </div>
@@ -2343,6 +2343,9 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
           
+            
+            
+          
         
         </ul>
       
@@ -2548,7 +2551,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
       <ul>
         <li><a href="#théorie-classique-des-champs">Théorie classique des champs</a></li>
         <li><a href="#mécanique-quantique-relativiste-première-tentative">Mécanique quantique relativiste, première tentative</a></li>
-        <li><a href="#quelques-lagrangiens">Quelques Lagrangiens</a></li>
+        <li><a href="#quelques-lagrangiens-de-champs-classiques">Quelques Lagrangiens de champs classiques</a></li>
       </ul>
     </li>
   </ul>
@@ -2761,11 +2764,14 @@ Le taux de variation de l&rsquo;espérance quantique de l&rsquo;opérateur $\hat
 $$</p>
 </div>
 <p>Le parallélisme entre mécanique quantique et formalisme hamiltonien pousse à jeter un pont entre les deux :</p>
+<div id="def">
  <div id="grosseformule">
 <p>$$
 \{ A, B \} \rightarrow \frac{1}{\mathrm{i} \hbar} \langle [\hat{A}, \hat{B}] \rangle
 $$</p>
 </div>
+</div>
+<br>
 <div id="preuve">
 <p>Vérifions le parallèle pour le couple (position, moment conjugué) :</p>
  <div id="grosseformule">
@@ -2861,7 +2867,12 @@ F_{\mu \nu} = \partial_{\mu} A_{\nu} - \partial_{\nu} A_{\mu}
 $$</p>
 </div>
 </div>
-<p>C&rsquo;est le <strong>tenseur du champ électromagnétique</strong>  (il ressemble à un rotationnel à 4 dimensions). Ses éléments contiennent les composantes des champs $\boldsymbol{E}$ et $\boldsymbol{B}$ :</p>
+<p>C&rsquo;est le <strong>tenseur du champ électromagnétique</strong>  (il ressemble à un rotationnel à 4 dimensions). Ses éléments contiennent les composantes des champs $\boldsymbol{E}$ et $\boldsymbol{B}$.</p>
+<p>En notant que $\partial^\mu=\left(\frac{\partial}{\partial t},-\nabla\right)$ et $\partial_\mu=\left(\frac{\partial}{\partial t},\nabla\right)$, on obtient les composantes du champ à partir de :</p>
+<ul>
+<li>$\boldsymbol{B}=\boldsymbol{\nabla} \times \boldsymbol{A}$, qui donne ${\color{#0076BA}B^i}=-\varepsilon^{ijk}\partial_jA_k=-\frac{1}{2}\varepsilon^{ijk}F^{jk}$ où $\varepsilon^{ijk}$ est le symbole de Levi-Civita,</li>
+<li>$\boldsymbol{E}=-\frac{\partial \boldsymbol{A}}{\partial t}-\boldsymbol{\nabla} V$, qui donne ${\color{#D41876}E^i}=-\partial^0 A^i+\partial^i A^0=-F^{0i}=F^{i0}$.</li>
+</ul>
 <div id="grosseformule">
 <p>$$
 F_{\mu \nu} = \begin{pmatrix}
@@ -2875,14 +2886,13 @@ $$</p>
 <div id="grosseformule">
 <p>$$
 F^{\mu \nu} = \begin{pmatrix}
-0 &amp; \color{#D41876}{-E_1} &amp; \color{#D41876}-E_2 &amp; \color{#D41876}-E_3 \\
-\color{#D41876}E_1 &amp; 0 &amp;\color{#0076BA} -B_3 &amp; \color{#0076BA}B_2 \\
-\color{#D41876}E_2 &amp;\color{#0076BA} B_3 &amp; 0 &amp;\color{#0076BA} -B_1 \\
-\color{#D41876}E_3 &amp;\color{#0076BA} -B_2 &amp; \color{#0076BA}B_1 &amp; 0
+0 &amp; \color{#D41876}{-E^1} &amp; \color{#D41876}-E^2 &amp; \color{#D41876}-E^3 \\
+\color{#D41876}E^1 &amp; 0 &amp;\color{#0076BA} -B^3 &amp; \color{#0076BA}B^2 \\
+\color{#D41876}E^2 &amp;\color{#0076BA} B^3 &amp; 0 &amp;\color{#0076BA} -B^1 \\
+\color{#D41876}E^3 &amp;\color{#0076BA} -B^2 &amp; \color{#0076BA}B^1 &amp; 0
 \end{pmatrix}
 $$</p>
 </div>
-<p>Et donc ${\color{#D41876}E^i}=-F^{0i}=F^{i0}$, et ${\color{#0076BA}B^i}=-\frac{1}{2}\varepsilon^{ijk}F^{jk}$ où $\varepsilon^{ijk}$ est le symbole de Levi-Civita.</p>
 <p>On cherche à nouveau un invariant de Lorentz pour le Lagrangien du champ, ce qui nous amène logiquement au produit scalaire du tenseur champ :</p>
 <div id="grosseformule">
 <p>$$
@@ -2910,6 +2920,10 @@ $$</p>
 <h4 id="champs-classiques">Champs classiques</h4>
 <p>Un champ classique est une bestiole qui se nourrit d&rsquo;une position dans l&rsquo;espace-temps et qui pond l&rsquo;amplitude du champ en ce point. La sortie peut être un scalaire (ex : température), un nombre complexe, un vecteur (ex : champ magnétique), un tenseur (ex : $F_{\mu\nu}(x)$) ou tout objet plus complexe. On obtient alors respectivement un <strong>champ scalaire</strong>, un <strong>champ scalaire complexe</strong>, un <strong>champ vectoriel</strong>, un <strong>champ tensoriel</strong>, etc.</p>
 <p>Les champs sont définis <em>localement</em>.</p>
+<p>Les valeurs du champ vivent dans un espace supplémentaire &ldquo;au-dessus&rdquo; de l&rsquo;espace-temps. Pour un champ scalaire, par exemple, l&rsquo;amplitude pouvant prendre une valeur réelle en chaque point de l&rsquo;espace-temps, c&rsquo;est comme ci passait en se point un axe réel supplémentaire. Et pour un champ dont l&rsquo;amplitude s&rsquo;ébat dans un espace plus complexe, c&rsquo;est comme ci on avait collé une copie de cet espace en tout point de l&rsquo;espace-temps. L&rsquo;espace total obtenu (espace de base + copies en tout point de l&rsquo;espace des amplitudes) s&rsquo;appelle un <strong>fibré</strong>.</p>
+<div style="position:relative;margin-left:auto;margin-right:auto;width:400px;max-width:100%;margin-bottom:-40px;margin-top:-40px;">
+<img src="/tqcfibre.png">
+</div>
 <br>
 <h4 id="densité-lagrangienne-et-hamiltonienne">Densité lagrangienne et hamiltonienne</h4>
 <p>Le but ici est de formuler des Lagrangiens et Hamiltoniens dans le langage des champs classiques.</p>
@@ -3060,6 +3074,7 @@ $$</p>
 <p>On retrouve les deux équations de Maxwell inhomogènes avec charges ($\boldsymbol{\nabla}\cdot\boldsymbol{E}=\rho$ et $\boldsymbol{\nabla}\times\boldsymbol{B}=\boldsymbol{J}+\dot{\boldsymbol{E}}$).</p>
 <p>Le facteur $1/4$ dans le Lagrangien se justifie donc a posteriori par le fait qu&rsquo;il nous ait donné les bonnes équations.</p>
 </div>
+<p>Dans la suite, lorsqu&rsquo;on parlera de Lagrangien, il s&rsquo;agira le plus souvent en réalité de la densité lagrangienne.</p>
 <p>La résolution des équations d&rsquo;Euler-Lagrange va produire tous les <em>modes d&rsquo;oscillations</em> et donc les vecteurs d&rsquo;onde autorisés, c&rsquo;est-à-dire les valeurs particulières $k_n$ qui survivent à la dissipation. Par principe de superposition, l&rsquo;onde la plus générale est faite de la somme pondérée des différents modes possibles :</p>
 <div id="grosseformule">
 <p>$$
@@ -3127,7 +3142,7 @@ $$</p>
 -\frac{\partial^2 \phi(x, t)}{\partial t^2} = \left( -\boldsymbol{\nabla}^2 + m^2 \right) \phi(\boldsymbol{x}, t)
 $$</p>
 </div>
-<p>Tout semble maintenant joliment covariant. En notant $\partial^2=\partial_\mu\partial^\mu=\frac{\partial^2}{\partial t^2}-\boldsymbol{\nabla}^2$, on peut réécrire joliment l&rsquo;équation de Klein-Gordon :</p>
+<p>Tout semble maintenant parfaitement covariant. En notant $\partial^2=\partial_\mu\partial^\mu=\frac{\partial^2}{\partial t^2}-\boldsymbol{\nabla}^2$, on peut réécrire joliment l&rsquo;équation de Klein-Gordon :</p>
 <div id="theo">
 <div id="grosseformule">
 <p>$$
@@ -3139,30 +3154,18 @@ $$</p>
 <p>En substituant dans l&rsquo;équation, on retrouve bien la relation de dispersion $E^2=\boldsymbol{p}^2+m^2$. $\phi$ est donc bien une solution et tout semble parfait jusqu&rsquo;au moment où on constate que pour obtenir l&rsquo;énergie de la particule, il faut prendre la racine carrée de l&rsquo;équation de dispersion, mais alors deux solutions coexistent : $E=\pm(\boldsymbol{p}^2+m^2)^{\frac{1}{2}}$. Peut-on juste ignorer la solution négative en arguant qu&rsquo;elle est non physique ?</p>
 <br>
 <h4 id="courants-de-probabilité-et-densités">Courants de probabilité et densités</h4>
-<p>Schrödinger a découvert l&rsquo;équation de Klein-Gordon le premier, mais il la vite rejetée. La raison ? Elle aboutit à des densités de probabilité possiblement négatives&hellip;</p>
+<p>C&rsquo;est Schrödinger qui découvrit le premier l&rsquo;équation de Klein-Gordon. Mais il la vite rejetée&hellip; moins du fait des énergies négatives que des densités de probabilité négatives qu&rsquo;elles rendent possibles.</p>
 <p>La densité de probabilité $\rho$ et le courant de probabilité $\boldsymbol{j}$ obéissent à l&rsquo;équation de continuité :</p>
 <div id="grosseformule">
 <p>$$
 \frac{\partial \rho}{\partial t} +\boldsymbol{\nabla} \cdot \boldsymbol{j}  = 0
 $$</p>
 </div>
-<p>Ou en notation quadrivectorielle :</p>
+<p>qui devient en notation quadrivectorielle :</p>
 <p>$$
 \partial_\mu j^\mu = 0
 $$</p>
-<p>La partie spatiale est donnée par :</p>
-<div id="grosseformule">
-<p>$$
-\boldsymbol{j}(x) = -\mathrm{i} \left[ \phi^*(x) \boldsymbol{\nabla} \phi(x) - \phi(x) \boldsymbol{\nabla} \phi^*(x) \right]
-$$</p>
-</div>
-<p>Pour que l&rsquo;équation de continuité soit respectée, il faut donc que la partie temporelle s&rsquo;écrive :</p>
-<div id="grosseformule">
-<p>$$
-\rho(x) = \mathrm{i} \left[ \phi^*(x) \frac{\partial \phi(x)}{\partial t} - \frac{\partial \phi^*(x)}{\partial t} \phi(x) \right]
-$$</p>
-</div>
-<p>Le courant de probabilité quadrivectoriel est donc :</p>
+<p>Et le courant de probabilité quadrivectoriel s&rsquo;écrit :</p>
 <div id="grosseformule">
 <p>$$
 j^\mu(x) = \mathrm{i} \left[ \phi^*(x) \partial^\mu \phi(x) - \phi(x) \partial^\mu \phi^*(x) \right]
@@ -3174,7 +3177,7 @@ $$</p>
 j^0 = \rho = 2|N|^2 E
 $$</p>
 </div>
-<p>Comme $E$ peut être négative, $\rho$ aussi, or une probabilité négative n&rsquo;a aucun sens !</p>
+<p>Comme $E$ peut être négative, $\rho$ aussi, et donner un sens à des probabilités négatives semblent sans espoir !</p>
 <br>
 <h4 id="linterprétation-de-feynman-des-énergies-négatives">L&rsquo;interprétation de Feynman des énergies négatives</h4>
 <p>Feynman a proposé une interprétation audacieuse des états à énergies négatives solutions de l&rsquo;équation de Klein-Gordon : il s&rsquo;agirait de particules remontant le temps ! On appelle ces particules <strong>antiparticules</strong>.</p>
@@ -3211,9 +3214,191 @@ $$</p>
 $$</p>
 </div>
 <br>
-<h3 id="quelques-lagrangiens">Quelques Lagrangiens</h3>
+<h3 id="quelques-lagrangiens-de-champs-classiques">Quelques Lagrangiens de champs classiques</h3>
 <h4 id="champ-scalaire-sans-masse">Champ scalaire sans masse</h4>
-<p>Un champ scalaire $\phi(x)$ assigne une amplitude scalaire à toute position $x$ de l&rsquo;espace-temps.</p>
+<p>Un champ scalaire $\phi(x)$ assigne une amplitude scalaire à toute position $x$ de l&rsquo;espace-temps. Le Lagrangien ne va dépendre que du taux de variation temporel $\partial_\phi$ et spatial $\boldsymbol{\nabla}$ de $\phi$. Et pour que $\mathcal{L}$ respecte les canons relativistes, on choisit :</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+\mathcal{L}=\frac{1}{2} \partial^\mu \phi \partial_\mu \phi=\frac{1}{2}\left(\partial_\mu \phi\right)^2
+$$</p>
+</div>
+</div>
+<p>Il se développe en $\mathcal{L}=\frac{1}{2}\left(\partial_0 \phi\right)^2-\frac{1}{2} \boldsymbol{\nabla}^2 \phi$ pour lui donner un air de $\mathcal{L}=$ (énergie cinétique)- (énergie potentielle). Comme d&rsquo;habitude, le facteur ($\frac{1}{2}$, ici) est là pour faire coller les prédictions du Lagrangien à ce qu&rsquo;on connait.</p>
+<p>Comme $\frac{\partial \mathcal{L}}{\partial \phi}=0$ et $\frac{\partial \mathcal{L}}{\partial\left(\partial_\mu \phi\right)}=\partial^\mu \phi$, l&rsquo;équation d&rsquo;Euler-Lagrange implique l&rsquo;équation de mouvement suivante :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\partial_\mu\partial^\mu\phi =0
+$$</p>
+</div>
+</div>
+<p>Ce n&rsquo;est autre que l&rsquo;équation des ondes (équation de d&rsquo;Alembert) $\partial^2=0$ ou $\frac{\partial^2 \phi}{\partial t^2}-\boldsymbol{\nabla}^2 \phi=0$.</p>
+<p>Et les solutions ondulent sous la forme :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\phi(x, t)=\sum_{\boldsymbol{p}} a_{\boldsymbol{p}} \mathrm{e}^{-\mathrm{i}\left(E_{\boldsymbol{p}} t-\boldsymbol{p} \cdot \boldsymbol{x}\right)}
+$$</p>
+</div>
+</div>
+<p>avec une équation de dispersion donnée par :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+E_{\boldsymbol{p}}=c|\boldsymbol{p}|
+$$</p>
+</div>
+</div>
+<p>ou $E_{\boldsymbol{p}}=|\boldsymbol{p}|$ avec $c=1$.</p>
+<p>Comme $E_{\boldsymbol{p}}=0$ en $|\boldsymbol{p}|=0$, on dit que la relation de dispersion est sans gap.</p>
+<p>Cette équation décrira plus loin l&rsquo;énergie des excitations quantiques de ce système et puisque c&rsquo;est la version $m=0$ de la relation de dispersion relativiste $E_p=\sqrt{p^2+m^2}$, on parle de particules non massives ainsi que d&rsquo;un champ scalaire sans masse.</p>
+<p>L&rsquo;équation d&rsquo;onde étant linéaire, les ondes solutions obéissent au principe de superposition. Les particules correspondant à ces ondes sont alors dites libres ou sans interaction. Si on les envoies les unes contres les autres, elles se traversent sans se voir.</p>
+<br>
+<h4 id="champ-scalaire-avec-masse">Champ scalaire avec masse</h4>
+<p>Pour inclure une masse, on fait dépendre $\mathcal{L}$ non plus seulement de $\partial_\mu\phi$ mais aussi du champ $\phi$ lui-même en introduisant un terme d&rsquo;énergie potentielle $U(\phi)\propto\phi^2$ qui va traduire le coût d&rsquo;avoir un champ plutôt que du vide à cet endroit.</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+\mathcal{L}=\frac{1}{2}\left(\partial_\mu \phi\right)^2-\frac{1}{2} m^2 \phi^2,
+$$</p>
+</div>
+</div>
+<p>Montrons à partir des équations d&rsquo;Euler-Lagrange que le paramètre $m$ est bien une masse.<br>
+Comme on a $\frac{\partial \mathcal{L}}{\partial \phi}=-m^2 \phi$ et $\frac{\partial \mathcal{L}}{\partial\left(\partial_\mu \phi\right)}=\partial^\mu \phi$, on obtient :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\left(\partial_\mu \partial^\mu+m^2\right) \phi=0
+$$</p>
+</div>
+</div>
+<p>L&rsquo;équation du mouvement de ce champ est donc l&rsquo;équation de Klein-Gordon !</p>
+<p>Ses solutions sont à nouveau :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\phi(x, t)=\sum_{\boldsymbol{p}} a_{\boldsymbol{p}} \mathrm{e}^{-\mathrm{i}\left(E_{\boldsymbol{p}} t-\boldsymbol{p} \cdot \boldsymbol{x}\right)}
+$$</p>
+</div>
+</div>
+<p>avec la relation de dispersion :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+E^2_\boldsymbol{p}=\boldsymbol{p}^2+m^2
+$$</p>
+</div>
+</div>
+<p>Avoir $m\neq 0$ crée un gap dans la relation de dispersion (à $\boldsymbol{p}=0$, $E_\boldsymbol{p}=\pm m$) correspondant à la masse de la particule.</p>
+<div style="position:relative;margin-left:auto;margin-right:auto;width:500px;max-width:100%;margin-bottom:-40px;margin-top:-40px;">
+<img src="/tqcdispmasse.png">
+</div>
+<p>À nouveau, les équations du mouvement sont linéaires et donc les particules ainsi décrites n&rsquo;interagissent pas.</p>
+<br>
+<h4 id="source-externe">Source externe</h4>
+<p>On veut maintenant introduire des interactions. Le plus simple est de faire interagir un champ scalaire avec un potentiel externe. On décrit le potentiel par une fonction $J(x)$ (<strong>source externe</strong>) qui interagit avec le champ via le terme $-J(x)\phi(x)$ dans le potentiel. Cela donne le Lagrangien :</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+\mathcal{L}=\frac{1}{2}\left[\partial_\mu \phi(x)\right]^2-\frac{1}{2} m^2[\phi(x)]^2+J(x) \phi(x)
+$$</p>
+</div>
+</div>
+<p>L&rsquo;équation du mouvement devient :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\left(\partial_\mu \partial^\mu+m^2\right) \phi(x)=J(x) .
+$$</p>
+<p>On a ainsi maintenant une équation différentielle inhomogène.</p>
+</div>
+</div>
+<br>
+<h4 id="la-théorie-phi4">La théorie $\phi^4$</h4>
+<p>Comment faire interagir des particules les unes avec les autres (ou des champs avec des champs) ? La recette la plus simple consiste à ajouter un terme d&rsquo;énergie potentielle $U(\phi)$ proportionnel à $\phi^4$ au Lagrangien scalaire. S&rsquo;il crée bien des interactions se terme empêche dans le même temps de trouver des solutions aux équations autrement que par une sorte de théorie des perturbations, comme on le verra&hellip;</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+\mathcal{L}=\frac{1}{2} \partial^\mu \phi \partial_\mu \phi-\frac{1}{2} m^2 \phi^2-\frac{1}{4!} \lambda \phi^4,
+$$</p>
+</div>
+</div>
+<p>Et cela donne une équation du mouvement pas très jolie :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\left(\partial^2+m^2\right) \phi=-\frac{\lambda}{3!} \phi^3 .
+$$</p>
+</div>
+</div>
+<br>
+<h4 id="deux-champs-scalaires">Deux champs scalaires</h4>
+<p>Pour faire interagie des particules, on peut aussi décrire deux types de particules via deux champs différents $\phi_1(x)$ et $\phi_2(x)$ et les faire interagir grâce à un potentiel $U(\phi_1,\phi_2)=g(\phi_1^2+\phi_2)^2$ où $g$ paramétrise la force de l&rsquo;interaction.</p>
+<p>développer le carré donne des termes d&rsquo;interaction propre en $\phi^4$ mais aussi un terme d&rsquo;interaction mutuelle $2\phi_1^2\phi_2^2$.</p>
+<p>La densité lagrangienne est donnée par :</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+\mathcal{L}=\frac{1}{2}\left(\partial_\mu \phi_1\right)^2-\frac{1}{2} m^2 \phi_1^2+\frac{1}{2}\left(\partial_\mu \phi_2\right)^2-\frac{1}{2} m^2 \phi_2^2-g\left(\phi_1^2+\phi_2^2\right)^2
+$$</p>
+</div>
+</div>
+<p>On remarque que certaines transformations des champs gardent invariant le Lagrangien. On peut ainsi opérer une rotation des champs dans l&rsquo;espace abstrait $\phi_1$-$\phi_2$. On a alors $\phi_1 \rightarrow \phi_1^{\prime}$ et $\phi_2 \rightarrow \phi_2^{\prime}$ avec :</p>
+<div id="grosseformule">
+<p>$$
+\binom{\phi_1^{\prime}}{\phi_2^{\prime}}=\left(\begin{array}{cc}
+\cos \theta &amp; -\sin \theta \\
+\sin \theta &amp; \cos \theta
+\end{array}\right)\binom{\phi_1}{\phi_2}
+$$</p>
+</div>
+<p>On dit que les particules ont un <strong>degré de liberté interne</strong>. L&rsquo;invariance de la physique par rapport aux rotations d&rsquo;un angle $\theta$ dans l&rsquo;espace $\phi_1$-$\phi_2$ exprime une symétrie $SO(2)$.</p>
+<div id="preuve">
+<p>$SO(2)$ est le groupe spécial orthogonal à 2 dimensions. Il correspond aux matrices $2\times2$ orthogonales avec un déterminant égal à 1.<br>
+C&rsquo;est une symétrie continue et on va voir plus loin que les symétries continues conduisent à des quantités conservées.</p>
+</div>
+<br>
+<h4 id="champ-scalaire-complexe">Champ scalaire complexe</h4>
+<p>On peut simplifier le Lagrangien à deux champs scalaires précédent en passant à des champs scalaires complexes $\psi$ et $\psi^\dagger$ définis par :</p>
+<div id="grosseformule">
+<p>$$
+\begin{aligned}
+\psi &amp; =\frac{1}{\sqrt{2}}\left[\phi_1+\mathrm{i} \phi_2\right] \\
+\psi^{\dagger} &amp; =\frac{1}{\sqrt{2}}\left[\phi_1-\mathrm{i} \phi_2\right]
+\end{aligned}
+$$</p>
+</div>
+<div style="position:relative;margin-left:auto;margin-right:auto;width:700px;max-width:100%;margin-bottom:-40px;margin-top:-40px;">
+<img src="/tqcargand.png">
+</div>
+<p>On obtient :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\mathcal{L}=\partial^\mu \psi^{\dagger} \partial_\mu \psi-m^2 \psi^{\dagger} \psi-g\left(\psi^{\dagger} \psi\right)^2
+$$</p>
+</div>
+</div>
+<p>Le nouveau champ scalaire complexe $\psi$ contient, comme avant, deux degrés de liberté et le nouveau Lagrangien se retrouve invariant par rapport aux rotations dans le plan complexe $\psi \rightarrow \psi \mathrm{e}^{\mathrm{i} \alpha}$ et $\psi^{\dagger} \rightarrow \mathrm{e}^{-\mathrm{i} \alpha} \psi^{\dagger}$ qui expriment une symétrie $U(1)$.</p>
+<div id="preuve">
+<p>$U(1)$  est le groupe des transformations unitaires à 1 dimension.</p>
+<p>L&rsquo;équivalence entre les deux descritptions précédentes découlent de l&rsquo;isomorphisme entre $SO(2)$ et $U(1)$ noté $SO(2)\simeq U(1)$.</p>
+</div>
+<br>
+<h4 id="théorie-psidaggerpsiphi">Théorie $\psi^\dagger\psi\phi$</h4>
+<p>Terminons par une théorie décrivant 3 types de particules. On additionne les Lagrangiens de champ scalaire complexe (avec une masse $m$) et de champ scalaire réel (avec une masse $\mu$) et on ajoute un terme d&rsquo;interaction entre les deux $g\psi^\dagger\psi\phi$ :</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+\mathcal{L}= \partial^\mu \psi^{\dagger} \partial_\mu \psi-m^2 \psi^{\dagger} \psi+\frac{1}{2}\left(\partial_\mu \phi\right)^2-\frac{1}{2} \mu^2 \phi^2-g \psi^{\dagger} \psi \phi
+$$</p>
+</div>
+</div>
+<p>Comme on le verra plus tard, cette théorie ressemble beaucoup à l&rsquo;électrodynamique quantique.</p>
+<br>
+<br>
+<p>Dans le chapitre suivant, on va passer de ces champs classiques à des champs quantiques et vérifier que les particules émergent bien comme leurs excitations.</p>
 <br>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../tqc3">Chapitre suivant</a></p>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../">Sommaire</a></p>
@@ -4784,6 +4969,11 @@ $$</p>
             
         
                     
+                        
+            
+            
+        
+                    
             
         
                     
@@ -4925,16 +5115,16 @@ $$</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1729089638"></script>
-    <script src="/js/perfect-scrollbar.min.js?1729089638"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1729089638"></script>
-    <script src="/js/jquery.sticky.js?1729089638"></script>
-    <script src="/js/featherlight.min.js?1729089638"></script>
-    <script src="/js/highlight.pack.js?1729089638"></script>
+    <script src="/js/clipboard.min.js?1729435769"></script>
+    <script src="/js/perfect-scrollbar.min.js?1729435769"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1729435769"></script>
+    <script src="/js/jquery.sticky.js?1729435769"></script>
+    <script src="/js/featherlight.min.js?1729435769"></script>
+    <script src="/js/highlight.pack.js?1729435769"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1729089638"></script>
-    <script src="/js/learn.js?1729089638"></script>
-    <script src="/js/hugo-learn.js?1729089638"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1729435769"></script>
+    <script src="/js/learn.js?1729435769"></script>
+    <script src="/js/hugo-learn.js?1729435769"></script>
     
     
 
