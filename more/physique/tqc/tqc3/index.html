@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1729438198" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1729438198" rel="stylesheet">
-    <link href="/css/hybrid.css?1729438198" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1729438198" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1729438198" rel="stylesheet">
-    <link href="/css/auto-complete.css?1729438198" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1729438198" rel="stylesheet">
-    <link href="/css/theme.css?1729438198" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1729438198" rel="stylesheet">
+    <link href="/css/nucleus.css?1729594416" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1729594416" rel="stylesheet">
+    <link href="/css/hybrid.css?1729594416" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1729594416" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1729594416" rel="stylesheet">
+    <link href="/css/auto-complete.css?1729594416" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1729594416" rel="stylesheet">
+    <link href="/css/theme.css?1729594416" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1729594416" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1729438198" rel="stylesheet">
+    <link href="/css/theme-blue.css?1729594416" rel="stylesheet">
     
-    <link href="/css/foo.css?1729438198" rel="stylesheet"><link href="/css/bar.css?1729438198" rel="stylesheet">
+    <link href="/css/foo.css?1729594416" rel="stylesheet"><link href="/css/bar.css?1729594416" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1729438198"></script>
+    <script src="/js/jquery-3.3.1.min.js?1729594416"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1729438198"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1729438198"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1729594416"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1729594416"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1729438198"></script>
+<script type="text/javascript" src="/js/search.js?1729594416"></script>
 
     
   </div>
@@ -2547,7 +2547,11 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#partie-3--champs-quantiques">Partie 3 : champs quantiques</a></li>
+    <li><a href="#partie-3--champs-quantiques">Partie 3 : champs quantiques</a>
+      <ul>
+        <li><a href="#évolution-temporelle">Évolution temporelle</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -2649,6 +2653,93 @@ MathJax = {
 <p style="font-size:1.2em;text-align:center;font-weight:bold;"><a href="../">Retour sommaire</a></p>
 <br>
 <h2 id="partie-3--champs-quantiques">Partie 3 : champs quantiques</h2>
+<h3 id="évolution-temporelle">Évolution temporelle</h3>
+<p>Deux représentations de la mécanique quantique s&rsquo;opposent quant à la description de l&rsquo;évolution temporelle d&rsquo;un système : la représentation de Schrödinger et la représentation d&rsquo;Heisenberg.</p>
+<p>Dans la <strong>représentation de Schrödinger</strong>, ce sont les fonctions d&rsquo;onde qui dépendent du temps et leur évolution est déterminée par l&rsquo;équation de Schrödinger :</p>
+<div id="def">
+<div id="grosseformule">
+<p>$$
+\mathrm{i} \frac{\partial \psi(\boldsymbol{x}, t)}{\partial t}=\hat{H} \psi(\boldsymbol{x}, t)
+$$</p>
+</div>
+</div>
+<p>On accède aux variables dynamiques comme la position et l&rsquo;impulsion via des opérateurs ($\hat{\boldsymbol{x}}=\boldsymbol{x}$, $\hat{\boldsymbol{p}}=-\mathrm{i} \nabla$) qui agissent sur la fonction d&rsquo;onde.</p>
+<p>On est très loin de la mécanique classique où les variables dynamiques ($\boldsymbol{p}(t)$, $\boldsymbol{x}(t)$,&hellip;) dépendent du temps et sont donc décrites par des équations du mouvement. En effet, aucun opérateur temps n&rsquo;existe en mécanique quantique, seul un paramètre temps (que la représentation de Schrödinger confine donc entièrement dans la fonction d&rsquo;onde).</p>
+<p>Bien qu&rsquo;aucun opérateur nous donne le temps, il y a bien un opérateur $\hat{U}(t_2,t_1)$ qui permet de faire évoluer une particule entre $t_1$ et $t_2$.</p>
+<div id="grosseformule">
+<p>$$
+\psi\left(t_2\right)=\hat{U}\left(t_2, t_1\right) \psi\left(t_1\right)
+$$</p>
+</div>
+<p>L&rsquo;<strong>opérateur d&rsquo;évolution</strong> a les propriétés suivantes :</p>
+<ol>
+<li>$\hat{U}\left(t_1, t_1\right)=1$<br>
+Rien ne se passe si les instants sont les mêmes.
+</li>
+<br>
+<li>$\hat{U}\left(t_3, t_2\right) \hat{U}\left(t_2, t_1\right)=\hat{U}\left(t_3, t_1\right)$<br>
+Cette relation de composition montre qu'on peut construire une translation temporelle en multipliant entre elles une multitude de translations temporelles minuscules.
+</li>
+<br>
+<li>$\mathrm{i} \frac{\mathrm{~d}}{\mathrm{~d} t_2} \hat{U}\left(t_2, t_1\right)=\hat{H} \hat{U}\left(t_2, t_1\right)$<br>
+L'opérateur d'évolution lui-même obéit à l'équation de Schrödinger.
+<br><br>
+<div id="preuve">
+<p>Pour le prouver, oOn part de $\psi\left(t_2\right)=\hat{U}\left(t_2, t_1\right) \psi\left(t_1\right)$ et on dérive par rapport à $t_2$ :</p>
+<div id="grosseformule">
+<p>$$
+\frac{\mathrm{d} \psi\left(t_2\right)}{\mathrm{d} t_2}=\frac{\mathrm{d} \hat{U}\left(t_2, t_1\right)}{\mathrm{d} t_2} \psi\left(t_1\right)
+$$</p>
+</div>
+<p>Et en utilisant $\mathrm{i} \frac{\partial \psi(\boldsymbol{x}, t)}{\partial t}=\hat{H} \psi(\boldsymbol{x}, t)$, on obtient ;</p>
+<div id="grosseformule">
+<p>$$
+\mathrm{i} \frac{\mathrm{~d} \psi\left(t_2\right)}{\mathrm{d} t_2}=\hat{H} \psi\left(t_2\right)=\hat{H} \hat{U}\left(t_2, t_1\right) \psi\left(t_1\right)
+$$</p>
+</div>
+</div></li>
+<br>
+<li>$\hat{U}\left(t_1, t_2\right)=\hat{U}^{-1}\left(t_2, t_1\right)$<br>
+On prenant l'inverse de l'opérateur d'évolution, on remonte le temps.
+</li>
+<br>
+<li>$\hat{U}^{\dagger}\left(t_2, t_1\right) \hat{U}\left(t_2, t_1\right)=1,$<br>
+L'opérateur d'évolution est unitaire.
+<br><br>
+<div id="preuve">
+<p>Pour $t_2=t_1$, c&rsquo;est trivial.</p>
+<p>Pour $t_2\neq t_1$ :</p>
+<div id="grosseformule">
+<p>$$
+\begin{aligned}
+\frac{\mathrm{d}}{\mathrm{~d} t_2}\left[\hat{U}^{\dagger}\left(t_2, t_1\right) \hat{U}\left(t_2, t_1\right)\right] &amp; =\frac{\mathrm{d} \hat{U}^{\dagger}}{\mathrm{d} t_2} U+U^{\dagger} \frac{\mathrm{d} \hat{U}}{\mathrm{~d} t_2} \\
+&amp; =-\frac{\hat{U}^{\dagger} \hat{H} \hat{U}}{\mathrm{i}}+\frac{\hat{U}^{\dagger} \hat{H} \hat{U}}{\mathrm{i}}\\=0
+\end{aligned}
+$$</p>
+<p>Où on a utilisé $\frac{\mathrm{d} \hat{U}}{\mathrm{~d} t}=\frac{\hat{H} \hat{U}}{\mathrm{i}}$ et $\frac{\mathrm{d} \hat{U}^{\dagger}}{\mathrm{d} t}=-\frac{\hat{U}^{\dagger} \hat{H}}{\mathrm{i}}$.</p>
+</div>
+</div></li>
+<p>Une conséquence directe est que $\hat{U}^\dagger(t_2,t_1)=\hat{U}^{-1}(t_2,t_1)$. L&rsquo;opérateur adjoint est l&rsquo;opérateur inverse.</p>
+<br>
+</li>
+</ol>
+<p>La propriété 3 permet d&rsquo;exprimer explicitement $\hat{U}(t_2,t_1)$ :</p>
+<div id="theo">
+<div id="grosseformule">
+<p>$$
+\hat{U}\left(t_2, t_1\right)=\mathrm{e}^{-\mathrm{i} \hat{H}\left(t_2-t_1\right)}
+$$</p>
+</div>
+</div>
+<br>
+<div id="preuve">
+<p>Ce type d&rsquo;expression exponentiel cache le développement :</p>
+<div id="grosseformule">
+<p>$$
+\mathrm{e}^{\hat{A}}=1+\hat{A}+\frac{1}{2!} \hat{A} \hat{A}+\frac{1}{3!} \hat{A} \hat{A} \hat{A}+\ldots
+$$</p>
+</div>
+</div>
 <br>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../tqc4">Chapitre suivant</a></p>
 <p style="font-size:1.5em;text-align:center;font-weight:bold;"><a href="../">Sommaire</a></p>
@@ -4365,16 +4456,16 @@ MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1729438198"></script>
-    <script src="/js/perfect-scrollbar.min.js?1729438198"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1729438198"></script>
-    <script src="/js/jquery.sticky.js?1729438198"></script>
-    <script src="/js/featherlight.min.js?1729438198"></script>
-    <script src="/js/highlight.pack.js?1729438198"></script>
+    <script src="/js/clipboard.min.js?1729594416"></script>
+    <script src="/js/perfect-scrollbar.min.js?1729594416"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1729594416"></script>
+    <script src="/js/jquery.sticky.js?1729594416"></script>
+    <script src="/js/featherlight.min.js?1729594416"></script>
+    <script src="/js/highlight.pack.js?1729594416"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1729438198"></script>
-    <script src="/js/learn.js?1729438198"></script>
-    <script src="/js/hugo-learn.js?1729438198"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1729594416"></script>
+    <script src="/js/learn.js?1729594416"></script>
+    <script src="/js/hugo-learn.js?1729594416"></script>
     
     
 
