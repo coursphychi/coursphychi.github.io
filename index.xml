@@ -100,48 +100,6 @@
       <description>Course de tremplins Deux balles dévalent chacune un tremplin différent dont les points de départ et d&amp;rsquo;arrivée ont même altitude :&#xA;Les différentes coordonnées sont données ci-dessous. Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s-2. La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.&#xA;Questions préliminaires :&#xA;Qulle balle atterrit le plus loin ? Quelle balle parcourt le moins de distance ?</description>
     </item>
     <item>
-      <title>Algorithmique</title>
-      <link>https://coursphychi.github.io/more/info/algorithmique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/info/algorithmique/</guid>
-      <description> Algorithmique Généralités Quelques algorithmes Présentation et détails de quelques algorithmes importants&amp;nbsp;: </description>
-    </item>
-    <item>
-      <title>Calcul des propositions</title>
-      <link>https://coursphychi.github.io/more/logique/logique1/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/logique/logique1/</guid>
-      <description>info&#xA;Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.&#xA;Calcul des propositions Syntaxe Sémantique Preuve Le calcul des propositions (ou calcul propositionnel ou logique des propositions) permet de modéliser des raisonnements simples. Son pouvoir expressif est assez limité mais c&amp;rsquo;est sur ses fondations que se construisent les logiques plus évoluées.&#xA;Syntaxe Langage Le langage du calcul des propositions est constitué de variables propositionnelles $P$, $Q$, $R$,.</description>
-    </item>
-    <item>
-      <title>Mécanique</title>
-      <link>https://coursphychi.github.io/more/physique/meca/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/meca/</guid>
-      <description>Mécanique Énergie cinétique et travail Une approche historique sur l&amp;rsquo;émergence du concept d&amp;rsquo;énergie en mécanique, de Descartes à Einstein.&#xA;Pourquoi une énergie cinétique en $v^2$ ? Trois démonstrations de la formule de l&amp;rsquo;énergie cinétique.&#xA;Je trouve la deuxième (celle de Johann Bernoulli) fabuleuse d&amp;rsquo;intuition géométrique (elle utilise l&amp;rsquo;escargot de Pythagore).&#xA;Chute libre et paraboles Étudier la chute libre, c&amp;rsquo;est jouer avec des paraboles.&#xA;Force de Coriolis La force de Coriolis n&amp;rsquo;est pas une force mais traduit juste la galère d&amp;rsquo;aller droit dans un référentiel tournant.</description>
-    </item>
-    <item>
-      <title>TQC-1</title>
-      <link>https://coursphychi.github.io/more/physique/tqc/tqc1/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/tqc/tqc1/</guid>
-      <description>Théorie quantique des champs note&#xA;Notes de lecture du livre Quantum field theory for the gifted amateur de Thomas Lancaster et Stephen Blundell.&#xA;Partie 1 : un univers d&amp;rsquo;oscillateurs harmoniques Lagrangien et principe de moindre action La détermination de la trajectoire $x(t)$ d&amp;rsquo;une particule entre A et B par intégration de la 2e loi de Newton, $F=m\ddot{x}$, ne cadre pas avec les enseignements de la mécanique quantique. Car si on peut bien mesurer la particule en A à $t=0$ et en B à $t=\tau$, un voile impénétrable nous empèche de savoir précisément ce qui s&amp;rsquo;est passé entre les deux.</description>
-    </item>
-    <item>
-      <title>TQC-2</title>
-      <link>https://coursphychi.github.io/more/physique/tqc/tqc2/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/tqc/tqc2/</guid>
-      <description>Théorie quantique des champs note&#xA;Notes de lecture du livre Quantum field theory for the gifted amateur de Thomas Lancaster et Stephen Blundell. Très souvent une simple traduction.&#xA;Le premier encadré gris est issu de No-Nonsense Classical Mechanics de Jakob Schwichtenberg.&#xA;Retour sommaire&#xA;Partie 2 : le bon Lagrangien Revenons dans un premier temps à la mécanique du 19e siècle, en particulier la mécanique hamiltonienne pour constater sa similarité avec la mécanique quantique avant de présenter la théorie classique des champs.</description>
-    </item>
-    <item>
-      <title>TQC-3</title>
-      <link>https://coursphychi.github.io/more/physique/tqc/tqc3/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/tqc/tqc3/</guid>
-      <description>Théorie quantique des champs note&#xA;Notes de lecture du livre Quantum field theory for the gifted amateur de Thomas Lancaster et Stephen Blundell. Très souvent une simple traduction.&#xA;Retour sommaire&#xA;Partie 3 : champs quantiques Évolution temporelle Deux représentations de la mécanique quantique s&amp;rsquo;opposent quant à la description de l&amp;rsquo;évolution temporelle d&amp;rsquo;un système : la représentation de Schrödinger et la représentation d&amp;rsquo;Heisenberg.&#xA;Représentation de Schrödinger Dans la représentation de Schrödinger, ce sont les fonctions d&amp;rsquo;onde qui dépendent du temps et leur évolution est déterminée par l&amp;rsquo;équation de Schrödinger :</description>
-    </item>
-    <item>
       <title>Acide/Base</title>
       <link>https://coursphychi.github.io/tsti2d/acide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -177,48 +135,6 @@
       <description>Solutions Présentation&#xA;Définitions Solution aqueuse&#xA;Mélange homogène dans lequel l’eau est le constituant ultra-majoritaire. Elle y joue le rôle de solvant, les espèces chimiques dissoutes sont qualifiées de solutés.&#xA;Exemple :&#xA;Le vinaigre est, en première approximation, une solution aqueuse d’acide éthanoïque (soluté).&#xA;Concentration en masse&#xA;Masse d’une espèce chimique dissoute par litre de solution. La concentration en masse peut s’exprimer en g/L.&#xA;Exemple :&#xA;Une solution de chlorure de sodium de concentration en masse 10 g/L est obtenue en introduisant 10 g de chlorure de sodium dans une fiole jaugée de 1,0 L et en ajoutant de l’eau jusqu’à obtenir un volume final de mélange égal à 1,0 L.</description>
     </item>
     <item>
-      <title>Arithmétique</title>
-      <link>https://coursphychi.github.io/more/maths/arithmetique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/arithmetique/</guid>
-      <description>Arithmétique et théorie des nombres : Infinis dénombrables et indénombrables Des entiers aux transcendants en passant par l&amp;rsquo;hypothèse du continu ($\aleph_0 = 2^{\aleph_1}$) :&#xA;Numération De nombreux systèmes de numération à bases entières ont été utilisés par différents peuples et à différentes époques.&#xA;Par exemple :&#xA;système binaire (base 2) utilisé dans des langues d&amp;rsquo;Amérique du Sud et d&amp;rsquo;Océanie, et utilisé de nos jours en informatique.&#xA;système quinaire (base 5) dont il reste des traces jusqu&amp;rsquo;au xxe siècle dans des langues africaines, mais aussi, partiellement, dans les notations tchouvache, suzhou, romaine et maya.</description>
-    </item>
-    <item>
-      <title>Électromagnétisme</title>
-      <link>https://coursphychi.github.io/more/physique/electromag/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/electromag/</guid>
-      <description>Électromagnétisme Rayonnement Code Python pour cette dernière vidéo : import numpy as np import matplotlib.pyplot as plt from scipy.optimize import fsolve import os x0 = 0.2 def beta_function(t): return np.array([0.,-x0*c*np.sin(np.pi*t),0]) def beta_dot_function(t): return np.array([0,-x0*c*np.pi*np.cos(np.pi*t),0]) c = 1 def r_0(t): return np.array([float(0.),float(x0*c/np.pi*np.cos(np.pi*t)),0]) def determinetprime(r,r_0,t): &#34;&#34;&#34; r_0(t_prime) est la fonction donnant la position au cours du temps r est le point où on cherche la valeur du champ &#34;&#34;&#34; def func(t_prime): return t - t_prime - np.</description>
-    </item>
-    <item>
-      <title>Optique</title>
-      <link>https://coursphychi.github.io/more/physique/optique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/optique/</guid>
-      <description> Optique Arcs-en-ciel La physique de l&amp;rsquo;arc-en-ciel avec des simulations en VPython.&#xA;Lentilles Physique et maths des lentilles avec simulations VPython.&#xA;Polarisation </description>
-    </item>
-    <item>
-      <title>Ordinateur</title>
-      <link>https://coursphychi.github.io/more/info/ordinateur/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/info/ordinateur/</guid>
-      <description>Ordinateur Petite série de vidéo sur le fonctionnement simplifié d&amp;rsquo;un ordinateur.&#xA;Source : &amp;ldquo;But how do it know?&amp;rdquo; de J. Clark Scott</description>
-    </item>
-    <item>
-      <title>Propositions - Sémantique</title>
-      <link>https://coursphychi.github.io/more/logique/logique2/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/logique/logique2/</guid>
-      <description>info&#xA;Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.&#xA;Calcul des propositions Syntaxe Sémantique Preuve Sémantique Modèle La sémantique concerne l&amp;rsquo;interprétation des formules. Le calcul propositionnel est très frustre à cet égard. Une variable propositionnelle vaut soit 1, soit 0, c&amp;rsquo;est-à-dire qu&amp;rsquo;elle est soit vraie, soit fausse. Et il en est de même pour une formule dont l&amp;rsquo;interprétation se déduit de celles des variables et des règles qu&amp;rsquo;impliquent les connecteurs.</description>
-    </item>
-    <item>
-      <title>Pythagore et Thalès</title>
-      <link>https://coursphychi.github.io/more/maths/geometrie/geo1/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/geometrie/geo1/</guid>
-      <description>Le triangle Pythagore Pythagore a vécu à Samos (une île grecque) au 6e siècle avant notre ère. Malgré le nom qu&amp;rsquo;on lui donne, le théorème de Pythagore était connu et utilisé par les Babyloniens et les Indiens des siècles avant Pythagore. Mais peut-être que Pythagore a été le premier à l&amp;rsquo;introduire en Grèce et cela a suffi à lui octroyer une reconnaissance éternelle.&#xA;Théorème de Pythagore :&#xA;Si un triangle est rectangle, alors le carré de la longueur de l’hypoténuse est égal à la somme des carrés des longueurs des deux autres côtés.</description>
-    </item>
-    <item>
       <title>Entités chimiques</title>
       <link>https://coursphychi.github.io/2nde/atome/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -231,83 +147,6 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/oxydo/</guid>
       <description>Oxydo-réduction Présentation&#xA;Demi-équation électronique&#xA;Une demi-équation électronique met en évidence, de manière formelle, l’existence d’un transfert d’électron(s) au cours d’une transformation convertissant l’oxydant d’un couple en son réducteur conjugué (ou l’inverse). La demi-équation ne modélise pas le déroulement microscopique de cet échange, mais illustre, à l’échelle macroscopique, les proportions dans lesquelles il s’opère.&#xA;Exemple :&#xA;La demi-équation électronique associée au couple $\left(\ce{Cr2O7^2-/Cr^3+}\right)$, montre que 3 moles d’électrons sont échangées par mole de chrome converti :</description>
-    </item>
-    <item>
-      <title>Algèbre</title>
-      <link>https://coursphychi.github.io/more/maths/algebre/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/algebre/</guid>
-      <description>Algèbre Équations Jusque là, rien de bien folichon&amp;hellip; Mais si on libère la variable de nos polynômes en lui permettant de se balader dans l&amp;rsquo;espace des complexes, tout devient plus sympa. Déjà, plus d&amp;rsquo;histoires de 0, 1 ou 2 solutions pour un polynôme de degré 2&amp;hellip; En complexe, un polynôme de degré 2 a toujours 2 solutions. C&amp;rsquo;est quand même plus propre comme ça. Et d&amp;rsquo;ailleurs, un polynôme de degré n a toujours n racines et peut donc se factoriser en n polynômes de degré 1.</description>
-    </item>
-    <item>
-      <title>Analyse en composantes principales</title>
-      <link>https://coursphychi.github.io/more/maths/pca/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/pca/</guid>
-      <description>Analyse en composantes principales Les axes qui tiraillent territorialement la France Détaillons un exemple sur le modèle de celui des prénoms dans la vidéo.&#xA;L&amp;rsquo;idée ici est de récupérer plein de séries de données départementales disparates sur le site de l&amp;rsquo;INSEE pour voir si les composantes principales font ou non ressurgir une géographie identifiable de ce brouillard de chiffres. On peut alors s&amp;rsquo;amuser à balbutier des interprétations pour ces axes de différentiation territoriaux et probablement irriter ainsi fortement tout sociologue un tant soit peu éduqué.</description>
-    </item>
-    <item>
-      <title>Cercle et Trigo</title>
-      <link>https://coursphychi.github.io/more/maths/geometrie/geo2/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/geometrie/geo2/</guid>
-      <description>Cercle et triangle Trigonométrie La loi des sinus a contribué à la définition du mètre, la première unité &amp;ldquo;universelle&amp;rdquo; lors de la révolution française.&#xA;Delambre et Méchain furent missionner pour mesurer le plus précisément possible un bout de méridien entre Dunkerque et Barcelone, la toute neuve définition du mètre étant :&#xA;un mètre est la dix millionième partie d&amp;rsquo;un quart de méridien terrestre&#xA;Le cercle répétiteur de Borda fut leur arme secrète.</description>
-    </item>
-    <item>
-      <title>IA</title>
-      <link>https://coursphychi.github.io/more/info/ia/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/info/ia/</guid>
-      <description>Intelligence Artificielle Avant de parler d&amp;rsquo;intelligence artificielle, il convient de s&amp;rsquo;interroger sur le terme intelligence.&#xA;L&amp;rsquo;intelligence arificielle (IA) est une discipline scientifique qui a vu officiellement le jour en 1956. Elle repose sur la conjecture selon laquelle toutes les fonctions cognitives, en particulier l&amp;rsquo;apprentissage, le raisonnement, le calcul, la perception, la mémorisation, voire la découverte scientifique ou la créativité artistique, peuvent être décrites avec une précision telle qu&amp;rsquo;il serait possible de les reproduire sur des ordinateurs.</description>
-    </item>
-    <item>
-      <title>Logique modale</title>
-      <link>https://coursphychi.github.io/more/logique/godel/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/logique/godel/</guid>
-      <description>Il y a différentes logiques de la prouvabilité dont celle de Gödel-Löb. $\Box\phi$ y est interprétée comme &amp;ldquo;la formule $\phi$ est prouvable&amp;rdquo;.&#xA;Toute formule peut être codée par un entier (il suffit par exemple de regarder le code binaire du fichier de traitement de texte où cette formule est écrite et d&amp;rsquo;ajouter &amp;ldquo;1&amp;rdquo; à gauche du code pour éviter la perte éventuelle de zéros non significatifs). De même, on peut coder un arbre de preuve (puisqu&amp;rsquo;il peut lui-même s&amp;rsquo;écrire avec un logiciel de traitement de texte).</description>
-    </item>
-    <item>
-      <title>Logique modale</title>
-      <link>https://coursphychi.github.io/more/logique/logique4/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/logique/logique4/</guid>
-      <description>info&#xA;Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.&#xA;Logique modale Syntaxe et sémantique Systèmes logiques Différentes logiques modales Une petite communauté de dragons vivent sur une île aux règles spéciales. Si un dragon apprend qu&amp;rsquo;il a les yeux bleus, c&amp;rsquo;est la honte et il doit partir le soir même. Mais les autres dragons n&amp;rsquo;ont pas le droit de lui dire et aucun de ces dragons n&amp;rsquo;a de reflet et ne peut donc constater la couleur de ses propres yeux.</description>
-    </item>
-    <item>
-      <title>Logique modale</title>
-      <link>https://coursphychi.github.io/more/logique/logique5/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/logique/logique5/</guid>
-      <description>info&#xA;Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.&#xA;Logique modale Syntaxe et sémantique Systèmes logiques Différentes logiques modales Axiomatique : les systèmes logiques Nous cherchons l&amp;rsquo;équivalent en logique modale des tautologies pour le calcul des propositions ; des formules vraies dans tous les modèles, ou plutôt dans toute une classe de modèles car comme on va le voir, la topologie d&amp;rsquo;un modèle contraint la vérité à l&amp;rsquo;intérieur de celui-ci.</description>
-    </item>
-    <item>
-      <title>Logique modale</title>
-      <link>https://coursphychi.github.io/more/logique/logique6/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/logique/logique6/</guid>
-      <description>Logique modale Syntaxe et sémantique Systèmes logiques Différentes logiques modales Petit condensé de logique modale&amp;nbsp;: En logique modale, un &amp;ldquo;monde possible&amp;rdquo; contient les propositions qui sont vraies dans ce monde. Il correspond à un modèle du calcul des propositions (à une ligne d&amp;rsquo;une table de vérité). Ces mondes possibles sont connectés entre eux par des relations d&amp;rsquo;accessibilité, et les opérateurs de modalité permettent d&amp;rsquo;explorer ces relations. Si $P$ est vraie dans tous les mondes accessibles depuis le monde $a$, alors on écrit $a\Vdash \Box P$ et si $P$ est vraie dans au moins un de ces mondes, on utilise $a\Vdash \Diamond P$.</description>
-    </item>
-    <item>
-      <title>Probabilités / Statistiques</title>
-      <link>https://coursphychi.github.io/more/maths/probastat/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/probastat/</guid>
-      <description>Probabilités Loi Binomiale D&amp;rsquo;une épreuve de Bernoulli à la loi binomiale :&#xA;Loi normale La célèbre gaussienne (ou courbe en cloche) :&#xA;Densité de probabilités Nouvelle énigme permettant de parler des densités de probabilité :&#xA;Quelle est la distance moyenne entre deux points pris au hasard sur un segment ?&#xA;On peut vérifier la solution statistiquement avec un petit programme simplissime :&#xA;Probabilités conditionnelles et Bayes Les probabilités conditionnelles au tribunal, chez le médecin et dans un vieux jeu télévisé américain :</description>
-    </item>
-    <item>
-      <title>Propositions - Preuve</title>
-      <link>https://coursphychi.github.io/more/logique/logique3/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/logique/logique3/</guid>
-      <description>info&#xA;Notes de lecture du livre La logique pas à pas de Jacques Duparc que je paraphrase allégrement.&#xA;Calcul des propositions Syntaxe Sémantique Preuve Théorie de la démonstration Une preuve ou une démonstration&amp;nbsp;:&#xA;est de longueur finie, est vérifiable mécaniquement, s&amp;rsquo;appuie sur des hypothèses, aboutit à une conclusion. Une démonstration permet de mettre au jour une vérité syntaxique (s&amp;rsquo;appuyant sur un jeu de règles) plutôt que sémantique (faisant intervenir les modèles d&amp;rsquo;une théorie).</description>
-    </item>
-    <item>
-      <title>Relativité restreinte</title>
-      <link>https://coursphychi.github.io/more/physique/relatres/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/relatres/</guid>
-      <description>Relativité restreinte Vision géométrique Série de vidéos sur la relativité restreinte avec un angle plutôt géométrique.&#xA;Source : le génial petit livre &amp;ldquo;Very special relativity - An illustrated guide&amp;rdquo; de Sander Bais.&#xA;FloatHeadPhysics communique bien dans la vidéo suivante la joie de la découverte d&amp;rsquo;un modèle explicatif simple.&#xA;Ici, elle vient de ce merveilleux petit livre illustré : Relativity visualized de Lewis Caroll Epstein.&#xA;Masse du photon Paradoxe des jumeaux Champ magnétique Il n&amp;rsquo;y a pas de champ magnétique, seulement un champ électrique et du mouvement.</description>
     </item>
     <item>
       <title>Combustions</title>
@@ -331,20 +170,6 @@
       <description>Titrage Présentation&#xA;Dosage par titrage&#xA;Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’« acido-basique », « par oxydoréduction » ou « par précipitation » selon la nature de la réaction support.&#xA;En première, on ne verra que des dosages par oxydo-réduction (la réaction support du titrage est une oxydo-réduction) avec suivi colorimétrique.</description>
     </item>
     <item>
-      <title>Aires et Volumes</title>
-      <link>https://coursphychi.github.io/more/maths/geometrie/geo3/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/geometrie/geo3/</guid>
-      <description> Aires et volumes </description>
-    </item>
-    <item>
-      <title>Relativité générale</title>
-      <link>https://coursphychi.github.io/more/physique/relatge/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/relatge/</guid>
-      <description>Relativité générale Le plus impressionnant livre sur la relativité générale est sans contexte à mes yeux &amp;ldquo;A Journey into Gravity and Spacetime&amp;rdquo; du génial John Archibald Wheeler. Il réussit le tour de force d&amp;rsquo;expliquer la relativité générale quasiment sans mathématiques tout en n&amp;rsquo;esquivant rien de la profondeur conceptuelle de la théorie, au contraire.&#xA;Le livre démarre par un long poème dont les derniers vers dévoilent la notion au cœur de son explication, relation fondamentale de la topologie algébrique qui peut sembler de prime abord assez cryptique : le bord d&amp;rsquo;un bord est vide.</description>
-    </item>
-    <item>
       <title>Énergie/Puissance</title>
       <link>https://coursphychi.github.io/tsti2d/egiepuiss/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -364,27 +189,6 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/mole/</guid>
       <description> Quantité de matière Présentation&#xA;Définition Quantité de matière d’une espèce chimique&#xA;Grandeur, exprimée en moles, utilisée pour dénombrer les entités d’une espèce chimique dans un échantillon de matière, une mole étant définie comme un ensemble d’exactement $6,02214076\times10^{23}$ entités.&#xA;Documents TP Bouteille bleue A mole of moles - xkcd </description>
-    </item>
-    <item>
-      <title>Dimensions</title>
-      <link>https://coursphychi.github.io/more/maths/geometrie/geo4/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/geometrie/geo4/</guid>
-      <description>Curse of dimensionality L&amp;rsquo;expression Curse of dimensionality (Fléau de la dimension dans sa traduction française) vient de l&amp;rsquo;américain Richard Bellman alors qu&amp;rsquo;il considérait des problèmes en programmation dynamique (qu&amp;rsquo;il inventa en 1953).&#xA;Mais qu&amp;rsquo;est-ce donc que ce &amp;ldquo;fléau&amp;rdquo; ?&#xA;Le volume d&amp;rsquo;un cube de côté $a$ dans un espace à $n$ dimensions vaut $a^n$. Jusque là, ça va.&#xA;Pour la boule, de rayon $R$, c&amp;rsquo;est plus compliqué&amp;hellip;&#xA;à 1D, la boule se réduit à un segment de longueur $R$.</description>
-    </item>
-    <item>
-      <title>Logique</title>
-      <link>https://coursphychi.github.io/more/logique/logique-c/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/logique/logique-c/</guid>
-      <description>Logique Algèbre de Boole L&amp;rsquo;algèbre de Boole permet d&amp;rsquo;algébriser la logique.&#xA;Logique des propositions L&amp;rsquo;implication $A\rightarrow B$ signifie que si $A$ est vraie alors $B$ est vraie.&#xA;$A$ $B$ $A\rightarrow B$ 0 0 1 0 1 1 1 0 0 1 1 1 L&amp;rsquo;implication réciproque s&amp;rsquo;écrit $B\rightarrow A$. On peut la lire : $B$ est vraie seulement si $A$ est vraie.&#xA;$A$ $B$ $B\rightarrow A$ 0 0 1 0 1 0 1 0 1 1 1 1 S&amp;rsquo;il y a conjonction entre l&amp;rsquo;implication ($B$ si $A$) et sa réciproque ($B$ seulement si $A$), ce qui s&amp;rsquo;écrit $(A\rightarrow B) \land (B\rightarrow A)$, alors les propositions $A$ et $B$ sont dites matériellement équivalentes $A \leftrightarrow B$.</description>
-    </item>
-    <item>
-      <title>Mécanique quantique</title>
-      <link>https://coursphychi.github.io/more/physique/quantique/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/quantique/</guid>
-      <description>Mécanique quantique Le paradoxe EPR (et plus généralement le concept d&amp;rsquo;intrication quantique) est le vortex autour duquel tourne les différentes interprétations de la quantique puisqu&amp;rsquo;il met en porte-à-faux nos deux explications les plus abouties du monde : la quantique et la relativité. La relativité est par nature une théorie locale alors que le paradoxe EPR démontre la non localité quantique.&#xA;Un joli test de la non-localité quantique sans utiliser d&amp;rsquo;inégalités.</description>
     </item>
     <item>
       <title>Changement d&#39;état</title>
@@ -408,27 +212,6 @@
       <description>Conduction thermique Présentation&#xA;Rappels Les 3 modes de transferts thermiques sont&amp;nbsp;: la conduction&amp;nbsp;: agitation moléculaire qui se transmet de proche en proche dans un matériau. la convection&amp;nbsp;: mouvement d&#39;ensemble de la matière dans un fluide type air ou eau. le rayonnement&amp;nbsp;: transfert à distance, même dans le vide, par des ondes électromagnétiques ayant un spectre de type corps noir.&#xA;C&#39;est comme ça que le soleil nous chauffe. Questions : Quel mode de transfert thermique est-il illustré dans cette expérience&amp;nbsp;?</description>
     </item>
     <item>
-      <title>Physique statistique</title>
-      <link>https://coursphychi.github.io/more/physique/phistat/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/phistat/</guid>
-      <description>Physique statistique Petite série de vidéo sur la physique statistique, de la définition de la température à l&amp;rsquo;entropie en passant par le facteur de Boltzmann et la loi de Planck :&#xA;L&amp;rsquo;entropie est une notion passionnante qui ramifie dans différents champs.&#xA;En théorie de l&amp;rsquo;information, Claude Shannon a appelé entropie la mesure de la quantité d&amp;rsquo;information contenu dans un message. Ramenée à la physique, l&amp;rsquo;entropie de Shannon mesure le nombre de questions binaires (dont la réponse est oui ou non) auxquelles il faudrait répondre pour spécifier le microétat du système pour un macroétat donné.</description>
-    </item>
-    <item>
-      <title>Poursuites</title>
-      <link>https://coursphychi.github.io/more/maths/geometrie/geo5/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/geometrie/geo5/</guid>
-      <description>Poursuites note&#xA;Cette page est très inspirée du livre Chases and Escapes The Mathematics of Pursuit and Evasion de Paul Nahin.&#xA;Paradoxe d&amp;rsquo;Achille et de la tortue Dans La Physique, Aristote rapporte les célèbres paradoxes de Zénon d&amp;rsquo;Élée dont celui d&amp;rsquo;Achille et la tortue. :&#xA;Celui qui court le plus lentement ne sera jamais rattrapé par le plus rapide. Car le poursuivant doit d&amp;rsquo;abord atteindre le point d&amp;rsquo;où est parti le poursuivi, si bien que le plus lent doit toujours avoir une longueur d&amp;rsquo;avance.</description>
-    </item>
-    <item>
-      <title>Théorie des jeux</title>
-      <link>https://coursphychi.github.io/more/maths/jeux/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/maths/jeux/</guid>
-      <description>Un peu de théorie des jeux note&#xA;Cette page est très inspirée du livre Chases and Escapes The Mathematics of Pursuit and Evasion de Paul Nahin.&#xA;Attaque - Défense Un petit problème mathématique qui fleure bon la Guerre Froide :&#xA;Deux bombardiers bleus sont en mission. L&amp;rsquo;un transporte une bombe H et l&amp;rsquo;autre des équipements pour brouiller les radars. Leur plan de vol est tel qu&amp;rsquo;un des deux bombardiers est mieux protégé par les mitrailleuses de l&amp;rsquo;autre.</description>
-    </item>
-    <item>
       <title>Entités organiques</title>
       <link>https://coursphychi.github.io/1spe/orga/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -443,13 +226,6 @@
       <description>Transformation chimique :&#xA;la réaction chimique Présentation&#xA;Réaction chimique&#xA;Modèle introduit pour rendre compte d’observations et de mesures effectuées lors de transformations chimiques pouvant différer par les conditions de leur réalisation (température, pression, composition du mélange initial), mais partageant les mêmes réactifs, les mêmes produits et les mêmes proportions dans lesquelles ceux-ci sont convertis.&#xA;L’équation de la réaction permet de réaliser le bilan de matière d’une transformation.&#xA;Exemple :</description>
     </item>
     <item>
-      <title>Chaos</title>
-      <link>https://coursphychi.github.io/more/physique/chaos/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/chaos/</guid>
-      <description>Chaos Au confin des maths et de la physique, une des plus belle chose qui soit : le chaos (avec son cheptel de fractales et d&amp;rsquo;attracteurs étranges). Le chaos n&amp;rsquo;a pas grand chose à voir avec son image &amp;ldquo;grand public&amp;rdquo; puisqu&amp;rsquo;il est finalement très organisé. Mais timide, il le cache bien&amp;hellip;&#xA;L&amp;rsquo;intégration du système d&amp;rsquo;équations différentielles suivant donne le fameux attracteur de Lorenz avec sa forme caractéristique de papillon : $$\begin{cases}x&amp;rsquo;=\sigma(y-x)\\y&amp;rsquo;=\rho x-y-xz\\z&amp;rsquo;=xy-\beta \end{cases}$$ Avec les valeurs de paramètres suivantes : $$\begin{cases}\sigma = 3\\\rho = 26.</description>
-    </item>
-    <item>
       <title>Puissance électrique</title>
       <link>https://coursphychi.github.io/tsti2d/puisselec/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -462,13 +238,6 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/synthese/</guid>
       <description>Synthèses d’espèces chimiques organiques Lavage&#xA;Après une extraction liquide-liquide il peut rester dans la phase organique des impuretés faiblement solubles dans le solvant organique et solubles dans l&amp;rsquo;eau.&#xA;Elles peuvent être éliminées par un lavage réalisé en ajoutant de l&amp;rsquo;eau distillée à la phase organique dans une ampoule à décanter.&#xA;La phase aqueuse contenant les impuretés est ensuite séparée puis éliminée.&#xA;Distillation rapide&#xA;Après avoir isolé la phase organique contenant uniquement le produit d&amp;rsquo;intérêt, on peut éliminer le solvant grâce à une distillation rapide.</description>
-    </item>
-    <item>
-      <title>Curiosités</title>
-      <link>https://coursphychi.github.io/more/physique/jeux/</link>
-      <pubDate>Sat, 06 Mar 2021 14:20:50 +0100</pubDate>
-      <guid>https://coursphychi.github.io/more/physique/jeux/</guid>
-      <description>Curiosités La toupie tippe-top La toupie tippe-top se redresse semblant braver les lois physiques. C&amp;rsquo;est le couple des forces de frottement qui est responsable de cette bizarrerie.&#xA;Wolfgang Pauli et Niels Bohr, deux immenses physiciens au cœur de la révolution quantique, regardant une toupie tippe-top se relever.&#xA;Comme le centre de masse s&amp;rsquo;est élevé, on a envie de s&amp;rsquo;inquiéter pour la conservation de l&amp;rsquo;énergie Mais il ne faut pas !</description>
     </item>
     <item>
       <title>Lumière</title>
