@@ -93,6 +93,13 @@
       <description>La chute du Slinky Quel doit être le mouvement du centre de masse du slinky ? Le code suivant modélise de manière très simplifiée le slinky en le décomposant en deux sous-systèmes : le premier est composé des n_haut premiers disques et le second des n_bas disques restants. Le cœur du code se situe de la ligne 48 à la ligne 66.&#xA;En supposant que les deux sous-systèmes sont reliés par un ressort et que le sous-système du bas est immobile, faire un bilan des forces et exprimer ces forces sur chacun des sous-systèmes.</description>
     </item>
     <item>
+      <title>Spectrophotométrie</title>
+      <link>https://coursphychi.github.io/1spe/spectro/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/1spe/spectro/</guid>
+      <description>Spectrophotométrie Déterminer une concentration par spectrophotométrie&#xA;Dosage par étalonnage&#xA;Méthode de détermination d’une concentration, généralement non destructive, utilisant une courbe de référence liant la valeur d’une grandeur physique (absorbance, conductivité, masse volumique, etc.) à la concentration (en masse ou en quantité de matière) d’un soluté.&#xA;La courbe de référence, appelée courbe d’étalonnage, doit être monotone sur l’intervalle de concentration encadrant la concentration inconnue. La courbe n’est pas nécessairement une droite, mais cette situation permet d’obtenir une précision constante quelle que soit la valeur de la concentration recherchée.</description>
+    </item>
+    <item>
       <title>Tremplins</title>
       <link>https://coursphychi.github.io/colles/tremplins/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
