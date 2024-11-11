@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Correction fosse de plongée</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/moon.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/atom-one-dark-reasonable.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><style>
+img {border: none !important}
+
+.imp {font-weight:bold;color:#FF968D;}
+
+span {font-weight:normal;color:#93a1a1;}
+
+ul {
+margin-left: auto;
+margin-right: auto;
+text-align: left;
+width: fit-content;
+list-style-position: inside;
+color:#93a1a1;
+}
+
+ul li {
+text-indent: -1em;
+padding-left: 1em;
+}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+.shape {
+    display: inline-block;
+    margin: 5px;
+    margin-bottom: -1px;
+}
+.circle {
+    width: 30px;
+    height: 30px;
+    background-color: #FF644E;
+    border-radius: 50%;
+}
+.square {
+    width: 30px;
+    height: 30px;
+    background-color: #0076BA;
+}
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid #FFD932;
+}
+.circlevert {
+    width: 30px;
+    height: 30px;
+    background-color: #1DB100;
+    border-radius: 50%;
+}
+
+</style>
+<h1 id="correction-de-léxercice-fossebrde-plongée">Correction de l&rsquo;éxercice fosse<br>de plongée</h1>
+</section><section>
+<h2 id="11-span-stylefont-size1emcolorff95cai-classfas-fa-smileispan">1.1. <span style="font-size:1em;color:#FF95CA"><i class="fas fa-smile"></i></span></h2>
+<p>La pression dans l&rsquo;eau augmente<br>proportionnellement à la profondeur du plongeur.</p>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="12-span-stylefont-size1emcolorffd932i-classfas-fa-brainispan">1.2. <span style="font-size:1em;color:#FFD932"><i class="fas fa-brain"></i></span></h2>
+</section><section>
+<p>Appelons B un point à la surface (<b style="color:#FFD932">$z_B=\pu{0 m}$</b>)<br>et A un point à une profondeur de 20 m (<b style="color:#61D836">$z_A=\pu{-20 m}$</b>)</p>
+<p class="fragment">Puis appliquons le principe fondamental de l'hydrostatique entre A et B :<p>
+</section><section>
+<p>${\color{#FFD932}P_B} - {\color{#61D836}P_A} = \rho g ({\color{#61D836}z_A}-{\color{#FFD932}z_B})$</p>
+<p class="fragment">On cherche la pression à la profondeur de 20 m <b style="color:#61D836">$P_A$</b> :</p>
+<p class="fragment">$- {\color{#61D836}P_A} = \rho g ({\color{#61D836}z_A}-{\color{#FFD932}z_B})-{\color{#FFD932}P_B}$</p>
+<p class="fragment">$\quad\;\; {\color{#61D836}P_A} = {\color{#FF644E}-}\rho g ({\color{#61D836}z_A}-{\color{#FFD932}z_B}){\color{#FF644E}+}{\color{#FFD932}P_B}$</p>
+</section><section>
+<p>Application numérique :</p>
+<div class="fragment">
+<p>$
+\begin{aligned}
+{\color{#61D836}P_A}  &amp;= - \pu{1,0*10^3}\times\pu{9,81}\times({\color{#61D836}-20}-{\color{#FFD932}0})+{\color{#FFD932}\pu{1,013E5}}\\
+&amp;=\pu{3,0E5 Pa}
+\end{aligned}
+$</p>
+</div>
+<div class="fragment">
+<p>On retrouve bien une pression de 3,0 bar<br>soit environ 3 fois la pression atmosphérique.</p>
+</div>
+
+</section>
+</section><section>
+<h2 id="13-span-stylefont-size1emcolorff95cai-classfas-fa-smileispan">1.3. <span style="font-size:1em;color:#FF95CA"><i class="fas fa-smile"></i></span></h2>
+<p>$P_0 = P(h=0) = \pu{101,3E3} = \pu{1,013E5}$</p>
+<p class="fragment">
+$P_0$ (pression à la surface du liquide)<br>représente la pression atmosphérique.
+</p>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="14-span-stylefont-size1emcolorffd932i-classfas-fa-brainispan">1.4. <span style="font-size:1em;color:#FFD932"><i class="fas fa-brain"></i></span></h2>
+<p>La modélisation des résultats expérimentaux donne :<br>
+$\begin{equation}
+P=\pu{9,77E3}\times h+\pu{101,3E3} \tag{a}
+\end{equation}$<br>
+et comme on l&rsquo;a vu à question 1.2, la loi fondamentale de la statique des fluides prédit :<br>
+$\begin{equation}
+P_A = -\rho g (z_A-z_B)+P_B \tag{b}
+\end{equation}$</p>
+</section><section>
+<p>Si B est un point à la surface, $P_B=P_0=\color{#FFD932}\pu{101,3E3 Pa}$<br>et $z_B=\color{#61D836}\pu{0 m}$.</p>
+<p class="fragment">Si A est un point à la profondeur $h$,<br>alors $z_A=\color{#FF644E}-h$.</p>
+<p class="fragment">Posons $P_A=\color{#73FDEA}P$.</p>
+<p class="fragment">Dans le cas de l'eau : $\rho \times g= \pu{1,0E3}\times\pu{9,81} = \color{#FF95CA}\pu{9,81E3}$</p>
+</section><section>
+<p>(b) devient :</p>
+<p>$
+\begin{aligned}
+{\color{#73FDEA}P} &amp;= - {\color{#FF95CA}\pu{9,81E3}} ({\color{#FF644E}-h}-{\color{#61D836}0})+{\color{#FFD932}\pu{101,3E3}}\\
+&amp;= \pu{9,81E3}\times h + \pu{101,3E3}
+\end{aligned}
+$</p>
+<p class="fragment">On retrouve bien quelque chose de très proche de (a).</p>
+
+</section>
+</section><section>
+<h2 id="15-span-stylefont-size1emcolorff95cai-classfas-fa-smileispan">1.5. <span style="font-size:1em;color:#FF95CA"><i class="fas fa-smile"></i></span></h2>
+<p>Sources d&rsquo;erreur :</p>
+<ul>
+<li class="fragment">mauvaise lecture de la profondeur,</li>
+<li class="fragment">erreur de mesure du capteur de pression.</li>
+</ul>
+</section><section>
+<h2 id="21-span-stylefont-size1emcolorff95cai-classfas-fa-smileispan">2.1. <span style="font-size:1em;color:#FF95CA"><i class="fas fa-smile"></i></span></h2>
+<p>D&rsquo;après la loi de Mariotte :</p>
+<p>$P_1\times V_1 = P_2\times V_2$</p>
+</section><section>
+<h2 id="22-span-stylefont-size1emcolorffd932i-classfas-fa-brainispan">2.2. <span style="font-size:1em;color:#FFD932"><i class="fas fa-brain"></i></span></h2>
+<p>Sachant qu&rsquo;avec la <span class="imp">profondeur</span>, la <span class="imp">pression</span> augmente<br>et donc le <span class="imp">volume</span> d&rsquo;air disponible diminue (Mariotte),<br>si le plongeur consomme le même volume d&rsquo;air<br>à chaque respiration, il aura une autonomie<br>moins grande en profondeur.</p>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="23-span-stylefont-size1emcolorffd932i-classfas-fa-brainispan">2.3. <span style="font-size:1em;color:#FFD932"><i class="fas fa-brain"></i></span></h2>
+<p>À 20 m de profondeur, on est à la pression $P_2$<br>calculée en 1.2., soit environ 3,0 bar.</p>
+<p class="fragment">
+Appliquons la loi de Mariotte<br>pour connaître le volume $V_2$ d'air disponible :
+</p>
+<p class="fragment">
+$P_1 V_1 = P_2 V_2$<br>
+</p>
+</section><section>
+<p>$$\Rightarrow V_2 = \frac{P_1 V_1}{P_2}$$</p>
+<p class="fragment">
+$$V_2 = \frac{\pu{200 bar}\times \pu{12 L}}{\pu{3,0 bar}}$$
+</p>
+<p class="fragment">
+$$V_2 = \pu{8,0E2 L}$$
+</p>
+<p class="fragment">
+Il y a environ 800 L d'air disponible
+</p>
+</section><section>
+<p>Et comme le plongeur consomme<br>15 L d&rsquo;air par minute,<br>son autonomie est de :</p>
+<p class="fragment">
+$$\frac{\pu{8,0E2 L}}{\pu{15 L*min-1}} = \pu{53 min}$$
+</p>
+
+</section>
+</section><section>
+<h2 id="24-span-stylefont-size1emcolorff95cai-classfas-fa-smileispan">2.4. <span style="font-size:1em;color:#FF95CA"><i class="fas fa-smile"></i></span></h2>
+<p>Pour qu&rsquo;il y ait encore de la pression dans la bouteille,<br>il doit rester de l&rsquo;air&hellip;</p>
+<p class="fragment">
+L'autonomie est donc bien sûr diminuée.
+</p>
+</section><section>
+<h2 id="31-span-stylefont-size1emcolorff95cai-classfas-fa-smileispan">3.1. <span style="font-size:1em;color:#FF95CA"><i class="fas fa-smile"></i></span></h2>
+<p>$$F = P\times S$$</p>
+</section><section>
+<h2 id="32-span-stylefont-size1emcolorffd932i-classfas-fa-brainispan">3.2. <span style="font-size:1em;color:#FFD932"><i class="fas fa-brain"></i></span></h2>
+<p>$$F_1 = \pu{1,0 bar}\times \pu{70 mm2}$$</p>
+<p class="fragment">
+$$F_1 = (\pu{1,0E5 Pa})\times(\pu{70E-6 m^2})$$
+</p>
+<p class="fragment">
+$$F_1 = \pu{7,0 N}$$
+</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="/exotympan.png"
+      data-background-size="contain"
+      data-background-transition="concave">
+  
+<h2 id="33-span-stylefont-size1emcolorffd932i-classfas-fa-brainispan">3.3. <span style="font-size:1em;color:#FFD932"><i class="fas fa-brain"></i></span></h2>
+<p><br><br><br><br><br><br><br></p>
+<p>Une force résultante non nulle agit donc sur le tympan, provoquant une douleur.</p>
+</section><section>
+<h2 id="34-span-stylefont-size1emcolorffd932i-classfas-fa-brainispan">3.4. <span style="font-size:1em;color:#FFD932"><i class="fas fa-brain"></i></span></h2>
+<p>La manœuvre permet de faire entrer l&rsquo;air extérieur<br>(à pression plus élevée) dans l&rsquo;oreille interne.</p>
+<p>Cela équilibre les pressions de part et d&rsquo;autre<br>du tympan, rendant la résultante des forces<br>pressantes nulle. Plus de douleur.</p>
+</section><section>
+<h2 id="bilan-">Bilan :</h2>
+<p>13 questions $\rightarrow$ 13 pts</p>
+<p>Dont 6 <span style="font-size:1em;color:#FF95CA"><i class="fas fa-smile"></i></span> !!!</p>
+<p>$\Rightarrow$ $\approx 9/20$ très facilement accessible.</p>
+<p>Et rien interdit de grappiller des points<br>sur les questions <span style="font-size:1em;color:#FFD932"><i class="fas fa-brain"></i></span>.</p>
+</section><section>
+<p><a href="https://coursphychi.github.io/1spe/pression/">Retour site</a></p>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"highlight_theme":"github-dark","line-numbers":true,"theme":"sky","transition":"concave","transition_speed":"fast"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"highlight_theme":"atom-one-dark-reasonable","theme":"moon"}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({startOnLoad: false});
+    let render = (event) => {
+      let mermaidElems = event.currentSlide.querySelectorAll('.mermaid');
+      if (!mermaidElems.length){
+          return
+      }
+      mermaidElems.forEach(mermaidElem => {
+          let processed = mermaidElem.getAttribute('data-processed');
+          if (!processed){
+              
+              mermaid.init(undefined, mermaidElem);
+          }
+      });
+    };
+    Reveal.addEventListener('slidechanged', render);
+    Reveal.addEventListener('ready', render);
+  </script>
+
+    
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+    
+  </body>
+</html>

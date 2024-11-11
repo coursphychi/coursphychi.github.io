@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Photons</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/moon.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/atom-one-dark-reasonable.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><style>
+img {border: none !important}
+
+.imp {font-weight:bold;color:#FF968D;}
+
+span {font-weight:normal;color:#93a1a1;}
+
+ul {
+margin-left: auto;
+margin-right: auto;
+text-align: left;
+width: fit-content;
+list-style-position: inside;
+color:#93a1a1;
+}
+
+ul li {
+text-indent: -1em;
+padding-left: 1em;
+}
+
+.video-container {
+position: relative;
+width: 90%;
+max-width: 100%;
+margin: auto;
+padding-bottom: 50.7%; 
+height: 0;
+}
+.video-container iframe {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+
+</style>
+
+
+<section data-shortcode-section>
+<h2 id="modèle-corpusculaire">Modèle corpusculaire</h2>
+</section><section>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen="allowfullscreen"
+    loading="eager"
+    referrerpolicy="strict-origin-when-cross-origin"
+    src="https://www.youtube.com/embed/oYnp0WZDhYQ?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;"
+    title="YouTube video"
+  ></iframe>
+</div>
+<aside class="notes"><p>Passer la vidéo sans le son.
+Première lampe visible mais luminosité de fou (qu&rsquo;il augmente au fur et à mesure)
+Puis lampe noire (UVA probablement)
+Puis lampe désinfection UVC. Lampe qui produit de l&rsquo;ozone et nécessite de sortir de la salle !
+Intensité du rayonnement = nombre de photons
+Energie du rayonnement = fréquence de chaque photon
+Augmenter l&rsquo;intensité de la lumière blanche ne rend pas les photons plus énergétiques.</p>
+</aside>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/einstein2.png"
+      data-background-size="contain"
+      data-background-transition="concave">
+<div style="text-align:left;margin-left:-80px;">
+En 1905, Einstein explique l'effet<br> en généralisant l'idée de Planck au rayonnement<br>lui-même (et non plus seulement aux échanges).<br>La lumière serait constituée de petits paquets ;<br>les <span class="imp">photons</span>.
+</div>
+</section><section>
+<p>Le <span class="imp">photon</span> est une particule de lumière sans masse voyageant à $c$ qui transporte une énergie :</p>
+<div class="imp fragment" style="display: flex; justify-content: center;">
+<div style = "border:solid #FF968D 5px;padding: 20px 20px 30px 20px; font-size:1.2em">
+$\Delta E = h\times \nu$
+</div></div>
+</section><section>
+<p>Unités :</p>
+<ul>
+<li class="fragment">E en <span class="fragment imp">joule (J)</span>
+<li class="fragment">$\nu$ en <span class="fragment imp">hertz (Hz)</span></li>
+<li class="fragment">$h=\pu{6,63E-34 J*s}$<br>est la <span class="imp">constante de Planck</span>.</li>
+</ul>
+</section><section>
+<p>On peut lier énergie du photon et longueur d&rsquo;onde :</p>
+<div class="imp fragment" style="display: flex; justify-content: center;">
+<div style = "border:solid #FF968D 5px;padding: 20px 20px 30px 20px; font-size:1.2em">
+$\displaystyle E = h\times \frac{c}{\lambda}=\frac{hc}{\lambda}$
+</div></div>
+</section><section>
+<p>Unités :</p>
+<ul>
+<li class="fragment">E en <span class="fragment imp">joule (J)</span>
+<li class="fragment">$\lambda$ en <span class="fragment imp">mètre (m)</span>
+<li class="fragment">$h=\pu{6,63E-34 J*s}$<br>est la constante de Planck.</li>
+<li class="fragment">$c=$<span class="fragment"> $\pu{3,00E8 m*s^-1}$</span><br>est la célérité de la lumière.</li>
+</ul>
+</section><section>
+<p>Si la fréquence est au-dessus d&rsquo;un certain seuil,<br>le photon a assez d&rsquo;énergie pour éjecter un électron<br>du métal, créant l&rsquo;effet observé.</p>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/photoelectric.png"
+      data-background-size="contain"
+      data-background-transition="concave">
+</section><section>
+<p>Un autre savant, Millikan, n&rsquo;aime pas beaucoup<br>la théorie d&rsquo;Einstein et met au point<br>une expérience pour la détruire.</p>
+</section><section>
+<p><a href="https://applets.kcvs.ca/photoelectricEffect/PhotoElectric.html">Simulation de l&rsquo;expérience de Millikan</a><br></p>
+<p><span class='fragment ' ><span style="font-weight:normal">
+L&rsquo;expérience consiste, pour différentes fréquences,<br>à trouver la tension minimale à appliquer<br>entre les deux plaques pour obtenir<br>un courant nulle dans le circuit.</span></span></p>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/einsteinlangue.png"
+      data-background-size="contain"
+      data-background-transition="concave">
+<p>Contrairement à son souhait premier,<br>l&rsquo;expérience de Millikan a totalement<br>confirmé la théorie d&rsquo;Einstein !</p>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/courbephotoelec.png"
+      data-background-size="contain"
+      data-background-transition="concave">
+</section><section>
+<p>Conséquence :</p>
+<p>Attribution du prix Nobel en 1921 à Einstein 🥳</p>
+<br>
+<p><span class='fragment ' ><span style="font-weight:normal">Mais aussi à Millikan en 1923 😅 </span></span></p>
+<p><span class='fragment ' ><span style="font-weight:normal">Cela illustre bien qu’une bonne expérience<br>n’est pas sensée donner raison à celui qui la mène<br>mais seulement permettre de trancher.</span></span></p>
+
+</section>
+</section><section>
+<p><a href="https://coursphychi.github.io/tspe/photon/">Retour site</a></p>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"highlight_theme":"github-dark","line-numbers":true,"theme":"sky","transition":"concave","transition_speed":"fast"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"highlight_theme":"atom-one-dark-reasonable","theme":"moon"}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({startOnLoad: false});
+    let render = (event) => {
+      let mermaidElems = event.currentSlide.querySelectorAll('.mermaid');
+      if (!mermaidElems.length){
+          return
+      }
+      mermaidElems.forEach(mermaidElem => {
+          let processed = mermaidElem.getAttribute('data-processed');
+          if (!processed){
+              
+              mermaid.init(undefined, mermaidElem);
+          }
+      });
+    };
+    Reveal.addEventListener('slidechanged', render);
+    Reveal.addEventListener('ready', render);
+  </script>
+
+    
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+    
+  </body>
+</html>

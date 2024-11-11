@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Correction avancement</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/moon.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/atom-one-dark-reasonable.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><style>
+img {border: none !important}
+
+.imp {font-weight:bold;color:#FF968D;}
+
+span {font-weight:normal;color:#93a1a1;}
+
+ul {
+margin-left: auto;
+margin-right: auto;
+text-align: left;
+width: fit-content;
+list-style-position: inside;
+color:#93a1a1;
+}
+
+ul li {
+text-indent: -1em;
+padding-left: 1em;
+}
+
+</style>
+<h1 id="correction-avancement">Correction avancement</h1>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="taux-dalcoolémie">Taux d&rsquo;alcoolémie</h2>
+</section><section>
+<ol>
+<li></li>
+</ol>
+<p>Un seul réactif coloré et le seul produit coloré est d&rsquo;une autre couleur. En réglant le spectrophotomètre sur la longueur d&rsquo;onde d&rsquo;absorbance maximale du réactif,<br>on va pouvoir suivre l&rsquo;évolution de la concentration du réactif en solution ; plus sa concentration sera faible<br>(et donc plus l&rsquo;avancement sera grand),<br>plus l&rsquo;absorbance sera faible elle aussi.</p>
+</section><section>
+<ol start="2">
+<li></li>
+</ol>
+<div style="position:relative;margin:auto;">
+<div>
+<img src="/tabavalcool.png" style="background:none; box-shadow: none;">
+</div>
+</div>
+</section><section>
+<ol start="3">
+<li></li>
+</ol>
+<p>$
+\begin{aligned}
+n_2 &amp;= [\ce{Cr2O7^2-}]_0 \times V_2 \\
+&amp;= (\pu{2,0E-2 mol*L-1})\times (\pu{10,0 mL})\\
+&amp;= (\pu{2,0E-2 mol*L-1})\times (\pu{10,0E-3 L})\\
+&amp;= \pu{2,0E-4 mol}
+\end{aligned}
+$</p>
+</section><section>
+<ol start="4">
+<li></li>
+</ol>
+<p>$
+n_2 - 2\, x_{max} = 0
+$</p>
+<p>$
+\begin{aligned}
+\Rightarrow x_{max} &amp;= \frac{n_2}{2} \\
+&amp;=\frac{\pu{2,0E-4 mol}}{2}\\
+&amp;= \pu{1,0E-4 mol}
+\end{aligned}
+$</p>
+</section><section>
+<ol start="5">
+<li></li>
+</ol>
+<p>$ \displaystyle
+[\ce{Cr2O7^2-}] = \frac{n_2 - 2x}{V}
+$</p>
+</section><section>
+<ol start="6">
+<li></li>
+</ol>
+<p>$
+\begin{aligned}
+A_{420} &amp;= k \times [\ce{Cr2O7^2-}]\\
+&amp; = k\times \frac{n_2 - 2x}{V}
+\end{aligned}
+$</p>
+<p>$\displaystyle
+\Rightarrow \frac{V A_{420}}{k} = n_2 - 2x
+$</p>
+<p>$\displaystyle
+\Rightarrow 2x=n_2 - \frac{VA_{420}}{k}
+$</p>
+</section><section>
+<p>$
+\begin{aligned}
+\Rightarrow x&amp;=\frac{n_2}{2} - \frac{VA_{420}}{2k}\\
+&amp; = 1,0\times \color{#56C1FF}10^{-4}\color{#93a1a1} - \frac{12\times \color{#88FA4E}10^{-3} \color{#93a1a1}A_{420}}{2\times 150}\\
+&amp; =1,0\times  \color{#56C1FF}10 \times 10^{-5}\color{#93a1a1} - \frac{12\times  \color{#88FA4E}100\times 10^{-5}\color{#93a1a1} A_{420}}{300}\\
+&amp;=10 \color{#FF968D}\times 10^{-5}\color{#93a1a1} - \frac{1200}{300}\times A_{420}\color{#FF968D}\times 10^{-5}\\
+&amp; = (10 - 4\times A_{420})\color{#FF968D}\times 10^{-5}\color{#93a1a1}\; \pu{mol}
+\end{aligned}
+$</p>
+</section><section>
+<p>$
+\begin{aligned}
+x_f&amp; = (10 - 4\times 2,39)\times 10^{-5}\\
+&amp; = \pu{4,4E-6 mol}
+\end{aligned}
+$</p>
+<p>Comme la réaction est supposée totale, $x_f = x_{max}$.<br>
+Or cela nous donne un $x_{max}$ plus petit que celui qu&rsquo;on a trouvé en supposant le dichromate limitant.<br>
+C&rsquo;est donc l&rsquo;éthanol qui est limitant !</p>
+</section><section>
+<ol start="8">
+<li></li>
+</ol>
+<p>$n_1 - 3\,x_{max} = 0$</p>
+<p>$
+\begin{aligned}
+\Rightarrow n_1&amp; = 3\, x_{max}\\
+&amp; = 3\times\pu{4,4E-6 mol}\\
+&amp;=\pu{1,3E-5 mol}
+\end{aligned}
+$</p>
+</section><section>
+<ol start="9">
+<li></li>
+</ol>
+<p>Cherchons la masse d&rsquo;éthanol dans les 2 mL :</p>
+<p>$
+\begin{aligned}
+m_2&amp; = n_2\times M(\ce{C2H6O})\\
+&amp; = n_2\times (2M(\ce{C})+6M(\ce{H})+M(\ce{O}))\\
+&amp;=(\pu{1,3E-5 mol})\times (\pu{46 g*mol-1})\\
+&amp;=\pu{6,0E-4 g}
+\end{aligned}
+$</p>
+</section><section>
+<p>On en aura $\frac{\pu{1000 mL}}{\pu{2 mL}}=500$ fois plus dans un litre.</p>
+<p>Cela donne :</p>
+<p>$
+\begin{aligned}
+m&amp; =500\times \pu{6,0E-4 g}\\
+&amp; = \pu{0,30 g}
+\end{aligned}
+$</p>
+<p>$\pu{0,30 g} &lt; \pu{0,5 g}$ donc le conducteur<br>n&rsquo;est pas en infraction.</p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="chameaux">chameaux</h2>
+</section><section>
+<ol>
+<li></li>
+</ol>
+<br>
+<p>$\ce{2 C57H110O6 + 163 O2 -&gt; 114 CO2 + 110 H2O}$</p>
+</section><section>
+<ol start="2">
+<li></li>
+</ol>
+<div style="position:relative;margin:auto;">
+<div>
+<img src="/tabavcham.png" style="background:none; box-shadow: none;">
+</div>
+</div>
+</section><section>
+<p>Cherchons $n_1$ :</p>
+<br>
+<p>$
+\begin{aligned}
+M(\ce{C57H110O6}) &amp;= 57\,M(\ce{C}) + 110\,M(\ce{H}) + 6\,M(\ce{O}) \\
+&amp;= \pu{890 g*mol-1}
+\end{aligned}
+$</p>
+</section><section>
+<p>$
+\begin{aligned}
+n_1 &amp;= \frac{m}{M}\\
+&amp;= \frac{\pu{1,0 kg}}{\pu{890 g*mol-1}}\\
+&amp;= \frac{\pu{1,0E3 g}}{\pu{890 g*mol-1}}\\
+&amp;= \pu{1,1 mol}
+\end{aligned}
+$</p>
+</section><section>
+<p>On suppose la transformation totale<br>et la tristéarine limitante :</p>
+<p>$n_1 - 2\, x_{max} = 0$</p>
+<p>$
+\begin{aligned}
+\Rightarrow x_{max} &amp;= \frac{n_1}{2}\\
+&amp; = \pu{5,5E-1 mol}
+\end{aligned}
+$</p>
+</section><section>
+<p>Pour déterminer la quantité de matière nécessaire<br>en dioxygène, on va supposer que le mélange<br>est stœchiométrique et donc que<br>le dioxygène est lui aussi limitant.</p>
+<p class="fragment">On obtiendra bien ainsi la quantité de matière minimale en dioxygène.</p>
+</section><section>
+<p>$n_2 - 163\, x_{max} = 0$</p>
+<p>$
+\begin{aligned}
+\Rightarrow n_2 &amp;= 163\,x_{max}\\
+&amp; = \pu{90 mol}
+\end{aligned}
+$</p>
+</section><section>
+<p>Quantité de matière d&rsquo;eau libérée :</p>
+<p>$
+\begin{aligned}
+n_\ce{H2O} &amp;= 110\, x_{max} \\
+&amp;= \pu{61 mol}
+\end{aligned}
+$</p>
+</section><section>
+<ol start="3">
+<li></li>
+</ol>
+<p>Masse d&rsquo;eau formée :</p>
+<p>$
+\begin{aligned}
+m_\ce{H2O} &amp;= n_\ce{H2O}\times M(\ce{H2O}) \\
+&amp;= (\pu{61 mol})\times (\pu{18 g*mol-1})\\
+&amp; = \pu{1,1E3 g}\\
+&amp; = \pu{1,1 kg}
+\end{aligned}
+$</p>
+</section><section>
+<p>Volume d&rsquo;eau formé (en L) :</p>
+<p>$
+\begin{aligned}
+V_\ce{H2O} &amp;= \frac{m_\ce{H2O}}{\rho_\ce{H2O}} \\
+&amp;= \frac{\pu{1,1 kg}}{ \pu{1,0 kg*L-1}}\\
+&amp; = \pu{1,1L}
+\end{aligned}
+$</p>
+</section><section>
+<p>Le volume d&rsquo;air nécessaire est 5 fois plus grand que le volume de dioxygène qu&rsquo;on trouverait en supposant que l&rsquo;air en est intégralement composé :</p>
+<p>$
+\begin{aligned}
+V_\text{air} &amp;= 5 \times n_2  \times V_m \\
+&amp;= 5 \times \pu{90 mol} \times \pu{24 L*mol-1}\\\
+&amp; = \pu{1,1E4 L}\\
+&amp; = \pu{11 m^3}
+\end{aligned}
+$</p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="eau-oxygénée">eau oxygénée</h2>
+</section><section>
+<ol>
+<li></li>
+</ol>
+<p>10 volumes $\Rightarrow \pu{200 mL}\times 10 = \pu{2,0 L}$</p>
+</section><section>
+<ol start="2">
+<li></li>
+</ol>
+<p>$
+\begin{aligned}
+n_\ce{O2} &amp;= \frac{V}{V_m} \\
+&amp;= \frac{\pu{2,0 L}}{\pu{24 L*mol-1}}\\\
+&amp; = \pu{8,3E-2 mol}\\
+\end{aligned}
+$</p>
+</section><section>
+<ol start="3">
+<li></li>
+</ol>
+<br>
+<br>
+<div style="position:relative;margin:auto;">
+<div>
+<img src="/tabavH2O2.png" style="background:none; box-shadow: none;">
+</div>
+</div>
+</section><section>
+<p>On connaît l&rsquo;avancement final<br>puisqu&rsquo;on a la quantité de $\ce{O_2}$ formé :</p>
+<p>$x_f = n_\ce{O2} = \pu{8,3E-2 mol}$</p>
+</section><section>
+<p>En supposant la transformation totale, ça nous permet de déterminer la quantité initiale de peroxyde d&rsquo;hydrogène (forcément limitant) :</p>
+<p>$n_\ce{H2O2} - 2\, x_{max} = 0$</p>
+<p>$
+\begin{aligned}
+\Rightarrow n_\ce{H2O2} &amp;= 2\,x_{max} \\
+&amp;= 2\times 8,3\times10^{-2}\\\
+&amp; = \pu{1,7E-1 mol}\\
+\end{aligned}
+$</p>
+</section><section>
+<p>Cherchons la masse de peroxyde d&rsquo;hydrogène :</p>
+<p>$
+\begin{aligned}
+m_\ce{H2O2} &amp;= n_\ce{H2O2} \times M(\ce{H2O2})\\
+&amp;= (\pu{1,7E-1 mol}) \times (\pu{34 g*mol-1})\\\
+&amp; = \pu{5,8 g}\\
+\end{aligned}
+$</p>
+<p>On a donc 5,8 g pour 200 mL.</p>
+</section><section>
+<p>La masse des $V=\pu{200 mL}$<br>de solution est donnée par :</p>
+<p>$
+\begin{aligned}
+m_\text{solution} &amp;= V\times \rho_\text{solution}\\
+&amp;= V\times d_\text{solution}\times \rho_\text{eau}\\
+&amp; = (\pu{200 mL})\times 1,0 \times (\pu{1,0 g*mL-1})\\
+&amp; = \pu{200 g}
+\end{aligned}
+$</p>
+</section><section>
+<p>Le pourcentage en masse vaut donc :</p>
+<p>$
+\begin{aligned}
+\frac{ m_\ce{H2O2}}{m_\text{solution}}\times 100 &amp;= \frac{\pu{5,8 g}}{\pu{200 g}}\times 100\\
+&amp;= 2,9
+\end{aligned}
+$</p>
+<p>Pour une solution à 2,9 %,<br>il n&rsquo;y a pas de protection à prendre.</p>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/utilisationH2O2.png"
+      data-background-size="contain"
+      data-background-transition="concave">
+
+</section>
+</section><section>
+<p><a href="https://coursphychi.github.io/1spe/avancement/">Retour site</a></p>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"highlight_theme":"github-dark","line-numbers":true,"theme":"sky","transition":"concave","transition_speed":"fast"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"highlight_theme":"atom-one-dark-reasonable","theme":"moon"}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({startOnLoad: false});
+    let render = (event) => {
+      let mermaidElems = event.currentSlide.querySelectorAll('.mermaid');
+      if (!mermaidElems.length){
+          return
+      }
+      mermaidElems.forEach(mermaidElem => {
+          let processed = mermaidElem.getAttribute('data-processed');
+          if (!processed){
+              
+              mermaid.init(undefined, mermaidElem);
+          }
+      });
+    };
+    Reveal.addEventListener('slidechanged', render);
+    Reveal.addEventListener('ready', render);
+  </script>
+
+    
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+    
+  </body>
+</html>

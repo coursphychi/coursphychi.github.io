@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Machine Learning</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/sky.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/atom-one-dark-reasonable.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+<style>
+.container {
+    display: flex;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(8, 40px);
+    grid-gap: 1px;
+    margin-right: 20px; /* Espace entre les grilles */
+}
+.grid-item {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #000;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grid-item select {
+    width: 75%; /* Plus petit que la cellule */
+    height: 70%; /* Plus petit que la cellule */
+}
+canvas {
+    border: 1px solid black;
+    margin-left: 20px;
+}
+</style>
+<div class="container">
+    <div id="userGrid" class="grid-container"></div>
+    <canvas id="predictionCanvas" width="320" height="320"></canvas>
+</div>
+<script>
+
+const gridSize = 8;
+const userGrid = document.getElementById('userGrid');
+const predictionCanvas = document.getElementById('predictionCanvas');
+const ctxPrediction = predictionCanvas.getContext('2d');
+let userInput = new Array(gridSize * gridSize).fill({x: 0, y: 0, color: 0});
+
+// Modèle TensorFlow.js avec une couche cachée supplémentaire
+const model = tf.sequential();
+model.add(tf.layers.dense({inputShape: [2], units: 32, activation: 'relu'}));
+model.add(tf.layers.dense({units: 64, activation: 'relu'})); // Couche cachée supplémentaire
+model.add(tf.layers.dense({units: 3, activation: 'softmax'}));
+model.compile({optimizer: 'adam', loss: 'categoricalCrossentropy', metrics: ['accuracy']});
+
+function initializeUserGrid() {
+    for (let y = 0; y < gridSize; y++) {
+        for (let x = 0; x < gridSize; x++) {
+            const index = x + y * gridSize;
+            userInput[index] = {x, y, color: 0}; // Initialiser avec "Clear"
+            const cell = document.createElement('div');
+            cell.className = 'grid-item';
+            const select = document.createElement('select');
+            ['Clear', 'Red', 'Green', 'Blue'].forEach((color, idx) => {
+                const option = document.createElement('option');
+                option.value = idx;
+                option.textContent = color;
+                select.appendChild(option);
+            });
+            select.onchange = () => {
+                userInput[index].color = parseInt(select.value);
+                cell.style.backgroundColor = select.value === '1' ? 'red' : select.value === '2' ? 'green' : select.value === '3' ? 'blue' : 'transparent'; // Colorer la case
+                trainAndUpdateModel();
+            };
+            cell.appendChild(select);
+            userGrid.appendChild(cell);
+        }
+    }
+}
+
+async function trainAndUpdateModel() {
+    const xs = tf.tensor2d(userInput.filter(input => input.color > 0).map(input => [input.x / gridSize, input.y / gridSize])); // Coordonnées normalisées
+    const ys = tf.oneHot(tf.tensor1d(userInput.filter(input => input.color > 0).map(input => input.color - 1), 'int32'), 3); // Encodage one-hot
+    await model.fit(xs, ys, {epochs: 20, batchSize: 32});
+    updatePredictionGrid();
+}
+
+async function updatePredictionGrid() {
+    const allInputs = userInput.map(input => [input.x / gridSize, input.y / gridSize]);
+    const predictions = model.predict(tf.tensor2d(allInputs));
+    const predictedClasses = await predictions.argMax(-1).data();
+    drawPredictionGrid(predictedClasses);
+}
+
+function drawPredictionGrid(predictedClasses) {
+    ctxPrediction.clearRect(0, 0, predictionCanvas.width, predictionCanvas.height);
+    predictedClasses.forEach((cls, i) => {
+        const x = (i % gridSize) * 40;
+        const y = Math.floor(i / gridSize) * 40;
+        ctxPrediction.fillStyle = cls === 0 ? 'red' : cls === 1 ? 'green' : cls === 2 ? 'blue' : 'transparent'; // Choisir la couleur
+        ctxPrediction.fillRect(x, y, 40, 40);
+    });
+}
+
+initializeUserGrid();
+
+</script>
+</section><section>
+<p><a href="https://coursphychi.github.io/tes/vivant/ia/#algorithme-des-k-moyennes----exemple-dapprentissage-non-supervis%C3%A9">Retour site</a></p>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"highlight_theme":"github-dark","line-numbers":true,"theme":"sky","transition":"concave","transition_speed":"fast"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"highlight_theme":"atom-one-dark-reasonable"}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({startOnLoad: false});
+    let render = (event) => {
+      let mermaidElems = event.currentSlide.querySelectorAll('.mermaid');
+      if (!mermaidElems.length){
+          return
+      }
+      mermaidElems.forEach(mermaidElem => {
+          let processed = mermaidElem.getAttribute('data-processed');
+          if (!processed){
+              
+              mermaid.init(undefined, mermaidElem);
+          }
+      });
+    };
+    Reveal.addEventListener('slidechanged', render);
+    Reveal.addEventListener('ready', render);
+  </script>
+
+    
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+    
+  </body>
+</html>

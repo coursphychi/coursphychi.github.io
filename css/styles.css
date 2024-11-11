@@ -1,0 +1,27 @@
+ul {
+    width: 90%;
+    margin: 10%;
+    color: gray;
+}
+.court {
+    width: 60%;
+    margin: 40%;
+    color: gray;
+}
+.moyen {
+    width: 75%;
+    margin: 25%;
+    color: gray;
+}
+.long {
+    width: 100%;
+    margin: 0%;
+    color: gray;
+}
+li {
+		width:100%;
+		margin: auto;
+}
+span {
+		font-weight: bold;
+}

@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Acide/Base</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/sky.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/github-dark.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><style>
+img {
+border: none !important;
+}
+
+.imp {
+font-weight:bold;color:#FF644E;
+}
+
+li {
+color: #5E5E5E;
+}
+
+ul {
+margin-left: auto;
+margin-right: auto;
+text-align: left;
+width: fit-content;
+list-style-position: inside;
+color:#93a1a1;
+}
+
+span {
+font-weight:normal;
+}
+</style>
+<h1 id="acidebase">Acide/Base</h1>
+</section>
+
+
+<section data-shortcode-section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/ptcomacide.png"
+      data-background-size="contain"
+      data-background-transition="concave">
+</section><section>
+<p>Quel est le point commun de ces acides ?</p>
+<aside class="notes"><p>La présence d&rsquo;atome d&rsquo;hydrogène ne fait pas systématiquement d&rsquo;une molécule un acide !
+Exemple du méthane ou de l&rsquo;éthanol.
+Il faut que la molécule puisse donner facilement cet atome d&rsquo;hydrogène une fois dissoute dans l&rsquo;eau.</p>
+</aside>
+</section><section>
+<p><span>Définition d&rsquo;un <span class="imp">acide</span><br>de <b>Brönsted</b> :</span>
+<br>
+<br></p>
+<p><span class='fragment ' ><div style="position:relative;margin:auto;width:fit-content;"></p>
+<div style = "border:solid #EE220C 8px;padding: 20px 10px 30px 10px; font-size:1.1em">
+ Espèce chimique capable de<br>
+<span class="imp">céder un ion hydrogène $\ce{H+}$</span> 
+</div></div>
+</span>
+</section><section>
+<p><span>Définition d&rsquo;une <b style="color:#0076BA;">base</b><br>de <b>Brönsted</b> :</span>
+<br>
+<br></p>
+<p><span class='fragment ' ><div style="position:relative;margin:auto;width:fit-content;"></p>
+<div style = "border:solid #004D80 8px;padding: 20px 10px 30px 10px; font-size:1.1em">
+ Une espèce chimique capable de<br>
+<span class="imp" style="color:#0076BA;">capter un ion hydrogène $\ce{H+}$</span>
+</div></div>
+</span>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="couples-acide-base">Couples acide-base</h2>
+</section><section>
+<p>En cédant un <span style="color:#D41876;font-weight:bold">proton</span>, un acide $\color{#EE220C}\ce{AH}$<br>se transforme en sa base conjuguée $\color{#0076BA}\ce{A-}$ :</p>
+<p>$\ce{\color{#EE220C}AH\color{black} &ndash;&gt; \color{#0076BA}A- \color{black} + \color{#D41876}H+}$</p>
+</section><section>
+<span style = "border:solid black 5px;width:40%;padding: 20px 20px 25px 20px;">
+$\ce{(\color{#EE220C}{AH}/\color{#0076BA}{A-})}$ est un <span style="font-weight:bold">couple</span> <span style="color:#EE220C;">acide</span>-<span style="color:#0076BA;">base</span></span>
+</section><section>
+<p>Exemples : <br><br></p>
+<p>$($$\ce{\color{#EE220C}{CH3COOH}}$$/$<span class="fragment">$\color{#0076BA}\ce{CH3COO-}$</span>$)$</p>
+<p class="fragment">acide éthanoïque / ion éthanoate</p>
+<br>
+<p class="fragment">
+$($<span class="fragment">$\ce{\color{#EE220C}{NH4+}}$</span>$/$$\color{#0076BA}\ce{NH3}$$)$
+</p>
+<p class="fragment">ion ammonium / ammoniac</p>
+</section><section>
+<p>Les deux exemples précédents font partie<br>de deux familles chimiques ayant<br>des propriétés acidobasiques :</p>
+<ul>
+<li>
+<p>acide carboxylique / ion carboxylate</p>
+</li>
+<li>
+<p>ion ammonium / amine</p>
+</li>
+</ul>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/couplecarbo.png"
+      data-background-size="contain"
+      data-background-transition="concave">
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/coupleamine.png"
+      data-background-size="contain"
+      data-background-transition="concave">
+</section><section>
+<p>Autre exemple :</p>
+<br>
+<p class="fragment">$($$\ce{\color{#EE220C}{H2CO3}}$$/$<span class="fragment">$\color{#0076BA}\ce{HCO3-}$</span>$)$</p>
+<span class="fragment">acide carbonique / ion bicarbonate</span>
+<p><br><br></p>
+<p class="fragment">
+$($<span class="fragment">$\ce{\color{#EE220C}{HCO3-}}$</span>$/$ <span>$\color{#0076BA}\ce{CO3^2-}$</span>$)$</p>
+<span class="fragment">ion bicarbonate / ion carbonate</span>
+</section><section>
+<p>Que peut-on dire de l&rsquo;acide carbonique $\ce{\color{#EE220C}H2CO3}$ ?</p>
+<br>
+<div style="position:relative;margin-left:auto;margin-right:auto;width:500px;max-width:100%;margin-bottom:-40px;margin-top:-40px;">
+<img src="/carbonique.png" style="box-shadow:none;background:none;">
+</div>
+<br>
+<p class="fragment">C'est un <span class="imp">diacide</span> !</p>
+</section><section>
+<p><u>Remarque</u></p>
+<p>l&rsquo;acide carbonique est créé par la solvatation<br>du dioxyde de carbone dans l&rsquo;eau :</p>
+<p class="fragment">
+$$\ce{CO2 (aq) + H2O (\ell) -> H2CO3 (aq)}$$
+</p>
+<p class="fragment">Il est responsable de l'acidification des océans !</p>
+</section><section>
+<p>Et que peut-on dire de l&rsquo;ion bicarbonate $\ce{HCO3-}$ ?</p>
+<p class="fragment">C'est à la fois la base de l'acide carbonique<br>et l'acide de l'ion carbonate.</p>
+<p class="fragment">On dit qu'il s'agit d'une espèce <b style="color:#1DB100;">amphotère</b><br>
+ou d'un  <b style="color:#1DB100;">ampholyte</b>.
+<aside class="notes"><p>amphotère est l&rsquo;adjectif associé au nom ampholyte</p>
+</aside>
+</section><section>
+<p><u>Remarque</u></p>
+<p>Le caractère amphotère de l&rsquo;ion bicarbonate<br>lui permet de jouer un rôle de <b style="color:#1DB100;">tampon</b>.</p>
+<p class="fragment">
+Une <b style="color:#1DB100;">solution tampon</b> est une solution dont le pH varie peu lors de l'addition d'une petite quantité d'un acide, d'une base ou lors d'une légère dilution. 
+</p>
+<p class="fragment">
+Dans le sang, l'ion bicarbonate participe<br>ainsi à la régulation du pH.
+</p>
+</section><section>
+<p>Dernier exemple :</p>
+<br>
+<div style="position:relative;margin:auto;border:solid 5px #D41876;border-radius:10px;width:fit-content;padding:10px 20px 40px 20px">
+<p class="fragment">$($$\ce{\color{#EE220C}{H3O+}}$$/$ <span class="fragment">$\color{#0076BA}\ce{H2O}$</span>$)$</p>
+<span class="fragment"><span class="imp">ion oxonium</span> / <u>eau</u></span>
+<br>
+<p class="fragment">
+$($<span class="fragment">$\ce{\color{#EE220C}{H2O}}$</span> $/$ <span>$\color{#0076BA}\ce{HO-}$</span>$)$</p>
+<span class="fragment"><u>eau</u> / <b style="color:#0076BA ;">ion hydroxyde</b></span>
+</div>
+</section><section>
+<p>Que peut-on dire de l&rsquo;eau ?</p>
+<br>
+<p class="fragment">L'eau est une espèce <b style="color:#1DB100;">amphotère</b>.<p>
+<p class="fragment">ou</p>
+<p class="fragment">L'eau est un <b style="color:#1DB100;">ampholyte</b>.<p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="réaction-acido-basique">Réaction acido-basique</h2>
+</section><section>
+<p>C&rsquo;est la réaction entre l&rsquo;acide d&rsquo;un couple<br> et la base d&rsquo;un autre couple.</p>
+<p>Il y a alors échange d&rsquo;<b style="color:#D41876 ;">un ion hydrogène $\color{#D41876}\ce{H+}$</b><br>donné par l&rsquo;acide et capté par la base.</p>
+</section><section>
+<p>Soient les couples $\ce{({\color{#EE220C}A\color{#D41876}H}/\ce{A-})}$ et $\ce{(BH/{\ce{\color{#0076BA}B-}})}$,<br>
+la réaction entre $\ce{\color{#EE220}A\color{#D41876}H}$ et $\color{#0076BA}\ce{B-}$ s&rsquo;écrit :</p>
+<div style="position:relative;margin:auto;width:fit-content;border:solid 6px #1DB100;padding:0 50px 0 50px;border-radius:10px">
+$$\ce{\color{#EE220}A\color{#D41876}H\color{black} + \color{#0076BA}B^- \color{black}  ->A- + BH}$$
+</div>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-size="content"
+      data-background-transition="concave"
+      data-background-video="/vidacidebase.mp4"
+      data-background-video-loop="loop">
+</section><section>
+<p>Exemple :</p>
+<p>Écrire la réaction entre l&rsquo;ammoniac $\color{#0076BA}\ce{NH3}$<br>
+et l&rsquo;acide ethanoïque $\ce{\color{#EE220C}CH3COO\color{#D41876}H}$.</p>
+<p>Les deux couples acide-base mis en jeu :
+$\ce{(NH4+/{\color{#0076BA}NH3})}$ et $(\ce{\color{#EE220C}CH3COO\color{#D41876}H}/\ce{CH3COO-})$
+<br><br></p>
+<p><span class='fragment ' >$\ce{{\color{#EE220C}CH3COO\color{#D41876}H} +{\color{#0076BA}NH3} –&gt; CH3COO- + NH4+}$</span></p>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-auto-animate="">
+<p>Exemple :</p>
+<p>Écrire la réaction entre<br>l&rsquo;ammoniac $\ce{NH3}$ et l&rsquo;eau $\ce{H2O}$.</p>
+<p>Les trois couples acide-base mis en jeu :
+$\ce{(NH4+/NH3)}$, $(\ce{H3O+}/\ce{H2O})$ et $(\ce{H2O}/\ce{OH-})$</p>
+<br>
+<div class="fragment" style="position:relative;margin:auto;width:fit-content;border:solid 6px #1DB100;padding:0 50px 0 50px;border-radius:10px">
+$$\ce{H2O + NH3 -> OH- + NH4+}$$
+</div>
+</section><section>
+<p>Exemple :</p>
+<p>Écrire la réaction entre l&rsquo;acide éthanoïque $\ce{CH3COOH}$ et l&rsquo;eau $\ce{H2O}$.</p>
+<div class="fragment" style="position:relative;margin:auto;width:fit-content;border:solid 6px #1DB100;padding:0 50px 0 50px;border-radius:10px; font-size:0.9em">
+$$\ce{CH3COOH + H2O -> CH3COO- + H3O+}$$
+</div>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="comment-savoir-quune-solution-est-acidenbsp">Comment savoir qu&rsquo;une solution est acide ?</h2>
+</section><section>
+<h3 id="indicateurs-colorés">Indicateurs colorés</h3>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/papierph.png"
+      data-background-size="20%"
+      data-background-transition="concave">
+<p><span class='fragment ' >papier pH<br> bandelette test</span></p>
+<br>
+<br>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/chourouge.png"
+      data-background-size="50%"
+      data-background-transition="concave">
+<p>Chou rouge</p>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/hortensia.png"
+      data-background-size="70%"
+      data-background-transition="concave">
+<p>Hortensias
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br></p>
+</section><section>
+<img src="/royalpH.png" width="60%">
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/phmetre.png"
+      data-background-size="60%"
+      data-background-transition="concave">
+<p><strong>pH-mètre</strong>                               
+<br><br><br><br><br><br><br><br></p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h2 id="le-potentiel-hydrogène-textph">Le potentiel Hydrogène ($\text{pH}$)</h2>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/phscale.png"
+      data-background-size="60%"
+      data-background-transition="concave">
+</section><section>
+<p>Lorsqu&rsquo;une espèce acide $\ce{AH}$ est ajoutée à une solution aqueuse, l&rsquo;acide cède un ion hydrogène<br>à l&rsquo;eau qui forme un ion oxonium $\ce{H3O+}$.<br><br>
+ajout de $\ce{AH}$ $\Rightarrow$  $\ce{[H3O+]}$➚
+<br><br></p>
+<p><span class='fragment ' ><span style="font-weight:normal">Et on sait aussi que : <br><br>ajout de $\ce{AH}$ $\Rightarrow$  $\text{pH}$➘</span></span></p>
+</section><section>
+<p><strong>Le $\text{pH}$ est lié à la concentration<br>en ions oxonium $\ce{[H3O+]}$</strong><br>
+Quand l&rsquo;un augmente, l&rsquo;autre diminue.</p>
+</section><section>
+<p>Définition du pH :<br><br></p>
+<div style = "position:relative;margin:auto;border:solid red 7px;width:fit-content;padding: 20px 40px 20px 40px;border-radius:20px;">
+$$\displaystyle\text{pH} = -\log\left(\frac{\ce{[H3O+]}}{c^\circ}\right)$$
+</div>
+<p><br><br></p>
+<ul>
+<li class="fragment"> le pH est sans unité</li>
+<li class="fragment"> $c^\circ = \pu{1 mol*L-1}$<br>(concentration standard)</li>
+</ul>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/logcalc.png"
+      data-background-size="80%"
+      data-background-transition="concave">
+</section><section>
+<p>Si  $\ce{[H3O+]}=\pu{1,0E-8 mol * L-1}$, <br></p>
+<p class="fragment" style="color:#017100;">$\text{pH}=$ <span class="fragment">$8,0$</span></p>
+<br>
+<p class="fragment">Si  $\ce{[H3O+]}=\pu{1,00E-12 mol * L-1}$, </p>
+<p class="fragment" style="color:#017100;">$\text{pH}=$ <span class="fragment">$12,0$</span></p>
+</section><section>
+<p>Si  $\ce{[H3O+]}=\pu{2,5E-2 mol * L-1}$,</p>
+<p class="fragment" style="color:#017100;">$\text{pH}=$ <span class="fragment">$1,6$</span></p>
+<br>
+<p class="fragment">Si  $\ce{[H3O+]}=\pu{8,4E-13 mol * L-1}$,</p>
+<p class="fragment" style="color:#017100;">$\text{pH}=$ <span class="fragment" >$12,1$</span></p>
+</section><section>
+<p>Précision sur la précision :</p>
+<p>on écrit généralement le pH<br>avec un seul chiffre après la virgule.</p>
+</section><section>
+<p>Pour obtenir $\ce{[H3O+]}$ à partir du $\text{pH}$ ?
+<br><br></p>
+<div class="fragment" style = "position:relative;margin:auto;border:solid red 7px;width:fit-content;padding: 20px 40px 20px 40px;border-radius:20px;">
+$$\ce{[H3O+]} = c^\circ\times10^{-\text{pH}}$$
+</div>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/10puisscalc.png"
+      data-background-size="80%"
+      data-background-transition="concave">
+</section><section>
+<p>Si  $\text{pH}=7,0$ </p>
+<p class="fragment" style="color:#017100;">$\ce{[H3O+]}=$ <span class="fragment">$\pu{1,0E-7 mol * L-1}$</pan></p>
+<br>
+<p class="fragment">Si  $\text{pH}=1,0$ </p>
+<p class="fragment" style="color:#017100;">$\ce{[H3O+]}=$ <span class="fragment">$\pu{1,0E-1 mol * L-1}$</pan></p>
+</section><section>
+<p>Si  $\text{pH}=9,8$ </span></p>
+<p class="fragment" style="color:#017100;">$\ce{[H3O+]}=$ <span class="fragment">$\pu{1,6E-10 mol * L-1}$</span></p>
+<br>
+<p class="fragment">Si  $\text{pH}=0,5$ </span></p>
+<p class="fragment" style="color:#017100;">$\ce{[H3O+]}=$ <span class="fragment">$\pu{3,2E-1 mol * L-1}$</span></p>
+</section><section>
+<p>Comment mesure-t-on le pH ?</p>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/phmetre.png"
+      data-background-size="60%"
+      data-background-transition="concave">
+<p><strong>pH-mètre</strong>                               
+<br><br><br><br><br><br><br><br></p>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/papierph.png"
+      data-background-size="20%"
+      data-background-transition="concave">
+<p><span class='fragment ' >papier pH<br> bandelette test</span></p>
+<br>
+<br>
+</section><section>
+<img src="/royalpH.png" width="60%">
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/chourouge.png"
+      data-background-size="50%"
+      data-background-transition="concave">
+<p>Chou rouge</p>
+</section>
+<section data-noprocess data-shortcode-slide
+      data-background-image="/hortensia.png"
+      data-background-size="70%"
+      data-background-transition="concave">
+<p>Hortensias
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br></p>
+
+</section>
+</section><section>
+
+
+<section data-shortcode-section>
+<h3 id="petit-exercice">Petit exercice</h3>
+</section><section>
+<p>On fait barboter $n=\pu{5,0E-3 mol}$<br>d&rsquo;acide chlorhydrique $\ce{HC\ell (g)}$<br>dans $V=\pu{500 mL}$ d&rsquo;eau.</p>
+<p>La dissociation de l&rsquo;acide chlorhydrique est totale et l&rsquo;équation de la réaction est :
+$$\ce{HC\ell (g) + H2O (\ell) -&gt; H3O+ (aq) + C\ell^- (aq)} $$</p>
+<p>Que vaut le pH de la solution ?</p>
+</section><section>
+<p>Et si on dilue la solution 10 fois, que devient le pH ?</p>
+
+</section>
+</section><section>
+<p><a href="https://coursphychi.github.io/tsti2d/acide/">Retour site</a></p>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"highlight_theme":"github-dark","line-numbers":true,"theme":"sky","transition":"concave","transition_speed":"fast"}</script>
+<script type="application/json" id="reveal-hugo-page-params">null</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({startOnLoad: false});
+    let render = (event) => {
+      let mermaidElems = event.currentSlide.querySelectorAll('.mermaid');
+      if (!mermaidElems.length){
+          return
+      }
+      mermaidElems.forEach(mermaidElem => {
+          let processed = mermaidElem.getAttribute('data-processed');
+          if (!processed){
+              
+              mermaid.init(undefined, mermaidElem);
+          }
+      });
+    };
+    Reveal.addEventListener('slidechanged', render);
+    Reveal.addEventListener('ready', render);
+  </script>
+
+    
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+    
+  </body>
+</html>

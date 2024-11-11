@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Caractéristique</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/moon.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/atom-one-dark-reasonable.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><style>
+img {border: none !important}
+
+.imp {font-weight:bold;color:#00A2FF;}
+
+span {font-weight:normal;color:white;}
+
+ul {
+margin-left: auto;
+margin-right: auto;
+text-align: left;
+width: fit-content;
+list-style-position: inside;
+}
+
+ul li {
+text-indent: -1em;
+padding-left: 1em;
+}
+
+.custom-button {
+width: 100%;
+font-size: 1em;
+border: none;
+padding: 15px 20px;
+cursor: pointer;
+background-color: #27BB28;
+color:white;
+transition: background-color 0.3s;
+border-radius: 25px; /* Pour rendre les boutons arrondis */
+}
+
+.custom-button:hover {
+opacity: 0.9;
+}
+
+.custom-button:active {
+opacity: 0.8;
+}
+
+.update-button {
+background-color: #599DFF;
+color: white;
+font-size: 1em; 
+}
+
+</style>
+
+
+<section data-shortcode-section>
+<div>
+<label for="inputI">Valeurs de I (en A) :</label>
+<input type="text" id="inputI" style="width: 100%; font-size: 1em;">
+</div>
+<br>
+<div>
+<p>Valeurs de U correspondantes (en V) :</p>
+<textarea id="inputU" style="width: 100%; font-size: 1em;" rows="1"></textarea>
+</div>
+<br>
+<button onclick="prepareData()" class="custom-button">Tracer le graphique</button>
+<button onclick="updateGraph()" class="custom-button update-button" style="display: none;">Mettre à jour le graphique</button>
+</section><section>
+<p id="validationMessage" style="color: white;">
+Il faut valider les valeurs<br>(bouton vert sur la diapo précédente)<br>pour afficher le graphique
+</p>
+<div style="object-fit:cover;">
+<canvas id="chart"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+/* eslint-env es6 */
+/* eslint-env browser */
+/* exported prepareData, updateGraph, showRegression */
+/* global Chart */ 
+
+// Déclarations de variables
+let U = [];
+let I = [];
+let chart;
+
+// Configuration pour le graphique
+let config = {
+type: 'scatter',
+data: {
+datasets: [{
+//label: 'Caractéristique',
+data: I.map((value, index) => ({ x: value, y: U[index] })),
+backgroundColor: '#599DFF',
+showLine: false
+}, {
+//label: 'Ligne de liaison',
+data: I.map((value, index) => ({ x: value, y: U[index] })),
+borderColor: '#FF644E',
+backgroundColor: 'transparent',
+showLine: true,
+fill: false,
+pointRadius: 0,
+borderWidth: 2,
+borderDash: [5, 5]
+}]
+},
+options: {
+responsive: true,
+devicePixelRatio: 5,
+scales: {
+x: {
+title: {
+display: true,
+text: 'I (A)',
+color: 'white'
+},
+grid: {
+color: 'rgba(255, 255, 255, 0.3)'
+},
+ticks: {
+color: 'white'
+}
+},
+y: {
+title: {
+display: true,
+text: 'U (V)',
+color: 'white'
+},
+grid: {
+color: 'rgba(255, 255, 255, 0.1)'
+},
+ticks: {
+color: 'white'
+}
+}
+},
+plugins: {
+title: {
+display: true,
+text: "Tracé de la caractéristique",
+font: {
+size: 16
+},
+color: 'white'
+},
+legend: {
+display: false
+}
+}
+}
+};
+
+// Fonction pour préparer les données
+function prepareData() {
+U = document.getElementById('inputU').value.split(',').map(Number);
+I = document.getElementById('inputI').value.split(',').map(Number);
+
+if (U.length !== I.length) {
+document.getElementById('validationMessage').innerHTML = "Il faut autant de valeurs<br>dans chaque champ !";
+return;
+}
+
+// Masquer le message et afficher le bouton de mise à jour
+document.getElementById('validationMessage').style.display = 'none';
+document.querySelector('.update-button').style.display = 'block';
+
+// Masquer le bouton de traçage du graphique
+document.querySelector('.custom-button').style.display = 'none';
+
+const newData = I.map((value, index) => ({ x: value, y: U[index] }));
+
+// Si le graphique n'a pas été créé
+if (!chart) {
+let ctx = document.getElementById('chart').getContext('2d');
+
+// Mettre à jour le dataset avant de créer le graphique
+config.data.datasets[0].data = newData;
+config.data.datasets[1].data = newData;
+
+chart = new Chart(ctx, config);
+} else {
+updateGraph();
+}
+}
+
+// Fonction pour mettre à jour le graphique
+function updateGraph() {
+U = document.getElementById('inputU').value.split(',').map(Number);
+I = document.getElementById('inputI').value.split(',').map(Number);
+
+if (U.length !== I.length) {
+document.getElementById('validationMessage').innerHTML = "Il faut autant de valeurs<br>dans chaque champ !";
+document.getElementById('validationMessage').style.display = 'block';
+return;
+}
+
+const newData = I.map((value, index) => ({ x: value, y: U[index] }));
+
+// Mise à jour du dataset des points
+chart.data.datasets[0].data = newData;
+
+// Mise à jour du dataset de la courbe de liaison
+chart.data.datasets[1].data = newData;
+
+// Force une mise à jour de l'échelle
+chart.options.scales.y.min = Math.min(...I) - 50; // Pour donner une petite marge
+chart.options.scales.y.max = Math.max(...I) + 50; // Pour donner une petite marge
+
+chart.update();
+}
+</script>
+
+</section>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"highlight_theme":"github-dark","line-numbers":true,"theme":"sky","transition":"concave","transition_speed":"fast"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"highlight_theme":"atom-one-dark-reasonable","theme":"moon"}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({startOnLoad: false});
+    let render = (event) => {
+      let mermaidElems = event.currentSlide.querySelectorAll('.mermaid');
+      if (!mermaidElems.length){
+          return
+      }
+      mermaidElems.forEach(mermaidElem => {
+          let processed = mermaidElem.getAttribute('data-processed');
+          if (!processed){
+              
+              mermaid.init(undefined, mermaidElem);
+          }
+      });
+    };
+    Reveal.addEventListener('slidechanged', render);
+    Reveal.addEventListener('ready', render);
+  </script>
+
+    
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+    
+  </body>
+</html>
