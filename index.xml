@@ -44,13 +44,6 @@
       <description>Lentilles minces : modéliser le flou L&amp;rsquo;objectif de cet exercice est de reproduire par traitement d&amp;rsquo;image, à l&amp;rsquo;aide d&amp;rsquo;un programme Python, ce qu&amp;rsquo;on verrait sur un écran situé derrière une lentille convergente pour différentes positions de l&amp;rsquo;écran ; on fournit au programme un fichier image et des paramètres (le diamètre de la lentille $D$, sa distance focale $f&amp;rsquo;$, la distance lentille-objet $\overline{OA}$, la distance lentille-écran $\overline{OE}$, la taille de l&amp;rsquo;objet $\overline{AB}$), et il produit une image correspondant à ce qu&amp;rsquo;on verrait sur l&amp;rsquo;écran.</description>
     </item>
     <item>
-      <title>Méthodes physiques</title>
-      <link>https://coursphychi.github.io/tspe/methphys/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      <guid>https://coursphychi.github.io/tspe/methphys/</guid>
-      <description> Analyser un système chimique par des méthodes physiques Présentation&#xA;Documents et autres TP Dosage par étalonnage conductimétrique Activités Acide lactique et spectre infrarouge Montgolfière et loi des gaz parfaits Révisions 1re Spectrophotométrie Spectres infrarouges Appliquette Loi des gaz parfaits </description>
-    </item>
-    <item>
       <title>Onde</title>
       <link>https://coursphychi.github.io/colles/onde/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -142,6 +135,13 @@
       <description>Changements d&amp;rsquo;état Présentation&#xA;Rappels La température rend compte de l&amp;rsquo;agitation moléculaire.&#xA;La température absolue se mesure en kelvins $K$ $(\pu{0^\circ C = 273,15 K})$.&#xA;L&amp;rsquo;énergie interne $U$ d&amp;rsquo;un système se compose des énergies microscopiques cinétiques (agitation) et potentielles (interaction) des molécules qui le constituent.&#xA;La variation d&amp;rsquo;énergie interne $\Delta U = U_f - U_i$ d&amp;rsquo;un solide ou d&amp;rsquo;un liquide est donnée par la formule suivante :&#xA;$$\Delta U = m c \Delta\theta$$ où $m$ est la masse (en $\pu kg$)</description>
     </item>
     <item>
+      <title>Méthodes physiques</title>
+      <link>https://coursphychi.github.io/tspe/methphys/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/tspe/methphys/</guid>
+      <description>Analyser un système chimique par des méthodes physiques Présentation&#xA;Dosage par étalonnage&#xA;Méthode de détermination d&amp;rsquo;une concentration, généralement non destructive, utilisant une courbe de référence liant la valeur d&amp;rsquo;une grandeur physique (absorbance, conductivité, masse volumique, etc.) à la concentration (en masse ou en quantité de matière) d&amp;rsquo;un soluté. La courbe de référence, appelée courbe d&amp;rsquo;étalonnage, doit être monotone sur l&amp;rsquo;intervalle de concentration encadrant la concentration inconnue. La courbe n&amp;rsquo;est pas nécessairement une droite, mais cette situation permet d&amp;rsquo;obtenir une précision constante quelle que soit la valeur de la concentration recherchée.</description>
+    </item>
+    <item>
       <title>Piles</title>
       <link>https://coursphychi.github.io/tsti2d/piles/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -168,6 +168,13 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/oxydo/</guid>
       <description>Oxydo-réduction Présentation&#xA;Demi-équation électronique&#xA;Une demi-équation électronique met en évidence, de manière formelle, l’existence d’un transfert d’électron(s) au cours d’une transformation convertissant l’oxydant d’un couple en son réducteur conjugué (ou l’inverse). La demi-équation ne modélise pas le déroulement microscopique de cet échange, mais illustre, à l’échelle macroscopique, les proportions dans lesquelles il s’opère.&#xA;Exemple :&#xA;La demi-équation électronique associée au couple $\left(\ce{Cr2O7^2-/Cr^3+}\right)$, montre que 3 moles d’électrons sont échangées par mole de chrome converti :</description>
+    </item>
+    <item>
+      <title>Titrages</title>
+      <link>https://coursphychi.github.io/tspe/titrages/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/tspe/titrages/</guid>
+      <description>Analyser un système chimique par des méthodes chimiques Présentation&#xA;Dosage par titrage&#xA;Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’« acido-basique », « par oxydoréduction » ou « par précipitation » selon la nature de la réaction support.</description>
     </item>
     <item>
       <title>Combustions</title>

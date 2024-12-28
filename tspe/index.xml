@@ -20,7 +20,14 @@
       <link>https://coursphychi.github.io/tspe/methphys/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tspe/methphys/</guid>
-      <description> Analyser un système chimique par des méthodes physiques Présentation&#xA;Documents et autres TP Dosage par étalonnage conductimétrique Activités Acide lactique et spectre infrarouge Montgolfière et loi des gaz parfaits Révisions 1re Spectrophotométrie Spectres infrarouges Appliquette Loi des gaz parfaits </description>
+      <description>Analyser un système chimique par des méthodes physiques Présentation&#xA;Dosage par étalonnage&#xA;Méthode de détermination d&amp;rsquo;une concentration, généralement non destructive, utilisant une courbe de référence liant la valeur d&amp;rsquo;une grandeur physique (absorbance, conductivité, masse volumique, etc.) à la concentration (en masse ou en quantité de matière) d&amp;rsquo;un soluté. La courbe de référence, appelée courbe d&amp;rsquo;étalonnage, doit être monotone sur l&amp;rsquo;intervalle de concentration encadrant la concentration inconnue. La courbe n&amp;rsquo;est pas nécessairement une droite, mais cette situation permet d&amp;rsquo;obtenir une précision constante quelle que soit la valeur de la concentration recherchée.</description>
+    </item>
+    <item>
+      <title>Titrages</title>
+      <link>https://coursphychi.github.io/tspe/titrages/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/tspe/titrages/</guid>
+      <description>Analyser un système chimique par des méthodes chimiques Présentation&#xA;Dosage par titrage&#xA;Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’« acido-basique », « par oxydoréduction » ou « par précipitation » selon la nature de la réaction support.</description>
     </item>
   </channel>
 </rss>
