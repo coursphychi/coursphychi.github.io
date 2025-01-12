@@ -69,7 +69,7 @@
       <link>https://coursphychi.github.io/colles/slinky/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/slinky/</guid>
-      <description>La chute du Slinky Quel doit être le mouvement du centre de masse du slinky ? Le code suivant modélise de manière très simplifiée le slinky en le décomposant en deux sous-systèmes : le premier est composé des n_haut premiers disques et le second des n_bas disques restants. Le cœur du code se situe de la ligne 48 à la ligne 66.&#xA;En supposant que les deux sous-systèmes sont reliés par un ressort et que le sous-système du bas est immobile, faire un bilan des forces et exprimer ces forces sur chacun des sous-systèmes.</description>
+      <description>La chute du Slinky Quel doit être le mouvement du centre de masse du slinky ? Le code suivant modélise de manière très simplifiée le slinky en le décomposant en deux sous-systèmes : le premier est composé des n_haut premiers disques et le second des n_bas disques restants. Le cœur du code se situe de la ligne 48 à la ligne 59.&#xA;En supposant que les deux sous-systèmes sont reliés par un ressort et que le sous-système du bas est immobile, faire un bilan des forces et exprimer ces forces sur chacun des sous-systèmes.</description>
     </item>
     <item>
       <title>Tremplins</title>
