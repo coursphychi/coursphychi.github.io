@@ -30,6 +30,13 @@
       <description>Lentilles minces : modéliser le flou L&amp;rsquo;objectif de cet exercice est de reproduire par traitement d&amp;rsquo;image, à l&amp;rsquo;aide d&amp;rsquo;un programme Python, ce qu&amp;rsquo;on verrait sur un écran situé derrière une lentille convergente pour différentes positions de l&amp;rsquo;écran ; on fournit au programme un fichier image et des paramètres (le diamètre de la lentille $D$, sa distance focale $f&amp;rsquo;$, la distance lentille-objet $\overline{OA}$, la distance lentille-écran $\overline{OE}$, la taille de l&amp;rsquo;objet $\overline{AB}$), et il produit une image correspondant à ce qu&amp;rsquo;on verrait sur l&amp;rsquo;écran.</description>
     </item>
     <item>
+      <title>Norton</title>
+      <link>https://coursphychi.github.io/colles/norton/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/colles/norton/</guid>
+      <description>Le dôme de Norton Le dôme de Norton est une expérience de pensée mise au point par John Norton en 2003. Elle a suscité un certain émoi dans la communauté scientifique en montrant qu’un comportement semblant non déterministe pouvait émerger des équations de Newton (elles, tout à fait déterministes).&#xA;On modélise le dôme comme une surface de révolution autour de l’axe vertical passant par son sommet. Pour décrire la forme de ce dôme, on introduit une coordonnée radiale $r$, définie comme la distance (le long de la surface) entre le sommet et le point considéré.</description>
+    </item>
+    <item>
       <title>Onde</title>
       <link>https://coursphychi.github.io/colles/onde/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
