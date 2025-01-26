@@ -23,6 +23,13 @@
       <description>Corps purs et mélanges Présentation&#xA;Définitions Échelles de description de la matière Entité chimique&#xA;Objet pouvant être dénombré. Les atomes isolés, les ions, les molécules sont des entités chimiques. Une entité peut être décrite au moyen d’une formule chimique.&#xA;Échelle microscopique&#xA;Échelle de description rassemblant un nombre restreint d’entités, notamment adaptée à l’étude de la structure et aux propriétés des entités chimiques.&#xA;Échelle macroscopique&#xA;Échelle de description rassemblant un nombre suffisamment élevé d’entités pour que des grandeurs comme la pression, la température, la masse volumique, etc.</description>
     </item>
     <item>
+      <title>Fronde</title>
+      <link>https://coursphychi.github.io/colles/fronde/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/colles/fronde/</guid>
+      <description>Fronde Dynamique Une fronde est constituée par une pierre de masse $m$ reliée à un point fixe O par l&amp;rsquo;intermédiaire d&amp;rsquo;un fil de longueurs $\ell$ et de masse négligeable.&#xA;Depuis sa position d’équilibre, on donne à la masse une vitesse initiale $\vec{v_0}$ horizontale.&#xA;Écrire le PFD dans un repère polaire pour une position de la masse repérée par l’angle définie depuis la direction initiale du fil.&#xA;Intégrer la projection du PFD suivant en multipliant chaque membre par $\dot{\theta}$.</description>
+    </item>
+    <item>
       <title>Lance-balle</title>
       <link>https://coursphychi.github.io/colles/lanceballe/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
