@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Réfraction - Cours Physique-Chimie</title>
+    <title>Révisions - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/colles/refraction/">
+  <body class="" data-url="/tes/energie/revision/">
     <nav id="sidebar" class="">
 
 
@@ -1662,7 +1662,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/tes/" title="TES" class="dd-item
-        
+        parent
         
         
         ">
@@ -1717,7 +1717,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/tes/energie/" title="Le futur des énergies" class="dd-item
-        
+        parent
         
         
         ">
@@ -1747,7 +1747,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     
     <li data-nav-id="/tes/energie/revision/" title="Révisions" class="dd-item
         
-        
+        active
         
         ">
       <a href="/tes/energie/revision/">
@@ -1904,7 +1904,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        parent
+        
         
         
         ">
@@ -2004,14 +2004,19 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Réfraction
+                   Révisions
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#qcm-1">QCM 1</a></li>
+    <li><a href="#qcm-2">QCM 2</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -2029,158 +2034,128 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/luxon@^2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1"></script>
 <style>
- 	#correc
+ #correc
   {
     color: #006C65;
     border-left: solid 10px #C7DDDC;
   }
- 	#comm
+ #comm
   {
     color: #004D80;
     border-left: solid 10px #B3CAD9;
   }
- 	#commsum
+ #commsum
   {
     color: #004D80;
   }
- 	#correcsum
+ #correcsum
   {
     color: #006C65;
   }
 </style>
-<h1 id="réfraction">Réfraction</h1>
-<video width="700" controls style="display:block; max-width: 100%; position:relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-  <source src="https://presentationssite.github.io/carreaux.mp4" type="video/mp4">
-</video>
-<blockquote>
-<p>Le champ de l&rsquo;image fait 7 carreaux de largeur en dehors de l&rsquo;eau mais seulement 5 sous l&rsquo;eau. L&rsquo;exercice vise dans un premier temps à expliquer cette observation puis à déterminer la distance entre le mur et la caméra.</p>
-</blockquote>
-<ol>
-<li>Observerait-on la même chose en immergeant sa tête sous l&rsquo;eau, les yeux ouverts ? Et avec un masque ?</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-Les carreaux ne nous apparaitraient pas plus grands si on ouvrait les yeux sous l'eau. Par contre, ils nous apparaîtraient flous car les rayons de lumière sont moins réfractés lors de leur passage de l'eau au corps vitré (le milieu contenu dans l'œil d'indice optique 1,336). C'est comme si on était devenu très hypermétrope.
-    <img src="/aireauoeil.png">
-Avec un masque ou des lunettes, on observerait la même chose que la caméra de la vidéo car c'est bien la couche d'air supplémentaire qui crée la réfraction responsable de l'agrandissement de l'image.
-</blockquote>
-</details>
-<ol start="2">
-<li>Schématiser la situation lorsque la caméra est dans l&rsquo;eau en représentant les rayons lumineux, les angles et en faisant apparaître les paramètres nécessaires.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-<img src="/schemacollerefr.png">
-</blockquote>
-</details>
-<p>On cherche maintenant à déterminer la distance $D$ entre la caméra et le mur.</p>
-<ol start="3">
-<li>Écrire la relation liant $\theta$, $c$ et $D$.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-$$\tan\theta = \frac{3,5\times c}{D}$$
-</blockquote>
-</details>
-<ol start="4">
-<li>Écrire la relation liant $\theta_r$, $h$, $d$, $c$ et $D$.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-$$\begin{aligned}
-(D-d)\tan\theta_r + h &= 2,5\times c\\
-\tan\theta_r &= \frac{2,5\times c-h}{D-d}
-\end{aligned}$$
-</blockquote>
-</details>
-<ol start="5">
-<li>Quelles approximations peut-on faire ?</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-$$d\ll D \;\text{  et  }\;h\ll 2,5c$$
-La relation précédente devient alors :
-$$
-\tan\theta_r = \frac{2,5\times c}{D}
-$$
-</blockquote>
-</details>
-<ol start="6">
-<li>Utiliser la relation de la question 3 et Snell-Descartes pour remplacer $\theta_r$ dans la relation de la question 4 (dans sa version simplifiée).</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-$$\begin{aligned}
-n_{air} \sin\theta &= n_{eau}\sin\theta_r\\
-\Rightarrow \theta_r &= \sin^{-1}\left(\frac{n_{air}}{n_{eau}}\sin\theta\right)
-\end{aligned}$$
-Et en utilisant la relation de la question 3 :
-$$\theta_r = \sin^{-1}\left(\frac{n_{air}}{n_{eau}}\sin\left(\tan^{-1}\left(\frac{3,5\times c}{D}\right)\right)\right)$$
-$$\tan\theta_r = \frac{2,5c}{D}$$
-devient donc :
-$$\tan \left(\sin^{-1}\left(\frac{n_{air}}{n_{eau}}\sin\left(\tan^{-1}\left(\frac{3,5\times c}{D}\right)\right)\right)\right)= \frac{2,5\times c}{D}$$
-</blockquote>
-</details>
-<ol start="7">
-<li>Utiliser Python pour trouver graphiquement une approximation de la solution.</li>
-</ol>
-<p><a href="https://colab.research.google.com/drive/1QD9yHmXzN25woSPemtNbuOeXNxK5frL3?usp=sharing">Lien vers notebook Colab</a></p>
-<ol start="8">
-<li>Reschématiser la situation en prenant en compte les approximations faites à la question 4.</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-<img src="/schemacollerefrsimpl.png">
-</blockquote>
-</details>
-<ol start="9">
-<li>En utilisant les deux triangles, déterminer algébriquement $D$ en fonction de $c$, $n_{eau}$ et $n_{air}$ (partir de Snell-Descartes et utiliser la trigonométrie et Pythagore).</li>
-</ol>
-<details>
-<summary id="correcsum">
-Correction</summary>
-<blockquote id="correc">
-<img src="/schemacollerefrcorr.png">
-$$
-\begin{aligned}
-n_{air} \sin\theta &= n_{eau}\sin\theta_r\\
-n_{air} \frac{3,5c}{\sqrt{D^2+(3,5c)^2}} &= n_{eau} \frac{2,5c}{\sqrt{D^2+(2,5c)^2}}\\
-\Rightarrow n_{air}^2 \frac{(3,5c)^2}{D^2+(3,5c)^2} &= n_{eau}^2 \frac{(2,5c)^2}{D^2+(2,5c)^2}
-\end{aligned}
-$$
-D'où
-<div style="display: flex;justify-content: center;">
-<div style = "border:solid red 3px;width:min-content;padding: 0px 10px 0px 10px;font-size: 18px;">
-$$D = 2,5 \times 3,5 \times c  \times \sqrt{\frac{ n_{eau}^2-n_{air}^2}{(3,5 \times  n_{air})^2 - (2,5 \times n_{eau})^2}}$$
-</div></div>
-Pour $\pu{c = 5,0 cm}$, on trouve $\pu{D = 35 cm}$.
-</blockquote>
-</details>
+<h1 id="pour-les-interros">Pour les interros</h1>
+<h2 id="qcm-1">QCM 1</h2>
+<p>Les questions du 1<sup>er</sup> QCM seront tirées de ces trois présentations :</p>
+<ul>
+<li><a href="https://presentationssite.github.io/tes/cours0">Energie, puissance, rendement, facteur de charge</a> </li>
+<li><a href="https://presentationssite.github.io/tes/cours1">Deux convertisseurs permettent de produire de l'énergie électrique dans les centrales&nbsp;: l'alternateur et la cellule photovoltaïque </a> </li>
+<li><a href="https://presentationssite.github.io/tes/cours2">Les centrales électriques</a> </li>
+</ul>
 <hr>
-<video width="700" controls style="display:block;max-width: 100%;position:relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-  <source src="https://presentationssite.github.io/perchemoite.mp4" type="video/mp4">
-</video>
-<br>
-<video width="700" controls style="display:block;max-width: 100%;position:relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-  <source src="https://presentationssite.github.io/casse.mp4" type="video/mp4">
-</video>
+<h2 id="qcm-2">QCM 2</h2>
+<p>Les questions du 2<sup>e</sup> QCM seront tirées de la présentation ci-dessous. Les vidéos qui suivent contiennent aussi toutes les informations interrogeables.</p>
 
-<footer class="footline">
+<div class="notices info" style="--title: 'info';">
+  <p style="display: none;">info</p>
+  <div class="notice-body">
+    <p>Pas besoin d&rsquo;apprendre les  données chiffrées par cœur mais il faut connaître les ordres de grandeur importants. <br>
+Les questions ne porteront pas sur des détails.</p>
+
+  </div>
+</div>
+
+
+<br>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Jzfpyo-q-RM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<br>
+<iframe src="https://ourworldindata.org/grapher/death-rates-from-energy-production-per-twh" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
+<br>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/KD3n7f3HnbE?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<br>
+<iframe src="https://ourworldindata.org/grapher/temperature-anomaly" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
+<br>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/8nzRXxPnlPQ?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<br>
+<iframe src="https://ourworldindata.org/grapher/co2-by-source?tab=chart" loading="lazy" style="width: 100%; height: 600px; border: 0px none;" allow="web-share; clipboard-write"></iframe>
+<br>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/GVJRZqI6h2k?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<br>
+<iframe src="https://ourworldindata.org/grapher/annual-share-of-co2-emissions?facet=none&country=CHN~IND~GBR~USA~OWID_EU27~FRA&tab=chart" loading="lazy" style="width: 100%; height: 600px; border: 0px none;" allow="web-share; clipboard-write"></iframe>
+<br>
+<iframe src="https://ourworldindata.org/explorers/co2?facet=none&hideControls=true&Gas+or+Warming=All+GHGs+%28CO%E2%82%82eq%29&Accounting=Consumption-based&Fuel+or+Land+Use+Change=All+fossil+emissions&Count=Per+capita&country=CHN~USA~IND~OWID_WRL~FRA~OWID_EU27" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
+<br>
+<iframe src="https://ourworldindata.org/grapher/consumption-co2-per-capita-vs-gdppc?tab=chart" loading="lazy" style="width: 100%; height: 600px; border: 0px none;" allow="web-share; clipboard-write"></iframe>
+<br>
+<iframe src="https://ourworldindata.org/grapher/annual-co-emissions-by-region" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
+<br>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/sDxvadwizw8?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<br>
+<iframe src="https://ourworldindata.org/grapher/per-capita-ghg-sector?country=~FRA" loading="lazy" style="width: 100%; height: 600px; border: 0px none;"></iframe>
+<br>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/ok31_F_2_I0?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+
+
+
+
+
+<footer class=" footline" >
 	
 </footer>
 
@@ -3285,6 +3260,80 @@ Pour $\pu{c = 5,0 cm}$, on trouve $\pu{D = 35 cm}$.
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
                 
                 
 
@@ -3321,71 +3370,6 @@ Pour $\pu{c = 5,0 cm}$, on trouve $\pu{D = 35 cm}$.
 
                     
                     
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                     
 
                     
@@ -3418,7 +3402,6 @@ Pour $\pu{c = 5,0 cm}$, on trouve $\pu{D = 35 cm}$.
             
             
                 
-                    
                     
                 
                 
@@ -3521,4 +3504,3 @@ Pour $\pu{c = 5,0 cm}$, on trouve $\pu{D = 35 cm}$.
 
   </body>
 </html>
-
