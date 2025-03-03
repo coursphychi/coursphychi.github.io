@@ -153,7 +153,7 @@
       <link>https://coursphychi.github.io/tspe/methphys/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tspe/methphys/</guid>
-      <description>Analyser un système chimique par des méthodes physiques Présentation&#xA;Dosage par étalonnage&#xA;Méthode de détermination d&amp;rsquo;une concentration, généralement non destructive, utilisant une courbe de référence liant la valeur d&amp;rsquo;une grandeur physique (absorbance, conductivité, masse volumique, etc.) à la concentration (en masse ou en quantité de matière) d&amp;rsquo;un soluté. La courbe de référence, appelée courbe d&amp;rsquo;étalonnage, doit être monotone sur l&amp;rsquo;intervalle de concentration encadrant la concentration inconnue. La courbe n&amp;rsquo;est pas nécessairement une droite, mais cette situation permet d&amp;rsquo;obtenir une précision constante quelle que soit la valeur de la concentration recherchée.</description>
+      <description>Analyser un système chimique par des méthodes physiques Présentation&#xA;Documents et autres TP Dosage par étalonnage conductimétrique Activités Acide lactique et spectre infrarouge Montgolfière et loi des gaz parfaits Révisions 1re Spectrophotométrie Spectres infrarouges Appliquette Loi des gaz parfaits Définition Dosage par étalonnage&#xA;Méthode de détermination d&amp;rsquo;une concentration, généralement non destructive, utilisant une courbe de référence liant la valeur d&amp;rsquo;une grandeur physique (absorbance, conductivité, masse volumique, etc.) à la concentration (en masse ou en quantité de matière) d&amp;rsquo;un soluté.</description>
     </item>
     <item>
       <title>Piles</title>
@@ -188,7 +188,7 @@
       <link>https://coursphychi.github.io/tspe/titrages/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tspe/titrages/</guid>
-      <description>Analyser un système chimique par des méthodes chimiques Présentation&#xA;Dosage par titrage&#xA;Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’« acido-basique », « par oxydoréduction » ou « par précipitation » selon la nature de la réaction support.</description>
+      <description>Analyser un système chimique par des méthodes chimiques Présentation&#xA;Documents et autres TP Titrage pH-métrique Titrage conductimétrique&amp;nbsp;+&amp;nbsp;Notebook Python pour Monte-Carlo Activités Titrage conductimétrique et agneaux&amp;nbsp;+&amp;nbsp;Notebook Python Eau de Javel et acide (partie A et B) Acide polylactique (jusqu&#39;à B.1.) Révisions 1re Titrage par oxydoréduction avec suivi colorimétrique Définitions Dosage par titrage&#xA;Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer.</description>
     </item>
     <item>
       <title>Cinétique chimique</title>
@@ -224,6 +224,13 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/egiepuiss/</guid>
       <description>Énergie / Puissance Présentation&#xA;Rappels La variation d&amp;rsquo;énergie $\Delta E$ (en J) d&amp;rsquo;un système pendant $\Delta t$ (en s) est donnée par : $\displaystyle \Delta E = P\times \Delta t$ où $P$ (en W) est la puissance moyenne reçue ou fournie par le système pendant $\Delta t$.&#xA;Et on obtient par conséquent la puissance moyenne $P$ délivrée ou reçue pendant $\Delta t$ grâce à : $\displaystyle P = \frac{\Delta E}{\Delta t}$ Conversion à connaître et à savoir redémontrer :</description>
+    </item>
+    <item>
+      <title>Équilibre chimique</title>
+      <link>https://coursphychi.github.io/tspe/equilibre/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/tspe/equilibre/</guid>
+      <description>Évolution spontanée d&amp;rsquo;un système chimique Présentation&#xA;Documents TP Dilution et pH Activité Pluie dorée Définitions Avancement maximal&#xA;Avancement associé à la disparition totale du réactif limitant.&#xA;Taux d&amp;#39;avancement&#xA;Rapport de la valeur finale de l’avancement sur celle de l’avancement maximal :&#xA;$$\tau=\frac{x_\mathrm{final}}{x_\mathrm{max}}$$&#xA;Transformation totale ou non totale&#xA;Une transformation est dite totale si le taux d’avancement final est égal à 1. S’il est inférieur à 1 ($x_\mathrm{final}&amp;lt;1$), la transformation est dite non-totale.</description>
     </item>
     <item>
       <title>Lewis</title>
