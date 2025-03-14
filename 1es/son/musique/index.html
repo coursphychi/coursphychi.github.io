@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Tremplins - Cours Physique-Chimie</title>
+    <title>Son et musique - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/colles/tremplins/">
+  <body class="" data-url="/1es/son/musique/">
     <nav id="sidebar" class="">
 
 
@@ -1457,7 +1457,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/" title="1ES" class="dd-item
-        
+        parent
         
         
         ">
@@ -1628,7 +1628,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/son/" title="Son et musique" class="dd-item
-        
+        parent
         
         
         ">
@@ -1658,7 +1658,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     
     <li data-nav-id="/1es/son/musique/" title="Son et musique" class="dd-item
         
-        
+        active
         
         ">
       <a href="/1es/son/musique/">
@@ -1967,7 +1967,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        parent
+        
         
         
         ">
@@ -2067,7 +2067,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Tremplins
+                   Son et musique
                  
                   </span>
                 </div>
@@ -2076,7 +2076,18 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#petits-suppléments--brachistochrone-et-tautochrone">Petits suppléments : brachistochrone et tautochrone</a></li>
+    <li><a href="#le-son-un-phénomène-vibratoire">Le son, un phénomène vibratoire</a></li>
+    <li><a href="#la-musique-ou-lart-de-faire-entendre-les-nombres">La musique ou l&rsquo;art de faire entendre les nombres</a>
+      <ul>
+        <li><a href="#son-pur-et-son-composé">Son pur et son composé</a></li>
+        <li><a href="#produire-des-notes">Produire des notes</a></li>
+        <li><a href="#consonance">Consonance</a></li>
+        <li><a href="#cycle-des-quintes">Cycle des quintes</a></li>
+        <li><a href="#les-problèmes-posés-par-les-gammes-de-pythagore">Les problèmes posés par les gammes de Pythagore</a></li>
+        <li><a href="#gamme-tempérée">Gamme tempérée</a></li>
+        <li><a href="#progression-arithmétique-vs-géométrique">Progression arithmétique vs géométrique</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -2096,88 +2107,171 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<style>
-table {
-  margin: auto;
-  border-collapse: collapse;
-  border: none !important;
-}
-td {
-  width: 60px;
-  height: 60px;
-  border: 5px solid white !important;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 1em;
-}
-td.clickable {
-  cursor: pointer;
-}
-.s-block {
-  background-color: #0076BA;
-}
-.p-block {
-  background-color: #0076BA;
-}
-.neutre {
-  background-color: #0076BA;
-}
-.noble-gas {
-  background-color: #EE220C;
-}
-.empty {
-  border: none !important;
-  color:#1C90F3;
-  font-weight:bold;
-}
-.symbol {
-  font-size: 2em;
-  font-weight:bold;
-  color:#fff;
-}
-.atomic-number {
-  font-size: 1.5em;
-  font-weight:bold;
-  color: #fff;
-}
-.electron-configuration {
-  font-size: 1em;
-  color: #fff;
-}
-</style>
-<h1 id="course-de-tremplins">Course de tremplins</h1>
-<p>Deux balles dévalent chacune un tremplin différent dont les points de départ et d&rsquo;arrivée ont même altitude :</p>
-<p><img src="/tremplins.png" alt="tremplins"></p>
-<p>Les différentes coordonnées sont données ci-dessous. <br>Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s<sup>-2</sup>. <br>La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.</p>
-<p><img src="/coordtremplins.png" alt="ccordtremplins"></p>
-<p>Questions préliminaires :</p>
-<ol>
-<li>Qulle balle atterrit le plus loin ?</li>
-<li>Quelle balle parcourt le moins de distance ?</li>
-<li>Quelle balle arrive la première en C ?</li>
-</ol>
-<p>Vérification par simulation :</p>
-<iframe src="https://trinket.io/embed/glowscript/85d892ed3b?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Résolution :</p>
-<ol start="4">
-<li>Déterminer la durée mise pour chacune des balles pour atteindre le sol (y = -4). Confirmez-vous les valeurs de la simulation ? Commenter.</li>
-</ol>
-<p><a href="http://www.youtube.com/watch?v=88NZStgiIt0">Vidéo de Bruce Yeany sur des tremplins ressemblants</a>.</p>
+
+	<h1 id="son-et-musique">Son et musique</h1>
+<h2 id="le-son-un-phénomène-vibratoire">Le son, un phénomène vibratoire</h2>
+<hr>
+<p style="text-align:center;font-size: 25px;font-weight:bold;"><a href="https://presentationssite.github.io/1es/son/#/">Présentation</a></p>
+<hr>
+<p>Le son est une <strong>vibration</strong> qui se déplace de proche en proche dans un milieu matériel.</p>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;">
+<img src="/ondesonore.gif">
+</div>
+<p>Joseph Fourier (1768-1830) a montré que tout signal périodique peut se décomposer en une somme de sinusoïdes.</p>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:20px;">
+<img src="/decomp.gif" style="border-radius:20px;">
+</div>
+<hr>
+<h2 id="la-musique-ou-lart-de-faire-entendre-les-nombres">La musique ou l&rsquo;art de faire entendre les nombres</h2>
 <br>
-<h2 id="petits-suppléments--brachistochrone-et-tautochrone">Petits suppléments : brachistochrone et tautochrone</h2>
-<p>Vous pouvez modifier sur le programme ci-dessous la courbe que suit la balle entre deux points fixes. <br>Vous pouvez tenter par exemple de construire le chemin le plus court ou envoyer directement la balle le plus bas possible, là où la vitesse est plus grande.</p>
-<p>Que remarquez-vous sur les temps de parcours obtenus par rapport au temps de parcours sur la courbe initiale ?</p>
-<p>Cette courbe est une cycloïde et s&rsquo;appelle la <strong>brachistochrone</strong>.</p>
-<iframe src="https://trinket.io/embed/glowscript/6be753c232?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Une autre cycloïde intéressante, la <strong>tautochrone</strong>.</p>
-<p>Changez la position initiale de la balle verte sur la courbe, que remarquez-vous ?</p>
-<iframe src="https://trinket.io/embed/glowscript/3228a61a5b?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p><a href="https://www.youtube.com/watch?v=QL6HkOukxLA">Petite vidéo de Bruce Yeany</a> donnant l&rsquo;intuition pour comprendre la propriété de cette courbe.</p>
-<p><strong>Python :</strong></p>
-<p>Et pour finir, <a href="https://scipython.com/blog/the-brachistochrone-problem/">un lien vers un programme Python permettant de tracer la brachistochrone</a> (utilisation de tableaux <code>numpy</code>, utilisation de la librairie <code>scipy</code> pour trouver une racine via la méthode de Newton et pour intégrer via <code>quad</code>, et utilisation de <code>matplotlib</code> pour tracer).</p>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 
 
-<footer class="footline">
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/cTYvCpLRwao?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+</div>
+<br>
+<h3 id="son-pur-et-son-composé">Son pur et son composé</h3>
+<p>Un <strong>son pur</strong> est une vibration sinusoïdale. C&rsquo;est un signal ne contenant qu&rsquo;une seule fréquence.</p>
+<p>Le son correspondant à une note jouée par un instrument de musique n’est pas un son pur, mais le signal sonore $s$ qui lui est associé a la particularité d’être périodique ($s(t+T)=s(t)$ où $T=1/f$ est la période du signal et $f$ sa <strong>fréquence</strong>, exprimée en <strong>hertz</strong>). On parle de <strong>son composé</strong>.</p>
+<p>Un son composé (représenté par une fonction périodique) résulte de la <strong>combinaison de sons purs</strong> (associés à des sinusoïdes) dont les fréquences sont toutes multiples de l’une d’elles, appelée la fréquence fondamentale. La fréquence fondamentale $f$ est perçue par l’oreille comme étant la fréquence du son. C’est pourquoi elle est encore appelée hauteur du son. L’ensemble des fréquences $f$, $2f$, $3f$,.. et des amplitudes associées constitue le spectre du son.</p>
+<br>
+<div style=" position: relative;overflow: hidden;max-width: 848px; margin: auto; padding-bottom: min(70.28%,596px);"> 
+<iframe scrolling="no" title="purcomplexe" src="https://www.geogebra.org/material/iframe/id/ebmqzxfk/width/848/height/596/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/false/ctl/false" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;"> </iframe>
+</div>
+<br>
+<h3 id="produire-des-notes">Produire des notes</h3>
+<p>Pour la plupart des instruments, les différentes fréquences d&rsquo;un son musical naissent des différentes possibilités qu&rsquo;une onde a de résonner dans une cavité de longueur donnée. C&rsquo;est ainsi que le registre d&rsquo;un instrument dépend de sa taille.</p>
+<div style="position:relative; width:640px; max-width:100%; height:480px; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<iframe width="640" height="480"  src="https://www.youtube.com/embed/uWoiMMLIvco" title="Ératosthène : mesure de la circonférence terrestre" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width:100%"></iframe>
+</div>
+<div style="position:relative; width:700px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:20px;">
+<img src="/ondestat.gif" style="border-radius:20px;">
+</div>
+<p>La cavité résonnante peut être une colonne d&rsquo;air comme dans les instruments à vent ou une corde comme dans les instruments&hellip; à cordes.</p>
+<p>Dans le cas d&rsquo;une corde, deux autres paramètres que la longueur permettent de joueur sur la hauteur du son (<a href="/actcorde.pdf">activité corde</a>).</p>
+<br>
+<h3 id="consonance">Consonance</h3>
+<blockquote>
+<p>Dans l&rsquo;applet suivant, la note bleue est un La. Essayez, en déplaçant la fréquence de la note rouge, de trouver une note qui &ldquo;sonne&rdquo; de manière tellement similaire à la note bleue qu&rsquo;on a envie de l&rsquo;appeler La elle aussi. Pour trouver une critère &ldquo;physique&rdquo; de proximité, vous pourrez vous aider du phénomène qu&rsquo;on obtient lorsque les deux notes ont une fréquence très proche.</p>
+</blockquote>
+<br>
+<div style=" position: relative;overflow: hidden;max-width: 707px;margin: auto;padding-bottom: min(78.78%,557px);"> 
+<iframe scrolling="no" title="DeuxNotes" src="https://www.geogebra.org/material/iframe/id/eephupg9/width/707/height/557/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/false/ctl/false" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;"> </iframe>
+</div>
+<p>La décomposition d’un son composé en somme de sons purs de fréquences multiples de la fréquence fondamentale permet d’expliquer pourquoi certains sons produits simultanément sont agréables à l’oreille ; on dit alors qu’ils sont consonants.</p>
+<p>Plus les spectres de deux sons ont de fréquences en commun, et plus il apparaissent consonants.</p>
+<br>
+<div style=" position: relative;overflow: hidden;max-width: 851px;margin: auto;padding-bottom: min(70.04%,596px);"> 
+<iframe scrolling="no" title="purcomplexe" src="https://www.geogebra.org/material/iframe/id/kvv2jdw6/width/851/height/596/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/false/ctl/false" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;"> </iframe>
+</div>
+<br>
+<p>On remarque que le meilleur recouvrement est obtenu lorsque le fondamental du deuxième son a une fréquence double ou moitié par rapport au fondamental du premier son (une fréquence sur deux du spectre est commune).<br>Le deuxième son est alors dit à l&rsquo;<strong>octave</strong> par rapport au premier.<br>Les deux notes sont considérées comme identiques.</p>
+<blockquote>
+<p>L’oreille humaine est capable de percevoir des sons dont la fréquence est comprise entre 20 Hz et 20 000 Hz. Déterminer le nombre de Do différents audibles par l’oreille humaine sachant que la hauteur (fréquence) du Do 0 est de 33 Hz.</p>
+</blockquote>
+<blockquote>
+<p>La note la plus basse d’un piano a une fréquence de 27,5 Hz et la note la plus haute a une fréquence d’environ 4 186 Hz. Combien y a-t-il d’octaves dans un piano ?</p>
+</blockquote>
+<p>Si le fondamental du deuxième son a une fréquence triple par rapport au premier (ou ×1,5 en ramenant à l&rsquo;octave précédent), on recouvre une fréquence sur trois. La note du deuxième son correspond alors à la <strong>quinte</strong> de la note du premier son.</p>
+<p>Ce son est suffisamment différent pour que la note puisse être considérée comme distincte de la première.</p>
+<br>
+<h3 id="cycle-des-quintes">Cycle des quintes</h3>
+<p>On a jusque là deux notes : la note de départ et sa quinte. Comment en obtenir de nouvelles ?</p>
+<p>Il suffit de prendre la quinte de la quinte, puis la quinte de la quinte de la quinte, etc.</p>
+<p>À chaque fois, on obtient la quinte en multipliant la fréquence de la note précédente par 3 et pour garder toutes nos notes à l&rsquo;intérieur d&rsquo;une même octave, on divise autant de fois que nécessaire par 2 pour que la fréquence finisse dans l&rsquo;intervalle $[f_1,2f_1]$ où $f_1$ est la fréquence de la note 1.</p>
+<p>Finalement chaque nouvelle note sera de la forme $f_1\times\frac{3^m}{2^n}$.</p>
+<p>Un algorithme permettant d&rsquo;obtenir les différentes notes est donné par le diagramme ci-dessous.</p>
+<p><img src="/1esquinte.png?width=500" alt=""></p>
+<blockquote>
+<p>Compléter l&rsquo;implémentation Python ci-dessous donnant les 55 premières notes obtenues en complétant les pointillés.</p>
+</blockquote>
+<center><iframe src="https://trinket.io/embed/python/da91de7483" width="100%" height="300" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe></center>
+<p>Lorsqu&rsquo;une note obtenue est proche d&rsquo;une note déjà présente, on peut &ldquo;refermer&rdquo; la gamme en ne gardant que les notes obtenues jusque là. On construit ainsi la <strong>gamme de Pythagore</strong>.</p>
+<p>On remarque ainsi que la $12^e$ note correspond approximativement à la note de départ ($f=1$).<br>En effet : $3^{12}\approx 2^{19}$. On dit alors que le cycle des quintes reboucle (même si imparfaitement) incitant à découper l&rsquo;octave en 12 notes.</p>
+<p>Presque tous les instruments occidentaux sont construits pour pouvoir reproduire la gamme chromatique faite de 12 notes séparées par des demi-tons.</p>
+<p><img src="/12notes.png?width=800" alt=""></p>
+<p>On peut aussi décider de refermer la gamme à la $5^e$ quinte. Cela boucle moins bien mais on obtient alors une gamme qui semble universellement répandue sur Terre : la gamme pentatonique.</p>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/ne6tB2KiZuk?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+</div>
+<br>
+<p>En refermant à la $7^e$ quinte, on obtient la gamme diatonique faite de 5 tons et 2 demi-tons à partir desquels on peut obtenir les noms des notes (touches blanches du piano).</p>
+<blockquote>
+<p>Qui &ldquo;boucle le mieux&rdquo; entre la gamme pentatonique et la gamme diatonique ?</p>
+</blockquote>
+<p>Enfin, une gamme à 53 niveaux boucle si bien qu&rsquo;elle sert de base en théorie musicale. Des notes comme Do♯ et Ré♭ n&rsquo;y&rsquo; sont plus confondues.</p>
+<br>
+<h3 id="les-problèmes-posés-par-les-gammes-de-pythagore">Les problèmes posés par les gammes de Pythagore</h3>
+<h4 id="la-quinte-du-loup">La quinte du loup</h4>
+<p>Dans la gamme de Pythagore (à 5,7 ou 12 notes), l’une des quintes n’est pas pure (sa valeur a été choisie pour arrêter le cycle alors qu’on ne rebouclait pas exactement sur 1).</p>
+<blockquote>
+<p>Prouver par l&rsquo;absurde que $\frac{3^n}{2^m}\neq 2$, quels que soient les entiers $n$ et $m$.</p>
+</blockquote>
+<p>Cette quinte, appelée la <strong>quinte du loup</strong> parce qu’elle rappelle le hurlement du loup, n’est pas consonante avec les autres (elle sonne faux).</p>
+<div style=" position: relative;overflow: hidden;max-width: 894px;margin: auto;padding-bottom: min(84.90%,759px);"> 
+<iframe scrolling="no" title="purcomplexe" src="https://www.geogebra.org/material/iframe/id/upbjauud/width/894/height/759/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/false/ctl/false" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;"> </iframe>
+</div>
+<p>L’écart entre la quinte du loup et les autres quintes est appelé comma pythagoricien (représenté en vert ci-dessous). Pour contourner cette difficulté, les compositeurs choisissaient de positionner la quinte du loup dans le cycle sur un intervalle peu utilisé dans leur composition musicale.</p>
+<p><img src="/1espythagore.png?width=1200" alt=""></p>
+<h4 id="la-transposition">La transposition</h4>
+<p>La figure précédente fait apparaître deux types d&rsquo;intervales entre deux notes consécutives. On dit que les gammes de Pythagore sont à tempéraments inégaux.</p>
+<p>L’existence de ces deux types d’intervalle pose problème pour la transposition d’un morceau de musique, qui consiste à décaler d’un intervalle fixe toutes les notes de ce morceau
+afin de l’adapter à la tonalité des instruments ou de la voix.</p>
+<p><u>Rq</u> : l&rsquo;apotome fait quasiment 5 commas et le limma 4, ce qui donne 53 commas par octave.</p>
+<br>
+<h3 id="gamme-tempérée">Gamme tempérée</h3>
+<p>L&rsquo;idée est de moyenner les deux types d&rsquo;intervalle pour n&rsquo;avoir plus qu&rsquo;un seul facteur multiplicatif entre deux notes. On parle alors de gamme au <strong>tempérament égal</strong>.</p>
+<p>Pour y parvenir, on va prendre soin de conserver un facteur 2 parfait entre une note et son octave. On découpe ensuite cette octave en un intervalle unique $x$, appelé <strong>demi-ton tempéré</strong>, de telle sorte que $x^{12}=2$.</p>
+<blockquote>
+<p>Par tâtonnement et à l’aide d’une calculatrice, trouver un encadrement à $10^{-2}$ près du demi-ton tempéré $x$.</p>
+</blockquote>
+<blockquote>
+<p>Complétez l&rsquo;algorithme suivant permettant d&rsquo;obtenir une valeur approchée à $10^{-k}$ près du demi-ton tempéré $x$ par balayage.</p>
+</blockquote>
+<center>
+<iframe src="https://trinket.io/embed/python/57689f18d9" width="100%" height="300" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+</center>
+<p>L&rsquo;opération mathématique permettant d&rsquo;obtenir $x$ est la racine douzième de 2 : $\sqrt[12]{2}$. On peut aussi écrire $2^{\frac{1}{12}}$ de façon à ce que $x^{12}=(2^{\frac{1}{12}})^{12}=12$.</p>
+<blockquote>
+<p>Expliquer pourquoi le ton tempéré est le carré du demi-ton tempéré. Calculer une valeur décimale approchée à $10^{-2}$ près du ton tempéré.</p>
+</blockquote>
+<blockquote>
+<p>Sachant que la quinte tempérée est égale à sept demi-tons tempérés, la calculer et la comparer à la quinte pure.</p>
+</blockquote>
+<p>Moralité, dans la gamme tempérée, toutes les quintes sont un peu fausses (mais très peu). C&rsquo;est le prix à payer pour corriger les deux inconvénients de la gamme pythagoricienne :</p>
+<ul>
+<li>il n&rsquo;y a plus une quinte plus fausse que les autres ;</li>
+<li>tous les intervalles sont les mêmes $\Rightarrow$ plus de problème de transposition.</li>
+</ul>
+<br>
+<h3 id="progression-arithmétique-vs-géométrique">Progression arithmétique vs géométrique</h3>
+<p>Le découpage de l&rsquo;octave de la gamme tempérée est dit géométrique dans le sens où on avance d&rsquo;un niveau à l&rsquo;autre via des multiplications plutôt que par des additions (la progression ne serait alors plus géométrique mais arithmétique ou linéaire).</p>
+<p>Résultat : les fréquences correspondant aux notes de la gamme tempérée ne sont pas régulièrement réparties sur une échelle linéaire (où un carreau a toujours la même valeur).</p>
+<div style="position: relative;overflow: hidden;max-width: 839px;margin: auto;padding-bottom: min(76.16%,639px);"> 
+<iframe scrolling="no" title="échelle géométrique vs arithmétique" src="https://www.geogebra.org/material/iframe/id/ftqkzqgb/width/839/height/639/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/false/ctl/false" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;"> </iframe>
+</div>
+<br>
+<p>Plus globalement, nos capteurs sensoriels partagent cette sensibilité géométrique aux stimuli extérieurs ; ils ne graduent pas en variations absolues égales mais en variations relatives égales.</p>
+<p>On perçoit par exemple la même différence de niveau sonore lorsqu&rsquo;une trompette est rejointe par une autre trompette, que lorsque 8 trompettes se joignent à 8 autres.</p>
+<p>L&rsquo;échelle utilisée pour le niveau sonore traduit bien cette sensibilité aux variations relatives puisqu&rsquo;on a dans les deux cas la même augmentation de 3 dB.</p>
+
+
+
+
+
+<footer class=" footline" >
 	
 </footer>
 
@@ -3180,6 +3274,7 @@ td.clickable {
             
                 
                     
+                    
                 
                 
 
@@ -3194,6 +3289,9 @@ td.clickable {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -3277,6 +3375,7 @@ td.clickable {
             
                 
                     
+                    
                 
                 
 
@@ -3291,6 +3390,7 @@ td.clickable {
             
             
                 
+                    
                     
                 
                 
@@ -3308,42 +3408,8 @@ td.clickable {
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
-                    
-                    
-
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -3355,34 +3421,6 @@ td.clickable {
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3431,6 +3469,71 @@ td.clickable {
 
                     
                     
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
                     
 
                     
@@ -3463,7 +3566,6 @@ td.clickable {
             
             
                 
-                    
                     
                 
                 
@@ -3566,4 +3668,3 @@ td.clickable {
 
   </body>
 </html>
-

@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Tremplins - Cours Physique-Chimie</title>
+    <title>La Terre - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/colles/tremplins/">
+  <body class="" data-url="/1es/terre/">
     <nav id="sidebar" class="">
 
 
@@ -1457,7 +1457,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/" title="1ES" class="dd-item
-        
+        parent
         
         
         ">
@@ -1539,7 +1539,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     
     <li data-nav-id="/1es/terre/" title="La Terre" class="dd-item
         
-        
+        active
         
         ">
       <a href="/1es/terre/">
@@ -1967,7 +1967,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        parent
+        
         
         
         ">
@@ -2062,26 +2062,13 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                         </a>
                     </span>
                   
-                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
-                  
                   <span class="links">
                  
                  
-                   Tremplins
+                   La Terre
                  
                   </span>
                 </div>
-                
-                    <div class="progress">
-    <div class="wrapper">
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#petits-suppléments--brachistochrone-et-tautochrone">Petits suppléments : brachistochrone et tautochrone</a></li>
-  </ul>
-</nav>
-    </div>
-</div>
-
                 
               </div>
             </div>
@@ -2090,97 +2077,72 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
         </div>
         
+          <div id="chapter">
+        
         <div id="body-inner">
 
 
         
 
 
-<style>
-table {
-  margin: auto;
-  border-collapse: collapse;
-  border: none !important;
+
+	<style>
+figure {
+    position: relative;
+    padding: 0px;
+    margin: auto;
+    max-width: 800px;
 }
-td {
-  width: 60px;
-  height: 60px;
-  border: 5px solid white !important;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 1em;
+
+img {
+		display: block;
+		max-width: 100%;
+		max-height: inherit;
+  	width: auto;
 }
-td.clickable {
-  cursor: pointer;
-}
-.s-block {
-  background-color: #0076BA;
-}
-.p-block {
-  background-color: #0076BA;
-}
-.neutre {
-  background-color: #0076BA;
-}
-.noble-gas {
-  background-color: #EE220C;
-}
-.empty {
-  border: none !important;
-  color:#1C90F3;
-  font-weight:bold;
-}
-.symbol {
-  font-size: 2em;
-  font-weight:bold;
-  color:#fff;
-}
-.atomic-number {
-  font-size: 1.5em;
-  font-weight:bold;
-  color: #fff;
-}
-.electron-configuration {
-  font-size: 1em;
-  color: #fff;
+
+figcaption {
+		position: absolute;
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 </style>
-<h1 id="course-de-tremplins">Course de tremplins</h1>
-<p>Deux balles dévalent chacune un tremplin différent dont les points de départ et d&rsquo;arrivée ont même altitude :</p>
-<p><img src="/tremplins.png" alt="tremplins"></p>
-<p>Les différentes coordonnées sont données ci-dessous. <br>Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s<sup>-2</sup>. <br>La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.</p>
-<p><img src="/coordtremplins.png" alt="ccordtremplins"></p>
-<p>Questions préliminaires :</p>
-<ol>
-<li>Qulle balle atterrit le plus loin ?</li>
-<li>Quelle balle parcourt le moins de distance ?</li>
-<li>Quelle balle arrive la première en C ?</li>
-</ol>
-<p>Vérification par simulation :</p>
-<iframe src="https://trinket.io/embed/glowscript/85d892ed3b?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Résolution :</p>
-<ol start="4">
-<li>Déterminer la durée mise pour chacune des balles pour atteindre le sol (y = -4). Confirmez-vous les valeurs de la simulation ? Commenter.</li>
-</ol>
-<p><a href="http://www.youtube.com/watch?v=88NZStgiIt0">Vidéo de Bruce Yeany sur des tremplins ressemblants</a>.</p>
-<br>
-<h2 id="petits-suppléments--brachistochrone-et-tautochrone">Petits suppléments : brachistochrone et tautochrone</h2>
-<p>Vous pouvez modifier sur le programme ci-dessous la courbe que suit la balle entre deux points fixes. <br>Vous pouvez tenter par exemple de construire le chemin le plus court ou envoyer directement la balle le plus bas possible, là où la vitesse est plus grande.</p>
-<p>Que remarquez-vous sur les temps de parcours obtenus par rapport au temps de parcours sur la courbe initiale ?</p>
-<p>Cette courbe est une cycloïde et s&rsquo;appelle la <strong>brachistochrone</strong>.</p>
-<iframe src="https://trinket.io/embed/glowscript/6be753c232?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Une autre cycloïde intéressante, la <strong>tautochrone</strong>.</p>
-<p>Changez la position initiale de la balle verte sur la courbe, que remarquez-vous ?</p>
-<iframe src="https://trinket.io/embed/glowscript/3228a61a5b?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p><a href="https://www.youtube.com/watch?v=QL6HkOukxLA">Petite vidéo de Bruce Yeany</a> donnant l&rsquo;intuition pour comprendre la propriété de cette courbe.</p>
-<p><strong>Python :</strong></p>
-<p>Et pour finir, <a href="https://scipython.com/blog/the-brachistochrone-problem/">un lien vers un programme Python permettant de tracer la brachistochrone</a> (utilisation de tableaux <code>numpy</code>, utilisation de la librairie <code>scipy</code> pour trouver une racine via la méthode de Newton et pour intégrer via <code>quad</code>, et utilisation de <code>matplotlib</code> pour tracer).</p>
+<h1 id="la-terre-un-astre-singulier">La Terre, un astre singulier</h1>
+<iframe src='https://solarsystem.nasa.gov/gltf_embed/2392'; width='100%'; height='450px'; frameborder='0'; ></iframe>
+<hr>
+<h2 id="forme-de-la-terreterre1"><a href="./terre1/">Forme de la Terre</a></h2>
+<ul>
+<li>Horizon</li>
+<li>Ératosthène</li>
+<li>Histoire du mètre</li>
+<li>Se déplacer sur une sphère</li>
+<li>Représenter une sphère sur un plan</li>
+</ul>
+<hr>
+<h2 id="la-terre-dans-luniversterre2"><a href="./terre2/">La Terre dans l&rsquo;univers</a></h2>
+<ul>
+<li>Copernic</li>
+<li>Parallaxe</li>
+<li>Mouvements de la Terre</li>
+<li>Lune</li>
+</ul>
 
 
-<footer class="footline">
+
+
+
+<footer class=" footline" >
 	
 </footer>
 
+        
+            </div> 
         
         </div>
         
@@ -3180,6 +3142,7 @@ td.clickable {
             
                 
                     
+                    
                 
                 
 
@@ -3194,6 +3157,9 @@ td.clickable {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -3227,6 +3193,7 @@ td.clickable {
             
                 
                     
+                    
                 
                 
 
@@ -3241,6 +3208,9 @@ td.clickable {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -3252,124 +3222,6 @@ td.clickable {
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
                     
                         
             
@@ -3437,6 +3289,124 @@ td.clickable {
             
         
                     
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3463,7 +3433,6 @@ td.clickable {
             
             
                 
-                    
                     
                 
                 
@@ -3566,4 +3535,3 @@ td.clickable {
 
   </body>
 </html>
-

@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Tremplins - Cours Physique-Chimie</title>
+    <title>Numérisation - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/colles/tremplins/">
+  <body class="" data-url="/1es/son/numerisation/">
     <nav id="sidebar" class="">
 
 
@@ -1457,7 +1457,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/" title="1ES" class="dd-item
-        
+        parent
         
         
         ">
@@ -1628,7 +1628,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/son/" title="Son et musique" class="dd-item
-        
+        parent
         
         
         ">
@@ -1684,7 +1684,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     
     <li data-nav-id="/1es/son/numerisation/" title="Numérisation" class="dd-item
         
-        
+        active
         
         ">
       <a href="/1es/son/numerisation/">
@@ -1967,7 +1967,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        parent
+        
         
         
         ">
@@ -2067,7 +2067,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Tremplins
+                   Numérisation
                  
                   </span>
                 </div>
@@ -2076,7 +2076,16 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#petits-suppléments--brachistochrone-et-tautochrone">Petits suppléments : brachistochrone et tautochrone</a></li>
+    <li><a href="#analogique-vs-numérique">Analogique vs Numérique</a></li>
+    <li><a href="#pourquoi-numériser-">Pourquoi numériser ?</a></li>
+    <li><a href="#codage-dun-son">Codage d&rsquo;un son</a>
+      <ul>
+        <li><a href="#échantillonnage">Échantillonnage</a></li>
+        <li><a href="#quantification">Quantification</a></li>
+      </ul>
+    </li>
+    <li><a href="#exemple-">Exemple :</a></li>
+    <li><a href="#débit-binaire-et-compression">Débit binaire et compression</a></li>
   </ul>
 </nav>
     </div>
@@ -2096,88 +2105,248 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<style>
-table {
-  margin: auto;
-  border-collapse: collapse;
-  border: none !important;
-}
-td {
-  width: 60px;
-  height: 60px;
-  border: 5px solid white !important;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 1em;
-}
-td.clickable {
-  cursor: pointer;
-}
-.s-block {
-  background-color: #0076BA;
-}
-.p-block {
-  background-color: #0076BA;
-}
-.neutre {
-  background-color: #0076BA;
-}
-.noble-gas {
-  background-color: #EE220C;
-}
-.empty {
-  border: none !important;
-  color:#1C90F3;
-  font-weight:bold;
-}
-.symbol {
-  font-size: 2em;
-  font-weight:bold;
-  color:#fff;
-}
-.atomic-number {
-  font-size: 1.5em;
-  font-weight:bold;
-  color: #fff;
-}
-.electron-configuration {
-  font-size: 1em;
-  color: #fff;
-}
+
+	<style>
+ 	#correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ 	#comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ 	#commsum
+  {
+    color: #004D80;
+  }
+ 	#correcsum
+  {
+    color: #006C65;
+  }
 </style>
-<h1 id="course-de-tremplins">Course de tremplins</h1>
-<p>Deux balles dévalent chacune un tremplin différent dont les points de départ et d&rsquo;arrivée ont même altitude :</p>
-<p><img src="/tremplins.png" alt="tremplins"></p>
-<p>Les différentes coordonnées sont données ci-dessous. <br>Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s<sup>-2</sup>. <br>La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.</p>
-<p><img src="/coordtremplins.png" alt="ccordtremplins"></p>
-<p>Questions préliminaires :</p>
-<ol>
-<li>Qulle balle atterrit le plus loin ?</li>
-<li>Quelle balle parcourt le moins de distance ?</li>
-<li>Quelle balle arrive la première en C ?</li>
-</ol>
-<p>Vérification par simulation :</p>
-<iframe src="https://trinket.io/embed/glowscript/85d892ed3b?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Résolution :</p>
-<ol start="4">
-<li>Déterminer la durée mise pour chacune des balles pour atteindre le sol (y = -4). Confirmez-vous les valeurs de la simulation ? Commenter.</li>
-</ol>
-<p><a href="http://www.youtube.com/watch?v=88NZStgiIt0">Vidéo de Bruce Yeany sur des tremplins ressemblants</a>.</p>
+<h1 id="le-son-une-information-à-coder">Le son, une information à coder</h1>
+<h2 id="analogique-vs-numérique">Analogique vs Numérique</h2>
+<p>Avant les années 1990, le support sur lequel est enregistrée la musique était le plus souvent <strong>analogique</strong>, mais avec la démocratisation du Compact Disk, les supports <strong>numériques</strong> deviennent rapidement majoritaires.</p>
+<blockquote>
+<p>Définir les termes analogique et numérique.
+Nommer et classer les supports suivants entre analogique et numérique.</p>
+</blockquote>
+<p><img src="/stockage.jpg?width=800px" alt=""></p>
+<h2 id="pourquoi-numériser-">Pourquoi numériser ?</h2>
+<p>Selon vous, quels sont les principaux avantages d&rsquo;une numérisation des données ?</p>
+<details>
+<summary id="correcsum">
+Correction (cliquer pour afficher)</summary>
+<blockquote id="correc">
+<ul>
+<li>permet d'emmagasiner de grandes quantités d'information sur des volumes de faibles dimensions&nbsp;;</li>
+<li>permet de dupliquer exactement et facilement les informations numériques et cela pour un moindre coût&nbsp;;</li>
+<li>permet de distribuer largement les informations grâce aux réseaux informatiques et notamment grâce à Internet.</li>
+</ul>
+</blockquote>
+</details>
 <br>
-<h2 id="petits-suppléments--brachistochrone-et-tautochrone">Petits suppléments : brachistochrone et tautochrone</h2>
-<p>Vous pouvez modifier sur le programme ci-dessous la courbe que suit la balle entre deux points fixes. <br>Vous pouvez tenter par exemple de construire le chemin le plus court ou envoyer directement la balle le plus bas possible, là où la vitesse est plus grande.</p>
-<p>Que remarquez-vous sur les temps de parcours obtenus par rapport au temps de parcours sur la courbe initiale ?</p>
-<p>Cette courbe est une cycloïde et s&rsquo;appelle la <strong>brachistochrone</strong>.</p>
-<iframe src="https://trinket.io/embed/glowscript/6be753c232?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Une autre cycloïde intéressante, la <strong>tautochrone</strong>.</p>
-<p>Changez la position initiale de la balle verte sur la courbe, que remarquez-vous ?</p>
-<iframe src="https://trinket.io/embed/glowscript/3228a61a5b?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p><a href="https://www.youtube.com/watch?v=QL6HkOukxLA">Petite vidéo de Bruce Yeany</a> donnant l&rsquo;intuition pour comprendre la propriété de cette courbe.</p>
-<p><strong>Python :</strong></p>
-<p>Et pour finir, <a href="https://scipython.com/blog/the-brachistochrone-problem/">un lien vers un programme Python permettant de tracer la brachistochrone</a> (utilisation de tableaux <code>numpy</code>, utilisation de la librairie <code>scipy</code> pour trouver une racine via la méthode de Newton et pour intégrer via <code>quad</code>, et utilisation de <code>matplotlib</code> pour tracer).</p>
+<h2 id="codage-dun-son">Codage d&rsquo;un son</h2>
+<p>Un son est une vibration mécanique se propageant dans l’air ou dans un autre milieu (fluide, solide&hellip;). À l’aide d’un micro, un son peut être capté et converti en un signal analogique modélisé mathématiquement par une fonction représentant par exemple une tension en fonction du temps.</p>
+<p>Le traitement numérique de ce signal analogique, réalisé à l’aide d’un <strong>convertisseur analogique/numérique</strong> (CAN), consiste à <strong>discrétiser</strong> cette fonction en abscisse et en ordonnée pour en extraire un nombre fini de données.</p>
+<ul>
+<li><strong>L’échantillonnage</strong> consiste à relever différentes valeurs de la tension à intervalles de temps réguliers.</li>
+<li><strong>La quantification</strong>, quant à elle, revient à associer à chaque valeur de l’échantillon un nombre dont la longueur de l’écriture binaire est décidée par avance.</li>
+</ul>
+<br>
+<h3 id="échantillonnage">Échantillonnage</h3>
+<p>Considérons la représentation graphique en fonction du temps de la tension électrique correspondant au signal analogique du La du diapason (La3), son pur de fréquence $f=\pu{440 Hz}$.</p>
+<p>Un échantillonnage à la fréquence $f_e$ revient à garder constante la valeur du signal au début de la période pendant toute la période d&rsquo;échantillonnage $T_e = 1/f_e$.</p>
+<p>Plus $f_e$ est grande et plus le signal restitué est fidèle.</p>
+<div style=" position: relative;overflow: hidden;max-width: 673px;
+  margin: auto; padding-bottom: min(87.82%,591px);"> 
+<iframe scrolling="no" title="purcomplexe" src="https://www.geogebra.org/material/iframe/id/uggrvubv/width/673/height/591/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/false/ctl/false" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;"> </iframe>
+</div>
+<blockquote>
+<p>Pour quelle valeur de $f_e$, le signal échantillonné est-il un signal carré (ou créneau) ayant la même fréquence que le signal sinusoïdal initial ?</p>
+</blockquote>
+<p>On appelle cette fréquence la fréquence de Nyquist. C&rsquo;est la fréquence d&rsquo;échantillonnage minimale nécessaire pour que la fréquence du signal échantillonnée soit la même que celle du signal de départ.</p>
+<blockquote>
+<p>Sachant que l&rsquo;oreille humaine est capable d&rsquo;entendre des sons jusqu&rsquo;à 20000 Hz, à partir de quelle fréquence d&rsquo;échantillonage est-on sûr d&rsquo;enregistrer fidèlement un son ?</p>
+</blockquote>
+<blockquote>
+<p>Sur une ligne téléphonique, un son est échantillonnée à 8000 Hz. Pourquoi est-ce suffisant ?</p>
+</blockquote>
+<p>On considère un ensemble de valeurs obtenues par échantillonnage d’un son pur. L’unité portée sur l’axe des abscisses est la seconde.</p>
+<p><img src="/exo_ech.png?width=800px" alt=""></p>
+<blockquote>
+<p>Déterminer la fréquence du son échantillonné.</p>
+<p>Déterminer la fréquence $f_e$ d’échantillonnage.</p>
+</blockquote>
+<br>
+<h3 id="quantification">Quantification</h3>
+<h4 id="écriture-binaire-dun-nombre-entier">Écriture binaire d&rsquo;un nombre entier</h4>
+<div style="position:relative; width:640px; max-width:100%; height:480px; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<iframe width="640" height="480"  src="https://www.youtube.com/embed/lP9PaDs2xgQ" title="Ératosthène : mesure de la circonférence terrestre" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width:100%"></iframe>
+</div>
+<p>Les shadoks comptent en base 4, mais les ordinateurs, eux, préfèrent la base 2 car ils n&rsquo;ont que deux chiffres à leur disposition : $1$ et $0$, ouvert ou fermé (un ordinateur n&rsquo;est finalement qu&rsquo;un ensemble d&rsquo;interrupteurs !).</p>
+<p>0 et 1 sont les seuls nombres que l’on peut coder sur un seul bit. Sur deux bits, il y a quatre nombres codés : $00$, $01$, $10$ et $11$.</p>
+<p>Plus généralement, si $p$ est un entier naturel non nul, on peut coder $2^p$ nombres entiers sur $p$ bits.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Nombre $p$ de bits</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">8</th>
+<th style="text-align:center">10</th>
+<th style="text-align:center">16</th>
+<th style="text-align:center">24</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>Nombre de nombres codables</strong></td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">256</td>
+<td style="text-align:center">1 024</td>
+<td style="text-align:center">65 536</td>
+<td style="text-align:center">16 777 216</td>
+</tr>
+</tbody>
+</table>
+<p>On voit ainsi qu’un octet, constitué de 8 bits, permet de représenter 256 nombres distincts. L’octet est l’unité qui permet de mesurer la quantité de données en informatique, c&rsquo;est l&rsquo;unité de mémoire.</p>
+<p>Les nombres positifs sont simplement écrits dans leur écriture binaire : ainsi le nombre 3 a-t-il pour écriture binaire $011$ sur 3 bits.</p>
+<p>La technique du complément à 2 permet de coder des nombres négatifs. Si l&rsquo;espace de codage est de $p$ bits, alors cette technique permet de coder tous les nombres positifs de $0$ à $2^{p-1}$ et tous les nombres négatifs de $-2^p$ à $0$.</p>
+<p>Algorithme à suivre :</p>
+<ul>
+<li>
+<p>On considère l’écriture binaire de sa valeur absolue. Par exemple pour écrire $-3$ sur 3 bits, on commence par écrire $011$.</p>
+</li>
+<li>
+<p>On détermine le complément à 2 de ce dernier nombre, ce qui revient à prendre la
+négation de chaque bit : $0$ est remplacé par $1$ et $1$ est remplacé par $0$. Par exemple, $011$ devient $100$.</p>
+</li>
+<li>
+<p>On ajoute $1$ au nombre obtenu (ne pas oublier les retenues éventuelles), ce qui
+constitue le code cherché. Par exemple, en ajoutant $1$ à $100$, on obtient $101$. Le
+codage de $-3$ est $101$.</p>
+</li>
+</ul>
+<blockquote>
+<p>Appliquer l’algorithme ci-dessus pour déterminer le codage de -1 et -2.</p>
+</blockquote>
+<br>
+<h4 id="signal-numérisé">Signal numérisé</h4>
+<p>La courbe ci-dessous est obtenue après quantification de la courbe échantillonnée précédente.</p>
+<p><img src="/exo_num.png?width=800px" alt=""></p>
+<blockquote>
+<p>Indiquer sur combien de bits sont codés les valeurs quantifiés.</p>
+</blockquote>
+<div style=" position: relative;overflow: hidden;max-width: 1019px;
+  margin: auto; padding-bottom: min(84.40%,860px);"> 
+<iframe scrolling="no" title="purcomplexe" src="https://www.geogebra.org/material/iframe/id/t6jbyduj/width/1019/height/860/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/false/ctl/false" style="position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;"> </iframe>
+</div>
+<h2 id="exemple-">Exemple :</h2>
+<p>Fichier sonore original (quantification sur 16 bits et échantillonnage de 48 kHz) :</p>
+ <audio controls="controls">
+  <source type="audio/mp3" src="/ech48kHz16bit.mp3"></source>
+  <p>Your browser does not support the audio element.</p>
+</audio>
+<ul>
+<li>Modification de la fréquence d&rsquo;échantillonnage (en gardant la quantification sur 16 bit) :</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>16 kHz</th>
+<th>8 kHz</th>
+<th>4 kHz</th>
+<th>2 kHz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech16kHz16bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech8kHz16bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech4kHz16bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech4kHz16bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Modification de la quantification (en gardant l&rsquo;échantillonnage à 48 kHz) :</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>8 bit</th>
+<th>6 bit</th>
+<th>4 bit</th>
+<th>2 bit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech48kHz8bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech48kHz6bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech48kHz4bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+<td><audio controls="controls"><br/>  <source type="audio/mp3" src="/ech48kHz2bit.mp3"></source><br/>  <p>Your browser does not support the audio element.</p><br/></audio></td>
+</tr>
+</tbody>
+</table>
+<p>Passage par ligne téléphonique (quantification sur 8 bit et échantillonage à 8 kHz) :</p>
+<audio controls="controls">
+  <source type="audio/mp3" src="/ech8kHz8bit.mp3"></source>
+  <p>Your browser does not support the audio element.</p>
+</audio>
+<br>
+<br>
+<br>
+<h2 id="débit-binaire-et-compression">Débit binaire et compression</h2>
+<p>Le débit binaire mesure la quantité de données numériques transmises par unité de temps. L’unité utilisée est le bit par seconde (bit/s) et ses multiples kbit/s, Mbit/s ou Gbit/s.</p>
+<p>Quelques débits binaires typiques :</p>
+<ul>
+<li>télégraphie morse : 40 bit/s</li>
+<li>connexion bluetooth : 3 Mbit/s</li>
+<li>connexion internet par fibre : de 100 Mbit/s à 2 Gbit/s</li>
+</ul>
+<p>Pour transmettre une voix sur une ligne téléphonique, celle-ci est échantillonnée avec une fréquence de 8000 Hz et est codée sur 8 bits.</p>
+<blockquote>
+<p>Quel débit nécessite la diffusion d&rsquo;un son sur une ligne téléphonique (en bit/s) ?</p>
+</blockquote>
+<p>Sur un disque audio numérique (CD), la musique est enregistrée en stéréo. Elle est codée sur 16 bits avec une fréquence d’échantillonnage de 44,1 kHz.</p>
+<blockquote>
+<p>Quel espace de stockage (en octets) nécessite une seconde de musique sur un CD ?</p>
+</blockquote>
+<p>Les services de musique en ligne proposent en téléchargement de la musique en diverses résolutions. L’un d’eux propose des fichiers « haute résolution » correspondant à un échantillonnage à 192 kHz, un codage sur 24 bits et un enregistrement stéréo.
+On fait l’hypothèse que les fichiers proposés ne sont pas compressés.</p>
+<blockquote>
+<p>Quel est l’espace de stockage nécessaire (en octets) pour enregistrer une seconde de musique de cette qualité ?
+Une connexion ADSL à 8 Mbit/s est-elle suffisante pour pouvoir streamer cet album ?
+Quelle est la taille d’un fichier pouvant contenir un enregistrement de cette qualité des six suites pour violoncelle de Bach, d’une durée totale de 2 h 15 min ?</p>
+</blockquote>
+<p>Pour réduire les difficultés liées au stockage et à la transmission de fichiers audio, on effectue des compressions des données. Il existe des techniques de compression sans perte et d’autres avec perte.</p>
+<p>Une compression est dite sans perte d’information si elle permet de récupérer, après décompression, l’intégralité des sons produits. Elle est réalisée par des algorithmes exploitant les redondances et la prévision de ces redondances dans les fichiers audio. Ainsi, le format FLAC permet de réduire de 30 % à 70 % la taille d’un fichier audio sans perte d’information.</p>
+<p>Dans le cas contraire, la compression est dite avec perte. La compression avec perte supprime les sons peu audibles. La compression est effectuée par des algorithmes. Un format très connu de compression de ce type est le MP3.</p>
+<p>Les services de musique en ligne proposent en streaming ou en téléchargement des fichiers MP3 à 128 kbit/s. Cela signifie que, pour un tel fichier, une seconde de musique nécessite 128 kbit de données.</p>
+<p>Comme pour un CD audio, une seconde de musique nécessite 1411 kbit de données, on en déduit que le taux de compression d’un CD audio vers un fichier MP3 à 128 kbit/s est égal à $\frac{128}{1411}\approx0,091$.</p>
+<p>Le taux de compression est alors d’environ 9 % ou encore dans le ratio de 1:11 puisque $0,9\approx1/11$.</p>
+<blockquote>
+<p>Le fichier audio précédent contenant les suites de Bach est compressé en un fichier MP3 à 320 kbit/s. Calculer le taux de compression pour passer d’un fichier à l’autre.
+Quelle est la taille du fichier MP3 obtenu ?
+Un mélomane possède dans son audiothèque de nombreux CD, tous enregistrés en stéréo, échantillonnés à 44,1 kHz et codés sur 16 bits. Il estime qu’en moyenne, chaque CD dure une heure et décide de stocker sa musique sous forme de fichiers MP3 à
+320 kbit/s.
+Combien peut-il stocker de fichiers MP3 sur un disque dur ayant une capacité de 1 To ?</p>
+</blockquote>
 
 
-<footer class="footline">
+
+
+
+<footer class=" footline" >
 	
 </footer>
 
@@ -3180,6 +3349,7 @@ td.clickable {
             
                 
                     
+                    
                 
                 
 
@@ -3194,6 +3364,9 @@ td.clickable {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -3277,6 +3450,132 @@ td.clickable {
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -3319,124 +3618,6 @@ td.clickable {
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
             
             
@@ -3463,7 +3644,6 @@ td.clickable {
             
             
                 
-                    
                     
                 
                 
@@ -3566,4 +3746,3 @@ td.clickable {
 
   </body>
 </html>
-

@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Tremplins - Cours Physique-Chimie</title>
+    <title>Terre dans l&#39;Univers - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/colles/tremplins/">
+  <body class="" data-url="/1es/terre/terre2/">
     <nav id="sidebar" class="">
 
 
@@ -1457,7 +1457,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/" title="1ES" class="dd-item
-        
+        parent
         
         
         ">
@@ -1538,7 +1538,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/terre/" title="La Terre" class="dd-item
-        
+        parent
         
         
         ">
@@ -1594,7 +1594,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     
     <li data-nav-id="/1es/terre/terre2/" title="Terre dans l&#39;Univers" class="dd-item
         
-        
+        active
         
         ">
       <a href="/1es/terre/terre2/">
@@ -1967,7 +1967,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        parent
+        
         
         
         ">
@@ -2067,7 +2067,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Tremplins
+                   Terre dans l&#39;Univers
                  
                   </span>
                 </div>
@@ -2076,7 +2076,8 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#petits-suppléments--brachistochrone-et-tautochrone">Petits suppléments : brachistochrone et tautochrone</a></li>
+    <li><a href="#la-terre-dans-lunivers">La Terre dans l&rsquo;univers</a></li>
+    <li><a href="#la-lune">La Lune</a></li>
   </ul>
 </nav>
     </div>
@@ -2096,88 +2097,113 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<style>
-table {
-  margin: auto;
-  border-collapse: collapse;
-  border: none !important;
+
+	<style>
+figure {
+    position: relative;
+    padding: 0px;
+    margin: auto;
+    max-width: 800px;
 }
-td {
-  width: 60px;
-  height: 60px;
-  border: 5px solid white !important;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 1em;
+
+img {
+		display: block;
+		max-width: 100%;
+		max-height: inherit;
+  	width: auto;
 }
-td.clickable {
-  cursor: pointer;
-}
-.s-block {
-  background-color: #0076BA;
-}
-.p-block {
-  background-color: #0076BA;
-}
-.neutre {
-  background-color: #0076BA;
-}
-.noble-gas {
-  background-color: #EE220C;
-}
-.empty {
-  border: none !important;
-  color:#1C90F3;
-  font-weight:bold;
-}
-.symbol {
-  font-size: 2em;
-  font-weight:bold;
-  color:#fff;
-}
-.atomic-number {
-  font-size: 1.5em;
-  font-weight:bold;
-  color: #fff;
-}
-.electron-configuration {
-  font-size: 1em;
-  color: #fff;
+
+figcaption {
+		position: absolute;
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 </style>
-<h1 id="course-de-tremplins">Course de tremplins</h1>
-<p>Deux balles dévalent chacune un tremplin différent dont les points de départ et d&rsquo;arrivée ont même altitude :</p>
-<p><img src="/tremplins.png" alt="tremplins"></p>
-<p>Les différentes coordonnées sont données ci-dessous. <br>Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s<sup>-2</sup>. <br>La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.</p>
-<p><img src="/coordtremplins.png" alt="ccordtremplins"></p>
-<p>Questions préliminaires :</p>
-<ol>
-<li>Qulle balle atterrit le plus loin ?</li>
-<li>Quelle balle parcourt le moins de distance ?</li>
-<li>Quelle balle arrive la première en C ?</li>
-</ol>
-<p>Vérification par simulation :</p>
-<iframe src="https://trinket.io/embed/glowscript/85d892ed3b?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Résolution :</p>
-<ol start="4">
-<li>Déterminer la durée mise pour chacune des balles pour atteindre le sol (y = -4). Confirmez-vous les valeurs de la simulation ? Commenter.</li>
-</ol>
-<p><a href="http://www.youtube.com/watch?v=88NZStgiIt0">Vidéo de Bruce Yeany sur des tremplins ressemblants</a>.</p>
+<h2 id="la-terre-dans-lunivers">La Terre dans l&rsquo;univers</h2>
+<p>L&rsquo;échelle des distances spatiales : comment les différentes distance astronomiques ont-elles été mesurées, de la taille de la Terre aux distances intergalactiques ?</p>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/YdOXS_9_P4U?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+</div>
 <br>
-<h2 id="petits-suppléments--brachistochrone-et-tautochrone">Petits suppléments : brachistochrone et tautochrone</h2>
-<p>Vous pouvez modifier sur le programme ci-dessous la courbe que suit la balle entre deux points fixes. <br>Vous pouvez tenter par exemple de construire le chemin le plus court ou envoyer directement la balle le plus bas possible, là où la vitesse est plus grande.</p>
-<p>Que remarquez-vous sur les temps de parcours obtenus par rapport au temps de parcours sur la courbe initiale ?</p>
-<p>Cette courbe est une cycloïde et s&rsquo;appelle la <strong>brachistochrone</strong>.</p>
-<iframe src="https://trinket.io/embed/glowscript/6be753c232?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Une autre cycloïde intéressante, la <strong>tautochrone</strong>.</p>
-<p>Changez la position initiale de la balle verte sur la courbe, que remarquez-vous ?</p>
-<iframe src="https://trinket.io/embed/glowscript/3228a61a5b?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p><a href="https://www.youtube.com/watch?v=QL6HkOukxLA">Petite vidéo de Bruce Yeany</a> donnant l&rsquo;intuition pour comprendre la propriété de cette courbe.</p>
-<p><strong>Python :</strong></p>
-<p>Et pour finir, <a href="https://scipython.com/blog/the-brachistochrone-problem/">un lien vers un programme Python permettant de tracer la brachistochrone</a> (utilisation de tableaux <code>numpy</code>, utilisation de la librairie <code>scipy</code> pour trouver une racine via la méthode de Newton et pour intégrer via <code>quad</code>, et utilisation de <code>matplotlib</code> pour tracer).</p>
+<p><a href="/actcopernic.pdf"><b>Une des plus grandes controverses de l&rsquo;histoire des sciences : la révolution copernicienne</b></a> (où se joue le renversement de la représentation du monde).</p>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Jan_Matejko-Astronomer_Copernicus-Conversation_with_God.jpg/2880px-Jan_Matejko-Astronomer_Copernicus-Conversation_with_God.jpg">
+</div>
+<p><a href="/actparallaxe.pdf"><b>L&rsquo;argument de la parallaxe</b></a> qui a retardé l&rsquo;adhésion aux idées de Copernic.</p>
+<br>
+<div style=" display: block; width: 300px;max-width: 100%;position: relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),  0 6px 20px 0 rgba(0, 0, 0, 0.19);aspect-ratio: 9 / 16;">
+<iframe src="https://www.youtube.com/embed/HOfY7cN0368?si=GkEPcK40O1ATFAyV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></iframe>
+</div>
+<div style="position:relative; width:500px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:20px;">
+<img src="/tycho.png" style="border-radius:20px;">
+</div>
+<br>
+<p>Vidéos sur les mouvements de la Terre et du Soleil :</p>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 
 
-<footer class="footline">
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/IJhgZBn-LHg?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+</div>
+<br>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Pj-h6MEgE7I?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+</div>
+<br>
+<br>
+<hr>
+<h2 id="la-lune">La Lune</h2>
+<br>
+<iframe src='https://solarsystem.nasa.gov/gltf_embed/2366' width='100%' height='450px' frameborder='0' ></iframe>
+<br>
+<br>
+<p style="text-align:center;font-size:25px"><a href="https://presentationssite.github.io/1es/lune">Séance Lune</a></p>
+<br>
+<div style="position:relative;width:500px;max-width:100%;margin-left:auto;margin-right:auto;">
+<iframe src="https://trinket.io/embed/glowscript/83d7fd3f51?outputOnly=true&start=result" width="100%"  height="550px"  frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+</div>
+<br>
+<div style="position:relative;width:500px;max-width:100%;margin-left:auto;margin-right:auto;">
+<blockquote class="twitter-tweet"><p lang="fr" dir="ltr">D&#39;après vous, qu&#39;est-ce qui ne va pas dans cette image ? <a href="https://t.co/G4D56a1F5x">pic.twitter.com/G4D56a1F5x</a></p>&mdash; Astropierre (@astropierre) <a href="https://twitter.com/astropierre/status/1641167089384947720?ref_src=twsrc%5Etfw">March 29, 2023</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<br>
+<p style="text-align:center">
+Pourquoi ne voit-on jamais un tel croissant haut dans le ciel ?
+</p>
+<div style="position:relative;width:70%;max-width:100%;margin-left:auto;margin-right:auto;">
+<img src="/croissantlune.png" style="border-radius:20px;width:100%;">
+</div>
+
+
+
+
+
+<footer class=" footline" >
 	
 </footer>
 
@@ -3180,6 +3206,233 @@ td.clickable {
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -3232,87 +3485,6 @@ td.clickable {
 
                     
                     
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                     
 
                     
@@ -3329,141 +3501,6 @@ td.clickable {
             
             
                 
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -3566,4 +3603,3 @@ td.clickable {
 
   </body>
 </html>
-

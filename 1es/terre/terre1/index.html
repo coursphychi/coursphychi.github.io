@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Tremplins - Cours Physique-Chimie</title>
+    <title>Forme de la Terre - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/colles/tremplins/">
+  <body class="" data-url="/1es/terre/terre1/">
     <nav id="sidebar" class="">
 
 
@@ -1457,7 +1457,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/" title="1ES" class="dd-item
-        
+        parent
         
         
         ">
@@ -1538,7 +1538,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/1es/terre/" title="La Terre" class="dd-item
-        
+        parent
         
         
         ">
@@ -1568,7 +1568,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     
     <li data-nav-id="/1es/terre/terre1/" title="Forme de la Terre" class="dd-item
         
-        
+        active
         
         ">
       <a href="/1es/terre/terre1/">
@@ -1967,7 +1967,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        parent
+        
         
         
         ">
@@ -2067,7 +2067,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Tremplins
+                   Forme de la Terre
                  
                   </span>
                 </div>
@@ -2076,7 +2076,15 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#petits-suppléments--brachistochrone-et-tautochrone">Petits suppléments : brachistochrone et tautochrone</a></li>
+    <li><a href="#forme-de-la-terre">Forme de la Terre</a>
+      <ul>
+        <li><a href="#horizon">Horizon</a></li>
+        <li><a href="#ératosthène">Ératosthène</a></li>
+        <li><a href="#histoire-du-mètre">Histoire du mètre</a></li>
+        <li><a href="#se-déplacer-sur-une-sphère">Se déplacer sur une sphère</a></li>
+        <li><a href="#représenter-une-sphère-sur-un-plan">Représenter une sphère sur un plan</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -2096,88 +2104,107 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
         
 
 
-<style>
-table {
-  margin: auto;
-  border-collapse: collapse;
-  border: none !important;
+
+	<style>
+figure {
+    position: relative;
+    padding: 0px;
+    margin: auto;
+    max-width: 800px;
 }
-td {
-  width: 60px;
-  height: 60px;
-  border: 5px solid white !important;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 1em;
+
+img {
+		display: block;
+		max-width: 100%;
+		max-height: inherit;
+  	width: auto;
 }
-td.clickable {
-  cursor: pointer;
-}
-.s-block {
-  background-color: #0076BA;
-}
-.p-block {
-  background-color: #0076BA;
-}
-.neutre {
-  background-color: #0076BA;
-}
-.noble-gas {
-  background-color: #EE220C;
-}
-.empty {
-  border: none !important;
-  color:#1C90F3;
-  font-weight:bold;
-}
-.symbol {
-  font-size: 2em;
-  font-weight:bold;
-  color:#fff;
-}
-.atomic-number {
-  font-size: 1.5em;
-  font-weight:bold;
-  color: #fff;
-}
-.electron-configuration {
-  font-size: 1em;
-  color: #fff;
+
+figcaption {
+		position: absolute;
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 </style>
-<h1 id="course-de-tremplins">Course de tremplins</h1>
-<p>Deux balles dévalent chacune un tremplin différent dont les points de départ et d&rsquo;arrivée ont même altitude :</p>
-<p><img src="/tremplins.png" alt="tremplins"></p>
-<p>Les différentes coordonnées sont données ci-dessous. <br>Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s<sup>-2</sup>. <br>La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.</p>
-<p><img src="/coordtremplins.png" alt="ccordtremplins"></p>
-<p>Questions préliminaires :</p>
-<ol>
-<li>Qulle balle atterrit le plus loin ?</li>
-<li>Quelle balle parcourt le moins de distance ?</li>
-<li>Quelle balle arrive la première en C ?</li>
-</ol>
-<p>Vérification par simulation :</p>
-<iframe src="https://trinket.io/embed/glowscript/85d892ed3b?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Résolution :</p>
-<ol start="4">
-<li>Déterminer la durée mise pour chacune des balles pour atteindre le sol (y = -4). Confirmez-vous les valeurs de la simulation ? Commenter.</li>
-</ol>
-<p><a href="http://www.youtube.com/watch?v=88NZStgiIt0">Vidéo de Bruce Yeany sur des tremplins ressemblants</a>.</p>
+<h2 id="forme-de-la-terre">Forme de la Terre</h2>
+<video width="300" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <source src="/tiktokplatiste.mp4" type="video/mp4">
+</video>
 <br>
-<h2 id="petits-suppléments--brachistochrone-et-tautochrone">Petits suppléments : brachistochrone et tautochrone</h2>
-<p>Vous pouvez modifier sur le programme ci-dessous la courbe que suit la balle entre deux points fixes. <br>Vous pouvez tenter par exemple de construire le chemin le plus court ou envoyer directement la balle le plus bas possible, là où la vitesse est plus grande.</p>
-<p>Que remarquez-vous sur les temps de parcours obtenus par rapport au temps de parcours sur la courbe initiale ?</p>
-<p>Cette courbe est une cycloïde et s&rsquo;appelle la <strong>brachistochrone</strong>.</p>
-<iframe src="https://trinket.io/embed/glowscript/6be753c232?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Une autre cycloïde intéressante, la <strong>tautochrone</strong>.</p>
-<p>Changez la position initiale de la balle verte sur la courbe, que remarquez-vous ?</p>
-<iframe src="https://trinket.io/embed/glowscript/3228a61a5b?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p><a href="https://www.youtube.com/watch?v=QL6HkOukxLA">Petite vidéo de Bruce Yeany</a> donnant l&rsquo;intuition pour comprendre la propriété de cette courbe.</p>
-<p><strong>Python :</strong></p>
-<p>Et pour finir, <a href="https://scipython.com/blog/the-brachistochrone-problem/">un lien vers un programme Python permettant de tracer la brachistochrone</a> (utilisation de tableaux <code>numpy</code>, utilisation de la librairie <code>scipy</code> pour trouver une racine via la méthode de Newton et pour intégrer via <code>quad</code>, et utilisation de <code>matplotlib</code> pour tracer).</p>
+<p>L&rsquo;auteur de cette vidéo a le mérite d&rsquo;appliquer en partie une démarche scientifique car c&rsquo;est dans l&rsquo;essence même de la science que d&rsquo;essayer de détruire une théorie par la démonstration de son inconsistance à l&rsquo;aide d&rsquo;expériences. On verra cependant que les expériences rapportées sont assez loin de remettre en question la sphéricité de la Terre 🌍&hellip; Elles vont malgré tout nous permettre de réfléchir à des points intéressants comme la distance de l&rsquo;horizon, le calcul d&rsquo;Ératosthène ou encore le chemin le plus court  entre deux points sur une sphère.</p>
+<p>C&rsquo;est quand même dommage que l&rsquo;école n&rsquo;ait pas su apporter des réponses aux étonnements de l&rsquo;auteur (comme la notion de perspective pour expliquer l&rsquo;apparent non parallèlisme des rayons solaires ou la notion d&rsquo;inertie pour le rassurer quant à la vitesse du sol terrestre à l&rsquo;équateur).</p>
+<br>
+<br>
+<h3 id="horizon">Horizon</h3>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
+<img src="/eolienneshoriz.png">
+</div>
+<p>Jusqu&rsquo;où peut-on voir ?  Pourquoi peut-on parfois voir plus loin ?</p>
+<p>Une <a href="/acthorizon.pdf"><strong>première activité</strong></a> pour tenter de répondre à ces questions.</p>
+<video width="640" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <source src="/courburetwitter.mp4" type="video/mp4">
+</video>
+<br>
+<h3 id="ératosthène">Ératosthène</h3>
+<p>Comment un savant de la Grèce Antique a-t-il réussi à déterminer la taille de la Terre avec un bâton ?</p>
+<br>
+<div style="position:relative; width:640px; max-width:100%; height:480px; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<iframe width="640" height="480"  src="https://www.youtube.com/embed/j-n74K3VaYI" title="Ératosthène : mesure de la circonférence terrestre" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width:100%"></iframe>
+</div>
+<br>
+<p>Notre ami platiste a raison de dire que le calcul d&rsquo;Ératosthène ne prouve pas que la Terre est sphérique. Il trouve juste son rayon si elle l&rsquo;était (et c&rsquo;est déjà pas mal). Les résultats d&rsquo;une théorie dépendent complètement du modèle dans lequel la théorie s&rsquo;inscrit.<br>
+À partir des mêmes observations (ombre à Alexandrie mais pas à Syène à midi au solstice d&rsquo;été) mais des prémisses différentes (un modèle de Terre plate avec un petit Soleil flottant au-dessus), Anaxagore aboutissait ainsi deux siècles avant Ératosthène aux mêmes résultats numériques mais il leur donnait une signification bien différente ; le Soleil serait situé, selon lui, à 6500 km de la Terre.</p>
+<br>
+<p>Une des preuves de la rotondité rapportée par Aristote, l&rsquo;ombre de la Terre pendant une éclipse de Lune, est bien illustrée sur la superposition de photos ci-dessous (le contraste et la luminosité ont été boostés sur l&rsquo;image centrale).</p>
+<figure>
+<img src="/photeclipse.png">
+<figcaption>Photo composite de l'éclipse lunaire de 8 novembre 2022 (Andrew McCarthy).</figcaption>
+</figure>
+<p>Si cette preuve est compatible avec une Terre ronde mais plate, les deux autres (disparition derrière l&rsquo;horizon et changement de l&rsquo;élévation des étoiles en fonction de la lattitude) imposent la sphéricité.</p>
+<p><br><br></p>
+<h3 id="histoire-du-mètre">Histoire du mètre</h3>
+<p><img src="/metremeridien.png" alt=""></p>
+<p><a href="https://www.dailymotion.com/embed/video/x1ns2j0"><strong>Documentaire sur la naissance du mètre pendant la révolution française.</strong></a></p>
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<img src="/metreetalon.png">
+</div>
+<p><br><br></p>
+<h3 id="se-déplacer-sur-une-sphère">Se déplacer sur une sphère</h3>
+<p>Quel est le trajet le plus court entre deux points ?</p>
+<p>Dans un espace plat, c&rsquo;est la droite. Mais ce n&rsquo;est plus cas si l&rsquo;espace est courbe !</p>
+<p>On le constate dans l&rsquo;<a href="https://presentationssite.github.io/1es/avion/"><strong>exemple du trajet en avion entre Bordeau et Portland</strong></a>.</p>
+<br>
+<video width="400" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <source src="/indiatousa.mp4" type="video/mp4">
+</video>
+<p><br><br></p>
+<h3 id="représenter-une-sphère-sur-un-plan">Représenter une sphère sur un plan</h3>
+<p>La projection cartographique est un ensemble de techniques géodésiques (« la science qui mesure et représente la surface terrestre ») permettant de représenter une surface non plane (surface de la Terre, d&rsquo;un autre corps céleste, du ciel, &hellip;) dans son ensemble ou en partie sur la surface plane d&rsquo;une carte.</p>
+<p>L&rsquo;impossibilité de projeter le globe terrestre sur une surface plane sans distorsion explique que diverses projections aient été inventées, chacune ayant ses avantages.</p>
+<p>La projection la plus utilisée est celle de <strong>Mercator</strong>. Elle a pour avantage d&rsquo;être conforme, c&rsquo;est-à-dire qu&rsquo;elle conserve les angles, ce qui est particulièrement utile aux marins pour calculer un cap. Mais elle déforme les distances et les aires.</p>
+<p><img src="/projmercator.png?width=800px" alt=""></p>
+<p><img src="https://imgs.xkcd.com/comics/greenland_size.png" alt=""></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Worlds_animate.gif" alt=""></p>
+<p>Les cartes intéractives suivantes mettent en lumière ses inconvénients :</p>
+<ul>
+<li><a href="https://www.partir.com/cartedumonde/appli.html#taille">les aires grandissent lorsqu&rsquo;on s&rsquo;éloigne de l&rsquo;équateur</a></li>
+<li><a href="https://www.partir.com/cartedumonde/appli.html#distances">pareil pour les distances</a></li>
+<li><a href="https://www.partir.com/cartedumonde/appli.html#trajets">La ligne droite n&rsquo;est pas le trajet le plus court</a></li>
+</ul>
+<p>Pour comparaison, la projection de Peters conserve les aires (mais pas les angles) :</p>
+<p><img src="/projpeters.png?width=800px" alt=""></p>
 
 
-<footer class="footline">
+
+
+
+<footer class=" footline" >
 	
 </footer>
 
@@ -3180,6 +3207,7 @@ td.clickable {
             
                 
                     
+                    
                 
                 
 
@@ -3194,6 +3222,9 @@ td.clickable {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -3227,6 +3258,7 @@ td.clickable {
             
                 
                     
+                    
                 
                 
 
@@ -3241,6 +3273,7 @@ td.clickable {
             
             
                 
+                    
                     
                 
                 
@@ -3258,123 +3291,8 @@ td.clickable {
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -3437,6 +3355,124 @@ td.clickable {
             
         
                     
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3463,7 +3499,6 @@ td.clickable {
             
             
                 
-                    
                     
                 
                 
@@ -3566,4 +3601,3 @@ td.clickable {
 
   </body>
 </html>
-
