@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Inférences bayésiennes on Cours Physique-Chimie</title>
+    <link>https://coursphychi.github.io/tes/vivant/bayes/</link>
+    <description>Recent content in Inférences bayésiennes on Cours Physique-Chimie</description>
+    <generator>Hugo</generator>
+    <language>fr</language>
+    <lastBuildDate></lastBuildDate>
+    <atom:link href="https://coursphychi.github.io/tes/vivant/bayes/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>
