@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1743634343" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1743634343" rel="stylesheet">
-    <link href="/css/hybrid.css?1743634343" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1743634343" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1743634343" rel="stylesheet">
-    <link href="/css/auto-complete.css?1743634343" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1743634343" rel="stylesheet">
-    <link href="/css/theme.css?1743634343" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1743634343" rel="stylesheet">
+    <link href="/css/nucleus.css?1743676828" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1743676828" rel="stylesheet">
+    <link href="/css/hybrid.css?1743676828" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1743676828" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1743676828" rel="stylesheet">
+    <link href="/css/auto-complete.css?1743676828" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1743676828" rel="stylesheet">
+    <link href="/css/theme.css?1743676828" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1743676828" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1743634343" rel="stylesheet">
+    <link href="/css/theme-blue.css?1743676828" rel="stylesheet">
     
-    <link href="/css/foo.css?1743634343" rel="stylesheet"><link href="/css/bar.css?1743634343" rel="stylesheet">
+    <link href="/css/foo.css?1743676828" rel="stylesheet"><link href="/css/bar.css?1743676828" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1743634343"></script>
+    <script src="/js/jquery-3.3.1.min.js?1743676828"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1743634343"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1743634343"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1743676828"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1743676828"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1743634343"></script>
+<script type="text/javascript" src="/js/search.js?1743676828"></script>
 
     
   </div>
@@ -2149,6 +2149,10 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   {
     color: #006C65;
   }
+  th,td
+  {
+      text-align:center;
+  }
 </style>
 <h1 id="intelligence-artificielle">Intelligence Artificielle</h1>
 <p>Avant de parler d&rsquo;intelligence artificielle, il convient de s&rsquo;interroger sur le terme <strong>intelligence</strong>.</p>
@@ -2238,33 +2242,19 @@ Cela signifie qu&rsquo;on ne présuppose rien de particulier sur les données (�
 <li>En augmentant <em>k</em>, les résultats obtenus se stabilisent (vote de la majorité) et les erreurs diminuent, jusqu&rsquo;au moment où la boule à l&rsquo;intérieur de laquelle se fait le moyennage devient trop grosse, amenant in fine l&rsquo;algorithme a choisir systématiquement la catégorie majoritaire, quel que soit le point&hellip; On augmente alors le <strong>biais</strong> (ici, le biais est le préjudice en faveur du plus grand nombre). L&rsquo;ajustement ne suit plus les variations, on parle de sous-apprentissage (<strong>underfitting</strong>).</li>
 </ul>
 <p>Pour résumer :</p>
+<div style="overflow-x:auto;">
 <table>
-<thead>
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">variance</th>
-<th style="text-align:center">biais</th>
-<th style="text-align:center">Cas d&rsquo;une régression</th>
-<th style="text-align:center">Cas d&rsquo;une classification</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><strong>k trop petit</strong> $\rightarrow$ <strong>overfitting</strong></td>
-<td style="text-align:center">forte</td>
-<td style="text-align:center">faible</td>
-<td style="text-align:center"><img src="/overfreg.png?width=200px" alt=""></td>
-<td style="text-align:center"><img src="/overfclas.png?width=200px" alt=""></td>
+<th></th><th> variance</th><th> biais</th><th>Cas d'une régression</th><th>Cas d'une classification</th>
 </tr>
 <tr>
-<td style="text-align:center"><strong>k trop grand</strong> $\rightarrow$ <strong>underfitting</strong></td>
-<td style="text-align:center">faible</td>
-<td style="text-align:center">fort</td>
-<td style="text-align:center"><img src="/underfreg.png?width=200px" alt=""></td>
-<td style="text-align:center"><img src="/underfclas.png?width=200px" alt=""></td>
+<td><b>k trop petit $\rightarrow$ overfitting</b></td><td>forte</td><td>faible</td><td><img src="/overfreg.png" style="max-width:150px;"></td><td><img src="/overfclas.png" style="max-width:150px;"></td>
+</tr><tr>
+<td><b>k trop grand $\rightarrow$ underfitting</b></td><td>faible</td><td>fort</td><td><img src="/underfreg.png" style="max-width:150px;"></td><td><img src="/underfclas.png" style="max-width:150px;"></td>
 </tr>
-</tbody>
 </table>
+</div>
+<br>
 
 <div class="notices tip" style="--title: 'tip';">
   <p style="display: none;">tip</p>
@@ -4114,16 +4104,16 @@ Au-delà du genre, ces modèles peuvent renforcer un large éventail de stéréo
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1743634343"></script>
-    <script src="/js/perfect-scrollbar.min.js?1743634343"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1743634343"></script>
-    <script src="/js/jquery.sticky.js?1743634343"></script>
-    <script src="/js/featherlight.min.js?1743634343"></script>
-    <script src="/js/highlight.pack.js?1743634343"></script>
+    <script src="/js/clipboard.min.js?1743676828"></script>
+    <script src="/js/perfect-scrollbar.min.js?1743676828"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1743676828"></script>
+    <script src="/js/jquery.sticky.js?1743676828"></script>
+    <script src="/js/featherlight.min.js?1743676828"></script>
+    <script src="/js/highlight.pack.js?1743676828"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1743634343"></script>
-    <script src="/js/learn.js?1743634343"></script>
-    <script src="/js/hugo-learn.js?1743634343"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1743676828"></script>
+    <script src="/js/learn.js?1743676828"></script>
+    <script src="/js/hugo-learn.js?1743676828"></script>
     
     
 
