@@ -391,14 +391,14 @@
       <link>https://coursphychi.github.io/1spe/tpvariationvitesse/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/tpvariationvitesse/</guid>
-      <description>TP variation de vitesse Lien vers notebook Colab&#xA;Cette page reprend le contenu du notebook (+ quelques petites vidéos illustratives) avec les sorties des codes affichées pour les listes de données ci-dessous (qui peuvent servir de listes de secours).&#xA;Les données sont issue du pointage de la vidéo &amp;ldquo;parabolique&amp;rdquo; de l&amp;rsquo;application fizziq.&#xA;À l&amp;rsquo;éxécution de la première cellule (voir image ci-dessous), Colab vous demandera de vous connecter à un compte Google.</description>
+      <description>TP variation de vitesse Lien vers notebook Colab&#xA;Vous allez devoir faire un pointage vidéo d&amp;rsquo;une chute libre à l&amp;rsquo;aide de l&amp;rsquo;application fizziq puis analyser le mouvement grâce à des petits codes python qui vont nous permettre de tracer les vecteurs déplacement, vitesse et variation de vitesse.&#xA;Les données que j&amp;rsquo;utilise dans les exemples sont issues du pointage de la vidéo &amp;ldquo;parabolique&amp;rdquo; de l&amp;rsquo;application.&#xA;Vous, vous devrez obtenir vos propres données.</description>
     </item>
     <item>
       <title>Variation de vitesse</title>
       <link>https://coursphychi.github.io/1spe/variationvitesse/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/variationvitesse/</guid>
-      <description> Vecteur variation de vitesse Présentation&#xA;Documents et autres Activités Montagnes Russes (partie&amp;nbsp;2) Ballon-sonde (partie&amp;nbsp;2) TP Chute libre (Python) </description>
+      <description> Vecteur variation de vitesse Présentation&#xA;Documents et autres Activités Montagnes Russes (partie&amp;nbsp;2) Ballon-sonde (partie&amp;nbsp;2) TP TP Chute libre (web) + notebook Python </description>
     </item>
     <item>
       <title>Énergie électrique</title>
