@@ -186,7 +186,7 @@
 	"title": "1SPÉ",
 	"tags": [],
 	"description": "",
-	"content": " Spécialité physique-chimie en première générale Programme officiel + Coefficients + Verbes d'action\nConstitution et transformations de la matière Suivi de l’évolution d’un système, siège d’une transformation : Quantité de matière Détermination physique d\u0026rsquo;une quantité de matière : spectrophotométrie Avancement Réaction d\u0026rsquo;oxydo-réduction Détermination chimique d\u0026rsquo;une quantité de matière : titrages De la structure des entités aux propriétés physiques de la matière : Schéma de Lewis, géométrie, polarité Cohésion, solubilité/miscibilité Chimie organique : Structure des entités organiques Synthèses Combustions Mouvement et interactions Interactions fondamentales et champs Description d’un fluide au repos Mouvement d’un système L’énergie : conversions et transferts Électricité et énergie Mécanique et énergie Ondes et signaux Ondes : Ondes mécaniques Lumière : Images Couleurs Modèles ondulatoire et particulaire de la lumière Incertitudes "
+	"content": " Spécialité physique-chimie en première générale Programme officiel + Coefficients + Verbes d'action\nConstitution et transformations de la matière Suivi de l’évolution d’un système, siège d’une transformation : Quantité de matière Détermination physique d\u0026rsquo;une quantité de matière : spectrophotométrie Avancement Réaction d\u0026rsquo;oxydo-réduction Détermination chimique d\u0026rsquo;une quantité de matière : titrages De la structure des entités aux propriétés physiques de la matière : Schéma de Lewis, géométrie, polarité Cohésion, solubilité/miscibilité Chimie organique : Structure des entités organiques Synthèses Combustions Mouvement et interactions Interactions fondamentales et champs Description d’un fluide au repos Mouvement d’un système L’énergie : conversions et transferts Électricité et énergie Mécanique et énergie Ondes et signaux Ondes : Ondes mécaniques Lumière : Images Couleurs Modèles ondulatoire et particulaire de la lumière Incertitudes Python "
 },
 {
 	"uri": "https://coursphychi.github.io/tes/energie/",
@@ -635,6 +635,13 @@
 	"tags": [],
 	"description": "",
 	"content": " Effet Doppler Présentation\nDocuments et autres TP Doppler Activités Fronde Doppler Appliquette Doppler "
+},
+{
+	"uri": "https://coursphychi.github.io/1spe/python/",
+	"title": "Python",
+	"tags": [],
+	"description": "",
+	"content": " Python Codes Python présents dans les différentes activités réunis dans le notebook ci-dessous.\nNotebook\n"
 },
 {
 	"uri": "https://coursphychi.github.io/",
