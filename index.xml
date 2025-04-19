@@ -485,6 +485,13 @@
       <description>Incertitudes Le cours Pour aller plus loin :&#xA;Tutoriels calculette&#xA;sur l&#39;utilisation de la partie tableur afin de calculer la moyenne d&#39;une série de valeurs et son écart-type expérimental $\sigma_{exp}$. Activités Écriture d&#39;un résultat TP Temps de réaction tip&#xA;Petite explication mathématique pour en savoir plus sur la formule de l&amp;rsquo;écart-type expérimental.</description>
     </item>
     <item>
+      <title>Incertitudes</title>
+      <link>https://coursphychi.github.io/tspe/incertitudestspe/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/tspe/incertitudestspe/</guid>
+      <description>Incertitudes Le cours Pour aller plus loin :&#xA;Tutoriels calculette&#xA;sur l&#39;utilisation de la partie tableur afin de calculer la moyenne d&#39;une série de valeurs et son écart-type expérimental $\sigma_{exp}$. Activités Écriture d&#39;un résultat TP Temps de réaction tip&#xA;Petite explication mathématique pour en savoir plus sur la formule de l&amp;rsquo;écart-type expérimental.</description>
+    </item>
+    <item>
       <title>Effet Doppler</title>
       <link>https://coursphychi.github.io/tspe/doppler/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -496,7 +503,7 @@
       <link>https://coursphychi.github.io/1spe/python/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/python/</guid>
-      <description>Python Codes Python présents dans les différentes activités réunis dans le notebook ci-dessous.&#xA;Notebook</description>
+      <description>Python Codes Python présents dans les différentes activités réunis dans le notebook ci-dessous.&#xA;Notebook&#xA;Codes à comprendre : Comment déterminer l&amp;rsquo;évolution des quantités de matière d&amp;rsquo;une réaction en fonction de l&amp;rsquo;avancement ? import matplotlib.pyplot as plt ## INITIALISATION DES VARIABLES # coefficients stœchiométrique # aA A + aB B -&amp;gt; aC C + aD D aA = 2 aB = 3 aC = 1 aD = 2 # quantités initiales nA = 0.</description>
     </item>
   </channel>
 </rss>

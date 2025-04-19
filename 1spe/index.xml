@@ -160,7 +160,7 @@
       <link>https://coursphychi.github.io/1spe/python/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/1spe/python/</guid>
-      <description>Python Codes Python présents dans les différentes activités réunis dans le notebook ci-dessous.&#xA;Notebook</description>
+      <description>Python Codes Python présents dans les différentes activités réunis dans le notebook ci-dessous.&#xA;Notebook&#xA;Codes à comprendre : Comment déterminer l&amp;rsquo;évolution des quantités de matière d&amp;rsquo;une réaction en fonction de l&amp;rsquo;avancement ? import matplotlib.pyplot as plt ## INITIALISATION DES VARIABLES # coefficients stœchiométrique # aA A + aB B -&amp;gt; aC C + aD D aA = 2 aB = 3 aC = 1 aD = 2 # quantités initiales nA = 0.</description>
     </item>
   </channel>
 </rss>
