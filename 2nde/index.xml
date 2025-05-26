@@ -51,18 +51,18 @@
       <description>Transformation physique :&#xA;les changements d&amp;rsquo;état Présentation&#xA;info&#xA;Le passage de l&amp;rsquo;état gazeux à l&amp;rsquo;état solide, la condensation, est parfois nommé : condensation, condensation solide, sublimation inverse, déposition, désublimation.&#xA;Dans le language courant, le terme condensation ne désigne pas la même chose qu&amp;rsquo;en physique. On parle communément de condensation pour évoquer le passage de l&amp;rsquo;état gazeux à l&amp;rsquo;état liquide comme la rosée du matin ou la buée sur une vitre.</description>
     </item>
     <item>
+      <title>Nucléaire</title>
+      <link>https://coursphychi.github.io/2nde/nucleaire/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/2nde/nucleaire/</guid>
+      <description>Transformation nucléaire Équation d&amp;rsquo;une transformation physique, chimique ou nucléaire ? --- primary_color: steelblue secondary_color: &#34;#f2f2f2&#34; text_color: black shuffle_questions: false --- ## Équation 1 $\ce{^2H + ^3H -&gt; ^4{He} + n}$ - [ ] chimique - [ ] physique - [x] nucléaire &gt; On reconnaît la notation symbolique des noyaux. Il s&#39;agit donc d&#39;une transformation des noyaux&amp;nbsp;; une réaction nucléaire&amp;nbsp;! ## Équation 2 $\ce{H_2 (g) + Br_2 (ℓ) -&gt; 2 HBr (g)}$ - [x] chimique &gt; Il y a réassamblage des atomes dans de nouvelles molécules.</description>
+    </item>
+    <item>
       <title>Réaction chimique</title>
       <link>https://coursphychi.github.io/2nde/reaction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/2nde/reaction/</guid>
       <description>Transformation chimique :&#xA;la réaction chimique Présentation&#xA;Réaction chimique&#xA;Modèle introduit pour rendre compte d’observations et de mesures effectuées lors de transformations chimiques pouvant différer par les conditions de leur réalisation (température, pression, composition du mélange initial), mais partageant les mêmes réactifs, les mêmes produits et les mêmes proportions dans lesquelles ceux-ci sont convertis.&#xA;L’équation de la réaction permet de réaliser le bilan de matière d’une transformation.&#xA;Exemple :</description>
-    </item>
-    <item>
-      <title>Transformation nucléaire</title>
-      <link>https://coursphychi.github.io/2nde/nucleaire/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      <guid>https://coursphychi.github.io/2nde/nucleaire/</guid>
-      <description>Transformation nucléaire Équation d&amp;rsquo;une transformation physique, chimique ou nucléaire ? --- primary_color: steelblue secondary_color: &#34;#f2f2f2&#34; text_color: black shuffle_questions: false --- ## Équation 1 $\ce{^2H + ^3H -&gt; ^4{He} + n}$ - [ ] chimique - [ ] physique - [x] nucléaire &gt; On reconnaît la notation symbolique des noyaux. Il s&#39;agit donc d&#39;une transformation des noyaux&amp;nbsp;; une réaction nucléaire&amp;nbsp;! ## Équation 2 $\ce{H_2 (g) + Br_2 (ℓ) -&gt; 2 HBr (g)}$ - [x] chimique &gt; Il y a réassamblage des atomes dans de nouvelles molécules.</description>
     </item>
     <item>
       <title>Mouvement</title>
