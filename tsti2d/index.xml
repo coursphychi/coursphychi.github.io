@@ -62,14 +62,14 @@
       <link>https://coursphychi.github.io/tsti2d/puisselec/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/puisselec/</guid>
-      <description>Puissance en régime sinusoïdal Présentation&#xA;Rappels En régime alternatif, le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓) mesurent&amp;nbsp;: La tension et l&#39;intensité moyenne. Et en mode alternatif (AC ou ∿), ils mesurent&amp;nbsp;: La tension et l&#39;intensité efficace. Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;? $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$ Savoir et savoir faire coeur&#xA;Savoir définir la puissance apparente $S$. Savoir que la puissance apparente est une grandeur de dimensionnement d&amp;rsquo;une installation ou d&amp;rsquo;un équipement électrique.</description>
+      <description>Puissance en régime sinusoïdal Présentation&#xA;Rappels En régime alternatif, que mesurent le voltmètre et l&#39;ampèremètre en mode continu (DC ou ⎓)&amp;nbsp;? La tension et l&#39;intensité moyenne. Et en mode alternatif (AC ou ∿), que mesurent-ils&amp;nbsp;? La tension et l&#39;intensité efficace. Comment obtient-on $U_{eff}$ à partir de $U_{max}$ en régime sinusoïdal&amp;nbsp;? $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$ Savoir et savoir faire coeur&#xA;Savoir définir la puissance apparente $S$. Savoir que la puissance apparente est une grandeur de dimensionnement d&amp;rsquo;une installation ou d&amp;rsquo;un équipement électrique.</description>
     </item>
     <item>
       <title>Lumière</title>
       <link>https://coursphychi.github.io/tsti2d/lumiere/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/lumiere/</guid>
-      <description>Énergie transportée par la lumière Présentation&#xA;Rappels Lien entre la fréquence $f$ et la longueur d&#39;onde $\lambda$&amp;nbsp;? $$\lambda=\frac{c}{f}$$ Où $c$ est la célérité (vitesse) de la lumière&#xA;$c = \pu{3,0*10^8 m*s-1}$ Étendu en longueurs d&#39;ondes de la partie visible du spectre électromagnétique&amp;nbsp;? Simulations Photons et niveaux d&amp;rsquo;énergie (spectres) : applet Geogebra&#xA;Tracé d&amp;rsquo;une caractéristique : applet Geogebra + activité&#xA;Savoir et savoir faire coeur&#xA;Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon.</description>
+      <description>Énergie transportée par la lumière Présentation&#xA;Rappels Lien entre la fréquence $f$ et la longueur d&#39;onde $\lambda$&amp;nbsp;? $$\lambda=\frac{c}{f}$$ Où $c$ est la célérité (vitesse) de la lumière&#xA;$c = \pu{3,0*10^8 m*s-1}$ Étendue en longueurs d&#39;ondes de la partie visible du spectre électromagnétique&amp;nbsp;? Simulations Photons et niveaux d&amp;rsquo;énergie (spectres) : applet Geogebra&#xA;Tracé d&amp;rsquo;une caractéristique : applet Geogebra + activité&#xA;Savoir et savoir faire coeur&#xA;Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de photon.</description>
     </item>
     <item>
       <title>Signaux</title>
