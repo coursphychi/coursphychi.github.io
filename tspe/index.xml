@@ -37,13 +37,6 @@
       <description> Modéliser l’évolution temporelle d’un système, siège d’une transformation Présentation&#xA;Documents et autres TP Suivi cinétique Activités Eau de Javel et acide (partie C) Acide polylactique (à partir de B.2.) Dégradation de produits de contraste + Notebook Python Mécanismes réactionnels </description>
     </item>
     <item>
-      <title>Constante d&#39;acidité</title>
-      <link>https://coursphychi.github.io/tspe/ka/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      <guid>https://coursphychi.github.io/tspe/ka/</guid>
-      <description>Force des acides et des base Présentation&#xA;Documents TP Pile Daniell Activités Pile au méthanol Pile lithium-soufre Anode sacrificielle Pile à flux organiques Pile &#34;zinc-air&#34; Définitions Système de conversion d’énergie chimique en énergie électrique, obtenu par association de deux demi-piles reliées par une jonction électrolytique interne (pont salin, membrane, etc.) et permettant le transfert d’électrons d’un compartiment à l’autre par l’intermédiaire d’un circuit électrique extérieur.&#xA;Chaque demi-pile doit contenir :</description>
-    </item>
-    <item>
       <title>Équilibre chimique</title>
       <link>https://coursphychi.github.io/tspe/equilibre/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -56,6 +49,13 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tspe/piles/</guid>
       <description>Piles Présentation&#xA;Documents TP Pile Daniell Activités Pile au méthanol Pile lithium-soufre Anode sacrificielle Pile à flux organiques Pile &#34;zinc-air&#34; Définitions Système de conversion d’énergie chimique en énergie électrique, obtenu par association de deux demi-piles reliées par une jonction électrolytique interne (pont salin, membrane, etc.) et permettant le transfert d’électrons d’un compartiment à l’autre par l’intermédiaire d’un circuit électrique extérieur.&#xA;Chaque demi-pile doit contenir :&#xA;un électrolyte (milieu conducteur par déplacement d’ions)&amp;nbsp;;</description>
+    </item>
+    <item>
+      <title>Constante d&#39;acidité</title>
+      <link>https://coursphychi.github.io/tspe/ka/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/tspe/ka/</guid>
+      <description>Force des acides et des base Présentation&#xA;Documents TP Pile Daniell Activités Pile au méthanol Pile lithium-soufre Anode sacrificielle Pile à flux organiques Pile &#34;zinc-air&#34; Définitions Système de conversion d’énergie chimique en énergie électrique, obtenu par association de deux demi-piles reliées par une jonction électrolytique interne (pont salin, membrane, etc.) et permettant le transfert d’électrons d’un compartiment à l’autre par l’intermédiaire d’un circuit électrique extérieur.&#xA;Chaque demi-pile doit contenir :</description>
     </item>
     <item>
       <title>Effet Doppler</title>

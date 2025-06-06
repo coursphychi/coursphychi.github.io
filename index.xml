@@ -100,13 +100,6 @@
       <description>La respiration La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).&#xA;On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.&#xA;On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
     </item>
     <item>
-      <title>Respiration</title>
-      <link>https://coursphychi.github.io/colles/respiration_corr/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      <guid>https://coursphychi.github.io/colles/respiration_corr/</guid>
-      <description>Correction La respiration permet d&amp;rsquo;illustrer le premier principe de la thermodynamique sur un exemple qui nous est tous assez familier (j&amp;rsquo;espère).&#xA;On va supposer l&amp;rsquo;air comme étant un gaz parfait diatomique. Dans ces conditions, l&amp;rsquo;énergie interne de $n$ moles d&amp;rsquo;air vaut $U=\frac{5}{2}nRT$.&#xA;On ne considère dans la suite que les variations relatives du volume des poumons $\Rightarrow$ le volume $V$ avant inspiration (= après expiration) est pris comme égal à zéro.</description>
-    </item>
-    <item>
       <title>Slinky</title>
       <link>https://coursphychi.github.io/colles/slinky/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -219,13 +212,6 @@
       <description>Titrage Présentation&#xA;Dosage par titrage&#xA;Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’« acido-basique », « par oxydoréduction » ou « par précipitation » selon la nature de la réaction support.&#xA;En première, on ne verra que des dosages par oxydo-réduction (la réaction support du titrage est une oxydo-réduction) avec suivi colorimétrique.</description>
     </item>
     <item>
-      <title>Constante d&#39;acidité</title>
-      <link>https://coursphychi.github.io/tspe/ka/</link>
-      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
-      <guid>https://coursphychi.github.io/tspe/ka/</guid>
-      <description>Force des acides et des base Présentation&#xA;Documents TP Pile Daniell Activités Pile au méthanol Pile lithium-soufre Anode sacrificielle Pile à flux organiques Pile &#34;zinc-air&#34; Définitions Système de conversion d’énergie chimique en énergie électrique, obtenu par association de deux demi-piles reliées par une jonction électrolytique interne (pont salin, membrane, etc.) et permettant le transfert d’électrons d’un compartiment à l’autre par l’intermédiaire d’un circuit électrique extérieur.&#xA;Chaque demi-pile doit contenir :</description>
-    </item>
-    <item>
       <title>Énergie/Puissance</title>
       <link>https://coursphychi.github.io/tsti2d/egiepuiss/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -280,6 +266,13 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/tsti2d/conduction/</guid>
       <description>Conduction thermique Présentation&#xA;Rappels Les 3 modes de transferts thermiques sont&amp;nbsp;: la conduction&amp;nbsp;: agitation moléculaire qui se transmet de proche en proche dans un matériau. la convection&amp;nbsp;: mouvement d&#39;ensemble de la matière dans un fluide type air ou eau. le rayonnement&amp;nbsp;: transfert à distance, même dans le vide, par des ondes électromagnétiques ayant un spectre de type corps noir.&#xA;C&#39;est comme ça que le soleil nous chauffe. Questions : Quel mode de transfert thermique est-il illustré dans cette expérience&amp;nbsp;?</description>
+    </item>
+    <item>
+      <title>Constante d&#39;acidité</title>
+      <link>https://coursphychi.github.io/tspe/ka/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/tspe/ka/</guid>
+      <description>Force des acides et des base Présentation&#xA;Documents TP Pile Daniell Activités Pile au méthanol Pile lithium-soufre Anode sacrificielle Pile à flux organiques Pile &#34;zinc-air&#34; Définitions Système de conversion d’énergie chimique en énergie électrique, obtenu par association de deux demi-piles reliées par une jonction électrolytique interne (pont salin, membrane, etc.) et permettant le transfert d’électrons d’un compartiment à l’autre par l’intermédiaire d’un circuit électrique extérieur.&#xA;Chaque demi-pile doit contenir :</description>
     </item>
     <item>
       <title>Entités organiques</title>
