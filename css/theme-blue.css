@@ -70,6 +70,7 @@ a:hover {
     background-color: currentColor;
 }
 
+
 /* ============================================================
    Cas où le lien contient un enfant coloré
    ex. <a><b style="color:#D41876">…</b></a>
@@ -105,6 +106,9 @@ a:hover {
 #body a.highlight:has(> span.link-color)::after{
     display:none;
 }
+
+
+
 
 #sidebar {
 	background-color: var(--MENU-SECTIONS-BG-color);
