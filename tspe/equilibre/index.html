@@ -38,22 +38,22 @@
     
 
     
-    <link href="/css/nucleus.css?1749190625" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1749190625" rel="stylesheet">
-    <link href="/css/hybrid.css?1749190625" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1749190625" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1749190625" rel="stylesheet">
-    <link href="/css/auto-complete.css?1749190625" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1749190625" rel="stylesheet">
-    <link href="/css/theme.css?1749190625" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1749190625" rel="stylesheet">
+    <link href="/css/nucleus.css?1749302547" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1749302547" rel="stylesheet">
+    <link href="/css/hybrid.css?1749302547" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1749302547" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1749302547" rel="stylesheet">
+    <link href="/css/auto-complete.css?1749302547" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1749302547" rel="stylesheet">
+    <link href="/css/theme.css?1749302547" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1749302547" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1749190625" rel="stylesheet">
+    <link href="/css/theme-blue.css?1749302547" rel="stylesheet">
     
-    <link href="/css/foo.css?1749190625" rel="stylesheet"><link href="/css/bar.css?1749190625" rel="stylesheet">
+    <link href="/css/foo.css?1749302547" rel="stylesheet"><link href="/css/bar.css?1749302547" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1749190625"></script>
+    <script src="/js/jquery-3.3.1.min.js?1749302547"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +107,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1749190625"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1749190625"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1749302547"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1749302547"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1749190625"></script>
+<script type="text/javascript" src="/js/search.js?1749302547"></script>
 
     
   </div>
@@ -2219,7 +2219,7 @@ td, th {
 <div class="notices definition" style="--title: 'Avancement maximal';">
   <p style="display: none;">Avancement maximal</p>
   <div class="notice-body">
-    <p>Avancement associé à la disparition totale du réactif limitant.</p>
+    <p>Avancement associé à la <b style="color:#B51700;">disparition totale du réactif limitant</b>.</p>
 
   </div>
 </div>
@@ -2230,7 +2230,7 @@ td, th {
   <p style="display: none;">Taux d&#39;avancement</p>
   <div class="notice-body">
     <p>Rapport de la valeur finale de l’avancement sur celle de l’avancement maximal :<br>
-$$\tau=\frac{x_\mathrm{final}}{x_\mathrm{max}}$$</p>
+<b style="color:#B51700;">$$\tau=\frac{x_\mathrm{final}}{x_\mathrm{max}}$$</b></p>
 
   </div>
 </div>
@@ -2240,8 +2240,19 @@ $$\tau=\frac{x_\mathrm{final}}{x_\mathrm{max}}$$</p>
 <div class="notices definition" style="--title: 'Transformation totale ou non totale';">
   <p style="display: none;">Transformation totale ou non totale</p>
   <div class="notice-body">
-    <p>Une transformation est dite totale si le taux d’avancement final est égal à 1. S’il est inférieur à 1 ($x_\mathrm{final}&lt;1$), la transformation est dite non-totale. A l’état final d’une transformation totale, au moins une des espèces chimiques présentes à l’état initial a disparu.<br><br>
-<u>Rq</u> : Un soluté ou un gaz ne disparaissent jamais totalement d’un milieu. Ainsi, toute transformation consommant exclusivement des solutés et/ou gaz ne peut être totale. Dans certains cas, le taux d’avancement final est si proche de 1 que la transformation peut être qualifiée de quasi-totale. Une transformation chimique n’est rigoureusement totale que si une phase condensée pure (liquide pur ou solide pur) a disparu.</p>
+    <p>Une transformation est dite <b style="color:#B51700;">totale</b> si le taux d’avancement final est égal à 1 (<b style="color:#B51700;">$\tau=1$</b>).<br>
+À l’état final d’une transformation totale, au moins une des espèces chimiques présentes à l’état initial a disparu.<br><br>
+S’il est inférieur à 1 (<b style="color:#B51700;">$\tau&lt;1\Leftrightarrow x_\mathrm{final}&lt;x_\mathrm{max}$</b>), la transformation est dite <b style="color:#B51700;">non-totale</b>.<br><br></p>
+
+  </div>
+</div>
+
+
+
+<div class="notices note" style="--title: 'note';">
+  <p style="display: none;">note</p>
+  <div class="notice-body">
+    <p>Un soluté ou un gaz ne disparaissent jamais totalement d’un milieu. Ainsi, toute transformation consommant exclusivement des solutés et/ou gaz ne peut être totale. Dans certains cas, le taux d’avancement final est si proche de 1 que la transformation peut être qualifiée de quasi-totale. Une transformation chimique n’est rigoureusement totale que si une phase condensée pure (liquide pur ou solide pur) a disparu.</p>
 
   </div>
 </div>
@@ -2252,8 +2263,19 @@ $$\tau=\frac{x_\mathrm{final}}{x_\mathrm{max}}$$</p>
   <p style="display: none;">Quotient de réaction</p>
   <div class="notice-body">
     <p>Grandeur adimensionnée définie par la relation ci-dessous dans laquelle interviennent les activités des espèces chimiques réactives et produites apparaissant dans l’équation de la réaction et les nombres stœchiométriques qui leur sont associés, considérés ici positifs :
-$$\displaystyle Q_r=\frac{\prod_i\left(a_{\text {produits } i}\right)^{\nu_i}}{\prod_j\left(a_{\text {réactifs } j}\right)^{\nu_j}}$$
-L’activité d’un solvant est prise égale à 1, celle d’une espèce soluté est le rapport $C_i/C°$ de sa concentration $C_i$ en quantité de matière sur la concentration standard, celle d’un solide est prise égale à 1.</p>
+<b style="color:#B51700;">$$\displaystyle Q_r=\frac{\prod_i\left(a_{\text {produits } i}\right)^{\nu_i}}{\prod_j\left(a_{\text {réactifs } j}\right)^{\nu_j}}$$</b></p>
+
+  </div>
+</div>
+
+
+
+<div class="notices info" style="--title: 'info';">
+  <p style="display: none;">info</p>
+  <div class="notice-body">
+    <p><i class="fa fa-arrow-right"></i> L’activité d’un solvant est prise égale à 1,<br>
+<i class="fa fa-arrow-right"></i> celle d’une espèce soluté est le rapport $C_i/C°$ de sa concentration $C_i$ en quantité de matière sur la concentration standard,<br>
+<i class="fa fa-arrow-right"></i> celle d’un solide est prise égale à 1.</p>
 
   </div>
 </div>
@@ -2262,21 +2284,49 @@ L’activité d’un solvant est prise égale à 1, celle d’une espèce solut�
 <div class="notices definition" style="--title: 'Équilibre chimique';">
   <p>
     Un système est à l’équilibre chimique s’il vérifie, à l’état final, les conditions suivantes :<br>
-  <i class="fa fa-pencil"></i> l’ensemble des réactifs et produits de la réaction coexistent et leurs quantités de matière n’évoluent plus dans le temps&nbsp;;<br>
-<i class="fa fa-pencil"></i> le quotient de réaction \( Q_r \) prend une valeur notée \( K(T) \), indépendante de la composition initiale, appelée constante d’équilibre.<br><br>
-    Pour une réaction donnée, la valeur de \( K(T) \) ne dépend que de la température. Elle est par conséquent indépendante de la pression et des quantités de matière mises en œuvre.<br><br>
-    <u>Rq</u>&nbsp;: L’équilibre chimique est modélisé par deux réactions opposées dont les effets se compensent une fois l’équilibre chimique atteint.
+  <i class="fa fa-arrow-right"></i> l’ensemble des <b style="color:#B51700;">réactifs</b> et <b style="color:#B51700;">produits</b> de la réaction <b style="color:#B51700;">coexistent</b> et leurs quantités de matière <b style="color:#B51700;">n’évoluent plus</b> dans le temps</b>&nbsp;;<br>
+  <i class="fa fa-arrow-right"></i> le quotient de réaction <b style="color:#B51700;">\( Q_r \)</b> prend une valeur notée <b style="color:#B51700;">\( K(T) \)</b>, indépendante de la composition initiale, appelée <b style="color:#B51700;">constante d’équilibre</b>.<br>
   </p>
 </div>
 
-<div class="notices definition" style="--title: 'Sens d’évolution d’un système chimique';">
-  <p style="display: none;">Sens d’évolution d’un système chimique</p>
+<div class="notices info" style="--title: 'info';">
+  <p style="display: none;">info</p>
   <div class="notice-body">
-    <p>En l’absence de générateur, le sens d’évolution spontanée est celui qui modifie la valeur du quotient de réaction pour le rapprocher de la constante d’équilibre $K(T)$.<br><br>
-L’état d’équilibre final du système résulte de l’une des deux situations suivantes :<br>
-<i class="fa fa-pencil"></i> l’état final est un état d’équilibre chimique caractérisé par la relation $Q_{r,\mathrm{eq}}=K(T)$, la transformation n’est pas totale ;<br>
-<i class="fa fa-pencil"></i> la disparition d’un réactif (solide ou liquide pur) intervient avant que la valeur du quotient de réaction n’atteigne $K(T)$, la transformation est totale.<br><br>
-En présence d’un générateur (système siège d’une électrolyse), le sens d’évolution dusystème peut être contrôlé par l’expérimentateur : le générateur impose le sens de circulation des électrons dans le circuit extérieur, et par conséquent, le sens des transferts électroniques aux électrodes.</p>
+    <p>Pour une réaction donnée, la valeur de $K(T)$ ne dépend que de la température. Elle est par conséquent indépendante de la pression et des quantités de matière mises en œuvre.</p>
+
+  </div>
+</div>
+
+
+
+<div class="notices note" style="--title: 'note';">
+  <p style="display: none;">note</p>
+  <div class="notice-body">
+    <p>L’équilibre chimique est modélisé par deux réactions opposées dont les effets se compensent une fois l’équilibre chimique atteint.</p>
+
+  </div>
+</div>
+
+
+
+<div class="notices definition" style="--title: 'Sens d’évolution spontanée d’un système chimique';">
+  <p style="display: none;">Sens d’évolution spontanée d’un système chimique</p>
+  <div class="notice-body">
+    <p>En l’absence de générateur, le <b style="color:#B51700;">sens d’évolution spontanée</b> est celui qui modifie la valeur du quotient de réaction pour le rapprocher de la constante d’équilibre (<b style="color:#B51700;">$Qr\rightarrow K(T)$)</b>.<br><br>
+L’état d’<b style="color:#B51700;">équilibre final du système</b> résulte de l’une des deux situations suivantes :<br>
+<i class="fa fa-arrow-right"></i> l’état final est un état d’équilibre chimique caractérisé par la relation <b style="color:#B51700;">$Q_{r,\mathrm{eq}}=K(T)$</b>, la transformation n’est <b style="color:#B51700;">pas totale</b> ;<br>
+<i class="fa fa-arrow-right"></i> la <b style="color:#B51700;">disparition d’un réactif</b> (solide ou liquide pur) intervient avant que la valeur du quotient de réaction n’atteigne $K(T)$, la transformation est <b style="color:#B51700;">totale</b>.</p>
+
+  </div>
+</div>
+
+
+
+<div class="notices info" style="--title: 'info';">
+  <p style="display: none;">info</p>
+  <div class="notice-body">
+    <p>En présence d’un générateur (système siège d’une électrolyse), le sens d’évolution du système peut être contrôlé par l’expérimentateur :<br>
+le générateur impose le sens de circulation des électrons dans le circuit extérieur, et par conséquent, le sens des transferts électroniques aux électrodes.</p>
 
   </div>
 </div>
@@ -3724,16 +3774,16 @@ En présence d’un générateur (système siège d’une électrolyse), le sens
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1749190625"></script>
-    <script src="/js/perfect-scrollbar.min.js?1749190625"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1749190625"></script>
-    <script src="/js/jquery.sticky.js?1749190625"></script>
-    <script src="/js/featherlight.min.js?1749190625"></script>
-    <script src="/js/highlight.pack.js?1749190625"></script>
+    <script src="/js/clipboard.min.js?1749302547"></script>
+    <script src="/js/perfect-scrollbar.min.js?1749302547"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1749302547"></script>
+    <script src="/js/jquery.sticky.js?1749302547"></script>
+    <script src="/js/featherlight.min.js?1749302547"></script>
+    <script src="/js/highlight.pack.js?1749302547"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1749190625"></script>
-    <script src="/js/learn.js?1749190625"></script>
-    <script src="/js/hugo-learn.js?1749190625"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1749302547"></script>
+    <script src="/js/learn.js?1749302547"></script>
+    <script src="/js/hugo-learn.js?1749302547"></script>
     
     
 
