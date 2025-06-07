@@ -67,8 +67,45 @@ a:hover {
     -moz-transition: width 0.5s ease;
     -ms-transition: width 0.5s ease;
     transition: width 0.5s ease;
-    background-color: var(--MAIN-LINK-HOVER-color);
+    background-color: currentColor;
 }
+
+/* ============================================================
+   Cas où le lien contient un enfant coloré
+   ex. <a><b style="color:#D41876">…</b></a>
+   ============================================================ */
+#body a.highlight > b,
+#body a.highlight > span.link-color {      /* .link-color = classe optionnelle */
+    position: relative;
+    display: inline-block;
+}
+
+/* Trait “rangé” */
+#body a.highlight > b::after,
+#body a.highlight > span.link-color::after{
+    content:'';
+    position:absolute;
+    left:0; bottom:0;
+    width:0; height:1px;                  /* même épaisseur que ci-dessus */
+    background:currentColor;
+    transition:width .5s ease;
+}
+
+/* Trait “déplié” au survol ou focus clavier */
+#body a.highlight:hover  > b::after,
+#body a.highlight:focus  > b::after,
+#body a.highlight:hover  > span.link-color::after,
+#body a.highlight:focus  > span.link-color::after{
+    width:100%;
+}
+
+/* On coupe le trait du <a> pour éviter le double soulignement
+   (nécessite :has(), pris en charge par Chrome, Edge, Firefox, Safari ≥ 2024) */
+#body a.highlight:has(> b)::after,
+#body a.highlight:has(> span.link-color)::after{
+    display:none;
+}
+
 #sidebar {
 	background-color: var(--MENU-SECTIONS-BG-color);
 }
