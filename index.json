@@ -305,7 +305,7 @@
 	"title": "Cinétique chimique",
 	"tags": [],
 	"description": "",
-	"content": " Modéliser l’évolution temporelle d’un système, siège d’une transformation Présentation\nDocuments et autres TP Suivi cinétique Exercices Eau de Javel et acide (partie C) Acide polylactique (à partir de B.2.) Dégradation de produits de contraste + Notebook Python Mécanismes réactionnels "
+	"content": " Modéliser l’évolution temporelle d’un système, siège d’une transformation Présentation\nDocuments et autres Rappels Schéma de Lewis TP Suivi cinétique Exercices Eau de Javel et acide (partie C) Acide polylactique (à partir de B.2.) Dégradation de produits de contraste + Notebook Python Mécanismes réactionnels "
 },
 {
 	"uri": "https://coursphychi.github.io/tsti2d/combustion/",
@@ -565,6 +565,13 @@
 	"tags": [],
 	"description": "",
 	"content": " Synthèse organique : optimisation et stratégie Présentation\nDocuments TP Synthèse de l'aspirine Activité Utilisation d'une banque de réactions Exercices Synthèse écoresponsable de l'acide lactique Stratégie de synthèse Synthèse du plexiglas Schémas Montage à reflux Filtration sous vide Extraction liquide-liquide Distillation fractionnée Chromatographie sur couche mince Animation Chauffage à reflux En savoir plus Montage à reflux Filtration et essorage Chromatographie sur couche mince Recristallisation Infographie 12 principes de la chimie verte Vidéos Techniques expérimentales lors d'une synthèse "
+},
+{
+	"uri": "https://coursphychi.github.io/tspe/mouvement/",
+	"title": "Décrire un mouvement",
+	"tags": [],
+	"description": "",
+	"content": " Décrire un mouvement Présentation\nDocuments Rappels 1re Schéma de Lewis Exercices Nomenclature, fonctions, polymères, isomérie, IR Fiche Règles de nomenclature Interactivité Représentation 3D de molécules "
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/lumiere/",
