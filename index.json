@@ -7,6 +7,13 @@
 	"content": " Transformations acide-base Présentation\nDocuments et autres Rappels 1re Protocole dilution TP Dilution et pH Activités Lac acide Duodenum Appliquettes Solutions et pH Mesure de pH "
 },
 {
+	"uri": "https://coursphychi.github.io/colles/clothoide/",
+	"title": "Clothoïde",
+	"tags": [],
+	"description": "",
+	"content": " Clothoïde Pour opérer un virage, on choisit d\u0026rsquo;abord de connecter deux sections de rails rectilignes (en orange) de directions différentes par un arc de cercle (bleu).\nTracer l\u0026rsquo;évolution de l\u0026rsquo;accélération d\u0026rsquo;un point $\\mathrm{M}$ suivant les rails à vitesse constante sur le trajet entre $\\mathrm{I}$ et $\\mathrm{F}$.\nCe raccordement est-il une bonne idée ?\nPlutôt qu\u0026rsquo;un arc de cercle, on va relier les deux portions rectilignes par une clothoïde. Cette courbe a pour particularité que son rayon de courbure croit linéairement avec l\u0026rsquo;abscisse curviligne sur la courbe.\nPlus précisément, supposons qu\u0026rsquo;un point $\\mathrm{M}$ suive une clothoïde vitesse constante $v=\\pu{1,0 m*s-1}$. On peut alors paramétrer la courbe avec le temps $t$.\nOn suppose que l\u0026rsquo;origine est telle que $\\mathrm{M}(t=0)=\\mathrm{O}(0,0)$ et que la tangente initiale est dirigée vers l\u0026rsquo;axe $\\mathrm{O}x$.\nLa particularité de la courbe clothoïde est que son rayon de courbure $R(t)$ en $\\mathrm{M}(t)$ est tel que $\\frac{1}{R(t)}=kt$ où $k$ est une constante positive.\nEsquisser l\u0026rsquo;allure d\u0026rsquo;une clothoïde.\nDans un repère de Frenet, écrire l\u0026rsquo;accélération tangentielle et normale du point M.\nReprendre les questions 1 et 2 avec un tronçon de raccordement en clothoïde dont l\u0026rsquo;origine serait au début du raccordement.\nEn appelant $\\theta$ l\u0026rsquo;angle que fait le vecteur tangent $\\vec{u}_t(t)$ au point $\\mathrm{M}(t)$ de la courbe avec l\u0026rsquo;axe $\\mathrm{O}x$, montrer que : $$\\theta(t)=\\frac 12 k v t^2$$\nEn déduire que l\u0026rsquo;équation de la clothoïde est donnée par : $$ \\begin{cases} \\int_0^t \\cos\\left(\\frac 12 kv u^2\\right)\\mathrm{d}u\\\\ \\int_0^t \\sin\\left(\\frac 12 kv u^2\\right)\\mathrm{d}u \\end{cases} $$\nEn utilisant la méthode des rectangles, représenter graphiquement un tronçon de clothoïde pout $t$ allant de 0 à 5 s sur Python en complétant le code suivant.\nimport numpy as np import matplotlib.pyplot as plt def integrale(f,a,b): ################# ## À COMPLÉTER ## ################# v = 1 k = 2 t = np.linspace(0,5,500) def c(x): return np.cos(1/2 * k * v * x**2) def s(x): return np.sin(1/2 * k * v * x**2) def C(x): return integrale(c,0,x) def S(x): return integrale(s,0,x) plt.figure(figsize=(6, 6),dpi=150) plt.plot(C(t),S(t)) plt.show() "
+},
+{
 	"uri": "https://coursphychi.github.io/2nde/melanges/",
 	"title": "Corps purs et mélanges",
 	"tags": [],
@@ -424,7 +431,7 @@
 	"title": "Colles",
 	"tags": [],
 	"description": "",
-	"content": " Colles de physique-chimie TSI1 Onde Réfraction Lentilles : démonstrations Lentilles : modéliser le flou Lance-balle Slinky Dôme de Norton Fronde Oscillateur harmonique à frottement solide Tremplins Respiration Petites énigmes @pinkpencilmath What do you all think? Anyone want to do the math for this? ♬ Western Music: Arizona Dreaming - Piero Piccioni Réponse 82% des gens ont répondu que le lait avait moins de café alors que les deux verres contiennent la même concentration de l'autre liquide. Une corde est tendue autour de la Terre. De quelle hauteur faut-il l’élever pour qu’elle reste tendue si on lui ajoute 1 m de longueur ?\nEt si elle entourait la Lune ? Ou une balle de ping-pong ? Vous courez deux tours sur une piste d\u0026rsquo;athlétisme. Supposons que votre vitesse moyenne sur le premier tour soit $v_1$. À quelle vitesse moyenne $v_2$ devrez-vous courir le deuxième tour de piste pour que la vitesse moyenne sur l\u0026rsquo;ensemble des deux tours soit le double de la vitesse moyenne sur le premier tour ($2v_1$) ? "
+	"content": "Colles de physique-chimie MP Cinématique (MPSI) Colles de physique-chimie TSI1 Onde Réfraction Lentilles : démonstrations Lentilles : modéliser le flou Lance-balle Slinky Dôme de Norton Fronde Oscillateur harmonique à frottement solide Tremplins Respiration Petites énigmes @pinkpencilmath What do you all think? Anyone want to do the math for this? ♬ Western Music: Arizona Dreaming - Piero Piccioni Réponse 82% des gens ont répondu que le lait avait moins de café alors que les deux verres contiennent la même concentration de l'autre liquide. Une corde est tendue autour de la Terre. De quelle hauteur faut-il l’élever pour qu’elle reste tendue si on lui ajoute 1 m de longueur ?\nEt si elle entourait la Lune ? Ou une balle de ping-pong ? Vous courez deux tours sur une piste d\u0026rsquo;athlétisme. Supposons que votre vitesse moyenne sur le premier tour soit $v_1$. À quelle vitesse moyenne $v_2$ devrez-vous courir le deuxième tour de piste pour que la vitesse moyenne sur l\u0026rsquo;ensemble des deux tours soit le double de la vitesse moyenne sur le premier tour ($2v_1$) ? "
 },
 {
 	"uri": "https://coursphychi.github.io/tes/vivant/bayes/",
@@ -571,7 +578,14 @@
 	"title": "Décrire un mouvement",
 	"tags": [],
 	"description": "",
-	"content": " Décrire un mouvement Présentation\nDocuments Rappels 1re Schéma de Lewis Exercices Nomenclature, fonctions, polymères, isomérie, IR Fiche Règles de nomenclature Interactivité Représentation 3D de molécules "
+	"content": " Décrire un mouvement Présentation\nDocuments TP Regressi + Python\u0026nbsp;+\u0026nbsp;Notebook Python Exercices Atterrissage fusée Clothoïde et raccordement\u0026nbsp;+\u0026nbsp;Notebook Python\u0026nbsp;+\u0026nbsp;petit article "
+},
+{
+	"uri": "https://coursphychi.github.io/tspe/newton/",
+	"title": "Lois de Newton",
+	"tags": [],
+	"description": "",
+	"content": " Lois de Newton Présentation\nDocuments TP Regressi + Python\u0026nbsp;+\u0026nbsp;Notebook Python Exercices Atterrissage fusée Clothoïde et raccordement\u0026nbsp;+\u0026nbsp;Notebook Python\u0026nbsp;+\u0026nbsp;petit article "
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/lumiere/",
