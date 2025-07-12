@@ -578,14 +578,14 @@
 	"title": "Décrire un mouvement",
 	"tags": [],
 	"description": "",
-	"content": " Décrire un mouvement Présentation\nDocuments TP Regressi + Python\u0026nbsp;+\u0026nbsp;Notebook Python Exercices Atterrissage fusée Clothoïde et raccordement\u0026nbsp;+\u0026nbsp;Notebook Python\u0026nbsp;+\u0026nbsp;petit article "
+	"content": " Décrire un mouvement Présentation\nDocuments TP Pointage et analyse Regressi + Python Exercices Atterrissage fusée Clothoïde et raccordement\u0026nbsp;+\u0026nbsp;Notebook Python\u0026nbsp;+\u0026nbsp;petit article "
 },
 {
 	"uri": "https://coursphychi.github.io/tspe/newton/",
 	"title": "Lois de Newton",
 	"tags": [],
 	"description": "",
-	"content": " Lois de Newton Présentation\nDocuments TP Regressi + Python\u0026nbsp;+\u0026nbsp;Notebook Python Exercices Atterrissage fusée Clothoïde et raccordement\u0026nbsp;+\u0026nbsp;Notebook Python\u0026nbsp;+\u0026nbsp;petit article "
+	"content": " Lois de Newton Présentation\nDocuments Activités 3 activités sur la 2e loi de Newton Exercices Freinage F1 Parapentiste Pente d'eau Marquise du Châtelet "
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/lumiere/",
@@ -635,6 +635,13 @@
 	"tags": [],
 	"description": "",
 	"content": " Formation des images et lentille convergente Documents et autres TP Lentille convergente et grandissement Exos Lumière et lentilles Animation Lentille convergente "
+},
+{
+	"uri": "https://coursphychi.github.io/tspe/champuni/",
+	"title": "Champ uniforme",
+	"tags": [],
+	"description": "",
+	"content": " Mouvement dans un champ uniforme Présentation\nDocuments Activités 3 activités sur la 2e loi de Newton Exercices Marquise du Châtelet Parapentiste "
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/elec/",
