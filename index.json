@@ -578,14 +578,14 @@
 	"title": "Décrire un mouvement",
 	"tags": [],
 	"description": "",
-	"content": " Décrire un mouvement Présentation\nDocuments TP Pointage et analyse Regressi + Python Exercices Atterrissage fusée Clothoïde et raccordement\u0026nbsp;+\u0026nbsp;Notebook Python\u0026nbsp;+\u0026nbsp;petit article "
+	"content": " Décrire un mouvement Présentation\nDocuments TP Pointage et analyse Regressi + Python Exercices Atterrissage fusée Clothoïde et raccordement\u0026nbsp;+\u0026nbsp;Notebook Python\u0026nbsp;+\u0026nbsp;petit article Appliquette Position, vitesse, accélération "
 },
 {
 	"uri": "https://coursphychi.github.io/tspe/newton/",
 	"title": "Lois de Newton",
 	"tags": [],
 	"description": "",
-	"content": " Lois de Newton Présentation\nDocuments Activités 3 activités sur la 2e loi de Newton Exercices Freinage F1 Parapentiste Pente d'eau Marquise du Châtelet "
+	"content": " Lois de Newton Présentation\nDocuments TP Viscosimètre à chute de bille Activité 3 activités sur la 2e loi de Newton Exercices Freinage F1 Parapentiste Pente d'eau Marquise du Châtelet "
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/lumiere/",
@@ -641,7 +641,7 @@
 	"title": "Champ uniforme",
 	"tags": [],
 	"description": "",
-	"content": " Mouvement dans un champ uniforme Présentation\nDocuments Activités 3 activités sur la 2e loi de Newton Exercices Marquise du Châtelet Parapentiste "
+	"content": " Mouvement dans un champ uniforme Présentation\nDocuments TP Saut lunaire (ECE) Activités LINAC\u0026nbsp;+\u0026nbsp;Notebook Python Rebond d'un ballon Exercices Skate Masse de la Lune "
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/elec/",
@@ -656,6 +656,13 @@
 	"tags": [],
 	"description": "",
 	"content": " Énergie mécanique Présentation\nDocuments et autres Activités Montagnes Russes (partie\u0026nbsp;1 et\u0026nbsp;3) Ski de vitesse + Correction Frottements fluides TP Pendule (type ECE) (qrcode du petit tuto) TP pointage Darwin Animations Plan incliné Travail d'une force constante "
+},
+{
+	"uri": "https://coursphychi.github.io/tspe/gravitation/",
+	"title": "Gravitatione",
+	"tags": [],
+	"description": "",
+	"content": " Mouvement dans un champ de gravitation Présentation\nDocuments TP Saut lunaire (ECE) Activités LINAC\u0026nbsp;+\u0026nbsp;Notebook Python Rebond d'un ballon Exercices Skate Masse de la Lune "
 },
 {
 	"uri": "https://coursphychi.github.io/1spe/ondes/",
