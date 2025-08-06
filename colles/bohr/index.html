@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Entités chimiques - Cours Physique-Chimie</title>
+    <title>Bohr - Cours Physique-Chimie</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
 
@@ -81,7 +81,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 	
   </head>
-  <body class="" data-url="/2nde/atome/">
+  <body class="" data-url="/colles/bohr/">
     <nav id="sidebar" class="">
 
 
@@ -142,7 +142,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/2nde/" title="2nde" class="dd-item
-        parent
+        
         
         
         ">
@@ -210,7 +210,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
  
   
     
-      <li data-nav-id="/2nde/atome/" title="Entités chimiques" class="dd-item active">
+      <li data-nav-id="/2nde/atome/" title="Entités chimiques" class="dd-item ">
         <a href="/2nde/atome/">
         Entités chimiques
         
@@ -2301,7 +2301,7 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        
+        parent
         
         
         ">
@@ -2410,19 +2410,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
                   <span class="links">
                  
                  
-                   Entités chimiques
+                   Bohr
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#définitions">Définitions</a></li>
-    <li><a href="#documents-et-autres">Documents et autres</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -2441,56 +2436,51 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
 
 
 <style>
-ul {
-  text-align: left;
+ 	#correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ 	#comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ 	#commsum
+  {
+    color: #004D80;
+  }
+ 	#correcsum
+  {
+    color: #006C65;
+  }
+
+details > summary:first-of-type {
+  display: list-item;    
+  cursor: pointer;       
 }
-table {
-  border-collapse: collapse;
-  border: 0;
+
+details > summary:first-of-type {
+  list-style: disclosure-closed inside;
 }
-td, th {
-  border-collapse: collapse;
-  text-align: center;
-  vertical-align: middle;
+details[open] > summary:first-of-type {
+  list-style-type: disclosure-open;
 }
 </style>
-<h1 id="entités-chimiques--atome-et-noyau">Entités chimiques / Atome et Noyau</h1>
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/2nde/atome">Présentation</a></p>
-<p><a href="/cm-atome.pdf"><img src="/cm-atome.png" alt=""></a></p>
-<h2 id="définitions">Définitions</h2>
-
-<div class="notices definition" style="--title: 'Élément chimique';">
-  <p style="display: none;">Élément chimique</p>
-  <div class="notice-body">
-    <p>Ensemble des atomes (isolés ou engagés dans un édifice polyatomique neutre ou chargé) et des ions monoatomiques comportant un même nombre de protons dans leur noyau.</p>
-
-  </div>
+<h1 id="modèle-de-bohr">Modèle de Bohr<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></h1>
+<p><img src="/bohrcolle.png" alt=""></p>
+<p>Le noyau d’un atome a pour charge $Ze$ et un electron de masse $m$ et de charge $e$ orbite autour.<br>
+On considère que l&rsquo;orbite est circulaire et que le moment cinétique s&rsquo;écrit $\sigma = n\hbar$.</p>
+<p>Exprimer les niveaux d&rsquo;énergies  que peut prendre l’électron (on posera $k=\frac{1}{4\pi\epsilon_0}$).</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>malgré que ce modèle soit très rudimentaire, il capture bien les caractéristiques des orbitales électroniques d&rsquo;un atome pour $n$ grand. L&rsquo;atome excité est alors appelé atome de Rydberg. Les atomes de Rydberg peuvent être immenses (jusqu&rsquo;à quelques μm) car l&rsquo;électron est alors très peu lié.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
 </div>
 
-
-<p>Exemple :<br>
-Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite comportent des atomes de chlore ou des ions chlorure de même Z = 17, caractérisant l’élément chlore.</p>
-<br>
-<h2 id="documents-et-autres">Documents et autres</h2>
-<ul>
-<li><a href="https://presentationssite.github.io/2nde/maths"><strong>Un peu de maths : ordre de grandeur, puissances de 10, multiples et sous-multiples</strong></a></li>
-</ul>
-<div style="overflow-x: auto;">
-<table>
-<tr>
-<th rowspan="1">TP</th>
-<td><a href="/tpsel.pdf"><b>Identification d'un sel</b></a> + <a href="/compterenducorr.pdf"><b style="color:#FF644E">Correction</b></a></td>
-</tr>
-<tr>
-<th rowspan="1">Activité</th>
-<td><a href="/actelement.pdf"><b>L'élément chimique</b></a></td>
-</tr>
-</table>
-</div>
-<ul>
-<li><a href="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_all.html?locale=fr"><strong>Petits jeux pour se tester</strong></a></li>
-</ul>
-<br>
 
 <footer class="footline">
 	
@@ -2527,6 +2517,8 @@ Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite 
             
                 
                     
+                        
+                        
                     
                 
                 
@@ -2540,9 +2532,6 @@ Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite 
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -2576,7 +2565,6 @@ Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite 
             
                 
                     
-                    
                 
                 
 
@@ -2592,9 +2580,6 @@ Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite 
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -4044,6 +4029,7 @@ Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite 
             
             
                 
+                    
                     
                 
                 

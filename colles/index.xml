@@ -9,6 +9,13 @@
     <lastBuildDate>Sat, 06 Mar 2021 14:23:56 +0100</lastBuildDate>
     <atom:link href="https://coursphychi.github.io/colles/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Bohr</title>
+      <link>https://coursphychi.github.io/colles/bohr/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/colles/bohr/</guid>
+      <description>&lt;style&gt;&#xA; &#x9;#correc&#xA;  {&#xA;    color: #006C65;&#xA;    border-left: solid 10px #C7DDDC;&#xA;  }&#xA; &#x9;#comm&#xA;  {&#xA;    color: #004D80;&#xA;    border-left: solid 10px #B3CAD9;&#xA;  }&#xA; &#x9;#commsum&#xA;  {&#xA;    color: #004D80;&#xA;  }&#xA; &#x9;#correcsum&#xA;  {&#xA;    color: #006C65;&#xA;  }&#xA;&#xA;details &gt; summary:first-of-type {&#xA;  display: list-item;    &#xA;  cursor: pointer;       &#xA;}&#xA;&#xA;details &gt; summary:first-of-type {&#xA;  list-style: disclosure-closed inside;&#xA;}&#xA;details[open] &gt; summary:first-of-type {&#xA;  list-style-type: disclosure-open;&#xA;}&#xA;&lt;/style&gt;&#xA;&lt;h1 id=&#34;modèle-de-bohr&#34;&gt;Modèle de Bohr&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h1&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://coursphychi.github.io/bohrcolle.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Le noyau d’un atome a pour charge $Ze$ et un electron de masse $m$ et de charge $e$ orbite autour.&lt;br&gt;&#xA;On considère que l&amp;rsquo;orbite est circulaire et que le moment cinétique s&amp;rsquo;écrit $\sigma = n\hbar$.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Clothoïde</title>
       <link>https://coursphychi.github.io/colles/clothoide/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -65,6 +72,13 @@
       <description>&lt;style&gt;&#xA; &#x9;#correc&#xA;  {&#xA;    color: #006C65;&#xA;    border-left: solid 10px #C7DDDC;&#xA;  }&#xA; &#x9;#comm&#xA;  {&#xA;    color: #004D80;&#xA;    border-left: solid 10px #B3CAD9;&#xA;  }&#xA; &#x9;#commsum&#xA;  {&#xA;    color: #004D80;&#xA;  }&#xA; &#x9;#correcsum&#xA;  {&#xA;    color: #006C65;&#xA;  }&#xA;&#xA;details &gt; summary:first-of-type {&#xA;  display: list-item;    &#xA;  cursor: pointer;       &#xA;}&#xA;&#xA;details &gt; summary:first-of-type {&#xA;  list-style: disclosure-closed inside;&#xA;}&#xA;details[open] &gt; summary:first-of-type {&#xA;  list-style-type: disclosure-open;&#xA;}&#xA;&lt;/style&gt;&#xA;&lt;h1 id=&#34;simulation-dun-oscillateur-mécanique&#34;&gt;Simulation d&amp;rsquo;un oscillateur mécanique&lt;/h1&gt;&#xA;&lt;iframe src=&#34;https://trinket.io/embed/glowscript/ed106ffc04&#34; width=&#34;100%&#34; height=&#34;600&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;&#xA;&lt;p&gt;&lt;em&gt;Oscillateur amorti par frottement fluide :&lt;/em&gt;&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Faire les modifications nécessaires pour se placer dans le régime apériodique critique.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;em&gt;Oscillateur amorti par frottement solide :&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Promenade</title>
+      <link>https://coursphychi.github.io/colles/promenade/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/colles/promenade/</guid>
+      <description>&lt;style&gt;&#xA; &#x9;#correc&#xA;  {&#xA;    color: #006C65;&#xA;    border-left: solid 10px #C7DDDC;&#xA;  }&#xA; &#x9;#comm&#xA;  {&#xA;    color: #004D80;&#xA;    border-left: solid 10px #B3CAD9;&#xA;  }&#xA; &#x9;#commsum&#xA;  {&#xA;    color: #004D80;&#xA;  }&#xA; &#x9;#correcsum&#xA;  {&#xA;    color: #006C65;&#xA;  }&#xA;&#xA;details &gt; summary:first-of-type {&#xA;  display: list-item;    &#xA;  cursor: pointer;       &#xA;}&#xA;&#xA;details &gt; summary:first-of-type {&#xA;  list-style: disclosure-closed inside;&#xA;}&#xA;details[open] &gt; summary:first-of-type {&#xA;  list-style-type: disclosure-open;&#xA;}&#xA;&lt;/style&gt;&#xA;&lt;h1 id=&#34;promenade&#34;&gt;Promenade&lt;/h1&gt;&#xA;&lt;p&gt;Alice part se promener en marchant à une vitesse de $\pu{2 km*h-1}$.&#xA;Une heure après, Bob part avec un chien pour la rejoindre, en marchant à une vitesse de $\pu{4 km*h-1}$. Le chien étant agité, il fait des aller-retours entre les deux, à une vitesse de $\pu{10 km*h-1}$ jusqu’à ce qu’Alice et Bob se rejoignent.&#xA;On veut déterminer la distance  que le chien a parcouru ?&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Réfraction</title>
       <link>https://coursphychi.github.io/colles/refraction/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
@@ -91,6 +105,13 @@
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
       <guid>https://coursphychi.github.io/colles/tremplins/</guid>
       <description>&lt;h1 id=&#34;course-de-tremplins&#34;&gt;Course de tremplins&lt;/h1&gt;&#xA;&lt;p&gt;Deux balles dévalent chacune un tremplin différent dont les points de départ et d&amp;rsquo;arrivée ont même altitude :&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://coursphychi.github.io/tremplins.png&#34; alt=&#34;tremplins&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Les différentes coordonnées sont données ci-dessous. &lt;br&gt;Les deux balles sont supposées ponctuelles et on prendra g = 9.8 m.s&lt;sup&gt;-2&lt;/sup&gt;. &lt;br&gt;La boule jaune suit la ligne brisée ABC et la boule rouge suit ADEC.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://coursphychi.github.io/coordtremplins.png&#34; alt=&#34;ccordtremplins&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Questions préliminaires :&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Qulle balle atterrit le plus loin ?&lt;/li&gt;&#xA;&lt;li&gt;Quelle balle parcourt le moins de distance ?&lt;/li&gt;&#xA;&lt;li&gt;Quelle balle arrive la première en C ?&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Vérification par simulation :&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Tsiolkovsky</title>
+      <link>https://coursphychi.github.io/colles/tsiolkovsky/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/colles/tsiolkovsky/</guid>
+      <description>&lt;style&gt;&#xA; &#x9;#correc&#xA;  {&#xA;    color: #006C65;&#xA;    border-left: solid 10px #C7DDDC;&#xA;  }&#xA; &#x9;#comm&#xA;  {&#xA;    color: #004D80;&#xA;    border-left: solid 10px #B3CAD9;&#xA;  }&#xA; &#x9;#commsum&#xA;  {&#xA;    color: #004D80;&#xA;  }&#xA; &#x9;#correcsum&#xA;  {&#xA;    color: #006C65;&#xA;  }&#xA;&#xA;details &gt; summary:first-of-type {&#xA;  display: list-item;    &#xA;  cursor: pointer;       &#xA;}&#xA;&#xA;details &gt; summary:first-of-type {&#xA;  list-style: disclosure-closed inside;&#xA;}&#xA;details[open] &gt; summary:first-of-type {&#xA;  list-style-type: disclosure-open;&#xA;}&#xA;&lt;/style&gt;&#xA;&lt;h1 id=&#34;équation-de-tsiolkovsky&#34;&gt;Équation de Tsiolkovsky&lt;/h1&gt;&#xA;&lt;p style=&#34;text-align:center&#34;&gt;&lt;b&gt;the tyranny of the rocket equation&lt;/b&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/2/29/Exp%C3%A9rience_de_Tsiolkovsky.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Une fusée éjecte du gaz pour décoller. On note le débit massique $D_m=-\frac{\mathrm{d}m}{\mathrm{d}t}&amp;gt;0$ où $m(t)$ est la masse de la fusée à l’instant $t$. On note $\vec{u}=-u\vec{e_z}$ la vitesse d’éjection des gaz par rapport à la fusée ($u&amp;gt;0$) et $\vec{v}(t)=v(t)\vec{e_z}$ la vitesse de la fusée par rapport au référentiel terrestre galiléen. On suppose que $D_m$, $u$ et $g$ (accélération de la pesanteur) sont constants.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
