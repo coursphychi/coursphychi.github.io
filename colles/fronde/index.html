@@ -10,50 +10,46 @@
     <link rel="icon" href="/images/favicon.png" type="image/png">
     <title>Fronde - Cours Physique-Chimie</title>
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js" integrity="sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN"  crossorigin="anonymous"></script>
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
-        onload="renderMathInElement(document.body);"></script>
-
-
+    
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: "$$", right: "$$", display: true},
-                {left: "$", right: "$", display: false}
-            ]
-        });
-    });
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']]
+  },
+
+   
+  displayOverflow: 'linebreak',   
+};
 </script>
 
 
+<script async
+  src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-svg.js"
+  id="MathJax-script"></script>
+
+
+
     
 
     
-    <link href="/css/nucleus.css?1754440166" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1754440166" rel="stylesheet">
-    <link href="/css/hybrid.css?1754440166" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1754440166" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1754440166" rel="stylesheet">
-    <link href="/css/auto-complete.css?1754440166" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1754440166" rel="stylesheet">
-    <link href="/css/theme.css?1754440166" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1754440166" rel="stylesheet">
+    <link href="/css/nucleus.css?1754528379" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1754528379" rel="stylesheet">
+    <link href="/css/hybrid.css?1754528379" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1754528379" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1754528379" rel="stylesheet">
+    <link href="/css/auto-complete.css?1754528379" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1754528379" rel="stylesheet">
+    <link href="/css/theme.css?1754528379" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1754528379" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1754440166" rel="stylesheet">
+    <link href="/css/theme-blue.css?1754528379" rel="stylesheet">
     
-    <link href="/css/foo.css?1754440166" rel="stylesheet"><link href="/css/bar.css?1754440166" rel="stylesheet">
+    <link href="/css/foo.css?1754528379" rel="stylesheet"><link href="/css/bar.css?1754528379" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1754440166"></script>
+    <script src="/js/jquery-3.3.1.min.js?1754528379"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -107,14 +103,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1754440166"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1754440166"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1754528379"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1754528379"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1754440166"></script>
+<script type="text/javascript" src="/js/search.js?1754528379"></script>
 
     
   </div>
@@ -2363,6 +2359,12 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
             
             
           
+            
+            
+          
+            
+            
+          
         
         </ul>
       
@@ -2490,7 +2492,7 @@ MathJax = {
 <hr>
 <h2 id="dynamique">Dynamique</h2>
 <p>Une fronde est constituée par une pierre de masse $m$ reliée à un point fixe O par l&rsquo;intermédiaire d&rsquo;un fil de longueurs $\ell$ et de masse négligeable.</p>
-<p>Depuis sa position d’équilibre, on donne à la masse une vitesse initiale $\vec{v_0}$ horizontale.</p>
+<p>Depuis sa position d’équilibre, on donne à la masse une vitesse initiale $\overrightarrow{v_0}$ horizontale.</p>
 <ol>
 <li>
 <p>Écrire le PFD dans un repère polaire pour une position de la masse repérée par l’angle définie depuis la direction initiale du fil.</p>
@@ -2532,8 +2534,8 @@ Le TEC s'écrit :
 $$
 \displaystyle
 \begin{array}{rcll}
-E_{cB}-E_{cA}&=&\sum W_{AB}(\vec{F})&\text{en appelant A le point de départ et B le point repéré par }\theta\\\\
-\frac{1}{2}m(\ell\dot{\theta})^2-\frac{1}{2}m\ell v_0^2 &=& W_{AB}(\vec{P}) &\text{car la tension de la corde ne travaille pas}\\\\
+E_{cB}-E_{cA}&=&\sum W_{AB}(\overrightarrow{F})&\text{en appelant A le point de départ et B le point repéré par }\theta\\\\
+\frac{1}{2}m(\ell\dot{\theta})^2-\frac{1}{2}m\ell v_0^2 &=& W_{AB}(\overrightarrow{P}) &\text{car la tension de la corde ne travaille pas}\\\\
 \frac{1}{2}m(\ell\dot{\theta})^2-\frac{1}{2}m v_0^2 &=& \int_A^B \overrightarrow{P}\cdot \overrightarrow{dOM} &\\\\
 \frac{1}{2}m(\ell\dot{\theta})^2-\frac{1}{2}m v_0^2 &=& -\int_{z_A}^{z_B} mgdz &\text{avec un axe z vertical dirigé vers le haut}\\\\
 \frac{1}{2}m(\ell\dot{\theta})^2-\frac{1}{2}m v_0^2 &=& -mg\ell(1-\cos (\theta)) &\\\\
@@ -4186,6 +4188,16 @@ $$
             
         
                     
+                        
+            
+            
+        
+                    
+                        
+            
+            
+        
+                    
             
         
                     
@@ -4204,16 +4216,16 @@ $$
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1754440166"></script>
-    <script src="/js/perfect-scrollbar.min.js?1754440166"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1754440166"></script>
-    <script src="/js/jquery.sticky.js?1754440166"></script>
-    <script src="/js/featherlight.min.js?1754440166"></script>
-    <script src="/js/highlight.pack.js?1754440166"></script>
+    <script src="/js/clipboard.min.js?1754528379"></script>
+    <script src="/js/perfect-scrollbar.min.js?1754528379"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1754528379"></script>
+    <script src="/js/jquery.sticky.js?1754528379"></script>
+    <script src="/js/featherlight.min.js?1754528379"></script>
+    <script src="/js/highlight.pack.js?1754528379"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1754440166"></script>
-    <script src="/js/learn.js?1754440166"></script>
-    <script src="/js/hugo-learn.js?1754440166"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1754528379"></script>
+    <script src="/js/learn.js?1754528379"></script>
+    <script src="/js/hugo-learn.js?1754528379"></script>
     
     
 
