@@ -34,22 +34,22 @@ window.MathJax = {
     
 
     
-    <link href="/css/nucleus.css?1755608589" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1755608589" rel="stylesheet">
-    <link href="/css/hybrid.css?1755608589" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1755608589" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1755608589" rel="stylesheet">
-    <link href="/css/auto-complete.css?1755608589" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1755608589" rel="stylesheet">
-    <link href="/css/theme.css?1755608589" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1755608589" rel="stylesheet">
+    <link href="/css/nucleus.css?1756340410" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1756340410" rel="stylesheet">
+    <link href="/css/hybrid.css?1756340410" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1756340410" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1756340410" rel="stylesheet">
+    <link href="/css/auto-complete.css?1756340410" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1756340410" rel="stylesheet">
+    <link href="/css/theme.css?1756340410" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1756340410" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1755608589" rel="stylesheet">
+    <link href="/css/theme-blue.css?1756340410" rel="stylesheet">
     
-    <link href="/css/foo.css?1755608589" rel="stylesheet"><link href="/css/bar.css?1755608589" rel="stylesheet">
+    <link href="/css/foo.css?1756340410" rel="stylesheet"><link href="/css/bar.css?1756340410" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1755608589"></script>
+    <script src="/js/jquery-3.3.1.min.js?1756340410"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -103,14 +103,14 @@ src="https://cdn.jsdelivr.net/npm/quizdown@latest/public/build/extensions/quizdo
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1755608589"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1755608589"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1756340410"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1756340410"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1755608589"></script>
+<script type="text/javascript" src="/js/search.js?1756340410"></script>
 
     
   </div>
@@ -2501,9 +2501,7 @@ details[open] > summary:first-of-type {
 </li>
 </ol>
 <p>Plutôt qu&rsquo;un arc de cercle, on va relier les deux portions rectilignes par des morceaux de clothoïdes<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Cette courbe a pour particularité que son rayon de courbure croit linéairement avec l&rsquo;abscisse curviligne sur la courbe.<br>
-Plus précisément, supposons qu&rsquo;un point $\mathrm{M}$ suive une clothoïde à vitesse constante $v=\pu{1,0 m*s-1}$. On peut alors paramétrer la courbe avec le temps $t$.<br>
-On suppose que l&rsquo;origine est telle que $\mathrm{M}(t=0)=\mathrm{O}(0,0)$ et que la tangente initiale est dirigée vers l&rsquo;axe $\mathrm{O}x$.<br>
-Le rayon de courbure $R(t)$ en $\mathrm{M}(t)$ est tel que $\frac{1}{R(t)}=kt$ où $k$ est une constante positive.</p>
+Supposons qu&rsquo;un point $\mathrm{M}$ suive une clothoïde à vitesse constante $v=\pu{1,0 m*s-1}$. On peut alors paramétrer la courbe avec le temps $t$. Plaçons l&rsquo;origine en $\mathrm{M}(t=0)$. Le rayon de courbure $R(t)$ en $\mathrm{M}(t)$ vaut alors $\frac{1}{R(t)}=kt$ où $k$ est une constante positive.</p>
 <ol start="3">
 <li>
 <p>Esquisser l&rsquo;allure d&rsquo;une clothoïde.</p>
@@ -2512,12 +2510,13 @@ Le rayon de courbure $R(t)$ en $\mathrm{M}(t)$ est tel que $\frac{1}{R(t)}=kt$ o
 <p>Dans un repère de Frenet, écrire l&rsquo;accélération tangentielle et normale du point M.</p>
 </li>
 <li>
-<p>Reprendre les questions 1 et 2 avec un tronçon de raccordement fait à partir de deux tronçons de clothoïdes symétrique par rapport à l&rsquo;axe de symétrie du virage du virage. L&rsquo;origine de la première clothoïde serait en O et celle de la deuxième en B.</p>
+<p>Reprendre les questions 1 et 2 avec un tronçon de raccordement fait à partir de deux tronçons de clothoïdes symétriques par rapport à l&rsquo;axe ($\Delta$). L&rsquo;origine de la première clothoïde est en O et celle de la deuxième en B.</p>
 </li>
 </ol>
 <div style="position:relative;margin-left:auto;margin-right:auto;width:500px;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
 <img src="/clothoapex.png" style="box-shadow:none;background:none;">
 </div>
+<p>On veut maintenant tracer un tronçon de clothoïde et pour cela, il faut trouver son équation.</p>
 <ol start="6">
 <li>
 <p>En appelant $\theta$ l&rsquo;angle que fait le vecteur tangent $\vec{u}_T(t)$ au point $\mathrm{M}(t)$ de la courbe avec l&rsquo;axe $\mathrm{O}x$, montrer que :
@@ -4265,16 +4264,16 @@ On appelle aussi la clothoïde spirale de Cornu ou d&rsquo;Euler ou de Fresnel&h
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1755608589"></script>
-    <script src="/js/perfect-scrollbar.min.js?1755608589"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1755608589"></script>
-    <script src="/js/jquery.sticky.js?1755608589"></script>
-    <script src="/js/featherlight.min.js?1755608589"></script>
-    <script src="/js/highlight.pack.js?1755608589"></script>
+    <script src="/js/clipboard.min.js?1756340410"></script>
+    <script src="/js/perfect-scrollbar.min.js?1756340410"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1756340410"></script>
+    <script src="/js/jquery.sticky.js?1756340410"></script>
+    <script src="/js/featherlight.min.js?1756340410"></script>
+    <script src="/js/highlight.pack.js?1756340410"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1755608589"></script>
-    <script src="/js/learn.js?1755608589"></script>
-    <script src="/js/hugo-learn.js?1755608589"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1756340410"></script>
+    <script src="/js/learn.js?1756340410"></script>
+    <script src="/js/hugo-learn.js?1756340410"></script>
     
     
 
