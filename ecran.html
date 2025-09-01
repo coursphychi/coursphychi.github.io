@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulateur de sous‑pixels RGB</title>
+  <style>
+    :root{
+      --bg:#0b0d10;              /* fond global */
+      --panel:#0f1115;            /* fond zone de contrôle */
+      --border:#262a33;           /* traits discrets */
+      --text:#e6e8eb;             /* texte */
+      --accent:#5aaaff;           /* accent UI */
+      --matrix:#0a0c10;           /* "black matrix" entre sous‑pixels */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font:500 14px/1.3 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;
+      display:flex; flex-direction:column; min-height:100vh;
+    }
+    /* Zone de rendu (plein écran) */
+    #stage{position:relative; flex:1 1 auto; overflow:hidden;}
+    canvas{display:block; width:100%; height:100%; background:#1a1f27}
+
+    /* Overlay : indications discrètes */
+    .hud{position:absolute; left:12px; top:12px; padding:6px 10px; border-radius:8px;
+         background:rgba(0,0,0,.35); backdrop-filter: blur(3px); border:1px solid rgba(255,255,255,.08);
+         font-variant-numeric:tabular-nums}
+
+    /* Barre de contrôle */
+    .controls{display:flex; gap:16px; align-items:center; flex-wrap:wrap;
+      padding:12px 14px; border-top:1px solid var(--border); background:var(--panel)}
+    .group{display:flex; align-items:center; gap:8px}
+    .group label{width:18px; text-align:center; font-weight:700; letter-spacing:.02em}
+    .range{appearance:none; width:220px; height:6px; border-radius:999px; background:#1f2430; outline:none}
+    .range::-webkit-slider-thumb{appearance:none; width:18px; height:18px; border-radius:50%; background:var(--accent); border:2px solid #ffffff30}
+    .range::-moz-range-thumb{width:18px; height:18px; border-radius:50%; background:var(--accent); border:2px solid #ffffff30}
+
+    .val{width:50px; padding:4px 6px; text-align:center; border-radius:8px; border:1px solid var(--border); background:#171b22; color:var(--text); font-variant-numeric:tabular-nums}
+    .btn{padding:6px 10px; border-radius:10px; border:1px solid var(--border); background:#161a21; color:var(--text); cursor:pointer}
+    .btn:hover{border-color:#334155}
+
+    .swatch{width:44px; height:24px; border-radius:6px; border:1px solid #ffffff30}
+    .sep{flex:1 1 auto}
+
+    @media (max-width: 560px){
+      .range{width:160px}
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <canvas id="lcd" aria-label="surface de simulation des sous‑pixels"></canvas>
+    <div class="hud" id="hud">Zoom ×1.00 · Faites défiler pour zoomer, glisser pour déplacer</div>
+  </div>
+
+  <div class="controls">
+    <div class="group"><label for="r">R</label><input id="r" class="range" type="range" min="0" max="255" value="255"><input id="rVal" class="val" type="number" min="0" max="255" value="255"></div>
+    <div class="group"><label for="g">G</label><input id="g" class="range" type="range" min="0" max="255" value="255"><input id="gVal" class="val" type="number" min="0" max="255" value="255"></div>
+    <div class="group"><label for="b">B</label><input id="b" class="range" type="range" min="0" max="255" value="255"><input id="bVal" class="val" type="number" min="0" max="255" value="255"></div>
+
+    <div class="sep"></div>
+    <button id="fsBtn" class="btn" title="Basculer en plein écran">Plein écran</button>
+    <button id="resetBtn" class="btn" title="Réinitialiser">Réinitialiser</button>
+  </div>
+
+  <script>
+    // ----------------------------------------------
+    // Paramètres visuels de la matrice LCD
+    // ----------------------------------------------
+    const BASE_PITCH = 22;        // largeur d'un triplet (R+G+B) en unités monde
+    const APERTURE = 0.82;        // fraction lumineuse par sous‑pixel (le reste = "black matrix")
+    const H_SEGMENT = 12;         // pas de segmentation horizontale (px) pour l'aspect "barrettes"
+
+    // ----------------------------------------------
+    // Variables d'état
+    // ----------------------------------------------
+    const canvas = document.getElementById('lcd');
+    const ctx = canvas.getContext('2d');
+    const hud = document.getElementById('hud');
+    const DPR = Math.max(1, window.devicePixelRatio || 1);
+
+    const state = {
+      r:255, g:255, b:255,
+      scale: 1,             // échelle monde→pixels (1 = BASE_PITCH px par triplet)
+      ox: 0, oy: 0,         // décalage monde (pour le glisser)
+    };
+
+    // UI
+    const rRange = document.getElementById('r');
+    const gRange = document.getElementById('g');
+    const bRange = document.getElementById('b');
+    const rVal   = document.getElementById('rVal');
+    const gVal   = document.getElementById('gVal');
+    const bVal   = document.getElementById('bVal');
+
+    const fsBtn = document.getElementById('fsBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function syncFromInputs(){
+      state.r = clamp255(+rRange.value); rVal.value = state.r;
+      state.g = clamp255(+gRange.value); gVal.value = state.g;
+      state.b = clamp255(+bRange.value); bVal.value = state.b;
+      draw();
+    }
+    function syncFromNumbers(){
+      state.r = clamp255(+rVal.value);   rRange.value = state.r;
+      state.g = clamp255(+gVal.value);   gRange.value = state.g;
+      state.b = clamp255(+bVal.value);   bRange.value = state.b;
+      draw();
+    }
+    [rRange,gRange,bRange].forEach(el=>el.addEventListener('input', syncFromInputs));
+    [rVal,gVal,bVal].forEach(el=>el.addEventListener('input', syncFromNumbers));
+
+    // Plein écran
+    fsBtn.addEventListener('click', async ()=>{
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen().catch(()=>{});
+        fsBtn.textContent = 'Quitter plein écran';
+      } else {
+        await document.exitFullscreen();
+        fsBtn.textContent = 'Plein écran';
+      }
+    });
+
+    resetBtn.addEventListener('click', ()=>{
+      state.scale = 1; state.ox = state.oy = 0; draw();
+    });
+
+    // Redimensionnement HiDPI
+    function fit(){
+      const rect = canvas.getBoundingClientRect();
+      canvas.width  = Math.max(1, Math.floor(rect.width  * DPR));
+      canvas.height = Math.max(1, Math.floor(rect.height * DPR));
+      draw();
+    }
+    window.addEventListener('resize', fit, {passive:true});
+
+    // Zoom/pan
+    let isDown = false, lastX=0, lastY=0;
+    canvas.addEventListener('pointerdown', e=>{
+      isDown = true; canvas.setPointerCapture(e.pointerId);
+      const rect = canvas.getBoundingClientRect();
+      lastX = (e.clientX - rect.left) * DPR;
+      lastY = (e.clientY - rect.top)  * DPR;
+    });
+    canvas.addEventListener('pointermove', e=>{
+      if(!isDown) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX - rect.left) * DPR;
+      const y = (e.clientY - rect.top)  * DPR;
+      const dx = x - lastX, dy = y - lastY;
+      lastX = x; lastY = y;
+      // décalage en coordonnées monde
+      state.ox += dx / (state.scale * DPR);
+      state.oy += dy / (state.scale * DPR);
+      draw();
+    });
+    window.addEventListener('pointerup', ()=>{ isDown=false; });
+
+    canvas.addEventListener('wheel', e=>{
+      e.preventDefault();
+      const factor = Math.pow(1.1, -e.deltaY / 100); // deltaY>0 -> zoom out
+      const rect = canvas.getBoundingClientRect();
+      const mx = (e.clientX - rect.left) * DPR;
+      const my = (e.clientY - rect.top)  * DPR;
+      zoomAt(mx,my,factor);
+    }, {passive:false});
+
+    function zoomAt(mx, my, factor){
+      const old = state.scale;
+      const next = clamp(old * factor, 0.05, 40);
+      if (next === old) return;
+      // garder le point sous le curseur
+      state.ox -= mx * (1/old - 1/next) / DPR;
+      state.oy -= my * (1/old - 1/next) / DPR;
+      state.scale = next;
+      draw();
+    }
+
+    function clamp(v,min,max){ return Math.min(max, Math.max(min, v)); }
+    function clamp255(v){ return Math.round(clamp(v,0,255)); }
+
+    // ----------------------------------------------
+    // Rendu
+    // ----------------------------------------------
+    let cached = { key:"", canvas:null };
+
+    function makePattern(pitchPx){
+      const key = [pitchPx|0, state.r, state.g, state.b].join('-');
+      if (cached.canvas && cached.key === key) return cached.canvas;
+
+      // dimensions du motif de répétition
+      const W = Math.max(6, Math.round(pitchPx));           // largeur d'un triplet
+      const H = Math.max(40, Math.round(pitchPx*3));        // hauteur du motif (répété verticalement)
+
+      const off = document.createElement('canvas');
+      off.width = W; off.height = H;
+      const p = off.getContext('2d');
+
+      // fond = "black matrix"
+      p.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--matrix') || '#0a0c10';
+      p.fillRect(0,0,W,H);
+
+      // géométrie de sous‑pixels (vertical RGB)
+      const chunk = W/3;                         // largeur d'un canal
+      const glowW = Math.max(1, Math.round(chunk*APERTURE));
+      const margin = (chunk - glowW)/2;
+
+      const cols = [ `rgb(${state.r},0,0)`, `rgb(0,${state.g},0)`, `rgb(0,0,${state.b})` ];
+      for(let i=0;i<3;i++){
+        const x = Math.round(i*chunk + margin);
+        const w = Math.round(glowW);
+        // rectangle lumineux
+        p.fillStyle = cols[i];
+        p.fillRect(x, 0, w, H);
+        // petit dégradé latéral pour un aspect "émissif"
+        const gL = p.createLinearGradient(x-1,0,x+1,0);
+        gL.addColorStop(0, 'rgba(0,0,0,0.35)');
+        gL.addColorStop(0.5, 'rgba(0,0,0,0)');
+        gL.addColorStop(1, 'rgba(0,0,0,0.35)');
+        p.fillStyle = gL; p.fillRect(x-1,0,2,H);
+      }
+
+      // segmentation horizontale
+      p.fillStyle = 'rgba(0,0,0,.45)';
+      for(let y=H_SEGMENT; y<H; y+=H_SEGMENT){ p.fillRect(0,y, W, 1); }
+
+      cached = { key, canvas: off };
+      return off;
+    }
+
+    function draw(){
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0,0,w,h);
+
+      const pitchPx = BASE_PITCH * state.scale * DPR; // largeur d'un triplet en pixels réels du canvas
+
+      // Quand les sous‑pixels deviennent très petits, on passe à la couleur synthétisée
+      if (pitchPx < 2.2){
+        ctx.fillStyle = `rgb(${state.r},${state.g},${state.b})`;
+        ctx.fillRect(0,0,w,h);
+      } else {
+        const patCanvas = makePattern(pitchPx);
+        const pat = ctx.createPattern(patCanvas, 'repeat');
+        ctx.save();
+        // translation tenant compte du décalage monde
+        const tx = (state.ox * state.scale * DPR) % patCanvas.width;
+        const ty = (state.oy * state.scale * DPR) % patCanvas.height;
+        ctx.translate(tx, ty);
+        ctx.fillStyle = pat; ctx.fillRect(-patCanvas.width, -patCanvas.height, w+patCanvas.width*2, h+patCanvas.height*2);
+        ctx.restore();
+      }
+
+      // HUD
+      hud.textContent = `Zoom ×${state.scale.toFixed(2)} · Molette/Trackpad pour zoomer · Glisser pour déplacer`;
+      // échantillon couleur
+      document.querySelector(':root').style.setProperty('--accent', `rgb(${state.r},${state.g},${state.b})`);
+      document.querySelector('.swatch')?.style.setProperty('background', `rgb(${state.r},${state.g},${state.b})`);
+    }
+
+    // Ajouter un petit échantillon à droite (créé dynamiquement pour garder le DOM minimal)
+    const sw = document.createElement('div');
+    sw.className = 'swatch';
+    document.querySelector('.controls').appendChild(sw);
+
+    // Boot
+    fit();
+    draw();
+  </script>
+</body>
+</html>
