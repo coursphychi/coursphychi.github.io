@@ -442,10 +442,10 @@
 },
 {
 	"uri": "https://coursphychi.github.io/tspe/nucleaire/",
-	"title": "Nucléaires",
+	"title": "Nucléaire",
 	"tags": [],
 	"description": "",
-	"content": " Transformations nucléaires Présentation\nDocuments TP Atténuation sonore Appliquette Atténuation géométrique Site "
+	"content": " Transformations nucléaires Présentation\nDocuments TP Mousse Appliquette Atténuation géométrique Site "
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/mole/",
@@ -732,7 +732,7 @@
 	"title": "Électricité",
 	"tags": [],
 	"description": "",
-	"content": " Électricité Présentation\nDocuments Activités Caractéristique d'une thermistance + Tracé et régression linéaire Comment fabriquer un thermomètre à partir d'une thermistance ? + Tracé de la courbe d'étalonnage Circuit électrique au sein d’un bathythermographe "
+	"content": " Électricité Présentation\nDocuments Activités Caractéristique d'une thermistance + Tracé et régression linéaire + Correction Comment fabriquer un thermomètre à partir d'une thermistance ? + Tracé de la courbe d'étalonnage Circuit électrique au sein d’un bathythermographe "
 },
 {
 	"uri": "https://coursphychi.github.io/1spe/egiemeca/",
