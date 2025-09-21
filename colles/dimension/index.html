@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Lumière - Cours Physique-Chimie</title>
+    <title>Analyse dimensionnelle - Cours Physique-Chimie</title>
     
     <script>
   window.MathJax = {
@@ -22,22 +22,22 @@
     
 
     
-    <link href="/css/nucleus.css?1758492938" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1758492938" rel="stylesheet">
-    <link href="/css/hybrid.css?1758492938" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1758492938" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1758492938" rel="stylesheet">
-    <link href="/css/auto-complete.css?1758492938" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1758492938" rel="stylesheet">
-    <link href="/css/theme.css?1758492938" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1758492938" rel="stylesheet">
+    <link href="/css/nucleus.css?1758492937" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1758492937" rel="stylesheet">
+    <link href="/css/hybrid.css?1758492937" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1758492937" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1758492937" rel="stylesheet">
+    <link href="/css/auto-complete.css?1758492937" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1758492937" rel="stylesheet">
+    <link href="/css/theme.css?1758492937" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1758492937" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1758492938" rel="stylesheet">
+    <link href="/css/theme-blue.css?1758492937" rel="stylesheet">
     
-    <link href="/css/foo.css?1758492938" rel="stylesheet"><link href="/css/bar.css?1758492938" rel="stylesheet">
+    <link href="/css/foo.css?1758492937" rel="stylesheet"><link href="/css/bar.css?1758492937" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1758492938"></script>
+    <script src="/js/jquery-3.3.1.min.js?1758492937"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -95,7 +95,7 @@
 
 	
   </head>
-  <body class="" data-url="/tsti2d/lumiere/">
+  <body class="" data-url="/colles/dimension/">
     <nav id="sidebar" class="">
 
 
@@ -121,14 +121,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1758492938"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1758492938"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1758492937"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1758492937"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1758492938"></script>
+<script type="text/javascript" src="/js/search.js?1758492937"></script>
 
     
   </div>
@@ -1395,7 +1395,7 @@
   
     
     <li data-nav-id="/tsti2d/" title="TSTI2D" class="dd-item
-        parent
+        
         
         
         ">
@@ -1589,7 +1589,7 @@
  
   
     
-      <li data-nav-id="/tsti2d/lumiere/" title="Lumière" class="dd-item active">
+      <li data-nav-id="/tsti2d/lumiere/" title="Lumière" class="dd-item ">
         <a href="/tsti2d/lumiere/">
         Lumière
         
@@ -2336,7 +2336,7 @@
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        
+        parent
         
         
         ">
@@ -2472,7 +2472,7 @@
                   <span class="links">
                  
                  
-                   Lumière
+                   Analyse dimensionnelle
                  
                   </span>
                 </div>
@@ -2481,11 +2481,16 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#rappels">Rappels</a></li>
-    <li><a href="#simulations">Simulations</a></li>
-    <li><a href="#savoir-et-savoir-faire">Savoir et savoir faire</a></li>
-    <li><a href="#exercices">Exercices</a></li>
-    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#écoulement-du-verre-dun-vitrail">Écoulement du verre d’un vitrail</a></li>
+    <li><a href="#rayon-dun-cratère-dimpact-météoritique">Rayon d’un cratère d’impact météoritique</a></li>
+    <li><a href="#ondes-de-surface">Ondes de surface</a>
+      <ul>
+        <li><a href="#ondes-capillaires">Ondes capillaires</a></li>
+        <li><a href="#ondes-de-gravité">Ondes de gravité</a></li>
+      </ul>
+    </li>
+    <li><a href="#bulles-de-savon">Bulles de savon</a></li>
+    <li><a href="#éolienne">Éolienne</a></li>
   </ul>
 </nav>
     </div>
@@ -2506,250 +2511,116 @@
 
 
 <style>
-details summary { cursor:pointer; }
+ 	#correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ 	#comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ 	#commsum
+  {
+    color: #004D80;
+  }
+ 	#correcsum
+  {
+    color: #006C65;
+  }
 
-details summary::-webkit-details-marker { display:none; } /* WebKit */
-details summary { list-style:none; }                      /* Firefox */
-
-/* triangle personnalisé AVANT le texte */
-details summary::before {
-  content:"▸";
-  display:inline-block;
-  margin-right:0.4em;
-  font-size:0.8em;
-  transition:transform .2s ease;
+details > summary:first-of-type {
+  display: list-item;    
+  cursor: pointer;       
 }
 
-details[open] > summary::before {
-  transform:rotate(90deg);
+details > summary:first-of-type {
+  list-style: disclosure-closed inside;
+}
+details[open] > summary:first-of-type {
+  list-style-type: disclosure-open;
 }
 </style>
-<h1 id="énergie-transportée-par-la-lumière">Énergie transportée par la lumière</h1>
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tsti/lumiere">Présentation</a></p>
-<br>
-<h2 id="rappels">Rappels</h2>
-<details>
-<summary>
-<a>Lien entre la fréquence $f$ et la longueur d'onde $\lambda$&nbsp;?</a></summary>
-<blockquote>
-<div style="display: flex;justify-content: left;">
-<div style = "border:solid red 2px;width:min-content;padding: 0px 10px 0px 10px;">
-$$\lambda=\frac{c}{f}$$
-</div></div>
-<br>
-Où $c$ est la célérité (vitesse) de la lumière<br>
-$c = \pu{3,0*10^8 m*s-1}$
-</blockquote>
-</details>
-<br>
-<details>
-<summary>
-Étendue en longueurs d'ondes de la <a>partie <span style="font-weight:bold">visible</span></a> du spectre électromagnétique&nbsp;?</summary>
-<blockquote>
-<div style="position:relative;width:800px;max-width:100%;margin:auto;">
-<img src="/spectrelmag.png" style="width:content"/>
+<h1 id="analyse-dimensionnelle">Analyse dimensionnelle</h1>
+<h2 id="écoulement-du-verre-dun-vitrail">Écoulement du verre d’un vitrail</h2>
+<div style="position:relative;margin-left:auto;margin-right:auto;width:600px;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
+<img src="/vitrail.png" style="box-shadow:none;background:none;border-radius:10px;">
 </div>
-</blockquote>
-</details>
+<p>On entend parfois que l’écoulement du verre des vitraux des cathédrales sous leur propre poids explique pourquoi on observe sur certains de ces vitraux que le bas est plus épais que le haut.</p>
+<p>Déterminer par analyse dimensionnelle un temps typique pour cet écoulement à partir des deux grandeurs suivantes :</p>
+<ul style="margin-top:-0.5em; margin-bottom:-0.5em;">
+ <li>la viscosité dynamique $\eta$  (pour le verre $\eta\approx\pu{e20 Pa*s}$),</li>
+ <li>la grandeur $A$ (avec $A = \rho g H$ où $\rho$ est la masse volumique, $g$ la pesanteur et $H$ la hauteur du vitrail).</li>
+ </ul> 
+<p>Conclure : s’agit-il d’un mythe ou est-ce vraisemblable ?</p>
+<p>Rq : pour comparaison, la viscosité de l’eau liquide vaut environ $\pu{e-3 Pa*s}$, celle du miel $\pu{10 Pa*s}$
+et celle du plomb $\pu{e-10 Pa*s}$.</p>
 <br>
-<h2 id="simulations">Simulations</h2>
-<ul>
+<h2 id="rayon-dun-cratère-dimpact-météoritique">Rayon d’un cratère d’impact météoritique</h2>
+<div style="position:relative;margin-left:auto;margin-right:auto;width:600px;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
+<img src="/crateres.png" style="box-shadow:none;background:none;border-radius:10px;">
+</div>
+<ol>
 <li>
-<p>Photons et niveaux d&rsquo;énergie (spectres) : <a href="https://www.geogebra.org/m/kMx37ken"><strong>applet Geogebra</strong></a></p>
+<p>Proposer une loi donnant le rayon  du cratère créé par l’impact d’un météorite en fonction de l’énergie cinétique $E_c$ du météorite, de la masse volumique $\rho$ du sol et de la pesanteur $g$.</p>
 </li>
 <li>
-<p>Tracé d&rsquo;une caractéristique : <a href="https://www.geogebra.org/m/u27ch5v7"><strong>applet Geogebra</strong></a> + <a href="/TP-PV.pdf"><strong>activité</strong></a></p>
+<p>En déduire approximativement le ratio des masses des météorites ayant créés les deux cratères lunaires fléchés sur l’image ci-dessus en supposant qu’ils avaient la même vitesse.</p>
 </li>
-</ul>
+<li>
+<p>Et quel serait le ratio des vitesses s’ils avaient la même masse ?</p>
+</li>
+<li>
+<p>En supposant un coefficient de proportionnalité proche de 1 dans la loi trouvée, donner l’ordre de grandeur de la vitesse d’une météorite d’1 kg créant un cratère de 10 m de rayon. Cette vitesse vous apparait-elle raisonnable ? Comparez-la à la vitesse de la Terre autour du Soleil.</p>
+</li>
+</ol>
 <br>
-<h2 id="savoir-et-savoir-faire">Savoir et savoir faire</h2>
-
-<div class="notices coeur" style="--title: 'coeur';">
-  <p style="display: none;">coeur</p>
-  <div class="notice-body">
-    <p><input type="checkbox"> Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de <strong>photon</strong>.
-<br><br>
-<input type="checkbox"> Citer et exploiter la relation $ΔE = h\cdot f$ reliant une variation d’énergie à la fréquence des photons émis ou reçus.
-<br><br>
-<input type="checkbox"> Identifier les formes d’énergie mises en jeu dans une <strong>conversion photovoltaïque</strong> et une <strong>conversion photothermique</strong>.
-<br><br>
-<input type="checkbox"> Exploiter les <strong>caractéristiques tension-courant</strong> d’un panneau photovoltaïque pour identifier son point de fonctionnement.
-<br><br>
-<input type="checkbox"> Réaliser le <strong>bilan de puissance</strong> pour déterminer le <strong>rendement</strong> d’une conversion photovoltaïque et d’une conversion photothermique.</p>
-
-  </div>
+<h2 id="ondes-de-surface">Ondes de surface</h2>
+<p>Lorsqu’on perturbe la surface d’un lac (en y jetant un objet par exemple), deux types de régimes d’onde peuvent être créés en fonction de la taille de l’objet.</p>
+<h3 id="ondes-capillaires">Ondes capillaires</h3>
+<p>Si l’objet est petit, on obtient des ondes dites capillaires dont la célérité dépend de la tension superficielle du fluide.</p>
+<ol>
+<li>Retrouver par analyse dimensionnelle une relation donnant la célérité $c$ de ces ondes en fonction de la longueur d’onde $\lambda$, de la tension superficielle de l&rsquo;eau $\gamma$ (force par unité de longueur), et de la masse volumique de l&rsquo;eau $\rho$.</li>
+</ol>
+<h3 id="ondes-de-gravité">Ondes de gravité</h3>
+<p>Si l’objet est plus gros, on passe au régime des ondes de gravité dont la célérité $c$ ne dépend plus que de la longueur d’onde $\lambda$ et de la pesanteur $g$.</p>
+<ol start="2">
+<li>Déterminer cette relation.</li>
+</ol>
+ <div style="position:relative;margin-left:auto;margin-right:auto;width:400px;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
+<img src="/capillaire.png" style="box-shadow:none;background:none;">
 </div>
-
-
-
-<div class="notices piege" style="--title: 'piege';">
-  <p style="display: none;">piege</p>
-  <div class="notice-body">
-    <p>L&rsquo;<strong>irradiance</strong>, qui est la puissance radiative reçue par mètre carré (unité : $\pu{W*m-2}$), peut aussi être appelé <strong>éclairement énergétique</strong>.<br> Et la lettre pour désigner cette grandeur peut varier ! Fiez-vous à l&rsquo;unité.</p>
-
-  </div>
+<ol start="3">
+<li>D’après cette image, a-t-on lancé un gros ou un petit objet ?</li>
+</ol>
+ <br>
+<h2 id="bulles-de-savon">Bulles de savon</h2>
+ <div style="position:relative;margin-left:auto;margin-right:auto;width:600px;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Jean-Baptiste_Siméon_Chardin_022.jpg/1238px-Jean-Baptiste_Siméon_Chardin_022.jpg?20150210150300" style="box-shadow:none;background:none;">
 </div>
-
-
-<br>
-<h2 id="exercices">Exercices</h2>
-<ul>
-<li><a href="/exo-pv-pt-fctnmt.pdf"><strong>caractéristiques et point de fonctionnement</strong></a> - <a href="/exo-pv-pt-fctnmt-corr.pdf" style="font-weight:bold;color:green">Correction</a></li>
-<li><a href="/exo-bac-pvthermique.pdf"><strong>refuge de montagne</strong> (extrait sujet 2022 métropole)</a> - <a href="https://presentationssite.github.io/tsti/correc-lumiere" style="font-weight:bold;color:green">Correction</a></li>
-</ul>
-<br>
-<h2 id="quiz">Quiz</h2>
-<div class="quizdown">
-
----
-primary_color: steelblue
-secondary_color: "#f2f2f2"
-text_color: black
-shuffle_questions: false
-
----
-
-##
-
-La lumière est&nbsp;:
-
-- [x] constituée de photons
-- [ ] constituée de phonons
-- [x] une onde électromagnétique
-
-##
-
-Un rayonnement gamma a pour fréquence $\pu{7,7E19 Hz}$. L'énergie du photon associé est&nbsp;:
-
-- [x] $\Delta E = hf$
-- [x] $\pu{5,1E-14 J}$
-- [ ] $\displaystyle \Delta E = \frac{hc}{f}$
-
-##
-
-L'énergie d'un photon de 3,5 eV est égale à&nbsp;:
-
-- [ ] $\pu{2,2E19 J}$
-- [x] $\pu{5,6E-19 J}$
-- [ ] $\pu{4,6E-20 J}$
-
-> $\pu{1,0 eV}=\pu{1,6E-19 J}$
-
-##
-
-La longueur d'onde dans le vide d'un rayonnement associé à un photon d'énergie $\Delta E = \pu{2,34E-19 J}$ est&nbsp;:
-
-- [ ] $\pu{85 \mu m}$
-- [x] $\pu{850 nm}$
-- [x] $\pu{8,50E-7 m}$
-
-##
-
-Un panneau solaire thermique fournit&nbsp;:
-
-- [x] une énergie thermique
-- [ ] une énergie lumineuse
-- [ ] une énergie électrique
-
-
-##
-
-Le rendement d'un panneau solaire thermique est le rapport des puissances&nbsp;:
-
-
-- [x] $\frac{P_{thermique}}{P_{rayonnante}}$
-- [ ] $\frac{P_{rayonnante}}{P_{thermique}}$
-- [ ] $\frac{P_{électrique}}{P_{rayonnante}}$
-
-
-
-##
-
-Une masse de $\pu{1,0 kg}$ d'eau subissant une élévation de température de $\pu{50 ^\circ C}$ reçoit une énergie thermique de&nbsp;:
-
-
-- [x] $\pu{58 Wh}$
-- [ ] $\pu{7,6E8 Wh}$
-- [x] $\pu{2,1E5 J}$
-
-> $c_{eau}=\pu{4,18E3 J*kg-1*^\circ C-1}$
-
-##
-
-On a représenté ci-dessous la caractéristique $I(U)$ d'une cellule photovoltaïque.<br><br>
-![](/caractnue.png)<br><br>
-Que vallent la tension en circuit ouvert $U_{co}$ et l'intensité de court-circuit $I_{cc}$&nbsp;?
-
-- [x] $\pu{8,08 V}$ et $\pu{1,05 A}$
-- [ ] $\pu{7,0 V}$ et $\pu{1,0 A}$
-- [ ] les valeurs de la tension et de l'intensité au point de fonctionnement à puissance maximale.
-
-
-##
-
-![](/caractass.png)<br><br>
-La caractéristique ci-dessus correspond à une association de deux cellules identiques à celle de la question précédente.<br>
-Il s'agit&nbsp;:
-
-- [x] d'une association série
-- [ ] d'une association parallèle
-- [ ] d'une association libre
-
-
-##
-
-On a maintenant superposé la courbe de la puissance délivrée $P(U)$ à la caractéristique.<br><br>
-![](/caractpuiss.png)<br><br>
-les valeurs nominales d'intensité et de tension de cette cellule sont&nbsp;:
-
-- [x] les coordonnées du point B
-- [ ] les coordonnées du point A
-- [ ] $\pu{8,08 V}$ et $\pu{1,05 A}$
-
-##
-
-![](/caractpuiss.png)<br><br>
-La puissance électrique maximale que peut fournir le panneau est&nbsp;:
-
-- [ ] $\pu{8,5 W}$
-- [x] $\pu{7,0 W}$
-- [ ] $\pu{8,0 W}$
-- [ ] $\pu{9,4 W}$
-
-
-##
-
-Le panneau alimente un conducteur ohmique de résistance $R = \pu{40 \Omega}$ dont on a superposé la caractéristique&nbsp;:<br>
-![](/caractres.png)<br><br>
-Le point de fonctionnement du circuit est&nbsp;:
-
-- [x] le point C
-- [ ] le point A
-- [ ] le point B
-
-
-##
-
-![](/caractres.png)<br><br>
-La puissance que la cellule délivre au dipôle ohmique est&nbsp;:
-
-- [x] $\pu{1,6 W}$
-- [ ] $\pu{9,8 W}$
-- [ ] $\pu{7,0 W}$
-
-
-
-##
-
-![](/caractpuiss.png)<br><br>
-Que vaut la résistance qui permettrait à la cellule de délivrer une puissance maximale&nbsp;:
-
-- [ ] $\pu{0,14 \Omega}$
-- [x] $\pu{7,0 \Omega}$
-- [ ] $\pu{40 \Omega}$
-
-
+<p>Faut-il souffler plus fort pour avoir des bulles plus grosses ?</p>
+<ol>
+<li>
+<p>Établir une relation liant le rayon $R$ d’une bulle de savon à la tension superficielle $\gamma$  de la bulle (la tension superficielle est une force par unité de longueur), la masse volumique $\rho$ de l’air et la vitesse $v$ du souffle.</p>
+</li>
+<li>
+<p>Répondre à la question posée en introduction.</p>
+</li>
+</ol>
+ <br>
+<h2 id="éolienne">Éolienne</h2>
+ <div style="position:relative;margin-left:auto;margin-right:auto;width:350px;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Éolienne-tripale-st-caradec-22.gif?20241217103647" style="box-shadow:none;background:none;border-radius:10px;">
 </div>
+<ol>
+<li>
+<p>Proposer une loi donnant la puissance maximale $P$ qu’une éolienne peut extraire du vent en fonction de l’aire $A$ balayée par les pales, de la vitesse $v$ du vent , et de la masse volumique de l’air $\rho$.</p>
+</li>
+<li>
+<p>Sachant que le coefficient de proportionnalité vaut $1/2$, donnée une application numérique de la puissance maximale recueillie pour un vent de 36 km/h et des pales de 60 m.</p>
+</li>
+</ol>
 
 
 <footer class="footline">
@@ -3707,7 +3578,6 @@ Que vaut la résistance qui permettrait à la cellule de délivrer une puissance
             
                 
                     
-                    
                 
                 
 
@@ -3720,9 +3590,6 @@ Que vaut la résistance qui permettrait à la cellule de délivrer une puissance
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -3852,7 +3719,6 @@ Que vaut la résistance qui permettrait à la cellule de délivrer une puissance
             
                 
                     
-                    
                 
                 
 
@@ -3868,9 +3734,6 @@ Que vaut la résistance qui permettrait à la cellule de délivrer une puissance
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -4323,6 +4186,7 @@ Que vaut la résistance qui permettrait à la cellule de délivrer une puissance
             
             
                 
+                    
                     
                 
                 
@@ -4470,16 +4334,16 @@ Que vaut la résistance qui permettrait à la cellule de délivrer une puissance
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1758492938"></script>
-    <script src="/js/perfect-scrollbar.min.js?1758492938"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1758492938"></script>
-    <script src="/js/jquery.sticky.js?1758492938"></script>
-    <script src="/js/featherlight.min.js?1758492938"></script>
-    <script src="/js/highlight.pack.js?1758492938"></script>
+    <script src="/js/clipboard.min.js?1758492937"></script>
+    <script src="/js/perfect-scrollbar.min.js?1758492937"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1758492937"></script>
+    <script src="/js/jquery.sticky.js?1758492937"></script>
+    <script src="/js/featherlight.min.js?1758492937"></script>
+    <script src="/js/highlight.pack.js?1758492937"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1758492938"></script>
-    <script src="/js/learn.js?1758492938"></script>
-    <script src="/js/hugo-learn.js?1758492938"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1758492937"></script>
+    <script src="/js/learn.js?1758492937"></script>
+    <script src="/js/hugo-learn.js?1758492937"></script>
     
     
 

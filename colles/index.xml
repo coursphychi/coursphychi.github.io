@@ -9,6 +9,13 @@
     <lastBuildDate>Sat, 06 Mar 2021 14:23:56 +0100</lastBuildDate>
     <atom:link href="https://coursphychi.github.io/colles/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Analyse dimensionnelle</title>
+      <link>https://coursphychi.github.io/colles/dimension/</link>
+      <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
+      <guid>https://coursphychi.github.io/colles/dimension/</guid>
+      <description>&lt;style&gt;&#xA; &#x9;#correc&#xA;  {&#xA;    color: #006C65;&#xA;    border-left: solid 10px #C7DDDC;&#xA;  }&#xA; &#x9;#comm&#xA;  {&#xA;    color: #004D80;&#xA;    border-left: solid 10px #B3CAD9;&#xA;  }&#xA; &#x9;#commsum&#xA;  {&#xA;    color: #004D80;&#xA;  }&#xA; &#x9;#correcsum&#xA;  {&#xA;    color: #006C65;&#xA;  }&#xA;&#xA;details &gt; summary:first-of-type {&#xA;  display: list-item;    &#xA;  cursor: pointer;       &#xA;}&#xA;&#xA;details &gt; summary:first-of-type {&#xA;  list-style: disclosure-closed inside;&#xA;}&#xA;details[open] &gt; summary:first-of-type {&#xA;  list-style-type: disclosure-open;&#xA;}&#xA;&lt;/style&gt;&#xA;&lt;h1 id=&#34;analyse-dimensionnelle&#34;&gt;Analyse dimensionnelle&lt;/h1&gt;&#xA;&lt;h2 id=&#34;écoulement-du-verre-dun-vitrail&#34;&gt;Écoulement du verre d’un vitrail&lt;/h2&gt;&#xA;&lt;div style=&#34;position:relative;margin-left:auto;margin-right:auto;width:600px;max-width:100%;margin-bottom:-1em;margin-top:-1em;&#34;&gt;&#xA;&lt;img src=&#34;https://coursphychi.github.io/vitrail.png&#34; style=&#34;box-shadow:none;background:none;border-radius:10px;&#34;&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;On entend parfois que l’écoulement du verre des vitraux des cathédrales sous leur propre poids explique pourquoi on observe sur certains de ces vitraux que le bas est plus épais que le haut.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Baleine</title>
       <link>https://coursphychi.github.io/colles/baleine/</link>
       <pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
