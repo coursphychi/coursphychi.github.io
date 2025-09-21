@@ -102,7 +102,7 @@
 	"title": "Onde",
 	"tags": [],
 	"description": "",
-	"content": "Onde Inspecter le code ci-dessous :\nCombien de périodes observe-t-on pendant l\u0026rsquo;animation ? Modifier le code pour visualiser 10 périodes. Imaginons qu\u0026rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.\nQuel sera le retard temporel de l\u0026rsquo;anneau i par rapport à l\u0026rsquo;anneau 0 ? Faire en sorte que l\u0026rsquo;animation montre une telle onde en modifiant la ligne 64. Que vaut alors la longueur d\u0026rsquo;onde $\\lambda$ ? S\u0026rsquo;agit-il d\u0026rsquo;une onde transversale ou longitudinale ? "
+	"content": "Onde Inspecter le code ci-dessous (des lignes 37 à 46 et de 59 à 68) :\nLes lignes les plus importantes pour la suite sont les lignes 61 et 64.\nCombien de périodes observe-t-on pendant l\u0026rsquo;animation ? Modifier le code pour visualiser 10 périodes. Imaginons qu\u0026rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.\nQuel sera le retard temporel de l\u0026rsquo;anneau i par rapport à l\u0026rsquo;anneau 0 sachant que les anneaux sont régulièrement espacés d\u0026rsquo;une distance $d$ ? Faire en sorte que l\u0026rsquo;animation montre une telle onde en modifiant la ligne 64. Que vaut alors la longueur d\u0026rsquo;onde $\\lambda$ ? S\u0026rsquo;agit-il d\u0026rsquo;une onde transversale ou longitudinale ? "
 },
 {
 	"uri": "https://coursphychi.github.io/colles/oscillsolide/",
