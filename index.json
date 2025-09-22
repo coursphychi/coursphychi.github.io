@@ -847,6 +847,13 @@
 	"content": " Incertitudes Le cours Pour aller plus loin :\nTutoriels calculette\nsur l'utilisation de la partie tableur afin de calculer la moyenne d'une série de valeurs et son écart-type expérimental $\\sigma_{exp}$. Activités Écriture d'un résultat TP Temps de réaction tip\nPour en savoir plus sur la formule de l\u0026rsquo;écart-type expérimental :\n"
 },
 {
+	"uri": "https://coursphychi.github.io/tspe/python/",
+	"title": "Python",
+	"tags": [],
+	"description": "",
+	"content": " Python Codes Python présents dans les différentes activités et dans le cours réunis dans le notebook ci-dessous.\nNotebook\n"
+},
+{
 	"uri": "https://coursphychi.github.io/",
 	"title": "Cours de physique-chimie",
 	"tags": [],
