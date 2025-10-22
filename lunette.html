@@ -7,15 +7,15 @@
   <style>
     html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif; background: radial-gradient(1200px 600px at 20% 0%, #0b1020, #05070f); color: #e7e9ee; }
     #app { position: relative; height: 100%; }
-    #overlay { position: absolute; top: 12px; left: 12px; backdrop-filter: blur(6px); background: rgba(15, 18, 34, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 12px 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); z-index: 10; }
+    #overlay { position: absolute; top: 12px; left: 12px; backdrop-filter: blur(6px); background: rgba(15, 18, 34, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 12px 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); z-index: 10; width: 600px; }
     #overlay h1 { font-size: 16px; margin: 0 0 8px; letter-spacing: 0.3px; font-weight: 700; }
     .control { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; margin: 8px 0; }
     .control label { font-size: 13px; color: #d6d9e0; }
     input[type="range"] { width: 240px; }
-    .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .btn { appearance: none; border: 1px solid rgba(255,255,255,0.1); background: linear-gradient(180deg, #1e243f, #151a32); color: #eef1f6; padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 13px; letter-spacing: 0.2px; }
+    .row { display: flex; gap: 10px; align-items: center; flex-wrap: nowrap; }
+    .btn { appearance: none; border: 1px solid rgba(255,255,255,0.1); background: linear-gradient(180deg, #1e243f, #151a32); color: #eef1f6; padding: 8px 12px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 13px; letter-spacing: 0.2px; white-space: nowrap; }
     .btn:hover { border-color: rgba(255,255,255,0.25); }
-    .small { font-size: 12px; color: #9ca3af; margin-top: 6px; max-width: 760px; }
+    .small { font-size: 12px; color: #9ca3af; margin-top: 6px; max-width: 760px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
     .pill { display: inline-block; padding: 3px 8px; font-size: 11px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); }
     a { color: #9dd0ff; text-decoration: none; }
     #canvas { position: absolute; inset: 0; cursor: default; }
@@ -36,9 +36,9 @@
 <body>
   <div id="app">
     <div id="overlay">
-      <h1>Lunette afocale — <span class="pill">Kepler</span></h1>
+      <h1>Lunette afocale — Kepler</h1>
       <div class="control">
-        <label for="angle">Angle d'entrée θ (°)</label>
+        <label for="angle">Angle d'entree theta (deg)</label>
         <input id="angle" type="range" min="-2.8" max="2.8" step="0.01" value="1.0" />
       </div>
       <div class="control">
@@ -59,32 +59,33 @@
         </div>
       </div>
       <div class="control" id="offsetRow" style="display:none">
-        <label for="offset">Décalage du 2e rayon (m)</label>
+        <label for="offset">Decalage du 2e rayon (m)</label>
         <input id="offset" type="range" min="0.02" max="0.22" step="0.005" value="0.10" />
       </div>
       <div class="small" id="infoText"></div>
     </div>
     <div id="canvas"></div>
-    <div class="legend">Astuce : Alt pour zoomer, glisser pour orbiter. Axe optique = ligne claire (z). <b>Glissez l’oculaire</b> le long de z (aucun curseur pour z).</div>
+    <div class="legend">Astuce : Alt pour zoomer, glisser pour orbiter. Axe optique = ligne claire (z). Glissez l'oculaire le long de z.</div>
   </div>
 
   <script type="module">
+    'use strict';
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-    // ===== Paramètres géométriques (m) =====
-    var DObj = 0.50;           // diamètre objectif (fixe)
+    // Geometrie (m)
+    var DObj = 0.50;           // diametre objectif
     var RObj = DObj / 2;
-    var REye = 0.05;           // rayon oculaire (fixe)
+    var REye = 0.05;           // rayon oculaire
 
-    // ===== Paramètres optiques (variables) =====
+    // Optique (variables)
     var fObj = 1.00;           // focale objectif
     var fEye = 0.10;           // focale oculaire
     var sep  = fObj + fEye;    // position (z) de l'oculaire
 
     var minSep = 0.50, maxSep = 2.50;
 
-    // ===== Scène =====
+    // Scene
     var container = document.getElementById('canvas');
     var renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -93,10 +94,10 @@
 
     var scene = new THREE.Scene();
 
-    // ===== Caméra orthographique par défaut (zoom un cran de plus) =====
-    var frustumHeight = 2.2; // ↓ plus petit = zoom visuel plus fort en ortho
+    // Camera ortho par defaut
+    var frustumHeight = 2.2;
     var aspect = container.clientWidth / container.clientHeight;
-    var perspCam = new THREE.PerspectiveCamera(38, aspect, 0.01, 200); // conservée mais inactive
+    var perspCam = new THREE.PerspectiveCamera(38, aspect, 0.01, 200);
     var orthoCam = new THREE.OrthographicCamera(
       -aspect * frustumHeight / 2,
       aspect * frustumHeight / 2,
@@ -105,11 +106,9 @@
       0.01,
       200
     );
-    var activeCam = orthoCam; // ORTHO PAR DÉFAUT
+    var activeCam = orthoCam;
     var controls = new OrbitControls(activeCam, renderer.domElement);
     controls.enableDamping = true;
-    controls.minDistance = 0.5;
-    controls.maxDistance = 12;
 
     function setInitialView() {
       var zc = sep * 0.5;
@@ -118,9 +117,8 @@
       controls.target.set(0, 0, zc);
       controls.update();
     }
-    setInitialView();
 
-    // Lumière & grille
+    // Lumiere & grille
     scene.add(new THREE.HemisphereLight(0xffffff, 0x223344, 0.9));
     var grid = new THREE.GridHelper(6, 30, 0x32435f, 0x1b2742);
     grid.rotation.z = Math.PI / 2; // YZ
@@ -136,7 +134,7 @@
       scene.add(axisLine);
     }
 
-    // Lentilles (ellipsoïdes aplatis)
+    // Lentilles (ellipsoides aplatis)
     var lensMat = new THREE.MeshPhysicalMaterial({
       color: 0x9fd4ff, roughness: 0.06, metalness: 0.0, transmission: 0.98,
       transparent: true, opacity: 0.78, thickness: 0.2, clearcoat: 1.0, clearcoatRoughness: 0.08
@@ -167,14 +165,13 @@
     eyeGroup.add(L_eye.mesh, L_eye.edges, eyeRing);
     eyeGroup.position.z = sep; scene.add(eyeGroup);
 
-    // ===== Drag direct de l'oculaire (clic strict sur la lentille) =====
+    // Drag de l'oculaire (clic sur la lentille)
     var raycaster = new THREE.Raycaster();
     var ndc = new THREE.Vector2();
-    var planeX0 = new THREE.Plane(new THREE.Vector3(1,0,0), 0); // plan x = 0
+    var planeX0 = new THREE.Plane(new THREE.Vector3(1,0,0), 0);
     var draggingEye = false;
 
-    // Verrou d'afocalité : actif si la lunette est (ou vient d'être) afocale; se désactive si on bouge l'oculaire manuellement
-    var afocalLock = false;
+    var afocalLock = false; // pas d'affichage
 
     function setCursor(grabbing) { container.style.cursor = grabbing ? 'grabbing' : 'default'; }
 
@@ -184,12 +181,10 @@
       ndc.y = - ((event.clientY - rect.top) / rect.height) * 2 + 1;
     }
 
-    function activeCamera() { return activeCam; }
-
     function pointerDown(e) {
       e.preventDefault();
       getNDC(e);
-      raycaster.setFromCamera(ndc, activeCamera());
+      raycaster.setFromCamera(ndc, activeCam);
       var inter = raycaster.intersectObject(L_eye.mesh, false);
       if (inter && inter.length) { draggingEye = true; afocalLock = false; controls.enabled = false; setCursor(true); }
     }
@@ -197,7 +192,7 @@
     function pointerMove(e) {
       if (!draggingEye) return;
       getNDC(e);
-      raycaster.setFromCamera(ndc, activeCamera());
+      raycaster.setFromCamera(ndc, activeCam);
       var p = new THREE.Vector3();
       if (raycaster.ray.intersectPlane(planeX0, p)) {
         var zNew = Math.max(minSep, Math.min(maxSep, p.z));
@@ -214,19 +209,19 @@
     function pointerHover(e){
       if (draggingEye) return;
       getNDC(e);
-      raycaster.setFromCamera(ndc, activeCamera());
+      raycaster.setFromCamera(ndc, activeCam);
       var inter = raycaster.intersectObject(L_eye.mesh, false);
       container.style.cursor = (inter && inter.length) ? 'grab' : 'default';
     }
     renderer.domElement.addEventListener('pointermove', pointerHover);
 
-    // Marqueurs (petits, rapprochés de l'axe)
+    // Marqueurs (petits)
     var focusOffsetX = 0.004; // 4 mm
-    var focusObjMarker = pointMarker(0x42f59e, 0.0016); // foyer image objectif (z = fObj)
-    var focusEyeMarker = pointMarker(0xff7bd5, 0.0016); // foyer objet oculaire (z = sep - fEye)
+    var focusObjMarker = pointMarker(0x42f59e, 0.0016); // z = fObj
+    var focusEyeMarker = pointMarker(0xff7bd5, 0.0016); // z = sep - fEye
     scene.add(focusObjMarker, focusEyeMarker);
 
-    var midImageMarker = pointMarker(0xffe369, 0.0014); // croisement des 2 rayons
+    var midImageMarker = pointMarker(0xffe369, 0.0014); // intersection deux rayons
     midImageMarker.visible = false; scene.add(midImageMarker);
 
     function updateFociMarkers() {
@@ -234,27 +229,26 @@
       focusEyeMarker.position.set(-focusOffsetX, 0.0, sep - fEye);
     }
 
-    // ===== Groupes de rayons =====
+    // Groupes de rayons
     var raysGroup = new THREE.Group(); scene.add(raysGroup);
 
-    // ===== Cercle oculaire (image de l'objectif par l'oculaire) =====
+    // Cercle oculaire
     var pupilMode = false;
-    var pupilVisualGroup = new THREE.Group(); // disque/anneau seulement
+    var pupilVisualGroup = new THREE.Group();
     scene.add(pupilVisualGroup);
     var pupilFill = new THREE.Mesh(new THREE.CircleGeometry(0.2, 64), new THREE.MeshBasicMaterial({ color: 0x8fe3ff, transparent: true, opacity: 0.18 }));
     var pupilRing = new THREE.Mesh(new THREE.RingGeometry(0.198, 0.202, 96), new THREE.MeshBasicMaterial({ color: 0xbfe9ff, transparent: true, opacity: 0.8, side: THREE.DoubleSide }));
     pupilVisualGroup.add(pupilFill, pupilRing);
     pupilVisualGroup.visible = false;
 
-    var pupilBeamsGroup = new THREE.Group(); // lignes mondes
-    scene.add(pupilBeamsGroup);
+    var pupilBeamsGroup = new THREE.Group(); scene.add(pupilBeamsGroup);
 
     function computeExitPupil() {
       if (sep <= fEye + 1e-5) return null;
-      var s_i = (fEye * sep) / (sep - fEye); // distance image depuis l'oculaire
-      var z_exit = sep + s_i;               // position de la pupille de sortie
-      var m = - s_i / sep;                  // grandissement transversal
-      var R_exit = Math.abs(m) * RObj;      // rayon du cercle oculaire
+      var s_i = (fEye * sep) / (sep - fEye);
+      var z_exit = sep + s_i;
+      var m = - s_i / sep;
+      var R_exit = Math.abs(m) * RObj;
       return { z_exit: z_exit, R_exit: R_exit, m: m, s_i: s_i };
     }
 
@@ -284,7 +278,7 @@
 
       var rimCount = 72;
       var ringRadials = [1.0, 0.85, 0.7, 0.55, 0.4, 0.25, 0.1];
-      var tail = 0.8; // prolongement derrière la pupille de sortie (m)
+      var tail = 0.8;
 
       for (var i = 0; i < rimCount; i++) {
         var phiR = (2*Math.PI*i)/rimCount;
@@ -296,8 +290,8 @@
             var phiE = (2*Math.PI*s)/spokes + (rIdx%2 ? Math.PI/spokes : 0);
             var xe = rE*Math.cos(phiE); var ye = rE*Math.sin(phiE);
             var pts = [ new THREE.Vector3(xr, yr, 0), new THREE.Vector3(xe, ye, sep) ];
-            var thx = (xe - xr)/sep; var thy = (ye - yr)/sep; // avant oculaire
-            var thx2 = thx - xe/fEye; var thy2 = thy - ye/fEye; // après oculaire
+            var thx = (xe - xr)/sep; var thy = (ye - yr)/sep;
+            var thx2 = thx - xe/fEye; var thy2 = thy - ye/fEye;
             var xExit = xe + ep.s_i*thx2; var yExit = ye + ep.s_i*thy2;
             pts.push(new THREE.Vector3(xExit, yExit, ep.z_exit));
             var xTail = xExit + tail*thx2; var yTail = yExit + tail*thy2;
@@ -310,7 +304,7 @@
       }
     }
 
-    // ===== UI =====
+    // UI refs
     var angleInput  = document.getElementById('angle');
     var fobjInput   = document.getElementById('fobj');
     var feyeInput   = document.getElementById('feye');
@@ -322,21 +316,24 @@
     var offsetInput = document.getElementById('offset');
     var infoText    = document.getElementById('infoText');
 
-    var mode = 'beam'; // 'beam' | 'two'
+    var mode = 'beam'; // modes: 'beam' ou 'two'
 
     function isAfocalNow() { return Math.abs(sep - (fObj + fEye)) < 1e-3; }
 
     function updateInfo() {
       var G = Math.abs(fObj / fEye);
       var thetaIn = parseFloat(angleInput.value);
-      var txt = 'f<sub>obj</sub> = <b>' + fObj.toFixed(2) + ' m</b> &nbsp; | &nbsp; f<sub>oc</sub> = <b>' + fEye.toFixed(3) + ' m</b> &nbsp; | &nbsp; |G| = <b>' + G.toFixed(2) + '</b>';
-      txt += ' &nbsp; | &nbsp; θ<sub>in</sub> = <b>' + thetaIn.toFixed(2) + '°</b>';
+      var parts = [
+        'f_obj=' + fObj.toFixed(2) + ' m',
+        'f_oc=' + fEye.toFixed(3) + ' m',
+        'G=' + G.toFixed(2),
+        'theta_in=' + thetaIn.toFixed(2) + ' deg'
+      ];
       if (isAfocalNow()) {
-        var thetaOut = - (fObj / fEye) * thetaIn; // approx paraxiale
-        txt += ' &nbsp; | &nbsp; θ<sub>out</sub> ≈ <b>' + thetaOut.toFixed(2) + '°</b>';
+        var thetaOut = - (fObj / fEye) * thetaIn;
+        parts.push('theta_out~' + thetaOut.toFixed(2) + ' deg');
       }
-      if (afocalLock) txt += ' &nbsp; | &nbsp; <span class="pill">Afocal verrouillé</span>';
-      infoText.innerHTML = txt;
+      infoText.innerHTML = parts.join(' - ');
     }
 
     function clampAngleToLimit() {
@@ -347,53 +344,43 @@
       angleInput.value = val.toFixed(3);
     }
 
-    function updateOpticsFromUI(e) {
-      var wasAfocal = Math.abs(sep - (fObj + fEye)) < 1e-3 || afocalLock;
-      fObj = parseFloat(fobjInput.value);
-      fEye = parseFloat(feyeInput.value);
-      if (wasAfocal) {
-        afocalLock = true;
-        sep = Math.max(minSep, Math.min(maxSep, fObj + fEye));
-      }
-      eyeGroup.position.z = sep;
-      updateAxisLine(); updateFociMarkers(); clampAngleToLimit(); updateInfo(); buildRays(); if (pupilMode) updatePupil();
-    }
-
-    function setAfocal() {
-      sep = Math.max(minSep, Math.min(maxSep, fObj + fEye));
-      eyeGroup.position.z = sep;
-      afocalLock = true; // activer le verrou
-      updateAxisLine(); updateFociMarkers(); clampAngleToLimit(); updateInfo(); buildRays(); if (pupilMode) updatePupil();
-    }
-
-    // Init UI
-    clampAngleToLimit(); updateAxisLine(); updateFociMarkers(); updateInfo();
-
-    toggleBtn.textContent = (mode === 'beam') ? 'Faisceau' : 'Deux rayons';
-
-    toggleBtn.addEventListener('click', function() {
-      mode = (mode === 'beam') ? 'two' : 'beam';
+    function wireUI() {
       toggleBtn.textContent = (mode === 'beam') ? 'Faisceau' : 'Deux rayons';
       offsetRow.style.display = (mode === 'two') ? '' : 'none';
-      buildRays();
-    });
 
-    togglePupilBtn.addEventListener('click', function(){
-      pupilMode = !pupilMode;
-      if (pupilMode) updatePupil();
-      pupilVisualGroup.visible = pupilMode;
-      pupilBeamsGroup.visible = pupilMode;
-    });
+      function onAngle(){ buildRays(); updateInfo(); }
+      angleInput.addEventListener('input', onAngle);
+      angleInput.addEventListener('change', onAngle);
 
-    btnAfocal.addEventListener('click', setAfocal);
+      function onOffset(){ buildRays(); }
+      offsetInput.addEventListener('input', onOffset);
+      offsetInput.addEventListener('change', onOffset);
 
-    resetBtn.addEventListener('click', function() { setInitialView(); });
-    angleInput.addEventListener('input', function(){ buildRays(); updateInfo(); });
-    offsetInput.addEventListener('input', buildRays);
-    fobjInput.addEventListener('input', updateOpticsFromUI);
-    feyeInput.addEventListener('input', updateOpticsFromUI);
+      function onFocal(){ updateOpticsFromUI(); }
+      fobjInput.addEventListener('input', onFocal);
+      fobjInput.addEventListener('change', onFocal);
+      feyeInput.addEventListener('input', onFocal);
+      feyeInput.addEventListener('change', onFocal);
 
-    // ===== Optique géométrique (paraxiale) =====
+      toggleBtn.addEventListener('click', function() {
+        mode = (mode === 'beam') ? 'two' : 'beam';
+        toggleBtn.textContent = (mode === 'beam') ? 'Faisceau' : 'Deux rayons';
+        offsetRow.style.display = (mode === 'two') ? '' : 'none';
+        buildRays();
+      });
+
+      togglePupilBtn.addEventListener('click', function(){
+        pupilMode = !pupilMode;
+        if (pupilMode) updatePupil();
+        pupilVisualGroup.visible = pupilMode;
+        pupilBeamsGroup.visible = pupilMode;
+      });
+
+      btnAfocal.addEventListener('click', function(){ setAfocal(); });
+      resetBtn.addEventListener('click', function(){ setInitialView(); });
+    }
+
+    // Optique
     function propagate(x, theta, L) { return [x + L * theta, theta]; }
     function thinLens(x, theta, f) { return [x, theta - x / f]; }
 
@@ -421,8 +408,29 @@
       return pts;
     }
 
+    function computeTwoRayIntersection(angleRad, offset) {
+      var y0a = 0.0;
+      var y0b = Math.min(offset, RObj * 0.98);
+      var thy0 = Math.tan(angleRad);
+      var thy1a = thy0 - y0a / fObj;
+      var thy1b = thy0 - y0b / fObj;
+      var den1 = (thy1a - thy1b);
+      if (Math.abs(den1) < 1e-12) return null;
+      var zPre = (y0b - y0a) / den1; // devrait etre fObj
+      var yPre = y0a + zPre * thy1a;
+      if (zPre <= sep + 1e-9) { return { z: zPre, y: yPre }; }
+      var yEa = y0a + sep * thy1a;
+      var yEb = y0b + sep * thy1b;
+      var thy2a = thy1a - yEa / fEye;
+      var thy2b = thy1b - yEb / fEye;
+      var den2 = (thy2a - thy2b);
+      if (Math.abs(den2) < 1e-12) return null;
+      var zPost = sep + (yEb - yEa) / den2;
+      var yPost = yEa + (zPost - sep) * thy2a;
+      return { z: zPost, y: yPost };
+    }
+
     function buildRays() {
-      // clear
       for (var i = raysGroup.children.length - 1; i >= 0; i--) {
         var child = raysGroup.children[i];
         if (child.geometry && typeof child.geometry.dispose === 'function') child.geometry.dispose();
@@ -454,8 +462,7 @@
 
       if (mode === 'beam') {
         midImageMarker.visible = false;
-        var rings = 12; // plus dense
-        var perRing = 48;
+        var rings = 12; var perRing = 48;
         for (var ri = 0; ri <= rings; ri++) {
           var r = RObj * Math.sqrt(ri / rings);
           var nTheta = (ri === 0) ? 1 : perRing;
@@ -489,8 +496,13 @@
           raysGroup.add(line2);
           addMarker([rdef.x0, rdef.y0, zObj], 0x7ef7c7);
         }
-        midImageMarker.visible = true;
-        midImageMarker.position.set(0, Math.tan(angleRad) * fObj, fObj);
+        var inter = computeTwoRayIntersection(angleRad, offset);
+        if (inter && isFinite(inter.z) && isFinite(inter.y)) {
+          midImageMarker.visible = true;
+          midImageMarker.position.set(0, inter.y, inter.z);
+        } else {
+          midImageMarker.visible = false;
+        }
       }
 
       controls.update();
@@ -499,7 +511,8 @@
     function addMarker(arr, color) {
       var x = arr[0], y = arr[1], z = arr[2];
       var s = 0.0014;
-      var m = new THREE.Mesh(new THREE.SphereGeometry(s, 16, 16), new THREE.MeshBasicMaterial({ color: color || 0xffffff, transparent: true, opacity: 0.95 }));
+      var material = new THREE.MeshBasicMaterial({ color: (color || 0xffffff), transparent: true, opacity: 0.95 });
+      var m = new THREE.Mesh(new THREE.SphereGeometry(s, 16, 16), material);
       m.position.set(x, y, z);
       raysGroup.add(m);
     }
@@ -517,11 +530,34 @@
       return new THREE.Line(geom, material);
     }
 
-    // Initial draw
-    updateAxisLine();
-    buildRays();
+    // Afocal & maj
+    function updateOpticsFromUI() {
+      var wasAfocal = Math.abs(sep - (fObj + fEye)) < 1e-3 || afocalLock;
+      fObj = parseFloat(fobjInput.value);
+      fEye = parseFloat(feyeInput.value);
+      if (wasAfocal) { afocalLock = true; sep = Math.max(minSep, Math.min(maxSep, fObj + fEye)); }
+      eyeGroup.position.z = sep;
+      updateAxisLine(); updateFociMarkers(); clampAngleToLimit(); updateInfo(); buildRays(); if (pupilMode) updatePupil();
+    }
 
-    // Render loop
+    function setAfocal() {
+      sep = Math.max(minSep, Math.min(maxSep, fObj + fEye));
+      eyeGroup.position.z = sep;
+      afocalLock = true;
+      updateAxisLine(); updateFociMarkers(); clampAngleToLimit(); updateInfo(); buildRays(); if (pupilMode) updatePupil();
+    }
+
+    function init() {
+      clampAngleToLimit();
+      updateAxisLine();
+      updateFociMarkers();
+      updateInfo();
+      buildRays();
+      setInitialView();
+      wireUI();
+    }
+    init();
+
     renderer.setAnimationLoop(function(){ controls.update(); renderer.render(scene, activeCam); });
 
     window.addEventListener('resize', function(){
