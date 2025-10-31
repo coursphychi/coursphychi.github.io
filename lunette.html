@@ -34,15 +34,15 @@
     <div id="overlay">
       <h1>Lunette astronomique</h1>
       <div class="control">
-        <label for="angle">Angle d'entree theta (deg)</label>
+        <label for="angle">Angle d'entree θ (deg)</label>
         <input id="angle" type="range" min="-2.8" max="2.8" step="0.01" value="1.0" />
       </div>
       <div class="control">
-        <label for="fobj">Focale objectif f<sub>obj</sub> (m)</label>
+        <label for="fobj">Distance focale objectif f'<sub>obj</sub> (m)</label>
         <input id="fobj" type="range" min="0.30" max="2.00" step="0.01" value="0.60" />
       </div>
       <div class="control">
-        <label for="feye">Focale oculaire f<sub>oc</sub> (m)</label>
+        <label for="feye">Distance focale oculaire f'<sub>oc</sub> (m)</label>
         <input id="feye" type="range" min="0.01" max="0.30" step="0.001" value="0.05" />
       </div>
       <div class="control">
@@ -298,14 +298,14 @@
     const cmObj = (fObj * 100).toFixed(1);
     const cmEye = (fEye * 100).toFixed(1);
     const parts = [
-      'f_obj=' + cmObj + ' cm',
-      'f_oc=' + cmEye + ' cm',
+      "f'_ob=" + cmObj + ' cm',
+      "f'_oc=" + cmEye + ' cm',
       'G=' + G.toFixed(2),
-      'theta_in=' + thetaIn.toFixed(2) + ' deg'
+      'θ=' + thetaIn.toFixed(2) + ' deg'
     ];
     if (isAfocalNow()) {
       const thetaOut = - (fObj / fEye) * thetaIn;
-      parts.push('theta_out~' + thetaOut.toFixed(2) + ' deg');
+      parts.push("θ'=" + thetaOut.toFixed(2) + ' deg');
     }
     infoText.innerHTML = parts.join(' - ');
   }
