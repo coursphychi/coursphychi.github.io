@@ -732,7 +732,7 @@
 	"title": "Champ uniforme",
 	"tags": [],
 	"description": "",
-	"content": " Mouvement dans un champ uniforme Présentation\nDocuments TP Saut lunaire (ECE) Activités LINAC\u0026nbsp;+\u0026nbsp; + Rebond d'un ballon + Exercices Skate + Masse de la Lune + En plus Science Étonnante\u0026nbsp;\u0026nbsp;+\u0026nbsp; "
+	"content": " Mouvement dans un champ uniforme Présentation\nnote\nPetit mémo sur les primitives.\nDocuments TP Saut lunaire (ECE) Activités LINAC\u0026nbsp;+\u0026nbsp; + Rebond d'un ballon + Exercices Skate + Masse de la Lune + En plus Science Étonnante\u0026nbsp;\u0026nbsp;+\u0026nbsp; "
 },
 {
 	"uri": "https://coursphychi.github.io/2nde/elec/",
@@ -754,6 +754,13 @@
 	"tags": [],
 	"description": "",
 	"content": " Mouvement dans un champ de gravitation Présentation\nDocuments Activités Découverte des lois\u0026nbsp;+\u0026nbsp;Programme Python Exercices Mercure Tracteur Astérix Carte interactive Position des satellites "
+},
+{
+	"uri": "https://coursphychi.github.io/tspe/fluide/",
+	"title": "Écoulement d&#39;un fluide",
+	"tags": [],
+	"description": "",
+	"content": " Écoulement d\u0026rsquo;un fluide Présentation\nDocuments et autres Activités Les ballasts du Terrible Exercices Saturne Jupiter Oie cendrée (+ interférences) Appliquette Lunette astronomique "
 },
 {
 	"uri": "https://coursphychi.github.io/1spe/ondes/",
