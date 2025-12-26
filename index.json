@@ -634,7 +634,7 @@
 	"title": "Molécules organiques",
 	"tags": [],
 	"description": "",
-	"content": " Structure et propriétés des molécules Présentation\nDocuments Rappels 1re Schéma de Lewis Exercices Nomenclature, fonctions, polymères, isomérie, IR Fiche Règles de nomenclature Interactivité Représentation 3D de molécules "
+	"content": " Structure et propriétés des molécules Présentation\nnote\nLes règles de nomenclature seront fournies.\nDocuments Rappels 1re Schéma de Lewis Exercices Nomenclature, fonctions, polymères, isomérie, IR Fiche Règles de nomenclature Interactivité Représentation 3D de molécules "
 },
 {
 	"uri": "https://coursphychi.github.io/tsti2d/incertitudes/",
@@ -753,14 +753,14 @@
 	"title": "Gravitation",
 	"tags": [],
 	"description": "",
-	"content": " Mouvement dans un champ de gravitation Présentation\nDocuments Activités Découverte des lois\u0026nbsp;+\u0026nbsp;Programme Python Exercices Mercure Tracteur Astérix Carte interactive Position des satellites "
+	"content": " Mouvement dans un champ de gravitation Présentation\nDocuments Activités Découverte des lois + Exercices Mercure Tracteur Astérix Carte interactive Position des satellites Animation Orbites + Satellisation "
 },
 {
 	"uri": "https://coursphychi.github.io/tspe/fluide/",
 	"title": "Écoulement d&#39;un fluide",
 	"tags": [],
 	"description": "",
-	"content": " Écoulement d\u0026rsquo;un fluide Présentation\nDocuments et autres Activités Les ballasts du Terrible Exercices Saturne Jupiter Oie cendrée (+ interférences) Appliquette Lunette astronomique "
+	"content": " Écoulement d\u0026rsquo;un fluide Présentation\nnote\nLa relation de Bernoulli sera toujours fournie.\nDocuments et autres Activités Les ballasts du Terrible Exercices Cargo dirigeable Jupiter Oie cendrée (+ interférences) Appliquette Simulation d'un écoulement dans une conduite "
 },
 {
 	"uri": "https://coursphychi.github.io/1spe/ondes/",
