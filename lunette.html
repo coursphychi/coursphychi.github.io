@@ -358,8 +358,10 @@
     pts.push(new THREE.Vector3(xEnd, yEnd, zEnd));
     return pts;
   }
-  function computeTwoRayIntersection(angleRad, offset) {
-    const y0a = 0.0; const y0b = Math.min(offset, RObj * 0.98); const thy0 = Math.tan(angleRad);
+  function computeTwoRayIntersection(angleRad, y0bIn) {
+    const y0a = 0.0;
+    const Rlim = RObj * 0.98;
+    const y0b = Math.max(-Rlim, Math.min(Rlim, y0bIn)); const thy0 = Math.tan(angleRad);
     const thy1a = thy0 - y0a / fObj; const thy1b = thy0 - y0b / fObj; const den1 = (thy1a - thy1b);
     if (Math.abs(den1) < 1e-12) return null;
     const zPre = (y0b - y0a) / den1; const yPre = y0a + zPre * thy1a;
@@ -369,6 +371,38 @@
     if (Math.abs(den2) < 1e-12) return null;
     const zPost = sep + (yEb - yEa) / den2; const yPost = yEa + (zPost - sep) * thy2a; return { z: zPost, y: yPost };
   }
+  // Choix automatique du point de passage dans l'objectif (mode "Deux rayons")
+  // pour garantir que le rayon hors-axe traverse toujours l'ouverture de l'oculaire.
+  function chooseOffAxisAtObjective(angleRad) {
+    const thy0 = Math.tan(angleRad);
+    const Rlim = RObj * 0.98;
+    const RE   = REye * 0.995; // petite marge pour éviter de frôler le bord
+    // y(z=sep) = A*y0 + B, avec A = 1 - sep/fObj et B = sep*tan(theta)
+    const A = 1.0 - sep / Math.max(1e-9, fObj);
+    const B = sep * thy0;
+    // Si A ~ 0, la hauteur au plan de l'oculaire ne dépend (presque) pas de y0 :
+    // on peut alors prendre un rayon près du bord de l'objectif.
+    if (Math.abs(A) < 1e-9) return Rlim;
+    // Contraintes : -RE <= A*y0 + B <= RE
+    const y1 = (-RE - B) / A;
+    const y2 = ( RE - B) / A;
+    let yMin = Math.min(y1, y2);
+    let yMax = Math.max(y1, y2);
+    // Intersection avec l'ouverture de l'objectif
+    yMin = Math.max(yMin, -Rlim);
+    yMax = Math.min(yMax,  Rlim);
+    if (!(yMin <= yMax)) return 0.0;
+    // Choisir l'extrémité la plus éloignée de l'axe pour un rayon bien distinct
+    const candA = yMin;
+    const candB = yMax;
+    const absA  = Math.abs(candA);
+    const absB  = Math.abs(candB);
+    if (absB > absA + 1e-12) return candB;
+    if (absA > absB + 1e-12) return candA;
+    // Égalité : préférer le positif
+    return (candB >= 0 ? candB : candA);
+  }
+
   function buildRays() {
     for (let i = raysGroup.children.length - 1; i >= 0; i--) {
       const child = raysGroup.children[i];
@@ -404,14 +438,19 @@
         }
       }
     } else {
-      const offset = 0.10; // m
-      const rays = [ { x0: 0.0, y0: 0.0, mat: matTwoA }, { x0: 0.0, y0: Math.min(offset, RObj * 0.98), mat: matTwoB } ];
+      // Détermine automatiquement la hauteur au niveau de l'objectif pour que
+      // le rayon jaune reste toujours dans l'ouverture de l'oculaire.
+      const y0b = chooseOffAxisAtObjective(angleRad);
+      const rays = [
+        { x0: 0.0, y0: 0.0, mat: matTwoA, mark: 0x7ef7c7 },
+        { x0: 0.0, y0: y0b, mat: matTwoB, mark: 0xfdd66b }
+      ];
       for (let j = 0; j < rays.length; j++) {
         const rdef = rays[j]; const pts2 = makeRayPath(rdef.x0, rdef.y0, Math.tan(angleRad), zStart, zObj, zEye, zEnd);
         const geom2 = new THREE.BufferGeometry().setFromPoints(pts2); const line2 = new THREE.Line(geom2, rdef.mat);
-        raysGroup.add(line2); addMarker([rdef.x0, rdef.y0, zObj], 0x7ef7c7);
+        raysGroup.add(line2); addMarker([rdef.x0, rdef.y0, zObj], rdef.mark);
       }
-      const inter = computeTwoRayIntersection(angleRad, offset);
+      const inter = computeTwoRayIntersection(angleRad, y0b);
       if (inter && isFinite(inter.z) && isFinite(inter.y)) { midImageMarker.visible = true; midImageMarker.position.set(0, inter.y, inter.z); }
       else { midImageMarker.visible = false; }
     }
