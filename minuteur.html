@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Minuteur Ultimatum</title>
+  <style>
+    :root { --bg: hsl(120 80% 35%); }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      transition: background 120ms linear;
+      user-select: none;
+    }
+    .panel{
+      width: min(900px, 92vw);
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 20px;
+      padding: 18px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      color: white;
+    }
+    .top {
+      display: flex;
+      gap: 12px;
+      align-items: end;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    label { font-size: 14px; opacity: .9; }
+    input[type="number"]{
+      width: 70px;
+      font-size: 18px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(0,0,0,.20);
+      color: white;
+      outline: none;
+    }
+    .btn{
+      font-size: 16px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(0,0,0,.22);
+      color: white;
+      cursor: pointer;
+    }
+    .btn:active { transform: translateY(1px); }
+    .timer{
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      font-size: clamp(64px, 10vw, 140px);
+      letter-spacing: 1px;
+      margin: 8px 0 0;
+      text-shadow: 0 8px 30px rgba(0,0,0,.35);
+    }
+    .sub{
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 14px;
+      opacity: .9;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .badge{
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(0,0,0,.18);
+    }
+    /* Clignotement fin */
+    body.blink {
+      animation: blink 0.35s steps(2, end) infinite;
+    }
+    @keyframes blink {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(2); }
+      100% { filter: brightness(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="top">
+      <div>
+        <input id="minutes" type="number" min="0" step="1" value="5" />
+      </div>
+      <button class="btn" id="start">Démarrer</button>
+      <button class="btn" id="pause" disabled>Pause</button>
+      <button class="btn" id="reset" disabled>Réinitialiser</button>
+      <button class="btn" id="mute">🔊 Son</button>
+    </div>
+
+    <div class="timer" id="display">05:00</div>
+
+    <div class="sub">
+      <span class="badge" id="status">Prêt</span>
+      <span class="badge" id="remaining">Restant : 300.0 s</span>
+    </div>
+  </div>
+
+  <script>
+    // --- Helpers ---
+    const $ = (id) => document.getElementById(id);
+    const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+
+    function fmtMMSS(totalSeconds) {
+      totalSeconds = Math.max(0, Math.floor(totalSeconds));
+      const m = Math.floor(totalSeconds / 60);
+      const s = totalSeconds % 60;
+      return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    }
+
+    // Fond vert -> jaune -> rouge en fonction du temps restant
+    // t = fraction restante (1 au début, 0 à la fin)
+    // hue: 120 (vert) -> 60 (jaune) -> 0 (rouge)
+    function setBackgroundFromFraction(t) {
+      t = clamp(t, 0, 1);
+      const hue = 120 * t; // 120->0 (passe par 60 naturellement)
+      document.documentElement.style.setProperty("--bg", `hsl(${hue} 80% 35%)`);
+    }
+
+    // --- State ---
+    let totalMs = 5 * 60 * 1000;
+    let remainingMs = totalMs;
+    let running = false;
+    let rafId = null;
+    let lastTick = null;
+
+    let muted = false;
+    let audioCtx = null;
+    let alarmInterval = null;
+
+    // --- Elements ---
+    const minutesEl = $("minutes");
+    const startBtn = $("start");
+    const pauseBtn = $("pause");
+    const resetBtn = $("reset");
+    const muteBtn = $("mute");
+    const displayEl = $("display");
+    const statusEl = $("status");
+    const remainingEl = $("remaining");
+
+    function updateUI() {
+      displayEl.textContent = fmtMMSS(remainingMs / 1000);
+      remainingEl.textContent = `Restant : ${(remainingMs/1000).toFixed(1)} s`;
+
+      const frac = totalMs > 0 ? remainingMs / totalMs : 0;
+      setBackgroundFromFraction(frac);
+
+      startBtn.disabled = running;
+      pauseBtn.disabled = !running;
+      resetBtn.disabled = (remainingMs === totalMs && !running);
+
+      minutesEl.disabled = running;
+    }
+
+    function setStatus(txt) {
+      statusEl.textContent = txt;
+    }
+
+    function ensureAudioContext() {
+      if (muted) return null;
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      return audioCtx;
+    }
+
+    function beepOnce(freq = 880, durationMs = 140, gain = 0.12) {
+      const ctx = ensureAudioContext();
+      if (!ctx) return;
+
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+
+      o.type = "sine";
+      o.frequency.value = freq;
+
+      const now = ctx.currentTime;
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.exponentialRampToValueAtTime(gain, now + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + durationMs/1000);
+
+      o.connect(g);
+      g.connect(ctx.destination);
+
+      o.start(now);
+      o.stop(now + durationMs/1000 + 0.02);
+    }
+
+    function startAlarm() {
+      if (muted) return;
+      stopAlarm();
+      // Alarm: alternance de bips rapides
+      alarmInterval = setInterval(() => {
+        beepOnce(880, 120, 0.14);
+        setTimeout(() => beepOnce(660, 120, 0.14), 160);
+      }, 520);
+    }
+
+    function stopAlarm() {
+      if (alarmInterval) {
+        clearInterval(alarmInterval);
+        alarmInterval = null;
+      }
+    }
+
+    function stopBlink() {
+      document.body.classList.remove("blink");
+    }
+
+    function startBlink() {
+      document.body.classList.add("blink");
+    }
+
+    function finish() {
+      running = false;
+      remainingMs = 0;
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      lastTick = null;
+
+      setBackgroundFromFraction(0);
+      setStatus("Terminé !");
+      startBlink();
+      startAlarm();
+      updateUI();
+    }
+
+    function tick(ts) {
+      if (!running) return;
+
+      if (lastTick == null) lastTick = ts;
+      const dt = ts - lastTick;
+      lastTick = ts;
+
+      remainingMs -= dt;
+      if (remainingMs <= 0) {
+        finish();
+        return;
+      }
+
+      updateUI();
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function readMinutes() {
+      const min = parseFloat(minutesEl.value);
+      if (!Number.isFinite(min) || min <= 0) return 0;
+      return min;
+    }
+
+    function resetTimer(toTotal = true) {
+      stopAlarm();
+      stopBlink();
+      running = false;
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      lastTick = null;
+
+      if (toTotal) {
+        const mins = readMinutes();
+        totalMs = mins * 60 * 1000;
+        remainingMs = totalMs;
+      } else {
+        remainingMs = totalMs;
+      }
+
+      setStatus("Prêt");
+      updateUI();
+    }
+
+    // --- Events ---
+    startBtn.addEventListener("click", () => {
+      stopAlarm();
+      stopBlink();
+
+      const mins = readMinutes();
+      if (mins <= 0) {
+        setStatus("Entre un temps > 0");
+        return;
+      }
+
+      // Si on démarre depuis "prêt", (re)charge le total
+      if (remainingMs === totalMs) {
+        totalMs = mins * 60 * 1000;
+        remainingMs = totalMs;
+      }
+
+      ensureAudioContext(); // important: déclenché par un clic
+      running = true;
+      setStatus("En cours…");
+      updateUI();
+      rafId = requestAnimationFrame(tick);
+    });
+
+    pauseBtn.addEventListener("click", () => {
+      running = false;
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      lastTick = null;
+      setStatus("En pause");
+      updateUI();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      resetTimer(true);
+    });
+
+    muteBtn.addEventListener("click", () => {
+      muted = !muted;
+      muteBtn.textContent = muted ? "🔇 Muet" : "🔊 Son";
+      if (muted) stopAlarm();
+    });
+
+    minutesEl.addEventListener("change", () => {
+      // Recalcule l’affichage si pas en cours
+      if (!running) resetTimer(true);
+    });
+
+    // init
+    resetTimer(true);
+  </script>
+</body>
+</html>
