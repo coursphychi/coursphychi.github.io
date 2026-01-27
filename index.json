@@ -123,7 +123,7 @@
 	"title": "Oscillateur",
 	"tags": [],
 	"description": "",
-	"content": " Simulation d\u0026rsquo;un oscillateur mécanique Oscillateur amorti par frottement fluide :\nFaire les modifications nécessaires pour se placer dans le régime apériodique critique. Oscillateur amorti par frottement solide :\nFaire les modifications nécessaires pour étudier un oscillateur amorti par frottement solide plutôt que par frottement fluide.\nAnalyser les graphes obtenus.\nDéterminer la variation entre deux élongations maximales consécutives du ressort.\nCorrection Approche dynamique et énergétique "
+	"content": " Simulation d\u0026rsquo;un oscillateur mécanique Oscillateur amorti par frottement fluide :\nModifier la valeur du coefficient de frottement fluide pour se placer dans le régime apériodique critique. Oscillateur amorti par frottement solide :\nFaire les modifications nécessaires pour étudier un oscillateur amorti par frottement solide plutôt que par frottement fluide.\nAnalyser les graphes obtenus.\nDéterminer la variation entre deux élongations maximales consécutives du ressort et vérifier sur le graphe.\nCorrection Approche dynamique et énergétique "
 },
 {
 	"uri": "https://coursphychi.github.io/colles/promenade/",
