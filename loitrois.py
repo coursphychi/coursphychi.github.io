@@ -16,4 +16,4 @@ for (heures,minutes) in Périodes:
 ### POUR CHAQUE COUPLE (R,T), ON SOUHAITE CALCULER ET AFFICHER LE QUOTIENT T²/R³
 for i in range(len(R)):
     quotient = ........
-    print(quotien)
+    print(quotient)
