@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Gravitation - Cours Physique-Chimie</title>
+    <title>Deux plans puis un troisième - Cours Physique-Chimie</title>
     
     <script>
   window.MathJax = {
@@ -95,7 +95,7 @@
 
 	
   </head>
-  <body class="" data-url="/tspe/gravitation/">
+  <body class="" data-url="/colles/cavite/">
     <nav id="sidebar" class="">
 
 
@@ -962,7 +962,7 @@
   
     
     <li data-nav-id="/tspe/" title="TSPÉ" class="dd-item
-        parent
+        
         
         
         ">
@@ -1282,7 +1282,7 @@
  
   
     
-      <li data-nav-id="/tspe/gravitation/" title="Gravitation" class="dd-item active">
+      <li data-nav-id="/tspe/gravitation/" title="Gravitation" class="dd-item ">
         <a href="/tspe/gravitation/">
         Gravitation
         
@@ -2420,7 +2420,7 @@
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        
+        parent
         
         
         ">
@@ -2562,18 +2562,14 @@
                   <span class="links">
                  
                  
-                   Gravitation
+                   Deux plans puis un troisième
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#documents">Documents</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -2592,56 +2588,424 @@
 
 
 <style>
-ul {
-  text-align: left;
+ 	#correc
+  {
+    color: #006C65;
+    border-left: solid 10px #C7DDDC;
+  }
+ 	#comm
+  {
+    color: #004D80;
+    border-left: solid 10px #B3CAD9;
+  }
+ 	#commsum
+  {
+    color: #004D80;
+  }
+ 	#correcsum
+  {
+    color: #006C65;
+  }
+
+details > summary:first-of-type {
+  display: list-item;    
+  cursor: pointer;       
 }
-table {
-  border-collapse: collapse;
-  border: 0;
+
+details > summary:first-of-type {
+  list-style: disclosure-closed inside;
 }
-td, th {
-  border-collapse: collapse;
-  text-align: center;
-  vertical-align: middle;
+details[open] > summary:first-of-type {
+  list-style-type: disclosure-open;
 }
 </style>
-<h1 id="mouvement-dans-un-champ-de-gravitation">Mouvement dans un champ de gravitation</h1>
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tspe/gravitation">Présentation</a></p>
-<div style="position: relative; max-width: 100%; margin-left: auto;margin-right: auto;border-radius: 50px;">
-<a href="/cm-kepler.pdf"><img src="/cm-kepler.png"></a>
+<h1 id="deux-plans-puis-un-troisième-ccinp">Deux plans puis un troisième (CCINP)</h1>
+<p>On considère deux plans métalliques parfaits parallèles entre eux et situés en $x=0$ et $x=a$.
+Une onde électromagnétique se propage entre ces deux plan, le milieu étant assimilé au vide. Le champ électrique de l’onde est donné par :</p>
+<p>$$\vec{\underline{E}}=E_0 \sin \left(\frac{n \pi x}{a}\right) \exp (i(\omega t-k z)) \overrightarrow{u_y}$$</p>
+<ol>
+<li>Déterminer le champ magnétique associé à cette onde.</li>
+<li>Quelle équation $\vec{\underline{E}}$ vérifie-t-il ? Déterminer la relation de dispersion reliant $k$ et $\omega$.</li>
+<li>On ferme le guide par une paroi parfaitement conductrice en $z=L$, ce qui produit une onde réfléchie.</li>
+<ol type="a">
+<li>Donner la forme du champ électrique réfléchi et déterminer précisément ce champ réfléchi en utilisant les conditions aux limites sur la paroi réfléchissante.</li>
+<li>Montrer que l’onde résultante est stationnaire</li>
+</ol>
+</ol>
+<div class="emviz">
+  <div class="emviz-ui">
+    <div class="row">
+      <label for="aCm">a</label>
+      <input id="aCm" type="range" min="1" max="30" step="0.1" value="10" />
+      <span id="aOut"></span>
+    </div>
+    <div class="row">
+      <label for="nVal">n</label>
+      <input id="nVal" type="range" min="1" max="8" step="1" value="1" />
+      <span id="nOut"></span>
+    </div>
+    <div id="meta" class="meta"></div>
+  </div>
+<p><canvas id="emCanvas"></canvas></p>
 </div>
-<h2 id="documents">Documents</h2>
-<div style="overflow-x: auto;">
-<table>
-     <tr>
-  <th rowspan="2 ">Activités</th>
-  <td style="border-bottom:none;"><a href="/act-kepler.pdf"><b>Découverte des lois de Kepler</b></a> + <a href="/loitrois.py" target="_blank"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i> (3<sup>e</sup> loi)</b></a></td>
-  </tr>
-      <tr>
- <td style="border-top:none;"><a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1?authuser=1#scrollTo=BBeSn1YJubl-"><b>Éphémérides de Mercure et loi des aires</b></a> + <a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1?authuser=1#scrollTo=BBeSn1YJubl-" target="_blank"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i> (2<sup>e</sup> loi)</b></a></td>
- </tr>
-   <tr>
-<th rowspan="3">Exercices</th>
-<td style="border-bottom:none;"><a href="/act-mercure.pdf"><b>Mercure</b></a></td>
- </tr>
-    <tr>
- <td style="border-top:none;border-bottom:none;"><a href="/act-tracteur.pdf"><b>Tracteur</b></a></td>
- </tr>
-   <tr>
- <td style="border-top:none;"><a href="/act-asterix.pdf"><b>Astérix</b></a></td>
- </tr>
-    <tr>
-<th rowspan="1">Carte interactive</th>
-<td><a href="https://satellitetracker3d.com/track?norad-id=25544"><b>Position des satellites</b></a>&nbsp;+&nbsp;<a href="https://cnes.fr/sites/default/files/migration/automne/standard/2014_10/p10688_2fd578009e14ecf8e083c10a877b6060CNESMAG-Poster-GEO-MEO-LEO-v2.pdf"><b style="color:#FFA601"><i class="fa-solid fa-newspaper"></i></b></td>
- </tr>
-     <tr>
-<th rowspan="1">Animation</th>
-<td><a href="https://www.edumedia.com/fr/media/241-satellite?auth=ececafd77b22252780b96a1802fb7287/75935"><b>Orbites</b></a> + <a href="https://www.edumedia.com/fr/media/150-satellisation?auth=84b12d5f75f871e6339f7e3c1222d6b6/75935
-"><b>Satellisation</b></a></td>
- </tr>
-</table>
-</div>
+<style>
+  .emviz{
+    display:flex;
+    flex-direction:column;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .emviz-ui{
+    width: 100%;
+    background: rgba(255,255,255,0.92);
+    padding: 10px 12px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+  }
+  .row{ display:flex; align-items:center; gap:10px; margin: 8px 0; }
+  label{ width: 55px; }
+  input[type="range"]{ flex:1; }
+  .meta{ font-size: 12px; line-height: 1.35; color:#222; margin-top:8px; }
+  .hint{ font-size:12px; color:#444; margin-top:6px; }
 
+  /* IMPORTANT: hauteur explicite => canvas non nul */
+  #emCanvas{
+    width: 100%;
+    height: 520px;       /* ajuste si tu veux */
+    display:block;
+    border-radius: 12px;
+    background: #f7f7fb;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+  @media (max-width: 900px){
+    #emCanvas{ height: 380px; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script type="module">
+  import * as THREE from "https://esm.sh/three@0.160.0";
+  import { OrbitControls } from "https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+
+  (() => {
+    const c = 299792458;
+
+    // Dispersion
+    const fPhys = 3.0e9;
+    const omegaPhys = 2*Math.PI*fPhys;
+
+    // Visible animation
+    const fAnim = 0.5;
+    const omegaAnim = 2*Math.PI*fAnim;
+
+    const E0 = 1.0;
+    const YSCALE = 0.35;
+
+    // z in [-ZMAX, L]
+    const ZNEG_FACTOR = 20.0;
+
+    // Keep frame stable
+    const L_OVER_A = 3.0;
+
+    // Visual infinite effect (fog only)
+    const USE_FOG = true;
+    const ZFOG_FACTOR = 3.0;
+
+    // DOM
+    const aCm = document.getElementById("aCm");
+    const nVal = document.getElementById("nVal");
+    const aOut = document.getElementById("aOut");
+    const nOut = document.getElementById("nOut");
+    const meta = document.getElementById("meta");
+    const canvas = document.getElementById("emCanvas");
+
+    // Three.js
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
+
+    // ↑ résolution: pixelRatio un peu plus élevé
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 3));
+
+    const scene = new THREE.Scene();
+    const bg = new THREE.Color(0xf7f7fb);
+    scene.background = bg;
+
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 8000);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+
+    // Helpers (tu peux les masquer si tu veux)
+    const grid = new THREE.GridHelper(3.5, 35, 0x999999, 0xcccccc);
+    grid.material.opacity = 0.35;
+    grid.material.transparent = true;
+    scene.add(grid);
+
+   //  const axes = new THREE.AxesHelper(1.8);
+   //  scene.add(axes);
+
+    // Physics
+    function computeInfo(a, n){
+      const alpha = n*Math.PI/a;
+      const k0 = omegaPhys/c;
+      const k2 = k0*k0 - alpha*alpha;
+      if (k2 >= 0) return { type:"prop", k: Math.sqrt(k2), alpha, k0, alphaE: 0.0 };
+      return { type:"evan", k: 0.0, alpha, k0, alphaE: Math.sqrt(-k2) };
+    }
+
+    // Shaders
+    const VERT = `
+      precision highp float;
+
+      uniform float uTime;
+      uniform float uE0;
+      uniform float uYScale;
+
+      uniform float uA;
+      uniform float uN;
+      uniform float uL;
+
+      uniform float uOmegaAnim;
+
+      uniform float uK;
+      uniform float uAlphaE;
+      uniform float uMode;
+
+      uniform float uZMin;
+      uniform float uZMax;
+
+      uniform float uUseFog;
+      uniform float uZFog;
+
+      varying float vFog;
+      varying float vShade;
+
+      void main(){
+        float xn = position.x + 0.5;
+        float zn = position.z + 0.5;
+
+        float xPhys = xn * uA;
+        float zPhys = mix(uZMin, uZMax, zn);
+
+        float sx = sin(uN * 3.141592653589793 * xPhys / uA);
+        float d = (uL - zPhys);
+
+        float E;
+        if (uMode < 0.5){
+          E = -2.0 * uE0 * sx * sin(uOmegaAnim*uTime - uK*uL) * sin(uK*d);
+        } else {
+          E = uE0 * sx * exp(-uAlphaE * d) * cos(uOmegaAnim*uTime);
+        }
+
+        vec3 p = position;
+        p.y += uYScale * E;
+
+        vShade = 0.80 + 0.20 * cos(6.28318*zn);
+
+        float fogRaw = 0.0;
+        if (uUseFog > 0.5 && zPhys < 0.0){
+          fogRaw = 1.0 - exp(zPhys / uZFog);
+        }
+        vFog = clamp(fogRaw, 0.0, 1.0);
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      }
+    `;
+
+    const FRAG = `
+      precision highp float;
+
+      uniform vec3 uColor;
+      uniform vec3 uBg;
+      uniform float uAlphaBase;
+
+      varying float vFog;
+      varying float vShade;
+
+      void main(){
+        vec3 col = uColor * vShade;
+        col = mix(col, uBg, vFog);
+        float alpha = uAlphaBase * (1.0 - 0.90*vFog);
+        gl_FragColor = vec4(col, alpha);
+      }
+    `;
+
+    const uniforms = {
+      uTime:      { value: 0.0 },
+      uE0:        { value: E0 },
+      uYScale:    { value: YSCALE },
+
+      uA:         { value: 0.10 },
+      uN:         { value: 1.0 },
+      uL:         { value: 0.30 },
+
+      uOmegaAnim: { value: omegaAnim },
+
+      uK:         { value: 1.0 },
+      uAlphaE:    { value: 0.0 },
+      uMode:      { value: 0.0 },
+
+      uZMin:      { value: -1.0 },
+      uZMax:      { value:  0.3 },
+
+      uUseFog:    { value: USE_FOG ? 1.0 : 0.0 },
+      uZFog:      { value: 1.0 },
+
+      uColor:     { value: new THREE.Color(0x4f7cff) },
+      uBg:        { value: bg.clone() },
+      uAlphaBase: { value: 0.95 }
+    };
+
+    // ↑ résolution: maillage plus fin
+    const NX = 500;
+    const NZ = 2000;
+
+    const geom = new THREE.PlaneGeometry(1, 1, NX-1, NZ-1);
+    geom.rotateX(-Math.PI/2);
+
+    const mat = new THREE.ShaderMaterial({
+      vertexShader: VERT,
+      fragmentShader: FRAG,
+      uniforms,
+      transparent: true,
+      side: THREE.DoubleSide,
+      depthWrite: false
+    });
+
+    const mesh = new THREE.Mesh(geom, mat);
+    scene.add(mesh);
+
+    // (Optionnel) wireframe plus discret — enlève-le si tu veux gagner en perf
+    const wire = new THREE.LineSegments(
+      new THREE.WireframeGeometry(geom),
+      new THREE.LineBasicMaterial({ color: 0x000000, transparent:true, opacity:0.03 })
+    );
+    scene.add(wire);
+
+    // Plane z=L (wall)
+    const wallGroup = new THREE.Group();
+    scene.add(wallGroup);
+
+    const wallFill = new THREE.Mesh(
+      new THREE.PlaneGeometry(1, 1),
+      new THREE.MeshBasicMaterial({
+        color: 0x222222,
+        transparent: true,
+        opacity: 0.08,
+        side: THREE.DoubleSide,
+        depthWrite: false
+      })
+    );
+    wallGroup.add(wallFill);
+
+    const borderPts = [
+      new THREE.Vector3(-0.5, -0.5, 0),
+      new THREE.Vector3( 0.5, -0.5, 0),
+      new THREE.Vector3( 0.5,  0.5, 0),
+      new THREE.Vector3(-0.5,  0.5, 0),
+      new THREE.Vector3(-0.5, -0.5, 0),
+    ];
+    const wallBorder = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(borderPts),
+      new THREE.LineBasicMaterial({ color: 0x111111, transparent:true, opacity:0.45 })
+    );
+    wallGroup.add(wallBorder);
+
+    // UI driven params
+    let a = parseFloat(aCm.value) * 1e-2;
+    let n = parseInt(nVal.value, 10);
+    const aRef = 0.10;
+
+    let initializedCamera = false;
+
+    function updateEverything(){
+      a = parseFloat(aCm.value) * 1e-2;
+      n = parseInt(nVal.value, 10);
+
+      const info = computeInfo(a, n);
+      const L = L_OVER_A * a;
+
+      const ZMAX = ZNEG_FACTOR * L;
+      const zMin = -ZMAX;
+      const zMax = L;
+      const zSpan = zMax - zMin;
+
+      // uniforms
+      uniforms.uA.value = a;
+      uniforms.uN.value = n;
+      uniforms.uL.value = L;
+
+      uniforms.uMode.value   = (info.type === "evan") ? 1.0 : 0.0;
+      uniforms.uK.value      = info.k;
+      uniforms.uAlphaE.value = info.alphaE;
+
+      uniforms.uZMin.value = zMin;
+      uniforms.uZMax.value = zMax;
+
+      uniforms.uUseFog.value = USE_FOG ? 1.0 : 0.0;
+      uniforms.uZFog.value   = ZFOG_FACTOR * L;
+
+      // scale
+      const sx = a / aRef;
+      const sz = zSpan / aRef;
+
+      mesh.scale.set(sx, 1, sz);
+      wire.scale.set(sx, 1, sz);
+      grid.scale.set(sx, 1, sz);
+
+      // wall at z=L => zn=1 => local z=+0.5
+      const zWallScene = 0.5 * sz;
+      wallGroup.position.z = zWallScene;
+
+      wallFill.scale.set(sx, sx, 1);
+      wallBorder.scale.set(sx, sx, 1);
+
+      // center initial view on z=L
+      const target = new THREE.Vector3(0, 0, zWallScene);
+      if (!initializedCamera){
+        camera.position.set(2.6, 1.7, zWallScene + 2.6);
+        initializedCamera = true;
+      } else {
+        const camToOldTarget = camera.position.clone().sub(controls.target);
+        camera.position.copy(target.clone().add(camToOldTarget));
+      }
+      controls.target.copy(target);
+      controls.update();
+
+      // UI labels
+      aOut.textContent = (parseFloat(aCm.value)).toFixed(1) + " cm";
+      nOut.textContent = String(n);
+
+      // ✅ fenêtre de contrôle: uniquement fréquence + régime
+      const regime = (info.type === "prop") ? "propagatif" : "évanescent";
+      meta.innerHTML = `f = ${(fPhys/1e9).toFixed(1)} GHz<br>Régime : <b>${regime}</b>`;
+    }
+
+    aCm.addEventListener("input", updateEverything);
+    nVal.addEventListener("input", updateEverything);
+    updateEverything();
+
+    // Resize
+    function resize(){
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      if (w === 0 || h === 0) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w/h;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    // Animate
+    function tick(ms){
+      resize();
+      uniforms.uTime.value = ms/1000;
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+</script>
 
 <footer class="footline">
 	
@@ -3278,7 +3642,6 @@ td, th {
             
                 
                     
-                    
                 
                 
 
@@ -3291,9 +3654,6 @@ td, th {
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -3519,7 +3879,6 @@ td, th {
             
                 
                     
-                    
                 
                 
 
@@ -3535,9 +3894,6 @@ td, th {
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -4278,6 +4634,7 @@ td, th {
             
             
                 
+                    
                     
                 
                 
