@@ -22,22 +22,22 @@
     
 
     
-    <link href="/css/nucleus.css?1773085585" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1773085585" rel="stylesheet">
-    <link href="/css/hybrid.css?1773085585" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1773085585" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1773085585" rel="stylesheet">
-    <link href="/css/auto-complete.css?1773085585" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1773085585" rel="stylesheet">
-    <link href="/css/theme.css?1773085585" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1773085585" rel="stylesheet">
+    <link href="/css/nucleus.css?1773099746" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1773099746" rel="stylesheet">
+    <link href="/css/hybrid.css?1773099746" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1773099746" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1773099746" rel="stylesheet">
+    <link href="/css/auto-complete.css?1773099746" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1773099746" rel="stylesheet">
+    <link href="/css/theme.css?1773099746" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1773099746" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1773085585" rel="stylesheet">
+    <link href="/css/theme-blue.css?1773099746" rel="stylesheet">
     
-    <link href="/css/foo.css?1773085585" rel="stylesheet"><link href="/css/bar.css?1773085585" rel="stylesheet">
+    <link href="/css/foo.css?1773099746" rel="stylesheet"><link href="/css/bar.css?1773099746" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1773085585"></script>
+    <script src="/js/jquery-3.3.1.min.js?1773099746"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -121,14 +121,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1773085585"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1773085585"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1773099746"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1773099746"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1773085585"></script>
+<script type="text/javascript" src="/js/search.js?1773099746"></script>
 
     
   </div>
@@ -2632,379 +2632,180 @@ Une onde électromagnétique se propage entre ces deux plan, le milieu étant as
 <li>Montrer que l’onde résultante est stationnaire</li>
 </ol>
 </ol>
-<div class="emviz">
-  <div class="emviz-ui">
-    <div class="row">
-      <label for="aCm">a</label>
-      <input id="aCm" type="range" min="1" max="30" step="0.1" value="10" />
-      <span id="aOut"></span>
-    </div>
-    <div class="row">
-      <label for="nVal">n</label>
-      <input id="nVal" type="range" min="1" max="8" step="1" value="1" />
-      <span id="nOut"></span>
-    </div>
-    <div id="meta" class="meta"></div>
-  </div>
-<p><canvas id="emCanvas"></canvas></p>
+<div class="phys-container">
+<div class="ui-panel">
+<!---<div class="header">MODE $TE_{n0}$</div>-->
+<div class="control-group">
+<label>Largeur <b>a</b> : <span id="aVal"></span> cm</label>
+<input id="aInput" type="range" min="2" max="25" step="0.1" value="10">
+</div>
+<div class="control-group">
+<label>Mode <b>n</b> : <span id="nVal"></span></label>
+<input id="nInput" type="range" min="1" max="5" step="1" value="1">
+</div>
+<div class="control-group">
+<label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+<input id="wallToggle" type="checkbox" unchecked> Paroi physique en $z=0$
+</label>
+</div>
+<div class="stats">
+<div id="fDisplay">f = 3.00 GHz</div>
+<div id="fcDisplay">fc = -- GHz</div>
+<div id="status" class="status-badge"></div>
+</div>
+</div>
+<canvas id="renderCanvas"></canvas>
 </div>
 <style>
-  .emviz{
-    display:flex;
-    flex-direction:column;
-    gap: 12px;
-    margin: 16px 0;
-  }
-  .emviz-ui{
-    width: 100%;
-    background: rgba(255,255,255,0.92);
-    padding: 10px 12px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.10);
-  }
-  .row{ display:flex; align-items:center; gap:10px; margin: 8px 0; }
-  label{ width: 55px; }
-  input[type="range"]{ flex:1; }
-  .meta{ font-size: 12px; line-height: 1.35; color:#222; margin-top:8px; }
-  .hint{ font-size:12px; color:#444; margin-top:6px; }
-
-  /* IMPORTANT: hauteur explicite => canvas non nul */
-  #emCanvas{
-    width: 100%;
-    height: 520px;       /* ajuste si tu veux */
-    display:block;
-    border-radius: 12px;
-    background: #f7f7fb;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  }
-  @media (max-width: 900px){
-    #emCanvas{ height: 380px; }
-  }
+.phys-container { position: relative; width: 100%; height: 550px; background: #0f172a; border-radius: 12px; overflow: hidden; font-family: system-ui, -apple-system, sans-serif; }
+.ui-panel { position: absolute; top: 15px; left: 15px; width: 220px; z-index: 10; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); color: white; }
+.header { font-weight: bold; font-size: 14px; margin-bottom: 12px; color: #00d4ff; letter-spacing: 0.5px; }
+.control-group { margin-bottom: 12px; }
+label { display: block; font-size: 12px; margin-bottom: 4px; opacity: 0.8; }
+input[type="range"] { width: 100%; cursor: pointer; }
+.stats { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; font-size: 13px; line-height: 1.5; }
+.status-badge { display: inline-block; margin-top: 6px; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 11px; text-transform: uppercase; }
+.propagative { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #4ade80; }
+.evanescent { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #f87171; }
+#renderCanvas { width: 100%; height: 100%; display: block; }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script type="module">
-  import * as THREE from "https://esm.sh/three@0.160.0";
-  import { OrbitControls } from "https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js";
-
-  (() => {
-    const c = 299792458;
-
-    // Dispersion
-    const fPhys = 3.0e9;
-    const omegaPhys = 2*Math.PI*fPhys;
-
-    // Visible animation
-    const fAnim = 0.5;
-    const omegaAnim = 2*Math.PI*fAnim;
-
-    const E0 = 1.0;
-    const YSCALE = 0.35;
-
-    // z in [-ZMAX, L]
-    const ZNEG_FACTOR = 20.0;
-
-    // Keep frame stable
-    const L_OVER_A = 3.0;
-
-    // Visual infinite effect (fog only)
-    const USE_FOG = true;
-    const ZFOG_FACTOR = 3.0;
-
-    // DOM
-    const aCm = document.getElementById("aCm");
-    const nVal = document.getElementById("nVal");
-    const aOut = document.getElementById("aOut");
-    const nOut = document.getElementById("nOut");
-    const meta = document.getElementById("meta");
-    const canvas = document.getElementById("emCanvas");
-
-    // Three.js
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
-
-    // ↑ résolution: pixelRatio un peu plus élevé
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 3));
-
-    const scene = new THREE.Scene();
-    const bg = new THREE.Color(0xf7f7fb);
-    scene.background = bg;
-
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 8000);
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.08;
-
-    // Helpers (tu peux les masquer si tu veux)
-    const grid = new THREE.GridHelper(3.5, 35, 0x999999, 0xcccccc);
-    grid.material.opacity = 0.35;
-    grid.material.transparent = true;
-    scene.add(grid);
-
-   //  const axes = new THREE.AxesHelper(1.8);
-   //  scene.add(axes);
-
-    // Physics
-    function computeInfo(a, n){
-      const alpha = n*Math.PI/a;
-      const k0 = omegaPhys/c;
-      const k2 = k0*k0 - alpha*alpha;
-      if (k2 >= 0) return { type:"prop", k: Math.sqrt(k2), alpha, k0, alphaE: 0.0 };
-      return { type:"evan", k: 0.0, alpha, k0, alphaE: Math.sqrt(-k2) };
-    }
-
-    // Shaders
-    const VERT = `
-      precision highp float;
-
-      uniform float uTime;
-      uniform float uE0;
-      uniform float uYScale;
-
-      uniform float uA;
-      uniform float uN;
-      uniform float uL;
-
-      uniform float uOmegaAnim;
-
-      uniform float uK;
-      uniform float uAlphaE;
-      uniform float uMode;
-
-      uniform float uZMin;
-      uniform float uZMax;
-
-      uniform float uUseFog;
-      uniform float uZFog;
-
-      varying float vFog;
-      varying float vShade;
-
-      void main(){
-        float xn = position.x + 0.5;
-        float zn = position.z + 0.5;
-
-        float xPhys = xn * uA;
-        float zPhys = mix(uZMin, uZMax, zn);
-
-        float sx = sin(uN * 3.141592653589793 * xPhys / uA);
-        float d = (uL - zPhys);
-
-        float E;
-        if (uMode < 0.5){
-          E = -2.0 * uE0 * sx * sin(uOmegaAnim*uTime - uK*uL) * sin(uK*d);
-        } else {
-          E = uE0 * sx * exp(-uAlphaE * d) * cos(uOmegaAnim*uTime);
-        }
-
-        vec3 p = position;
-        p.y += uYScale * E;
-
-        vShade = 0.80 + 0.20 * cos(6.28318*zn);
-
-        float fogRaw = 0.0;
-        if (uUseFog > 0.5 && zPhys < 0.0){
-          fogRaw = 1.0 - exp(zPhys / uZFog);
-        }
-        vFog = clamp(fogRaw, 0.0, 1.0);
-
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
-      }
-    `;
-
-    const FRAG = `
-      precision highp float;
-
-      uniform vec3 uColor;
-      uniform vec3 uBg;
-      uniform float uAlphaBase;
-
-      varying float vFog;
-      varying float vShade;
-
-      void main(){
-        vec3 col = uColor * vShade;
-        col = mix(col, uBg, vFog);
-        float alpha = uAlphaBase * (1.0 - 0.90*vFog);
-        gl_FragColor = vec4(col, alpha);
-      }
-    `;
-
-    const uniforms = {
-      uTime:      { value: 0.0 },
-      uE0:        { value: E0 },
-      uYScale:    { value: YSCALE },
-
-      uA:         { value: 0.10 },
-      uN:         { value: 1.0 },
-      uL:         { value: 0.30 },
-
-      uOmegaAnim: { value: omegaAnim },
-
-      uK:         { value: 1.0 },
-      uAlphaE:    { value: 0.0 },
-      uMode:      { value: 0.0 },
-
-      uZMin:      { value: -1.0 },
-      uZMax:      { value:  0.3 },
-
-      uUseFog:    { value: USE_FOG ? 1.0 : 0.0 },
-      uZFog:      { value: 1.0 },
-
-      uColor:     { value: new THREE.Color(0x4f7cff) },
-      uBg:        { value: bg.clone() },
-      uAlphaBase: { value: 0.95 }
-    };
-
-    // ↑ résolution: maillage plus fin
-    const NX = 500;
-    const NZ = 2000;
-
-    const geom = new THREE.PlaneGeometry(1, 1, NX-1, NZ-1);
-    geom.rotateX(-Math.PI/2);
-
-    const mat = new THREE.ShaderMaterial({
-      vertexShader: VERT,
-      fragmentShader: FRAG,
-      uniforms,
-      transparent: true,
-      side: THREE.DoubleSide,
-      depthWrite: false
-    });
-
-    const mesh = new THREE.Mesh(geom, mat);
-    scene.add(mesh);
-
-    // (Optionnel) wireframe plus discret — enlève-le si tu veux gagner en perf
-    const wire = new THREE.LineSegments(
-      new THREE.WireframeGeometry(geom),
-      new THREE.LineBasicMaterial({ color: 0x000000, transparent:true, opacity:0.03 })
-    );
-    scene.add(wire);
-
-    // Plane z=L (wall)
-    const wallGroup = new THREE.Group();
-    scene.add(wallGroup);
-
-    const wallFill = new THREE.Mesh(
-      new THREE.PlaneGeometry(1, 1),
-      new THREE.MeshBasicMaterial({
-        color: 0x222222,
-        transparent: true,
-        opacity: 0.08,
-        side: THREE.DoubleSide,
-        depthWrite: false
-      })
-    );
-    wallGroup.add(wallFill);
-
-    const borderPts = [
-      new THREE.Vector3(-0.5, -0.5, 0),
-      new THREE.Vector3( 0.5, -0.5, 0),
-      new THREE.Vector3( 0.5,  0.5, 0),
-      new THREE.Vector3(-0.5,  0.5, 0),
-      new THREE.Vector3(-0.5, -0.5, 0),
-    ];
-    const wallBorder = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(borderPts),
-      new THREE.LineBasicMaterial({ color: 0x111111, transparent:true, opacity:0.45 })
-    );
-    wallGroup.add(wallBorder);
-
-    // UI driven params
-    let a = parseFloat(aCm.value) * 1e-2;
-    let n = parseInt(nVal.value, 10);
-    const aRef = 0.10;
-
-    let initializedCamera = false;
-
-    function updateEverything(){
-      a = parseFloat(aCm.value) * 1e-2;
-      n = parseInt(nVal.value, 10);
-
-      const info = computeInfo(a, n);
-      const L = L_OVER_A * a;
-
-      const ZMAX = ZNEG_FACTOR * L;
-      const zMin = -ZMAX;
-      const zMax = L;
-      const zSpan = zMax - zMin;
-
-      // uniforms
-      uniforms.uA.value = a;
-      uniforms.uN.value = n;
-      uniforms.uL.value = L;
-
-      uniforms.uMode.value   = (info.type === "evan") ? 1.0 : 0.0;
-      uniforms.uK.value      = info.k;
-      uniforms.uAlphaE.value = info.alphaE;
-
-      uniforms.uZMin.value = zMin;
-      uniforms.uZMax.value = zMax;
-
-      uniforms.uUseFog.value = USE_FOG ? 1.0 : 0.0;
-      uniforms.uZFog.value   = ZFOG_FACTOR * L;
-
-      // scale
-      const sx = a / aRef;
-      const sz = zSpan / aRef;
-
-      mesh.scale.set(sx, 1, sz);
-      wire.scale.set(sx, 1, sz);
-      grid.scale.set(sx, 1, sz);
-
-      // wall at z=L => zn=1 => local z=+0.5
-      const zWallScene = 0.5 * sz;
-      wallGroup.position.z = zWallScene;
-
-      wallFill.scale.set(sx, sx, 1);
-      wallBorder.scale.set(sx, sx, 1);
-
-      // center initial view on z=L
-      const target = new THREE.Vector3(0, 0, zWallScene);
-      if (!initializedCamera){
-        camera.position.set(2.6, 1.7, zWallScene + 2.6);
-        initializedCamera = true;
-      } else {
-        const camToOldTarget = camera.position.clone().sub(controls.target);
-        camera.position.copy(target.clone().add(camToOldTarget));
-      }
-      controls.target.copy(target);
-      controls.update();
-
-      // UI labels
-      aOut.textContent = (parseFloat(aCm.value)).toFixed(1) + " cm";
-      nOut.textContent = String(n);
-
-      // ✅ fenêtre de contrôle: uniquement fréquence + régime
-      const regime = (info.type === "prop") ? "propagatif" : "évanescent";
-      meta.innerHTML = `f = ${(fPhys/1e9).toFixed(1)} GHz<br>Régime : <b>${regime}</b>`;
-    }
-
-    aCm.addEventListener("input", updateEverything);
-    nVal.addEventListener("input", updateEverything);
-    updateEverything();
-
-    // Resize
-    function resize(){
-      const w = canvas.clientWidth, h = canvas.clientHeight;
-      if (w === 0 || h === 0) return;
-      renderer.setSize(w, h, false);
-      camera.aspect = w/h;
-      camera.updateProjectionMatrix();
-    }
-    window.addEventListener("resize", resize);
-    resize();
-
-    // Animate
-    function tick(ms){
-      resize();
-      uniforms.uTime.value = ms/1000;
-      controls.update();
-      renderer.render(scene, camera);
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  })();
+import * as THREE from "https://esm.sh/three@0.160.0";
+import { OrbitControls } from "https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+
+const canvas = document.getElementById('renderCanvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0f172a);
+
+const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.01, 100);
+camera.position.set(0.9, 0.7, 1.3);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+// --- SHADERS ---
+const vertexShader = `
+varying float vAmp;
+uniform float uTime, uA, uN, uKz, uAlpha, uIsEvanescent, uWallZ;
+void main() {
+vec3 p = position;
+float x = (p.x + 0.5) * uA;
+float z = (0.5 - p.y) * 1.0; // Direction de propagation
+
+float spatialX = sin(uN * 3.14159265 * x / uA);
+float field = 0.0;
+float omegaT = 6.28318 * 0.5 * uTime;
+
+if(uIsEvanescent < 0.5) {
+if(uWallZ > 0.5) {
+// RÉGIME STATIONNAIRE : superposition onde incidente/réfléchie
+// E = E0 * sin(kx*x) * sin(kz*z) * cos(wt)
+field = 2.0 * spatialX * sin(uKz * z) * cos(omegaT);
+} else {
+// RÉGIME PROGRESSIF : E = E0 * sin(kx*x) * sin(wt - kz*z)
+field = spatialX * sin(omegaT - uKz * z);
+}
+} else {
+// RÉGIME ÉVANESCENT
+field = spatialX * exp(-uAlpha * z) * sin(omegaT);
+}
+
+p.z = field * 0.15;
+vAmp = field;
+gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+}
+`;
+
+const fragmentShader = `
+varying float vAmp;
+uniform vec3 uColor;
+void main() {
+gl_FragColor = vec4(mix(vec3(0.05, 0.1, 0.2), uColor, abs(vAmp)), 0.8);
+}
+`;
+
+const waveMaterial = new THREE.ShaderMaterial({
+uniforms: {
+uTime: { value: 0 }, uA: { value: 0.1 }, uN: { value: 1.0 },
+uKz: { value: 0.0 }, uAlpha: { value: 0.0 }, uIsEvanescent: { value: 0.0 },
+uWallZ: { value: 1.0 }, uColor: { value: new THREE.Color(0x00d4ff) }
+},
+vertexShader, fragmentShader, transparent: true, side: THREE.DoubleSide
+});
+
+const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1, 1, 100, 250), waveMaterial);
+mesh.rotation.x = -Math.PI / 2;
+scene.add(mesh);
+
+// Parois
+const wallMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.15, side: THREE.DoubleSide, depthWrite: false });
+const wallX0 = new THREE.Mesh(new THREE.PlaneGeometry(1, 0.4), wallMat);
+const wallXa = new THREE.Mesh(new THREE.PlaneGeometry(1, 0.4), wallMat);
+const wallZ0 = new THREE.Mesh(new THREE.PlaneGeometry(1, 0.4), wallMat);
+wallX0.rotation.y = wallXa.rotation.y = Math.PI / 2;
+scene.add(wallX0, wallXa, wallZ0);
+
+function update() {
+const a = parseFloat(document.getElementById('aInput').value) / 100;
+const n = parseInt(document.getElementById('nInput').value);
+const wallActive = document.getElementById('wallToggle').checked;
+
+const f = 3e9, c = 299792458;
+const fc = (n * c) / (2 * a), isE = f < fc;
+const k0 = (2 * Math.PI * f) / c, kc = (n * Math.PI) / a;
+
+waveMaterial.uniforms.uIsEvanescent.value = isE ? 1.0 : 0.0;
+waveMaterial.uniforms.uWallZ.value = wallActive ? 1.0 : 0.0;
+
+if (!isE) {
+waveMaterial.uniforms.uKz.value = Math.sqrt(k0*k0 - kc*kc);
+waveMaterial.uniforms.uColor.value.set(wallActive ? 0xffcc00 : 0x00d4ff); // Jaune pour stationnaire
+} else {
+waveMaterial.uniforms.uAlpha.value = Math.sqrt(kc*kc - k0*k0);
+waveMaterial.uniforms.uColor.value.set(0xff4444);
+}
+
+waveMaterial.uniforms.uA.value = a;
+waveMaterial.uniforms.uN.value = n;
+
+const visualWidth = a * 4;
+mesh.scale.set(visualWidth, 1, 1);
+wallX0.position.set(-visualWidth/2, 0, 0);
+wallXa.position.set(visualWidth/2, 0, 0);
+wallZ0.position.set(0, 0, 0.5);
+wallZ0.scale.x = visualWidth;
+wallZ0.visible = wallActive;
+
+document.getElementById('aVal').textContent = (a * 100).toFixed(1);
+document.getElementById('nVal').textContent = n;
+document.getElementById('fcDisplay').textContent = "fc = " + (fc / 1e9).toFixed(2) + " GHz";
+const status = document.getElementById('status');
+status.textContent = isE ? "Évanescent" : (wallActive ? "Stationnaire" : "Propagatif");
+status.className = "status-badge " + (isE ? "evanescent" : "propagative");
+}
+
+document.getElementById('aInput').oninput = update;
+document.getElementById('nInput').oninput = update;
+document.getElementById('wallToggle').onchange = update;
+
+function animate(t) {
+requestAnimationFrame(animate);
+const w = canvas.clientWidth, h = canvas.clientHeight;
+if (canvas.width !== w || canvas.height !== h) {
+renderer.setSize(w, h, false);
+camera.aspect = w / h;
+camera.updateProjectionMatrix();
+}
+waveMaterial.uniforms.uTime.value = t / 1000;
+controls.update();
+renderer.render(scene, camera);
+}
+
+update();
+animate(0);
 </script>
 
 <footer class="footline">
@@ -4792,16 +4593,16 @@ Une onde électromagnétique se propage entre ces deux plan, le milieu étant as
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1773085585"></script>
-    <script src="/js/perfect-scrollbar.min.js?1773085585"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1773085585"></script>
-    <script src="/js/jquery.sticky.js?1773085585"></script>
-    <script src="/js/featherlight.min.js?1773085585"></script>
-    <script src="/js/highlight.pack.js?1773085585"></script>
+    <script src="/js/clipboard.min.js?1773099746"></script>
+    <script src="/js/perfect-scrollbar.min.js?1773099746"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1773099746"></script>
+    <script src="/js/jquery.sticky.js?1773099746"></script>
+    <script src="/js/featherlight.min.js?1773099746"></script>
+    <script src="/js/highlight.pack.js?1773099746"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1773085585"></script>
-    <script src="/js/learn.js?1773085585"></script>
-    <script src="/js/hugo-learn.js?1773085585"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1773099746"></script>
+    <script src="/js/learn.js?1773099746"></script>
+    <script src="/js/hugo-learn.js?1773099746"></script>
     
     
 
