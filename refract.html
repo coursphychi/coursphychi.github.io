@@ -2,10 +2,30 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Optique - Snell-Descartes & Fresnel</title>
+    <title>Optique - Simulation Réfraction & Fresnel</title>
     <style>
         body { margin: 0; overflow: hidden; background-color: #050505; font-family: sans-serif; cursor: default; }
         canvas { display: block; touch-action: none; }
+        
+        #controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(20, 20, 20, 0.85);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            border: 1px solid #444;
+            user-select: none;
+            width: 240px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        .slider-container { margin-top: 10px; }
+        input[type=range] { width: 100%; cursor: pointer; }
+        .n-display { font-weight: bold; color: #56c1ff; font-size: 1.2em; }
+        .info-txt { margin-top: 10px; font-size: 0.85em; opacity: 0.7; line-height: 1.4em; }
+
         .label {
             position: absolute;
             pointer-events: none;
@@ -19,13 +39,23 @@
 </head>
 <body>
 
+<div id="controls">
+    <div style="margin-bottom: 5px;">Milieu 1 (Haut, Air) : <b>1.00</b></div>
+    <div class="slider-container">
+        Milieu 2 (Bas) : <span id="n2-val" class="n-display">1.33</span>
+        <input type="range" id="n2-slider" min="1" max="3.5" step="0.01" value="1.33">
+    </div>
+</div>
+
 <div id="labels-container"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
 
 <script>
-    const n1 = 1.0, n2 = 1.33;
+    // --- Configuration ---
+    let n1 = 1.0;
+    let n2 = 1.33;
     const L = 10, H = 5, W = 5;
     const ARROW_HEAD_HEIGHT = 0.5; 
     const SECTOR_RADIUS = 2.2;
@@ -69,34 +99,27 @@
     m1Group.position.set(-3.5, 3, 0);
     scene.add(m1Group);
 
-    // Rayons
+    // --- Fonctions de construction ---
     function createRay(color) {
         const group = new THREE.Group();
-        const mat = new THREE.MeshPhongMaterial({ color: color, transparent: true, opacity: 1 });
+        const mat = new THREE.MeshPhongMaterial({ color: color, transparent: true, opacity: 1.0 });
         const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 1, 16), mat);
         const head = new THREE.Mesh(new THREE.ConeGeometry(0.22, ARROW_HEAD_HEIGHT, 16), mat);
         shaft.position.y = 0.5; head.position.y = 1;
         group.add(shaft, head);
         scene.add(group);
+        // FIX: Ajout de 'head' dans l'objet retourné
         return { group, shaft, head, mat };
     }
-    const rayIncid = createRay(0x1db100);
-    const rayRefle = createRay(0xd41876);
-    const rayRefra = createRay(0xfeae00);
 
-    // Secteurs (Angles)
     function createSector(color) {
         const mat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.5, side: THREE.DoubleSide, depthWrite: false });
         const mesh = new THREE.Mesh(new THREE.BufferGeometry(), mat);
-        mesh.renderOrder = 10; // Pour être sûr qu'il passe devant l'aquarium
+        mesh.renderOrder = 10;
         scene.add(mesh);
         return mesh;
     }
-    const secIncid = createSector(0x1db100);
-    const secRefle = createSector(0xd41876);
-    const secRefra = createSector(0xfeae00);
 
-    // Labels
     function createLabel(color) {
         const div = document.createElement('div');
         div.className = 'label';
@@ -104,11 +127,29 @@
         document.getElementById('labels-container').appendChild(div);
         return div;
     }
+
+    // --- Instanciation ---
+    const rayIncid = createRay(0x1db100);
+    const rayRefle = createRay(0xd41876);
+    const rayRefra = createRay(0xfeae00);
+
+    const secIncid = createSector(0x1db100);
+    const secRefle = createSector(0xd41876);
+    const secRefra = createSector(0xfeae00);
+
     const lblT1 = createLabel("#88fa4e");
     const lblTr = createLabel("#ff95ca");
     const lblT2 = createLabel("#fff056");
 
-    // Interaction
+    // --- Interaction ---
+    const slider = document.getElementById('n2-slider');
+    const n2ValDisp = document.getElementById('n2-val');
+    slider.addEventListener('input', (e) => {
+        n2 = parseFloat(e.target.value);
+        n2ValDisp.innerText = n2.toFixed(2);
+        updatePhysics();
+    });
+
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
     const planeXY = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
@@ -136,7 +177,8 @@
         }
     });
 
-    window.addEventListener('pointerdown', () => {
+    window.addEventListener('pointerdown', (e) => {
+        if (e.target.tagName === "INPUT") return;
         raycaster.setFromCamera(mouse, camera);
         if (raycaster.intersectObject(m1Hitbox).length > 0) {
             isDragging = true;
@@ -149,6 +191,7 @@
         controls.enabled = true;
     });
 
+    // --- Logique d'orientation ---
     function orientRay(ray, start, dir, totalLength) {
         ray.group.position.copy(start);
         ray.group.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
@@ -158,20 +201,17 @@
         ray.head.position.y = shaftLength + (ARROW_HEAD_HEIGHT/2);
     }
 
-    function drawSector(mesh, angle, startVec, endVec, label) {
-        // Sécurité anti-colinéarité
+    function drawSector(mesh, angle, startVec, endVec, label, opacity) {
         let rotAxis = new THREE.Vector3().crossVectors(startVec, endVec);
-        if (rotAxis.lengthSq() < 0.0001) {
-            rotAxis.set(0, 0, 1);
-        } else {
-            rotAxis.normalize();
-        }
+        if (rotAxis.lengthSq() < 0.0001) rotAxis.set(0, 0, 1);
+        else rotAxis.normalize();
         
+        mesh.material.opacity = opacity;
+
         const pts = [new THREE.Vector3(0, 0, 0)];
         const steps = 32;
         for (let i = 0; i <= steps; i++) {
             const a = (i / steps) * angle;
-            // On ajoute un petit offset Z pour éviter le Z-fighting
             pts.push(startVec.clone().applyAxisAngle(rotAxis, a).multiplyScalar(SECTOR_RADIUS).add(new THREE.Vector3(0,0,0.01)));
         }
         
@@ -181,14 +221,16 @@
         for(let i=1; i<pts.length-1; i++) idx.push(0, i, i+1);
         mesh.geometry.setIndex(idx);
         
-        // POSITION DU LABEL : au milieu de l'angle et à 65% du rayon (DANS le secteur)
         const midVec = startVec.clone().applyAxisAngle(rotAxis, angle / 2).multiplyScalar(SECTOR_RADIUS * 0.65);
         const screenPos = midVec.project(camera);
         label.style.left = (screenPos.x * 0.5 + 0.5) * window.innerWidth + 'px';
         label.style.top = -(screenPos.y * 0.5 - 0.5) * window.innerHeight + 'px';
-        label.innerText = (angle * 180 / Math.PI).toFixed(1) + "°";
+        
+        if (opacity < 0.05) { label.innerText = ""; } 
+        else { label.innerText = (angle * 180 / Math.PI).toFixed(1) + "°"; }
     }
 
+    // --- Coeur du programme ---
     function updatePhysics() {
         const posM1 = m1Group.position.clone();
         const vToOrigin = posM1.clone().negate();
@@ -204,10 +246,8 @@
         const r = curN1 / curN2;
         const sin2T2 = r * r * (1 - cosT1 * cosT1);
 
-        // Rayon Incident : de M1 vers l'origine
         orientRay(rayIncid, posM1, dirToOrigin, vToOrigin.length());
 
-        // Rayon Réfléchi : de l'origine
         const dirRefle = dirToOrigin.clone().add(up.clone().multiplyScalar(2 * cosT1)).normalize();
         orientRay(rayRefle, new THREE.Vector3(0,0,0), dirRefle, 5);
 
@@ -218,6 +258,7 @@
             dirRefra = dirToOrigin.clone().multiplyScalar(r).add(up.clone().multiplyScalar(r * cosT1 - cosT2)).normalize();
             orientRay(rayRefra, new THREE.Vector3(0,0,0), dirRefra, 5);
             rayRefra.group.visible = true;
+            
             const rs = Math.pow((curN1 * cosT1 - curN2 * cosT2) / (curN1 * cosT1 + curN2 * cosT2), 2);
             const rp = Math.pow((curN1 * cosT2 - curN2 * cosT1) / (curN1 * cosT2 + curN2 * cosT1), 2);
             R = (rs + rp) / 2; T = 1 - R;
@@ -225,16 +266,19 @@
             rayRefra.group.visible = false;
         }
 
-        rayRefle.mat.opacity = Math.max(R, 0.1);
-        rayRefra.mat.opacity = T;
+        const opacityRefle = Math.max(R, 0.1);
+        const opacityRefra = T;
+        
+        rayRefle.mat.opacity = opacityRefle;
+        rayRefra.mat.opacity = opacityRefra;
 
-        // Mise à jour des secteurs
-        // CRUCIAL : Pour l'angle incident, on dessine l'arc vers M1 (posM1), pas vers l'origine !
-        drawSector(secIncid, theta1, up, posM1.clone().normalize(), lblT1);
-        drawSector(secRefle, theta1, up, dirRefle, lblTr);
+        // Secteurs
+        drawSector(secIncid, theta1, up, posM1.clone().normalize(), lblT1, 0.5);
+        drawSector(secRefle, theta1, up, dirRefle, lblTr, opacityRefle);
+        
         if (sin2T2 <= 1) {
             secRefra.visible = true;
-            drawSector(secRefra, theta2, up.clone().negate(), dirRefra, lblT2);
+            drawSector(secRefra, theta2, up.clone().negate(), dirRefra, lblT2, opacityRefra);
         } else {
             secRefra.visible = false;
             lblT2.innerText = "";
