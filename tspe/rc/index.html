@@ -8,7 +8,7 @@
 
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
-    <title>Onde - Cours Physique-Chimie</title>
+    <title>Circuit RC - Cours Physique-Chimie</title>
     
     <script>
   window.MathJax = {
@@ -95,7 +95,7 @@
 
 	
   </head>
-  <body class="" data-url="/colles/onde/">
+  <body class="" data-url="/tspe/rc/">
     <nav id="sidebar" class="">
 
 
@@ -962,7 +962,7 @@
   
     
     <li data-nav-id="/tspe/" title="TSPÉ" class="dd-item
-        
+        parent
         
         
         ">
@@ -1408,7 +1408,7 @@
  
   
     
-      <li data-nav-id="/tspe/rc/" title="Circuit RC" class="dd-item ">
+      <li data-nav-id="/tspe/rc/" title="Circuit RC" class="dd-item active">
         <a href="/tspe/rc/">
         Circuit RC
         
@@ -2441,7 +2441,7 @@
   
     
     <li data-nav-id="/colles/" title="Colles" class="dd-item
-        parent
+        
         
         
         ">
@@ -2583,14 +2583,18 @@
                   <span class="links">
                  
                  
-                   Onde
+                   Circuit RC
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#documents-et-autres">Documents et autres</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -2608,20 +2612,52 @@
         
 
 
-<h1 id="onde">Onde</h1>
-<p>Inspecter le code ci-dessous (des lignes 37 à 46 et de 59 à 68) :</p>
-<iframe src="https://trinket.io/embed/glowscript/ce374615e2" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-<p>Les lignes les plus importantes pour la suite sont les lignes 61 et 64.</p>
-<ol>
-<li>Combien de périodes observe-t-on pendant l&rsquo;animation ? Modifier le code pour visualiser 10 périodes.</li>
-</ol>
-<p>Imaginons qu&rsquo;une onde progressive de fréquence $f$ et de célérité $c$ se propage dans les ressorts.</p>
-<ol start="2">
-<li>Quel sera le retard temporel de l&rsquo;anneau <code>i</code> par rapport à l&rsquo;anneau <code>0</code> sachant que les anneaux sont régulièrement espacés d&rsquo;une distance $d$ ?</li>
-<li>Faire en sorte que l&rsquo;animation montre une telle onde en modifiant la ligne 64.</li>
-<li>Que vaut alors la longueur d&rsquo;onde $\lambda$ ?</li>
-<li>S&rsquo;agit-il d&rsquo;une onde transversale ou longitudinale ?</li>
-</ol>
+<style>
+ul {
+  text-align: left;
+}
+table {
+  border-collapse: collapse;
+  border: 0;
+}
+td, th {
+  border-collapse: collapse;
+  text-align: center;
+  vertical-align: middle;
+}
+</style>
+<h1 style="overflow-x:auto;">Circuit RC série</h1>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tspe/rc">Présentation</a></p>
+<div style="position: relative; max-width: 100%; margin-left: auto;margin-right: auto;border-radius: 50px;">
+<a href="/cm-rc.pdf"><img src="/cm-rc.png"></a>
+</div>
+<h2 id="documents-et-autres">Documents et autres</h2>
+<div style="overflow-x: auto;">
+<table>
+ <tr>
+<th rowspan="1 ">TP</th>
+  <td style="border-bottom:none;"><a href="/tp-rc.pdf"><b>Mesure de l'épaisseur d'une feuille A4</b></a></td>
+  </tr>
+  <tr>
+<th rowspan="3 ">Exercices</th>
+  <td style="border-bottom:none;"><a href="/act-vigneron.pdf"><b>La physique au service du vigneron</b></a></td>
+  </tr>
+  <tr>
+    <td style="border-bottom:none;border-top:none"><a href="/act-defibrillateur.pdf"><b>Défibrillateur cardiaque</b></a></td>
+  </tr>
+    <tr>
+    <td style="border-top:none"><a href="/act-capteurdhumidite.pdf"><b>Capteur d'humidité</b> (microcontrôleur)</a></td>
+  </tr>
+ <tr>
+  <th rowspan="2 ">Appliquettes</th>
+  <td style="border-bottom:none;"><a href="https://presentationssite.github.io/rc.html" target=”_blank”><b>Évolution temporelle</b></a></td>
+  </tr>
+    <tr>
+    <td style="border-top:none"><a href="https://www.geogebra.org/m/w9aqhfvg" target="_blank"><b>Influence de $\tau$</b></a></td>
+  </tr>
+</table>
+</div>
+<br>
 
 
 <footer class="footline">
@@ -3259,6 +3295,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -3272,21 +3309,8 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
+                        
                     
                 
                 
@@ -3608,6 +3632,26 @@
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
                 
                 
 
@@ -4267,7 +4311,6 @@
             
             
                 
-                    
                     
                 
                 
