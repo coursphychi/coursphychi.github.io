@@ -287,13 +287,6 @@
 	"content": " Spécialité physique-chimie en première générale Programme officiel + Coefficients + Verbes d'action\nConstitution et transformations de la matière Suivi de l’évolution d’un système, siège d’une transformation : Quantité de matière Détermination physique d\u0026rsquo;une quantité de matière : spectrophotométrie Avancement Réaction d\u0026rsquo;oxydo-réduction Détermination chimique d\u0026rsquo;une quantité de matière : titrages De la structure des entités aux propriétés physiques de la matière : Schéma de Lewis, géométrie, polarité Cohésion, solubilité/miscibilité Chimie organique : Structure des entités organiques Synthèses Combustions Mouvement et interactions Interactions fondamentales et champs Description d’un fluide au repos Mouvement d’un système L’énergie : conversions et transferts Électricité et énergie Mécanique et énergie Ondes et signaux Ondes : Ondes mécaniques Lumière : Images Couleurs Modèles ondulatoire et particulaire de la lumière Incertitudes Python "
 },
 {
-	"uri": "https://coursphychi.github.io/tes/energie/france_et_monde/",
-	"title": "Énergie en France et dans le Monde",
-	"tags": [],
-	"description": "",
-	"content": " Énergie en France et dans le monde Énergie électrique en France "
-},
-{
 	"uri": "https://coursphychi.github.io/tes/energie/_index-sauvegarde/",
 	"title": "Le futur des énergies",
 	"tags": [],
@@ -305,7 +298,7 @@
 	"title": "Le futur des énergies",
 	"tags": [],
 	"description": "",
-	"content": " Le futur des énergies Ressources : Qu'est-ce que l'énergie\u0026nbsp;? Quelle est la différence entre énergie et puissance\u0026nbsp;? Comment fabrique-t-on de l'électricité\u0026nbsp;? Les différents types de centrales électriques Stocks et flux d'énergie L'énergie en France et dans le monde Danger des énergies Le stockage de l'électricité Optimisation du transport de l'électricité "
+	"content": " Le futur des énergies Ressources : Qu'est-ce que l'énergie\u0026nbsp;? Quelle est la différence entre énergie et puissance\u0026nbsp;? Comment fabrique-t-on de l'électricité\u0026nbsp;? Les différents types de centrales électriques Stocks et flux d'énergie L'énergie en France et dans le monde Danger comparé des énergies Le stockage de l'électricité Optimisation du transport de l'électricité "
 },
 {
 	"uri": "https://coursphychi.github.io/1es/soleil/",
@@ -313,13 +306,6 @@
 	"tags": [],
 	"description": "",
 	"content": "Le Soleil, notre source d\u0026rsquo;énergie Présentation\nRécap\nRayonnement solaire Bilan radiatif terrestre Applet Geogebra pour visualiser l\u0026rsquo;origine géométrique des lignes imaginaires que sont les tropiques et cercles polaires en lien avec les solstices et les équinoxes :\nVidéo filmée à Pune, en Inde, le 13 Mai 2023 (source : संकेत) + tracking du zéro shadow day + tracking du point subsolaire :\nDocuments : Activité température des étoiles Activité température et distance au Soleil Activité lattitude et \u0026ldquo;hauteur\u0026rdquo; du Soleil Activité température et albédo Activité bilan radiatif + correction "
-},
-{
-	"uri": "https://coursphychi.github.io/tes/energie/fabrication/",
-	"title": "Produire de l&#39;électricité",
-	"tags": [],
-	"description": "",
-	"content": " Comment \u0026ldquo;Fabrique-t-on\u0026rdquo; de l\u0026rsquo;électricité "
 },
 {
 	"uri": "https://coursphychi.github.io/tes/energie/stocks_et_flux/",
