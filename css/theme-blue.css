@@ -58,55 +58,36 @@ a:hover {
 	color: var(--MENU-VISITED-color);
 }
 
-#body a.highlight:after {
-    display: block;
-    content: "";
-    height: 1px;
-    width: 0%;
-    -webkit-transition: width 0.5s ease;
-    -moz-transition: width 0.5s ease;
-    -ms-transition: width 0.5s ease;
-    transition: width 0.5s ease;
-    background-color: currentColor;
-}
-
-
 /* ============================================================
-   Cas où le lien contient un enfant coloré
-   ex. <a><b style="color:#D41876">…</b></a>
+   Effet de soulignement animé multi-ligne
    ============================================================ */
-#body a.highlight > b,
-#body a.highlight > span.link-color {      /* .link-color = classe optionnelle */
-    position: relative;
-    display: inline-block;
+
+#body a.highlight {
+    text-decoration: none;
+    /* On crée une ligne de 1px avec un dégradé de la couleur actuelle du texte */
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    /* La ligne commence à 0% de largeur */
+    background-size: 0% 1px;
+    transition: background-size 0.5s ease;
+    
+    /* Important pour le multi-ligne */
+    display: inline;
 }
 
-/* Trait “rangé” */
+#body a.highlight:hover,
+#body a.highlight:focus {
+    /* La ligne passe à 100% de la largeur sur chaque ligne de texte */
+    background-size: 100% 1px;
+}
+
+/* On supprime les anciens comportements qui créaient le trait unique en bas */
+#body a.highlight:after,
 #body a.highlight > b::after,
-#body a.highlight > span.link-color::after{
-    content:'';
-    position:absolute;
-    left:0; bottom:0;
-    width:0; height:1px;                  /* même épaisseur que ci-dessus */
-    background:currentColor;
-    transition:width .5s ease;
+#body a.highlight > span.link-color::after {
+    display: none !important;
 }
-
-/* Trait “déplié” au survol ou focus clavier */
-#body a.highlight:hover  > b::after,
-#body a.highlight:focus  > b::after,
-#body a.highlight:hover  > span.link-color::after,
-#body a.highlight:focus  > span.link-color::after{
-    width:100%;
-}
-
-/* On coupe le trait du <a> pour éviter le double soulignement
-   (nécessite :has(), pris en charge par Chrome, Edge, Firefox, Safari ≥ 2024) */
-#body a.highlight:has(> b)::after,
-#body a.highlight:has(> span.link-color)::after{
-    display:none;
-}
-
 
 
 
