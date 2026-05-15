@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://votre-domaine/sitemap.xml
+Sitemap: https://coursphychi.github.io/sitemap.xml
