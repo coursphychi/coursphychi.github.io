@@ -760,7 +760,7 @@
 	"title": "Écoulement d&#39;un fluide",
 	"tags": [],
 	"description": "",
-	"content": " Écoulement d\u0026rsquo;un fluide Présentation\nnote\nLa relation de Bernoulli sera toujours fournie.\nDocuments et autres Activités Les ballasts du Terrible + Exercices Cargo dirigeable Traitement des eaux Énigmes poussée d'Archimède (Balle de ping-pong vs balle d'acier) (Canard sur aquarium en équilibre) Appliquette Simulation d'un écoulement dans une conduite "
+	"content": " Écoulement d\u0026rsquo;un fluide Présentation\nnote\nLa relation de Bernoulli sera toujours fournie.\nDocuments et autres Activités Les ballasts du Terrible + Exercices Cargo dirigeable Traitement des eaux Énigmes poussée d'Archimède (Balle de ping-pong vs balle d'acier) (Canard sur aquarium en équilibre) (Bouteille XKCD) Appliquette Simulation d'un écoulement dans une conduite "
 },
 {
 	"uri": "https://coursphychi.github.io/1spe/ondes/",
@@ -795,7 +795,7 @@
 	"title": "Thermodynamique",
 	"tags": [],
 	"description": "",
-	"content": " Thermodynamique Présentation\nnote\nLa loi phénoménologique de Newton, la loi de Stefan-Boltzmann, et l\u0026rsquo;expression de la résistance thermique en fonction de la conductivité, de l\u0026rsquo;épaisseur et de la surface seront fournies au bac.\nRq : l\u0026rsquo;expression de $R_{th}$ en fonction du flux $\\Phi$ et de l\u0026rsquo;écart de température $\\Delta T$ ($R_{th}=\\frac{\\Delta T}{\\Phi}$) doit être connue par contre.\nDocuments et autres TP Évolution de la température Exercices Couverture de survie Tour montparnasse (partie 3) Réfrigérateur + + Bouclier thermique La physique au service du vigneron (partie 2) Appliquettes Loi des GP $T(t)$ (solutions de l'équa diff) Bilan radiatif "
+	"content": " Thermodynamique Présentation\nnote\nLa loi phénoménologique de Newton, la loi de Stefan-Boltzmann, et l\u0026rsquo;expression de la résistance thermique en fonction de la conductivité, de l\u0026rsquo;épaisseur et de la surface seront fournies au bac.\nRq : l\u0026rsquo;expression de $R_{th}$ en fonction du flux $\\Phi$ et de l\u0026rsquo;écart de température $\\Delta T$ ($R_{th}=\\frac{\\Delta T}{\\Phi}$) doit être connue par contre.\nDocuments et autres TP Évolution de la température Exercices Couverture de survie Tour montparnasse (partie 3) Réfrigérateur + + Bouclier thermique + La physique au service du vigneron (partie 2) Appliquettes Loi des GP $T(t)$ (solutions de l'équa diff) Bilan radiatif "
 },
 {
 	"uri": "https://coursphychi.github.io/1spe/couleurs/",
