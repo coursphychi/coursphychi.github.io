@@ -22,22 +22,22 @@
     
 
     
-    <link href="/css/nucleus.css?1781875045" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1781875045" rel="stylesheet">
-    <link href="/css/hybrid.css?1781875045" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1781875045" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1781875045" rel="stylesheet">
-    <link href="/css/auto-complete.css?1781875045" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1781875045" rel="stylesheet">
-    <link href="/css/theme.css?1781875045" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1781875045" rel="stylesheet">
+    <link href="/css/nucleus.css?1781876566" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1781876566" rel="stylesheet">
+    <link href="/css/hybrid.css?1781876566" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1781876566" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1781876566" rel="stylesheet">
+    <link href="/css/auto-complete.css?1781876566" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1781876566" rel="stylesheet">
+    <link href="/css/theme.css?1781876566" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1781876566" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1781875045" rel="stylesheet">
+    <link href="/css/theme-blue.css?1781876566" rel="stylesheet">
     
-    <link href="/css/foo.css?1781875045" rel="stylesheet"><link href="/css/bar.css?1781875045" rel="stylesheet">
+    <link href="/css/foo.css?1781876566" rel="stylesheet"><link href="/css/bar.css?1781876566" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1781875045"></script>
+    <script src="/js/jquery-3.3.1.min.js?1781876566"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -121,14 +121,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1781875045"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1781875045"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1781876566"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1781876566"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1781875045"></script>
+<script type="text/javascript" src="/js/search.js?1781876566"></script>
 
     
   </div>
@@ -2560,38 +2560,59 @@ color: white;
 font-weight: lighter;
 }
 
-a.alarm-link,
-a.alarm-link:visited,
-a.alarm-link:hover,
-a.alarm-link:active {
+/* Reset global pour ce lien spécifique */
+a.alarm-link {
+  display: inline-block !important; /* Indispensable pour que le 'transform' survive au thème */
+  color: #aaa !important; /* Verrouille la couleur face aux styles de liens du thème */
   text-decoration: none !important;
   background: none !important;
   box-shadow: none !important;
-  border: 0 !important;
-  outline: none;
-  color: #aaa;      
+  border: none !important;
+  line-height: 1;
+  
+  /* Paramètres d'animation */
+  transform-origin: center center;
+  transition: transform 160ms ease !important;
 }
 
+/* Neutralisation des pseudo-éléments (effets de soulignement, flèches, etc.) */
 a.alarm-link::before,
 a.alarm-link::after {
+  display: none !important;
   content: none !important;
 }
 
-a.alarm-link {
-  display: inline-block;           
-  line-height: 1;
-  transform-origin: 50% 50%;
-  transition: transform 160ms ease;
+/* Comportement au survol et au clic */
+a.alarm-link:hover,
+a.alarm-link:active {
+  transform: scale(1.25) !important; /* Force l'animation */
+  background: none !important; /* Empêche le thème d'ajouter un fond au survol */
+  /* color: #888 !important; Optionnel : foncer légèrement l'icône au survol */
 }
 
-a.alarm-link:hover {
-  transform: scale(1.25);
-}
-
+/* Accessibilité (Navigation au clavier) */
 a.alarm-link:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 4px;
-  border-radius: 8px;
+  outline: 2px solid currentColor !important;
+  outline-offset: 4px !important;
+  border-radius: 8px !important;
+}
+/* On s'assure que le lien englobe bien l'icône */
+a.alarm-link {
+  display: inline-block !important;
+  padding: 5px; /* Donne un peu de "matière" à survoler */
+}
+
+/* L'animation est appliquée à l'enfant (i ou svg) lors du survol du parent (a) */
+a.alarm-link i,
+a.alarm-link svg {
+  display: inline-block !important;
+  transform-origin: center center;
+  transition: transform 160ms ease !important;
+}
+
+a.alarm-link:hover i,
+a.alarm-link:hover svg {
+  transform: scale(1.25) !important;
 }
 </style>
 <h1 id="cours-de-physique-chimie"><span style="color:white">Cours de physique-chimie</span></h1>
@@ -4406,16 +4427,16 @@ a.alarm-link:focus-visible {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1781875045"></script>
-    <script src="/js/perfect-scrollbar.min.js?1781875045"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1781875045"></script>
-    <script src="/js/jquery.sticky.js?1781875045"></script>
-    <script src="/js/featherlight.min.js?1781875045"></script>
-    <script src="/js/highlight.pack.js?1781875045"></script>
+    <script src="/js/clipboard.min.js?1781876566"></script>
+    <script src="/js/perfect-scrollbar.min.js?1781876566"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1781876566"></script>
+    <script src="/js/jquery.sticky.js?1781876566"></script>
+    <script src="/js/featherlight.min.js?1781876566"></script>
+    <script src="/js/highlight.pack.js?1781876566"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1781875045"></script>
-    <script src="/js/learn.js?1781875045"></script>
-    <script src="/js/hugo-learn.js?1781875045"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1781876566"></script>
+    <script src="/js/learn.js?1781876566"></script>
+    <script src="/js/hugo-learn.js?1781876566"></script>
     
     
 

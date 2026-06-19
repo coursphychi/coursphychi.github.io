@@ -4,86 +4,155 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Minuteur Ultimatum</title>
+  
+  <!-- Polices Google Fonts pour un look moderne et digital -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@800&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome pour les icônes (version la plus récente) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
     :root { --bg: hsl(120 80% 35%); }
     html, body { height: 100%; margin: 0; }
     body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       display: grid;
       place-items: center;
-      transition: background 120ms linear;
+      transition: background 300ms ease;
       user-select: none;
     }
-    .panel{
-      width: min(900px, 92vw);
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 20px;
-      padding: 18px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    .panel {
+      width: min(800px, 90vw);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 35px;
+      padding: 40px 30px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.25), inset 0 0 20px rgba(255,255,255,0.1);
       color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .top {
       display: flex;
-      gap: 12px;
-      align-items: end;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
+      background: rgba(0,0,0,0.15);
+      padding: 12px 25px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
     }
-    label { font-size: 14px; opacity: .9; }
-    input[type="number"]{
-      width: 70px;
-      font-size: 18px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.25);
-      background: rgba(0,0,0,.20);
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      color: rgba(255,255,255,0.9);
+      margin-right: 10px;
+    }
+    input[type="number"] {
+      width: 65px;
+      font-size: 22px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 2px solid rgba(255,255,255,0.3);
+      background: rgba(0,0,0,0.3);
       color: white;
       outline: none;
+      text-align: center;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .btn{
-      font-size: 16px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.25);
-      background: rgba(0,0,0,.22);
+    input[type="number"]:focus {
+      border-color: #fff;
+      background: rgba(0,0,0,0.5);
+      box-shadow: 0 0 15px rgba(255,255,255,0.4);
+      transform: scale(1.05);
+    }
+    /* Style des boutons circulaires avec icônes */
+    .btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.1);
       color: white;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
-    .btn:active { transform: translateY(1px); }
-    .timer{
+    .btn:hover:not(:disabled) {
+      transform: scale(1.15) translateY(-3px);
+      background: rgba(255,255,255,0.3);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      border-color: #fff;
+    }
+    .btn:active:not(:disabled) {
+      transform: scale(0.95);
+    }
+    .btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      background: transparent;
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: none;
+    }
+    /* Bouton Démarrer en évidence */
+    #start:not(:disabled) {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    .timer {
       text-align: center;
-      font-variant-numeric: tabular-nums;
+      font-family: 'JetBrains Mono', monospace;
       font-weight: 800;
-      font-size: clamp(64px, 10vw, 140px);
-      letter-spacing: 1px;
-      margin: 8px 0 0;
-      text-shadow: 0 8px 30px rgba(0,0,0,.35);
+      font-size: clamp(80px, 15vw, 160px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin: 15px 0;
+      text-shadow: 0 10px 40px rgba(0,0,0,0.35);
+      filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2));
     }
-    .sub{
-      display:flex;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 14px;
-      opacity: .9;
-      margin-top: 8px;
+    .sub {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-top: 15px;
       flex-wrap: wrap;
     }
-    .badge{
-      padding: 6px 10px;
+    .badge {
+      padding: 8px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.25);
-      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: background 0.2s;
     }
-    /* Clignotement fin */
     body.blink {
-      animation: blink 0.35s steps(2, end) infinite;
+      animation: blink 0.4s steps(2, end) infinite;
     }
     @keyframes blink {
       0% { filter: brightness(1); }
-      50% { filter: brightness(2); }
+      50% { filter: brightness(1.4) contrast(1.1); }
       100% { filter: brightness(1); }
     }
   </style>
@@ -91,25 +160,26 @@
 <body>
   <div class="panel">
     <div class="top">
-      <div>
+      <div class="input-group" title="Durée en minutes">
+        <i class="fa-solid fa-hourglass-half"></i>
         <input id="minutes" type="number" min="0" step="1" value="5" />
       </div>
-      <button class="btn" id="start">Démarrer</button>
-      <button class="btn" id="pause" disabled>Pause</button>
-      <button class="btn" id="reset" disabled>Réinitialiser</button>
-      <button class="btn" id="mute">🔊 Son</button>
+      <!-- Utilisation des attributs 'title' pour l'accessibilité -->
+      <button class="btn" id="start" title="Démarrer"><i class="fa-solid fa-play"></i></button>
+      <button class="btn" id="pause" title="Pause" disabled><i class="fa-solid fa-pause"></i></button>
+      <button class="btn" id="reset" title="Réinitialiser" disabled><i class="fa-solid fa-rotate-left"></i></button>
+      <button class="btn" id="mute" title="Activer/Désactiver le son"><i class="fa-solid fa-volume-high"></i></button>
     </div>
 
     <div class="timer" id="display">05:00</div>
 
     <div class="sub">
-      <span class="badge" id="status">Prêt</span>
-      <span class="badge" id="remaining">Restant : 300.0 s</span>
+      <span class="badge" id="status"><i class="fa-solid fa-circle-check"></i> Prêt</span>
+      <span class="badge" id="remaining"><i class="fa-solid fa-stopwatch"></i> Restant : 300.0 s</span>
     </div>
   </div>
 
   <script>
-    // --- Helpers ---
     const $ = (id) => document.getElementById(id);
     const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 
@@ -120,16 +190,12 @@
       return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
     }
 
-    // Fond vert -> jaune -> rouge en fonction du temps restant
-    // t = fraction restante (1 au début, 0 à la fin)
-    // hue: 120 (vert) -> 60 (jaune) -> 0 (rouge)
     function setBackgroundFromFraction(t) {
       t = clamp(t, 0, 1);
-      const hue = 120 * t; // 120->0 (passe par 60 naturellement)
+      const hue = 120 * t; 
       document.documentElement.style.setProperty("--bg", `hsl(${hue} 80% 35%)`);
     }
 
-    // --- State ---
     let totalMs = 5 * 60 * 1000;
     let remainingMs = totalMs;
     let running = false;
@@ -140,7 +206,6 @@
     let audioCtx = null;
     let alarmInterval = null;
 
-    // --- Elements ---
     const minutesEl = $("minutes");
     const startBtn = $("start");
     const pauseBtn = $("pause");
@@ -152,7 +217,7 @@
 
     function updateUI() {
       displayEl.textContent = fmtMMSS(remainingMs / 1000);
-      remainingEl.textContent = `Restant : ${(remainingMs/1000).toFixed(1)} s`;
+      remainingEl.innerHTML = `<i class="fa-solid fa-stopwatch"></i> Restant : ${(remainingMs/1000).toFixed(1)} s`;
 
       const frac = totalMs > 0 ? remainingMs / totalMs : 0;
       setBackgroundFromFraction(frac);
@@ -164,8 +229,8 @@
       minutesEl.disabled = running;
     }
 
-    function setStatus(txt) {
-      statusEl.textContent = txt;
+    function setStatus(txt, icon = "fa-circle-info") {
+      statusEl.innerHTML = `<i class="fa-solid ${icon}"></i> ${txt}`;
     }
 
     function ensureAudioContext() {
@@ -202,7 +267,6 @@
     function startAlarm() {
       if (muted) return;
       stopAlarm();
-      // Alarm: alternance de bips rapides
       alarmInterval = setInterval(() => {
         beepOnce(880, 120, 0.14);
         setTimeout(() => beepOnce(660, 120, 0.14), 160);
@@ -232,7 +296,7 @@
       lastTick = null;
 
       setBackgroundFromFraction(0);
-      setStatus("Terminé !");
+      setStatus("Terminé !", "fa-flag-checkered");
       startBlink();
       startAlarm();
       updateUI();
@@ -277,7 +341,7 @@
         remainingMs = totalMs;
       }
 
-      setStatus("Prêt");
+      setStatus("Prêt", "fa-circle-check");
       updateUI();
     }
 
@@ -288,19 +352,18 @@
 
       const mins = readMinutes();
       if (mins <= 0) {
-        setStatus("Entre un temps > 0");
+        setStatus("Temps invalide", "fa-triangle-exclamation");
         return;
       }
 
-      // Si on démarre depuis "prêt", (re)charge le total
       if (remainingMs === totalMs) {
         totalMs = mins * 60 * 1000;
         remainingMs = totalMs;
       }
 
-      ensureAudioContext(); // important: déclenché par un clic
+      ensureAudioContext(); 
       running = true;
-      setStatus("En cours…");
+      setStatus("En cours…", "fa-spinner fa-spin");
       updateUI();
       rafId = requestAnimationFrame(tick);
     });
@@ -310,7 +373,7 @@
       cancelAnimationFrame(rafId);
       rafId = null;
       lastTick = null;
-      setStatus("En pause");
+      setStatus("En pause", "fa-circle-pause");
       updateUI();
     });
 
@@ -320,12 +383,11 @@
 
     muteBtn.addEventListener("click", () => {
       muted = !muted;
-      muteBtn.textContent = muted ? "🔇 Muet" : "🔊 Son";
+      muteBtn.innerHTML = muted ? '<i class="fa-solid fa-volume-xmark"></i>' : '<i class="fa-solid fa-volume-high"></i>';
       if (muted) stopAlarm();
     });
 
     minutesEl.addEventListener("change", () => {
-      // Recalcule l’affichage si pas en cours
       if (!running) resetTimer(true);
     });
 
