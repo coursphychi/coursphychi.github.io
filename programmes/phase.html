@@ -1,0 +1,234 @@
+<style>
+    body { 
+        margin: 0; 
+        padding: 0; 
+        overflow: hidden; 
+        /* Optionnel : centre toute la simulation (canevas + boutons) verticalement et horizontalement dans la page */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #043f61; /* Assorti à la couleur de fond de votre scène vec(4, 63, 97) */
+    }
+    .glowscript { 
+        text-align: center; 
+    }
+    /* Assure un alignement vertical harmonieux entre le slider et le texte de la légende */
+    .glowscript .ui-slider, .glowscript input, .glowscript span {
+        vertical-align: middle;
+    }
+</style>
+
+
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+
+    var version, print, arange, __name__, type, ρσ_ls, ρσ_unpack, textmoon, R_T, R_L, O, d_TL, omega_L, t, Laxe, Inc, L, Terre, Lune, Debaxe, Finaxe, Axe, cr, circpath, Orb, ar, arcpath, R_obs, Lamp, Soleil, Obs_pole, suivrelune, r, s, wt, dt;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "4";
+    ρσ_unpack = [500, 400];
+    scene.width = ρσ_unpack[0];
+    scene.height = ρσ_unpack[1];
+    "5";
+    scene.background = vec(4, 63, 97)["/"](255);
+    "6";
+    textmoon = "https://upload.wikimedia.org/wikipedia/commons/2/26/Solarsystemscope_texture_2k_moon.jpg";
+    "7";
+    scene.lights = ρσ_list_decorate([]);
+    "8";
+    ρσ_interpolate_kwargs.call(this, distant_light, [ρσ_desugar_kwargs({direction: vector(1["-u"]()["*"](1), 0, 0), color: color.white})]);
+    "9";
+    R_T = 6371;
+    "10";
+    R_L = 1737;
+    "11";
+    O = vec(0, 0, 0);
+    "12";
+    d_TL = 15e3;
+    "13";
+    omega_L = 2["*"](pi)["/"](29.5);
+    "14";
+    t = 0;
+    "15";
+    Laxe = 1.4["*"](R_T);
+    "16";
+    Inc = 23.5["/"](180)["*"](pi);
+    "17";
+    L = vec(d_TL["*"](cos(omega_L["*"](t))), d_TL["*"](sin(omega_L["*"](t))), 0);
+    "18";
+    Terre = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: O, radius: R_T, texture: textures.earth})]);
+    "19";
+    ρσ_interpolate_kwargs.call(Terre, Terre.rotate, [ρσ_desugar_kwargs({angle: pi["/"](2), axis: vector(1, 0, 0)})]);
+    "20";
+    ρσ_interpolate_kwargs.call(Terre, Terre.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](Inc), axis: vector(1, 0, 0)})]);
+    "21";
+    Lune = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: L, radius: R_L, texture: textmoon})]);
+    "22";
+    Debaxe = vec(0, 1["-u"]()["*"](Laxe)["*"](sin(Inc)), 1["-u"]()["*"](Laxe)["*"](cos(Inc)));
+    "23";
+    Finaxe = vec(0, Laxe["*"](sin(Inc)), Laxe["*"](cos(Inc)));
+    "24";
+    Axe = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: Debaxe, axis: Finaxe["-"](1["*"](Debaxe)), round: true, shaftwidth: 200, visible: false})]);
+    "27";
+    cr = ρσ_list_decorate(ρσ_interpolate_kwargs.call(shapes, shapes.circle, [ρσ_desugar_kwargs({radius: 50})]));
+    "28";
+    circpath = ρσ_list_decorate(ρσ_interpolate_kwargs.call(paths, paths.circle, [ρσ_desugar_kwargs({radius: d_TL})]));
+    "29";
+    Orb = ρσ_interpolate_kwargs.call(this, extrusion, [ρσ_desugar_kwargs({path: circpath, shape: cr, color: color.red})]);
+    "30";
+    ar = ρσ_list_decorate(ρσ_interpolate_kwargs.call(shapes, shapes.arc, [ρσ_desugar_kwargs({radius: R_L["*"](1.01), angle1: 0, angle2: pi})]));
+    "31";
+    arcpath = ρσ_list_decorate(ρσ_interpolate_kwargs.call(paths, paths.arc, [ρσ_desugar_kwargs({radius: 1e-12, angle1: 0, angle2: pi["*"](1.05)})]));
+    "35";
+    ρσ_interpolate_kwargs.call(Orb, Orb.rotate, [ρσ_desugar_kwargs({angle: pi["/"](2), axis: vector(1, 0, 0)})]);
+    "37";
+    R_obs = R_T["*"](1.1);
+    "39";
+    Lamp = ρσ_interpolate_kwargs.call(this, local_light, [ρσ_desugar_kwargs({pos: vector(1["-u"]()["*"](30)["*"](d_TL), 0, 0), color: color.white})]);
+    "40";
+    Soleil = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: Lamp.pos, radius: 10["*"](R_T), color: color.white, emissive: true})]);
+    "42";
+    Obs_pole = vec(0, 0, R_T["*"](1.3));
+    "45";
+    scene.center = O;
+    "47";
+    scene.range = 2e4;
+    "50";
+    suivrelune = false;
+    "52";
+    scene.append_to_caption("\n");
+    "53";
+    async function suivre() {
+        var ρσ_ls, suivrelune;
+        "54";
+        suivrelune = true;
+        "55";
+        scene.up = vec(0, 0, 1);
+        "56";
+        scene.camera.pos = Obs_pole;
+        "57";
+        scene.camera.axis = Lune.pos["-"](1["*"](Obs_pole));
+    };
+    if (!suivre.__module__) Object.defineProperties(suivre, {
+        __module__ : {value: null}
+    });
+
+    "58";
+    r = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: suivre, text: " Suivre la Lune depuis la Terre"})]);
+    "59";
+    scene.append_to_caption("\n\n");
+    "61";
+    async function acc(s) {
+        "62";
+        wt.text = "{}".format(s.value);
+    };
+    if (!acc.__argnames__) Object.defineProperties(acc, {
+        __argnames__ : {value: ["s"]},
+        __module__ : {value: null}
+    });
+
+    "63";
+    s = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({bind: acc, min: 1, max: 10, step: 1, length: 250})]);
+    "64";
+    scene.append_to_caption("\n\n");
+    "65";
+    scene.append_to_caption(" accélérer ×");
+    "66";
+    wt = ρσ_interpolate_kwargs.call(this, wtext, [ρσ_desugar_kwargs({text: "{}".format(s.value)})]);
+    "67";
+    scene.append_to_caption("\n\n");
+    "69";
+    dt = .001;
+    "70";
+    while (true) {
+        "71";
+        (await rate(s.value["/"](dt)));
+        "72";
+        Lune.pos = vec(d_TL["*"](cos(omega_L["*"](t))), d_TL["*"](sin(omega_L["*"](t))), 0);
+        "74";
+        if (r.checked) {
+            "75";
+            scene.up = vec(0, 0, 1);
+            "76";
+            scene.camera.pos = Obs_pole;
+            "77";
+            scene.camera.axis = Lune.pos["-"](1["*"](Obs_pole));
+        }
+        "78";
+        ρσ_interpolate_kwargs.call(Lune, Lune.rotate, [ρσ_desugar_kwargs({angle: omega_L["*"](dt), axis: vector(0, 0, 1)})]);
+        "79";
+        ρσ_interpolate_kwargs.call(Terre, Terre.rotate, [ρσ_desugar_kwargs({angle: 2["*"](pi)["*"](dt), axis: Finaxe["-"](1["*"](Debaxe))})]);
+        "80";
+        t=t["+"](dt);
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>

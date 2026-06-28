@@ -22,22 +22,22 @@
     
 
     
-    <link href="/css/nucleus.css?1782226452" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1782226452" rel="stylesheet">
-    <link href="/css/hybrid.css?1782226452" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1782226452" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1782226452" rel="stylesheet">
-    <link href="/css/auto-complete.css?1782226452" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1782226452" rel="stylesheet">
-    <link href="/css/theme.css?1782226452" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1782226452" rel="stylesheet">
+    <link href="/css/nucleus.css?1782606333" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1782606333" rel="stylesheet">
+    <link href="/css/hybrid.css?1782606333" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1782606333" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1782606333" rel="stylesheet">
+    <link href="/css/auto-complete.css?1782606333" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1782606333" rel="stylesheet">
+    <link href="/css/theme.css?1782606333" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1782606333" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1782226452" rel="stylesheet">
+    <link href="/css/theme-blue.css?1782606333" rel="stylesheet">
     
-    <link href="/css/foo.css?1782226452" rel="stylesheet"><link href="/css/bar.css?1782226452" rel="stylesheet">
+    <link href="/css/foo.css?1782606333" rel="stylesheet"><link href="/css/bar.css?1782606333" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1782226452"></script>
+    <script src="/js/jquery-3.3.1.min.js?1782606333"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -121,14 +121,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1782226452"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1782226452"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1782606333"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1782606333"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1782226452"></script>
+<script type="text/javascript" src="/js/search.js?1782606333"></script>
 
     
   </div>
@@ -2613,7 +2613,40 @@
 <div style="position:relative;margin-left:auto;margin-right:auto;width:700px;max-width:100%;">
 <img src="/expgrowth.png" style="box-shadow:none;background:none;">
 </div>
-<iframe src="https://trinket.io/embed/python/1ea4c379f6d4" width="100%" height="300" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+<div class="trinket-embed" style="margin:1rem 0;text-align:center;">
+  <iframe id="trinket-1"
+          src="/trinket/player.html#eyJhdXRvcnVuIjpmYWxzZSwiY29kZSI6InNvbW1lID0gMC4wMVxubmJfcGllY2VzID0gMVxuZm9yIGkgaW4gcmFuZ2UoMiw2NSk6XG4gIG5iX3BpZWNlcyAqPSAyXG4gIHNvbW1lICs9IG5iX3BpZWNlcyowLjAxXG4gIHByaW50KGZcIsOAIGxhIGNhc2Uge2l9LCBvbiBwb3Nzw6hkZSB7c29tbWU6Xy4yZn0g4oKsXCIpIiwiZGVmYXVsdCI6ImNvZGUiLCJsYW5nIjoicHl0aG9uIiwibW9kZSI6InRvZ2dsZSIsIndpZHRoIjowfQ"
+          title="Fenêtre de code"
+          loading="lazy"
+          style="display:inline-block;vertical-align:top;width:100%;height:340px;border:0;overflow:hidden;border-radius:8px;background:transparent;color-scheme:normal;"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-modals allow-downloads">
+  </iframe>
+  <script>
+  
+
+  (function(){
+    var iframe = document.getElementById("trinket-1");
+    if (!iframe) return;
+    var cfg = {
+      code: "c29tbWUgPSAwLjAxCm5iX3BpZWNlcyA9IDEKZm9yIGkgaW4gcmFuZ2UoMiw2NSk6CiAgbmJfcGllY2VzICo9IDIKICBzb21tZSArPSBuYl9waWVjZXMqMC4wMQogIHByaW50KGYiw4AgbGEgY2FzZSB7aX0sIG9uIHBvc3PDqGRlIHtzb21tZTpfLjJmfSDigqwiKQ==",
+      lang: "python",
+      mode: "toggle",
+      autorun:  false 
+    };
+    var sent = false;
+    function send(){
+      if (sent || !iframe.contentWindow) return;
+      sent = true;
+      iframe.contentWindow.postMessage({ __trinket: true, cfg: cfg }, "*");
+    }
+    window.addEventListener("message", function(e){
+      if (e.source === iframe.contentWindow && e.data && e.data.__trinket_ready) send();
+    });
+    iframe.addEventListener("load", function(){ setTimeout(send, 50); });
+  })();
+  </script>
+</div>
+
 <p>Question bonus : pourquoi la longueur des cordes d&rsquo;un piano suit-elle une progression géométrique comme dans le dessin ci-dessous (réinvestissement du programme de 1ES) ? Quelle est la raison de la suite ?</p>
 <p><img src="/pianoexp2.png?width=300px" alt=""></p>
 <br>
@@ -4537,16 +4570,16 @@ new Chart(document.getElementById("line-chart"), {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1782226452"></script>
-    <script src="/js/perfect-scrollbar.min.js?1782226452"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1782226452"></script>
-    <script src="/js/jquery.sticky.js?1782226452"></script>
-    <script src="/js/featherlight.min.js?1782226452"></script>
-    <script src="/js/highlight.pack.js?1782226452"></script>
+    <script src="/js/clipboard.min.js?1782606333"></script>
+    <script src="/js/perfect-scrollbar.min.js?1782606333"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1782606333"></script>
+    <script src="/js/jquery.sticky.js?1782606333"></script>
+    <script src="/js/featherlight.min.js?1782606333"></script>
+    <script src="/js/highlight.pack.js?1782606333"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1782226452"></script>
-    <script src="/js/learn.js?1782226452"></script>
-    <script src="/js/hugo-learn.js?1782226452"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1782606333"></script>
+    <script src="/js/learn.js?1782606333"></script>
+    <script src="/js/hugo-learn.js?1782606333"></script>
     
     
 

@@ -22,22 +22,22 @@
     
 
     
-    <link href="/css/nucleus.css?1782226452" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1782226452" rel="stylesheet">
-    <link href="/css/hybrid.css?1782226452" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1782226452" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1782226452" rel="stylesheet">
-    <link href="/css/auto-complete.css?1782226452" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1782226452" rel="stylesheet">
-    <link href="/css/theme.css?1782226452" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1782226452" rel="stylesheet">
+    <link href="/css/nucleus.css?1782606333" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1782606333" rel="stylesheet">
+    <link href="/css/hybrid.css?1782606333" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1782606333" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1782606333" rel="stylesheet">
+    <link href="/css/auto-complete.css?1782606333" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1782606333" rel="stylesheet">
+    <link href="/css/theme.css?1782606333" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1782606333" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1782226452" rel="stylesheet">
+    <link href="/css/theme-blue.css?1782606333" rel="stylesheet">
     
-    <link href="/css/foo.css?1782226452" rel="stylesheet"><link href="/css/bar.css?1782226452" rel="stylesheet">
+    <link href="/css/foo.css?1782606333" rel="stylesheet"><link href="/css/bar.css?1782606333" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1782226452"></script>
+    <script src="/js/jquery-3.3.1.min.js?1782606333"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -121,14 +121,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1782226452"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1782226452"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1782606333"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1782606333"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1782226452"></script>
+<script type="text/javascript" src="/js/search.js?1782606333"></script>
 
     
   </div>
@@ -2665,7 +2665,40 @@
 <blockquote>
 <p>Compléter l&rsquo;implémentation Python ci-dessous donnant les 55 premières notes obtenues en complétant les pointillés.</p>
 </blockquote>
-<center><iframe src="https://trinket.io/embed/python/da91de7483" width="100%" height="300" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe></center>
+<div class="trinket-embed" style="margin:1rem 0;text-align:center;">
+  <iframe id="trinket-1"
+          src="/trinket/player.html#eyJhdXRvcnVuIjpmYWxzZSwiY29kZSI6Im4gPSAuLi5cbmYgPSAuLi5cbndoaWxlIC4uLiA6XG4gIHByaW50KFwiZlwiLG4sXCIgPSBcIixmLHNlcD0nJylcbiAgbiA9IC4uLlxuICBmID0gLi4uXG4gIGlmIC4uLiA6XG4gICAgZiA9IC4uLiIsImRlZmF1bHQiOiJjb2RlIiwibGFuZyI6InB5dGhvbiIsIm1vZGUiOiJ0b2dnbGUiLCJ3aWR0aCI6MH0"
+          title="Fenêtre de code"
+          loading="lazy"
+          style="display:inline-block;vertical-align:top;width:100%;height:340px;border:0;overflow:hidden;border-radius:8px;background:transparent;color-scheme:normal;"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-modals allow-downloads">
+  </iframe>
+  <script>
+  
+
+  (function(){
+    var iframe = document.getElementById("trinket-1");
+    if (!iframe) return;
+    var cfg = {
+      code: "biA9IC4uLgpmID0gLi4uCndoaWxlIC4uLiA6CiAgcHJpbnQoImYiLG4sIiA9ICIsZixzZXA9JycpCiAgbiA9IC4uLgogIGYgPSAuLi4KICBpZiAuLi4gOgogICAgZiA9IC4uLg==",
+      lang: "python",
+      mode: "toggle",
+      autorun:  false 
+    };
+    var sent = false;
+    function send(){
+      if (sent || !iframe.contentWindow) return;
+      sent = true;
+      iframe.contentWindow.postMessage({ __trinket: true, cfg: cfg }, "*");
+    }
+    window.addEventListener("message", function(e){
+      if (e.source === iframe.contentWindow && e.data && e.data.__trinket_ready) send();
+    });
+    iframe.addEventListener("load", function(){ setTimeout(send, 50); });
+  })();
+  </script>
+</div>
+
 <p>Lorsqu&rsquo;une note obtenue est proche d&rsquo;une note déjà présente, on peut &ldquo;refermer&rdquo; la gamme en ne gardant que les notes obtenues jusque là. On construit ainsi la <strong>gamme de Pythagore</strong>.</p>
 <p>On remarque ainsi que la $12^e$ note correspond approximativement à la note de départ ($f=1$).<br>En effet : $3^{12}\approx 2^{19}$. On dit alors que le cycle des quintes reboucle (même si imparfaitement) incitant à découper l&rsquo;octave en 12 notes.</p>
 <p>Presque tous les instruments occidentaux sont construits pour pouvoir reproduire la gamme chromatique faite de 12 notes séparées par des demi-tons.</p>
@@ -2696,7 +2729,7 @@
 <p>L’écart entre la quinte du loup et les autres quintes est appelé comma pythagoricien (représenté en vert ci-dessous). Pour contourner cette difficulté, les compositeurs choisissaient de positionner la quinte du loup dans le cycle sur un intervalle peu utilisé dans leur composition musicale.</p>
 <p><img src="/1espythagore.png?width=1200" alt=""></p>
 <h4 id="la-transposition">La transposition</h4>
-<p>La figure précédente fait apparaître deux types d&rsquo;intervales entre deux notes consécutives. On dit que les gammes de Pythagore sont à tempéraments inégaux.</p>
+<p>La figure précédente fait apparaître deux types d&rsquo;intervalles entre deux notes consécutives. On dit que les gammes de Pythagore sont à tempéraments inégaux.</p>
 <p>L’existence de ces deux types d’intervalle pose problème pour la transposition d’un morceau de musique, qui consiste à décaler d’un intervalle fixe toutes les notes de ce morceau
 afin de l’adapter à la tonalité des instruments ou de la voix.</p>
 <p><u>Rq</u> : l&rsquo;apotome fait quasiment 5 commas et le limma 4, ce qui donne 53 commas par octave.</p>
@@ -2710,9 +2743,40 @@ afin de l’adapter à la tonalité des instruments ou de la voix.</p>
 <blockquote>
 <p>Complétez l&rsquo;algorithme suivant permettant d&rsquo;obtenir une valeur approchée à $10^{-k}$ près du demi-ton tempéré $x$ par balayage.</p>
 </blockquote>
-<center>
-<iframe src="https://trinket.io/embed/python/57689f18d9" width="100%" height="300" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-</center>
+<div class="trinket-embed" style="margin:1rem 0;text-align:center;">
+  <iframe id="trinket-3"
+          src="/trinket/player.html#eyJhdXRvcnVuIjpmYWxzZSwiY29kZSI6InggPSAxXG5rID0gNVxucGFzID0gMTAqKigtaylcblxud2hpbGUgVHJ1ZTpcbiAgICBpZiB4KioxMiBcdTAwM2MgMiBhbmQgLi4uIFx1MDAzZSAyOlxuICAgICAgICBicmVha1xuICAgIGVsc2U6XG4gICAgICAgIC4uLlxuXG5wcmludCh4KSIsImRlZmF1bHQiOiJjb2RlIiwibGFuZyI6InB5dGhvbiIsIm1vZGUiOiJ0b2dnbGUiLCJ3aWR0aCI6MH0"
+          title="Fenêtre de code"
+          loading="lazy"
+          style="display:inline-block;vertical-align:top;width:100%;height:340px;border:0;overflow:hidden;border-radius:8px;background:transparent;color-scheme:normal;"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-modals allow-downloads">
+  </iframe>
+  <script>
+  
+
+  (function(){
+    var iframe = document.getElementById("trinket-3");
+    if (!iframe) return;
+    var cfg = {
+      code: "eCA9IDEKayA9IDUKcGFzID0gMTAqKigtaykKCndoaWxlIFRydWU6CiAgICBpZiB4KioxMiA8IDIgYW5kIC4uLiA+IDI6CiAgICAgICAgYnJlYWsKICAgIGVsc2U6CiAgICAgICAgLi4uCgpwcmludCh4KQ==",
+      lang: "python",
+      mode: "toggle",
+      autorun:  false 
+    };
+    var sent = false;
+    function send(){
+      if (sent || !iframe.contentWindow) return;
+      sent = true;
+      iframe.contentWindow.postMessage({ __trinket: true, cfg: cfg }, "*");
+    }
+    window.addEventListener("message", function(e){
+      if (e.source === iframe.contentWindow && e.data && e.data.__trinket_ready) send();
+    });
+    iframe.addEventListener("load", function(){ setTimeout(send, 50); });
+  })();
+  </script>
+</div>
+
 <p>L&rsquo;opération mathématique permettant d&rsquo;obtenir $x$ est la racine douzième de 2 : $\sqrt[12]{2}$. On peut aussi écrire $2^{\frac{1}{12}}$ de façon à ce que $x^{12}=(2^{\frac{1}{12}})^{12}=12$.</p>
 <blockquote>
 <p>Expliquer pourquoi le ton tempéré est le carré du demi-ton tempéré. Calculer une valeur décimale approchée à $10^{-2}$ près du ton tempéré.</p>
@@ -4528,16 +4592,16 @@ afin de l’adapter à la tonalité des instruments ou de la voix.</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1782226452"></script>
-    <script src="/js/perfect-scrollbar.min.js?1782226452"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1782226452"></script>
-    <script src="/js/jquery.sticky.js?1782226452"></script>
-    <script src="/js/featherlight.min.js?1782226452"></script>
-    <script src="/js/highlight.pack.js?1782226452"></script>
+    <script src="/js/clipboard.min.js?1782606333"></script>
+    <script src="/js/perfect-scrollbar.min.js?1782606333"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1782606333"></script>
+    <script src="/js/jquery.sticky.js?1782606333"></script>
+    <script src="/js/featherlight.min.js?1782606333"></script>
+    <script src="/js/highlight.pack.js?1782606333"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1782226452"></script>
-    <script src="/js/learn.js?1782226452"></script>
-    <script src="/js/hugo-learn.js?1782226452"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1782606333"></script>
+    <script src="/js/learn.js?1782606333"></script>
+    <script src="/js/hugo-learn.js?1782606333"></script>
     
     
 

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code runner</title>
+<style>
+  /* ===================================================================
+     Fenêtre épurée — inspirée de Trinket, sans le branding.
+     Les couleurs passent par des variables CSS faciles à personnaliser.
+  =================================================================== */
+  :root{
+    --tk-border:#d8dde3;
+    --tk-bg:#ffffff;
+    --tk-bar:#f5f7f9;
+    --tk-text:#1f2933;
+    --tk-muted:#6b7682;
+    --tk-accent:#2b7a4b;       /* vert "exécuter" */
+    --tk-accent-hover:#246b41;
+    --tk-stop:#d14b3d;         /* rouge "arrêter" */
+    --tk-tab-active:#ffffff;
+    --tk-error:#c0392b;
+    --tk-radius:8px;
+    --tk-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --tk-mono: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:transparent}
+  body{font-family:var(--tk-font);color:var(--tk-text)}
+
+  .tk{
+    display:flex;flex-direction:column;height:100vh;
+    border:1px solid var(--tk-border);border-radius:var(--tk-radius);
+    overflow:hidden;background:var(--tk-bg);
+  }
+
+  /* Barre d'outils */
+  .tk-bar{
+    display:flex;align-items:stretch;gap:0;
+    background:var(--tk-bar);border-bottom:1px solid var(--tk-border);
+    min-height:40px;
+  }
+  .tk-tabs{display:flex}
+  .tk-tab{
+    appearance:none;border:0;background:transparent;cursor:pointer;
+    padding:0 16px;font-size:13px;color:var(--tk-muted);
+    border-right:1px solid var(--tk-border);
+  }
+  .tk-tab.is-active{background:var(--tk-tab-active);color:var(--tk-text);font-weight:600}
+  .tk-spacer{flex:1}
+
+  /* Boutons icône ronds (Exécuter / Arrêter) */
+  .tk-iconbtn{
+    appearance:none;border:0;cursor:pointer;padding:0;
+    align-self:center;margin-right:8px;
+    width:30px;height:30px;border-radius:50%;
+    display:none;align-items:center;justify-content:center;
+    color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.18);
+    transition:background .15s ease, filter .15s ease, transform .06s ease, opacity .15s ease;
+  }
+  .tk-iconbtn svg{width:14px;height:14px;fill:currentColor;display:block}
+  .tk-iconbtn:active{transform:scale(.9)}
+  .tk-run{display:flex;background:var(--tk-accent)}
+  .tk-run:hover{background:var(--tk-accent-hover)}
+  .tk-run[disabled]{opacity:.4;cursor:default;box-shadow:none}
+  .tk-stop{background:var(--tk-stop)}
+  .tk-stop.is-visible{display:flex}
+  .tk-stop:hover{filter:brightness(.92)}
+
+  /* Zones */
+  .tk-body{flex:1;position:relative;overflow:hidden}
+  .tk-pane{position:absolute;inset:0;overflow:auto}
+  .tk-pane[hidden]{display:none}
+
+  /* Éditeur */
+  .tk-editor textarea{
+    width:100%;height:100%;border:0;resize:none;outline:none;padding:10px 12px;
+    font-family:var(--tk-mono);font-size:13.5px;line-height:1.5;color:var(--tk-text);
+    tab-size:4;
+  }
+  .CodeMirror{height:100% !important;font-family:var(--tk-mono);font-size:13.5px}
+
+  /* Sortie */
+  .tk-out{padding:10px 12px}
+  .tk-stdout{margin:0;font-family:var(--tk-mono);font-size:13.5px;line-height:1.45;white-space:pre-wrap;word-break:break-word}
+  .tk-stdin{font-family:var(--tk-mono);font-size:13.5px;border:1px solid var(--tk-border);border-radius:4px;padding:1px 4px}
+  .tk-canvas{display:flex;justify-content:center}
+  .tk-error{color:var(--tk-error);font-family:var(--tk-mono);font-size:13px;white-space:pre-wrap;margin-top:6px}
+  /* VPython : on dimensionne la fenêtre au conteneur GlowScript entier (scène +
+     boutons + sliders + graphes + sortie print). La mise à l'échelle éventuelle
+     se fait par transform sur tout le conteneur (aucune déformation). */
+  .tk-out.is-vpython{padding:0}
+  .gs-fit{overflow:hidden}
+  .gs-fit .glowscript{display:flow-root}
+
+  /* État de chargement */
+  .tk-loading{display:flex;align-items:center;justify-content:center;height:100%;color:var(--tk-muted);font-size:13px}
+</style>
+</head>
+<body>
+  <div class="tk" id="tk-root">
+    <div class="tk-bar" id="tk-bar"></div>
+    <div class="tk-body" id="tk-body">
+      <div class="tk-loading" id="tk-boot">…</div>
+    </div>
+  </div>
+
+<script>
+/* =====================================================================
+   CONFIGURATION DES BIBLIOTHÈQUES
+   ---------------------------------------------------------------------
+   • Skulpt et CodeMirror sont par défaut sur CDN (fiable, fonctionne tout
+     de suite). Tu peux les rapatrier en local pour t'affranchir totalement
+     des services tiers : voir le README.
+   • GlowScript n'a PAS de CDN officiel : il DOIT être auto-hébergé.
+     Place le dossier glowscript_libraries/ (issu de GlowScriptOffline3.2.zip)
+     dans  static/trinket/glowscript_libraries/.
+===================================================================== */
+var LIBS = {
+  skulpt:       "https://cdn.jsdelivr.net/gh/Tezumie/Skulpt-CDN@latest/skulpt.min.js",
+  skulptStdlib: "https://cdn.jsdelivr.net/gh/Tezumie/Skulpt-CDN@latest/skulpt-stdlib.js",
+
+  cmCss: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css",
+  cmJs:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js",
+  cmPy:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js",
+
+  gsBase:    "glowscript_libraries/",   // relatif à player.html → /trinket/glowscript_libraries/
+  gsVersion: "3.2"
+};
+
+/* ---------- utilitaires ---------- */
+function el(tag, attrs, children){
+  var n = document.createElement(tag);
+  if (attrs) for (var k in attrs){
+    if (k === "class") n.className = attrs[k];
+    else if (k === "html") n.innerHTML = attrs[k];
+    else n.setAttribute(k, attrs[k]);
+  }
+  (children||[]).forEach(function(c){ n.appendChild(typeof c==="string"?document.createTextNode(c):c); });
+  return n;
+}
+function b64ToUtf8(b64){
+  try { return decodeURIComponent(escape(window.atob(b64))); }
+  catch(e){ return window.atob(b64); }
+}
+var _loaded = {};
+function loadScript(url){
+  if (_loaded[url]) return _loaded[url];
+  _loaded[url] = new Promise(function(res, rej){
+    var s = document.createElement("script");
+    s.src = url; s.async = false;
+    s.onload = function(){ res(url); };
+    s.onerror = function(){ rej(new Error("Échec du chargement : " + url)); };
+    document.head.appendChild(s);
+  });
+  return _loaded[url];
+}
+function loadScriptsSequential(urls){
+  return urls.reduce(function(p, u){ return p.then(function(){ return loadScript(u); }); }, Promise.resolve());
+}
+function loadCss(url){
+  return new Promise(function(res){
+    var l = document.createElement("link");
+    l.rel = "stylesheet"; l.href = url; l.onload = res; l.onerror = res;
+    document.head.appendChild(l);
+  });
+}
+
+/* =====================================================================
+   ÉTAT + INITIALISATION
+   Priorité 1 : configuration lue dans le hash de l'URL (#<base64url>).
+                Robuste : aucun script parent requis, immunisé contre
+                reveal.js / Markdown / CSP inline.
+   Priorité 2 : postMessage (secours, ex. très gros programmes).
+===================================================================== */
+var CFG = null, editor = null;
+var els = {};
+
+function applyCfg(cfg, codeIsB64){
+  if (CFG || !cfg) return;             // une seule initialisation
+  CFG = cfg;
+  if (codeIsB64) CFG.code = b64ToUtf8(CFG.code || "");
+  init();
+}
+function b64urlToUtf8(s){
+  s = String(s).replace(/-/g, "+").replace(/_/g, "/");
+  while (s.length % 4) s += "=";
+  return b64ToUtf8(s);
+}
+function readHashCfg(){
+  var h = location.hash ? location.hash.slice(1) : "";
+  if (!h) return null;
+  try { return JSON.parse(b64urlToUtf8(h)); } catch(e){ return null; }
+}
+
+// Secours : configuration transmise par le script parent (thèmes classiques)
+window.addEventListener("message", function(e){
+  var d = e.data;
+  if (d && d.__trinket && d.cfg) applyCfg(d.cfg, true);
+});
+// reveal.js prévient l'iframe quand sa slide devient visible / masquée
+window.addEventListener("message", function(e){
+  if (e.data === "slide:start") onSlideVisible();
+});
+
+// Priorité 1 : le hash
+var _hashCfg = readHashCfg();
+if (_hashCfg) {
+  applyCfg(_hashCfg, false);
+} else {
+  // pas de hash : on signale au parent qu'on attend une config par message
+  try { parent.postMessage({ __trinket_ready: true }, "*"); } catch(e){}
+}
+
+function init(){
+  var lang = (CFG.lang || "python").toLowerCase();
+  var mode = (CFG.mode || "toggle").toLowerCase();
+  var dv   = (CFG.default || CFG.defaultView || "code").toLowerCase();
+  CFG.lang = (lang === "vpython" || lang === "glowscript") ? "vpython" : "python";
+  CFG.mode = (mode === "output" || mode === "output-only") ? "output" : "toggle";
+  CFG.defaultView = (dv === "output" || dv === "result" || dv === "résultat" || dv === "resultat") ? "output" : "code";
+  CFG.width = parseInt(CFG.width, 10) || 0;   // 0 = largeur auto (fenêtre épouse la scène)
+
+  buildUI();
+  // exécution initiale : uniquement si autorun="true" est demandé explicitement
+  if (!CFG.idle && CFG.autorun) run();
+}
+
+/* =====================================================================
+   INTERFACE
+===================================================================== */
+function buildUI(){
+  var bar  = document.getElementById("tk-bar");
+  var body = document.getElementById("tk-body");
+  bar.innerHTML = ""; body.innerHTML = "";
+
+  // --- panneaux ---
+  var editorPane = el("div", {class:"tk-pane tk-editor"});
+  var ta = el("textarea", {spellcheck:"false"});
+  ta.value = CFG.code;
+  editorPane.appendChild(ta);
+
+  var outPane = el("div", {class:"tk-pane tk-out"});
+  var stdout  = el("pre", {class:"tk-stdout"});
+  var canvas  = el("div", {class:"tk-canvas", id:"tk-canvas"});
+  var errBox  = el("div", {class:"tk-error"});
+  outPane.appendChild(canvas);
+  outPane.appendChild(stdout);
+  outPane.appendChild(errBox);
+
+  body.appendChild(editorPane);
+  body.appendChild(outPane);
+  els = {editorPane:editorPane, outPane:outPane, ta:ta, stdout:stdout, canvas:canvas, errBox:errBox};
+
+  // --- barre ---
+  if (CFG.mode === "toggle"){
+    var tabs = el("div", {class:"tk-tabs"});
+    var tabCode = el("button", {class:"tk-tab is-active"}, ["Code"]);
+    var tabOut  = el("button", {class:"tk-tab"}, ["Résultat"]);
+    tabs.appendChild(tabCode); tabs.appendChild(tabOut);
+    bar.appendChild(tabs);
+    bar.appendChild(el("div", {class:"tk-spacer"}));
+
+    function show(which){
+      var code = which === "code";
+      els.editorPane.hidden = !code;
+      els.outPane.hidden = code;
+      tabCode.classList.toggle("is-active", code);
+      tabOut.classList.toggle("is-active", !code);
+      if (code && editor) setTimeout(function(){ editor.refresh(); }, 0);
+    }
+    tabCode.onclick = function(){ show("code"); };
+    tabOut.onclick  = function(){ show("out"); };
+    els.show = show;
+    show(CFG.defaultView === "output" ? "out" : "code");
+  } else {
+    // output only : pas d'onglets, pas d'éditeur visible
+    els.editorPane.hidden = true;
+    bar.appendChild(el("div", {class:"tk-spacer"}));
+  }
+
+  var stopBtn = el("button", {class:"tk-iconbtn tk-stop", title:"Arrêter", "aria-label":"Arrêter"});
+  stopBtn.innerHTML = '<svg viewBox="0 0 16 16"><rect x="4" y="4" width="8" height="8" rx="2"/></svg>';
+  stopBtn.onclick = stopRun;
+  bar.appendChild(stopBtn);
+  els.stopBtn = stopBtn;
+
+  var runBtn = el("button", {class:"tk-iconbtn tk-run", title:"Exécuter", "aria-label":"Exécuter"});
+  runBtn.innerHTML = '<svg viewBox="0 0 16 16"><path d="M5 3.4c0-.5.5-.8 1-.6l6.5 4.1c.4.3.4.9 0 1.2L5.9 12.2c-.4.3-.9 0-.9-.6z"/></svg>';
+  runBtn.onclick = run;
+  bar.appendChild(runBtn);
+  els.runBtn = runBtn;
+
+  // éditeur enrichi (CodeMirror) uniquement en mode toggle
+  if (CFG.mode === "toggle"){
+    loadCss(LIBS.cmCss)
+      .then(function(){ return loadScript(LIBS.cmJs); })
+      .then(function(){ return loadScript(LIBS.cmPy); })
+      .then(function(){
+        editor = window.CodeMirror.fromTextArea(ta, {
+          mode: "python", lineNumbers: true, indentUnit: 4, tabSize: 4,
+          indentWithTabs: false, lineWrapping: false, viewportMargin: Infinity
+        });
+        editor.setSize("100%", "100%");
+      })
+      .catch(function(){ /* on garde le textarea brut si CodeMirror échoue */ });
+  }
+}
+
+function currentCode(){
+  return editor ? editor.getValue() : els.ta.value;
+}
+function clearOutput(){
+  els.stdout.textContent = "";
+  els.canvas.innerHTML = "";
+  els.errBox.textContent = "";
+}
+function showError(msg){ els.errBox.textContent = msg; }
+
+var _running = false, _vpStarted = false;
+function setRunning(on){
+  _running = on;
+  if (els.runBtn)  els.runBtn.disabled = on;
+  if (els.stopBtn) els.stopBtn.classList.toggle("is-visible", on);
+}
+// Re-lancer en rechargeant l'iframe : repart d'un état GlowScript propre.
+// Indispensable car relancer un programme VPython pendant qu'un autre tourne
+// encore corrompt l'état interne de GlowScript (erreur "L.match", etc.).
+function rerunViaReload(){
+  var next = {
+    code: currentCode(),
+    lang: CFG.lang, mode: CFG.mode, "default": CFG.defaultView,
+    width: CFG.width, autorun: true
+  };
+  try { location.hash = utf8ToB64url(JSON.stringify(next)); } catch(e){}
+  location.reload();
+}
+function run(){
+  // un programme tourne déjà, ou VPython a déjà été lancé une fois → on repart propre
+  if (_running || (CFG.lang === "vpython" && _vpStarted)) { rerunViaReload(); return; }
+  clearOutput();
+  if (els.show) els.show("out");        // bascule sur Résultat en mode toggle
+  els.outPane.classList.toggle("is-vpython", CFG.lang === "vpython");
+  setRunning(true);
+  var done = function(){ setRunning(false); };
+  var code = currentCode();
+  if (CFG.lang === "vpython"){ _vpStarted = true; runVPython(code, done); }
+  else runPython(code, done);
+}
+
+/* =====================================================================
+   AJUSTEMENT DE LA FENÊTRE AU CONTENU VPython
+   Le player redimensionne sa propre <iframe> via window.frameElement pour
+   englober TOUT le conteneur GlowScript (scène + boutons + sliders + graphes +
+   sortie print), et non la seule scène :
+   - sans width : la fenêtre épouse le contenu (réduit par transform si la place
+     manque) ;
+   - avec width : tout le contenu est mis à l'échelle pour tenir dans la largeur
+     forcée.
+   La hauteur suit toujours pour que rien ne soit coupé.
+===================================================================== */
+var _sceneRO = null, _sceneMO = null, _fitPending = false;
+
+function glowEls(){
+  if (!els || !els.canvas) return null;
+  var wrap = els.canvas.querySelector(".gs-fit");
+  var gs = wrap && wrap.firstElementChild;   // le div #glowscript
+  return (wrap && gs) ? { wrap: wrap, gs: gs } : null;
+}
+// Boîte englobante réelle du contenu GlowScript, en coordonnées de mise en page.
+// getBoundingClientRect, à l'intérieur de l'iframe, n'est PAS affecté par le
+// transform de reveal (l'iframe a son propre repère) ; on remet seulement à zéro
+// notre propre transform avant de mesurer.
+function gsBounds(gs){
+  var r0 = gs.getBoundingClientRect();
+  var minL = Infinity, minT = Infinity, maxR = 0, maxB = 0, found = false;
+  function consider(n){
+    var r = n.getBoundingClientRect();
+    if (r.width === 0 && r.height === 0) return;
+    found = true;
+    if (r.left - r0.left < minL) minL = r.left - r0.left;
+    if (r.top  - r0.top  < minT) minT = r.top  - r0.top;
+    if (r.right  - r0.left > maxR) maxR = r.right  - r0.left;
+    if (r.bottom - r0.top  > maxB) maxB = r.bottom - r0.top;
+  }
+  var i, kids = gs.children;
+  for (i = 0; i < kids.length; i++) consider(kids[i]);   // graphes, légendes, print…
+  var canv = gs.querySelectorAll("canvas");
+  for (i = 0; i < canv.length; i++) consider(canv[i]);   // …plus les canvas (gèrent le débordement)
+  if (!found) return null;
+  if (minL === Infinity) minL = 0;
+  if (minT === Infinity) minT = 0;
+  return { left: minL, top: minT, w: Math.ceil(maxR - minL), h: Math.ceil(maxB - minT) };
+}
+function fitGlowscript(){
+  var fe;
+  try { fe = window.frameElement; } catch(e){ fe = null; }
+  if (!fe) return;
+  var g = glowEls();
+  if (!g || !g.gs.querySelector("canvas")) return;
+  var avail = (fe.parentElement ? fe.parentElement.clientWidth : 0) || 800;
+  // largeur de mise en page : forcée (width=) ou place disponible. GlowScript
+  // dispose librement ses éléments dedans (align='left'/'right' → côte à côte).
+  var layoutW = (CFG.width && CFG.width > 0) ? CFG.width : avail;
+  g.gs.style.transform = "none";
+  g.gs.style.display = "flow-root";
+  g.wrap.style.overflow = "visible";
+  g.wrap.style.width = ""; g.wrap.style.height = "";
+  g.gs.style.width = layoutW + "px";
+  var b = gsBounds(g.gs);
+  if (!b || !b.w || !b.h) return;
+  // largeur forcée → on met le contenu à l'échelle pour remplir cette largeur
+  // (bornée à la place dispo) ; sinon on réduit seulement si ça dépasse.
+  var scale = (CFG.width && CFG.width > 0) ? (Math.min(CFG.width, avail) / b.w)
+                                          : (b.w > avail ? avail / b.w : 1);
+  var outW = Math.round(b.w * scale);
+  var outH = Math.ceil(b.h * scale);
+  g.gs.style.transformOrigin = "top left";
+  g.gs.style.transform = "translate(" + (-b.left) + "px," + (-b.top) + "px) scale(" + scale + ")";
+  g.wrap.style.overflow = "hidden";
+  g.wrap.style.width = outW + "px";
+  g.wrap.style.height = outH + "px";
+  var bar = document.getElementById("tk-bar");
+  var barH = bar ? bar.offsetHeight : 40;
+  fe.style.width = outW + "px";
+  fe.style.height = (barH + outH) + "px";
+  fe.style.maxWidth = "100%";
+}
+function scheduleFit(){
+  if (_fitPending) return;
+  _fitPending = true;
+  requestAnimationFrame(function(){ _fitPending = false; fitGlowscript(); });
+}
+function observeScene(){
+  if (CFG.lang !== "vpython") return;
+  if (_sceneRO) { _sceneRO.disconnect(); _sceneRO = null; }
+  if (_sceneMO) { _sceneMO.disconnect(); _sceneMO = null; }
+  var tries = 0;
+  (function attach(){
+    var g = glowEls();
+    var canvas = g && g.gs.querySelector("canvas");
+    if (g && canvas){
+      scheduleFit();
+      // ré-ajuster quand la scène change de taille…
+      if (typeof ResizeObserver !== "undefined"){
+        _sceneRO = new ResizeObserver(scheduleFit);
+        _sceneRO.observe(canvas);
+      }
+      // …et quand GlowScript ajoute des éléments (graphes, sortie print, boutons)
+      if (typeof MutationObserver !== "undefined"){
+        _sceneMO = new MutationObserver(scheduleFit);
+        _sceneMO.observe(g.gs, { childList: true, subtree: true, characterData: true });
+      }
+    } else if (tries++ < 60){
+      setTimeout(attach, 100);
+    }
+  })();
+}
+window.addEventListener("resize", function(){
+  if (CFG && CFG.lang === "vpython") scheduleFit();
+});
+
+function utf8ToB64url(s){
+  var b64 = window.btoa(unescape(encodeURIComponent(s)));
+  return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+function stopRun(){
+  if (!CFG) return;
+  var next = {
+    code: currentCode(),
+    lang: CFG.lang,
+    mode: CFG.mode,
+    autorun: false,
+    idle: true,                  // empêche la relance automatique après rechargement
+    width: CFG.width,
+    "default": CFG.defaultView
+  };
+  try { location.hash = utf8ToB64url(JSON.stringify(next)); } catch(e){}
+  location.reload();
+}
+
+// Appelé quand la slide reveal.js contenant l'iframe devient visible :
+// on rafraîchit l'éditeur et on réajuste la scène (un canvas créé masqué a une
+// taille nulle). On ne relance le programme que si autorun est demandé.
+function onSlideVisible(){
+  if (!CFG) return;
+  if (editor) setTimeout(function(){ editor.refresh(); }, 0);
+  if (CFG.lang === "vpython") setTimeout(scheduleFit, 60);
+  if (CFG.autorun && !CFG.idle && !_running && !(CFG.lang === "vpython" && _vpStarted)) run();
+}
+
+/* =====================================================================
+   MOTEUR PYTHON — Skulpt
+===================================================================== */
+function builtinRead(x){
+  if (window.Sk.builtinFiles === undefined || window.Sk.builtinFiles["files"][x] === undefined)
+    throw "Module introuvable : '" + x + "'";
+  return window.Sk.builtinFiles["files"][x];
+}
+function makeInputFun(){
+  return function(promptStr){
+    return new Promise(function(resolve){
+      if (promptStr) els.stdout.appendChild(document.createTextNode(promptStr));
+      var inp = el("input", {class:"tk-stdin", type:"text"});
+      els.stdout.appendChild(inp);
+      inp.focus();
+      inp.addEventListener("keydown", function(ev){
+        if (ev.key === "Enter"){
+          var v = inp.value;
+          inp.replaceWith(document.createTextNode(v + "\n"));
+          resolve(v);
+        }
+      });
+    });
+  };
+}
+function runPython(code, done){
+  loadScriptsSequential([LIBS.skulpt, LIBS.skulptStdlib]).then(function(){
+    var Sk = window.Sk;
+    Sk.configure({
+      output: function(t){ els.stdout.appendChild(document.createTextNode(t)); },
+      read: builtinRead,
+      inputfun: makeInputFun(),
+      inputfunTakesPrompt: true,
+      __future__: Sk.python3
+    });
+    (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "tk-canvas";
+    Sk.misceval.asyncToPromise(function(){
+      return Sk.importMainWithBody("<stdin>", false, code, true);
+    }).then(function(){ done(); }, function(err){ showError(String(err)); done(); });
+  }).catch(function(err){ showError(String(err)); done(); });
+}
+
+/* =====================================================================
+   MOTEUR VPYTHON — GlowScript
+   Reproduit la séquence officielle de GlowScriptOffline/GlowScript.html :
+   charger runtime + compilateur, compiler la source, puis eval + __main__().
+===================================================================== */
+function ensureVPythonHeader(src){
+  var V = LIBS.gsVersion;
+  var nl = src.indexOf("\n");
+  var first = nl >= 0 ? src.slice(0, nl) : src;
+  var rest  = nl >= 0 ? src.slice(nl) : "";
+  var header = "Web VPython " + V;
+  if (/^\s*Web\s*VPython\s*[0-9]\.[0-9]\s*$/i.test(first)) return header + rest;
+  if (/^\s*GlowScript\s*[0-9]\.[0-9]\s*VPython\s*$/i.test(first)) return header + rest;
+  if (/^\s*from\s+vpython\s+import\s+\*\s*$/i.test(first)) return header + rest;
+  return header + "\n" + src;
+}
+function formatGSError(err){
+  err = String(err);
+  // une ligne d'en-tête a été ajoutée → on décrémente le numéro de ligne annoncé
+  var m = err.match(/line(\s*)([0-9]+):/);
+  if (m){ var n = parseInt(m[2], 10) - 1; err = err.slice(0, m.index) + "line " + n + err.slice(m.index + m[0].length - 1); }
+  return err;
+}
+var _vpReady = false;
+function loadVPython(){
+  if (_vpReady) return Promise.resolve();
+  var V = LIBS.gsVersion, B = LIBS.gsBase;
+  return loadCss(B + "jquery-ui.custom.css")
+    .then(function(){ return loadCss(B + "ide.css"); })
+    .then(function(){ return loadScriptsSequential([
+      B + "jquery.min.js",
+      B + "jquery-ui.custom.min.js",
+      B + "RSrun." + V + ".min.js",
+      B + "glow." + V + ".min.js",
+      B + "Roboto_Medium_ttf_sans.js",
+      B + "NimbusRomNo9L_Med_otf_serif.js",
+      B + "RScompiler." + V + ".min.js"
+    ]); })
+    .then(function(){ _vpReady = true; });
+}
+async function _runCompiled(prog, done){
+  try {
+    eval(prog);            // définit __main__ (fonction asynchrone)
+    await __main__();      // exécute le programme GlowScript
+    done();
+  } catch(err){ showError(String(err)); done(); }
+}
+function runVPython(code, done){
+  loadVPython().then(function(){
+    var src = ensureVPythonHeader(code);
+    var program;
+    try {
+      program = window.glowscript_compile(src, { lang:"vpython", version:LIBS.gsVersion });
+    } catch(err){ showError(formatGSError(err)); done(); return; }
+
+    els.canvas.innerHTML = '<div class="gs-fit"><div id="glowscript" class="glowscript"></div></div>';
+    window.__context = { glowscript_container: window.$("#glowscript") };
+    _runCompiled(program, done);
+    observeScene();   // ajuste la fenêtre à la scène dès qu'elle apparaît
+  }).catch(function(err){
+    showError("VPython indisponible : " + err.message +
+      "\nAs-tu bien placé glowscript_libraries/ dans static/trinket/ ? (voir README)");
+    done();
+  });
+}
+</script>
+</body>
+</html>
