@@ -45,9 +45,11 @@
   .tk-tab{
     appearance:none;border:0;background:transparent;cursor:pointer;
     padding:0 16px;font-size:13px;color:var(--tk-muted);
-    border-right:1px solid var(--tk-border);
+    border-right:1px solid var(--tk-border);transition:color .15s ease, background .15s ease;
   }
-  .tk-tab.is-active{background:var(--tk-tab-active);color:var(--tk-text);font-weight:600}
+  .tk-tab:hover{color:var(--tk-text)}
+  .tk-tab.is-active{background:var(--tk-tab-active);color:var(--tk-text);font-weight:600;
+    box-shadow:inset 0 -2px 0 var(--tk-accent)}
   .tk-spacer{flex:1}
 
   /* Boutons icône ronds (Exécuter / Arrêter) */
@@ -67,6 +69,25 @@
   .tk-stop{background:var(--tk-stop)}
   .tk-stop.is-visible{display:flex}
   .tk-stop:hover{filter:brightness(.92)}
+
+  /* Bouton secondaire discret (Copier le code) */
+  .tk-ghostbtn{
+    appearance:none;cursor:pointer;align-self:center;margin-right:6px;
+    width:30px;height:30px;border-radius:7px;border:1px solid transparent;
+    background:transparent;color:var(--tk-muted);
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease, color .15s ease;
+  }
+  .tk-ghostbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;
+    stroke-linecap:round;stroke-linejoin:round;display:block}
+  .tk-ghostbtn:hover{background:rgba(15,23,32,.06);color:var(--tk-text)}
+  .tk-ghostbtn:active{transform:scale(.94)}
+  .tk-ghostbtn.is-done{color:var(--tk-accent)}
+
+  /* Focus clavier visible et homogène */
+  .tk-tab:focus-visible,.tk-iconbtn:focus-visible,.tk-ghostbtn:focus-visible{
+    outline:2px solid var(--tk-accent);outline-offset:2px;
+  }
 
   /* Zones */
   .tk-body{flex:1;position:relative;overflow:hidden}
@@ -101,6 +122,17 @@
     outline:none;font:inherit}
   .tk-canvas{display:flex;justify-content:center}
   .tk-error{color:var(--tk-error);font-family:var(--tk-mono);font-size:13px;white-space:pre-wrap;margin-top:6px}
+  .tk-error.is-clickable{cursor:pointer}
+  .tk-error.is-clickable:hover{text-decoration:underline;text-underline-offset:2px}
+  /* marqueur d'erreur : point rouge dans la gouttière + surlignage de la ligne */
+  .CodeMirror .tk-err-gutter{width:14px}
+  .tk-err-dot{display:block;width:8px;height:8px;margin:5px auto 0;border-radius:50%;background:var(--tk-stop)}
+  .CodeMirror .tk-err-line{background:rgba(209,75,61,.12)}
+
+  @media (prefers-reduced-motion: reduce){
+    .tk-caret{animation:none}
+    .tk-iconbtn,.tk-ghostbtn,.tk-tab{transition:none}
+  }
   /* Fichiers générés (open()/write) : reproduit l'onglet "fichier" de Trinket */
   .tk-files{margin-top:10px;display:flex;flex-direction:column;gap:8px}
   .tk-file{border:1px solid var(--tk-border);border-radius:6px;overflow:hidden}
@@ -153,6 +185,8 @@ var LIBS = {
   cmJs:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js",
   cmPy:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js",
   cmActiveLine: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/selection/active-line.min.js",
+  cmCloseBrackets: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js",
+  cmMatchBrackets: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js",
 
   gsBase:    "glowscript_libraries/",   // relatif à player.html → /trinket/glowscript_libraries/
   gsVersion: "3.2",                     // version GlowScript par défaut (surchargée par version="…" du shortcode)
@@ -161,6 +195,12 @@ var LIBS = {
   // pas width=. La scène ne dépasse jamais cette valeur (ni la place disponible).
   // 0 = pas de plafond (la scène occupe toute la largeur disponible).
   vpDefaultWidth: 640
+};
+
+/* Icônes SVG (trait fin, style épuré, héritent de currentColor) */
+var ICONS = {
+  copy:    '<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="7" y="7" width="9" height="11" rx="2"/><path d="M4 13H3.5A1.5 1.5 0 0 1 2 11.5v-7A1.5 1.5 0 0 1 3.5 3h7A1.5 1.5 0 0 1 12 4.5V5"/></svg>',
+  check:   '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>'
 };
 
 /* ---------- utilitaires ---------- */
@@ -319,6 +359,27 @@ function buildUI(){
     bar.appendChild(el("div", {class:"tk-spacer"}));
   }
 
+  // --- boutons secondaires (style discret) ---
+  if (CFG.mode === "toggle"){
+    var copyBtn = el("button", {class:"tk-ghostbtn tk-copy", title:"Copier le code", "aria-label":"Copier le code"});
+    copyBtn.innerHTML = ICONS.copy;
+    copyBtn.onclick = function(){
+      copyText(currentCode()).then(function(){
+        copyBtn.classList.add("is-done");
+        copyBtn.innerHTML = ICONS.check;
+        copyBtn.title = "Code copié"; copyBtn.setAttribute("aria-label", "Code copié");
+        clearTimeout(copyBtn._t);
+        copyBtn._t = setTimeout(function(){
+          copyBtn.classList.remove("is-done");
+          copyBtn.innerHTML = ICONS.copy;
+          copyBtn.title = "Copier le code"; copyBtn.setAttribute("aria-label", "Copier le code");
+        }, 1500);
+      });
+    };
+    bar.appendChild(copyBtn);
+    els.copyBtn = copyBtn;
+  }
+
   var stopBtn = el("button", {class:"tk-iconbtn tk-stop", title:"Arrêter", "aria-label":"Arrêter"});
   stopBtn.innerHTML = '<svg viewBox="0 0 16 16"><rect x="4" y="4" width="8" height="8" rx="2"/></svg>';
   stopBtn.onclick = stopRun;
@@ -337,11 +398,19 @@ function buildUI(){
       .then(function(){ return loadScript(LIBS.cmJs); })
       .then(function(){ return loadScript(LIBS.cmPy); })
       .then(function(){ return loadScript(LIBS.cmActiveLine); })
+      .then(function(){ return loadScript(LIBS.cmCloseBrackets); })
+      .then(function(){ return loadScript(LIBS.cmMatchBrackets); })
       .then(function(){
         editor = window.CodeMirror.fromTextArea(ta, {
           mode: "python", lineNumbers: true, indentUnit: 4, tabSize: 4,
           indentWithTabs: false, lineWrapping: false, viewportMargin: Infinity,
-          styleActiveLine: true   // surligne la ligne où se trouve le curseur (façon Trinket)
+          styleActiveLine: true,      // surligne la ligne du curseur (façon Trinket)
+          autoCloseBrackets: true,    // ferme automatiquement ( [ { " '
+          matchBrackets: true,        // met en évidence la parenthèse jumelle
+          smartIndent: true,          // indentation automatique après ":" etc.
+          electricChars: true,
+          // gouttière dédiée au marqueur d'erreur (point rouge), à gauche des numéros
+          gutters: ["tk-err-gutter", "CodeMirror-linenumbers"]
         });
         editor.setSize("100%", "100%");
       })
@@ -357,8 +426,43 @@ function clearOutput(){
   els.canvas.innerHTML = "";
   els.errBox.textContent = "";
   if (els.files){ els.files.innerHTML = ""; els.files.hidden = true; }
+  clearErrorMarks();
 }
 function showError(msg){ els.errBox.textContent = msg; }
+
+var _errLine = null;
+function clearErrorMarks(){
+  if (editor && _errLine != null){
+    try { editor.clearGutter("tk-err-gutter"); editor.removeLineClass(_errLine, "background", "tk-err-line"); } catch(e){}
+  }
+  _errLine = null;
+  if (els && els.errBox){ els.errBox.classList.remove("is-clickable"); els.errBox.onclick = null; els.errBox.removeAttribute("title"); }
+}
+// Erreur Python lisible : numéro de ligne en français + (si éditeur présent)
+// point rouge dans la gouttière et surlignage de la ligne fautive. Cliquer sur
+// le message renvoie à la bonne ligne dans l'onglet Code.
+function showPyError(err){
+  var s = formatPyError(err);
+  var m = s.match(/line (\d+)/);
+  var lineNo = m ? parseInt(m[1], 10) : null;
+  els.errBox.textContent = s.replace(/\bon line (\d+)/g, "(ligne $1)").replace(/\bline (\d+)/g, "ligne $1");
+  if (editor && lineNo && lineNo >= 1){
+    var idx = lineNo - 1;
+    clearErrorMarks();
+    var dot = el("span", {class:"tk-err-dot", "aria-hidden":"true"});
+    try {
+      editor.setGutterMarker(idx, "tk-err-gutter", dot);
+      editor.addLineClass(idx, "background", "tk-err-line");
+      _errLine = idx;
+    } catch(e){}
+    els.errBox.classList.add("is-clickable");
+    els.errBox.title = "Aller à la ligne " + lineNo;
+    els.errBox.onclick = function(){
+      if (els.show) els.show("code");
+      try { editor.setCursor(idx, 0); editor.focus(); editor.scrollIntoView({line: idx, ch: 0}, 120); } catch(e){}
+    };
+  }
+}
 
 var _running = false, _vpStarted = false;
 function setRunning(on){
@@ -727,7 +831,7 @@ function runPython(code, done){
     Sk.misceval.asyncToPromise(function(){
       return Sk.importMainWithBody("<stdin>", false, PYFILE_SHIM + code, true);
     }).then(function(mod){ capturePyFiles(mod); done(); },
-            function(err){ showError(formatPyError(err)); done(); });
+            function(err){ showPyError(err); done(); });
   }).catch(function(err){ showError(String(err)); done(); });
 }
 

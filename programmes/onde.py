@@ -1,33 +1,31 @@
-Web VPython 3.2
-
 scene.width,scene.height = 800,550
 
 # fonction gérant les couleurs des anneaux
 def fabrique_couleurs(nb_couleurs):
-  couleurs = []
-  for i in range(nb_couleurs):
-    hue = i * 360.0 / nb_couleurs
-    r, g, b = 0, 0, 0
-    if 0 <= hue < 60:
-      r = 255
-      g = int(255 * (hue / 60))
-    elif 60 <= hue < 120:
-      r = 255 - int(255 * ((hue - 60) / 60))
-      g = 255
-    elif 120 <= hue < 180:
-      g = 255
-      b = int(255 * ((hue - 120) / 60))
-    elif 180 <= hue < 240:
-      g = 255 - int(255 * ((hue - 180) / 60))
-      b = 255
-    elif 240 <= hue < 300:
-      r = int(255 * ((hue - 240) / 60))
-      b = 255
-    else:
-      r = 255
-      b = 255 - int(255 * ((hue - 300) / 60))
-    couleurs.append([r/255, g/255, b/255])
-  return couleurs
+    couleurs = []
+    for i in range(nb_couleurs):
+        hue = i * 360.0 / nb_couleurs
+        r, g, b = 0, 0, 0
+        if 0 <= hue < 60:
+            r = 255
+            g = int(255 * (hue / 60))
+        elif 60 <= hue < 120:
+            r = 255 - int(255 * ((hue - 60) / 60))
+            g = 255
+        elif 120 <= hue < 180:
+            g = 255
+            b = int(255 * ((hue - 120) / 60))
+        elif 180 <= hue < 240:
+            g = 255 - int(255 * ((hue - 180) / 60))
+            b = 255
+        elif 240 <= hue < 300:
+            r = int(255 * ((hue - 240) / 60))
+            b = 255
+        else:
+            r = 255
+            b = 255 - int(255 * ((hue - 300) / 60))
+        couleurs.append([r/255, g/255, b/255])
+    return couleurs
 
 # Initialisation des listes
 Anneaux = []
@@ -59,11 +57,10 @@ for i in range(N-1):
 t = 0          # temps en s
 dt = 1e-3      # en s
 while t < 2/f:
-  rate(1/dt)   # vitesse de l'animation
-  for i in range(N):
-    Anneaux[i].pos.x = i*d + A*sin(2*pi*f*t) # position de l'anneau i sur l'axe des x
-  for i in range(N-1):
-    Ressorts[i].pos = Anneaux[i].pos
-    Ressorts[i].axis = Anneaux[i+1].pos - Anneaux[i].pos
-  t += dt
-
+    rate(1/dt)   # vitesse de l'animation
+    for i in range(N):
+        Anneaux[i].pos.x = i*d + A*sin(2*pi*f*t) # position de l'anneau i sur l'axe des x
+    for i in range(N-1):
+        Ressorts[i].pos = Anneaux[i].pos
+        Ressorts[i].axis = Anneaux[i+1].pos - Anneaux[i].pos
+    t += dt

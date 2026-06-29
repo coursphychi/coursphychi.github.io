@@ -1,5 +1,3 @@
-GlowScript 2.9 VPython
-
 scene.userzoom=False
 L = 700
 scene.width=L 
@@ -48,7 +46,6 @@ polgraph = gcurve(graph=g2,color=color.red)
 
 # evolution :
 while(t<10):
-
     rate(1.5/dt)        
     t = t + dt  
     # forces agissant sur la masse :

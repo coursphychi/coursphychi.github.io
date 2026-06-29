@@ -1,5 +1,3 @@
-GlowScript 2.9 VPython
-
 scene.width=800
 scene.height=500
 Ly = 2
@@ -7,10 +5,6 @@ L = Ly/2*(11/8*pi-sin(11/8*pi))
 scene.center.x = L/2 
 scene.center.y = -Ly/2
 scene.range = 2
-#scene.userzoom=False
-#scene.userspin=False
-#scene.userpan=False
-#scene.axis = vec(0,0,0)
 
 running = False
 

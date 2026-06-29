@@ -1,5 +1,3 @@
-GlowScript 3.0 VPython
-
 # Paramètres
 l = 1
 m = 2
@@ -51,31 +49,31 @@ t = 0
 dt = 5e-6
 test = True
 while True :
-  rate(10/dt)
+    rate(10/dt)
   
-  # Calcul des forces pour les points intermédiaires
-  for i in range(1,N):
-    # force due au point précédent
-    force_prec = force_rappel(X[i].pos, X[i-1].pos, l/N, k)
-    # force due au point suivant
-    force_suiv = force_rappel(X[i].pos, X[i+1].pos, l/N, k)
-    # Somme des forces
-    F[i] = force_prec + force_suiv
+    # Calcul des forces pour les points intermédiaires
+    for i in range(1,N):
+        # force due au point précédent
+        force_prec = force_rappel(X[i].pos, X[i-1].pos, l/N, k)
+        # force due au point suivant
+        force_suiv = force_rappel(X[i].pos, X[i+1].pos, l/N, k)
+        # Somme des forces
+        F[i] = force_prec + force_suiv
   
-  # Force sur la pierre
-  F_M = M.m * g + force_rappel(M.pos, X[N-1].pos, l/N, k)
+    # Force sur la pierre
+    F_M = M.m * g + force_rappel(M.pos, X[N-1].pos, l/N, k)
   
-  # Mise à jour de la vitesse et de la position de M
-  M.v += F_M/M.m*dt
-  M.pos += M.v*dt
-  X[N] = M
+    # Mise à jour de la vitesse et de la position de M
+    M.v += F_M/M.m*dt
+    M.pos += M.v*dt
+    X[N] = M
 
-  # Mise à jour des forces et des positions des points intermédiaires
-  for i in range(1,N) :
-    X[i].v += (X[i].m*g+F[i]-alpha*X[i].v*mag(X[i].v))/X[i].m*dt
-    X[i].pos += X[i].v*dt
+    # Mise à jour des forces et des positions des points intermédiaires
+    for i in range(1,N) :
+        X[i].v += (X[i].m*g+F[i]-alpha*X[i].v*mag(X[i].v))/X[i].m*dt
+        X[i].pos += X[i].v*dt
 
-  # Mise à jour de la courbe
-  for i in range(N+1) :
-    C.modify(i,pos=X[i].pos)
-  t += dt
+    # Mise à jour de la courbe
+    for i in range(N+1) :
+        C.modify(i,pos=X[i].pos)
+    t += dt

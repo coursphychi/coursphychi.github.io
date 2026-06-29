@@ -1,13 +1,8 @@
-GlowScript 2.9 VPython
-
 scene.width = 800
 scene.height = 500
 scene.center.x = 4
 scene.center.y = 0
 scene.range = 10
-#scene.userzoom=False
-#scene.userspin=False
-#scene.userpan=False
 scene.axis = vec(0,-0.3,-1)
 
 running = False
@@ -54,7 +49,7 @@ p1 += [sphere(pos=end, radius=rball, visible=False)]
 
 colorsocle1 = vec(0.5,0.7,0.8)
 for i in range(len(p1)):
-  socle1.append([p1[i].pos.x,p1[i].pos.y])
+    socle1.append([p1[i].pos.x,p1[i].pos.y])
 socle1.append([10,-4])
 socle1.append([-8,-4])
 socle1.append([p1[0].pos.x,p1[0].pos.y])
@@ -67,7 +62,7 @@ p2 += [sphere(pos=end, radius=rball, visible=False)]
 
 colorsocle2 = vec(0.2,0.8,0.6)
 for i in range(len(p2)):
-  socle2.append([p2[i].pos.x,p2[i].pos.y])
+    socle2.append([p2[i].pos.x,p2[i].pos.y])
 socle2.append([10,-4])
 socle2.append([-8,-4])
 socle2.append([p2[0].pos.x,p2[0].pos.y])
@@ -96,31 +91,31 @@ while True:
         
         for j in range(len(p1)-1):
             if ball1.pos.x>=(p1[j].pos.x) & ball1.pos.x<=10:
-               ball1.v = mag(ball1.v)*norm(p1[j+1].pos-p1[j].pos)
-               a1 = dot(g,norm(p1[j+1].pos-p1[j].pos))*norm(p1[j+1].pos-p1[j].pos)
+                ball1.v = mag(ball1.v)*norm(p1[j+1].pos-p1[j].pos)
+                a1 = dot(g,norm(p1[j+1].pos-p1[j].pos))*norm(p1[j+1].pos-p1[j].pos)
             elif ball1.pos.x>=10:
-               a1 = g
+                a1 = g
         ball1.v += a1*dt
         
         for j in range(len(p2)-1):
             if ball2.pos.x>=(p2[j].pos.x) & ball2.pos.x<=10:
-               ball2.v = mag(ball2.v)*norm(p2[j+1].pos-p2[j].pos)
-               a2 = dot(g,norm(p2[j+1].pos-p2[j].pos))*norm(p2[j+1].pos-p2[j].pos)
+                ball2.v = mag(ball2.v)*norm(p2[j+1].pos-p2[j].pos)
+                a2 = dot(g,norm(p2[j+1].pos-p2[j].pos))*norm(p2[j+1].pos-p2[j].pos)
             elif ball2.pos.x>=10:
-               a2 = g
-               #ball2.make_trail = True
+                a2 = g
+                #ball2.make_trail = True
         ball2.v += a2*dt
         
         if ball1.pos.y >= -4+Rball :
-          ball1.pos += ball1.v*dt
-          t1 += dt
-          tlabel1.text = "t = {:.2f} s".format(t1)
+            ball1.pos += ball1.v*dt
+            t1 += dt
+            tlabel1.text = "t = {:.2f} s".format(t1)
         else :
-          ball1.v = vec(0,0,0)
+            ball1.v = vec(0,0,0)
           
         if ball2.pos.y >= -4+Rball :
-          ball2.pos += ball2.v*dt
-          t2 += dt
-          tlabel2.text = "t = {:.2f} s".format(t2)
+            ball2.pos += ball2.v*dt
+            t2 += dt
+            tlabel2.text = "t = {:.2f} s".format(t2)
         else :
-          ball2.v = vec(0,0,0)
+            ball2.v = vec(0,0,0)
