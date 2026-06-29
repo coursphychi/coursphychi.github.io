@@ -17,6 +17,36 @@ running = False
 label(pos=vec(L/2,0.2,0),text="Vous pouvez changer l'allure de la courbe\n en déplaçant les petits points bleus", xoffset=0,yoffset=0, space=0,height=15, border=5, box=False, color=vec(0.8,0.8,1))
 
 
+# Nettoie un contour avant triangulation : retire les points dupliqués et les
+# points colinéaires qui font planter poly2tri ("Intersecting Constraints").
+def contour_propre(poly):
+    # 1) retirer les points consécutifs identiques. Pas de "not pts" ni de pts[-1] :
+    #    GlowScript traite [] comme VRAI (sémantique JS), donc on teste len().
+    pts = []
+    for q in poly:
+        m = len(pts)
+        if m == 0 or q[0] != pts[m-1][0] or q[1] != pts[m-1][1]:
+            pts.append([q[0], q[1]])
+    # 2) retirer les points colinéaires (cyclique). Pas de dépaquetage "x,y = ..."
+    #    (autre construction qui peut appeler __getitem__ sur un tableau brut).
+    n = len(pts)
+    if n >= 4:
+        out = []
+        for i in range(n):
+            a0 = pts[(i-1+n) % n]
+            a1 = pts[i]
+            a2 = pts[(i+1) % n]
+            aire = (a1[0]-a0[0])*(a2[1]-a0[1]) - (a1[1]-a0[1])*(a2[0]-a0[0])
+            if abs(aire) >= 1e-7:
+                out.append([a1[0], a1[1]])
+        pts = out
+    # 3) refermer le contour : extrusion exige premier point == dernier
+    k = len(pts)
+    if k >= 1 and (pts[k-1][0] != pts[0][0] or pts[k-1][1] != pts[0][1]):
+        pts.append([pts[0][0], pts[0][1]])
+    return pts
+
+
 def Run(b):
     global running
     running = not running
@@ -80,8 +110,8 @@ for i in range(N):
   socle.append([p[i].pos.x,p[i].pos.y])
 socle.append([p[-1].pos.x,-Ly-0.2])
 socle.append([p[0].pos.x,-Ly-0.2])
-socle.append([p[0].pos.x,p[0].pos.y])
-ex = extrusion(path=[vec(0,0,0), vec(0,0,-0.2)], shape=socle, color=colorsocle)
+# (le point de fermeture est ajouté par contour_propre, qui referme le contour)
+ex = extrusion(path=[vec(0,0,0), vec(0,0,-0.2)], shape=contour_propre(socle), color=colorsocle)
 track += [cylinder(pos=p[0].pos, axis=p[1].pos-p[0].pos, radius=rcylindre, visible=True)]
 
 for j in range(1,N-1,1):
@@ -128,7 +158,7 @@ while True:
                 track[k+1].pos.y = p[k+1].pos.y
                 track[k+1].axis = p[k+2].pos-p[k+1].pos
         ex.visible = False
-        ex = extrusion(path=[vec(0,0,0), vec(0,0,-0.2)], shape=socle, color=colorsocle)
+        ex = extrusion(path=[vec(0,0,0), vec(0,0,-0.2)], shape=contour_propre(socle), color=colorsocle)
 
     if running:
         

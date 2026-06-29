@@ -86,11 +86,25 @@
   .tk-stdin{font-family:var(--tk-mono);font-size:13.5px;border:1px solid var(--tk-border);border-radius:4px;padding:1px 4px}
   .tk-canvas{display:flex;justify-content:center}
   .tk-error{color:var(--tk-error);font-family:var(--tk-mono);font-size:13px;white-space:pre-wrap;margin-top:6px}
-  /* VPython : on dimensionne la fenêtre au conteneur GlowScript entier (scène +
-     boutons + sliders + graphes + sortie print). La mise à l'échelle éventuelle
-     se fait par transform sur tout le conteneur (aucune déformation). */
+  /* Fichiers générés (open()/write) : reproduit l'onglet "fichier" de Trinket */
+  .tk-files{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+  .tk-file{border:1px solid var(--tk-border);border-radius:6px;overflow:hidden}
+  .tk-file-head{display:flex;align-items:center;justify-content:space-between;
+    gap:8px;padding:4px 8px;background:rgba(0,0,0,.04);border-bottom:1px solid var(--tk-border)}
+  .tk-file-name{font-family:var(--tk-mono);font-size:12.5px;color:var(--tk-muted);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tk-file-copy{font:inherit;font-size:12px;cursor:pointer;border:1px solid var(--tk-border);
+    background:var(--tk-bg);border-radius:5px;padding:2px 10px;color:var(--tk-accent)}
+  .tk-file-copy:hover{background:rgba(0,0,0,.03)}
+  .tk-file-btns{display:flex;gap:6px;flex:0 0 auto}
+  .tk-file-content{display:block;width:100%;box-sizing:border-box;border:0;resize:vertical;
+    font-family:var(--tk-mono);font-size:12.5px;line-height:1.4;padding:6px 8px;min-height:54px;
+    max-height:240px;background:var(--tk-bg);color:inherit;white-space:pre}
+  /* VPython : le canvas est dimensionné NATIVEMENT (via la largeur du conteneur),
+     jamais par transform CSS — sinon le calcul de la souris par GlowScript est
+     faussé. La fenêtre épouse ensuite la taille réelle du contenu. */
   .tk-out.is-vpython{padding:0}
-  .gs-fit{overflow:hidden}
+  .tk-out.is-vpython .tk-canvas{display:block;overflow:visible}
   .gs-fit .glowscript{display:flow-root}
 
   /* État de chargement */
@@ -125,7 +139,12 @@ var LIBS = {
   cmPy:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js",
 
   gsBase:    "glowscript_libraries/",   // relatif à player.html → /trinket/glowscript_libraries/
-  gsVersion: "3.2"
+  gsVersion: "3.2",
+
+  // VPython : largeur de mise en page par défaut quand le shortcode ne fournit
+  // pas width=. La scène ne dépasse jamais cette valeur (ni la place disponible).
+  // 0 = pas de plafond (la scène occupe toute la largeur disponible).
+  vpDefaultWidth: 640
 };
 
 /* ---------- utilitaires ---------- */
@@ -220,6 +239,7 @@ function init(){
   CFG.mode = (mode === "output" || mode === "output-only") ? "output" : "toggle";
   CFG.defaultView = (dv === "output" || dv === "result" || dv === "résultat" || dv === "resultat") ? "output" : "code";
   CFG.width = parseInt(CFG.width, 10) || 0;   // 0 = largeur auto (fenêtre épouse la scène)
+  CFG.fit = ((CFG.fit || "scale") + "").toLowerCase() === "native" ? "native" : "scale";
 
   buildUI();
   // exécution initiale : uniquement si autorun="true" est demandé explicitement
@@ -244,13 +264,16 @@ function buildUI(){
   var stdout  = el("pre", {class:"tk-stdout"});
   var canvas  = el("div", {class:"tk-canvas", id:"tk-canvas"});
   var errBox  = el("div", {class:"tk-error"});
+  var files   = el("div", {class:"tk-files"});
+  files.hidden = true;
   outPane.appendChild(canvas);
   outPane.appendChild(stdout);
   outPane.appendChild(errBox);
+  outPane.appendChild(files);
 
   body.appendChild(editorPane);
   body.appendChild(outPane);
-  els = {editorPane:editorPane, outPane:outPane, ta:ta, stdout:stdout, canvas:canvas, errBox:errBox};
+  els = {editorPane:editorPane, outPane:outPane, ta:ta, stdout:stdout, canvas:canvas, errBox:errBox, files:files};
 
   // --- barre ---
   if (CFG.mode === "toggle"){
@@ -314,6 +337,7 @@ function clearOutput(){
   els.stdout.textContent = "";
   els.canvas.innerHTML = "";
   els.errBox.textContent = "";
+  if (els.files){ els.files.innerHTML = ""; els.files.hidden = true; }
 }
 function showError(msg){ els.errBox.textContent = msg; }
 
@@ -330,7 +354,7 @@ function rerunViaReload(){
   var next = {
     code: currentCode(),
     lang: CFG.lang, mode: CFG.mode, "default": CFG.defaultView,
-    width: CFG.width, autorun: true
+    width: CFG.width, fit: CFG.fit, autorun: true
   };
   try { location.hash = utf8ToB64url(JSON.stringify(next)); } catch(e){}
   location.reload();
@@ -352,11 +376,12 @@ function run(){
    AJUSTEMENT DE LA FENÊTRE AU CONTENU VPython
    Le player redimensionne sa propre <iframe> via window.frameElement pour
    englober TOUT le conteneur GlowScript (scène + boutons + sliders + graphes +
-   sortie print), et non la seule scène :
-   - sans width : la fenêtre épouse le contenu (réduit par transform si la place
-     manque) ;
-   - avec width : tout le contenu est mis à l'échelle pour tenir dans la largeur
-     forcée.
+   sortie print), et non la seule scène. Le canvas est dimensionné NATIVEMENT
+   (largeur du conteneur ; GlowScript suit via l'événement resize), jamais par
+   transform CSS — un scale fausserait le calcul de la position de la souris.
+   - sans width : la fenêtre épouse le contenu, plafonné à vpDefaultWidth et à la
+     place disponible ;
+   - avec width : le canvas est rendu à cette largeur (réduit à la place dispo).
    La hauteur suit toujours pour que rien ne soit coupé.
 ===================================================================== */
 var _sceneRO = null, _sceneMO = null, _fitPending = false;
@@ -367,61 +392,99 @@ function glowEls(){
   var gs = wrap && wrap.firstElementChild;   // le div #glowscript
   return (wrap && gs) ? { wrap: wrap, gs: gs } : null;
 }
-// Boîte englobante réelle du contenu GlowScript, en coordonnées de mise en page.
-// getBoundingClientRect, à l'intérieur de l'iframe, n'est PAS affecté par le
-// transform de reveal (l'iframe a son propre repère) ; on remet seulement à zéro
-// notre propre transform avant de mesurer.
-function gsBounds(gs){
+var _lastOutW = -1, _lastOutH = -1;
+// Largeur réelle du contenu = bord droit le plus à droite (canvas + éléments
+// dimensionnés), en ignorant les blocs étirés sur toute la largeur du conteneur
+// (titre/légende) → la fenêtre épouse la scène, centrée, sans marge asymétrique.
+function contentRight(gs, wrapW){
   var r0 = gs.getBoundingClientRect();
-  var minL = Infinity, minT = Infinity, maxR = 0, maxB = 0, found = false;
-  function consider(n){
-    var r = n.getBoundingClientRect();
-    if (r.width === 0 && r.height === 0) return;
-    found = true;
-    if (r.left - r0.left < minL) minL = r.left - r0.left;
-    if (r.top  - r0.top  < minT) minT = r.top  - r0.top;
-    if (r.right  - r0.left > maxR) maxR = r.right  - r0.left;
-    if (r.bottom - r0.top  > maxB) maxB = r.bottom - r0.top;
-  }
-  var i, kids = gs.children;
-  for (i = 0; i < kids.length; i++) consider(kids[i]);   // graphes, légendes, print…
+  var best = 0, i, r;
   var canv = gs.querySelectorAll("canvas");
-  for (i = 0; i < canv.length; i++) consider(canv[i]);   // …plus les canvas (gèrent le débordement)
-  if (!found) return null;
-  if (minL === Infinity) minL = 0;
-  if (minT === Infinity) minT = 0;
-  return { left: minL, top: minT, w: Math.ceil(maxR - minL), h: Math.ceil(maxB - minT) };
+  for (i = 0; i < canv.length; i++){
+    r = canv[i].getBoundingClientRect();
+    if (r.width || r.height){ var cr = r.right - r0.left; if (cr > best) best = cr; }
+  }
+  var all = gs.querySelectorAll("*");
+  for (i = 0; i < all.length; i++){
+    r = all[i].getBoundingClientRect();
+    if ((r.width === 0 && r.height === 0) || r.width >= wrapW - 2) continue;
+    var er = r.right - r0.left; if (er > best) best = er;
+  }
+  return Math.ceil(best);
+}
+// Bas réel du contenu (au plus juste : plus bas des canvas et enfants directs).
+function contentBottom(gs){
+  var r0 = gs.getBoundingClientRect();
+  var h = 0, i, b;
+  var canv = gs.querySelectorAll("canvas");
+  for (i = 0; i < canv.length; i++){ b = canv[i].getBoundingClientRect().bottom - r0.top; if (b > h) h = b; }
+  var kids = gs.children;
+  for (i = 0; i < kids.length; i++){ b = kids[i].getBoundingClientRect().bottom - r0.top; if (b > h) h = b; }
+  return Math.ceil(h);
 }
 function fitGlowscript(){
   var fe;
   try { fe = window.frameElement; } catch(e){ fe = null; }
   if (!fe) return;
   var g = glowEls();
-  if (!g || !g.gs.querySelector("canvas")) return;
+  if (!g) return;
+  var canvas = g.gs.querySelector("canvas");
+  if (!canvas) return;
+  var clip = els.canvas;
   var avail = (fe.parentElement ? fe.parentElement.clientWidth : 0) || 800;
-  // largeur de mise en page : forcée (width=) ou place disponible. GlowScript
-  // dispose librement ses éléments dedans (align='left'/'right' → côte à côte).
-  var layoutW = (CFG.width && CFG.width > 0) ? CFG.width : avail;
+  var cap = LIBS.vpDefaultWidth;
+  var layoutW = (CFG.width && CFG.width > 0)
+    ? CFG.width
+    : (cap && cap > 0 ? Math.min(avail, cap) : avail);
+
   g.gs.style.transform = "none";
   g.gs.style.display = "flow-root";
-  g.wrap.style.overflow = "visible";
-  g.wrap.style.width = ""; g.wrap.style.height = "";
-  g.gs.style.width = layoutW + "px";
-  var b = gsBounds(g.gs);
-  if (!b || !b.w || !b.h) return;
-  // largeur forcée → on met le contenu à l'échelle pour remplir cette largeur
-  // (bornée à la place dispo) ; sinon on réduit seulement si ça dépasse.
-  var scale = (CFG.width && CFG.width > 0) ? (Math.min(CFG.width, avail) / b.w)
-                                          : (b.w > avail ? avail / b.w : 1);
-  var outW = Math.round(b.w * scale);
-  var outH = Math.ceil(b.h * scale);
-  g.gs.style.transformOrigin = "top left";
-  g.gs.style.transform = "translate(" + (-b.left) + "px," + (-b.top) + "px) scale(" + scale + ")";
-  g.wrap.style.overflow = "hidden";
-  g.wrap.style.width = outW + "px";
-  g.wrap.style.height = outH + "px";
+  g.wrap.style.transform = "none";
+  clip.style.transform = "none";
+  clip.style.overflow = "visible";
+  clip.style.width = ""; clip.style.height = "";
+
   var bar = document.getElementById("tk-bar");
   var barH = bar ? bar.offsetHeight : 40;
+
+  if (CFG.fit === "native"){
+    // --- NATIF : aucun transform → la souris reste juste même fenêtre réduite.
+    //     On dimensionne le canvas via la largeur du conteneur (GlowScript suit
+    //     via l'événement resize). Ajustement potentiellement moins parfait. ---
+    var targetW = Math.min(layoutW, avail);
+    if (Math.abs(g.wrap.offsetWidth - targetW) > 1){
+      g.wrap.style.width = targetW + "px";
+      try { window.dispatchEvent(new Event("resize")); } catch(e){}
+    }
+    var nW = contentRight(g.gs, g.wrap.offsetWidth) || canvas.offsetWidth || targetW;
+    var nH = contentBottom(g.gs);
+    if (!nW || !nH) return;
+    if (nW === _lastOutW && nH === _lastOutH) return;
+    _lastOutW = nW; _lastOutH = nH;
+    fe.style.width = nW + "px";
+    fe.style.height = (barH + nH) + "px";
+    fe.style.maxWidth = "100%";
+    return;
+  }
+
+  // --- SCALE (défaut) : ajustement PARFAIT par transform. La fenêtre épouse
+  //     exactement le contenu mis à l'échelle ; la souris peut être décalée
+  //     quand l'échelle < 1 (fenêtre réduite). La largeur du conteneur reste
+  //     celle posée par runVPython ; seul le scale s'adapte à la place dispo. ---
+  var wrapW = g.wrap.offsetWidth;
+  var natW = contentRight(g.gs, wrapW) || canvas.offsetWidth || wrapW;
+  var natH = contentBottom(g.gs);
+  if (!natW || !natH) return;
+  var scale = natW > avail ? avail / natW : 1;
+  var outW = Math.round(natW * scale);
+  var outH = Math.ceil(natH * scale);
+  g.wrap.style.transformOrigin = "top left";
+  g.wrap.style.transform = (scale === 1) ? "none" : "scale(" + scale + ")";
+  clip.style.overflow = "hidden";
+  clip.style.width = outW + "px";
+  clip.style.height = outH + "px";
+  if (outW === _lastOutW && outH === _lastOutH) return;   // anti-scintillement
+  _lastOutW = outW; _lastOutH = outH;
   fe.style.width = outW + "px";
   fe.style.height = (barH + outH) + "px";
   fe.style.maxWidth = "100%";
@@ -514,6 +577,103 @@ function makeInputFun(){
     });
   };
 }
+/* Préambule : redéfinit open() pour CAPTURER les écritures de fichiers en
+   mémoire (comme l'onglet "fichier" de Trinket). Les print() ne sont pas
+   touchés. Après l'exécution, le contenu est lu puis affiché avec un bouton
+   Copier (prêt à coller dans un tableur / grapheur). */
+var PYFILE_SHIM =
+  "__tkfiles__ = {}\n" +
+  "class __TkFile__:\n" +
+  "    def __init__(s, n, m='r'):\n" +
+  "        s.n = n; s.m = m\n" +
+  "        if 'r' not in m: __tkfiles__[n] = ''\n" +
+  "    def write(s, x):\n" +
+  "        __tkfiles__[s.n] = __tkfiles__.get(s.n, '') + x\n" +
+  "        return len(x)\n" +
+  "    def writelines(s, xs):\n" +
+  "        for x in xs: s.write(x)\n" +
+  "    def read(s, *a): return __tkfiles__.get(s.n, '')\n" +
+  "    def readlines(s, *a): return s.read().splitlines(True)\n" +
+  "    def __iter__(s): return iter(s.read().splitlines(True))\n" +
+  "    def flush(s): pass\n" +
+  "    def close(s): pass\n" +
+  "    def __enter__(s): return s\n" +
+  "    def __exit__(s, *a): return False\n" +
+  "def open(n, m='r', *a, **k): return __TkFile__(n, m)\n";
+var PYFILE_OFFSET = (PYFILE_SHIM.match(/\n/g) || []).length;  // lignes ajoutées
+
+// Le préambule décale les numéros de ligne → on les corrige dans les erreurs.
+function formatPyError(err){
+  var s = String(err);
+  return s.replace(/line (\d+)/g, function(whole, n){
+    var v = parseInt(n, 10) - PYFILE_OFFSET;
+    return v >= 1 ? ("line " + v) : whole;
+  });
+}
+function copyText(t){
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    try { return navigator.clipboard.writeText(t); } catch(e){}
+  }
+  return new Promise(function(res){
+    var ta = document.createElement("textarea");
+    ta.value = t; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand("copy"); } catch(e){}
+    document.body.removeChild(ta); res();
+  });
+}
+function renderFiles(files){
+  if (!els.files) return;
+  els.files.innerHTML = "";
+  var any = false, names = files ? Object.keys(files) : [];
+  for (var i = 0; i < names.length; i++){
+    var name = names[i];
+    var content = files[name];
+    if (content == null) continue;
+    content = String(content);
+    any = true;
+    var box  = el("div", {class:"tk-file"});
+    var head = el("div", {class:"tk-file-head"});
+    var nm   = el("span", {class:"tk-file-name"}); nm.textContent = name;
+    var btn  = el("button", {class:"tk-file-copy", type:"button"}); btn.textContent = "Copier";
+    var dl   = el("button", {class:"tk-file-copy", type:"button"}); dl.textContent = "Télécharger";
+    var grp  = el("div", {class:"tk-file-btns"});
+    var area = el("textarea", {class:"tk-file-content", readonly:"readonly", spellcheck:"false"});
+    area.value = content;
+    (function(c, b, a, d, fname){
+      b.addEventListener("click", function(){
+        a.focus(); a.select();
+        copyText(c).then(function(){
+          var old = b.textContent; b.textContent = "Copié \u2713";
+          setTimeout(function(){ b.textContent = old; }, 1500);
+        });
+      });
+      d.addEventListener("click", function(){
+        try {
+          var blob = new Blob([c], {type:"text/plain;charset=utf-8"});
+          var url = URL.createObjectURL(blob);
+          var lnk = document.createElement("a");
+          lnk.href = url; lnk.download = fname || "fichier.txt";
+          document.body.appendChild(lnk); lnk.click(); document.body.removeChild(lnk);
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+        } catch(e){}
+      });
+    })(content, btn, area, dl, name);
+    grp.appendChild(btn); grp.appendChild(dl);
+    head.appendChild(nm); head.appendChild(grp);
+    box.appendChild(head); box.appendChild(area);
+    els.files.appendChild(box);
+  }
+  els.files.hidden = !any;
+}
+function capturePyFiles(mod){
+  try {
+    var Sk = window.Sk;
+    var d = mod && mod.$d;
+    if (!d || !d.__tkfiles__) return;
+    renderFiles(Sk.ffi.remapToJs(d.__tkfiles__));
+  } catch(e){ /* pas de fichier généré : on ignore */ }
+}
 function runPython(code, done){
   loadScriptsSequential([LIBS.skulpt, LIBS.skulptStdlib]).then(function(){
     var Sk = window.Sk;
@@ -526,8 +686,9 @@ function runPython(code, done){
     });
     (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "tk-canvas";
     Sk.misceval.asyncToPromise(function(){
-      return Sk.importMainWithBody("<stdin>", false, code, true);
-    }).then(function(){ done(); }, function(err){ showError(String(err)); done(); });
+      return Sk.importMainWithBody("<stdin>", false, PYFILE_SHIM + code, true);
+    }).then(function(mod){ capturePyFiles(mod); done(); },
+            function(err){ showError(formatPyError(err)); done(); });
   }).catch(function(err){ showError(String(err)); done(); });
 }
 
@@ -578,6 +739,12 @@ async function _runCompiled(prog, done){
     done();
   } catch(err){ showError(String(err)); done(); }
 }
+function availWidth(){
+  var fe;
+  try { fe = window.frameElement; } catch(e){ fe = null; }
+  if (fe && fe.parentElement && fe.parentElement.clientWidth) return fe.parentElement.clientWidth;
+  return window.innerWidth || 800;
+}
 function runVPython(code, done){
   loadVPython().then(function(){
     var src = ensureVPythonHeader(code);
@@ -586,10 +753,17 @@ function runVPython(code, done){
       program = window.glowscript_compile(src, { lang:"vpython", version:LIBS.gsVersion });
     } catch(err){ showError(formatGSError(err)); done(); return; }
 
-    els.canvas.innerHTML = '<div class="gs-fit"><div id="glowscript" class="glowscript"></div></div>';
+    // Largeur du conteneur FIXÉE avant l'exécution : un canvas GlowScript se cale
+    // sur la largeur de son conteneur à sa création. width= si fourni, sinon la
+    // place disponible, éventuellement plafonnée par LIBS.vpDefaultWidth.
+    var cap = LIBS.vpDefaultWidth;
+    var layoutW = (CFG.width && CFG.width > 0)
+      ? CFG.width
+      : (cap && cap > 0 ? Math.min(availWidth(), cap) : availWidth());
+    els.canvas.innerHTML = '<div class="gs-fit" style="width:' + layoutW + 'px"><div id="glowscript" class="glowscript"></div></div>';
     window.__context = { glowscript_container: window.$("#glowscript") };
     _runCompiled(program, done);
-    observeScene();   // ajuste la fenêtre à la scène dès qu'elle apparaît
+    observeScene();   // ajuste/centre la fenêtre une fois la scène rendue
   }).catch(function(err){
     showError("VPython indisponible : " + err.message +
       "\nAs-tu bien placé glowscript_libraries/ dans static/trinket/ ? (voir README)");
