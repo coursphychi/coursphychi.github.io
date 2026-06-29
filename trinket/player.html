@@ -18,6 +18,7 @@
     --tk-accent:#2b7a4b;       /* vert "exécuter" */
     --tk-accent-hover:#246b41;
     --tk-stop:#d14b3d;         /* rouge "arrêter" */
+    --tk-input:#1971c2;        /* bleu de la saisie console (façon Trinket) */
     --tk-tab-active:#ffffff;
     --tk-error:#c0392b;
     --tk-radius:8px;
@@ -79,11 +80,25 @@
     tab-size:4;
   }
   .CodeMirror{height:100% !important;font-family:var(--tk-mono);font-size:13.5px}
+  /* ligne active (curseur) surlignée en gris, façon Trinket */
+  .CodeMirror-activeline-background{background:#eceff3}
+  .CodeMirror-activeline-gutter{background:#e4e8ee}
 
   /* Sortie */
   .tk-out{padding:10px 12px}
   .tk-stdout{margin:0;font-family:var(--tk-mono);font-size:13.5px;line-height:1.45;white-space:pre-wrap;word-break:break-word}
-  .tk-stdin{font-family:var(--tk-mono);font-size:13.5px;border:1px solid var(--tk-border);border-radius:4px;padding:1px 4px}
+  /* Saisie input() façon Trinket : inline dans la console, texte bleu, sans
+     cadre, avec un curseur bloc clignotant (pas le caret natif). */
+  .tk-inwrap{white-space:pre;position:relative}
+  .tk-instyle{color:var(--tk-input)}      /* saisie / valeur, en bleu, dans le flux */
+  .tk-caret{display:inline-block;width:0.6em;height:1.1em;background:var(--tk-muted);
+    vertical-align:text-bottom;animation:tk-blink 1.05s steps(1,start) infinite}
+  @keyframes tk-blink{50%{opacity:0}}
+  /* Le champ réel est invisible : il ne sert qu'à capter la frappe et le focus.
+     L'affichage est fait par le span .tk-instyle → aucun rognage ni défilement. */
+  .tk-stdin{position:absolute;left:0;top:0;width:1px;height:1em;opacity:0;
+    border:0;padding:0;margin:0;background:transparent;color:transparent;
+    outline:none;font:inherit}
   .tk-canvas{display:flex;justify-content:center}
   .tk-error{color:var(--tk-error);font-family:var(--tk-mono);font-size:13px;white-space:pre-wrap;margin-top:6px}
   /* Fichiers générés (open()/write) : reproduit l'onglet "fichier" de Trinket */
@@ -137,9 +152,10 @@ var LIBS = {
   cmCss: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css",
   cmJs:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js",
   cmPy:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js",
+  cmActiveLine: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/selection/active-line.min.js",
 
   gsBase:    "glowscript_libraries/",   // relatif à player.html → /trinket/glowscript_libraries/
-  gsVersion: "3.2",
+  gsVersion: "3.2",                     // version GlowScript par défaut (surchargée par version="…" du shortcode)
 
   // VPython : largeur de mise en page par défaut quand le shortcode ne fournit
   // pas width=. La scène ne dépasse jamais cette valeur (ni la place disponible).
@@ -240,6 +256,7 @@ function init(){
   CFG.defaultView = (dv === "output" || dv === "result" || dv === "résultat" || dv === "resultat") ? "output" : "code";
   CFG.width = parseInt(CFG.width, 10) || 0;   // 0 = largeur auto (fenêtre épouse la scène)
   CFG.fit = ((CFG.fit || "scale") + "").toLowerCase() === "native" ? "native" : "scale";
+  CFG.version = /^[0-9]\.[0-9]$/.test((CFG.version || "") + "") ? ("" + CFG.version) : "";
 
   buildUI();
   // exécution initiale : uniquement si autorun="true" est demandé explicitement
@@ -319,10 +336,12 @@ function buildUI(){
     loadCss(LIBS.cmCss)
       .then(function(){ return loadScript(LIBS.cmJs); })
       .then(function(){ return loadScript(LIBS.cmPy); })
+      .then(function(){ return loadScript(LIBS.cmActiveLine); })
       .then(function(){
         editor = window.CodeMirror.fromTextArea(ta, {
           mode: "python", lineNumbers: true, indentUnit: 4, tabSize: 4,
-          indentWithTabs: false, lineWrapping: false, viewportMargin: Infinity
+          indentWithTabs: false, lineWrapping: false, viewportMargin: Infinity,
+          styleActiveLine: true   // surligne la ligne où se trouve le curseur (façon Trinket)
         });
         editor.setSize("100%", "100%");
       })
@@ -354,7 +373,7 @@ function rerunViaReload(){
   var next = {
     code: currentCode(),
     lang: CFG.lang, mode: CFG.mode, "default": CFG.defaultView,
-    width: CFG.width, fit: CFG.fit, autorun: true
+    width: CFG.width, fit: CFG.fit, version: CFG.version, autorun: true
   };
   try { location.hash = utf8ToB64url(JSON.stringify(next)); } catch(e){}
   location.reload();
@@ -564,13 +583,33 @@ function makeInputFun(){
   return function(promptStr){
     return new Promise(function(resolve){
       if (promptStr) els.stdout.appendChild(document.createTextNode(promptStr));
-      var inp = el("input", {class:"tk-stdin", type:"text"});
-      els.stdout.appendChild(inp);
+      var wrap   = el("span", {class:"tk-inwrap"});
+      var mirror = el("span", {class:"tk-instyle"});      // texte affiché (bleu)
+      var caret  = el("span", {class:"tk-caret"});
+      var inp    = el("input", {class:"tk-stdin", type:"text",
+                                autocomplete:"off", autocorrect:"off",
+                                autocapitalize:"off", spellcheck:"false"});
+      // l'input (invisible) capte la frappe ; mirror affiche ; caret = curseur bloc
+      wrap.appendChild(mirror); wrap.appendChild(caret); wrap.appendChild(inp);
+      els.stdout.appendChild(wrap);
+
+      function sync(){ mirror.textContent = inp.value; }   // recopie la saisie
+      sync();
       inp.focus();
+
+      // un clic dans la console redonne le focus à la saisie en cours
+      function refocus(){ if (document.body.contains(inp)) inp.focus(); }
+      els.stdout.addEventListener("click", refocus);
+
+      inp.addEventListener("input", sync);
       inp.addEventListener("keydown", function(ev){
         if (ev.key === "Enter"){
+          ev.preventDefault();
+          els.stdout.removeEventListener("click", refocus);
           var v = inp.value;
-          inp.replaceWith(document.createTextNode(v + "\n"));
+          var done = el("span", {class:"tk-instyle"});
+          done.textContent = v + "\n";          // valeur conservée en bleu, dans le flux
+          wrap.replaceWith(done);
           resolve(v);
         }
       });
@@ -697,8 +736,13 @@ function runPython(code, done){
    Reproduit la séquence officielle de GlowScriptOffline/GlowScript.html :
    charger runtime + compilateur, compiler la source, puis eval + __main__().
 ===================================================================== */
+// Version GlowScript effective : celle demandée par l'embed (version="…") si
+// valide, sinon la version par défaut du player (LIBS.gsVersion).
+function vpVersion(){
+  return (CFG && CFG.version) ? CFG.version : LIBS.gsVersion;
+}
 function ensureVPythonHeader(src){
-  var V = LIBS.gsVersion;
+  var V = vpVersion();
   var nl = src.indexOf("\n");
   var first = nl >= 0 ? src.slice(0, nl) : src;
   var rest  = nl >= 0 ? src.slice(nl) : "";
@@ -718,7 +762,7 @@ function formatGSError(err){
 var _vpReady = false;
 function loadVPython(){
   if (_vpReady) return Promise.resolve();
-  var V = LIBS.gsVersion, B = LIBS.gsBase;
+  var V = vpVersion(), B = LIBS.gsBase;
   return loadCss(B + "jquery-ui.custom.css")
     .then(function(){ return loadCss(B + "ide.css"); })
     .then(function(){ return loadScriptsSequential([
@@ -750,7 +794,7 @@ function runVPython(code, done){
     var src = ensureVPythonHeader(code);
     var program;
     try {
-      program = window.glowscript_compile(src, { lang:"vpython", version:LIBS.gsVersion });
+      program = window.glowscript_compile(src, { lang:"vpython", version:vpVersion() });
     } catch(err){ showError(formatGSError(err)); done(); return; }
 
     // Largeur du conteneur FIXÉE avant l'exécution : un canvas GlowScript se cale
