@@ -178,8 +178,15 @@
      dans  static/trinket/glowscript_libraries/.
 ===================================================================== */
 var LIBS = {
-  skulpt:       "https://cdn.jsdelivr.net/gh/Tezumie/Skulpt-CDN@latest/skulpt.min.js",
-  skulptStdlib: "https://cdn.jsdelivr.net/gh/Tezumie/Skulpt-CDN@latest/skulpt-stdlib.js",
+  // Skulpt (moteur Python). On essaie les sources dans l'ordre : d'abord une
+  // copie AUTO-HÉBERGÉE (la plus fiable — fonctionne hors-ligne et derrière un
+  // proxy d'établissement), puis le CDN en secours si le local est absent.
+  // Pour auto-héberger : place skulpt.min.js et skulpt-stdlib.js dans
+  //   static/trinket/skulpt_libraries/        (voir le README).
+  skulpt:       ["skulpt_libraries/skulpt.min.js",
+                 "https://cdn.jsdelivr.net/gh/Tezumie/Skulpt-CDN@latest/skulpt.min.js"],
+  skulptStdlib: ["skulpt_libraries/skulpt-stdlib.js",
+                 "https://cdn.jsdelivr.net/gh/Tezumie/Skulpt-CDN@latest/skulpt-stdlib.js"],
 
   cmCss: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css",
   cmJs:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js",
@@ -232,6 +239,17 @@ function loadScript(url){
 }
 function loadScriptsSequential(urls){
   return urls.reduce(function(p, u){ return p.then(function(){ return loadScript(u); }); }, Promise.resolve());
+}
+// Essaie plusieurs sources dans l'ordre ; la 1ʳᵉ qui se charge l'emporte.
+// (URL unique acceptée aussi.) → auto-hébergement prioritaire, CDN en secours.
+function loadFirst(urls){
+  var list = [].concat(urls), i = 0;
+  return new Promise(function(res, rej){
+    (function next(){
+      if (i >= list.length){ rej(new Error("aucune source disponible")); return; }
+      loadScript(list[i++]).then(res, next);
+    })();
+  });
 }
 function loadCss(url){
   return new Promise(function(res){
@@ -818,7 +836,7 @@ function capturePyFiles(mod){
   } catch(e){ /* pas de fichier généré : on ignore */ }
 }
 function runPython(code, done){
-  loadScriptsSequential([LIBS.skulpt, LIBS.skulptStdlib]).then(function(){
+  loadFirst(LIBS.skulpt).then(function(){ return loadFirst(LIBS.skulptStdlib); }).then(function(){
     var Sk = window.Sk;
     Sk.configure({
       output: function(t){ els.stdout.appendChild(document.createTextNode(t)); },
@@ -832,7 +850,12 @@ function runPython(code, done){
       return Sk.importMainWithBody("<stdin>", false, PYFILE_SHIM + code, true);
     }).then(function(mod){ capturePyFiles(mod); done(); },
             function(err){ showPyError(err); done(); });
-  }).catch(function(err){ showError(String(err)); done(); });
+  }).catch(function(){
+    showError("Impossible de charger le moteur Python (Skulpt).\n"
+      + "Vérifie ta connexion, ou héberge Skulpt en local (voir le README, "
+      + "dossier static/trinket/skulpt_libraries/).");
+    done();
+  });
 }
 
 /* =====================================================================
