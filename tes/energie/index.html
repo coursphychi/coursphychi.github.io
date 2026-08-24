@@ -22,22 +22,22 @@
     
 
     
-    <link href="/css/nucleus.css?1783095152" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1783095152" rel="stylesheet">
-    <link href="/css/hybrid.css?1783095152" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1783095152" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1783095152" rel="stylesheet">
-    <link href="/css/auto-complete.css?1783095152" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1783095152" rel="stylesheet">
-    <link href="/css/theme.css?1783095152" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1783095152" rel="stylesheet">
+    <link href="/css/nucleus.css?1787538252" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1787538252" rel="stylesheet">
+    <link href="/css/hybrid.css?1787538252" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1787538252" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1787538252" rel="stylesheet">
+    <link href="/css/auto-complete.css?1787538252" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1787538252" rel="stylesheet">
+    <link href="/css/theme.css?1787538252" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1787538252" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1783095152" rel="stylesheet">
+    <link href="/css/theme-blue.css?1787538252" rel="stylesheet">
     
-    <link href="/css/foo.css?1783095152" rel="stylesheet"><link href="/css/bar.css?1783095152" rel="stylesheet">
+    <link href="/css/foo.css?1787538252" rel="stylesheet"><link href="/css/bar.css?1787538252" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1783095152"></script>
+    <script src="/js/jquery-3.3.1.min.js?1787538252"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -121,14 +121,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1783095152"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1783095152"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1787538252"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1787538252"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1783095152"></script>
+<script type="text/javascript" src="/js/search.js?1787538252"></script>
 
     
   </div>
@@ -2597,6 +2597,606 @@
 <td>Cours&nbsp;8</td><th><a href="https://presentationssite.github.io/tes/cours8">Empreinte carbone</a></th>
 </tr>
 </table>
+<br>
+<h2 id="une-interview-instructive-en-introduction">Une interview instructive en introduction</h2>
+<blockquote style="text-alig:left;color:#959595;font-size:1.2em;"> L'interview date de novembre 2019, ce qui permet de passer une partie du discours de l'invité au révélateur des données actuelles.</blockquote>
+<p><a href="/act-interview.pdf"><strong>Activité</strong></a></p>
+<h3 id="nucléaire-et-politique">Nucléaire et politique</h3>
+<style>
+.ap{
+   
+  --ap-accent:#5b6472;       
+  --ap-bg:#f7f8f9;
+  --ap-fg:#24272d;
+  --ap-muted:#797f8a;
+  --ap-rail:#e3e5e9;
+  --ap-buffer:#cfd3da;
+  --ap-border:#e0e2e7;
+  --ap-hover:#eceef1;
+  --ap-radius:14px;
+  box-sizing:border-box;
+  display:block;
+  margin:1.5rem 0;
+  padding:.8rem .95rem .85rem;
+  background:var(--ap-bg);
+  color:var(--ap-fg);
+  border:1px solid var(--ap-border);
+  border-radius:var(--ap-radius);
+  font-family:inherit;
+  font-size:.95rem;
+  line-height:1.35;
+}
+.ap *,.ap *::before,.ap *::after{box-sizing:border-box;}
+.ap__top{display:flex;align-items:center;gap:.8rem;}
+.ap__bottom{display:flex;align-items:center;gap:.65rem;margin-top:.55rem;}
+
+ 
+.ap__play{
+  position:relative;flex:0 0 auto;width:44px;height:44px;padding:0;
+  display:grid;place-items:center;
+  border:none;border-radius:50%;
+  background:var(--ap-accent);color:#fff;cursor:pointer;
+  transition:transform .12s ease,filter .12s ease;
+}
+.ap__play:hover{filter:brightness(1.12);}
+.ap__play:active{transform:scale(.94);}
+.ap__play svg{width:20px;height:20px;fill:currentColor;grid-area:1/1;}
+.ap__icon--pause,.ap.is-playing .ap__icon--play{display:none;}
+.ap.is-playing .ap__icon--pause{display:block;}
+.ap.is-busy .ap__icon--play,.ap.is-busy .ap__icon--pause{opacity:0;}
+.ap__spin{
+  grid-area:1/1;width:20px;height:20px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.35);border-top-color:#fff;
+  display:none;animation:ap-spin .7s linear infinite;
+}
+.ap.is-busy .ap__spin{display:block;}
+@keyframes ap-spin{to{transform:rotate(360deg);}}
+
+ 
+.ap__meta{flex:1 1 auto;min-width:0;}
+.ap__title{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ap__sub{color:var(--ap-muted);font-size:.82em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+ 
+.ap__tools{display:flex;align-items:center;gap:.15rem;margin-left:auto;flex:0 0 auto;}
+.ap__btn{
+  display:grid;place-items:center;height:30px;min-width:30px;padding:0 .35rem;
+  border:none;border-radius:8px;background:transparent;color:var(--ap-muted);
+  font:inherit;font-size:.78em;font-weight:600;cursor:pointer;
+  text-decoration:none;transition:background .12s ease,color .12s ease;
+}
+.ap__btn:hover{background:var(--ap-hover);color:var(--ap-fg);}
+.ap__btn svg{width:17px;height:17px;fill:currentColor;}
+.ap__rate{font-variant-numeric:tabular-nums;}
+.ap__volwrap{display:flex;align-items:center;}
+.ap__vol{
+  width:0;opacity:0;margin:0;height:20px;
+  -webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;
+  transition:width .18s ease,opacity .18s ease;
+}
+.ap__volwrap:hover .ap__vol,.ap__vol:focus-visible{width:70px;opacity:1;margin-left:.3rem;}
+.ap__vol::-webkit-slider-runnable-track{height:4px;border-radius:99px;
+  background:linear-gradient(to right,var(--ap-accent) calc(var(--v,1)*100%),var(--ap-rail) 0);}
+.ap__vol::-moz-range-track{height:4px;border-radius:99px;
+  background:linear-gradient(to right,var(--ap-accent) calc(var(--v,1)*100%),var(--ap-rail) 0);}
+.ap__vol::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+  width:11px;height:11px;margin-top:-3.5px;border-radius:50%;background:var(--ap-fg);border:none;}
+.ap__vol::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--ap-fg);border:none;}
+
+ 
+.ap__time{
+  flex:0 0 auto;font-size:.78em;color:var(--ap-muted);
+  font-variant-numeric:tabular-nums;min-width:3.4em;text-align:center;
+}
+.ap__seek{position:relative;flex:1 1 auto;height:20px;display:flex;align-items:center;}
+.ap__rail{position:absolute;left:0;right:0;height:5px;border-radius:99px;background:var(--ap-rail);overflow:hidden;}
+.ap__buf{position:absolute;inset:0 auto 0 0;width:0;background:var(--ap-buffer);transition:width .25s linear;}
+.ap__fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--ap-accent);}
+.ap__range{
+  position:relative;width:100%;height:20px;margin:0;
+  -webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;
+}
+.ap__range:focus{outline:none;}
+.ap__range::-webkit-slider-runnable-track{height:20px;background:transparent;}
+.ap__range::-moz-range-track{height:20px;background:transparent;}
+.ap__range::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:13px;height:13px;margin-top:3.5px;border-radius:50%;
+  background:var(--ap-accent);border:2px solid var(--ap-bg);
+  box-shadow:0 1px 3px rgba(36,39,45,.28);
+  transition:transform .12s ease;
+}
+.ap__range::-moz-range-thumb{
+  width:13px;height:13px;border-radius:50%;
+  background:var(--ap-accent);border:2px solid var(--ap-bg);
+  box-shadow:0 1px 3px rgba(36,39,45,.28);
+  transition:transform .12s ease;
+}
+.ap__range:hover::-webkit-slider-thumb,.ap__range:active::-webkit-slider-thumb{transform:scale(1.3);}
+.ap__range:hover::-moz-range-thumb,.ap__range:active::-moz-range-thumb{transform:scale(1.3);}
+.ap__range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--ap-bg),0 0 0 5px var(--ap-accent);}
+.ap__range:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px var(--ap-bg),0 0 0 5px var(--ap-accent);}
+.ap__btn:focus-visible,.ap__play:focus-visible{outline:2px solid var(--ap-accent);outline-offset:2px;}
+
+ 
+.ap__resume{
+  display:none;align-items:center;gap:.35rem;
+  margin:.5rem 0 0;padding:.3rem .5rem;
+  background:var(--ap-hover);border-radius:8px;
+  font-size:.5em;color:var(--ap-muted);
+}
+.ap.has-resume .ap__resume{display:flex;}
+.ap__resume button{
+  border:none;background:transparent;padding:0;
+  font:inherit;font-weight:600;color:var(--ap-fg);
+  cursor:pointer;
+}
+
+ 
+.ap.is-error{border-color:#c0504a;}
+.ap.is-error .ap__sub{color:#c0504a;}
+
+ 
+@media (max-width:520px){
+  .ap__title{font-size:.92em;}
+  .ap__time{min-width:3.1em;font-size:.74em;}
+  .ap__play{width:40px;height:40px;}
+}
+@media (hover:none){
+  .ap__volwrap{display:none;}  
+}
+@media (prefers-reduced-motion:reduce){
+  .ap *,.ap *::before,.ap *::after{transition:none!important;animation:none!important;}
+}
+</style>
+<script>
+(function(){
+  "use strict";
+  var RATES=[1,1.25,1.5,1.75,2,0.75];
+  var STORE="ap:pos:";          
+  var MIN_SAVE=10;              
+  var TAIL=15;                  
+  var EXPIRE=90*24*3600*1000;   
+
+  function fmt(t){
+    if(!isFinite(t)||t<0) return "--:--";
+    t=Math.floor(t);
+    var h=Math.floor(t/3600), m=Math.floor((t%3600)/60), s=t%60;
+    var mm=(h?String(m).padStart(2,"0"):String(m));
+    return (h?h+":":"")+mm+":"+String(s).padStart(2,"0");
+  }
+  
+
+  function load(k){
+    try{
+      var raw=localStorage.getItem(STORE+k);
+      if(!raw) return null;
+      var o=JSON.parse(raw);
+      if(!o||Date.now()-o.t>EXPIRE){ localStorage.removeItem(STORE+k); return null; }
+      return o;
+    }catch(e){ return null; }
+  }
+  function save(k,pos){
+    try{ localStorage.setItem(STORE+k,JSON.stringify({p:pos,t:Date.now()})); }catch(e){}
+  }
+  function drop(k){ try{ localStorage.removeItem(STORE+k); }catch(e){} }
+
+  function setup(el){
+    el.setAttribute("data-ap-ready","");
+    var a       = el.querySelector(".ap__audio"),
+        play    = el.querySelector(".ap__play"),
+        range   = el.querySelector(".ap__range"),
+        fill    = el.querySelector(".ap__fill"),
+        buf     = el.querySelector(".ap__buf"),
+        cur     = el.querySelector(".ap__cur"),
+        dur     = el.querySelector(".ap__dur"),
+        sub     = el.querySelector(".ap__sub"),
+        rate    = el.querySelector(".ap__rate"),
+        vol     = el.querySelector(".ap__vol"),
+        mute    = el.querySelector(".ap__mute"),
+        resume  = el.querySelector(".ap__resume"),
+        rTime   = el.querySelector(".ap__resume-time"),
+        rGo     = el.querySelector(".ap__resume-go"),
+        rNo     = el.querySelector(".ap__resume-no");
+    var seeking=false, ri=0, tick=0;
+    var key = el.getAttribute("data-ap-key") || "";
+    var memo = (el.getAttribute("data-ap-resume")!=="false") && key;
+
+    function paint(){ fill.style.width=((+range.value)/10)+"%"; }
+    function timeOfSlider(){ return a.duration ? (+range.value)/1000*a.duration : 0; }
+    function sync(t){
+      cur.textContent=fmt(t);
+      if(a.duration){
+        range.value=Math.round(1000*t/a.duration);
+        range.setAttribute("aria-valuetext",fmt(t));
+        paint();
+      }
+    }
+
+     
+    play.addEventListener("click",function(){
+      if(a.paused){ a.play().catch(function(){}); } else { a.pause(); }
+    });
+    a.addEventListener("play",function(){
+      el.classList.add("is-playing");
+      el.classList.remove("has-resume");
+      play.setAttribute("aria-label","Mettre en pause");
+      document.querySelectorAll(".ap__audio").forEach(function(other){
+        if(other!==a && !other.paused) other.pause();
+      });
+    });
+    a.addEventListener("pause",function(){
+      el.classList.remove("is-playing","is-busy");
+      play.setAttribute("aria-label","Lire");
+      remember();
+    });
+    a.addEventListener("ended",function(){
+      sync(0);
+      if(memo) drop(key);
+    });
+    a.addEventListener("waiting",function(){ el.classList.add("is-busy"); });
+    ["playing","canplay","loadeddata"].forEach(function(ev){
+      a.addEventListener(ev,function(){ el.classList.remove("is-busy"); });
+    });
+    a.addEventListener("error",function(){
+      el.classList.add("is-error");
+      el.classList.remove("is-busy");
+      if(sub) sub.textContent="Fichier audio introuvable ou format non pris en charge.";
+    });
+
+     
+    function remember(){
+      if(!memo || !a.duration) return;
+      var t=a.currentTime;
+      if(t>MIN_SAVE && t<a.duration-TAIL) save(key,t); else drop(key);
+    }
+    function onMeta(){
+      dur.textContent=fmt(a.duration);
+      if(!memo) return;
+      var o=load(key);
+      if(o && o.p>MIN_SAVE && o.p<a.duration-TAIL){
+        if(rTime) rTime.textContent=fmt(o.p);
+        el.classList.add("has-resume");
+        if(rGo) rGo.onclick=function(){
+          a.currentTime=o.p; sync(o.p);
+          el.classList.remove("has-resume");
+          a.play().catch(function(){});
+        };
+        if(rNo) rNo.onclick=function(){
+          drop(key); el.classList.remove("has-resume");
+        };
+      }
+    }
+    a.addEventListener("loadedmetadata",onMeta);
+    if(a.readyState>0) onMeta();
+
+    a.addEventListener("timeupdate",function(){
+      if(!seeking) sync(a.currentTime); else cur.textContent=fmt(a.currentTime);
+      if(memo && ++tick%20===0) remember();   
+    });
+    a.addEventListener("progress",function(){
+      if(a.buffered.length && a.duration){
+        var end=a.buffered.end(a.buffered.length-1);
+        buf.style.width=Math.min(100,100*end/a.duration)+"%";
+      }
+    });
+    window.addEventListener("pagehide",remember);
+    document.addEventListener("visibilitychange",function(){
+      if(document.visibilityState==="hidden") remember();
+    });
+
+     
+    range.addEventListener("pointerdown",function(){ seeking=true; });
+    range.addEventListener("input",function(){
+      seeking=true; paint();
+      var t=timeOfSlider();
+      cur.textContent=fmt(t);
+      range.setAttribute("aria-valuetext",fmt(t));
+    });
+    function commit(){
+      if(a.duration) a.currentTime=timeOfSlider();
+      seeking=false;
+      remember();
+    }
+    range.addEventListener("change",commit);
+    range.addEventListener("pointerup",commit);
+    range.addEventListener("pointercancel",commit);
+    range.addEventListener("keydown",function(e){
+      var step = (e.key==="PageUp"||e.key==="PageDown") ? 30 : 5;
+      var dir  = (e.key==="ArrowRight"||e.key==="PageUp") ? 1
+               : (e.key==="ArrowLeft" ||e.key==="PageDown") ? -1 : 0;
+      if(!dir || !a.duration) return;
+      e.preventDefault();
+      a.currentTime=Math.min(a.duration,Math.max(0,a.currentTime+dir*step));
+    });
+
+     
+    if(rate){
+      rate.addEventListener("click",function(){
+        ri=(ri+1)%RATES.length;
+        a.playbackRate=RATES[ri];
+        rate.textContent=String(RATES[ri]).replace(".",",")+"\u00d7";
+        rate.setAttribute("aria-label","Vitesse de lecture : "+RATES[ri]+" fois");
+      });
+    }
+
+     
+    function syncMute(){
+      if(!mute) return;
+      var off=a.muted||a.volume===0;
+      mute.querySelector(".ap__icon--on").style.display  = off?"none":"block";
+      mute.querySelector(".ap__icon--off").style.display = off?"block":"none";
+      mute.setAttribute("aria-label",off?"Rétablir le son":"Couper le son");
+    }
+    if(vol){
+      vol.addEventListener("input",function(){
+        a.volume=+vol.value; a.muted=(+vol.value===0);
+        vol.style.setProperty("--v",vol.value);
+        syncMute();
+      });
+    }
+    if(mute){
+      mute.addEventListener("click",function(){
+        a.muted=!a.muted;
+        if(!a.muted && a.volume===0) a.volume=1;
+        if(vol){ vol.value=a.muted?0:a.volume; vol.style.setProperty("--v",vol.value); }
+        syncMute();
+      });
+      syncMute();
+    }
+
+    paint();
+  }
+
+  function init(){
+    document.querySelectorAll(".ap:not([data-ap-ready])").forEach(setup);
+  }
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",init);
+  }else{
+    init();
+  }
+  window.apInitAudioPlayers=init;   
+})();
+</script>
+<figure class="ap" style="--ap-accent:#0076BA" data-ap-key="/audio/introjanco.m4a" data-ap-resume="true">
+  <audio class="ap__audio" preload="metadata">
+    <source src="/audio/introjanco.m4a" type="audio/mp4">
+    Votre navigateur ne peut pas lire ce fichier audio.
+    <a href="/audio/introjanco.m4a">Télécharger la piste</a>.
+  </audio>
+
+  <div class="ap__top">
+    <button type="button" class="ap__play" aria-label="Lire">
+      <svg class="ap__icon ap__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72L19 12z"/></svg>
+      <svg class="ap__icon ap__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+      <span class="ap__spin" aria-hidden="true"></span>
+    </button>
+
+    <div class="ap__meta"><div class="ap__title">Politique nucléaire</div>
+    </div>
+
+    <div class="ap__tools">
+      <button type="button" class="ap__btn ap__rate" aria-label="Vitesse de lecture : 1 fois">1&times;</button>
+      <span class="ap__volwrap">
+        <button type="button" class="ap__btn ap__mute" aria-label="Couper le son">
+          <svg class="ap__icon--on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 2.2v2.1a7.7 7.7 0 0 1 0 15.4v2.1A9.8 9.8 0 0 0 14 2.2z"/></svg>
+          <svg class="ap__icon--off" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M4 9v6h4l5 4V5L8 9H4zm15.5 3 2.3-2.3-1.2-1.2-2.3 2.3-2.3-2.3-1.2 1.2 2.3 2.3-2.3 2.3 1.2 1.2 2.3-2.3 2.3 2.3 1.2-1.2z"/></svg>
+        </button>
+        <input class="ap__vol" type="range" min="0" max="1" step="0.01" value="1" style="--v:1" aria-label="Volume">
+      </span>
+    </div>
+  </div>
+
+  <div class="ap__bottom">
+    <span class="ap__time ap__cur">0:00</span>
+    <div class="ap__seek">
+      <div class="ap__rail"><div class="ap__buf"></div><div class="ap__fill"></div></div>
+      <input class="ap__range" type="range" min="0" max="1000" step="1" value="0"
+             aria-label="Position dans la piste" aria-valuetext="0:00">
+    </div>
+    <span class="ap__time ap__dur">--:--</span>
+  </div>
+
+  <p class="ap__resume">
+    <span>Écoute interrompue à <span class="ap__resume-time">0:00</span>.</span>
+    <button type="button" class="ap__resume-go">Reprendre</button>
+    <button type="button" class="ap__resume-no">Ignorer</button>
+  </p>
+</figure>
+
+<h3 id="sûreté-nucléaire">Sûreté nucléaire</h3>
+
+<figure class="ap" style="--ap-accent:#00AB8E" data-ap-key="/audio/janco-suretenucl.m4a" data-ap-resume="true">
+  <audio class="ap__audio" preload="metadata">
+    <source src="/audio/janco-suretenucl.m4a" type="audio/mp4">
+    Votre navigateur ne peut pas lire ce fichier audio.
+    <a href="/audio/janco-suretenucl.m4a">Télécharger la piste</a>.
+  </audio>
+
+  <div class="ap__top">
+    <button type="button" class="ap__play" aria-label="Lire">
+      <svg class="ap__icon ap__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72L19 12z"/></svg>
+      <svg class="ap__icon ap__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+      <span class="ap__spin" aria-hidden="true"></span>
+    </button>
+
+    <div class="ap__meta"><div class="ap__title">Sûreté nucléaire</div>
+    </div>
+
+    <div class="ap__tools">
+      <button type="button" class="ap__btn ap__rate" aria-label="Vitesse de lecture : 1 fois">1&times;</button>
+      <span class="ap__volwrap">
+        <button type="button" class="ap__btn ap__mute" aria-label="Couper le son">
+          <svg class="ap__icon--on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 2.2v2.1a7.7 7.7 0 0 1 0 15.4v2.1A9.8 9.8 0 0 0 14 2.2z"/></svg>
+          <svg class="ap__icon--off" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M4 9v6h4l5 4V5L8 9H4zm15.5 3 2.3-2.3-1.2-1.2-2.3 2.3-2.3-2.3-1.2 1.2 2.3 2.3-2.3 2.3 1.2 1.2 2.3-2.3 2.3 2.3 1.2-1.2z"/></svg>
+        </button>
+        <input class="ap__vol" type="range" min="0" max="1" step="0.01" value="1" style="--v:1" aria-label="Volume">
+      </span>
+    </div>
+  </div>
+
+  <div class="ap__bottom">
+    <span class="ap__time ap__cur">0:00</span>
+    <div class="ap__seek">
+      <div class="ap__rail"><div class="ap__buf"></div><div class="ap__fill"></div></div>
+      <input class="ap__range" type="range" min="0" max="1000" step="1" value="0"
+             aria-label="Position dans la piste" aria-valuetext="0:00">
+    </div>
+    <span class="ap__time ap__dur">--:--</span>
+  </div>
+
+  <p class="ap__resume">
+    <span>Écoute interrompue à <span class="ap__resume-time">0:00</span>.</span>
+    <button type="button" class="ap__resume-go">Reprendre</button>
+    <button type="button" class="ap__resume-no">Ignorer</button>
+  </p>
+</figure>
+
+<h3 id="légitimité-des-experts-et-médias">Légitimité des experts et médias</h3>
+
+<figure class="ap" style="--ap-accent:#1DB100" data-ap-key="/audio/janco-experts.m4a" data-ap-resume="true">
+  <audio class="ap__audio" preload="metadata">
+    <source src="/audio/janco-experts.m4a" type="audio/mp4">
+    Votre navigateur ne peut pas lire ce fichier audio.
+    <a href="/audio/janco-experts.m4a">Télécharger la piste</a>.
+  </audio>
+
+  <div class="ap__top">
+    <button type="button" class="ap__play" aria-label="Lire">
+      <svg class="ap__icon ap__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72L19 12z"/></svg>
+      <svg class="ap__icon ap__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+      <span class="ap__spin" aria-hidden="true"></span>
+    </button>
+
+    <div class="ap__meta"><div class="ap__title">Légitimité des experts et médias</div>
+    </div>
+
+    <div class="ap__tools">
+      <button type="button" class="ap__btn ap__rate" aria-label="Vitesse de lecture : 1 fois">1&times;</button>
+      <span class="ap__volwrap">
+        <button type="button" class="ap__btn ap__mute" aria-label="Couper le son">
+          <svg class="ap__icon--on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 2.2v2.1a7.7 7.7 0 0 1 0 15.4v2.1A9.8 9.8 0 0 0 14 2.2z"/></svg>
+          <svg class="ap__icon--off" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M4 9v6h4l5 4V5L8 9H4zm15.5 3 2.3-2.3-1.2-1.2-2.3 2.3-2.3-2.3-1.2 1.2 2.3 2.3-2.3 2.3 1.2 1.2 2.3-2.3 2.3 2.3 1.2-1.2z"/></svg>
+        </button>
+        <input class="ap__vol" type="range" min="0" max="1" step="0.01" value="1" style="--v:1" aria-label="Volume">
+      </span>
+    </div>
+  </div>
+
+  <div class="ap__bottom">
+    <span class="ap__time ap__cur">0:00</span>
+    <div class="ap__seek">
+      <div class="ap__rail"><div class="ap__buf"></div><div class="ap__fill"></div></div>
+      <input class="ap__range" type="range" min="0" max="1000" step="1" value="0"
+             aria-label="Position dans la piste" aria-valuetext="0:00">
+    </div>
+    <span class="ap__time ap__dur">--:--</span>
+  </div>
+
+  <p class="ap__resume">
+    <span>Écoute interrompue à <span class="ap__resume-time">0:00</span>.</span>
+    <button type="button" class="ap__resume-go">Reprendre</button>
+    <button type="button" class="ap__resume-no">Ignorer</button>
+  </p>
+</figure>
+
+<h3 id="risque-climatique">Risque climatique</h3>
+
+<figure class="ap" style="--ap-accent:#FEAE00" data-ap-key="/audio/jancorisqueclimat.m4a" data-ap-resume="true">
+  <audio class="ap__audio" preload="metadata">
+    <source src="/audio/jancorisqueclimat.m4a" type="audio/mp4">
+    Votre navigateur ne peut pas lire ce fichier audio.
+    <a href="/audio/jancorisqueclimat.m4a">Télécharger la piste</a>.
+  </audio>
+
+  <div class="ap__top">
+    <button type="button" class="ap__play" aria-label="Lire">
+      <svg class="ap__icon ap__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72L19 12z"/></svg>
+      <svg class="ap__icon ap__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+      <span class="ap__spin" aria-hidden="true"></span>
+    </button>
+
+    <div class="ap__meta"><div class="ap__title">Risque climatique</div>
+    </div>
+
+    <div class="ap__tools">
+      <button type="button" class="ap__btn ap__rate" aria-label="Vitesse de lecture : 1 fois">1&times;</button>
+      <span class="ap__volwrap">
+        <button type="button" class="ap__btn ap__mute" aria-label="Couper le son">
+          <svg class="ap__icon--on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 2.2v2.1a7.7 7.7 0 0 1 0 15.4v2.1A9.8 9.8 0 0 0 14 2.2z"/></svg>
+          <svg class="ap__icon--off" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M4 9v6h4l5 4V5L8 9H4zm15.5 3 2.3-2.3-1.2-1.2-2.3 2.3-2.3-2.3-1.2 1.2 2.3 2.3-2.3 2.3 1.2 1.2 2.3-2.3 2.3 2.3 1.2-1.2z"/></svg>
+        </button>
+        <input class="ap__vol" type="range" min="0" max="1" step="0.01" value="1" style="--v:1" aria-label="Volume">
+      </span>
+    </div>
+  </div>
+
+  <div class="ap__bottom">
+    <span class="ap__time ap__cur">0:00</span>
+    <div class="ap__seek">
+      <div class="ap__rail"><div class="ap__buf"></div><div class="ap__fill"></div></div>
+      <input class="ap__range" type="range" min="0" max="1000" step="1" value="0"
+             aria-label="Position dans la piste" aria-valuetext="0:00">
+    </div>
+    <span class="ap__time ap__dur">--:--</span>
+  </div>
+
+  <p class="ap__resume">
+    <span>Écoute interrompue à <span class="ap__resume-time">0:00</span>.</span>
+    <button type="button" class="ap__resume-go">Reprendre</button>
+    <button type="button" class="ap__resume-no">Ignorer</button>
+  </p>
+</figure>
+
+<h3 id="mix-énergétique">Mix énergétique</h3>
+
+<figure class="ap" style="--ap-accent:#D41876" data-ap-key="/audio/jancomixteetprix.m4a" data-ap-resume="true">
+  <audio class="ap__audio" preload="metadata">
+    <source src="/audio/jancomixteetprix.m4a" type="audio/mp4">
+    Votre navigateur ne peut pas lire ce fichier audio.
+    <a href="/audio/jancomixteetprix.m4a">Télécharger la piste</a>.
+  </audio>
+
+  <div class="ap__top">
+    <button type="button" class="ap__play" aria-label="Lire">
+      <svg class="ap__icon ap__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72L19 12z"/></svg>
+      <svg class="ap__icon ap__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+      <span class="ap__spin" aria-hidden="true"></span>
+    </button>
+
+    <div class="ap__meta"><div class="ap__title">Mix énergétique et coût</div>
+    </div>
+
+    <div class="ap__tools">
+      <button type="button" class="ap__btn ap__rate" aria-label="Vitesse de lecture : 1 fois">1&times;</button>
+      <span class="ap__volwrap">
+        <button type="button" class="ap__btn ap__mute" aria-label="Couper le son">
+          <svg class="ap__icon--on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 2.2v2.1a7.7 7.7 0 0 1 0 15.4v2.1A9.8 9.8 0 0 0 14 2.2z"/></svg>
+          <svg class="ap__icon--off" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M4 9v6h4l5 4V5L8 9H4zm15.5 3 2.3-2.3-1.2-1.2-2.3 2.3-2.3-2.3-1.2 1.2 2.3 2.3-2.3 2.3 1.2 1.2 2.3-2.3 2.3 2.3 1.2-1.2z"/></svg>
+        </button>
+        <input class="ap__vol" type="range" min="0" max="1" step="0.01" value="1" style="--v:1" aria-label="Volume">
+      </span>
+    </div>
+  </div>
+
+  <div class="ap__bottom">
+    <span class="ap__time ap__cur">0:00</span>
+    <div class="ap__seek">
+      <div class="ap__rail"><div class="ap__buf"></div><div class="ap__fill"></div></div>
+      <input class="ap__range" type="range" min="0" max="1000" step="1" value="0"
+             aria-label="Position dans la piste" aria-valuetext="0:00">
+    </div>
+    <span class="ap__time ap__dur">--:--</span>
+  </div>
+
+  <p class="ap__resume">
+    <span>Écoute interrompue à <span class="ap__resume-time">0:00</span>.</span>
+    <button type="button" class="ap__resume-go">Reprendre</button>
+    <button type="button" class="ap__resume-no">Ignorer</button>
+  </p>
+</figure>
+
 
 
 
@@ -4390,16 +4990,16 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1783095152"></script>
-    <script src="/js/perfect-scrollbar.min.js?1783095152"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1783095152"></script>
-    <script src="/js/jquery.sticky.js?1783095152"></script>
-    <script src="/js/featherlight.min.js?1783095152"></script>
-    <script src="/js/highlight.pack.js?1783095152"></script>
+    <script src="/js/clipboard.min.js?1787538252"></script>
+    <script src="/js/perfect-scrollbar.min.js?1787538252"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1787538252"></script>
+    <script src="/js/jquery.sticky.js?1787538252"></script>
+    <script src="/js/featherlight.min.js?1787538252"></script>
+    <script src="/js/highlight.pack.js?1787538252"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1783095152"></script>
-    <script src="/js/learn.js?1783095152"></script>
-    <script src="/js/hugo-learn.js?1783095152"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1787538252"></script>
+    <script src="/js/learn.js?1787538252"></script>
+    <script src="/js/hugo-learn.js?1787538252"></script>
     
     
 
