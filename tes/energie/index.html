@@ -22,22 +22,22 @@
     
 
     
-    <link href="/css/nucleus.css?1787538252" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1787538252" rel="stylesheet">
-    <link href="/css/hybrid.css?1787538252" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1787538252" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1787538252" rel="stylesheet">
-    <link href="/css/auto-complete.css?1787538252" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1787538252" rel="stylesheet">
-    <link href="/css/theme.css?1787538252" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1787538252" rel="stylesheet">
+    <link href="/css/nucleus.css?1787539094" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1787539094" rel="stylesheet">
+    <link href="/css/hybrid.css?1787539094" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1787539094" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1787539094" rel="stylesheet">
+    <link href="/css/auto-complete.css?1787539094" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1787539094" rel="stylesheet">
+    <link href="/css/theme.css?1787539094" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1787539094" rel="stylesheet">
     
-    <link href="/css/theme-blue.css?1787538252" rel="stylesheet">
+    <link href="/css/theme-blue.css?1787539094" rel="stylesheet">
     
-    <link href="/css/foo.css?1787538252" rel="stylesheet"><link href="/css/bar.css?1787538252" rel="stylesheet">
+    <link href="/css/foo.css?1787539094" rel="stylesheet"><link href="/css/bar.css?1787539094" rel="stylesheet">
 
 
-    <script src="/js/jquery-3.3.1.min.js?1787538252"></script>
+    <script src="/js/jquery-3.3.1.min.js?1787539094"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -121,14 +121,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1787538252"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1787538252"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1787539094"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1787539094"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/coursphychi.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1787538252"></script>
+<script type="text/javascript" src="/js/search.js?1787539094"></script>
 
     
   </div>
@@ -2719,17 +2719,19 @@
 .ap__btn:focus-visible,.ap__play:focus-visible{outline:2px solid var(--ap-accent);outline-offset:2px;}
 
  
-.ap__resume{
-  display:none;align-items:center;gap:.35rem;
+.ap .ap__resume{
+  display:none;align-items:center;flex-wrap:wrap;gap:.35rem;
   margin:.5rem 0 0;padding:.3rem .5rem;
   background:var(--ap-hover);border-radius:8px;
-  font-size:.5em;color:var(--ap-muted);
+  font-size:var(--ap-resume-size,.78em);
+  line-height:1.5;
+  color:var(--ap-muted);
 }
 .ap.has-resume .ap__resume{display:flex;}
-.ap__resume button{
+.ap .ap__resume button{
+  font:inherit;font-weight:600;
   border:none;background:transparent;padding:0;
-  font:inherit;font-weight:600;color:var(--ap-fg);
-  cursor:pointer;
+  color:var(--ap-fg);cursor:pointer;
 }
 
  
@@ -2998,11 +3000,11 @@
     <span class="ap__time ap__dur">--:--</span>
   </div>
 
-  <p class="ap__resume">
+  <div class="ap__resume">
     <span>Écoute interrompue à <span class="ap__resume-time">0:00</span>.</span>
     <button type="button" class="ap__resume-go">Reprendre</button>
     <button type="button" class="ap__resume-no">Ignorer</button>
-  </p>
+  </div>
 </figure>
 
 <h3 id="sûreté-nucléaire">Sûreté nucléaire</h3>
@@ -3046,11 +3048,11 @@
     <span class="ap__time ap__dur">--:--</span>
   </div>
 
-  <p class="ap__resume">
+  <div class="ap__resume">
     <span>Écoute interrompue à <span class="ap__resume-time">0:00</span>.</span>
     <button type="button" class="ap__resume-go">Reprendre</button>
     <button type="button" class="ap__resume-no">Ignorer</button>
-  </p>
+  </div>
 </figure>
 
 <h3 id="légitimité-des-experts-et-médias">Légitimité des experts et médias</h3>
@@ -3094,11 +3096,11 @@
     <span class="ap__time ap__dur">--:--</span>
   </div>
 
-  <p class="ap__resume">
+  <div class="ap__resume">
     <span>Écoute interrompue à <span class="ap__resume-time">0:00</span>.</span>
     <button type="button" class="ap__resume-go">Reprendre</button>
     <button type="button" class="ap__resume-no">Ignorer</button>
-  </p>
+  </div>
 </figure>
 
 <h3 id="risque-climatique">Risque climatique</h3>
@@ -3142,11 +3144,11 @@
     <span class="ap__time ap__dur">--:--</span>
   </div>
 
-  <p class="ap__resume">
+  <div class="ap__resume">
     <span>Écoute interrompue à <span class="ap__resume-time">0:00</span>.</span>
     <button type="button" class="ap__resume-go">Reprendre</button>
     <button type="button" class="ap__resume-no">Ignorer</button>
-  </p>
+  </div>
 </figure>
 
 <h3 id="mix-énergétique">Mix énergétique</h3>
@@ -3190,11 +3192,11 @@
     <span class="ap__time ap__dur">--:--</span>
   </div>
 
-  <p class="ap__resume">
+  <div class="ap__resume">
     <span>Écoute interrompue à <span class="ap__resume-time">0:00</span>.</span>
     <button type="button" class="ap__resume-go">Reprendre</button>
     <button type="button" class="ap__resume-no">Ignorer</button>
-  </p>
+  </div>
 </figure>
 
 
@@ -4990,16 +4992,16 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1787538252"></script>
-    <script src="/js/perfect-scrollbar.min.js?1787538252"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1787538252"></script>
-    <script src="/js/jquery.sticky.js?1787538252"></script>
-    <script src="/js/featherlight.min.js?1787538252"></script>
-    <script src="/js/highlight.pack.js?1787538252"></script>
+    <script src="/js/clipboard.min.js?1787539094"></script>
+    <script src="/js/perfect-scrollbar.min.js?1787539094"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1787539094"></script>
+    <script src="/js/jquery.sticky.js?1787539094"></script>
+    <script src="/js/featherlight.min.js?1787539094"></script>
+    <script src="/js/highlight.pack.js?1787539094"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1787538252"></script>
-    <script src="/js/learn.js?1787538252"></script>
-    <script src="/js/hugo-learn.js?1787538252"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1787539094"></script>
+    <script src="/js/learn.js?1787539094"></script>
+    <script src="/js/hugo-learn.js?1787539094"></script>
     
     
 
