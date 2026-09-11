@@ -10,7 +10,7 @@
 		
 		
 		
-			<lastBuildDate>Fri, 11 Sep 2026 21:29:55 +0200</lastBuildDate>
+			<lastBuildDate>Fri, 11 Sep 2026 21:55:12 +0200</lastBuildDate>
 		
 			<atom:link href="https://coursphychi.github.io/index.xml" rel="self" type="application/rss+xml" />
 			<item>
@@ -613,7 +613,7 @@
 				<link>https://coursphychi.github.io/2nde/entrainement/</link>
 				<pubDate>Sat, 06 Mar 2021 14:23:56 +0100</pubDate>
 				<guid>https://coursphychi.github.io/2nde/entrainement/</guid>
-				<description>&lt;style&gt;&#xA;ul {&#xA;  text-align: left;&#xA;}&#xA;table {&#xA;  border-collapse: collapse;&#xA;  border: 0;&#xA;}&#xA;td, th {&#xA;  border-collapse: collapse;&#xA;  text-align: center;&#xA;  vertical-align: middle;&#xA;}&#xA;&lt;/style&gt;&#xA;&lt;h1 id=&#34;entraînement-mathématiques&#34;&gt;Entraînement mathématiques&lt;/h1&gt;&#xA;&lt;p&gt;Les quiz ci-dessous visent à vérifier ou installer certains automatismes bien pratiques en physique-chimie.&lt;/p&gt;&#xA;&lt;h2 id=&#34;jouer-avec-les-relations&#34;&gt;Jouer avec les relations&lt;/h2&gt;&#xA;&lt;div style=&#34;position:relative;margin-left:auto;margin-right:auto;width:100%;max-width:100%;margin-bottom:-1em;margin-top:-1em;&#34;&gt;&#xA;&lt;img src=&#34;https://coursphychi.github.io/bandeaurel.png&#34; style=&#34;box-shadow:none;background:none;&#34;&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;Les lois sont données par des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l&amp;rsquo;une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s&amp;rsquo;aguerrir dans cet exercice et le quiz suivant teste votre agilité dans le maniement de ces relations algébriques.&lt;/p&gt;</description>
+				<description>&lt;style&gt;&#xA;ul {&#xA;  text-align: left;&#xA;}&#xA;table {&#xA;  border-collapse: collapse;&#xA;  border: 0;&#xA;}&#xA;td, th {&#xA;  border-collapse: collapse;&#xA;  text-align: center;&#xA;  vertical-align: middle;&#xA;}&#xA;&lt;/style&gt;&#xA;&lt;h1 style=&#34;overflow-x:auto;&#34;&gt; Entraînement mathématiques&lt;/h1&gt;&#xA;&lt;p&gt;Les quiz ci-dessous visent à vérifier ou installer certains automatismes bien pratiques en physique-chimie.&lt;/p&gt;&#xA;&lt;h2 id=&#34;jouer-avec-les-relations&#34;&gt;Jouer avec les relations&lt;/h2&gt;&#xA;&lt;div style=&#34;position:relative;margin-left:auto;margin-right:auto;width:100%;max-width:100%;margin-bottom:-1em;margin-top:-1em;&#34;&gt;&#xA;&lt;img src=&#34;https://coursphychi.github.io/bandeaurel.png&#34; style=&#34;box-shadow:none;background:none;&#34;&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;Les lois sont données par des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l&amp;rsquo;une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s&amp;rsquo;aguerrir dans cet exercice et le quiz suivant teste votre agilité dans le maniement de ces relations algébriques.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Gravitation</title>
