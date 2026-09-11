@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isoler une grandeur — relations algébriques</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+  :root {
+    --paper: #FBFBF9;
+    --ink: #1C2A4A;
+    --ink-soft: #2E4170;
+    --muted: #697086;
+    --rule: #D9DCE4;
+    --hover: #F1F3F8;
+    --ok: #1F7A4D;
+    --ok-bg: #EAF4EE;
+    --ko: #B42318;
+    --ko-bg: #FBEDEB;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: "KaTeX_Main", "Latin Modern Roman", "CMU Serif", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .quiz {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 2.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .title { font-style: italic; color: var(--muted); font-size: 1rem; }
+  .count { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 1rem; }
+  .ticks { display: grid; grid-template-columns: repeat(var(--n, 10), 1fr); gap: 4px; margin-top: .6rem; min-height: 3px; }
+  .tick { height: 3px; border-radius: 2px; background: var(--rule); }
+  .tick.current { background: var(--ink); }
+  .tick.ok { background: var(--ok); }
+  .tick.ko { background: var(--ko); }
+
+  .stage { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 2rem 0 1rem; }
+  .fade { animation: appear .18s ease-out; }
+  @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+
+  .context { text-align: center; font-style: italic; color: var(--muted); font-size: 1rem; margin: 0; min-height: 1.6em; }
+  .relation {
+    font-size: clamp(1.9rem, 8vw, 3.2rem);
+    min-height: 2.8em;
+    display: flex; align-items: center; justify-content: center;
+    overflow-x: auto;
+    padding: .25em 0;
+  }
+  .prompt { text-align: center; color: var(--muted); margin: 1.1rem 0 1rem; font-size: 1.05rem; }
+  .prompt .var { color: var(--ink); font-size: 1.15em; }
+
+  .options { display: flex; flex-direction: column; gap: .6rem; }
+  .option {
+    display: flex; align-items: center; gap: .8rem;
+    width: 100%; min-height: 4.4rem;
+    padding: .7rem 1.1rem;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--rule); border-radius: 6px;
+    font: inherit; text-align: left; cursor: pointer;
+    transition: background-color .12s, border-color .12s;
+  }
+  .option .key { flex: none; width: 1.2rem; font-size: .85rem; color: var(--muted); }
+  .option .expr { flex: 1; text-align: center; font-size: 1.45rem; overflow-x: auto; padding: .2em 0; }
+  .option:hover:not(:disabled) { border-color: var(--ink); background: var(--hover); }
+  .option:disabled { cursor: default; color: var(--ink); }
+  .option.is-correct { border-color: var(--ok); background: var(--ok-bg); color: var(--ok); }
+  .option.is-wrong { border-color: var(--ko); background: var(--ko-bg); color: var(--ko); }
+  .option.is-dim { opacity: .4; }
+  @media (hover: none) { .option .key { display: none; } }
+
+  .feedback { min-height: 3.2em; margin: 1rem auto 0; max-width: 32rem; text-align: center; font-size: 1rem; }
+  .feedback.ok { color: var(--ok); }
+  .feedback.ko { color: var(--ko); }
+  .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; min-height: 3rem; }
+
+  button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .btn {
+    font: inherit; font-size: 1rem;
+    padding: .55rem 1.5rem;
+    border: 1px solid var(--ink); border-radius: 6px;
+    background: var(--ink); color: var(--paper);
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--ink-soft); }
+  [hidden] { display: none !important; }
+
+  .result { text-align: center; padding-top: 2.5rem; }
+  .score { font-size: clamp(2.6rem, 11vw, 4rem); margin: 0; }
+  .comment { max-width: 32rem; margin: 1.5rem auto 2rem; font-size: 1.1rem; line-height: 1.65; }
+  .recap { text-align: left; margin-top: 1rem; border-top: 1px solid var(--rule); }
+  .recap h2 { font-size: 1rem; font-weight: normal; font-style: italic; color: var(--muted); margin: 1.2rem 0 .2rem; }
+  .item { padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+  .item .ctx { font-size: .9rem; font-style: italic; color: var(--muted); }
+  .item .rel { font-size: 1.3rem; overflow-x: auto; padding: .35em 0 .15em; }
+  .item .line { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1rem; margin-top: .6rem; }
+  .item .lab { min-width: 8rem; font-size: .9rem; color: var(--muted); }
+  .item .m { font-size: 1.15rem; padding: .15em 0; overflow-x: auto; }
+  .item .bad { color: var(--ko); }
+  .item .good { color: var(--ok); }
+  .item .why { margin-top: .45rem; font-size: .95rem; color: var(--muted); }
+  .result .actions { margin-top: 2rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade { animation: none; }
+    .option { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="quiz">
+  <header>
+    <div class="top">
+      <span class="title">Isoler une grandeur</span>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="ticks" id="ticks" aria-hidden="true"></div>
+  </header>
+
+  <section class="stage" id="screen-q" aria-live="polite">
+    <p class="context" id="context"></p>
+    <div class="relation" id="relation"></div>
+    <p class="prompt">Isoler <span class="var" id="target"></span></p>
+    <div class="options" id="options"></div>
+    <p class="feedback" id="feedback"></p>
+    <div class="actions"><button class="btn" id="next" type="button" hidden>Question suivante</button></div>
+  </section>
+
+  <section class="result" id="screen-end" hidden>
+    <p class="score" id="score"></p>
+    <p class="comment" id="comment"></p>
+    <div class="recap" id="recap" hidden></div>
+    <div class="actions">
+      <button class="btn" id="restart" type="button">Recommencer</button>
+    </div>
+  </section>
+
+  <noscript>Ce quiz nécessite JavaScript.</noscript>
+</main>
+
+<script id="engine">
+/* =====================================================================
+   Réglages
+   ===================================================================== */
+const CONFIG = {
+  nbQuestions: 10,
+  mode: 'melange',                // 'melange' ; 'lettres' ou 'physique' pour une série non mélangée
+  multSymbol: '',                 // relations littérales : '' (juxtaposition), '\\times' ou '\\cdot'
+  multSymbolPhysique: '\\times',  // relations de physique
+  greek: true,                    // lettres grecques possibles à partir de la question 6 (relations littérales)
+  swapProbability: 0.3,           // relations littérales, dès la question 4 : parfois écrites « expression = a »
+  autoAdvanceMs: 900              // délai avant la question suivante après une bonne réponse
+};
+
+/* =====================================================================
+   Arbres d'expressions
+   Feuille : { v: identifiant, tex?, txt?, cst? (valeur numérique d'une constante) }
+   ===================================================================== */
+const v   = x => ({ v: x });
+const sym = (id, texStr, txtStr) => ({ v: id, tex: texStr, txt: txtStr || id });
+const num = n => ({ v: '#' + n, tex: String(n), txt: String(n), cst: n });
+const N   = (op, l, r) => ({ op, l, r });
+const add = (l, r) => N('+', l, r);
+const sub = (l, r) => N('-', l, r);
+const mul = (l, r) => N('*', l, r);
+const div = (l, r) => N('/', l, r);
+
+const isLeaf = t => 'v' in t;
+const isConst = t => isLeaf(t) && t.cst !== undefined;
+const isAdditive = t => !isLeaf(t) && (t.op === '+' || t.op === '-');
+
+const rnd = n => Math.floor(Math.random() * n);
+const pick = a => a[rnd(a.length)];
+function shuffle(a) {
+  const b = a.slice();
+  for (let i = b.length - 1; i > 0; i--) { const j = rnd(i + 1); [b[i], b[j]] = [b[j], b[i]]; }
+  return b;
+}
+
+function leaves(t, acc = []) {
+  if (isLeaf(t)) acc.push(t.v); else { leaves(t.l, acc); leaves(t.r, acc); }
+  return acc;
+}
+const contains = (t, x) => isLeaf(t) ? t.v === x : contains(t.l, x) || contains(t.r, x);
+function findLeaf(t, x) {
+  if (isLeaf(t)) return t.v === x ? t : null;
+  return findLeaf(t.l, x) || findLeaf(t.r, x);
+}
+function depthOf(t, x, d = 0) {
+  if (isLeaf(t)) return t.v === x ? d : -1;
+  const a = depthOf(t.l, x, d + 1);
+  return a >= 0 ? a : depthOf(t.r, x, d + 1);
+}
+
+function evalT(t, env) {
+  if (isLeaf(t)) return isConst(t) ? t.cst : env[t.v];
+  const a = evalT(t.l, env), b = evalT(t.r, env);
+  switch (t.op) { case '+': return a + b; case '-': return a - b; case '*': return a * b; default: return a / b; }
+}
+
+/* Forme d'affichage : on regroupe les quotients en une seule fraction */
+function norm(t) {
+  if (isLeaf(t)) return t;
+  const l = norm(t.l), r = norm(t.r);
+  if (t.op === '*') {
+    if (!isLeaf(l) && l.op === '/') return norm(div(mul(l.l, r), l.r));
+    if (!isLeaf(r) && r.op === '/') return norm(div(mul(l, r.l), r.r));
+  }
+  if (t.op === '/') {
+    if (!isLeaf(l) && l.op === '/') return norm(div(l.l, mul(l.r, r)));
+    if (!isLeaf(r) && r.op === '/') return norm(div(mul(l, r.r), r.l));
+  }
+  return N(t.op, l, r);
+}
+
+/* =====================================================================
+   Rendu LaTeX (KaTeX) et texte de secours
+   ===================================================================== */
+let MULT = '';   // symbole de multiplication de la question en cours de construction
+const GREEK_TEX = { 'α': '\\alpha', 'β': '\\beta', 'λ': '\\lambda', 'ρ': '\\rho', 'ω': '\\omega', 'θ': '\\theta' };
+
+function factorOrder(t) {
+  let a = t.l, b = t.r;
+  if (isConst(b) && !isConst(a)) [a, b] = [b, a];                  // 2 × d plutôt que d × 2
+  else if (!MULT && isAdditive(a) && !isAdditive(b)) [a, b] = [b, a]; // d(a − b) plutôt que (a − b)d
+  return [a, b];
+}
+
+function tex(t, inFrac = false) {
+  if (isLeaf(t)) return t.tex !== undefined ? t.tex : (GREEK_TEX[t.v] || t.v);
+  const paren = s => /frac/.test(s) ? '\\left(' + s + '\\right)' : '(' + s + ')';
+  switch (t.op) {
+    case '+': return tex(t.l, inFrac) + ' + ' + tex(t.r, inFrac);
+    case '-': return tex(t.l, inFrac) + ' - ' + (isAdditive(t.r) ? paren(tex(t.r, inFrac)) : tex(t.r, inFrac));
+    case '*': {
+      const [a, b] = factorOrder(t);
+      const f = n => isAdditive(n) ? paren(tex(n, inFrac)) : tex(n, inFrac);
+      const sep = MULT ? ' ' + MULT + ' ' : (isAdditive(b) ? ' ' : '\\,');
+      return f(a) + sep + f(b);
+    }
+    default: return (inFrac ? '\\frac' : '\\dfrac') + '{' + tex(t.l, true) + '}{' + tex(t.r, true) + '}';
+  }
+}
+
+function txt(t) {
+  if (isLeaf(t)) return t.txt !== undefined ? t.txt : t.v;
+  switch (t.op) {
+    case '+': return txt(t.l) + ' + ' + txt(t.r);
+    case '-': return txt(t.l) + ' − ' + (isAdditive(t.r) ? '(' + txt(t.r) + ')' : txt(t.r));
+    case '*': {
+      const [a, b] = factorOrder(t);
+      const f = n => isAdditive(n) ? '(' + txt(n) + ')' : txt(n);
+      return f(a) + (MULT ? ' × ' : '·') + f(b);
+    }
+    default: {
+      const w = n => isLeaf(n) ? txt(n) : '(' + txt(n) + ')';
+      return w(t.l) + ' / ' + w(t.r);
+    }
+  }
+}
+
+/* =====================================================================
+   Inversion d'une étape, avec erreurs typiques
+   Équation courante : [expression contenant la cible] = O
+   kind 0 = inversion correcte ; 1, 2 = erreurs d'opération ou d'ordre ;
+   3, 4 = erreurs de priorité (distribution partielle)
+   ===================================================================== */
+function invertStep(op, inL, O, X, kind) {
+  const Odiv = !isLeaf(O) && O.op === '/';
+  switch (op) {
+    case '+':                                   // T + X = O  →  T = O − X
+      if (kind === 0) return sub(O, X);
+      if (kind === 1) return add(O, X);
+      if (kind === 2) return sub(X, O);
+      if (kind === 3 && Odiv) return div(sub(O.l, X), O.r);
+      return null;
+    case '-':
+      if (inL) {                                // T − X = O  →  T = O + X
+        if (kind === 0) return add(O, X);
+        if (kind === 1) return sub(O, X);
+        if (kind === 2) return sub(X, O);
+        if (kind === 3 && Odiv) return div(add(O.l, X), O.r);
+      } else {                                  // X − T = O  →  T = X − O
+        if (kind === 0) return sub(X, O);
+        if (kind === 1) return sub(O, X);
+        if (kind === 2) return add(X, O);
+        if (kind === 3 && Odiv) return div(sub(X, O.l), O.r);
+      }
+      return null;
+    case '*':                                   // T·X = O  →  T = O / X
+      if (kind === 0) return div(O, X);
+      if (kind === 1) return mul(O, X);
+      if (kind === 2) return div(X, O);
+      if (kind === 3 && isAdditive(O)) return N(O.op, O.l, div(O.r, X));
+      if (kind === 4 && isAdditive(O)) return N(O.op, div(O.l, X), O.r);
+      return null;
+    default:
+      if (inL) {                                // T / X = O  →  T = O·X
+        if (kind === 0) return mul(O, X);
+        if (kind === 1) return div(O, X);
+        if (kind === 2) return div(X, O);
+        if (kind === 3 && isAdditive(O)) return N(O.op, O.l, mul(O.r, X));
+        if (kind === 4 && isAdditive(O)) return N(O.op, mul(O.l, X), O.r);
+      } else {                                  // X / T = O  →  T = X / O
+        if (kind === 0) return div(X, O);
+        if (kind === 1) return mul(X, O);
+        if (kind === 2) return div(O, X);
+        if (kind === 3 && isAdditive(O)) return N(O.op, div(X, O.l), div(X, O.r));
+      }
+      return null;
+  }
+}
+
+const ERR_MSG = {
+  '+1':  "Pour éliminer un terme ajouté, on le soustrait aux deux membres : le signe change.",
+  '+2':  "La soustraction est écrite dans le mauvais ordre.",
+  '+3':  "Priorités : on retranche le terme à la fraction entière, il ne va pas au numérateur.",
+  '-L1': "Pour éliminer un terme retranché, on l'ajoute aux deux membres.",
+  '-L2': "En ajoutant le terme retranché aux deux membres, on obtient une somme, pas une différence.",
+  '-L3': "Priorités : on ajoute le terme à la fraction entière, il ne va pas au numérateur.",
+  '-R1': "Piège du signe : la grandeur cherchée est retranchée, la différence se lit dans l'autre sens.",
+  '-R2': "La grandeur cherchée est retranchée : on l'obtient par une différence, pas par une somme.",
+  '-R3': "Priorités : on retranche la fraction entière, le terme ne va pas au numérateur.",
+  '*1':  "Pour éliminer un facteur, on divise les deux membres par ce facteur.",
+  '*2':  "Bonne opération, mais le quotient est à l'envers.",
+  '*3':  "La division porte sur toute la somme (ou la différence), pas sur un seul de ses termes.",
+  '/L1': "Pour éliminer un dénominateur, on multiplie les deux membres par ce dénominateur.",
+  '/L2': "En multipliant par le dénominateur, on obtient un produit, pas un quotient.",
+  '/L3': "La multiplication porte sur toute la somme (ou la différence), pas sur un seul de ses termes.",
+  '/R1': "La grandeur cherchée est au dénominateur : on aboutit à un quotient, pas à un produit.",
+  '/R2': "La grandeur cherchée est au dénominateur : le quotient est à l'envers.",
+  '/R3': "Une fraction ne se découpe pas selon les termes de son dénominateur."
+};
+
+function solveFor(side, other, target, err) {
+  let e = side, O = other, step = 0, errKey = null;
+  while (!isLeaf(e)) {
+    const inL = contains(e.l, target);
+    const X = inL ? e.r : e.l;
+    const kind = (err && err.step === step) ? err.kind : 0;
+    const res = invertStep(e.op, inL, O, X, kind);
+    if (!res) return null;
+    if (kind > 0) {
+      const k = kind >= 3 ? 3 : kind;
+      errKey = (e.op === '-' || e.op === '/') ? e.op + (inL ? 'L' : 'R') + k : e.op + k;
+    }
+    O = res; e = inL ? e.l : e.r; step++;
+  }
+  return { tree: O, errKey };
+}
+
+function shapeOf(t, s = { div: 0, add: 0, mul: 0 }) {
+  if (isLeaf(t)) return s;
+  if (t.op === '/') s.div++; else if (t.op === '*') s.mul++; else s.add++;
+  shapeOf(t.l, s); shapeOf(t.r, s);
+  return s;
+}
+const shapeDist = (a, b) => Math.abs(a.div - b.div) + Math.abs(a.add - b.add) + 0.5 * Math.abs(a.mul - b.mul);
+
+/* Construit une question à partir d'une relation et d'une grandeur à isoler (null si impossible) */
+function makeQuestion(lhs, rhs, target, opts) {
+  MULT = opts.mult;
+  const onLeft = contains(lhs, target);
+  const side = onLeft ? lhs : rhs, other = onLeft ? rhs : lhs;
+
+  const vars = [...new Set(leaves(lhs).concat(leaves(rhs)))];
+  const envs = [0, 1, 2, 3].map(() => Object.fromEntries(vars.map(x => [x, 1.3 + Math.random() * 8.4])));
+  const sig = t => envs.map(env => evalT(t, env));
+  const same = (p, q) => p.every((x, i) => Math.abs(x - q[i]) <= 1e-9 * Math.max(1, Math.abs(x), Math.abs(q[i])));
+
+  const correct = norm(solveFor(side, other, target, null).tree);
+  const cSig = sig(correct);
+  const depth = depthOf(side, target);
+
+  const cands = [];
+  for (let s = 0; s < depth; s++) {
+    for (let k = 1; k <= 4; k++) {
+      const r = solveFor(side, other, target, { step: s, kind: k });
+      if (!r) continue;
+      const t = norm(r.tree);
+      const sg = sig(t);
+      if (!sg.every(Number.isFinite)) continue;
+      if (same(sg, cSig) || cands.some(c => same(c.sg, sg))) continue;
+      cands.push({ tree: t, sg, key: r.errKey, partial: k >= 3 });
+    }
+  }
+  if (cands.length < 2) return null;
+
+  /* distracteurs de même allure que la bonne réponse, erreurs de priorité favorisées */
+  const shape = shapeOf(correct);
+  cands.forEach(c => { c.score = shapeDist(shape, shapeOf(c.tree)) - (c.partial ? 0.6 : 0) + Math.random() * 1.2; });
+  cands.sort((a, b) => a.score - b.score);
+  const chosen = cands.slice(0, 2);
+
+  const [A, B] = opts.swap ? [norm(rhs), norm(lhs)] : [norm(lhs), norm(rhs)];
+  const leaf = findLeaf(side, target);
+  const tv = tex(leaf), tt = txt(leaf);
+
+  const options = shuffle([
+    { tex: tv + ' = ' + tex(correct), txt: tt + ' = ' + txt(correct), ok: true, tree: correct },
+    ...chosen.map(c => ({ tex: tv + ' = ' + tex(c.tree), txt: tt + ' = ' + txt(c.tree), ok: false, msg: ERR_MSG[c.key], tree: c.tree }))
+  ]);
+
+  return {
+    label: opts.label || '', target, targetTex: tv, targetTxt: tt, lhs, rhs,
+    relTex: tex(A) + ' = ' + tex(B),
+    relTxt: txt(A) + ' = ' + txt(B),
+    options
+  };
+}
+
+/* =====================================================================
+   Relations littérales, du plus simple au plus imbriqué
+   f : lettres → [membre gauche, membre droit] ; t : indices des cibles possibles
+   ===================================================================== */
+const T = (f, t) => ({ f, t });
+const LEVELS = [
+  /* 1 */ [ T(L => [v(L[0]), mul(v(L[1]), v(L[2]))], [1, 2]),
+           T(L => [v(L[0]), div(v(L[1]), v(L[2]))], [1]) ],
+  /* 2 */ [ T(L => [v(L[0]), add(v(L[1]), v(L[2]))], [1, 2]),
+           T(L => [v(L[0]), sub(v(L[1]), v(L[2]))], [1]) ],
+  /* 3 */ [ T(L => [v(L[0]), div(v(L[1]), v(L[2]))], [2]),
+           T(L => [v(L[0]), sub(v(L[1]), v(L[2]))], [2]) ],
+  /* 4 */ [ T(L => [v(L[0]), div(mul(v(L[1]), v(L[2])), v(L[3]))], [1, 2, 3]),
+           T(L => [v(L[0]), div(v(L[1]), mul(v(L[2]), v(L[3])))], [1, 2, 3]),
+           T(L => [mul(v(L[0]), v(L[1])), div(v(L[2]), v(L[3]))], [0, 2, 3]) ],
+  /* 5 */ [ T(L => [v(L[0]), add(v(L[1]), mul(v(L[2]), v(L[3])))], [2, 3]),
+           T(L => [v(L[0]), sub(v(L[1]), div(v(L[2]), v(L[3])))], [2]),
+           T(L => [v(L[0]), sub(mul(v(L[1]), v(L[2])), v(L[3]))], [1]) ],
+  /* 6 */ [ T(L => [v(L[0]), div(add(v(L[1]), v(L[2])), v(L[3]))], [1, 2, 3]),
+           T(L => [v(L[0]), mul(sub(v(L[1]), v(L[2])), v(L[3]))], [1, 2]),
+           T(L => [v(L[0]), add(div(v(L[1]), v(L[2])), v(L[3]))], [1, 2]) ],
+  /* 7 */ [ T(L => [v(L[0]), div(v(L[1]), add(v(L[2]), v(L[3])))], [2, 3]),
+           T(L => [v(L[0]), div(v(L[1]), sub(v(L[2]), v(L[3])))], [2, 3]),
+           T(L => [mul(v(L[0]), v(L[1])), add(v(L[2]), v(L[3]))], [0, 2, 3]),
+           T(L => [v(L[0]), sub(v(L[1]), div(v(L[2]), v(L[3])))], [3]) ],
+  /* 8 */ [ T(L => [v(L[0]), div(mul(v(L[1]), v(L[2])), mul(v(L[3]), v(L[4])))], [1, 3, 4]),
+           T(L => [v(L[0]), add(v(L[1]), div(mul(v(L[2]), v(L[3])), v(L[4])))], [2, 4]),
+           T(L => [v(L[0]), div(sub(v(L[1]), v(L[2])), v(L[3]))], [2, 3]) ],
+  /* 9 */ [ T(L => [v(L[0]), div(sub(v(L[1]), v(L[2])), mul(v(L[3]), v(L[4])))], [1, 2, 3]),
+           T(L => [mul(v(L[0]), v(L[1])), div(add(v(L[2]), v(L[3])), v(L[4]))], [0, 2, 4]),
+           T(L => [v(L[0]), add(v(L[1]), div(v(L[2]), sub(v(L[3]), v(L[4]))))], [2, 3, 4]) ],
+  /* 10 */ [ T(L => [v(L[0]), div(v(L[1]), add(v(L[2]), mul(v(L[3]), v(L[4]))))], [2, 3, 4]),
+            T(L => [v(L[0]), div(add(v(L[1]), v(L[2])), sub(v(L[3]), v(L[4])))], [1, 3, 4]),
+            T(L => [mul(v(L[0]), v(L[1])), div(v(L[2]), sub(v(L[3]), v(L[4])))], [3, 4]),
+            T(L => [v(L[0]), sub(v(L[1]), div(v(L[2]), add(v(L[3]), v(L[4]))))], [3, 4]) ]
+];
+
+/* Lettres : on évite les paires confondables (c/C, p/ρ, a/α, b/β) dans une même relation */
+const LOWER = ['a','b','c','d','f','g','h','k','m','n','p','q','r','s','t','u','v','x','y','z'];
+const UPPER = ['A','B','C','D','E','F','G','H','L','M','N','P','R','T','U'];
+const GREEK = ['α','β','λ','ρ','ω','θ'];
+const CONFUSABLE = { 'α': 'a', 'β': 'b', 'ρ': 'p' };
+
+function pickLetters(n, level) {
+  let pool = LOWER.slice();
+  if (level >= 2) pool = pool.concat(UPPER);
+  if (CONFIG.greek && level >= 5) pool = pool.concat(GREEK);
+  const out = [], seen = new Set();
+  for (const c of shuffle(pool)) {
+    const key = CONFUSABLE[c] || c.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key); out.push(c);
+    if (out.length === n) break;
+  }
+  return out;
+}
+
+function buildLetterQuestion(level) {
+  for (let attempt = 0; attempt < 200; attempt++) {
+    const tpl = pick(LEVELS[level]);
+    const L = pickLetters(5, level);
+    const [lhs, rhs] = tpl.f(L);
+    const swap = level >= 3 && Math.random() < CONFIG.swapProbability;
+    const q = makeQuestion(lhs, rhs, L[pick(tpl.t)], { swap, mult: CONFIG.multSymbol, label: '' });
+    if (q) return q;
+  }
+  throw new Error('Impossible de générer une question au niveau ' + level);
+}
+
+/* =====================================================================
+   Relations de physique-chimie de seconde
+   (programme d'enseignement commun, BO spécial n° 1 du 22 janvier 2019)
+   family : deux relations de même famille ne figurent pas dans la même série
+   ===================================================================== */
+const R = (label, family, f, targets) => ({ label, family, f, targets });
+const s = sym;
+const PHYSICS = [
+  R('Masse volumique', 'mV',
+    () => [s('rho', '\\rho', 'ρ'), div(s('m', 'm'), s('V', 'V'))], ['m', 'V']),
+  R('Concentration en masse', 'mV',
+    () => [s('Cm', 'C_\\text{m}', 'Cm'), div(s('m', 'm'), s('V', 'V'))], ['m', 'V']),
+  R('Masse volumique (pesée par différence)', 'mV',
+    () => [s('rho', '\\rho', 'ρ'), div(sub(s('m2', 'm_2', 'm₂'), s('m1', 'm_1', 'm₁')), s('V', 'V'))], ['m2', 'm1', 'V']),
+  R('Dilution', 'dil',
+    () => [mul(s('C0', 'C_{\\text{m},0}', 'Cm,0'), s('V0', 'V_0', 'V₀')), mul(s('C1', 'C_{\\text{m},1}', 'Cm,1'), s('V1', 'V_1', 'V₁'))], ['C0', 'V0', 'C1', 'V1']),
+  R('Facteur de dilution', 'Fdil',
+    () => [s('F', 'F'), div(s('V1', 'V_1', 'V₁'), s('V0', 'V_0', 'V₀'))], ['V1', 'V0']),
+  R('Nombre d’entités dans un échantillon', 'Nent',
+    () => [s('N', 'N'), div(s('me', 'm_\\text{échantillon}', 'm(échantillon)'), s('mu', 'm_\\text{entité}', 'm(entité)'))], ['me', 'mu']),
+  R('Quantité de matière', 'n',
+    () => [s('n', 'n'), div(s('N', 'N'), s('NA', 'N_\\text{A}', 'NA'))], ['N']),
+  R('Quantité de matière', 'n',
+    () => [s('n', 'n'), div(s('me', 'm_\\text{échantillon}', 'm(échantillon)'), mul(s('mu', 'm_\\text{entité}', 'm(entité)'), s('NA', 'N_\\text{A}', 'NA')))], ['me', 'mu']),
+  R('Masse d’une molécule d’eau', 'H2O',
+    () => [s('mw', 'm_{\\text{H}_2\\text{O}}', 'm(H₂O)'), add(mul(num(2), s('mH', 'm_\\text{H}', 'm(H)')), s('mO', 'm_\\text{O}', 'm(O)'))], ['mH', 'mO']),
+  R('Nombre de neutrons d’un noyau', 'AZ',
+    () => [s('N', 'N'), sub(s('A', 'A'), s('Z', 'Z'))], ['A', 'Z']),
+  R('Énergie de changement d’état', 'Q',
+    () => [s('Q', 'Q'), mul(s('m', 'm'), s('L', 'L'))], ['m', 'L']),
+  R('Vitesse moyenne', 'v',
+    () => [s('v', 'v'), div(s('d', 'd'), s('Dt', '\\Delta t', 'Δt'))], ['d', 'Dt']),
+  R('Vitesse moyenne', 'v',
+    () => [s('v', 'v'), div(s('d', 'd'), sub(s('t2', 't_2', 't₂'), s('t1', 't_1', 't₁')))], ['d', 't2', 't1']),
+  R('Vitesse moyenne sur deux parcours', 'v3',
+    () => [s('v', 'v'), div(add(s('d1', 'd_1', 'd₁'), s('d2', 'd_2', 'd₂')), add(s('Dt1', '\\Delta t_1', 'Δt₁'), s('Dt2', '\\Delta t_2', 'Δt₂')))], ['d2', 'Dt2']),
+  R('Écho (sonar, échographie)', 'echo',
+    () => [s('v', 'v'), div(mul(num(2), s('d', 'd')), s('Dt', '\\Delta t', 'Δt'))], ['d', 'Dt']),
+  R('Poids', 'P',
+    () => [s('P', 'P'), mul(s('m', 'm'), s('g', 'g'))], ['m', 'g']),
+  R('Loi de la gravitation universelle', 'grav',
+    () => [s('F', 'F'), div(mul(mul(s('G', 'G'), s('mA', 'm_A')), s('mB', 'm_B')), s('d2', 'd^2', 'd²'))], ['mA', 'mB', 'd2']),
+  R('Pesanteur à la surface d’une planète', 'gpl',
+    () => [s('g', 'g'), div(mul(s('G', 'G'), s('M', 'M')), s('R2', 'R^2', 'R²'))], ['M', 'R2']),
+  R('Indice de réfraction', 'nc',
+    () => [s('n', 'n'), div(s('c', 'c'), s('v', 'v'))], ['v']),
+  R('Loi de Snell-Descartes pour la réfraction', 'snell',
+    () => [mul(s('n1', 'n_1', 'n₁'), s('si1', '\\sin i_1', 'sin i₁')), mul(s('n2', 'n_2', 'n₂'), s('si2', '\\sin i_2', 'sin i₂'))], ['n1', 'si1', 'n2', 'si2']),
+  R('Grandissement', 'gam',
+    () => [s('gam', '\\gamma', 'γ'), div(s('ApBp', "\\overline{A'B'}", "A'B'"), s('AB', '\\overline{AB}', 'AB'))], ['ApBp', 'AB']),
+  R('Grandissement', 'gam',
+    () => [div(s('ApBp', "\\overline{A'B'}", "A'B'"), s('AB', '\\overline{AB}', 'AB')), div(s('OAp', "\\overline{OA'}", "OA'"), s('OA', '\\overline{OA}', 'OA'))], ['ApBp', 'AB', 'OAp', 'OA']),
+  R('Loi d’Ohm', 'ohm',
+    () => [s('U', 'U'), mul(s('R', 'R'), s('I', 'I'))], ['R', 'I']),
+  R('Loi des nœuds', 'noeuds',
+    () => [s('I', 'I'), add(s('I1', 'I_1', 'I₁'), s('I2', 'I_2', 'I₂'))], ['I1', 'I2']),
+  R('Loi des mailles', 'mailles',
+    () => [s('UG', 'U_G'), add(add(s('U1', 'U_1', 'U₁'), s('U2', 'U_2', 'U₂')), s('U3', 'U_3', 'U₃'))], ['U2', 'U3']),
+  R('Loi des mailles et loi d’Ohm', 'mailles-ohm',
+    () => [s('UG', 'U_G'), add(s('UL', 'U_L'), mul(s('R', 'R'), s('I', 'I')))], ['UL', 'R', 'I']),
+  R('Résistances en série', 'serie',
+    () => [s('U', 'U'), mul(add(s('R1', 'R_1', 'R₁'), s('R2', 'R_2', 'R₂')), s('I', 'I'))], ['R1', 'R2', 'I'])
+];
+
+/* Difficulté estimée : nombre de grandeurs, profondeur, dénominateur, terme retranché… */
+function difficulty(lhs, rhs, target) {
+  const onLeft = contains(lhs, target);
+  const side = onLeft ? lhs : rhs, other = onLeft ? rhs : lhs;
+  const all = leaves(lhs).concat(leaves(rhs));
+  const nVars = new Set(all.filter(id => id[0] !== '#')).size;
+  let depth = 0, den = 0, retr = 0, t = side;
+  while (!isLeaf(t)) {
+    const inL = contains(t.l, target);
+    if (!inL && t.op === '/') den = 1;
+    if (!inL && t.op === '-') retr = 1;
+    depth++; t = inL ? t.l : t.r;
+  }
+  const hasConst = all.some(id => id[0] === '#');
+  return nVars + 1.5 * depth + 2 * den + 1.5 * retr + (isLeaf(other) ? 0 : 1) + (hasConst ? 1 : 0);
+}
+
+function physicsPairs() {
+  const pairs = [];
+  PHYSICS.forEach(r => {
+    const [l, rr] = r.f();
+    r.targets.forEach(tg => pairs.push({ r, target: tg, score: difficulty(l, rr, tg) + Math.random() * 1.5 }));
+  });
+  return pairs.sort((a, b) => a.score - b.score);
+}
+
+function buildPhysicsQuestion(i, nq, pairs, used) {
+  const len = pairs.length, width = len / nq, center = (i + 0.5) * width;
+  const order = pairs
+    .map((p, k) => ({ p, dist: Math.abs(k + 0.5 - center) + Math.random() * width * 0.5 }))
+    .filter(o => !used.has(o.p.r.family))
+    .sort((a, b) => a.dist - b.dist);
+  for (const o of order) {
+    const [l, r] = o.p.r.f();
+    const q = makeQuestion(l, r, o.p.target, { swap: false, mult: CONFIG.multSymbolPhysique, label: o.p.r.label });
+    if (q) { used.add(o.p.r.family); q.physics = true; return q; }
+  }
+  return null;
+}
+
+/* =====================================================================
+   Série de questions
+   ===================================================================== */
+function levelFor(i, nq) {
+  return Math.min(LEVELS.length - 1, Math.round(i * (LEVELS.length - 1) / Math.max(1, nq - 1)));
+}
+
+/* Mélange : moitié de relations de physique, jamais plus de deux questions du même type d'affilée */
+function mixedPattern(nq) {
+  const base = Array.from({ length: nq }, (_, i) => i < Math.ceil(nq / 2));
+  for (let attempt = 0; attempt < 500; attempt++) {
+    const p = shuffle(base);
+    if (p.every((x, i) => i < 2 || !(x === p[i - 1] && x === p[i - 2]))) return p;
+  }
+  return base.map((_, i) => i % 2 === 1);
+}
+
+function buildSeries(mode = CONFIG.mode, nq = CONFIG.nbQuestions) {
+  const pairs = physicsPairs();
+  const used = new Set();
+  const pattern = mode === 'physique' ? Array(nq).fill(true)
+                : mode === 'lettres'  ? Array(nq).fill(false)
+                : mixedPattern(nq);
+  const physIdx = new Set(pattern.flatMap((x, i) => x ? [i] : []));
+  return Array.from({ length: nq }, (_, i) =>
+    (physIdx.has(i) && buildPhysicsQuestion(i, nq, pairs, used)) || buildLetterQuestion(levelFor(i, nq))
+  );
+}
+</script>
+
+<script>
+/* =====================================================================
+   Interface
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+const els = {
+  count: $('count'), ticks: $('ticks'),
+  screenQ: $('screen-q'), screenEnd: $('screen-end'),
+  context: $('context'), relation: $('relation'), target: $('target'),
+  options: $('options'), feedback: $('feedback'), next: $('next'),
+  score: $('score'), comment: $('comment'), recap: $('recap'),
+  restart: $('restart')
+};
+const NQ = CONFIG.nbQuestions;
+const state = { mode: null, i: 0, questions: [], answers: [], locked: false, timer: null };
+
+function math(el, texStr, txtStr) {
+  if (window.katex) katex.render(texStr, el, { throwOnError: false, displayMode: false });
+  else el.textContent = txtStr;
+}
+
+function show(screen) {
+  els.screenQ.hidden = screen !== 'q';
+  els.screenEnd.hidden = screen !== 'end';
+}
+
+function start(mode) {
+  clearTimeout(state.timer);
+  state.mode = mode;
+  state.questions = buildSeries(mode, NQ);
+  state.answers = [];
+  state.i = 0;
+  els.ticks.style.setProperty('--n', NQ);
+  els.ticks.innerHTML = '';
+  for (let k = 0; k < NQ; k++) {
+    const t = document.createElement('span');
+    t.className = 'tick';
+    els.ticks.appendChild(t);
+  }
+  show('q');
+  showQuestion();
+}
+
+function showQuestion() {
+  const q = state.questions[state.i];
+  state.locked = false;
+  els.count.textContent = (state.i + 1) + ' / ' + NQ;
+  [...els.ticks.children].forEach((t, k) => t.classList.toggle('current', k === state.i));
+
+  els.context.textContent = q.label;
+  math(els.relation, q.relTex, q.relTxt);
+  math(els.target, q.targetTex, q.targetTxt);
+
+  els.options.innerHTML = '';
+  q.options.forEach((o, k) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'option';
+    b.innerHTML = '<span class="key">' + (k + 1) + '</span><span class="expr"></span>';
+    math(b.querySelector('.expr'), o.tex, o.txt);
+    b.setAttribute('aria-label', 'Proposition ' + (k + 1) + ' : ' + o.txt);
+    b.addEventListener('click', () => answer(k));
+    els.options.appendChild(b);
+  });
+
+  els.feedback.textContent = '';
+  els.feedback.className = 'feedback';
+  els.next.hidden = true;
+
+  els.screenQ.classList.remove('fade');
+  void els.screenQ.offsetWidth;
+  els.screenQ.classList.add('fade');
+}
+
+function answer(k) {
+  if (state.locked) return;
+  state.locked = true;
+  const q = state.questions[state.i];
+  const chosen = q.options[k];
+  state.answers.push({ q, chosen, ok: chosen.ok });
+
+  [...els.options.children].forEach((b, j) => {
+    b.disabled = true;
+    if (q.options[j].ok) b.classList.add('is-correct');
+    else if (j === k) b.classList.add('is-wrong');
+    else b.classList.add('is-dim');
+  });
+  const tick = els.ticks.children[state.i];
+  tick.classList.remove('current');
+  tick.classList.add(chosen.ok ? 'ok' : 'ko');
+
+  if (chosen.ok) {
+    els.feedback.textContent = 'Juste.';
+    els.feedback.className = 'feedback ok';
+    state.timer = setTimeout(next, CONFIG.autoAdvanceMs);
+  } else {
+    els.feedback.textContent = chosen.msg || 'Ce n’est pas la bonne expression.';
+    els.feedback.className = 'feedback ko';
+    els.next.textContent = state.i === NQ - 1 ? 'Voir le résultat' : 'Question suivante';
+    els.next.hidden = false;
+    els.next.focus({ preventScroll: true });
+  }
+}
+
+function next() {
+  clearTimeout(state.timer);
+  if (state.i >= NQ - 1) { showEnd(); return; }
+  state.i++;
+  showQuestion();
+}
+
+function commentFor(s) {
+  let c;
+  if (s === NQ) c = "Sans faute : les automatismes sont en place.";
+  else if (s >= 0.8 * NQ) c = "Très bien. Les règles sont acquises ; relire les quelques erreurs ci-dessous pour qu’elles ne deviennent pas des habitudes.";
+  else if (s >= 0.6 * NQ) c = "Bien. Les cas simples sont maîtrisés, mais les relations imbriquées demandent encore de l’attention : procéder pas à pas, en écrivant chaque étape.";
+  else if (s >= 0.4 * NQ) c = "C’est un début. Pour isoler une grandeur, on défait les opérations une à une, en commençant par la dernière effectuée, et on applique chaque opération aux deux membres.";
+  else c = "Les règles ne sont pas encore en place. Reprendre les relations à trois grandeurs (produit, quotient, somme, différence), puis recommencer.";
+  if (s < NQ && state.questions.some(q => q.physics)) {
+    c += " En physique, vérifier l’unité de l’expression obtenue permet souvent de repérer une erreur.";
+  }
+  return c;
+}
+
+function showEnd() {
+  const score = state.answers.filter(a => a.ok).length;
+  show('end');
+  els.count.textContent = 'Résultat';
+  math(els.score, '\\dfrac{' + score + '}{' + NQ + '}', score + ' / ' + NQ);
+  els.comment.textContent = commentFor(score);
+
+  const wrong = state.answers.filter(a => !a.ok);
+  els.recap.innerHTML = '';
+  els.recap.hidden = wrong.length === 0;
+  if (wrong.length) {
+    const h = document.createElement('h2');
+    h.textContent = wrong.length === 1 ? 'L’erreur à revoir' : 'Les erreurs à revoir';
+    els.recap.appendChild(h);
+    wrong.forEach(a => {
+      const good = a.q.options.find(o => o.ok);
+      const item = document.createElement('div');
+      item.className = 'item';
+      item.innerHTML =
+        (a.q.label ? '<div class="ctx"></div>' : '') +
+        '<div class="rel"></div>' +
+        '<div class="line"><span class="lab">Réponse donnée</span><span class="m bad"></span></div>' +
+        '<div class="line"><span class="lab">Réponse attendue</span><span class="m good"></span></div>' +
+        '<div class="why"></div>';
+      if (a.q.label) item.querySelector('.ctx').textContent = a.q.label;
+      math(item.querySelector('.rel'), a.q.relTex, a.q.relTxt);
+      math(item.querySelector('.bad'), a.chosen.tex, a.chosen.txt);
+      math(item.querySelector('.good'), good.tex, good.txt);
+      item.querySelector('.why').textContent = a.chosen.msg || '';
+      els.recap.appendChild(item);
+    });
+  }
+  els.restart.focus({ preventScroll: true });
+  window.scrollTo({ top: 0 });
+}
+
+els.next.addEventListener('click', next);
+els.restart.addEventListener('click', () => start(state.mode));
+
+document.addEventListener('keydown', e => {
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  if (!els.screenQ.hidden) {
+    if (!state.locked && ['1', '2', '3'].includes(e.key)) { answer(Number(e.key) - 1); return; }
+    const nextVisible = state.locked && !els.next.hidden;
+    if (nextVisible && e.key === 'ArrowRight') next();
+    if (nextVisible && (e.key === 'Enter' || e.key === ' ') && document.activeElement !== els.next) { e.preventDefault(); next(); }
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const mode = new URLSearchParams(location.search).get('mode');
+  start(['lettres', 'physique', 'melange'].includes(mode) ? mode : CONFIG.mode);
+});
+</script>
+</body>
+</html>

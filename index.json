@@ -221,7 +221,7 @@
 	"title": "2nde",
 	"tags": [],
 	"description": "",
-	"content": " Physique-chimie de seconde Programme officiel\nDescriptions de la matière À l\u0026rsquo;échelle macroscopique Mélanges Solutions À l\u0026rsquo;échelle microscopique Entités chimiques Cortège électronique Mole Transformations de la matière Physique Chimique Nucléaire Mécanique Mouvements Actions et principe d'inertie Ondes et signaux Son Lumière et spectre Vision et image Électricité "
+	"content": " Physique-chimie de seconde Programme officiel\nDescriptions de la matière À l\u0026rsquo;échelle macroscopique Mélanges Solutions À l\u0026rsquo;échelle microscopique Entités chimiques Cortège électronique Mole Transformations de la matière Physique Chimique Nucléaire Mécanique Mouvements Actions et principe d'inertie Ondes et signaux Son Lumière et spectre Vision et image Électricité Entraînements Algèbre (jouer avec les relations) Numérique (puissances de 10, ordres de grandeur, conversions, notation scientifique) "
 },
 {
 	"uri": "https://coursphychi.github.io/1es/matiere/",
@@ -747,6 +747,13 @@
 	"tags": [],
 	"description": "",
 	"content": " Énergie mécanique Cours Documents et autres Activités Montagnes Russes (partie\u0026nbsp;1 et\u0026nbsp;3) Ski de vitesse + Frottements fluides TP Pendule (type ECE) (qrcode du petit tuto) TP pointage Darwin Animations Plan incliné Travail d'une force constante "
+},
+{
+	"uri": "https://coursphychi.github.io/2nde/entrainement/",
+	"title": "Entraînement maths",
+	"tags": [],
+	"description": "",
+	"content": " Entraînement mathématiques Les quiz ci-dessous visent à vérifier ou installer certains automatismes bien pratiques en physique-chimie.\nJouer avec les relations Les lois sont données par des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\\frac{m_a\\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l\u0026rsquo;une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s\u0026rsquo;aguerrir dans cet exercice et le quiz suivant teste votre agilité dans le maniement de ces relations algébriques.\nQuiz relations Calculs numériques et écriture d\u0026rsquo;un résultat Une fois qu\u0026rsquo;on a déterminer la bonne formule littérale pour la grandeur cherchée, on calcule (on dit qu\u0026rsquo;on fait l\u0026rsquo;application numérique). Plusieurs difficultés se dressent alors : les grandeurs doivent être converties pour que les unités « se parlent », la précision des mesures doit être retranscrites dans le nombre de chiffres significatifs et pour que le résultat soit le plus lisible possible, on utilise la notation scientifique.\nLe quiz ci-dessous permet de diagnostiquer et renforcer les points suivant :\npuissances de 10 + ordres de grandeur conversions notation scientifique Diagnostic + entraînement "
 },
 {
 	"uri": "https://coursphychi.github.io/tspe/gravitation/",

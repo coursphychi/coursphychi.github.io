@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automatismes : ordres de grandeur, conversions, écriture scientifique, chiffres significatifs</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+  :root {
+    --paper: #FBFBF9;
+    --ink: #1C2A4A;
+    --ink-soft: #2E4170;
+    --muted: #697086;
+    --rule: #D9DCE4;
+    --rule-strong: #AEB4C2;
+    --hover: #F1F3F8;
+    --ok: #1F7A4D;
+    --ok-bg: #EAF4EE;
+    --mid: #946200;
+    --ko: #B42318;
+    --ko-bg: #FBEDEB;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: "KaTeX_Main", "Latin Modern Roman", "CMU Serif", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .quiz { max-width: 42rem; margin: 0 auto; padding: 1.4rem 1.25rem 3rem; min-height: 100vh; display: flex; flex-direction: column; }
+
+  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .title { font-style: italic; color: var(--muted); font-size: 1rem; }
+  .count { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 1rem; }
+  .ticks { display: grid; grid-template-columns: repeat(var(--n, 16), 1fr); gap: 4px; margin-top: .6rem; min-height: 3px; }
+  .ticks.grouped { display: flex; gap: 12px; }
+  .tick-group { flex: 1; display: grid; grid-template-columns: repeat(var(--c, 3), 1fr); gap: 3px; }
+  .tick { height: 3px; border-radius: 2px; background: var(--rule); }
+  .tick.current, .tick-group.active .tick:not(.ok) { background: var(--rule-strong); }
+  .tick.current { background: var(--ink); }
+  .tick.ok { background: var(--ok); }
+  .tick.ko { background: var(--ko); }
+
+  .stage { flex: 1; padding: 1.6rem 0 1rem; }
+  .centered { display: flex; flex-direction: column; justify-content: center; }
+  .fade { animation: appear .18s ease-out; }
+  @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+
+  .intro-title { font-size: clamp(1.7rem, 6vw, 2.3rem); line-height: 1.25; margin: 0 0 1.2rem; font-weight: normal; }
+  .intro p { max-width: 34rem; margin: 0 0 .9rem; }
+  .intro .hint { color: var(--muted); }
+  .intro .actions { justify-content: flex-start; margin-top: 1.2rem; }
+
+  .context { text-align: center; font-style: italic; color: var(--muted); font-size: 1rem; margin: 0 0 .4rem; min-height: 1.6em; }
+  .prompt { text-align: center; font-size: clamp(1.12rem, 4.4vw, 1.36rem); line-height: 1.85; margin: 0 auto 1.3rem; max-width: 36rem; }
+
+  .options { display: grid; grid-template-columns: 1fr; gap: .55rem; }
+  @media (min-width: 620px) { .options { grid-template-columns: 1fr 1fr; } }
+  .option {
+    display: flex; align-items: center; gap: .7rem;
+    width: 100%; min-height: 3.7rem; padding: .55rem 1rem;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--rule); border-radius: 6px;
+    font: inherit; text-align: left; cursor: pointer;
+    transition: background-color .12s, border-color .12s;
+  }
+  .option .key { flex: none; width: 1rem; font-size: .8rem; color: var(--muted); }
+  .option .expr { flex: 1; text-align: center; font-size: 1.2rem; overflow-x: auto; padding: .15em 0; }
+  .option:hover:not(:disabled) { border-color: var(--ink); background: var(--hover); }
+  .option:disabled { cursor: default; color: var(--ink); }
+  .option.is-correct { border-color: var(--ok); background: var(--ok-bg); color: var(--ok); }
+  .option.is-wrong { border-color: var(--ko); background: var(--ko-bg); color: var(--ko); }
+  .option.is-dim { opacity: .4; }
+  @media (hover: none) { .option .key { display: none; } }
+
+  .dunno-row { text-align: center; margin-top: .5rem; min-height: 2.3rem; }
+  .link {
+    background: none; border: 0; padding: .35rem .5rem; font: inherit; font-size: .95rem;
+    color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+  }
+  .link:hover { color: var(--ink); }
+  .top .link { padding: 0; flex: none; }
+  .nw { white-space: nowrap; }
+  .prompt .katex, .feedback .katex, .err .katex, .comment .katex { font-size: 1.08em; }
+
+  .feedback { max-width: 36rem; margin: .8rem auto 0; padding: .1rem 0 .1rem .95rem; border-left: 2px solid var(--rule); text-align: left; }
+  .feedback:empty { display: none; }
+  .feedback.ok { border-color: var(--ok); }
+  .feedback.ko { border-color: var(--ko); }
+  .feedback p { margin: .3rem 0; }
+  .feedback .verdict { font-size: 1.05rem; }
+  .feedback.ok .verdict { color: var(--ok); }
+  .feedback.ko .verdict { color: var(--ko); }
+  .feedback .rule, .feedback .lab { color: var(--muted); }
+  .feedback .lab { font-style: italic; }
+  .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; min-height: 3rem; margin-top: 1rem; }
+
+  button:focus-visible, summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .btn {
+    font: inherit; font-size: 1rem; padding: .5rem 1.4rem;
+    border: 1px solid var(--ink); border-radius: 6px;
+    background: var(--ink); color: var(--paper); cursor: pointer;
+  }
+  .btn:hover { background: var(--ink-soft); }
+  .btn.ghost { background: transparent; color: var(--ink); border-color: var(--rule-strong); }
+  .btn.ghost:hover { border-color: var(--ink); background: var(--hover); }
+  .btn.small { font-size: .95rem; padding: .35rem 1.1rem; }
+  [hidden] { display: none !important; }
+
+  .score { text-align: center; font-size: clamp(2.4rem, 10vw, 3.6rem); margin: .4rem 0 0; }
+  .comment { max-width: 34rem; margin: 1.2rem auto 1.8rem; text-align: center; font-size: 1.08rem; line-height: 1.65; }
+
+  .themes { border-top: 1px solid var(--rule); }
+  .theme { padding: 1rem 0 1.1rem; border-bottom: 1px solid var(--rule); }
+  .theme-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .theme-name { font-size: 1.15rem; }
+  .status { font-style: italic; font-size: .98rem; white-space: nowrap; }
+  .status.ok { color: var(--ok); }
+  .status.mid { color: var(--mid); }
+  .status.ko { color: var(--ko); }
+  .skill-list { list-style: none; padding: 0; margin: .45rem 0 .75rem; }
+  .skill-list li { display: flex; align-items: baseline; gap: .6rem; font-size: .97rem; color: var(--muted); padding: .05rem 0; }
+  .skill-list li.miss { color: var(--ink); }
+  .skill-list .meta { margin-left: auto; font-size: .88rem; color: var(--muted); white-space: nowrap; }
+  .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--rule); flex: none; transform: translateY(-.05rem); }
+  .dot.ok { background: var(--ok); }
+  .dot.ko { background: var(--ko); }
+  .trained { font-size: .92rem; color: var(--muted); margin: -.2rem 0 .7rem; }
+
+  details.errors { margin-top: 1.4rem; }
+  details.errors summary { cursor: pointer; color: var(--muted); font-style: italic; padding: .4rem 0; }
+  .err { padding: .9rem 0; border-bottom: 1px solid var(--rule); }
+  .err .ctx { font-size: .9rem; font-style: italic; color: var(--muted); }
+  .err .q { margin: .25rem 0 .45rem; line-height: 1.8; }
+  .err .line { display: flex; flex-wrap: wrap; gap: .2rem 1rem; align-items: baseline; margin: .2rem 0; }
+  .err .lab { min-width: 8.5rem; font-size: .9rem; color: var(--muted); }
+  .err .bad { color: var(--ko); }
+  .err .good { color: var(--ok); }
+  .err .why, .err .how { font-size: .95rem; margin: .3rem 0 0; }
+  .err .how { color: var(--muted); }
+
+  .tend-title { font-size: clamp(1.5rem, 5.5vw, 2rem); font-weight: normal; margin: .6rem 0 0; text-align: center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade { animation: none; }
+    .option { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="quiz">
+  <header>
+    <div class="top">
+      <span class="title" id="title">Automatismes</span>
+      <span class="count" id="count"></span>
+      <button class="link" id="stop" type="button" hidden>Arrêter</button>
+    </div>
+    <div class="ticks" id="ticks" aria-hidden="true"></div>
+  </header>
+
+  <section class="stage centered intro" id="screen-intro">
+    <h1 class="intro-title">Ordres de grandeur, conversions, écriture scientifique, chiffres significatifs</h1>
+    <p>Seize questions pour faire le point, de la plus simple à la plus exigeante. À la fin, un bilan indique ce qui est maîtrisé et propose un entraînement ciblé sur chaque thème.</p>
+    <p class="hint">En cas de doute, choisir « Je ne sais pas » plutôt que répondre au hasard : le bilan sera plus fiable.</p>
+    <div class="actions"><button class="btn" id="go" type="button">Commencer le diagnostic</button></div>
+  </section>
+
+  <section class="stage" id="screen-q" hidden aria-live="polite">
+    <p class="context" id="context"></p>
+    <div class="prompt" id="prompt"></div>
+    <div class="options" id="options"></div>
+    <div class="dunno-row" id="dunno-row"><button class="link" id="dunno" type="button">Je ne sais pas</button></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="actions"><button class="btn" id="next" type="button" hidden>Question suivante</button></div>
+  </section>
+
+  <section class="stage" id="screen-bilan" hidden>
+    <div class="score" id="b-score"></div>
+    <p class="comment" id="b-comment"></p>
+    <div class="themes" id="b-themes"></div>
+    <details class="errors" id="b-errors" hidden><summary id="b-errors-sum"></summary><div id="b-errors-list"></div></details>
+    <div class="actions"><button class="btn ghost" id="b-redo" type="button">Refaire un diagnostic</button></div>
+  </section>
+
+  <section class="stage" id="screen-tend" hidden>
+    <h2 class="tend-title" id="te-title"></h2>
+    <p class="comment" id="te-comment"></p>
+    <ul class="skill-list" id="te-skills"></ul>
+    <div class="actions">
+      <button class="btn" id="te-back" type="button">Retour au bilan</button>
+      <button class="btn ghost" id="te-again" type="button">Nouvel entraînement sur ce thème</button>
+    </div>
+  </section>
+
+  <noscript>Ce quiz nécessite JavaScript.</noscript>
+</main>
+
+<script id="engine">
+/* =====================================================================
+   Réglages
+   ===================================================================== */
+const CONFIG = {
+  seuilOdG: 5,          // ordre de grandeur de a × 10^n : 10^n si a < seuil, 10^(n+1) sinon (5 ou Math.sqrt(10))
+  critere: 3,           // réussites consécutives pour valider une compétence à l'entraînement
+  maxEntrainement: 30   // nombre maximal de questions par entraînement
+};
+
+/* =====================================================================
+   Outils
+   ===================================================================== */
+const rnd = n => Math.floor(Math.random() * n);
+const randint = (a, b) => a + rnd(b - a + 1);
+const pick = a => a[rnd(a.length)];
+const chance = p => Math.random() < p;
+function shuffle(a) {
+  const b = a.slice();
+  for (let i = b.length - 1; i > 0; i--) { const j = rnd(i + 1); [b[i], b[j]] = [b[j], b[i]]; }
+  return b;
+}
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const rangs = n => n + ' rang' + (n > 1 ? 's' : '');
+const rangOrd = n => (n === 1 ? '1er' : n + 'e');
+const nCS = n => n + ' chiffre' + (n > 1 ? 's' : '') + ' significatif' + (n > 1 ? 's' : '');
+
+/* Nombres exacts : d = chaîne de chiffres sans zéro de tête, E = exposant ; valeur = d × 10^E */
+function randDigits(n) {
+  let s = String(randint(1, 9));
+  for (let i = 1; i < n; i++) s += String(i === n - 1 ? randint(1, 9) : randint(0, 9));
+  return s;
+}
+function stripZeros(d, E) {
+  let k = d.length;
+  while (k > 1 && d[k - 1] === '0') k--;
+  return [d.slice(0, k), E + d.length - k];
+}
+function decStr(d, E) {
+  if (E >= 0) return d + '0'.repeat(E);
+  const pos = d.length + E;
+  return pos > 0 ? d.slice(0, pos) + ',' + d.slice(pos) : '0,' + '0'.repeat(-pos) + d;
+}
+const groupInt = ip => (ip.length < 5 ? ip : ip.replace(/\B(?=(\d{3})+(?!\d))/g, '\\,'));
+function texDec(d, E, neg = false) {
+  const [ip, fp] = decStr(d, E).split(',');
+  return (neg ? '-' : '') + groupInt(ip) + (fp !== undefined ? '{,}' + fp : '');
+}
+const sciN = (d, E) => E + d.length - 1;
+const texMant = d => (d.length > 1 ? d[0] + '{,}' + d.slice(1) : d);
+function texSci(d, E, neg = false, hide0 = true) {
+  const n = sciN(d, E);
+  return (neg ? '-' : '') + texMant(d) + (n === 0 && hide0 ? '' : ' \\times 10^{' + n + '}');
+}
+const texP = n => '10^{' + n + '}';
+const par = n => (n < 0 ? '(' + n + ')' : String(n));
+const num = (d, E) => Number(d) * Math.pow(10, E);
+const mantOf = d => Number(d[0] + '.' + d.slice(1));
+const frf = (x, k = 2) => String(Number(x.toPrecision(k))).replace('.', '{,}');
+const T = s => '\\text{' + s + '}';
+const U = (s, p) => T(s) + (p && p !== 1 ? '^{' + p + '}' : '');
+const ambiguous = (d, E) => E > 0 || (E === 0 && d.length > 1 && d.endsWith('0'));
+function roundDigits(d, E, k) {
+  if (k >= d.length) return [d + '0'.repeat(k - d.length), E - (k - d.length)];
+  let s = (BigInt(d.slice(0, k)) + (Number(d[k]) >= 5 ? 1n : 0n)).toString();
+  let e = E + d.length - k;
+  if (s.length > k) { s = s.slice(0, k); e += 1; }
+  return [s, e];
+}
+
+const W = (tex, why, p = 1, same = false) => ({ tex, why, p, same });
+
+function assemble(g) {
+  if (!g) return null;
+  const opts = [{ tex: g.correct, ok: true }];
+  const seen = new Set([g.correct]);
+  const pool = g.wrongs.filter(w => w && w.tex)
+    .map(w => Object.assign({}, w, { s: w.p + Math.random() * 0.9 }))
+    .sort((a, b) => a.s - b.s);
+  for (const w of pool) {
+    if (opts.length === 4) break;
+    if (seen.has(w.tex)) continue;
+    seen.add(w.tex);
+    opts.push({ tex: w.tex, ok: false, why: w.why, same: w.same });
+  }
+  if (opts.length < 4) return null;
+  const options = g.kind === 'count' ? opts.sort((a, b) => Number(a.tex) - Number(b.tex)) : shuffle(opts);
+  return { prompt: g.prompt, options, method: g.method, rule: g.rule, truth: g.truth, truthCS: g.truthCS, kind: g.kind || 'value' };
+}
+
+/* =====================================================================
+   Thème 1 : puissances de 10 et ordres de grandeur
+   ===================================================================== */
+const seuilTex = () => (Math.abs(CONFIG.seuilOdG - 5) < 1e-9 ? '5' : '\\sqrt{10}');
+const odg = (m, n) => (m < CONFIG.seuilOdG ? n : n + 1);
+const nearSeuil = m => Math.abs(m - CONFIG.seuilOdG) < 0.3 || m > 9.9;
+function odgFloat(x) {
+  let n = Math.floor(Math.log10(x) + 1e-12);
+  let m = x / Math.pow(10, n);
+  if (m >= 10 - 1e-9) { n++; m /= 10; }
+  return Math.pow(10, m < CONFIG.seuilOdG ? n : n + 1);
+}
+const ODG_RULE = () => `Ordre de grandeur de $a \\times 10^{n}$, avec $1 \\le a < 10$ : $10^{n}$ si $a < ${seuilTex()}$, $10^{n+1}$ sinon.`;
+function odgWhy(mTex, m) {
+  return m < CONFIG.seuilOdG
+    ? `Le premier facteur, $${mTex}$, est inférieur à $${seuilTex()}$ : l’ordre de grandeur est la puissance de 10 de l’écriture scientifique.`
+    : `Le premier facteur, $${mTex}$, est supérieur à $${seuilTex()}$ : l’ordre de grandeur est la puissance de 10 suivante.`;
+}
+
+const PREFIX = { G: 9, M: 6, k: 3, h: 2, da: 1, '': 0, d: -1, c: -2, m: -3, 'µ': -6, n: -9, p: -12 };
+const PREFIX_ERR = { G: [6, 12], M: [3, 9], k: [2, 6], h: [3, 1], da: [2], '': [], d: [-2], c: [-3, -1], m: [-2, -6], 'µ': [-3, -9], n: [-6, -12], p: [-9, -15] };
+
+function genPow() {
+  const v = pick(['prod', 'quot', 'pow', 'mix']);
+  const P = (n, why, p) => W(texP(n), why, p);
+  if (v === 'prod') {
+    let a, b;
+    do { a = randint(-9, 9); b = randint(-9, 9); } while (!a || !b || (a > 0 && b > 0) || a + b === 0);
+    const c = a + b;
+    return {
+      prompt: `Calculer $10^{${a}} \\times 10^{${b}}$.`,
+      correct: texP(c),
+      wrongs: [
+        P(a * b, 'Pour un produit, les exposants s’additionnent : ils ne se multiplient pas.', 1),
+        P(a - b, 'Pour un produit, on additionne les exposants : ici, l’un a été soustrait.', 1),
+        P(b - a, 'Pour un produit, on additionne les exposants : ici, l’un a été soustrait.', 1.3),
+        P(-c, 'Erreur de signe sur l’exposant du résultat.', 1.2)
+      ],
+      method: `$10^{${a}} \\times 10^{${b}} = 10^{${a} + ${par(b)}} = 10^{${c}}$.`,
+      rule: 'Produit : $10^{a} \\times 10^{b} = 10^{a+b}$.',
+      truth: Math.pow(10, a) * Math.pow(10, b)
+    };
+  }
+  if (v === 'quot') {
+    let a, b;
+    do { a = randint(-9, 9); b = randint(-9, 9); } while (!a || !b || a === b || (a > 0 && b > 0));
+    const c = a - b;
+    return {
+      prompt: `Calculer $\\dfrac{10^{${a}}}{10^{${b}}}$.`,
+      correct: texP(c),
+      wrongs: [
+        P(a + b, 'Pour un quotient, on soustrait l’exposant du dénominateur : ici, il a été ajouté.', 1),
+        P(b - a, 'C’est l’exposant du numérateur moins celui du dénominateur, pas l’inverse.', 1),
+        P(a * b, 'Pour un quotient, les exposants se soustraient : ils ne se multiplient pas.', 1.5),
+        P(-(a + b), 'Pour un quotient, on soustrait l’exposant du dénominateur.', 1.8)
+      ],
+      method: `$\\dfrac{10^{${a}}}{10^{${b}}} = 10^{${a} - ${par(b)}} = 10^{${c}}$.`,
+      rule: 'Quotient : $\\dfrac{10^{a}}{10^{b}} = 10^{a-b}$.',
+      truth: Math.pow(10, a) / Math.pow(10, b)
+    };
+  }
+  if (v === 'pow') {
+    const BASES = { 2: '100', 3: '1000', 4: '10\\,000', '-2': '0{,}01', '-3': '0{,}001' };
+    const numeric = chance(0.6);
+    const k = numeric ? pick([2, 3, 4, -2, -3]) : pick([-5, -4, -3, -2, 2, 3, 4, 5]);
+    let b;
+    do { b = randint(-6, 6); } while (Math.abs(b) < 2);
+    const c = k * b;
+    const baseTex = numeric ? BASES[k] : texP(k);
+    const wrongs = [
+      P(k + b, 'Puissance d’une puissance : on multiplie les exposants, on ne les additionne pas.', 1),
+      P(-c, 'Erreur de signe sur l’exposant du résultat.', 1.2)
+    ];
+    if (numeric) {
+      wrongs.push(P((k + 1) * b, k > 0
+        ? `$${BASES[k]} = 10^{${k}}$ : l’exposant est le nombre de zéros, pas le nombre de chiffres.`
+        : `$${BASES[k]} = 10^{${k}}$ : le chiffre 1 est au ${rangOrd(-k)} rang après la virgule.`, 0.8));
+      wrongs.push(P(b, `Il faut d’abord écrire $${BASES[k]}$ comme une puissance de 10 : $${BASES[k]} = 10^{${k}}$.`, 1.4));
+    } else {
+      wrongs.push(P(b, 'L’exposant de la puissance intérieure a été oublié.', 1.4));
+      wrongs.push(P(k - b, 'Puissance d’une puissance : on multiplie les exposants.', 1.6));
+    }
+    return {
+      prompt: numeric ? `Écrire $(${baseTex})^{${b}}$ sous la forme d’une puissance de 10.` : `Calculer $(${baseTex})^{${b}}$.`,
+      correct: texP(c),
+      wrongs,
+      method: `$(${baseTex})^{${b}} = ${numeric ? `(10^{${k}})^{${b}} = ` : ''}10^{${k} \\times ${par(b)}} = 10^{${c}}$.`,
+      rule: 'Puissance d’une puissance : $(10^{a})^{b} = 10^{a \\times b}$.',
+      truth: Math.pow(Math.pow(10, k), b)
+    };
+  }
+  let a, b, c;
+  do { a = randint(-8, 8); b = randint(-8, 8); c = randint(-8, 8); } while (!a || !b || !c || a + b - c === 0);
+  const r = a + b - c;
+  return {
+    prompt: `Calculer $\\dfrac{10^{${a}} \\times 10^{${b}}}{10^{${c}}}$.`,
+    correct: texP(r),
+    wrongs: [
+      P(a + b + c, 'L’exposant du dénominateur se soustrait.', 1),
+      P(a * b - c, 'Au numérateur, les exposants s’additionnent : ils ne se multiplient pas.', 1.2),
+      P(c - a - b, 'C’est l’exposant du numérateur moins celui du dénominateur, pas l’inverse.', 1),
+      P(a - b - c, 'Au numérateur, on additionne les exposants.', 1.5)
+    ],
+    method: `$\\dfrac{10^{${a}} \\times 10^{${b}}}{10^{${c}}} = \\dfrac{10^{${a + b}}}{10^{${c}}} = 10^{${a + b} - ${par(c)}} = 10^{${r}}$.`,
+    rule: 'Produit : on additionne les exposants. Quotient : on les soustrait.',
+    truth: Math.pow(10, a) * Math.pow(10, b) / Math.pow(10, c)
+  };
+}
+
+function genOdgValue() {
+  let d;
+  do { d = randDigits(2); } while (nearSeuil(mantOf(d)));
+  const m = mantOf(d), mTex = texMant(d);
+  const form = pick(['sci', 'dec', 'pfx']);
+  let n, valueTex, unit = '', prompt, x;
+  const extra = [];
+  if (form === 'sci') {
+    do { n = randint(-12, 12); } while (Math.abs(n) < 2);
+    valueTex = texSci(d, n - 1);
+    prompt = `Ordre de grandeur de $${valueTex}$ :`;
+    x = num(d, n - 1);
+  } else if (form === 'dec') {
+    n = chance(0.5) ? randint(-5, -2) : randint(3, 6);
+    valueTex = texDec(d, n - 1);
+    prompt = `Ordre de grandeur de $${valueTex}$ :`;
+    x = num(d, n - 1);
+    extra.push(W(texP(odg(m, n < 0 ? n + 1 : n - 1)), 'Compter les zéros ne donne pas l’exposant : écrire d’abord la valeur en écriture scientifique.', 0.8));
+  } else {
+    const base = pick(['m', 'g', 's']);
+    const pf = pick({ m: ['k', 'c', 'm', 'µ', 'n'], g: ['k', 'm', 'µ'], s: ['m', 'µ', 'n'] }[base]);
+    const E = pick([-1, 0]);
+    n = sciN(d, E) + PREFIX[pf];
+    unit = '\\,' + T(base);
+    valueTex = texDec(d, E) + '\\,' + T(pf + base);
+    prompt = `Ordre de grandeur, en $${T(base)}$, de $${valueTex}$ :`;
+    x = num(d, E) * Math.pow(10, PREFIX[pf]);
+    PREFIX_ERR[pf].forEach(k => extra.push(W(texP(odg(m, sciN(d, E) + k)) + unit,
+      `Valeur du préfixe : $1\\,${T(pf + base)} = ${texP(PREFIX[pf])}\\,${T(base)}$.`, 0.9)));
+  }
+  const c = odg(m, n);
+  const Pu = (k, why, p) => W(texP(k) + unit, why, p);
+  const fb = 'Écrire d’abord la valeur en écriture scientifique, puis appliquer la règle de l’ordre de grandeur.';
+  return {
+    prompt,
+    correct: texP(c) + unit,
+    wrongs: [
+      Pu(c === n ? n + 1 : n, odgWhy(mTex, m), 0.5),
+      ...extra,
+      c !== 0 ? Pu(-c, n < 0
+        ? 'Erreur de signe : une valeur inférieure à 1 a pour ordre de grandeur une puissance de 10 d’exposant négatif.'
+        : 'Erreur de signe : une valeur supérieure à 10 a pour ordre de grandeur une puissance de 10 d’exposant positif.', 1.2) : null,
+      Pu(c - 1, fb, 2), Pu(c + 1, fb, 2.1), Pu(c - 2, fb, 2.5)
+    ],
+    method: `$${valueTex} = ${texSci(d, n - 1)}${unit}$ et $${mTex} ${m < CONFIG.seuilOdG ? '<' : '\\geq'} ${seuilTex()}$, donc l’ordre de grandeur est $${texP(c)}${unit}$.`,
+    rule: ODG_RULE(),
+    truth: odgFloat(x)
+  };
+}
+
+const RATIOS = [
+  { a: { label: 'rayon d’un atome', sym: 'r_\\text{atome}', d: '1', n: -10, unit: '\\text{m}' },
+    b: { label: 'rayon de son noyau', sym: 'r_\\text{noyau}', d: '1', n: -15, unit: '\\text{m}' } },
+  { a: { label: 'masse d’un proton', sym: 'm_\\text{p}', d: '167', n: -27, unit: '\\text{kg}' },
+    b: { label: 'masse d’un électron', sym: 'm_\\text{e}', d: '911', n: -31, unit: '\\text{kg}' } },
+  { a: { label: 'vitesse de la lumière dans l’air', sym: 'c', d: '300', n: 8, unit: '\\text{m}\\cdot\\text{s}^{-1}' },
+    b: { label: 'vitesse du son dans l’air', sym: 'v_\\text{son}', d: '340', n: 2, unit: '\\text{m}\\cdot\\text{s}^{-1}' } },
+  { a: { label: 'distance Terre-Soleil', sym: 'D_\\text{TS}', d: '150', n: 11, unit: '\\text{m}' },
+    b: { label: 'rayon de la Terre', sym: 'R_\\text{T}', d: '637', n: 6, unit: '\\text{m}' } },
+  { a: { label: 'masse de la Terre', sym: 'M_\\text{T}', d: '597', n: 24, unit: '\\text{kg}' },
+    b: { label: 'masse de la Lune', sym: 'M_\\text{L}', d: '735', n: 22, unit: '\\text{kg}' } },
+  { a: { label: 'distance Terre-Lune', sym: 'D_\\text{TL}', d: '384', n: 8, unit: '\\text{m}' },
+    b: { label: 'rayon de la Terre', sym: 'R_\\text{T}', d: '637', n: 6, unit: '\\text{m}' } },
+  { a: { label: 'masse d’un atome de carbone', sym: 'm_\\text{C}', d: '20', n: -26, unit: '\\text{kg}' },
+    b: { label: 'masse d’un électron', sym: 'm_\\text{e}', d: '911', n: -31, unit: '\\text{kg}' } },
+  { a: { label: 'diamètre d’un globule rouge', sym: 'd_\\text{g}', d: '7', n: -6, unit: '\\text{m}' },
+    b: { label: 'diamètre d’un atome', sym: 'd_\\text{a}', d: '1', n: -10, unit: '\\text{m}' } },
+  { a: { label: 'rayon du Soleil', sym: 'R_\\text{S}', d: '696', n: 8, unit: '\\text{m}' },
+    b: { label: 'rayon de la Terre', sym: 'R_\\text{T}', d: '637', n: 6, unit: '\\text{m}' } },
+  { a: { label: 'longueur d’une bactérie', sym: 'L_\\text{b}', d: '2', n: -6, unit: '\\text{m}' },
+    b: { label: 'diamètre d’un atome', sym: 'd_\\text{a}', d: '1', n: -10, unit: '\\text{m}' } }
+];
+
+function genOdgRatio() {
+  for (let t = 0; t < 40; t++) {
+    const { a: A, b: B } = pick(RATIOS);
+    const raw = mantOf(A.d) / mantOf(B.d), rawE = A.n - B.n;
+    let r = raw, e = rawE;
+    if (r < 1) { r *= 10; e -= 1; }
+    if (nearSeuil(r)) continue;
+    const c = odg(r, e);
+    const EA = A.n - A.d.length + 1, EB = B.n - B.d.length + 1;
+    const P = (k, why, p) => W(texP(k), why, p);
+    const fb = 'Calculer séparément le quotient des premiers facteurs et celui des puissances de 10, puis appliquer la règle.';
+    return {
+      prompt: `${cap(A.label)} : $${A.sym} = ${texSci(A.d, EA, false, false)}\\,${A.unit}$. ${cap(B.label)} : $${B.sym} = ${texSci(B.d, EB, false, false)}\\,${B.unit}$. Ordre de grandeur du rapport $\\dfrac{${A.sym}}{${B.sym}}$ :`,
+      correct: texP(c),
+      wrongs: [
+        P(A.n + B.n, 'Pour un quotient, on soustrait les exposants : ici, ils ont été additionnés.', 1),
+        P(B.n - A.n, 'Rapport inversé : c’est l’exposant du numérateur moins celui du dénominateur.', 1),
+        P(c === e ? e + 1 : e, odgWhy(frf(r), r), 0.8),
+        P(rawE, 'Les premiers facteurs comptent aussi : leur quotient peut modifier la puissance de 10.', 1.1),
+        P(c - 1, fb, 2), P(c + 1, fb, 2.1)
+      ],
+      method: `$\\dfrac{${A.sym}}{${B.sym}} = \\dfrac{${texMant(A.d)}}{${texMant(B.d)}} \\times 10^{${A.n} - ${par(B.n)}} \\approx ${frf(raw)} \\times 10^{${rawE}}${raw < 1 ? ` = ${frf(r)} \\times 10^{${e}}` : ''}$, donc l’ordre de grandeur est $${texP(c)}$.`,
+      rule: 'Rapport : $\\dfrac{a \\times 10^{p}}{b \\times 10^{q}} = \\dfrac{a}{b} \\times 10^{p-q}$.',
+      truth: odgFloat(num(A.d, EA) / num(B.d, EB))
+    };
+  }
+  return null;
+}
+
+const ENTITIES = [
+  { nom: 'atomes de carbone', d: '20', E: -27 },
+  { nom: 'molécules d’eau', d: '30', E: -27 },
+  { nom: 'atomes de fer', d: '93', E: -27 },
+  { nom: 'atomes d’aluminium', d: '45', E: -27 },
+  { nom: 'atomes d’or', d: '33', E: -26 },
+  { nom: 'atomes de cuivre', d: '106', E: -27 }
+];
+const de = s => (/^[aeiouéh]/i.test(s) ? 'd’' : 'de ') + s;
+
+function genOdgEntities() {
+  for (let t = 0; t < 80; t++) {
+    const ent = pick(ENTITIES);
+    const dm = randDigits(2), Em = pick([-1, 0]);
+    const nKg = sciN(dm, Em) - 3, entN = sciN(ent.d, ent.E);
+    const raw = mantOf(dm) / mantOf(ent.d), rawE = nKg - entN;
+    let r = raw, e = rawE;
+    if (r < 1) { r *= 10; e -= 1; }
+    if (nearSeuil(r)) continue;
+    const c = odg(r, e);
+    if (odg(mantOf(dm), nKg) - odg(mantOf(ent.d), entN) !== c) continue;
+    const massTex = texDec(dm, Em) + '\\,\\text{g}';
+    const mKgTex = texSci(dm, Em - 3, false, false);
+    const entTex = texSci(ent.d, ent.E, false, false);
+    const P = (k, why, p) => W(texP(k), why, p);
+    return {
+      prompt: `Ordre de grandeur du nombre ${de(ent.nom)} dans un échantillon de $${massTex}$, sachant qu’une entité a une masse de $${entTex}\\,\\text{kg}$ :`,
+      correct: texP(c),
+      wrongs: [
+        P(odg(r, e + 3), `La masse de l’échantillon doit d’abord être convertie en kilogrammes : $${massTex} = ${mKgTex}\\,\\text{kg}$.`, 0.7),
+        P(odg(r, e + 6), 'Conversion à l’envers : $1\\,\\text{g} = 10^{-3}\\,\\text{kg}$.', 1),
+        P(odg(r, nKg + entN + (e - rawE)), 'Pour un quotient, on soustrait les exposants.', 1),
+        P(c === e ? e + 1 : e, odgWhy(frf(r), r), 0.9),
+        P(c - 1, 'Convertir, calculer le quotient, puis appliquer la règle de l’ordre de grandeur.', 2),
+        P(c + 1, 'Convertir, calculer le quotient, puis appliquer la règle de l’ordre de grandeur.', 2.1)
+      ],
+      method: `$${massTex} = ${mKgTex}\\,\\text{kg}$, puis $N = \\dfrac{${mKgTex}}{${entTex}} \\approx ${frf(raw)} \\times 10^{${rawE}}${raw < 1 ? ` = ${frf(r)} \\times 10^{${e}}` : ''}$ : l’ordre de grandeur est $${texP(c)}$.`,
+      rule: 'Convertir dans des unités cohérentes avant de calculer : $N = \\dfrac{m_\\text{échantillon}}{m_\\text{entité}}$.',
+      truth: odgFloat(num(dm, Em) * 1e-3 / num(ent.d, ent.E))
+    };
+  }
+  return null;
+}
+
+function genOdgCalc() {
+  if (chance(0.4)) return genOdgEntities();
+  for (let t = 0; t < 120; t++) {
+    const da = randDigits(2), db = randDigits(2), dc = randDigits(2);
+    const p = randint(-8, 8), q = randint(-8, 8), s = randint(-8, 8);
+    if (!p || !q || !s || (p > 0 && q > 0 && s > 0)) continue;
+    const raw = mantOf(da) * mantOf(db) / mantOf(dc), rawE = p + q - s;
+    let r = raw, e = rawE;
+    while (r >= 10) { r /= 10; e++; }
+    while (r < 1) { r *= 10; e--; }
+    if (nearSeuil(r)) continue;
+    const c = odg(r, e);
+    if (odg(mantOf(da), p) + odg(mantOf(db), q) - odg(mantOf(dc), s) !== c) continue;
+    const shift = e - rawE;
+    const P = (k, why, pr) => W(texP(k), why, pr);
+    const fb = 'Traiter séparément les premiers facteurs et les puissances de 10, puis appliquer la règle.';
+    return {
+      prompt: `Ordre de grandeur de $\\dfrac{${texSci(da, p - 1)} \\times ${texSci(db, q - 1)}}{${texSci(dc, s - 1)}}$ :`,
+      correct: texP(c),
+      wrongs: [
+        P(odg(r, p + q + s + shift), 'L’exposant du dénominateur se soustrait.', 0.9),
+        shift ? P(odg(r, rawE), `Le calcul des premiers facteurs donne environ $${frf(raw)}$ : il faut réajuster la puissance de 10.`, 0.8) : null,
+        P(c === e ? e + 1 : e, odgWhy(frf(r), r), 1),
+        P(c - 1, fb, 2), P(c + 1, fb, 2.1), P(c + 2, fb, 2.5), P(c - 2, fb, 2.6)
+      ],
+      method: `$\\dfrac{${texMant(da)} \\times ${texMant(db)}}{${texMant(dc)}} \\approx ${frf(raw)}$ et $\\dfrac{10^{${p}} \\times 10^{${q}}}{10^{${s}}} = 10^{${rawE}}$, d’où environ $${frf(r)} \\times 10^{${e}}$ : l’ordre de grandeur est $${texP(c)}$.`,
+      rule: ODG_RULE(),
+      truth: odgFloat(num(da, p - 1) * num(db, q - 1) / num(dc, s - 1))
+    };
+  }
+  return null;
+}
+
+/* =====================================================================
+   Thème 2 : conversions
+   ===================================================================== */
+const prefixFact = (pf, base) => `$1\\,${T(pf + base)} = ${texP(PREFIX[pf])}\\,${T(base)}$`;
+function convValue() { const len = randint(2, 3); return [randDigits(len), randint(-len, 0)]; }
+
+function genConvPrefix() {
+  const base = pick(['m', 'm', 'g', 's', 'L']);
+  const list = { m: ['k', '', 'c', 'm', 'µ', 'n'], g: ['k', '', 'm', 'µ', 'n'], s: ['', 'm', 'µ', 'n'], L: ['h', '', 'd', 'c', 'm', 'µ'] }[base];
+  let p1, p2;
+  do { p1 = pick(list); p2 = pick(list); } while (p1 === p2 || Math.abs(PREFIX[p1] - PREFIX[p2]) < 2);
+  const [d, E] = convValue();
+  const D = PREFIX[p1] - PREFIX[p2];
+  const u1 = T(p1 + base), u2 = T(p2 + base);
+  const R = e => texSci(d, e) + '\\,' + u2;
+  const valTex = texDec(d, E);
+  const wrongs = [W(R(E - D), `Conversion dans le mauvais sens : $1\\,${u1} = ${texP(D)}\\,${u2}$, donc on multiplie la valeur par $${texP(D)}$.`, 0.6)];
+  PREFIX_ERR[p1].forEach(k => wrongs.push(W(R(E + k - PREFIX[p2]), `Valeur du préfixe : ${prefixFact(p1, base)}.`, 1)));
+  PREFIX_ERR[p2].forEach(k => wrongs.push(W(R(E + PREFIX[p1] - k), `Valeur du préfixe : ${prefixFact(p2, base)}.`, 1)));
+  [1, -1, 2, -2].forEach((x, i) => wrongs.push(W(R(E + D + x), 'Écrire chaque préfixe sous forme de puissance de 10 avant de calculer.', 2 + i / 10)));
+  const facts = [p1, p2].filter(Boolean).map(pf => prefixFact(pf, base)).join(' et ');
+  return {
+    prompt: `Convertir $${valTex}\\,${u1}$ en $${u2}$.`,
+    correct: R(E + D),
+    wrongs,
+    method: `${facts}, donc $1\\,${u1} = ${texP(D)}\\,${u2}$ et $${valTex}\\,${u1} = ${valTex} \\times ${texP(D)}\\,${u2} = ${R(E + D)}$.`,
+    rule: 'On remplace chaque préfixe par la puissance de 10 qui lui correspond.',
+    truth: num(d, E) * Math.pow(10, PREFIX[p1]) / Math.pow(10, PREFIX[p2])
+  };
+}
+
+function genConvCube() {
+  const dim = chance(0.7) ? 3 : 2;
+  const list = dim === 3 ? ['k', '', 'd', 'c', 'm', 'µ'] : ['k', 'h', '', 'd', 'c', 'm'];
+  let p1, p2;
+  do { p1 = pick(list); p2 = pick(list); } while (p1 === p2 || Math.abs(PREFIX[p1] - PREFIX[p2]) > (dim === 3 ? 6 : 5));
+  const k = PREFIX[p1] - PREFIX[p2], D = dim * k;
+  const l1 = T(p1 + 'm'), l2 = T(p2 + 'm');
+  const u1 = U(p1 + 'm', dim), u2 = U(p2 + 'm', dim);
+  const [d, E] = convValue();
+  const valTex = texDec(d, E);
+  const R = e => texSci(d, e) + '\\,' + u2;
+  const what = dim === 3 ? 'un volume' : 'une aire', pw = dim === 3 ? 'au cube' : 'au carré';
+  return {
+    prompt: `Convertir $${valTex}\\,${u1}$ en $${u2}$.`,
+    correct: R(E + D),
+    wrongs: [
+      W(R(E + k), `$1\\,${l1} = ${texP(k)}\\,${l2}$, mais pour ${what} ce facteur est élevé ${pw} : $1\\,${u1} = ${texP(D)}\\,${u2}$.`, 0.5),
+      W(R(E + (5 - dim) * k), `Pour ${what}, le facteur est élevé ${pw}, pas ${dim === 3 ? 'au carré' : 'au cube'}.`, 0.9),
+      W(R(E - D), `Conversion dans le mauvais sens : $1\\,${u1} = ${texP(D)}\\,${u2}$.`, 0.9),
+      W(R(E - k), `Mauvais sens, et le facteur doit être élevé ${pw}.`, 1.6),
+      W(R(E + D + (D > 0 ? -1 : 1)), `Élever la puissance de 10 ${pw} : $(${texP(k)})^{${dim}} = ${texP(D)}$.`, 2)
+    ],
+    method: `$1\\,${l1} = ${texP(k)}\\,${l2}$, donc $1\\,${u1} = (${texP(k)})^{${dim}}\\,${u2} = ${texP(D)}\\,${u2}$ et $${valTex}\\,${u1} = ${R(E + D)}$.`,
+    rule: dim === 3 ? 'Volume : le facteur de conversion des longueurs est élevé au cube.' : 'Aire : le facteur de conversion des longueurs est élevé au carré.',
+    truth: num(d, E) * Math.pow(Math.pow(10, PREFIX[p1]) / Math.pow(10, PREFIX[p2]), dim)
+  };
+}
+
+const VOL = {
+  m3: { tex: U('m', 3), neg: U('m', -3), e: 0, cube: 'm' },
+  dm3: { tex: U('dm', 3), neg: U('dm', -3), e: -3, cube: 'd' },
+  cm3: { tex: U('cm', 3), neg: U('cm', -3), e: -6, cube: 'c' },
+  mm3: { tex: U('mm', 3), neg: U('mm', -3), e: -9, cube: 'm' },
+  hL: { tex: T('hL'), neg: U('hL', -1), e: -1 },
+  L: { tex: T('L'), neg: U('L', -1), e: -3 },
+  dL: { tex: T('dL'), neg: U('dL', -1), e: -4 },
+  cL: { tex: T('cL'), neg: U('cL', -1), e: -5 },
+  mL: { tex: T('mL'), neg: U('mL', -1), e: -6 },
+  'µL': { tex: T('µL'), neg: U('µL', -1), e: -9 }
+};
+const volM3 = u => (u.endsWith('3') ? Math.pow(Math.pow(10, PREFIX[u.slice(0, -2)]), 3) : Math.pow(10, PREFIX[u.slice(0, -1)]) * 1e-3);
+const LITRE_FACT = '$1\\,\\text{L} = 1\\,\\text{dm}^{3} = 10^{-3}\\,\\text{m}^{3}$ et $1\\,\\text{mL} = 1\\,\\text{cm}^{3}$';
+function cubeWhy(u) {
+  const pf = u.slice(0, -2), k = PREFIX[pf];
+  return `$1\\,${U(pf + 'm', 3)} = (${texP(k)}\\,\\text{m})^{3} = ${texP(3 * k)}\\,\\text{m}^{3}$ : pour un volume, le facteur est élevé au cube.`;
+}
+
+function genConvLiter() {
+  const cubes = ['m3', 'dm3', 'cm3', 'mm3'], litres = ['hL', 'L', 'dL', 'cL', 'mL', 'µL'];
+  let a, b;
+  do { a = pick(cubes); b = pick(litres); if (chance(0.5)) [a, b] = [b, a]; } while (VOL[a].e === VOL[b].e && chance(0.7));
+  const A = VOL[a], B = VOL[b];
+  const D = A.e - B.e;
+  const [d, E] = convValue();
+  const valTex = texDec(d, E);
+  const R = x => texSci(d, x) + '\\,' + B.tex;
+  const wrongs = [W(R(E - D), `Conversion dans le mauvais sens : $1\\,${A.tex} = ${texP(D)}\\,${B.tex}$.`, 0.9)];
+  const alt = (u, model) => {
+    const V = VOL[u];
+    if (u.endsWith('3')) return model === 'lin' && u !== 'm3' ? V.e / 3 : null;
+    if (model === 'Lm3') return V.e + 3;
+    if (model === 'Lcm3') return V.e - 3;
+    return null;
+  };
+  for (const model of ['Lm3', 'Lcm3', 'lin']) {
+    const ea = alt(a, model), eb = alt(b, model);
+    if (ea === null && eb === null) continue;
+    const Dw = (ea === null ? A.e : ea) - (eb === null ? B.e : eb);
+    const why = model === 'lin' ? cubeWhy(a.endsWith('3') ? a : b) : `Repère : ${LITRE_FACT}.`;
+    wrongs.push(W(R(E + Dw), why, model === 'lin' ? 0.8 : 1));
+  }
+  [1, -1, 2, -2].forEach((x, i) => wrongs.push(W(R(E + D + x), `Passer par le mètre cube. Repère : ${LITRE_FACT}.`, 2 + i / 10)));
+  const facts = [a, b].filter(u => u !== 'm3').map(u => `$1\\,${VOL[u].tex} = ${texP(VOL[u].e)}\\,\\text{m}^{3}$`).join(' et ');
+  return {
+    prompt: `Convertir $${valTex}\\,${A.tex}$ en $${B.tex}$.`,
+    correct: R(E + D),
+    wrongs,
+    method: `${facts}, donc $${valTex}\\,${A.tex} = ${valTex} \\times ${texP(D)}\\,${B.tex} = ${R(E + D)}$.`,
+    rule: `Repère : ${LITRE_FACT}.`,
+    truth: num(d, E) * volM3(a) / volM3(b)
+  };
+}
+
+const MASS = { kg: 3, g: 0, mg: -3, 'µg': -6 };
+const COMPOSITE = [
+  ['Masse volumique', 'g', 'cm3', 'kg', 'm3'], ['Masse volumique', 'kg', 'm3', 'g', 'cm3'],
+  ['Masse volumique', 'kg', 'L', 'g', 'cm3'], ['Masse volumique', 'g', 'mL', 'kg', 'm3'],
+  ['Masse volumique', 'g', 'L', 'kg', 'm3'], ['Concentration en masse', 'g', 'mL', 'g', 'L'],
+  ['Concentration en masse', 'g', 'L', 'g', 'mL'], ['Concentration en masse', 'mg', 'L', 'g', 'L'],
+  ['Concentration en masse', 'g', 'L', 'mg', 'mL'], ['Concentration en masse', 'mg', 'mL', 'g', 'L'],
+  ['Concentration en masse', 'g', 'dL', 'g', 'L'], ['Concentration en masse', 'µg', 'mL', 'mg', 'L']
+];
+
+function genConvComposite() {
+  const [ctx, m1, v1, m2, v2] = pick(COMPOSITE);
+  const Um = MASS[m1] - MASS[m2], Uv = VOL[v1].e - VOL[v2].e, D = Um - Uv;
+  const U1 = `${T(m1)}\\cdot${VOL[v1].neg}`, U2 = `${T(m2)}\\cdot${VOL[v2].neg}`;
+  const [d, E] = convValue();
+  const valTex = texDec(d, E);
+  const R = x => texSci(d, x) + '\\,' + U2;
+  const pw = (n, u) => (n === 0 ? `1\\,${u}` : `${texP(n)}\\,${u}`);
+  const fb = `Écrire l’unité comme une fraction, masse sur volume, et convertir chacune des deux.`;
+  return {
+    prompt: `${ctx} : convertir $${valTex}\\,${U1}$ en $${U2}$.`,
+    correct: R(E + D),
+    wrongs: [
+      Uv !== 0 ? W(R(E + Um), 'Il faut aussi convertir l’unité de volume, au dénominateur.', 0.7) : null,
+      Um !== 0 ? W(R(E - Uv), 'Il faut aussi convertir l’unité de masse, au numérateur.', 0.9) : null,
+      Uv !== 0 ? W(R(E + Um + Uv), `Au dénominateur, la conversion agit à l’inverse : diviser par $${texP(Uv)}$ revient à multiplier par $${texP(-Uv)}$.`, 0.7) : null,
+      W(R(E - D), 'Conversion dans le mauvais sens.', 1.2),
+      W(R(E + D + 3), fb, 2), W(R(E + D - 3), fb, 2.1), W(R(E + D + 1), fb, 2.5)
+    ],
+    method: `$1\\,${U1} = \\dfrac{${pw(Um, T(m2))}}{${pw(Uv, VOL[v2].tex)}} = ${pw(D, U2)}$, donc $${valTex}\\,${U1} = ${R(E + D)}$.`,
+    rule: `Une unité composée se convertit comme une fraction : numérateur et dénominateur séparément. Repère : ${LITRE_FACT}.`,
+    truth: num(d, E) * Math.pow(10, MASS[m1]) / Math.pow(10, MASS[m2]) / (volM3(v1) / volM3(v2))
+  };
+}
+
+/* =====================================================================
+   Thème 3 : écriture scientifique
+   ===================================================================== */
+const SCI_RULE = 'Écriture scientifique : $a \\times 10^{n}$, avec $1 \\le a < 10$ et $n$ entier relatif.';
+const NON_NORM = 'Égalité juste, mais ce n’est pas une écriture scientifique : le premier facteur doit être compris entre 1 et 10 (10 exclu).';
+
+function genSciFromDec() {
+  const len = randint(2, 4), d = randDigits(len);
+  const small = chance(0.5);
+  const n = small ? randint(-7, -2) : randint(4, 9);
+  const E = n - (len - 1);
+  const neg = chance(0.2);
+  const dec = texDec(d, E, neg);
+  const S = (nn, sg = neg) => texSci(d, nn - (len - 1), sg, false);
+  const nonNorm = chance(0.5)
+    ? `${neg ? '-' : ''}${d.slice(0, 2)}${len > 2 ? '{,}' + d.slice(2) : ''} \\times 10^{${n - 1}}`
+    : `${neg ? '-' : ''}0{,}${d} \\times 10^{${n + 1}}`;
+  const shiftFb = 'Décalage d’un rang : compter précisément les rangs dont la virgule se déplace.';
+  return {
+    prompt: `Écriture scientifique de $${dec}$ :`,
+    correct: S(n),
+    wrongs: [
+      W(S(-n), neg && !small
+        ? 'Le signe « − » du nombre ne dit rien du signe de l’exposant : ce nombre est grand en valeur absolue.'
+        : small ? 'Un nombre compris entre 0 et 1 (en valeur absolue) s’écrit avec un exposant négatif.' : 'Un nombre supérieur à 10 (en valeur absolue) s’écrit avec un exposant positif.', 0.9),
+      W(S(small ? n + 1 : E), 'Compter les zéros ne suffit pas : l’exposant indique de combien de rangs la virgule se déplace.', 0.7),
+      W(nonNorm, NON_NORM, 0.9, true),
+      neg ? W(S(n, false), 'Le signe « − » du nombre est conservé.', 0.8) : null,
+      !neg && small ? W(S(n, true), 'Un nombre compris entre 0 et 1 est positif : c’est l’exposant qui est négatif, pas le nombre.', 1.3) : null,
+      W(S(n + 1), shiftFb, 2), W(S(n - 1), shiftFb, 2.1)
+    ],
+    method: `On place la virgule juste après le premier chiffre non nul : elle se déplace de ${rangs(Math.abs(n))} vers la ${small ? 'droite' : 'gauche'}, donc $${dec} = ${S(n)}$.`,
+    rule: SCI_RULE,
+    truth: (neg ? -1 : 1) * num(d, E)
+  };
+}
+
+function genSciToDec() {
+  const len = randint(2, 3), d = randDigits(len);
+  const small = chance(0.5);
+  const n = small ? randint(-6, -2) : randint(3, 6);
+  const neg = chance(0.15);
+  const E = n - (len - 1);
+  const D = (x, sg = neg) => texDec(d, x, sg);
+  const shiftFb = `La virgule se déplace de ${rangs(Math.abs(n))}, ni plus ni moins.`;
+  return {
+    prompt: `Écriture décimale de $${texSci(d, E, neg, false)}$ :`,
+    correct: D(E),
+    wrongs: [
+      W(D(small ? n - len : n), small
+        ? `$10^{${n}}$ ne signifie pas « ${-n} zéros après la virgule » : le premier chiffre non nul se place au ${rangOrd(-n)} rang après la virgule.`
+        : `$10^{${n}}$ ne signifie pas « ajouter ${n} zéros » : la virgule se déplace de ${rangs(n)} vers la droite.`, 0.6),
+      W(D(E + 1), shiftFb, 1.5), W(D(E - 1), shiftFb, 1.6),
+      W(D(-n - (len - 1)), small ? 'Erreur de signe : un exposant négatif donne un nombre plus petit que 1 en valeur absolue.' : 'Erreur de signe : un exposant positif donne un nombre plus grand que 10 en valeur absolue.', 1),
+      small && !neg ? W(D(E, true), 'Un exposant négatif donne un nombre compris entre 0 et 1, pas un nombre négatif.', 0.9) : null,
+      neg ? W(D(E, false), 'Le signe « − » du nombre est conservé.', 1) : null
+    ],
+    method: `La virgule se déplace de ${rangs(Math.abs(n))} vers la ${small ? 'gauche' : 'droite'} : $${texSci(d, E, neg, false)} = ${D(E)}$.`,
+    rule: 'Multiplier par $10^{n}$ déplace la virgule de $n$ rangs : vers la droite si $n > 0$, vers la gauche si $n < 0$.',
+    truth: (neg ? -1 : 1) * num(d, E)
+  };
+}
+
+function genSciRenorm() {
+  const len = randint(2, 3), d = randDigits(len);
+  let n, s;
+  do { n = randint(-9, 9); s = pick([-3, -2, -1, 1, 2, 3]); } while (Math.abs(n) < 2 || n - s === 0);
+  const bTex = texDec(d, s - (len - 1));
+  const S = nn => texSci(d, nn - (len - 1), false, false);
+  const as = Math.abs(s);
+  return {
+    prompt: `Écrire $${bTex} \\times 10^{${n - s}}$ en écriture scientifique.`,
+    correct: S(n),
+    wrongs: [
+      W(S(n - 2 * s), `Le premier facteur est ${s > 0 ? 'divisé' : 'multiplié'} par $${texP(as)}$ : pour compenser, la puissance de 10 est ${s > 0 ? 'multipliée' : 'divisée'} par $${texP(as)}$, donc l’exposant ${s > 0 ? 'augmente' : 'diminue'} de ${as}.`, 0.6),
+      W(S(n - s), 'Le premier facteur a changé : l’exposant doit être ajusté pour compenser.', 0.8),
+      W(S(n + Math.sign(s)), 'Compter précisément de combien de rangs la virgule se déplace.', 1.5),
+      W(S(n - Math.sign(s) * (as + 1)), 'Compter précisément de combien de rangs la virgule se déplace.', 1.8),
+      W(S(-n), 'Erreur de signe sur l’exposant.', 2)
+    ],
+    method: `$${bTex} = ${texMant(d)} \\times 10^{${s}}$, donc $${bTex} \\times 10^{${n - s}} = ${texMant(d)} \\times 10^{${s} + ${par(n - s)}} = ${S(n)}$.`,
+    rule: 'Si le premier facteur est divisé par $10^{k}$, la puissance de 10 est multipliée par $10^{k}$, et inversement.',
+    truth: num(d, s - (len - 1)) * Math.pow(10, n - s)
+  };
+}
+
+function genSciOps() {
+  const prod = chance(0.5);
+  let dA, EA, dB, EB, dR, ER;
+  const db = randDigits(2);
+  let nb;
+  if (prod) {
+    const da = randDigits(2);
+    let na;
+    do { na = randint(-9, 9); nb = randint(-9, 9); } while (!na || !nb || (na > 0 && nb > 0));
+    [dA, EA] = [da, na - 1];
+    [dB, EB] = [db, nb - 1];
+    [dR, ER] = stripZeros(String(Number(da) * Number(db)), EA + EB);
+  } else {
+    const dr = randDigits(2);
+    let nr;
+    do { nr = randint(-9, 9); nb = randint(-9, 9); } while (!nr || !nb);
+    [dB, EB] = [db, nb - 1];
+    [dR, ER] = [dr, nr - 1];
+    [dA, EA] = stripZeros(String(Number(dr) * Number(db)), ER + EB);
+  }
+  const nA = sciN(dA, EA), nB = sciN(dB, EB), nR = sciN(dR, ER);
+  if (!nA || !nB || !nR) return null;
+  const rawE = prod ? nA + nB : nA - nB;
+  const shift = nR - rawE;
+  const S = x => texSci(dR, x - (dR.length - 1), false, false);
+  const rawTex = texDec(dR, ER - rawE);
+  const Atex = texSci(dA, EA, false, false), Btex = texSci(dB, EB, false, false);
+  const lhs = prod ? `(${Atex}) \\times (${Btex})` : `\\dfrac{${Atex}}{${Btex}}`;
+  const mant = prod ? `(${texMant(dA)} \\times ${texMant(dB)})` : `\\dfrac{${texMant(dA)}}{${texMant(dB)}}`;
+  const fb = 'Refaire le calcul des exposants, puis vérifier que le premier facteur est entre 1 et 10.';
+  return {
+    prompt: `Écriture scientifique de $${lhs}$ :`,
+    correct: S(nR),
+    wrongs: [
+      W(S(prod ? nA - nB + shift : nA + nB + shift), prod ? 'Pour un produit, on additionne les exposants.' : 'Pour un quotient, on soustrait l’exposant du dénominateur.', 0.8),
+      shift ? W(S(rawE), `Le ${prod ? 'produit' : 'quotient'} des premiers facteurs vaut $${rawTex}$ : pour le ramener entre 1 et 10, il faut ajuster l’exposant.`, 0.6) : null,
+      shift ? W(`${rawTex} \\times 10^{${rawE}}`, NON_NORM, 0.8, true) : null,
+      shift ? W(S(rawE - shift), 'L’exposant a été ajusté dans le mauvais sens.', 1.2) : null,
+      W(S(-nR), 'Erreur de signe sur l’exposant.', 1.8),
+      W(S(nR + 1), fb, 2.2), W(S(nR - 1), fb, 2.3)
+    ],
+    method: `$${lhs} = ${mant} \\times 10^{${nA} ${prod ? '+' : '-'} ${par(nB)}} = ${rawTex} \\times 10^{${rawE}}${shift ? ' = ' + S(nR) : ''}$.`,
+    rule: prod
+      ? 'Produit : on multiplie les premiers facteurs, on additionne les exposants, puis on remet en écriture scientifique.'
+      : 'Quotient : on divise les premiers facteurs, on soustrait les exposants, puis on remet en écriture scientifique.',
+    truth: prod ? num(dA, EA) * num(dB, EB) : num(dA, EA) / num(dB, EB)
+  };
+}
+
+/* =====================================================================
+   Thème 4 : chiffres significatifs
+   ===================================================================== */
+function genCsCount() {
+  const n = randint(2, 5);
+  const kind = pick(['small', 'dec', 'sci']);
+  const tz = n >= 3 && chance(0.55) ? randint(1, Math.min(2, n - 2)) : (n === 2 && chance(0.3) ? 1 : 0);
+  let core = String(randint(1, 9));
+  for (let i = 1; i < n - tz; i++) core += i === n - tz - 1 ? String(randint(1, 9)) : (chance(0.35) ? '0' : String(randint(1, 9)));
+  const d = core + '0'.repeat(tz);
+  const inner = (core.match(/0/g) || []).length;
+  let E, tex, under;
+  if (kind === 'small') {
+    E = -(n + randint(1, 3));
+    tex = texDec(d, E);
+    under = `0{,}${'0'.repeat(-E - n)}\\underline{${d}}`;
+  } else if (kind === 'dec') {
+    E = -randint(Math.max(1, tz), n - 1);
+    tex = texDec(d, E);
+    under = `\\underline{${tex}}`;
+  } else {
+    do { E = randint(-9, 9); } while (sciN(d, E) === 0);
+    tex = texSci(d, E, false, false);
+    under = `\\underline{${texMant(d)}} \\times 10^{${sciN(d, E)}}`;
+  }
+  const unit = pick(['\\,\\text{m}', '\\,\\text{g}', '\\,\\text{s}', '\\,\\text{mL}', '']);
+  const all = decStr(d, E).replace(',', '').length;
+  const N = k => String(k);
+  const fb = 'Compter les chiffres à partir du premier chiffre non nul, zéros finaux compris.';
+  return {
+    kind: 'count',
+    prompt: `Nombre de chiffres significatifs de $${tex}${unit}$ :`,
+    correct: N(n),
+    wrongs: [
+      kind === 'small' ? W(N(all), 'Les zéros placés avant le premier chiffre non nul ne sont pas significatifs : ils servent seulement à placer la virgule.', 0.5) : null,
+      kind === 'small' ? W(N(all - 1), 'Les zéros placés avant le premier chiffre non nul ne sont pas significatifs, y compris ceux qui suivent la virgule.', 0.9) : null,
+      tz ? W(N(n - tz), 'Les zéros placés à la fin, après la virgule, sont significatifs : ils indiquent la précision de la mesure.', 0.5) : null,
+      inner ? W(N(n - inner), 'Un zéro placé entre deux chiffres non nuls est significatif.', 0.7) : null,
+      inner && tz ? W(N(n - inner - tz), 'Tous les zéros situés après le premier chiffre non nul sont significatifs.', 1) : null,
+      kind === 'sci' ? W(N(n + String(Math.abs(sciN(d, E))).length), 'L’exposant ne compte pas : seuls les chiffres du premier facteur sont significatifs.', 1.2) : null,
+      W(N(n + 1), fb, 2), n > 1 ? W(N(n - 1), fb, 2.1) : null, W(N(n + 2), fb, 2.5), n > 2 ? W(N(n - 2), fb, 2.6) : null
+    ],
+    method: `$${under}${unit}$ : ${nCS(n)}, soulignés.`,
+    rule: 'On compte à partir du premier chiffre non nul ; tous les chiffres qui suivent sont significatifs, y compris les zéros finaux après la virgule.',
+    truth: n
+  };
+}
+
+function genCsRound() {
+  const n = chance(0.8) ? randint(2, 3) : 4;
+  const digs = randDigits(7).split('');
+  digs[n] = String(chance(0.6) ? randint(5, 9) : randint(0, 4));
+  const d7 = digs.join('');
+  const mag = pick(['small', 'mid', 'large']);
+  const top = mag === 'small' ? randint(-4, -1) : mag === 'mid' ? randint(0, 2) : randint(4, 7);
+  const E7 = top - 6;
+  const next = Number(d7[n]);
+  const c = {
+    ok: roundDigits(d7, E7, n),
+    trunc: [d7.slice(0, n), E7 + 7 - n],
+    plus: roundDigits(d7, E7, n + 1),
+    minus: roundDigits(d7, E7, n - 1),
+    plus2: roundDigits(d7, E7, n + 2)
+  };
+  const decK = 7 + E7 + n;
+  if (mag !== 'large' && decK >= 1 && decK <= 6 && decK !== n) c.dec = roundDigits(d7, E7, decK);
+  const sciMode = mag === 'large' || Object.values(c).some(x => ambiguous(x[0], x[1]));
+  const F = x => (sciMode ? texSci(x[0], x[1]) : texDec(x[0], x[1]));
+  const same = (x, y) => x[0] === y[0] && x[1] === y[1];
+  return {
+    kind: 'cs',
+    prompt: `Arrondir $${texDec(d7, E7)}$ à ${nCS(n)}.`,
+    correct: F(c.ok),
+    wrongs: [
+      !same(c.trunc, c.ok) ? W(F(c.trunc), `On arrondit, on ne tronque pas : le chiffre suivant est ${next}, donc le dernier chiffre conservé augmente de 1.`, 0.5, 'cs') : null,
+      W(F(c.plus), `C’est un arrondi à ${nCS(n + 1)}.`, 1, 'cs'),
+      W(F(c.minus), `C’est un arrondi à ${nCS(n - 1)}.`, 1.1, 'cs'),
+      c.dec ? W(F(c.dec), `C’est un arrondi à ${n} décimales : les chiffres significatifs se comptent à partir du premier chiffre non nul.`, 0.7, 'cs') : null,
+      sciMode ? W(texSci(c.ok[0], c.ok[1] + 1), 'La puissance de 10 ne correspond plus à la valeur de départ.', 1.8) : null,
+      W(F(c.plus2), `C’est un arrondi à ${nCS(n + 2)}.`, 2, 'cs')
+    ],
+    method: `Les ${n} premiers chiffres significatifs sont ${d7.slice(0, n).split('').join(', ')} ; le suivant est ${next}, ${next >= 5 ? 'supérieur ou égal à 5 : on arrondit par excès' : 'inférieur à 5 : on arrondit par défaut'}. D’où $${F(c.ok)}$.`,
+    rule: 'On garde le nombre de chiffres demandé à partir du premier chiffre non nul, puis on arrondit selon le chiffre suivant.',
+    truth: Number(num(d7, E7).toPrecision(n)),
+    truthCS: n
+  };
+}
+
+const CALCS = [
+  { label: 'Vitesse moyenne', res: 'v', unit: '\\text{m}\\cdot\\text{s}^{-1}', op: '/', a: { sym: 'd', unit: '\\text{m}', min: 20, max: 900 }, b: { sym: '\\Delta t', unit: '\\text{s}', min: 2, max: 90 } },
+  { label: 'Masse volumique', res: '\\rho', unit: '\\text{g}\\cdot\\text{mL}^{-1}', op: '/', a: { sym: 'm', unit: '\\text{g}', min: 5, max: 95 }, b: { sym: 'V', unit: '\\text{mL}', min: 5, max: 95 } },
+  { label: 'Concentration en masse', res: 'C_\\text{m}', unit: '\\text{g}\\cdot\\text{L}^{-1}', op: '/', a: { sym: 'm', unit: '\\text{g}', min: 0.1, max: 9.5 }, b: { sym: 'V', unit: '\\text{L}', min: 0.05, max: 0.95 } },
+  { label: 'Loi d’Ohm', res: 'U', unit: '\\text{V}', op: '*', a: { sym: 'R', unit: '\\Omega', min: 10, max: 900 }, b: { sym: 'I', unit: '\\text{A}', min: 0.01, max: 0.5 } },
+  { label: 'Poids', res: 'P', unit: '\\text{N}', op: '*', a: { sym: 'm', unit: '\\text{kg}', min: 0.1, max: 9 }, b: { sym: 'g', unit: '\\text{N}\\cdot\\text{kg}^{-1}', fixed: ['981', -2] } },
+  { label: 'Énergie de changement d’état', res: 'Q', unit: '\\text{J}', op: '*', a: { sym: 'm', unit: '\\text{kg}', min: 0.1, max: 9 }, b: { sym: 'L_\\text{f}', unit: '\\text{J}\\cdot\\text{kg}^{-1}', fixed: ['334', 3] } }
+];
+
+function makeDatum(spec, cs) {
+  for (let t = 0; t < 100; t++) {
+    let d = randDigits(cs);
+    if (cs >= 3 && chance(0.3)) d = d.slice(0, -1) + '0';
+    const Es = [];
+    for (let E = -8; E <= 6; E++) { const v = num(d, E); if (v >= spec.min && v <= spec.max) Es.push(E); }
+    if (Es.length) return [d, pick(Es)];
+  }
+  return null;
+}
+const showDatum = ([d, E]) => (ambiguous(d, E) ? texSci(d, E, false, false) : texDec(d, E));
+
+function genCsCalc() {
+  const C = pick(CALCS);
+  let A, B, csA, csB;
+  if (C.b.fixed) {
+    B = C.b.fixed; csB = B[0].length; csA = pick([2, 4]); A = makeDatum(C.a, csA);
+  } else {
+    csA = randint(2, 4);
+    do { csB = randint(2, 4); } while (csB === csA);
+    A = makeDatum(C.a, csA); B = makeDatum(C.b, csB);
+  }
+  if (!A || !B) return null;
+  const va = num(A[0], A[1]), vb = num(B[0], B[1]);
+  const raw = C.op === '*' ? va * vb : va / vb;
+  const nMin = Math.min(csA, csB), nMax = Math.max(csA, csB);
+  const long = raw.toExponential(nMax + 6);
+  const digs = long.split('e')[0].replace('.', '');
+  const eRaw = Number(long.split('e')[1]);
+  for (const k of [nMin - 1, nMin, nMin + 1, nMax, nMin + 2]) {
+    if (k >= 1 && /^(499|500)/.test(digs.slice(k))) return null;
+  }
+  const rd = k => { const [m, e] = raw.toExponential(k - 1).split('e'); return [m.replace('.', ''), Number(e) - (k - 1)]; };
+  const c = { ok: rd(nMin), max: rd(nMax), trunc: [digs.slice(0, nMin), eRaw - (nMin - 1)] };
+  if (nMin > 1) c.minus = rd(nMin - 1);
+  if (nMin + 1 !== nMax) c.plus = rd(nMin + 1);
+  if (nMin + 2 !== nMax) c.plus2 = rd(nMin + 2);
+  const sciMode = Object.values(c).some(x => ambiguous(x[0], x[1]));
+  const F = x => (sciMode ? texSci(x[0], x[1]) : texDec(x[0], x[1])) + '\\,' + C.unit;
+  const calcStr = String(Number(raw.toPrecision(10)));
+  if (/e/.test(calcStr) || calcStr.replace(/[^0-9]/g, '').replace(/^0+/, '').length <= nMax + 1) return null;
+  const [ip, fp] = calcStr.split('.');
+  const calcTex = groupInt(ip) + (fp ? '{,}' + fp : '');
+  const same = (x, y) => x[0] === y[0] && x[1] === y[1];
+  const formula = C.op === '*' ? `${C.a.sym} \\times ${C.b.sym}` : `\\dfrac{${C.a.sym}}{${C.b.sym}}`;
+  return {
+    kind: 'cs',
+    prompt: `${C.label} : $${C.res} = ${formula}$ avec $${C.a.sym} = ${showDatum(A)}\\,${C.a.unit}$ et $${C.b.sym} = ${showDatum(B)}\\,${C.b.unit}$. La calculatrice affiche $${calcTex}$. Résultat à retenir :`,
+    correct: F(c.ok),
+    wrongs: [
+      W(F(c.max), `On garde le nombre de chiffres significatifs de la donnée la moins précise (${nMin}), pas celui de la plus précise.`, 0.6, 'cs'),
+      W(calcTex + '\\,' + C.unit, 'On ne recopie pas tous les chiffres de la calculatrice : le résultat ne peut pas être plus précis que les données.', 0.8, 'cs'),
+      c.minus ? W(F(c.minus), `Il manque un chiffre significatif : le résultat en garde ${nMin}, comme la donnée la moins précise.`, 1.1, 'cs') : null,
+      c.plus ? W(F(c.plus), `Un chiffre significatif de trop : le résultat en garde ${nMin}, comme la donnée la moins précise.`, 1, 'cs') : null,
+      !same(c.trunc, c.ok) ? W(F(c.trunc), 'On arrondit, on ne tronque pas.', 1.3, 'cs') : null,
+      c.plus2 ? W(F(c.plus2), `Trop de chiffres significatifs : le résultat en garde ${nMin}.`, 2, 'cs') : null
+    ],
+    method: `$${C.a.sym}$ est donnée avec ${nCS(csA)} et $${C.b.sym}$ avec ${nCS(csB)} : le résultat en garde ${nMin}, d’où $${C.res} = ${F(c.ok)}$.`,
+    rule: 'Produit ou quotient : le résultat garde autant de chiffres significatifs que la donnée qui en a le moins.',
+    truth: Number(raw.toPrecision(nMin)),
+    truthCS: nMin
+  };
+}
+
+const CS_CONV = [['k', 'm', '', 'm'], ['', 'm', 'm', 'm'], ['c', 'm', '', 'm'], ['m', 'L', '', 'L'], ['', 'L', 'm', 'L'], ['', 'g', 'k', 'g'], ['m', 'g', '', 'g'], ['k', 'g', '', 'g'], ['c', 'L', 'm', 'L'], ['µ', 'm', 'm', 'm'], ['k', 'm', 'c', 'm']];
+
+function genCsConv() {
+  const [p1, b1, p2, b2] = pick(CS_CONV);
+  const cs = randint(2, 4);
+  const tz = chance(0.65) ? randint(1, Math.min(2, cs - 1)) : 0;
+  const d = randDigits(cs - tz) + '0'.repeat(tz);
+  const E = -randint(Math.max(tz, 1), cs);
+  const D = PREFIX[p1] - PREFIX[p2], E2 = E + D;
+  const u1 = T(p1 + b1), u2 = T(p2 + b2);
+  const amb = ambiguous(d, E2);
+  const asDec = !amb && (sciN(d, E2) === 0 || chance(0.5));
+  const F = (dd, ee) => (asDec ? texDec(dd, ee) : texSci(dd, ee, false, false)) + '\\,' + u2;
+  const [ds, Es] = stripZeros(d, E2);
+  const start = texDec(d, E);
+  return {
+    kind: 'cs',
+    prompt: `Convertir $${start}\\,${u1}$ en $${u2}$, en conservant sans ambiguïté le nombre de chiffres significatifs.`,
+    correct: F(d, E2),
+    wrongs: [
+      tz ? W(F(ds, Es), 'Les zéros finaux de la mesure sont significatifs : la conversion doit les conserver.', 0.5, 'cs') : null,
+      W(F(d + '0', E2 - 1), 'La conversion ne rend pas la mesure plus précise : on n’ajoute pas de chiffre significatif.', 0.9, 'cs'),
+      amb ? W(texDec(d, E2) + '\\,' + u2, 'Écriture ambiguë : on ne sait pas si les zéros finaux sont significatifs. L’écriture scientifique lève l’ambiguïté.', 0.5, 'cs') : null,
+      W(F(d, E - D), `Conversion dans le mauvais sens : $1\\,${u1} = ${texP(D)}\\,${u2}$.`, 1.2),
+      !tz ? W(F(...roundDigits(d, E2, cs - 1)), 'Un chiffre significatif a été perdu pendant la conversion.', 1, 'cs') : null,
+      W(F(d, E2 + (D > 0 ? -1 : 1)), `Valeur de la conversion : $1\\,${u1} = ${texP(D)}\\,${u2}$.`, 2)
+    ],
+    method: `$${start}\\,${u1}$ comporte ${nCS(cs)} et $1\\,${u1} = ${texP(D)}\\,${u2}$, d’où $${F(d, E2)}$, toujours avec ${nCS(cs)}.`,
+    rule: 'Une conversion ne change pas la précision : le nombre de chiffres significatifs est conservé. L’écriture scientifique évite les zéros ambigus.',
+    truth: num(d, E) * Math.pow(10, PREFIX[p1]) / Math.pow(10, PREFIX[p2]),
+    truthCS: cs
+  };
+}
+
+/* =====================================================================
+   Thèmes et compétences (du plus simple au plus exigeant)
+   ===================================================================== */
+const THEMES = [
+  { name: 'Puissances de 10 et ordres de grandeur', short: 'ordres de grandeur', skills: [
+    { name: 'Calculer avec des puissances de 10', gen: genPow },
+    { name: 'Ordre de grandeur d’une valeur', gen: genOdgValue },
+    { name: 'Comparer deux grandeurs', gen: genOdgRatio },
+    { name: 'Ordre de grandeur d’un calcul', gen: genOdgCalc } ] },
+  { name: 'Conversions', short: 'conversions', skills: [
+    { name: 'Multiples et sous-multiples', gen: genConvPrefix },
+    { name: 'Aires et volumes', gen: genConvCube },
+    { name: 'Volumes et litres', gen: genConvLiter },
+    { name: 'Unités composées', gen: genConvComposite } ] },
+  { name: 'Écriture scientifique', short: 'écriture scientifique', skills: [
+    { name: 'Passer à l’écriture scientifique', gen: genSciFromDec },
+    { name: 'Revenir à l’écriture décimale', gen: genSciToDec },
+    { name: 'Rétablir l’écriture scientifique', gen: genSciRenorm },
+    { name: 'Produits et quotients', gen: genSciOps } ] },
+  { name: 'Chiffres significatifs', short: 'chiffres significatifs', skills: [
+    { name: 'Compter les chiffres significatifs', gen: genCsCount },
+    { name: 'Arrondir', gen: genCsRound },
+    { name: 'Résultat d’un calcul', gen: genCsCalc },
+    { name: 'Conversion et précision', gen: genCsConv } ] }
+];
+
+function makeQ(t, s, avoid) {
+  for (let i = 0; i < 300; i++) {
+    const q = assemble(THEMES[t].skills[s].gen());
+    if (!q || (avoid && avoid.has(q.prompt))) continue;
+    q.theme = t; q.skill = s;
+    if (avoid) avoid.add(q.prompt);
+    return q;
+  }
+  throw new Error('Génération impossible : thème ' + t + ', compétence ' + s);
+}
+
+/* Diagnostic : une question par compétence ; difficulté croissante ; thèmes entrelacés */
+function buildDiagnostic(avoid) {
+  const qs = [];
+  let last = -1;
+  for (let s = 0; s < 4; s++) {
+    let order;
+    do { order = shuffle([0, 1, 2, 3]); } while (order[0] === last);
+    order.forEach(t => qs.push(makeQ(t, s, avoid)));
+    last = order[3];
+  }
+  return qs;
+}
+</script>
+
+<script>
+/* =====================================================================
+   Interface
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+const S = { phase: 'intro', diag: null, train: null, q: null, locked: false, seen: new Set(), trained: {} };
+
+function plainTex(tex) {
+  return tex
+    .replace(/\\dfrac\{([^{}]*)\}\{([^{}]*)\}/g, '($1)/($2)')
+    .replace(/\\(text|underline)\{([^{}]*)\}/g, '$2')
+    .replace(/\{,\}/g, ',').replace(/\\times/g, '×').replace(/\\cdot/g, '·').replace(/\\,/g, ' ')
+    .replace(/\\geq/g, '≥').replace(/\\le/g, '≤').replace(/\\approx/g, '≈').replace(/\\Delta/g, 'Δ')
+    .replace(/\\rho/g, 'ρ').replace(/\\Omega/g, 'Ω').replace(/\\sqrt\{10\}/g, '√10')
+    .replace(/\^\{([^{}]*)\}/g, '^$1').replace(/[{}\\]/g, '');
+}
+function mathInto(el, tex) {
+  if (window.katex) katex.render(tex, el, { throwOnError: false });
+  else el.textContent = plainTex(tex);
+}
+function rich(el, str) {
+  el.textContent = '';
+  const parts = String(str).split('$');
+  for (let i = 0; i < parts.length; i++) {
+    if (i % 2 === 0) { if (parts[i]) el.appendChild(document.createTextNode(parts[i])); continue; }
+    const wrap = document.createElement('span');
+    if (parts[i].length < 40) wrap.className = 'nw';   // les formules longues restent sécables
+    const sp = document.createElement('span');
+    mathInto(sp, parts[i]);
+    wrap.appendChild(sp);
+    const m = (parts[i + 1] || '').match(/^[.,;:)]+/);   // la ponctuation reste collée à la formule
+    if (m) { wrap.appendChild(document.createTextNode(m[0])); parts[i + 1] = parts[i + 1].slice(m[0].length); }
+    el.appendChild(wrap);
+  }
+}
+function show(name) {
+  ['intro', 'q', 'bilan', 'tend'].forEach(n => { $('screen-' + n).hidden = n !== name; });
+  window.scrollTo(0, 0);
+}
+function header(title, count, stop) {
+  $('title').textContent = title;
+  $('count').textContent = count || '';
+  $('count').hidden = !!stop;
+  $('stop').hidden = !stop;
+}
+
+/* ---------- Diagnostic ---------- */
+function startDiagnostic() {
+  S.phase = 'diag';
+  S.diag = { questions: buildDiagnostic(S.seen), answers: [], i: 0 };
+  show('q');
+  diagQuestion();
+}
+function diagTicks() {
+  const tk = $('ticks');
+  tk.className = 'ticks';
+  tk.style.setProperty('--n', S.diag.questions.length);
+  tk.innerHTML = '';
+  S.diag.questions.forEach((q, k) => {
+    const s = document.createElement('span');
+    const a = S.diag.answers[k];
+    s.className = 'tick' + (a ? (a.ok ? ' ok' : ' ko') : k === S.diag.i ? ' current' : '');
+    tk.appendChild(s);
+  });
+}
+function diagQuestion() {
+  const q = S.diag.questions[S.diag.i];
+  header('Diagnostic', (S.diag.i + 1) + ' / ' + S.diag.questions.length, false);
+  diagTicks();
+  showQuestion(q, THEMES[q.theme].name);
+}
+
+/* ---------- Question ---------- */
+function showQuestion(q, context) {
+  S.q = q;
+  S.locked = false;
+  $('context').textContent = context;
+  rich($('prompt'), q.prompt);
+  const box = $('options');
+  box.innerHTML = '';
+  q.options.forEach((o, k) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'option';
+    b.innerHTML = '<span class="key">' + (k + 1) + '</span><span class="expr"></span>';
+    mathInto(b.querySelector('.expr'), o.tex);
+    b.setAttribute('aria-label', 'Proposition ' + (k + 1) + ' : ' + plainTex(o.tex));
+    b.addEventListener('click', () => answer(k));
+    box.appendChild(b);
+  });
+  $('dunno-row').hidden = false;
+  $('feedback').innerHTML = '';
+  $('feedback').className = 'feedback';
+  $('next').hidden = true;
+  const st = $('screen-q');
+  st.classList.remove('fade'); void st.offsetWidth; st.classList.add('fade');
+  window.scrollTo(0, 0);
+}
+
+function answer(k) {
+  if (S.locked) return;
+  S.locked = true;
+  const q = S.q;
+  const chosen = k >= 0 ? q.options[k] : null;
+  const ok = !!(chosen && chosen.ok);
+  [...$('options').children].forEach((b, j) => {
+    b.disabled = true;
+    if (q.options[j].ok) b.classList.add('is-correct');
+    else if (j === k) b.classList.add('is-wrong');
+    else b.classList.add('is-dim');
+  });
+  $('dunno-row').hidden = true;
+
+  const fb = $('feedback');
+  fb.className = 'feedback ' + (ok ? 'ok' : 'ko');
+  fb.innerHTML = '';
+  const add = (cls, str, label) => {
+    const p = document.createElement('p');
+    p.className = cls;
+    if (label) { const l = document.createElement('span'); l.className = 'lab'; l.textContent = label; p.appendChild(l); }
+    const sp = document.createElement('span'); rich(sp, str); p.appendChild(sp);
+    fb.appendChild(p);
+  };
+  if (ok) {
+    add('verdict', 'Juste.');
+    add('rule', q.rule);
+  } else {
+    add('verdict', chosen ? 'Pas tout à fait.' : 'Voici comment faire.');
+    if (chosen && chosen.why) add('why', chosen.why);
+    add('method', q.method, 'Méthode : ');
+  }
+
+  if (S.phase === 'diag') {
+    S.diag.answers.push({ q, k, ok });
+    diagTicks();
+    $('next').textContent = S.diag.i === S.diag.questions.length - 1 ? 'Voir le bilan' : 'Question suivante';
+  } else {
+    recordTraining(q, ok);
+    $('next').textContent = 'Question suivante';
+  }
+  $('next').hidden = false;
+  $('next').focus({ preventScroll: true });
+  if (fb.getBoundingClientRect().bottom > window.innerHeight) fb.scrollIntoView({ block: 'nearest' });
+}
+
+function next() {
+  if (S.phase === 'diag') {
+    S.diag.i++;
+    if (S.diag.i >= S.diag.questions.length) showBilan(); else diagQuestion();
+  } else if (S.phase === 'train') {
+    trainNext();
+  }
+}
+
+/* ---------- Bilan ---------- */
+function statusOf(k) {
+  if (k === 4) return ['Maîtrisé', 'ok'];
+  if (k === 3) return ['À consolider', 'mid'];
+  return ['À travailler', 'ko'];
+}
+function showBilan() {
+  S.phase = 'bilan';
+  const ans = S.diag.answers;
+  const total = ans.filter(a => a.ok).length;
+  header('Bilan du diagnostic', '', false);
+  $('ticks').className = 'ticks';
+  diagTicks();
+  mathInto($('b-score'), '\\dfrac{' + total + '}{' + ans.length + '}');
+
+  const perTheme = THEMES.map((th, t) => ans.filter(a => a.q.theme === t && a.ok).length);
+  const minK = Math.min(...perTheme);
+  const rec = minK < 4 ? perTheme.indexOf(minK) : -1;
+
+  $('b-comment').textContent = rec < 0
+    ? 'Tous les automatismes testés sont en place. Pour vérifier qu’ils tiennent dans la durée, refaire le diagnostic dans une semaine.'
+    : `À travailler en priorité : ${THEMES[rec].short}. L’entraînement revient sur les compétences manquées et s’arrête quand chacune est réussie ${CONFIG.critere} fois d’affilée.`;
+
+  const box = $('b-themes');
+  box.innerHTML = '';
+  THEMES.forEach((th, t) => {
+    const [label, cls] = statusOf(perTheme[t]);
+    const div = document.createElement('div');
+    div.className = 'theme';
+    const head = document.createElement('div');
+    head.className = 'theme-head';
+    head.innerHTML = '<span class="theme-name"></span><span class="status ' + cls + '"></span>';
+    head.children[0].textContent = th.name;
+    head.children[1].textContent = label;
+    div.appendChild(head);
+    const ul = document.createElement('ul');
+    ul.className = 'skill-list';
+    th.skills.forEach((sk, s) => {
+      const a = ans.find(x => x.q.theme === t && x.q.skill === s);
+      const li = document.createElement('li');
+      li.className = a && a.ok ? '' : 'miss';
+      li.innerHTML = '<span class="dot ' + (a && a.ok ? 'ok' : 'ko') + '"></span><span></span>';
+      li.children[1].textContent = sk.name;
+      ul.appendChild(li);
+    });
+    div.appendChild(ul);
+    if (S.trained[t] !== undefined) {
+      const p = document.createElement('p');
+      p.className = 'trained';
+      p.textContent = `Entraînement : ${S.trained[t]} compétence${S.trained[t] > 1 ? 's' : ''} sur 4 validée${S.trained[t] > 1 ? 's' : ''}.`;
+      div.appendChild(p);
+    }
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn small' + (t === rec ? '' : ' ghost');
+    btn.textContent = 'S’entraîner';
+    btn.setAttribute('aria-label', 'S’entraîner : ' + th.name);
+    btn.addEventListener('click', () => startTraining(t));
+    div.appendChild(btn);
+    box.appendChild(div);
+  });
+
+  const wrong = ans.filter(a => !a.ok);
+  const det = $('b-errors');
+  det.hidden = wrong.length === 0;
+  det.open = false;
+  $('b-errors-sum').textContent = wrong.length === 1 ? 'Revoir la question manquée' : `Revoir les ${wrong.length} questions manquées`;
+  const list = $('b-errors-list');
+  list.innerHTML = '';
+  wrong.forEach(a => {
+    const good = a.q.options.find(o => o.ok);
+    const chosen = a.k >= 0 ? a.q.options[a.k] : null;
+    const it = document.createElement('div');
+    it.className = 'err';
+    it.innerHTML = '<div class="ctx"></div><div class="q"></div>' +
+      '<div class="line"><span class="lab">Réponse donnée</span><span class="bad"></span></div>' +
+      '<div class="line"><span class="lab">Réponse attendue</span><span class="good"></span></div>' +
+      '<p class="why"></p><p class="how"></p>';
+    it.querySelector('.ctx').textContent = THEMES[a.q.theme].skills[a.q.skill].name;
+    rich(it.querySelector('.q'), a.q.prompt);
+    if (chosen) mathInto(it.querySelector('.bad'), chosen.tex); else it.querySelector('.bad').textContent = 'Je ne sais pas';
+    mathInto(it.querySelector('.good'), good.tex);
+    if (chosen && chosen.why) rich(it.querySelector('.why'), chosen.why); else it.querySelector('.why').remove();
+    rich(it.querySelector('.how'), 'Méthode : ' + a.q.method);
+    list.appendChild(it);
+  });
+  show('bilan');
+}
+
+/* ---------- Entraînement ciblé ---------- */
+function startTraining(t) {
+  const skills = THEMES[t].skills.map((sk, s) => {
+    const a = S.diag.answers.find(x => x.q.theme === t && x.q.skill === s);
+    return { streak: a && a.ok ? 1 : 0, attempts: 0, errors: 0 };
+  });
+  S.train = { t, skills, last: -1, retry: null, count: 0, cur: -1 };
+  S.phase = 'train';
+  show('q');
+  trainNext();
+}
+function trainTicks() {
+  const tk = $('ticks');
+  tk.className = 'ticks grouped';
+  tk.innerHTML = '';
+  S.train.skills.forEach((sk, s) => {
+    const g = document.createElement('span');
+    g.className = 'tick-group' + (s === S.train.cur ? ' active' : '');
+    g.style.setProperty('--c', CONFIG.critere);
+    for (let k = 0; k < CONFIG.critere; k++) {
+      const x = document.createElement('span');
+      x.className = 'tick' + (k < Math.min(sk.streak, CONFIG.critere) ? ' ok' : '');
+      g.appendChild(x);
+    }
+    tk.appendChild(g);
+  });
+}
+function trainNext() {
+  const tr = S.train;
+  const open = tr.skills.map((_, i) => i).filter(i => tr.skills[i].streak < CONFIG.critere);
+  if (!open.length || tr.count >= CONFIG.maxEntrainement) { showTrainEnd(); return; }
+  let s;
+  if (tr.retry && tr.retry.due <= tr.count && open.includes(tr.retry.skill)) {
+    s = tr.retry.skill;
+  } else {
+    let c = open.filter(i => i !== tr.last && !(tr.retry && tr.retry.skill === i));
+    if (!c.length) c = open.filter(i => i !== tr.last);
+    if (!c.length) c = open;
+    const low = Math.min(...c.map(i => tr.skills[i].streak));
+    s = pick(c.filter(i => tr.skills[i].streak === low));
+  }
+  if (tr.retry && tr.retry.skill === s) tr.retry = null;
+  tr.cur = s; tr.last = s; tr.count++;
+  header('Entraînement : ' + THEMES[tr.t].short, '', true);
+  trainTicks();
+  showQuestion(makeQ(tr.t, s, S.seen), THEMES[tr.t].skills[s].name);
+}
+function recordTraining(q, ok) {
+  const tr = S.train;
+  const sk = tr.skills[q.skill];
+  sk.attempts++;
+  if (ok) sk.streak++;
+  else { sk.streak = 0; sk.errors++; tr.retry = { skill: q.skill, due: tr.count + 1 }; }
+  trainTicks();
+}
+function showTrainEnd() {
+  const tr = S.train;
+  S.phase = 'tend';
+  const done = tr.skills.filter(sk => sk.streak >= CONFIG.critere).length;
+  S.trained[tr.t] = done;
+  header('Entraînement : ' + THEMES[tr.t].short, '', false);
+  trainTicks();
+  $('te-title').textContent = THEMES[tr.t].name;
+  $('te-comment').textContent = done === 4
+    ? `Les quatre compétences sont validées, chacune réussie ${CONFIG.critere} fois d’affilée. Pour que cela dure, refaire le diagnostic dans quelques jours : revenir sur une notion après un délai la consolide.`
+    : `${done} compétence${done > 1 ? 's' : ''} sur 4 validée${done > 1 ? 's' : ''}. Reprendre plus tard est utile : les notions reviennent plus solidement après une pause.`;
+  const ul = $('te-skills');
+  ul.innerHTML = '';
+  THEMES[tr.t].skills.forEach((skd, s) => {
+    const sk = tr.skills[s];
+    const v = sk.streak >= CONFIG.critere;
+    const li = document.createElement('li');
+    li.className = v ? '' : 'miss';
+    li.innerHTML = '<span class="dot ' + (v ? 'ok' : 'ko') + '"></span><span></span><span class="meta"></span>';
+    li.children[1].textContent = skd.name;
+    li.children[2].textContent = sk.attempts
+      ? `${sk.attempts} question${sk.attempts > 1 ? 's' : ''}, ${sk.errors} erreur${sk.errors > 1 ? 's' : ''}`
+      : 'validée au diagnostic';
+    ul.appendChild(li);
+  });
+  show('tend');
+  $('te-back').focus({ preventScroll: true });
+}
+
+/* ---------- Événements ---------- */
+$('go').addEventListener('click', startDiagnostic);
+$('dunno').addEventListener('click', () => answer(-1));
+$('next').addEventListener('click', next);
+$('b-redo').addEventListener('click', startDiagnostic);
+$('stop').addEventListener('click', showTrainEnd);
+$('te-back').addEventListener('click', showBilan);
+$('te-again').addEventListener('click', () => {
+  const t = S.train.t;
+  S.train = { t, skills: THEMES[t].skills.map(() => ({ streak: 0, attempts: 0, errors: 0 })), last: -1, retry: null, count: 0, cur: -1 };
+  S.phase = 'train';
+  show('q');
+  trainNext();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  if ($('screen-q').hidden) return;
+  if (!S.locked && ['1', '2', '3', '4'].includes(e.key)) { answer(Number(e.key) - 1); return; }
+  if (!S.locked && (e.key === '0' || e.key === '?')) { answer(-1); return; }
+  if (S.locked && !$('next').hidden && (e.key === 'Enter' || e.key === 'ArrowRight') && document.activeElement !== $('next')) {
+    e.preventDefault();
+    next();
+  }
+});
+</script>
+</body>
+</html>
