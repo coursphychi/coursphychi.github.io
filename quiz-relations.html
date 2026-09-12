@@ -43,6 +43,7 @@
   .chrono:empty { display: none; }
   .times { text-align: center; color: var(--muted); margin: .6rem 0 0; font-size: 1rem; }
   .times .record { color: var(--ink); }
+  .dunno-row { text-align: center; margin-top: .5rem; min-height: 2.3rem; }
   .link {
     background: none; border: 0; padding: .35rem .5rem; font: inherit; font-size: .95rem;
     color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
@@ -88,9 +89,25 @@
   .option.is-dim { opacity: .4; }
   @media (hover: none) { .option .key { display: none; } }
 
-  .feedback { min-height: 3.2em; margin: 1rem auto 0; max-width: 32rem; text-align: center; font-size: 1rem; }
-  .feedback.ok { color: var(--ok); }
-  .feedback.ko { color: var(--ko); }
+  .feedback { margin: 1rem auto 0; max-width: 33rem; text-align: center; font-size: 1rem; }
+  .feedback:empty { min-height: 3.2em; }
+  .verdict { margin: 0; }
+  .steps { margin: 1rem 0 0; padding: .1rem 0 .1rem .95rem; border-left: 2px solid var(--rule); text-align: left; }
+  .feedback.ko .steps { border-color: var(--ko); }
+  .step { padding: .3rem 0; }
+  .step .note { font-size: .93rem; color: var(--muted); }
+  .step .eq { font-size: 1.18rem; overflow-x: auto; padding: .12em 0; }
+  .step.err .note { color: var(--ko); }
+  .step .blame { font-size: .93rem; color: var(--ko); padding-top: .1rem; }
+  .step.final .eq { font-weight: bold; }
+  details.check { margin-top: .8rem; text-align: left; }
+  details.check summary { cursor: pointer; color: var(--muted); font-size: .93rem; padding: .25rem 0; }
+  details.check .line { padding: .2rem 0; font-size: .97rem; }
+  details.check .line .num { overflow-x: auto; }
+  details.check .bad { color: var(--ko); }
+  details.check .good { color: var(--ok); }
+  .feedback.ok .verdict { color: var(--ok); }
+  .feedback.ko .verdict { color: var(--ko); }
   .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; min-height: 3rem; }
 
   button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
@@ -141,7 +158,8 @@
     <div class="relation" id="relation"></div>
     <p class="prompt">Isoler <span class="var" id="target"></span></p>
     <div class="options" id="options"></div>
-    <p class="feedback" id="feedback"></p>
+    <div class="dunno-row" id="dunno-row"><button class="link" id="dunno" type="button">Je ne sais pas</button></div>
+    <div class="feedback" id="feedback"></div>
     <div class="actions"><button class="btn" id="next" type="button" hidden>Question suivante</button></div>
   </section>
 
@@ -192,6 +210,7 @@ const isConst = t => isLeaf(t) && t.cst !== undefined;
 const isAdditive = t => !isLeaf(t) && (t.op === '+' || t.op === '-');
 
 const rnd = n => Math.floor(Math.random() * n);
+const randint = (a, b) => a + rnd(b - a + 1);
 const pick = a => a[rnd(a.length)];
 function shuffle(a) {
   const b = a.slice();
@@ -368,7 +387,74 @@ function solveFor(side, other, target, err) {
     }
     O = res; e = inL ? e.l : e.r; step++;
   }
-  return { tree: O, errKey };
+  return { tree: O, errKey, errStep: err ? err.step : -1 };
+}
+
+/* Trace de la résolution : une ligne par transformation, avec sa justification.
+   Les cas « grandeur retranchée » et « grandeur au dénominateur » sont détaillés en deux temps,
+   parce que c'est là que se concentrent les erreurs. */
+function traceSolve(side, other, target, echange) {
+  const rows = [];
+  const M = t => '$' + tex(norm(t)) + '$';
+  const push = (l, r, note, step, sub) => rows.push({ l: norm(l), r: norm(r), note, step, sub });
+  let e = side, O = other, step = 0;
+  push(e, O, echange ? 'on écrit la relation en plaçant à gauche le membre qui contient la grandeur cherchée' : null, -1);
+  while (!isLeaf(e)) {
+    const inL = contains(e.l, target);
+    const X = inL ? e.r : e.l;
+    const T = inL ? e.l : e.r;
+    if (e.op === '+') { const R = sub(O, X); push(T, R, 'on retranche ' + M(X) + ' aux deux membres', step); O = R; }
+    else if (e.op === '-' && inL) { const R = add(O, X); push(T, R, 'on ajoute ' + M(X) + ' aux deux membres', step); O = R; }
+    else if (e.op === '-') {
+      push(X, add(O, T), 'on ajoute ' + M(T) + ' aux deux membres, pour que la grandeur cherchée ne soit plus retranchée', step, 0);
+      const R = sub(X, O);
+      push(T, R, 'on retranche ' + M(O) + ' aux deux membres', step, 1);
+      O = R;
+    }
+    else if (e.op === '*') { const R = div(O, X); push(T, R, 'on divise les deux membres par ' + M(X), step); O = R; }
+    else if (e.op === '/' && inL) { const R = mul(O, X); push(T, R, 'on multiplie les deux membres par ' + M(X), step); O = R; }
+    else {
+      push(X, mul(O, T), 'on multiplie les deux membres par ' + M(T) + ', pour que la grandeur cherchée ne soit plus au dénominateur', step, 0);
+      const R = div(X, O);
+      push(T, R, 'on divise les deux membres par ' + M(O), step, 1);
+      O = R;
+    }
+    e = T; step++;
+  }
+  rows[rows.length - 1].final = true;
+  return rows.map(r => ({ tex: tex(r.l) + ' = ' + tex(r.r), txt: txt(r.l) + ' = ' + txt(r.r), note: r.note, step: r.step, final: r.final }));
+}
+
+/* Vérification numérique : substituer des valeurs simples et voir laquelle des deux
+   propositions redonne la relation de départ. */
+function fmtNum(x) {
+  const r = Math.round(x * 100) / 100;
+  return (Number.isInteger(x) ? '' : (Math.abs(r - x) > 1e-9 ? '\\approx ' : '')) + String(r).replace('.', '{,}');
+}
+function numCheck(lhs, rhs, target, correctTree, wrongTree) {
+  const vars = [...new Set(leaves(lhs).concat(leaves(rhs)))].filter(x => x !== target);
+  const nameOf = x => tex(findLeaf(lhs, x) || findLeaf(rhs, x));
+  const joli = x => Math.abs(x * 10 - Math.round(x * 10)) < 1e-9;
+  for (let t = 0; t < 900; t++) {
+    const env = {};
+    vars.forEach(x => { env[x] = randint(2, t < 450 ? 9 : 12); });
+    if (new Set(vars.map(x => env[x])).size !== vars.length) continue;
+    const tv = evalT(correctTree, env);
+    if (tv < 0.5 || tv > 400) continue;
+    if (t < 450 ? !Number.isInteger(tv) : !joli(tv)) continue;
+    const wv = evalT(wrongTree, env);
+    if (!isFinite(wv) || Math.abs(wv - tv) < 1e-9) continue;
+    const e1 = Object.assign({}, env); e1[target] = tv;
+    const e2 = Object.assign({}, env); e2[target] = wv;
+    const L1 = evalT(lhs, e1), R1 = evalT(rhs, e1), L2 = evalT(lhs, e2), R2 = evalT(rhs, e2);
+    if (!isFinite(L2) || !isFinite(R2) || Math.abs(L2 - R2) < 1e-9) continue;
+    return {
+      donnees: vars.map(x => '$' + nameOf(x) + ' = ' + env[x] + '$').join(', '),
+      mauvais: '$' + fmtNum(wv) + '$', mauvaisRel: '$' + fmtNum(L2) + ' = ' + fmtNum(R2) + '$',
+      bon: '$' + fmtNum(tv) + '$', bonRel: '$' + fmtNum(L1) + ' = ' + fmtNum(R1) + '$'
+    };
+  }
+  return null;
 }
 
 function shapeOf(t, s = { div: 0, add: 0, mul: 0 }) {
@@ -403,16 +489,23 @@ function makeQuestion(lhs, rhs, target, opts) {
       const sg = sig(t);
       if (!sg.every(Number.isFinite)) continue;
       if (same(sg, cSig) || cands.some(c => same(c.sg, sg))) continue;
-      cands.push({ tree: t, sg, key: r.errKey, partial: k >= 3 });
+      cands.push({ tree: t, sg, key: r.errKey, step: s, partial: k >= 3 });
     }
   }
   if (cands.length < 2) return null;
 
-  /* distracteurs de même allure que la bonne réponse, erreurs de priorité favorisées */
+  /* distracteurs de même allure que la bonne réponse ; erreurs de priorité favorisées ;
+     types d'erreur encore absents de la série favorisés, pour les balayer tous */
   const shape = shapeOf(correct);
-  cands.forEach(c => { c.score = shapeDist(shape, shapeOf(c.tree)) - (c.partial ? 0.6 : 0) + Math.random() * 1.2; });
+  cands.forEach(c => {
+    c.score = shapeDist(shape, shapeOf(c.tree)) - (c.partial ? 0.6 : 0)
+      - (COUVERTURE.has(c.key) ? 0 : 1.1) + Math.random() * 1.2;
+  });
   cands.sort((a, b) => a.score - b.score);
-  const chosen = cands.slice(0, 2);
+  const chosen = [cands[0]];
+  const second = cands.slice(1).find(c => c.step !== cands[0].step) || cands[1];
+  chosen.push(second);
+  chosen.forEach(c => COUVERTURE.add(c.key));
 
   const [A, B] = opts.swap ? [norm(rhs), norm(lhs)] : [norm(lhs), norm(rhs)];
   const leaf = findLeaf(side, target);
@@ -420,13 +513,18 @@ function makeQuestion(lhs, rhs, target, opts) {
 
   const options = shuffle([
     { tex: tv + ' = ' + tex(correct), txt: tt + ' = ' + txt(correct), ok: true, tree: correct },
-    ...chosen.map(c => ({ tex: tv + ' = ' + tex(c.tree), txt: tt + ' = ' + txt(c.tree), ok: false, msg: ERR_MSG[c.key], tree: c.tree }))
+    ...chosen.map(c => ({
+      tex: tv + ' = ' + tex(c.tree), txt: tt + ' = ' + txt(c.tree), ok: false,
+      msg: ERR_MSG[c.key], tree: c.tree, errStep: c.step,
+      check: numCheck(lhs, rhs, target, correct, c.tree)
+    }))
   ]);
 
   return {
     label: opts.label || '', target, targetTex: tv, targetTxt: tt, lhs, rhs,
     relTex: tex(A) + ' = ' + tex(B),
     relTxt: txt(A) + ' = ' + txt(B),
+    steps: traceSolve(side, other, target, onLeft === !!opts.swap),
     options
   };
 }
@@ -435,6 +533,7 @@ function makeQuestion(lhs, rhs, target, opts) {
    Relations littérales, du plus simple au plus imbriqué
    f : lettres → [membre gauche, membre droit] ; t : indices des cibles possibles
    ===================================================================== */
+const COUVERTURE = new Set();   // types d'erreur déjà rencontrés dans la série en cours
 const T = (f, t) => ({ f, t });
 const LEVELS = [
   /* 1 */ [ T(L => [v(L[0]), mul(v(L[1]), v(L[2]))], [1, 2]),
@@ -622,6 +721,7 @@ function mixedPattern(nq) {
 }
 
 function buildSeries(mode = CONFIG.mode, nq = CONFIG.nbQuestions) {
+  COUVERTURE.clear();
   const pairs = physicsPairs();
   const used = new Set();
   const pattern = mode === 'physique' ? Array(nq).fill(true)
@@ -643,7 +743,7 @@ const els = {
   count: $('count'), ticks: $('ticks'), chrono: $('chrono'), times: $('times'), chronoToggle: $('chrono-toggle'),
   screenQ: $('screen-q'), screenEnd: $('screen-end'),
   context: $('context'), relation: $('relation'), target: $('target'),
-  options: $('options'), feedback: $('feedback'), next: $('next'),
+  options: $('options'), feedback: $('feedback'), next: $('next'), dunno: $('dunno-row'),
   score: $('score'), comment: $('comment'), recap: $('recap'),
   restart: $('restart')
 };
@@ -683,6 +783,71 @@ let dernier = null;   // dernière partie terminée : { score, ms, bat }
 function math(el, texStr, txtStr) {
   if (window.katex) katex.render(texStr, el, { throwOnError: false, displayMode: false });
   else el.textContent = txtStr;
+}
+function plain(texStr) {
+  return texStr
+    .replace(/\\dfrac\{([^{}]*)\}\{([^{}]*)\}/g, '($1)/($2)')
+    .replace(/\\(text|left|right)/g, '').replace(/\{,\}/g, ',')
+    .replace(/\\times/g, '×').replace(/\\cdot/g, '·').replace(/\\,/g, ' ')
+    .replace(/\\approx/g, '≈').replace(/\^\{([^{}]*)\}/g, '^$1').replace(/[{}\\]/g, '');
+}
+/* texte mêlant prose et formules délimitées par $ */
+function rich(el, str) {
+  el.textContent = '';
+  String(str).split('$').forEach((part, i) => {
+    if (i % 2 === 0) { if (part) el.appendChild(document.createTextNode(part)); return; }
+    const sp = document.createElement('span');
+    math(sp, part, plain(part));
+    el.appendChild(sp);
+  });
+}
+
+/* Correction : le calcul refait ligne à ligne, avec l'étape fautive signalée */
+function renderSteps(box, q, chosen) {
+  const wrap = document.createElement('div');
+  wrap.className = 'steps';
+  q.steps.forEach((r, i) => {
+    const blame = chosen && !chosen.ok && r.step === chosen.errStep
+      && !q.steps.slice(i + 1).some(x => x.step === chosen.errStep);
+    const div = document.createElement('div');
+    div.className = 'step' + (blame ? ' err' : '') + (r.final ? ' final' : '');
+    if (r.note) { const n = document.createElement('div'); n.className = 'note'; rich(n, r.note); div.appendChild(n); }
+    const eq = document.createElement('div');
+    eq.className = 'eq';
+    math(eq, r.tex, r.txt);
+    div.appendChild(eq);
+    if (blame && chosen.msg) {
+      const b = document.createElement('div');
+      b.className = 'blame';
+      rich(b, 'L’erreur est ici. ' + chosen.msg);
+      div.appendChild(b);
+    }
+    wrap.appendChild(div);
+  });
+  box.appendChild(wrap);
+}
+
+function renderCheck(box, q, chosen) {
+  const c = chosen && chosen.check;
+  if (!c) return;
+  const det = document.createElement('details');
+  det.className = 'check';
+  const sum = document.createElement('summary');
+  sum.textContent = 'Vérifier avec des nombres';
+  det.appendChild(sum);
+  const intro = document.createElement('div');
+  intro.className = 'line';
+  rich(intro, 'On remplace par des valeurs simples : ' + c.donnees + '.');
+  det.appendChild(intro);
+  const l1 = document.createElement('div');
+  l1.className = 'line bad';
+  rich(l1, 'Proposition choisie : ' + c.mauvais + ', et la relation de départ devient ' + c.mauvaisRel + ' : fausse.');
+  det.appendChild(l1);
+  const l2 = document.createElement('div');
+  l2.className = 'line good';
+  rich(l2, 'Réponse attendue : ' + c.bon + ', et la relation de départ devient ' + c.bonRel + ' : vraie.');
+  det.appendChild(l2);
+  box.appendChild(det);
 }
 
 function show(screen) {
@@ -730,7 +895,8 @@ function showQuestion() {
     els.options.appendChild(b);
   });
 
-  els.feedback.textContent = '';
+  els.dunno.hidden = false;
+  els.feedback.innerHTML = '';
   els.feedback.className = 'feedback';
   els.next.hidden = true;
 
@@ -745,8 +911,9 @@ function answer(k) {
   state.locked = true;
   chrono.stop();
   const q = state.questions[state.i];
-  const chosen = q.options[k];
-  state.answers.push({ q, chosen, ok: chosen.ok });
+  const chosen = k >= 0 ? q.options[k] : null;
+  const ok = !!(chosen && chosen.ok);
+  state.answers.push({ q, chosen, ok });
 
   [...els.options.children].forEach((b, j) => {
     b.disabled = true;
@@ -754,20 +921,29 @@ function answer(k) {
     else if (j === k) b.classList.add('is-wrong');
     else b.classList.add('is-dim');
   });
+  els.dunno.hidden = true;
   const tick = els.ticks.children[state.i];
   tick.classList.remove('current');
-  tick.classList.add(chosen.ok ? 'ok' : 'ko');
+  tick.classList.add(ok ? 'ok' : 'ko');
 
-  if (chosen.ok) {
-    els.feedback.textContent = 'Juste.';
-    els.feedback.className = 'feedback ok';
+  els.feedback.innerHTML = '';
+  els.feedback.className = 'feedback ' + (ok ? 'ok' : chosen ? 'ko' : '');
+  const v = document.createElement('p');
+  v.className = 'verdict';
+  v.textContent = ok ? 'Juste.' : chosen ? 'Pas tout à fait.' : 'Voici le calcul, étape par étape.';
+  els.feedback.appendChild(v);
+
+  if (ok) {
     state.timer = setTimeout(next, CONFIG.autoAdvanceMs);
-  } else {
-    els.feedback.textContent = chosen.msg || 'Ce n’est pas la bonne expression.';
-    els.feedback.className = 'feedback ko';
-    els.next.textContent = state.i === NQ - 1 ? 'Voir le résultat' : 'Question suivante';
-    els.next.hidden = false;
-    els.next.focus({ preventScroll: true });
+    return;
+  }
+  renderSteps(els.feedback, q, chosen);
+  renderCheck(els.feedback, q, chosen);
+  els.next.textContent = state.i === NQ - 1 ? 'Voir le résultat' : 'Question suivante';
+  els.next.hidden = false;
+  els.next.focus({ preventScroll: true });
+  if (els.feedback.getBoundingClientRect().bottom > window.innerHeight) {
+    els.feedback.scrollIntoView({ block: 'nearest' });
   }
 }
 
@@ -819,13 +995,13 @@ function showEnd() {
         (a.q.label ? '<div class="ctx"></div>' : '') +
         '<div class="rel"></div>' +
         '<div class="line"><span class="lab">Réponse donnée</span><span class="m bad"></span></div>' +
-        '<div class="line"><span class="lab">Réponse attendue</span><span class="m good"></span></div>' +
-        '<div class="why"></div>';
+        '<div class="line"><span class="lab">Réponse attendue</span><span class="m good"></span></div>';
       if (a.q.label) item.querySelector('.ctx').textContent = a.q.label;
       math(item.querySelector('.rel'), a.q.relTex, a.q.relTxt);
-      math(item.querySelector('.bad'), a.chosen.tex, a.chosen.txt);
+      if (a.chosen) math(item.querySelector('.bad'), a.chosen.tex, a.chosen.txt);
+      else item.querySelector('.bad').textContent = 'Je ne sais pas';
       math(item.querySelector('.good'), good.tex, good.txt);
-      item.querySelector('.why').textContent = a.chosen.msg || '';
+      renderSteps(item, a.q, a.chosen);
       els.recap.appendChild(item);
     });
   }
@@ -860,6 +1036,7 @@ els.chronoToggle.addEventListener('click', () => {
 });
 majToggle();
 
+$('dunno').addEventListener('click', () => answer(-1));
 els.next.addEventListener('click', next);
 els.restart.addEventListener('click', () => start(state.mode));
 
@@ -867,6 +1044,7 @@ document.addEventListener('keydown', e => {
   if (e.altKey || e.ctrlKey || e.metaKey) return;
   if (!els.screenQ.hidden) {
     if (!state.locked && ['1', '2', '3'].includes(e.key)) { answer(Number(e.key) - 1); return; }
+    if (!state.locked && (e.key === '0' || e.key === '?')) { answer(-1); return; }
     const nextVisible = state.locked && !els.next.hidden;
     if (nextVisible && e.key === 'ArrowRight') next();
     if (nextVisible && (e.key === 'Enter' || e.key === ' ') && document.activeElement !== els.next) { e.preventDefault(); next(); }
