@@ -34,6 +34,12 @@
   .top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
   .title { font-style: italic; color: var(--muted); font-size: 1rem; }
   .count { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 1rem; }
+  .meta-top { display: flex; align-items: baseline; gap: .9rem; }
+  .chrono { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 1rem; }
+  .chrono:empty { display: none; }
+  .times { text-align: center; color: var(--muted); margin: .5rem 0 0; font-size: 1rem; }
+  .times .record { color: var(--ink); }
+  .times:empty { display: none; }
   .ticks { display: grid; grid-template-columns: repeat(var(--n, 16), 1fr); gap: 4px; margin-top: .6rem; min-height: 3px; }
   .ticks.grouped { display: flex; gap: 12px; }
   .tick-group { flex: 1; display: grid; grid-template-columns: repeat(var(--c, 3), 1fr); gap: 3px; }
@@ -124,6 +130,7 @@
   .skill-list li { display: flex; align-items: baseline; gap: .6rem; font-size: .97rem; color: var(--muted); padding: .05rem 0; }
   .skill-list li.miss { color: var(--ink); }
   .skill-list .meta { margin-left: auto; font-size: .88rem; color: var(--muted); white-space: nowrap; }
+  .skill-list .meta.slow { color: var(--mid); }
   .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--rule); flex: none; transform: translateY(-.05rem); }
   .dot.ok { background: var(--ok); }
   .dot.ko { background: var(--ko); }
@@ -154,8 +161,8 @@
   <header>
     <div class="top">
       <span class="title" id="title">Automatismes</span>
-      <span class="count" id="count"></span>
-      <button class="link" id="stop" type="button" hidden>Arrêter</button>
+      <span class="meta-top"><span class="chrono" id="chrono"></span><span class="count" id="count"></span>
+      <button class="link" id="stop" type="button" hidden>Arrêter</button></span>
     </div>
     <div class="ticks" id="ticks" aria-hidden="true"></div>
   </header>
@@ -178,14 +185,17 @@
 
   <section class="stage" id="screen-bilan" hidden>
     <div class="score" id="b-score"></div>
+    <p class="times" id="b-times"></p>
     <p class="comment" id="b-comment"></p>
     <div class="themes" id="b-themes"></div>
     <details class="errors" id="b-errors" hidden><summary id="b-errors-sum"></summary><div id="b-errors-list"></div></details>
     <div class="actions"><button class="btn ghost" id="b-redo" type="button">Refaire un diagnostic</button></div>
+    <div class="actions"><button class="link" id="chrono-toggle" type="button"></button></div>
   </section>
 
   <section class="stage" id="screen-tend" hidden>
     <h2 class="tend-title" id="te-title"></h2>
+    <p class="times" id="te-times"></p>
     <p class="comment" id="te-comment"></p>
     <ul class="skill-list" id="te-skills"></ul>
     <div class="actions">
@@ -202,9 +212,11 @@
    Réglages
    ===================================================================== */
 const CONFIG = {
-  seuilOdG: 5,          // ordre de grandeur de a × 10^n : 10^n si a < seuil, 10^(n+1) sinon (5 ou Math.sqrt(10))
+  seuilOdG: 5,
+  seuilLent: 25000,     // au-delà, une réponse juste est signalée comme non encore automatique (ms)          // ordre de grandeur de a × 10^n : 10^n si a < seuil, 10^(n+1) sinon (5 ou Math.sqrt(10))
   critere: 3,           // réussites consécutives pour valider une compétence à l'entraînement
-  maxEntrainement: 30   // nombre maximal de questions par entraînement
+  maxEntrainement: 30,  // nombre maximal de questions par entraînement
+  chrono: true          // false : chronomètre masqué par défaut
 };
 
 /* =====================================================================
@@ -1140,6 +1152,33 @@ function rich(el, str) {
     el.appendChild(wrap);
   }
 }
+/* Chronomètre : il ne tourne que pendant la recherche de la réponse.
+   Le temps de lecture des corrections n'est pas compté, et l'onglet masqué met en pause. */
+const chrono = {
+  visible: CONFIG.chrono, cumul: 0, depuis: null, arme: false, tick: null,
+  reset() { this.stop(); this.cumul = 0; this.afficher(); },
+  demarrer() { this.arme = true; if (this.depuis === null && !document.hidden) { this.depuis = performance.now(); this.tick = setInterval(() => this.afficher(), 250); } this.afficher(); },
+  pause() {
+    if (this.depuis !== null) { this.cumul += performance.now() - this.depuis; this.depuis = null; }
+    clearInterval(this.tick); this.tick = null; this.afficher();
+  },
+  stop() { this.arme = false; this.pause(); },
+  ms() { return this.cumul + (this.depuis === null ? 0 : performance.now() - this.depuis); },
+  afficher() { $('chrono').textContent = this.visible ? court(this.ms()) : ''; }
+};
+function court(ms) {
+  const s = Math.floor(ms / 1000);
+  return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+}
+function duree(ms) {
+  const s = Math.round(ms / 1000);
+  return s < 60 ? s + ' s' : Math.floor(s / 60) + ' min ' + String(s % 60).padStart(2, '0') + ' s';
+}
+function moyenne(ms) {   // une décimale sous la dizaine de secondes, pour rester informatif
+  return ms < 10000 ? String(Math.round(ms / 100) / 10).replace('.', ',') + ' s' : duree(ms);
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) chrono.pause(); else if (chrono.arme) chrono.demarrer(); });
+
 function show(name) {
   ['intro', 'q', 'bilan', 'tend'].forEach(n => { $('screen-' + n).hidden = n !== name; });
   window.scrollTo(0, 0);
@@ -1154,6 +1193,7 @@ function header(title, count, stop) {
 /* ---------- Diagnostic ---------- */
 function startDiagnostic() {
   S.phase = 'diag';
+  chrono.reset();
   S.diag = { questions: buildDiagnostic(S.seen), answers: [], i: 0 };
   show('q');
   diagQuestion();
@@ -1202,11 +1242,15 @@ function showQuestion(q, context) {
   const st = $('screen-q');
   st.classList.remove('fade'); void st.offsetWidth; st.classList.add('fade');
   window.scrollTo(0, 0);
+  S.t0 = chrono.ms();
+  chrono.demarrer();
 }
 
 function answer(k) {
   if (S.locked) return;
   S.locked = true;
+  chrono.stop();
+  const dt = chrono.ms() - S.t0;
   const q = S.q;
   const chosen = k >= 0 ? q.options[k] : null;
   const ok = !!(chosen && chosen.ok);
@@ -1238,11 +1282,11 @@ function answer(k) {
   }
 
   if (S.phase === 'diag') {
-    S.diag.answers.push({ q, k, ok });
+    S.diag.answers.push({ q, k, ok, dt });
     diagTicks();
     $('next').textContent = S.diag.i === S.diag.questions.length - 1 ? 'Voir le bilan' : 'Question suivante';
   } else {
-    recordTraining(q, ok);
+    recordTraining(q, ok, dt);
     $('next').textContent = 'Question suivante';
   }
   $('next').hidden = false;
@@ -1269,6 +1313,14 @@ function showBilan() {
   S.phase = 'bilan';
   const ans = S.diag.answers;
   const total = ans.filter(a => a.ok).length;
+  const ms = ans.reduce((x, a) => x + a.dt, 0);
+  if (S.diag.ms === undefined) {
+    S.diag.ms = ms;
+    const bat = !S.record || total > S.record.score || (total === S.record.score && ms < S.record.ms);
+    S.dernier = { score: total, ms, bat, avant: S.record };
+    if (bat) S.record = { score: total, ms };
+  }
+  afficherTemps();
   header('Bilan du diagnostic', '', false);
   $('ticks').className = 'ticks';
   diagTicks();
@@ -1278,9 +1330,13 @@ function showBilan() {
   const minK = Math.min(...perTheme);
   const rec = minK < 4 ? perTheme.indexOf(minK) : -1;
 
-  $('b-comment').textContent = rec < 0
+  const lentes = ans.filter(a => a.ok && a.dt > CONFIG.seuilLent).length;
+  $('b-comment').textContent = (rec < 0
     ? 'Tous les automatismes testés sont en place. Pour vérifier qu’ils tiennent dans la durée, refaire le diagnostic dans une semaine.'
-    : `À travailler en priorité : ${THEMES[rec].short}. L’entraînement revient sur les compétences manquées et s’arrête quand chacune est réussie ${CONFIG.critere} fois d’affilée.`;
+    : `À travailler en priorité : ${THEMES[rec].short}. L’entraînement revient sur les compétences manquées et s’arrête quand chacune est réussie ${CONFIG.critere} fois d’affilée.`)
+    + (chrono.visible && lentes
+      ? ` Les temps sont indiqués à droite de chaque compétence : ${lentes === 1 ? 'une réponse juste a demandé' : lentes + ' réponses justes ont demandé'} plus de ${Math.round(CONFIG.seuilLent / 1000)} secondes, signe d’un automatisme encore fragile.`
+      : '');
 
   const box = $('b-themes');
   box.innerHTML = '';
@@ -1300,8 +1356,12 @@ function showBilan() {
       const a = ans.find(x => x.q.theme === t && x.q.skill === s);
       const li = document.createElement('li');
       li.className = a && a.ok ? '' : 'miss';
-      li.innerHTML = '<span class="dot ' + (a && a.ok ? 'ok' : 'ko') + '"></span><span></span>';
+      li.innerHTML = '<span class="dot ' + (a && a.ok ? 'ok' : 'ko') + '"></span><span></span><span class="meta"></span>';
       li.children[1].textContent = sk.name;
+      if (a && chrono.visible) {
+        li.children[2].textContent = moyenne(a.dt);
+        if (a.ok && a.dt > CONFIG.seuilLent) li.children[2].classList.add('slow');
+      }
       ul.appendChild(li);
     });
     div.appendChild(ul);
@@ -1354,8 +1414,9 @@ function startTraining(t) {
     const a = S.diag.answers.find(x => x.q.theme === t && x.q.skill === s);
     return { streak: a && a.ok ? 1 : 0, attempts: 0, errors: 0 };
   });
-  S.train = { t, skills, last: -1, retry: null, count: 0, cur: -1 };
+  S.train = { t, skills, last: -1, retry: null, count: 0, cur: -1, ms: 0 };
   S.phase = 'train';
+  chrono.reset();
   show('q');
   trainNext();
 }
@@ -1395,10 +1456,12 @@ function trainNext() {
   trainTicks();
   showQuestion(makeQ(tr.t, s, S.seen), THEMES[tr.t].skills[s].name);
 }
-function recordTraining(q, ok) {
+function recordTraining(q, ok, dt) {
   const tr = S.train;
   const sk = tr.skills[q.skill];
   sk.attempts++;
+  sk.ms = (sk.ms || 0) + dt;
+  tr.ms = (tr.ms || 0) + dt;
   if (ok) sk.streak++;
   else { sk.streak = 0; sk.errors++; tr.retry = { skill: q.skill, due: tr.count + 1 }; }
   trainTicks();
@@ -1408,9 +1471,13 @@ function showTrainEnd() {
   S.phase = 'tend';
   const done = tr.skills.filter(sk => sk.streak >= CONFIG.critere).length;
   S.trained[tr.t] = done;
+  chrono.stop();
   header('Entraînement : ' + THEMES[tr.t].short, '', false);
   trainTicks();
   $('te-title').textContent = THEMES[tr.t].name;
+  $('te-times').textContent = chrono.visible && tr.ms
+    ? `${tr.count} question${tr.count > 1 ? 's' : ''} en ${duree(tr.ms)}, soit ${moyenne(tr.ms / tr.count)} par question.`
+    : '';
   $('te-comment').textContent = done === 4
     ? `Les quatre compétences sont validées, chacune réussie ${CONFIG.critere} fois d’affilée. Pour que cela dure, refaire le diagnostic dans quelques jours : revenir sur une notion après un délai la consolide.`
     : `${done} compétence${done > 1 ? 's' : ''} sur 4 validée${done > 1 ? 's' : ''}. Reprendre plus tard est utile : les notions reviennent plus solidement après une pause.`;
@@ -1425,6 +1492,7 @@ function showTrainEnd() {
     li.children[1].textContent = skd.name;
     li.children[2].textContent = sk.attempts
       ? `${sk.attempts} question${sk.attempts > 1 ? 's' : ''}, ${sk.errors} erreur${sk.errors > 1 ? 's' : ''}`
+        + (chrono.visible ? `, ${moyenne(sk.ms / sk.attempts)} en moyenne` : '')
       : 'validée au diagnostic';
     ul.appendChild(li);
   });
@@ -1432,7 +1500,36 @@ function showTrainEnd() {
   $('te-back').focus({ preventScroll: true });
 }
 
+function afficherTemps() {
+  const el = $('b-times');
+  el.textContent = '';
+  if (!S.dernier || !chrono.visible) return;
+  const d = S.dernier, n = S.diag.answers.length;
+  const ligne = document.createElement('span');
+  ligne.textContent = `${duree(d.ms)}, soit ${moyenne(d.ms / n)} par question.`;
+  el.appendChild(ligne);
+  if (!d.avant) return;
+  el.appendChild(document.createElement('br'));
+  const rec = document.createElement('span');
+  rec.className = d.bat ? 'record' : '';
+  rec.textContent = d.bat
+    ? 'Nouveau record de la séance.'
+    : `Record de la séance : ${d.avant.score} / ${n} en ${duree(d.avant.ms)}.`;
+  el.appendChild(rec);
+}
+
+function majToggle() {
+  $('chrono-toggle').textContent = chrono.visible ? 'Masquer le chronomètre' : 'Afficher le chronomètre';
+}
+
 /* ---------- Événements ---------- */
+$('chrono-toggle').addEventListener('click', () => {
+  chrono.visible = !chrono.visible;
+  chrono.afficher();
+  majToggle();
+  showBilan();
+});
+majToggle();
 $('go').addEventListener('click', startDiagnostic);
 $('dunno').addEventListener('click', () => answer(-1));
 $('next').addEventListener('click', next);
@@ -1441,8 +1538,9 @@ $('stop').addEventListener('click', showTrainEnd);
 $('te-back').addEventListener('click', showBilan);
 $('te-again').addEventListener('click', () => {
   const t = S.train.t;
-  S.train = { t, skills: THEMES[t].skills.map(() => ({ streak: 0, attempts: 0, errors: 0 })), last: -1, retry: null, count: 0, cur: -1 };
+  S.train = { t, skills: THEMES[t].skills.map(() => ({ streak: 0, attempts: 0, errors: 0 })), last: -1, retry: null, count: 0, cur: -1, ms: 0 };
   S.phase = 'train';
+  chrono.reset();
   show('q');
   trainNext();
 });

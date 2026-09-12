@@ -38,6 +38,16 @@
   .top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
   .title { font-style: italic; color: var(--muted); font-size: 1rem; }
   .count { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 1rem; }
+  .meta { display: flex; align-items: baseline; gap: .9rem; }
+  .chrono { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 1rem; }
+  .chrono:empty { display: none; }
+  .times { text-align: center; color: var(--muted); margin: .6rem 0 0; font-size: 1rem; }
+  .times .record { color: var(--ink); }
+  .link {
+    background: none; border: 0; padding: .35rem .5rem; font: inherit; font-size: .95rem;
+    color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+  }
+  .link:hover { color: var(--ink); }
   .ticks { display: grid; grid-template-columns: repeat(var(--n, 10), 1fr); gap: 4px; margin-top: .6rem; min-height: 3px; }
   .tick { height: 3px; border-radius: 2px; background: var(--rule); }
   .tick.current { background: var(--ink); }
@@ -121,7 +131,7 @@
   <header>
     <div class="top">
       <span class="title">Isoler une grandeur</span>
-      <span class="count" id="count"></span>
+      <span class="meta"><span class="chrono" id="chrono"></span><span class="count" id="count"></span></span>
     </div>
     <div class="ticks" id="ticks" aria-hidden="true"></div>
   </header>
@@ -137,11 +147,13 @@
 
   <section class="result" id="screen-end" hidden>
     <p class="score" id="score"></p>
+    <p class="times" id="times"></p>
     <p class="comment" id="comment"></p>
     <div class="recap" id="recap" hidden></div>
     <div class="actions">
       <button class="btn" id="restart" type="button">Recommencer</button>
     </div>
+    <div class="actions"><button class="link" id="chrono-toggle" type="button"></button></div>
   </section>
 
   <noscript>Ce quiz nécessite JavaScript.</noscript>
@@ -158,7 +170,8 @@ const CONFIG = {
   multSymbolPhysique: '\\times',  // relations de physique
   greek: true,                    // lettres grecques possibles à partir de la question 6 (relations littérales)
   swapProbability: 0.3,           // relations littérales, dès la question 4 : parfois écrites « expression = a »
-  autoAdvanceMs: 900              // délai avant la question suivante après une bonne réponse
+  autoAdvanceMs: 900,             // délai avant la question suivante après une bonne réponse
+  chrono: true                    // false : chronomètre masqué par défaut
 };
 
 /* =====================================================================
@@ -627,7 +640,7 @@ function buildSeries(mode = CONFIG.mode, nq = CONFIG.nbQuestions) {
    ===================================================================== */
 const $ = id => document.getElementById(id);
 const els = {
-  count: $('count'), ticks: $('ticks'),
+  count: $('count'), ticks: $('ticks'), chrono: $('chrono'), times: $('times'), chronoToggle: $('chrono-toggle'),
   screenQ: $('screen-q'), screenEnd: $('screen-end'),
   context: $('context'), relation: $('relation'), target: $('target'),
   options: $('options'), feedback: $('feedback'), next: $('next'),
@@ -636,6 +649,36 @@ const els = {
 };
 const NQ = CONFIG.nbQuestions;
 const state = { mode: null, i: 0, questions: [], answers: [], locked: false, timer: null };
+
+/* Chronomètre : il ne tourne que pendant la recherche de la réponse.
+   Le temps de lecture des corrections n'est pas compté, et l'onglet masqué met en pause. */
+const chrono = {
+  visible: CONFIG.chrono, cumul: 0, depuis: null, arme: false, tick: null,
+  reset() { this.stop(); this.cumul = 0; this.afficher(); },
+  demarrer() { this.arme = true; if (this.depuis === null && !document.hidden) { this.depuis = performance.now(); this.tick = setInterval(() => this.afficher(), 250); } this.afficher(); },
+  pause() {
+    if (this.depuis !== null) { this.cumul += performance.now() - this.depuis; this.depuis = null; }
+    clearInterval(this.tick); this.tick = null; this.afficher();
+  },
+  stop() { this.arme = false; this.pause(); },
+  ms() { return this.cumul + (this.depuis === null ? 0 : performance.now() - this.depuis); },
+  afficher() { els.chrono.textContent = this.visible ? court(this.ms()) : ''; }
+};
+function court(ms) {
+  const s = Math.floor(ms / 1000);
+  return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+}
+function duree(ms) {
+  const s = Math.round(ms / 1000);
+  return s < 60 ? s + ' s' : Math.floor(s / 60) + ' min ' + String(s % 60).padStart(2, '0') + ' s';
+}
+function moyenne(ms) {   // une décimale sous la dizaine de secondes, pour rester informatif
+  return ms < 10000 ? String(Math.round(ms / 100) / 10).replace('.', ',') + ' s' : duree(ms);
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) chrono.pause(); else if (chrono.arme) chrono.demarrer(); });
+
+let record = null;    // meilleure performance de la séance : score d'abord, temps ensuite
+let dernier = null;   // dernière partie terminée : { score, ms, bat } 
 
 function math(el, texStr, txtStr) {
   if (window.katex) katex.render(texStr, el, { throwOnError: false, displayMode: false });
@@ -653,6 +696,7 @@ function start(mode) {
   state.questions = buildSeries(mode, NQ);
   state.answers = [];
   state.i = 0;
+  chrono.reset();
   els.ticks.style.setProperty('--n', NQ);
   els.ticks.innerHTML = '';
   for (let k = 0; k < NQ; k++) {
@@ -693,11 +737,13 @@ function showQuestion() {
   els.screenQ.classList.remove('fade');
   void els.screenQ.offsetWidth;
   els.screenQ.classList.add('fade');
+  chrono.demarrer();
 }
 
 function answer(k) {
   if (state.locked) return;
   state.locked = true;
+  chrono.stop();
   const q = state.questions[state.i];
   const chosen = q.options[k];
   state.answers.push({ q, chosen, ok: chosen.ok });
@@ -747,9 +793,15 @@ function commentFor(s) {
 
 function showEnd() {
   const score = state.answers.filter(a => a.ok).length;
+  const ms = chrono.ms();
+  chrono.stop();
   show('end');
   els.count.textContent = 'Résultat';
   math(els.score, '\\dfrac{' + score + '}{' + NQ + '}', score + ' / ' + NQ);
+  const bat = !record || score > record.score || (score === record.score && ms < record.ms);
+  dernier = { score, ms, bat, avant: record };
+  if (bat) record = { score, ms };
+  afficherTemps();
   els.comment.textContent = commentFor(score);
 
   const wrong = state.answers.filter(a => !a.ok);
@@ -780,6 +832,33 @@ function showEnd() {
   els.restart.focus({ preventScroll: true });
   window.scrollTo({ top: 0 });
 }
+
+function afficherTemps() {
+  els.times.textContent = '';
+  if (!dernier || !chrono.visible) return;
+  const ligne = document.createElement('span');
+  ligne.textContent = duree(dernier.ms) + ', soit ' + moyenne(dernier.ms / NQ) + ' par question.';
+  els.times.appendChild(ligne);
+  if (!dernier.avant) return;
+  els.times.appendChild(document.createElement('br'));
+  const rec = document.createElement('span');
+  rec.className = dernier.bat ? 'record' : '';
+  rec.textContent = dernier.bat
+    ? 'Nouveau record de la séance.'
+    : 'Record de la séance : ' + dernier.avant.score + ' / ' + NQ + ' en ' + duree(dernier.avant.ms) + '.';
+  els.times.appendChild(rec);
+}
+
+function majToggle() {
+  els.chronoToggle.textContent = chrono.visible ? 'Masquer le chronomètre' : 'Afficher le chronomètre';
+}
+els.chronoToggle.addEventListener('click', () => {
+  chrono.visible = !chrono.visible;
+  chrono.afficher();
+  afficherTemps();
+  majToggle();
+});
+majToggle();
 
 els.next.addEventListener('click', next);
 els.restart.addEventListener('click', () => start(state.mode));
