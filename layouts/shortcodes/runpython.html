@@ -1,0 +1,105 @@
+{{- /*
+  Shortcode : runpython
+  ---------------------------------------------------------------------
+  Intègre une fenêtre de code exécutable (Python ou VPython) façon Trinket.
+
+  Paramètres :
+    lang     "python" (défaut) | "vpython"
+    mode     "toggle" (défaut, bascule Code/Résultat) | "output" (résultat seul)
+    file     nom d'un fichier dans  static/programmes/  (gros programmes)
+    height   hauteur en px (défaut : selon le mode/lang)
+    autorun  "true" pour exécuter automatiquement même en mode toggle
+
+  Usage — code en ligne (paire, garde l'indentation avec  {{< >}}  ) :
+
+      {{< runpython lang="python" mode="toggle" >}}
+      for i in range(5):
+          print(i)
+      {{< /runpython >}}
+
+  Usage — depuis un fichier (auto-fermant) :
+
+      {{< runpython lang="vpython" mode="output" file="rebond.py" />}}
+*/ -}}
+
+{{- $lang := lower (.Get "lang" | default "python") -}}
+{{- $mode := lower (.Get "mode" | default "toggle") -}}
+{{- $default := lower (.Get "default" | default "code") -}}
+{{- $file := .Get "file" -}}
+{{- $autorun := eq (lower (.Get "autorun" | default "false")) "true" -}}
+{{- /* fit : "scale" (défaut, ajustement parfait par transform CSS) |
+        "native" (canvas dimensionné nativement → souris juste même réduit,
+        recommandé pour les scènes où l'on tire des points) */ -}}
+{{- $fit := lower (.Get "fit" | default "scale") -}}
+{{- /* version : version GlowScript à utiliser pour ce programme (ex. "3.1").
+        Vide = version par défaut du player (vpDefaultVersion). Les bibliothèques
+        glow.<v>.min.js, RScompiler.<v>.min.js, RSrun.<v>.min.js doivent être
+        présentes dans static/trinket/glowscript_libraries/. */ -}}
+{{- $version := .Get "version" | default "" -}}
+
+{{- /* récupération du code : fichier prioritaire, sinon contenu interne */ -}}
+{{- $code := "" -}}
+{{- with $file -}}
+  {{- $path := printf "static/programmes/%s" . -}}
+  {{- if (os.FileExists $path) -}}
+    {{- $code = os.ReadFile $path -}}
+  {{- else -}}
+    {{- errorf "runpython : fichier introuvable %q (cherché dans %s)" . $path -}}
+  {{- end -}}
+{{- else -}}
+  {{- $code = trim $.Inner "\n\r" -}}
+{{- end -}}
+
+{{- /* hauteur par défaut adaptée */ -}}
+{{- $h := .Get "height" -}}
+{{- if not $h -}}
+  {{- if eq $mode "output" -}}
+    {{- $h = cond (or (eq $lang "vpython") (eq $lang "glowscript")) "420" "240" -}}
+  {{- else -}}
+    {{- $h = cond (or (eq $lang "vpython") (eq $lang "glowscript")) "440" "340" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $uid := printf "trinket-%d" .Ordinal -}}
+{{- $b64 := $code | base64Encode -}}
+{{- /* largeur de fenêtre forcée (optionnelle) : la scène s'y adapte, la hauteur suit */ -}}
+{{- $w := .Get "width" -}}
+{{- $wnum := 0 -}}{{- with $w -}}{{- $wnum = int . -}}{{- end -}}
+{{- /* config complète encodée en base64url pour le hash de l'iframe (méthode robuste) */ -}}
+{{- $cfgjson := dict "code" $code "lang" $lang "mode" $mode "default" $default "width" $wnum "autorun" $autorun "fit" $fit "version" $version | jsonify -}}
+{{- $hash := $cfgjson | base64Encode | replaceRE `\+` "-" | replaceRE `/` "_" | replaceRE `=+$` "" -}}
+
+<div class="trinket-embed" style="margin:1rem 0;text-align:center;">
+  <iframe id="{{ $uid }}"
+          src="{{ "trinket/player.html" | relURL }}#{{ $hash }}"
+          title="Fenêtre de code"
+          loading="lazy"
+          style="display:inline-block;vertical-align:top;width:100%;{{ if $w }}max-width:{{ $w }}px;{{ end }}height:{{ $h }}px;border:0;overflow:hidden;border-radius:8px;background:transparent;color-scheme:normal;"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-modals allow-downloads">
+  </iframe>
+  <script>
+  /* Secours pour les thèmes classiques : si jamais le hash n'a pas suffi
+     (très rare), on retransmet la config par postMessage. En présentation
+     reveal.js ce script peut ne pas s'exécuter — c'est voulu, le hash gère tout. */
+  (function(){
+    var iframe = document.getElementById({{ $uid }});
+    if (!iframe) return;
+    var cfg = {
+      code: {{ $b64 }},
+      lang: {{ $lang }},
+      mode: {{ $mode }},
+      autorun: {{ $autorun }}
+    };
+    var sent = false;
+    function send(){
+      if (sent || !iframe.contentWindow) return;
+      sent = true;
+      iframe.contentWindow.postMessage({ __trinket: true, cfg: cfg }, "*");
+    }
+    window.addEventListener("message", function(e){
+      if (e.source === iframe.contentWindow && e.data && e.data.__trinket_ready) send();
+    });
+    iframe.addEventListener("load", function(){ setTimeout(send, 50); });
+  })();
+  </script>
+</div>

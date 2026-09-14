@@ -1,0 +1,13 @@
+<!-- partials/math.html -->
+
+
+{{- /* MathJax v4, site-wide (ou par page si .Params.math = true) */ -}}
+<script>
+  window.MathJax = {
+    // on veut que MathJax ignore les quizzes (ils seront rendus par KaTeX)
+    options: { ignoreHtmlClass: 'quizdown' },
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+<script async id="MathJax-script"
+        src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"></script>

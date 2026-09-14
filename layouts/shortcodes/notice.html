@@ -1,0 +1,10 @@
+<!--{{ $_hugo_config := `{ "version": 1 }` }}-->
+<div class="notices {{ .Get 0 }}" style="--title: '{{ .Get 1 | default (.Get 0) }}';">
+  <p style="display: none;">{{ .Get 1 | default (.Get 0) }}</p>
+  <div class="notice-body">
+    {{ .Inner }}
+  </div>
+</div>
+
+<!--><div class="notices {{ .Get 0 }}" {{ if len .Params | eq 2 }} id="{{ .Get 1 }}"  {{ end }}>{{ .Inner }}
+</div>-->

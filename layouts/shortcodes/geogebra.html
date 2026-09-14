@@ -1,0 +1,170 @@
+{{- /*
+  Shortcode GeoGebra responsive, plein écran sur mobile uniquement.
+  Usage : {{< geogebra id="jy5thkeg" width="1011" height="698" maxwidth="600" rounded="true" shadow="true" >}}
+  - id       : identifiant du matériel GeoGebra (obligatoire)
+  - width    : largeur native de l'appliquette, définit le ratio (défaut 1011)
+  - height   : hauteur native de l'appliquette, définit le ratio (défaut 698)
+  - maxwidth : largeur d'affichage souhaitée, la hauteur suit le ratio
+               (ex : "600", "600px", "80%" ; défaut = largeur native)
+  - drag       : "true" pour autoriser le glissement de la vue (défaut false).
+                 Indispensable pour faire tourner une vue 3D à la souris :
+                 dans GeoGebra, la rotation 3D est un glissement de la vue.
+                 Attention : sur mobile, cela capture le geste de défilement
+                 de la page à l'intérieur de l'appliquette.
+  - zoombuttons: "true" pour afficher les boutons +/- de zoom (défaut false)
+  - rightclick : "true" pour activer clic droit, zoom molette et clavier (défaut false)
+  - rounded  : "true" pour un léger arrondi des coins (défaut false)
+  - shadow   : "true" pour une ombre portée (défaut false)
+*/ -}}
+{{- $id := .Get "id" -}}
+{{- $w := .Get "width" | default "1011" -}}
+{{- $h := .Get "height" | default "698" -}}
+{{- $maxw := .Get "maxwidth" | default (printf "%spx" $w) -}}
+{{- if findRE `^\d+$` $maxw -}}{{- $maxw = printf "%spx" $maxw -}}{{- end -}}
+{{- $rounded := eq (.Get "rounded") "true" -}}
+{{- $shadow := eq (.Get "shadow") "true" -}}
+{{- $drag := eq (.Get "drag") "true" -}}
+{{- $szb := eq (.Get "zoombuttons") "true" -}}
+{{- $rc := eq (.Get "rightclick") "true" -}}
+{{- $uid := printf "ggb-%s-%d" $id .Ordinal -}}
+
+<div class="ggb-wrapper{{ if $rounded }} ggb-rounded{{ end }}{{ if $shadow }} ggb-shadow{{ end }}"
+     id="{{ $uid }}" style="--ggb-ratio: {{ $w }} / {{ $h }}; --ggb-maxw: {{ $maxw }};">
+  <iframe
+    scrolling="no"
+    title="Appliquette GeoGebra"
+    src="https://www.geogebra.org/material/iframe/id/{{ $id }}/width/{{ $w }}/height/{{ $h }}/border/ffffff/sfsb/true/szb/{{ $szb }}/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/{{ $rc }}/ld/false/sdz/{{ $drag }}/ctl/false"
+    allowfullscreen
+    loading="lazy">
+  </iframe>
+  <button type="button" class="ggb-fs-btn" aria-label="Plein écran" title="Plein écran"
+    onclick="ggbToggleFullscreen('{{ $uid }}')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/>
+      <path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .ggb-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: var(--ggb-maxw, 1011px);
+    aspect-ratio: var(--ggb-ratio, 1011 / 698);
+    margin: 1.5rem auto;          /* centrage horizontal */
+    line-height: 0;               /* supprime l'espace blanc sous l'iframe */
+    background: transparent;      /* aucun fond visible en cas de micro-écart */
+    overflow: hidden;
+  }
+  .ggb-rounded {
+    border-radius: 8px;
+  }
+  .ggb-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .ggb-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    /* Légère mise à l'échelle uniforme (ratio strictement conservé) :
+       la bordure interne de GeoGebra et les reliquats d'arrondi de pixel
+       débordent du conteneur et sont rognés par overflow:hidden */
+    transform: scale(1.015);
+    transform-origin: center;
+  }
+  /* Bouton plein écran : masqué par défaut, visible sur mobile, en haut à gauche */
+  .ggb-fs-btn {
+    display: none;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.15s ease;
+  }
+  .ggb-fs-btn:hover,
+  .ggb-fs-btn:focus-visible {
+    opacity: 1;
+  }
+  @media (max-width: 768px), (pointer: coarse) {
+    .ggb-fs-btn {
+      display: flex;
+    }
+  }
+  /* Mode plein écran natif */
+  .ggb-wrapper:fullscreen {
+    max-width: none;
+    aspect-ratio: auto;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #fff;
+  }
+  /* Repli "faux plein écran" pour iOS/Safari (pas de Fullscreen API sur les div) */
+  .ggb-wrapper.ggb-fake-fs {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    max-width: none;
+    aspect-ratio: auto;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+</style>
+
+<script>
+  function ggbToggleFullscreen(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    // Sortie du faux plein écran
+    if (el.classList.contains('ggb-fake-fs')) {
+      el.classList.remove('ggb-fake-fs');
+      document.documentElement.style.overflow = '';
+      return;
+    }
+    // Sortie du plein écran natif
+    if (document.fullscreenElement === el) {
+      document.exitFullscreen();
+      return;
+    }
+    // Entrée en plein écran natif si disponible, sinon repli CSS (iOS)
+    if (el.requestFullscreen) {
+      el.requestFullscreen().catch(function () {
+        el.classList.add('ggb-fake-fs');
+        document.documentElement.style.overflow = 'hidden';
+      });
+    } else {
+      el.classList.add('ggb-fake-fs');
+      document.documentElement.style.overflow = 'hidden';
+    }
+  }
+  // Touche Échap pour quitter le faux plein écran
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.ggb-wrapper.ggb-fake-fs').forEach(function (el) {
+        el.classList.remove('ggb-fake-fs');
+        document.documentElement.style.overflow = '';
+      });
+    }
+  });
+</script>

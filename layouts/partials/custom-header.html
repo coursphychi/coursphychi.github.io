@@ -1,0 +1,50 @@
+<!-- Partial intended to be overwritten to add custom headers, like CSS or any other info
+<style type="text/css">
+    /* Custom css */
+</style>
+-->
+
+<!-- KaTeX pour les QUIZ (CSS + JS + mhchem pour \ce et \pu + auto-render) -->
+<link rel="stylesheet" href="/katex/katex.min.css"> <!-- voir Étape 3 -->
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/mhchem.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+<!-- Quizdown (sans l’extension quizdownKatex) -->
+<script defer src="https://cdn.jsdelivr.net/npm/quizdown@0.6.0/public/build/quizdown.js"></script>
+
+<!-- Init robuste : 1) quizdown, 2) KaTeX auto-render sur .quizdown -->
+<script>
+(function initQuizzes() {
+  function ready() {
+    // 1) Transformer le markdown des quiz
+    quizdown.init();
+
+    // 2) Rendu KaTeX (avec mhchem) à l'intérieur des quiz
+    document.querySelectorAll('.quizdown').forEach(el => {
+      renderMathInElement(el, {
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$',  right: '$',  display: false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ],
+        throwOnError: true
+      });
+    });
+  }
+
+  // Attendre que tous les scripts "defer" soient prêts
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ready, {once:true});
+  } else {
+    ready();
+  }
+})();
+</script>
+
+
+{{ if .Params.js }}
+<script src="{{ .Params.js }}"></script>
+{{ end }}

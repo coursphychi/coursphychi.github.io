@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Simulateur de sous‑pixels RGB</title>
+  <style>
+    :root{
+      --bg:#0b0d10;
+      --panel:#0f1115;
+      --border:#262a33;
+      --text:#e6e8eb;
+      --matrix:#07090a;  /* black matrix (faible) */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font:500 14px/1.3 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;
+      display:flex; flex-direction:column; min-height:100vh;
+      touch-action:none; /* pas de pan/zoom au geste : zoom uniquement via curseur */
+    }
+
+    /* Barre de zoom (centrée) */
+    .topbar{display:flex; justify-content:center; padding:10px 12px; border-bottom:1px solid var(--border); background:var(--panel)}
+    .zoomwrap{display:flex; align-items:center; gap:10px; max-width:720px; width:100%; justify-content:center}
+    .topbar label{font-weight:700}
+    #zoom{appearance:none; width:360px; max-width:60vw; height:6px; border-radius:999px; background:#1f2430; outline:none}
+    #zoom::-webkit-slider-thumb{appearance:none; width:18px; height:18px; border-radius:50%; background:#9aa0a6; border:2px solid #ffffff30}
+    #zoom::-moz-range-thumb{width:18px; height:18px; border-radius:50%; background:#9aa0a6; border:2px solid #ffffff30}
+
+    #stage{position:relative; flex:1 1 auto; overflow:hidden}
+    canvas{display:block; width:100%; height:100%; background:#101317}
+
+    .hud{position:absolute; left:12px; top:12px; padding:6px 10px; border-radius:8px;
+         background:rgba(0,0,0,.30); backdrop-filter: blur(3px); border:1px solid rgba(255,255,255,.08);
+         font-variant-numeric:tabular-nums}
+
+    /* Barre RGB sous l'écran */
+    .controls{display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+      padding:10px 12px; border-top:1px solid var(--border); background:var(--panel)}
+    .group{display:flex; align-items:center; gap:8px}
+    .group label{width:18px; text-align:center; font-weight:700; letter-spacing:.02em}
+    .range{appearance:none; width:170px; height:6px; border-radius:999px; background:#1f2430; outline:none}
+
+    /* Poignées colorées + piste inversée (sombre à gauche) */
+    #r.range::-webkit-slider-thumb{appearance:none; width:18px; height:18px; border-radius:50%; background:#ff3b30; border:2px solid #ffffff30}
+    #g.range::-webkit-slider-thumb{appearance:none; width:18px; height:18px; border-radius:50%; background:#34c759; border:2px solid #ffffff30}
+    #b.range::-webkit-slider-thumb{appearance:none; width:18px; height:18px; border-radius:50%; background:#0a84ff; border:2px solid #ffffff30}
+    #r.range::-moz-range-thumb{width:18px; height:18px; border-radius:50%; background:#ff3b30; border:2px solid #ffffff30}
+    #g.range::-moz-range-thumb{width:18px; height:18px; border-radius:50%; background:#34c759; border:2px solid #ffffff30}
+    #b.range::-moz-range-thumb{width:18px; height:18px; border-radius:50%; background:#0a84ff; border:2px solid #ffffff30}
+
+    #r.range::-webkit-slider-runnable-track{background:linear-gradient(90deg,#1f2430,#6d1a18)}
+    #g.range::-webkit-slider-runnable-track{background:linear-gradient(90deg,#1f2430,#1e4d2b)}
+    #b.range::-webkit-slider-runnable-track{background:linear-gradient(90deg,#1f2430,#153a6f)}
+    #r.range::-moz-range-track{background:linear-gradient(90deg,#1f2430,#6d1a18)}
+    #g.range::-moz-range-track{background:linear-gradient(90deg,#1f2430,#1e4d2b)}
+    #b.range::-moz-range-track{background:linear-gradient(90deg,#153a6f,#1f2430)}
+
+    .val{width:50px; padding:4px 6px; text-align:center; border-radius:8px; border:1px solid var(--border); background:#171b22; color:var(--text); font-variant-numeric:tabular-nums}
+    .btn{padding:6px 10px; border-radius:10px; border:1px solid var(--border); background:#161a21; color:var(--text); cursor:pointer}
+    .btn:hover{border-color:#334155}
+    .swatch{width:44px; height:24px; border-radius:6px; border:1px solid #ffffff30}
+    .sep{flex:1 1 auto}
+    @media (max-width:600px){ .range{width:120px} }
+  </style>
+</head>
+<body>
+  <!-- Curseur de zoom (centré) -->
+  <div class="topbar">
+    <div class="zoomwrap">
+      <label for="zoom">Zoom</label>
+      <input id="zoom" type="range" min="0" max="100" value="55">
+      <span id="zoomTxt">×1.00</span>
+    </div>
+  </div>
+
+  <div id="stage">
+    <canvas id="lcd" aria-label="surface de simulation des sous‑pixels"></canvas>
+    <div class="hud" id="hud">Zoom via le curseur</div>
+  </div>
+
+  <div class="controls">
+    <div class="group"><label for="r">R</label><input id="r" class="range" type="range" min="0" max="255" value="255"><input id="rVal" class="val" type="number" min="0" max="255" value="255"></div>
+    <div class="group"><label for="g">G</label><input id="g" class="range" type="range" min="0" max="255" value="255"><input id="gVal" class="val" type="number" min="0" max="255" value="255"></div>
+    <div class="group"><label for="b">B</label><input id="b" class="range" type="range" min="0" max="255" value="255"><input id="bVal" class="val" type="number" min="0" max="255" value="255"></div>
+
+    <div class="sep"></div>
+    <button id="fsBtn" class="btn" title="Basculer en plein écran">Plein écran</button>
+    <button id="resetBtn" class="btn" title="Réinitialiser vue">Réinitialiser</button>
+    <div class="swatch" id="swatch"></div>
+  </div>
+
+  <script>
+    // -----------------------------------------------------
+    // Modèle (unités monde) — un pixel par triplet, rendu vectoriel
+    // -----------------------------------------------------
+    const TRIP = 1;                 // largeur d'un triplet (monde)
+    const PIX_H = 1.5 * TRIP;       // hauteur d'un pixel (monde)
+    const CHANNEL = TRIP/3;         // largeur d'un canal
+
+    // === Paramètres des marges noires (black matrix) ===
+    // 1) APERTURE : part lumineuse horizontale dans chaque canal (0..1)
+    //    ↑ APERTURE ⇒ barres plus larges ⇒ moins de noir latéral
+    const APERTURE = 0.985;         // (avant: 0.96) → barres ~98.5% du canal
+    // 2) V_GAP_FRAC : fraction de hauteur noire en haut/bas du pixel
+    const V_GAP_FRAC = 0.005;       // (avant: 0.02) → 1.0% seulement
+    // 3) H_GAP_SCALE : facteur sur la marge latérale de base
+    //    ↓ H_GAP_SCALE ⇒ séparations verticales plus fines
+    const H_GAP_SCALE = 2.50;       // (avant: 3.0) → marges latérales très fines
+
+    const canvas = document.getElementById('lcd');
+    const ctx = canvas.getContext('2d');
+    const DPR = Math.max(1, window.devicePixelRatio || 1);
+
+    const state = { r:255, g:255, b:255, cx:0, cy:0, scale:20 };
+
+    const hud = document.getElementById('hud');
+    const swatch = document.getElementById('swatch');
+    const zoom = document.getElementById('zoom');
+    const zoomTxt = document.getElementById('zoomTxt');
+
+    // -----------------------------------------------------
+    // Limitation anti‑aliasing (inchangée)
+    // -----------------------------------------------------
+    function luminousWidthWorld(){
+      const baseLum = CHANNEL * APERTURE;
+      const baseMargin = (CHANNEL - baseLum)/2;
+      const hgap = Math.min(CHANNEL*0.49, baseMargin * H_GAP_SCALE);
+      const wLum = Math.max(1e-4, CHANNEL - 2*hgap);
+      return wLum;
+    }
+    let S_MIN = 0.3, S_MAX = 120; // bornes de sécurité
+    function recomputeMinScale(){
+      const wLum = luminousWidthWorld();
+      const MIN_LUM_PX = 3; // seuil anti-aliasing approx.
+      const sPix_min = MIN_LUM_PX / wLum;    // px/triplet * DPR
+      const s_min_scale = sPix_min / DPR;    // échelle ×
+      S_MIN = Math.max(0.3, Math.min(20, s_min_scale));
+    }
+    recomputeMinScale();
+
+    function sliderToScale(t){ const a=Math.log(S_MIN), b=Math.log(S_MAX); return Math.exp(a + (t/100)*(b-a)); }
+    function scaleToSlider(s){ const a=Math.log(S_MIN), b=Math.log(S_MAX); return ((Math.log(s)-a)/(b-a))*100; }
+    function pxPerWorld(){ return state.scale * DPR; }
+
+    // Zoom centré via curseur (pas de panning)
+    function setScaleKeepingCenter(newScale){
+      const clamped = Math.max(S_MIN, Math.min(S_MAX, newScale));
+      const sOld = pxPerWorld(); const w=canvas.width, h=canvas.height;
+      const cxW = state.cx + (w/2)/sOld; const cyW = state.cy + (h/2)/sOld;
+      state.scale = clamped; const sNew = pxPerWorld();
+      state.cx = cxW - (w/2)/sNew; state.cy = cyW - (h/2)/sNew;
+      requestRender();
+      const desiredSlider = Math.round(scaleToSlider(state.scale));
+      if (zoom.valueAsNumber !== desiredSlider) zoom.value = String(desiredSlider);
+    }
+    function onZoomInput(){ const newScale = sliderToScale(+zoom.value); setScaleKeepingCenter(newScale); zoomTxt.textContent = `×${state.scale.toFixed(2)}`; }
+    zoom.addEventListener('input', onZoomInput);
+
+    // === Pas de panning : handlers retirés ===
+
+    // RGB UI ------------------------------------------------
+    const rRange=document.getElementById('r'), gRange=document.getElementById('g'), bRange=document.getElementById('b');
+    const rVal=document.getElementById('rVal'), gVal=document.getElementById('gVal'), bVal=document.getElementById('bVal');
+    function clamp(v,min,max){ return Math.min(max, Math.max(min, v)); }
+    function clamp255(v){ return Math.round(clamp(v,0,255)); }
+    function syncFromSliders(){ state.r=clamp255(+rRange.value); rVal.value=state.r; state.g=clamp255(+gRange.value); gVal.value=state.g; state.b=clamp255(+bRange.value); bVal.value=state.b; requestRender(); }
+    function syncFromNumbers(){ state.r=clamp255(+rVal.value); rRange.value=state.r; state.g=clamp255(+gVal.value); gRange.value=state.g; state.b=clamp255(+bVal.value); bRange.value=state.b; requestRender(); }
+    [rRange,gRange,bRange].forEach(el=>el.addEventListener('input', syncFromSliders));
+    [rVal,gVal,bVal].forEach(el=>el.addEventListener('input', syncFromNumbers));
+
+    // Plein écran & reset ---------------------------------
+    const fsBtn=document.getElementById('fsBtn'); const resetBtn=document.getElementById('resetBtn');
+    fsBtn.addEventListener('click', async ()=>{ if(!document.fullscreenElement){ await document.documentElement.requestFullscreen().catch(()=>{}); fsBtn.textContent='Quitter plein écran'; } else { await document.exitFullscreen(); fsBtn.textContent='Plein écran'; } });
+    resetBtn.addEventListener('click', ()=>{ state.cx=0; state.cy=0; setScaleKeepingCenter(20); requestRender(); });
+
+    // Resize HiDPI ----------------------------------------
+    function fit(){ const rect=canvas.getBoundingClientRect(); canvas.width=Math.max(1,Math.floor(rect.width*DPR)); canvas.height=Math.max(1,Math.floor(rect.height*DPR));
+      recomputeMinScale(); if (state.scale < S_MIN) setScaleKeepingCenter(S_MIN);
+      zoom.value = String(Math.round(scaleToSlider(state.scale))); requestRender(true);
+    }
+    window.addEventListener('resize', fit, {passive:true});
+
+    // -----------------------------------------------------
+    // Rendu vectoriel (pas de pattern), coordonnées flottantes
+    // -----------------------------------------------------
+    function draw(){
+      const wpx = canvas.width, hpx = canvas.height;
+      const sPix = pxPerWorld();
+
+      ctx.setTransform(sPix,0,0,sPix, -state.cx*sPix, -state.cy*sPix);
+      ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+
+      const wx0 = state.cx, wy0 = state.cy; const wx1 = state.cx + wpx/sPix, wy1 = state.cy + hpx/sPix;
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--matrix') || '#07090a';
+      ctx.fillRect(wx0-TRIP, wy0-PIX_H, (wx1-wx0)+TRIP*2, (wy1-wy0)+PIX_H*2);
+
+      const baseLum = CHANNEL * APERTURE; const baseMargin = (CHANNEL - baseLum)/2; const hgap = Math.min(CHANNEL*0.49, baseMargin * H_GAP_SCALE); const wLum = Math.max(1e-3, CHANNEL - 2*hgap);
+      const vGap = PIX_H * V_GAP_FRAC; const lumH = Math.max(1e-3, PIX_H - 2*vGap);
+
+      const i0 = Math.floor(wx0/TRIP) - 2, i1 = Math.ceil(wx1/TRIP) + 2; const j0 = Math.floor(wy0/PIX_H) - 2, j1 = Math.ceil(wy1/PIX_H) + 2;
+
+      for(let i=i0; i<=i1; i++){
+        const baseX = i*TRIP; const phaseY = (i & 1) ? PIX_H/2 : 0;
+        const xR = baseX + 0*CHANNEL + hgap; const xG = baseX + 1*CHANNEL + hgap; const xB = baseX + 2*CHANNEL + hgap;
+        for(let j=j0; j<=j1; j++){
+          const yBase = j*PIX_H + phaseY; const yRB = yBase + vGap; const yG0 = yRB + PIX_H/2; const yG1 = yG0 + lumH; const yCut = yBase + PIX_H;
+          ctx.fillStyle = `rgb(${state.r},0,0)`; ctx.fillRect(xR, yRB, wLum, lumH);
+          ctx.fillStyle = `rgb(0,0,${state.b})`; ctx.fillRect(xB, yRB, wLum, lumH);
+          ctx.fillStyle = `rgb(0,${state.g},0)`;
+          if (yG1 <= yCut){ ctx.fillRect(xG, yG0, wLum, lumH); }
+          else { const h1 = yCut - yG0; const h2 = yG1 - yCut; if (h1>0) ctx.fillRect(xG, yG0, wLum, h1); if (h2>0) ctx.fillRect(xG, yBase, wLum, h2); }
+        }
+      }
+
+      ctx.setTransform(1,0,0,1,0,0);
+      hud.textContent = `Zoom via le curseur`;
+      swatch.style.background = `rgb(${state.r},${state.g},${state.b})`;
+      zoomTxt.textContent = `×${state.scale.toFixed(2)}`;
+    }
+
+    // Render loop à la demande
+    let raf=0, needs=false; function requestRender(){ needs=true; if(!raf){ raf=requestAnimationFrame(()=>{ raf=0; if(needs){ needs=false; draw(); } }); }}
+
+    // Boot
+    function init(){ const rect=canvas.getBoundingClientRect(); canvas.width=Math.max(1,Math.floor(rect.width*DPR)); canvas.height=Math.max(1,Math.floor(rect.height*DPR)); recomputeMinScale(); if (state.scale < S_MIN) state.scale = S_MIN; zoom.value = String(Math.round(scaleToSlider(state.scale))); requestRender(true); }
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Sortie compilée par Hugo (régénérée par la CI)
+/public/
+/resources/
+
+# Fichiers temporaires Hugo
+.hugo_build.lock
+
+# macOS
+.DS_Store

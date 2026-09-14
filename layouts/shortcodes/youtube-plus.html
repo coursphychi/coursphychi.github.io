@@ -1,0 +1,99 @@
+{{- /*
+  Shortcode : youtube-plus
+  ------------------------
+  Usage (dans un fichier Markdown) :
+    {{< youtube-plus id="dQw4w9WgXcQ" >}}
+    {{< youtube-plus id="dQw4w9WgXcQ" ratio="4x3" width="600px" shadow=true rounded=true start="1:30" end="2:45" >}}
+    {{< youtube-plus dQw4w9WgXcQ >}}   (forme positionnelle minimale)
+
+  Paramètres :
+    id      : identifiant de la vidéo YouTube (obligatoire ; nommé ou positionnel)
+    ratio   : "16x9" (défaut) | "4x3" | "9x16" (alias : "short", "portrait", "vertical")
+    width   : largeur souhaitée, ex. "600px", "70%", ou nombre nu "600" (→ px).
+              Défaut : "100%". Bornée par max-width:100% dans tous les cas.
+    shadow  : true/false — ombre portée (défaut : false)
+    rounded : true/false — coins arrondis (défaut : false)
+    start   : instant de départ, en secondes ("90") ou au format "m:ss" / "h:mm:ss" ("1:30")
+    end     : instant d'arrêt, mêmes formats
+*/ -}}
+
+{{- /* ---------- 1. Récupération et validation de l'identifiant ---------- */ -}}
+{{- $id := "" -}}
+{{- if .IsNamedParams -}}
+  {{- $id = .Get "id" -}}
+{{- else -}}
+  {{- $id = .Get 0 -}}
+{{- end -}}
+{{- if not $id -}}
+  {{- errorf "youtube-plus : paramètre 'id' manquant (%s)" .Position -}}
+{{- end -}}
+
+{{- /* ---------- 2. Ratio d'aspect ---------- */ -}}
+{{- $ratio := "16x9" -}}
+{{- if .IsNamedParams -}}{{- $ratio = .Get "ratio" | default "16x9" -}}{{- end -}}
+{{- $ratioCSS := "16 / 9" -}}
+{{- if eq $ratio "4x3" -}}
+  {{- $ratioCSS = "4 / 3" -}}
+{{- else if in (slice "9x16" "short" "portrait" "vertical") $ratio -}}
+  {{- $ratioCSS = "9 / 16" -}}
+{{- else if ne $ratio "16x9" -}}
+  {{- warnf "youtube-plus : ratio %q inconnu, repli sur 16x9 (%s)" $ratio .Position -}}
+{{- end -}}
+
+{{- /* ---------- 3. Largeur ---------- */ -}}
+{{- $width := "100%" -}}
+{{- if .IsNamedParams -}}{{- $width = .Get "width" | default "100%" -}}{{- end -}}
+{{- $width = printf "%v" $width -}}
+{{- if not (findRE `[a-z%]` $width) -}}
+  {{- /* nombre nu → pixels */ -}}
+  {{- $width = printf "%spx" $width -}}
+{{- end -}}
+
+{{- /* ---------- 4. Booléens shadow / rounded ---------- */ -}}
+{{- /* .Get renvoie un booléen si on écrit shadow=true, une chaîne si shadow="true" : on accepte les deux. */ -}}
+{{- $shadow := false -}}
+{{- $rounded := false -}}
+{{- if .IsNamedParams -}}
+  {{- $shadow = in (slice true "true" "yes" "1") (.Get "shadow") -}}
+  {{- $rounded = in (slice true "true" "yes" "1") (.Get "rounded") -}}
+{{- end -}}
+
+{{- /* ---------- 5. Conversion start / end en secondes ---------- */ -}}
+{{- /* Accepte "90", 90, "1:30", "1:02:05". */ -}}
+{{- $times := newScratch -}}
+{{- range $k := slice "start" "end" -}}
+  {{- if $.IsNamedParams -}}
+    {{- with $.Get $k -}}
+      {{- $v := printf "%v" . -}}
+      {{- if strings.Contains $v ":" -}}
+        {{- $sec := 0 -}}
+        {{- range split $v ":" -}}
+          {{- $sec = add (mul $sec 60) (int .) -}}
+        {{- end -}}
+        {{- $v = printf "%d" $sec -}}
+      {{- end -}}
+      {{- $times.Set $k $v -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* ---------- 6. Construction de l'URL ---------- */ -}}
+{{- $params := slice -}}
+{{- with $times.Get "start" -}}{{- $params = $params | append (printf "start=%s" .) -}}{{- end -}}
+{{- with $times.Get "end"   -}}{{- $params = $params | append (printf "end=%s"   .) -}}{{- end -}}
+{{- $src := printf "https://www.youtube-nocookie.com/embed/%s" $id -}}
+{{- if $params -}}{{- $src = printf "%s?%s" $src (delimit $params "&") -}}{{- end -}}
+
+{{- /* ---------- 7. Rendu ---------- */ -}}
+<div class="yt-plus"
+     style="width:{{ $width }};max-width:100%;margin:1.5rem auto;aspect-ratio:{{ $ratioCSS | safeCSS }};
+            {{- if $rounded }}border-radius:0.75rem;overflow:hidden;{{ end -}}
+            {{- if $shadow }}box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);{{ end -}}">
+  <iframe src="{{ $src }}"
+          style="display:block;width:100%;height:100%;border:0;"
+          title="Lecteur vidéo YouTube"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+</div>
