@@ -76,7 +76,6 @@ td, th {
 </div>
 
 
-
 ## Quiz
 
 {{< quizdown >}}
