@@ -75,7 +75,6 @@ td, th {
 </table>
 </div>
 
-Oh
 
 
 ## Quiz
