@@ -30,11 +30,15 @@ Les quiz ci-dessous visent à vérifier ou installer certains automatismes très
 <img src="/bandeaurel.png" style="box-shadow:none;background:none;">
 </div>
 
-Les lois consistent en des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l'une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s'aguerrir dans cet exercice et le quiz suivant teste votre agilité dans le maniement de ces relations algébriques.
+Les lois consistent en des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l'une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s'aguerrir dans cet exercice et le quiz suivant permet de tester votre agilité.
 
 <p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="/quiz-relations.html"> Quiz relations </a></p>
 
 La cible idéale à atteindre est un score de 10/10 en environ une minute.
+
+<div style="position:relative;margin-left:auto;margin-right:auto;width:700px;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
+<img src="/gifyoda.gif" style="box-shadow:none;background:none;border-radius:10px;">
+</div>
 
 
 ## Calculs numériques et écriture d'un résultat
