@@ -78,7 +78,7 @@ text-decoration: none;
 - Magnifique vidéo du [CEA](https://www.cea.fr/Pages/le-cea/acteur-clef-de-la-recherche-technologique.aspx) sur la physique nucléaire&nbsp;: vallée de la stabilité, différents types de radioactivités pour retourner dans la vallée, nucléosynthèse stellaire.
 
 
-{{< youtube-plus id="VZHpAwSGYZE" ratio="16x9"  width="800" shadow=true rounded=true >}}
+{{< youtube-plus id="VZHpAwSGYZE" ratio="16x9"  width="800" shadow=true rounded=true end="9:30">}}
 
 
 <br>

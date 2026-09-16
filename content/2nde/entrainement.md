@@ -27,7 +27,7 @@ Les quiz ci-dessous visent à vérifier ou installer certains automatismes très
 ## Jouer avec les relations
 
 <div style="position:relative;margin-left:auto;margin-right:auto;width:100%;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
-<img src="/bandeaurel.png" style="box-shadow:none;background:none;">
+<img src="/bandeaurel.png" style="box-shadow:none;background:none;border-radius:3px;">
 </div>
 
 Les lois consistent en des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l'une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s'aguerrir dans cet exercice et le quiz suivant permet de tester votre agilité.
@@ -44,7 +44,7 @@ La cible idéale à atteindre est un score de 10/10 en environ une minute.
 ## Calculs numériques et écriture d'un résultat
 
 <div style="position:relative;margin-left:auto;margin-right:auto;width:100%;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
-<img src="/bandeaunum.png" style="box-shadow:none;background:none;">
+<img src="/bandeaunum.png" style="box-shadow:none;background:none;border-radius:3px;">
 </div>
 
 Une fois qu'on a déterminer la bonne formule littérale pour la grandeur cherchée, on calcule (on dit qu'on fait l'application numérique). Plusieurs difficultés se dressent alors&nbsp;: les grandeurs doivent être converties pour que les unités «&nbsp;se parlent&nbsp;», la précision des mesures doit être retranscrites dans le nombre de chiffres significatifs et pour que le résultat soit le plus lisible possible, on utilise la notation scientifique.
