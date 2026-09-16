@@ -44,6 +44,7 @@
   .times { text-align: center; color: var(--muted); margin: .6rem 0 0; font-size: 1rem; }
   .times .record { color: var(--ink); }
   .dunno-row { text-align: center; margin-top: .5rem; min-height: 2.3rem; }
+  .nowrap { white-space: nowrap; }
   .link {
     background: none; border: 0; padding: .35rem .5rem; font: inherit; font-size: .95rem;
     color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
@@ -183,11 +184,9 @@
    ===================================================================== */
 const CONFIG = {
   nbQuestions: 10,
-  mode: 'melange',                // 'melange' ; 'lettres' ou 'physique' pour une série non mélangée
-  multSymbol: '',                 // relations littérales : '' (juxtaposition), '\\times' ou '\\cdot'
-  multSymbolPhysique: '\\times',  // relations de physique
-  greek: true,                    // lettres grecques possibles à partir de la question 6 (relations littérales)
-  swapProbability: 0.3,           // relations littérales, dès la question 4 : parfois écrites « expression = a »
+  niveaux: ['2de', '1re', 'Tle'], // niveaux tirés au sort ; paramètre d'URL : ?niveau=2de ou ?niveau=1re,Tle
+  multSymbolPhysique: '\\times',  // symbole de multiplication : '\\times', '\\cdot' ou '' (juxtaposition)
+  swapProbability: 0.25,          // dès la question 4 : relation parfois écrite « expression = grandeur »
   autoAdvanceMs: 900,             // délai avant la question suivante après une bonne réponse
   chrono: true                    // false : chronomètre masqué par défaut
 };
@@ -498,7 +497,7 @@ function makeQuestion(lhs, rhs, target, opts) {
      types d'erreur encore absents de la série favorisés, pour les balayer tous */
   const shape = shapeOf(correct);
   cands.forEach(c => {
-    c.score = shapeDist(shape, shapeOf(c.tree)) - (c.partial ? 0.6 : 0)
+    c.score = Math.min(shapeDist(shape, shapeOf(c.tree)), 1.8) - (c.partial ? 1 : 0)
       - (COUVERTURE.has(c.key) ? 0 : 1.1) + Math.random() * 1.2;
   });
   cands.sort((a, b) => a.score - b.score);
@@ -530,137 +529,191 @@ function makeQuestion(lhs, rhs, target, opts) {
 }
 
 /* =====================================================================
-   Relations littérales, du plus simple au plus imbriqué
-   f : lettres → [membre gauche, membre droit] ; t : indices des cibles possibles
+   Relations de physique-chimie du lycée
+   Programmes : enseignement commun de seconde et spécialité de première
+   et de terminale (BO spécial n° 1 du 22 janvier 2019).
+   family : deux relations de même famille ne figurent pas dans la même série.
+   niveau : '2de', '1re' ou 'Tle' ; voir CONFIG.niveaux.
    ===================================================================== */
 const COUVERTURE = new Set();   // types d'erreur déjà rencontrés dans la série en cours
-const T = (f, t) => ({ f, t });
-const LEVELS = [
-  /* 1 */ [ T(L => [v(L[0]), mul(v(L[1]), v(L[2]))], [1, 2]),
-           T(L => [v(L[0]), div(v(L[1]), v(L[2]))], [1]) ],
-  /* 2 */ [ T(L => [v(L[0]), add(v(L[1]), v(L[2]))], [1, 2]),
-           T(L => [v(L[0]), sub(v(L[1]), v(L[2]))], [1]) ],
-  /* 3 */ [ T(L => [v(L[0]), div(v(L[1]), v(L[2]))], [2]),
-           T(L => [v(L[0]), sub(v(L[1]), v(L[2]))], [2]) ],
-  /* 4 */ [ T(L => [v(L[0]), div(mul(v(L[1]), v(L[2])), v(L[3]))], [1, 2, 3]),
-           T(L => [v(L[0]), div(v(L[1]), mul(v(L[2]), v(L[3])))], [1, 2, 3]),
-           T(L => [mul(v(L[0]), v(L[1])), div(v(L[2]), v(L[3]))], [0, 2, 3]) ],
-  /* 5 */ [ T(L => [v(L[0]), add(v(L[1]), mul(v(L[2]), v(L[3])))], [2, 3]),
-           T(L => [v(L[0]), sub(v(L[1]), div(v(L[2]), v(L[3])))], [2]),
-           T(L => [v(L[0]), sub(mul(v(L[1]), v(L[2])), v(L[3]))], [1]) ],
-  /* 6 */ [ T(L => [v(L[0]), div(add(v(L[1]), v(L[2])), v(L[3]))], [1, 2, 3]),
-           T(L => [v(L[0]), mul(sub(v(L[1]), v(L[2])), v(L[3]))], [1, 2]),
-           T(L => [v(L[0]), add(div(v(L[1]), v(L[2])), v(L[3]))], [1, 2]) ],
-  /* 7 */ [ T(L => [v(L[0]), div(v(L[1]), add(v(L[2]), v(L[3])))], [2, 3]),
-           T(L => [v(L[0]), div(v(L[1]), sub(v(L[2]), v(L[3])))], [2, 3]),
-           T(L => [mul(v(L[0]), v(L[1])), add(v(L[2]), v(L[3]))], [0, 2, 3]),
-           T(L => [v(L[0]), sub(v(L[1]), div(v(L[2]), v(L[3])))], [3]) ],
-  /* 8 */ [ T(L => [v(L[0]), div(mul(v(L[1]), v(L[2])), mul(v(L[3]), v(L[4])))], [1, 3, 4]),
-           T(L => [v(L[0]), add(v(L[1]), div(mul(v(L[2]), v(L[3])), v(L[4])))], [2, 4]),
-           T(L => [v(L[0]), div(sub(v(L[1]), v(L[2])), v(L[3]))], [2, 3]) ],
-  /* 9 */ [ T(L => [v(L[0]), div(sub(v(L[1]), v(L[2])), mul(v(L[3]), v(L[4])))], [1, 2, 3]),
-           T(L => [mul(v(L[0]), v(L[1])), div(add(v(L[2]), v(L[3])), v(L[4]))], [0, 2, 4]),
-           T(L => [v(L[0]), add(v(L[1]), div(v(L[2]), sub(v(L[3]), v(L[4]))))], [2, 3, 4]) ],
-  /* 10 */ [ T(L => [v(L[0]), div(v(L[1]), add(v(L[2]), mul(v(L[3]), v(L[4]))))], [2, 3, 4]),
-            T(L => [v(L[0]), div(add(v(L[1]), v(L[2])), sub(v(L[3]), v(L[4])))], [1, 3, 4]),
-            T(L => [mul(v(L[0]), v(L[1])), div(v(L[2]), sub(v(L[3]), v(L[4])))], [3, 4]),
-            T(L => [v(L[0]), sub(v(L[1]), div(v(L[2]), add(v(L[3]), v(L[4]))))], [3, 4]) ]
-];
-
-/* Lettres : on évite les paires confondables (c/C, p/ρ, a/α, b/β) dans une même relation */
-const LOWER = ['a','b','c','d','f','g','h','k','m','n','p','q','r','s','t','u','v','x','y','z'];
-const UPPER = ['A','B','C','D','E','F','G','H','L','M','N','P','R','T','U'];
-const GREEK = ['α','β','λ','ρ','ω','θ'];
-const CONFUSABLE = { 'α': 'a', 'β': 'b', 'ρ': 'p' };
-
-function pickLetters(n, level) {
-  let pool = LOWER.slice();
-  if (level >= 2) pool = pool.concat(UPPER);
-  if (CONFIG.greek && level >= 5) pool = pool.concat(GREEK);
-  const out = [], seen = new Set();
-  for (const c of shuffle(pool)) {
-    const key = CONFUSABLE[c] || c.toLowerCase();
-    if (seen.has(key)) continue;
-    seen.add(key); out.push(c);
-    if (out.length === n) break;
-  }
-  return out;
-}
-
-function buildLetterQuestion(level) {
-  for (let attempt = 0; attempt < 200; attempt++) {
-    const tpl = pick(LEVELS[level]);
-    const L = pickLetters(5, level);
-    const [lhs, rhs] = tpl.f(L);
-    const swap = level >= 3 && Math.random() < CONFIG.swapProbability;
-    const q = makeQuestion(lhs, rhs, L[pick(tpl.t)], { swap, mult: CONFIG.multSymbol, label: '' });
-    if (q) return q;
-  }
-  throw new Error('Impossible de générer une question au niveau ' + level);
-}
-
-/* =====================================================================
-   Relations de physique-chimie de seconde
-   (programme d'enseignement commun, BO spécial n° 1 du 22 janvier 2019)
-   family : deux relations de même famille ne figurent pas dans la même série
-   ===================================================================== */
-const R = (label, family, f, targets) => ({ label, family, f, targets });
+const R = (label, family, niveau, f, targets) => ({ label, family, niveau, f, targets });
 const s = sym;
+const k2 = num(2);
 const PHYSICS = [
-  R('Masse volumique', 'mV',
+
+  /* ---------- Seconde : constitution et transformations de la matière ---------- */
+  R('Masse volumique', 'mV', '2de',
     () => [s('rho', '\\rho', 'ρ'), div(s('m', 'm'), s('V', 'V'))], ['m', 'V']),
-  R('Concentration en masse', 'mV',
-    () => [s('Cm', 'C_\\text{m}', 'Cm'), div(s('m', 'm'), s('V', 'V'))], ['m', 'V']),
-  R('Masse volumique (pesée par différence)', 'mV',
+  R('Masse volumique (pesée par différence)', 'mV', '2de',
     () => [s('rho', '\\rho', 'ρ'), div(sub(s('m2', 'm_2', 'm₂'), s('m1', 'm_1', 'm₁')), s('V', 'V'))], ['m2', 'm1', 'V']),
-  R('Dilution', 'dil',
+  R('Concentration en masse', 'Cm', '2de',
+    () => [s('Cm', 'C_\\text{m}', 'Cm'), div(s('m', 'm'), s('V', 'V'))], ['m', 'V']),
+  R('Dilution', 'dil', '2de',
     () => [mul(s('C0', 'C_{\\text{m},0}', 'Cm,0'), s('V0', 'V_0', 'V₀')), mul(s('C1', 'C_{\\text{m},1}', 'Cm,1'), s('V1', 'V_1', 'V₁'))], ['C0', 'V0', 'C1', 'V1']),
-  R('Facteur de dilution', 'Fdil',
+  R('Facteur de dilution', 'Fdil', '2de',
     () => [s('F', 'F'), div(s('V1', 'V_1', 'V₁'), s('V0', 'V_0', 'V₀'))], ['V1', 'V0']),
-  R('Nombre d’entités dans un échantillon', 'Nent',
+  R('Nombre d’entités dans un échantillon', 'Nent', '2de',
     () => [s('N', 'N'), div(s('me', 'm_\\text{échantillon}', 'm(échantillon)'), s('mu', 'm_\\text{entité}', 'm(entité)'))], ['me', 'mu']),
-  R('Quantité de matière', 'n',
+  R('Quantité de matière', 'nNA', '2de',
     () => [s('n', 'n'), div(s('N', 'N'), s('NA', 'N_\\text{A}', 'NA'))], ['N']),
-  R('Quantité de matière', 'n',
+  R('Quantité de matière', 'nNA', '2de',
     () => [s('n', 'n'), div(s('me', 'm_\\text{échantillon}', 'm(échantillon)'), mul(s('mu', 'm_\\text{entité}', 'm(entité)'), s('NA', 'N_\\text{A}', 'NA')))], ['me', 'mu']),
-  R('Masse d’une molécule d’eau', 'H2O',
-    () => [s('mw', 'm_{\\text{H}_2\\text{O}}', 'm(H₂O)'), add(mul(num(2), s('mH', 'm_\\text{H}', 'm(H)')), s('mO', 'm_\\text{O}', 'm(O)'))], ['mH', 'mO']),
-  R('Nombre de neutrons d’un noyau', 'AZ',
+  R('Masse d’une molécule d’eau', 'H2O', '2de',
+    () => [s('mw', 'm_{\\text{H}_2\\text{O}}', 'm(H₂O)'), add(mul(k2, s('mH', 'm_\\text{H}', 'm(H)')), s('mO', 'm_\\text{O}', 'm(O)'))], ['mH', 'mO']),
+  R('Nombre de neutrons d’un noyau', 'AZ', '2de',
     () => [s('N', 'N'), sub(s('A', 'A'), s('Z', 'Z'))], ['A', 'Z']),
-  R('Énergie de changement d’état', 'Q',
+  R('Énergie de changement d’état', 'QL', '2de',
     () => [s('Q', 'Q'), mul(s('m', 'm'), s('L', 'L'))], ['m', 'L']),
-  R('Vitesse moyenne', 'v',
+
+  /* ---------- Seconde : mouvement et interactions ---------- */
+  R('Vitesse moyenne', 'v', '2de',
     () => [s('v', 'v'), div(s('d', 'd'), s('Dt', '\\Delta t', 'Δt'))], ['d', 'Dt']),
-  R('Vitesse moyenne', 'v',
+  R('Vitesse moyenne', 'v', '2de',
     () => [s('v', 'v'), div(s('d', 'd'), sub(s('t2', 't_2', 't₂'), s('t1', 't_1', 't₁')))], ['d', 't2', 't1']),
-  R('Vitesse moyenne sur deux parcours', 'v3',
+  R('Vitesse moyenne sur deux parcours', 'v3', '2de',
     () => [s('v', 'v'), div(add(s('d1', 'd_1', 'd₁'), s('d2', 'd_2', 'd₂')), add(s('Dt1', '\\Delta t_1', 'Δt₁'), s('Dt2', '\\Delta t_2', 'Δt₂')))], ['d2', 'Dt2']),
-  R('Écho (sonar, échographie)', 'echo',
-    () => [s('v', 'v'), div(mul(num(2), s('d', 'd')), s('Dt', '\\Delta t', 'Δt'))], ['d', 'Dt']),
-  R('Poids', 'P',
+  R('Écho (sonar, échographie)', 'echo', '2de',
+    () => [s('v', 'v'), div(mul(k2, s('d', 'd')), s('Dt', '\\Delta t', 'Δt'))], ['d', 'Dt']),
+  R('Poids', 'P', '2de',
     () => [s('P', 'P'), mul(s('m', 'm'), s('g', 'g'))], ['m', 'g']),
-  R('Loi de la gravitation universelle', 'grav',
+  R('Loi de la gravitation universelle', 'grav', '2de',
     () => [s('F', 'F'), div(mul(mul(s('G', 'G'), s('mA', 'm_A')), s('mB', 'm_B')), s('d2', 'd^2', 'd²'))], ['mA', 'mB', 'd2']),
-  R('Pesanteur à la surface d’une planète', 'gpl',
+  R('Pesanteur à la surface d’une planète', 'gpl', '2de',
     () => [s('g', 'g'), div(mul(s('G', 'G'), s('M', 'M')), s('R2', 'R^2', 'R²'))], ['M', 'R2']),
-  R('Indice de réfraction', 'nc',
+
+  /* ---------- Seconde : ondes et signaux ---------- */
+  R('Indice de réfraction', 'nc', '2de',
     () => [s('n', 'n'), div(s('c', 'c'), s('v', 'v'))], ['v']),
-  R('Loi de Snell-Descartes pour la réfraction', 'snell',
+  R('Loi de Snell-Descartes pour la réfraction', 'snell', '2de',
     () => [mul(s('n1', 'n_1', 'n₁'), s('si1', '\\sin i_1', 'sin i₁')), mul(s('n2', 'n_2', 'n₂'), s('si2', '\\sin i_2', 'sin i₂'))], ['n1', 'si1', 'n2', 'si2']),
-  R('Grandissement', 'gam',
+  R('Grandissement', 'gam', '2de',
     () => [s('gam', '\\gamma', 'γ'), div(s('ApBp', "\\overline{A'B'}", "A'B'"), s('AB', '\\overline{AB}', 'AB'))], ['ApBp', 'AB']),
-  R('Grandissement', 'gam',
+  R('Grandissement', 'gam', '2de',
     () => [div(s('ApBp', "\\overline{A'B'}", "A'B'"), s('AB', '\\overline{AB}', 'AB')), div(s('OAp', "\\overline{OA'}", "OA'"), s('OA', '\\overline{OA}', 'OA'))], ['ApBp', 'AB', 'OAp', 'OA']),
-  R('Loi d’Ohm', 'ohm',
+  R('Loi d’Ohm', 'ohm', '2de',
     () => [s('U', 'U'), mul(s('R', 'R'), s('I', 'I'))], ['R', 'I']),
-  R('Loi des nœuds', 'noeuds',
+  R('Loi des nœuds', 'noeuds', '2de',
     () => [s('I', 'I'), add(s('I1', 'I_1', 'I₁'), s('I2', 'I_2', 'I₂'))], ['I1', 'I2']),
-  R('Loi des mailles', 'mailles',
+  R('Loi des mailles', 'mailles', '2de',
     () => [s('UG', 'U_G'), add(add(s('U1', 'U_1', 'U₁'), s('U2', 'U_2', 'U₂')), s('U3', 'U_3', 'U₃'))], ['U2', 'U3']),
-  R('Loi des mailles et loi d’Ohm', 'mailles-ohm',
+  R('Loi des mailles et loi d’Ohm', 'mailles-ohm', '2de',
     () => [s('UG', 'U_G'), add(s('UL', 'U_L'), mul(s('R', 'R'), s('I', 'I')))], ['UL', 'R', 'I']),
-  R('Résistances en série', 'serie',
-    () => [s('U', 'U'), mul(add(s('R1', 'R_1', 'R₁'), s('R2', 'R_2', 'R₂')), s('I', 'I'))], ['R1', 'R2', 'I'])
+  R('Résistances en série', 'serie', '2de',
+    () => [s('U', 'U'), mul(add(s('R1', 'R_1', 'R₁'), s('R2', 'R_2', 'R₂')), s('I', 'I'))], ['R1', 'R2', 'I']),
+
+  /* ---------- Première : constitution et transformations de la matière ---------- */
+  R('Masse molaire', 'nM', '1re',
+    () => [s('n', 'n'), div(s('m', 'm'), s('M', 'M'))], ['m', 'M']),
+  R('Concentration en quantité de matière', 'CnV', '1re',
+    () => [s('C', 'C'), div(s('n', 'n'), s('V', 'V'))], ['n', 'V']),
+  R('Concentration en masse et concentration', 'CmCM', '1re',
+    () => [s('Cm', 'C_\\text{m}', 'Cm'), mul(s('C', 'C'), s('M', 'M'))], ['C', 'M']),
+  R('Avancement d’une réaction', 'avanc', '1re',
+    () => [s('nf', 'n_\\text{f}', 'nf'), sub(s('ni', 'n_\\text{i}', 'ni'), s('x', 'x', 'x'))], ['ni', 'x']),
+  R('Titrage : équivalence', 'titr', '1re',
+    () => [mul(s('CA', 'C_A'), s('VA', 'V_A')), mul(s('CB', 'C_B'), s('VE', 'V_E'))], ['CA', 'VA', 'CB', 'VE']),
+  R('Loi de Beer-Lambert', 'beer', '1re',
+    () => [s('A', 'A'), mul(mul(s('eps', '\\varepsilon', 'ε'), s('l', '\\ell', 'ℓ')), s('C', 'C'))], ['eps', 'l', 'C']),
+  R('Loi des gaz parfaits', 'gp', '1re',
+    () => [mul(s('P', 'P'), s('V', 'V')), mul(mul(s('n', 'n'), s('Rc', 'R')), s('T', 'T'))], ['P', 'V', 'n', 'T']),
+  R('Énergie transférée par transfert thermique', 'QmcT', '1re',
+    () => [s('Q', 'Q'), mul(mul(s('m', 'm'), s('c', 'c')), s('DT', '\\Delta T', 'ΔT'))], ['m', 'c', 'DT']),
+  R('Énergie transférée par transfert thermique', 'QmcT', '1re',
+    () => [s('Q', 'Q'), mul(mul(s('m', 'm'), s('c', 'c')), sub(s('Tf', '\\theta_\\text{f}', 'θf'), s('Ti', '\\theta_\\text{i}', 'θi')))], ['m', 'Tf', 'Ti']),
+
+  /* ---------- Première : mouvement, énergie, électricité ---------- */
+  R('Température finale après un transfert thermique', 'thetaf', '1re',
+    () => [s('Tf', '\\theta_\\text{f}', 'θf'), add(s('Ti', '\\theta_\\text{i}', 'θi'), div(s('Q', 'Q'), mul(s('m', 'm'), s('c', 'c'))))], ['Ti', 'Q', 'm', 'c']),
+  R('Accélération moyenne', 'acc', '1re',
+    () => [s('a', 'a'), div(s('Dv', '\\Delta v', 'Δv'), s('Dt', '\\Delta t', 'Δt'))], ['Dv', 'Dt']),
+  R('Accélération moyenne', 'acc2', '1re',
+    () => [s('a', 'a'), div(sub(s('v2', 'v_2', 'v₂'), s('v1', 'v_1', 'v₁')), sub(s('t2', 't_2', 't₂'), s('t1', 't_1', 't₁')))], ['v2', 'v1', 't2', 't1']),
+  R('Travail d’une force constante', 'trav', '1re',
+    () => [s('W', 'W'), mul(mul(s('F', 'F'), s('d', 'd')), s('ca', '\\cos \\alpha', 'cos α'))], ['F', 'd', 'ca']),
+  R('Énergie cinétique', 'Ec', '1re',
+    () => [s('Ec', 'E_\\text{c}', 'Ec'), div(mul(s('m', 'm'), s('v2', 'v^2', 'v²')), k2)], ['m', 'v2']),
+  R('Énergie potentielle de pesanteur', 'Epp', '1re',
+    () => [s('Epp', 'E_\\text{pp}', 'Epp'), mul(mul(s('m', 'm'), s('g', 'g')), s('z', 'z'))], ['m', 'z']),
+  R('Énergie mécanique', 'Em', '1re',
+    () => [s('Em', 'E_\\text{m}', 'Em'), add(s('Ec', 'E_\\text{c}', 'Ec'), s('Epp', 'E_\\text{pp}', 'Epp'))], ['Ec', 'Epp']),
+  R('Théorème de l’énergie cinétique', 'TEC', '1re',
+    () => [s('Ecf', 'E_{\\text{c},\\text{f}}', 'Ec,f'), add(s('Eci', 'E_{\\text{c},\\text{i}}', 'Ec,i'), s('W', 'W'))], ['Eci', 'W']),
+  R('Pression', 'pFS', '1re',
+    () => [s('p', 'p'), div(s('F', 'F'), s('S', 'S'))], ['F', 'S']),
+  R('Débit volumique', 'debit', '1re',
+    () => [s('Dv', 'D_\\text{v}', 'Dv'), div(s('V', 'V'), s('Dt', '\\Delta t', 'Δt'))], ['V', 'Dt']),
+  R('Puissance électrique', 'PUI', '1re',
+    () => [s('P', 'P'), mul(s('U', 'U'), s('I', 'I'))], ['U', 'I']),
+  R('Énergie électrique', 'EPt', '1re',
+    () => [s('E', 'E'), mul(s('P', 'P'), s('Dt', '\\Delta t', 'Δt'))], ['P', 'Dt']),
+  R('Rendement d’un convertisseur', 'rend', '1re',
+    () => [s('eta', '\\eta', 'η'), div(s('Pu', 'P_\\text{utile}', 'Putile'), s('Pa', 'P_\\text{absorbée}', 'Pabsorbée'))], ['Pu', 'Pa']),
+  R('Modèle du générateur linéaire', 'gene', '1re',
+    () => [s('U', 'U'), sub(s('E', 'E'), mul(s('r', 'r'), s('I', 'I')))], ['E', 'r', 'I']),
+  R('Pont diviseur de tension', 'pont', '1re',
+    () => [s('U2', 'U_2', 'U₂'), div(mul(s('U', 'U'), s('R2', 'R_2', 'R₂')), add(s('R1', 'R_1', 'R₁'), s('R2b', 'R_2', 'R₂')))], ['U', 'R1']),
+  R('Puissance dissipée par effet Joule', 'joule', '1re',
+    () => [s('P', 'P'), mul(s('R', 'R'), s('I2', 'I^2', 'I²'))], ['R', 'I2']),
+
+  /* ---------- Terminale : mouvement et interactions ---------- */
+  R('Deuxième loi de Newton (en projection)', 'newton', 'Tle',
+    () => [s('F', 'F'), mul(s('m', 'm'), s('a', 'a'))], ['m', 'a']),
+  R('Quantité de mouvement', 'pmv', 'Tle',
+    () => [s('p', 'p'), mul(s('m', 'm'), s('v', 'v'))], ['m', 'v']),
+  R('Troisième loi de Kepler', 'kepler', 'Tle',
+    () => [div(s('T2', 'T^2', 'T²'), s('a3', 'a^3', 'a³')), div(s('pi4', '4\\pi^2', '4π²'), mul(s('G', 'G'), s('M', 'M')))], ['T2', 'a3', 'M']),
+  R('Poussée d’Archimède', 'archi', 'Tle',
+    () => [s('F', 'F'), mul(mul(s('rho', '\\rho', 'ρ'), s('V', 'V')), s('g', 'g'))], ['rho', 'V']),
+  R('Loi fondamentale de la statique des fluides', 'fluide', 'Tle',
+    () => [sub(s('PB', 'P_B'), s('PA', 'P_A')), mul(mul(s('rho', '\\rho', 'ρ'), s('g', 'g')), sub(s('zA', 'z_A'), s('zB', 'z_B')))], ['PB', 'PA', 'rho', 'zA']),
+  R('Énergie de masse', 'emc2', 'Tle',
+    () => [s('DE', '\\Delta E', 'ΔE'), mul(s('Dm', '\\Delta m', 'Δm'), s('c2', 'c^2', 'c²'))], ['Dm']),
+
+  /* ---------- Terminale : ondes et signaux ---------- */
+  R('Longueur d’onde', 'lambda', 'Tle',
+    () => [s('lam', '\\lambda', 'λ'), mul(s('v', 'v'), s('T', 'T'))], ['v', 'T']),
+  R('Longueur d’onde et fréquence', 'lambda', 'Tle',
+    () => [s('v', 'v'), mul(s('lam', '\\lambda', 'λ'), s('f', 'f'))], ['lam', 'f']),
+  R('Écart angulaire de diffraction', 'diff', 'Tle',
+    () => [s('th', '\\theta', 'θ'), div(s('lam', '\\lambda', 'λ'), s('a', 'a'))], ['lam', 'a']),
+  R('Interfrange', 'interf', 'Tle',
+    () => [s('i', 'i'), div(mul(s('lam', '\\lambda', 'λ'), s('D', 'D')), s('b', 'b'))], ['lam', 'D', 'b']),
+  R('Décalage Doppler', 'doppler', 'Tle',
+    () => [s('Df', '\\Delta f', 'Δf'), div(mul(s('f0', 'f_0', 'f₀'), s('v', 'v')), s('c', 'c'))], ['f0', 'v']),
+  R('Effet Doppler (source qui s’approche)', 'doppler2', 'Tle',
+    () => [s('fR', 'f_\\text{R}', 'fR'), div(mul(s('fE', 'f_\\text{E}', 'fE'), s('v', 'v')), sub(s('vb', 'v', 'v'), s('ve', 'v_\\text{E}', 'vE')))], ['fE', 've']),
+  R('Grossissement d’une lunette astronomique', 'lunette', 'Tle',
+    () => [s('G', 'G'), div(s('f1', "f_1'", "f1'"), s('f2', "f_2'", "f2'"))], ['f1', 'f2']),
+  R('Charge d’un condensateur', 'condq', 'Tle',
+    () => [s('q', 'q'), mul(s('C', 'C'), s('u', 'u'))], ['C', 'u']),
+  R('Loi des mailles dans un circuit RC', 'rc', 'Tle',
+    () => [s('E', 'E'), add(mul(s('R', 'R'), s('i', 'i')), div(s('q', 'q'), s('C', 'C')))], ['R', 'i', 'q', 'C']),
+  R('Temps caractéristique d’un circuit RC', 'tau', 'Tle',
+    () => [s('tau', '\\tau', 'τ'), mul(s('R', 'R'), s('C', 'C'))], ['R', 'C']),
+  R('Énergie d’un condensateur', 'condE', 'Tle',
+    () => [s('E', 'E'), div(mul(s('C', 'C'), s('u2', 'u^2', 'u²')), k2)], ['C', 'u2']),
+
+  /* ---------- Terminale : énergie, thermodynamique, chimie ---------- */
+  R('Capacité thermique', 'capa', 'Tle',
+    () => [s('C', 'C'), mul(s('m', 'm'), s('c', 'c'))], ['m', 'c']),
+  R('Variation d’énergie interne', 'Uint', 'Tle',
+    () => [s('DU', '\\Delta U', 'ΔU'), mul(s('C', 'C'), s('DT', '\\Delta T', 'ΔT'))], ['C', 'DT']),
+  R('Flux thermique', 'flux', 'Tle',
+    () => [s('Phi', '\\Phi', 'Φ'), div(sub(s('Ti', 'T_\\text{int}', 'Tint'), s('Te', 'T_\\text{ext}', 'Text')), s('Rth', 'R_\\text{th}', 'Rth'))], ['Ti', 'Te', 'Rth']),
+  R('Flux thermique à travers deux parois', 'flux2', 'Tle',
+    () => [s('Phi', '\\Phi', 'Φ'), div(sub(s('Ti', 'T_\\text{int}', 'Tint'), s('Te', 'T_\\text{ext}', 'Text')), add(s('R1', 'R_1', 'R₁'), s('R2', 'R_2', 'R₂')))], ['Ti', 'Te', 'R1', 'R2']),
+  R('Résistance thermique', 'Rth', 'Tle',
+    () => [s('Rth', 'R_\\text{th}', 'Rth'), div(s('e', 'e'), mul(s('lam', '\\lambda', 'λ'), s('S', 'S')))], ['e', 'lam', 'S']),
+  R('Activité d’un échantillon radioactif', 'activ', 'Tle',
+    () => [s('A', 'A'), mul(s('lam', '\\lambda', 'λ'), s('N', 'N'))], ['lam', 'N']),
+  R('Temps de demi-vie', 'demivie', 'Tle',
+    () => [s('t12', 't_{1/2}', 't1/2'), div(s('ln2', '\\ln 2', 'ln 2'), s('lam', '\\lambda', 'λ'))], ['lam']),
+  R('Conductivité d’une solution', 'sigma', 'Tle',
+    () => [s('sig', '\\sigma', 'σ'), add(mul(s('l1', '\\lambda_1', 'λ₁'), s('c1', 'c_1', 'c₁')), mul(s('l2', '\\lambda_2', 'λ₂'), s('c2', 'c_2', 'c₂')))], ['l1', 'c1', 'c2']),
+  R('Quotient de réaction (A + B = C + D)', 'Qr', 'Tle',
+    () => [s('Qr', 'Q_\\text{r}', 'Qr'), div(mul(s('cC', '[\\text{C}]', '[C]'), s('cD', '[\\text{D}]', '[D]')), mul(s('cA', '[\\text{A}]', '[A]'), s('cB', '[\\text{B}]', '[B]')))], ['cC', 'cA', 'cB']),
+  R('Rendement d’une synthèse', 'rendsyn', 'Tle',
+    () => [s('eta', '\\eta', 'η'), div(s('nexp', 'n_\\text{exp}', 'nexp'), s('nmax', 'n_\\text{max}', 'nmax'))], ['nexp', 'nmax'])
 ];
 
 /* Difficulté estimée : nombre de grandeurs, profondeur, dénominateur, terme retranché… */
@@ -682,13 +735,16 @@ function difficulty(lhs, rhs, target) {
 
 function physicsPairs() {
   const pairs = [];
-  PHYSICS.forEach(r => {
+  let liste = PHYSICS.filter(r => CONFIG.niveaux.includes(r.niveau));
+  if (liste.length < 6) liste = PHYSICS;
+  liste.forEach(r => {
     const [l, rr] = r.f();
     r.targets.forEach(tg => pairs.push({ r, target: tg, score: difficulty(l, rr, tg) + Math.random() * 1.5 }));
   });
   return pairs.sort((a, b) => a.score - b.score);
 }
 
+/* Une question par tranche de difficulté, sans reprendre une relation déjà vue */
 function buildPhysicsQuestion(i, nq, pairs, used) {
   const len = pairs.length, width = len / nq, center = (i + 0.5) * width;
   const order = pairs
@@ -697,8 +753,9 @@ function buildPhysicsQuestion(i, nq, pairs, used) {
     .sort((a, b) => a.dist - b.dist);
   for (const o of order) {
     const [l, r] = o.p.r.f();
-    const q = makeQuestion(l, r, o.p.target, { swap: false, mult: CONFIG.multSymbolPhysique, label: o.p.r.label });
-    if (q) { used.add(o.p.r.family); q.physics = true; return q; }
+    const swap = i >= 3 && Math.random() < CONFIG.swapProbability;
+    const q = makeQuestion(l, r, o.p.target, { swap, mult: CONFIG.multSymbolPhysique, label: o.p.r.label });
+    if (q) { used.add(o.p.r.family); q.niveau = o.p.r.niveau; return q; }
   }
   return null;
 }
@@ -706,32 +763,19 @@ function buildPhysicsQuestion(i, nq, pairs, used) {
 /* =====================================================================
    Série de questions
    ===================================================================== */
-function levelFor(i, nq) {
-  return Math.min(LEVELS.length - 1, Math.round(i * (LEVELS.length - 1) / Math.max(1, nq - 1)));
-}
-
-/* Mélange : moitié de relations de physique, jamais plus de deux questions du même type d'affilée */
-function mixedPattern(nq) {
-  const base = Array.from({ length: nq }, (_, i) => i < Math.ceil(nq / 2));
-  for (let attempt = 0; attempt < 500; attempt++) {
-    const p = shuffle(base);
-    if (p.every((x, i) => i < 2 || !(x === p[i - 1] && x === p[i - 2]))) return p;
-  }
-  return base.map((_, i) => i % 2 === 1);
-}
-
-function buildSeries(mode = CONFIG.mode, nq = CONFIG.nbQuestions) {
+function buildSeries(nq = CONFIG.nbQuestions) {
   COUVERTURE.clear();
   const pairs = physicsPairs();
   const used = new Set();
-  const pattern = mode === 'physique' ? Array(nq).fill(true)
-                : mode === 'lettres'  ? Array(nq).fill(false)
-                : mixedPattern(nq);
-  const physIdx = new Set(pattern.flatMap((x, i) => x ? [i] : []));
-  return Array.from({ length: nq }, (_, i) =>
-    (physIdx.has(i) && buildPhysicsQuestion(i, nq, pairs, used)) || buildLetterQuestion(levelFor(i, nq))
-  );
+  const qs = [];
+  for (let i = 0; i < nq; i++) {
+    let q = buildPhysicsQuestion(i, nq, pairs, used);
+    if (!q) { used.clear(); q = buildPhysicsQuestion(i, nq, pairs, used); }
+    if (q) qs.push(q);
+  }
+  return qs;
 }
+
 </script>
 
 <script>
@@ -748,7 +792,8 @@ const els = {
   restart: $('restart')
 };
 const NQ = CONFIG.nbQuestions;
-const state = { mode: null, i: 0, questions: [], answers: [], locked: false, timer: null };
+const NIVEAU_NOM = { '2de': 'seconde', '1re': 'première', 'Tle': 'terminale' };
+const state = { i: 0, questions: [], answers: [], locked: false, timer: null };
 
 /* Chronomètre : il ne tourne que pendant la recherche de la réponse.
    Le temps de lecture des corrections n'est pas compté, et l'onglet masqué met en pause. */
@@ -784,6 +829,16 @@ function math(el, texStr, txtStr) {
   if (window.katex) katex.render(texStr, el, { throwOnError: false, displayMode: false });
   else el.textContent = txtStr;
 }
+/* Les relations longues sont réduites avant d'être coupées en deux lignes */
+function ajuster(el) {
+  if (!el || !el.clientWidth) return;
+  el.style.fontSize = '';
+  el.classList.add('nowrap');
+  let f = 100;
+  while (el.scrollWidth > el.clientWidth + 1 && f > 58) { f -= 6; el.style.fontSize = f + '%'; }
+  if (el.scrollWidth > el.clientWidth + 1) el.classList.remove('nowrap');
+}
+
 function plain(texStr) {
   return texStr
     .replace(/\\dfrac\{([^{}]*)\}\{([^{}]*)\}/g, '($1)/($2)')
@@ -806,6 +861,7 @@ function rich(el, str) {
 function renderSteps(box, q, chosen) {
   const wrap = document.createElement('div');
   wrap.className = 'steps';
+  const eqs = [];
   q.steps.forEach((r, i) => {
     const blame = chosen && !chosen.ok && r.step === chosen.errStep
       && !q.steps.slice(i + 1).some(x => x.step === chosen.errStep);
@@ -816,6 +872,7 @@ function renderSteps(box, q, chosen) {
     eq.className = 'eq';
     math(eq, r.tex, r.txt);
     div.appendChild(eq);
+    eqs.push(eq);
     if (blame && chosen.msg) {
       const b = document.createElement('div');
       b.className = 'blame';
@@ -825,6 +882,7 @@ function renderSteps(box, q, chosen) {
     wrap.appendChild(div);
   });
   box.appendChild(wrap);
+  eqs.forEach(ajuster);
 }
 
 function renderCheck(box, q, chosen) {
@@ -855,10 +913,9 @@ function show(screen) {
   els.screenEnd.hidden = screen !== 'end';
 }
 
-function start(mode) {
+function start() {
   clearTimeout(state.timer);
-  state.mode = mode;
-  state.questions = buildSeries(mode, NQ);
+  state.questions = buildSeries(NQ);
   state.answers = [];
   state.i = 0;
   chrono.reset();
@@ -879,7 +936,7 @@ function showQuestion() {
   els.count.textContent = (state.i + 1) + ' / ' + NQ;
   [...els.ticks.children].forEach((t, k) => t.classList.toggle('current', k === state.i));
 
-  els.context.textContent = q.label;
+  els.context.textContent = q.label + (q.niveau ? ' · ' + NIVEAU_NOM[q.niveau] : '');
   math(els.relation, q.relTex, q.relTxt);
   math(els.target, q.targetTex, q.targetTxt);
 
@@ -903,6 +960,8 @@ function showQuestion() {
   els.screenQ.classList.remove('fade');
   void els.screenQ.offsetWidth;
   els.screenQ.classList.add('fade');
+  ajuster(els.relation);
+  [...els.options.querySelectorAll('.expr')].forEach(ajuster);
   chrono.demarrer();
 }
 
@@ -961,9 +1020,7 @@ function commentFor(s) {
   else if (s >= 0.6 * NQ) c = "Bien. Les cas simples sont maîtrisés, mais les relations imbriquées demandent encore de l’attention : procéder pas à pas, en écrivant chaque étape.";
   else if (s >= 0.4 * NQ) c = "C’est un début. Pour isoler une grandeur, on défait les opérations une à une, en commençant par la dernière effectuée, et on applique chaque opération aux deux membres.";
   else c = "Les règles ne sont pas encore en place. Reprendre les relations à trois grandeurs (produit, quotient, somme, différence), puis recommencer.";
-  if (s < NQ && state.questions.some(q => q.physics)) {
-    c += " En physique, vérifier l’unité de l’expression obtenue permet souvent de repérer une erreur.";
-  }
+  if (s < NQ) c += " Vérifier l’unité de l’expression obtenue permet souvent de repérer une erreur.";
   return c;
 }
 
@@ -996,8 +1053,9 @@ function showEnd() {
         '<div class="rel"></div>' +
         '<div class="line"><span class="lab">Réponse donnée</span><span class="m bad"></span></div>' +
         '<div class="line"><span class="lab">Réponse attendue</span><span class="m good"></span></div>';
-      if (a.q.label) item.querySelector('.ctx').textContent = a.q.label;
+      if (a.q.label) item.querySelector('.ctx').textContent = a.q.label + (a.q.niveau ? ' · ' + NIVEAU_NOM[a.q.niveau] : '');
       math(item.querySelector('.rel'), a.q.relTex, a.q.relTxt);
+      ajuster(item.querySelector('.rel'));
       if (a.chosen) math(item.querySelector('.bad'), a.chosen.tex, a.chosen.txt);
       else item.querySelector('.bad').textContent = 'Je ne sais pas';
       math(item.querySelector('.good'), good.tex, good.txt);
@@ -1038,7 +1096,7 @@ majToggle();
 
 $('dunno').addEventListener('click', () => answer(-1));
 els.next.addEventListener('click', next);
-els.restart.addEventListener('click', () => start(state.mode));
+els.restart.addEventListener('click', start);
 
 document.addEventListener('keydown', e => {
   if (e.altKey || e.ctrlKey || e.metaKey) return;
@@ -1052,8 +1110,12 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const mode = new URLSearchParams(location.search).get('mode');
-  start(['lettres', 'physique', 'melange'].includes(mode) ? mode : CONFIG.mode);
+  const n = new URLSearchParams(location.search).get('niveau');
+  if (n) {
+    const choix = n.split(',').map(x => x.trim()).filter(x => ['2de', '1re', 'Tle'].includes(x));
+    if (choix.length) CONFIG.niveaux = choix;
+  }
+  start();
 });
 </script>
 </body>
