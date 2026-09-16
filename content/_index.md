@@ -100,9 +100,11 @@ a.alarm-link:hover svg {
 
 <p>
 <a class="alarm-link" href="/minuteur.html" aria-label="Minuteur">
-  <i class="fa-solid fa-stopwatch" aria-hidden="true"></i>
+  <i class="fa-solid fa-stopwatch" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;
+  <a class="alarm-link" href="/2nde/entrainement/" aria-label="Minuteur"><i class="fa-solid fa-gears"></i></a>
 </a>
 </p>
+
 
 <p style="color:#929292">Pour toute question : 
     <a id="email-link" href="mailto:" style="font-size:1em;"></a>

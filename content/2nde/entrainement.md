@@ -20,9 +20,9 @@ td, th {
 }
 </style>
 
-<h1 style="overflow-x:auto;"> Entraînement mathématiques</h1>
+<h1 style="overflow-x:auto;">Automatismes</h1>
 
-Les quiz ci-dessous visent à vérifier ou installer certains automatismes bien pratiques en physique-chimie.
+Les quiz ci-dessous visent à vérifier ou installer certains automatismes très utiles (voire indispensable) en physique-chimie.
 
 ## Jouer avec les relations
 
@@ -30,9 +30,11 @@ Les quiz ci-dessous visent à vérifier ou installer certains automatismes bien 
 <img src="/bandeaurel.png" style="box-shadow:none;background:none;">
 </div>
 
-Les lois sont données par des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l'une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s'aguerrir dans cet exercice et le quiz suivant teste votre agilité dans le maniement de ces relations algébriques.
+Les lois consistent en des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l'une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s'aguerrir dans cet exercice et le quiz suivant teste votre agilité dans le maniement de ces relations algébriques.
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="/quiz-relations.html"> Quiz relations </a></p> 
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="/quiz-relations.html"> Quiz relations </a></p>
+
+La cible idéale à atteindre est un score de 10/10 en environ une minute.
 
 
 ## Calculs numériques et écriture d'un résultat
@@ -49,6 +51,8 @@ Le quiz ci-dessous permet de diagnostiquer et renforcer les points suivant&nbsp;
 <li>conversions</li>
 <li>notation scientifique</li>
 </ul>
+
+Rappel : en physique, l'ordre de grandeur d'un nombre est la puissance de 10 la plus proche de ce nombre.
 
 <p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="/quiz-automatismes.html"> Diagnostic + entraînement </a></p> 
 

@@ -187,6 +187,7 @@ const CONFIG = {
   niveaux: ['2de', '1re', 'Tle'], // niveaux tirés au sort ; paramètre d'URL : ?niveau=2de ou ?niveau=1re,Tle
   multSymbolPhysique: '\\times',  // symbole de multiplication : '\\times', '\\cdot' ou '' (juxtaposition)
   swapProbability: 0.25,          // dès la question 4 : relation parfois écrite « expression = grandeur »
+  courbe: 0.65,                   // < 1 : les dernières bandes de difficulté sont resserrées sur le haut de l'échelle
   autoAdvanceMs: 900,             // délai avant la question suivante après une bonne réponse
   chrono: true                    // false : chronomètre masqué par défaut
 };
@@ -615,7 +616,7 @@ const PHYSICS = [
   R('Loi de Beer-Lambert', 'beer', '1re',
     () => [s('A', 'A'), mul(mul(s('eps', '\\varepsilon', 'ε'), s('l', '\\ell', 'ℓ')), s('C', 'C'))], ['eps', 'l', 'C']),
   R('Loi des gaz parfaits', 'gp', '1re',
-    () => [mul(s('P', 'P'), s('V', 'V')), mul(mul(s('n', 'n'), s('Rc', 'R')), s('T', 'T'))], ['P', 'V', 'n', 'T']),
+    () => [mul(s('P', 'P'), s('V', 'V')), mul(mul(s('n', 'n'), s('Rc', 'R', 'R')), s('T', 'T'))], ['P', 'V', 'n', 'T']),
   R('Énergie transférée par transfert thermique', 'QmcT', '1re',
     () => [s('Q', 'Q'), mul(mul(s('m', 'm'), s('c', 'c')), s('DT', '\\Delta T', 'ΔT'))], ['m', 'c', 'DT']),
   R('Énergie transférée par transfert thermique', 'QmcT', '1re',
@@ -626,7 +627,7 @@ const PHYSICS = [
     () => [s('Tf', '\\theta_\\text{f}', 'θf'), add(s('Ti', '\\theta_\\text{i}', 'θi'), div(s('Q', 'Q'), mul(s('m', 'm'), s('c', 'c'))))], ['Ti', 'Q', 'm', 'c']),
   R('Accélération moyenne', 'acc', '1re',
     () => [s('a', 'a'), div(s('Dv', '\\Delta v', 'Δv'), s('Dt', '\\Delta t', 'Δt'))], ['Dv', 'Dt']),
-  R('Accélération moyenne', 'acc2', '1re',
+  R('Accélération entre deux instants', 'acc2', '1re',
     () => [s('a', 'a'), div(sub(s('v2', 'v_2', 'v₂'), s('v1', 'v_1', 'v₁')), sub(s('t2', 't_2', 't₂'), s('t1', 't_1', 't₁')))], ['v2', 'v1', 't2', 't1']),
   R('Travail d’une force constante', 'trav', '1re',
     () => [s('W', 'W'), mul(mul(s('F', 'F'), s('d', 'd')), s('ca', '\\cos \\alpha', 'cos α'))], ['F', 'd', 'ca']),
@@ -652,6 +653,18 @@ const PHYSICS = [
     () => [s('U', 'U'), sub(s('E', 'E'), mul(s('r', 'r'), s('I', 'I')))], ['E', 'r', 'I']),
   R('Pont diviseur de tension', 'pont', '1re',
     () => [s('U2', 'U_2', 'U₂'), div(mul(s('U', 'U'), s('R2', 'R_2', 'R₂')), add(s('R1', 'R_1', 'R₁'), s('R2b', 'R_2', 'R₂')))], ['U', 'R1']),
+  R('Rattrapage de deux mobiles', 'rattrap', '2de',
+    () => [s('t', 't'), add(s('t0', 't_0', 't₀'), div(s('d', 'd'), sub(s('v1', 'v_1', 'v₁'), s('v2', 'v_2', 'v₂'))))], ['t0', 'd', 'v1', 'v2']),
+  R('Chauffage avec pertes', 'chauf', '1re',
+    () => [s('tf', 't_\\text{f}', 'tf'), add(s('ti', 't_\\text{i}', 'ti'), div(s('Q', 'Q'), sub(s('P', 'P'), s('Pp', 'P_\\text{p}', 'Pp'))))], ['ti', 'Q', 'P', 'Pp']),
+  R('Fusion d’un glaçon avec pertes', 'fusion', '1re',
+    () => [s('tf', 't_\\text{f}', 'tf'), add(s('ti', 't_\\text{i}', 'ti'), div(mul(s('m', 'm'), s('Lf', 'L_\\text{f}', 'Lf')), sub(s('P', 'P'), s('Pp', 'P_\\text{p}', 'Pp'))))], ['m', 'P']),
+  R('Rendez-vous spatial', 'rdv', 'Tle',
+    () => [s('tf', 't_\\text{f}', 'tf'), add(s('ti', 't_\\text{i}', 'ti'), div(s('d', 'd'), sub(s('vC', 'v_\\text{C}', 'vC'), s('vS', 'v_\\text{S}', 'vS'))))], ['ti', 'd', 'vC', 'vS']),
+  R('Bilan thermique d’un logement', 'bilanth', 'Tle',
+    () => [s('tf', 't_\\text{f}', 'tf'), add(s('ti', 't_\\text{i}', 'ti'), div(s('Q', 'Q'), sub(s('Pp', '\\Phi_\\text{p}', 'Φp'), s('Pc', '\\Phi_\\text{c}', 'Φc'))))], ['ti', 'Q', 'Pp', 'Pc']),
+  R('Remplissage d’une cuve qui fuit', 'cuve', '1re',
+    () => [s('t', 't'), add(s('t0', 't_0', 't₀'), div(s('V', 'V'), sub(s('De', 'D_\\text{e}', 'De'), s('Df', 'D_\\text{f}', 'Df'))))], ['t0', 'V', 'De', 'Df']),
   R('Puissance dissipée par effet Joule', 'joule', '1re',
     () => [s('P', 'P'), mul(s('R', 'R'), s('I2', 'I^2', 'I²'))], ['R', 'I2']),
 
@@ -716,21 +729,26 @@ const PHYSICS = [
     () => [s('eta', '\\eta', 'η'), div(s('nexp', 'n_\\text{exp}', 'nexp'), s('nmax', 'n_\\text{max}', 'nmax'))], ['nexp', 'nmax'])
 ];
 
-/* Difficulté estimée : nombre de grandeurs, profondeur, dénominateur, terme retranché… */
+/* Difficulté estimée : on cumule les obstacles rencontrés sur le chemin vers la cible.
+   Une étape coûte 1 ; la cible au dénominateur coûte 2 de plus (la transformation se fait
+   en deux temps), la cible retranchée 1,5 de plus, un facteur écarté composé 0,5 de plus.
+   Le maximum correspond à « isoler e dans a = b + c/(d − e) ». */
 function difficulty(lhs, rhs, target) {
   const onLeft = contains(lhs, target);
-  const side = onLeft ? lhs : rhs, other = onLeft ? rhs : lhs;
+  const other = onLeft ? rhs : lhs;
   const all = leaves(lhs).concat(leaves(rhs));
   const nVars = new Set(all.filter(id => id[0] !== '#')).size;
-  let depth = 0, den = 0, retr = 0, t = side;
+  let cout = 0, t = onLeft ? lhs : rhs;
   while (!isLeaf(t)) {
     const inL = contains(t.l, target);
-    if (!inL && t.op === '/') den = 1;
-    if (!inL && t.op === '-') retr = 1;
-    depth++; t = inL ? t.l : t.r;
+    const X = inL ? t.r : t.l;
+    cout += 1;
+    if (!inL && t.op === '/') cout += 2;
+    if (!inL && t.op === '-') cout += 1.5;
+    if (!isLeaf(X)) cout += 0.5;
+    t = inL ? t.l : t.r;
   }
-  const hasConst = all.some(id => id[0] === '#');
-  return nVars + 1.5 * depth + 2 * den + 1.5 * retr + (isLeaf(other) ? 0 : 1) + (hasConst ? 1 : 0);
+  return 1.5 * cout + 0.5 * nVars + (isLeaf(other) ? 0 : 1) + (all.some(id => id[0] === '#') ? 0.5 : 0);
 }
 
 function physicsPairs() {
@@ -739,43 +757,53 @@ function physicsPairs() {
   if (liste.length < 6) liste = PHYSICS;
   liste.forEach(r => {
     const [l, rr] = r.f();
-    r.targets.forEach(tg => pairs.push({ r, target: tg, score: difficulty(l, rr, tg) + Math.random() * 1.5 }));
+    r.targets.forEach(tg => pairs.push({ r, target: tg, score: difficulty(l, rr, tg) }));
   });
   return pairs.sort((a, b) => a.score - b.score);
 }
 
-/* Une question par tranche de difficulté, sans reprendre une relation déjà vue */
-function buildPhysicsQuestion(i, nq, pairs, used) {
-  const len = pairs.length, width = len / nq, center = (i + 0.5) * width;
-  const order = pairs
-    .map((p, k) => ({ p, dist: Math.abs(k + 0.5 - center) + Math.random() * width * 0.5 }))
-    .filter(o => !used.has(o.p.r.family))
-    .sort((a, b) => a.dist - b.dist);
-  for (const o of order) {
-    const [l, r] = o.p.r.f();
+function tenter(candidats, i, used, vus) {
+  for (const o of shuffle(candidats)) {
+    const [l, r] = o.r.f();
     const swap = i >= 3 && Math.random() < CONFIG.swapProbability;
-    const q = makeQuestion(l, r, o.p.target, { swap, mult: CONFIG.multSymbolPhysique, label: o.p.r.label });
-    if (q) { used.add(o.p.r.family); q.niveau = o.p.r.niveau; return q; }
+    const q = makeQuestion(l, r, o.target, { swap, mult: CONFIG.multSymbolPhysique, label: o.r.label });
+    if (q) {
+      used.add(o.r.family); vus.add(o.r.family + '|' + o.target);
+      q.niveau = o.r.niveau; q.score = o.score;
+      return q;
+    }
   }
   return null;
 }
 
 /* =====================================================================
    Série de questions
+   Les couples (relation, grandeur) sont rangés par difficulté, puis découpés
+   en autant de bandes qu'il y a de questions : la série balaie ainsi toute
+   l'échelle. Les bandes hautes sont resserrées (CONFIG.courbe), de sorte que
+   la dernière question vienne toujours du sommet. Le tri final garantit une
+   difficulté croissante.
    ===================================================================== */
 function buildSeries(nq = CONFIG.nbQuestions) {
   COUVERTURE.clear();
   const pairs = physicsPairs();
-  const used = new Set();
+  const used = new Set(), vus = new Set();
   const qs = [];
+  const bord = x => Math.floor(pairs.length * Math.pow(x / nq, CONFIG.courbe));
   for (let i = 0; i < nq; i++) {
-    let q = buildPhysicsQuestion(i, nq, pairs, used);
-    if (!q) { used.clear(); q = buildPhysicsQuestion(i, nq, pairs, used); }
+    const lo = bord(i), hi = Math.max(bord(i + 1), lo + 1);
+    const libre = p => !used.has(p.r.family);
+    const inedit = p => !vus.has(p.r.family + '|' + p.target);
+    const q =
+      tenter(pairs.slice(lo, hi).filter(libre), i, used, vus) ||
+      tenter(pairs.slice(lo).filter(libre), i, used, vus) ||
+      tenter(pairs.filter(libre), i, used, vus) ||
+      tenter(pairs.slice(lo, hi).filter(inedit), i, used, vus) ||
+      tenter(pairs.filter(inedit), i, used, vus);
     if (q) qs.push(q);
   }
-  return qs;
+  return qs.sort((a, b) => a.score - b.score);
 }
-
 </script>
 
 <script>

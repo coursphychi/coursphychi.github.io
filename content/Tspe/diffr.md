@@ -47,10 +47,9 @@ td, th {
   <td><a href="/act-conditinterf.pdf" target=”_blank”><b> Conditions d'interférences </b></a> + <a href="https://presentationssite.github.io/interf.html" target="_blank"><b style="color:#00AB8E;"> <i class="fa-solid fa-video"></i> </b></a></td>
   </tr>
      <tr>
-  <th rowspan="3 ">Appliquettes</th>
-  <td style="border-bottom:none;"><a href="https://presentationssite.github.io/interf.html" target=”_blank”><b>Interférences</b></a> et <a href="https://presentationssite.github.io/diffr.html" target=”_blank”><b>diffraction</b></a> d'ici</td>
-  </tr>
-  <td style="border-top:none;border-bottom:none;"><a href="https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_all.html?locale=fr" target=”_blank”><b>Interférences et diffraction du Colorado</b></td>
+  <th rowspan="2 ">Appliquettes</th>
+
+  <td style="border-bottom:none;"><a href="https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_all.html?locale=fr" target=”_blank”><b>Interférences et diffraction du Colorado</b></td>
   </tr>
     <td style="border-top:none;"><a href="https://www.geogebra.org/m/crmutgye" target=”_blank”><b>Interférences et différence de marche</b></td>
    <tr>
