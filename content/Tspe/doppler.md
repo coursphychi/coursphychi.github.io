@@ -64,3 +64,10 @@ td, th {
 
 <br>
 
+{{%notice tip%}}
+Pour la démonstration, le programme dit précisément&nbsp;:<br>
+«&nbsp;*Établir l’expression du décalage Doppler dans le cas d’un
+observateur fixe, d’un émetteur mobile et dans une
+configuration à une dimension.*&nbsp;»<br>
+À ma connaissance, ce n'est tombé qu'une seule fois, en SI (cf. exo Andromède).
+{{%/notice%}}
