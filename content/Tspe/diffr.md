@@ -100,7 +100,7 @@ La diffraction consiste en&nbsp;:
 
 ## Largeur d'une fente
 
-Une onde lumineuse de longueur d'onde $λ=\pu{500 nm}$ est diffractée par une fente de très grande longueur. Le premier minimum de diffraction est observé avec un angle $θ=\pu{0,1 rad}$ par rapport à l'axe central. Calculer la largeur de cette fente&nbsp;:
+Une onde lumineuse de longueur d'onde $λ=\pu{500 nm}$ est diffractée par une fente de très grande longueur. Le premier minimum de diffraction est observé avec un angle $θ=\pu{0,10 rad}$ par rapport à l'axe central. Calculer la largeur de cette fente&nbsp;:
 
 - [x] 5,0 µm
 - [ ] 50 nm
