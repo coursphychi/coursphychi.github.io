@@ -49,15 +49,9 @@ La relation de Bernoulli sera toujours fournie.
     <td style="border-top:none"><a href="/act-orages.pdf"><b>Traitement des eaux</b></a></td>
   </tr>
    <tr>
-  <th rowspan="3 ">Énigmes poussée d'Archimède</th>
-<td style="border-bottom:none;"><a href="https://youtu.be/SUq_tM3yGTM" target="_blank"><b style="color:#FFA601"><i class="fa-solid fa-video"></i></b> (Balle de ping-pong vs balle d'acier)</a></td>
+  <th rowspan="1 ">Énigmes</th>
+<td><a href="https://presentationssite.github.io/tspe/enigmes-archi/" target="_blank"><b>4 petites énigmes sur la poussée d'Archimède</b></a></td>
 </tr>
-<tr>
-  <td style="border-top:none;border-bottom:none;"><a href="https://youtu.be/Go0gKexmLlc" target="_blank"><b style="color:#FFA601"><i class="fa-solid fa-video"></i></b> (Canard sur aquarium en équilibre)</a></td>
-  </tr>
-  <tr>
-  <td style="border-top:none;"><a href="https://www.explainxkcd.com/wiki/index.php/3240:_Bottle" target="_blank"><b style="color:#FFA601"><i class="fa-solid fa-palette"></i></b> (Bouteille XKCD)</a></td>
-  </tr>
  <tr>
   <th rowspan="1 ">Appliquette</th>
   <td><a href="https://presentationssite.github.io/ecoulement.html" target=”_blank”><b>Simulation d'un écoulement dans une conduite</b></a></td>
