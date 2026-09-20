@@ -40,18 +40,17 @@ td, th {
   <td style="border-bottom:none;"><a href="/tp-cheveu.pdf"><b>Épaisseur d'un cheveu</b></a></td>
   </tr>
      <tr>
- <td style="border-top:none;"><a href="/tp-irisations.pdf"><b>Irisations</b></a> + <a href="/interferences_lumiere_blanche.jpg"><b style="color:#FEAE00";><i class="fa-solid fa-photo-film"></i></b></a></td>
+ <td style="border-top:none;"><a href="/tp-irisations.pdf"><b>Irisations</b></a> + <a href="/interferences_lumiere_blanche.jpg"><b style="color:#FF95CA";><i class="fa-solid fa-photo-film"></i></b></a></td>
  </tr>
       <tr>
   <th rowspan="1 ">Activité</th>
-  <td><a href="/act-conditinterf.pdf" target=”_blank”><b> Conditions d'interférences </b></a> + <a href="https://presentationssite.github.io/interf.html" target="_blank"><b style="color:#00AB8E;"> <i class="fa-solid fa-video"></i> </b></a></td>
+  <td><a href="/act-conditinterf.pdf" target=”_blank”><b> Conditions d'interférences </b></a> + <a href="https://presentationssite.github.io/interf.html" target="_blank"><b style="color:#FF95CA;"> <i class="fa-solid fa-video"></i> </b></a></td>
   </tr>
      <tr>
   <th rowspan="2 ">Appliquettes</th>
-
-  <td style="border-bottom:none;"><a href="https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_all.html?locale=fr" target=”_blank”><b>Interférences et diffraction du Colorado</b></td>
+  <td style="border-bottom:none;"><a href="https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_all.html?locale=fr" target=”_blank”><b>Interférences / diffraction (Colorado)</b></td>
   </tr>
-    <td style="border-top:none;"><a href="https://www.geogebra.org/m/crmutgye" target=”_blank”><b>Interférences et différence de marche</b></td>
+    <td style="border-top:none;"><a href="https://www.geogebra.org/m/crmutgye" target=”_blank”><b>Interférences et différence de marche (geogebra)</b></td>
    <tr>
 <th rowspan="4">Exercices</th>
 <td style="border-bottom:none;"><a href="/act-laser.pdf"><b>Le laser comme outil de mesure</b></a><!--&nbsp;+&nbsp;<a href="/correclaser.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a>--></td>
@@ -65,6 +64,10 @@ td, th {
    <tr>
  <td style="border-top:none;"><a href="/act-volcan.pdf"><b>Interférométrie et volcan</b></a></td>
  </tr>
+   <th rowspan="1 ">Pour creuser</th>
+  <td><a href="https://planet-terre.ens-lyon.fr/ressource/interferometrie-radar.xml" target=”_blank”><b>Article sur l'interférométrie radar <i class="fa-solid fa-newspaper" style="color:#1DB100"></i></b></td>
+  </tr>
+   <tr>
  <!--
 <tr>
   <th rowspan="1 ">DS</th>
