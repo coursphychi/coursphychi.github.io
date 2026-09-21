@@ -53,7 +53,7 @@ td, th {
     <td style="border-top:none;"><a href="https://www.geogebra.org/m/crmutgye" target=”_blank”><b>Interférences et différence de marche (geogebra)</b></td>
    <tr>
 <th rowspan="4">Exercices</th>
-<td style="border-bottom:none;"><a href="/act-laser.pdf"><b>Le laser comme outil de mesure</b></a><!--&nbsp;+&nbsp;<a href="/correclaser.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a>--></td>
+<td style="border-bottom:none;"><a href="/act-laser.pdf"><b>Le laser comme outil de mesure</b></a>&nbsp;+&nbsp;<a href="/correclaser.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
  </tr>
      <tr>
  <td style="border-bottom:none;border-top:none;"><a href="/act-ondesgrav.pdf"><b>Interféromètre gravitationnel</b></a></td>
@@ -67,7 +67,6 @@ td, th {
    <th rowspan="1 ">Pour creuser</th>
   <td><a href="https://planet-terre.ens-lyon.fr/ressource/interferometrie-radar.xml" target=”_blank”><b>Article sur l'interférométrie radar <i class="fa-solid fa-newspaper" style="color:#1DB100"></i></b></td>
   </tr>
-   <tr>
  <!--
 <tr>
   <th rowspan="1 ">DS</th>
