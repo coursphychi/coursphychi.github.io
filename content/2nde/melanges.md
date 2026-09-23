@@ -43,8 +43,11 @@ td, th {
 <td style="border-top:none;"><a href="/tpmassevol.pdf"><b> Identifier avec la masse volumique</b></a></td>
 </tr>
 <tr>
-<th rowspan="1"> Exercice </th>
-<td><a href="/couronnearchimede.pdf"><b>Couronne d'Archimède</b></a></td>
+<th rowspan="2"> Exercice </th>
+<td style="border-bottom:none;"><a href="/couronnearchimede.pdf"><b>Couronne d'Archimède</b></a></td>
+</tr>
+<tr>
+<td style="border-top:none;"><a href="/act-identtfus.pdf"><b> Identifier avec la température de changement d'état</b></a></td>
 </tr>
 <tr>
 <th rowspan="1"> Exercice interactif</th>
