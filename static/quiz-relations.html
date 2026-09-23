@@ -4,143 +4,230 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Isoler une grandeur — relations algébriques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <style>
   :root {
-    --paper: #FBFBF9;
-    --ink: #1C2A4A;
-    --ink-soft: #2E4170;
-    --muted: #697086;
-    --rule: #D9DCE4;
-    --hover: #F1F3F8;
-    --ok: #1F7A4D;
-    --ok-bg: #EAF4EE;
-    --ko: #B42318;
-    --ko-bg: #FBEDEB;
+    --papier: #F2F4F9;
+    --carte: #FFFFFF;
+    --encre: #16223F;
+    --encre-2: #2A3A66;
+    --gris: #636D86;
+    --trait: #D5DBE7;
+    --trait-fort: #B3BCCD;
+    --survol: #EEF1F8;
+    --feutre: rgba(255, 219, 40, .88);
+    --feutre-bord: rgba(255, 219, 40, .5);
+    --feutre-reflet: rgba(255, 255, 255, .16);
+    --feutre-melange: multiply;
+    --feutre-texte: inherit;
+    --stylo: #1D5BCC;
+    --juste: #137A48;
+    --juste-fond: #E4F4EA;
+    --faux: #C22A1F;
+    --faux-fond: #FCEAE8;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --papier: #0F1526;
+      --carte: #172038;
+      --encre: #E7EBF5;
+      --encre-2: #C9D2EA;
+      --gris: #9BA5BF;
+      --trait: #2B3553;
+      --trait-fort: #45507A;
+      --survol: #1E2945;
+      --feutre: rgba(255, 205, 30, .36);
+      --feutre-bord: rgba(255, 205, 30, .16);
+      --feutre-reflet: transparent;
+      --feutre-melange: normal;
+      --feutre-texte: #FFF3C4;
+      --stylo: #86B4FF;
+      --juste: #56D08F;
+      --juste-fond: rgba(86, 208, 143, .13);
+      --faux: #FF8074;
+      --faux-fond: rgba(255, 128, 116, .13);
+      color-scheme: dark;
+    }
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--paper); color: var(--ink); }
+  html, body { margin: 0; background: var(--papier); color: var(--encre); }
   body {
-    font-family: "KaTeX_Main", "Latin Modern Roman", "CMU Serif", Georgia, serif;
+    font-family: "Atkinson Hyperlegible", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     font-size: 18px;
-    line-height: 1.55;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  .quiz {
-    max-width: 40rem;
-    margin: 0 auto;
-    padding: 1.5rem 1.25rem 2.5rem;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-  .title { font-style: italic; color: var(--muted); font-size: 1rem; }
-  .count { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 1rem; }
-  .meta { display: flex; align-items: baseline; gap: .9rem; }
-  .chrono { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 1rem; }
+  .quiz { max-width: 40rem; margin: 0 auto; padding: 1.2rem 1.1rem 2.5rem; min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* ---------- en-tête ---------- */
+  .top { display: flex; justify-content: space-between; align-items: center; gap: .8rem; }
+  .title { font-weight: 700; font-size: 1rem; letter-spacing: .01em; }
+  .meta { display: flex; align-items: center; gap: .75rem; color: var(--gris); font-size: .95rem; font-variant-numeric: tabular-nums; }
   .chrono:empty { display: none; }
-  .times { text-align: center; color: var(--muted); margin: .6rem 0 0; font-size: 1rem; }
-  .times .record { color: var(--ink); }
-  .dunno-row { text-align: center; margin-top: .5rem; min-height: 2.3rem; }
-  .nowrap { white-space: nowrap; }
-  .link {
-    background: none; border: 0; padding: .35rem .5rem; font: inherit; font-size: .95rem;
-    color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+  .serie {
+    font-size: .85rem; font-weight: 700; color: var(--juste); background: var(--juste-fond);
+    padding: .12rem .55rem; border-radius: 999px; white-space: nowrap;
   }
-  .link:hover { color: var(--ink); }
-  .ticks { display: grid; grid-template-columns: repeat(var(--n, 10), 1fr); gap: 4px; margin-top: .6rem; min-height: 3px; }
-  .tick { height: 3px; border-radius: 2px; background: var(--rule); }
-  .tick.current { background: var(--ink); }
-  .tick.ok { background: var(--ok); }
-  .tick.ko { background: var(--ko); }
+  .serie:empty { display: none; }
+  .serie.pop { animation: pop .35s ease-out; }
 
-  .stage { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 2rem 0 1rem; }
-  .fade { animation: appear .18s ease-out; }
-  @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+  /* escalier : la hauteur de chaque marche encode la difficulté de la question */
+  .ticks { display: flex; align-items: flex-end; gap: 4px; height: 26px; margin-top: .7rem; }
+  .tick { flex: 1; height: var(--h, 30%); min-height: 4px; border-radius: 3px 3px 1px 1px; background: var(--trait); transition: background-color .2s; }
+  .tick.current { background: var(--encre); }
+  .tick.ok { background: var(--juste); }
+  .tick.ko { background: var(--faux); }
 
-  .context { text-align: center; font-style: italic; color: var(--muted); font-size: 1rem; margin: 0; min-height: 1.6em; }
+  /* ---------- question ---------- */
+  .stage { flex: 1; padding: 1.4rem 0 1rem; }
+  .fade { animation: appear .2s ease-out; }
+  @keyframes appear { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  .context { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: .45rem; margin: 0 0 .3rem; min-height: 1.7em; color: var(--gris); font-size: .98rem; }
+  .niveau { font-size: .78rem; font-weight: 700; color: var(--encre-2); border: 1px solid var(--trait-fort); border-radius: 999px; padding: .05rem .5rem; }
   .relation {
-    font-size: clamp(1.9rem, 8vw, 3.2rem);
+    font-size: clamp(2rem, 8.5vw, 3.3rem);
     min-height: 2.8em;
     display: flex; align-items: center; justify-content: center;
-    overflow-x: auto;
-    padding: .25em 0;
+    overflow-x: auto; padding: .2em .25em;
   }
-  .prompt { text-align: center; color: var(--muted); margin: 1.1rem 0 1rem; font-size: 1.05rem; }
-  .prompt .var { color: var(--ink); font-size: 1.15em; }
+  .prompt { text-align: center; margin: .6rem 0 1.1rem; font-size: 1.15rem; font-weight: 700; }
+  .prompt .var { font-size: 1.1em; margin-left: .2em; }
 
-  .options { display: flex; flex-direction: column; gap: .6rem; }
-  .option {
-    display: flex; align-items: center; gap: .8rem;
-    width: 100%; min-height: 4.4rem;
-    padding: .7rem 1.1rem;
-    background: transparent; color: var(--ink);
-    border: 1px solid var(--rule); border-radius: 6px;
-    font: inherit; text-align: left; cursor: pointer;
-    transition: background-color .12s, border-color .12s;
+  /* le surligneur : la grandeur cherchée, partout où elle apparaît */
+  /* Le trait est un pseudo-élément placé derrière la lettre : il ne change pas la mise en page
+     de la formule, dépasse un peu de chaque côté comme un vrai coup de feutre, suit la pente
+     de l'italique et reçoit une légère rotation propre à chaque occurrence (voir math()). */
+  .hl-cible { position: relative; z-index: 0; color: var(--feutre-texte); }
+  .hl-cible::before {
+    content: ""; position: absolute; z-index: -1; pointer-events: none;
+    left: -.17em; right: -.07em; top: .16em; bottom: .02em;
+    border-radius: .55em .28em .5em .32em / .45em .6em .4em .55em;
+    background:
+      linear-gradient(to bottom, transparent 30%, var(--feutre-reflet) 36%, transparent 46%),
+      linear-gradient(100deg, var(--feutre-bord) 0%, var(--feutre) 13%, var(--feutre) 80%, var(--feutre-bord) 100%);
+    transform: rotate(var(--rot, -1deg)) skewX(-9deg);
+    mix-blend-mode: var(--feutre-melange);
   }
-  .option .key { flex: none; width: 1.2rem; font-size: .85rem; color: var(--muted); }
-  .option .expr { flex: 1; text-align: center; font-size: 1.45rem; overflow-x: auto; padding: .2em 0; }
-  .option:hover:not(:disabled) { border-color: var(--ink); background: var(--hover); }
-  .option:disabled { cursor: default; color: var(--ink); }
-  .option.is-correct { border-color: var(--ok); background: var(--ok-bg); color: var(--ok); }
-  .option.is-wrong { border-color: var(--ko); background: var(--ko-bg); color: var(--ko); }
-  .option.is-dim { opacity: .4; }
+  /* variante discrète : une bande basse, ajustée, sans effet de main */
+  .surlignage-discret .hl-cible::before {
+    left: -.02em; right: -.02em; top: 50%; bottom: 17%;
+    border-radius: .1em; transform: none;
+    background: var(--feutre);
+  }
+  /* le terme déplacé à l'étape en cours de la correction */
+  .hl-bouge { color: var(--stylo); }
+
+  /* les propositions sont des touches : un relief en bas, enfoncé au clic */
+  .options { display: flex; flex-direction: column; gap: .65rem; }
+  .option {
+    position: relative; display: flex; align-items: center; gap: .8rem;
+    width: 100%; min-height: 4.4rem; padding: .6rem 1rem;
+    background: var(--carte); color: var(--encre);
+    border: 1.5px solid var(--trait); border-bottom-width: 4px; border-radius: 12px;
+    font: inherit; text-align: left; cursor: pointer;
+    transition: transform .08s, border-color .12s, background-color .12s;
+  }
+  .option .key {
+    flex: none; display: grid; place-items: center; width: 1.7rem; height: 1.7rem;
+    font-size: .85rem; font-weight: 700; color: var(--gris);
+    border: 1.5px solid var(--trait-fort); border-bottom-width: 3px; border-radius: 6px;
+  }
+  .option .expr { flex: 1; text-align: center; font-size: 1.45rem; overflow-x: auto; padding: .15em .25em; }
+  .option:hover:not(:disabled) { border-color: var(--trait-fort); background: var(--survol); }
+  .option:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
+  .option:disabled { cursor: default; }
+  .option.is-correct { border-color: var(--juste); background: var(--juste-fond); color: var(--juste); animation: pop .32s ease-out; }
+  .option.is-correct .key { border-color: var(--juste); color: var(--juste); }
+  .option.is-wrong { border-color: var(--faux); background: var(--faux-fond); color: var(--faux); animation: shake .32s ease-in-out; }
+  .option.is-wrong .key { border-color: var(--faux); color: var(--faux); }
+  .option.is-dim { opacity: .38; }
+  @keyframes pop { 0% { transform: scale(1); } 45% { transform: scale(1.025); } 100% { transform: scale(1); } }
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 55% { transform: translateX(4px); } 80% { transform: translateX(-2px); } }
   @media (hover: none) { .option .key { display: none; } }
 
-  .feedback { margin: 1rem auto 0; max-width: 33rem; text-align: center; font-size: 1rem; }
-  .feedback:empty { min-height: 3.2em; }
-  .verdict { margin: 0; }
-  .steps { margin: 1rem 0 0; padding: .1rem 0 .1rem .95rem; border-left: 2px solid var(--rule); text-align: left; }
-  .feedback.ko .steps { border-color: var(--ko); }
-  .step { padding: .3rem 0; }
-  .step .note { font-size: .93rem; color: var(--muted); }
-  .step .eq { font-size: 1.18rem; overflow-x: auto; padding: .12em 0; }
-  .step.err .note { color: var(--ko); }
-  .step .blame { font-size: .93rem; color: var(--ko); padding-top: .1rem; }
-  .step.final .eq { font-weight: bold; }
-  details.check { margin-top: .8rem; text-align: left; }
-  details.check summary { cursor: pointer; color: var(--muted); font-size: .93rem; padding: .25rem 0; }
-  details.check .line { padding: .2rem 0; font-size: .97rem; }
-  details.check .line .num { overflow-x: auto; }
-  details.check .bad { color: var(--ko); }
-  details.check .good { color: var(--ok); }
-  .feedback.ok .verdict { color: var(--ok); }
-  .feedback.ko .verdict { color: var(--ko); }
-  .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; min-height: 3rem; }
-
-  button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-  .btn {
-    font: inherit; font-size: 1rem;
-    padding: .55rem 1.5rem;
-    border: 1px solid var(--ink); border-radius: 6px;
-    background: var(--ink); color: var(--paper);
-    cursor: pointer;
+  .dunno-row { text-align: center; margin-top: .55rem; min-height: 2.3rem; }
+  .link {
+    background: none; border: 0; padding: .35rem .5rem; font: inherit; font-size: .95rem;
+    color: var(--gris); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
   }
-  .btn:hover { background: var(--ink-soft); }
+  .link:hover { color: var(--encre); }
+  .nowrap { white-space: nowrap; }
+
+  /* ---------- correction ---------- */
+  .feedback { margin: 1rem auto 0; max-width: 34rem; }
+  .feedback:empty { min-height: 3.2em; }
+  .verdict { margin: 0; text-align: center; font-weight: 700; font-size: 1.1rem; }
+  .feedback.ok .verdict { color: var(--juste); }
+  .feedback.ko .verdict { color: var(--faux); }
+  .steps { counter-reset: etape; margin: .9rem 0 0; padding: .2rem 0 .2rem .9rem; border-left: 3px solid var(--trait); text-align: left; }
+  .feedback.ko .steps { border-color: var(--faux); }
+  .step { position: relative; padding: .45rem .6rem .45rem 2.2rem; border-radius: 8px; }
+  .step:not(.depart) { counter-increment: etape; }
+  .step:not(.depart)::before {
+    content: counter(etape); position: absolute; left: .35rem; top: .5rem;
+    width: 1.35rem; height: 1.35rem; display: grid; place-items: center;
+    font-size: .75rem; font-weight: 700; color: var(--gris);
+    border: 1.5px solid var(--trait-fort); border-radius: 50%;
+  }
+  .step.depart { padding-left: .6rem; }
+  .step .note { font-size: .95rem; color: var(--gris); }
+  .step .eq { font-size: 1.2rem; overflow-x: auto; padding: .15em .25em; }
+  .step.err { background: var(--faux-fond); }
+  .step.err::before { border-color: var(--faux); color: var(--faux); }
+  .step.err .note { color: var(--faux); }
+  .step .blame { font-size: .93rem; color: var(--faux); font-weight: 700; padding-top: .15rem; }
+  .step.final { background: var(--juste-fond); }
+  .step.final::before { border-color: var(--juste); color: var(--juste); }
+  /* si l'erreur a été commise à la dernière étape, c'est elle qu'on signale */
+  .step.final.err { background: var(--faux-fond); }
+  .step.final.err::before { border-color: var(--faux); color: var(--faux); }
+
+  details.check { margin-top: .9rem; text-align: left; }
+  details.check summary { cursor: pointer; color: var(--gris); font-size: .95rem; padding: .25rem 0; }
+  details.check .line { padding: .2rem 0; font-size: .98rem; }
+  details.check .bad { color: var(--faux); }
+  details.check .good { color: var(--juste); }
+
+  .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; min-height: 3rem; margin-top: .9rem; }
+  button:focus-visible, summary:focus-visible { outline: 3px solid var(--stylo); outline-offset: 2px; }
+  .btn {
+    font: inherit; font-size: 1.02rem; font-weight: 700; padding: .6rem 1.5rem;
+    border: 0; border-bottom: 3px solid rgba(0, 0, 0, .28); border-radius: 10px;
+    background: var(--encre); color: var(--papier); cursor: pointer;
+  }
+  .btn:hover { background: var(--encre-2); }
+  .btn:active { transform: translateY(2px); border-bottom-width: 1px; }
   [hidden] { display: none !important; }
 
-  .result { text-align: center; padding-top: 2.5rem; }
-  .score { font-size: clamp(2.6rem, 11vw, 4rem); margin: 0; }
-  .comment { max-width: 32rem; margin: 1.5rem auto 2rem; font-size: 1.1rem; line-height: 1.65; }
-  .recap { text-align: left; margin-top: 1rem; border-top: 1px solid var(--rule); }
-  .recap h2 { font-size: 1rem; font-weight: normal; font-style: italic; color: var(--muted); margin: 1.2rem 0 .2rem; }
-  .item { padding: 1rem 0; border-bottom: 1px solid var(--rule); }
-  .item .ctx { font-size: .9rem; font-style: italic; color: var(--muted); }
-  .item .rel { font-size: 1.3rem; overflow-x: auto; padding: .35em 0 .15em; }
-  .item .line { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1rem; margin-top: .6rem; }
-  .item .lab { min-width: 8rem; font-size: .9rem; color: var(--muted); }
-  .item .m { font-size: 1.15rem; padding: .15em 0; overflow-x: auto; }
-  .item .bad { color: var(--ko); }
-  .item .good { color: var(--ok); }
-  .item .why { margin-top: .45rem; font-size: .95rem; color: var(--muted); }
-  .result .actions { margin-top: 2rem; }
+  /* ---------- résultat ---------- */
+  .result { text-align: center; padding-top: 2rem; }
+  .score { font-size: clamp(2.8rem, 12vw, 4.2rem); margin: 0; }
+  .times { color: var(--gris); margin: .5rem 0 0; font-size: 1rem; }
+  .times .record { color: var(--encre); font-weight: 700; }
+  .palier { margin: .9rem auto 0; max-width: 30rem; font-size: 1.05rem; }
+  .palier strong { font-weight: 700; }
+  .comment { max-width: 32rem; margin: 1rem auto 1.8rem; font-size: 1.05rem; line-height: 1.6; }
+  .recap { text-align: left; margin-top: 1rem; border-top: 1px solid var(--trait); }
+  .recap h2 { font-size: 1.05rem; margin: 1.3rem 0 .2rem; }
+  .item { padding: 1rem 0; border-bottom: 1px solid var(--trait); }
+  .item .ctx { font-size: .9rem; color: var(--gris); display: flex; align-items: center; gap: .45rem; flex-wrap: wrap; }
+  .item .rel { font-size: 1.35rem; overflow-x: auto; padding: .35em .25em .15em; }
+  .item .line { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1rem; margin-top: .5rem; }
+  .item .lab { min-width: 8.5rem; font-size: .9rem; color: var(--gris); }
+  .item .m { font-size: 1.15rem; padding: .15em 0; }
+  .item .bad { color: var(--faux); }
+  .item .good { color: var(--juste); }
 
   @media (prefers-reduced-motion: reduce) {
-    .fade { animation: none; }
-    .option { transition: none; }
+    .fade, .option.is-correct, .option.is-wrong, .serie.pop { animation: none; }
+    .option, .tick { transition: none; }
+    .option:active:not(:disabled), .btn:active { transform: none; }
   }
 </style>
 </head>
@@ -149,9 +236,9 @@
   <header>
     <div class="top">
       <span class="title">Isoler une grandeur</span>
-      <span class="meta"><span class="chrono" id="chrono"></span><span class="count" id="count"></span></span>
+      <span class="meta"><span class="serie" id="serie" aria-live="polite"></span><span class="chrono" id="chrono"></span><span class="count" id="count"></span></span>
     </div>
-    <div class="ticks" id="ticks" aria-hidden="true"></div>
+    <div class="ticks" id="ticks" aria-hidden="true" title="Chaque barre est une question ; sa hauteur indique sa difficulté."></div>
   </header>
 
   <section class="stage" id="screen-q" aria-live="polite">
@@ -167,6 +254,7 @@
   <section class="result" id="screen-end" hidden>
     <p class="score" id="score"></p>
     <p class="times" id="times"></p>
+    <p class="palier" id="palier"></p>
     <p class="comment" id="comment"></p>
     <div class="recap" id="recap" hidden></div>
     <div class="actions">
@@ -188,6 +276,7 @@ const CONFIG = {
   multSymbolPhysique: '\\times',  // symbole de multiplication : '\\times', '\\cdot' ou '' (juxtaposition)
   swapProbability: 0.25,          // dès la question 4 : relation parfois écrite « expression = grandeur »
   courbe: 0.65,                   // < 1 : les dernières bandes de difficulté sont resserrées sur le haut de l'échelle
+  surlignage: 'feutre',           // 'feutre' (trait de surligneur) ou 'discret' (bande basse ajustée) ; URL : ?surlignage=discret
   autoAdvanceMs: 900,             // délai avant la question suivante après une bonne réponse
   chrono: true                    // false : chronomètre masqué par défaut
 };
@@ -267,8 +356,16 @@ function factorOrder(t) {
   return [a, b];
 }
 
+/* Marquage visuel : la grandeur cherchée (surlignée) et le terme déplacé à l'étape en cours.
+   Rendu par \htmlClass, que KaTeX n'accepte qu'avec l'option trust (voir math()). */
+const HL = { cible: null, bouge: new Set() };
 function tex(t, inFrac = false) {
-  if (isLeaf(t)) return t.tex !== undefined ? t.tex : (GREEK_TEX[t.v] || t.v);
+  if (isLeaf(t)) {
+    const base = t.tex !== undefined ? t.tex : (GREEK_TEX[t.v] || t.v);
+    if (t.v === HL.cible) return '\\htmlClass{hl-cible}{' + base + '}';
+    if (HL.bouge.has(t.v)) return '\\htmlClass{hl-bouge}{' + base + '}';
+    return base;
+  }
   const paren = s => /frac/.test(s) ? '\\left(' + s + '\\right)' : '(' + s + ')';
   switch (t.op) {
     case '+': return tex(t.l, inFrac) + ' + ' + tex(t.r, inFrac);
@@ -395,34 +492,41 @@ function solveFor(side, other, target, err) {
    parce que c'est là que se concentrent les erreurs. */
 function traceSolve(side, other, target, echange) {
   const rows = [];
-  const M = t => '$' + tex(norm(t)) + '$';
-  const push = (l, r, note, step, sub) => rows.push({ l: norm(l), r: norm(r), note, step, sub });
+  /* une ligne de calcul : l'égalité obtenue, et la phrase qui dit ce qu'on a fait ;
+     le terme déplacé est marqué dans les deux, pour qu'on le suive de l'un à l'autre */
+  const pas = (l, r, bouge, gabarit, step) => {
+    HL.bouge = new Set(bouge ? leaves(bouge) : []);
+    const note = gabarit ? gabarit.replace('#', () => '$' + tex(norm(bouge)) + '$') : null;
+    rows.push({ tex: tex(norm(l)) + ' = ' + tex(norm(r)), txt: txt(norm(l)) + ' = ' + txt(norm(r)), note, step });
+    HL.bouge = new Set();
+  };
   let e = side, O = other, step = 0;
-  push(e, O, echange ? 'on écrit la relation en plaçant à gauche le membre qui contient la grandeur cherchée' : null, -1);
+  pas(e, O, null, echange ? 'on écrit la relation en plaçant à gauche le membre qui contient la grandeur cherchée' : null, -1);
+  rows[0].depart = !echange;
   while (!isLeaf(e)) {
     const inL = contains(e.l, target);
     const X = inL ? e.r : e.l;
     const T = inL ? e.l : e.r;
-    if (e.op === '+') { const R = sub(O, X); push(T, R, 'on retranche ' + M(X) + ' aux deux membres', step); O = R; }
-    else if (e.op === '-' && inL) { const R = add(O, X); push(T, R, 'on ajoute ' + M(X) + ' aux deux membres', step); O = R; }
+    if (e.op === '+') { const R = sub(O, X); pas(T, R, X, 'on retranche # aux deux membres', step); O = R; }
+    else if (e.op === '-' && inL) { const R = add(O, X); pas(T, R, X, 'on ajoute # aux deux membres', step); O = R; }
     else if (e.op === '-') {
-      push(X, add(O, T), 'on ajoute ' + M(T) + ' aux deux membres, pour que la grandeur cherchée ne soit plus retranchée', step, 0);
+      pas(X, add(O, T), T, 'on ajoute # aux deux membres, pour que la grandeur cherchée ne soit plus retranchée', step);
       const R = sub(X, O);
-      push(T, R, 'on retranche ' + M(O) + ' aux deux membres', step, 1);
+      pas(T, R, O, 'on retranche # aux deux membres', step);
       O = R;
     }
-    else if (e.op === '*') { const R = div(O, X); push(T, R, 'on divise les deux membres par ' + M(X), step); O = R; }
-    else if (e.op === '/' && inL) { const R = mul(O, X); push(T, R, 'on multiplie les deux membres par ' + M(X), step); O = R; }
+    else if (e.op === '*') { const R = div(O, X); pas(T, R, X, 'on divise les deux membres par #', step); O = R; }
+    else if (e.op === '/' && inL) { const R = mul(O, X); pas(T, R, X, 'on multiplie les deux membres par #', step); O = R; }
     else {
-      push(X, mul(O, T), 'on multiplie les deux membres par ' + M(T) + ', pour que la grandeur cherchée ne soit plus au dénominateur', step, 0);
+      pas(X, mul(O, T), T, 'on multiplie les deux membres par #, pour que la grandeur cherchée ne soit plus au dénominateur', step);
       const R = div(X, O);
-      push(T, R, 'on divise les deux membres par ' + M(O), step, 1);
+      pas(T, R, O, 'on divise les deux membres par #', step);
       O = R;
     }
     e = T; step++;
   }
   rows[rows.length - 1].final = true;
-  return rows.map(r => ({ tex: tex(r.l) + ' = ' + tex(r.r), txt: txt(r.l) + ' = ' + txt(r.r), note: r.note, step: r.step, final: r.final }));
+  return rows;
 }
 
 /* Vérification numérique : substituer des valeurs simples et voir laquelle des deux
@@ -468,6 +572,8 @@ const shapeDist = (a, b) => Math.abs(a.div - b.div) + Math.abs(a.add - b.add) + 
 /* Construit une question à partir d'une relation et d'une grandeur à isoler (null si impossible) */
 function makeQuestion(lhs, rhs, target, opts) {
   MULT = opts.mult;
+  HL.cible = target;
+  HL.bouge = new Set();
   const onLeft = contains(lhs, target);
   const side = onLeft ? lhs : rhs, other = onLeft ? rhs : lhs;
 
@@ -812,7 +918,7 @@ function buildSeries(nq = CONFIG.nbQuestions) {
    ===================================================================== */
 const $ = id => document.getElementById(id);
 const els = {
-  count: $('count'), ticks: $('ticks'), chrono: $('chrono'), times: $('times'), chronoToggle: $('chrono-toggle'),
+  count: $('count'), ticks: $('ticks'), chrono: $('chrono'), serie: $('serie'), palier: $('palier'), times: $('times'), chronoToggle: $('chrono-toggle'),
   screenQ: $('screen-q'), screenEnd: $('screen-end'),
   context: $('context'), relation: $('relation'), target: $('target'),
   options: $('options'), feedback: $('feedback'), next: $('next'), dunno: $('dunno-row'),
@@ -821,7 +927,7 @@ const els = {
 };
 const NQ = CONFIG.nbQuestions;
 const NIVEAU_NOM = { '2de': 'seconde', '1re': 'première', 'Tle': 'terminale' };
-const state = { i: 0, questions: [], answers: [], locked: false, timer: null };
+const state = { i: 0, questions: [], answers: [], locked: false, timer: null, serie: 0, meilleureSerie: 0 };
 
 /* Chronomètre : il ne tourne que pendant la recherche de la réponse.
    Le temps de lecture des corrections n'est pas compté, et l'onglet masqué met en pause. */
@@ -853,9 +959,21 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) chron
 let record = null;    // meilleure performance de la séance : score d'abord, temps ensuite
 let dernier = null;   // dernière partie terminée : { score, ms, bat } 
 
+const KATEX_OPTS = { throwOnError: false, displayMode: false, strict: 'ignore', trust: c => c.command === '\\htmlClass' };
 function math(el, texStr, txtStr) {
-  if (window.katex) katex.render(texStr, el, { throwOnError: false, displayMode: false });
-  else el.textContent = txtStr;
+  if (window.katex) {
+    katex.render(texStr, el, KATEX_OPTS);
+    el.querySelectorAll('.hl-cible').forEach(n => n.style.setProperty('--rot', (Math.random() * 1.8 - 1.5).toFixed(2) + 'deg'));
+  } else el.textContent = txtStr;
+}
+/* nom de la relation suivi d'une pastille de niveau */
+function contexte(el, q) {
+  el.textContent = '';
+  if (q.label) { const n = document.createElement('span'); n.textContent = q.label; el.appendChild(n); }
+  if (q.niveau) { const c = document.createElement('span'); c.className = 'niveau'; c.textContent = NIVEAU_NOM[q.niveau]; el.appendChild(c); }
+}
+function majSerie() {
+  els.serie.textContent = state.serie >= 2 ? state.serie + ' de suite' : '';
 }
 /* Les relations longues sont réduites avant d'être coupées en deux lignes */
 function ajuster(el) {
@@ -869,6 +987,7 @@ function ajuster(el) {
 
 function plain(texStr) {
   return texStr
+    .replace(/\\htmlClass\{[^{}]*\}/g, '')
     .replace(/\\dfrac\{([^{}]*)\}\{([^{}]*)\}/g, '($1)/($2)')
     .replace(/\\(text|left|right)/g, '').replace(/\{,\}/g, ',')
     .replace(/\\times/g, '×').replace(/\\cdot/g, '·').replace(/\\,/g, ' ')
@@ -881,6 +1000,7 @@ function rich(el, str) {
     if (i % 2 === 0) { if (part) el.appendChild(document.createTextNode(part)); return; }
     const sp = document.createElement('span');
     math(sp, part, plain(part));
+    if (plain(part).length < 32) sp.className = 'nowrap';   // une courte formule ne se coupe pas en fin de ligne
     el.appendChild(sp);
   });
 }
@@ -894,7 +1014,7 @@ function renderSteps(box, q, chosen) {
     const blame = chosen && !chosen.ok && r.step === chosen.errStep
       && !q.steps.slice(i + 1).some(x => x.step === chosen.errStep);
     const div = document.createElement('div');
-    div.className = 'step' + (blame ? ' err' : '') + (r.final ? ' final' : '');
+    div.className = 'step' + (r.depart ? ' depart' : '') + (blame ? ' err' : '') + (r.final ? ' final' : '');
     if (r.note) { const n = document.createElement('div'); n.className = 'note'; rich(n, r.note); div.appendChild(n); }
     const eq = document.createElement('div');
     eq.className = 'eq';
@@ -947,13 +1067,15 @@ function start() {
   state.answers = [];
   state.i = 0;
   chrono.reset();
-  els.ticks.style.setProperty('--n', NQ);
+  state.serie = 0; state.meilleureSerie = 0; majSerie();
+  const tous = physicsPairs(), smin = tous[0].score, smax = tous[tous.length - 1].score;
   els.ticks.innerHTML = '';
-  for (let k = 0; k < NQ; k++) {
+  state.questions.forEach(q => {
     const t = document.createElement('span');
     t.className = 'tick';
+    t.style.setProperty('--h', Math.round(16 + 84 * (q.score - smin) / Math.max(1e-9, smax - smin)) + '%');
     els.ticks.appendChild(t);
-  }
+  });
   show('q');
   showQuestion();
 }
@@ -964,7 +1086,7 @@ function showQuestion() {
   els.count.textContent = (state.i + 1) + ' / ' + NQ;
   [...els.ticks.children].forEach((t, k) => t.classList.toggle('current', k === state.i));
 
-  els.context.textContent = q.label + (q.niveau ? ' · ' + NIVEAU_NOM[q.niveau] : '');
+  contexte(els.context, q);
   math(els.relation, q.relTex, q.relTxt);
   math(els.target, q.targetTex, q.targetTxt);
 
@@ -1012,6 +1134,10 @@ function answer(k) {
   const tick = els.ticks.children[state.i];
   tick.classList.remove('current');
   tick.classList.add(ok ? 'ok' : 'ko');
+  state.serie = ok ? state.serie + 1 : 0;
+  state.meilleureSerie = Math.max(state.meilleureSerie, state.serie);
+  majSerie();
+  if (ok && state.serie >= 2) { els.serie.classList.remove('pop'); void els.serie.offsetWidth; els.serie.classList.add('pop'); }
 
   els.feedback.innerHTML = '';
   els.feedback.className = 'feedback ' + (ok ? 'ok' : chosen ? 'ko' : '');
@@ -1063,6 +1189,15 @@ function showEnd() {
   dernier = { score, ms, bat, avant: record };
   if (bat) record = { score, ms };
   afficherTemps();
+  const reussies = state.answers.map((a, k) => a.ok ? k + 1 : 0).filter(Boolean);
+  els.palier.textContent = '';
+  if (reussies.length) {
+    const haut = Math.max(...reussies);
+    const b = document.createElement('strong');
+    b.textContent = haut === NQ ? 'La dernière marche, la plus difficile, est franchie.' : 'Marche la plus haute franchie : ' + haut + ' sur ' + NQ + '.';
+    els.palier.appendChild(b);
+    if (state.meilleureSerie >= 2) els.palier.appendChild(document.createTextNode(' Meilleure série : ' + state.meilleureSerie + ' réponses justes d’affilée.'));
+  }
   els.comment.textContent = commentFor(score);
 
   const wrong = state.answers.filter(a => !a.ok);
@@ -1081,7 +1216,7 @@ function showEnd() {
         '<div class="rel"></div>' +
         '<div class="line"><span class="lab">Réponse donnée</span><span class="m bad"></span></div>' +
         '<div class="line"><span class="lab">Réponse attendue</span><span class="m good"></span></div>';
-      if (a.q.label) item.querySelector('.ctx').textContent = a.q.label + (a.q.niveau ? ' · ' + NIVEAU_NOM[a.q.niveau] : '');
+      if (a.q.label) contexte(item.querySelector('.ctx'), a.q);
       math(item.querySelector('.rel'), a.q.relTex, a.q.relTxt);
       ajuster(item.querySelector('.rel'));
       if (a.chosen) math(item.querySelector('.bad'), a.chosen.tex, a.chosen.txt);
@@ -1138,6 +1273,9 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  const sl = new URLSearchParams(location.search).get('surlignage');
+  if (sl === 'feutre' || sl === 'discret') CONFIG.surlignage = sl;
+  document.body.classList.toggle('surlignage-discret', CONFIG.surlignage === 'discret');
   const n = new URLSearchParams(location.search).get('niveau');
   if (n) {
     const choix = n.split(',').map(x => x.trim()).filter(x => ['2de', '1re', 'Tle'].includes(x));
