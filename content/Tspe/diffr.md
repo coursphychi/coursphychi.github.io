@@ -47,7 +47,7 @@ td, th {
   <td style="border-bottom:none;"><a href="/act-conditinterf.pdf" target=”_blank”><b> Conditions d'interférences </b></a> + <a href="https://presentationssite.github.io/interf.html" target="_blank"><b style="color:#FF95CA;"> <i class="fa-solid fa-video"></i> </b></a></td>
   </tr>
   <tr>
-   <td style="border-top:none;"><a href="/act-rab.pdf" target=”_blank”><b>Écouteurs à réduction active de bruit</b></a></td>
+   <td style="border-top:none;"><a href="/act-rab.pdf" target=”_blank”><b>Écouteurs à réduction active de bruit</b></a>&nbsp;+&nbsp;<a href="/rabcorr.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
    </tr>
      <tr>
   <th rowspan="2 ">Appliquettes</th>
