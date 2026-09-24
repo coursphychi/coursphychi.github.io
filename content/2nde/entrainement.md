@@ -32,7 +32,7 @@ Les quiz ci-dessous visent à vérifier ou installer certains automatismes très
 
 Les lois consistent en des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l'une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s'aguerrir dans cet exercice et le quiz suivant permet de tester votre agilité.
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="/quiz-relations.html"> Quiz relations </a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="/quiz-relations.html">Quiz relations  (avec de simple lettres)</a><br><a href="/quiz-relations.html?mode=physique">Quiz relations (avec formules de physique-chimie) </a></p>
 
 La cible idéale à atteindre est un score de 10/10 en environ une minute.
 
@@ -47,7 +47,7 @@ La cible idéale à atteindre est un score de 10/10 en environ une minute.
 <img src="/bandeaunum.png" style="box-shadow:none;background:none;border-radius:3px;">
 </div>
 
-Une fois qu'on a déterminer la bonne formule littérale pour la grandeur cherchée, on calcule (on dit qu'on fait l'application numérique). Plusieurs difficultés se dressent alors&nbsp;: les grandeurs doivent être converties pour que les unités «&nbsp;se parlent&nbsp;», la précision des mesures doit être retranscrites dans le nombre de chiffres significatifs et pour que le résultat soit le plus lisible possible, on utilise la notation scientifique.
+Une fois qu'on a déterminé la bonne formule littérale pour la grandeur cherchée, on calcule (on dit qu'on fait l'application numérique). Plusieurs difficultés se dressent alors&nbsp;: les grandeurs doivent être converties pour que les unités «&nbsp;se parlent&nbsp;», la précision des mesures doit être retranscrites dans le nombre de chiffres significatifs et pour que le résultat soit le plus lisible possible, on utilise la notation scientifique.
 
 Le quiz ci-dessous permet de diagnostiquer et renforcer les points suivant&nbsp;: 
 <ul style="margin-top:-0.5em; margin-bottom:1em;">

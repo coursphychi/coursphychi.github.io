@@ -272,8 +272,10 @@
    ===================================================================== */
 const CONFIG = {
   nbQuestions: 10,
-  niveaux: ['2de', '1re', 'Tle'], // niveaux tirés au sort ; paramètre d'URL : ?niveau=2de ou ?niveau=1re,Tle
-  multSymbolPhysique: '\\times',  // symbole de multiplication : '\\times', '\\cdot' ou '' (juxtaposition)
+  mode: 'lettres',                // 'lettres' (a, b, c…) ou 'physique' (symboles des relations) ; URL : ?mode=physique
+  niveaux: ['2de', '1re', 'Tle'], // mode physique : niveaux tirés au sort ; URL : ?niveau=2de ou ?niveau=1re,Tle
+  multSymbolLettres: '',          // mode lettres : '' (juxtaposition, 2ab), '\\times' ou '\\cdot'
+  multSymbolPhysique: '\\times',  // mode physique : '\\times', '\\cdot' ou '' (juxtaposition)
   swapProbability: 0.25,          // dès la question 4 : relation parfois écrite « expression = grandeur »
   courbe: 0.65,                   // < 1 : les dernières bandes de difficulté sont resserrées sur le haut de l'échelle
   surlignage: 'feutre',           // 'feutre' (trait de surligneur) ou 'discret' (bande basse ajustée) ; URL : ?surlignage=discret
@@ -359,6 +361,7 @@ function factorOrder(t) {
 /* Marquage visuel : la grandeur cherchée (surlignée) et le terme déplacé à l'étape en cours.
    Rendu par \htmlClass, que KaTeX n'accepte qu'avec l'option trust (voir math()). */
 const HL = { cible: null, bouge: new Set() };
+let TRI_PRODUITS = false;   // vrai en mode lettres
 function tex(t, inFrac = false) {
   if (isLeaf(t)) {
     const base = t.tex !== undefined ? t.tex : (GREEK_TEX[t.v] || t.v);
@@ -371,8 +374,18 @@ function tex(t, inFrac = false) {
     case '+': return tex(t.l, inFrac) + ' + ' + tex(t.r, inFrac);
     case '-': return tex(t.l, inFrac) + ' - ' + (isAdditive(t.r) ? paren(tex(t.r, inFrac)) : tex(t.r, inFrac));
     case '*': {
-      const [a, b] = factorOrder(t);
       const f = n => isAdditive(n) ? paren(tex(n, inFrac)) : tex(n, inFrac);
+      if (TRI_PRODUITS) {
+        /* mode lettres : les facteurs d'un produit sont écrits dans l'ordre usuel,
+           nombre d'abord, lettres dans l'ordre alphabétique, parenthèses en dernier (2abc(d − e)) */
+        const fs = [];
+        const cueillir = n => { if (!isLeaf(n) && n.op === '*') { cueillir(n.l); cueillir(n.r); } else fs.push(n); };
+        cueillir(t);
+        const rang = n => (isConst(n) ? 0 : isLeaf(n) ? 1 : 2);
+        fs.sort((x, y) => rang(x) - rang(y) || (rang(x) === 1 ? String(x.tex).localeCompare(String(y.tex)) : 0));
+        return fs.map((n, k) => (k === 0 ? '' : MULT ? ' ' + MULT + ' ' : ' ') + f(n)).join('');
+      }
+      const [a, b] = factorOrder(t);
       const sep = MULT ? ' ' + MULT + ' ' : (isAdditive(b) ? ' ' : '\\,');
       return f(a) + sep + f(b);
     }
@@ -531,12 +544,12 @@ function traceSolve(side, other, target, echange) {
 
 /* Vérification numérique : substituer des valeurs simples et voir laquelle des deux
    propositions redonne la relation de départ. */
-function fmtNum(x) {
+function fmtNum(x, approx = true) {
   const r = Math.round(x * 100) / 100;
-  return (Number.isInteger(x) ? '' : (Math.abs(r - x) > 1e-9 ? '\\approx ' : '')) + String(r).replace('.', '{,}');
+  return (approx && Math.abs(r - x) > 1e-9 ? '\\approx ' : '') + String(r).replace('.', '{,}');
 }
 function numCheck(lhs, rhs, target, correctTree, wrongTree) {
-  const vars = [...new Set(leaves(lhs).concat(leaves(rhs)))].filter(x => x !== target);
+  const vars = [...new Set(leaves(lhs).concat(leaves(rhs)))].filter(x => x !== target && x[0] !== '#');
   const nameOf = x => tex(findLeaf(lhs, x) || findLeaf(rhs, x));
   const joli = x => Math.abs(x * 10 - Math.round(x * 10)) < 1e-9;
   for (let t = 0; t < 900; t++) {
@@ -553,9 +566,10 @@ function numCheck(lhs, rhs, target, correctTree, wrongTree) {
     const L1 = evalT(lhs, e1), R1 = evalT(rhs, e1), L2 = evalT(lhs, e2), R2 = evalT(rhs, e2);
     if (!isFinite(L2) || !isFinite(R2) || Math.abs(L2 - R2) < 1e-9) continue;
     return {
-      donnees: vars.map(x => '$' + nameOf(x) + ' = ' + env[x] + '$').join(', '),
-      mauvais: '$' + fmtNum(wv) + '$', mauvaisRel: '$' + fmtNum(L2) + ' = ' + fmtNum(R2) + '$',
-      bon: '$' + fmtNum(tv) + '$', bonRel: '$' + fmtNum(L1) + ' = ' + fmtNum(R1) + '$'
+      donnees: vars.map(x => [nameOf(x), env[x]]).sort((u, w) => u[0].localeCompare(w[0]))
+        .map(([n, v]) => '$' + n + ' = ' + v + '$').join(', '),
+      mauvais: '$' + fmtNum(wv) + '$', mauvaisRel: '$' + fmtNum(L2, false) + ' \\neq ' + fmtNum(R2, false) + '$',
+      bon: '$' + fmtNum(tv) + '$', bonRel: '$' + fmtNum(L1, false) + ' = ' + fmtNum(R1, false) + '$'
     };
   }
   return null;
@@ -857,13 +871,43 @@ function difficulty(lhs, rhs, target) {
   return 1.5 * cout + 0.5 * nVars + (isLeaf(other) ? 0 : 1) + (all.some(id => id[0] === '#') ? 0.5 : 0);
 }
 
+/* Mode lettres : chaque relation du catalogue garde sa structure, mais ses symboles sont
+   remplacés par a, b, c… dans l'ordre où on les lit dans la relation affichée. Les élèves
+   s'entraînent ainsi sur exactement les formes algébriques qu'ils retrouveront en physique. */
+const LETTRES = 'abcdefgh';
+function enLettres(l, r, cible, swap) {
+  const [A, B] = swap ? [r, l] : [l, r];
+  const marque = t => isLeaf(t) ? (isConst(t) ? t : { v: t.v, tex: '⟦' + t.v + '⟧' }) : N(t.op, marque(t.l), marque(t.r));
+  const garde = HL.cible;
+  HL.cible = null;
+  const lu = tex(norm(marque(A))) + ' = ' + tex(norm(marque(B)));
+  HL.cible = garde;
+  const ordre = [...new Set([...lu.matchAll(/⟦([^⟧]+)⟧/g)].map(m => m[1]))];
+  const nom = id => LETTRES[ordre.indexOf(id)];
+  const conv = t => isLeaf(t) ? (isConst(t) ? t : { v: nom(t.v), tex: nom(t.v), txt: nom(t.v) }) : N(t.op, conv(t.l), conv(t.r));
+  return [conv(l), conv(r), nom(cible)];
+}
+
 function physicsPairs() {
-  const pairs = [];
-  let liste = PHYSICS.filter(r => CONFIG.niveaux.includes(r.niveau));
+  const lettres = CONFIG.mode === 'lettres';
+  let liste = lettres ? PHYSICS : PHYSICS.filter(r => CONFIG.niveaux.includes(r.niveau));
   if (liste.length < 6) liste = PHYSICS;
+  const pairs = [], dejaVu = new Set();
   liste.forEach(r => {
     const [l, rr] = r.f();
-    r.targets.forEach(tg => pairs.push({ r, target: tg, score: difficulty(l, rr, tg) }));
+    r.targets.forEach(tg => {
+      let family = r.family;
+      if (lettres) {
+        /* deux relations de même structure donnent la même question en lettres : on n'en garde qu'une */
+        MULT = CONFIG.multSymbolLettres;
+        const [L, R, c] = enLettres(l, rr, tg, false);
+        const rel = txt(L) + ' = ' + txt(R);
+        if (dejaVu.has(rel + '|' + c)) return;
+        dejaVu.add(rel + '|' + c);
+        family = rel;
+      }
+      pairs.push({ r, target: tg, family, score: difficulty(l, rr, tg) });
+    });
   });
   return pairs.sort((a, b) => a.score - b.score);
 }
@@ -872,10 +916,16 @@ function tenter(candidats, i, used, vus) {
   for (const o of shuffle(candidats)) {
     const [l, r] = o.r.f();
     const swap = i >= 3 && Math.random() < CONFIG.swapProbability;
-    const q = makeQuestion(l, r, o.target, { swap, mult: CONFIG.multSymbolPhysique, label: o.r.label });
+    const lettres = CONFIG.mode === 'lettres';
+    const mult = lettres ? CONFIG.multSymbolLettres : CONFIG.multSymbolPhysique;
+    MULT = mult;
+    TRI_PRODUITS = lettres;
+    const [L, R, cible] = lettres ? enLettres(l, r, o.target, swap) : [l, r, o.target];
+    const q = makeQuestion(L, R, cible, { swap, mult, label: lettres ? '' : o.r.label });
     if (q) {
-      used.add(o.r.family); vus.add(o.r.family + '|' + o.target);
-      q.niveau = o.r.niveau; q.score = o.score;
+      used.add(o.family); vus.add(o.family + '|' + o.target);
+      if (!lettres) q.niveau = o.r.niveau;
+      q.score = o.score;
       return q;
     }
   }
@@ -898,8 +948,8 @@ function buildSeries(nq = CONFIG.nbQuestions) {
   const bord = x => Math.floor(pairs.length * Math.pow(x / nq, CONFIG.courbe));
   for (let i = 0; i < nq; i++) {
     const lo = bord(i), hi = Math.max(bord(i + 1), lo + 1);
-    const libre = p => !used.has(p.r.family);
-    const inedit = p => !vus.has(p.r.family + '|' + p.target);
+    const libre = p => !used.has(p.family);
+    const inedit = p => !vus.has(p.family + '|' + p.target);
     const q =
       tenter(pairs.slice(lo, hi).filter(libre), i, used, vus) ||
       tenter(pairs.slice(lo).filter(libre), i, used, vus) ||
@@ -1174,7 +1224,8 @@ function commentFor(s) {
   else if (s >= 0.6 * NQ) c = "Bien. Les cas simples sont maîtrisés, mais les relations imbriquées demandent encore de l’attention : procéder pas à pas, en écrivant chaque étape.";
   else if (s >= 0.4 * NQ) c = "C’est un début. Pour isoler une grandeur, on défait les opérations une à une, en commençant par la dernière effectuée, et on applique chaque opération aux deux membres.";
   else c = "Les règles ne sont pas encore en place. Reprendre les relations à trois grandeurs (produit, quotient, somme, différence), puis recommencer.";
-  if (s < NQ) c += " Vérifier l’unité de l’expression obtenue permet souvent de repérer une erreur.";
+  if (s < NQ && CONFIG.mode === 'physique') c += " Vérifier l’unité de l’expression obtenue permet souvent de repérer une erreur.";
+  if (s < NQ && CONFIG.mode === 'lettres') c += " Pour contrôler une réponse, remplacer les lettres par des nombres simples et vérifier que la relation de départ reste vraie.";
   return c;
 }
 
@@ -1273,6 +1324,8 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  const md = new URLSearchParams(location.search).get('mode');
+  if (md === 'lettres' || md === 'physique') CONFIG.mode = md;
   const sl = new URLSearchParams(location.search).get('surlignage');
   if (sl === 'feutre' || sl === 'discret') CONFIG.surlignage = sl;
   document.body.classList.toggle('surlignage-discret', CONFIG.surlignage === 'discret');
