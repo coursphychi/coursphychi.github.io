@@ -32,7 +32,7 @@ Les quiz ci-dessous visent à vérifier ou installer certains automatismes très
 
 Les lois consistent en des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l'une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s'aguerrir dans cet exercice et le quiz suivant permet de tester votre agilité.
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="/quiz-relations.html">Quiz relations  (avec de simple lettres)</a><br><a href="/quiz-relations.html?mode=physique">Quiz relations (avec formules de physique-chimie) </a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="/quiz-relations.html">Quiz relations  (avec de simples lettres)</a><br><a href="/quiz-relations.html?mode=physique">Quiz relations (avec formules de physique-chimie) </a></p>
 
 La cible idéale à atteindre est un score de 10/10 en environ une minute.
 
