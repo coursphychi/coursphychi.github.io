@@ -40,7 +40,7 @@ td, th {
   <td style="border-bottom:none;"><a href="/tp-cheveu.pdf"><b>Épaisseur d'un cheveu</b></a></td>
   </tr>
      <tr>
- <td style="border-top:none;"><a href="/tp-irisations.pdf"><b>Irisations</b></a> + <a href="/interferences_lumiere_blanche.jpg"><b style="color:#FF95CA";><i class="fa-solid fa-photo-film"></i></b></a>&nbsp;+&nbsp;<a href="/explirr.png"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
+ <td style="border-top:none;"><a href="/tp-irisations.pdf"><b>Irisations</b></a> + <a href="/interferences_lumiere_blanche.jpg"><b style="color:#FF95CA";><i class="fa-solid fa-photo-film"></i></b></a><!--&nbsp;+&nbsp;<a href="/young_lumiere_blanche.png"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a>--></td>
  </tr>
       <tr>
   <th rowspan="2 ">Activité</th>
