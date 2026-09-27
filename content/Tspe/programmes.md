@@ -653,7 +653,7 @@ plt.tight_layout()
 
 ## Décrire un mouvement
 
-### TP mouvement
+### [TP mouvement](/tp-mouvement.pdf)
 
 Pour importer les tableaux `regressi` dans le programme ci-dessous, utiliser le bouton d'import sur la droite de la barre supérieure. 
 
@@ -1050,7 +1050,7 @@ On va tester la deuxième loi de Kepler en suivant sur plusieurs jours la positi
 
 {{%notice type="tip" round="true" title="Protocole"%}}
 Pour récupérer un tableau de données des positions de Mercure dans le référentiel héliocentrique pour 17 positions séparées de 5 jours&nbsp;:
-<ul style="margin-top:-0.5em; margin-bottom:1em;">
+<ul style="margin-top:-0.5em; margin-bottom:0.5em;">
 <li>se rendre sur le <a href="https://ssp.imcce.fr/forms/ephemeris" target="_blank">site d'éphémérides de l'Observatoire de Paris</a>&nbsp;;</li>
 <li>dans "corps du système solaire", choisir Mercure&nbsp;;</li>
 <li>dans "époque", choisir la date d'aujourd'hui, nombres de dates : 17, pas de calcul : 5 jours&nbsp;;</li>
