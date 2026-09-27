@@ -243,13 +243,18 @@ UCB = CB*np.sqrt((Vf[1]/Vf[0])**2+(Vp[1]/Vp[0])**2+(CA[1]/CA[0])**2+(VB[1]/VB[0]
 </code></pre>
 {{%/notice%}}
 
+
+
 ---
+
+
+
 
 ## Cinétique chimique 
 
 ### Activité «&nbsp;[Dégradation d'un produit de contraste](/act-cinet.pdf)&nbsp;»
 
-Tester une relation donnée entre la vitesse volumique de disparition et la concentration d'un réactif&nbsp;:
+Ajustement de l'évolution de la concentration par une exponentielle décroissante dont on détermine les paramètres idéaux&nbsp;:
 
 {{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
@@ -288,7 +293,8 @@ print(f"a = {ecriture_resultat(a, a_err)}")
 print(f"b = {ecriture_resultat(b, b_err)}")
 {{< /runpython >}}
 
-Tracer de l'évolution temporelle de la concentration et de la vitesse volumique de disparition&nbsp;:
+
+Tracé de l'évolution temporelle de la concentration et de sa modélisation&nbsp;:
 
 {{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
@@ -325,6 +331,7 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 {{< /runpython >}}
+
 
 Au lieu d'ajuster les points expérimentaux par une fonction exponentielle, on aurait pu prendre le logarithme des concentrations et réaliser un ajustement linéaire&nbsp;:
  
@@ -384,7 +391,40 @@ plt.tight_layout()
 plt.show()
 {{< /runpython >}}
 
-On peut aussi tracer l'évolution temporelle de la vitesse de disparition&nbsp;:
+On peut aussi tracer l'évolution temporelle de la vitesse de disparition, mais pour cela, il faut calculer numériquement la dérivée temporelle de la concentration.
+
+{{%notice type="info" title="Rappel dérivée numérique" round="true" %}}
+Soit une grandeur $x$ variant en fonction du temps.<br>
+Supposons que l'on ait une liste `X` de N valeurs de $x$ correspondant à N valeurs temporelles enregistrées dans une liste `T`.
+
+Une liste de N-1 valeurs approximant numériquement la **dérivée** de $x$ par rapport au temps s'obtient grâce à la boucle suivante&nbsp;:
+
+<pre style="margin-top:-0.5em;margin-bottom:-0.5em;">
+<code class="python" style="border-radius:5px;">derX = []
+for i in range(N-1):
+    derX.append((X[i+1]-X[i])/(T[i+1]-T[i]))</code></pre>
+
+Ce n'est rien d'autre que l'approximation $\frac{\mathrm d x}{\mathrm d t}\approx \frac{\Delta x}{\Delta t}=\frac{x(t+\Delta t)-x(t)}{\Delta t}$.
+
+Exemple :
+{{< runpython lang="pyodide" height="auto" theme="dark">}}
+import numpy as np
+import matplotlib.pyplot as plt
+
+N = 1000
+T = np.linspace(-5,5,N)
+X = T**2 - 5
+
+derX = []
+for i in range(N-1):
+    derX.append((X[i+1]-X[i])/(T[i+1]-T[i]))
+
+plt.plot(T, X, label = "X")
+plt.plot(T[:-1], derX, label="dérivée de X")
+plt.legend()
+plt.grid()
+{{< /runpython >}}
+{{%/notice%}}
 
 {{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
