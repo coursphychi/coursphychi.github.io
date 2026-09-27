@@ -615,7 +615,9 @@ plt.tight_layout()
 
 ### TP mouvement
 
-{{< runpython lang="pyodide" height="auto" >}}
+Pour importer les tableaux `regressi` dans le programme ci-dessous, utiliser le bouton d'import sur la droite de la barre supérieure. 
+
+{{< runpython lang="pyodide" height="auto"  upload="true">}}
 # #####
 # IMPORTATION DES MODULES
 # #####

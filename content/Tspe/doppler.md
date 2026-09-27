@@ -56,8 +56,7 @@ td, th {
      <th rowspan="1 ">Pour creuser</th>
   <td><a href="https://lameteorologie.fr/admin/api/public/api/meteo/website/downloadArticlePDF/meteo_2002_38_30/false" target=”_blank”><b>Radars météorologiques Doppler <i class="fa-solid fa-newspaper" style="color:#1DB100"></i></b></td>
   </tr>
-<tr>
-<!--
+<!--<tr>
   <th rowspan="1 ">DS</th>
   <td><a href="/ds-doppler.pdf"><b>A312</b></a></td>
   </tr>
