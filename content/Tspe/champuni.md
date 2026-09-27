@@ -43,7 +43,7 @@ td, th {
   </tr>
      <tr>
   <th rowspan="2 ">Activités</th>
-  <td style="border-bottom:none;"><a href="/linac.pdf"><b>LINAC</b></a>&nbsp;+&nbsp;<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=pQqcaqN65aAV&line=2&uniqifier=1" target=”_blank”><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a> + <a href="/corrlinac.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
+  <td style="border-bottom:none;"><a href="/linac.pdf"><b>LINAC</b></a>&nbsp;+&nbsp;<a href="../programmes/#activité-linac"><b style="color:#00AB8E;"><i class="fa-solid fa-computer"></i></b></a> + <a href="/corrlinac.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
   </tr>
     <tr>
  <td style="border-top:none;"><a href="/act-rebond.pdf"><b>Rebond d'un ballon</b></a> + <a href="/corrrebond.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>

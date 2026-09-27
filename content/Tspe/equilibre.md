@@ -53,16 +53,16 @@ td, th {
 
 ## Définitions
 
-{{%notice definition "Avancement maximal"%}}
+{{%notice def "Avancement maximal"%}}
 Avancement associé à la <b style="color:#B51700;">disparition totale du réactif limitant</b>.
 {{%/notice%}}
 
-{{%notice definition "Taux d'avancement"%}}
+{{%notice def "Taux d'avancement"%}}
 Rapport de la valeur finale de l’avancement sur celle de l’avancement maximal&nbsp;:<br>
 <b style="color:#B51700;">$$\tau=\frac{x_\mathrm{final}}{x_\mathrm{max}}$$</b>
 {{%/notice%}}
 
-{{%notice definition "Transformation totale ou non totale"%}}
+{{%notice def "Transformation totale ou non totale"%}}
 Une transformation est dite <b style="color:#B51700;">totale</b> si le taux d’avancement final est égal à 1 (<b style="color:#B51700;">$\tau=1$</b>).<br>
 À l’état final d’une transformation totale, au moins une des espèces chimiques présentes à l’état initial a disparu.<br><br>
 S’il est inférieur à 1 (<b style="color:#B51700;">$\tau<1\Leftrightarrow x_\mathrm{final}<x_\mathrm{max}$</b>), la transformation est dite <b style="color:#B51700;">non-totale</b>.<br><br>
@@ -72,7 +72,7 @@ S’il est inférieur à 1 (<b style="color:#B51700;">$\tau<1\Leftrightarrow x_\
  Un soluté ou un gaz ne disparaissent jamais totalement d’un milieu. Ainsi, toute transformation consommant exclusivement des solutés et/ou gaz ne peut être totale. Dans certains cas, le taux d’avancement final est si proche de 1 que la transformation peut être qualifiée de quasi-totale. Une transformation chimique n’est rigoureusement totale que si une phase condensée pure (liquide pur ou solide pur) a disparu.
 {{%/notice%}}
 
-{{%notice definition "Quotient de réaction"%}}
+{{%notice def "Quotient de réaction"%}}
 Grandeur adimensionnée définie par la relation ci-dessous dans laquelle interviennent les activités des espèces chimiques réactives et produites apparaissant dans l’équation de la réaction et les nombres stœchiométriques qui leur sont associés, considérés ici positifs&nbsp;:
 <b style="color:#B51700;">$$\displaystyle Q_r=\frac{\prod_i\left(a_{\text {produits } i}\right)^{\nu_i}}{\prod_j\left(a_{\text {réactifs } j}\right)^{\nu_j}}$$</b>
 {{%/notice%}}
@@ -99,7 +99,7 @@ Grandeur adimensionnée définie par la relation ci-dessous dans laquelle interv
  L’équilibre chimique est modélisé par deux réactions opposées dont les effets se compensent une fois l’équilibre chimique atteint.
 {{%/notice%}}
 
-{{%notice definition "Sens d’évolution spontanée d’un système chimique"%}}
+{{%notice def "Sens d’évolution spontanée d’un système chimique"%}}
 En l’absence de générateur, le <b style="color:#B51700;">sens d’évolution spontanée</b> est celui qui modifie la valeur du quotient de réaction pour le rapprocher de la constante d’équilibre (<b style="color:#B51700;">$Qr\rightarrow K(T)$</b>).<br><br>
 L’état d’<b style="color:#B51700;">équilibre final du système</b> résulte de l’une des deux situations suivantes&nbsp;:<br>
  <i class="fa fa-arrow-right"></i> l’état final est un état d’équilibre chimique caractérisé par la relation <b style="color:#B51700;">$Q_{r\,\mathrm{eq}}=K(T)$</b>, la transformation n’est <b style="color:#B51700;">pas totale</b>&nbsp;;<br>

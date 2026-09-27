@@ -84,6 +84,24 @@
   .tk-ghostbtn:active{transform:scale(.94)}
   .tk-ghostbtn.is-done{color:var(--tk-accent)}
 
+  /* Import de fichiers : bande d'étiquettes sous la barre, zone de dépôt */
+  .tk-uploads{display:flex;flex-wrap:wrap;align-items:center;gap:6px;
+    padding:6px 10px;border-bottom:1px solid var(--tk-border);background:var(--tk-bg);font-size:12.5px}
+  .tk-uploads[hidden]{display:none}
+  .tk-chip{display:inline-flex;align-items:center;gap:6px;max-width:100%;
+    padding:2px 3px 2px 8px;border:1px solid var(--tk-border);border-radius:999px;
+    background:var(--tk-bar);color:var(--tk-text)}
+  .tk-chip svg{width:14px;height:14px;flex:none;fill:none;stroke:var(--tk-muted);stroke-width:1.5;stroke-linejoin:round}
+  .tk-chip-name{font-family:var(--tk-mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tk-chip small{color:var(--tk-muted);white-space:nowrap}
+  .tk-chip button{appearance:none;border:0;background:transparent;cursor:pointer;color:var(--tk-muted);
+    width:20px;height:20px;border-radius:50%;font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center}
+  .tk-chip button:hover{background:rgba(15,23,32,.08);color:var(--tk-text)}
+  .tk-chip button:focus-visible{outline:2px solid var(--tk-accent);outline-offset:1px}
+  .tk-upmsg{color:var(--tk-error)}
+  .tk.is-drop{outline:2px dashed var(--tk-accent);outline-offset:-6px}
+  .tk.is-drop .tk-body{opacity:.55}
+
   /* Focus clavier visible et homogène */
   .tk-tab:focus-visible,.tk-iconbtn:focus-visible,.tk-ghostbtn:focus-visible{
     outline:2px solid var(--tk-accent);outline-offset:2px;
@@ -100,7 +118,9 @@
     font-family:var(--tk-mono);font-size:13.5px;line-height:1.5;color:var(--tk-text);
     tab-size:4;
   }
-  .CodeMirror{height:100% !important;font-family:var(--tk-mono);font-size:13.5px}
+  .CodeMirror{height:100% !important;font-family:var(--tk-mono);font-size:13.5px;line-height:1.3}
+  /* height="auto" : l'éditeur prend la hauteur de son contenu */
+  .tk.is-autoh .CodeMirror{height:auto !important}
   /* ligne active (curseur) surlignée en gris, façon Trinket */
   .CodeMirror-activeline-background{background:#eceff3}
   .CodeMirror-activeline-gutter{background:#e4e8ee}
@@ -121,6 +141,13 @@
     border:0;padding:0;margin:0;background:transparent;color:transparent;
     outline:none;font:inherit}
   .tk-canvas{display:flex;justify-content:center}
+  /* Pyodide : figures matplotlib insérées dans le flux de la console */
+  .tk-plot{display:block;max-width:100%;height:auto;margin:8px 0;
+    background:#fff;border-radius:6px}
+  .tk-stderr{color:#b26a00}                 /* avertissements (warnings) : orangé, pas rouge */
+  .tk-status{font-family:var(--tk-font);font-size:12.5px;color:var(--tk-muted);
+    margin-bottom:8px;animation:tk-pulse 1.6s ease-in-out infinite}
+  @keyframes tk-pulse{50%{opacity:.45}}
   .tk-error{color:var(--tk-error);font-family:var(--tk-mono);font-size:13px;white-space:pre-wrap;margin-top:6px}
   .tk-error.is-clickable{cursor:pointer}
   .tk-error.is-clickable:hover{text-decoration:underline;text-underline-offset:2px}
@@ -130,7 +157,7 @@
   .CodeMirror .tk-err-line{background:rgba(209,75,61,.12)}
 
   @media (prefers-reduced-motion: reduce){
-    .tk-caret{animation:none}
+    .tk-caret,.tk-status{animation:none}
     .tk-iconbtn,.tk-ghostbtn,.tk-tab{transition:none}
   }
   /* Fichiers générés (open()/write) : reproduit l'onglet "fichier" de Trinket */
@@ -188,6 +215,18 @@ var LIBS = {
   skulptStdlib: ["skulpt_libraries/skulpt-stdlib.js",
                  "https://cdn.jsdelivr.net/gh/Tezumie/Skulpt-CDN@latest/skulpt-stdlib.js"],
 
+  // Pyodide (lang="pyodide") : vrai CPython en WebAssembly + numpy, matplotlib…
+  // Version ÉPINGLÉE (jamais "latest") pour qu'une mise à jour ne casse rien.
+  // Pour changer de version : remplacer 314.0.7 ci-dessous (voir pyodide.org).
+  pyodide: ["https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.js"],
+
+  // Paquets PyPI (Python PUR) absents de Pyodide, installés automatiquement
+  // (via micropip) quand le code les importe. Forme : { nom_importé: "nom_PyPI" }.
+  // Liste blanche volontaire : on n'installe PAS n'importe quel nom tapé dans
+  // l'éditeur (une faute de frappe pourrait tirer un paquet malveillant homonyme).
+  // Pour un besoin ponctuel, préférer le paramètre packages="…" du shortcode.
+  pypiAuto: { seaborn: "seaborn" },
+
   cmCss: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css",
   cmJs:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js",
   cmPy:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js",
@@ -207,7 +246,9 @@ var LIBS = {
 /* Icônes SVG (trait fin, style épuré, héritent de currentColor) */
 var ICONS = {
   copy:    '<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="7" y="7" width="9" height="11" rx="2"/><path d="M4 13H3.5A1.5 1.5 0 0 1 2 11.5v-7A1.5 1.5 0 0 1 3.5 3h7A1.5 1.5 0 0 1 12 4.5V5"/></svg>',
-  check:   '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>'
+  check:   '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>',
+  upload:  '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 13V3.5M6.5 7L10 3.5 13.5 7M4 12.5v3A1.5 1.5 0 0 0 5.5 17h9a1.5 1.5 0 0 0 1.5-1.5v-3"/></svg>',
+  file:    '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M11.5 2.5H6A1.5 1.5 0 0 0 4.5 4v12A1.5 1.5 0 0 0 6 17.5h8a1.5 1.5 0 0 0 1.5-1.5V6.5z"/><path d="M11.5 2.5v4h4"/></svg>'
 };
 
 /* ---------- utilitaires ---------- */
@@ -296,25 +337,47 @@ window.addEventListener("message", function(e){
   if (e.data === "slide:start") onSlideVisible();
 });
 
-// Priorité 1 : le hash
-var _hashCfg = readHashCfg();
-if (_hashCfg) {
-  applyCfg(_hashCfg, false);
-} else {
-  // pas de hash : on signale au parent qu'on attend une config par message
-  try { parent.postMessage({ __trinket_ready: true }, "*"); } catch(e){}
+// Priorité 1 : le hash. Démarrage appelé À LA FIN du script (voir boot() tout
+// en bas) : toutes les variables « var x = … » sont alors initialisées. Démarrer
+// ici laisserait valoir undefined celles déclarées plus bas pendant init().
+function boot(){
+  var hashCfg = readHashCfg();
+  if (hashCfg) {
+    applyCfg(hashCfg, false);
+  } else {
+    // pas de hash : on signale au parent qu'on attend une config par message
+    try { parent.postMessage({ __trinket_ready: true }, "*"); } catch(e){}
+  }
 }
 
 function init(){
   var lang = (CFG.lang || "python").toLowerCase();
   var mode = (CFG.mode || "toggle").toLowerCase();
   var dv   = (CFG.default || CFG.defaultView || "code").toLowerCase();
-  CFG.lang = (lang === "vpython" || lang === "glowscript") ? "vpython" : "python";
+  CFG.lang = (lang === "vpython" || lang === "glowscript") ? "vpython"
+           : (lang === "pyodide") ? "pyodide" : "python";
   CFG.mode = (mode === "output" || mode === "output-only") ? "output" : "toggle";
   CFG.defaultView = (dv === "output" || dv === "result" || dv === "résultat" || dv === "resultat") ? "output" : "code";
   CFG.width = parseInt(CFG.width, 10) || 0;   // 0 = largeur auto (fenêtre épouse la scène)
   CFG.fit = ((CFG.fit || "scale") + "").toLowerCase() === "native" ? "native" : "scale";
   CFG.version = /^[0-9]\.[0-9]$/.test((CFG.version || "") + "") ? ("" + CFG.version) : "";
+  // height="auto" : la fenêtre épouse la hauteur du code (mode toggle uniquement)
+  CFG.autoheight = (CFG.autoheight === true || CFG.autoheight === "true") && CFG.mode === "toggle";
+  // packages="seaborn, uncertainties" : paquets PyPI à installer (lang="pyodide")
+  CFG.packages = (Array.isArray(CFG.packages) ? CFG.packages : String(CFG.packages || "").split(/[\s,;]+/))
+    .filter(function(x){ return /^[A-Za-z0-9][A-Za-z0-9._-]*([<>=!~]=?[A-Za-z0-9.*]+)?$/.test(x); });
+  // data : fichiers de données fournis par le shortcode → { nom: contenu }
+  var _d = CFG.data, _obj = {};
+  if (Array.isArray(_d)) _d.forEach(function(x){ if (x && x.n) _obj[String(x.n)] = String(x.c == null ? "" : x.c); });
+  else if (_d && typeof _d === "object") for (var _k in _d) _obj[_k] = String(_d[_k]);
+  CFG.data = _obj;
+  // upload : "" (aucun) | "auto" (upload="true") | liste d'extensions (".csv,.txt")
+  var _up = CFG.upload;
+  _up = (_up === true || _up === "true" || _up === "auto") ? "auto"
+      : (!_up || _up === "false") ? "" : String(_up);
+  CFG.upload = (CFG.lang === "vpython") ? "" : _up;
+  var _root = document.getElementById("tk-root");
+  if (_root) _root.classList.toggle("is-autoh", CFG.autoheight);
 
   buildUI();
   // exécution initiale : uniquement si autorun="true" est demandé explicitement
@@ -349,6 +412,11 @@ function buildUI(){
   body.appendChild(editorPane);
   body.appendChild(outPane);
   els = {editorPane:editorPane, outPane:outPane, ta:ta, stdout:stdout, canvas:canvas, errBox:errBox, files:files};
+  var strip = el("div", {class:"tk-uploads", "aria-label":"Fichiers importés"});
+  strip.hidden = true;
+  document.getElementById("tk-root").insertBefore(strip, body);   // entre la barre et le code
+  els.uploads = strip;
+  watchOutput();                         // hauteur adaptée à la sortie (python / pyodide)
 
   // --- barre ---
   if (CFG.mode === "toggle"){
@@ -366,6 +434,15 @@ function buildUI(){
       tabCode.classList.toggle("is-active", code);
       tabOut.classList.toggle("is-active", !code);
       if (code && editor) setTimeout(function(){ editor.refresh(); }, 0);
+      if (CFG.lang === "vpython"){
+        if (CFG.autoheight){
+          if (code){ _lastCodeH = -1; setTimeout(scheduleCodeFit, 0); }   // re-épouser le code
+          else { _lastOutW = -1; _lastOutH = -1; scheduleFit(); }         // la scène reprend sa taille
+        }
+      } else {
+        if (code) setTimeout(restoreCodeHeight, 0);   // hauteur d'origine (ou du code en "auto")
+        else scheduleOutFit();                        // la fenêtre épouse la sortie
+      }
     }
     tabCode.onclick = function(){ show("code"); };
     tabOut.onclick  = function(){ show("out"); };
@@ -378,6 +455,7 @@ function buildUI(){
   }
 
   // --- boutons secondaires (style discret) ---
+  setupUpload(bar);                      // import de fichiers (upload="true")
   if (CFG.mode === "toggle"){
     var copyBtn = el("button", {class:"tk-ghostbtn tk-copy", title:"Copier le code", "aria-label":"Copier le code"});
     copyBtn.innerHTML = ICONS.copy;
@@ -430,9 +508,15 @@ function buildUI(){
           // gouttière dédiée au marqueur d'erreur (point rouge), à gauche des numéros
           gutters: ["tk-err-gutter", "CodeMirror-linenumbers"]
         });
-        editor.setSize("100%", "100%");
+        editor.setSize("100%", CFG.autoheight ? "auto" : "100%");
+        if (CFG.autoheight){
+          editor.on("change", scheduleCodeFit);   // la fenêtre suit la saisie
+          scheduleCodeFit();
+        }
       })
-      .catch(function(){ /* on garde le textarea brut si CodeMirror échoue */ });
+      .catch(function(){ /* on garde le textarea brut si CodeMirror échoue */
+        _cmFailed = true; scheduleCodeFit();
+      });
   }
 }
 
@@ -459,10 +543,15 @@ function clearErrorMarks(){
 // Erreur Python lisible : numéro de ligne en français + (si éditeur présent)
 // point rouge dans la gouttière et surlignage de la ligne fautive. Cliquer sur
 // le message renvoie à la bonne ligne dans l'onglet Code.
-function showPyError(err){
-  var s = formatPyError(err);
-  var m = s.match(/line (\d+)/);
-  var lineNo = m ? parseInt(m[1], 10) : null;
+// `pre` (optionnel, Pyodide) = { text, line } déjà nettoyés ; sinon erreur Skulpt.
+function showPyError(err, pre){
+  var s, lineNo;
+  if (pre){ s = pre.text; lineNo = pre.line; }
+  else {
+    s = formatPyError(err);
+    var m = s.match(/line (\d+)/);
+    lineNo = m ? parseInt(m[1], 10) : null;
+  }
   els.errBox.textContent = s.replace(/\bon line (\d+)/g, "(ligne $1)").replace(/\bline (\d+)/g, "ligne $1");
   if (editor && lineNo && lineNo >= 1){
     var idx = lineNo - 1;
@@ -487,19 +576,25 @@ function setRunning(on){
   _running = on;
   if (els.runBtn)  els.runBtn.disabled = on;
   if (els.stopBtn) els.stopBtn.classList.toggle("is-visible", on);
+  if (!on) scheduleOutFit();             // programme terminé : ajustement exact à la sortie
 }
 // Re-lancer en rechargeant l'iframe : repart d'un état GlowScript propre.
 // Indispensable car relancer un programme VPython pendant qu'un autre tourne
 // encore corrompt l'état interne de GlowScript (erreur "L.match", etc.).
-function rerunViaReload(){
+// Configuration COMPLÈTE retransmise lors d'un rechargement (Stop, relance) :
+// tout paramètre oublié ici serait perdu après un clic sur ■ ou ▶.
+function reloadWith(extra){
   var next = {
     code: currentCode(),
     lang: CFG.lang, mode: CFG.mode, "default": CFG.defaultView,
-    width: CFG.width, fit: CFG.fit, version: CFG.version, autorun: true
+    width: CFG.width, fit: CFG.fit, version: CFG.version,
+    autoheight: CFG.autoheight, packages: CFG.packages, data: CFG.data, upload: CFG.upload
   };
+  for (var k in extra) next[k] = extra[k];
   try { location.hash = utf8ToB64url(JSON.stringify(next)); } catch(e){}
   location.reload();
 }
+function rerunViaReload(){ reloadWith({ autorun: true }); }
 function run(){
   // un programme tourne déjà, ou VPython a déjà été lancé une fois → on repart propre
   if (_running || (CFG.lang === "vpython" && _vpStarted)) { rerunViaReload(); return; }
@@ -510,6 +605,7 @@ function run(){
   var done = function(){ setRunning(false); };
   var code = currentCode();
   if (CFG.lang === "vpython"){ _vpStarted = true; runVPython(code, done); }
+  else if (CFG.lang === "pyodide") runPyodide(code, done);
   else runPython(code, done);
 }
 
@@ -564,6 +660,7 @@ function contentBottom(gs){
   return Math.ceil(h);
 }
 function fitGlowscript(){
+  if (CFG.autoheight && els.outPane.hidden) return;
   var fe;
   try { fe = window.frameElement; } catch(e){ fe = null; }
   if (!fe) return;
@@ -630,6 +727,129 @@ function fitGlowscript(){
   fe.style.height = (barH + outH) + "px";
   fe.style.maxWidth = "100%";
 }
+/* =====================================================================
+   HAUTEUR AUTOMATIQUE (height="auto") — la fenêtre épouse le code
+   Mesure la hauteur réelle de l'éditeur (CodeMirror en hauteur "auto") et
+   règle celle de l'<iframe> : barre d'outils + code + bordures. Réajusté à
+   chaque modification du code, au redimensionnement, au retour sur l'onglet
+   Code. Sur l'onglet Résultat, la hauteur est conservée (la console défile ;
+   une scène VPython, elle, ajuste la fenêtre comme d'habitude).
+===================================================================== */
+var AUTOH_MIN = 100;                     // hauteur minimale (px) : 2-3 lignes
+var _codeFitPending = false, _lastCodeH = -1, _cmFailed = false;
+function scheduleCodeFit(){
+  if (!CFG || !CFG.autoheight || _codeFitPending) return;
+  _codeFitPending = true;
+  requestAnimationFrame(function(){ _codeFitPending = false; fitCodeHeight(); });
+}
+function fitCodeHeight(){
+  if (!CFG || !CFG.autoheight || !els || els.editorPane.hidden) return;
+  var fe;
+  try { fe = window.frameElement; } catch(e){ fe = null; }
+  if (!fe) return;                       // iframe d'un autre domaine : l'estimation Hugo reste
+  var codeH;
+  if (editor){
+    codeH = editor.getWrapperElement().offsetHeight;
+  } else if (!_cmFailed){
+    return;                              // CodeMirror en chargement : l'estimation Hugo tient d'ici là
+  } else {                               // secours sans CodeMirror : textarea brut
+    els.ta.style.height = "0px";
+    codeH = els.ta.scrollHeight;
+    els.ta.style.height = "";
+  }
+  if (!codeH) return;                    // pas encore affiché (diapo cachée…)
+  var h = Math.max(AUTOH_MIN, Math.ceil(chromeHeight() + codeH + 2));  // +2 : bordures
+  if (h === _lastCodeH) return;
+  _lastCodeH = h;
+  fe.style.height = h + "px";
+}
+
+/* =====================================================================
+   HAUTEUR ADAPTÉE À LA SORTIE (python / pyodide)
+   Onglet Résultat : la fenêtre épouse la sortie (graphes, texte, erreurs,
+   fichiers) : elle s'agrandit OU rétrécit, au plus ~90 % de la hauteur de
+   l'écran (au-delà : la console défile), au moins AUTOH_MIN.
+   Pendant l'exécution, elle ne fait que grandir (évite l'effet « écrasée puis
+   ré-agrandie » tant que la sortie arrive) ; l'ajustement exact se fait à la fin.
+   Retour sur Code : hauteur d'origine (ou celle du code en "auto").
+   VPython garde son propre ajustement à la scène. Désactivé en présentation
+   reveal.js (une diapositive a une taille fixe).
+===================================================================== */
+var OUT_MAX_FRACTION = 0.9;              // part max. de la hauteur d'écran
+var _outFitPending = false, _lastOutFitH = -1;
+function hostFrame(){
+  var fe;
+  try { fe = window.frameElement; } catch(e){ fe = null; }
+  return fe;
+}
+// Hauteur d'origine : mémorisée SUR l'iframe (dans la page parente) pour
+// survivre aux rechargements du player (bouton ■, relance).
+function baseHeight(fe){
+  if (CFG.autoheight && _lastCodeH > 0) return _lastCodeH;
+  if (!fe.dataset.tkBaseH){
+    var h0 = parseInt(fe.style.height, 10) || fe.offsetHeight;   // hauteur posée par le shortcode
+    if (h0 > 0) fe.dataset.tkBaseH = String(h0);
+  }
+  return parseInt(fe.dataset.tkBaseH, 10) || fe.offsetHeight;
+}
+function outFitEnabled(fe){
+  if (!CFG || CFG.lang === "vpython" || !els) return false;
+  try { if (fe.closest && fe.closest(".reveal")) return false; } catch(e){}
+  return true;
+}
+function setFrameHeight(fe, h){
+  var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  fe.style.transition = still ? "" : "height .18s ease";
+  fe.style.height = h + "px";
+}
+// Hauteur du contenu réel de l'onglet Résultat (indépendante de la taille
+// actuelle de la fenêtre, pour pouvoir aussi redescendre).
+function outContentHeight(){
+  var pane = els.outPane, r0 = pane.getBoundingClientRect(), bottom = 0;
+  for (var i = 0; i < pane.children.length; i++){
+    var c = pane.children[i];
+    if (c.hidden || !c.offsetParent) continue;           // éléments masqués
+    var b = c.getBoundingClientRect().bottom - r0.top + pane.scrollTop;
+    if (b > bottom) bottom = b;
+  }
+  var cs = window.getComputedStyle(pane);
+  return Math.ceil(bottom + (parseFloat(cs.paddingBottom) || 0));
+}
+function scheduleOutFit(){
+  if (_outFitPending) return;
+  _outFitPending = true;
+  requestAnimationFrame(function(){ _outFitPending = false; fitOutHeight(); });
+}
+function fitOutHeight(){
+  var fe = hostFrame();
+  if (!fe || !outFitEnabled(fe) || els.outPane.hidden) return;
+  baseHeight(fe);                        // (mémorise l'origine si ce n'est déjà fait)
+  var want = Math.ceil(chromeHeight() + outContentHeight() + 2);   // +2 : bordures
+  var screenH = 0;
+  try { screenH = fe.ownerDocument.defaultView.innerHeight; } catch(e){}
+  if (screenH) want = Math.min(want, Math.round(screenH * OUT_MAX_FRACTION));
+  var h = Math.max(AUTOH_MIN, want);
+  if (_running) h = Math.max(h, parseInt(fe.style.height, 10) || 0);   // en cours : grandir seulement
+  if (h === _lastOutFitH) return;
+  _lastOutFitH = h;
+  setFrameHeight(fe, h);
+}
+// Retour sur l'onglet Code : hauteur d'origine.
+function restoreCodeHeight(){
+  _lastOutFitH = -1;
+  if (CFG.autoheight){ _lastCodeH = -1; scheduleCodeFit(); return; }   // "auto" : ré-épouser le code
+  var fe = hostFrame();
+  if (fe && outFitEnabled(fe)) setFrameHeight(fe, baseHeight(fe));
+}
+function watchOutput(){
+  var fe = hostFrame();
+  if (fe) baseHeight(fe);                // mémorise la hauteur d'origine AVANT tout changement
+  if (!window.ResizeObserver) return;
+  var ro = new ResizeObserver(scheduleOutFit);   // print, image chargée, erreur, fichiers…
+  [els.stdout, els.canvas, els.errBox, els.files].forEach(function(x){ if (x) ro.observe(x); });
+  if (window.MutationObserver) new MutationObserver(scheduleOutFit).observe(els.outPane, { childList: true });
+}
+
 function scheduleFit(){
   if (_fitPending) return;
   _fitPending = true;
@@ -662,6 +882,8 @@ function observeScene(){
 }
 window.addEventListener("resize", function(){
   if (CFG && CFG.lang === "vpython") scheduleFit();
+  scheduleCodeFit();                     // largeur changée → barre de défilement horizontale ?
+  scheduleOutFit();                      // largeur changée → le texte se ré-enroule
 });
 
 function utf8ToB64url(s){
@@ -670,17 +892,7 @@ function utf8ToB64url(s){
 }
 function stopRun(){
   if (!CFG) return;
-  var next = {
-    code: currentCode(),
-    lang: CFG.lang,
-    mode: CFG.mode,
-    autorun: false,
-    idle: true,                  // empêche la relance automatique après rechargement
-    width: CFG.width,
-    "default": CFG.defaultView
-  };
-  try { location.hash = utf8ToB64url(JSON.stringify(next)); } catch(e){}
-  location.reload();
+  reloadWith({ autorun: false, idle: true });   // idle : pas de relance automatique
 }
 
 // Appelé quand la slide reveal.js contenant l'iframe devient visible :
@@ -688,7 +900,7 @@ function stopRun(){
 // taille nulle). On ne relance le programme que si autorun est demandé.
 function onSlideVisible(){
   if (!CFG) return;
-  if (editor) setTimeout(function(){ editor.refresh(); }, 0);
+  if (editor) setTimeout(function(){ editor.refresh(); scheduleCodeFit(); }, 0);
   if (CFG.lang === "vpython") setTimeout(scheduleFit, 60);
   if (CFG.autorun && !CFG.idle && !_running && !(CFG.lang === "vpython" && _vpStarted)) run();
 }
@@ -742,20 +954,199 @@ function makeInputFun(){
    mémoire (comme l'onglet "fichier" de Trinket). Les print() ne sont pas
    touchés. Après l'exécution, le contenu est lu puis affiché avec un bouton
    Copier (prêt à coller dans un tableur / grapheur). */
+/* =====================================================================
+   IMPORT DE FICHIERS PAR L'ÉLÈVE (upload="true") — python / pyodide
+   Bouton ⇪ dans la barre ou glisser-déposer sur la fenêtre. Le programme lit
+   le fichier par son nom : open("mesures.csv"), pandas.read_csv("mesures.csv").
+   • Texte converti en UTF-8 (un CSV d'Excel est souvent en Windows-1252 : sans
+     conversion, les accents feraient planter la lecture) ; fins de ligne
+     Windows normalisées ; BOM retiré.
+   • Fichier binaire (image, xlsx…) : Pyodide seulement, tel quel.
+   • Conservés le temps de la session de l'onglet (survivent au bouton ■ et au
+     rechargement de la page) ; un fichier importé remplace un fichier data=
+     de même nom.
+===================================================================== */
+var UPLOAD_MAX = 5 * 1024 * 1024;        // 5 Mo par fichier
+var _uploads = {};                       // nom → { text } ou { bin: Uint8Array }, + size, enc
+
+function uploadStoreKey(){
+  var fe = hostFrame();
+  if (!fe || !fe.id) return null;
+  try { return "tk-uploads:" + fe.ownerDocument.location.pathname + "#" + fe.id; } catch(e){ return null; }
+}
+function saveUploads(){
+  var k = uploadStoreKey(); if (!k) return;
+  var keep = {};
+  for (var n in _uploads) if (_uploads[n].text != null) keep[n] = { text: _uploads[n].text, size: _uploads[n].size, enc: _uploads[n].enc };
+  try { sessionStorage.setItem(k, JSON.stringify(keep)); } catch(e){}   // quota dépassé : tant pis
+}
+function loadUploads(){
+  var k = uploadStoreKey(); if (!k) return;
+  try { var o = JSON.parse(sessionStorage.getItem(k) || "{}"); for (var n in o) _uploads[n] = o[n]; } catch(e){}
+}
+function safeFileName(n){
+  n = String(n || "fichier").split(/[\\/]/).pop().replace(/[:*?"<>|]/g, "_").trim();
+  return (n && n !== "." && n !== "..") ? n : "fichier";
+}
+function decodeUpload(buf){
+  var u8 = new Uint8Array(buf), txt, enc;
+  if (u8[0] === 0xFF && u8[1] === 0xFE){ txt = new TextDecoder("utf-16le").decode(u8); enc = "UTF-16"; }
+  else if (u8[0] === 0xFE && u8[1] === 0xFF){ txt = new TextDecoder("utf-16be").decode(u8); enc = "UTF-16"; }
+  else {
+    for (var i = 0, n = Math.min(u8.length, 8000); i < n; i++) if (u8[i] === 0) return { bin: u8 };   // binaire
+    try { txt = new TextDecoder("utf-8", { fatal: true }).decode(u8); enc = "UTF-8"; }
+    catch(e){ txt = new TextDecoder("windows-1252").decode(u8); enc = "Windows-1252"; }
+  }
+  if (txt.charCodeAt(0) === 0xFEFF) txt = txt.slice(1);              // BOM
+  return { text: txt.replace(/\r\n?/g, "\n"), enc: enc };
+}
+function uploadMessage(msg){
+  var s = els.uploads; if (!s) return;
+  var m = s.querySelector(".tk-upmsg");
+  if (!m){ m = el("span", {class:"tk-upmsg", role:"status"}); s.appendChild(m); }
+  m.textContent = msg; s.hidden = false; refitChrome();
+  clearTimeout(uploadMessage._t);
+  uploadMessage._t = setTimeout(function(){ if (m.parentNode) m.remove(); renderUploads(); }, 5000);
+}
+// Contenu d'un fichier en octets (FileReader en secours : anciens Safari < 14).
+function readBytes(f){
+  if (f.arrayBuffer) return f.arrayBuffer();
+  return new Promise(function(res, rej){
+    var r = new FileReader();
+    r.onload = function(){ res(r.result); }; r.onerror = function(){ rej(r.error); };
+    r.readAsArrayBuffer(f);
+  });
+}
+function addUploads(list){
+  var jobs = [].slice.call(list || []).map(function(f){
+    var name = safeFileName(f.name);
+    if (f.size > UPLOAD_MAX){ uploadMessage("« " + name + " » dépasse 5 Mo : non importé."); return null; }
+    return readBytes(f).then(function(buf){
+      var d = decodeUpload(buf);
+      if (d.bin && CFG.lang !== "pyodide"){
+        uploadMessage("« " + name + " » n'est pas un fichier texte : non lisible ici."); return;
+      }
+      d.size = f.size; _uploads[name] = d;
+    });
+  });
+  return Promise.all(jobs).then(function(){ saveUploads(); renderUploads(); });
+}
+function formatSize(n){ return n < 1024 ? n + " o" : n < 1048576 ? Math.round(n / 1024) + " ko" : (n / 1048576).toFixed(1) + " Mo"; }
+function renderUploads(){
+  var s = els.uploads; if (!s) return;
+  var msg = s.querySelector(".tk-upmsg");
+  s.innerHTML = "";
+  var names = Object.keys(_uploads).sort();
+  names.forEach(function(n){
+    var u = _uploads[n];
+    var chip = el("span", {class:"tk-chip", title:'Lire avec open("' + n + '")' + (u.enc && u.enc !== "UTF-8" ? " — converti de " + u.enc + " en UTF-8" : "")});
+    chip.innerHTML = ICONS.file;
+    chip.appendChild(el("span", {class:"tk-chip-name"}, [n]));
+    chip.appendChild(el("small", {}, [formatSize(u.size || 0)]));
+    var x = el("button", {type:"button", "aria-label":"Retirer " + n, title:"Retirer"}, ["×"]);
+    x.onclick = function(){ delete _uploads[n]; saveUploads(); renderUploads(); };
+    chip.appendChild(x);
+    s.appendChild(chip);
+  });
+  if (msg) s.appendChild(msg);
+  s.hidden = !names.length && !msg;
+  refitChrome();
+}
+// La bande des fichiers change la hauteur « hors code » : on réajuste la fenêtre.
+function refitChrome(){ _lastCodeH = -1; _lastOutFitH = -1; scheduleCodeFit(); scheduleOutFit(); }
+// Hauteur de tout ce qui n'est pas le code / la sortie : barre + bande des fichiers.
+function chromeHeight(){
+  var bar = document.getElementById("tk-bar"), h = bar ? bar.offsetHeight : 40;
+  if (els && els.uploads && !els.uploads.hidden) h += els.uploads.offsetHeight;
+  return h;
+}
+function setupUpload(bar){
+  if (!CFG.upload) return;
+  var accept = CFG.upload === "auto"
+    ? (CFG.lang === "pyodide" ? "" : ".csv,.tsv,.txt,.dat,.json")
+    : CFG.upload;
+  var input = el("input", {type:"file", multiple:"multiple", "aria-hidden":"true", tabindex:"-1"});
+  if (accept) input.setAttribute("accept", accept);
+  input.style.display = "none";
+  input.onchange = function(){ addUploads(input.files).then(function(){ input.value = ""; }); };
+  document.body.appendChild(input);
+  var btn = el("button", {class:"tk-ghostbtn tk-upload", type:"button", title:"Importer un fichier (ou le glisser sur la fenêtre)", "aria-label":"Importer un fichier"});
+  btn.innerHTML = ICONS.upload;
+  btn.onclick = function(){ input.click(); };
+  bar.appendChild(btn);
+  // glisser-déposer sur toute la fenêtre
+  var root = document.getElementById("tk-root"), depth = 0;
+  root.addEventListener("dragenter", function(e){ if (e.dataTransfer && [].indexOf.call(e.dataTransfer.types || [], "Files") >= 0){ depth++; root.classList.add("is-drop"); } });
+  root.addEventListener("dragleave", function(){ if (--depth <= 0){ depth = 0; root.classList.remove("is-drop"); } });
+  root.addEventListener("dragover", function(e){ e.preventDefault(); if (e.dataTransfer) e.dataTransfer.dropEffect = "copy"; });
+  root.addEventListener("drop", function(e){
+    e.preventDefault(); depth = 0; root.classList.remove("is-drop");
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) addUploads(e.dataTransfer.files);
+  });
+  loadUploads(); renderUploads();
+}
+// Toutes les données visibles du programme : data= du shortcode + fichiers importés.
+function allData(withBinary){
+  var out = {}, d = (CFG && CFG.data) || {}, k;
+  for (k in d) out[k] = d[k];
+  for (k in _uploads){
+    if (_uploads[k].text != null) out[k] = _uploads[k].text;
+    else if (withBinary) out[k] = _uploads[k].bin;
+  }
+  return out;
+}
+
 var PYFILE_SHIM =
   "__tkfiles__ = {}\n" +
+  // Skulpt ne connaît qu'IOError : on crée OSError et FileNotFoundError comme en
+  // Python 3 (un élève peut alors écrire « except FileNotFoundError: »).
+  "try:\n" +
+  "    OSError\n" +
+  "except NameError:\n" +
+  "    OSError = IOError\n" +
+  "try:\n" +
+  "    FileNotFoundError\n" +
+  "except NameError:\n" +
+  "    class FileNotFoundError(OSError): pass\n" +
   "class __TkFile__:\n" +
   "    def __init__(s, n, m='r'):\n" +
-  "        s.n = n; s.m = m\n" +
-  "        if 'r' not in m: __tkfiles__[n] = ''\n" +
+  "        s.n = n; s.m = m; s.p = 0\n" +
+  "        if 'w' in m or 'x' in m:\n" +             // écriture : fichier remis à zéro
+  "            __tkfiles__[n] = ''\n" +
+  "        elif 'a' in m:\n" +                        // ajout : on garde le contenu
+  "            if n not in __tkfiles__: __tkfiles__[n] = ''\n" +
+  "        elif n not in __tkfiles__:\n" +            // lecture d'un fichier absent
+  "            raise FileNotFoundError(\"[Errno 2] No such file or directory: '\" + n + \"'\")\n" +
   "    def write(s, x):\n" +
   "        __tkfiles__[s.n] = __tkfiles__.get(s.n, '') + x\n" +
   "        return len(x)\n" +
   "    def writelines(s, xs):\n" +
   "        for x in xs: s.write(x)\n" +
-  "    def read(s, *a): return __tkfiles__.get(s.n, '')\n" +
-  "    def readlines(s, *a): return s.read().splitlines(True)\n" +
-  "    def __iter__(s): return iter(s.read().splitlines(True))\n" +
+  "    def read(s, k=-1):\n" +
+  "        t = __tkfiles__.get(s.n, '')\n" +
+  "        if k is None or k < 0: r = t[s.p:]\n" +
+  "        else: r = t[s.p:s.p + k]\n" +
+  "        s.p = s.p + len(r)\n" +
+  "        return r\n" +
+  "    def readline(s, *a):\n" +
+  "        t = __tkfiles__.get(s.n, '')\n" +
+  "        i = t.find('\\n', s.p)\n" +
+  "        e = len(t) if i < 0 else i + 1\n" +
+  "        r = t[s.p:e]\n" +
+  "        s.p = e\n" +
+  "        return r\n" +
+  "    def readlines(s, *a):\n" +
+  "        out = []\n" +
+  "        while True:\n" +
+  "            l = s.readline()\n" +
+  "            if l == '': break\n" +
+  "            out.append(l)\n" +
+  "        return out\n" +
+  "    def __iter__(s): return iter(s.readlines())\n" +
+  "    def seek(s, p, *a):\n" +
+  "        s.p = p\n" +
+  "        return p\n" +
+  "    def tell(s): return s.p\n" +
   "    def flush(s): pass\n" +
   "    def close(s): pass\n" +
   "    def __enter__(s): return s\n" +
@@ -763,13 +1154,35 @@ var PYFILE_SHIM =
   "def open(n, m='r', *a, **k): return __TkFile__(n, m)\n";
 var PYFILE_OFFSET = (PYFILE_SHIM.match(/\n/g) || []).length;  // lignes ajoutées
 
+var _pyPrefixLines = PYFILE_OFFSET;       // préambule réel (shim + données) de l'exécution en cours
 // Le préambule décale les numéros de ligne → on les corrige dans les erreurs.
+// Si l'erreur est levée DANS le préambule (ex. open() d'un fichier absent), on
+// remonte la pile d'appels jusqu'à la ligne la plus interne du programme de l'élève.
 function formatPyError(err){
-  var s = String(err);
+  var s = String(err), off = _pyPrefixLines, userLine = null;
+  var tb = err && err.traceback;
+  if (tb && tb.length){
+    for (var i = 0; i < tb.length; i++){
+      if (tb[i] && tb[i].lineno > off){ userLine = tb[i].lineno - off; break; }
+    }
+  }
+  if (userLine) return /line \d+/.test(s) ? s.replace(/line \d+/, "line " + userLine) : s + " on line " + userLine;
   return s.replace(/line (\d+)/g, function(whole, n){
-    var v = parseInt(n, 10) - PYFILE_OFFSET;
+    var v = parseInt(n, 10) - off;
     return v >= 1 ? ("line " + v) : whole;
   });
+}
+// Ligne Python qui pré-remplit le système de fichiers avec les données du shortcode
+// (paramètre data=) : un dict JSON, qui est aussi un littéral Python valide.
+function pyDataLine(){
+  var d = allData(false);                // data= du shortcode + fichiers importés (texte)
+  return Object.keys(d).length ? "__tkfiles__.update(" + JSON.stringify(d) + ")\n" : "";
+}
+// Fichiers à montrer dans « Fichiers générés » : les données fournies non modifiées sont exclues.
+function onlyGenerated(files){
+  var out = {}, d = allData(false);
+  for (var k in files) if (!(k in d && d[k] === files[k])) out[k] = files[k];
+  return out;
 }
 function copyText(t){
   if (navigator.clipboard && navigator.clipboard.writeText){
@@ -832,7 +1245,7 @@ function capturePyFiles(mod){
     var Sk = window.Sk;
     var d = mod && mod.$d;
     if (!d || !d.__tkfiles__) return;
-    renderFiles(Sk.ffi.remapToJs(d.__tkfiles__));
+    renderFiles(onlyGenerated(Sk.ffi.remapToJs(d.__tkfiles__)));
   } catch(e){ /* pas de fichier généré : on ignore */ }
 }
 function runPython(code, done){
@@ -847,13 +1260,240 @@ function runPython(code, done){
     });
     (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "tk-canvas";
     Sk.misceval.asyncToPromise(function(){
-      return Sk.importMainWithBody("<stdin>", false, PYFILE_SHIM + code, true);
+      var prefix = PYFILE_SHIM + pyDataLine();
+      _pyPrefixLines = (prefix.match(/\n/g) || []).length;
+      return Sk.importMainWithBody("<stdin>", false, prefix + code, true);
     }).then(function(mod){ capturePyFiles(mod); done(); },
             function(err){ showPyError(err); done(); });
   }).catch(function(){
     showError("Impossible de charger le moteur Python (Skulpt).\n"
       + "Vérifie ta connexion, ou héberge Skulpt en local (voir le README, "
       + "dossier static/trinket/skulpt_libraries/).");
+    done();
+  });
+}
+
+/* =====================================================================
+   MOTEUR PYODIDE — lang="pyodide"
+   Vrai CPython compilé en WebAssembly : numpy, matplotlib, scipy, sympy…
+   • Chargé une seule fois (le runtime reste en mémoire ; relancer est rapide).
+   • Les paquets sont détectés automatiquement d'après les `import` du code.
+   • Chaque exécution repart avec des variables vierges.
+   • matplotlib : backend standard "Agg" ; plt.show() insère l'image PNG dans
+     la console, à sa place parmi les print(). Les figures non montrées sont
+     affichées à la fin (comme dans un notebook).
+   • input() : boîte de dialogue du navigateur (Pyodide tourne de façon
+     synchrone, la saisie inline de Skulpt n'est pas possible ici).
+   • Les fichiers écrits (open(..., "w")) apparaissent dans « Fichiers générés ».
+===================================================================== */
+var _pyo = null;                 // promesse de l'instance Pyodide
+var _pyoLastLine = "";           // dernière ligne affichée (sert d'invite à input())
+var _pyoMpl = false;             // matplotlib déjà configuré ?
+
+// Python d'amorçage : dossier de travail propre + utilitaires fichiers.
+var PYO_BOOT =
+  "import os, sys\n" +
+  "os.makedirs('/tmp/tk-run', exist_ok=True)\n" +
+  "os.chdir('/tmp/tk-run')\n" +
+  "def _tk_clean():\n" +
+  "    os.chdir('/tmp/tk-run')\n" +
+  "    for n in os.listdir('.'):\n" +
+  "        if os.path.isfile(n): os.remove(n)\n" +
+  "def _tk_files():\n" +
+  "    r = {}\n" +
+  "    for n in sorted(os.listdir('/tmp/tk-run')):\n" +
+  "        p = os.path.join('/tmp/tk-run', n)\n" +
+  "        if os.path.isfile(p) and os.path.getsize(p) <= 300000:\n" +
+  "            try:\n" +
+  "                with open(p, encoding='utf-8') as f: r[n] = f.read()\n" +
+  "            except Exception: pass\n" +   // fichier binaire (image…) : ignoré
+  "    return r\n" +
+  "def _tk_flush():\n" +
+  "    sys.stdout.flush(); sys.stderr.flush()\n" +
+  // modules importés par le code mais introuvables (noms de premier niveau)
+  "def _tk_missing(src):\n" +
+  "    import importlib.util\n" +
+  "    from pyodide.code import find_imports\n" +
+  "    try: mods = find_imports(src)\n" +
+  "    except Exception: return []\n" +      // erreur de syntaxe : signalée à l'exécution
+  "    out = []\n" +
+  "    for m in mods:\n" +
+  "        m = m.split('.')[0]\n" +
+  "        if m in out: continue\n" +
+  "        try: found = importlib.util.find_spec(m) is not None\n" +
+  "        except Exception: found = False\n" +
+  "        if not found: out.append(m)\n" +
+  "    return out\n";
+
+// Python de configuration de matplotlib (exécuté une fois, après son chargement).
+var PYO_MPL =
+  "import io, base64, warnings\n" +
+  "import matplotlib\n" +
+  "matplotlib.use('Agg')\n" +
+  // Avertissements internes à matplotlib 3.10 sous WebAssembly : ses fonctions C++
+  // de texte/rendu (FreeType, Agg) reçoivent des décimaux au lieu d'entiers pour
+  // x, y, x0, y0, x1, y1, width, height. Sans effet sur le rendu, jamais causés par
+  // le code de l'élève (API interne) → on masque CETTE famille de messages seulement,
+  // les autres avertissements de matplotlib restent visibles.
+  "warnings.filterwarnings('ignore', message=r'The \\w+ parameter as float was deprecated',\n" +
+  "                        category=matplotlib.MatplotlibDeprecationWarning)\n" +
+  "import matplotlib.pyplot as _tk_plt\n" +
+  "import tkbridge\n" +
+  "def _tk_show(*args, **kwargs):\n" +
+  "    _tk_flush()\n" +                       // les print() précédents d'abord
+  "    for _n in _tk_plt.get_fignums():\n" +
+  "        _f = _tk_plt.figure(_n)\n" +
+  "        _b = io.BytesIO()\n" +
+  "        _f.savefig(_b, format='png', dpi=144, bbox_inches='tight')\n" +
+  "        tkbridge.image(base64.b64encode(_b.getvalue()).decode('ascii'))\n" +
+  "    _tk_plt.close('all')\n" +
+  "_tk_plt.show = _tk_show\n";
+
+function pyoWrite(text, isErr){
+  if (!text) return;
+  _pyoLastLine = (_pyoLastLine + text).split("\n").pop();
+  if (isErr){
+    var s = el("span", {class:"tk-stderr"}); s.textContent = text;
+    els.stdout.appendChild(s);
+  } else {
+    els.stdout.appendChild(document.createTextNode(text));
+  }
+}
+function pyoImage(b64){
+  var img = el("img", {class:"tk-plot", alt:"Figure matplotlib"});
+  // rendu à 144 dpi → affiché à taille « 100 dpi » : net sur écran haute densité
+  img.onload = function(){ img.style.width = Math.round(img.naturalWidth / 1.44) + "px"; };
+  img.src = "data:image/png;base64," + b64;
+  els.stdout.appendChild(img);
+}
+// Petite ligne d'état discrète pendant les téléchargements.
+function pyoStatus(msg){
+  var s = els.outPane.querySelector(".tk-status");
+  if (!msg){ if (s) s.remove(); return; }
+  if (!s){ s = el("div", {class:"tk-status"}); els.outPane.insertBefore(s, els.outPane.firstChild); }
+  s.textContent = msg;
+}
+
+function getPyodide(){
+  if (_pyo) return _pyo;
+  pyoStatus("Démarrage de Python… (la première fois peut prendre quelques secondes)");
+  _pyo = loadFirst(LIBS.pyodide).then(function(url){
+    return window.loadPyodide({ indexURL: url.replace(/[^\/]*$/, "") });
+  }).then(function(py){
+    var decOut = new TextDecoder(), decErr = new TextDecoder();
+    py.setStdout({ write: function(b){ pyoWrite(decOut.decode(b, {stream:true}), false); return b.length; } });
+    py.setStderr({ write: function(b){ pyoWrite(decErr.decode(b, {stream:true}), true);  return b.length; } });
+    py.setStdin({ stdin: function(){
+      var v = window.prompt(_pyoLastLine || "Entrée :", "");
+      if (v === null) v = "";
+      var s = el("span", {class:"tk-instyle"}); s.textContent = v + "\n";   // écho en bleu
+      els.stdout.appendChild(s); _pyoLastLine = "";
+      return v;
+    }});
+    py.registerJsModule("tkbridge", { image: pyoImage });
+    return py.runPythonAsync(PYO_BOOT).then(function(){ return py; });
+  });
+  _pyo.catch(function(){ _pyo = null; });   // autoriser un nouvel essai
+  return _pyo;
+}
+
+// Traceback Pyodide → uniquement les lignes du programme de l'élève.
+function cleanPyTraceback(msg){
+  var lines = String(msg).replace(/\s+$/, "").split("\n"), out = [], keep = true;
+  for (var i = 0; i < lines.length; i++){
+    var L = lines[i];
+    if (/^\s+File "/.test(L)){ keep = /File "main\.py"/.test(L); if (keep) out.push(L); continue; }
+    if (/^\S/.test(L)) keep = true;          // en-tête ou ligne finale de l'exception
+    if (keep) out.push(L);
+  }
+  var txt = out.join("\n").replace(/^Traceback \(most recent call last\):/,
+                                   "Traceback (appel le plus récent en dernier) :");
+  var m, re = /File "main\.py", line (\d+)/g, line = null;
+  while ((m = re.exec(txt))) line = parseInt(m[1], 10);   // ligne la plus interne
+  return { text: txt, line: line };
+}
+
+function runPyodide(code, done){
+  _pyoLastLine = "";
+  var py, ns = null, failed = null, pipFailed = {};
+  getPyodide().then(function(p){
+    py = p;
+    return py.loadPackagesFromImports(code, {
+      messageCallback: function(msg){ if (/^Loading /.test(msg)) pyoStatus("Chargement des bibliothèques : " + msg.replace(/^Loading /, "")); },
+      errorCallback:   function(){}
+    });
+  }).then(function(){
+    // Paquets PyPI : ceux déclarés par packages="…" + ceux de la liste blanche importés par le code
+    var req = (CFG.packages || []).slice();
+    var miss = py.globals.get("_tk_missing")(code), names = miss.toJs(); miss.destroy();
+    names.forEach(function(m){
+      var pip = (LIBS.pypiAuto || {})[m];
+      if (pip && req.indexOf(pip) < 0) req.push(pip);
+    });
+    if (!req.length) return;
+    pyoStatus("Installation depuis PyPI : " + req.join(", ") + "…");
+    return py.loadPackage("micropip").then(function(){
+      // un paquet à la fois : l'échec de l'un n'empêche pas les autres
+      return req.reduce(function(chain, pkg){
+        return chain.then(function(){
+          py.globals.set("_tk_req", pkg);
+          return py.runPythonAsync("import micropip\nawait micropip.install(_tk_req)")
+            .catch(function(e){ pipFailed[pkg.split(/[<>=!~\[ ]/)[0].toLowerCase()] = true; });
+        });
+      }, Promise.resolve());
+    });
+  }).then(function(){
+    // matplotlib a pu arriver comme dépendance (seaborn…) : on le cherche côté Python
+    if (!_pyoMpl && py.runPython("import importlib.util as _u; _u.find_spec('matplotlib') is not None")){
+      pyoStatus("Préparation de matplotlib…");
+      return py.runPythonAsync(PYO_MPL).then(function(){ _pyoMpl = true; });
+    }
+  }).then(function(){
+    pyoStatus(null);
+    py.globals.get("_tk_clean")();
+    var d = allData(true);                       // data= du shortcode + fichiers importés
+    for (var name in d){
+      if (/^[^\/\\]+$/.test(name) && name !== "." && name !== "..")
+        py.FS.writeFile("/tmp/tk-run/" + name, d[name]);   // texte (UTF-8) ou octets
+    }
+    if (_pyoMpl) py.runPython("_tk_plt.close('all')");
+    ns = py.globals.get("dict")();              // variables vierges à chaque exécution
+    ns.set("__name__", "__main__");
+    return py.runPythonAsync(code, { globals: ns, filename: "main.py" })
+             .catch(function(err){ failed = err; });
+  }).then(function(){
+    try { py.globals.get("_tk_flush")(); } catch(e){}
+    if (_pyoMpl && !failed){ try { py.globals.get("_tk_show")(); } catch(e){} }   // figures restantes
+    try {
+      var f = py.globals.get("_tk_files")();
+      var files = f.toJs({ dict_converter: Object.fromEntries }); f.destroy();
+      files = onlyGenerated(files);
+      if (Object.keys(files).length) renderFiles(files);
+    } catch(e){}
+    if (ns){ try { ns.destroy(); } catch(e){} }
+    if (failed){
+      if (failed.type){
+        var pre = cleanPyTraceback(failed.message);
+        var mm = failed.type === "ModuleNotFoundError" && /No module named '([^'.]+)/.exec(failed.message);
+        if (mm){
+          var mod = mm[1], pip = (LIBS.pypiAuto || {})[mod] || mod;
+          pre.text += pipFailed[pip.toLowerCase()]
+            ? "\n\n→ « " + pip + " » n'a pas pu être installé depuis PyPI (connexion, ou paquet "
+              + "non compatible : seuls les paquets en Python pur s'installent dans le navigateur)."
+            : "\n\n→ Le module « " + mod + " » n'existe pas dans Python pour navigateur (Pyodide). "
+              + "Faute de frappe ? S'il s'agit d'un paquet PyPI en Python pur, il peut être "
+              + "ajouté avec packages=\"" + mod + "\" dans le shortcode.";
+        }
+        showPyError(failed, pre);
+      }
+      else showError(String(failed));
+    }
+    done();
+  }).catch(function(err){
+    pyoStatus(null);
+    showError(py ? String(err)
+      : "Impossible de charger Python scientifique (Pyodide).\n"
+        + "Vérifie ta connexion : il est téléchargé depuis cdn.jsdelivr.net.");
     done();
   });
 }
@@ -941,6 +1581,9 @@ function runVPython(code, done){
     done();
   });
 }
+
+/* Démarrage : en DERNIER, une fois tout le script évalué. */
+boot();
 </script>
 </body>
 </html>

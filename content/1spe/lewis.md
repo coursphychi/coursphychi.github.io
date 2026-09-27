@@ -44,7 +44,7 @@ details[open] > summary:first-of-type {
 </div>
 
 
-{{%notice definition "Schéma de Lewis d’une entité chimique"%}}
+{{%notice def "Schéma de Lewis d’une entité chimique"%}}
 Modèle de représentation de la structure électronique de valence d’entités au moyen de lettres (symbole des éléments chimiques), traits (doublets liants et doublets non liants), lacunes électroniques et charges formelles.<br><br>
 <b>Charge formelle</b><br>
 Charge portée par un atome après partage équitable de chaque doublet liant, la charge formelle étant obtenue par comparaison entre le nombre d’électrons de valence à l’état fondamental et celui obtenu après partage.<br><br>
@@ -56,14 +56,14 @@ Symbole signalant le défaut d’un doublet, liant ou non liant, par rapport à 
 L’atome de bore présente une lacune électronique dans la molécule de formule $\ce{BH3}$ (il y est entouré de 3 doublets contre 4 pour l’atome de néon), mais pas dans l’ion de formule $\ce{BH4-}$. Le bore porte une charge formelle négative dans le second édifice car il est entouré de 4 électrons après partage alors que l’atome de bore n’a que 3 électrons de valence à l’état isolé.
 
 
-{{%notice definition "Caractère polaire d’une liaison covalente"%}}
+{{%notice def "Caractère polaire d’une liaison covalente"%}}
 Une liaison est dite polarisée lorsque les atomes liés ont des électronégativités différentes. La probabilité de présence des électrons du doublet liant tend alors à être supérieure dans le voisinage de l’atome le plus électronégatif. Cette situation peut être représentée par l’intermédiaire de charges partielles, notées δ+ et δ-, ou par le tracé d’un vecteur moment dipolaire.
 {{%/notice%}}
 
 > Exemple :<br>
 La liaison $\ce{O-H}$ dans une molécule est polarisée, l’électronégativité de l’oxygène étant supérieure à celle de l’hydrogène. Les atomes d’hydrogène d’une molécule d’eau sont porteurs d’une charge partielle positive δ+ et l’oxygène d’une charge partielle 2δ-.
 
-{{%notice definition "Polarité d’une entité polyatomique"%}}
+{{%notice def "Polarité d’une entité polyatomique"%}}
 Une entité polyatomique est dite polaire si le barycentre des charges positives et celui des charges négatives ne sont pas confondus. Cette situation se rencontre lorsque l’édifice présente des liaisons polaires et que les moments dipolaires de ces liaisons ne s’annulent pas. La reconnaissance d’une entité polaire nécessite par conséquent la connaissance de la géométrie de l’entité.
 {{%/notice%}}
 

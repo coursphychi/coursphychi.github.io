@@ -41,7 +41,7 @@ Capacités numériques (Python) explicitement mentionnées au programme&nbsp;:
 Simuler, à l’aide d’un langage de programmation, un processus aléatoire illustrant la détermination de la valeur d’une grandeur avec incertitudes-types composées.
 </td>
 <td>
-<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=UQwA4Y1mva9e&line=3&uniqifier=1">
+<a href="../programmes/#tp-titrage-conductimétrique">
 📒
 </a>
 </td>
@@ -53,7 +53,7 @@ Représenter, à l’aide d’un langage de programmation, l’évolution des qu
 espèces en fonction du volume de solution titrante versé.
 </td>
 <td>
-<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=bQpCHJo8mM-2&line=12&uniqifier=1" target="_blank">
+<a href="../programmes/#titrages">
 📒
 </a>
 </td>
@@ -64,7 +64,7 @@ espèces en fonction du volume de solution titrante versé.
 À l’aide d’un langage de programmation et à partir de données expérimentales, tracer l’évolution temporelle d’une concentration, d’une vitesse volumique d’apparition ou de disparition et tester une relation donnée entre la vitesse volumique de disparition et la concentration d’un réactif.
 </td>
 <td>
-<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=n0a03DnWLZkw&line=6&uniqifier=1" target="_blank">
+<a href="../programmes/#cinétique-chimique">
 📒
 </a>
 </td>
@@ -75,7 +75,7 @@ espèces en fonction du volume de solution titrante versé.
 Déterminer, à l’aide d’un langage de programmation, le taux d’avancement final d’une transformation, modélisée par la réaction d’un acide sur l’eau.
 </td>
 <td  style="border-bottom:none;">
-<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=B837xeRnpfGA" target="_blank">
+<a href="../programmes/#activité-taux-d">
 📒
 </a>
 </td>
@@ -85,7 +85,7 @@ Déterminer, à l’aide d’un langage de programmation, le taux d’avancement
 Tracer, à l’aide d’un langage de programmation, le diagramme de distribution des espèces d’un couple acide-base de pK<sub>A</sub> donné.
 </td>
 <td  style="border-top:none;">
-<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=r7pO0eGfqizH" target="_blank">
+<a href="../programmes/#activité-diagramme-de-distribution">
 📒
 </a>
 </td>
@@ -96,7 +96,7 @@ Tracer, à l’aide d’un langage de programmation, le diagramme de distributio
 Représenter, à l’aide d’un langage de programmation, des vecteurs accélération d’un point lors d'un mouvement.
 </td>
 <td>
-<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=Jo6hy5seacXK&line=2&uniqifier=1" target="_blank">
+<a href="../programmes/#décrire-un-mouvement">
 📒
 </a>
 </td>
@@ -107,7 +107,7 @@ Représenter, à l’aide d’un langage de programmation, des vecteurs accélé
 Représenter, à partir de données expérimentales variées, l’évolution des grandeurs énergétiques d’un système en mouvement dans un champ uniforme à l’aide d’un langage de programmation ou d’un tableur.
 </td>
 <td>
-<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=OkO94pCtGpkk&line=1&uniqifier=1" target="_blank">
+<a href="../programmes/#chute-libre-énergie">
 📒
 </a>
 </td>
@@ -119,7 +119,7 @@ Exploiter, à l’aide d’un langage de programmation, des données astronomiqu
 pour tester les deuxième et troisième lois de Kepler.
 </td>
 <td>
-<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1?authuser=1#scrollTo=y5UtAQbKuaQo" target="_blank">
+<a href="../programmes/#kepler">
 📒
 </a>
 </td>
@@ -130,7 +130,7 @@ pour tester les deuxième et troisième lois de Kepler.
 Représenter, à l’aide d’un langage de programmation, la somme de deux signaux sinusoïdaux périodiques synchrones en faisant varier la phase à l'origine de l'un des deux.
 </td>
 <td>
-<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=4-P71gOx1sPx&line=4&uniqifier=1" target="_blank">
+<a href="../programmes/#diffraction-et-interférences">
 📒
 </a>
 </td>
@@ -139,9 +139,9 @@ Représenter, à l’aide d’un langage de programmation, la somme de deux sign
 
 <br>
 
-<p style="text-align:center;">Ensemble des codes Python rencontrés dans les exercices, TP et cours réunis dans le notebook ci-dessous.</p>
+<p style="text-align:center;">Ensemble des codes Python rencontrés dans les exercices, TP et cours réunis dans la page ci-dessous.</p>
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1?usp=sharing" target="_blank">Notebook</a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="../programmes/">Programmes</a></p>
 
 
 

@@ -22,7 +22,6 @@ td, th {
 
 # Mouvement dans un champ de gravitation
 
-
 <p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tspe/gravitation">Cours</a></p>
 
 <div style="position: relative; max-width: 100%; margin-left: auto;margin-right: auto;border-radius: 50px;">
@@ -39,7 +38,7 @@ td, th {
   <td style="border-bottom:none;"><a href="/act-kepler.pdf"><b>Découverte des lois de Kepler</b></a> + <a href="/loitrois.py" target="_blank" style="color:#00AB8E"><b><i class="fa-solid fa-computer"></i></b> (3<sup>e</sup> loi)</a></td>
   </tr>
       <tr>
- <td style="border-top:none;"><a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1?authuser=1#scrollTo=BBeSn1YJubl-"><b>Éphémérides de Mercure et loi des aires</b></a> + <a href="/mercure.py" target="_blank" style="color:#00AB8E"><b><i class="fa-solid fa-computer"></i></b> (2<sup>e</sup> loi)</a></td>
+ <td style="border-top:none;"><a href="../programmes/#test-de-la-deuxième-loi"><b>Éphémérides de Mercure et loi des aires</b></a> + <a href="/mercure.py" target="_blank" style="color:#00AB8E"><b><i class="fa-solid fa-computer"></i></b> (2<sup>e</sup> loi)</a></td>
  </tr>
    <tr>
 <th rowspan="3">Exercices</th>

@@ -1,0 +1,227 @@
+/* ==========================================================================
+   Encarts « notice » — compagnon de layouts/shortcodes/notice.html
+
+   Valeurs reprises telles quelles de ton css/theme.css (section div.notices) :
+   barre de 30 px, angles droits, fond pastel, texte #666, icône Font Awesome 5
+   Free solide en blanc à gauche, libellé à 2rem.
+   Seule différence assumée : une seule barre et un fond continu même quand
+   l'encart contient plusieurs blocs.
+   ========================================================================== */
+
+.notice {
+  --notice-accent: #6AB0DE;   /* note */
+  --notice-fond:   #E7F2FA;
+  --notice-glyphe: "\f05a";   /* fa-info-circle, le glyphe par défaut */
+  --notice-rayon: 0;          /* angles droits, comme le thème */
+  margin: 2rem 0;
+  background: var(--notice-fond);
+  border-radius: var(--notice-rayon);
+  overflow: hidden;           /* la barre de titre suit les coins arrondis */
+}
+
+/* Arrondi léger.
+   - au cas par cas :   {{< notice note round="true" >}}
+   - sur tout le site : décommenter la règle globale ci-dessous.        */
+
+.notice--arrondi { --notice-rayon: 4px; }
+
+/*
+.notice { --notice-rayon: 4px; }
+*/
+
+.notice--info {
+  --notice-accent: #F0B37E;
+  --notice-fond: #FFF2DB;
+  --notice-glyphe: "\f06a";              /* fa-exclamation-circle */
+}
+.notice--warning {
+  --notice-accent: rgba(217, 83, 79, .8);
+  --notice-fond: #FAE2E2;
+  --notice-glyphe: "\f1e2";              /* fa-bomb */
+}
+.notice--tip {
+  --notice-accent: rgba(92, 184, 92, .8);
+  --notice-fond: #E6F9E6;
+  --notice-glyphe: "\f0d0";              /* fa-magic */
+}
+.notice--theo {
+  --notice-accent: rgba(188, 128, 255, .8);
+  --notice-fond: rgba(188, 128, 255, .2);
+}
+.notice--def {
+  --notice-accent: #6AB0DE;
+  --notice-fond: #E7F2FA;
+  --notice-glyphe: "\f02d";              /* fa-book */
+}
+.notice--piege {
+  --notice-accent: #8C275C;
+  --notice-fond: #F2C7DE;
+  --notice-glyphe: "\f1e2";              /* fa-bomb */
+}
+.notice--correction {
+  --notice-accent: rgba(92, 184, 92, .8);   /* vert des tip */
+  --notice-fond: #E6F9E6;
+  --notice-glyphe: "\f5ad";              /* fa-pen-nib */
+}
+.notice--coeur {
+  --notice-accent: #B51700;
+  --notice-fond: #F8CDC8;
+  --notice-glyphe: "\f004";              /* fa-heart */
+}
+
+/* --- barre de titre : les 30 px du border-top d'origine ----------------- */
+
+.notice__entete {
+  position: relative;
+  height: 30px;
+  background: var(--notice-accent);
+  color: #fff;
+  font-size: 1rem;
+  overflow: hidden;
+}
+
+.notice__icone {
+  position: absolute;
+  top: 2px;
+  left: 10px;
+  color: #fff;
+}
+
+/* icône du thème quand le paramètre icon= n'est pas fourni ;
+   le span est alors émis vide et le CSS reprend la main */
+.notice__icone:empty::before {
+  font-family: "Font Awesome 5 Free", "Font Awesome 6 Free", "FontAwesome";
+  font-weight: 900;
+  content: var(--notice-glyphe);
+}
+
+.notice__titre {
+  position: absolute;
+  top: 2px;
+  left: 2rem;
+  right: 2.2rem;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- corps : padding, taille et couleur de texte d'origine ------------- */
+
+.notice__corps {
+  padding: 15px;
+  font-size: 1rem;
+  color: #666;
+}
+
+.notice__corps > :first-child { margin-top: 0; }
+.notice__corps > :last-child  { margin-bottom: 0; }
+
+.notice__corps p  { margin: .8rem 0; padding: 0; }
+.notice__corps ul,
+.notice__corps ol { margin: .8rem 0; padding-left: 1.5rem; }
+.notice__corps li { margin: .25rem 0; }
+.notice__corps li > ul,
+.notice__corps li > ol { margin: .25rem 0; }
+
+.notice__corps blockquote {
+  margin: .8rem 0;
+  padding-left: .8rem;
+  border-left: 3px solid var(--notice-accent);
+}
+
+.notice__corps table { margin: .8rem 0; }
+.notice__corps img   { max-width: 100%; height: auto; }
+.notice__corps details { margin: .8rem 0; }
+.notice__corps details > summary { cursor: pointer; }
+
+/* --- variante sans titre : title="none" -------------------------------- */
+/* le fond pastel et le padding subsistent, sans la barre */
+
+/* --- variante pliable : collapse="true" -------------------------------- */
+/*
+   Principe : une seule affordance, à droite, symétrique de l'icône de gauche.
+   - un chevron « ⌄ » dessiné en CSS (indépendant de Font Awesome) qui pivote
+     de 180° à l'ouverture : vers le bas = « il y a du contenu dessous » ;
+   - un indice texte discret « Afficher » / « Masquer » ;
+   - un léger assombrissement de la barre au survol.
+   Pour supprimer l'indice texte :  .notice { --notice-indice-ferme: ""; --notice-indice-ouvert: ""; }
+*/
+
+.notice {
+  --notice-indice-ferme: "Afficher";
+  --notice-indice-ouvert: "Masquer";
+}
+
+/* suppression radicale du marqueur natif : un élément en display:block
+   ne génère plus de ::marker, quel que soit le navigateur (Safari récent
+   ignore content sur ::marker) */
+details.notice--pliable > summary.notice__entete {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-image .15s ease;
+}
+details.notice--pliable > summary.notice__entete::-webkit-details-marker { display: none; }
+details.notice--pliable > summary.notice__entete::marker { content: ""; }
+details.notice--pliable > summary.notice__entete::before,
+details.notice--pliable > summary.notice__entete::after { content: none; display: none; }
+
+/* survol : voile sombre par-dessus l'accent, le texte reste blanc pur */
+details.notice--pliable > summary.notice__entete:hover {
+  background-image: linear-gradient(rgba(0, 0, 0, .08), rgba(0, 0, 0, .08));
+}
+
+/* le titre laisse la place à l'indice et au chevron */
+.notice--pliable .notice__titre { right: 6.5rem; }
+
+/* indice texte, centré verticalement dans la barre */
+.notice__indice {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  font-size: .8rem;
+  letter-spacing: .02em;
+  color: #fff;
+  opacity: .85;
+}
+.notice__indice::before { content: var(--notice-indice-ferme); }
+details.notice--pliable[open] .notice__indice::before { content: var(--notice-indice-ouvert); }
+
+/* chevron : un carré à deux bords, tourné de 45°.
+   Son centre visuel est à ~18 px du bord droit, comme celui de l'icône
+   depuis le bord gauche : la barre est symétrique. */
+.notice__chevron {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform .2s ease;
+}
+details.notice--pliable[open] .notice__chevron {
+  transform: translateY(-30%) rotate(225deg);
+}
+
+details.notice--pliable > summary.notice__entete:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notice__chevron,
+  details.notice--pliable > summary.notice__entete { transition: none; }
+}
+
+/* à l'impression, l'indice n'a pas de sens */
+@media print {
+  .notice__indice, .notice__chevron { display: none; }
+}

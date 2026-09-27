@@ -66,7 +66,7 @@ Pour les spectres infrarouges, il peut être pratique de retenir qu'une grosse p
 
 ## Définition
 
-{{%notice definition "Dosage par étalonnage"%}}
+{{%notice def "Dosage par étalonnage"%}}
 Méthode de détermination d'une concentration, généralement non destructive, utilisant une courbe de référence liant la valeur d'une grandeur physique (absorbance, conductivité, masse volumique, etc.) à la concentration (en masse ou en quantité de matière) d'un soluté.<br>
 La courbe de référence, appelée courbe d'étalonnage, doit être monotone sur l'intervalle de concentration encadrant la concentration inconnue. La courbe n'est pas nécessairement une droite, mais cette situation permet d'obtenir une précision constante quelle que soit la valeur de la concentration recherchée.
 {{%/notice%}}

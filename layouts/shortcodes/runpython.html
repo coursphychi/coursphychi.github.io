@@ -1,14 +1,21 @@
 {{- /*
   Shortcode : runpython
   ---------------------------------------------------------------------
-  Intègre une fenêtre de code exécutable (Python ou VPython) façon Trinket.
+  Intègre une fenêtre de code exécutable (Python, VPython ou Pyodide) façon Trinket.
 
   Paramètres :
-    lang     "python" (défaut) | "vpython"
+    lang     "python" (défaut, Skulpt, léger) | "vpython" (GlowScript 3D)
+             | "pyodide" (vrai CPython : numpy, matplotlib… — plus lourd)
     mode     "toggle" (défaut, bascule Code/Résultat) | "output" (résultat seul)
     file     nom d'un fichier dans  static/programmes/  (gros programmes)
-    height   hauteur en px (défaut : selon le mode/lang)
+    height   hauteur en px (défaut : selon le mode/lang), ou "auto" :
+             la fenêtre affiche toutes les lignes du code (mode toggle)
     autorun  "true" pour exécuter automatiquement même en mode toggle
+    packages (pyodide) paquets PyPI en Python pur à installer, ex. "pint, uncertainties"
+    data     fichiers de données (dans static/programmes/) lisibles par le programme,
+             ex. data="mesures.csv" ou data="tp3/mesures.csv, tp3/etalon.csv"
+    upload   "true" : l'élève peut importer ses propres fichiers (bouton ou glisser-déposer),
+             ou liste d'extensions autorisées, ex. upload=".csv,.txt"
 
   Usage — code en ligne (paire, garde l'indentation avec  {{< >}}  ) :
 
@@ -36,6 +43,34 @@
         glow.<v>.min.js, RScompiler.<v>.min.js, RSrun.<v>.min.js doivent être
         présentes dans static/trinket/glowscript_libraries/. */ -}}
 {{- $version := .Get "version" | default "" -}}
+{{- /* packages : paquets PyPI (Python pur) à installer pour cette fenêtre,
+        lang="pyodide" uniquement. Ex. packages="uncertainties, pint".
+        seaborn est déjà installé automatiquement (liste blanche du player). */ -}}
+{{- $packages := .Get "packages" | default "" -}}
+{{- /* data : fichiers de données (CSV, TXT…) que le programme peut lire avec
+        open("mesures.csv") ou pandas.read_csv("mesures.csv"). Chemins relatifs à
+        static/programmes/, séparés par des virgules ; le programme les voit sous
+        leur NOM SEUL (data="tp3/mesures.csv" → open("mesures.csv")).
+        Lus par Hugo au build et transmis avec le code. lang python ou pyodide. */ -}}
+{{- /* upload : "true" → bouton « Importer un fichier » (et glisser-déposer) pour
+        que l'élève charge ses propres fichiers ; ou une liste d'extensions
+        autorisées, ex. upload=".csv,.txt". lang python ou pyodide. */ -}}
+{{- $upload := .Get "upload" | default "" -}}
+{{- $data := slice -}}
+{{- range split (.Get "data" | default "") "," -}}
+  {{- with trim . " " -}}
+    {{- $dpath := printf "static/programmes/%s" . -}}
+    {{- if os.FileExists $dpath -}}
+      {{- $contenu := os.ReadFile $dpath -}}
+      {{- if gt (len $contenu) 300000 -}}
+        {{- warnf "runpython : %q pèse %d octets ; au-delà de ~300 ko la page s'alourdit (données transmises avec le code). %s" . (len $contenu) $.Position -}}
+      {{- end -}}
+      {{- $data = $data | append (dict "n" (path.Base .) "c" $contenu) -}}
+    {{- else -}}
+      {{- errorf "runpython : fichier de données introuvable %q (cherché dans %s). %s" . $dpath $.Position -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 
 {{- /* récupération du code : fichier prioritaire, sinon contenu interne */ -}}
 {{- $code := "" -}}
@@ -52,21 +87,43 @@
 
 {{- /* hauteur par défaut adaptée */ -}}
 {{- $h := .Get "height" -}}
+{{- /* height="auto" (mode toggle) : la fenêtre prend la hauteur de TOUT le code.
+        Hugo pose une estimation (≈ 17,6 px par ligne + barre d'outils) pour que la
+        page s'affiche d'emblée à peu près à la bonne taille ; le player ajuste
+        ensuite au pixel près et suit les modifications du code.
+        En mode output (pas de code affiché), "auto" = hauteur par défaut. */ -}}
+{{- $autoh := false -}}
+{{- if eq (lower (printf "%v" $h)) "auto" -}}
+  {{- $h = "" -}}
+  {{- if eq $mode "toggle" -}}
+    {{- $autoh = true -}}
+    {{- $nl := len (split $code "\n") -}}
+    {{- $h = int (add 51 (mul $nl 17.6)) -}}   {{- /* 13,5 px × 1,3 d'interligne ≈ 17,6 px/ligne ; 51 = barre + marges + bordures */ -}}
+    {{- if lt $h 100 -}}{{- $h = 100 -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- if not $h -}}
+  {{- $big := or (eq $lang "vpython") (eq $lang "glowscript") (eq $lang "pyodide") -}}
   {{- if eq $mode "output" -}}
-    {{- $h = cond (or (eq $lang "vpython") (eq $lang "glowscript")) "420" "240" -}}
+    {{- $h = cond $big "420" "240" -}}
   {{- else -}}
-    {{- $h = cond (or (eq $lang "vpython") (eq $lang "glowscript")) "440" "340" -}}
+    {{- $h = cond $big "440" "340" -}}
   {{- end -}}
 {{- end -}}
 
-{{- $uid := printf "trinket-%d" .Ordinal -}}
+{{- /* Identifiant unique, y compris pour une fenêtre imbriquée (notice…) :
+        .Ordinal repart de 0 dans chaque shortcode parent, et la .Position
+        d'un shortcode imbriqué vaut toujours 1:1 → on combine la position
+        du parent, la position propre et le rang parmi les frères. */ -}}
+{{- $cle := printf "%s|%v|%d" .Page.RelPermalink .Position .Ordinal -}}
+{{- with .Parent }}{{ $cle = printf "%v>%s" .Position $cle }}{{ end -}}
+{{- $uid := printf "trinket-%s" (substr (md5 $cle) 0 10) -}}
 {{- $b64 := $code | base64Encode -}}
 {{- /* largeur de fenêtre forcée (optionnelle) : la scène s'y adapte, la hauteur suit */ -}}
 {{- $w := .Get "width" -}}
 {{- $wnum := 0 -}}{{- with $w -}}{{- $wnum = int . -}}{{- end -}}
 {{- /* config complète encodée en base64url pour le hash de l'iframe (méthode robuste) */ -}}
-{{- $cfgjson := dict "code" $code "lang" $lang "mode" $mode "default" $default "width" $wnum "autorun" $autorun "fit" $fit "version" $version | jsonify -}}
+{{- $cfgjson := dict "code" $code "lang" $lang "mode" $mode "default" $default "width" $wnum "autorun" $autorun "fit" $fit "version" $version "autoheight" $autoh "packages" $packages "data" $data "upload" $upload | jsonify -}}
 {{- $hash := $cfgjson | base64Encode | replaceRE `\+` "-" | replaceRE `/` "_" | replaceRE `=+$` "" -}}
 
 <div class="trinket-embed" style="margin:1rem 0;text-align:center;">
@@ -77,10 +134,14 @@
           style="display:inline-block;vertical-align:top;width:100%;{{ if $w }}max-width:{{ $w }}px;{{ end }}height:{{ $h }}px;border:0;overflow:hidden;border-radius:8px;background:transparent;color-scheme:normal;"
           sandbox="allow-scripts allow-same-origin allow-popups allow-modals allow-downloads">
   </iframe>
+{{- /* Secours pour les thèmes classiques : si jamais le hash n'a pas suffi
+        (très rare), on retransmet la config par postMessage. En présentation
+        reveal.js ce script peut ne pas s'exécuter — c'est voulu, le hash gère tout.
+        IMPORTANT : la sortie de ce shortcode ne doit contenir AUCUNE ligne vide
+        (ni ligne faite d'espaces). Imbriquée dans un shortcode qui rend son
+        contenu en Markdown (notice…), une ligne vide terminerait le bloc HTML
+        et Goldmark réécrirait la suite du script (<p>, guillemets typographiques). */}}
   <script>
-  /* Secours pour les thèmes classiques : si jamais le hash n'a pas suffi
-     (très rare), on retransmet la config par postMessage. En présentation
-     reveal.js ce script peut ne pas s'exécuter — c'est voulu, le hash gère tout. */
   (function(){
     var iframe = document.getElementById({{ $uid }});
     if (!iframe) return;
@@ -88,7 +149,11 @@
       code: {{ $b64 }},
       lang: {{ $lang }},
       mode: {{ $mode }},
-      autorun: {{ $autorun }}
+      autorun: {{ $autorun }},
+      autoheight: {{ $autoh }},
+      packages: {{ $packages }},
+      data: {{ $data }},
+      upload: {{ $upload }}
     };
     var sent = false;
     function send(){

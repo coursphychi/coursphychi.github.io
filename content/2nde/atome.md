@@ -57,7 +57,7 @@ td, th {
 
 ## Définitions
 
-{{%notice definition "Élément chimique"%}}
+{{%notice def "Élément chimique"%}}
 Ensemble des atomes (isolés ou engagés dans un édifice polyatomique neutre ou chargé) et des ions monoatomiques comportant un même nombre de protons dans leur noyau.
 {{%/notice%}}
 

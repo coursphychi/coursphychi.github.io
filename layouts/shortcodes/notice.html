@@ -1,10 +1,54 @@
-<!--{{ $_hugo_config := `{ "version": 1 }` }}-->
-<div class="notices {{ .Get 0 }}" style="--title: '{{ .Get 1 | default (.Get 0) }}';">
-  <p style="display: none;">{{ .Get 1 | default (.Get 0) }}</p>
-  <div class="notice-body">
-    {{ .Inner }}
-  </div>
-</div>
-
-<!--><div class="notices {{ .Get 0 }}" {{ if len .Params | eq 2 }} id="{{ .Get 1 }}"  {{ end }}>{{ .Inner }}
-</div>-->
+{{- /*
+  notice.html - encart a titre libre, contenu Markdown complet.
+  Appels acceptes : delimiteurs pourcent (historique) ou chevrons (recommande).
+  Positionnels : 0 = type, 1 = titre, 2 = icone.
+  Nommes : type, title, icon, collapse, open, round.
+  Valeurs speciales : title="none" masque l'entete, icon="none" masque l'icone.
+*/ -}}
+{{- $catalogue := dict
+      "note"    (dict "label" "Note"      "icon" "")
+      "info"    (dict "label" "Important" "icon" "")
+      "tip"     (dict "label" "Tip"       "icon" "")
+      "warning" (dict "label" "Attention" "icon" "")
+      "theo"    (dict "label" "Théorème"  "icon" "")
+      "def"     (dict "label" "Définition" "icon" "")
+      "piege"   (dict "label" "Piège"     "icon" "")
+      "correction" (dict "label" "Correction" "icon" "")
+      "coeur"   (dict "label" "À retenir" "icon" "")
+-}}
+{{- $type := "note" -}}
+{{- $titre := "" -}}
+{{- $icone := "" -}}
+{{- $collapse := false -}}
+{{- $open := false -}}
+{{- $arrondi := false -}}
+{{- if .IsNamedParams -}}
+  {{- $type     = default $type (.Get "type") -}}
+  {{- $titre    = default "" (.Get "title") -}}
+  {{- $icone    = default "" (.Get "icon") -}}
+  {{- $collapse = eq (default "false" (.Get "collapse")) "true" -}}
+  {{- $open     = eq (default "false" (.Get "open")) "true" -}}
+  {{- $arrondi  = eq (default "false" (.Get "round")) "true" -}}
+{{- else -}}
+  {{- $type  = default $type (.Get 0) -}}
+  {{- $titre = default "" (.Get 1) -}}
+  {{- $icone = default "" (.Get 2) -}}
+{{- end -}}
+{{- $meta := index $catalogue $type -}}
+{{- if not $meta -}}
+  {{- warnf "shortcode notice : type inconnu %q (%s)" $type .Position -}}
+  {{- $meta = dict "label" (title $type) "icon" "" -}}
+{{- end -}}
+{{- $titre = default $meta.label $titre -}}
+{{- $icone = default $meta.icon $icone -}}
+{{- $sansEntete := eq (lower $titre) "none" -}}
+{{- $sansIcone := eq (lower $icone) "none" -}}
+{{- $corps := .Inner | strings.TrimSpace | .Page.RenderString (dict "display" "block") -}}
+{{- $classe := printf "notice notice--%s" (anchorize $type) -}}
+{{- if $arrondi -}}{{- $classe = printf "%s notice--arrondi" $classe -}}{{- end -}}
+{{- if $collapse -}}
+{{- if $sansEntete -}}{{- errorf "shortcode notice : collapse exige un titre (%s)" .Position -}}{{- end -}}
+<details class="{{ $classe }} notice--pliable"{{ if $open }} open{{ end }}><summary class="notice__entete">{{ if not $sansIcone }}<span class="notice__icone" aria-hidden="true">{{ $icone }}</span>{{ end }}<span class="notice__titre">{{ $titre }}</span><span class="notice__indice" aria-hidden="true"></span><span class="notice__chevron" aria-hidden="true"></span></summary><div class="notice__corps">{{ $corps }}</div></details>
+{{- else -}}
+<div class="{{ $classe }}{{ if $sansEntete }} notice--nu{{ end }}" role="note">{{ if not $sansEntete }}<div class="notice__entete">{{ if not $sansIcone }}<span class="notice__icone" aria-hidden="true">{{ $icone }}</span>{{ end }}<span class="notice__titre">{{ $titre }}</span></div>{{ end }}<div class="notice__corps">{{ $corps }}</div></div>
+{{- end -}}

@@ -37,14 +37,14 @@ td, th {
 <table>
    <tr>
   <th rowspan="1 ">TP</th>
-  <td><a href="/tp-mouvement.pdf"><b>Pointage / Regressi / Python</b></a> + <a href="https://video.wixstatic.com/video/5a84a5_5de3df9d305d427ca015618f6be1b621/720p/mp4/file.mp4"><b style="color:#00AB8E"><i class="fa-solid fa-video"></i></b></a></td>
+  <td><a href="/tp-mouvement.pdf"><b>Pointage / Regressi / Python</b></a> + <a href="https://video.wixstatic.com/video/5a84a5_5de3df9d305d427ca015618f6be1b621/720p/mp4/file.mp4"><b style="color:#00AB8E"><i class="fa-solid fa-video"></i></b></a>  + <a href="../programmes/#tp-mouvement"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a></td>
   </tr>
    <tr>
 <th rowspan="2">Exercices</th>
   <td style="border-bottom:none;"><a href="/act-tspemvt1.pdf"><b>Atterrissage fusée</b></a> +  <a href="/correcatterr.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
  </tr>
  <tr>
- <td style="border-top:none;"><a href="/act-tspemvt2.pdf"><b>Clothoïde et raccordement</b></a>&nbsp;+&nbsp;<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=cqhDB-OuvYN-&uniqifier=1"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a>&nbsp;+&nbsp;<a href="https://accromath.uqam.ca/wp-content/uploads/2014/10/Virage9.2.pdf"><b style="color:#FFA601"><i class="fa-solid fa-newspaper"></i></b></td>
+ <td style="border-top:none;"><a href="/act-tspemvt2.pdf"><b>Clothoïde et raccordement</b></a>&nbsp;+&nbsp;<a href="../programmes/#exercice-clothoïde-et-échangeur-routier"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a>&nbsp;+&nbsp;<a href="https://accromath.uqam.ca/wp-content/uploads/2014/10/Virage9.2.pdf"><b style="color:#FFA601"><i class="fa-solid fa-newspaper"></i></b></td>
  </tr>
   <tr>
   <th rowspan="1 ">Appliquette</th>

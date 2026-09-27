@@ -59,7 +59,7 @@ Le banc Kofler se compose d'une plaque chauffante qui présente un gradient de t
  ![](/banckofler.png?width=600px)
 {{% /notice %}}
 
-{{%notice definition "Rendement"%}}
+{{%notice def "Rendement"%}}
 
 {{%/notice%}}
 

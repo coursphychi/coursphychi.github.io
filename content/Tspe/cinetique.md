@@ -58,7 +58,7 @@ td, th {
   <td style="border-bottom:none;border-top:none;"><a href="/act-titragets3.pdf"><b>Acide polylactique</b> (à partir de B.2.)</a> </td>
   </tr>
     <tr>
-  <td style="border-bottom:none;border-top:none;"><a href="/act-cinet.pdf"><b>Dégradation de produits de contraste</b></a> + <a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=n0a03DnWLZkw&line=6&uniqifier=1" target="_blank"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a></td>
+  <td style="border-bottom:none;border-top:none;"><a href="/act-cinet.pdf"><b>Dégradation de produits de contraste</b></a> + <a href="../programmes/#activité-dégradation-d"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a></td>
   </tr>
   <tr>
   <td style="border-top:none;"><a href="/act-cinet-meca-reac.pdf"><b>Mécanismes réactionnels</b></a></td>

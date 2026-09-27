@@ -37,11 +37,11 @@ td, th {
   <th rowspan="2">TP</th>
   <td style="border-bottom:none;"><a href="/tp-titrageph.pdf"><b>Titrage pH-métrique</b></a></td>
   <tr>
-  <td style="border-top:none;"><a href="/tp-titrageconduct.pdf"><b>Titrage conductimétrique</b></a>&nbsp;+&nbsp;<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=cqhDB-OuvYN-&uniqifier=1" target="_blank" style="color:#00AB8E"><b><i class="fa-solid fa-computer"></i></b> (Monte-Carlo)</a></td>
+  <td style="border-top:none;"><a href="/tp-titrageconduct.pdf"><b>Titrage conductimétrique</b></a>&nbsp;+&nbsp;<a href="../programmes/#tp-titrage-conductimétrique" style="color:#00AB8E"><b><i class="fa-solid fa-computer"></i></b> (Monte-Carlo)</a></td>
   </tr>
   <tr>
 <th rowspan="4 ">Exercices</th>
-  <td style="border-bottom:none;"><a href="/act-titragets1.pdf"><b>Titrage conductimétrique et agneaux</b></a>&nbsp;+&nbsp;<a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=cqhDB-OuvYN-&uniqifier=1" target="_blank"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a>  +  <a href="/correcagneau.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
+  <td style="border-bottom:none;"><a href="/act-titragets1.pdf"><b>Titrage conductimétrique et agneaux</b></a>&nbsp;+&nbsp;<a href="../programmes/#exercice-titrage-agneaux"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a>  +  <a href="/correcagneau.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
   <tr>
   <td style="border-top:none;border-bottom:none;"><a href="/act-titragets2.pdf"><b>Eau de Javel et acide</b> (partie B)</td>
   </tr>
@@ -81,12 +81,12 @@ $\cdots$&nbsp;&raquo;
 
 ## Définitions
 
-{{%notice definition "Dosage par titrage"%}}
+{{%notice def "Dosage par titrage"%}}
 Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’«&nbsp;acido-basique&nbsp;», «&nbsp;par oxydoréduction » ou «&nbsp;par précipitation&nbsp;» selon la nature de la réaction support.
 {{%/notice%}}
 
 
-{{%notice definition "Équivalence"%}}
+{{%notice def "Équivalence"%}}
 Moment du titrage associé à la disparition quasi-totale de l’espèce à titrer. Cette situation correspond au moment où la quantité introduite de l’espèce titrante et celle de l’espèce titrée initiale sont dans les proportions stœchiométriques de la réaction support du titrage.<br>
 La détection de l’équivalence nécessite une technique adaptée, comme la colorimétrie, la pH-métrie ou encore la conductimétrie.
 {{%/notice%}}

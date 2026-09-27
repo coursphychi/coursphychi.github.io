@@ -53,7 +53,7 @@ td, th {
   <td style="border-bottom:none;border-top:none;"><a href="/act-pileorganique.pdf"><b>Pile à flux organiques</b></a></td>
 </tr>
 <tr>
- <td style="border-top:none;"><a href="/act-pilezincair.pdf"><b>Pile "zinc-air"</b></a></td>
+ <td style="border-top:none;"><a href="/act-pilezincair.pdf"><b>Pile "zinc-air"</b></a> + <a href="../programmes/#exercice-pile-zinc-air"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a></td>
  </tr>
  <th rowspan="2">Animations</th>
   <td style="border-bottom:none;"><a href="https://www.edumedia.com/fr/media/711-pile-daniell?auth=263895047a3b739211e26a307bc61deb/75935"><b>Pile Daniell</b></a></td>
@@ -83,11 +83,11 @@ extérieur)&nbsp;;<br>
   </p>
 </div>
 
-{{%notice definition "Tension à vide d’une pile"%}}
+{{%notice def "Tension à vide d’une pile"%}}
 <b style="color:#B51700;">Différence de potentiel</b> mesurée entre les électrodes d’une pile en <b style="color:#B51700;">circuit ouvert</b>, c’est-à-dire quand aucun courant électrique ne la traverse.
 {{%/notice%}}
 
-{{%notice definition "Capacité d’une pile"%}}
+{{%notice def "Capacité d’une pile"%}}
 <b style="color:#B51700;">Charge électrique maximale</b> qu’une pile est susceptible de faire circuler dans un circuit extérieur.<br>
 Cette grandeur est notamment liée aux quantités de matière des réactifs utilisés pour élaborer la pile.<br>
 Elle s’exprime dans le système international en coulombs, mais plus couramment en <b style="color:#B51700;">mAh</b> dans les données commerciales.

@@ -31,19 +31,19 @@ td, th {
 </div>
 
 
-{{%notice definition "Avancement"%}}
+{{%notice def "Avancement"%}}
 Grandeur extensive décrivant la progression d’une transformation chimique modélisée par une réaction.
 {{%/notice%}}
 
-{{%notice definition "Avancement maximal"%}}
+{{%notice def "Avancement maximal"%}}
 Avancement associé à la disparition totale du réactif limitant.
 {{%/notice%}}
 
-{{%notice definition "Taux d’avancement"%}}
+{{%notice def "Taux d’avancement"%}}
 Rapport de la valeur finale de l’avancement sur celle de l’avancement maximal&nbsp;: $\tau = \frac{x_{final}}{x_{max}}$
 {{%/notice%}}
 
-{{%notice definition "Transformation totale ou non totale"%}}
+{{%notice def "Transformation totale ou non totale"%}}
 Une transformation est dite totale si le taux d’avancement final est égal à 1. S’il est inférieur à 1 ($x_{final}<x_{max}$), la transformation est dite non-totale. A l’état final d’une transformation totale, au moins une des espèces chimiques présentes à l’état initial a disparu.
 {{%/notice%}}
 

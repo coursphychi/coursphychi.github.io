@@ -178,7 +178,7 @@ Parmi les schéma de Lewis, le(s)quel(s) corresponde(nt) à un gain de stabilit�
 
 ## Définitions
 
-{{%notice definition "Configuration électronique d’un atome"%}}
+{{%notice def "Configuration électronique d’un atome"%}}
 Répartition des électrons d’un atome dans les différentes **couches** et **sous-couches**.
 {{%/notice%}}
 
@@ -187,7 +187,7 @@ La configuration électronique de l’atome de sodium (numéro atomique **Z&nbsp
 $\text{1s}^2\\,\text{2s}^2\\,\text{2p}^6\\,\text{3s}^1$ à l’état fondamental. Cette configuration permet de retrouver la position de l’élément sodium dans le tableau périodique : il se situe dans la <b>3<sup>e</sup> période</b> et la <b>1<sup>re</sup> colonne du bloc s</b>, et par conséquent, la <b>1<sup>re</sup> colonne du tableau</b>.
 
 
-{{%notice definition "Électrons de valence"%}}
+{{%notice def "Électrons de valence"%}}
 Ensemble des électrons appartenant à la couche de nombre quantique principal $n$ le plus élevé, ainsi que les électrons appartenant à des sous-couches partiellement remplies.
 {{%/notice%}}
 
@@ -195,7 +195,7 @@ Ensemble des électrons appartenant à la couche de nombre quantique principal $
 L’atome de sodium a un électron de valence à l’état fondamental, l’électron appartenant à la sous-couche $3\text{s}$.
 
 
-{{%notice definition "Famille chimique"%}}
+{{%notice def "Famille chimique"%}}
 Éléments chimiques appartenant à une **même colonne** du **tableau périodique** et partageant des **propriétés chimiques et physiques similaires**. La similarité des propriétés observées à l’échelle macroscopique est associée à l’échelle microscopique, à l’identité des configurations électroniques de valence pour les atomes isolés de ces éléments.
 {{%/notice%}}
 

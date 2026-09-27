@@ -44,10 +44,10 @@ td, th {
 </tr>
   <tr>
 <th rowspan="2">Activités</th>
-  <td style="border-bottom:none;"><a href="/act-kapython.pdf"><b>Tau d'avancement et $\mathrm{p}K_\mathrm{a}$</b></a> + <a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=B837xeRnpfGA" target="_blank"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a> + <a href="/act-kapython-corr.pdf" ><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
+  <td style="border-bottom:none;"><a href="/act-kapython.pdf"><b>Tau d'avancement et $\mathrm{p}K_\mathrm{a}$</b></a> + <a href="../programmes/#activité-taux-d"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a> + <a href="/act-kapython-corr.pdf" ><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
 </tr>
 <tr>
-  <td style="border-top:none;"><a href="/act-diagdistrib.pdf"><b>Diagramme de distribution</b></a> + <a href="https://colab.research.google.com/drive/1xJbK97GnqoUhC7m5SpJc8cy_cQk1T7g1#scrollTo=r7pO0eGfqizH" target="_blank"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a> +  <a href="/corrdistrib.pdf" ><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
+  <td style="border-top:none;"><a href="/act-diagdistrib.pdf"><b>Diagramme de distribution</b></a> + <a href="../programmes/#activité-diagramme-de-distribution"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a> +  <a href="/corrdistrib.pdf" ><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
 </tr>
 <th rowspan="4">Exercices</th>
   <td style="border-bottom:none;"><a href="/act-kachourouge.pdf"><b>Chou rouge</b></a></td>
@@ -90,7 +90,7 @@ La notion d’acide fort ou de base forte constitue un modèle introduit pour si
 le chlorure d’hydrogène $\ce{HCℓ (g)}$ est un acide fort dans l’eau. Sa dissolution dans l’eau permet d’obtenir de l’acide chlorhydrique, solution modélisée par un mélange d’ions oxonium $\ce{H3O+ (aq)}$ et d’ions chlorure $\ce{Cℓ^- (aq)}$.
 
 
-{{%notice definition "Constante d'acidité"%}}
+{{%notice def "Constante d'acidité"%}}
 Constante d’équilibre de la réaction entre un acide et l’eau, écrite avec un nombre stœchiométrique 1 pour l’espèce $\ce{H3O^+}$.<br>
 Cette grandeur est caractéristique d’un couple acide-base à une température donnée.
 {{%/notice%}}

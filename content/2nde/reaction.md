@@ -64,7 +64,7 @@ td, th {
 
 ## Définitions
 
-{{%notice definition "Réaction chimique"%}}
+{{%notice def "Réaction chimique"%}}
 Modèle introduit pour rendre compte d’observations et de mesures effectuées lors de transformations chimiques pouvant différer par les conditions de leur réalisation (température, pression, composition du mélange initial), mais partageant les mêmes réactifs, les mêmes produits et les mêmes proportions dans lesquelles ceux-ci sont convertis.<br>L’équation de la réaction permet de réaliser le bilan de matière d’une transformation.
 {{%/notice%}}
 

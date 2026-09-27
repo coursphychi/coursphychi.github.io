@@ -31,11 +31,11 @@ td, th {
 </div>
 
 
-{{%notice definition "Transformation exothermique/endothermique"%}}
+{{%notice def "Transformation exothermique/endothermique"%}}
 Une transformation est dite **exothermique** si le système siège de cette transformation **cède de l’énergie** sous forme transfert thermique au milieu extérieur, **endothermique** s’il en **reçoit** de la part du milieu extérieur.
 {{%/notice%}}
 
-{{%notice definition "Énergie de liaison"%}}
+{{%notice def "Énergie de liaison"%}}
 Énergie minimale à fournir pour dissocier de manière homolytique, et à l’état gazeux, une mole de liaisons A-B.
 {{%/notice%}}
 
