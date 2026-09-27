@@ -14,6 +14,8 @@
     packages (pyodide) paquets PyPI en Python pur à installer, ex. "pint, uncertainties"
     data     fichiers de données (dans static/programmes/) lisibles par le programme,
              ex. data="mesures.csv" ou data="tp3/mesures.csv, tp3/etalon.csv"
+    theme    "light" (défaut) | "dark" | "auto" (suit le système) ;
+             défaut du site : [params] runpython_theme = "dark"
     upload   "true" : l'élève peut importer ses propres fichiers (bouton ou glisser-déposer),
              ou liste d'extensions autorisées, ex. upload=".csv,.txt"
 
@@ -56,6 +58,14 @@
         que l'élève charge ses propres fichiers ; ou une liste d'extensions
         autorisées, ex. upload=".csv,.txt". lang python ou pyodide. */ -}}
 {{- $upload := .Get "upload" | default "" -}}
+{{- /* theme : "light" (défaut) | "dark" | "auto" (suit le réglage clair/sombre du
+        système de l'élève). Défaut pour tout le site : dans hugo.toml,
+        [params] runpython_theme = "dark". */ -}}
+{{- $theme := lower (printf "%v" (.Get "theme" | default (site.Params.runpython_theme | default "light"))) -}}
+{{- if not (in (slice "light" "dark" "auto") $theme) -}}
+  {{- warnf "runpython : theme=%q inconnu (light, dark ou auto) — clair utilisé. %s" $theme .Position -}}
+  {{- $theme = "light" -}}
+{{- end -}}
 {{- $data := slice -}}
 {{- range split (.Get "data" | default "") "," -}}
   {{- with trim . " " -}}
@@ -123,15 +133,15 @@
 {{- $w := .Get "width" -}}
 {{- $wnum := 0 -}}{{- with $w -}}{{- $wnum = int . -}}{{- end -}}
 {{- /* config complète encodée en base64url pour le hash de l'iframe (méthode robuste) */ -}}
-{{- $cfgjson := dict "code" $code "lang" $lang "mode" $mode "default" $default "width" $wnum "autorun" $autorun "fit" $fit "version" $version "autoheight" $autoh "packages" $packages "data" $data "upload" $upload | jsonify -}}
+{{- $cfgjson := dict "code" $code "lang" $lang "mode" $mode "default" $default "width" $wnum "autorun" $autorun "fit" $fit "version" $version "autoheight" $autoh "packages" $packages "data" $data "upload" $upload "theme" $theme | jsonify -}}
 {{- $hash := $cfgjson | base64Encode | replaceRE `\+` "-" | replaceRE `/` "_" | replaceRE `=+$` "" -}}
 
 <div class="trinket-embed" style="margin:1rem 0;text-align:center;">
   <iframe id="{{ $uid }}"
-          src="{{ "trinket/player.html" | relURL }}#{{ $hash }}"
+          src="{{ "trinket/player.html" | relURL }}{{ if ne $theme "light" }}?theme={{ $theme }}{{ end }}#{{ $hash }}"
           title="Fenêtre de code"
           loading="lazy"
-          style="display:inline-block;vertical-align:top;width:100%;{{ if $w }}max-width:{{ $w }}px;{{ end }}height:{{ $h }}px;border:0;overflow:hidden;border-radius:8px;background:transparent;color-scheme:normal;"
+          style="display:inline-block;vertical-align:top;width:100%;{{ if $w }}max-width:{{ $w }}px;{{ end }}height:{{ $h }}px;border:0;overflow:hidden;border-radius:8px;{{ if eq $theme "dark" }}background:#16191d;color-scheme:dark;{{ else if eq $theme "auto" }}background:transparent;color-scheme:light dark;{{ else }}background:transparent;color-scheme:normal;{{ end }}"
           sandbox="allow-scripts allow-same-origin allow-popups allow-modals allow-downloads">
   </iframe>
 {{- /* Secours pour les thèmes classiques : si jamais le hash n'a pas suffi
@@ -153,7 +163,8 @@
       autoheight: {{ $autoh }},
       packages: {{ $packages }},
       data: {{ $data }},
-      upload: {{ $upload }}
+      upload: {{ $upload }},
+      theme: {{ $theme }}
     };
     var sent = false;
     function send(){

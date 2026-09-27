@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Code runner</title>
+<script>
+  /* Thème appliqué AVANT le premier affichage (évite un flash blanc) :
+     le shortcode ajoute ?theme=dark|auto à l'adresse du player. */
+  (function(){
+    var m = /[?&]theme=(dark|auto)\b/.exec(location.search);
+    if (!m) return;
+    var dark = m[1] === "dark" || (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches);
+    if (dark) document.documentElement.classList.add("tk-dark");
+  })();
+</script>
 <style>
   /* ===================================================================
      Fenêtre épurée — inspirée de Trinket, sans le branding.
@@ -21,6 +31,15 @@
     --tk-input:#1971c2;        /* bleu de la saisie console (façon Trinket) */
     --tk-tab-active:#ffffff;
     --tk-error:#c0392b;
+    --tk-warn:#b26a00;                    /* avertissements (warnings) */
+    --tk-hover:rgba(15,23,32,.06);        /* survol des boutons discrets */
+    --tk-hover-strong:rgba(15,23,32,.08);
+    --tk-subtle:rgba(0,0,0,.04);          /* fonds très légers (en-têtes de fichiers) */
+    --tk-subtle-hover:rgba(0,0,0,.03);
+    --tk-activeline:#e8f2ff;              /* ligne du curseur dans l'éditeur (bleu pâle) */
+    --tk-activeline-gutter:#e4e8ee;
+    --tk-errline:rgba(209,75,61,.12);     /* ligne fautive */
+    color-scheme:light;
     --tk-radius:8px;
     --tk-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --tk-mono: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
@@ -80,7 +99,7 @@
   }
   .tk-ghostbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;
     stroke-linecap:round;stroke-linejoin:round;display:block}
-  .tk-ghostbtn:hover{background:rgba(15,23,32,.06);color:var(--tk-text)}
+  .tk-ghostbtn:hover{background:var(--tk-hover);color:var(--tk-text)}
   .tk-ghostbtn:active{transform:scale(.94)}
   .tk-ghostbtn.is-done{color:var(--tk-accent)}
 
@@ -96,7 +115,7 @@
   .tk-chip small{color:var(--tk-muted);white-space:nowrap}
   .tk-chip button{appearance:none;border:0;background:transparent;cursor:pointer;color:var(--tk-muted);
     width:20px;height:20px;border-radius:50%;font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center}
-  .tk-chip button:hover{background:rgba(15,23,32,.08);color:var(--tk-text)}
+  .tk-chip button:hover{background:var(--tk-hover-strong);color:var(--tk-text)}
   .tk-chip button:focus-visible{outline:2px solid var(--tk-accent);outline-offset:1px}
   .tk-upmsg{color:var(--tk-error)}
   .tk.is-drop{outline:2px dashed var(--tk-accent);outline-offset:-6px}
@@ -122,8 +141,10 @@
   /* height="auto" : l'éditeur prend la hauteur de son contenu */
   .tk.is-autoh .CodeMirror{height:auto !important}
   /* ligne active (curseur) surlignée en gris, façon Trinket */
-  .CodeMirror-activeline-background{background:#eceff3}
-  .CodeMirror-activeline-gutter{background:#e4e8ee}
+  /* ".CodeMirror " en préfixe : codemirror.css (chargé APRÈS ce style) impose sa
+     propre couleur (#e8f2ff) avec la même priorité ; il faut être plus spécifique. */
+  .CodeMirror .CodeMirror-activeline-background{background:var(--tk-activeline)}
+  .CodeMirror .CodeMirror-activeline-gutter{background:var(--tk-activeline-gutter)}
 
   /* Sortie */
   .tk-out{padding:10px 12px}
@@ -144,7 +165,7 @@
   /* Pyodide : figures matplotlib insérées dans le flux de la console */
   .tk-plot{display:block;max-width:100%;height:auto;margin:8px 0;
     background:#fff;border-radius:6px}
-  .tk-stderr{color:#b26a00}                 /* avertissements (warnings) : orangé, pas rouge */
+  .tk-stderr{color:var(--tk-warn)}                 /* avertissements (warnings) : orangé, pas rouge */
   .tk-status{font-family:var(--tk-font);font-size:12.5px;color:var(--tk-muted);
     margin-bottom:8px;animation:tk-pulse 1.6s ease-in-out infinite}
   @keyframes tk-pulse{50%{opacity:.45}}
@@ -154,7 +175,7 @@
   /* marqueur d'erreur : point rouge dans la gouttière + surlignage de la ligne */
   .CodeMirror .tk-err-gutter{width:14px}
   .tk-err-dot{display:block;width:8px;height:8px;margin:5px auto 0;border-radius:50%;background:var(--tk-stop)}
-  .CodeMirror .tk-err-line{background:rgba(209,75,61,.12)}
+  .CodeMirror .tk-err-line{background:var(--tk-errline)}
 
   @media (prefers-reduced-motion: reduce){
     .tk-caret,.tk-status{animation:none}
@@ -164,12 +185,12 @@
   .tk-files{margin-top:10px;display:flex;flex-direction:column;gap:8px}
   .tk-file{border:1px solid var(--tk-border);border-radius:6px;overflow:hidden}
   .tk-file-head{display:flex;align-items:center;justify-content:space-between;
-    gap:8px;padding:4px 8px;background:rgba(0,0,0,.04);border-bottom:1px solid var(--tk-border)}
+    gap:8px;padding:4px 8px;background:var(--tk-subtle);border-bottom:1px solid var(--tk-border)}
   .tk-file-name{font-family:var(--tk-mono);font-size:12.5px;color:var(--tk-muted);
     overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .tk-file-copy{font:inherit;font-size:12px;cursor:pointer;border:1px solid var(--tk-border);
     background:var(--tk-bg);border-radius:5px;padding:2px 10px;color:var(--tk-accent)}
-  .tk-file-copy:hover{background:rgba(0,0,0,.03)}
+  .tk-file-copy:hover{background:var(--tk-subtle-hover)}
   .tk-file-btns{display:flex;gap:6px;flex:0 0 auto}
   .tk-file-content{display:block;width:100%;box-sizing:border-box;border:0;resize:vertical;
     font-family:var(--tk-mono);font-size:12.5px;line-height:1.4;padding:6px 8px;min-height:54px;
@@ -183,6 +204,61 @@
 
   /* État de chargement */
   .tk-loading{display:flex;align-items:center;justify-content:center;height:100%;color:var(--tk-muted);font-size:13px}
+
+  /* ===================================================================
+     THÈME SOMBRE (theme="dark", ou "auto" quand le système est en sombre)
+     Activé par la classe tk-dark sur <html>. Mêmes variables, autres valeurs.
+  =================================================================== */
+  html.tk-dark{
+    --tk-border:#2e353d;
+    --tk-bg:#16191d;
+    --tk-bar:#1d2127;
+    --tk-text:#e3e7ec;
+    --tk-muted:#8d96a0;
+    --tk-accent:#2f9e5f;
+    --tk-accent-hover:#36ad69;
+    --tk-stop:#e0584c;
+    --tk-input:#6cb6ff;
+    --tk-tab-active:#16191d;
+    --tk-error:#ff7b72;
+    --tk-warn:#d9a54a;
+    --tk-hover:rgba(255,255,255,.07);
+    --tk-hover-strong:rgba(255,255,255,.10);
+    --tk-subtle:rgba(255,255,255,.04);
+    --tk-subtle-hover:rgba(255,255,255,.06);
+    --tk-activeline:#1f242b;
+    --tk-activeline-gutter:#232931;
+    --tk-errline:rgba(224,88,76,.20);
+    color-scheme:dark;                   /* barres de défilement, champs natifs */
+  }
+  /* figures matplotlib : on garde leur fond blanc, posé comme une carte */
+  html.tk-dark .tk-plot{box-shadow:0 0 0 1px var(--tk-border)}
+
+  /* Éditeur CodeMirror : thème « tkdark » (couleurs inspirées de One Dark) */
+  .cm-s-tkdark.CodeMirror{background:var(--tk-bg);color:#d7dce2}
+  .cm-s-tkdark .CodeMirror-gutters{background:var(--tk-bar);border-right:1px solid var(--tk-border)}
+  .cm-s-tkdark .CodeMirror-linenumber{color:#6e7883}
+  .cm-s-tkdark .CodeMirror-activeline-gutter .CodeMirror-linenumber{color:#aab3bd}
+  .cm-s-tkdark .CodeMirror-cursor{border-left:2px solid #e3e7ec}
+  .cm-s-tkdark div.CodeMirror-selected{background:#2b3440}
+  .cm-s-tkdark.CodeMirror-focused div.CodeMirror-selected{background:#304256}
+  .cm-s-tkdark .CodeMirror-line::selection,.cm-s-tkdark .CodeMirror-line > span::selection,
+  .cm-s-tkdark .CodeMirror-line > span > span::selection{background:#304256}
+  .cm-s-tkdark .cm-keyword{color:#c678dd}
+  .cm-s-tkdark .cm-def{color:#61afef}
+  .cm-s-tkdark .cm-builtin{color:#56b6c2}
+  .cm-s-tkdark .cm-variable{color:#d7dce2}
+  .cm-s-tkdark .cm-variable-2{color:#e5c07b}
+  .cm-s-tkdark .cm-property{color:#e06c75}
+  .cm-s-tkdark .cm-number,.cm-s-tkdark .cm-atom{color:#d19a66}
+  .cm-s-tkdark .cm-string,.cm-s-tkdark .cm-string-2{color:#98c379}
+  .cm-s-tkdark .cm-comment{color:#86909b;font-style:italic}
+  .cm-s-tkdark .cm-operator{color:#56b6c2}
+  .cm-s-tkdark .cm-meta{color:#e5c07b}
+  .cm-s-tkdark .cm-bracket,.cm-s-tkdark .cm-punctuation{color:#abb2bf}
+  .cm-s-tkdark .cm-error{color:#ff7b72}
+  .cm-s-tkdark .CodeMirror-matchingbracket{color:#e3e7ec !important;background:#3a4450;outline:1px solid #5a6674}
+  .cm-s-tkdark .CodeMirror-nonmatchingbracket{color:#ff7b72 !important}
 </style>
 </head>
 <body>
@@ -376,6 +452,10 @@ function init(){
   _up = (_up === true || _up === "true" || _up === "auto") ? "auto"
       : (!_up || _up === "false") ? "" : String(_up);
   CFG.upload = (CFG.lang === "vpython") ? "" : _up;
+  // theme : "light" (défaut) | "dark" | "auto" (suit le réglage du système)
+  var _th = String(CFG.theme || (/[?&]theme=(\w+)/.exec(location.search) || [])[1] || "light").toLowerCase();
+  CFG.theme = (_th === "dark" || _th === "auto") ? _th : "light";
+  setupTheme();
   var _root = document.getElementById("tk-root");
   if (_root) _root.classList.toggle("is-autoh", CFG.autoheight);
 
@@ -500,6 +580,7 @@ function buildUI(){
         editor = window.CodeMirror.fromTextArea(ta, {
           mode: "python", lineNumbers: true, indentUnit: 4, tabSize: 4,
           indentWithTabs: false, lineWrapping: false, viewportMargin: Infinity,
+          theme: isDark() ? "tkdark" : "default",
           styleActiveLine: true,      // surligne la ligne du curseur (façon Trinket)
           autoCloseBrackets: true,    // ferme automatiquement ( [ { " '
           matchBrackets: true,        // met en évidence la parenthèse jumelle
@@ -588,7 +669,7 @@ function reloadWith(extra){
     code: currentCode(),
     lang: CFG.lang, mode: CFG.mode, "default": CFG.defaultView,
     width: CFG.width, fit: CFG.fit, version: CFG.version,
-    autoheight: CFG.autoheight, packages: CFG.packages, data: CFG.data, upload: CFG.upload
+    autoheight: CFG.autoheight, packages: CFG.packages, data: CFG.data, upload: CFG.upload, theme: CFG.theme
   };
   for (var k in extra) next[k] = extra[k];
   try { location.hash = utf8ToB64url(JSON.stringify(next)); } catch(e){}
@@ -954,6 +1035,26 @@ function makeInputFun(){
    mémoire (comme l'onglet "fichier" de Trinket). Les print() ne sont pas
    touchés. Après l'exécution, le contenu est lu puis affiché avec un bouton
    Copier (prêt à coller dans un tableur / grapheur). */
+/* =====================================================================
+   THÈME CLAIR / SOMBRE (theme="light" | "dark" | "auto")
+===================================================================== */
+function isDark(){ return document.documentElement.classList.contains("tk-dark"); }
+function applyDark(on){
+  document.documentElement.classList.toggle("tk-dark", !!on);
+  if (editor){ editor.setOption("theme", on ? "tkdark" : "default"); editor.refresh(); }
+}
+function setupTheme(){
+  if (CFG.theme === "auto" && window.matchMedia){
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    applyDark(mq.matches);
+    var onChange = function(){ applyDark(mq.matches); };      // bascule en direct
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
+    else if (mq.addListener) mq.addListener(onChange);          // anciens Safari
+  } else {
+    applyDark(CFG.theme === "dark");
+  }
+}
+
 /* =====================================================================
    IMPORT DE FICHIERS PAR L'ÉLÈVE (upload="true") — python / pyodide
    Bouton ⇪ dans la barre ou glisser-déposer sur la fenêtre. Le programme lit

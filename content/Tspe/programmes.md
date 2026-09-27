@@ -32,7 +32,7 @@ Ensemble des codes python rencontrés (dans les TP, activités, exercices, etc.)
 
 Code du sujet&nbsp;:
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 # Simulation du titrage dont la réaction support est de la forme
 # a A + b B -> c C + H2O
 # a, b, c et d sont les coefficients stoechiométriques
@@ -77,7 +77,7 @@ plt.show()
 {{%notice type="tip" collapse="true" round="true"%}}
 Code utilisé pour tracer la figure de l'énoncé comprenant l'ensemble des graphes&nbsp;:
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 # Simulation du titrage dont la réaction support est de la forme
 # a A + b B -> c C + H2O
 # a, b, c et d sont les coefficients stoechiométriques
@@ -181,7 +181,7 @@ Dans la simulation Monte-Carlo, on tire au hasard chaque valeur expérimentale e
 On recommence l'opération 500\,000 fois et on calcule ensuite l'écart-type expérimental des valeurs de `CB` obtenues (et on trace aussi un histogramme de ces valeurs).<br>
 L'écart-type, estimation de l'incertitude-type sur `CB`, est ensuite comparée au résultat donné par la formule de propagation des erreurs.
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -251,7 +251,7 @@ UCB = CB*np.sqrt((Vf[1]/Vf[0])**2+(Vp[1]/Vp[0])**2+(CA[1]/CA[0])**2+(VB[1]/VB[0]
 
 Tester une relation donnée entre la vitesse volumique de disparition et la concentration d'un réactif&nbsp;:
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 from scipy.optimize import curve_fit
 
@@ -290,7 +290,7 @@ print(f"b = {ecriture_resultat(b, b_err)}")
 
 Tracer de l'évolution temporelle de la concentration et de la vitesse volumique de disparition&nbsp;:
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 from scipy.optimize import curve_fit
 from matplotlib import pyplot as plt
@@ -329,7 +329,7 @@ plt.show()
 Au lieu d'ajuster les points expérimentaux par une fonction exponentielle, on aurait pu prendre le logarithme des concentrations et réaliser un ajustement linéaire&nbsp;:
  
  
- {{< runpython lang="pyodide" height="auto" >}}
+ {{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 from scipy.optimize import curve_fit
 from matplotlib import pyplot as plt
@@ -386,7 +386,7 @@ plt.show()
 
 On peut aussi tracer l'évolution temporelle de la vitesse de disparition&nbsp;:
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -414,7 +414,7 @@ plt.legend()
 
 ### Exercice «&nbsp;[pile zinc-air](/act-pilezincair.pdf)&nbsp;»
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -475,7 +475,7 @@ $
 
 Ou en utilisant Python&nbsp;:
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 
 # Paramètres (valeurs moyennes et incertitudes-type)
@@ -504,7 +504,7 @@ Compléter le code de la fonction `final` permettant de retourner à la fois le 
 <u>Rq</u> : on obtient la racine carrée grâce à `np.sqrt()` et le logarithme décimal grâce à `np.log10()`.
 
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -584,7 +584,7 @@ La seule racine positive permet d'obtenir le pH et il est bien acide ($<7$) cett
 
 Compléter le code de la fonction `pAH`. La fonction doit retourner la valeur de la proportion de la forme acide donnée à la question 3.
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -617,7 +617,7 @@ plt.tight_layout()
 
 Pour importer les tableaux `regressi` dans le programme ci-dessous, utiliser le bouton d'import sur la droite de la barre supérieure. 
 
-{{< runpython lang="pyodide" height="auto"  upload="true">}}
+{{< runpython lang="pyodide" height="auto"  upload="true" theme="dark" >}}
 # #####
 # IMPORTATION DES MODULES
 # #####
@@ -724,7 +724,7 @@ plt.show()
 
 ### Mouvement circulaire uniforme
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 from math import sqrt, cos, sin, pi
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-v0_8")
@@ -752,7 +752,7 @@ plt.margins(0.2)
 {{< /runpython >}}
 
 
-{{< runpython lang="vpython" height="auto" >}}
+{{< runpython lang="vpython" height="auto" theme="dark" >}}
 Web VPython 3.2
 
 scene.width, scene.height = 500,500
@@ -786,7 +786,7 @@ while(True):
 
 ### Exercice «&nbsp;[clothoïde et échangeur routier](/act-tspemvt2.pdf)&nbsp;»
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 # début du programme
 from math import *
 # -----Coordonnées des positions du véhicule-----
@@ -819,7 +819,7 @@ print(a)
 
 ### Chute libre (vecteurs accélération)
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-v0_8")
@@ -853,7 +853,7 @@ plt.axis('equal')
 plt.show()
 {{< /runpython >}}
 
-{{< runpython lang="vpython" height="auto" >}}
+{{< runpython lang="vpython" height="auto" theme="dark" >}}
 Web VPython 3.2
 
 scene.width, scene.height = 800,600
@@ -889,7 +889,7 @@ while(M.pos.y >= 0):
 
 ### Chute libre (énergie)
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-v0_8")
@@ -965,7 +965,7 @@ plt.show()
 
 ### Activité «&nbsp;[LINAC](/linac.pdf)&nbsp;»
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 from math import sqrt
 
 e = 1.60E-19
@@ -1026,7 +1026,7 @@ Vous pouvez télécharger le programme `mercure.py` en cliquant [ici](https://co
 
 En exécutant le programme `mercure.py`, on peut alors constater que la deuxième loi de Kepler est plutôt très bien vérifiée pour l'orbite de Mercure.
 
-{{< runpython lang="pyodide" height="auto" upload="true">}}
+{{< runpython lang="pyodide" height="auto" upload="true" theme="dark" >}}
 # =============================================
 # TEST DE LA DEUXIÈME LOI DE KEPLER SUR MERCURE
 # =============================================
@@ -1098,7 +1098,7 @@ print(f"incertitude-type = {np.std(areas,ddof=1)/np.sqrt(len(areas)):.1e}  UA²"
 
 Le code se trouve dans l'activité «&nbsp;[découverte des lois de Kepler](/act-kepler.pdf)&nbsp;»
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 ### ENTRER LES VALEURS OBTENUS DANS LES LISTES SUIVANTES
 Hauteurs = [hauteur en km, hauteur en km, hauteur en km, ...]
 Périodes = [(heures,minutes),(heures,minutes),(heures,minutes),...]
@@ -1128,7 +1128,7 @@ for i in range(len(R)):
 
 ### Somme de deux signaux sinusoïdaux déphasés
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -1177,7 +1177,7 @@ $$\phi = -\left(\pi + 2 \pi \frac{\tau}{T}\right)$$
 
 Autrement dit, l'anti-bruit est exactement le bruit inversé et retardé de tau.
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -1248,7 +1248,7 @@ plt.show()
 
 ### Exercice «&nbsp;[trombone de Koenig](/act-konig.pdf)&nbsp;»
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 from statistics import mean
 
 D = [4.35e-2, 8.7e-2, 13.1e-2, 17.4e-2, 21.6e-2]   # décalage en mètre de la partie mobile du trombone
@@ -1257,8 +1257,8 @@ f = 4032
 v = []
 
 for i in range(len(k)):                            # i prend les valeurs successives 0,1,2,3,4
-  vi = 2 * f * D[i] / k[i]
-  v.append(vi)
+    vi = 2 * f * D[i] / k[i]
+    v.append(vi)
 
 vson = round(mean(v))                              # permet de calculer la moyenne vson des grandeurs contenues dans la liste v
 
@@ -1270,7 +1270,7 @@ print("La longueur d'onde de l’onde acoustique dans le trombone est", Lambda, 
 
 ### Scarabé
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 import numpy.random as rd
 import matplotlib.pyplot as plt
