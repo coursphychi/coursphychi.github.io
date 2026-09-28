@@ -63,7 +63,7 @@ On considère dans un premier temps la caisse en équilibre sur la bielle.
 
 On donne un code Python qui permet de représenter les normes des réactions tangentielles et normales de la bielle sur la caisse.
 
-```python
+{{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -86,7 +86,8 @@ plt.plot(t, N, label=r'$N/m$ (normale)')
 plt.xlabel('temps (s)'); plt.ylabel('force spécifique (m·s$^{-2}$)')
 plt.title('Réactions bielle → caisse sur un tour'); plt.legend(); plt.tight_layout()
 plt.show()
-```
+{{< /runpython >}}
+
 
 
 4. En modifiant le code, vérifier la réponse à la question 3. puis déterminer graphiquement les laps de temps sur lesquels la caisse glisse lorsque $v_{max2}<v<v_{max1}$.
