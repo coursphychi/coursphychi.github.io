@@ -25,14 +25,14 @@ draft: false
 ## Savoir et savoir faire
 
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Écrire et équilibrer l'équation d'une combustion complète.<br><br>
 <input type="checkbox"> ⚠️ Établir un bilan de matière&nbsp;: savoir déterminer la masse de $\ce{CO2}$ ou d'$\ce{H2O}$ dans le cas de la combustion complète d'une masse $m$ de combustible.<br><br>
 <input type="checkbox"> Déterminer l'énergie dégagée par une combustion.
 {{%/notice%}}
 
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 Si on ne fait pas la différence entre le pouvoir calorifique inférieur $\text{PCI}$ ou supérieur $\text{PCS}$ en parlant seulement de pouvoir calorifique $\text{PC}$, il s'agit en fait la plupart du temps, sans le dire, du $\text{PCI}$.<br>
 On a alors : $Q=m_{\text{combustible}}\times \text{PC}$, où $Q$ est la chaleur dégagée, en J.
 {{%/notice%}}

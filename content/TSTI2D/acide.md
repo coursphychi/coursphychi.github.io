@@ -91,7 +91,7 @@ Testez la [**simulation**](https://phet.colorado.edu/sims/html/ph-scale/latest/p
 
 ![](/cm-acid.png)
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> **Identifier un acide** par sa capacité à céder un ion $\ce{H+}$, **en déduire la base conjuguée**.
 <br><br>
 <input type="checkbox"> **Écrire l'équation de la réaction** entre un acide et une base à partir des couples acide-base.
@@ -101,22 +101,22 @@ Testez la [**simulation**](https://phet.colorado.edu/sims/html/ph-scale/latest/p
 <input type="checkbox"> Savoir comment **évolue le pH** lors d'une **dilution**.
 {{%/notice%}}
 
-{{%notice info%}}
+{{%notice type="info" round="true"%}}
 La précision d'une mesure au pH-mètre est d'un chiffre après la virgule (0,1 unité de pH). Conséquence : on ne note jamais un pH avec plus d'un chiffre après la virgule.<br>
 ⚠️ La concentration en ions oxonium $\ce{[H3O+]}$ déduite d'une mesure de pH est toujours donnée avec **2 chiffres significatifs**, même lorsque la mesure de pH en comporte 3.
 {{%/notice%}}
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 Attention à bien écrire **pH**, petit **p**, grand **H**, pour "**p**otentiel **H**ydrogène".
 {{%/notice%}}
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 Une **solution** aqueuse peut-être **acide** (**pH&nbsp;<&nbsp;7**) alors qu'une base est le soluté majoritaire dans la solution et inversement.<br>
 Par exemple, l'espèce majoritaire dans une solution contenant le couple $\ce{(CH3COOH/CH3COO^-)}$ est la base $\ce{CH3COO-}$ si le pH vaut 5,5&nbsp;!<br>
 Mais **ajouter un acide dans la solution fera toujours ➘ le pH** alors qu'ajouter une base le fera ➚.
 {{%/notice%}}
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 $\ce{H3O^+}$ et $\ce{H^+(aq)}$ désignent la même chose&nbsp;!<br>
 Pour une réaction acidobasique dans l'eau on utilise $\ce{H3O+}$, mais pour une réation d'oxydoréduction dans l'eau, on utilise plus souvent $\ce{H^+(aq)}$. Dans ce cas, on a $\text{pH}=-\log(\ce{H^+(aq)})$.
 {{%/notice%}}

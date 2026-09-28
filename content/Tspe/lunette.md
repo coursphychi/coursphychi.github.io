@@ -68,7 +68,7 @@ td, th {
 
 <br>
 
-{{%notice tip%}}
+{{%notice type="tip" round="true"%}}
 Savoir aussi faire le schéma le plus simple quand l'objet à l'infini $\mathrm{A}_\infty$ est sur l'axe optique (rayons incidents parallèles à l'axe optique). L'image finale $\mathrm{A}'$ et l'image intermédiaire $\mathrm{A}_i$ sont alors aussi sur l'axe optique.
 {{%/notice%}}
 

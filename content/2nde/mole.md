@@ -47,7 +47,7 @@ td, th {
 
 ## Définition
 
-{{%notice def "Quantité de matière d’une espèce chimique"%}}
+{{%notice type="def" title="Quantité de matière d’une espèce chimique" round="true"%}}
 Grandeur, exprimée en moles, utilisée pour dénombrer les entités d’une espèce chimique dans un échantillon de matière, une mole étant définie comme un ensemble d’exactement $6,02214076\times10^{23}$ entités.
 {{%/notice%}}
 

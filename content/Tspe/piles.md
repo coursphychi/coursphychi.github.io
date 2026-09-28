@@ -83,11 +83,11 @@ extérieur)&nbsp;;<br>
   </p>
 </div>
 
-{{%notice def "Tension à vide d’une pile"%}}
+{{%notice type="def" title="Tension à vide d’une pile" round="true"%}}
 <b style="color:#B51700;">Différence de potentiel</b> mesurée entre les électrodes d’une pile en <b style="color:#B51700;">circuit ouvert</b>, c’est-à-dire quand aucun courant électrique ne la traverse.
 {{%/notice%}}
 
-{{%notice def "Capacité d’une pile"%}}
+{{%notice type="def" title="Capacité d’une pile" round="true"%}}
 <b style="color:#B51700;">Charge électrique maximale</b> qu’une pile est susceptible de faire circuler dans un circuit extérieur.<br>
 Cette grandeur est notamment liée aux quantités de matière des réactifs utilisés pour élaborer la pile.<br>
 Elle s’exprime dans le système international en coulombs, mais plus couramment en <b style="color:#B51700;">mAh</b> dans les données commerciales.

@@ -183,7 +183,7 @@ On peut utiliser la représentation graphique décrite dans la vidéo d'introduc
 Moralité, le portrait correspond probablement plus à un agriculteur !
 
 
-{{%notice info%}}
+{{%notice type="info" round="true"%}}
 Les **fréquentistes** et les **bayésiens** interprètent les probabilités différemment.<br>
 Pour les fréquentistes, une probabilité est la limite vers laquelle tendrait une fréquence mesurée sur un échantillon lorsqu'on fait tendre la taille de l'échantillon vers l'infini.<br>
 Pour les bayésiens, une probabilité mesure un degré de conviction qui est mis à jour à chaque nouvelle information obtenue.<br><br>
@@ -300,7 +300,7 @@ print(f"Probabilité qe les parents aient deux filles sachant qu'on a vu une fil
 </details>
 
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 la probabilité a priori d'avoir deux filles vaut 1/4.<br>
 L'information apportée tire cette probabilité vers le haut.<br>
 Elle tire plus dans le second cas que dans le premier, car l'information est plus précise ; un tirage a été fait.<br>
@@ -510,7 +510,7 @@ Et la **spécificité** correspond à la proportion d'aire verte seule (les non 
 ---
 
 
-{{%notice info%}}
+{{%notice type="info" round="true"%}}
 En bon bayésien, il ne faut pas considérer qu'un test détermine si on a une maladie, ni même qu'il détermine les chances d'avoir une maladie.<br>
 Tout ce qu'il fait, c'est **mettre à jour** les chances d'avoir une maladie&nbsp;!
 {{%/notice%}}
@@ -668,7 +668,7 @@ $$
 }
 </style>
 
-{{%notice note spam%}}
+{{%notice type="note" title="spam" round="true"%}}
 Un des premiers programmes de filtrage bayésien du courrier électronique était le programme iFile de Jason Rennie, publié en 1996.<br><br>
 Le principe, analogue à celui du diagnostic médical, repose sur le fait que les mots du dictionnaire ont des probabilités différentes d’apparaître dans les spams et dans les courriers légitimes.<br><br>
 Le filtre de détection des spams ne connaît pas à l’avance les probabilités d’apparition de ces mots, c’est pourquoi il lui faut une phase d’apprentissage pour les évaluer. Cette phase d’apprentissage est analogue à la phase de calibrage du test médical étudié ci-dessus.<br><br>

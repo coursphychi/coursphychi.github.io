@@ -49,7 +49,7 @@ Les questions du 1<sup>er</sup> QCM seront tirées de ces trois présentations :
 
 Les questions du 2<sup>e</sup> QCM seront tirées de la présentation ci-dessous. Les vidéos qui suivent contiennent aussi toutes les informations interrogeables.
 
-{{%notice info%}}
+{{%notice type="info" round="true"%}}
 Pas besoin d'apprendre les  données chiffrées par cœur mais il faut connaître les ordres de grandeur importants. <br>
 Les questions ne porteront pas sur des détails.
 {{%/notice%}}

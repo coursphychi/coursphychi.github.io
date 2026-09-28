@@ -68,7 +68,7 @@ td, th {
 </table>
 </div>
 
-{{%notice tip%}}
+{{%notice type="tip" round="true"%}}
 Il faut tout connaître sur le bout des doigts (schémas de montages, méthodes de détermination de l'équivalence, rédaction de la détermination d'une concentration à l'équivalence, etc.). Tombe tout le temps au bac.<br>
 En particulier, savoir écrire&nbsp;:<br>
 &laquo;&nbsp;<b>À l'équivalence, le mélange est stœchiométrique</b>.<br>
@@ -81,12 +81,12 @@ $\cdots$&nbsp;&raquo;
 
 ## Définitions
 
-{{%notice def "Dosage par titrage"%}}
+{{%notice type="def" title="Dosage par titrage" round="true"%}}
 Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’«&nbsp;acido-basique&nbsp;», «&nbsp;par oxydoréduction » ou «&nbsp;par précipitation&nbsp;» selon la nature de la réaction support.
 {{%/notice%}}
 
 
-{{%notice def "Équivalence"%}}
+{{%notice type="def" title="Équivalence" round="true"%}}
 Moment du titrage associé à la disparition quasi-totale de l’espèce à titrer. Cette situation correspond au moment où la quantité introduite de l’espèce titrante et celle de l’espèce titrée initiale sont dans les proportions stœchiométriques de la réaction support du titrage.<br>
 La détection de l’équivalence nécessite une technique adaptée, comme la colorimétrie, la pH-métrie ou encore la conductimétrie.
 {{%/notice%}}

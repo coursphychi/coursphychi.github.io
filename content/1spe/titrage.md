@@ -30,17 +30,17 @@ td, th {
 <a href="/cm-titrage.pdf"><img src="/cm-titrage.png" style="border-radius: 50px;"></a>
 </div>
 
-{{%notice def "Dosage par titrage"%}}
+{{%notice type="def" title="Dosage par titrage" round="true"%}}
 Méthode destructive de détermination d’une quantité de matière utilisant une transformation chimique totale, en pratique, quasi-totale. La mise en œuvre de la technique nécessite l’introduction d’incréments de quantité de matière d’un réactif titrant à une solution contenant l’espèce à titrer. Le titrage est qualifié d’« acido-basique », « par oxydoréduction » ou « par précipitation » selon la nature de la réaction support.
 {{%/notice%}}
 
 > En première, on ne verra que des dosages **par oxydo-réduction** (la réaction support du titrage est une oxydo-réduction) avec **suivi colorimétrique**.
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 Dans de rares cas, l’espèce à titrer peut être placée dans la burette, par exemple pour le dosage d’une solution de concentration inconnue en ions permanganate.
 {{%/notice %}}
 
-{{%notice def "Équivalence"%}}
+{{%notice type="def" title="Équivalence" round="true"%}}
 Moment du titrage associé à la disparition quasi-totale de l’espèce à titrer. Cette situation correspond au moment où la quantité introduite de l’espèce titrante et celle de l’espèce titrée initiale sont dans les proportions stœchiométriques de la réaction support du titrage. La détection de l’équivalence nécessite
 une technique adaptée, comme la colorimétrie, la pH-métrie ou encore la conductimétrie.
 {{%/notice%}}

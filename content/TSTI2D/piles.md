@@ -20,7 +20,7 @@ draft: false
 Réactions d'oxydoréduction&nbsp;:
 ![](/Redox-cm.png)
 
-{{%notice info%}}
+{{%notice type="info" round="true"%}}
 Il y a  **échanges d'électrons** lors d'une réaction d'**oxydoréduction** (alors que ce sont des **échanges de protons** dans les réactions **acidobasiques**).
 {{%/notice%}}
 
@@ -34,7 +34,7 @@ Il y a  **échanges d'électrons** lors d'une réaction d'**oxydoréduction** (a
 
 ## Savoir et savoir faire
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Équilibrer les **demi-équations** redox
 <br><br>
 <input type="checkbox"> Déterminer une **équation bilan** à partir des demi-équations
@@ -51,7 +51,7 @@ Il y a  **échanges d'électrons** lors d'une réaction d'**oxydoréduction** (a
 {{%/notice%}}
 
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 Une capacité $Q$ (la "charge") (qui mesure la "quantité d'électricité" dans la pile) est souvent donnée en ampères-heures $\pu{A\*h}$ ou milli ampères-heures $\pu{mA\*h}$.<br>
 On convertit alors en coulombs en passant des heures aux secondes&nbsp;:<br>
 $\pu{1,0 A\*h}=\pu{3,6E3 C}$<br>
@@ -59,7 +59,7 @@ $\pu{1,0 mA*h}=\pu{3,6 C}$
 {{%/notice%}}
 
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 Équilibrer les demi-éqautions redox peut nécessiter d'utiliser des ions $\ce{H+}$ ou $\ce{OH-}$ suivant le pH et des molécules d'eau $\ce{H2O}$.<br>
 Si c'est le cas, les demi-équations seront au minimum données précomplétées au bac 😅.<br>
 Cependant, il faut savoir que pour l'écriture des couples $\ce{(Ox/Red)}$, on ne prend en compte ni $\ce{H+}$, ni $\ce{OH-}$, ni $\ce{H2O}$.<br>
@@ -69,7 +69,7 @@ Le couple correspondant à la demi-équation $\ce{NiOOH + H2O + e- = Ni(OH)2 + H
 {{%/notice%}}
 
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 La tension nominale d'une pile est sa tension à vide (en circuit ouvert), aussi appelée f.e.m. (pour force électro motrice), lorsqu'elle est neuve.
 {{%/notice%}}
 

@@ -230,7 +230,7 @@ On cherche à obtenir $\pu{250 mL}$ d'une solution d'hydrogénocarbonate de sodi
 
 ## Définitions
 
-{{%notice def "Solution aqueuse"%}}
+{{%notice type="def" title="Solution aqueuse" round="true"%}}
 Mélange homogène dans lequel l’eau est le constituant ultra-majoritaire. Elle y joue le rôle de solvant, les espèces chimiques dissoutes sont qualifiées de solutés.
 {{%/notice%}}
 
@@ -238,7 +238,7 @@ Mélange homogène dans lequel l’eau est le constituant ultra-majoritaire. Ell
 Le vinaigre est, en première approximation, une solution aqueuse d’acide éthanoïque (soluté).
 
 
-{{%notice def "Concentration en masse"%}}
+{{%notice type="def" title="Concentration en masse" round="true"%}}
 Masse d’une espèce chimique dissoute par litre de solution. La concentration en masse peut s’exprimer en g/L.
 {{%/notice%}}
 
@@ -246,7 +246,7 @@ Masse d’une espèce chimique dissoute par litre de solution. La concentration 
 Une solution de chlorure de sodium de concentration en masse 10&nbsp;g/L est obtenue en introduisant 10&nbsp;g de chlorure de sodium dans une fiole jaugée de 1,0&nbsp;L et en ajoutant de l’eau jusqu’à obtenir un volume final de mélange égal à 1,0&nbsp;L.
 
 
-{{%notice def "Concentration maximale d’un soluté"%}}
+{{%notice type="def" title="Concentration maximale d’un soluté" round="true"%}}
 Masse maximale d’une espèce chimique qui peut être dissoute par litre de solution.
 {{%/notice%}}
 
@@ -254,7 +254,7 @@ Masse maximale d’une espèce chimique qui peut être dissoute par litre de sol
 La concentration maximale du chlorure de sodium dans l’eau à 25 °C est égale à $\pu{3,6E2 g}$ de sel par litre de solution.
 
 
-{{%notice def "Dosage par étalonnage"%}}
+{{%notice type="def" title="Dosage par étalonnage" round="true"%}}
 Méthode de détermination d’une concentration, généralement non destructive, utilisant
 une courbe de référence liant la valeur d’une grandeur physique (absorbance, conductivité, masse volumique, etc.) à la concentration d’un soluté. La courbe de référence, appelée **courbe d’étalonnage**, doit être monotone sur l’intervalle de concentration encadrant la concentration inconnue. La courbe n’est pas nécessairement une droite, mais cette situation permet d’obtenir une précision constante quelle que soit la valeur de la concentration recherchée.
 {{%/notice%}}

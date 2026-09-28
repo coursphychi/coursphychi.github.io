@@ -30,36 +30,36 @@ td, th {
 </div>
 
 
-{{% notice def Lavage %}}
+{{% notice type="def" title="Lavage" round="true" %}}
 Après une extraction liquide-liquide il peut rester dans la phase organique des impuretés faiblement solubles dans le solvant organique et solubles dans l'eau.<br> Elles peuvent être éliminées par un **lavage** réalisé en ajoutant de l'eau distillée à la phase organique dans une ampoule à décanter.<br> 
 La phase aqueuse contenant les impuretés est ensuite séparée puis éliminée.
 {{% /notice %}}
 
 
-{{% notice def "Distillation rapide" %}}
+{{% notice type="def" title="Distillation rapide" round="true" %}}
 Après avoir isolé la phase organique contenant uniquement le produit d'intérêt, on peut éliminer le solvant grâce à une **distillation rapide**.<br>
 On peut utiliser pour cela un évaporateur rotatif qui permet de recueillir le solvant évaporé dans un collecteur alors que le produit d'intérêt reste dans le ballon chauffé au bain marie.
 ![](/evaporotatif.png?width=200px)
 {{% /notice %}}
 
 
-{{% notice def "Recristallisation" %}}
+{{% notice type="def" title="Recristallisation" round="true" %}}
 Le produit à purifier est recouvert d'un minimum de solvant et le mélange est chauffé dans un montage à reflux jusqu'à dissolution complète.<br>
 Un lent refroidissement (à température ambiante puis dans un bain d'eau glacée) conduit à la formation de cristaux du produit d'intérêt. C'est la **recristallisation**. Les cristaux peuvent ensuite être isolés par essorage sous pression réduite sur un entonnoir Büchner (les impuretés restent en solution).
 {{% /notice %}}
 
 
-{{% notice def "Distillation fractionnée" %}}
+{{% notice type="def" title="Distillation fractionnée" round="true" %}}
 Le but de la **distillation fractionnée** est de séparer les différents constituants d’un mélange de liquides miscibles, possédant des températures d’ébullition différentes. Pour cela, elle exploite le même principe que la distillation classique mais se distingue par l'utilisation d'une colonne de séparation, qui permet une meilleure discrimination des constituants du mélange. Le distillat contient l'espèce la plus volatil.
 {{% /notice %}}
 
-{{% notice def "Banc Köfler" %}}
+{{% notice type="def" title="Banc Köfler" round="true" %}}
 Le banc Kofler se compose d'une plaque chauffante qui présente un gradient de température à sa surface, habituellement de 50 à 250 °C. On dépose un échantillon du produit sur la partie froide de la table préalablement étalonnée puis on le pouce vers les températures plus élevées jusqu'à observer son point de fusion.<br>
  Le composé est considéré comme impur quand sa température de fusion est inférieure à celle attendue, ou quand sa fusion s'effectue sur une plage de température et non à une température précise.
  ![](/banckofler.png?width=600px)
 {{% /notice %}}
 
-{{%notice def "Rendement"%}}
+{{%notice type="def" title="Rendement" round="true"%}}
 
 {{%/notice%}}
 

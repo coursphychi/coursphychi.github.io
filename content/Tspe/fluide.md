@@ -29,7 +29,7 @@ td, th {
 <a href="/cm-fluide.pdf"><img src="/cm-fluide.png"></a>
 </div>
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 La relation de Bernoulli sera toujours fournie.
 {{%/notice%}}
 

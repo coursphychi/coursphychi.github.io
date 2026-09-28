@@ -64,7 +64,7 @@ td, th {
 
 ## Définitions
 
-{{%notice def "Réaction chimique"%}}
+{{%notice type="def" title="Réaction chimique" round="true"%}}
 Modèle introduit pour rendre compte d’observations et de mesures effectuées lors de transformations chimiques pouvant différer par les conditions de leur réalisation (température, pression, composition du mélange initial), mais partageant les mêmes réactifs, les mêmes produits et les mêmes proportions dans lesquelles ceux-ci sont convertis.<br>L’équation de la réaction permet de réaliser le bilan de matière d’une transformation.
 {{%/notice%}}
 
@@ -72,6 +72,6 @@ Modèle introduit pour rendre compte d’observations et de mesures effectuées 
 L’action d’acide chlorhydrique sur du magnésium solide peut être modélisée par une réaction dont l’équation est : $\ce{Mg(s) + 2H+(aq) -> Mg^2+(aq) + H2(g)}$
 
 
-{{%notice info%}}
+{{%notice type="info" round="true"%}}
 L’**équation de réaction** ne traduit nullement le déroulement microscopique de la transformation. Elle est un outil de bilan à l’**échelle macroscopique** et ne prend en compte que des quantités de matière déterminées à l’échelle macroscopique. Par conséquent, on ne doit pas dire « un atome de cuivre réagit avec deux ions argent » mais « une mole de cuivre réagit avec deux moles d’ions argent ».
 {{%/notice%}}

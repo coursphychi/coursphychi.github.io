@@ -16,7 +16,7 @@ draft: false
 ## Savoir et savoir faire
 
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Savoir schématiser l’organisation du **transport** et de la **distribution** de l’**énergie électrique** pour une ligne monophasée.<br><br>
 <input type="checkbox"> Distinguer et citer les caractéristiques essentielles du **réseau de distribution électrique**.<br><br>
 <input type="checkbox"> Relier qualitativement le **facteur de puissance** d’un équipement de puissance donnée aux **pertes dans les lignes** d’alimentation.<br><br>
@@ -28,7 +28,7 @@ draft: false
 {{%/notice%}}
 
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 On a vu que la puissance dissipée par effet Joule s'écrit $P_J = RI^2$. Cette formule s'obtient en écrivant que la puissance électrique dissipée par un dipôle ohmique est $P_J=U_R\times I = R\times I\times I$ où on a utilisé la loi d'Ohm aux bornes du dipôle ohmique $U_R = R\times I$.<br>
 Pour une puissance transportée $P=UI$ donnée, minimiser les pertes $P_J$ suppose donc de minimiser $I$ (et $R$).<br>
 Mais on aurait aussi très bien pu remplacer $I$ par $\frac{U_R}{R}$ dans la formule de la puissance dissipée par effet Joule pour obtenir $P_J=\frac{U_R^2}{R}$. Cela semble alors imposer une conclusion inverse que précédemment&nbsp;; il faudrait diminuer $U$ et augmenter $R$.<br><br>

@@ -22,7 +22,7 @@ draft: false
 ## Savoir et savoir faire
 
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Calculer la **masse molaire** d'une molécule à partir de celles des atomes qui la constituent.<br>
 <br>
 <input type="checkbox"> Calculer une quantité de matière $n$ d'une espèce chimique à partir de la masse $m$ de l'espèce et de sa masse molaire $M$&nbsp;: $\displaystyle n=\frac{m}{M}$ <br>
@@ -41,7 +41,7 @@ draft: false
 {{%/notice%}}
 
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 Ne pas confondre la **concentration massique** et la **masse volumique**.<br>
 Les deux grandeurs ont la **même dimension** (masse sur volume), mais elles sont très différentes.<br>
 <br>
@@ -53,7 +53,7 @@ De plus, la concentration massique est une grandeur chimique alors que la masse 
 En **chimie**, l'unité de base du **volume** est le litre **L** et l'unité de base des **masses** est le gramme **g**, alors qu'en **physique**, on utilise les unités du système internationnal (USI) où les **volumes** sont en **m<sup>3</sup>** et les **masses** en **kg**.
 {{%/notice%}}
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 La **densité** est une version adimensionnée de la masse volumique.<br>
 On obtient la densité d'un objet en divisant sa masse volumique par la masse volumique de l'eau&nbsp;: $\displaystyle d = \frac{\rho}{\rho_{eau}}$ (avec $\rho_{eau}=\pu{1.00E3 kg * m-3}$ ) 
 {{%/notice%}}

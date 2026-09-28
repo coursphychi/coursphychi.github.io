@@ -29,13 +29,13 @@ td, th {
 [![](/cm-chgt.png)](/cm-chgt.pdf)
 
 
-{{%notice info%}}
+{{%notice type="info" round="true"%}}
 Le passage de l'état gazeux à l'état solide, la condensation, est parfois nommé&nbsp;: condensation, condensation solide, sublimation inverse, déposition, désublimation.<br>
 Dans le language courant, le terme **condensation** ne désigne pas la même chose qu'en physique. On parle communément de condensation pour évoquer le passage de l'état gazeux à l'état liquide comme la rosée du matin ou la buée sur une vitre.
 {{%/notice%}}
 
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 La vaporisation (passage de l'état liquide à l'état gazeux) peut prendre la forme d'une **évaporation** (en surface) ou d'une **ébullition** (dans les profondeurs du matériau vaporisé).<br>
 Seule l'ébullition se fait à température fixe (pour un corps pur) et on parle alors de température d'ébullition.
 {{%/notice%}}

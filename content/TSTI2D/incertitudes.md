@@ -30,7 +30,7 @@ Calcul de la moyenne et de l'écart-type expérimental :
 
 ## Savoir et savoir faire
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Procéder à l’évaluation d’une **incertitude-type** par une approche statistique (**type A**).
 <br><br>
 <input type="checkbox"> Savoir utiliser sa **calculette** pour déterminer la moyenne et l'écart-type expérimental d'une série de données.

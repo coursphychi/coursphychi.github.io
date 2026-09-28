@@ -29,7 +29,7 @@ td, th {
 <a href="/cm-thermo.pdf"><img src="/cm-thermo.png"></a>
 </div>
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 La loi phénoménologique de Newton, la loi de Stefan-Boltzmann, et l'expression de la résistance thermique en fonction de la conductivité, de l'épaisseur et de la surface seront fournies au bac.<br>
 <u>Rq</u> : l'expression de $R_{th}$ en fonction du flux $\Phi$ et de l'écart de température $\Delta T$ ($R_{th}=\frac{\Delta T}{\Phi}$) doit être connue par contre.
 {{%/notice%}}
@@ -73,11 +73,11 @@ La loi phénoménologique de Newton, la loi de Stefan-Boltzmann, et l'expression
 </table>
 </div>
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 Lorsque la température est en °C, l'usage est de la noter $\theta$ plutôt que $T$.<br>
 {{%/notice%}}
 
-{{%notice tip%}}
+{{%notice type="tip" round="true"%}}
 On trouve souvent le raccourci conceptuellement faux mais pratique $Q=C\Delta T$ pour un système incompressible.<br>
 Rigoureusement, $C\Delta T$ n'informe que sur la variation d'énergie interne $\Delta U$ du système (supposé incompressible).<br>
 Mais comme il n'y a le plus souvent pas d'énergie échangée sous forme de travail, le premier principe nous assure que $\Delta U = Q$ et donc que $Q=C\Delta T$.<br>

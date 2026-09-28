@@ -102,18 +102,18 @@ details[open] > summary:first-of-type {
 
 ## Définitions
 
-{{%notice def "Cohésion dans une espèce chimique solide ou liquide"%}}
+{{%notice type="def" title="Cohésion dans une espèce chimique solide ou liquide" round="true"%}}
 L’existence d’un volume propre pour un liquide ou un solide, à température et de pression données, est modélisée par des forces attractives entre entités, d’origine électrostatique, de courte portée et n’impliquant pas de mise en commun d’électrons : interaction entre deux ions, entre un ion et une entité polaire, entre deux entités polaires, entre deux entités polarisables.
 {{%/notice%}}
 
 > Exemple :<br>
 La cohésion de cristaux de chlorure de sodium, observée à l’échelle macroscopique, peut s’expliquer par l’existence de forces attractives entre les cations $\ce{Na+}$ et les anions $\ce{Cl-}$ à l’échelle microscopique.
 
-{{%notice def "Polarisabilité d’une entité"%}}
+{{%notice type="def" title="Polarisabilité d’une entité" round="true"%}}
 La polarisabilité caractérise la capacité d’un nuage électronique à être déformé sous l’action d’un champ électrique extérieur, situation qui peut être induite par la proximité d’une autre entité, chargée ou non. En règle générale, plus un édifice est volumineux, plus il est polarisable.
 {{%/notice%}}
 
-{{%notice def "Interaction par pont Hydrogène"%}}
+{{%notice type="def" title="Interaction par pont Hydrogène" round="true"%}}
 Interaction d’origine électrostatique entre un atome très électronégatif, porteur de doublet non liant, et un atome d’hydrogène attaché à un autre atome très électronégatif. En pratique, cette interaction est principalement rencontrée lorsque l’atome très électronégatif est un atome de fluor, un atome d’oxygène ou un atome d’azote.
 {{%/notice%}}
 

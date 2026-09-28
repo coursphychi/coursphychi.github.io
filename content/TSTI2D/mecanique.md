@@ -19,7 +19,7 @@ draft: false
 
 ## Savoir et savoir faire
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Déterminer la **résultante des forces** appliquées à un système dont le mouvement est rectiligne **à partir de l’accélération** en utilisant le **principe fondamental de la mécanique** (PFD).
 <br><br>
 <input type="checkbox"> Déterminer les caractéristiques de l’**accélération** d’un système dans le cas d’un mouvement rectiligne **à partir des forces extérieures** appliquées en utilisant le PFD.
@@ -37,11 +37,11 @@ draft: false
 <input type="checkbox"> Exploiter graphiquement la **caractéristique mécanique d'un moteur** pour déterminer le **point de fonctionnement** d’un ensemble moteur-charge en régime permanent
 {{%/notice%}}
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 On appelle aussi la **force d'un fluide sur un solide** qui se déplace à travers lui une **force de résistance aérodynamique**.
 {{%/notice%}}
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 La "chute libre" d'un parachutiste avant qu'il ouvre son parachute n'est pas physiquement une chute libre&nbsp;!
 {{%/notice%}}
 

@@ -58,12 +58,12 @@ td, th {
 </table>
 </div>
 
-{{%notice tip%}}
+{{%notice type="tip" round="true"%}}
 Il peut être intéressant de retenir que le gap du silicium (le semi-conducteur le plus utilisé) est autour de $\pu{1 eV}$, ce qui donne une longueur d'onde d'environ 1&nbsp;μm pour la longueur d'onde $\lambda_{gap}$ d'un photon capable de fournir à un électron l'énergie suffisante pour franchir le gap.<br>
   $\lambda_{gap}$ est alors dans le proche infrarouge (car un peu au-delà de 800&nbsp;nm).<br>
   Bien se rappeler que $E\nearrow$ quand $\lambda \searrow$ et donc que des photons de longueurs d'onde $\lambda<\lambda_{gap}$ permettent de franchir le gap. C'est donc le cas des photons visibles&nbsp;! Or le visible correspond aux longueurs d'onde où la puissance rayonnée par le Soleil est la plus grande.
 {{%/notice%}}
 
-{{%notice tip%}}
+{{%notice type="tip" round="true"%}}
 Les exercices de bac et le programme semblent parfois confondre en un seul concept l'**effet photoélectrique externe** (extraction d'un électron d'un métal grâce à un photon d'énergie supérieure au travail d'extraction) et l'**effet photoélectrique interne** (passage d'un électron d'un semi-conducteur de la bande de valence à la bande conduction par absorption d'un photon d'énergie supérieure à celle du gap entre les deux bandes).
 {{%/notice%}}

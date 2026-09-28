@@ -54,7 +54,7 @@ Vidéo survolant l'histoire de l'électricité au 19<sup>e</sup> siècle&nbsp;:
 }
 </style>
 
-{{% notice def puiss %}}
+{{% notice type="def" title="puiss" round="true" %}}
 La **puissance** est la variation d'énergie par unité de temps&nbsp;:
 $$\displaystyle P=\frac{\Delta E}{\Delta t}$$
 Les unités de base sont le joule ($\pu{J}$) pour la variation d'énergie $\Delta E$, la seconde ($\pu{s}$) pour la durée $\Delta t$ et le watt ($\pu{W}$) pour la puissance $P$.<br>
@@ -67,7 +67,7 @@ Mais dans le secteur de l'électricité, on utilise le plus souvent l'heure ($\p
     content: 'Rendement';
 }
 </style>
-{{% notice def rend %}}
+{{% notice type="def" title="rend" round="true" %}}
 Définition du rendement $r$ :<br>
 $\displaystyle r=\frac{E\_{utile}}{E\_{perdue}}=\frac{P\_{utile}}{P\_{perdue}}$<br>
 {{%/notice%}}
@@ -91,7 +91,7 @@ Ajourd'hui, on sait obtenir de l'énergie électrique à partir de deux sources 
 </div>
 </div>
 
-{{%notice info%}}
+{{%notice type="info" round="true"%}}
 Principe physique du fonctionnement d'un alternateur&nbsp;: l'**induction électromagnétique**.
 {{%/notice%}}
 
@@ -124,7 +124,7 @@ L'ensemble forme un **turbo-alternateur**.
 
 > Quelle conversion opère la turbine / à quoi sert-elle&nbsp;?
 
-{{%notice info%}}
+{{%notice type="info" round="true"%}}
 Dans ce cas, le rendement vaut : $\displaystyle r=\frac{E\_{élec}}{E\_{méca}}=\frac{P\_{élec}}{P\_{méca}}$<br>
 Un alternateur peut atteindre des **rendements**  supérieurs à 99%.<br>
 Globalement, le rendement d'un alternateur croît avec sa masse (et par ricochet avec la puissance électrique qu'il délivre).
@@ -143,7 +143,7 @@ L'alternateur d'un groupe électrogène (utilisé par exemple pour un food truck
 
 ![](/chainpv.png?width=800px)
 
-{{%notice info%}}
+{{%notice type="info" round="true"%}}
 Principe physique du fonctionnement d'une cellule photovoltaïque&nbsp;: l'**effet photoélectrique**.
 {{%/notice%}}
 
@@ -191,7 +191,7 @@ La centrale hydroélectrique la plus puissante de France se trouve au barrage de
 
 La plus grande centrale hydroélectrique au monde est le barrage des Trois-Gorges en Chine. Sa puissance installée est de 22500&nbsp;MW.
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 On distingue les centrales gravitaires, les stations de transfert d'énergie par pompage et les centrales maritimes.
 {{%/notice%}}
 

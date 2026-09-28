@@ -107,7 +107,7 @@ ex&nbsp;: $5,23 +2,7 - 0,03 = 7,9$
 
 
 
-{{%notice tip%}}
+{{%notice type="tip" round="true"%}}
 
 La vidéo suivante explique l'intérêt de répéter les mesures.
 
@@ -116,7 +116,7 @@ La vidéo suivante explique l'intérêt de répéter les mesures.
 {{<youtube g5kIh7sjPwQ>}}
 
 
-{{%notice tip%}}
+{{%notice type="tip" round="true"%}}
 
 La vidéo suivante permet d'en savoir plus sur le lien entre incertitude-type et niveau de confiance&nbsp;: quelle est la probabilité que la valeur de référence soit dans l'intervalle $[x-\mathrm{u},x+\mathrm{u}]$&nbsp;?
 
@@ -125,7 +125,7 @@ La vidéo suivante permet d'en savoir plus sur le lien entre incertitude-type et
 {{<youtube k1y9h7c3yDo>}}
 
 
-{{%notice tip%}}
+{{%notice type="tip" round="true"%}}
 
 La vidéo suivante permet d'en savoir plus sur la formule de l'écart-type expérimental (en particulier l'étrange présence du $n-1$).
 
@@ -134,7 +134,7 @@ La vidéo suivante permet d'en savoir plus sur la formule de l'écart-type expé
 
 {{<youtube bEDXykqj6o4>}}
 
-{{%notice tip%}}
+{{%notice type="tip" round="true"%}}
 
 Pourquoi faut-il diviser la demi-étendue par $\sqrt{3}$ pour obtenir l'incertitude-type lors d'une évaluation de type B&nbsp;?&nbsp;
 

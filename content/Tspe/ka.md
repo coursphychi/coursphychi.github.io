@@ -90,7 +90,7 @@ La notion d’acide fort ou de base forte constitue un modèle introduit pour si
 le chlorure d’hydrogène $\ce{HCℓ (g)}$ est un acide fort dans l’eau. Sa dissolution dans l’eau permet d’obtenir de l’acide chlorhydrique, solution modélisée par un mélange d’ions oxonium $\ce{H3O+ (aq)}$ et d’ions chlorure $\ce{Cℓ^- (aq)}$.
 
 
-{{%notice def "Constante d'acidité"%}}
+{{%notice type="def" title="Constante d'acidité" round="true"%}}
 Constante d’équilibre de la réaction entre un acide et l’eau, écrite avec un nombre stœchiométrique 1 pour l’espèce $\ce{H3O^+}$.<br>
 Cette grandeur est caractéristique d’un couple acide-base à une température donnée.
 {{%/notice%}}

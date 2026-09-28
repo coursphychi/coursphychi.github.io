@@ -73,7 +73,7 @@ $c = \pu{3,0*10^8 m*s-1}$
 
 ## Savoir et savoir faire
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Interpréter les échanges d’énergie entre la matière et la lumière à l’aide de la notion de **photon**.
 <br><br>
 <input type="checkbox"> Citer et exploiter la relation $ΔE = h\cdot f$ reliant une variation d’énergie à la fréquence des photons émis ou reçus.
@@ -87,7 +87,7 @@ $c = \pu{3,0*10^8 m*s-1}$
 
 
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 L'**irradiance**, qui est la puissance radiative reçue par mètre carré (unité : $\pu{W*m-2}$), peut aussi être appelé **éclairement énergétique**.<br> Et la lettre pour désigner cette grandeur peut varier ! Fiez-vous à l'unité.
 {{%/notice%}}
 

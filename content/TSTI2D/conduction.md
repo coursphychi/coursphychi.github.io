@@ -173,7 +173,7 @@ Dans ce matériau très isolant, le flux thermique dû à la conduction thermiqu
 
 ## Savoir et savoir faire
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Définir un **flux thermique** et le calculer.<br><br>
 <input type="checkbox"> Savoir comment le flux thermique évolue en fonction de l'écart de température et de la résistance thermique.<br><br>
 <input type="checkbox"> Calculer la valeur de la **résistance thermique** d’une paroi à partir de son épaisseur et de la conductivité thermique du matériau.<br><br>
@@ -181,7 +181,7 @@ Dans ce matériau très isolant, le flux thermique dû à la conduction thermiqu
 {{%/notice%}}
 
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 La résistance thermique telle que définie dans la présentation est en réalité la **résistance thermique surfacique**.<br>
 La vraie résistance thermique est définie par $R_{th}=\frac{e}{S \lambda}$ et s'exprime en $\pu{K * W-1}$.<br>
 Avec cette définition, on a $\Phi = \frac{\Delta \theta}{R_{th}}$.<br>
@@ -191,7 +191,7 @@ Moralité, faites très attention aux unités et sachez que les deux définition
 
 
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 
 Pour **mesurer une résistance thermique**, on utilise un appareil capable de mesurer le **flux thermique**.<br>
 Lorsqu'on dispose d'un échantillon, on peut utiliser un appareil un peu encombrant constitué de deux plaques métalliques dont l'une est reliée à une résistance électrique.<br>

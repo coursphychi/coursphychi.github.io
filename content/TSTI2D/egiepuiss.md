@@ -52,7 +52,7 @@ $\displaystyle \eta = \frac{P_{utile}}{P_{fournie}} = \frac{E_{utile}}{E_{fourni
 ## Savoir et savoir faire
 
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Déterminer une **puissance instantanée** à partir d'une courbe d'énergie.<br><br>
 <input type="checkbox"> Déterminer une **énergie** à partir d'une courbe de puissance.<br><br>
 <input type="checkbox"> Calculer un **rendement**.

@@ -48,7 +48,7 @@ document.getElementById('play').addEventListener('click', function (e) {
 ## Savoir et savoir faire
 
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Distinguer la **radioactivité naturelle** de la **radioactivité artificielle**.<br><br>
 <input type="checkbox"> Citer les différents **types de rayonnement radioactif** et préciser la nature des particules émises.<br><br>
 <input type="checkbox"> Citer la définition de l’**activité** d’une source radioactive et indiquer son unité.<br><br>
@@ -60,7 +60,7 @@ document.getElementById('play').addEventListener('click', function (e) {
 {{%/notice%}}
 
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 Faire attentionà garder assez de chiffres significatifs lors des calculs de défaut de masse. La différence se joue la plupart du temps plusieurs chiffres après la virgule (dans les unités standards).
 {{%/notice%}}
 

@@ -30,7 +30,7 @@ $$\Delta U = m c \Delta\theta$$
 
 ## Savoir et savoir faire
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Décrire les **liaisons hydrogènes** responsables des liaisons intermoléculaires dans l'eau.<br><br>
 <input type="checkbox"> Lire et utiliser un **diagramme d'état** $(P,T)$&nbsp;; savoir déterminer l'état physique pour une pression et une température donnée et après une modification des paramètres.<br><br>
 <input type="checkbox"> Savoir si un changement d'état est **exothermique** ou **endothermique**.<br><br>
@@ -38,15 +38,15 @@ $$\Delta U = m c \Delta\theta$$
 {{%/notice%}}
 
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 L'évaporation est une vaporisation progressive qui a lieu à la surface d'un liquide (et non dans son volume). L'évaporation peut avoir lieu à des pressions et températures différentes de celles de la vaporisation.
 {{%/notice%}}
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 L'énergie massique de changement d'état est aussi appelée **enthalpie massique** de changement d'état et peut être notée $l$, ou $L$, ou $\Delta h$, ou $h$, ou encore $H$.
 {{%/notice%}}
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 Dans le langage courant, le terme **condensation** se substitue le plus souvent à liquéfaction et désigne alors le phénomène opposé à l'évaporation.
 {{%/notice%}}
 

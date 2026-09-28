@@ -29,7 +29,7 @@ td, th {
 <a href="/cm-champuni.pdf"><img src="/cm-champuni.png"></a>
 </div>
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 <p style="text-align:center;"><a href="https://presentationssite.github.io/tspe/primitives"><b>Petit mémo</b></a> sur les <b>primitives</b>.</p>
 {{%/notice%}}
 

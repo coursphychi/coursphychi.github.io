@@ -30,7 +30,7 @@ td, th {
 </div>
 
 
-{{%notice def "Concentration en quantité de matière"%}}
+{{%notice type="def" title="Concentration en quantité de matière" round="true"%}}
 Quantité de matière d’une espèce chimique dissoute par litre de solution.<br>
 La concentration en quantité de matière peut s’exprimer en $\pu{mol*L-1}$.
 {{%/notice%}}

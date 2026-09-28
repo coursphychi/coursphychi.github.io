@@ -26,7 +26,7 @@ draft: false
 
 ## Savoir et savoir faire
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Déterminer la **fréquence** du **fondamental** et des **harmoniques** à partir du **spectre d’amplitude** d’un signal sonore..
 <br><br>
 <input type="checkbox"> Définir et distinguer la notion de **timbre** et de **hauteur**.

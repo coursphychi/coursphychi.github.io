@@ -80,7 +80,7 @@ $$f=\frac{1}{T}$$
 
 ## Savoir et savoir faire
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Savoir qu'un **signal périodique** quelconque peut être **décomposé** en une **somme** d’un **signal continu** (composante continue) et de **signaux sinusoïdaux** (**les harmoniques**).
 <br><br>
 <input type="checkbox"> Savoir identifier la **fréquence du fondamental** (harmonique de rang 1) d’un signal périodique.
@@ -95,7 +95,7 @@ $$f=\frac{1}{T}$$
 {{%/notice%}}
 
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 Un [super cours un peu poussé](https://images.math.cnrs.fr/freeze/Analyse-frequentielle-du-signal.html) pour ceux que le sujet intéresse et qui voudraient creuser.
 {{%/notice%}}
 

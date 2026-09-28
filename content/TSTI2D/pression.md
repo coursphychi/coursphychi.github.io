@@ -42,7 +42,7 @@ details[open] > summary::before {
 ## Savoir et savoir faire
 
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Définir la **pression exercée sur une surface** à partir de la **résultante des forces pressantes** appliquées.<br><br>
 <input type="checkbox"> Distinguer la **pression absolue** de la **pression relative**.<br><br>
 <input type="checkbox"> Citer et exploiter le **principe fondamental de
@@ -50,7 +50,7 @@ l'hydrostatique**.<br>
 {{%/notice%}}
 
 
-{{%notice piege%}}
+{{%notice type="piege" round="true"%}}
 Le principe fondamental de l'hydrostatique peut s'écrire différemment suivant l'orientation des axes (parle-t-on de la hauteur ou de la profondeur ?) et suivant si on considère les élévations $z$ ou leur écart $\Delta z = z_2-z_1 = h$.<br>
 $\uparrow$ Ainsi, avec un axe dirigé vers le haut, $z_2$ est au-dessus de $z_1$. Et on a&nbsp;:<br>
 $P_1 + \rho g z_1 = P_2 + \rho g z_2$<br>

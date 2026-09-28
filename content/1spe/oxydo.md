@@ -37,7 +37,7 @@ td, th {
 </div>
 
 
-{{%notice def "Demi-équation électronique"%}}
+{{%notice type="def" title="Demi-équation électronique" round="true"%}}
 Une demi-équation électronique met en évidence, de manière formelle, l’existence d’un transfert d’électron(s) au cours d’une transformation convertissant l’oxydant d’un couple en son réducteur conjugué (ou l’inverse). La demi-équation ne modélise pas le déroulement microscopique de cet échange, mais illustre, à l’échelle macroscopique, les proportions dans lesquelles il s’opère.
 {{%/notice%}}
 
@@ -46,7 +46,7 @@ La demi-équation électronique associée au couple $\left(\ce{Cr2O7^2-/Cr^3+}\r
 $$\ce{Cr2O7^2- + 14 H+ +6 e- = 2 Cr^3+ + 7H2O}$$
 
 
-{{%notice def "Réaction électrochimique ou d'oxydo-réduction"%}}
+{{%notice type="def" title="Réaction électrochimique ou d'oxydo-réduction" round="true"%}}
 Modélisation, à l’échelle macroscopique, d’une transformation mettant en jeu un transfert
 d’électrons.
 {{%/notice%}}

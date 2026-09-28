@@ -69,7 +69,7 @@ $$U_{eff}=\frac{U_{max}}{\sqrt{2}}$$
 
 ## Savoir et savoir faire
 
-{{%notice coeur%}}
+{{%notice type="coeur" round="true"%}}
 <input type="checkbox"> Savoir définir la **puissance apparente** $S$.
 <br><br>
 <input type="checkbox"> Savoir que la **puissance apparente** est une **grandeur de dimensionnement** d'une installation ou d'un équipement électrique.

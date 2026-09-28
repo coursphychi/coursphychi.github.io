@@ -69,7 +69,7 @@ td, th {
 
 <br>
 
-{{%notice tip%}}
+{{%notice type="tip" round="true"%}}
 Pour la démonstration, le programme dit précisément&nbsp;:<br>
 «&nbsp;*Établir l’expression du décalage Doppler dans le cas d’un
 observateur fixe, d’un émetteur mobile et dans une

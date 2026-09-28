@@ -29,7 +29,7 @@ td, th {
 <a href="/cm-molecules.pdf"><img src="/cm-molecules.png"></a>
 </div>
 
-{{%notice note%}}
+{{%notice type="note" round="true"%}}
 Les règles de nomenclature seront fournies.
 {{%/notice%}}
 
