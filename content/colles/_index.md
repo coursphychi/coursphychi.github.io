@@ -216,7 +216,7 @@ Cela implique $\Delta t_2 = 0$. Le deuxième tour devra être instantané&nbsp;!
 </blockquote>
 </details>
 
-- Dans un pays imaginaire, les couples continuent à faire des enfants tant qu'ils n'ont pas eu de fille. Quelle est alors la proportion de fille dans ce pays&nbsp;?
+- Dans un pays imaginaire, les couples continuent à faire des enfants tant qu'ils n'ont pas eu de fille. Quelle est alors la proportion de filles dans ce pays&nbsp;?
 
 <details>
 <summary id="correcsum">Réponse</summary>
