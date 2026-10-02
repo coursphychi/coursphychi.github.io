@@ -40,7 +40,7 @@ td, th {
   <td style="border-bottom:none;"><a href="/act-doppler.pdf"><b>Démonstration</b></a>  +  <a href="/correcdoppler.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a> +  <a href="https://www.geogebra.org/m/cafh4wqn"><b style="color:#FFA601;"><i class="fa-solid fa-video"></i></b></a></td>
   </tr>
   <tr>
-  <td style="border-top:none;"><a href="/act-fronde.pdf"><b>Fronde</b></a><!-- + <a href="/correcfrondetspe.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a> --></td>
+  <td style="border-top:none;"><a href="/act-fronde.pdf"><b>Fronde</b></a> + <a href="/correcfrondetspe.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a> </td>
 </tr>
   <tr>
 <th rowspan="2 ">Exercices</th>
