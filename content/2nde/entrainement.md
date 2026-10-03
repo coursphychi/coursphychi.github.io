@@ -160,8 +160,8 @@ td, th {
              border-top: 1px solid var(--nt-line); border-right: 1px solid var(--nt-line); border-bottom: 1px solid var(--nt-line); }
 .nt-trap   { --bx-line: var(--nt-warn); --bx-bg: color-mix(in srgb, var(--nt-warn) 12%, var(--nt-soft)); --bx-ink: var(--nt-warn-ink); }
 ul.nt-facts { list-style: none !important; padding-left: 0 !important; margin: 0.3em 0 !important; }
-ul.nt-facts li { padding: 0.25em 0; }
-ul.nt-facts li::before { content: "▸"; color: var(--bx-ink); margin-right: 0.5em; }
+ul.nt-facts li { position: relative; padding: 0.25em 0 0.25em 1.2em; }
+ul.nt-facts li::before { content: "▸"; color: var(--bx-ink); position: absolute; left: 0; }
 
 /* --- Cartes aires / volumes --- */
 .nt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 0.8em 0; }
@@ -274,7 +274,7 @@ Les quiz ci-dessous visent à vérifier ou installer certains automatismes très
 <img src="/bandeaurel.png" style="box-shadow:none;background:none;border-radius:3px;">
 </div>-->
 
-Les lois consistent en des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l'une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s'aguerrir dans cet exercice et le quiz suivant permet de tester votre agilité.
+Les **lois** manipulées en physique-chimie consistent en des formules littérales mettant en jeu plusieurs grandeurs (comme $F=G\frac{m_a\times m_B}{d^2}$) et souvent, on se retrouve à vouloir isoler l'une de ces grandeurs ($m_A$ par exemple). Il est donc vital de s'aguerrir dans cet exercice et le quiz suivant permet de tester votre agilité.
 
 Le premier quiz utilise de simples lettres pour que l'on puisse se concentrer sur les manipulations algébriques&nbsp;:
 
@@ -284,7 +284,9 @@ Le premier quiz utilise de simples lettres pour que l'on puisse se concentrer su
 
 <br>
 
-La cible idéale à atteindre est un score de 10/10 en environ une minute.
+La cible idéale à atteindre est un score de 10/10 en environ une minute 🥳 
+
+🥲 C'est normal d'être loin de la cible au début et il ne faut pas se décourager. On mène le même combat qu'avec un exercice d'assouplissement ou un enchaînement technique sur un instrument de musique. Au départ, c'est douloureux et le résultat souhaité semble inatteignable, mais à force de persévérance, nos capacités augmentent petit à petit et le jeu en vaut la chandelle puisqu'on finit avec un pouvoir supplémentaire 💪
 
 <div style="position:relative;margin-left:auto;margin-right:auto;width:500px;max-width:100%;margin-bottom:-1em;margin-top:-1.5em;">
 <img src="/gifyoda.gif" style="box-shadow:none;background:none;border-radius:10px;">
@@ -382,11 +384,11 @@ Plusieurs difficultés se dressent alors&nbsp;:
 </div>
 
 <div class="nt-box nt-know">
-<p class="nt-box-title"><i class="fa-solid fa-thumbtack"></i>À savoir par cœur</p>
+<p class="nt-box-title"><i class="fa-solid fa-thumbtack"></i>À savoir</p>
 <ul class="nt-facts">
 <li>$\pu{1 L} = \pu{1 dm3}$, et donc (en divisant par 1000) $\pu{1 mL} = \pu{1 cm3}$.</li>
-<li>Un <b>are</b> est l'aire d'un carré de $\pu{10 m}$ de côté&nbsp;: $\pu{1 a} = \pu{10 m}\times\pu{10 m} = \pu{1E2 m2}$.</li>
-<li>Un <b>hectare</b> vaut 100 ares, soit un carré de $\pu{100 m}$ de côté&nbsp;: $\pu{1 ha} = \pu{100 m}\times\pu{100 m} = \pu{1E4 m2}$.</li>
+<li>Un <b>are</b> est l'aire d'un carré de $\pu{10 m}$ de côté&nbsp;: $\pu{1 a} = \pu{10 m}\times\pu{10 m} = \pu{1E2 m2}$.<br>
+Un <b>hectare</b> vaut 100 ares, soit un carré de $\pu{100 m}$ de côté&nbsp;: $\pu{1 ha} = \pu{100 m}\times\pu{100 m} = \pu{1E4 m2}$.</li>
 </ul>
 </div>
 
@@ -440,7 +442,11 @@ Plusieurs difficultés se dressent alors&nbsp;:
 </li>
 <li>
 <p class="nt-step-title">Écrire le résultat arrondi sur la copie</p>
-<p><span class="nt-result">$E_c = \tfrac 12\, m\times v^2 = \tfrac 12 \times 3{,}50\times 2{,}3^2 = \pu{9,3 J}$</span></p>
+<p><span class="nt-result">$\displaystyle \begin{aligned}
+E_c &= \tfrac 12\, m\times v^2\\
+&= \tfrac 12 \times 3{,}50\times 2{,}3^2\\
+ &= \pu{9,3 J}
+ \end{aligned}$</span></p>
 </li>
 </ol>
 
@@ -450,6 +456,7 @@ Plusieurs difficultés se dressent alors&nbsp;:
 </div>
 
 {{< youtube-plus id="KOvHirpl7vk" ratio="16x9" width="100%" shadow=true rounded=true >}}
+
 {{%/notice%}}
 
 <ul>
@@ -466,9 +473,12 @@ Plusieurs difficultés se dressent alors&nbsp;:
 {{%/notice%}}
 
 
-Le quiz ci-dessous permet de s'auto-diagnostiquer et de s'entraîner pour améliorer sa maîtrise. Le test se concentre sur&nbsp;: 
+Le quiz ci-dessous permet de s'auto-diagnostiquer et de s'entraîner pour améliorer sa maîtrise.<br>
+Le test se concentre sur&nbsp;: 
 <ul style="margin-top:-0.5em; margin-bottom:1em;">
-<li>les puissances de 10 et les ordres de grandeur,</li>
+<li>les conversions,</li>
+<li>la notation scientifique,</li>
+<li>les puissances de 10 et les ordres de grandeur.</li>
 </ul>
 
 {{%notice type="tip"  title="Définition des ordres de grandeur en physique" round="true" collapse="true"%}}
@@ -544,10 +554,6 @@ Sur une échelle où chaque facteur 10 occupe la même longueur (comme l'axe d'u
 {{%/notice%}}
 
 
-<ul>
-<li>les conversions,</li>
-<li>et la notation scientifique.</li>
-</ul>
 
 
 

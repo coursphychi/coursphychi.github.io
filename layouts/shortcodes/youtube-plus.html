@@ -85,9 +85,33 @@
 {{- if $params -}}{{- $src = printf "%s?%s" $src (delimit $params "&") -}}{{- end -}}
 
 {{- /* ---------- 7. Rendu ---------- */ -}}
-{{- /* ---------- 7. Fondu : CSS + JS émis une seule fois par page ---------- */ -}}
+{{- /* ---------- 7. Fondu : CSS + JS émis une seule fois par page ----------
+
+  Contrainte de forme : ce shortcode doit survivre à un passage dans Markdown,
+  ce qui arrive dès qu'il est imbriqué dans un shortcode appelé avec {{% %}}
+  (notice par exemple). En CommonMark, un bloc HTML ouvert par <details> ou
+  <div> se termine à la première ligne vide ; la suite est relue comme du
+  Markdown (lignes indentées → blocs de code, apostrophes → guillemets
+  typographiques…). D'où trois règles pour la sortie :
+    - aucune ligne vide ;
+    - aucun commentaire JavaScript : le moteur html/template de Go les
+      supprime et laisse à leur place une ligne blanche ;
+    - chaque balise ouvrante sur sa propre ligne, sans indentation.
+
+  Logique du fondu :
+    - l'iframe part à opacity 0 et passe à 1 via la classe is-loaded ;
+    - l'écouteur « load » est posé en phase de capture sur document au moment
+      où le script s'exécute, donc avant toute iframe de la page : aucun
+      chargement ne peut être manqué, plus besoin de temporisation ;
+    - le fondu n'est lancé que si l'iframe est effectivement affichée ; dans
+      une notice repliée (<details> fermé), on attend son ouverture ;
+    - à chaque ouverture d'un <details>, le fondu est rejoué : l'opacité est
+      d'abord ramenée à 0 sans transition (Chromium ne recalcule pas les
+      styles du contenu d'un <details> fermé, l'état de départ serait sinon
+      périmé), puis la classe est remise à l'image suivante.
+*/ -}}
 {{- if not (.Page.Scratch.Get "ytPlusFadeAssets") -}}
-{{- .Page.Scratch.Set "ytPlusFadeAssets" true -}}
+{{- .Page.Scratch.Set "ytPlusFadeAssets" true }}
 <style>
 .yt-plus iframe { opacity: 0; transition: opacity .45s ease; }
 .yt-plus iframe.is-loaded { opacity: 1; }
@@ -95,34 +119,35 @@
 </style>
 <script>
 (function () {
-  if (window.__ytPlusFade) return;
-  window.__ytPlusFade = true;
-  function init() {
-    document.querySelectorAll('.yt-plus iframe').forEach(function (f) {
-      var show = function () { f.classList.add('is-loaded'); };
-      f.addEventListener('load', show);
-      /* Filet de sécurité : si l'évènement load est déjà passé quand ce code
-         s'exécute, ou s'il n'arrive jamais, l'iframe ne doit pas rester
-         invisible. On l'affiche au bout de 3 s quoi qu'il arrive. */
-      setTimeout(show, 3000);
-    });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+if (window.__ytPlusFade) return;
+window.__ytPlusFade = true;
+var SEL = '.yt-plus iframe';
+function shown(f) { return f.getClientRects().length > 0; }
+function fadeIn(f) {
+f.style.transition = 'none';
+f.classList.remove('is-loaded');
+getComputedStyle(f).opacity;
+f.style.transition = '';
+requestAnimationFrame(function () { f.classList.add('is-loaded'); });
+}
+document.addEventListener('load', function (e) {
+var f = e.target;
+if (!f.matches || !f.matches(SEL)) return;
+f.setAttribute('data-yt-loaded', '');
+if (shown(f)) fadeIn(f);
+}, true);
+document.addEventListener('toggle', function (e) {
+var d = e.target;
+if (!d.querySelectorAll) return;
+if (!d.open) return;
+d.querySelectorAll(SEL).forEach(function (f) {
+if (f.hasAttribute('data-yt-loaded') && shown(f)) fadeIn(f);
+});
+}, true);
 })();
 </script>
-{{- end -}}
-
-{{- /* ---------- 8. Rendu ---------- */ -}}
-<div class="yt-plus"
-     style="width:{{ $width }};max-width:100%;margin:1.5rem auto;aspect-ratio:{{ $ratioCSS | safeCSS }};
-            {{- if $rounded }}border-radius:0.75rem;overflow:hidden;{{ end -}}
-            {{- if $shadow }}box-shadow:0 10px 30px rgba(0,0,0,.30);{{ end -}}">
-  <iframe src="{{ $src }}"
-          style="display:block;width:100%;height:100%;border:0;"
-          title="Lecteur vidéo YouTube"
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen></iframe>
+{{- end }}
+{{/* ---------- 8. Rendu ---------- */ -}}
+<div class="yt-plus" style="width:{{ $width }};max-width:100%;margin:1.5rem auto;aspect-ratio:{{ $ratioCSS | safeCSS }};{{ if $rounded }}border-radius:0.75rem;overflow:hidden;{{ end }}{{ if $shadow }}box-shadow:0 10px 30px rgba(0,0,0,.30);{{ end }}">
+<iframe src="{{ $src }}" style="display:block;width:100%;height:100%;border:0;border-radius:inherit;" title="Lecteur vidéo YouTube" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
