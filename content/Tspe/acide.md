@@ -20,7 +20,7 @@ td, th {
 }
 </style>
 
-<h1 style="overflow-x:true;">Transformations acide-base</h1>
+<h1 style="overflow-x:auto;">Transformations acide-base</h1>
 
 
 <p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tspe/acide"> Cours </a></p>
