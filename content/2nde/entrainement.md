@@ -290,7 +290,7 @@ La cible idéale à atteindre est un score de 10/10 en environ une minute.
 <img src="/gifyoda.gif" style="box-shadow:none;background:none;border-radius:10px;">
 </div>
 
-Lorsqu'on commence à s'aguerrir, on peut passer à ce quiz de même complexité algébrique mais qui utilise cette fois de vraies relations de physique-chimie (ce qui peut rendre les notations beaucoup plus lourdes).
+Lorsqu'on commence à s'aguerrir, on peut passer à ce quiz de même complexité algébrique mais qui utilise cette fois de véritables relations de physique-chimie (ce qui peut rendre les notations beaucoup plus lourdes et donc moins faciles à manipuler mentalement).
 
 <br>
 
@@ -309,7 +309,8 @@ Une fois qu'on a déterminé la bonne formule littérale pour la grandeur cherch
 
 Plusieurs difficultés se dressent alors&nbsp;: 
 <ul style="margin-top:-0.5em; margin-bottom:1em;">
-<li>les mesures doivent être <b>converties</b> pour que les unités «&nbsp;se parlent&nbsp;»,
+<li>les mesures doivent être <b>converties</b> pour que les unités «&nbsp;se parlent&nbsp;»,</li>
+</ul>
 
 {{%notice type="note" title="Rappels sur les conversions" collapse="true" round="true"%}}
 
@@ -390,9 +391,10 @@ Plusieurs difficultés se dressent alors&nbsp;:
 </div>
 
 {{%/notice%}}
-</li>
 
-<li>le nombre de <b>chiffres significatifs</b> doit témoigner fidèlement de la précision des mesures,
+<ul>
+<li>le nombre de <b>chiffres significatifs</b> doit témoigner fidèlement de la précision des mesures,</li>
+</ul>
 
 {{%notice type="note" title="Règle pour les chiffres significatifs" collapse="true" round="true"%}}
 
@@ -449,9 +451,11 @@ Plusieurs difficultés se dressent alors&nbsp;:
 
 {{< youtube-plus id="KOvHirpl7vk" ratio="16x9" width="100%" shadow=true rounded=true >}}
 {{%/notice%}}
-</li>
 
+<ul>
 <li>et pour que le résultat soit le plus lisible possible, on utilise la <b>notation scientifique</b>.
+</li>
+</ul>
 
 {{%notice type="note" title="Vidéos sur la notation scientifique et les ordres de grandeur" collapse="true" round="true"%}}
 
@@ -460,12 +464,12 @@ Plusieurs difficultés se dressent alors&nbsp;:
 {{< youtube-plus id="PtftD6sU-Sc" ratio="16x9" width="100%" shadow=true rounded=true >}}
 
 {{%/notice%}}
-</li>
-</ul>  
+
 
 Le quiz ci-dessous permet de s'auto-diagnostiquer et de s'entraîner pour améliorer sa maîtrise. Le test se concentre sur&nbsp;: 
 <ul style="margin-top:-0.5em; margin-bottom:1em;">
-<li>les puissances de 10 et les ordres de grandeur,
+<li>les puissances de 10 et les ordres de grandeur,</li>
+</ul>
 
 {{%notice type="tip"  title="Définition des ordres de grandeur en physique" round="true" collapse="true"%}}
 
@@ -538,9 +542,11 @@ Sur une échelle où chaque facteur 10 occupe la même longueur (comme l'axe d'u
 </details>
 
 {{%/notice%}}
-</li>
+
+
+<ul>
 <li>les conversions,</li>
-<li>et la notation scientifique</li>
+<li>et la notation scientifique.</li>
 </ul>
 
 
