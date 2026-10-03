@@ -85,10 +85,39 @@
 {{- if $params -}}{{- $src = printf "%s?%s" $src (delimit $params "&") -}}{{- end -}}
 
 {{- /* ---------- 7. Rendu ---------- */ -}}
+{{- /* ---------- 7. Fondu : CSS + JS émis une seule fois par page ---------- */ -}}
+{{- if not (.Page.Scratch.Get "ytPlusFadeAssets") -}}
+{{- .Page.Scratch.Set "ytPlusFadeAssets" true -}}
+<style>
+.yt-plus iframe { opacity: 0; transition: opacity .45s ease; }
+.yt-plus iframe.is-loaded { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .yt-plus iframe { transition: none; } }
+</style>
+<script>
+(function () {
+  if (window.__ytPlusFade) return;
+  window.__ytPlusFade = true;
+  function init() {
+    document.querySelectorAll('.yt-plus iframe').forEach(function (f) {
+      var show = function () { f.classList.add('is-loaded'); };
+      f.addEventListener('load', show);
+      /* Filet de sécurité : si l'évènement load est déjà passé quand ce code
+         s'exécute, ou s'il n'arrive jamais, l'iframe ne doit pas rester
+         invisible. On l'affiche au bout de 3 s quoi qu'il arrive. */
+      setTimeout(show, 3000);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+{{- end -}}
+
+{{- /* ---------- 8. Rendu ---------- */ -}}
 <div class="yt-plus"
      style="width:{{ $width }};max-width:100%;margin:1.5rem auto;aspect-ratio:{{ $ratioCSS | safeCSS }};
             {{- if $rounded }}border-radius:0.75rem;overflow:hidden;{{ end -}}
-            {{- if $shadow }}box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);{{ end -}}">
+            {{- if $shadow }}box-shadow:0 10px 30px rgba(0,0,0,.30);{{ end -}}">
   <iframe src="{{ $src }}"
           style="display:block;width:100%;height:100%;border:0;"
           title="Lecteur vidéo YouTube"
