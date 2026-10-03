@@ -1,0 +1,246 @@
+/* ==================================================================
+   cours.css — feuille de style commune des pages de cours (préfixe nt-)
+   À placer dans : static/css/cours.css
+   Chargée dans chaque page par :
+     <link rel="stylesheet" href="/css/cours.css">
+   (ou une fois pour tout le site via layouts/partials/custom-header.html)
+
+   Prérequis : Font Awesome 6 (icônes), MathJax ou KaTeX avec mhchem.
+
+   Composants
+   - Titres         : ## Titre {.nt-h2}   ### Sous-titre {.nt-h3}
+   - Cadres typés   : div.nt-b + .nt-def | .nt-prop | .nt-ex | .nt-ask | .nt-warn
+                      | .nt-demo-box ; étiquette : p.nt-tag
+   - Formules       : div.nt-f (p.nt-tag, p.nt-f-math, div.nt-f-units)
+   - Repliables     : details.nt-d (démonstration) | .nt-plus | .nt-rep
+   - Animations     : div.nt-lab (+ .nt-ctrls, .nt-btn, .nt-read, .nt-msg…)
+   - Mots-clés      : span.imp ; ajouter .nt-hole pour le mode révision
+                      (le script /js/cours.js gère le bouton .nt-quiz-toggle)
+   ================================================================== */
+
+/* ============================================================
+   PAGE DE COURS — système « nt- »
+   Palette : encre ardoise, accents indigo / violet,
+   une couleur par type de cadre (le type est aussi écrit en étiquette).
+   ============================================================ */
+:root {
+  --ink: #1E293B;  --muted: #94A3B8;  --line: #E2E8F0;
+  --navy: #12305A;
+  --blue: #2A6BC4;   --blue-bg: #EEF5FE;   /* bleu du thème (#458EEC), foncé pour le texte */
+  --blue-lt: #458EEC;                      /* bleu exact du bandeau du thème */
+  --sky: #0284C7;    --sky-bg: #F0F9FF;
+  --plum: #6B5BD2;   --plum-bg: #F4F3FD;   /* réservé à « Pour aller plus loin » */
+  --amber: #B45309;   --amber-bg: #FFFBEB;
+  --emerald: #047857; --emerald-bg: #ECFDF5;
+  --slate: #475569;   --slate-bg: #F8FAFC;
+  --rose: #E11D48;    --rose-bg: #FFF1F2;
+  --cyan: #0E7490;    --cyan-bg: #ECFEFF;
+  /* hauteur / intensité / timbre */
+  --c-haut: #0284C7;  --c-int: #D97706;  --c-timbre: #059669;
+}
+
+/* --- Titres --- */
+h2.nt-h2 {
+  counter-increment: ntsec; counter-reset: ntsub;
+  display: flex; align-items: center; gap: 0.6em;
+  font-size: 1.65em !important; font-weight: 800 !important; color: var(--navy) !important;
+  margin: 2.4em 0 0.9em !important; padding-bottom: 0.4em !important;
+  border-bottom: 3px solid transparent !important;
+  border-image: linear-gradient(to right, var(--blue), var(--blue-lt) 45%, transparent 90%) 1 !important;
+}
+h2.nt-h2::before {
+  content: counter(ntsec); flex: none; display: grid; place-items: center;
+  width: 1.75em; height: 1.75em; border-radius: 12px; font-size: 0.8em;
+  color: #fff; background: linear-gradient(135deg, var(--blue), var(--blue-lt));
+  box-shadow: 0 3px 10px rgba(42, 107, 196, 0.3);
+}
+h3.nt-h3 {
+  counter-increment: ntsub;
+  font-size: 1.28em !important; font-weight: 700 !important; color: var(--blue) !important;
+  margin: 2em 0 0.8em !important; padding: 0.15em 0 0.15em 0.75em !important;
+  border-left: 4px solid var(--blue-lt) !important;
+}
+h3.nt-h3::before { content: counter(ntsec) "." counter(ntsub) "\00a0\00a0"; color: var(--blue-lt); }
+
+/* --- Texte --- */
+.imp { font-weight: 700; color: var(--blue); }
+.nt-lead { font-size: 1.07em; line-height: 1.65; }
+.nt-note { font-size: 0.9em; color: var(--slate); }
+.nt-center { text-align: center; }
+.nt-big { font-size: 1.25em; text-align: center; margin: 1.2em 0 !important; }
+.nt-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* --- Cadres typés --- */
+.nt-b {
+  border: 1px solid color-mix(in srgb, var(--c) 28%, #fff); border-left: 5px solid var(--c);
+  background: var(--bg); border-radius: 10px; padding: 0.75em 1.2em 0.8em; margin: 1.4em 0;
+}
+.nt-b > p, .nt-b li { line-height: 1.6; }
+.nt-b p { margin: 0.4em 0 !important; }
+.nt-tag {
+  display: inline-flex; align-items: center; gap: 0.5em; margin: 0 0 0.3em !important;
+  font-size: 0.74em !important; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--c);
+}
+.nt-def   { --c: var(--blue);  --bg: var(--blue-bg); }
+.nt-ex    { --c: var(--emerald); --bg: var(--emerald-bg); }
+.nt-ask   { --c: var(--cyan);    --bg: var(--cyan-bg); }
+.nt-warn  { --c: var(--rose);    --bg: var(--rose-bg); }
+/* « À retenir » : le cadre le plus mis en valeur */
+.nt-prop {
+  --c: var(--amber); --bg: var(--amber-bg);
+  border: 2px solid color-mix(in srgb, var(--amber) 55%, #fff); border-left: 6px solid var(--amber);
+  box-shadow: 0 4px 16px rgba(180, 83, 9, 0.12);
+}
+.nt-prop .nt-tag { color: #fff; background: var(--amber); padding: 0.25em 0.75em; border-radius: 999px; }
+ul.nt-facts { list-style: none !important; padding-left: 0 !important; margin: 0.3em 0 !important; }
+ul.nt-facts li { position: relative; padding: 0.22em 0 0.22em 1.2em; }
+ul.nt-facts li::before { content: "▸"; color: var(--c, var(--blue)); position: absolute; left: 0; }
+
+/* --- Formules (cartes sombres) --- */
+.nt-f {
+  width: fit-content; max-width: 100%; margin: 1.4em auto; padding: 0.5em 2.4em 0.7em;
+  border-radius: 14px; color: #fff; text-align: center; overflow-x: auto;
+  background: linear-gradient(135deg, var(--navy), #1F4E8F 55%, #2F7BD8);
+  box-shadow: 0 8px 24px rgba(18, 48, 90, 0.28);
+}
+.nt-f .nt-tag { color: #BFDBFE; margin-top: 0.3em !important; }
+.nt-f p { margin: 0.25em 0 !important; }
+.nt-f-math { font-size: 1.25em; }
+.nt-f-units { display: flex; flex-wrap: wrap; gap: 0.4em 1.2em; justify-content: center; font-size: 0.92em; color: #DBEAFE; margin-top: 0.3em; }
+.nt-f-units b { color: #FDE68A; }
+.nt-f .nt-hole { color: #FDE68A; font-weight: 700; }
+
+/* --- Escamotables : démonstration (ardoise), pour aller plus loin (violet), réponse (cyan) --- */
+details.nt-d {
+  --c: var(--slate); --bg: var(--slate-bg);
+  margin: 1.2em 0; border: 1px solid color-mix(in srgb, var(--c) 30%, #fff); border-left: 5px solid var(--c);
+  border-radius: 10px; background: var(--bg);
+}
+details.nt-d.nt-plus { --c: var(--plum); --bg: var(--plum-bg); }
+details.nt-d.nt-rep  { --c: var(--cyan);   --bg: var(--cyan-bg); }
+details.nt-d > summary { cursor: pointer; list-style: none; padding: 0.6em 1.1em; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2em 0.8em; }
+details.nt-d > summary::-webkit-details-marker { display: none; }
+details.nt-d > summary .nt-tag { margin: 0 !important; }
+details.nt-d > summary .nt-sum { font-weight: 700; color: var(--ink); }
+details.nt-d > summary::after { content: "+"; margin-left: auto; font-weight: 800; font-size: 1.2em; color: var(--c); }
+details.nt-d[open] > summary::after { content: "−"; }
+details.nt-d[open] > summary { border-bottom: 1px dashed color-mix(in srgb, var(--c) 40%, #fff); }
+details.nt-d > summary:focus-visible { outline: 3px solid var(--c); outline-offset: 2px; border-radius: 8px; }
+.nt-d-body { padding: 0.5em 1.2em 0.9em; overflow-x: auto; }
+.nt-d-body p { margin: 0.5em 0 !important; line-height: 1.6; }
+.nt-demo-box { --c: var(--slate); --bg: var(--slate-bg); }
+
+/* --- Grilles et cartes « hauteur / intensité / timbre » --- */
+.nt-grid  { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 1.2em 0; align-items: stretch; }
+.nt-grid > .nt-b { margin: 0; }
+.nt-grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 1.2em 0; }
+.nt-feat {
+  border-radius: 12px; padding: 0.7em 1em; background: #fff;
+  border: 1px solid var(--line); border-top: 5px solid var(--f);
+  box-shadow: 0 2px 10px rgba(30, 41, 59, 0.06);
+}
+.nt-feat p { margin: 0.25em 0 !important; }
+.nt-feat-title { font-weight: 800; font-size: 1.08em; color: var(--f); }
+.nt-feat-key { font-weight: 700; color: var(--f); }
+.nt-wave { display: block; width: 100%; height: auto; margin: 0.4em 0; }
+
+/* --- Schémas et tableaux --- */
+.nt-svg { display: block; width: 100%; height: auto; max-width: 760px; margin: 1em auto; }
+.nt-svg-m { max-width: 560px; }
+.nt-svg-s { max-width: 440px; }
+.nt-cap { text-align: center; font-size: 0.9em; color: var(--slate); margin: -0.3em auto 1.2em !important; max-width: 44em; }
+.nt-t { width: 100%; min-width: 420px; border-collapse: collapse !important; margin: 0.4em 0 !important; }
+.nt-t th { background: var(--blue-bg) !important; color: var(--blue); border: 0 !important; border-bottom: 2px solid var(--blue) !important; font-size: 0.88em; padding: 7px 8px !important; text-align: center; }
+.nt-t td { background: none !important; border: 0 !important; border-bottom: 1px solid var(--line) !important; padding: 7px 8px !important; text-align: center; }
+.nt-pill { display: inline-block; padding: 0.05em 0.75em; border-radius: 999px; font-weight: 700; color: var(--sky); background: var(--sky-bg); border: 1.5px solid color-mix(in srgb, var(--sky) 45%, #fff); }
+
+/* --- Animations interactives --- */
+.nt-lab {
+  --c: var(--blue);
+  position: relative; margin: 1.8em 0; padding: 0.9em 1.3em 1.1em; border-radius: 14px; background: #fff;
+  border: 1px solid var(--line); box-shadow: 0 6px 22px rgba(30, 41, 59, 0.08); overflow: hidden;
+}
+.nt-lab::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(to right, var(--blue), var(--blue-lt), #38BDF8); }
+.nt-lab p { margin: 0.4em 0 !important; }
+.nt-lab-title { font-weight: 800; font-size: 1.1em; color: var(--navy); }
+.nt-lab canvas { display: block; width: 100%; border-radius: 10px; background: var(--slate-bg); border: 1px solid var(--line); }
+.nt-lab-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 0.6em 0; }
+.nt-lab-pair figure { margin: 0; }
+.nt-lab-pair figcaption { font-size: 0.82em; color: var(--slate); text-align: center; margin-top: 0.3em; }
+.nt-ctrls { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.6em 1.4em; margin: 0.8em 0 0.4em; }
+/* bloc (et non flex) : le texte, les formules et la valeur restent sur une même ligne */
+.nt-ctrl { display: block; font-size: 0.9em; color: var(--slate); line-height: 1.5; }
+.nt-ctrl input[type="range"] { display: block; margin-top: 0.35em; }
+.nt-ctrl .nt-seg { margin-top: 0.35em; }
+.nt-ctrl b { color: var(--ink); }
+.nt-lab input[type="range"] { width: 100%; accent-color: var(--blue-lt); }
+.nt-btns { display: flex; flex-wrap: wrap; gap: 0.5em; justify-content: center; margin: 0.7em 0 0.2em; }
+.nt-btn {
+  border: 1.5px solid var(--blue); background: #fff; color: var(--blue); border-radius: 999px;
+  padding: 0.35em 1em; cursor: pointer; font-weight: 700; font-size: 0.9em; transition: background 0.15s, transform 0.1s;
+}
+.nt-btn:hover { background: var(--blue-bg); }
+.nt-btn:active { transform: translateY(1px); }
+.nt-btn:disabled { opacity: 0.4; cursor: default; }
+.nt-btn-main { background: var(--blue); color: #fff; }
+.nt-btn-main:hover { background: #1F5AAE; }
+.nt-btn:focus-visible, .nt-seg label:focus-within { outline: 3px solid var(--sky); outline-offset: 2px; }
+.nt-read { display: flex; flex-wrap: wrap; gap: 0.5em 1.6em; justify-content: center; margin: 0.6em 0; font-size: 1.08em; }
+.nt-read span b { color: var(--sky); }
+.nt-msg { text-align: center; font-size: 0.92em; color: var(--slate); min-height: 1.4em; }
+.nt-seg { display: flex; flex-wrap: wrap; gap: 0.4em; }
+.nt-seg label { cursor: pointer; }
+.nt-seg input { position: absolute; opacity: 0; pointer-events: none; }
+.nt-seg span { display: inline-block; padding: 0.25em 0.8em; border-radius: 999px; border: 1.5px solid var(--line); color: var(--ink); font-size: 0.92em; }
+.nt-seg input:checked + span { background: var(--blue); border-color: var(--blue); color: #fff; }
+.nt-dots { display: flex; flex-wrap: wrap; gap: 4px; min-height: 2.4em; align-content: flex-start; margin: 0.6em 0; }
+.nt-dots i { width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #93C5FD, var(--blue)); }
+.nt-bar-row { display: grid; grid-template-columns: 7.5em 1fr 8.5em; align-items: center; gap: 0.6em; margin: 0.45em 0; font-size: 0.92em; }
+.nt-bar { height: 14px; border-radius: 7px; background: var(--slate-bg); border: 1px solid var(--line); overflow: hidden; }
+.nt-bar > div { height: 100%; border-radius: 7px; transition: width 0.35s; }
+.nt-bar-I > div { background: linear-gradient(to right, var(--blue), var(--blue-lt)); }
+.nt-bar-L > div { background: linear-gradient(to right, #34D399, #FBBF24 60%, #F97316); }
+.lab-mark { transition: transform 0.25s; }
+@media (prefers-reduced-motion: reduce) { .lab-mark, .nt-bar > div { transition: none; } }
+
+/* --- Mode révision --- */
+.nt-quizbar {
+  counter-reset: ntsec;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.6em 1em; margin: 0.5em 0 1.5em;
+  padding: 0.7em 1.1em; border-radius: 12px; background: var(--blue-bg); border: 1px dashed color-mix(in srgb, var(--blue) 45%, #fff);
+}
+.nt-quizbar p { margin: 0 !important; flex: 1 1 18em; font-size: 0.92em; color: var(--slate); }
+.nt-quiz-toggle[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+body.nt-quiz .nt-hole:not(.nt-shown) {
+  filter: blur(7px); opacity: 0.6; cursor: pointer; user-select: none;
+  background: color-mix(in srgb, var(--blue-lt) 30%, transparent); border-radius: 4px;
+}
+body.nt-quiz .nt-hole { transition: filter 0.25s, opacity 0.25s; }
+body.nt-quiz .nt-hole:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { body.nt-quiz .nt-hole { transition: none; } }
+
+/* --- Mots-clés accordés à la couleur du cadre ---
+   --c-ink : version foncée de la couleur du cadre, lisible sur son fond clair */
+.nt-def      { --c-ink: #2A6BC4; }
+.nt-prop     { --c-ink: #92400E; }
+.nt-ex       { --c-ink: #065F46; }
+.nt-ask      { --c-ink: #155E75; }
+.nt-warn     { --c-ink: #BE123C; }
+.nt-demo-box, details.nt-d { --c-ink: #334155; }
+details.nt-d.nt-plus { --c-ink: #4B3BB0; }
+details.nt-d.nt-rep  { --c-ink: #155E75; }
+.nt-b .imp, details.nt-d .imp { color: var(--c-ink); }
+body.nt-quiz .nt-b .nt-hole:not(.nt-shown),
+body.nt-quiz details.nt-d .nt-hole:not(.nt-shown) { background: color-mix(in srgb, var(--c) 28%, transparent); }
+body.nt-quiz .nt-b .nt-hole:focus-visible { outline-color: var(--c-ink); }
+
+/* --- Cases à cocher et canevas déplaçables (animations) --- */
+.nt-check {
+  display: inline-flex; align-items: center; gap: 0.4em; cursor: pointer; font-size: 0.9em; font-weight: 600;
+  color: var(--ink); padding: 0.3em 0.8em; border: 1.5px solid var(--line); border-radius: 999px; background: #fff;
+}
+.nt-check input { accent-color: var(--blue); width: 1.05em; height: 1.05em; margin: 0; }
+.nt-check:has(input:checked) { border-color: var(--blue); background: var(--blue-bg); color: var(--blue); }
+.nt-check:focus-within { outline: 3px solid var(--blue-lt); outline-offset: 2px; }
+.nt-lab canvas.nt-drag { cursor: crosshair; touch-action: none; }
+.nt-lab canvas.nt-drag:focus-visible { outline: 3px solid var(--blue-lt); outline-offset: 2px; }
