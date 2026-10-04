@@ -23,7 +23,7 @@ td, th {
 # Effet Doppler
 
 
-<p style="text-align:center;font-size: 25px	;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/tspe/doppler"><b>Cours 📽️</b> </a> + <a href="/cours/tspe/doppler"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></a></p>
+<p style="text-align:center;font-size: 25px	;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/tspe/doppler"><b>Cours 📽️</b> </a> + <a href="../cours/doppler"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></a></p>
 
 <div style="position: relative; max-width: 100%; margin-left: auto;margin-right: auto;">
 <img src="/cm-doppler.png">
