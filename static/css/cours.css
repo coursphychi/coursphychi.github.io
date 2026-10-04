@@ -339,3 +339,20 @@ ol.nt-steps p { margin: 0.3em 0 !important; line-height: 1.6; }
 .nt-ece::before { content: "ECE"; display: inline-block; margin-right: 0.5em; padding: 0 0.45em; border-radius: 4px; font-size: 0.78em; font-weight: 800; letter-spacing: 0.05em; color: #fff; background: var(--slate); vertical-align: 0.1em; }
 .nt-proto-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4em 1.2em; font-size: 0.85em; color: var(--slate); margin: 0.2em 0 0.4em !important; }
 .nt-proto-legend .nt-ece { display: inline-block; margin: 0 !important; padding: 0.05em 0.5em; }
+
+/* --- Tableaux comparatifs (deux méthodes côte à côte) --- */
+.nt-t-cmp { border-collapse: separate !important; border-spacing: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.nt-t-cmp thead th { background: #fff !important; border-bottom: 2px solid var(--line) !important; padding: 0.7em 0.6em !important; }
+.nt-t-cmp thead th:first-child { background: transparent !important; }
+.nt-t-cmp tbody th { text-align: left; width: 22%; background: var(--slate-bg) !important; color: var(--navy); font-size: 0.9em; border-right: 1px solid var(--line); }
+.nt-t-cmp tbody td { text-align: left; vertical-align: middle; line-height: 1.55; font-size: 0.95em; }
+.nt-t-cmp tbody td:nth-child(2) { background: color-mix(in srgb, var(--amber-bg) 60%, #fff) !important; }
+.nt-t-cmp tbody td:nth-child(3) { background: color-mix(in srgb, var(--emerald-bg) 60%, #fff) !important; }
+.nt-t-cmp tbody tr + tr > * { border-top: 1px solid var(--line); }
+.nt-cmp-h { display: inline-block; padding: 0.2em 0.9em; border-radius: 999px; font-weight: 800; color: #fff; }
+.nt-cmp-a { background: var(--amber); }
+.nt-cmp-b { background: var(--emerald); }
+
+/* --- Formule développée sous une carte de formule --- */
+.nt-f .nt-f-soit { margin: 0.6em 0 0 !important; text-align: center; font-size: 1.25em; color: #fff; }
+.nt-f .nt-f-soit b { color: #FDE68A; }
