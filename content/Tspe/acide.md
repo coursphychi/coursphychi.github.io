@@ -23,7 +23,7 @@ td, th {
 <h1 style="overflow-x:auto;">Transformations acide-base</h1>
 
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tspe/acide"> Cours </a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/tspe/acide"><b>Cours 📽️</b> </a> + <a href="../cours/acide"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
 
 <div style="position: relative; max-width: 100%; margin-left: auto;margin-right: auto;border-radius: 50px;">
 <a href="/cm-tspeacide.pdf"><img src="/cm-tspeacide.png" style="border-radius: 50px;"></a>

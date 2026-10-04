@@ -244,3 +244,16 @@ body.nt-quiz .nt-b .nt-hole:focus-visible { outline-color: var(--c-ink); }
 .nt-check:focus-within { outline: 3px solid var(--blue-lt); outline-offset: 2px; }
 .nt-lab canvas.nt-drag { cursor: crosshair; touch-action: none; }
 .nt-lab canvas.nt-drag:focus-visible { outline: 3px solid var(--blue-lt); outline-offset: 2px; }
+
+/* --- Chimie : explorateur de couples, équations animées, barre de pH --- */
+.nt-btn[aria-pressed="true"]:not(.nt-quiz-toggle) { background: var(--blue); border-color: var(--blue); color: #fff; }
+.nt-couple-out { margin-top: 0.8em; padding: 0.6em 1.1em; border-radius: 10px; background: var(--slate-bg); border: 1px solid var(--line); min-height: 6.5em; }
+.nt-couple-out p { margin: 0.45em 0 !important; line-height: 1.6; }
+.nt-couple-name { font-weight: 800; font-size: 1.12em; color: var(--navy); }
+.nt-role { display: inline-block; padding: 0 0.6em; margin-right: 0.4em; border-radius: 999px; font-size: 0.75em; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; vertical-align: 0.1em; }
+.nt-role-a { background: var(--rose); }
+.nt-role-b { background: var(--blue); }
+.nt-role-amph { background: var(--emerald); }
+.nt-demi { font-family: Georgia, "Times New Roman", serif; color: var(--slate); }
+.nt-eq { text-align: center; font-size: 1.3em; font-weight: 700; color: var(--navy); font-family: Georgia, "Times New Roman", serif; transition: opacity 0.3s; margin: 0.3em 0 !important; }
+.nt-bar-ph > div { background: linear-gradient(to right, #C62828, #E53935 14%, #FB8C00 29%, #FDD835 43%, #43A047 50%); background-size: 200% 100%; }

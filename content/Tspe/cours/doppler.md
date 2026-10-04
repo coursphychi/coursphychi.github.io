@@ -197,7 +197,7 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
 <div class="nt-f">
 <p class="nt-tag"><i class="fa-solid fa-equals"></i>Loi de Hubble-Lemaître</p>
 <p class="nt-f-math">$$v=H_0\times d$$</p>
-<div class="nt-f-units"><span>$v$&nbsp;: vitesse d'éloignement de la galaxie</span><span>$d$&nbsp;: distance de la galaxie</span><span>$H_0 \approx \pu{70 km*s-1*Mpc-1}$&nbsp;: constante de Hubble</span></div>
+<div class="nt-f-units"><span>$v$&nbsp;: vitesse d'éloignement de la galaxie</span><span>$d$&nbsp;: distance de la galaxie</span><span class="nt-hole">$H_0 \approx \pu{70 km*s-1*Mpc-1}$&nbsp;: constante de Hubble</span></div>
 </div>
 
 <p class="nt-cap">1&nbsp;Mpc (mégaparsec) vaut environ 3,3&nbsp;millions d'années-lumière. Une galaxie située à 100&nbsp;Mpc s'éloigne donc de nous à environ $\pu{7000 km*s-1}$&nbsp;: sa raie H<sub>α</sub> est observée vers 672&nbsp;nm.</p>
