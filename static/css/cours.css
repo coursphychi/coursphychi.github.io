@@ -311,3 +311,31 @@ ol.nt-steps p { margin: 0.3em 0 !important; line-height: 1.6; }
 .nt-tube-lab { font-size: 0.75em; font-weight: 700; color: var(--slate); }
 .nt-tube-active { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 0 0 15px 15px; }
 @media (prefers-reduced-motion: reduce) { .nt-tube .nt-liq { transition: none; } }
+
+/* --- Tableaux de prévision des pentes (titrages) --- */
+.nt-t-pente tbody th { background: var(--slate-bg) !important; color: var(--ink); border-bottom: 1px solid var(--line) !important; }
+.nt-t-pente thead th:first-child { background: transparent !important; border-bottom-color: transparent !important; }
+.nt-t-pente tbody th { font-size: 1em; }
+.nt-ar { display: inline-grid; place-items: center; width: 2em; height: 2em; border-radius: 50%; font-weight: 800; font-size: 1.05em; }
+.nt-ar-up { color: var(--emerald); background: var(--emerald-bg); }
+.nt-ar-dn { color: var(--rose); background: var(--rose-bg); }
+.nt-ar-eq { color: var(--slate); background: var(--slate-bg); }
+
+/* --- Listes déroulantes dans les animations --- */
+.nt-check select { font: inherit; font-weight: 600; border: 1px solid var(--line); border-radius: 6px; padding: 0.1em 0.3em; color: var(--ink); background: #fff; }
+
+/* --- Flacon de solution commerciale --- */
+.nt-flacon { display: grid; grid-template-columns: 170px 1fr; gap: 18px; align-items: center; margin-top: 0.8em; }
+@media (max-width: 600px) { .nt-flacon { grid-template-columns: 1fr; } }
+.nt-flacon-bottle { position: relative; width: 130px; height: 190px; margin: 0 auto; border-radius: 18px 18px 14px 14px; background: linear-gradient(90deg, #92400E, #B45309 45%, #78350F); box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.12); }
+.nt-flacon-cap { position: absolute; top: -26px; left: 38px; width: 54px; height: 30px; border-radius: 6px; background: var(--ink); }
+.nt-flacon-label { position: absolute; left: 12px; right: 12px; top: 46px; padding: 0.4em 0.3em; border-radius: 6px; background: #fff; text-align: center; font-size: 0.8em; line-height: 1.45; color: var(--ink); }
+.nt-flacon-label span { color: var(--slate); }
+
+/* --- Protocoles : ce qui doit figurer sur une copie / gestes utiles en ECE --- */
+.nt-proto { --c: var(--blue); --bg: #fff; border-left-width: 6px; box-shadow: 0 4px 16px rgba(42, 107, 196, 0.10); }
+.nt-must { font-weight: 700; color: var(--navy); background: linear-gradient(transparent 55%, rgba(251, 191, 36, 0.45) 55%); padding: 0 0.1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.nt-ece { display: block; margin: 0.25em 0 0.1em !important; padding: 0.35em 0.7em; border-radius: 8px; background: var(--slate-bg); border: 1px dashed var(--line); font-size: 0.88em; color: var(--slate); line-height: 1.55; }
+.nt-ece::before { content: "ECE"; display: inline-block; margin-right: 0.5em; padding: 0 0.45em; border-radius: 4px; font-size: 0.78em; font-weight: 800; letter-spacing: 0.05em; color: #fff; background: var(--slate); vertical-align: 0.1em; }
+.nt-proto-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4em 1.2em; font-size: 0.85em; color: var(--slate); margin: 0.2em 0 0.4em !important; }
+.nt-proto-legend .nt-ece { display: inline-block; margin: 0 !important; padding: 0.05em 0.5em; }

@@ -265,15 +265,17 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
 <p>Le domaine de validité de la loi de Beer-Lambert suppose que l'absorbance et donc la <span class="imp nt-hole">concentration reste modérée</span>.</p>
 </div>
 
-<div class="nt-b nt-def">
-<p class="nt-tag"><i class="fa-solid fa-list-ol"></i>Protocole du dosage</p>
+<div class="nt-b nt-proto">
+<p class="nt-tag"><i class="fa-solid fa-flask-vial"></i>Protocole du dosage spectrophotométrique</p>
+<p class="nt-proto-legend"><span><span class="nt-must">surligné</span>&nbsp;: à écrire sur une copie</span><span class="nt-ece">gestes utiles en TP</span></p>
 <ol class="nt-steps">
-<li><p>Tracer ou obtenir dans la littérature le spectre de l'espèce étudiée puis régler le spectrophotomètre sur $\lambda_{max}$.</p></li>
-<li><p>Réaliser une <b>gamme étalon</b> par dilution d'une solution mère de concentration connue contenant l'espèce absorbante étudiée.</p></li>
-<li><p>Faire <b>le zéro</b> du spectrophotomètre en plaçant une cuve ne contenant que le solvant de la solution mère (ou du moins ne contenant pas l'espèce absorbante étudiée).</p></li>
-<li><p>Mesurer l'absorbance des solutions étalons au spectrophotomètre et tracer la <b>courbe d'étalonnage</b> $A = f(C)$.</p></li>
-<li><p>Mesurer l'absorbance $A_x$ de la solution mystère. Si $A_x$ sort de la gamme, diluer la solution.</p></li>
-<li><p>Déterminer $\mathbf{C_x}$ grâce à la courbe (détermination graphique) ou grâce à la loi de Beer-Lambert si elle est vérifiée avec $C_x = \dfrac{A_x}{k}$ (détermination par le calcul).</p></li>
+<li><p><span class="nt-must">Préparer une gamme étalon</span>&nbsp;: <span class="nt-must">plusieurs solutions de l'espèce colorée de concentrations connues, obtenues par dilution d'une solution mère de concentration $C_0$, à l'aide de pipettes jaugées et de fioles jaugées</span>.</p><p class="nt-ece">Pour chaque solution fille&nbsp;: prélever le volume $V_\text{mère}$ de solution mère à la pipette jaugée (jamais directement dans le flacon), le verser dans une fiole jaugée de volume $V_\text{fiole}$, compléter avec de l'eau distillée jusqu'au trait de jauge (à la pissette puis au compte-gouttes pour la fin), boucher et retourner plusieurs fois pour homogénéiser. La concentration obtenue est $C = C_0\times V_\text{mère}/V_\text{fiole}$. Étiqueter chaque fiole.</p></li>
+<li><p><span class="nt-must">Tracer le spectre d'absorption de l'espèce et régler le spectrophotomètre sur la longueur d'onde $\lambda_{max}$</span> du maximum d'absorbance.</p><p class="nt-ece">Le spectre peut être tracé avec n'importe quelle solution de la gamme. Si $\lambda_{max}$ est donnée dans l'énoncé, il suffit de régler l'appareil.</p></li>
+<li><p><span class="nt-must">Faire le «&nbsp;blanc&nbsp;»</span>&nbsp;: <span class="nt-must">régler l'absorbance à zéro avec une cuve remplie du solvant</span> (souvent de l'eau distillée).</p><p class="nt-ece">L'appareil ne mesure ainsi que l'absorbance de l'espèce dosée, et non celle de la cuve ou du solvant. Le refaire si l'on change de longueur d'onde.</p></li>
+<li><p><span class="nt-must">Mesurer l'absorbance de chaque solution étalon</span>.</p><p class="nt-ece">Tenir la cuve par ses faces dépolies (ou striées) et placer les faces lisses dans le trajet du faisceau. Rincer la cuve avec un peu de la solution à mesurer, la remplir aux trois quarts, essuyer l'extérieur avec du papier absorbant. Mesurer de la solution la moins concentrée à la plus concentrée&nbsp;: une éventuelle trace de la solution précédente fausse alors peu la mesure.</p></li>
+<li><p><span class="nt-must">Tracer la courbe d'étalonnage $A = f(C)$</span>&nbsp;; <span class="nt-must">si les points sont alignés sur une droite passant par l'origine (loi de Beer-Lambert), la modéliser par $A = k\times C$</span>.</p><p class="nt-ece">Utiliser un tableur ou un logiciel de modélisation, et noter la valeur de $k$ avec son unité ($\pu{L*mol-1}$).</p></li>
+<li><p><span class="nt-must">Mesurer l'absorbance $A_x$ de la solution à doser, dans les mêmes conditions</span> (même longueur d'onde, même cuve).</p><p class="nt-ece">Si $A_x$ est supérieure à l'absorbance de l'étalon le plus concentré, diluer la solution d'un facteur connu, refaire la mesure, et en tenir compte dans le calcul final.</p></li>
+<li><p><span class="nt-must">En déduire la concentration $C_x = \dfrac{A_x}{k}$</span> (ou la lire graphiquement sur la droite d'étalonnage).</p></li>
 </ol>
 </div>
 
@@ -404,13 +406,28 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
 <p class="nt-note">Conductivités molaires ioniques à 25&nbsp;°C. Faites varier $C$&nbsp;: toutes les contributions, et donc $\sigma$, sont proportionnelles à $C$.</p>
 </div>
 
-<div class="nt-b nt-def">
-<p class="nt-tag"><i class="fa-solid fa-list-ol"></i>Le protocole du dosage est toujours le même</p>
+<svg class="nt-svg nt-svg-m" viewBox="-30 0 730 390" role="img" aria-label="Mesure de la conductivité d'une solution : la cellule conductimétrique, reliée au conductimètre, est plongée dans un bécher contenant la solution ; les deux plaques sont immergées"><rect x="20" y="364" width="660" height="10" rx="4" fill="var(--slate)" opacity=".85"/><path d="M78,246 L78,340 Q78,350 88,350 L212,350 Q222,350 222,340 L222,246" fill="#BAE6FD" fill-opacity=".6"/><path d="M70,226 L70,342 Q70,358 86,358 L214,358 Q230,358 230,342 L230,226" fill="none" stroke="var(--slate)" stroke-width="2.5"/><line x1="78" y1="246" x2="222" y2="246" stroke="#38BDF8" stroke-width="1.5"/><rect x="141" y="84" width="18" height="198" rx="6" fill="#CBD5E1" stroke="var(--slate)" stroke-width="1.5"/><path d="M130,280 L170,280 L170,328 Q170,334 164,334 L136,334 Q130,334 130,328 Z" fill="#E0F2FE" fill-opacity=".75" stroke="var(--slate)" stroke-width="1.5"/><rect x="138" y="290" width="5" height="38" rx="1" fill="#475569"/><rect x="157" y="290" width="5" height="38" rx="1" fill="#475569"/><path d="M150,84 C150,24 450,20 492,252" fill="none" stroke="var(--ink)" stroke-width="2.2"/><rect x="470" y="252" width="200" height="112" rx="14" fill="var(--slate)"/><rect x="490" y="268" width="160" height="46" rx="6" fill="#0B1220"/><text x="570" y="299" font-size="20" text-anchor="middle" fill="#4ADE80" font-family="monospace">1,413 mS/cm</text><circle cx="510" cy="338" r="9" fill="#94A3B8"/><circle cx="540" cy="338" r="9" fill="#94A3B8"/><rect x="570" y="330" width="80" height="16" rx="8" fill="#94A3B8"/><text class="nt-hole" x="590" y="242" font-size="13.5" text-anchor="middle" fill="var(--ink)" font-weight="600">conductimètre</text><line x1="141" y1="150" x2="124" y2="150" stroke="var(--muted)" stroke-width="1"/><text class="nt-hole" x="120" y="146" font-size="13.5" text-anchor="end" fill="var(--ink)" font-weight="600"><tspan x="120">cellule</tspan><tspan x="120" dy="16">conductimétrique</tspan></text><line x1="162" y1="310" x2="248" y2="296" stroke="var(--muted)" stroke-width="1"/><text class="nt-hole" x="252" y="300" font-size="13.5" text-anchor="start" fill="var(--ink)" font-weight="600">plaques immergées</text><line x1="222" y1="338" x2="248" y2="334" stroke="var(--muted)" stroke-width="1"/><text class="nt-hole" x="252" y="338" font-size="13.5" text-anchor="start" fill="var(--ink)" font-weight="600">solution (étalon ou à doser)</text><line x1="70" y1="290" x2="60" y2="290" stroke="var(--muted)" stroke-width="1"/><text class="nt-hole" x="56" y="294" font-size="13.5" text-anchor="end" fill="var(--ink)" font-weight="600">bécher</text></svg>
+
+<p class="nt-cap">Mesure de la conductivité d'une solution. En mode révision, les légendes sont masquées.</p>
+
+<div class="nt-b nt-proto">
+<p class="nt-tag"><i class="fa-solid fa-flask-vial"></i>Protocole du dosage conductimétrique</p>
+<p class="nt-proto-legend"><span><span class="nt-must">surligné</span>&nbsp;: à écrire sur une copie</span><span class="nt-ece">gestes utiles en TP</span></p>
 <ol class="nt-steps">
-<li><p>on réalise une <b>gamme étalon</b> en diluant une solution contenant le composé ionique présent dans la solution à doser&nbsp;;</p></li>
-<li><p>on mesure les conductivités des solutions étalons et on trace la <b>courbe d'étalonnage</b>&nbsp;;</p></li>
-<li><p>on mesure la conductivité de la solution à doser et on détermine sa concentration grâce à la courbe.</p></li>
+<li><p><span class="nt-must">Étalonner le conductimètre</span> avec une solution étalon de conductivité connue.</p><p class="nt-ece">En général une solution de chlorure de potassium fournie avec l'appareil&nbsp;; suivre la notice.</p></li>
+<li><p><span class="nt-must">Préparer une gamme étalon</span>&nbsp;: <span class="nt-must">plusieurs solutions du soluté ionique présent dans la solution à doser de concentrations connues, obtenues par dilution d'une solution mère de concentration $C_0$, à l'aide de pipettes jaugées et de fioles jaugées</span>.</p><p class="nt-ece">Pour chaque solution fille&nbsp;: prélever le volume $V_\text{mère}$ de solution mère à la pipette jaugée (jamais directement dans le flacon), le verser dans une fiole jaugée de volume $V_\text{fiole}$, compléter avec de l'eau distillée jusqu'au trait de jauge (à la pissette puis au compte-gouttes pour la fin), boucher et retourner plusieurs fois pour homogénéiser. La concentration obtenue est $C = C_0\times V_\text{mère}/V_\text{fiole}$. Étiqueter chaque fiole.</p></li>
+<li><p><span class="nt-must">Mesurer la conductivité de chaque solution étalon</span>.</p><p class="nt-ece">Rincer la cellule à l'eau distillée, puis avec un peu de la solution à mesurer. Les plaques doivent être entièrement immergées, sans bulle d'air entre elles. Mesurer de la solution la moins concentrée à la plus concentrée, et toutes les solutions à la même température&nbsp;: la conductivité en dépend. Pas d'agitateur magnétique&nbsp;: remuer doucement la cellule pour chasser les bulles, puis attendre que la valeur se stabilise avant de la noter.</p></li>
+<li><p><span class="nt-must">Tracer la courbe d'étalonnage $\sigma = f(C)$</span>&nbsp;; <span class="nt-must">si les points sont alignés sur une droite passant par l'origine (loi de Kohlrausch), la modéliser par $\sigma = k'\times C$</span>.</p></li>
+<li><p><span class="nt-must">Mesurer la conductivité $\sigma_x$ de la solution à doser, dans les mêmes conditions</span>.</p><p class="nt-ece">La loi de Kohlrausch ne vaut que pour des solutions diluées&nbsp;: si $\sigma_x$ dépasse la conductivité de l'étalon le plus concentré, diluer la solution d'un facteur connu avant la mesure.</p></li>
+<li><p><span class="nt-must">En déduire la concentration $C_x = \dfrac{\sigma_x}{k'}$</span> (ou la lire graphiquement sur la droite d'étalonnage).</p></li>
 </ol>
+</div>
+
+<div class="nt-b nt-warn">
+<p class="nt-tag"><i class="fa-solid fa-triangle-exclamation"></i>Pourquoi pas d'agitateur magnétique ici&nbsp;?</p>
+<p>Contrairement à un titrage, on n'ajoute rien dans le bécher pendant la mesure&nbsp;: chaque solution étalon a déjà été homogénéisée dans sa fiole jaugée. Il n'y a donc <b>rien à mélanger</b>, et l'agitation n'apporterait rien.</p>
+<p>Elle risquerait même de fausser la mesure&nbsp;: le tourbillon peut piéger des <b>bulles d'air entre les plaques</b> (la portion de solution mesurée n'est alors plus la bonne), et le moteur de certains agitateurs <b>chauffe légèrement la solution</b>, alors que la conductivité augmente d'environ 2&nbsp;% par degré.</p>
+<p>Pour chasser une bulle d'air restée entre les plaques, il suffit de remuer doucement la cellule dans la solution avant d'attendre que la valeur se stabilise.</p>
 </div>
 
 ## Loi des gaz parfaits {.nt-h2}
@@ -756,6 +773,13 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
     var root = document.getElementById('lab-gamme');
     if (!root) { return; }
     var cv = $(root, 'canvas'), tubes = $(root, '.nt-tubes'), tb = $(root, '.nt-gamme-tab tbody'), msg = $(root, '.nt-msg'), S, done = 0;
+    var bNext = $(root, '[data-act="next"]');
+    /* le libellé du bouton suit l'étape : le blanc d'abord, puis les solutions étalons */
+    function label() {
+      if (done === 0) { bNext.innerHTML = '<i class="fa-solid fa-vial"></i>&nbsp; Préparer le blanc et faire le zéro'; bNext.disabled = false; }
+      else if (done < SOL.length) { bNext.innerHTML = '<i class="fa-solid fa-vial"></i>&nbsp; Préparer et mesurer la solution S' + done; bNext.disabled = false; }
+      else { bNext.innerHTML = '<i class="fa-solid fa-check"></i>&nbsp; Gamme étalon terminée'; bNext.disabled = true; }
+    }
     var VM = [0, 10, 20, 30, 40, 50], SOL = VM.map(function (v, i) { return { n: 'S' + i, vm: v, c: ETAL.C0 * v / ETAL.VF }; });
     tubes.innerHTML = '<div class="nt-tubebox"><div class="nt-tube nt-tube-mere"><div class="nt-liq" style="height:85%;background:' + ETAL.color(ETAL.C0) + ';"></div></div><span class="nt-tube-lab">mère</span></div>' +
       SOL.map(function (s) { return '<div class="nt-tubebox"><div class="nt-tube"><div class="nt-liq"></div></div><span class="nt-tube-lab">' + s.n + '</span></div>'; }).join('');
@@ -785,18 +809,18 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
       liq.style.height = '85%'; liq.style.background = s.c === 0 ? 'rgba(186, 230, 253, .45)' : ETAL.color(s.c);
       tb.insertAdjacentHTML('beforeend', '<tr><td><b>' + s.n + '</b></td><td>' + fr(s.vm, 1) + '</td><td>' + fr(s.c, 3) + '</td><td>' + fr(A, 2) + '</td></tr>');
       done++;
-      if (s.vm === 0) { msg.textContent = 'S0 ne contient que de l\u2019eau distillée : c\u2019est le « blanc », qui sert à régler le zéro d\u2019absorbance de l\u2019appareil.'; }
+      if (s.vm === 0) { msg.textContent = 'S0 ne contient que de l\u2019eau distillée (le solvant) : c\u2019est le « blanc ». On le place dans le spectrophotomètre et on règle l\u2019absorbance à zéro : l\u2019appareil ne mesurera ensuite que l\u2019absorbance de l\u2019espèce colorée.'; }
       else if (s.vm === ETAL.VF) { msg.textContent = 'S5 est la solution mère elle-même (aucune dilution) : C = ' + fr(s.c, 3) + ' mol\u00b7L\u207b\u00b9, A = ' + fr(A, 2) + '.'; }
       else { msg.textContent = s.n + ' : on prélève ' + fr(s.vm, 1) + ' mL de solution mère à la pipette jaugée, on complète à 50,0 mL avec de l\u2019eau distillée. C = 0,120 \u00d7 ' + s.vm + '/50 = ' + fr(s.c, 3) + ' mol\u00b7L\u207b\u00b9. On mesure A = ' + fr(A, 2) + '.'; }
       if (done === SOL.length) { msg.textContent += ' Les points sont alignés sur une droite passant par l\u2019origine : la loi de Beer-Lambert est vérifiée, et la droite d\u2019étalonnage est prête à servir.'; }
-      draw();
+      draw(); label();
     }
     function reset() {
       done = 0; tb.innerHTML = '';
       T.forEach(function (x) { x.classList.remove('nt-tube-active'); var l = x.querySelector('.nt-liq'); l.style.height = '0'; });
-      msg.textContent = 'Cliquez pour préparer les solutions étalons une à une.'; draw();
+      msg.textContent = 'Commencez par le blanc, puis préparez les solutions étalons une à une.'; draw(); label();
     }
-    $(root, '[data-act="next"]').addEventListener('click', step);
+    bNext.addEventListener('click', step);
     $(root, '[data-act="all"]').addEventListener('click', function () { while (done < SOL.length) { step(); } });
     $(root, '[data-act="reset"]').addEventListener('click', reset);
     function setup() { S = canvasCtx(cv); draw(); }
