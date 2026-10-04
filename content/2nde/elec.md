@@ -36,7 +36,8 @@ td, th {
 <table>
 <tr>
 <th rowspan="3">Activités</th>
-<td style="border-bottom:none;"><a href="/elecact1.pdf"><b>Caractéristique d'une thermistance</b></a> + <a href="https://presentationssite.github.io/2nde/tpelec1" target="_blank" style="color:#27BB28"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a> + <a href="/elecact1corr.pdf" style="color:#ff0000"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
+<td style="border-bottom:none;"><a href="/elecact1.pdf"><b>Caractéristique d'une thermistance</b></a> + <a href="https://presentationssite.github.io/2nde/tpelec1" target="_blank" style="color:#27BB28"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a><!-- + <a href="/elecact1corr.pdf" style="color:#ff0000"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a>-->
+</td>
 </tr>
 <tr>
 <td style="border-bottom:none;border-top:none;"><a href="/elecact2.pdf"><b>Comment fabriquer un thermomètre à partir d'une thermistance ?</b></a> + <a href="https://presentationssite.github.io/2nde/tpelec2" style="color:#27BB28"><b style="color:#00AB8E"><i class="fa-solid fa-computer"></i></b></a></td>
