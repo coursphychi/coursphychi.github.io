@@ -23,7 +23,7 @@ td, th {
 # Lois de Newton
 
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tspe/newton"> Cours </a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/tspe/newton"><b>Cours 📽️</b> </a> + <a href="../cours/newton"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
 
 <div style="position: relative; max-width: 100%; margin-left: auto;margin-right: auto;border-radius: 50px;">
 <a href="/cm-newton.pdf"><img src="/cm-newton.png"></a>
