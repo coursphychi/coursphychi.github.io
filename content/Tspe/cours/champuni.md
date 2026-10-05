@@ -81,6 +81,45 @@ draft = false
 <p class="nt-center">$\vec{v}(t=0)=\vec{v}_0\begin{cases}v_x(0)=v_0\cos(\alpha)\\v_y(0)=0\\v_z(0)=v_0\sin(\alpha)\end{cases}$</p>
 </div>
 
+<details class="nt-d nt-plus" id="memo-primitives">
+<summary><span class="nt-tag"><i class="fa-solid fa-square-root-variable"></i>Mémo maths</span><span class="nt-sum">Primitives&nbsp;: les outils nécessaires </span></summary>
+<div class="nt-d-body">
+<div class="nt-f">
+<p class="nt-tag"><i class="fa-solid fa-equals"></i>Définition</p>
+<p class="nt-f-math">$$F' = f$$</p>
+<div class="nt-f-units"><span>une <b>primitive</b> $F$ d'une fonction $f$ est une fonction dont la <b>dérivée</b> est égale à $f$</span></div>
+</div>
+<p>Trouver une primitive, c'est donc faire le chemin inverse de la dérivation&nbsp;: on cherche une fonction <i>dont la dérivée</i> est connue. En cinématique, c'est exactement ce qu'il faut faire pour remonter de l'accélération à la vitesse, puis de la vitesse à la position&nbsp;:</p>
+<p class="nt-center">$\vec{a} = \dfrac{\mathrm{d}\vec{v}}{\mathrm{d}t}$ &nbsp;donc&nbsp; $\vec{v}$ est une primitive de $\vec{a}$, &nbsp;&nbsp;et&nbsp;&nbsp; $\vec{v} = \dfrac{\mathrm{d}\overrightarrow{\mathrm{OM}}}{\mathrm{d}t}$ &nbsp;donc&nbsp; $\overrightarrow{\mathrm{OM}}$ est une primitive de $\vec{v}$.</p>
+<div class="nt-scroll">
+<table class="nt-t">
+<thead><tr><th>Fonction $f(t)$</th><th>Ses primitives $F(t)$</th><th>Exemple en cinématique</th></tr></thead>
+<tbody>
+<tr><td>$0$ (fonction nulle)</td><td>$\beta$ (fonctions constantes)</td><td>$a_x = 0 \Rightarrow v_x = \mathrm{cte}$</td></tr>
+<tr><td>$\alpha$ (fonction constante)</td><td>$\alpha t + \beta$ (fonctions affines)</td><td>$a_z = -g \Rightarrow v_z = -gt + c_3$</td></tr>
+<tr><td>$\alpha t + \beta$ (fonction affine)</td><td>$\frac12 \alpha t^2 + \beta t + \gamma$ (polynômes du second degré)</td><td>$v_z = -gt + c_3 \Rightarrow z = -\frac12 g t^2 + c_3 t + c'_3$</td></tr>
+</tbody>
+</table>
+</div>
+<p class="nt-note">Ici, $\alpha$, $\beta$ et $\gamma$ sont des constantes.</p>
+<p><b>Pourquoi des constantes&nbsp;?</b> La dérivée d'une constante est nulle&nbsp;: si $F$ est une primitive de $f$, alors $F + 3$, $F - 7$ ou $F + \beta$ en sont aussi. Une fonction a donc une infinité de primitives, qui ne diffèrent que d'une constante. En physique, c'est la <b>condition initiale</b> (position ou vitesse à $t = 0$) qui permet de choisir la bonne.</p>
+<p><b>Le réflexe pour vérifier&nbsp;:</b> on dérive le résultat obtenu et l'on doit retrouver la fonction de départ. Par exemple, la dérivée de $-\frac12 g t^2 + c_3 t + c'_3$ est bien $-gt + c_3$.</p>
+<p><b>Une interprétation géométrique&nbsp;: l'aire sous la courbe.</b> La distance parcourue entre $0$ et $t$ est égale à l'aire sous la courbe de la vitesse $v(t)$. Pour une vitesse affine $v(t) = v_0 + at$, cette aire se découpe en un rectangle ($v_0 \times t$) et un triangle ($\frac12 \times t \times at = \frac12 a t^2$)&nbsp;: on retrouve $x(t) = x_0 + v_0 t + \frac12 a t^2$ sans aucun calcul de primitive.</p>
+<div class="nt-lab" id="lab-aire">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
+<p class="nt-lab-title">La distance parcourue est une aire</p>
+<canvas style="height:260px;" aria-label="Courbe de la vitesse en fonction du temps et aire sous la courbe, découpée en un rectangle et un triangle"></canvas>
+<div class="nt-ctrls">
+<label class="nt-ctrl">Vitesse initiale $v_0$&nbsp;: <b class="out-v0"></b><input type="range" data-p="v0" min="0" max="10" step="0.5" value="4"></label>
+<label class="nt-ctrl">Accélération $a$&nbsp;: <b class="out-a"></b><input type="range" data-p="a" min="0" max="4" step="0.1" value="2"></label>
+<label class="nt-ctrl">Date $t$&nbsp;: <b class="out-t"></b><input type="range" data-p="t" min="0" max="5" step="0.1" value="3"></label>
+</div>
+<div class="nt-read" aria-live="polite"><span>rectangle $v_0 t$ = <b class="out-rect"></b></span><span>triangle $\frac12 a t^2$ = <b class="out-tri"></b></span><span>distance parcourue = <b class="out-x"></b></span></div>
+</div>
+<p class="nt-note">C'est le lien profond entre primitives et intégrales&nbsp;: «&nbsp;intégrer&nbsp;» une fonction, c'est calculer l'aire sous sa courbe, et cette aire s'obtient justement avec une primitive.</p>
+</div>
+</details>
+
 <ol class="nt-steps">
 <li>
 <p><b>Inventaire des forces extérieures</b>&nbsp;: <span class="imp nt-hole">le poids</span> $\vec{P}=m\vec{g}$.</p>
@@ -92,7 +131,7 @@ draft = false
 <p class="nt-center">${\color{#059669}\vec{a}(t)\begin{cases}a_x(t)=0\\a_y(t)=0\\a_z(t)=-g\end{cases}}$</p>
 </li>
 <li>
-<p><b style="color:#D97706;">Vecteur vitesse.</b> Les coordonnées du vecteur vitesse sont des <span class="imp nt-hole"><a href="../primitives" target="_blank" rel="noopener noreferrer">primitives</a></span> des coordonnées du vecteur accélération&nbsp;:</p>
+<p><b style="color:#D97706;">Vecteur vitesse.</b> Les coordonnées du vecteur vitesse sont des <span class="imp nt-hole"><a href="#memo-primitives">primitives</a></span> (voir le mémo ci-dessus) des coordonnées du vecteur accélération&nbsp;:</p>
 <p class="nt-center">${\color{#059669}\begin{cases}\frac{\mathrm{d}v_x}{\mathrm{d}t}=0\\[1mm]\frac{\mathrm{d}v_y}{\mathrm{d}t}=0\\[1mm]\frac{\mathrm{d}v_z}{\mathrm{d}t}=-g\end{cases}} \Rightarrow {\color{#D97706}\vec{v}(t)\begin{cases}v_x(t)=c_1\\v_y(t)=c_2\\v_z(t)=-gt+c_3\end{cases}}$</p>
 <p>On obtient les constantes d'intégration grâce aux <span class="imp nt-hole">conditions initiales</span>&nbsp;: $v_x(0)=c_1=v_0\cos\alpha$, $v_y(0)=c_2=0$ et $v_z(0)=c_3=v_0\sin\alpha$. D'où&nbsp;:</p>
 <p class="nt-center">${\color{#D97706}\vec{v}(t)\begin{cases}v_x(t)=v_0\cos\alpha\\v_y(t)=0\\v_z(t)=-gt+v_0\sin\alpha\end{cases}}$</p>
@@ -174,11 +213,31 @@ draft = false
 <p class="nt-center">$z(t) = h - \frac12 g t^2$</p>
 <p>La pierre touche le sol quand $z = 0$&nbsp;:</p> 
 <p class="nt-center">$h = \frac12 g\,\Delta t^2$</p>
-Pour $\Delta t = \pu{3,0 s}$, $h \approx \pu{20 m}$.</p>
+<p>Pour $\Delta t = \pu{2 s}$, $h \approx \pu{20 m}$.</p>
 <p>En réalité, les frottements de l'air ralentissent la pierre&nbsp;: pour une même durée de chute, elle parcourt une distance plus faible. La profondeur calculée surestime donc la profondeur réelle.<br>
 Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que met le son pour remonter à la surface qui nous fait surestimer la durée de chute (mais ça rajouterait moins d'un dixième de seconde ici).</p>
 </div>
 </details>
+
+<div class="nt-lab" id="lab-puits">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
+<p class="nt-lab-title">Une pierre dans un puits</p>
+<canvas style="height:380px;" aria-label="Chute d'une pierre dans un puits, avec chronomètre"></canvas>
+<label class="nt-ctrl">Profondeur du puits $h$&nbsp;: <b class="out-h"></b><input type="range" data-p="h" min="5" max="100" step="1" value="20"></label>
+<div class="nt-ctrl">Objet lâché&nbsp;:
+<div class="nt-seg" role="radiogroup">
+<label><input type="radio" name="objet" value="pierre" checked><span>pierre (200 g)</span></label>
+<label><input type="radio" name="objet" value="balle"><span>balle de ping-pong (2,7 g)</span></label>
+</div>
+</div>
+<div class="nt-btns">
+<label class="nt-check"><input type="checkbox" data-p="frot"> frottements de l'air</label>
+<label class="nt-check"><input type="checkbox" data-p="son"> temps de remontée du son</label>
+<button type="button" class="nt-btn nt-btn-main" data-act="go"><i class="fa-solid fa-hand"></i>&nbsp; Lâcher</button>
+</div>
+<div class="nt-read" aria-live="polite"><span>chute libre&nbsp;: <b class="out-t0"></b></span><span>chute simulée&nbsp;: <b class="out-t"></b></span><span>«&nbsp;plouf&nbsp;» entendu après&nbsp;: <b class="out-plouf"></b></span></div>
+<p class="nt-note">«&nbsp;Chute libre&nbsp;» correspond au calcul $\Delta t = \sqrt{2h/g}$. Pour une pierre, les frottements de l'air ne changent presque rien sur quelques dizaines de mètres&nbsp;; pour une balle de ping-pong, très légère, ils changent tout. Le son, lui, remonte à environ $\pu{340 m*s-1}$.</p>
+</div>
 
 <div class="nt-b nt-ask">
 <p class="nt-tag"><i class="fa-solid fa-volleyball"></i>Exercice 2</p>
@@ -208,6 +267,34 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
 <p>Seule la solution positive (devant le serveur) nous intéresse. Il faut donc $v_0\sqrt{\dfrac{2(h-r)}{g}} < L$, soit $v_0 < L\sqrt{\dfrac{g}{2(h-r)}} = 18\times \sqrt{\dfrac{9{,}8}{2\times (3{,}50-0{,}10)}} = \pu{22 m*s-1}$.</p></li>
 </ol>
 <p>La vitesse du service doit finalement être comprise entre 20 et 22&nbsp;m/s. Easy peasy.</p>
+</div>
+</details>
+
+<div class="nt-b nt-ask">
+<p class="nt-tag"><i class="fa-solid fa-puzzle-piece"></i>Énigme</p>
+<p>Deux tours ont la même hauteur. Au sommet de la tour de droite, une balle rouge est lâchée sans vitesse initiale. <b>Au même instant</b>, on tire une balle bleue depuis le sommet de la tour de gauche.</p>
+<p>Dans quelle direction faut-il tirer la balle bleue pour qu'elle atteigne la balle rouge pendant sa chute&nbsp;? Faites une prédiction avant d'essayer&nbsp;!</p>
+</div>
+
+<div class="nt-lab" id="lab-tours">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
+<p class="nt-lab-title">Les deux tours</p>
+<canvas style="height:340px;" aria-label="Deux tours : une balle tirée depuis la tour de gauche, une balle lâchée depuis la tour de droite"></canvas>
+<div class="nt-ctrls">
+<label class="nt-ctrl">Direction du tir (par rapport à l'horizontale)&nbsp;: <b class="out-ang"></b><input type="range" data-p="ang" min="-25" max="25" step="1" value="15"></label>
+<label class="nt-ctrl">Vitesse du tir&nbsp;: <b class="out-v0"></b><input type="range" data-p="v0" min="5" max="30" step="0.5" value="18"></label>
+</div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="tir"><i class="fa-solid fa-crosshairs"></i>&nbsp; Tirer</button></div>
+<p class="nt-msg" aria-live="polite">Réglez le tir, puis cliquez sur «&nbsp;Tirer&nbsp;».</p>
+</div>
+
+<details class="nt-d nt-rep">
+<summary><span class="nt-tag"><i class="fa-solid fa-key"></i>Réponse</span><span class="nt-sum">Voir l'explication</span></summary>
+<div class="nt-d-body">
+<p>Il faut viser <b>directement la balle rouge</b>, c'est-à-dire ici tirer à l'horizontale, comme si elle n'allait pas tomber&nbsp;! Et cela marche quelle que soit la vitesse du tir, pourvu que la balle bleue arrive avant que la rouge ne touche le sol.</p>
+<p>Pourquoi&nbsp;? Les deux balles subissent la même accélération $\vec{g}$. Par rapport à la trajectoire rectiligne qu'elle suivrait sans pesanteur, chacune est descendue, à chaque instant, de la même hauteur $\frac12 g t^2$. La balle rouge est descendue de $\frac12 g t^2$ sous son point de départ, et la balle bleue de $\frac12 g t^2$ sous la ligne de visée&nbsp;: si la ligne de visée passait par la balle rouge au départ, les deux balles se retrouvent au même point.</p>
+<p>Autre façon de le voir&nbsp;: dans un référentiel qui tombe lui-même en chute libre (comme une cabine d'ascenseur dont le câble a cassé), la pesanteur «&nbsp;disparaît&nbsp;»&nbsp;: la balle rouge y est immobile et la balle bleue y va en ligne droite, droit sur elle.</p>
+<p class="nt-note">C'est une version de l'expérience classique du «&nbsp;chasseur et du singe&nbsp;»&nbsp;: un singe qui se lâche de sa branche au moment du tir est touché si le chasseur le vise directement.</p>
 </div>
 </details>
 
@@ -835,5 +922,159 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
     function setup() { S = canvasCtx(cv); draw(); }
     setup(); onResize(setup);
   })();
+  /* ================= 9. La pierre dans le puits ================= */
+  (function () {
+    var root = document.getElementById('lab-puits');
+    if (!root) { return; }
+    var cv = $(root, 'canvas'), rH = $(root, '[data-p="h"]'), cbF = $(root, '[data-p="frot"]'), cbS = $(root, '[data-p="son"]'), btn = $(root, '[data-act="go"]');
+    var oH = $(root, '.out-h'), oT0 = $(root, '.out-t0'), oT = $(root, '.out-t'), oP = $(root, '.out-plouf'), S, obj = 'pierre';
+    /* coefficient de frottement quadratique : F = k v² ; OBJ[...] = [masse (kg), k (kg/m)] */
+    var OBJ = { pierre: [0.20, 5.9e-4], balle: [0.0027, 3.8e-4] }, CS = 340;
+    var st = { t: 0, z: 0, v: 0, phase: 'attente', tf: 0, ts: 0 };
+    function tFall(h, frot) {   /* durée de chute, avec ou sans frottements (intégration numérique) */
+      if (!frot) { return Math.sqrt(2 * h / G); }
+      var m = OBJ[obj][0], k = OBJ[obj][1], z = 0, v = 0, t = 0, dt = 1e-3;
+      while (z < h) { var a = G - k / m * v * v; v += a * dt; z += v * dt; t += dt; }
+      return t;
+    }
+    function upd() {
+      var h = +rH.value, t0 = tFall(h, false), t1 = tFall(h, cbF.checked);
+      oH.textContent = h + ' m'; oT0.textContent = fr(t0, 2) + ' s'; oT.textContent = fr(t1, 2) + ' s';
+      oP.textContent = fr(t1 + (cbS.checked ? h / CS : 0), 2) + ' s';
+    }
+    function draw() {
+      var c = S.ctx, w = S.w, hh = S.h, h = +rH.value, top = 92, bot = hh - 24, k = (bot - top) / h, cx = w * 0.4, ww = 70;
+      c.clearRect(0, 0, w, hh);
+      c.fillStyle = '#E7E5E4'; c.fillRect(0, top, cx - ww / 2, hh - top); c.fillRect(cx + ww / 2, top, w - cx - ww / 2, hh - top);
+      c.fillStyle = '#A8A29E'; for (var y = top; y < hh; y += 14) { c.fillRect(cx - ww / 2 - 8, y, 8, 12); c.fillRect(cx + ww / 2, y + 7, 8, 12); }
+      c.fillStyle = '#86EFAC'; c.fillRect(0, top - 6, cx - ww / 2 - 8, 6); c.fillRect(cx + ww / 2 + 8, top - 6, w, 6);
+      c.fillStyle = '#7DD3FC'; c.fillRect(cx - ww / 2, bot, ww, hh - bot);
+      /* graduations de profondeur */
+      var stp = h > 60 ? 20 : (h > 25 ? 10 : 5);
+      for (var d = 0; d <= h + 1e-9; d += stp) { var yy = top + d * k; c.strokeStyle = col('--muted'); c.beginPath(); c.moveTo(cx + ww / 2 + 10, yy); c.lineTo(cx + ww / 2 + 18, yy); c.stroke(); txt(c, d + ' m', cx + ww / 2 + 22, yy + 4, col('--slate'), '10px system-ui, sans-serif', 'left'); }
+      /* personne au bord */
+      c.strokeStyle = '#94A3B8'; c.lineWidth = 3; c.lineCap = 'round'; var px = cx - ww / 2 - 28;
+      c.beginPath(); c.moveTo(px, top - 6); c.lineTo(px + 5, top - 30); c.lineTo(px + 10, top - 6); c.moveTo(px + 5, top - 30); c.lineTo(px + 5, top - 56); c.moveTo(px + 5, top - 50); c.lineTo(cx - 6, top - 44); c.stroke();
+      c.fillStyle = '#94A3B8'; c.beginPath(); c.arc(px + 5, top - 63, 7, 0, 2 * Math.PI); c.fill();
+      /* pierre */
+      var zs = Math.min(st.z, h), ys = top - 44 + 6 + zs * k * ((bot - (top - 38)) / (bot - top)) / 1;
+      ys = (top - 38) + zs / h * (bot - (top - 38));
+      if (st.phase !== 'son' && st.phase !== 'fini') { c.fillStyle = obj === 'pierre' ? '#57534E' : '#F97316'; c.beginPath(); c.arc(cx, ys, obj === 'pierre' ? 7 : 6, 0, 2 * Math.PI); c.fill(); }
+      /* éclaboussure et onde sonore */
+      if (st.phase === 'son' || st.phase === 'fini') {
+        c.strokeStyle = '#0EA5E9'; c.lineWidth = 2; c.beginPath(); c.arc(cx, bot, 12, Math.PI, 2 * Math.PI); c.stroke();
+        if (cbS.checked) {
+          var zsnd = h - (st.t - st.tf) * CS, ysn = (top - 38) + Math.max(0, zsnd) / h * (bot - (top - 38));
+          if (st.phase === 'son') { c.strokeStyle = 'rgba(225,29,72,.6)'; c.lineWidth = 2; for (var r = 0; r < 3; r++) { c.beginPath(); c.arc(cx, ysn + r * 6, 14 - r * 3, Math.PI * 1.15, Math.PI * 1.85); c.stroke(); } }
+        }
+      }
+      if (st.phase === 'fini') { txt(c, '« plouf ! »', cx - ww / 2 - 40, top - 72, CF, '700 15px system-ui, sans-serif'); }
+      /* chronomètre */
+      c.fillStyle = '#0B1220'; c.beginPath(); if (c.roundRect) { c.roundRect(w - 150, 16, 130, 46, 8); } else { c.rect(w - 150, 16, 130, 46); } c.fill();
+      c.fillStyle = '#4ADE80'; c.font = '700 24px monospace'; c.textAlign = 'center'; c.fillText(fr(st.t, 2) + ' s', w - 85, 48);
+      txt(c, 'chronomètre', w - 85, 78, col('--slate'), '600 11px system-ui, sans-serif');
+    }
+    function step(dt) {
+      if (st.phase === 'attente' || st.phase === 'fini') { draw(); return; }
+      var h = +rH.value, m = OBJ[obj][0], kk = OBJ[obj][1], n = 20;
+      for (var i = 0; i < n; i++) {
+        var d = dt / n; st.t += d;
+        if (st.phase === 'chute') {
+          var a = G - (cbF.checked ? kk / m * st.v * st.v : 0); st.v += a * d; st.z += st.v * d;
+          if (st.z >= h) { st.z = h; st.tf = st.t; st.phase = cbS.checked ? 'son' : 'fini'; if (!cbS.checked) { break; } }
+        } else if (st.phase === 'son' && st.t - st.tf >= h / CS) { st.t = st.tf + h / CS; st.phase = 'fini'; break; }
+      }
+      draw();
+    }
+    btn.addEventListener('click', function () { st.t = 0; st.z = 0; st.v = 0; st.phase = 'chute'; });
+    [rH].forEach(function (r) { r.addEventListener('input', function () { st.phase = 'attente'; st.t = 0; st.z = 0; upd(); draw(); }); });
+    [cbF, cbS].forEach(function (x) { x.addEventListener('change', function () { st.phase = 'attente'; st.t = 0; st.z = 0; upd(); draw(); }); });
+    $$(root, 'input[name="objet"]').forEach(function (x) { x.addEventListener('change', function () { obj = x.value; st.phase = 'attente'; st.t = 0; st.z = 0; upd(); draw(); }); });
+    function setup() { S = canvasCtx(cv); upd(); draw(); }
+    setup(); onResize(setup);
+    var lst = null; (function anim(ts) { var dt = lst === null ? 0 : Math.min(0.05, (ts - lst) / 1000); lst = ts; step(dt); requestAnimationFrame(anim); })(performance.now());
+  })();
+  /* ================= 10. Énigme : les deux tours ================= */
+  (function () {
+    var root = document.getElementById('lab-tours');
+    if (!root) { return; }
+    var cv = $(root, 'canvas'), rA = $(root, '[data-p="ang"]'), rV = $(root, '[data-p="v0"]'), btn = $(root, '[data-act="tir"]'), oA = $(root, '.out-ang'), oV = $(root, '.out-v0'), msg = $(root, '.nt-msg');
+    var S, H = 20, D = 16, R = 0.35, st = { t: 0, on: false, done: false, res: '' }, SLOW = 0.6;
+    function A(t, th, v0) { return [v0 * Math.cos(th) * t, H + v0 * Math.sin(th) * t - 0.5 * G * t * t]; }
+    function Bp(t) { return [D, H - 0.5 * G * t * t]; }
+    function draw() {
+      var th = +rA.value * Math.PI / 180, v0 = +rV.value, c = S.ctx, w = S.w, hh = S.h, k = Math.min((w - 80) / (D + 6), (hh - 40) / (H + 6));
+      oA.textContent = (+rA.value > 0 ? '+' : '') + Math.round(+rA.value) + '\u00b0'; oV.textContent = fr(v0, 1) + ' m\u00b7s\u207b\u00b9';
+      var x0 = (w - (D + 1.6) * k) / 2 + 1.6 * k;   /* scène centrée */
+      function X(x) { return x0 + x * k; }
+      function Y(z) { return hh - 22 - z * k; }
+      c.clearRect(0, 0, w, hh);
+      c.fillStyle = '#F1F5F9'; c.fillRect(0, Y(0), w, hh - Y(0));
+      c.fillStyle = '#CBD5E1'; c.fillRect(X(-1.6), Y(H), 1.6 * k, H * k); c.fillRect(X(D), Y(H), 1.6 * k, H * k);
+      /* ligne de visée */
+      c.strokeStyle = 'rgba(30,41,59,.35)'; c.setLineDash([6, 5]); c.lineWidth = 1.2; c.beginPath(); c.moveTo(X(0), Y(H)); c.lineTo(X(0) + Math.cos(th) * (D + 3) * k, Y(H) - Math.sin(th) * (D + 3) * k); c.stroke(); c.setLineDash([]);
+      txt(c, 'direction du tir', X(0) + Math.cos(th) * 7 * k, Y(H) - Math.sin(th) * 7 * k - 10, col('--slate'), '600 11px system-ui, sans-serif');
+      var t = st.t;
+      for (var s = 0; s <= t + 1e-9; s += 0.08) {
+        var pa = A(s, th, v0), pb = Bp(s);
+        if (pa[1] > 0) { c.fillStyle = 'rgba(42,107,196,.35)'; c.beginPath(); c.arc(X(pa[0]), Y(pa[1]), 2.5, 0, 2 * Math.PI); c.fill(); }
+        if (pb[1] > 0) { c.fillStyle = 'rgba(225,29,72,.35)'; c.beginPath(); c.arc(X(pb[0]), Y(pb[1]), 2.5, 0, 2 * Math.PI); c.fill(); }
+      }
+      var a = A(t, th, v0), b = Bp(t);
+      c.fillStyle = CP; c.beginPath(); c.arc(X(a[0]), Y(Math.max(a[1], R)), R * k, 0, 2 * Math.PI); c.fill();
+      c.fillStyle = CF; c.beginPath(); c.arc(X(b[0]), Y(Math.max(b[1], R)), R * k, 0, 2 * Math.PI); c.fill();
+      if (st.res === 'hit') { txt(c, 'Touché !', X(a[0]), Y(a[1]) - 18, '#16A34A', '800 16px system-ui, sans-serif'); }
+    }
+    function step(dt) {
+      if (st.on) {
+        var th = +rA.value * Math.PI / 180, v0 = +rV.value;
+        st.t += dt * SLOW;
+        var a = A(st.t, th, v0), b = Bp(st.t);
+        if (Math.hypot(a[0] - b[0], a[1] - b[1]) < 2 * R && b[1] > 0) { st.on = false; st.res = 'hit'; msg.textContent = 'Touché ! Les deux balles tombent de la même hauteur pendant la même durée : visée vers la cible, la balle tirée la rejoint, quelle que soit sa vitesse (pourvu qu\u2019elle arrive avant le sol).'; }
+        else if (a[0] > D + 2 * R || (a[1] <= R && b[1] <= R)) { st.on = false; st.res = 'miss'; msg.textContent = a[0] < D ? 'Raté : la balle tirée touche le sol avant d\u2019atteindre la seconde tour. Tirez plus fort.' : 'Raté ! Essayez une autre direction de tir\u2026'; }
+        else if (b[1] <= R && a[0] < D) { st.on = false; st.res = 'miss'; msg.textContent = 'Raté : la balle lâchée a touché le sol avant d\u2019être rejointe. Tirez plus fort.'; }
+      }
+      draw();
+    }
+    btn.addEventListener('click', function () { st.t = 0; st.on = true; st.res = ''; msg.textContent = 'Les deux balles partent au même instant\u2026'; });
+    [rA, rV].forEach(function (r) { r.addEventListener('input', function () { st.on = false; st.t = 0; st.res = ''; msg.textContent = 'Réglez le tir, puis cliquez sur « Tirer ».'; draw(); }); });
+    function setup() { S = canvasCtx(cv); draw(); }
+    setup(); onResize(setup);
+    var lst = null; (function anim(ts) { var dt = lst === null ? 0 : Math.min(0.05, (ts - lst) / 1000); lst = ts; step(dt); requestAnimationFrame(anim); })(performance.now());
+  })();
+  /* ================= 11. Mémo : la position est une aire sous la courbe de vitesse ================= */
+  (function () {
+    var root = document.getElementById('lab-aire');
+    if (!root) { return; }
+    var cv = $(root, 'canvas'), rV = $(root, '[data-p="v0"]'), rA = $(root, '[data-p="a"]'), rT = $(root, '[data-p="t"]');
+    var oV = $(root, '.out-v0'), oA = $(root, '.out-a'), oT = $(root, '.out-t'), oR = $(root, '.out-rect'), oTr = $(root, '.out-tri'), oX = $(root, '.out-x'), S;
+    function draw() {
+      var v0 = +rV.value, a = +rA.value, t = +rT.value, TM = 5, c = S.ctx, w = S.w, h = S.h, L = 50, Rr = w - 16, T = 14, B = h - 30, VM = 10 + 4 * 5;
+      oV.textContent = fr(v0, 1) + ' m\u00b7s\u207b\u00b9'; oA.textContent = fr(a, 1) + ' m\u00b7s\u207b\u00b2'; oT.textContent = fr(t, 1) + ' s';
+      function X(s) { return L + s / TM * (Rr - L); }
+      function Y(v) { return B - v / VM * (B - T); }
+      c.clearRect(0, 0, w, h);
+      c.fillStyle = 'rgba(42,107,196,.18)'; c.fillRect(X(0), Y(v0), X(t) - X(0), Y(0) - Y(v0));
+      c.fillStyle = 'rgba(5,150,105,.22)'; c.beginPath(); c.moveTo(X(0), Y(v0)); c.lineTo(X(t), Y(v0 + a * t)); c.lineTo(X(t), Y(v0)); c.closePath(); c.fill();
+      c.strokeStyle = col('--ink'); c.lineWidth = 1; c.beginPath(); c.moveTo(L, T); c.lineTo(L, B); c.lineTo(Rr, B); c.stroke();
+      for (var s = 0; s <= TM; s++) { txt(c, s + ' s', X(s), B + 14, col('--muted'), '10px system-ui, sans-serif'); }
+      [0, 10, 20, 30].forEach(function (v) { txt(c, v, L - 6, Y(v) + 4, col('--muted'), '10px system-ui, sans-serif', 'right'); });
+      txt(c, 'v (m\u00b7s\u207b\u00b9)', L + 6, T + 8, CV, '700 11px system-ui, sans-serif', 'left');
+      c.strokeStyle = CV; c.lineWidth = 2.6; c.beginPath(); c.moveTo(X(0), Y(v0)); c.lineTo(X(TM), Y(v0 + a * TM)); c.stroke();
+      c.strokeStyle = 'rgba(30,41,59,.5)'; c.setLineDash([4, 4]); c.beginPath(); c.moveTo(X(t), T); c.lineTo(X(t), B); c.stroke(); c.setLineDash([]);
+      if (t > 0.3) {
+        txt(c, 'v\u2080 \u00d7 t', (X(0) + X(t)) / 2, (Y(v0) + Y(0)) / 2 + 4, CP, '700 12px system-ui, sans-serif');
+        if (a * t > 2) { txt(c, '\u00bd a t\u00b2', X(t) - (X(t) - X(0)) / 3, Y(v0 + a * t / 3) + 4, CA, '700 12px system-ui, sans-serif'); }
+      }
+      oR.textContent = fr(v0 * t, 1) + ' m'; oTr.textContent = fr(0.5 * a * t * t, 1) + ' m'; oX.textContent = fr(v0 * t + 0.5 * a * t * t, 1) + ' m';
+    }
+    [rV, rA, rT].forEach(function (r) { r.addEventListener('input', draw); });
+    function setup() { S = canvasCtx(cv); draw(); }
+    setup(); onResize(setup);
+  })();
+  /* les liens vers le mémo ouvrent le cadre repliable */
+  Array.prototype.forEach.call(document.querySelectorAll('a[href="#memo-primitives"]'), function (l) {
+    l.addEventListener('click', function () { var d = document.getElementById('memo-primitives'); if (d) { d.open = true; } });
+  });
 })();
 </script>
