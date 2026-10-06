@@ -23,7 +23,7 @@ td, th {
 <h1 style="overflow-x:auto;"> Lunette astronomique</h1>
 
 
-<p style="text-align:center;font-size: 25px	;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tspe/lunette"> Cours </a></p>
+<p style="text-align:center;font-size: 25px	;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/tspe/lunette"><b>Cours 📽️</b> </a> + <a href="../cours/lunette"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
 
 <div style="position: relative; max-width: 100%; margin-left: auto;margin-right: auto;border-radius: 50px;">
 <a href="/cm-lunette.pdf"><img src="/cm-lunette.png"></a>

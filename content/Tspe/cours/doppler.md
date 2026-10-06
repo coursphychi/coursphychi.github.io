@@ -67,7 +67,7 @@ hidden = true
 <li>$f$&nbsp;: fréquence de l'émetteur en <span class="imp nt-hole">Hz</span></li>
 <li>$c$&nbsp;: célérité de l'onde en <span class="imp nt-hole">$\pu{m*s-1}$</span></li>
 </ul>
-<p>On considèrera qu'on a toujours $v<c$.</p>
+<p>On considèrera qu'on a toujours $v < c$.</p>
 </div>
 
 <div class="nt-grid">

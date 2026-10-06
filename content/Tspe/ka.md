@@ -23,7 +23,7 @@ td, th {
 # Force des acides et des bases
 
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tspe/ka"> Cours </a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/tspe/ka"><b>Cours 📽️</b> </a> + <a href="../cours/ka"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
 
 <div style="position: relative; max-width: 100%; margin-left: auto;margin-right: auto;border-radius: 50px;">
 <a href="/cm-ka.pdf"><img src="/cm-ka.png"></a>
