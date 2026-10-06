@@ -294,7 +294,7 @@ d'où&nbsp;:
 
 
 <details class="nt-d nt-plus">
-<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Des simulateurs de titrages plus complets</span></summary>
+<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Un simulateur de titrages plus complet</span></summary>
 <div class="nt-d-body">
 <p>Les <a href="https://www.hatier-clic.fr/miniliens/mie/2020/9782401061798/Simulateur_titrage_accueil/index.html" target="_blank" rel="noopener">simulateurs de titrage des éditions Hatier</a> permettent de choisir les réactifs, leurs concentrations et le type de suivi (pH-métrique ou conductimétrique), puis de réaliser le titrage goutte à goutte et d'exploiter la courbe obtenue.</p>
 </div>
