@@ -146,7 +146,7 @@ draft = false
 <li><p>Concentration initiale en ions plomb&nbsp;: $\ce{[Pb^{2+}]}_\mathrm{i} = C(\ce{Pb(NO3)2}) = \dfrac{0{,}30/331}{0{,}200} = \pu{4,5E-3 mol*L-1}$.</p>
 <p class="nt-note">Attention aux coefficients de la dissolution&nbsp;: pour les ions nitrate, on aurait $\ce{[NO3-]}_\mathrm{i} = 2\times C(\ce{Pb(NO3)2})$.</p></li>
 <li><p>Quotient de réaction initial (l'activité du solide vaut 1)&nbsp;:</p>
-<p class="nt-center">$\begin{aligned} Q_{r,\mathrm{i}} &= \dfrac{a_\mathrm{i}(\ce{PbI2})}{a_\mathrm{i}(\ce{Pb^{2+}})\times a_\mathrm{i}(\ce{I-})^2} = \dfrac{1}{\dfrac{\ce{[Pb^{2+}]}_\mathrm{i}}{c°}\times \left(\dfrac{\ce{[I-]}_\mathrm{i}}{c°}\right)^2} \\[2mm] &= \dfrac{1}{4{,}5\times10^{-3}\times (9{,}0\times10^{-3})^2} = 2{,}7\times 10^{6} \end{aligned}$</p></li>
+<p class="nt-center">$\begin{aligned} Q_{r,\mathrm{i}} &= \dfrac{a_\mathrm{i}(\ce{PbI2})}{a_\mathrm{i}(\mathrm{Pb^{2+}})\times {a_\mathrm{i}(\ce{I-})}^2} = \dfrac{1}{\dfrac{\ce{[Pb^{2+}]}_\mathrm{i}}{c°}\times \left(\dfrac{\ce{[I-]}_\mathrm{i}}{c°}\right)^2} \\[2mm] &= \dfrac{1}{4{,}5\times10^{-3}\times (9{,}0\times10^{-3})^2} = 2{,}7\times 10^{6} \end{aligned}$</p></li>
 </ol>
 </div>
 </details>
