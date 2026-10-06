@@ -314,10 +314,7 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
 <p class="nt-note">Courbes d'allure typique pour une grande galaxie spirale (1&nbsp;kpc ≈ 3&nbsp;260 années-lumière).</p>
 </div>
 
-<div class="nt-b nt-prop">
-<p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir</p>
-<p>Une explication populaire parmi les astrophysiciens serait la présence d'un <span class="imp nt-hole">halo de matière noire</span>.</p>
-</div>
+<p class="nt-lead">Une explication populaire parmi les astrophysiciens serait la présence d'un <b>halo de matière noire</b>.</p>
 
 <details class="nt-d nt-plus">
 <summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Les nuages d'hydrogène d'Andromède, et les autres pistes</span></summary>
