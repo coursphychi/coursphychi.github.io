@@ -1,7 +1,6 @@
 +++
 title = "Acide/Base"
 draft = false
-hidden = true
 +++
 
 <link rel="stylesheet" href="/css/cours.css">
@@ -191,7 +190,7 @@ hidden = true
 
 <div class="nt-f">
 <p class="nt-tag"><i class="fa-solid fa-equals"></i>Réaction acide-base</p>
-<p class="nt-f-math">$${\color{#FCA5A5}\ce{AH}} + {\color{#93C5FD}\ce{B-}} \ce{->} \ce{A-} + \ce{BH}$$</p>
+<p class="nt-f-math">$${\color{#FCA5A5}\ce{AH}} \; + \; {\color{#93C5FD}\ce{B-}} \ce{->} \ce{A-} + \ce{BH}$$</p>
 </div>
 
 <div class="nt-lab" id="lab-transfert">
@@ -221,6 +220,11 @@ hidden = true
 </ol>
 </div>
 
+<div class="nt-b nt-demo-box">
+<p class="nt-tag"><i class="fa-solid fa-eye"></i>Remarque</p>
+<p>C'est la même méthode que pour l'écriture d'une réaction d'oxydoréduction où l'échange d'électrons est remplacé par une échange de protons. Mais dans le cas acido-basique, il n'y a systématiquement qu'un seul ion $\ce{H+}$ échangé entre l'acide et la base conjuguée et rien d'autre n'est à équilibrer. C'est tellement simple que la méthode paraît inutile. Elle ne sert que si on demande de justifier l'équation de réaction.</p>
+</div>
+
 <div class="nt-b nt-ex">
 <p class="nt-tag"><i class="fa-solid fa-lightbulb"></i>Exemple 1</p>
 <p>Écrire la réaction entre l'ammoniac $\color{#2A6BC4}{\ce{NH3}}$ et l'acide éthanoïque $\color{#E11D48}{\ce{CH3COOH}}$.</p>
@@ -230,7 +234,12 @@ hidden = true
 <summary><span class="nt-tag"><i class="fa-solid fa-key"></i>Réponse</span><span class="nt-sum">Voir la résolution</span></summary>
 <div class="nt-d-body">
 <p>Les deux couples acide-base mis en jeu&nbsp;: $(\ce{NH4+}/{\color{#2A6BC4}\ce{NH3}})$ et $({\color{#E11D48}\ce{CH3COOH}}/\ce{CH3COO-})$.</p>
-<p>Demi-équations&nbsp;: $\ce{CH3COOH} = \ce{CH3COO-} + \ce{H+}$ et $\ce{NH3} + \ce{H+} = \ce{NH4+}$.</p>
+<p>Demi-équations&nbsp;:</p>
+<ul style="margin-top:0em; margin-bottom:0em;">
+<li>${\color{#E11D48}\ce{CH3COOH}} = \ce{CH3COO-} + {\color{#C026D3}\ce{H+}}$</li>
+<li>${\color{#2A6BC4}\ce{NH3}} + {\color{#C026D3}\ce{H+}} = \ce{NH4+}$</li>
+</ul>
+<p>On les additionnant, on obtient&nbsp;:</p>
 <p class="nt-center">${\color{#E11D48}\ce{CH3COOH}} + {\color{#2A6BC4}\ce{NH3}} \ce{->} \ce{CH3COO-} + \ce{NH4+}$</p>
 </div>
 </details>
@@ -304,14 +313,17 @@ hidden = true
 
 <div class="nt-b nt-warn">
 <p class="nt-tag"><i class="fa-solid fa-triangle-exclamation"></i>Précision sur la précision</p>
-<p>On écrit généralement le pH avec <b>un seul chiffre après la virgule</b>.</p>
+<p>On écrit généralement le pH avec <b>un seul chiffre après la virgule</b>.<br>
+En effet, les mesures de pH les plus courantes (pH-mètre de lycée) sont précises à 0,1 près environ&nbsp;: écrire davantage de décimales n'aurait pas de sens.</p>
+
+<p>Mathématiquement, un pH avec un chiffre après la virgule implique une concentration à un seul chiffre significatif. Mais en pratique, les grilles de correction du Bac tolèrent ou attendent souvent qu'on garde <b>deux chiffres significatifs sur la concentration</b>, même si c'est mathématiquement abusif.</p>
 </div>
 
 <details class="nt-d nt-plus">
-<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Pourquoi un seul chiffre après la virgule&nbsp;?</span></summary>
+<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Pourquoi un seul chiffre significatif théoriquement&nbsp;?</span></summary>
 <div class="nt-d-body">
-<p>Les mesures de pH les plus courantes (pH-mètre de lycée) sont précises à 0,1 près environ&nbsp;: écrire davantage de décimales n'aurait pas de sens.</p>
-<p>Plus rigoureusement, avec un logarithme, ce sont les chiffres <i>après la virgule</i> du pH qui portent l'information sur les chiffres significatifs de la concentration&nbsp;: la partie entière ne fait que donner la puissance de 10. Une concentration connue avec deux chiffres significatifs donne donc un pH avec deux décimales.</p>
+<p>La partie entière du pH ne renseigne que sur l'ordre de grandeur de la concentration, donc seulement sur la puissance de 10 de la notation scientifique. La mantisse reste, elle, encore indéterminée.<br>
+Ce n'est qu'à partir du premier chiffre après la virgule sur la valeur du pH qu'elle commence à se préciser. Et s'il n'y a qu'un seul chiffre après la virgule, $\ce{[H3O+]}$ n'a donc théoriquement droit qu'à un chiffre significatif.</p>
 </div>
 </details>
 
@@ -412,15 +424,18 @@ hidden = true
 <p>On fait barboter $n=\pu{5,0E-3 mol}$ de chlorure d'hydrogène $\ce{HCl (g)}$ dans $V=\pu{500 mL}$ d'eau.</p>
 <p>La dissociation du chlorure d'hydrogène est totale et l'équation de la réaction est&nbsp;:</p>
 <p class="nt-center">$\ce{HCl (g) + H2O (\ell) -> H3O+ (aq) + Cl^- (aq)}$</p>
-<p>1. Que vaut le pH de la solution (appelée solution d'acide chlorhydrique)&nbsp;?</p>
-<p>2. Et si on dilue la solution 10 fois, que devient le pH&nbsp;?</p>
+<p><b>1.</b> Que vaut le pH de la solution (appelée solution d'acide chlorhydrique)&nbsp;?</p>
+<p><b>2.</b> Et si on dilue la solution 10 fois, que devient le pH&nbsp;?</p>
 </div>
 
 <details class="nt-d nt-rep">
 <summary><span class="nt-tag"><i class="fa-solid fa-key"></i>Réponse</span><span class="nt-sum">Voir la résolution</span></summary>
 <div class="nt-d-body">
-<p><b>1.</b> La réaction étant totale, chaque molécule de $\ce{HCl}$ forme un ion $\ce{H3O+}$&nbsp;: $n(\ce{H3O+}) = n = \pu{5,0E-3 mol}$. D'où&nbsp;:</p>
-<p class="nt-center">$\ce{[H3O+]} = \dfrac{n}{V} = \dfrac{\pu{5,0E-3 mol}}{\pu{0,500 L}} = \pu{1,0E-2 mol*L-1}$ &nbsp;&nbsp;et&nbsp;&nbsp; $\text{pH} = -\log\left(1{,}0\times10^{-2}\right) = 2{,}0$</p>
+<p><b>1.</b> La réaction étant totale, chaque molécule de $\ce{HCl}$ forme un ion $\ce{H3O+}$&nbsp;:<br>
+$n(\ce{H3O+}) = n = \pu{5,0E-3 mol}$.<br>
+D'où&nbsp;:</p>
+<p class="nt-center">$\ce{[H3O+]} = \dfrac{n}{V} = \dfrac{\pu{5,0E-3 mol}}{\pu{0,500 L}} = \pu{1,0E-2 mol*L-1}$<br>
+$\Rightarrow \text{pH} = -\log\left(1{,}0\times10^{-2}\right) = 2{,}0$</p>
 <p><b>2.</b> Diluer 10 fois divise la concentration par 10&nbsp;: $\ce{[H3O+]} = \pu{1,0E-3 mol*L-1}$, donc $\text{pH} = 3{,}0$. Le pH augmente de 1.</p>
 </div>
 </details>
@@ -438,7 +453,7 @@ hidden = true
 <details class="nt-d nt-plus">
 <summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Peut-on rendre une solution basique en diluant un acide&nbsp;?</span></summary>
 <div class="nt-d-body">
-<p>Non&nbsp;! La règle «&nbsp;dilution par 10, pH + 1&nbsp;» cesse de valoir quand on s'approche de pH 7&nbsp;: l'eau elle-même contient toujours des ions oxonium, en concentration $\pu{1,0E-7 mol*L-1}$ à 25&nbsp;°C. Une solution d'acide, même extrêmement diluée, a donc un pH qui tend vers 7 sans jamais le dépasser.</p>
+<p>Non&nbsp;! La règle «&nbsp;dilution par 10, pH + 1&nbsp;» cesse de marcher quand on s'approche de pH 7&nbsp;: l'eau elle-même contient toujours des ions oxonium, en concentration $\pu{1,0E-7 mol*L-1}$ à 25&nbsp;°C. Une solution d'acide, même extrêmement diluée, a donc <b>un pH qui tend vers 7</b> sans jamais le dépasser.</p>
 </div>
 </details>
 
