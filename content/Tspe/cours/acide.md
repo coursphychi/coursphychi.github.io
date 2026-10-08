@@ -6,6 +6,13 @@ draft = false
 <link rel="stylesheet" href="/css/cours.css">
 <script src="/js/cours.js" defer></script>
 
+<style>
+.nt-acides3d { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 1em 0 0.4em; }
+.nt-acides3d figure { margin: 0; text-align: center; }
+.nt-acides3d .nt-mol3d { height: 160px; background: #fff; border-radius: 12px; border: 1px solid var(--line); }
+.nt-acides3d figcaption { font-size: 0.88em; color: var(--slate); margin-top: 0.35em; line-height: 1.4; }
+</style>
+
 <div class="nt-quizbar">
 <button type="button" class="nt-btn nt-quiz-toggle" aria-pressed="false"><i class="fa-solid fa-eye-slash"></i>&nbsp; Mode révision</button>
 <p>Le mode révision masque les mots-clés&nbsp;: essayez de les retrouver de mémoire, puis cliquez dessus pour vérifier.</p>
@@ -17,6 +24,9 @@ draft = false
 <p class="nt-tag"><i class="fa-solid fa-circle-question"></i>Question</p>
 <p>L'acide sulfurique $\ce{H2SO4}$, l'acide carbonique $\ce{H2CO3}$, l'acide chlorhydrique $\ce{HCl}$ et l'acide nitrique $\ce{HNO3}$&nbsp;: quel est le point commun de ces acides&nbsp;?</p>
 </div>
+
+<div class="nt-acides3d"><figure><div class="nt-mol3d" data-mol="h2so4" role="img" aria-label="Modèle moléculaire de l'acide sulfurique, en boules et bâtons, à faire tourner"></div><figcaption>l'acide sulfurique<br>$\ce{H2SO4}$</figcaption></figure><figure><div class="nt-mol3d" data-mol="h2co3" role="img" aria-label="Modèle moléculaire de l'acide carbonique, en boules et bâtons, à faire tourner"></div><figcaption>l'acide carbonique<br>$\ce{H2CO3}$</figcaption></figure><figure><div class="nt-mol3d" data-mol="hcl" role="img" aria-label="Modèle moléculaire de l'acide chlorhydrique, en boules et bâtons, à faire tourner"></div><figcaption>l'acide chlorhydrique<br>$\ce{HCl}$</figcaption></figure><figure><div class="nt-mol3d" data-mol="hno3" role="img" aria-label="Modèle moléculaire de l'acide nitrique, en boules et bâtons, à faire tourner"></div><figcaption>l'acide nitrique<br>$\ce{HNO3}$</figcaption></figure></div>
+<p class="nt-cap">Atomes d'hydrogène en blanc, d'oxygène en rouge, de carbone en gris, d'azote en bleu, de soufre en jaune, de chlore en vert.</p>
 
 <details class="nt-d nt-rep">
 <summary><span class="nt-tag"><i class="fa-solid fa-key"></i>Réponse</span><span class="nt-sum">Voir la réponse</span></summary>
@@ -614,6 +624,46 @@ $$
         'Chaque dilution par 10 divise [H\u2083O\u207a] par 10 et augmente le pH de 1.';
     }
     r.addEventListener('input', upd); upd();
+  })();
+  /* ================= Modèles moléculaires 3D (boules et bâtons), à faire tourner ================= */
+  (function () {
+    var MODELS = {"h2so4": {"a": [["O", 1.324, -0.301, 0.098], ["S", -0.253, -0.145, 0.35], ["O", -0.449, 0.75, 1.462], ["O", -0.809, -1.472, 0.279], ["O", -0.698, 0.66, -0.964], ["H", 1.451, -1.105, -0.447], ["H", -0.566, 1.613, -0.777]], "b": [[0, 1, 1], [1, 2, 2], [1, 3, 2], [1, 4, 1], [0, 5, 1], [4, 6, 1]]}, "h2co3": {"a": [["O", 1.104, -0.641, -0.128], ["C", -0.001, 0.091, 0.014], ["O", -0.019, 1.291, 0.196], ["O", -1.084, -0.681, -0.072], ["H", 1.833, 0.004, -0.052], ["H", -1.832, -0.064, 0.043]], "b": [[0, 1, 1], [1, 2, 2], [1, 3, 1], [0, 4, 1], [3, 5, 1]]}, "hcl": {"a": [["Cl", 0.683, 0.0, 0.0], ["H", -0.683, 0.0, 0.0]], "b": [[0, 1, 1]]}, "hno3": {"a": [["O", 0.846, -0.546, 0.229], ["N", -0.415, -0.044, -0.033], ["O", -1.326, -0.855, 0.075], ["O", -0.394, 1.145, -0.332], ["H", 1.289, 0.3, 0.062]], "b": [[0, 1, 1], [1, 2, 2], [1, 3, 1], [0, 4, 1]]}};
+    var EL = { C: ['#4B5563', 0.36], H: ['#F8FAFC', 0.24], O: ['#DC2626', 0.36], N: ['#2563EB', 0.36], Cl: ['#16A34A', 0.44], S: ['#EAB308', 0.44] };
+    function shade(hex, f) { var r = parseInt(hex.substr(1, 2), 16), g = parseInt(hex.substr(3, 2), 16), b = parseInt(hex.substr(5, 2), 16); function c(v) { return Math.max(0, Math.min(255, Math.round(f > 0 ? v + (255 - v) * f : v * (1 + f)))); } return 'rgb(' + c(r) + ',' + c(g) + ',' + c(b) + ')'; }
+    Array.prototype.forEach.call(document.querySelectorAll('.nt-mol3d'), function (box) {
+      var M = MODELS[box.getAttribute('data-mol')]; if (!M) { return; }
+      var cv = document.createElement('canvas'); cv.style.width = '100%'; cv.style.height = '100%'; cv.style.cursor = 'grab'; cv.style.touchAction = 'none'; box.appendChild(cv);
+      var ctx, W, H, rx = -0.4, ry = 0.6, auto = true, drag = null, R = 0;
+      M.a.forEach(function (a) { R = Math.max(R, Math.hypot(a[1], a[2], a[3])); });
+      function size() { var dpr = window.devicePixelRatio || 1; W = box.clientWidth; H = box.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+      function draw() {
+        var s = Math.min(W, H) / (2 * (Math.max(R, 1.6) + 0.45)), cx = W / 2, cy = H / 2, cX = Math.cos(rx), sX = Math.sin(rx), cY = Math.cos(ry), sY = Math.sin(ry);
+        var P = M.a.map(function (a) { var x = a[1] * cY + a[3] * sY, z1 = -a[1] * sY + a[3] * cY, y = a[2] * cX - z1 * sX, z = a[2] * sX + z1 * cX; return [cx + x * s, cy - y * s, z]; });
+        var items = [];
+        M.a.forEach(function (a, i) { items.push({ z: P[i][2], f: function () {
+          var e = EL[a[0]] || EL.C, r = e[1] * s * (1 + 0.06 * P[i][2] / R), g = ctx.createRadialGradient(P[i][0] - r * 0.35, P[i][1] - r * 0.35, r * 0.1, P[i][0], P[i][1], r);
+          g.addColorStop(0, shade(e[0], 0.55)); g.addColorStop(0.7, e[0]); g.addColorStop(1, shade(e[0], -0.35));
+          ctx.fillStyle = g; ctx.beginPath(); ctx.arc(P[i][0], P[i][1], r, 0, 2 * Math.PI); ctx.fill();
+          ctx.strokeStyle = 'rgba(15,23,42,.25)'; ctx.lineWidth = 0.6; ctx.stroke(); } }); });
+        M.b.forEach(function (b) {
+          var p = P[b[0]], q = P[b[1]], z = (p[2] + q[2]) / 2 - 0.01;
+          items.push({ z: z, f: function () {
+            var dx = q[0] - p[0], dy = q[1] - p[1], n = Math.hypot(dx, dy) || 1, nx = -dy / n, ny = dx / n, off = b[2] > 1 ? [-0.09 * s, 0.09 * s] : [0];
+            off.forEach(function (o) {
+              ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = b[2] > 1 ? 0.07 * s : 0.11 * s; ctx.lineCap = 'round';
+              ctx.beginPath(); ctx.moveTo(p[0] + nx * o, p[1] + ny * o); ctx.lineTo(q[0] + nx * o, q[1] + ny * o); ctx.stroke();
+            }); } });
+        });
+        items.sort(function (u, v) { return u.z - v.z; });
+        ctx.clearRect(0, 0, W, H); items.forEach(function (it) { it.f(); });
+      }
+      cv.addEventListener('pointerdown', function (e) { drag = [e.clientX, e.clientY]; auto = false; cv.setPointerCapture(e.pointerId); cv.style.cursor = 'grabbing'; });
+      cv.addEventListener('pointermove', function (e) { if (!drag) { return; } ry += (e.clientX - drag[0]) * 0.01; rx += (e.clientY - drag[1]) * 0.01; drag = [e.clientX, e.clientY]; draw(); });
+      cv.addEventListener('pointerup', function () { drag = null; cv.style.cursor = 'grab'; });
+      var visible = true; if ('IntersectionObserver' in window) { new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(box); }
+      size(); draw(); window.addEventListener('resize', function () { size(); draw(); });
+      (function spin() { if (auto && visible) { ry += 0.006; draw(); } requestAnimationFrame(spin); })();
+    });
   })();
 })();
 </script>

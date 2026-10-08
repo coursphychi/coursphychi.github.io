@@ -157,7 +157,7 @@ details.nt-etape-d > summary .nt-tag { color: var(--c); }
 <li>Transformation&nbsp;: <a href="https://www.youtube.com/watch?v=gRBG7RdY00I" target="_blank" rel="noopener">le montage à reflux</a>.</li>
 <li>Isolement&nbsp;: <a href="https://www.youtube.com/watch?v=iHk2tV8KwUI" target="_blank" rel="noopener">l'extraction liquide-liquide</a>, <a href="https://www.youtube.com/watch?v=2XkwYikTxao" target="_blank" rel="noopener">la filtration sous vide</a>.</li>
 <li>Purification&nbsp;: <a href="https://www.youtube.com/watch?v=3wKTiLfnSNs" target="_blank" rel="noopener">la recristallisation</a>, <a href="https://www.youtube.com/watch?v=iVwT10cV84k" target="_blank" rel="noopener">la distillation fractionnée</a>.</li>
-<li>Identification&nbsp;: <a href="https://www.youtube.com/watch?v=XuO9EPJcY7I" target="_blank" rel="noopener">vidéo 1</a>, <a href="https://www.youtube.com/watch?v=p7g21N5oFLE" target="_blank" rel="noopener">vidéo 2</a>, <a href="https://www.youtube.com/watch?v=1e27UfFGfBA" target="_blank" rel="noopener">vidéo 3</a>.</li>
+<li>Identification&nbsp;: <a href="https://www.youtube.com/watch?v=XuO9EPJcY7I" target="_blank" rel="noopener">CCM</a>, <a href="https://www.youtube.com/watch?v=p7g21N5oFLE" target="_blank" rel="noopener">banc Kofler</a>, <a href="https://www.youtube.com/watch?v=1e27UfFGfBA" target="_blank" rel="noopener">réfractométrie</a>.</li>
 </ul>
 </div>
 </details>

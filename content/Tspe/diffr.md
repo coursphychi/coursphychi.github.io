@@ -55,7 +55,7 @@ td, th {
   </tr>
     <td style="border-top:none;"><a href="https://www.geogebra.org/m/crmutgye" target=”_blank”><b>Interférences et différence de marche (geogebra)</b></td>
    <tr>
-<th rowspan="4">Exercices</th>
+<th rowspan="5">Exercices</th>
 <td style="border-bottom:none;"><a href="/act-laser.pdf"><b>Le laser comme outil de mesure</b></a>&nbsp;+&nbsp;<a href="/correclaser.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
  </tr>
      <tr>
@@ -63,6 +63,9 @@ td, th {
  </tr>
     <tr>
  <td style="border-bottom:none;border-top:none;"><a href="/act-konig.pdf"><b>Trombone de Koenig</b></a></td>
+ </tr>
+     <tr>
+ <td style="border-bottom:none;border-top:none;"><a href="/DS-scarabe.pdf"><b>Couleur des scarabées</b></a></td>
  </tr>
    <tr>
  <td style="border-top:none;"><a href="/act-volcan.pdf"><b>Interférométrie et volcan</b></a></td>
