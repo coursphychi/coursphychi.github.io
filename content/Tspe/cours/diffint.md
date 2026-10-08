@@ -429,6 +429,26 @@ hidden = true
 <div class="nt-d-body">
 <p>Une bulle de savon est une couche d'eau savonneuse de quelques centaines de nanomètres d'épaisseur. La lumière se réfléchit en partie sur sa face extérieure, en partie sur sa face intérieure&nbsp;: les deux ondes réfléchies ont parcouru des chemins différents et interfèrent.</p>
 <p>Selon l'épaisseur locale de la couche, certaines longueurs d'onde (donc certaines couleurs) interfèrent de façon constructive, d'autres de façon destructive&nbsp;: d'où les bandes colorées qui bougent quand l'épaisseur varie. C'est le même phénomène pour les taches de carburant sur le bitume mouillé.</p>
+<p><b>Les teintes de Newton.</b> Pour un film d'épaisseur $e$ et d'indice $n \approx 1{,}33$, éclairé sous incidence normale, l'onde réfléchie sur la face intérieure parcourt en plus l'aller-retour dans le film, soit $2ne$. La réflexion sur la face extérieure (de l'air vers l'eau) ajoute un décalage d'une demi-longueur d'onde&nbsp;: la différence de chemin optique vaut $\delta = 2ne + \dfrac{\lambda}{2}$. Une couleur est renforcée si $\delta$ est un multiple entier de $\lambda$, éteinte si $\delta$ est un multiple impair de $\dfrac{\lambda}{2}$.</p>
+<p>Quand l'épaisseur croît, on observe donc toujours la même succession de couleurs, décrite par Newton dès 1704&nbsp;: noir, gris, blanc, jaune paille, orange, rouge, pourpre, puis bleu, vert, jaune, rouge… Les couleurs se répètent par «&nbsp;ordres&nbsp;» de plus en plus pâles, jusqu'à un blanc délavé au-delà d'un micromètre environ. C'est l'<b>échelle des teintes de Newton</b>&nbsp;: en lisant la couleur d'un film, on connaît son épaisseur à quelques dizaines de nanomètres près. Les géologues utilisent une échelle analogue pour identifier les minéraux au microscope polarisant.</p>
+<p>Juste avant d'éclater, une bulle devient plus mince que quelques dizaines de nanomètres&nbsp;: toutes les couleurs y interfèrent de façon destructive, et des taches <b>noires</b> apparaissent en haut de la bulle, là où le liquide s'est le plus écoulé.</p>
+<div class="nt-lab" id="lab-newton">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
+<p class="nt-lab-title">De l'épaisseur du film à sa couleur</p>
+<canvas class="nt-newton-scale" style="height:104px;" aria-label="Échelle des teintes de Newton : couleur réfléchie par un film de savon en fonction de son épaisseur, de 0 à 1 600 nanomètres"></canvas>
+<label class="nt-ctrl">Épaisseur du film $e$&nbsp;: <b class="out-e"></b><input type="range" min="0" max="1600" step="1" value="420"></label>
+<div class="nt-lab-pair" style="grid-template-columns: minmax(0, 3fr) minmax(120px, 1fr); align-items: center;">
+<figure><canvas class="nt-newton-spec" style="height:190px;" aria-label="Intensité réfléchie en fonction de la longueur d'onde, pour l'épaisseur choisie"></canvas><figcaption>longueurs d'onde renforcées (pics) et éteintes (creux)</figcaption></figure>
+<figure><div class="nt-newton-swatch" style="width:110px; height:110px; margin:auto; border-radius:50%; border:1px solid #CBD5E1; box-shadow: inset 0 0 18px rgba(255,255,255,.35), 0 4px 14px rgba(15,23,42,.18);"></div><figcaption>couleur réfléchie</figcaption></figure>
+</div>
+<div class="nt-read" aria-live="polite"><span>$2ne$ = <b class="out-d"></b></span><span>renforcées&nbsp;: <b class="out-c"></b></span><span>éteintes&nbsp;: <b class="out-x"></b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="drain"><i class="fa-solid fa-droplet"></i>&nbsp; Laisser le film s'amincir</button></div>
+<p class="nt-msg" aria-live="polite"></p>
+<p class="nt-note">Les couleurs sont calculées à partir des courbes de sensibilité de l'œil (colorimétrie CIE), pour un film éclairé en lumière du jour et observé sous incidence normale.</p>
+</div>
+
+<p style="text-align:center;"><a href="https://youtu.be/f7F9KhiCyWM" target="_blank"><i class="fa-brands fa-youtube"></i> Vidéo d'un film de savon (Unisciel)</a></p>
+
 </div>
 </details>
 
@@ -1170,6 +1190,104 @@ hidden = true
     }
     r2.addEventListener('input', draw);
     function setup() { S = canvasCtx(cv); draw(); }
+    setup(); onResize(setup);
+  })();
+  /* ================= Les teintes de Newton : épaisseur d'un film de savon → différence de chemin → couleur ================= */
+  (function () {
+    var root = document.getElementById('lab-newton');
+    if (!root) { return; }
+    var cvS = $(root, '.nt-newton-scale'), cvP = $(root, '.nt-newton-spec'), rE = $(root, 'input[type="range"]'), btn = $(root, '[data-act="drain"]'),
+        oE = $(root, '.out-e'), oD = $(root, '.out-d'), oC = $(root, '.out-c'), oX = $(root, '.out-x'), sw = $(root, '.nt-newton-swatch'), msg = $(root, '.nt-msg');
+    var N = 1.33, EMAX = 1600, S1, S2;
+    /* fonctions colorimétriques CIE 1931, approximation multi-lobes (Wyman, Sloan et Shirley, 2013) */
+    function g(l, m, s1, s2) { var t = (l - m) / (l < m ? s1 : s2); return Math.exp(-0.5 * t * t); }
+    function xb(l) { return 1.056 * g(l, 599.8, 37.9, 31.0) + 0.362 * g(l, 442.0, 16.0, 26.7) - 0.065 * g(l, 501.1, 20.4, 26.2); }
+    function yb(l) { return 0.821 * g(l, 568.8, 46.9, 40.5) + 0.286 * g(l, 530.9, 16.3, 31.1); }
+    function zb(l) { return 1.217 * g(l, 437.0, 11.8, 36.0) + 0.681 * g(l, 459.0, 26.0, 13.8); }
+    /* lumière du jour : corps noir à 6 500 K */
+    function D(l) { var x = l * 1e-9, T = 6504; return 1 / (Math.pow(x, 5) * (Math.exp(0.014388 / (x * T)) - 1)); }
+    var L = [], W = [];
+    for (var l = 380; l <= 780; l += 5) { L.push(l); W.push([D(l) * xb(l), D(l) * yb(l), D(l) * zb(l)]); }
+    var Y0 = W.reduce(function (s, w) { return s + w[1]; }, 0);
+    /* réflexion à deux ondes, incidence normale : δ = 2ne + λ/2, intensité ∝ 1 − cos(2πδ/λ)… ramenée à une moyenne de 1 (film épais = blanc) */
+    function refl(e, l) { var s = Math.sin(2 * Math.PI * N * e / l); return 2 * s * s; }
+    function gam(u) { u = Math.max(0, u); return u <= 0.0031308 ? 12.92 * u : 1.055 * Math.pow(u, 1 / 2.4) - 0.055; }
+    function color(e) {
+      var X = 0, Y = 0, Z = 0;
+      for (var i = 0; i < L.length; i++) { var r = refl(e, L[i]); X += r * W[i][0]; Y += r * W[i][1]; Z += r * W[i][2]; }
+      X /= Y0; Y /= Y0; Z /= Y0;
+      var R = 3.2406 * X - 1.5372 * Y - 0.4986 * Z, G = -0.9689 * X + 1.8758 * Y + 0.0415 * Z, B = 0.0557 * X - 0.2040 * Y + 1.0570 * Z;
+      var m = Math.max(R, G, B, 1); R /= m; G /= m; B /= m;   /* hors gamut : on garde la teinte */
+      return [Math.round(255 * Math.min(1, gam(R))), Math.round(255 * Math.min(1, gam(G))), Math.round(255 * Math.min(1, gam(B)))];
+    }
+    var TAB = []; for (var k = 0; k <= EMAX; k++) { TAB.push(color(k)); }
+    function css(c) { return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+    function drawScale() {
+      var c = S1.ctx, w = S1.w, h = S1.h, e = +rE.value, x0 = 16, x1 = w - 22, H = h - 38;
+      c.clearRect(0, 0, w, h);
+      for (var px = x0; px <= x1; px++) { var ee = Math.round((px - x0) / (x1 - x0) * EMAX); c.fillStyle = css(TAB[ee]); c.fillRect(px, 6, 1.5, H - 6); }
+      c.strokeStyle = 'rgba(15,23,42,.35)'; c.lineWidth = 1; c.strokeRect(x0, 6, x1 - x0, H - 6);
+      c.fillStyle = '#475569'; c.font = '11px system-ui, sans-serif'; c.textAlign = 'center';
+      for (var t = 0; t <= EMAX; t += 200) { var xx = x0 + t / EMAX * (x1 - x0); c.fillRect(xx, H, 1, 4); c.fillText(t, xx, H + 16); }
+      c.fillText('épaisseur e du film (nm)', (x0 + x1) / 2, H + 32);
+      var xe = x0 + e / EMAX * (x1 - x0);
+      c.fillStyle = '#0F172A'; c.beginPath(); c.moveTo(xe, 6); c.lineTo(xe - 6, 0); c.lineTo(xe + 6, 0); c.fill();
+      c.strokeStyle = '#fff'; c.lineWidth = 3; c.beginPath(); c.moveTo(xe, 6); c.lineTo(xe, H); c.stroke();
+      c.strokeStyle = '#0F172A'; c.lineWidth = 1.2; c.beginPath(); c.moveTo(xe, 6); c.lineTo(xe, H); c.stroke();
+    }
+    function drawSpec() {
+      var c = S2.ctx, w = S2.w, h = S2.h, e = +rE.value, x0 = 46, x1 = w - 12, y0 = 10, y1 = h - 30;
+      function X(l) { return x0 + (l - 380) / 400 * (x1 - x0); }
+      function Y(v) { return y1 - v / 2 * (y1 - y0); }
+      c.clearRect(0, 0, w, h);
+      for (var l = 380; l <= 780; l += 1) {   /* aire sous la courbe, de la couleur de chaque longueur d'onde */
+        var rgb = lambdaRGB(l); c.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.85)';
+        var yy = Y(refl(e, l)); c.fillRect(X(l), yy, (x1 - x0) / 400 + 0.6, y1 - yy);
+      }
+      c.strokeStyle = '#0F172A'; c.lineWidth = 1.6; c.beginPath();
+      for (l = 380; l <= 780; l += 1) { var yv = Y(refl(e, l)); if (l === 380) { c.moveTo(X(l), yv); } else { c.lineTo(X(l), yv); } }
+      c.stroke();
+      c.strokeStyle = '#94A3B8'; c.lineWidth = 1; c.beginPath(); c.moveTo(x0, y0); c.lineTo(x0, y1); c.lineTo(x1, y1); c.stroke();
+      c.fillStyle = '#475569'; c.font = '11px system-ui, sans-serif'; c.textAlign = 'center';
+      for (var t = 400; t <= 750; t += 50) { c.fillText(t, X(t), y1 + 14); }
+      c.fillText('longueur d\u2019onde \u03bb (nm)', (x0 + x1) / 2, h - 2);
+      c.save(); c.translate(12, (y0 + y1) / 2); c.rotate(-Math.PI / 2); c.fillText('intensité réfléchie', 0, 0); c.restore();
+    }
+    function update() {
+      var e = +rE.value, d = 2 * N * e, rgb = TAB[Math.round(e)];
+      oE.textContent = Math.round(e) + ' nm'; oD.textContent = Math.round(d) + ' nm';
+      sw.style.background = css(rgb);
+      /* longueurs d'onde visibles renforcées (δ = kλ) et éteintes (δ = (k + 1/2)λ), avec δ = 2ne + λ/2 */
+      var ren = [], ext = [];
+      for (var kk = 0; kk < 12; kk++) {
+        var lr = d / (kk + 0.5), lx = kk ? d / kk : Infinity;   /* 2ne + λ/2 = (k+1)λ  ⇔ λ = 2ne/(k + 1/2) ; 2ne + λ/2 = (k + 1/2)λ ⇔ λ = 2ne/k */
+        if (lr >= 380 && lr <= 780) { ren.push(Math.round(lr)); }
+        if (lx >= 380 && lx <= 780) { ext.push(Math.round(lx)); }
+      }
+      oC.textContent = ren.length ? ren.join(', ') + ' nm' : 'aucune';
+      oX.textContent = ext.length ? ext.join(', ') + ' nm' : 'aucune';
+      msg.innerHTML = e < 30 ? 'Film plus mince que quelques dizaines de nanomètres&nbsp;: à cause du décalage d\u2019une demi-longueur d\u2019onde, toutes les couleurs interfèrent de façon destructive. Le film paraît <b>noir</b>&nbsp;: la bulle est sur le point d\u2019éclater.'
+        : (e > 1100 ? 'Film épais&nbsp;: de nombreuses longueurs d\u2019onde, réparties dans tout le spectre, sont éteintes et renforcées à la fois. Leur mélange redonne une teinte pâle, presque blanche&nbsp;: les couleurs se délavent.'
+        : 'Les longueurs d\u2019onde renforcées dominent&nbsp;: la couleur du film est leur mélange, privé des longueurs d\u2019onde éteintes.');
+      drawScale(); drawSpec();
+    }
+    rE.addEventListener('input', update);
+    /* un film qui s'amincit en s'égouttant */
+    var playing = false, last = null;
+    btn.addEventListener('click', function () {
+      playing = !playing; if (playing && +rE.value < 20) { rE.value = 1200; }
+      btn.innerHTML = playing ? '<i class="fa-solid fa-pause"></i>&nbsp; Pause' : '<i class="fa-solid fa-droplet"></i>&nbsp; Laisser le film s\u2019amincir';
+      last = null; if (playing) { requestAnimationFrame(step); }
+    });
+    function step(ts) {
+      if (!playing) { return; }
+      var dt = last === null ? 0 : Math.min(0.05, (ts - last) / 1000); last = ts;
+      var e = +rE.value; e = Math.max(0, e - dt * (RM ? 400 : 90) * (0.35 + e / 1200));
+      rE.value = e; update();
+      if (e <= 0) { playing = false; btn.innerHTML = '<i class="fa-solid fa-droplet"></i>&nbsp; Laisser le film s\u2019amincir'; return; }
+      requestAnimationFrame(step);
+    }
+    function setup() { S1 = canvasCtx(cvS); S2 = canvasCtx(cvP); update(); }
     setup(); onResize(setup);
   })();
 })();

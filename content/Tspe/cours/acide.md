@@ -21,7 +21,7 @@ draft = false
 <details class="nt-d nt-rep">
 <summary><span class="nt-tag"><i class="fa-solid fa-key"></i>Réponse</span><span class="nt-sum">Voir la réponse</span></summary>
 <div class="nt-d-body">
-<p>Ils contiennent tous au moins un atome d'hydrogène, qu'ils peuvent céder facilement une fois dissous dans l'eau.</p>
+<p>Ils contiennent tous au moins un atome d'hydrogène.</p>
 </div>
 </details>
 
@@ -296,7 +296,7 @@ draft = false
 <div class="nt-f-units"><span>le pH est <span class="nt-hole">sans unité</span></span><span>$c^\circ = \pu{1 mol*L-1}$ (concentration standard)</span></div>
 </div>
 
-<div class="nt-b nt-def">
+<div class="nt-b nt-demo-box">
 <p class="nt-tag"><i class="fa-solid fa-calculator"></i>À la calculatrice</p>
 <p>On utilise la touche <kbd>log</kbd> (logarithme décimal), puis on change le signe. Le logarithme décimal «&nbsp;donne l'exposant&nbsp;» d'une puissance de 10&nbsp;: c'est pourquoi un pH de 3 correspond à une concentration de $10^{-3}\ \pu{mol*L-1}$.</p>
 </div>
@@ -334,7 +334,7 @@ Ce n'est qu'à partir du premier chiffre après la virgule sur la valeur du pH q
 <p class="nt-f-math">$$\ce{[H3O+]} = c^\circ\times10^{-\text{pH}}$$</p>
 </div>
 
-<div class="nt-b nt-def">
+<div class="nt-b nt-demo-box">
 <p class="nt-tag"><i class="fa-solid fa-calculator"></i>À la calculatrice</p>
 <p>On utilise la touche <kbd>10<sup>x</sup></kbd>, souvent accessible par <kbd>2nde</kbd> puis <kbd>log</kbd>, sans oublier le signe «&nbsp;−&nbsp;» devant le pH.</p>
 </div>
@@ -435,7 +435,10 @@ Ce n'est qu'à partir du premier chiffre après la virgule sur la valeur du pH q
 $n(\ce{H3O+}) = n = \pu{5,0E-3 mol}$.<br>
 D'où&nbsp;:</p>
 <p class="nt-center">$\ce{[H3O+]} = \dfrac{n}{V} = \dfrac{\pu{5,0E-3 mol}}{\pu{0,500 L}} = \pu{1,0E-2 mol*L-1}$<br>
-$\Rightarrow \text{pH} = -\log\left(1{,}0\times10^{-2}\right) = 2{,}0$</p>
+$$
+\Rightarrow \text{pH} = -\log\left(\frac{[\ce{H3O+]}}{c^\circ}\right) =-\log\left(1{,}0\times10^{-2}\right) = 2{,}0
+$$
+</p>
 <p><b>2.</b> Diluer 10 fois divise la concentration par 10&nbsp;: $\ce{[H3O+]} = \pu{1,0E-3 mol*L-1}$, donc $\text{pH} = 3{,}0$. Le pH augmente de 1.</p>
 </div>
 </details>

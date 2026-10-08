@@ -382,3 +382,81 @@ table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr + tr > * { bor
 table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr > * + * { border-left: 1px solid rgba(15, 23, 42, 0.05) !important; }
 table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr > :first-child { text-align: left; font-weight: 600; color: var(--navy); }
 table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr:hover > td, table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr:hover > th { background: color-mix(in srgb, var(--tc) 20%, #fff) !important; }
+
+/* ==================================================================
+   RETOUCHES (2026) — sur le style d'origine
+   - couleurs plus chaleureuses pour remarque, questions, réponses, pour aller plus loin
+   - repliables : titre en graisse normale qui prend la couleur du cadre au survol,
+     pastille « + » entourée, qui devient un « − » plein une fois déroulé
+   - « À retenir » plus vif ; définition à bordure épaisse et halo léger
+   ================================================================== */
+
+/* --- Couleurs des cadres secondaires --- */
+.nt-demo-box { --c: #C98A2B; --bg: #FFF8EC; --c-ink: #8A5A12; }        /* remarque, démonstration : ambre doux */
+.nt-ask      { --c: #E8603C; --bg: #FFF2EC; --c-ink: #B8431F; }        /* questions, exercices : corail */
+details.nt-d.nt-rep  { --c: #2E9E7B; --bg: #EDF9F4; --c-ink: #1D6E55; } /* réponses : menthe */
+details.nt-d.nt-plus { --c: #7C5CE0; --bg: #F3EFFE; --c-ink: #5B3DC0; } /* pour aller plus loin : lavande */
+details.nt-d { --c-ink: color-mix(in srgb, var(--c) 80%, #000); }
+details.nt-d > summary .nt-tag { color: var(--c-ink); }
+
+/* --- Repliables --- */
+details.nt-d > summary { align-items: center; }
+details.nt-d > summary .nt-sum { font-weight: 500; color: var(--ink); transition: color 0.15s; }
+details.nt-d > summary:hover .nt-sum { color: var(--c-ink); }
+details.nt-d > summary::after {
+  content: "+"; flex: none; width: 1.55em; height: 1.55em; display: grid; place-items: center; border-radius: 50%;
+  font-size: 1.05em; font-weight: 500; line-height: 1; color: var(--c); border: 1.5px solid var(--c); background: #fff;
+  transition: background 0.15s, color 0.15s;
+}
+details.nt-d > summary:hover::after { background: color-mix(in srgb, var(--c) 12%, #fff); }
+details.nt-d[open] > summary::after { content: "−"; color: #fff; background: var(--c); }
+
+/* --- « À retenir » : plus vif --- */
+.nt-prop {
+  --c: #EA580C; --c-ink: #9A3412;
+  background: linear-gradient(135deg, #FFF7E0, #FFE6BF);
+  border: 2px solid #F59E0B; border-left: 6px solid #EA580C;
+  box-shadow: 0 6px 22px rgba(234, 88, 12, 0.22);
+}
+.nt-prop .nt-tag { background: linear-gradient(135deg, #EA580C, #F59E0B); color: #fff; box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35); }
+
+/* --- Définition : bordure épaisse et halo bleu léger --- */
+.nt-def {
+  border: 2px solid color-mix(in srgb, var(--blue) 50%, #fff); border-left: 6px solid var(--blue);
+  box-shadow: 0 6px 22px rgba(42, 107, 196, 0.18);
+}
+
+/* --- Texte en gras : couleur du cadre plutôt que noir --- */
+.nt-b b, .nt-b strong, details.nt-d b, details.nt-d strong { color: var(--c-ink, var(--c)); }
+.nt-proto { --c-ink: var(--blue); }
+
+/* --- Définition : sur le modèle de « À retenir » --- */
+.nt-def {
+  --c-ink: #1E4E9C;
+  background: linear-gradient(135deg, #F2F7FF, #DCEAFD);
+}
+.nt-def .nt-tag {
+  background: linear-gradient(135deg, #1E4E9C, #2F7FD6); color: #fff;
+  padding: 0.25em 0.75em; border-radius: 999px; box-shadow: 0 2px 8px rgba(30, 78, 156, 0.35);
+}
+
+/* --- Les trois cadres principaux réagissent au survol --- */
+.nt-def, .nt-prop, .nt-f { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.nt-def:hover  { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(42, 107, 196, 0.30); }
+.nt-prop:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(234, 88, 12, 0.32); }
+.nt-f:hover    { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(18, 48, 90, 0.40); }
+@media (prefers-reduced-motion: reduce) {
+  .nt-def, .nt-prop, .nt-f { transition: none; }
+  .nt-def:hover, .nt-prop:hover, .nt-f:hover { transform: none; }
+}
+
+/* --- Définitions en violet (couleur d'origine des « pour aller plus loin ») ; « pour aller plus loin » en gris clair --- */
+.nt-def {
+  --c: #6B5BD2; --c-ink: #4B3BB0;
+  background: linear-gradient(135deg, #E9E5FC, #FAF9FF);
+  border: 2px solid color-mix(in srgb, #6B5BD2 45%, #fff); border-left: 6px solid #6B5BD2;
+  box-shadow: 0 6px 22px rgba(107, 91, 210, 0.20);
+}
+.nt-def .nt-tag { background: linear-gradient(135deg, #3F2E9E, #6B5BD2); box-shadow: 0 2px 8px rgba(63, 46, 158, 0.35); }
+.nt-def:hover { box-shadow: 0 12px 30px rgba(107, 91, 210, 0.32); }
+details.nt-d.nt-plus { --c: #64748B; --bg: #F4F5F7; --c-ink: #475569; }
