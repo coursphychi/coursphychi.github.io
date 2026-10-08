@@ -239,7 +239,7 @@ draft = false
 <li>${\color{#E11D48}\ce{CH3COOH}} = \ce{CH3COO-} + {\color{#C026D3}\ce{H+}}$</li>
 <li>${\color{#2A6BC4}\ce{NH3}} + {\color{#C026D3}\ce{H+}} = \ce{NH4+}$</li>
 </ul>
-<p>On les additionnant, on obtient&nbsp;:</p>
+<p>En les additionnant, on obtient&nbsp;:</p>
 <p class="nt-center">${\color{#E11D48}\ce{CH3COOH}} + {\color{#2A6BC4}\ce{NH3}} \ce{->} \ce{CH3COO-} + \ce{NH4+}$</p>
 </div>
 </details>
