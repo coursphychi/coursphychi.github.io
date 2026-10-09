@@ -219,8 +219,11 @@ On fera l'hypothèse que le $\ce{NaCl (s)}$ se dissout totalement dans l'eau sel
   <th rowspan="2">Protocoles</th>
   <td style="border-bottom:none;"><a href="/protdiss.pdf"><b>Dissolution</b></a></td>
    <tr>
-  <td style="border-top:none;"><a href="/protdilu.pdf"><b>Dilution</b></a> + <a href="https://presentationssite.github.io/1spe/dilution"><b>Rappels théoriques</b></td>
+  <td style="border-top:none;"><a href="/protdilu.pdf"><b>Dilution</b></a></td>
   </tr>
+  <tr>
+  <th rowspan="1 ">Rappels</th>
+  <td><a href="https://presentationssite.github.io/2nde/verrerie/#/" target="_blank"><a href="../../tspe/cours/dilution"><b>Théorie dilution</b></a> (<a href="https://presentationssite.github.io/1spe/dilution"><b>📽️</b></a>)</td>
   </tr>
     <tr>
   <th rowspan="1 ">Manipulations</th>
