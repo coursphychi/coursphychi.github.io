@@ -436,6 +436,11 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
 <p>On dépose une goutte de chaque échantillon sur une <b>ligne de dépôt</b>, tracée au crayon en bas d'une plaque (ou d'un papier). On place la plaque dans une cuve contenant un solvant, l'<b>éluant</b>, qui monte le long de la plaque en entraînant plus ou moins vite chaque espèce chimique.</p>
 </div>
 
+<div class="nt-b nt-warn">
+<p class="nt-tag"><i class="fa-solid fa-triangle-exclamation"></i>Attention</p>
+<p>Il faut que ligne dépôt soit au-dessus du niveau de solvant dans la cuve, sinon les taches seront immédiatement noyées et l'expérience à recommencer.</p>
+</div>
+
 <div class="nt-b nt-prop">
 <p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir</p>
 <ul class="nt-facts">
