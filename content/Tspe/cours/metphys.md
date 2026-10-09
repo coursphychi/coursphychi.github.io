@@ -59,13 +59,25 @@ hidden = "true"
 <p class="nt-msg" aria-live="polite">Cliquez sur la couleur absorbée par une solution pour trouver sa couleur perçue.</p>
 </div>
 
+<div class="nt-b nt-ask">
+<p class="nt-tag"><i class="fa-solid fa-circle-question"></i>Question</p>
+<p>Quel devrait être le spectre d'un colorant vert&nbsp;?</p>
+</div>
+
+<details class="nt-d nt-rep">
+<summary><span class="nt-tag"><i class="fa-solid fa-key"></i>Réponse</span><span class="nt-sum">Voir la réponse</span></summary>
+<div class="nt-d-body">
+<p>Il doit absorber le magenta, donc à la fois le rouge et le bleu. C'est le cas de la chlorophylle, dont le spectre présente deux grandes zones d'absorption, l'une dans le bleu-violet et l'autre dans le rouge&nbsp;: choisissez-la dans l'animation ci-dessous.</p>
+</div>
+</details>
+
 <div class="nt-lab" id="lab-couleur">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
 <p class="nt-lab-title">Du spectre d'absorption à la couleur de la solution</p>
 <div class="nt-spec-wrap">
 <canvas style="height:220px;" aria-label="Spectre d'absorption de la solution"></canvas>
 <div class="nt-swatches">
-<div><div class="nt-swatch nt-swatch-abs"></div><p class="nt-note">couleur la plus absorbée</p></div>
+<div><div class="nt-swatch nt-swatch-abs"></div><p class="nt-note">couleur absorbée</p></div>
 <div><div class="nt-swatch nt-swatch-sol"></div><p class="nt-note">couleur de la solution</p></div>
 </div>
 </div>
@@ -87,20 +99,9 @@ hidden = "true"
 <label class="nt-ctrl">Absorbance maximale&nbsp;: <b class="out-a"></b><input type="range" data-p="a" min="0" max="1.2" step="0.01" value="1"></label>
 </div>
 <p class="nt-msg" aria-live="polite"></p>
-<p class="nt-note">Les spectres sont simplifiés (bandes en forme de cloche). La couleur affichée est calculée à partir de la lumière transmise, pour une solution éclairée en lumière blanche.</p>
+<p class="nt-note">Les spectres sont simplifiés (bandes en forme de cloche). Pour une solution éclairée en lumière blanche, la couleur de la solution est calculée à partir de la lumière transmise, et la couleur absorbée à partir de l'ensemble de la lumière absorbée (affichée à pleine luminosité pour bien voir sa teinte). Réunies, ces deux lumières redonnent la lumière blanche&nbsp;: les deux couleurs sont complémentaires.</p>
 </div>
 
-<div class="nt-b nt-ask">
-<p class="nt-tag"><i class="fa-solid fa-circle-question"></i>Question</p>
-<p>Quel devrait être le spectre d'un colorant vert&nbsp;?</p>
-</div>
-
-<details class="nt-d nt-rep">
-<summary><span class="nt-tag"><i class="fa-solid fa-key"></i>Réponse</span><span class="nt-sum">Voir la réponse</span></summary>
-<div class="nt-d-body">
-<p>Il doit absorber le magenta, donc à la fois le rouge et le bleu. C'est le cas de la chlorophylle, dont le spectre présente deux grandes zones d'absorption, l'une dans le bleu-violet et l'autre dans le rouge&nbsp;: choisissez-la dans l'animation ci-dessus.</p>
-</div>
-</details>
 
 ### Spectroscopie infrarouge {.nt-h3}
 
@@ -587,6 +588,21 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
       var rgb = toRGB(X, Y, Z), w = toRGB(Xw, Yw, Zw);
       return 'rgb(' + gam(rgb[0] / w[0]) + ',' + gam(rgb[1] / w[1]) + ',' + gam(rgb[2] / w[2]) + ')';
     }
+    /* couleur de l'ensemble de la lumière absorbée (fraction 1 − T à chaque longueur d'onde) ;
+       mise à la luminosité maximale pour bien voir sa teinte : lumière absorbée + lumière transmise = lumière blanche */
+    function absorbed() {
+      var X = 0, Y = 0, Z = 0, Xw = 0, Yw = 0, Zw = 0;
+      for (var l = 380; l <= 780; l += 2) {
+        var c = cmf(l), a = 1 - Math.pow(10, -A(l));
+        X += a * c[0]; Y += a * c[1]; Z += a * c[2]; Xw += c[0]; Yw += c[1]; Zw += c[2];
+      }
+      var rgb = toRGB(X, Y, Z), w = toRGB(Xw, Yw, Zw), v = [rgb[0] / w[0], rgb[1] / w[1], rgb[2] / w[2]];
+      var lo = Math.min(v[0], v[1], v[2]);
+      /* la partie « grise » (absorbée à peu près autant à toutes les longueurs d'onde) n'apporte aucune teinte : on en retire l'essentiel pour bien voir la couleur */
+      v = v.map(function (u) { return lo < 0 ? u - lo : u - 0.6 * lo; });
+      var m = Math.max(v[0], v[1], v[2]); if (m < 1e-6) { return 'rgb(255,255,255)'; }
+      return 'rgb(' + gam(v[0] / m) + ',' + gam(v[1] / m) + ',' + gam(v[2] / m) + ')';
+    }
     function draw() {
       var mx = 0; for (var q = 380; q <= 780; q += 4) { mx = Math.max(mx, A(q)); }
       var c = S.ctx, w = S.w, h = S.h, L = 40, Rr = w - 10, T = 10, B = h - 26, AM = Math.max(1.2, Math.ceil(mx * 1.1 * 2) / 2);
@@ -604,9 +620,8 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
       c.strokeStyle = col('--ink'); c.lineWidth = 2.6; c.beginPath();
       for (var l = 380; l <= 780; l += 2) { var y = Y(Math.min(AM, A(l))); if (l === 380) { c.moveTo(X(l), y); } else { c.lineTo(X(l), y); } }
       c.stroke();
-      var main = bands.reduce(function (p, q) { return q[2] > p[2] ? q : p; });
       sw.style.background = perceived();
-      swA.style.background = main[0] > 780 ? lambdaRGB(700) : lambdaRGB(Math.max(390, Math.min(770, main[0])));
+      swA.style.background = absorbed();
     }
     function fromSliders() {
       bands = [[parseFloat(rL.value), parseFloat(rW.value), parseFloat(rA.value)]];
@@ -620,7 +635,7 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
       r.addEventListener('change', function () {
         var p = PRESETS[r.value]; bands = p.b;
         rL.value = Math.min(780, p.b[0][0]); rW.value = Math.min(200, p.b[0][1]); rA.value = p.b[0][2]; labels();
-        msg.textContent = p.name + (r.value === 'chloro' ? ' : deux bandes, dans le bleu et dans le rouge.' : (r.value === 'cuso4' ? ' : absorbe surtout le rouge et le proche infrarouge.' : '.'));
+        msg.textContent = p.name + (r.value === 'chloro' ? ' : deux bandes, dans le bleu et dans le rouge. Ensemble, ces lumières absorbées donnent du pourpre, dont la couleur complémentaire est le vert.' : (r.value === 'cuso4' ? ' : absorbe surtout le rouge et le proche infrarouge.' : '.'));
         draw();
       });
     });

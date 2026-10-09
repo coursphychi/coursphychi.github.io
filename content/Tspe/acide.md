@@ -37,7 +37,7 @@ td, th {
 <table>
    <tr>
   <th rowspan="1">Rappels 1<sup>re</sup></th>
-  <td><a href="../cours/dilution"><b>Dilution</b></a> + <a href="https://www.edumedia.com/fr/media/659-solution-concentration?auth=d8aa1c8b7e725a7b825d68207d1cbe03/75935"><b style="color:#FFA601"><i class="fa-solid fa-palette"></i></b></a></td>
+  <td><a href="../cours/dilution"><b>Dilution</b></a> + <a href="https://www.edumedia.com/fr/media/659-solution-concentration?auth=d8aa1c8b7e725a7b825d68207d1cbe03/75935"><b style="color:#FFA601"><i class="fa-solid fa-play"></i></b></a></td>
   </tr>
       <tr>
   <th rowspan="1">TP</th>
