@@ -41,14 +41,14 @@ td, th {
   </tr>
       <tr>
   <th rowspan="1">TP</th>
-  <td><a href="/tp-tsacide.pdf"><b>Dilution et pH</b></a></td>
+  <td><a href="/tp-tsacide.pdf"><b>Dilution et pH</b></a>  +  <a href="/correc-tpph.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
   </tr>
   </tr>
   <tr>
 <th rowspan="2 ">Activités</th>
   <td style="border-bottom:none;"><a href="/act-tsacide1.pdf"><b>Lac acide</b></a>  +  <a href="/correc-lac.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a> </td>
   <tr>
-  <td style="border-top:none;"><a href="/act-tsacide2.pdf"><b>Duodenum</b> </td>
+  <td style="border-top:none;"><a href="/act-tsacide2.pdf"><b>Duodenum</b>  +  <a href="/corr-duodenum.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a> </td>
   </tr>
  <tr>
   <th rowspan="2 ">Appliquettes</th>
