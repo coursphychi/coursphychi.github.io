@@ -371,17 +371,30 @@ draft = false
 
 <div class="nt-f">
 <p class="nt-tag"><i class="fa-solid fa-equals"></i>Durée de fonctionnement</p>
-<p class="nt-f-math">$$Q = I\times\Delta t_\mathrm{max}$$</p>
-<div class="nt-f-units"><span>$Q$ en <b>C</b></span><span>$I$ (intensité délivrée, supposée constante) en <b>A</b></span><span>$\Delta t_\mathrm{max}$ (durée de vie de la pile) en <b>s</b></span></div>
+<p class="nt-f-math">$$\Delta t_\mathrm{max} = \frac{Q}{I}$$</p>
+<div class="nt-f-units"><span>$\Delta t_\mathrm{max}$ (durée de vie de la pile) en <b>s</b></span><span>$Q$ en <b>C</b></span><span>$I$ (intensité délivrée, supposée constante) en <b>A</b></span></div>
 </div>
 
 <div class="nt-b nt-demo-box">
 <p class="nt-tag"><i class="fa-solid fa-eye"></i>Remarques</p>
 <ul class="nt-facts">
 <li>Cette relation permet aussi de trouver la capacité $Q$, si l'on connaît l'intensité $I$ et la durée maximale de fonctionnement $\Delta t_\mathrm{max}$.</li>
-<li>Industriellement, la capacité est le plus souvent donnée en <b>A·h</b> ou en <b>mA·h</b>&nbsp;: $\pu{1 mA*h} = \pu{1E-3 A}\times\pu{3600 s} = \pu{3,6 C}$.</li>
+<li>Cela permet de comprendre pourquoi, industriellement, la capacité est le plus souvent donnée en <b>A·h</b> ou en <b>mA·h</b>.</li>
 </ul>
 </div>
+
+<div class="nt-b nt-ask">
+<p class="nt-tag"><i class="fa-solid fa-circle-question"></i>Conversion</p>
+<p>Monter que $\pu{1,0 mA.h}=\pu{3,6 C}$</p>
+</div>
+
+<details class="nt-d nt-rep">
+<summary><span class="nt-tag"><i class="fa-solid fa-key"></i>Réponse</span><span class="nt-sum">Voir la réponse</span></summary>
+<div class="nt-d-body">
+Comme $\pu{1 C} = \pu{1 A}\times \pu{1 s}$,<br>
+$\pu{1,0 mA*h} = \pu{1E-3 A}\times\pu{3600 s} = \pu{3,6 C}$
+</div>
+</details>
 
 <details class="nt-d nt-plus">
 <summary><span class="nt-tag"><i class="fa-solid fa-landmark"></i>Application</span><span class="nt-sum">La statue de la Liberté🗽, une pile géante</span></summary>
