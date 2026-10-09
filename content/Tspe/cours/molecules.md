@@ -313,13 +313,15 @@ draft = false
 </table>
 </div>
 
+<br>
+
 <div class="nt-poly">
-<figure><img src="https://presentationssite.github.io/polyethylene.png" alt="Objets en polyéthylène et modèle de la chaîne" loading="lazy"><figcaption>polyéthylène</figcaption></figure>
-<figure><img src="https://presentationssite.github.io/pvc.png" alt="Objets en PVC et modèle de la chaîne" loading="lazy"><figcaption>polychlorure de vinyle</figcaption></figure>
-<figure><img src="https://presentationssite.github.io/polystyrene.png" alt="Objets en polystyrène et modèle de la chaîne" loading="lazy"><figcaption>polystyrène</figcaption></figure>
-<figure><img src="https://presentationssite.github.io/polypropylene.png" alt="Objets en polypropylène et modèle de la chaîne" loading="lazy"><figcaption>polypropylène</figcaption></figure>
-<figure><img src="https://presentationssite.github.io/cellulose.png" alt="Bois, coton, papier et modèle de la cellulose" loading="lazy"><figcaption>cellulose, un biopolymère</figcaption></figure>
-<figure><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/DNA_orbit_animated.gif" alt="Double hélice d'ADN en rotation" loading="lazy"><figcaption>l'ADN, un biopolymère</figcaption></figure>
+<figure><img src="/pe.png" alt="Objets en polyéthylène et modèle de la chaîne" loading="lazy" style="margin-bottom:0em;margin-top:0em;"><figcaption>polyéthylène</figcaption></figure>
+<figure><img src="/pvc.png" alt="Objets en PVC et modèle de la chaîne" loading="lazy" style="margin-bottom:1em;margin-top:0em;"><figcaption>polychlorure de vinyle</figcaption></figure>
+<figure><img src="/ps.png" alt="Objets en polystyrène et modèle de la chaîne" loading="lazy" style="margin-bottom:0em;margin-top:0em;"><figcaption>polystyrène</figcaption></figure>
+<figure><img src="/pp.png" alt="Objets en polypropylène et modèle de la chaîne" loading="lazy" style="margin-bottom:0em;margin-top:0em;"><figcaption>polypropylène</figcaption></figure>
+<figure><img src="/cellulose.png" alt="Bois, coton, papier et modèle de la cellulose" loading="lazy" style="margin-bottom:0em;margin-top:0em;"><figcaption>cellulose, un biopolymère</figcaption></figure>
+<figure><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/DNA_orbit_animated.gif" alt="Double hélice d'ADN en rotation" loading="lazy" style="margin-bottom:0em;margin-top:0em;"><figcaption>l'ADN, un biopolymère</figcaption></figure>
 </div>
 
 ## Pour aller plus loin&nbsp;: nommer une molécule {.nt-h2}

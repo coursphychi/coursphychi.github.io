@@ -151,12 +151,12 @@ draft = false
 </div>
 </details>
 
-<details class="nt-d nt-plus">
-<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">La pluie dorée</span></summary>
-<div class="nt-d-body">
-<p><a href="https://www.youtube.com/shorts/nyoOhWLwN_g" target="_blank" rel="noopener">Voir l'expérience de la pluie dorée</a>&nbsp;: l'iodure de plomb, dissous à chaud, précipite en refroidissant sous forme de paillettes dorées.</p>
+<div class="nt-b nt-demo-box">
+<p class="nt-tag"><i class="fa-solid fa-eye"></i>La pluie dorée</p>
+<p>L'iodure de plomb, dissous à chaud, précipite en refroidissant sous forme de paillettes dorées. C'est le quotient de réaction de cette transformation qui a été calculé dans le petit exercice précédent.</p>
+<p style="text-align:center;"><a href="https://www.youtube.com/shorts/nyoOhWLwN_g" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> Vidéo de l'expérience</a></p>
 </div>
-</details>
+
 
 ## Évolution spontanée {.nt-h2}
 
@@ -198,7 +198,23 @@ draft = false
 <p class="nt-note">L'axe des quotients de réaction est en échelle logarithmique. Les compositions finales sont calculées en résolvant $Q_{r,\mathrm{eq}} = K$.</p>
 </div>
 
+<div class="nt-b nt-demo-box">
+<p class="nt-tag"><i class="fa-solid fa-eye"></i>La pluie dorée (le retour)</p>
+<p>Pourquoi le iodure de plomb ne précipite-t-il qu'après refroidissement pour donner cette apparition spectaculaire de petits grains dorés&nbsp;?</p>
+<ul style="margin-top:0em; margin-bottom:0.5em;">
+<li>Constante d’équilibre de la de précipitation à 70°C&nbsp;: $K(70^\circ \mathrm{C})=1,2\cdot 10^{6}$</li>
+<li>Constante d’équilibre de la de précipitation à 25°C&nbsp;: $K(25^\circ \mathrm{C})=1,6\cdot 10^{8}$</li>
+</ul>
+<p>On a choisi la composition initiale afin d'obtenir $Q_{r,\mathrm{i}} > K(70^\circ \mathrm{C})$. Le sens d'évolution spontanée est donc le sens indirect, celui de la dissolution du précipité. Le précipité étant initialement absent, le système est bloqué.</p>
+<p>Mais comme $Q_{r,\mathrm{i}} < K(25^\circ \mathrm{C})$, il y a une température entre 70°C et 25°C où $Q_{r,\mathrm{i}}$ devient inférieur à la constante d'équilibre et donc où le sens d'évolution spontanée devient le sens direct&nbsp;; l'iodure de plomb commence alors à précipiter.</p>
+</div>
+
 ## Description microscopique {.nt-h2}
+
+<div class="nt-b nt-demo-box">
+<p class="nt-tag"><i class="fa-solid fa-eye"></i>Remarque</p>
+<p>C'est hors programme mais éclairant.</p>
+</div>
 
 <p class="nt-lead">Reprenons la réaction modèle $\ce{A + B <=> C + D}$, et observons-la à l'échelle des entités.</p>
 

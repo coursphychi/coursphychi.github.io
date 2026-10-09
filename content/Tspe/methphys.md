@@ -60,14 +60,3 @@ td, th {
 </table>
 </div>
 
-{{%notice type="tip" round="true"%}}
-Pour les spectres infrarouges, il peut être pratique de retenir qu'une grosse patate au-delà de $\pu{3000 cm^-1}$ (bande d'absorption moyenne à forte et large tout à gauche du spectre) est toujours liée aux vibrations d'une liaison $\ce{O-H}$.
-{{%/notice%}}
-
-## Définition
-
-{{%notice type="def" title="Dosage par étalonnage" round="true"%}}
-Méthode de détermination d'une concentration, généralement non destructive, utilisant une courbe de référence liant la valeur d'une grandeur physique (absorbance, conductivité, masse volumique, etc.) à la concentration (en masse ou en quantité de matière) d'un soluté.<br>
-La courbe de référence, appelée courbe d'étalonnage, doit être monotone sur l'intervalle de concentration encadrant la concentration inconnue. La courbe n'est pas nécessairement une droite, mais cette situation permet d'obtenir une précision constante quelle que soit la valeur de la concentration recherchée.
-{{%/notice%}}
-

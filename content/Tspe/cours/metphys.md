@@ -217,9 +217,15 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
 <ol class="nt-steps">
 <li><p>mesurer une <span class="imp">propriété physique</span> sur une <span class="imp nt-hole">gamme étalon</span> de solutions de concentrations connues (obtenues par dilution d'une solution mère),</p></li>
 <li><p>tracer la <span class="imp nt-hole">courbe d'étalonnage</span>,</p></li>
-<li><p>mesurer la propriété physique sur la solution mystère et utiliser la courbe d'étalonnage (ou la proportionnalité si possible) pour déterminer sa concentration.</p></li>
+<li><p>mesurer la propriété physique sur la solution mystère et utiliser la courbe d'étalonnage (ou la proportionnalité si possible) pour <b>déterminer sa concentration</b>.</p></li>
 </ol>
 </div>
+
+<div class="nt-b nt-demo-box">
+<p class="nt-tag"><i class="fa-solid fa-eye"></i>Remarque</p>
+<p>La courbe d’étalonnage doit être <b>monotone</b> sur l’intervalle de concentration encadrant la concentration inconnue. La courbe n’est pas nécessairement une droite, mais cette situation permet d’obtenir une précision constante quelle que soit la valeur de la concentration recherchée.</p>
+</div>
+
 
 ### Spectrophotométrique {.nt-h3}
 
