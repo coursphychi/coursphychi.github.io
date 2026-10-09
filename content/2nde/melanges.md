@@ -23,7 +23,7 @@ td, th {
 # Corps purs et mélanges
 
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/2nde/melanges"> Cours </a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/2nde/melanges"><b>Cours 📽️</b> </a> + <a href="../cours/melanges"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
 
 
 [![](/cm-melange.png)](/cm-melange.pdf)
