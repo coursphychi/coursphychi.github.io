@@ -161,7 +161,7 @@ draft = false
 
 ## Le protocole {.nt-h2}
 
-<img class="nt-fig-prot" src="/protdilution.png" alt="Les quatre étapes d'une dilution : 1. prélever la solution mère à la pipette jaugée munie d'une propipette ; 2. verser le contenu de la pipette dans la fiole jaugée ; 3. boucher et agiter ; 4. compléter à la pissette jusqu'au trait de jauge, le bas du ménisque à hauteur des yeux">
+<img class="nt-fig-prot" src="/protdilution.png" alt="Les quatre étapes d'une dilution : 1. prélever la solution mère à la pipette jaugée munie d'une propipette ; 2. verser le contenu de la pipette dans la fiole jaugée ; 3. boucher et agiter ; 4. compléter à la pissette jusqu'au trait de jauge, le bas du ménisque à hauteur des yeux" style="max-width:100%;">
 
 <div class="nt-b nt-proto">
 <p class="nt-tag"><i class="fa-solid fa-flask-vial"></i>Protocole&nbsp;: préparer une solution par dilution</p>
