@@ -32,7 +32,7 @@ draft = false
 <div class="nt-b nt-prop">
 <p class="nt-tag"><i class="fa-solid fa-star"></i>L'équation de la réaction</p>
 <p>Il y a forcément autant d'électrons perdus par les uns que d'électrons gagnés par les autres&nbsp;: pour obtenir l'équation de la réaction, on multiplie les demi-équations de façon à <span class="imp nt-hole">équilibrer le nombre d'électrons</span>, qui disparaissent alors du bilan.</p>
-<p class="nt-center">$\begin{array}{rcll} \ce{Ox_1} + {\color{#CA8A04}\ce{m e-}} &=& \ce{Red_1} & {\color{#2A6BC4}(\times n)} \\ \ce{Red_2} &=& \ce{Ox_2} + {\color{#2A6BC4}\ce{n e-}} & {\color{#CA8A04}(\times m)} \\ \hline \ce{n Ox_1 + m Red_2} &\longrightarrow& \ce{n Red_1 + m Ox_2} & \end{array}$</p>
+<p class="nt-center" style="overflow-x:auto;">$\begin{array}{rcll} \ce{Ox_1} + {\color{#CA8A04}\ce{m e-}} &=& \ce{Red_1} & {\color{#2A6BC4}(\times n)} \\ \ce{Red_2} &=& \ce{Ox_2} + {\color{#2A6BC4}\ce{n e-}} & {\color{#CA8A04}(\times m)} \\ \hline \ce{n Ox_1 + m Red_2} &\longrightarrow& \ce{n Red_1 + m Ox_2} & \end{array}$</p>
 </div>
 
 <div class="nt-b nt-def">
