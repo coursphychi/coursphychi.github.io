@@ -218,7 +218,11 @@ draft = false
 <details class="nt-d nt-plus">
 <summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Des fluides vraiment parfaits, et des fluides jamais parfaits près d'une paroi</span></summary>
 <div class="nt-d-body">
-<p>L'hélium liquide, refroidi en dessous de 2,17&nbsp;K, devient <b>superfluide</b>&nbsp;: sa viscosité s'annule. Il en devient fondamentalement étrange&nbsp;: un film invisible remonte le long de la paroi intérieure d'un récipient, redescend à l'extérieur et forme des gouttes qui tombent, jusqu'à ce que le récipient soit vide. <a href="https://upload.wikimedia.org/wikipedia/commons/f/f8/Liquid_helium_Rollin_film.jpg" target="_blank" rel="noopener">Voir la photo</a>. Les condensats de Bose-Einstein sont aussi superfluides, et le plasma de quarks et de gluons créé dans les collisionneurs de particules est le fluide le moins visqueux connu, presque parfait.</p>
+<p>L'hélium liquide, refroidi en dessous de 2,17&nbsp;K, devient <b>superfluide</b>&nbsp;: sa viscosité s'annule. Il en devient fondamentalement étrange&nbsp;: un film invisible remonte le long de la paroi intérieure d'un récipient, redescend à l'extérieur et forme des gouttes qui tombent, jusqu'à ce que le récipient soit vide. 
+<div style="position:relative;margin-left:auto;margin-right:auto;width:400px;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Liquid_helium_Rollin_film.jpg" style="box-shadow:none;background:none;border-radius:5px;">
+</div>
+Les condensats de Bose-Einstein sont aussi superfluides, et le plasma de quarks et de gluons créé dans les collisionneurs de particules est le fluide le moins visqueux connu, presque parfait.</p>
 <p>Près d'une paroi, en revanche, un fluide réel est toujours visqueux&nbsp;: il «&nbsp;colle&nbsp;» à la paroi. On sépare alors l'étude en deux domaines&nbsp;: une mince <b>couche limite</b> près de la paroi, où la viscosité compte, et le reste de l'écoulement, où le fluide peut être considéré comme parfait.</p>
 </div>
 </details>
@@ -318,9 +322,9 @@ draft = false
 <summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Vidéos et simulation</span></summary>
 <div class="nt-d-body">
 <ul class="nt-facts">
-<li><a href="https://upload.wikimedia.org/wikipedia/commons/5/58/Venturi_Tube_en.webm" target="_blank" rel="noopener">Une animation du tube de Venturi</a> (Wikimedia Commons)&nbsp;;</li>
+<li><a href="https://upload.wikimedia.org/wikipedia/commons/5/58/Venturi_Tube_en.webm" target="_blank" rel="noopener">Une animation du tube de Venturi</a>&nbsp;;</li>
 <li><a href="https://presentationssite.github.io/ecoulement.html" target="_blank" rel="noopener">La simulation d'écoulement du cours</a>&nbsp;;</li>
-<li><a href="https://www.youtube.com/watch?v=Ye3QPgDdJNg" target="_blank" rel="noopener">vidéo 1</a>, <a href="https://www.youtube.com/watch?v=BWvGE238DdE" target="_blank" rel="noopener">vidéo 2</a>, <a href="https://www.youtube.com/watch?v=51_Rzpw119o" target="_blank" rel="noopener">vidéo 3</a> et <a href="https://www.youtube.com/shorts/XP6oqIic4lo" target="_blank" rel="noopener">une courte vidéo</a> sur l'effet Venturi et ses applications.</li>
+<li>Expériences illustrant l'effet Venturi&nbsp;: <a href="https://www.youtube.com/watch?v=Ye3QPgDdJNg" target="_blank" rel="noopener">lévitation d'une balle</a>, <a href="https://www.youtube.com/watch?v=BWvGE238DdE" target="_blank" rel="noopener">table et feuille</a>, <a href="https://www.youtube.com/watch?v=51_Rzpw119o" target="_blank" rel="noopener">feuille collée en soufflant</a> et <a href="https://www.youtube.com/shorts/XP6oqIic4lo" target="_blank" rel="noopener">gros sac gonflé d'un seul souffle</a>.</li>
 </ul>
 </div>
 </details>
@@ -410,57 +414,101 @@ draft = false
     if (!root) { return; }
     var cv = $(root, 'canvas'), rP = $(root, 'input[type="range"]'), oF = $(root, '.out-f'), oP = $(root, '.out-p'), oD = $(root, '.out-d'), oM = $(root, '.out-m'), oMg = $(root, '.out-mg'), msg = $(root, '.nt-msg'), S;
     var G = 9.81, V = 100, MOBJ = 270, liq = 'eau', vMax = 0, drops = [], last = null, visible = true;   /* V en mL (cm³), masses en g */
-    var LIQ = { eau: [1.00, 'eau', 'rgba(96,165,250,.55)'], sale: [1.20, 'eau très salée', 'rgba(45,212,191,.5)'], huile: [0.92, 'huile', 'rgba(250,204,21,.45)'], ethanol: [0.79, 'éthanol', 'rgba(203,213,225,.65)'] };
+    var LIQ = { eau: [1.00, 'eau', [96, 165, 250]], sale: [1.20, 'eau très salée', [45, 212, 191]], huile: [0.92, 'huile', [250, 204, 21]], ethanol: [0.79, 'éthanol', [203, 213, 225]] };
+    var INK = '#475569', GLASS = 'rgba(241,245,249,.55)';
+    function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+    function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+    /* légende centrée sous un élément, recadrée pour ne jamais sortir du dessin */
+    function legende(c, s, x, y, w) {
+      c.font = '12px system-ui, sans-serif'; var lw = c.measureText(s).width;
+      x = Math.max(6 + lw / 2, Math.min(w - 6 - lw / 2, x));
+      c.textAlign = 'center'; c.fillStyle = '#475569'; c.fillText(s, x, y);
+      return [x - lw / 2, x + lw / 2];
+    }
+    function geom(w, h) {
+      /* tailles adaptées à la largeur, puis montage recentré dans le cadre */
+      var canW = Math.max(96, Math.min(160, w * 0.3)), bw = Math.max(92, Math.min(124, w * 0.24));
+      var gx = { baseL: 0, rod: 30, cx: 30 + 34 + canW / 2 };
+      gx.x0 = gx.cx - canW / 2; gx.x1 = gx.cx + canW / 2; gx.bc = gx.x1 + bw / 2 + 10; gx.bR = gx.bc + bw / 2;   /* la balance ne touche pas le vase */
+      var spout = gx.bc - gx.x1 - (bw - 34) * 0.18;   /* le bec s'arrête au-dessus de l'ouverture du bécher */
+      var off = Math.max(8, (w - gx.bR) / 2);
+      var g = { canW: canW, bw: bw, spout: spout, rod: gx.rod + off, cx: gx.cx + off, x0: gx.x0 + off, x1: gx.x1 + off, bc: gx.bc + off, baseL: gx.baseL + off };
+      g.bench = h - 46;                 /* paillasse : potence, vase et balance y sont posés */
+      g.canB = g.bench; g.canT = g.bench - 150; g.surf0 = g.canT + 14;   /* niveau du liquide = lèvre inférieure du bec */
+      g.objW = Math.min(52, canW * 0.38); g.objH = 70; g.wire = 30;
+      g.bot0 = g.canT - 16;             /* bas de l'objet au départ : au-dessus du bord du vase */
+      g.bot1 = g.surf0 + 8 + g.objH;   /* fin de course : objet entièrement immergé, juste sous la surface ; le dynamomètre reste au-dessus du vase */
+      g.dyn = 104;                      /* longueur du dynamomètre (anneau compris jusqu'au crochet) */
+      g.balH = 16; g.balTop = g.bench - g.balH;
+      g.bkH = 58; g.bkW = bw - 34;
+      return g;
+    }
     function draw(dt) {
       if (!S) { return; }
-      var c = S.ctx, w = S.w, h = S.h, s = +rP.value, L = LIQ[liq], rho = L[0];
-      /* géométrie : potence et dynamomètre en haut, vase à trop-plein au centre, balance à droite */
-      var cx = w * 0.36, canW = 150, canB = h - 30, canT = h * 0.52, surf0 = canT + 9, objW = 56, objH = 72;
-      var dBot = s * objH * 1.6 - 0.45 * objH;   /* l'objet est entièrement immergé avant la fin de la course */                         /* profondeur du bas de l'objet sous le niveau du bec */
-      var f = Math.max(0, Math.min(1, dBot / objH)), Vimm = f * V;      /* fraction et volume immergés */
+      var c = S.ctx, w = S.w, h = S.h, s = +rP.value, L = LIQ[liq], rho = L[0], g = geom(w, h);
+      var bot = g.bot0 + s * (g.bot1 - g.bot0), objTop = bot - g.objH;
+      var dBot = bot - g.surf0, f = Math.max(0, Math.min(1, dBot / g.objH)), Vimm = f * V;
       if (Vimm > vMax + 1e-9) { var add = Vimm - vMax; vMax = Vimm; for (var k = 0; k < Math.min(6, Math.ceil(add / 3)); k++) { drops.push({ t: -k * 0.08 }); } }
       var Fdyn = (MOBJ * G - rho * Vimm * G) / 1000, P = MOBJ * G / 1000, mDeb = rho * vMax;
-      /* niveau dans le vase : au bec tant que l'objet est enfoncé au maximum atteint, plus bas si on le remonte */
-      var drop = (vMax - Vimm) / V * 22, surf = surf0 + drop;
+      var surf = g.surf0 + (vMax - Vimm) / V * 22;   /* le niveau baisse si l'on remonte l'objet */
+      /* positions qui suivent la noix : crochet du dynamomètre, dynamomètre, bras de la potence */
+      var hookY = objTop - g.wire, dTop = hookY - g.dyn, armY = dTop - 10;
       c.clearRect(0, 0, w, h);
-      /* potence */
-      c.fillStyle = '#94A3B8'; c.fillRect(24, 20, 8, h - 40); c.fillRect(24, 20, cx - 20, 7); c.fillRect(10, h - 22, 70, 8);
-      /* dynamomètre : tube gradué, ressort, index */
-      var dx = cx - 13, dTop = 30, dLen = 96, scale = dLen / 3.0;      /* 0 à 3 N sur la hauteur du tube */
-      c.fillStyle = '#F8FAFC'; c.strokeStyle = '#475569'; c.lineWidth = 1.2; c.fillRect(dx, dTop, 26, dLen + 10); c.strokeRect(dx, dTop, 26, dLen + 10);
-      for (var n = 0; n <= 3; n += 0.5) { var yy = dTop + 6 + n * scale; c.beginPath(); c.moveTo(dx, yy); c.lineTo(dx + (n % 1 === 0 ? 8 : 5), yy); c.stroke(); if (n % 1 === 0) { c.fillStyle = '#475569'; c.font = '10px system-ui'; c.textAlign = 'right'; c.fillText(n, dx - 3, yy + 3); } }
-      var yI = dTop + 6 + Fdyn * scale;
-      c.strokeStyle = '#64748B'; c.lineWidth = 1; c.beginPath();
-      for (var q = 0; q <= 14; q++) { var yq = dTop + 6 + (yI - dTop - 6) * q / 14; c.lineTo(cx + (q % 2 ? 6 : -6), yq); } c.stroke();
-      c.fillStyle = '#E11D48'; c.fillRect(dx + 2, yI - 1.5, 22, 3);
-      txt(c, 'dynamomètre', dx + 32, dTop + 12, col('--slate'), '500 11px system-ui, sans-serif', 'left');
-      /* tige, crochet et fil jusqu'à l'objet */
-      var objTop = surf0 + dBot - objH;
-      c.strokeStyle = '#334155'; c.lineWidth = 1.2; c.beginPath(); c.moveTo(cx, dTop + dLen + 10); c.lineTo(cx, objTop); c.stroke();
-      /* vase à trop-plein et son bec */
-      var x0 = cx - canW / 2, x1 = cx + canW / 2;
-      c.fillStyle = L[2]; c.fillRect(x0, surf, canW, canB - surf);
-      c.fillStyle = '#CBD5E1'; c.strokeStyle = '#475569'; c.lineWidth = 1.2;
-      c.fillRect(cx - objW / 2, objTop, objW, objH); c.strokeRect(cx - objW / 2, objTop, objW, objH);   /* objet */
-      var yi = Math.max(objTop, surf); if (yi < objTop + objH) { c.fillStyle = L[2]; c.fillRect(cx - objW / 2, yi, objW, objTop + objH - yi); }   /* le liquide est devant la partie immergée */
-      c.strokeStyle = '#475569'; c.lineWidth = 1.6; c.beginPath(); c.moveTo(x0, canT); c.lineTo(x0, canB); c.lineTo(x1, canB); c.lineTo(x1, surf0); c.stroke();
-      c.beginPath(); c.moveTo(x1, canT); c.lineTo(x1, surf0 - 7); c.stroke();
-      c.beginPath(); c.moveTo(x1, surf0 - 7); c.lineTo(x1 + 46, surf0 + 5); c.moveTo(x1, surf0); c.lineTo(x1 + 46, surf0 + 12); c.stroke();   /* bec : sa lèvre inférieure est au niveau du liquide */   /* bec verseur */
-      txt(c, 'vase à trop-plein', x0, canB + 16, col('--slate'), '500 11px system-ui, sans-serif', 'left');
-      /* balance et bécher de récupération */
-      var bx = x1 + 22, bw = 96, bTop = canB - 50;   /* bécher placé sous l'extrémité du bec */
-      c.fillStyle = '#E2E8F0'; c.strokeStyle = '#475569'; c.fillRect(bx - 6, canB - 14, bw + 12, 14); c.strokeRect(bx - 6, canB - 14, bw + 12, 14);
-      c.fillStyle = '#0F172A'; c.fillRect(bx + bw / 2 - 28, canB - 12, 56, 10);
-      c.fillStyle = '#4ADE80'; c.font = '10px monospace'; c.textAlign = 'center'; c.fillText(fr(mDeb, 1) + ' g', bx + bw / 2, canB - 4);
-      var bkL = bx + 14, bkR = bx + bw - 14, bkB = canB - 14, bkT = bTop;
-      var hl = Math.min(1, vMax / 120) * (bkB - bkT - 6);
-      c.fillStyle = L[2]; c.fillRect(bkL, bkB - hl, bkR - bkL, hl);
-      c.strokeStyle = '#475569'; c.beginPath(); c.moveTo(bkL, bkT); c.lineTo(bkL, bkB); c.lineTo(bkR, bkB); c.lineTo(bkR, bkT); c.stroke();
-      txt(c, 'balance tarée', bx + bw / 2, canB + 16, col('--slate'), '500 11px system-ui, sans-serif');
-      /* gouttes qui tombent du bec */
-      drops.forEach(function (d) { d.t += dt; if (d.t < 0) { return; } var yd = surf0 + 14 + d.t * d.t * 900; c.fillStyle = L[2].replace(/[\d.]+\)$/, '0.9)'); c.beginPath(); c.arc(x1 + 50, yd, 3, 0, 2 * Math.PI); c.fill(); });
-      drops = drops.filter(function (d) { return surf0 + 14 + d.t * d.t * 900 < bkB - hl; });
-      /* lectures */
+      /* paillasse */
+      c.fillStyle = '#E7E5E4'; c.fillRect(0, g.bench, w, 5); c.strokeStyle = '#A8A29E'; c.lineWidth = 1; c.beginPath(); c.moveTo(0, g.bench + 0.5); c.lineTo(w, g.bench + 0.5); c.stroke();
+      /* potence : socle, tige, noix et bras */
+      c.fillStyle = '#94A3B8'; rr(c, g.baseL, g.bench - 7, 64, 7, 2); c.fill();
+      var gr = c.createLinearGradient(g.rod - 4, 0, g.rod + 4, 0); gr.addColorStop(0, '#94A3B8'); gr.addColorStop(0.5, '#E2E8F0'); gr.addColorStop(1, '#94A3B8');
+      c.fillStyle = gr; c.fillRect(g.rod - 3.5, 3, 7, g.bench - 10);
+      c.fillStyle = '#475569'; rr(c, g.rod - 8, armY - 7, 16, 14, 2); c.fill();                 /* noix */
+      c.fillStyle = '#94A3B8'; c.fillRect(g.rod + 8, armY - 2.5, g.cx - g.rod - 8, 5);            /* bras */
+      c.strokeStyle = '#475569'; c.lineWidth = 1.6; c.beginPath(); c.moveTo(g.cx, armY + 2); c.lineTo(g.cx, armY + 6); c.arc(g.cx - 3, armY + 6, 3, 0, Math.PI); c.stroke();   /* crochet du bras */
+      /* dynamomètre : anneau, tube gradué, ressort, index, crochet */
+      var tx = g.cx - 11, tTop = dTop + 10, tLen = g.dyn - 26, sc = (tLen - 12) / 3;   /* 0 à 3 N */
+      c.strokeStyle = INK; c.lineWidth = 1.3; c.beginPath(); c.ellipse(g.cx, dTop + 4, 4, 5, 0, 0, 2 * Math.PI); c.stroke();   /* anneau passé dans le crochet */
+      c.fillStyle = '#F8FAFC'; rr(c, tx, tTop, 22, tLen, 4); c.fill(); c.lineWidth = 1; c.stroke();
+      c.font = '9.5px system-ui, sans-serif'; c.textAlign = 'right'; c.fillStyle = INK;
+      for (var n = 0; n <= 3; n += 0.5) { var yy = tTop + 6 + n * sc; c.strokeStyle = INK; c.lineWidth = 0.7; c.beginPath(); c.moveTo(tx, yy); c.lineTo(tx + (n % 1 === 0 ? 7 : 4), yy); c.stroke(); if (n % 1 === 0) { c.fillText(String(n), tx - 3, yy + 3); } }
+      var yI = tTop + 6 + Fdyn * sc;
+      c.strokeStyle = '#94A3B8'; c.lineWidth = 1; c.beginPath(); c.moveTo(g.cx, tTop + 2);
+      for (var q = 1; q <= 12; q++) { c.lineTo(g.cx + (q % 2 ? 5 : -5), tTop + 2 + (yI - tTop - 2) * q / 12); } c.stroke();
+      c.fillStyle = '#E11D48'; c.fillRect(tx + 2, yI - 1.2, 18, 2.4);
+      c.strokeStyle = INK; c.lineWidth = 1.2; c.beginPath(); c.moveTo(g.cx, tTop + tLen); c.lineTo(g.cx, hookY - 4); c.stroke();
+      c.beginPath(); c.arc(g.cx + 2.5, hookY - 2, 2.5, Math.PI, 2.2 * Math.PI, true); c.stroke();   /* crochet du dynamomètre */
+      c.font = '12px system-ui, sans-serif'; c.textAlign = 'left'; c.fillStyle = '#475569'; c.fillText('dynamomètre', tx + 30, tTop + tLen / 2 + 4);
+      /* fil */
+      c.strokeStyle = '#334155'; c.lineWidth = 1; c.beginPath(); c.moveTo(g.cx, hookY); c.lineTo(g.cx, objTop); c.stroke();
+      /* vase à trop-plein : liquide, objet, liquide devant la partie immergée, parois et bec */
+      var Lc = rgba(L[2], 0.5);
+      c.fillStyle = GLASS; c.fillRect(g.x0, g.canT, g.canW, g.canB - g.canT);
+      c.fillStyle = Lc; c.fillRect(g.x0 + 1, surf, g.canW - 2, g.canB - surf - 1);
+      var og = c.createLinearGradient(g.cx - g.objW / 2, 0, g.cx + g.objW / 2, 0); og.addColorStop(0, '#94A3B8'); og.addColorStop(0.45, '#F1F5F9'); og.addColorStop(1, '#94A3B8');
+      c.fillStyle = og; rr(c, g.cx - g.objW / 2, objTop, g.objW, g.objH, 3); c.fill(); c.strokeStyle = '#64748B'; c.lineWidth = 1; c.stroke();
+      var yi = Math.max(objTop, surf); if (yi < bot) { c.fillStyle = Lc; c.fillRect(g.cx - g.objW / 2, yi, g.objW, bot - yi); }
+      c.strokeStyle = rgba(L[2], 0.9); c.lineWidth = 1; c.beginPath(); c.moveTo(g.x0 + 1, surf); c.lineTo(g.x1 - 1, surf); c.stroke();
+      c.strokeStyle = INK; c.lineWidth = 1.3; c.lineJoin = 'round';
+      c.beginPath(); c.moveTo(g.x0, g.canT); c.lineTo(g.x0, g.canB); c.lineTo(g.x1, g.canB); c.lineTo(g.x1, g.surf0); c.lineTo(g.x1 + g.spout, g.surf0 + 9); c.stroke();
+      c.beginPath(); c.moveTo(g.x1, g.canT); c.lineTo(g.x1, g.surf0 - 7); c.lineTo(g.x1 + g.spout, g.surf0 + 2); c.stroke();
+      var lv = legende(c, 'vase à trop-plein', g.cx, g.bench + 20, w);
+      /* balance et bécher de récupération sous l'extrémité du bec */
+      var bL = g.bc - g.bw / 2;
+      c.fillStyle = '#E2E8F0'; c.strokeStyle = '#64748B'; c.lineWidth = 1; rr(c, bL, g.balTop, g.bw, g.balH, 4); c.fill(); c.stroke();
+      c.fillStyle = '#CBD5E1'; rr(c, g.bc - g.bw * 0.32, g.balTop - 3, g.bw * 0.64, 3, 1); c.fill();
+      c.fillStyle = '#0F172A'; rr(c, g.bc - 26, g.balTop + 3, 52, g.balH - 6, 2); c.fill();
+      c.fillStyle = '#4ADE80'; c.font = '9.5px ui-monospace, Menlo, monospace'; c.textAlign = 'center'; c.fillText(fr(mDeb, 1) + ' g', g.bc, g.balTop + g.balH - 5.5);
+      var bkB = g.balTop - 3, bkT = bkB - g.bkH, bkL = g.bc - g.bkW / 2, bkR = g.bc + g.bkW / 2;
+      var hl = Math.min(1, vMax / 130) * (g.bkH - 10);
+      c.fillStyle = GLASS; c.fillRect(bkL, bkT, g.bkW, g.bkH);
+      if (hl > 0) { c.fillStyle = Lc; c.fillRect(bkL + 1, bkB - hl, g.bkW - 2, hl); }
+      c.strokeStyle = INK; c.lineWidth = 1.2; c.beginPath(); c.moveTo(bkL - 4, bkT - 3); c.quadraticCurveTo(bkL, bkT - 1, bkL, bkT + 5); c.lineTo(bkL, bkB); c.lineTo(bkR, bkB); c.lineTo(bkR, bkT); c.stroke();
+      for (var m = 1; m <= 3; m++) { var ym = bkB - m * (g.bkH - 10) / 4; c.strokeStyle = 'rgba(71,85,105,.6)'; c.lineWidth = 0.7; c.beginPath(); c.moveTo(bkR - 9, ym); c.lineTo(bkR - 2, ym); c.stroke(); }
+      c.font = '12px system-ui, sans-serif'; var lb = c.measureText('balance tarée').width;
+      legende(c, 'balance tarée', g.bc, (g.bc - lb / 2 < lv[1] + 10) ? g.bench + 36 : g.bench + 20, w);   /* sur une seconde ligne si la place manque */
+      /* gouttes qui tombent du bec dans le bécher */
+      var xd = g.x1 + g.spout + 1, y0d = g.surf0 + 10, ySurf = bkB - hl;
+      drops.forEach(function (d) { d.t += dt; if (d.t < 0) { return; } var yd = y0d + d.t * d.t * 900; if (yd < ySurf) { c.fillStyle = rgba(L[2], 0.95); c.beginPath(); c.ellipse(xd, yd, 2.4, 3.2, 0, 0, 2 * Math.PI); c.fill(); } });
+      drops = drops.filter(function (d) { return y0d + d.t * d.t * 900 < ySurf; });
+      /* lectures et commentaire */
       oP.textContent = fr(P, 2) + ' N'; oF.textContent = fr(Fdyn, 2) + ' N'; oD.textContent = fr(P - Fdyn, 3) + ' N';
       oM.textContent = fr(mDeb, 1) + ' g'; oMg.textContent = fr(mDeb * G / 1000, 3) + ' N';
       msg.innerHTML = f === 0 && vMax === 0 ? 'Dans l\u2019air, le dynamomètre indique le poids de l\u2019objet, P = ' + fr(P, 2) + ' N. Descendez l\u2019objet dans le liquide.'
@@ -473,7 +521,12 @@ draft = false
     function setup() { S = canvasCtx(cv); draw(0); }
     if ('IntersectionObserver' in window) { new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(cv); }
     setup(); onResize(setup);
-    (function step(ts) { var dt = last === null ? 0 : Math.min(0.05, (ts - last) / 1000); last = ts; if (visible && drops.length) { draw(dt); } requestAnimationFrame(step); })(performance.now());
+    /* animation des gouttes ; un dernier dessin efface la dernière goutte arrivée */
+    (function step(ts) {
+      var dt = last === null ? 0 : Math.min(0.05, (ts - last) / 1000); last = ts;
+      if (visible && drops.length) { draw(dt); if (!drops.length) { draw(0); } }
+      requestAnimationFrame(step);
+    })(performance.now());
   })();
   /* ================= 2. Débit et effet Venturi ================= */
   (function () {

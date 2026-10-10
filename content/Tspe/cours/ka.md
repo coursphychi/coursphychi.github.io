@@ -22,7 +22,7 @@ draft = false
 
 <div class="nt-f">
 <p class="nt-tag"><i class="fa-solid fa-equals"></i>Produit ionique de l'eau</p>
-<p class="nt-f-math">$$K_\mathrm{e} = \frac{\ce{[H3O+]}\times\ce{[HO-]}}{{c°}^2}$$</p>
+<p class="nt-f-math">$$K_\mathrm{e} = \frac{\ce{[H3O+]}\times\ce{[HO-]}}{{c^°}^2}$$</p>
 <div class="nt-f-units"><span>à 25&nbsp;°C, <b>$K_\mathrm{e}=1{,}0\times10^{-14}$</b></span><span>d'où <b>$\mathrm{p}K_\mathrm{e} = -\log\left(K_\mathrm{e}\right) = 14$</b></span></div>
 </div>
 
@@ -37,15 +37,15 @@ draft = false
 <summary><span class="nt-tag"><i class="fa-solid fa-key"></i>Réponse</span><span class="nt-sum">Voir la résolution</span></summary>
 <div class="nt-d-body">
 <p class="nt-center">$\ce{[H3O+]}=c°\times 10^{-\mathrm{pH}}= 10^{-2{,}3} = \pu{5,0E-3 mol*L-1}$</p>
-<p class="nt-center">$\ce{[HO-]}=\dfrac{K_\mathrm{e} \times {c°}^2}{\ce{[H3O+]}} = \dfrac{1{,}0\times10^{-14}\times 1{,}0^2}{5{,}0\times10^{-3}} = \pu{2,0E-12 mol*L-1}$</p>
+<p class="nt-center">$\ce{[HO-]}=\dfrac{K_\mathrm{e} \times {c^°}^2}{\ce{[H3O+]}} = \dfrac{1{,}0\times10^{-14}\times 1{,}0^2}{5{,}0\times10^{-3}} = \pu{2,0E-12 mol*L-1}$</p>
 </div>
 </details>
 
 <div class="nt-b nt-demo-box">
 <p class="nt-tag"><i class="fa-solid fa-pen-nib"></i>Solution neutre, acide ou basique</p>
 <ul class="nt-facts">
-<li><b style="color:#16A34A;">Solution neutre</b>&nbsp;: par définition, $\ce{[H3O+]}=\ce{[HO-]}$. Comme $\ce{[H3O+]}\times\ce{[HO-]}=K_\mathrm{e}\,{c°}^2$, on obtient $\ce{[H3O+]}^2 = K_\mathrm{e}\,{c°}^2$, soit $\ce{[H3O+]} = \sqrt{K_\mathrm{e}}\times c° = \pu{1,0E-7 mol*L-1}$, ou encore $\mathrm{pH} = \frac{1}{2}\mathrm{p}K_\mathrm{e} = 7{,}0$.</li>
-<li><b style="color:#E11D48;">Solution acide</b>&nbsp;: $\ce{[H3O+]} &gt; \ce{[HO-]} = \dfrac{K_\mathrm{e}\,{c°}^2}{\ce{[H3O+]}}$, donc $\ce{[H3O+]}^2 &gt; K_\mathrm{e}\,{c°}^2$, soit $\ce{[H3O+]} &gt; \pu{1,0E-7 mol*L-1}$ et $\mathrm{pH} &lt; 7{,}0$.</li>
+<li><b style="color:#16A34A;">Solution neutre</b>&nbsp;: par définition, $\ce{[H3O+]}=\ce{[HO-]}$. Comme $\ce{[H3O+]}\times\ce{[HO-]}=K_\mathrm{e}\,{c^°}^2$, on obtient $\ce{[H3O+]}^2 = K_\mathrm{e}\,{c^°}^2$, soit $\ce{[H3O+]} = \sqrt{K_\mathrm{e}}\times c° = \pu{1,0E-7 mol*L-1}$, ou encore $\mathrm{pH} = \frac{1}{2}\mathrm{p}K_\mathrm{e} = 7{,}0$.</li>
+<li><b style="color:#E11D48;">Solution acide</b>&nbsp;: $\ce{[H3O+]} &gt; \ce{[HO-]} = \dfrac{K_\mathrm{e}\,{c^°}^2}{\ce{[H3O+]}}$, donc $\ce{[H3O+]}^2 &gt; K_\mathrm{e}\,{c^°}^2$, soit $\ce{[H3O+]} &gt; \pu{1,0E-7 mol*L-1}$ et $\mathrm{pH} &lt; 7{,}0$.</li>
 <li><b style="color:#2A6BC4;">Solution basique</b>&nbsp;: $\ce{[H3O+]} &lt; \ce{[HO-]}$, donc $\ce{[H3O+]} &lt; \pu{1,0E-7 mol*L-1}$ et $\mathrm{pH} &gt; 7{,}0$.</li>
 </ul>
 </div>
@@ -93,7 +93,7 @@ draft = false
 <summary><span class="nt-tag"><i class="fa-solid fa-pen-nib"></i>Démonstration</span><span class="nt-sum">Le pH d'une base forte</span></summary>
 <div class="nt-d-body">
 <p>Pour une base forte, $\ce{A- + H2O -> AH + HO-}$ est totale, donc $\ce{[HO-]} = C$. Avec le produit ionique de l'eau&nbsp;:</p>
-<p class="nt-center">$\ce{[H3O+]}=\dfrac{K_\mathrm{e}\,{c°}^2}{\ce{[HO-]}}=\dfrac{K_\mathrm{e}\,{c°}^2}{C}$</p>
+<p class="nt-center">$\ce{[H3O+]}=\dfrac{K_\mathrm{e}\,{c^°}^2}{\ce{[HO-]}}=\dfrac{K_\mathrm{e}\,{c^°}^2}{C}$</p>
 <p class="nt-center">$\mathrm{pH} =-\log\left(\dfrac{\ce{[H3O+]}}{c°}\right) =-\log\left(K_\mathrm{e}\times\dfrac{c°}{C}\right) =-\log\left(K_\mathrm{e}\right)-\log\left(\dfrac{c°}{C}\right) =\mathrm{p}K_\mathrm{e} + \log\left(\dfrac{C}{c°}\right)$</p>
 </div>
 </details>
@@ -133,8 +133,12 @@ draft = false
 <div class="nt-b nt-ex">
 <p class="nt-tag"><i class="fa-solid fa-lightbulb"></i>Exemples</p>
 <ul class="nt-facts">
-<li>Acide faible&nbsp;: l'acide éthanoïque (ou acide acétique), dont la forme dissoute est simplement $\ce{CH3COOH(aq)}$&nbsp;: $\ce{CH3COOH(aq) + H2O(l) <=> CH3COO-(aq) + H3O+(aq)}$. Sa base conjuguée est l'ion éthanoate.</li>
-<li>Base faible&nbsp;: l'ammoniac, dont la forme dissoute est simplement $\ce{NH3(aq)}$&nbsp;: $\ce{NH3(aq) + H2O(l) <=> NH4+(aq) + HO-(aq)}$. Son acide conjugué est l'ion ammonium.</li>
+<li>Acide faible&nbsp;: l'acide éthanoïque (ou acide acétique), dont la forme dissoute est simplement $\ce{CH3COOH(aq)}$&nbsp;:<br>
+$\ce{CH3COOH(aq) }+ \ce{H2O(l)} \ce{<=>} \ce{CH3COO-(aq)} + \ce{H3O+(aq)}$.<br>
+Sa base conjuguée est l'ion éthanoate.</li>
+<li>Base faible&nbsp;: l'ammoniac, dont la forme dissoute est simplement $\ce{NH3(aq)}$&nbsp;:<br>
+$\ce{NH3(aq)} + \ce{H2O(l)} \ce{<=>}  \ce{NH4+(aq)} + \ce{HO-(aq)}$.<br>
+Son acide conjugué est l'ion ammonium.</li>
 </ul>
 </div>
 
