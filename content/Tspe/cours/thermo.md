@@ -655,6 +655,11 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
 <p>Tout corps à la température $T$ émet un rayonnement électromagnétique, dont le flux thermique surfacique vaut $\varphi = \sigma T^4$.</p>
 </div>
 
+<div class="nt-b nt-demo-box">
+<p class="nt-tag"><i class="fa-solid fa-eye"></i>Remarque</p>
+<p>Au bac, la loi de Stefan-Boltzmann sera toujours donnée.</p>
+</div>
+
 <div class="nt-f">
 <p class="nt-tag"><i class="fa-solid fa-equals"></i>Loi de Stefan-Boltzmann</p>
 <p class="nt-f-math">$$\varphi = \sigma T^4$$</p>

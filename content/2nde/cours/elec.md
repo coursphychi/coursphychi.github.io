@@ -63,7 +63,7 @@ hidden = true
 <p>L'intensité est l'équivalent du <b>débit d'une rivière</b>&nbsp;: la quantité d'eau qui passe sous un pont chaque seconde.</p>
 </div>
 
-<div class="nt-svgbox"><svg class='nt-svg nt-svg-m' viewBox='0 0 720 220' role='img' aria-label="Pour mesurer une intensité, on retire un fil du circuit et on met l'ampèremètre à sa place : il est traversé par le courant, qui y entre par la borne A et en sort par la borne COM"><g><polyline points='60,60 300,60 300,170 60,170 60,60' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><circle cx='60' cy='115' r='17' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='60' y='120' font-size='14' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>G</text><text x='46' y='95' font-size='15' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>+</text><text x='46' y='145' font-size='15' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>−</text><rect x='160' y='52' width='40' height='16' fill='#fff' stroke='#1E293B' stroke-width='2'/><rect x='158' y='162' width='44' height='16' fill='#fff'/><circle cx='158' cy='170' r='3.6' fill='#1E293B'/><circle cx='202' cy='170' r='3.6' fill='#1E293B'/><text x='180' y='196' font-size='11.5' text-anchor='middle' fill='#64748B' font-family='system-ui, sans-serif'>on retire un fil</text><g transform='translate(250,170) rotate(180)'><polygon points='7,0 -6,-6 -6,6' fill='#E11D48'/></g></g><g transform='translate(360,0)'><polyline points='60,60 300,60 300,170 60,170 60,60' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><circle cx='60' cy='115' r='17' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='60' y='120' font-size='14' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>G</text><text x='46' y='95' font-size='15' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>+</text><text x='46' y='145' font-size='15' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>−</text><rect x='160' y='52' width='40' height='16' fill='#fff' stroke='#1E293B' stroke-width='2'/><circle cx='180' cy='170' r='13' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='180' y='175' font-size='13' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='200' y='164' font-size='10.5' text-anchor='start' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='160' y='164' font-size='10.5' text-anchor='end' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>COM</text><g transform='translate(250,170) rotate(180)'><polygon points='7,0 -6,-6 -6,6' fill='#E11D48'/></g><text x='250' y='160' font-size='14' text-anchor='middle' fill='#E11D48' font-family='Georgia, serif' font-weight='700'><tspan font-style='italic'>I</tspan></text><text x='180' y='210' font-size='11.5' text-anchor='middle' fill='#64748B' font-family='system-ui, sans-serif'>l'ampèremètre prend la place du fil</text></g><path d='M335,115 l18,0' stroke='#94A3B8' stroke-width='2'/><polygon points='358,115 350,110 350,120' fill='#94A3B8'/></svg></div>
+<div class="nt-svgbox"><svg class='nt-svg' viewBox='0 0 720 220' role='img' aria-label="Pour mesurer une intensité, on retire un fil du circuit et on met l'ampèremètre à sa place : il est traversé par le courant, qui y entre par la borne A et en sort par la borne COM"><g><polyline points='60,60 300,60 300,170 60,170 60,60' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><circle cx='60' cy='115' r='17' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='60' y='120' font-size='14' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>G</text><text x='46' y='95' font-size='15' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>+</text><text x='46' y='145' font-size='15' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>−</text><rect x='160' y='52' width='40' height='16' fill='#fff' stroke='#1E293B' stroke-width='2'/><rect x='158' y='162' width='44' height='16' fill='#fff'/><circle cx='158' cy='170' r='3.6' fill='#1E293B'/><circle cx='202' cy='170' r='3.6' fill='#1E293B'/><text x='180' y='196' font-size='11.5' text-anchor='middle' fill='#64748B' font-family='system-ui, sans-serif'>on retire un fil</text><g transform='translate(250,170) rotate(180)'><polygon points='7,0 -6,-6 -6,6' fill='#E11D48'/></g></g><g transform='translate(360,0)'><polyline points='60,60 300,60 300,170 60,170 60,60' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><circle cx='60' cy='115' r='17' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='60' y='120' font-size='14' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>G</text><text x='46' y='95' font-size='15' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>+</text><text x='46' y='145' font-size='15' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>−</text><rect x='160' y='52' width='40' height='16' fill='#fff' stroke='#1E293B' stroke-width='2'/><circle cx='180' cy='170' r='13' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='180' y='175' font-size='13' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='200' y='164' font-size='10.5' text-anchor='start' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='160' y='164' font-size='10.5' text-anchor='end' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>COM</text><g transform='translate(250,170) rotate(180)'><polygon points='7,0 -6,-6 -6,6' fill='#E11D48'/></g><text x='250' y='160' font-size='14' text-anchor='middle' fill='#E11D48' font-family='Georgia, serif' font-weight='700'><tspan font-style='italic'>I</tspan></text><text x='180' y='210' font-size='11.5' text-anchor='middle' fill='#64748B' font-family='system-ui, sans-serif'>l'ampèremètre prend la place du fil</text></g><path d='M335,115 l18,0' stroke='#94A3B8' stroke-width='2'/><polygon points='358,115 350,110 350,120' fill='#94A3B8'/></svg></div>
 <p class="nt-cap">Pour mesurer une intensité, il faut «&nbsp;casser&nbsp;» le circuit&nbsp;: on retire un fil et on met l'ampèremètre à sa place. Le courant y entre par la borne A et en sort par la borne COM.</p>
 
 <div class="nt-b nt-warn">
@@ -497,10 +497,9 @@ hidden = true
       var w = o === 'v' ? 16 : 40, h = o === 'v' ? 40 : 16;
       return "<rect x='" + n(x - w / 2) + "' y='" + n(y - h / 2) + "' width='" + w + "' height='" + h + "' fill='" + (col || '#fff') + "' stroke='" + INK + "' stroke-width='2'/>";
     }
-    function therm(x, y, o) {   /* thermistance : conducteur ohmique barré d'un trait coudé */
-      var s = res(x, y, o);
-      if (o === 'v') { s += "<polyline points='" + n(x - 16) + ',' + n(y + 22) + ' ' + n(x - 8) + ',' + n(y + 22) + ' ' + n(x + 14) + ',' + n(y - 20) + "' fill='none' stroke='" + INK + "' stroke-width='1.6'/>"; s += text(x + 14, y - 22, '\u03b8', INK, 12, 'start', 700); }
-      else { s += "<polyline points='" + n(x - 26) + ',' + n(y + 14) + ' ' + n(x - 18) + ',' + n(y + 14) + ' ' + n(x + 20) + ',' + n(y - 13) + "' fill='none' stroke='" + INK + "' stroke-width='1.6'/>"; s += text(x + 24, y - 12, '\u03b8', INK, 12, 'start', 700); }
+    function therm(x, y, o) {   /* thermistance : conducteur ohmique traversé d'une diagonale, terminée par un petit segment à chaque bout */
+      var s = res(x, y, o), pts = o === 'v' ? [[x - 13, y + 30], [x - 13, y + 19], [x + 13, y - 19], [x + 13, y - 30]] : [[x - 30, y + 13], [x - 19, y + 13], [x + 19, y - 13], [x + 30, y - 13]];
+      s += "<polyline points='" + pts.map(function (p) { return n(p[0]) + ',' + n(p[1]); }).join(' ') + "' fill='none' stroke='" + INK + "' stroke-width='1.6' stroke-linejoin='round'/>";
       return s;
     }
     function rheo(x, y, o) {   /* rhéostat : conducteur ohmique traversé d'une flèche oblique */
@@ -1061,34 +1060,37 @@ hidden = true
     }
     function schema(v) {
       var on = function (k) { return etape >= k; }, col = function (k, c) { return on(k) ? c : '#94A3B8'; };
-      var b = "<defs><linearGradient id='gEau' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#BFDBFE'/><stop offset='1' stop-color='#60A5FA'/></linearGradient></defs>";
-      /* bain d'eau autour de la thermistance */
-      b += "<rect x='318' y='54' width='104' height='96' rx='12' fill='url(#gEau)' fill-opacity='.55' stroke='#3B82F6' stroke-width='1.2'/>";
-      b += "<path d='M326,70 q8,-5 16,0 t16,0 t16,0 t16,0 t16,0 t16,0' fill='none' stroke='#fff' stroke-width='1.4' stroke-opacity='.85'/>";
-      b += CI.text(370, 142, 'eau à \u03b8 = ?', '#1E3A8A', 11, 'middle', 700);
-      /* afficheur : DEL + R_P, cadre centré entre les deux fils horizontaux */
-      b += "<rect x='454' y='184' width='112' height='122' rx='12' fill='rgba(187,247,208,.5)' stroke='#4ADE80' stroke-dasharray='5 4'/>";
-      b += CI.text(510, 200, 'afficheur', '#15803D', 10.5, 'middle', 700);
-      b += CI.wire([[130, 40], [370, 40], [370, 170]]) + CI.wire([[260, 170], [500, 170]]) + CI.wire([[260, 170], [260, 320], [500, 320], [500, 170]]) + CI.wire([[370, 320], [370, 345], [130, 345], [130, 40]]);
-      b += CI.wire([[260, 210], [330, 210], [330, 290], [260, 290]]);
-      b += CI.gen(130, 192, 'v', 't') + CI.therm(370, 100, 'v') + CI.res(260, 250, 'v') + CI.res(500, 280, 'v');
+      var F = "font-family='system-ui, sans-serif'", G = "font-family='Georgia, serif'";
+      var b = "<defs><linearGradient id='gEau' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#DBEAFE'/><stop offset='1' stop-color='#93C5FD'/></linearGradient></defs>";
+      /* bain d'eau autour de la thermistance ; légende à droite du fil */
+      b += "<rect x='298' y='50' width='170' height='100' rx='14' fill='url(#gEau)' fill-opacity='.75' stroke='#60A5FA' stroke-width='1.2'/>";
+      b += "<path d='M306,64 q8,-5 16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0' fill='none' stroke='#fff' stroke-width='1.4' stroke-opacity='.9'/>";
+      b += "<text x='428' y='100' font-size='11.5' text-anchor='middle' fill='#1E3A8A' " + F + " font-weight='700'>eau</text><text x='428' y='117' font-size='11.5' text-anchor='middle' fill='#1E3A8A' " + F + " font-weight='700'>\u03b8 = ?</text>";
+      /* afficheur : cadre vert resserré autour de la DEL et de R_P */
+      b += "<rect x='494' y='206' width='52' height='112' rx='10' fill='rgba(187,247,208,.55)' stroke='#4ADE80' stroke-dasharray='5 4'/>";
+      /* fils */
+      b += CI.wire([[120, 40], [370, 40], [370, 170]]) + CI.wire([[260, 170], [520, 170]]) + CI.wire([[260, 170], [260, 330], [520, 330], [520, 170]]) + CI.wire([[370, 330], [370, 350], [120, 350], [120, 40]]);
+      b += CI.wire([[260, 210], [350, 210], [350, 290], [260, 290]]);
+      /* dipôles */
+      b += CI.gen(120, 192, 'v', 't') + CI.therm(370, 100, 'v') + CI.res(260, 250, 'v') + CI.res(520, 288, 'v');
       var glow = Math.min(1, v.I2 / 0.006);
-      if (glow > 0.02) { b += "<circle cx='500' cy='228' r='" + (12 + 16 * glow).toFixed(1) + "' fill='rgba(239,68,68," + (0.4 * glow).toFixed(2) + ")'/>"; }
-      b += CI.led(500, 228, 'v', 'd');
-      b += CI.node(370, 170) + CI.node(370, 320) + CI.node(260, 210) + CI.node(260, 290) + CI.meter(330, 250, 'V', 't');
-      b += "<rect x='346' y='237' width='76' height='26' rx='6' fill='#0F172A'/><text x='384' y='255' font-size='13.5' text-anchor='middle' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>" + fr(v.UR0, 2) + " V</text>";
-      /* noms et valeurs des dipôles */
-      b += "<text x='348' y='96' font-size='13' text-anchor='end' fill='#1E293B' font-family='Georgia, serif' font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>T</tspan></text>";
-      b += "<text x='246' y='246' font-size='13' text-anchor='end' fill='#1E293B' font-family='Georgia, serif' font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>0</tspan></text><text x='246' y='264' font-size='10.5' text-anchor='end' fill='#64748B' font-family='system-ui, sans-serif'>1 500 \u03a9</text>";
-      b += "<text x='518' y='277' font-size='13' fill='#1E293B' font-family='Georgia, serif' font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>P</tspan></text><text x='518' y='295' font-size='10.5' fill='#64748B' font-family='system-ui, sans-serif'>1 k\u03a9</text>";
-      b += CI.text(522, 232, 'DEL', '#15803D', 10.5, 'start', 700);
-      /* tensions : le nom à côté de la flèche, jamais dessus */
-      b += CI.uarr(88, 240, 88, 144, '', '', '#475569') + CI.qty(78, 196, 'U', 'G', '#475569', 'end') + CI.text(88, 262, '10,0 V', '#475569', 11.5, 'middle', 700);
-      b += CI.uarr(436, 125, 436, 75, '', '', col(2, '#7C3AED')) + CI.qty(444, 104, 'U', 'RT', col(2, '#7C3AED'), 'start', 13);
-      b += CI.uarr(290, 278, 290, 222, '', '', col(1, '#E11D48')) + CI.qty(298, 238, 'U', 'R0', col(1, '#E11D48'), 'start', 13);
+      if (glow > 0.02) { b += "<circle cx='520' cy='236' r='" + (12 + 15 * glow).toFixed(1) + "' fill='rgba(239,68,68," + (0.4 * glow).toFixed(2) + ")'/>"; }
+      b += CI.led(520, 236, 'v', 'd');
+      b += CI.node(370, 170) + CI.node(370, 330) + CI.node(260, 210) + CI.node(260, 290) + CI.meter(350, 250, 'V', 't');
+      b += "<rect x='368' y='237' width='76' height='26' rx='6' fill='#0F172A'/><text x='406' y='255' font-size='13.5' text-anchor='middle' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>" + fr(v.UR0, 2) + " V</text>";
+      /* noms et valeurs */
+      b += "<text x='348' y='96' font-size='13' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>T</tspan></text>";
+      b += "<text x='246' y='246' font-size='13' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>0</tspan></text><text x='246' y='264' font-size='10.5' text-anchor='end' fill='#64748B' " + F + ">1 500 \u03a9</text>";
+      b += "<text x='554' y='240' font-size='11' fill='#15803D' " + F + " font-weight='700'>DEL</text>";
+      b += "<text x='554' y='286' font-size='13' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>P</tspan></text><text x='554' y='303' font-size='10.5' fill='#64748B' " + F + ">1 k\u03a9</text>";
+      b += "<text x='554' y='262' font-size='10.5' fill='#16A34A' " + F + " font-style='italic'>afficheur</text>";
+      /* tensions : chaque nom à côté de sa flèche */
+      b += CI.uarr(80, 240, 80, 144, '', '', '#475569') + CI.qty(70, 196, 'U', 'G', '#475569', 'end') + CI.text(80, 262, '10,0 V', '#475569', 11.5, 'middle', 700);
+      b += CI.uarr(486, 125, 486, 75, '', '', col(2, '#7C3AED')) + CI.qty(494, 104, 'U', 'RT', col(2, '#7C3AED'), 'start', 13);
+      b += CI.uarr(280, 278, 280, 222, '', '', col(1, '#E11D48')) + CI.qty(287, 254, 'U', 'R0', col(1, '#E11D48'), 'start', 12.5);
       /* intensités */
-      b += CI.iarr(250, 40, 'r', on(5) ? 'I' : '', 'G', '#2563EB', 0, -10) + CI.iarr(260, 188, 'd', on(3) ? 'I' : '', '1', '#D97706', -14, 4) + CI.iarr(500, 176, 'd', on(4) ? 'I' : '', '2', '#059669', 14, 2);
-      return CI.svg(600, 365, b, 'Montage du TP : le générateur alimente la thermistance, plongée dans l\u2019eau, puis deux branches en dérivation : le conducteur ohmique R0, aux bornes duquel un voltmètre mesure la tension, et l\u2019afficheur formé de la DEL et de son conducteur ohmique de protection RP', 'nt-svg');
+      b += CI.iarr(240, 40, 'r', on(5) ? 'I' : '', 'G', '#2563EB', 0, -10) + CI.iarr(260, 190, 'd', on(3) ? 'I' : '', '1', '#D97706', -14, 4) + CI.iarr(520, 190, 'd', on(4) ? 'I' : '', '2', '#059669', 14, 4);
+      return CI.svg(620, 368, b, 'Montage du TP : le générateur alimente la thermistance, plongée dans l\u2019eau, puis deux branches en dérivation : le conducteur ohmique R0, aux bornes duquel un voltmètre mesure la tension, et l\u2019afficheur formé de la DEL et de son conducteur ohmique de protection RP', 'nt-svg');
     }
     function grAssoc(v) {
       var c = SA.ctx, w = SA.w, h = SA.h, L = 56, R = w - 14, T = 14, B = h - 34, umax = 10, imax = 8;
