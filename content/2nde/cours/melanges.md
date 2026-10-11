@@ -1,6 +1,7 @@
 +++
 title = "Corps purs et mélanges"
 draft = false
+hidden="true"
 +++
 
 <link rel="stylesheet" href="/css/cours.css">
@@ -341,7 +342,7 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
 <div class="nt-grid">
 <div class="nt-b nt-ex" style="margin:0;">
 <p class="nt-tag"><i class="fa-solid fa-droplet"></i>L'eau</p>
-<p>1&nbsp;litre d'eau a une masse de 1&nbsp;kilogramme&nbsp;: $\rho_\text{eau}$ = 1&nbsp;kg/L = <b>1&nbsp;000&nbsp;kg/m³</b> = 1&nbsp;g/cm³.</p>
+<p>1&nbsp;litre d'eau pure a une masse de 1&nbsp;kilogramme&nbsp;: $\rho_\text{eau}$ = 1&nbsp;kg/L = <b>1&nbsp;000&nbsp;kg/m³</b> = 1&nbsp;g/cm³.</p>
 </div>
 <div class="nt-b nt-ex" style="margin:0;">
 <p class="nt-tag"><i class="fa-solid fa-wind"></i>L'air</p>
@@ -349,9 +350,9 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
 </div>
 </div>
 
-<div class="nt-b nt-demo-box">
-<p class="nt-tag"><i class="fa-solid fa-eye"></i>Remarque</p>
-<p>Pour l'air, on peut se contenter de retenir que sa masse volumique est d'environ <b>1&nbsp;kg/m³</b>.</p>
+<div class="nt-b nt-prop">
+<p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir</p>
+<p>La masse volumique de l'<b>eau</b> pure et de l'<b>air</b> sont à connaître.</p>
 </div>
 
 <div class="nt-b nt-demo-box">
