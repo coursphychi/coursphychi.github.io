@@ -129,6 +129,13 @@ draft = false
 </ul>
 </div>
 
+<details class="nt-d nt-plus">
+<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Activité&nbsp;?</span></summary>
+<div class="nt-d-body">
+<p>L'activité mesure la fraction molaire d'une espèce chimique dans sa phase.</p>
+</div>
+</details>
+
 <div class="nt-b nt-ask">
 <p class="nt-tag"><i class="fa-solid fa-circle-question"></i>Petit exercice</p>
 <p>Dans $V=\pu{200 mL}$ d'eau distillée, on dissout totalement $m_1=\pu{0,30 g}$ d'iodure de potassium $\ce{KI}$ et $m_2=\pu{0,30 g}$ de nitrate de plomb $\ce{Pb(NO3)2}$. Les ions iodure et les ions plomb peuvent précipiter selon la réaction d'équation&nbsp;:</p>

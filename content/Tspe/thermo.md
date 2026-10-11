@@ -23,7 +23,7 @@ td, th {
 <h1 style="overflow-x:auto;">Thermodynamique</h1>
 
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/tspe/thermo">Cours</a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/tspe/thermo"><b>Cours 📽️</b> </a> + <a href="../cours/thermo"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
 
 <div style="position: relative; max-width: 100%; margin-left: auto;margin-right: auto;border-radius: 0px;margin-top:-1em;margin-bottom:-1em;">
 <a href="/cm-thermo.pdf"><img src="/cm-thermo.png"></a>
@@ -73,15 +73,4 @@ La loi phénoménologique de Newton, la loi de Stefan-Boltzmann, et l'expression
 </table>
 </div>
 
-{{%notice type="note" round="true"%}}
-Lorsque la température est en °C, l'usage est de la noter $\theta$ plutôt que $T$.<br>
-{{%/notice%}}
-
-{{%notice type="tip" round="true"%}}
-On trouve souvent le raccourci conceptuellement faux mais pratique $Q=C\Delta T$ pour un système incompressible.<br>
-Rigoureusement, $C\Delta T$ n'informe que sur la variation d'énergie interne $\Delta U$ du système (supposé incompressible).<br>
-Mais comme il n'y a le plus souvent pas d'énergie échangée sous forme de travail, le premier principe nous assure que $\Delta U = Q$ et donc que $Q=C\Delta T$.<br>
-Utiliser le raccourci semble autorisé, voire même encouragé au bac dans certains exercices, comme s'il s'agissait d'une formule pour $Q$.<br>
-C'est un peu triste car cela brouille le message du premier principe qui distingue bien, d'une part, ce qui varie à l'intérieur du système, et d'autre part, ce qu'il échange.
-{{%/notice%}}
 

@@ -44,7 +44,9 @@ Simuler, à l’aide d’un langage de programmation, un processus aléatoire il
 <a href="../programmes/#tp-titrage-conductimétrique">
 📒
 </a>
-</td>
+<a href="../programmes/#scarabé">
+📒
+</a>
 </tr>
 <tr>
 <th>Titrages</th>
