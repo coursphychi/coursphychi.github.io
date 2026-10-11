@@ -456,7 +456,7 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
 <div class="nt-btns">
 <button type="button" class="nt-btn nt-btn-main" data-act="play"><i class="fa-solid fa-play"></i>&nbsp; Lancer l'élution</button>
 <button type="button" class="nt-btn" data-act="out" disabled><i class="fa-solid fa-hand"></i>&nbsp; Retirer la plaque</button>
-<span class="nt-ccm-x" hidden style="align-self:center; font-weight:700; color:#B91C1C;"><i class="fa-solid fa-forward"></i>&nbsp; vitesse × 3</span>
+<span class="nt-ccm-x" hidden style="align-self:center; font-weight:700; color:#B91C1C;"><i class="fa-solid fa-forward"></i>&nbsp; vitesse × 4</span>
 </div>
 <div class="nt-btns">
 <label class="nt-check"><input type="checkbox" name="ccmc" value="E102"> E102 (jaune)</label>
@@ -850,14 +850,16 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
     var cv = $(root, 'canvas'), btn = $(root, '[data-act="play"]'), btnOut = $(root, '[data-act="out"]'), msg = $(root, '.nt-msg'), S;
     /* rapport frontal (valeurs illustratives) et couleur de chaque colorant : E133 et E131 ont le même bleu, seule leur hauteur les distingue */
     var COL = { E102: [0.36, '#FACC15'], E133: [0.66, '#1E88E5'], E131: [0.84, '#1E88E5'] };
+    var VERT = (function () { var a = parseInt('FACC15', 16), b = parseInt('1E88E5', 16), m = function (s) { return Math.round(((a >> s) & 255) * ((b >> s) & 255) / 255); }; return '#' + [16, 8, 0].map(function (s) { return ('0' + m(s).toString(16)).slice(-2); }).join(''); })();   /* jaune × bleu */
     var DEP = [['M&M\u2019s vert', ['E102', 'E133']], ['E102', ['E102']], ['E133', ['E133']], ['E131', ['E131']]];
-    var f = null, run = false, sorti = false, trop = false, last = null, ext = 0;   /* f : ordonnée (px) du front ; ext : parcours supplémentaire des taches après « trop tard » */
+    var f = null, run = false, sorti = false, trop = false, depasse = false, last = null, ext = 0;   /* f : ordonnée (px) du front ; depasse : repère des 2 cm franchi ; ext : parcours supplémentaire des taches après « trop tard » */
     function geom() {
       var w = S.w, h = S.h, pw = Math.min(170, w * 0.42), pt = 44, pb = h - 30;
       return { w: w, h: h, pw: pw, pt: pt, pb: pb, px: (w - pw) / 2,
                liq: pb - 34,     /* niveau de l'éluant dans la cuve */
                base: pb - 52,    /* ligne de dépôt */
-               tm: pt + 26,      /* repère « 2 cm du bord » : là où il faut retirer la plaque */
+               tm: pt + 52,      /* repère « 2 cm du bord » : même écart avec le bord que la ligne de dépôt */
+               tol: 8,           /* tolérance autour du repère (px) */
                tt: pt + 3 };     /* haut de la plaque */
     }
     function prog(g) { return Math.max(0, (g.liq - f) / (g.liq - g.tm)); }   /* 0 au départ, 1 au repère */
@@ -865,10 +867,10 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
       var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
       return 'rgb(' + Math.round(r + (255 - r) * w) + ',' + Math.round(g + (255 - g) * w) + ',' + Math.round(b + (255 - b) * w) + ')';
     }
-    function spot(c, x, y, k, dist, lim, a) {
+    function spot(c, x, y, k, dist, lim, a, coul) {   /* coul : couleur imposée (tache mélangée) */
       var rx = 12 + 8 * dist, ry = 10 + 48 * dist;
       if (lim !== null && y - ry < lim) { y = lim + ry; }   /* la tache ne passe pas au-dessus du front : elle se place juste sous lui */
-      var col = clair(COL[k][1], 0.4 * dist), gr = c.createRadialGradient(x, y, 0, x, y, Math.max(rx, ry));
+      var col = clair(coul || COL[k][1], 0.7 * dist), gr = c.createRadialGradient(x, y, 0, x, y, Math.max(rx, ry));   /* plus la tache s'étale, plus sa couleur se dilue */
       gr.addColorStop(0, col); gr.addColorStop(0.6, col); gr.addColorStop(1, 'rgba(255,255,255,0)');
       c.save(); c.translate(x, y); c.scale(rx / Math.max(rx, ry), ry / Math.max(rx, ry)); c.translate(-x, -y);
       c.globalAlpha = a; c.fillStyle = gr; c.beginPath(); c.arc(x, y, Math.max(rx, ry), 0, 2 * Math.PI); c.fill(); c.restore();
@@ -897,18 +899,15 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
       c.save(); c.globalCompositeOperation = 'multiply';
       DEP.forEach(function (dep, i) {
         var x = g.px + g.pw * (i + 0.5) / 4;
-        if (dep[1].length === 2) {   /* M&M's vert : zone de mélange au départ, puis séparation */
-          var mix = Math.max(0, 1 - p / 0.3), ym = g.base - 0.51 * trav;
-          if (mix > 0) {
-            c.globalCompositeOperation = 'source-over';
-            var gg = c.createRadialGradient(x, ym, 0, x, ym, 13); gg.addColorStop(0, '#2E9E4F'); gg.addColorStop(0.6, '#2E9E4F'); gg.addColorStop(1, 'rgba(46,158,79,0)');
-            c.globalAlpha = 0.9 * mix; c.fillStyle = gg; c.beginPath(); c.arc(x, ym, 13, 0, 2 * Math.PI); c.fill(); c.globalAlpha = 1;
-            c.globalCompositeOperation = 'multiply';
-          }
+        var mix = 0;
+        if (dep[1].length === 2) {   /* M&M's vert : au départ, une seule tache verte, de même forme que les autres, qui s'efface pendant la séparation */
+          mix = Math.max(0, 1 - p / 0.3);
+          var dm = Math.min(1, 0.51 * tf), ym = g.base - 0.51 * trav;
+          if (mix > 0) { spot(c, x, ym, 'E102', dm, lim, mix, VERT); }
         }
         dep[1].forEach(function (k) {
-          var rf = COL[k][0], y = g.base - rf * trav, dist = Math.min(1, rf * tf), al = dep[1].length === 2 ? Math.min(1, 0.35 + p / 0.2) : 1;
-          spot(c, x, y, k, dist, lim, al);
+          var rf = COL[k][0], y = g.base - rf * trav, dist = Math.min(1, rf * tf), al = dep[1].length === 2 ? 1 - mix : 1;
+          if (al > 0) { spot(c, x, y, k, dist, lim, al); }
         });
       });
       c.restore();
@@ -930,7 +929,7 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
       txt(c, 'ligne de dépôt', g.px - (sorti ? 10 : 50), g.base + 4, '#475569', '11px system-ui, sans-serif', 'right');
     }
     function reset() {
-      var g = geom(); f = g.liq; run = false; sorti = false; trop = false; last = null; ext = 0;
+      var g = geom(); f = g.liq; run = false; sorti = false; trop = false; depasse = false; last = null; ext = 0;
       btn.disabled = false; btnOut.disabled = true; btn.innerHTML = '<i class="fa-solid fa-play"></i>&nbsp; Lancer l\u2019élution';
       $(root, '.nt-ccm-x').hidden = true;
       msg.textContent = 'La plaque est placée dans la cuve. Lancez l\u2019élution, et retirez la plaque au repère «\u00a02\u00a0cm\u00a0du\u00a0bord\u00a0».';
@@ -942,18 +941,20 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
       var g = geom(), k = 0.075 * (g.liq - g.tm);   /* vitesse de référence : le repère est atteint en une quinzaine de secondes */
       if (!trop) {
         f -= dt * k * (1.25 - 0.5 * Math.min(1, prog(g)));   /* l'éluant ralentit en montant */
-        if (f <= g.tm) {
-          f = g.tm; trop = true; $(root, '.nt-ccm-x').hidden = false; btnOut.disabled = true;
-          msg.innerHTML = '<b>Trop tard&nbsp;!</b> Le front a dépassé le repère «&nbsp;2&nbsp;cm&nbsp;du&nbsp;bord&nbsp;», où il fallait retirer la plaque. Les colorants continuent de monter&nbsp;: leurs hauteurs ne sont plus comparables. La suite est accélérée (×3).';
+        if (!depasse && f <= g.tm - g.tol) {   /* repère nettement dépassé (au-delà de la tolérance) : simple avertissement, on peut encore retirer la plaque */
+          depasse = true;
+          msg.innerHTML = '<b>Attention&nbsp;!</b> Le front a dépassé le repère «&nbsp;2&nbsp;cm&nbsp;du&nbsp;bord&nbsp;»&nbsp;: retirez la plaque sans tarder, avant que l\u2019éluant n\u2019atteigne le bord.';
+        }
+        if (f <= g.tt) {   /* l'éluant atteint le bord : trop tard, la suite est accélérée */
+          f = g.tt; trop = true; $(root, '.nt-ccm-x').hidden = false; btnOut.disabled = true;
+          msg.innerHTML = '<b>Trop tard&nbsp;!</b> L\u2019éluant a atteint le bord supérieur de la plaque. Les colorants continuent de monter et vont s\u2019accumuler en haut&nbsp;: leurs hauteurs ne seront plus comparables. La suite est accélérée (×4).';
         }
       } else {
-        var sp = k * 3 * 0.75;   /* vitesse accélérée (×3) */
-        if (f > g.tt) { f = Math.max(g.tt, f - dt * sp); }
-        else { ext += dt * sp / (g.base - g.tt); }   /* front bloqué en haut : les taches continuent de monter */
+        ext += dt * k * 4 * 0.75 / (g.base - g.tt);   /* front bloqué au bord : les taches continuent de monter (×4) */
         if (ext >= 2) {
           ext = 2; run = false; $(root, '.nt-ccm-x').hidden = true;
           btn.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; btn.disabled = false;
-          msg.innerHTML = '<b>Trop tard&nbsp;:</b> le front a atteint le haut de la plaque, et toutes les taches se sont accumulées en haut. La chromatographie est inexploitable&nbsp;: recommencez, en retirant la plaque au repère «&nbsp;2&nbsp;cm&nbsp;du&nbsp;bord&nbsp;».';
+          msg.innerHTML = '<b>Trop tard&nbsp;:</b> toutes les taches se sont accumulées en haut de la plaque. La chromatographie est inexploitable&nbsp;: recommencez, en retirant la plaque vers le repère «&nbsp;2&nbsp;cm&nbsp;du&nbsp;bord&nbsp;».';
           draw(); return;
         }
       }
@@ -969,7 +970,8 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
     btnOut.addEventListener('click', function () {
       if (trop) { return; }
       run = false; sorti = true; btnOut.disabled = true; btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; draw();
-      msg.innerHTML = prog(geom()) < 0.6 ? 'Les taches sont encore trop proches de la ligne de dépôt pour bien les distinguer&nbsp;: attendez davantage avant de retirer la plaque.' : 'Plaque retirée, front de l\u2019éluant marqué au crayon. Quels colorants contient le M&amp;M\u2019s vert&nbsp;? Cochez-les ci-dessous, puis vérifiez.';
+      msg.innerHTML = prog(geom()) < 0.6 ? 'Les taches sont encore trop proches de la ligne de dépôt pour bien les distinguer&nbsp;: attendez davantage avant de retirer la plaque.'
+        : (f < geom().tm - geom().tol ? 'Plaque retirée un peu tard (le front a dépassé le repère), mais avant que l\u2019éluant n\u2019atteigne le bord&nbsp;: les hauteurs des taches restent comparables. ' : 'Plaque retirée, front de l\u2019éluant marqué au crayon. ') + 'Quels colorants contient le M&amp;M\u2019s vert&nbsp;? Cochez-les ci-dessous, puis vérifiez.';
     });
     $(root, '[data-act="check"]').addEventListener('click', function () {
       if (!sorti || prog(geom()) < 0.6) { msg.textContent = 'Réalisez d\u2019abord une chromatographie exploitable.'; return; }
