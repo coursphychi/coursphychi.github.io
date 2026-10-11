@@ -247,7 +247,7 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
 <div class="nt-lab" id="lab-volley">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
 <p class="nt-lab-title">Le service au volley</p>
-<canvas style="height:240px;" aria-label="Trajectoire d'un service au volley, du serveur jusqu'au sol, par-dessus le filet"></canvas>
+<canvas style="height:280px;" aria-label="Trajectoire d'un service au volley, du serveur jusqu'au sol, par-dessus le filet"></canvas>
 <label class="nt-ctrl">Vitesse du service $v_0$&nbsp;: <b class="out-v0"></b><input type="range" min="12" max="28" step="0.1" value="17"></label>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="play"><i class="fa-solid fa-pause"></i>&nbsp; Pause</button></div>
 <p class="nt-msg" aria-live="polite"></p>
@@ -281,7 +281,7 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
 <p class="nt-lab-title">Les deux tours</p>
 <canvas style="height:340px;" aria-label="Deux tours : une balle tirée depuis la tour de gauche, une balle lâchée depuis la tour de droite"></canvas>
 <div class="nt-ctrls">
-<label class="nt-ctrl">Direction du tir (par rapport à l'horizontale)&nbsp;: <b class="out-ang"></b><input type="range" data-p="ang" min="-25" max="25" step="1" value="15"></label>
+<label class="nt-ctrl">Direction du tir&nbsp;: <b class="out-ang"></b><input type="range" data-p="ang" min="-25" max="25" step="1" value="15"></label>
 <label class="nt-ctrl">Vitesse du tir&nbsp;: <b class="out-v0"></b><input type="range" data-p="v0" min="5" max="30" step="0.5" value="18"></label>
 </div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="tir"><i class="fa-solid fa-crosshairs"></i>&nbsp; Tirer</button></div>
@@ -339,9 +339,14 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
 <div class="nt-ctrls">
 <label class="nt-ctrl">Vitesse initiale $v_0$&nbsp;: <b class="out-v0"></b><input type="range" data-p="v0" min="2" max="12" step="0.1" value="8"></label>
 <label class="nt-ctrl">Angle $\alpha$&nbsp;: <b class="out-al"></b><input type="range" data-p="al" min="0" max="90" step="1" value="55"></label>
+<label class="nt-ctrl">Coefficient de restitution $e$ des rebonds&nbsp;: <b class="out-e"></b><input type="range" data-p="e" min="0" max="1" step="0.05" value="0.8"></label>
 </div>
-<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="play"><i class="fa-solid fa-pause"></i>&nbsp; Pause</button></div>
-<p class="nt-note">Ballon de 600&nbsp;g lancé depuis 2,0&nbsp;m de haut (origine de l'énergie potentielle au sol). En orange&nbsp;: $E_c$&nbsp;; en bleu&nbsp;: $E_{pp}$&nbsp;; en rouge&nbsp;: $E_m = E_c + E_{pp}$, constante.</p>
+<div class="nt-btns">
+<label class="nt-check"><input type="checkbox" data-p="frot"> frottements de l'air (fluides)</label>
+<button type="button" class="nt-btn nt-btn-main" data-act="play"><i class="fa-solid fa-pause"></i>&nbsp; Pause</button>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<p class="nt-note">Ballon de 600&nbsp;g lancé depuis 2,0&nbsp;m de haut&nbsp;; l'origine de l'énergie potentielle est prise quand le ballon est posé au sol. À chaque rebond, la vitesse verticale s'inverse et est multipliée par $e$&nbsp;: $e = 1$ correspond à un rebond parfait, $e = 0$ à un ballon qui ne rebondit pas. Les frottements de l'air sont modélisés par une force opposée à la vitesse, de norme proportionnelle à $v^2$ (un peu exagérée pour être bien visible). En orange&nbsp;: $E_c$&nbsp;; en bleu&nbsp;: $E_{pp}$&nbsp;; en rouge&nbsp;: $E_m = E_c + E_{pp}$&nbsp;; en pointillés&nbsp;: sa valeur initiale.</p>
 </div>
 
 <div class="nt-b nt-demo-box">
@@ -608,43 +613,68 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
       return 9.7803253359 * (1 + 0.00193185265241 * s2) / Math.sqrt(1 - 0.00669437999013 * s2) - 3.086e-6 * alt;
     }
     function draw() {
-      var lat = +rL.value, alt = +rA.value, gv = g(lat, alt), c = S.ctx, w = S.w, h = S.h;
+      var lat = +rL.value, alt = +rA.value, gv = g(lat, alt), c = S.ctx, w = S.w, h = S.h, large = w >= 560;
       oL.textContent = Math.round(lat) + '\u00b0'; oA.textContent = Math.round(alt).toLocaleString('fr-FR') + ' m'; oG.textContent = fr(gv, 4) + ' m\u00b7s\u207b\u00b2';
-      c.clearRect(0, 0, w, h);
-      /* coupe de la Terre (aplatissement exagéré) */
-      var cx = w * 0.3, cy = h / 2, a = Math.min(w * 0.24, h * 0.42), b = a * 0.86, th = lat * Math.PI / 180;
-      var gr = c.createRadialGradient(cx - a * 0.3, cy - b * 0.3, a * 0.1, cx, cy, a); gr.addColorStop(0, '#BFDBFE'); gr.addColorStop(1, '#60A5FA');
+      c.clearRect(0, 0, w, h); c.setLineDash([]); c.lineCap = 'round';
+      /* ---- coupe de la Terre (aplatissement exagéré) ---- */
+      var cx = large ? w * 0.27 : w / 2, cy = large ? h / 2 + 6 : h * 0.34;
+      var a = large ? Math.min(w * 0.2, h * 0.36) : Math.min(w * 0.34, h * 0.24), b = a * 0.86, th = lat * Math.PI / 180;
+      /* axe de rotation et sens de rotation */
+      c.strokeStyle = 'rgba(30,58,138,.45)'; c.lineWidth = 1; c.setLineDash([4, 4]); c.beginPath(); c.moveTo(cx, cy - b - 16); c.lineTo(cx, cy + b + 10); c.stroke(); c.setLineDash([]);
+      c.strokeStyle = 'rgba(30,58,138,.6)'; c.lineWidth = 1.2; c.beginPath(); c.ellipse(cx, cy - b - 12, 10, 3.5, 0, 0.2 * Math.PI, 1.05 * Math.PI); c.stroke();
+      c.fillStyle = 'rgba(30,58,138,.6)'; c.beginPath(); c.moveTo(cx - 10, cy - b - 12); c.lineTo(cx - 13, cy - b - 7); c.lineTo(cx - 6, cy - b - 8); c.fill();
+      var gr = c.createRadialGradient(cx - a * 0.35, cy - b * 0.35, a * 0.08, cx, cy, a * 1.05); gr.addColorStop(0, '#DBEAFE'); gr.addColorStop(0.6, '#93C5FD'); gr.addColorStop(1, '#3B82F6');
       c.fillStyle = gr; c.beginPath(); c.ellipse(cx, cy, a, b, 0, 0, 2 * Math.PI); c.fill();
-      c.strokeStyle = 'rgba(255,255,255,.7)'; c.setLineDash([4, 4]); c.beginPath(); c.moveTo(cx - a, cy); c.lineTo(cx + a, cy); c.stroke(); c.setLineDash([]);
-      txt(c, 'équateur', cx - a + 34, cy - 6, '#1E3A8A', '600 11px system-ui, sans-serif');
-      txt(c, 'pôle Nord', cx, cy - b - 8, '#1E3A8A', '600 11px system-ui, sans-serif');
-      /* point de la surface et normale sortante (perpendiculaire à l'ellipse) */
+      c.strokeStyle = '#1E40AF'; c.lineWidth = 1; c.stroke();
+      /* parallèles à 30° et 60° (traits fins) puis équateur */
+      [30, 60].forEach(function (l) { var yy = b * Math.sin(l * Math.PI / 180), xx = a * Math.cos(l * Math.PI / 180); c.strokeStyle = 'rgba(255,255,255,.45)'; c.lineWidth = 0.8; [-1, 1].forEach(function (sg) { c.beginPath(); c.moveTo(cx - xx, cy + sg * yy); c.lineTo(cx + xx, cy + sg * yy); c.stroke(); }); });
+      c.strokeStyle = 'rgba(255,255,255,.9)'; c.lineWidth = 1; c.setLineDash([5, 4]); c.beginPath(); c.moveTo(cx - a, cy); c.lineTo(cx + a, cy); c.stroke(); c.setLineDash([]);
+      txt(c, 'équateur', cx - a * 0.55, cy - 6, '#1E3A8A', '600 11px system-ui, sans-serif');
+      txt(c, 'pôle Nord', cx + 16, cy - b - 8, '#1E3A8A', '600 11px system-ui, sans-serif', 'left');
+      /* point de la surface, latitude et normale sortante */
       var px = cx + a * Math.cos(th), py = cy - b * Math.sin(th);
+      c.strokeStyle = 'rgba(30,58,138,.55)'; c.lineWidth = 1; c.beginPath(); c.moveTo(cx, cy); c.lineTo(px, py); c.stroke();
+      var ra = Math.min(24, a * 0.22);
+      if (lat > 4) { c.beginPath(); c.arc(cx, cy, ra, -th, 0); c.stroke(); txt(c, Math.round(lat) + '\u00b0', cx + (ra + 14) * Math.cos(th / 2), cy - (ra + 14) * Math.sin(th / 2) + 4, '#1E3A8A', '600 10.5px system-ui, sans-serif'); }
       var nxo = Math.cos(th) / a, nyo = -Math.sin(th) / b, nno = Math.hypot(nxo, nyo); nxo /= nno; nyo /= nno;
-      var hgt = alt / 9000 * 0.16 * a, qx = px + nxo * hgt, qy = py + nyo * hgt;
-      if (alt > 0) {   /* montagne : petit triangle posé sur la surface */
-        var tx = -nyo, ty = nxo, base = Math.max(8, hgt * 0.7);
-        c.fillStyle = '#A16207'; c.beginPath(); c.moveTo(px + tx * base, py + ty * base); c.lineTo(qx, qy); c.lineTo(px - tx * base, py - ty * base); c.closePath(); c.fill();
+      var hgt = alt / 9000 * 0.18 * a, qx = px + nxo * hgt, qy = py + nyo * hgt;
+      if (alt > 0) {   /* montagne posée sur la surface, enneigée au sommet si elle est haute */
+        var tx = -nyo, ty = nxo, base = Math.max(7, hgt * 0.75);
+        c.fillStyle = '#92643A'; c.beginPath(); c.moveTo(px + tx * base, py + ty * base); c.lineTo(qx, qy); c.lineTo(px - tx * base, py - ty * base); c.closePath(); c.fill();
+        if (alt > 3000) { var f = 0.35; c.fillStyle = '#F8FAFC'; c.beginPath(); c.moveTo(qx + (px + tx * base - qx) * f, qy + (py + ty * base - qy) * f); c.lineTo(qx, qy); c.lineTo(qx + (px - tx * base - qx) * f, qy + (py - ty * base - qy) * f); c.closePath(); c.fill(); }
       }
-      /* vecteur g : du point vers l'intérieur, dessiné par-dessus la montagne */
-      var L = 44 + (gv - 9.76) * 900;
-      arrow(c, qx, qy, qx - nxo * L, qy - nyo * L, CA, 3.2);
-      c.fillStyle = CF; c.beginPath(); c.arc(qx, qy, 5, 0, 2 * Math.PI); c.fill();
-      /* étiquette décalée sur le côté de la flèche */
-      vecLabel(c, 'g', qx - nxo * L * 0.55 - nyo * 16, qy - nyo * L * 0.55 + nxo * 16 + 6, CA);
-      c.font = '10px system-ui, sans-serif'; c.fillStyle = col('--muted'); c.textAlign = 'center'; c.fillText('aplatissement exagéré', cx, cy + b + 18);
-      /* échelle de g */
-      var L0 = w * 0.62, R0 = w - 30, gmin = 9.75, gmax = 9.84, yb = h / 2;
+      var L = a * (0.3 + 0.15 * (gv - 9.76) / 0.08);   /* la flèche reste loin du centre et de l'angle */
+      arrow(c, qx, qy, qx - nxo * L, qy - nyo * L, CA, 3);
+      c.fillStyle = CF; c.beginPath(); c.arc(qx, qy, 4.5, 0, 2 * Math.PI); c.fill();
+      vecLabel(c, 'g', qx - nxo * L * 0.55 - nyo * 15, qy - nyo * L * 0.55 + nxo * 15 + 5, CA);
+      c.font = '10px system-ui, sans-serif'; c.fillStyle = col('--muted'); c.textAlign = 'center'; c.fillText('aplatissement exagéré', cx, cy + b + 22);
+      /* ---- jauge de g ---- */
+      var L0 = large ? w * 0.56 : 30, R0 = w - 30, yb = large ? h / 2 + 10 : h * 0.8, gmin = 9.76, gmax = 9.84;
       function X(v) { return L0 + (v - gmin) / (gmax - gmin) * (R0 - L0); }
-      c.strokeStyle = col('--ink'); c.lineWidth = 1.5; c.beginPath(); c.moveTo(L0, yb); c.lineTo(R0, yb); c.stroke();
-      [9.76, 9.78, 9.80, 9.82, 9.84].forEach(function (v) { c.beginPath(); c.moveTo(X(v), yb - 5); c.lineTo(X(v), yb + 5); c.stroke(); txt(c, fr(v, 2), X(v), yb + 20, col('--muted'), '11px system-ui, sans-serif'); });
-      [['équateur', g(0, 0)], ['pôles', g(90, 0)]].forEach(function (q, i) { c.fillStyle = col('--muted'); c.beginPath(); c.arc(X(q[1]), yb, 3.5, 0, 2 * Math.PI); c.fill(); txt(c, q[0], X(q[1]), yb - (i ? 28 : 14), col('--slate'), '600 11px system-ui, sans-serif'); });
-      c.fillStyle = CA; c.beginPath(); c.arc(X(gv), yb, 7, 0, 2 * Math.PI); c.fill();
-      txt(c, 'g (m\u00b7s\u207b\u00b2)', (L0 + R0) / 2, yb + 42, col('--slate'), '600 11px system-ui, sans-serif');
+      var tr = c.createLinearGradient(L0, 0, R0, 0); tr.addColorStop(0, '#E2E8F0'); tr.addColorStop(1, '#CBD5E1');
+      c.fillStyle = tr; c.beginPath(); if (c.roundRect) { c.roundRect(L0, yb - 4, R0 - L0, 8, 4); } else { c.rect(L0, yb - 4, R0 - L0, 8); } c.fill();
+      c.fillStyle = 'rgba(5,150,105,.35)'; c.beginPath(); if (c.roundRect) { c.roundRect(L0, yb - 4, Math.max(8, X(gv) - L0), 8, 4); } else { c.rect(L0, yb - 4, X(gv) - L0, 8); } c.fill();
+      /* graduation discrète, sous la jauge */
+      c.strokeStyle = '#94A3B8'; c.lineWidth = 1;
+      for (var v = gmin; v <= gmax + 1e-9; v += 0.01) { var xx = X(v), big = Math.round(v * 100) % 2 === 0; c.beginPath(); c.moveTo(xx, yb + 7); c.lineTo(xx, yb + (big ? 13 : 10)); c.stroke(); if (big) { c.font = '10.5px system-ui, sans-serif'; c.fillStyle = '#64748B'; c.textAlign = 'center'; c.fillText(fr(v, 2), xx, yb + 26); } }
+      c.font = '11px system-ui, sans-serif'; c.fillStyle = '#64748B'; c.textAlign = 'center'; c.fillText('g (m\u00b7s\u207b\u00b2)', (L0 + R0) / 2, yb + 44);
+      /* repères nommés, au-dessus */
+      [['pôles', g(90, 0)], ['équateur', g(0, 0)], ['Everest', g(28, 8849)]].forEach(function (q, i) {
+        var xr = X(q[1]); c.fillStyle = '#64748B'; c.beginPath(); c.moveTo(xr, yb - 6); c.lineTo(xr - 4, yb - 13); c.lineTo(xr + 4, yb - 13); c.closePath(); c.fill();
+        c.font = '600 10.5px system-ui, sans-serif'; var lw2 = c.measureText(q[0]).width;
+        txt(c, q[0], Math.max(4 + lw2 / 2, Math.min(w - 4 - lw2 / 2, xr)), yb - (i === 2 ? 32 : 18), '#475569', '600 10.5px system-ui, sans-serif');   /* jamais coupée ; Everest sur une seconde ligne */
+      });
+      /* valeur courante */
+      var xg = X(Math.max(gmin, Math.min(gmax, gv)));
+      c.fillStyle = CA; c.beginPath(); c.arc(xg, yb, 7, 0, 2 * Math.PI); c.fill(); c.strokeStyle = '#fff'; c.lineWidth = 2; c.stroke();
+      var lab = fr(gv, 3); c.font = '700 12px system-ui, sans-serif'; var lw = c.measureText(lab).width + 14, bxx = Math.max(L0, Math.min(R0 - lw, xg - lw / 2)), byy = yb - 66;
+      c.fillStyle = CA; c.beginPath(); if (c.roundRect) { c.roundRect(bxx, byy, lw, 20, 6); } else { c.rect(bxx, byy, lw, 20); } c.fill();
+      c.strokeStyle = CA; c.lineWidth = 1.2; c.beginPath(); c.moveTo(xg, byy + 20); c.lineTo(xg, yb - 8); c.stroke();
+      c.fillStyle = '#fff'; c.textAlign = 'center'; c.fillText(lab, bxx + lw / 2, byy + 14);
     }
     [rL, rA].forEach(function (r) { r.addEventListener('input', draw); });
     $$(root, '[data-preset]').forEach(function (b) { b.addEventListener('click', function () { var v = b.getAttribute('data-preset').split(','); rL.value = v[0]; rA.value = v[1]; draw(); }); });
-    function setup() { S = canvasCtx(cv); draw(); }
+    function setup() { cv.style.height = (cv.clientWidth < 560 ? 420 : 300) + 'px'; S = canvasCtx(cv); draw(); }
     setup(); onResize(setup);
   })();
   /* ================= 2. Le champ devient uniforme quand on zoome ================= */
@@ -703,12 +733,13 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
       /* cadrage adapté à la trajectoire (même échelle sur les deux axes) */
       var c = S.ctx, w = S.w, hh = S.h, WX = Math.max(6, xmax * 1.12 + 1), WZ = Math.max(3, zmax * 1.25 + 0.5), k = Math.min((w - 40) / WX, (hh - 30) / WZ);
       function X(x) { return 30 + x * k; }
-      function Y(z) { return hh - 20 - z * k; }
+      function Y(z) { return hh - 27 - z * k; }
       c.clearRect(0, 0, w, hh);
-      c.fillStyle = '#F1F5F9'; c.fillRect(0, Y(0), w, hh - Y(0));
+      var yS = Y(0) + 7;   /* sol : un rayon de ballon sous la trajectoire du centre, pour que le ballon le touche sans s'y enfoncer */
+      c.fillStyle = '#F1F5F9'; c.fillRect(0, yS, w, hh - yS); c.strokeStyle = '#CBD5E1'; c.lineWidth = 1; c.beginPath(); c.moveTo(0, yS + 0.5); c.lineTo(w, yS + 0.5); c.stroke();
       c.strokeStyle = col('--muted'); c.lineWidth = 1;
       var stp = WX > 30 ? 10 : (WX > 12 ? 5 : 1);
-      for (var gx = 0; gx <= WX; gx += stp) { c.beginPath(); c.moveTo(X(gx), Y(0)); c.lineTo(X(gx), Y(0) + 5); c.stroke(); txt(c, gx + ' m', X(gx), Y(0) + 16, col('--muted'), '10px system-ui, sans-serif'); }
+      for (var gx = 0; gx <= WX; gx += stp) { c.strokeStyle = '#94A3B8'; c.beginPath(); c.moveTo(X(gx), yS); c.lineTo(X(gx), yS + 5); c.stroke(); txt(c, gx + ' m', X(gx), yS + 16, col('--muted'), '10px system-ui, sans-serif'); }
       c.strokeStyle = 'rgba(42,107,196,.35)'; c.setLineDash([5, 4]); c.lineWidth = 1.5; c.beginPath();
       for (var s = 0; s <= tr.T + 1e-9; s += tr.T / 120) { var p = tr.P(s); if (s === 0) { c.moveTo(X(p[0]), Y(p[1])); } else { c.lineTo(X(p[0]), Y(p[1])); } }
       c.stroke(); c.setLineDash([]);
@@ -729,86 +760,151 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
     if (!root) { return; }
     var cv = $(root, 'canvas'), rV = $(root, 'input[type="range"]'), oV = $(root, '.out-v0'), msg = $(root, '.nt-msg'), btn = $(root, '[data-act="play"]'), S, t = 0;
     var Hh = 3.5, Hn = 2.40, Lc = 18, rb = 0.10;
+    function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+    function cote(c, x, y0, y1, s) {   /* cote verticale avec petites flèches et texte à gauche */
+      c.strokeStyle = '#64748B'; c.fillStyle = '#64748B'; c.lineWidth = 1;
+      c.beginPath(); c.moveTo(x, y0); c.lineTo(x, y1); c.stroke();
+      [[y0, y1 < y0 ? -1 : 1], [y1, y1 < y0 ? 1 : -1]].forEach(function (p) { c.beginPath(); c.moveTo(x, p[0]); c.lineTo(x - 3.5, p[0] + p[1] * 7); c.lineTo(x + 3.5, p[0] + p[1] * 7); c.closePath(); c.fill(); });   /* pointe exactement à l'altitude visée */
+      c.save(); c.translate(x - 6, (y0 + y1) / 2); c.rotate(-Math.PI / 2); txt(c, s, 0, 0, '#475569', '600 10.5px system-ui, sans-serif'); c.restore();
+    }
     function draw(dt) {
       if (!S) { return; }
       var v0 = +rV.value; oV.textContent = fr(v0, 1) + ' m\u00b7s\u207b\u00b9';
       function z(x) { return -G / (2 * v0 * v0) * x * x + Hh; }
       var zNet = z(Lc / 2), xs = v0 * Math.sqrt(2 * (Hh - rb) / G), ok1 = zNet > Hn + rb, ok2 = xs < Lc;
       var xEnd = ok1 ? xs : Lc / 2 - rb;
-      var c = S.ctx, w = S.w, h = S.h, k = Math.min((w - 40) / 22, (h - 40) / 4.4);
-      function X(x) { return 24 + x * k; }
-      function Y(y) { return h - 24 - y * k; }
-      c.clearRect(0, 0, w, h);
-      c.fillStyle = '#FDE68A'; c.fillRect(X(0), Y(0), Lc * k, 6); c.fillStyle = '#E2E8F0'; c.fillRect(X(Lc), Y(0), w, 6);
-      c.strokeStyle = col('--ink'); c.lineWidth = 3; c.beginPath(); c.moveTo(X(Lc / 2), Y(0)); c.lineTo(X(Lc / 2), Y(Hn)); c.stroke();
-      c.strokeStyle = 'rgba(30,41,59,.35)'; c.lineWidth = 1; for (var nt = 0.95; nt < Hn; nt += 0.15) { c.beginPath(); c.moveTo(X(Lc / 2) - 3, Y(nt)); c.lineTo(X(Lc / 2) + 3, Y(nt)); c.stroke(); }
-      txt(c, 'filet (2,40 m)', X(Lc / 2), Y(Hn) - 8, col('--ink'));
-      txt(c, 'fin du terrain', X(Lc), Y(0) + 18, col('--slate'));
-      txt(c, '0', X(0), Y(0) + 18, col('--slate'));
+      var c = S.ctx, w = S.w, h = S.h, k = Math.min((w - 60) / 22, (h - 46) / 4.3);
+      var x0 = (w - 21 * k) / 2 + 1.2 * k;   /* scène centrée : du serveur (-1,2 m) à 20 m */
+      function X(x) { return x0 + x * k; }
+      function Y(y) { return h - 30 - y * k; }
+      c.clearRect(0, 0, w, h); c.setLineDash([]); c.lineCap = 'round'; c.lineJoin = 'round';
+      /* gymnase : mur, plinthe, parquet */
+      var wall = c.createLinearGradient(0, 0, 0, Y(0)); wall.addColorStop(0, '#EEF2F7'); wall.addColorStop(1, '#E2E8F0'); c.fillStyle = wall; c.fillRect(0, 0, w, Y(0));
+      c.fillStyle = '#CBD5E1'; c.fillRect(0, Y(0) - 8, w, 8);
+      var fl = c.createLinearGradient(0, Y(0), 0, h); fl.addColorStop(0, '#E9B872'); fl.addColorStop(1, '#D9A35A'); c.fillStyle = fl; c.fillRect(0, Y(0), w, h - Y(0));
+      c.strokeStyle = 'rgba(146,95,35,.25)'; c.lineWidth = 1; for (var px = 0; px < w; px += 46) { c.beginPath(); c.moveTo(px, Y(0) + 1); c.lineTo(px - 18, h); c.stroke(); }
+      c.fillStyle = '#F97316'; c.fillRect(X(0), Y(0), Lc * k, 3);   /* aire de jeu */
+      c.fillStyle = '#FFFFFF'; [0, Lc].forEach(function (xl) { c.fillRect(X(xl) - 1.5, Y(0), 3, 6); });
+      c.font = '600 10.5px system-ui, sans-serif'; var l1 = c.measureText('ligne de fond').width, l2 = c.measureText('fin du terrain (18 m)').width;
+      txt(c, 'ligne de fond', Math.max(4 + l1 / 2, X(0)), Y(0) + 20, '#7C4A21', '600 10.5px system-ui, sans-serif');
+      txt(c, 'fin du terrain (18 m)', Math.min(w - 4 - l2 / 2, X(Lc)), Y(0) + 20, '#7C4A21', '600 10.5px system-ui, sans-serif');
+      /* filet : poteau, maillage, bande blanche, antenne */
+      var xn = X(Lc / 2), ytop = Y(Hn), ybot = Y(Hn - 1.0);
+      c.fillStyle = '#94A3B8'; c.fillRect(xn - 2.5, ytop, 5, Y(0) - ytop);
+      c.strokeStyle = 'rgba(30,41,59,.45)'; c.lineWidth = 0.8;
+      for (var yy = ybot; yy >= ytop; yy -= 5) { c.beginPath(); c.moveTo(xn - 3, yy); c.lineTo(xn + 3, yy); c.stroke(); }
+      c.beginPath(); c.moveTo(xn - 3, ytop); c.lineTo(xn - 3, ybot); c.moveTo(xn + 3, ytop); c.lineTo(xn + 3, ybot); c.stroke();
+      c.fillStyle = '#F8FAFC'; c.fillRect(xn - 4, ytop, 8, 5); c.strokeStyle = '#94A3B8'; c.strokeRect(xn - 4, ytop, 8, 5);   /* le haut de la bande est exactement à 2,40 m */
+      cote(c, xn - 14, Y(0), ytop, '2,40 m');
+      cote(c, X(-0.5), Y(0), Y(Hh), 'h = 3,50 m');
+      /* trajectoire */
       var good = ok1 && ok2, colr = good ? '#16A34A' : CF;
       c.strokeStyle = colr; c.setLineDash([6, 4]); c.lineWidth = 2; c.beginPath();
       for (var x = 0; x <= xEnd + 1e-9; x += 0.1) { if (x === 0) { c.moveTo(X(x), Y(z(x))); } else { c.lineTo(X(x), Y(z(x))); } }
       c.stroke(); c.setLineDash([]);
-      t += dt; var T = xEnd / v0, ts = Math.min(t % (T + 1.2), T), xb = v0 * ts;
-      c.fillStyle = '#F8FAFC'; c.strokeStyle = '#1D4ED8'; c.lineWidth = 2; c.beginPath(); c.arc(X(xb), Y(z(xb)), Math.max(5, rb * k), 0, 2 * Math.PI); c.fill(); c.stroke();
-      c.strokeStyle = col('--slate'); c.lineWidth = 1; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(X(0), Y(0)); c.lineTo(X(0), Y(Hh)); c.stroke(); c.setLineDash([]);
-      txt(c, 'h = 3,50 m', X(0) + 6, Y(Hh) - 10, col('--slate'), '600 11px system-ui, sans-serif', 'left');
+      if (good || !ok1) { c.fillStyle = colr; c.beginPath(); c.arc(X(xEnd), ok1 ? Y(0) : Y(z(xEnd)), 3, 0, 2 * Math.PI); c.fill(); }
+      /* ballon et son ombre */
+      t += dt; var T = xEnd / v0, ts = Math.min(t % (T + 1.2), T), xb = v0 * ts, zb = z(xb), R = Math.max(6, rb * k * 1.6), bx = X(xb), by = Y(zb);
+      c.fillStyle = 'rgba(120,72,20,' + (0.12 + 0.18 * (1 - zb / Hh)) + ')'; c.beginPath(); c.ellipse(bx, Y(0) + 2, R * (1.4 - 0.5 * zb / Hh), R * 0.35, 0, 0, 2 * Math.PI); c.fill();
+      var bg = c.createRadialGradient(bx - R * 0.35, by - R * 0.35, R * 0.1, bx, by, R); bg.addColorStop(0, '#FFFFFF'); bg.addColorStop(1, '#E2E8F0');
+      c.fillStyle = bg; c.beginPath(); c.arc(bx, by, R, 0, 2 * Math.PI); c.fill();
+      c.save(); c.beginPath(); c.arc(bx, by, R, 0, 2 * Math.PI); c.clip();
+      var rot = xb * 1.8; c.lineWidth = R * 0.42;
+      [['#FACC15', 0], ['#2563EB', 2.1]].forEach(function (p) { c.strokeStyle = p[0]; c.beginPath(); c.arc(bx + R * Math.cos(rot + p[1]) * 0.9, by + R * Math.sin(rot + p[1]) * 0.9, R * 0.95, 0, 2 * Math.PI); c.stroke(); });
+      c.restore(); c.strokeStyle = '#475569'; c.lineWidth = 1; c.beginPath(); c.arc(bx, by, R, 0, 2 * Math.PI); c.stroke();
       msg.textContent = !ok1 ? 'Le ballon est trop lent : il touche le filet (hauteur au niveau du filet : ' + fr(zNet, 2) + ' m, il faudrait plus de 2,50 m).'
         : (!ok2 ? 'Le ballon passe le filet mais sort du terrain : il touche le sol à ' + fr(xs, 1) + ' m du serveur (plus de 18 m).'
           : 'Service réussi : le ballon passe le filet (centre à ' + fr(zNet, 2) + ' m) et retombe à ' + fr(xs, 1) + ' m, dans le terrain.');
     }
     rV.addEventListener('input', function () { t = 0; draw(0); });
-    function setup() { S = canvasCtx(cv); draw(0); }
+    function setup() { var k = (cv.clientWidth - 60) / 22; cv.style.height = Math.round(Math.max(150, Math.min(300, 4.3 * k + 56))) + 'px'; S = canvasCtx(cv); draw(0); }
     setup(); onResize(setup); loop(cv, btn, draw);
   })();
   /* ================= 5. Énergies au cours de la chute libre ================= */
   (function () {
     var root = document.getElementById('lab-energie');
     if (!root) { return; }
-    var cv = $(root, 'canvas.scene'), cvG = $(root, 'canvas.graph'), rV = $(root, '[data-p="v0"]'), rA = $(root, '[data-p="al"]'), btn = $(root, '[data-act="play"]');
-    var oV = $(root, '.out-v0'), oA = $(root, '.out-al'), S, SG, t = 0, M = 0.60, H0 = 2.0, CE = '#D97706', CPP = '#2A6BC4', CM = '#E11D48';
+    var cv = $(root, 'canvas.scene'), cvG = $(root, 'canvas.graph'), rV = $(root, '[data-p="v0"]'), rA = $(root, '[data-p="al"]'), rE = $(root, '[data-p="e"]'), cbF = $(root, '[data-p="frot"]'), btn = $(root, '[data-act="play"]'), msg = $(root, '.nt-msg');
+    var oV = $(root, '.out-v0'), oA = $(root, '.out-al'), oE = $(root, '.out-e'), S, SG, t = 0, M = 0.60, H0 = 2.0, KD = 0.02, XMAX = 16, TMAXS = 8, DT = 0.002, REC = 0.01;
+    var CE = '#D97706', CPP = '#2A6BC4', CM = '#E11D48', sim = null;
+    /* simulation : position du centre du ballon (z = 0 quand il touche le sol), rebonds de coefficient e, frottement fluide F = KD v² */
+    function simuler() {
+      var v0 = +rV.value, al = +rA.value * Math.PI / 180, e = +rE.value, fr2 = cbF.checked;
+      var x = 0, z = H0, vx = v0 * Math.cos(al), vz = v0 * Math.sin(al), tt = 0, n = 0, roule = false, rebonds = 0, pts = [];
+      function rec() { pts.push([tt, x, z, 0.5 * M * (vx * vx + vz * vz), M * G * z]); }
+      rec();
+      while (tt < TMAXS && x < XMAX) {
+        var v = Math.hypot(vx, vz), ax = fr2 ? -KD / M * v * vx : 0, az = roule ? 0 : -G - (fr2 ? KD / M * v * vz : 0);
+        var vx0 = vx, vz0 = vz, z0 = z; vx += ax * DT; vz += az * DT; x += 0.5 * (vx0 + vx) * DT; z += 0.5 * (vz0 + vz) * DT; tt += DT;   /* trapèzes : exact à accélération constante */
+        if (!roule && z <= 0 && vz < 0) {
+          /* rebond : instant exact du contact dans le pas, vitesse verticale inversée et multipliée par e, puis fin du pas */
+          var tau = (-vz0 - Math.sqrt(Math.max(0, vz0 * vz0 - 2 * az * z0))) / az, rem = DT - tau, vzr = -e * (vz0 + az * tau);
+          rebonds++;
+          if (vzr < 0.25) { z = 0; vz = 0; roule = true; } else { z = vzr * rem + 0.5 * az * rem * rem; vz = vzr + az * rem; }
+        }   /* rebond : position réfléchie sous le sol, vitesse verticale inversée et multipliée par e */
+        /* (rebonds devenus imperceptibles : le ballon roule) */
+        if (roule) { z = 0; vz = 0; if (Math.abs(vx) < 0.05) { break; } }
+        if (++n % Math.round(REC / DT) === 0) { rec(); }
+      }
+      rec();
+      return { pts: pts, T: tt, Em0: pts[0][3] + pts[0][4], e: e, frot: fr2, rebonds: rebonds };
+    }
+    function etat(ts) { var i = Math.min(sim.pts.length - 1, Math.round(ts / REC)); return sim.pts[i]; }
     function draw(dt) {
       if (!S) { return; }
-      var v0 = +rV.value, al = +rA.value * Math.PI / 180, tr = traj(v0, al, H0);
-      oV.textContent = fr(v0, 1) + ' m\u00b7s\u207b\u00b9'; oA.textContent = Math.round(+rA.value) + '\u00b0';
-      t += dt * 0.6; var ts = Math.min(t % (tr.T + 1.0), tr.T);
-      function En(s) { var p = tr.P(s), vz = tr.vz - G * s, v2 = tr.vx * tr.vx + vz * vz; return [0.5 * M * v2, M * G * p[1]]; }
-      var Em = En(0)[0] + En(0)[1], e = En(ts);
-      /* scène + barres */
-      var c = S.ctx, w = S.w, h = S.h, sw = w * 0.64, k = Math.min((sw - 30) / 16, (h - 30) / 8);
+      if (!sim) { sim = simuler(); }
+      oV.textContent = fr(+rV.value, 1) + ' m\u00b7s\u207b\u00b9'; oA.textContent = Math.round(+rA.value) + '\u00b0'; oE.textContent = fr(+rE.value, 2);
+      t += dt * 0.6; var ts = Math.min(t % (sim.T + 1.0), sim.T), q = etat(ts), Em0 = sim.Em0, Em = q[3] + q[4];
+      /* ---- scène ---- */
+      var c = S.ctx, w = S.w, h = S.h, sw = w < 520 ? w * 0.46 : w * 0.64, k = Math.min((sw - 30) / XMAX, (h - 40) / 8), rb = 8;
       function X(x) { return 20 + x * k; }
-      function Y(y) { return h - 16 - y * k; }
+      function Y(z) { return h - 18 - rb - z * k; }   /* z est la hauteur du centre au-dessus de sa position « posé au sol » */
+      var yS = Y(0) + rb;
       c.clearRect(0, 0, w, h);
-      c.fillStyle = '#F1F5F9'; c.fillRect(0, Y(0), sw, h - Y(0));
+      c.fillStyle = '#F1F5F9'; c.fillRect(0, yS, sw, h - yS); c.strokeStyle = '#CBD5E1'; c.lineWidth = 1; c.beginPath(); c.moveTo(0, yS + 0.5); c.lineTo(sw, yS + 0.5); c.stroke();
       c.strokeStyle = 'rgba(42,107,196,.3)'; c.setLineDash([5, 4]); c.lineWidth = 1.5; c.beginPath();
-      for (var s = 0; s <= tr.T + 1e-9; s += tr.T / 100) { var p = tr.P(s); if (s === 0) { c.moveTo(X(p[0]), Y(p[1])); } else { c.lineTo(X(p[0]), Y(p[1])); } }
+      sim.pts.forEach(function (p, i) { if (i === 0) { c.moveTo(X(p[1]), Y(p[2])); } else { c.lineTo(X(p[1]), Y(p[2])); } });
       c.stroke(); c.setLineDash([]);
-      var P = tr.P(ts); c.fillStyle = '#F97316'; c.beginPath(); c.arc(X(P[0]), Y(P[1]), 8, 0, 2 * Math.PI); c.fill();
-      var bx = sw + 30, bw = (w - bx - 20) / 3 - 10, bb = h - 34, bt = 20;
-      [[e[0], CE, 'Ec'], [e[1], CPP, 'Epp'], [Em, CM, 'Em']].forEach(function (q, i) {
-        var x = bx + i * (bw + 10), hgt = q[0] / Em * (bb - bt) * 0.95;
+      if (X(q[1]) < sw + rb) {
+        var bg = c.createRadialGradient(X(q[1]) - 2.5, Y(q[2]) - 2.5, 1, X(q[1]), Y(q[2]), rb); bg.addColorStop(0, '#FDBA74'); bg.addColorStop(1, '#EA580C');
+        c.fillStyle = bg; c.beginPath(); c.arc(X(q[1]), Y(q[2]), rb, 0, 2 * Math.PI); c.fill();
+      }
+      /* barres : valeur initiale de Em en pointillés */
+      var bx = sw + (w < 520 ? 14 : 30), bw = (w - bx - 14) / 3 - 8, bb = h - 34, bt = 22;
+      function hb(v) { return Math.max(0, v) / Em0 * (bb - bt) * 0.95; }
+      [[q[3], CE, 'Ec'], [q[4], CPP, 'Epp'], [Em, CM, 'Em']].forEach(function (b, i) {
+        var x = bx + i * (bw + 8), hg = hb(b[0]);
         c.fillStyle = '#E2E8F0'; c.fillRect(x, bt, bw, bb - bt);
-        c.fillStyle = q[1]; c.fillRect(x, bb - hgt, bw, hgt);
-        txt(c, q[2], x + bw / 2, bb + 16, q[1], '700 13px system-ui, sans-serif');
-        txt(c, Math.round(q[0]) + ' J', x + bw / 2, bb - hgt - 6, q[1], '600 11px system-ui, sans-serif');
+        c.fillStyle = b[1]; c.fillRect(x, bb - hg, bw, hg);
+        txt(c, b[2], x + bw / 2, bb + 16, b[1], '700 13px system-ui, sans-serif');
+        txt(c, Math.round(b[0]) + ' J', x + bw / 2, bb - hg - 6, b[1], '600 11px system-ui, sans-serif');
+        if (i === 2 && Em0 - Em > 0.3) { c.strokeStyle = CM; c.setLineDash([4, 3]); c.lineWidth = 1.5; c.strokeRect(x + 0.75, bb - hb(Em0), bw - 1.5, hb(Em0) - hg); c.setLineDash([]); }
       });
-      /* graphe en fonction du temps */
-      var g = SG.ctx, W = SG.w, HG = SG.h, L = 46, R = W - 12, T = 10, B = HG - 26;
-      function GX(s) { return L + s / tr.T * (R - L); }
-      function GY(v) { return B - v / (Em * 1.08) * (B - T); }
+      /* ---- graphe en fonction du temps ---- */
+      var g = SG.ctx, W = SG.w, HG = SG.h, L = 40, R = W - 12, T = 10, B = HG - 26;
+      function GX(s) { return L + s / sim.T * (R - L); }
+      function GY(v) { return B - v / (Em0 * 1.08) * (B - T); }
       g.clearRect(0, 0, W, HG);
       g.strokeStyle = col('--line'); g.lineWidth = 1; g.beginPath(); g.moveTo(L, T); g.lineTo(L, B); g.lineTo(R, B); g.stroke();
       txt(g, 'temps \u2192', (L + R) / 2, HG - 6, col('--muted'), '11px system-ui, sans-serif');
-      txt(g, 'énergie (J)', L + 34, T + 10, col('--muted'), '11px system-ui, sans-serif');
-      [[0, CE], [1, CPP]].forEach(function (q) {
-        g.strokeStyle = q[1]; g.lineWidth = 2.2; g.beginPath();
-        for (var s3 = 0; s3 <= tr.T + 1e-9; s3 += tr.T / 100) { var v = En(s3)[q[0]]; if (s3 === 0) { g.moveTo(GX(s3), GY(v)); } else { g.lineTo(GX(s3), GY(v)); } }
+      g.save(); g.translate(L - 10, (T + B) / 2); g.rotate(-Math.PI / 2); txt(g, 'énergie (J) \u2192', 0, 0, col('--muted'), '11px system-ui, sans-serif'); g.restore();
+      g.strokeStyle = 'rgba(225,29,72,.4)'; g.setLineDash([4, 4]); g.lineWidth = 1.2; g.beginPath(); g.moveTo(GX(0), GY(Em0)); g.lineTo(GX(sim.T), GY(Em0)); g.stroke(); g.setLineDash([]);
+      [[3, CE], [4, CPP], [-1, CM]].forEach(function (cfg) {
+        g.strokeStyle = cfg[1]; g.lineWidth = 2.2; g.beginPath();
+        sim.pts.forEach(function (p, i) { var v = cfg[0] < 0 ? p[3] + p[4] : p[cfg[0]]; if (i === 0) { g.moveTo(GX(p[0]), GY(v)); } else { g.lineTo(GX(p[0]), GY(v)); } });
         g.stroke();
       });
-      g.strokeStyle = CM; g.lineWidth = 2.2; g.beginPath(); g.moveTo(GX(0), GY(Em)); g.lineTo(GX(tr.T), GY(Em)); g.stroke();
-      g.strokeStyle = 'rgba(30,41,59,.4)'; g.setLineDash([3, 3]); g.beginPath(); g.moveTo(GX(ts), T); g.lineTo(GX(ts), B); g.stroke(); g.setLineDash([]);
+      g.strokeStyle = 'rgba(30,41,59,.4)'; g.setLineDash([3, 3]); g.lineWidth = 1; g.beginPath(); g.moveTo(GX(ts), T); g.lineTo(GX(ts), B); g.stroke(); g.setLineDash([]);
+      /* commentaire */
+      var parfait = sim.e >= 0.999;
+      msg.innerHTML = (!sim.frot && parfait) ? 'Sans frottement et avec des rebonds parfaits, aucune énergie n\u2019est dissipée&nbsp;: E<sub>m</sub> reste constante, seuls E<sub>c</sub> et E<sub>pp</sub> s\u2019échangent.'
+        : ((sim.frot ? 'Les frottements de l\u2019air dissipent de l\u2019énergie tout au long du mouvement&nbsp;: E<sub>m</sub> diminue continûment. ' : '') +
+           (!parfait ? 'À chaque rebond imparfait (e&nbsp;&lt;&nbsp;1), une partie de l\u2019énergie est dissipée (déformation du ballon, échauffement, son)&nbsp;: E<sub>m</sub> diminue par paliers. ' : '') +
+           'L\u2019énergie perdue apparaît en pointillés.');
     }
-    [rV, rA].forEach(function (r) { r.addEventListener('input', function () { t = 0; draw(0); }); });
+    function refaire() { sim = null; t = 0; draw(0); }
+    [rV, rA, rE].forEach(function (r) { r.addEventListener('input', refaire); });
+    cbF.addEventListener('change', refaire);
     function setup() { S = canvasCtx(cv); SG = canvasCtx(cvG); draw(0); }
     setup(); onResize(setup); loop(cv, btn, draw);
   })();
@@ -930,7 +1026,7 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
     var oH = $(root, '.out-h'), oT0 = $(root, '.out-t0'), oT = $(root, '.out-t'), oP = $(root, '.out-plouf'), S, obj = 'pierre';
     /* coefficient de frottement quadratique : F = k v² ; OBJ[...] = [masse (kg), k (kg/m)] */
     var OBJ = { pierre: [0.20, 5.9e-4], balle: [0.0027, 3.8e-4] }, CS = 340;
-    var st = { t: 0, z: 0, v: 0, phase: 'attente', tf: 0, ts: 0 };
+    var st = { t: 0, z: 0, v: 0, phase: 'attente', tf: 0, ts: 0, sp: -1 };   /* sp : temps réel écoulé depuis l'impact (éclaboussure), -1 avant */
     function tFall(h, frot) {   /* durée de chute, avec ou sans frottements (intégration numérique) */
       if (!frot) { return Math.sqrt(2 * h / G); }
       var m = OBJ[obj][0], k = OBJ[obj][1], z = 0, v = 0, t = 0, dt = 1e-3;
@@ -942,51 +1038,76 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
       oH.textContent = h + ' m'; oT0.textContent = fr(t0, 2) + ' s'; oT.textContent = fr(t1, 2) + ' s';
       oP.textContent = fr(t1 + (cbS.checked ? h / CS : 0), 2) + ' s';
     }
+    function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
     function draw() {
-      var c = S.ctx, w = S.w, hh = S.h, h = +rH.value, top = 92, bot = hh - 24, k = (bot - top) / h, cx = w * 0.4, ww = 70;
-      c.clearRect(0, 0, w, hh);
-      c.fillStyle = '#E7E5E4'; c.fillRect(0, top, cx - ww / 2, hh - top); c.fillRect(cx + ww / 2, top, w - cx - ww / 2, hh - top);
-      c.fillStyle = '#A8A29E'; for (var y = top; y < hh; y += 14) { c.fillRect(cx - ww / 2 - 8, y, 8, 12); c.fillRect(cx + ww / 2, y + 7, 8, 12); }
-      c.fillStyle = '#86EFAC'; c.fillRect(0, top - 6, cx - ww / 2 - 8, 6); c.fillRect(cx + ww / 2 + 8, top - 6, w, 6);
-      c.fillStyle = '#7DD3FC'; c.fillRect(cx - ww / 2, bot, ww, hh - bot);
-      /* graduations de profondeur */
-      var stp = h > 60 ? 20 : (h > 25 ? 10 : 5);
-      for (var d = 0; d <= h + 1e-9; d += stp) { var yy = top + d * k; c.strokeStyle = col('--muted'); c.beginPath(); c.moveTo(cx + ww / 2 + 10, yy); c.lineTo(cx + ww / 2 + 18, yy); c.stroke(); txt(c, d + ' m', cx + ww / 2 + 22, yy + 4, col('--slate'), '10px system-ui, sans-serif', 'left'); }
-      /* personne au bord */
-      c.strokeStyle = '#94A3B8'; c.lineWidth = 3; c.lineCap = 'round'; var px = cx - ww / 2 - 28;
-      c.beginPath(); c.moveTo(px, top - 6); c.lineTo(px + 5, top - 30); c.lineTo(px + 10, top - 6); c.moveTo(px + 5, top - 30); c.lineTo(px + 5, top - 56); c.moveTo(px + 5, top - 50); c.lineTo(cx - 6, top - 44); c.stroke();
-      c.fillStyle = '#94A3B8'; c.beginPath(); c.arc(px + 5, top - 63, 7, 0, 2 * Math.PI); c.fill();
-      /* pierre */
-      var zs = Math.min(st.z, h), ys = top - 44 + 6 + zs * k * ((bot - (top - 38)) / (bot - top)) / 1;
-      ys = (top - 38) + zs / h * (bot - (top - 38));
-      if (st.phase !== 'son' && st.phase !== 'fini') { c.fillStyle = obj === 'pierre' ? '#57534E' : '#F97316'; c.beginPath(); c.arc(cx, ys, obj === 'pierre' ? 7 : 6, 0, 2 * Math.PI); c.fill(); }
-      /* éclaboussure et onde sonore */
-      if (st.phase === 'son' || st.phase === 'fini') {
-        c.strokeStyle = '#0EA5E9'; c.lineWidth = 2; c.beginPath(); c.arc(cx, bot, 12, Math.PI, 2 * Math.PI); c.stroke();
-        if (cbS.checked) {
-          var zsnd = h - (st.t - st.tf) * CS, ysn = (top - 38) + Math.max(0, zsnd) / h * (bot - (top - 38));
-          if (st.phase === 'son') { c.strokeStyle = 'rgba(225,29,72,.6)'; c.lineWidth = 2; for (var r = 0; r < 3; r++) { c.beginPath(); c.arc(cx, ysn + r * 6, 14 - r * 3, Math.PI * 1.15, Math.PI * 1.85); c.stroke(); } }
-        }
+      var c = S.ctx, w = S.w, hh = S.h, h = +rH.value, yG = 104, bot = hh - 26, cx = Math.max(130, w * 0.4), ww = 54, wl = cx - ww / 2, wr = cx + ww / 2, rimW = 9, rimH = 14;
+      c.clearRect(0, 0, w, hh); c.setLineDash([]); c.lineCap = 'round'; c.lineJoin = 'round';
+      /* ciel, sol, herbe */
+      var sky = c.createLinearGradient(0, 0, 0, yG); sky.addColorStop(0, '#E0F2FE'); sky.addColorStop(1, '#F8FAFC'); c.fillStyle = sky; c.fillRect(0, 0, w, yG);
+      var earth = c.createLinearGradient(0, yG, 0, hh); earth.addColorStop(0, '#D6C7B0'); earth.addColorStop(1, '#B8A68C'); c.fillStyle = earth; c.fillRect(0, yG, w, hh - yG);
+      c.fillStyle = '#86C47A'; c.fillRect(0, yG - 4, wl - rimW, 6); c.fillRect(wr + rimW, yG - 4, w - wr - rimW, 6);
+      /* conduit du puits : maçonnerie */
+      c.fillStyle = '#334155'; c.fillRect(wl, yG, ww, bot - yG);
+      var shaft = c.createLinearGradient(wl, 0, wr, 0); shaft.addColorStop(0, 'rgba(15,23,42,.55)'); shaft.addColorStop(0.5, 'rgba(15,23,42,.15)'); shaft.addColorStop(1, 'rgba(15,23,42,.55)'); c.fillStyle = shaft; c.fillRect(wl, yG, ww, bot - yG);
+      for (var y = yG, row = 0; y < bot; y += 11, row++) {
+        [wl - 9, wr].forEach(function (x0, j) { c.fillStyle = (row + j) % 2 ? '#A8A29E' : '#9CA3AF'; rr(c, x0 + 0.5, y + 0.5, 8, 10, 1.5); c.fill(); });
       }
-      if (st.phase === 'fini') { txt(c, '« plouf ! »', cx - ww / 2 - 40, top - 72, CF, '700 15px system-ui, sans-serif'); }
+      /* eau au fond, avec quelques vaguelettes */
+      var wat = c.createLinearGradient(0, bot, 0, hh); wat.addColorStop(0, '#38BDF8'); wat.addColorStop(1, '#0369A1'); c.fillStyle = wat; c.fillRect(wl, bot, ww, hh - bot);
+      c.strokeStyle = 'rgba(255,255,255,.6)'; c.lineWidth = 1; for (var q = 0; q < 2; q++) { c.beginPath(); c.moveTo(wl + 8 + q * 22, bot + 6 + q * 5); c.quadraticCurveTo(wl + 16 + q * 22, bot + 3 + q * 5, wl + 24 + q * 22, bot + 6 + q * 5); c.stroke(); }
+      /* margelle */
+      c.fillStyle = '#A8A29E'; c.strokeStyle = '#78716C'; c.lineWidth = 1;
+      [wl - rimW, wr].forEach(function (x0) { rr(c, x0, yG - rimH, rimW, rimH + 2, 2); c.fill(); c.stroke(); c.beginPath(); c.moveTo(x0, yG - rimH / 2); c.lineTo(x0 + rimW, yG - rimH / 2); c.stroke(); });
+      /* graduations de profondeur, à droite */
+      var stp = h > 60 ? 20 : (h > 25 ? 10 : 5);
+      for (var d = 0; d <= h + 1e-9; d += stp) { var yy = yG + d / h * (bot - yG); c.strokeStyle = '#64748B'; c.lineWidth = 1; c.beginPath(); c.moveTo(wr + rimW + 4, yy); c.lineTo(wr + rimW + 11, yy); c.stroke(); txt(c, d + ' m', wr + rimW + 15, yy + 4, '#334155', '10.5px system-ui, sans-serif', 'left'); }
+      /* personne au bord, penchée au-dessus de la margelle, main au-dessus du milieu du puits */
+      var px = wl - rimW - 14, foot = yG - 2, hipY = foot - 30, lean = 0.5;   /* inclinaison du buste (rad) */
+      var shX = px + 24 * Math.sin(lean), shY = hipY - 24 * Math.cos(lean), hdX = px + 33 * Math.sin(lean), hdY = hipY - 33 * Math.cos(lean);
+      var handX = cx, handY = yG - rimH - 8;
+      c.strokeStyle = '#334155'; c.lineWidth = 5; c.beginPath(); c.moveTo(px - 5, foot); c.lineTo(px - 1, hipY); c.lineTo(px + 3, foot); c.stroke();
+      c.save(); c.translate(px, hipY); c.rotate(lean); c.fillStyle = '#2A6BC4'; rr(c, -7, -26, 14, 30, 5); c.fill(); c.restore();
+      c.strokeStyle = '#1D4ED8'; c.lineWidth = 4.5; c.beginPath(); c.moveTo(shX, shY + 2); c.lineTo(handX - 3, handY - 1); c.stroke();
+      c.fillStyle = '#F2C9A5'; c.beginPath(); c.arc(handX - 2, handY - 1, 2.8, 0, 2 * Math.PI); c.fill();
+      c.beginPath(); c.arc(hdX + 2, hdY - 4, 7.5, 0, 2 * Math.PI); c.fill();
+      c.fillStyle = '#7C4A21'; c.beginPath(); c.arc(hdX + 2, hdY - 5.5, 7.8, Math.PI * 1.05 + lean, Math.PI * 1.95 + lean); c.fill();
+      /* pierre (ou balle) : elle disparaît dans l'eau à l'impact */
+      var y0s = handY + 7, ys = y0s + Math.min(st.z, h) / h * (bot - 6 - y0s);
+      if (st.phase === 'chute' || st.phase === 'attente') { c.fillStyle = obj === 'pierre' ? '#D6D3D1' : '#FB923C'; c.strokeStyle = obj === 'pierre' ? '#57534E' : '#C2410C'; c.lineWidth = 1.2; c.beginPath(); c.ellipse(handX, ys, obj === 'pierre' ? 6.5 : 5.5, 5.5, 0, 0, 2 * Math.PI); c.fill(); c.stroke(); }
+      /* éclaboussure : des gouttes jaillissent puis retombent ; des ronds s'étalent et s'effacent */
+      if (st.sp >= 0 && st.sp < 1.2) {
+        var tau = st.sp;
+        [[-1, 1.0], [-0.5, 1.35], [0.15, 1.5], [0.6, 1.25], [1, 0.95]].forEach(function (d) {
+          var vxs = d[0] * 26, vys = d[1] * 60, xd = handX + vxs * tau, yd = bot - (vys * tau - 0.5 * 260 * tau * tau);
+          if (yd < bot) { c.fillStyle = 'rgba(186,230,253,.95)'; c.beginPath(); c.arc(xd, yd, 2.2, 0, 2 * Math.PI); c.fill(); }
+        });
+        for (var rg = 0; rg < 2; rg++) { var tt = tau - rg * 0.25; if (tt > 0) { var al = Math.max(0, 1 - tt / 0.9); c.strokeStyle = 'rgba(255,255,255,' + (0.85 * al) + ')'; c.lineWidth = 1.2; c.beginPath(); c.ellipse(handX, bot + 3, 4 + 30 * tt, 1.5 + 4 * tt, 0, 0, 2 * Math.PI); c.stroke(); } }
+      }
+      if (cbS.checked && st.phase === 'son') {
+        var zsnd = h - (st.t - st.tf) * CS, ysn = yG + Math.max(0, zsnd) / h * (bot - yG);
+        c.strokeStyle = 'rgba(225,29,72,.7)'; c.lineWidth = 2; for (var r = 0; r < 3; r++) { c.beginPath(); c.arc(cx, ysn + r * 6 + 14, 16 - r * 3, Math.PI * 1.2, Math.PI * 1.8); c.stroke(); }
+      }
+      if (st.phase === 'fini') { txt(c, '« plouf ! »', px + 6, hdY - 24, CF, '700 15px system-ui, sans-serif'); }
       /* chronomètre */
-      c.fillStyle = '#0B1220'; c.beginPath(); if (c.roundRect) { c.roundRect(w - 150, 16, 130, 46, 8); } else { c.rect(w - 150, 16, 130, 46); } c.fill();
-      c.fillStyle = '#4ADE80'; c.font = '700 24px monospace'; c.textAlign = 'center'; c.fillText(fr(st.t, 2) + ' s', w - 85, 48);
-      txt(c, 'chronomètre', w - 85, 78, col('--slate'), '600 11px system-ui, sans-serif');
+      var cw = 128, cxx = w - cw - 16;
+      c.fillStyle = '#0B1220'; rr(c, cxx, 16, cw, 44, 9); c.fill();
+      c.fillStyle = '#4ADE80'; c.font = '700 22px ui-monospace, Menlo, monospace'; c.textAlign = 'center'; c.fillText(fr(st.t, 2) + ' s', cxx + cw / 2, 46);
+      txt(c, 'chronomètre', cxx + cw / 2, 76, '#475569', '600 11px system-ui, sans-serif');
     }
     function step(dt) {
+      if (st.sp >= 0 && st.sp < 1.2) { st.sp += dt; }
       if (st.phase === 'attente' || st.phase === 'fini') { draw(); return; }
       var h = +rH.value, m = OBJ[obj][0], kk = OBJ[obj][1], n = 20;
       for (var i = 0; i < n; i++) {
         var d = dt / n; st.t += d;
         if (st.phase === 'chute') {
           var a = G - (cbF.checked ? kk / m * st.v * st.v : 0); st.v += a * d; st.z += st.v * d;
-          if (st.z >= h) { st.z = h; st.tf = st.t; st.phase = cbS.checked ? 'son' : 'fini'; if (!cbS.checked) { break; } }
+          if (st.z >= h) { st.z = h; st.tf = st.t; st.sp = 0; st.phase = cbS.checked ? 'son' : 'fini'; if (!cbS.checked) { break; } }
         } else if (st.phase === 'son' && st.t - st.tf >= h / CS) { st.t = st.tf + h / CS; st.phase = 'fini'; break; }
       }
       draw();
     }
-    btn.addEventListener('click', function () { st.t = 0; st.z = 0; st.v = 0; st.phase = 'chute'; });
+    btn.addEventListener('click', function () { st.t = 0; st.z = 0; st.v = 0; st.sp = -1; st.phase = 'chute'; });
     [rH].forEach(function (r) { r.addEventListener('input', function () { st.phase = 'attente'; st.t = 0; st.z = 0; upd(); draw(); }); });
     [cbF, cbS].forEach(function (x) { x.addEventListener('change', function () { st.phase = 'attente'; st.t = 0; st.z = 0; upd(); draw(); }); });
     $$(root, 'input[name="objet"]').forEach(function (x) { x.addEventListener('change', function () { obj = x.value; st.phase = 'attente'; st.t = 0; st.z = 0; upd(); draw(); }); });
@@ -999,31 +1120,78 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
     var root = document.getElementById('lab-tours');
     if (!root) { return; }
     var cv = $(root, 'canvas'), rA = $(root, '[data-p="ang"]'), rV = $(root, '[data-p="v0"]'), btn = $(root, '[data-act="tir"]'), oA = $(root, '.out-ang'), oV = $(root, '.out-v0'), msg = $(root, '.nt-msg');
-    var S, H = 20, D = 16, R = 0.35, st = { t: 0, on: false, done: false, res: '' }, SLOW = 0.6;
-    function A(t, th, v0) { return [v0 * Math.cos(th) * t, H + v0 * Math.sin(th) * t - 0.5 * G * t * t]; }
-    function Bp(t) { return [D, H - 0.5 * G * t * t]; }
+    var S, H = 20, D = 16, R = 0.35, TW = 2.2, st = { t: 0, on: false, done: false, res: '' }, SLOW = 0.6;
+    var HA = H + 1.0, HB = HA;   /* bouche du canon et main du lanceur : exactement à la même hauteur, au-dessus du sommet des tours */
+    function A(t, th, v0) { return [v0 * Math.cos(th) * t, HA + v0 * Math.sin(th) * t - 0.5 * G * t * t]; }
+    function Bp(t) { return [D, HB - 0.5 * G * t * t]; }
+    function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+    function tour(c, X, Y, k, x0, x1) {   /* tour en pierre crénelée, de x0 à x1 (m), haute de H */
+      var L = X(x0), Rr = X(x1), T = Y(H), B = Y(0), wpx = Rr - L;
+      var gr = c.createLinearGradient(L, 0, Rr, 0); gr.addColorStop(0, '#9CA3AF'); gr.addColorStop(0.5, '#D1D5DB'); gr.addColorStop(1, '#9CA3AF');
+      c.fillStyle = gr; c.fillRect(L, T, wpx, B - T);
+      c.strokeStyle = 'rgba(71,85,105,.35)'; c.lineWidth = 1;
+      var hb = Math.max(6, k * 0.9);
+      for (var y = T + hb, row = 0; y < B; y += hb, row++) { c.beginPath(); c.moveTo(L, y); c.lineTo(Rr, y); c.stroke(); var off = row % 2 ? wpx / 4 : wpx / 2; for (var xx = L + off; xx < Rr; xx += wpx / 2) { c.beginPath(); c.moveTo(xx, y - hb); c.lineTo(xx, y); c.stroke(); } }
+      var nm = 3, mw = wpx / (2 * nm - 1);   /* créneaux */
+      c.fillStyle = '#9CA3AF'; for (var i = 0; i < nm; i++) { c.fillRect(L + i * 2 * mw, T - mw * 0.9, mw, mw * 0.9); }
+      c.strokeStyle = '#6B7280'; c.lineWidth = 1; c.strokeRect(L, T, wpx, B - T);
+      c.fillStyle = 'rgba(30,41,59,.55)'; rr(c, L + wpx * 0.35, T + (B - T) * 0.35, wpx * 0.3, Math.max(8, k * 1.4), wpx * 0.15); c.fill();   /* meurtrière */
+    }
     function draw() {
-      var th = +rA.value * Math.PI / 180, v0 = +rV.value, c = S.ctx, w = S.w, hh = S.h, k = Math.min((w - 80) / (D + 6), (hh - 40) / (H + 6));
+      var th = +rA.value * Math.PI / 180, v0 = +rV.value, c = S.ctx, w = S.w, hh = S.h, k = Math.min((w - 60) / (D + 2 * TW + 2), (hh - 50) / (H + 5));
       oA.textContent = (+rA.value > 0 ? '+' : '') + Math.round(+rA.value) + '\u00b0'; oV.textContent = fr(v0, 1) + ' m\u00b7s\u207b\u00b9';
-      var x0 = (w - (D + 1.6) * k) / 2 + 1.6 * k;   /* scène centrée */
+      var x0 = w / 2 - (D / 2) * k;   /* scène centrée sur l'espace entre les tours */
       function X(x) { return x0 + x * k; }
-      function Y(z) { return hh - 22 - z * k; }
-      c.clearRect(0, 0, w, hh);
-      c.fillStyle = '#F1F5F9'; c.fillRect(0, Y(0), w, hh - Y(0));
-      c.fillStyle = '#CBD5E1'; c.fillRect(X(-1.6), Y(H), 1.6 * k, H * k); c.fillRect(X(D), Y(H), 1.6 * k, H * k);
+      function Y(z) { return hh - 28 - z * k; }
+      c.clearRect(0, 0, w, hh); c.setLineDash([]); c.lineCap = 'round';
+      /* décor */
+      var sky = c.createLinearGradient(0, 0, 0, Y(0)); sky.addColorStop(0, '#DBEAFE'); sky.addColorStop(1, '#F8FAFC'); c.fillStyle = sky; c.fillRect(0, 0, w, Y(0));
+      c.fillStyle = 'rgba(255,255,255,.85)'; [[0.18, 0.18, 1], [0.7, 0.12, 0.8]].forEach(function (n) { var nx = n[0] * w, ny = n[1] * hh, s = 16 * n[2]; c.beginPath(); c.arc(nx, ny, s, 0, 2 * Math.PI); c.arc(nx + s, ny - s * 0.4, s * 0.9, 0, 2 * Math.PI); c.arc(nx + 2 * s, ny, s * 0.8, 0, 2 * Math.PI); c.fill(); });
+      c.fillStyle = '#BBDDB0'; c.beginPath(); c.ellipse(w * 0.18, Y(0) + 6, w * 0.3, hh * 0.18, 0, Math.PI, 2 * Math.PI); c.fill();
+      c.fillStyle = '#A7D49B'; c.beginPath(); c.ellipse(w * 0.85, Y(0) + 6, w * 0.32, hh * 0.24, 0, Math.PI, 2 * Math.PI); c.fill();
+      c.fillStyle = '#86C47A'; c.fillRect(0, Y(0), w, 5); c.fillStyle = '#D6C7B0'; c.fillRect(0, Y(0) + 5, w, hh - Y(0) - 5);
+      c.fillStyle = '#5BAE69'; [0.06, 0.12, 0.9, 0.95].forEach(function (f, i) { var bx2 = f * w, rbu = 9 + (i % 2) * 4; c.beginPath(); c.arc(bx2, Y(0) - rbu * 0.6, rbu, Math.PI, 2 * Math.PI); c.arc(bx2 + rbu, Y(0) - rbu * 0.5, rbu * 0.8, Math.PI, 2 * Math.PI); c.fill(); });
+      /* tours : la balle lâchée part du bord de la tour de droite */
+      tour(c, X, Y, k, -TW, 0); tour(c, X, Y, k, D + R, D + R + TW);
+      /* canon sur son affût, au sommet de la tour de gauche : sa bouche est le point de départ du boulet */
+      var mx = X(0), my = Y(HA), Lb = 1.5 * k, rw = 0.42 * k, ca = Math.cos(th), sa = Math.sin(th);
+      var pvx = mx - Lb * ca, pvy = my + Lb * sa;   /* culasse */
+      var wx = pvx + 0.35 * k * ca, wy = Y(H) - rw;   /* roue posée sur la tour */
+      c.fillStyle = '#7C4A21'; c.beginPath(); c.moveTo(wx - 0.55 * k, Y(H)); c.lineTo(wx + 0.25 * k, Y(H)); c.lineTo(pvx + 0.6 * k * ca, pvy - 0.6 * k * sa + 0.18 * k); c.lineTo(pvx, pvy + 0.2 * k); c.closePath(); c.fill();   /* affût */
+      c.save(); c.translate(pvx, pvy); c.rotate(-th);
+      var cg = c.createLinearGradient(0, -0.28 * k, 0, 0.28 * k); cg.addColorStop(0, '#475569'); cg.addColorStop(0.5, '#94A3B8'); cg.addColorStop(1, '#334155');
+      c.fillStyle = cg; rr(c, -0.15 * k, -0.27 * k, Lb + 0.15 * k, 0.54 * k, 0.14 * k); c.fill();
+      c.fillStyle = '#334155'; c.fillRect(Lb - 0.18 * k, -0.31 * k, 0.18 * k, 0.62 * k); c.restore();
+      c.fillStyle = '#5B3A1A'; c.beginPath(); c.arc(wx, wy, rw, 0, 2 * Math.PI); c.fill(); c.fillStyle = '#A16207'; c.beginPath(); c.arc(wx, wy, rw * 0.35, 0, 2 * Math.PI); c.fill();
+      /* lanceur au sommet de la tour de droite, bras tendu au-dessus du vide */
+      var lx = X(D + 1.0), lf = Y(H), sk = k;
+      c.lineCap = 'round'; c.strokeStyle = '#334155'; c.lineWidth = Math.max(2, 0.16 * sk);
+      c.beginPath(); c.moveTo(lx - 0.12 * sk, lf); c.lineTo(lx, lf - 0.85 * sk); c.lineTo(lx + 0.12 * sk, lf); c.stroke();
+      c.fillStyle = '#E11D48'; rr(c, lx - 0.17 * sk, lf - 1.45 * sk, 0.34 * sk, 0.7 * sk, 0.12 * sk); c.fill();
+      c.strokeStyle = '#BE123C'; c.lineWidth = Math.max(2, 0.13 * sk);
+      var bx = X(D), by = Y(HB), handOn = st.t === 0 && !st.on && st.res === '';
+      c.beginPath(); c.moveTo(lx - 0.05 * sk, lf - 1.32 * sk); c.lineTo(bx + 0.28 * sk, handOn ? by : by - 0.05 * sk); c.stroke();
+      c.fillStyle = '#F2C9A5'; c.beginPath(); c.arc(lx, lf - 1.65 * sk, 0.2 * sk, 0, 2 * Math.PI); c.fill();
+      c.fillStyle = '#7C4A21'; c.beginPath(); c.arc(lx, lf - 1.69 * sk, 0.21 * sk, Math.PI, 2 * Math.PI); c.fill();
       /* ligne de visée */
-      c.strokeStyle = 'rgba(30,41,59,.35)'; c.setLineDash([6, 5]); c.lineWidth = 1.2; c.beginPath(); c.moveTo(X(0), Y(H)); c.lineTo(X(0) + Math.cos(th) * (D + 3) * k, Y(H) - Math.sin(th) * (D + 3) * k); c.stroke(); c.setLineDash([]);
-      txt(c, 'direction du tir', X(0) + Math.cos(th) * 7 * k, Y(H) - Math.sin(th) * 7 * k - 10, col('--slate'), '600 11px system-ui, sans-serif');
+      c.strokeStyle = 'rgba(30,41,59,.4)'; c.setLineDash([6, 5]); c.lineWidth = 1.2; c.beginPath(); c.moveTo(X(0), Y(HA)); c.lineTo(X(0) + Math.cos(th) * (D + 2) * k, Y(HA) - Math.sin(th) * (D + 2) * k); c.stroke(); c.setLineDash([]);
+      txt(c, 'direction du tir', X(0) + Math.cos(th) * 7 * k, Y(HA) - Math.sin(th) * 7 * k - 12, '#475569', '600 11px system-ui, sans-serif');
+      /* positions successives */
       var t = st.t;
       for (var s = 0; s <= t + 1e-9; s += 0.08) {
         var pa = A(s, th, v0), pb = Bp(s);
-        if (pa[1] > 0) { c.fillStyle = 'rgba(42,107,196,.35)'; c.beginPath(); c.arc(X(pa[0]), Y(pa[1]), 2.5, 0, 2 * Math.PI); c.fill(); }
-        if (pb[1] > 0) { c.fillStyle = 'rgba(225,29,72,.35)'; c.beginPath(); c.arc(X(pb[0]), Y(pb[1]), 2.5, 0, 2 * Math.PI); c.fill(); }
+        if (pa[1] > 0) { c.fillStyle = 'rgba(42,107,196,.35)'; c.beginPath(); c.arc(X(pa[0]), Y(pa[1]), 2.4, 0, 2 * Math.PI); c.fill(); }
+        if (pb[1] > 0) { c.fillStyle = 'rgba(225,29,72,.35)'; c.beginPath(); c.arc(X(pb[0]), Y(pb[1]), 2.4, 0, 2 * Math.PI); c.fill(); }
       }
-      var a = A(t, th, v0), b = Bp(t);
-      c.fillStyle = CP; c.beginPath(); c.arc(X(a[0]), Y(Math.max(a[1], R)), R * k, 0, 2 * Math.PI); c.fill();
-      c.fillStyle = CF; c.beginPath(); c.arc(X(b[0]), Y(Math.max(b[1], R)), R * k, 0, 2 * Math.PI); c.fill();
-      if (st.res === 'hit') { txt(c, 'Touché !', X(a[0]), Y(a[1]) - 18, '#16A34A', '800 16px system-ui, sans-serif'); }
+      var a = A(t, th, v0), b = Bp(t), rb = Math.max(4, R * k);
+      function balle(x, y, col1, col2) { var g = c.createRadialGradient(x - rb * 0.35, y - rb * 0.35, rb * 0.1, x, y, rb); g.addColorStop(0, col2); g.addColorStop(1, col1); c.fillStyle = g; c.beginPath(); c.arc(x, y, rb, 0, 2 * Math.PI); c.fill(); }
+      balle(X(a[0]), Y(Math.max(a[1], R)), '#1D4ED8', '#93C5FD');
+      balle(X(b[0]), Y(Math.max(b[1], R)), '#BE123C', '#FDA4AF');
+      if (st.res === 'hit') {
+        var hx = X(a[0]), hy = Y(a[1]); c.strokeStyle = '#F59E0B'; c.lineWidth = 2;
+        for (var i = 0; i < 8; i++) { var an = i * Math.PI / 4; c.beginPath(); c.moveTo(hx + Math.cos(an) * rb * 1.6, hy + Math.sin(an) * rb * 1.6); c.lineTo(hx + Math.cos(an) * rb * 2.6, hy + Math.sin(an) * rb * 2.6); c.stroke(); }
+        txt(c, 'Touché !', hx, hy - rb * 3 - 6, '#16A34A', '800 16px system-ui, sans-serif');
+      }
     }
     function step(dt) {
       if (st.on) {

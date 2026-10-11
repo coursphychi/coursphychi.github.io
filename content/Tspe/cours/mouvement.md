@@ -138,6 +138,45 @@ draft = false
 <p>La notation physique $\dfrac{\mathrm{d}x}{\mathrm{d}t}$ correspond à la notation mathématique $x'(t)$.</p>
 </div>
 
+<details class="nt-d nt-plus" id="memo-primitives">
+<summary><span class="nt-tag"><i class="fa-solid fa-square-root-variable"></i>Mémo maths</span><span class="nt-sum">La dérivée</span></summary>
+<div class="nt-d-body">
+La dérivée d'une fonction mesure la rapidité avec laquelle elle varie, à un instant donné.<br>
+Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on fait tendre cet intervalle vers zéro. Graphiquement, c'est la <b>pente de la tangente</b> à la courbe.</p>
+
+<div class="nt-f">
+<p class="nt-tag"><i class="fa-solid fa-equals"></i>Définition</p>
+<p class="nt-f-math">$$f'(t) = \dfrac{\mathrm{d}f}{\mathrm{d}t} = \displaystyle\lim_{\Delta t \to 0} \dfrac{f(t+\Delta t)-f(t)}{\Delta t}$$</p>
+</div>
+
+<p><b>Les dérivées utiles en physique</b> ($a$ est une constante, la variable est le temps $t$)&nbsp;:</p>
+<div class="nt-scroll">
+<table class="nt-t">
+<thead><tr><th>fonction $f(t)$</th><th>dérivée $f'(t)$</th><th>exemple en physique</th></tr></thead>
+<tbody>
+<tr><td>$a$ (constante)</td><td>$0$</td><td>une position constante&nbsp;: vitesse nulle</td></tr>
+<tr><td>$a\,t$</td><td>$a$</td><td>$x(t) = 3\,t$&nbsp;: $v_x = 3~\pu{m*s-1}$</td></tr>
+<tr><td>$a\,t^2$</td><td>$2\,a\,t$</td><td>$x(t) = 5\,t^2$&nbsp;: $v_x(t) = 10\,t$</td></tr>
+<tr><td>$\mathrm{e}^{kt}$</td><td>$k\,\mathrm{e}^{t}$</td><td>la décharge d'un condensateur, la radioactivité</td></tr>
+<tr><td>$\cos t$</td><td>$-\sin t$</td><td>les oscillations</td></tr>
+<tr><td>$\sin t$</td><td>$\cos t$</td><td>les oscillations</td></tr>
+</tbody>
+</table>
+</div>
+<p><b>Deux règles de calcul</b>&nbsp;:</p>
+<ul style="margin-top:0;margin-bottom:0;">
+<li>la dérivée d'une somme est la somme des dérivées, $(u+v)' = u'+v'$,</li> 
+<li>et on peut sortir une constante, $(a\,u)' = a\,u'$.</li>
+</div>
+</details>
+
+<div class="nt-b nt-ex">
+<p class="nt-tag"><i class="fa-solid fa-lightbulb"></i>Exemple</p>
+<p>Un point se déplace sur un axe selon $x(t) = 4\,t^2 - 3\,t + 2$ (en mètres, $t$ en secondes). Sa vitesse est&nbsp;:</p>
+<p class="nt-center">$v_x(t) = \dfrac{\mathrm{d}x}{\mathrm{d}t} = 4 \times 2\,t - 3 + 0 = 8\,t - 3$</p>
+<p>À $t = 2~\text{s}$, $v_x = 8 \times 2 - 3 = 13~\pu{m*s-1}$.</p>
+</div>
+
 <div class="nt-b nt-def">
 <p class="nt-tag"><i class="fa-solid fa-book-open"></i>Coordonnées du vecteur vitesse</p>
 <p class="nt-center">$\vec{v}(t) = v_x(t)\,\vec{i}+v_y(t)\,\vec{j}+v_z(t)\,\vec{k} = \dfrac{\mathrm{d}x}{\mathrm{d}t}\,\vec{i}+\dfrac{\mathrm{d}y}{\mathrm{d}t}\,\vec{j}+\dfrac{\mathrm{d}z}{\mathrm{d}t}\,\vec{k}$</p>
@@ -148,6 +187,15 @@ draft = false
 <p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir</p>
 <p>Le vecteur vitesse est porté par la <span class="imp nt-hole">tangente à la trajectoire</span> et orienté dans le sens du mouvement.</p>
 <p>La <span class="imp">norme</span> $v(t)$ du vecteur vitesse vaut&nbsp;: $v(t)=\left\|\vec{v}(t)\right\|=\sqrt{v_x(t)^2+v_y(t)^2+v_z(t)^2}$. Unité&nbsp;: <span class="imp nt-hole">$\pu{m*s-1}$</span>.</p>
+</div>
+
+<div class="nt-b nt-demo-box">
+<p class="nt-tag"><i class="fa-solid fa-arrows-rotate"></i>Rappel&nbsp;: convertir une vitesse</p>
+<p>Dans la vie courante, les vitesses s'expriment souvent en km/h ($\pu{km*h-1}$), mais l'unité du Système international est le m/s ($\pu{m*s-1}$). Comme $1~\text{km} = 1\,000~\text{m}$ et $1~\text{h} = 3\,600~\text{s}$&nbsp;:</p>
+<p class="nt-center">$1~\pu{km*h-1} = \dfrac{1\,000~\text{m}}{3\,600~\text{s}} = \dfrac{1}{3{,}6}~\pu{m*s-1}$</p>
+<svg class='nt-svg nt-svg-s' viewBox='0 0 440 200' role='img' aria-label="Conversion des vitesses : pour passer des kilomètres par heure aux mètres par seconde, on divise par 3,6 ; pour passer des mètres par seconde aux kilomètres par heure, on multiplie par 3,6"><defs><marker id='mkB' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#2563EB'/></marker><marker id='mkO' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#EA580C'/></marker></defs><rect x='40' y='70' width='100' height='50' rx='12' fill='#EFF6FF' stroke='#2563EB' stroke-width='1.5'/><text x='90' y='102' font-size='20' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif'>km/h</text><rect x='300' y='70' width='100' height='50' rx='12' fill='#FFF7ED' stroke='#EA580C' stroke-width='1.5'/><text x='350' y='102' font-size='20' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif'>m/s</text><path d='M110,66 Q220,-6 330,66' fill='none' stroke='#2563EB' stroke-width='2.2' marker-end='url(#mkB)'/><text x='220' y='20' font-size='19' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif'>÷ 3,6</text><path d='M330,124 Q220,196 110,124' fill='none' stroke='#EA580C' stroke-width='2.2' marker-end='url(#mkO)'/><text x='220' y='188' font-size='19' text-anchor='middle' fill='#EA580C' font-family='system-ui, sans-serif'>× 3,6</text></svg>
+<p>Exemples&nbsp;: $90~\pu{km*h-1} = \dfrac{90}{3{,}6}~\pu{m*s-1} = 25~\pu{m*s-1}$, et $10~\pu{m*s-1} = 10 \times 3{,}6~\pu{km*h-1} = 36~\pu{km*h-1}$.</p>
+<p class="nt-note">Pour ne pas se tromper de sens&nbsp;: penser au sprinter qui parcourt le 100&nbsp;m en 10&nbsp;s à peu près. Cela correspond à une vitesse moyenne de $\pu{10 m*s-1}$. On a alors le choix entre $10/3,6$ et $10\times 3,6$ pour la vitesse en km/h&nbsp;; une vitesse de $\pu{36 km*h-1}$ semble la réponse évidente.</p>
 </div>
 
 ## Vecteur accélération {.nt-h2}
@@ -313,7 +361,9 @@ draft = false
 <li><p>On convertit les vitesses&nbsp;: $v_0 = \dfrac{327}{3{,}6} = \pu{90,8 m*s-1}$ et $v_1 = \dfrac{176}{3{,}6} = \pu{48,9 m*s-1}$.</p>
 <p>Le mouvement étant rectiligne uniformément accéléré, $a = \dfrac{\Delta v}{\Delta t} = \dfrac{48{,}9 - 90{,}8}{1{,}48} = \pu{-28,3 m*s-2}$.</p>
 <p>Le vecteur accélération a donc la direction du mouvement (la ligne droite), il est de sens opposé au mouvement, et sa norme vaut environ $\pu{28 m*s-2}$, soit près de 3 fois l'intensité de la pesanteur.</p></li>
-<li><p>La vitesse variant linéairement avec le temps, la distance parcourue est celle qu'on parcourrait à la vitesse moyenne $\dfrac{v_0+v_1}{2}$&nbsp;: $d = \dfrac{v_0+v_1}{2}\times\Delta t = \dfrac{90{,}8+48{,}9}{2}\times 1{,}48 = \pu{103 m}$.</p></li>
+<li><p>La vitesse variant linéairement avec le temps, la distance parcourue est celle qu'on parcourrait à la vitesse moyenne $\dfrac{v_0+v_1}{2}$&nbsp;: $d = \dfrac{v_0+v_1}{2}\times\Delta t = \dfrac{90{,}8+48{,}9}{2}\times 1{,}48 = \pu{103 m}$.</p>
+<p class="nt-note">On aurait aussi pu primitiver $v(t) = v_0 + a\times t$ pour obtenir $x(t)$.</p>
+</li>
 <li><p>Le freinage réel est plus court (93&nbsp;m) pour la même durée&nbsp;: la F1 a donc perdu sa vitesse plus tôt que prévu. Le mouvement n'est pas uniformément accéléré&nbsp;: la décélération est plus forte au début du freinage, à grande vitesse, car la traînée aérodynamique et l'appui (qui plaque la voiture au sol et améliore l'adhérence des pneus) augmentent fortement avec la vitesse.</p></li>
 </ol>
 </div>
@@ -528,7 +578,8 @@ draft = false
     var KV = 0.32;   /* échelle : longueur de la flèche (m) pour 1 m/s */
     function draw() {
       var t0 = parseFloat(rT.value), dt = parseFloat(rD.value), t1 = t0 + dt;
-      var c = S.ctx, w = S.w, h = S.h, k = Math.min((w - 40) / 5.2, (h - 30) / 2.6), ox = 20, oy = h - 18;
+      var c = S.ctx, w = S.w, h = S.h, k = Math.min((w - 40) / 5.2, (h - 30) / 2.6), oy = h - 18;
+      var ox = w / 2 - k * (Mx(0) + Mx(2.75)) / 2;   /* trajectoire centrée horizontalement dans le cadre */
       function X(x) { return ox + x * k; }
       function Y(y) { return oy - y * k; }
       c.clearRect(0, 0, w, h);

@@ -428,6 +428,8 @@ details.nt-d[open] > summary::after { content: "−"; color: #fff; background: v
 
 /* --- Texte en gras : couleur du cadre plutôt que noir --- */
 .nt-b b, .nt-b strong, details.nt-d b, details.nt-d strong { color: var(--c-ink, var(--c)); }
+/* dans une carte de formule (fond foncé), le gras reste jaune, même à l'intérieur d'un cadre ou d'un repliable */
+.nt-b .nt-f b, details.nt-d .nt-f b, .nt-f b, .nt-b .nt-f strong, details.nt-d .nt-f strong { color: #FDE68A; }
 .nt-proto { --c-ink: var(--blue); }
 
 /* --- Définition : sur le modèle de « À retenir » --- */

@@ -85,13 +85,12 @@ draft = false
 </div>
 
 <details class="nt-d nt-plus">
-<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Des vidéos pour voir l'inertie à l'œuvre</span></summary>
+<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">L'inertie à l'œuvre</span></summary>
 <div class="nt-d-body">
 <ul class="nt-facts">
-<li><a href="https://www.youtube.com/watch?v=wV2UTkkQ0Fg&t=15s" target="_blank" rel="noopener">Une vidéo sur le principe d'inertie</a> (à partir de 0'15'').</li>
+<li><a href="https://www.youtube.com/watch?v=wV2UTkkQ0Fg&t=15s" target="_blank" rel="noopener">Vidéo d'un crash-test</a>.</li>
 </ul>
 <p>Un objet posé ne se met pas en mouvement tout seul, et un objet lancé continue sur sa lancée&nbsp;: c'est ce qui rend dangereux un freinage brutal pour les passagers non attachés, qui continuent leur mouvement «&nbsp;sur leur lancée&nbsp;».</p>
-</div>
 </details>
 
 ## Deuxième loi de Newton {.nt-h2}
@@ -176,7 +175,7 @@ draft = false
 <div class="nt-lab" id="lab-react">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
 <p class="nt-lab-title">Deux patineurs qui se repoussent</p>
-<canvas style="height:260px;" aria-label="Deux patineurs immobiles se poussent mutuellement puis s'éloignent l'un de l'autre"></canvas>
+<canvas style="height:300px;" aria-label="Deux patineurs immobiles se poussent mutuellement puis s'éloignent l'un de l'autre"></canvas>
 <div class="nt-ctrls">
 <label class="nt-ctrl">Masse du patineur bleu $m_1$&nbsp;: <b class="out-m1"></b><input type="range" data-p="m1" min="30" max="100" step="5" value="80"></label>
 <label class="nt-ctrl">Masse du patineur orange $m_2$&nbsp;: <b class="out-m2"></b><input type="range" data-p="m2" min="30" max="100" step="5" value="40"></label>
@@ -255,8 +254,8 @@ draft = false
       if (!S) { return; }
       var m2 = parseFloat(rM.value), c = S.ctx, w = S.w, h = S.h;
       oM.textContent = fr(m2, 1) + ' \u00d7 m\u2081';
-      var xmax = 0.4 + VX * TF + 0.8, ymax = 0.4 + VY * VY / (2 * G) + 0.8, k = Math.min((w - 20) / xmax, (h - 20) / ymax);
-      function X(x) { return 10 + x * k; }
+      var xmin = -0.5, xmax = 0.4 + VX * TF + 0.9, ymax = 0.4 + VY * VY / (2 * G) + 0.8, k = Math.min((w - 20) / (xmax - xmin), (h - 20) / ymax);
+      function X(x) { return w / 2 + (x - (xmin + xmax) / 2) * k; }   /* trajectoire (boules comprises) centrée horizontalement */
       function Y(y) { return h - 10 - y * k; }
       c.clearRect(0, 0, w, h);
       c.fillStyle = '#E2E8F0'; c.fillRect(0, Y(0), w, h - Y(0));
@@ -305,13 +304,29 @@ draft = false
       var c = S.ctx, w = S.w, h = S.h, k = Math.min(w, h) * 0.44, cx = w / 2, cy = h / 2;
       c.clearRect(0, 0, w, h);
       var ts = Math.min(t % (TMAX + 1.2), TMAX), rot = mode === 'sol' ? OMEGA * ts : 0;
+      /* arbres vus de dessus, fixes dans le référentiel du sol (rayon, angle, taille, en rayons du manège) */
+      var arb = mode === 'sol' ? 0 : -OMEGA * ts;
+      [[1.3, 0.25, 0.14], [1.5, 1.15, 0.17], [1.22, 1.95, 0.12], [1.6, 2.75, 0.18], [1.3, 3.55, 0.15], [1.5, 4.4, 0.13], [1.25, 5.2, 0.16], [1.75, 5.8, 0.14],
+       [2.2, 0.6, 0.17], [2.5, 2.4, 0.15], [2.3, 3.2, 0.18], [2.6, 5.5, 0.16], [2.15, 4.0, 0.13], [2.7, 0.05, 0.15]].forEach(function (a) {
+        var ang = a[1] + arb, x = cx + a[0] * k * Math.cos(ang), y = cy - a[0] * k * Math.sin(ang), R = a[2] * k;
+        if (x < -R || x > w + R || y < -R || y > h + R) { return; }
+        var sx = 0.18 * R * (Math.cos(arb) + Math.sin(arb)), sy = 0.18 * R * (Math.cos(arb) - Math.sin(arb));
+        c.fillStyle = 'rgba(15,23,42,.10)'; c.beginPath(); c.arc(x + sx, y + sy, R, 0, 2 * Math.PI); c.fill();   /* ombre : elle tourne avec le paysage */
+        for (var l = 0; l < 6; l++) {   /* houppier en lobes */
+          var la = l * Math.PI / 3 + a[1] * 3 - arb;   /* rotation propre, dans le même sens que l'orbite (axe vertical de l'écran vers le bas) */
+          c.fillStyle = l % 2 ? '#4D9A5B' : '#5BAE69'; c.beginPath(); c.arc(x + 0.45 * R * Math.cos(la), y + 0.45 * R * Math.sin(la), 0.6 * R, 0, 2 * Math.PI); c.fill();
+        }
+        c.fillStyle = '#6CC17A'; c.beginPath(); c.arc(x - 0.15 * R, y - 0.15 * R, 0.45 * R, 0, 2 * Math.PI); c.fill();
+        c.fillStyle = '#3F7F4B'; c.beginPath(); c.arc(x, y, 0.12 * R, 0, 2 * Math.PI); c.fill();
+      });
       /* manège : disque et rayons repères (ils tournent dans le référentiel du sol) */
       c.fillStyle = '#EEF5FE'; c.strokeStyle = col('--blue'); c.lineWidth = 2; c.beginPath(); c.arc(cx, cy, k, 0, 2 * Math.PI); c.fill(); c.stroke();
       c.strokeStyle = 'rgba(42,107,196,.35)'; c.lineWidth = 1.5;
       for (var r = 0; r < 6; r++) { var a = rot + r * Math.PI / 3; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + k * Math.cos(a), cy - k * Math.sin(a)); c.stroke(); }
       var hx = cx + k * 0.92 * Math.cos(rot + 0.5), hy = cy - k * 0.92 * Math.sin(rot + 0.5);
       c.fillStyle = col('--amber'); c.beginPath(); c.arc(hx, hy, 7, 0, 2 * Math.PI); c.fill();
-      txt(c, 'observateur du manège', hx, hy - 12, col('--amber'), '600 11px system-ui, sans-serif');
+      c.font = '600 11px system-ui, sans-serif'; var lwo = c.measureText('observateur du manège').width;
+      txt(c, 'observateur du manège', Math.max(6 + lwo / 2, Math.min(w - 6 - lwo / 2, hx)), hy - 12, col('--amber'), '600 11px system-ui, sans-serif');   /* jamais coupée par le bord */
       /* palet : mouvement rectiligne uniforme dans le référentiel du sol */
       function pos(s) {
         var x = P0[0] + V * DIR[0] * s, y = P0[1] + V * DIR[1] * s;
@@ -322,8 +337,8 @@ draft = false
       for (var s = 0; s <= ts + 1e-9; s += 0.12) { var p = pos(s); c.fillStyle = 'rgba(225,29,72,.55)'; c.beginPath(); c.arc(cx + p[0] * k, cy - p[1] * k, 3.2, 0, 2 * Math.PI); c.fill(); }
       var q = pos(ts); c.fillStyle = CF; c.beginPath(); c.arc(cx + q[0] * k, cy - q[1] * k, 9, 0, 2 * Math.PI); c.fill();
       msg.textContent = mode === 'sol'
-        ? 'Dans le référentiel du sol (galiléen), le palet, pseudo-isolé (sans frottement), avance en ligne droite à vitesse constante : la première loi de Newton est vérifiée.'
-        : 'Dans le référentiel du manège, le même palet décrit une courbe alors qu\u2019aucune force supplémentaire n\u2019agit sur lui : la première loi n\u2019est pas vérifiée, ce référentiel n\u2019est pas galiléen.';
+        ? 'Dans le référentiel du sol (galiléen), les arbres sont immobiles et le manège tourne. Le palet, pseudo-isolé (sans frottement), avance en ligne droite à vitesse constante : la première loi de Newton est vérifiée.'
+        : 'Dans le référentiel du manège, c\u2019est le paysage qui tourne : les arbres défilent autour de l\u2019observateur. Le palet décrit une courbe alors qu\u2019aucune force supplémentaire n\u2019agit sur lui : la première loi n\u2019est pas vérifiée, ce référentiel n\u2019est pas galiléen.';
     }
     function step(ts) {
       if (last !== null && playing && visible) { t += Math.min(0.05, (ts - last) / 1000); }
@@ -395,7 +410,9 @@ draft = false
     if (!root) { return; }
     var cv = $(root, 'canvas'), r1 = $(root, '[data-p="m1"]'), r2 = $(root, '[data-p="m2"]'), btn = $(root, '[data-act="play"]');
     var o1 = $(root, '.out-m1'), o2 = $(root, '.out-m2'), oF = $(root, '.out-F'), oa1 = $(root, '.out-a1'), oa2 = $(root, '.out-a2'), ov1 = $(root, '.out-v1'), ov2 = $(root, '.out-v2'), msg = $(root, '.nt-msg');
-    var S, playing = !RM, visible = true, t = 0, last = null, F = 120, TP = 0.6, T0 = 0.8, TMAX = 4.2, GAP = 0.5;
+    var S, playing = !RM, visible = true, t = 0, last = null, F = 120, TP = 0.6, T0 = 0.8, TMAX = 4.2;
+    var REACH0 = 0.36, REACH1 = 0.62, GAP = 2 * REACH0;   /* bras repliés (au contact) puis tendus ; écart initial des deux patineurs (m) */
+    var SKIN = '#F2C9A5', PANTS = '#334155', BOOT = '#F8FAFC';
     function st(s) {
       var m1 = +r1.value, m2 = +r2.value, a1 = F / m1, a2 = F / m2, x1 = -GAP / 2, x2 = GAP / 2, v1 = 0, v2 = 0, push = false;
       if (s > T0) {
@@ -405,43 +422,94 @@ draft = false
       }
       return { m1: m1, m2: m2, a1: a1, a2: a2, x1: x1, x2: x2, v1: v1, v2: v2, push: push };
     }
-    function skater(c, x, y, k, m, color) {   /* silhouette proportionnée à la masse */
-      var sc = 0.75 + 0.25 * Math.cbrt(m / 60);
-      c.strokeStyle = color; c.fillStyle = color; c.lineWidth = 5 * sc; c.lineCap = 'round';
-      c.beginPath(); c.arc(x, y - 1.55 * k * sc, 0.14 * k * sc, 0, 2 * Math.PI); c.fill();
-      c.beginPath(); c.moveTo(x, y - 1.4 * k * sc); c.lineTo(x, y - 0.8 * k * sc); c.lineTo(x - 0.18 * k * sc, y - 0.05 * k); c.moveTo(x, y - 0.8 * k * sc); c.lineTo(x + 0.18 * k * sc, y - 0.05 * k); c.stroke();
-      c.lineWidth = 3; c.beginPath(); c.moveTo(x - 0.3 * k * sc, y); c.lineTo(x + 0.3 * k * sc, y); c.stroke();
+    function shade(hex, f) {   /* assombrit (f < 0) ou éclaircit (f > 0) une couleur */
+      var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+      function m(v) { return Math.round(f < 0 ? v * (1 + f) : v + (255 - v) * f); }
+      return 'rgb(' + m(r) + ',' + m(g) + ',' + m(b) + ')';
+    }
+    function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+    /* un patineur : pieds en (x, y), tourné vers dir (+1 vers la droite) ; reach : position de la main (en m, mesurée depuis l'axe du corps) ou null (bras le long du corps) */
+    function skater(c, x, y, k, m, color, dir, reach) {
+      var s = k * (0.93 + 0.12 * (m - 30) / 70), wf = 0.75 + 0.55 * (m - 30) / 70;   /* taille et carrure selon la masse */
+      var hipY = y - 0.86 * s, shY = y - 1.38 * s, headY = y - 1.58 * s, hr = 0.115 * s, tw = 0.36 * wf * s;
+      c.lineCap = 'round'; c.lineJoin = 'round';
+      /* jambes et patins */
+      c.strokeStyle = PANTS; c.lineWidth = 0.11 * s;
+      [-1, 1].forEach(function (e) {
+        var fx = x + e * 0.09 * s;
+        c.beginPath(); c.moveTo(x + e * 0.06 * s, hipY); c.lineTo(fx, y - 0.13 * s); c.stroke();
+        c.fillStyle = BOOT; rr(c, fx - 0.07 * s, y - 0.16 * s, 0.17 * s, 0.12 * s, 0.03 * s); c.fill(); c.strokeStyle = '#94A3B8'; c.lineWidth = 1; c.stroke();
+        c.strokeStyle = '#64748B'; c.lineWidth = 1.6; c.beginPath(); c.moveTo(fx - 0.09 * s, y - 0.02 * s); c.lineTo(fx + 0.13 * s, y - 0.02 * s); c.stroke();
+        c.strokeStyle = PANTS; c.lineWidth = 0.11 * s;
+      });
+      /* bras arrière (côté opposé) */
+      var hx, hy;
+      if (reach === null) { hx = x - dir * 0.1 * s; hy = y - 0.92 * s; } else { hx = x + dir * reach * k; hy = y - 1.18 * s; }
+      c.strokeStyle = shade(color, -0.25); c.lineWidth = 0.085 * s;
+      c.beginPath(); c.moveTo(x - dir * 0.03 * s, shY + 0.05 * s); c.lineTo(reach === null ? x + dir * 0.06 * s : hx - dir * 0.02 * s, reach === null ? y - 0.95 * s : hy + 0.04 * s); c.stroke();
+      /* buste (pull) */
+      var g = c.createLinearGradient(x - tw / 2, 0, x + tw / 2, 0); g.addColorStop(0, shade(color, -0.15)); g.addColorStop(0.5, shade(color, 0.12)); g.addColorStop(1, shade(color, -0.15));
+      c.fillStyle = g; rr(c, x - tw / 2, shY - 0.02 * s, tw, hipY - shY + 0.1 * s, 0.09 * s); c.fill();
+      /* bras avant et main */
+      c.strokeStyle = color; c.lineWidth = 0.09 * s;
+      c.beginPath(); c.moveTo(x + dir * 0.04 * s, shY + 0.05 * s); c.lineTo(hx, hy); c.stroke();
+      c.fillStyle = SKIN; c.beginPath(); c.arc(hx, hy, 0.045 * s, 0, 2 * Math.PI); c.fill();
+      /* tête et bonnet */
+      c.fillStyle = SKIN; c.beginPath(); c.arc(x, headY, hr, 0, 2 * Math.PI); c.fill();
+      c.fillStyle = shade(color, -0.2); c.beginPath(); c.arc(x, headY - 0.01 * s, hr * 1.04, Math.PI, 2 * Math.PI); c.fill();
+      c.beginPath(); c.arc(x, headY - hr * 1.05, hr * 0.32, 0, 2 * Math.PI); c.fill();
+      c.fillStyle = '#334155'; c.beginPath(); c.arc(x + dir * hr * 0.45, headY + hr * 0.1, hr * 0.12, 0, 2 * Math.PI); c.fill();
+      return headY - hr * 1.5;   /* ordonnée au-dessus de la tête */
     }
     function draw() {
       if (!S) { return; }
-      var c = S.ctx, w = S.w, h = S.h, k = Math.min(w / 9, h / 2.6), cx = w / 2, yg = h - 26;
+      var c = S.ctx, w = S.w, h = S.h, k = Math.min(w / (w < 520 ? 6 : 8.5), (h - 50) / 2.3), cx = w / 2, yg = h - 40;
       var s = Math.min(t % (TMAX + 1.0), TMAX), q = st(s);
       o1.textContent = q.m1 + ' kg'; o2.textContent = q.m2 + ' kg';
       oF.textContent = F + ' N'; oa1.textContent = fr(q.a1, 2) + ' m\u00b7s\u207b\u00b2'; oa2.textContent = fr(q.a2, 2) + ' m\u00b7s\u207b\u00b2';
       var vf1 = q.a1 * TP, vf2 = q.a2 * TP; ov1.textContent = fr(vf1, 2) + ' m\u00b7s\u207b\u00b9'; ov2.textContent = fr(vf2, 2) + ' m\u00b7s\u207b\u00b9';
       c.clearRect(0, 0, w, h);
-      var gi = c.createLinearGradient(0, yg, 0, h); gi.addColorStop(0, '#E0F2FE'); gi.addColorStop(1, '#F0F9FF'); c.fillStyle = gi; c.fillRect(0, yg, w, h - yg);
-      c.strokeStyle = '#BAE6FD'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(0, yg); c.lineTo(w, yg); c.stroke();
+      /* décor : fond, bande de la patinoire, glace */
+      var sky = c.createLinearGradient(0, 0, 0, yg); sky.addColorStop(0, '#F8FAFC'); sky.addColorStop(1, '#EEF2F7'); c.fillStyle = sky; c.fillRect(0, 0, w, yg);
+      var bB = yg - 0.5 * k, bT = bB - 0.4 * k;   /* bande de la patinoire, au fond */
+      c.fillStyle = '#FFFFFF'; c.fillRect(0, bT, w, bB - bT);
+      c.fillStyle = '#2563EB'; c.fillRect(0, bT, w, 4); c.fillStyle = '#E11D48'; c.fillRect(0, bB - 7, w, 3);
+      c.strokeStyle = '#CBD5E1'; c.lineWidth = 1; for (var px = 40; px < w; px += 110) { c.beginPath(); c.moveTo(px, bT + 4); c.lineTo(px, bB - 7); c.stroke(); }
+      var ice = c.createLinearGradient(0, bB, 0, h); ice.addColorStop(0, '#E0ECFB'); ice.addColorStop(1, '#F5FAFF'); c.fillStyle = ice; c.fillRect(0, bB, w, h - bB);
+      c.strokeStyle = '#CBD5E1'; c.beginPath(); c.moveTo(0, bB + 0.5); c.lineTo(w, bB + 0.5); c.stroke();
+      c.strokeStyle = 'rgba(255,255,255,.95)'; c.lineWidth = 1.2;   /* traces de patins */
+      [[0.06, 0.25, 0.26], [0.52, 0.55, 0.2], [0.76, 0.18, 0.2], [0.3, 0.85, 0.22]].forEach(function (r) { var y0 = bB + r[1] * (h - bB); c.beginPath(); c.moveTo(r[0] * w, y0); c.quadraticCurveTo((r[0] + r[2] / 2) * w, y0 + 5, (r[0] + r[2]) * w, y0 + 2); c.stroke(); });
       function X(x) { return cx + x * k; }
+      var xg = (q.m1 * q.x1 + q.m2 * q.x2) / (q.m1 + q.m2), x1 = X(q.x1), x2 = X(q.x2);
+      /* bras : au contact avant et pendant la poussée, le long du corps ensuite */
+      var reach = null, half = (q.x2 - q.x1) / 2;
+      if (s <= T0 || q.push) { reach = Math.min(REACH1, Math.max(REACH0, half)); }
+      var contact = (s <= T0 || q.push) && half <= REACH1 + 1e-9;
+      /* reflets sur la glace */
+      c.save(); c.beginPath(); c.rect(0, yg, w, h - yg); c.clip(); c.globalAlpha = 0.12; c.translate(0, 2 * yg); c.scale(1, -1);
+      skater(c, x1, yg, k, q.m1, CP, 1, contact ? half : null); skater(c, x2, yg, k, q.m2, CV, -1, contact ? half : null); c.restore();
       /* centre de masse : il reste immobile */
-      var xg = (q.m1 * q.x1 + q.m2 * q.x2) / (q.m1 + q.m2);
-      c.strokeStyle = 'rgba(225,29,72,.5)'; c.setLineDash([4, 4]); c.lineWidth = 1.5; c.beginPath(); c.moveTo(X(xg), yg - 2.1 * k); c.lineTo(X(xg), yg); c.stroke(); c.setLineDash([]);
-      txt(c, 'G', X(xg) + 10, yg - 2.05 * k, CF, 'italic 700 13px Georgia, serif');
-      var x1 = X(q.x1), x2 = X(q.x2);
-      if (x1 > -40) { skater(c, x1, yg, k, q.m1, CP); }
-      if (x2 < w + 40) { skater(c, x2, yg, k, q.m2, CV); }
-      var ya = yg - 1.15 * k;
-      if (q.push || s <= T0) {
-        /* mains en contact : forces égales et opposées */
-        c.strokeStyle = col('--slate'); c.lineWidth = 3; c.beginPath(); c.moveTo(x1, ya); c.lineTo(x1 + 0.22 * k, ya); c.moveTo(x2, ya); c.lineTo(x2 - 0.22 * k, ya); c.stroke();
-        if (q.push) {
-          var L = 0.9 * k;
-          arrow(c, x2, ya - 18, x2 + L, ya - 18, CF, 3); vecLabel(c, 'F', x2 + L / 2, ya - 28, CF, '1/2');
-          arrow(c, x1, ya - 18, x1 - L, ya - 18, CF, 3); vecLabel(c, 'F', x1 - L / 2, ya - 28, CF, '2/1');
-        }
-      } else {
-        if (x1 > 0) { arrow(c, x1, ya, x1 + q.v1 * 0.55 * k, ya, CV, 3); }
-        if (x2 < w) { arrow(c, x2, ya, x2 + q.v2 * 0.55 * k, ya, CV, 3); }
+      var gX = X(xg);
+      c.strokeStyle = 'rgba(225,29,72,.45)'; c.setLineDash([4, 4]); c.lineWidth = 1.3; c.beginPath(); c.moveTo(gX, yg - 2.12 * k); c.lineTo(gX, yg + 10); c.stroke(); c.setLineDash([]);
+      c.fillStyle = '#fff'; c.beginPath(); c.ellipse(gX, yg + 10, 9, 3.5, 0, 0, 2 * Math.PI); c.fill(); c.strokeStyle = CF; c.lineWidth = 1.4; c.stroke();
+      c.fillStyle = CF; c.beginPath(); c.ellipse(gX, yg + 10, 3, 1.3, 0, 0, 2 * Math.PI); c.fill();
+      txt(c, 'G', gX, yg - 2.12 * k - 6, CF, 'italic 700 14px Georgia, serif');
+      /* patineurs */
+      var top1 = skater(c, x1, yg, k, q.m1, CP, 1, contact ? half : null), top2 = skater(c, x2, yg, k, q.m2, CV, -1, contact ? half : null);
+      if (x1 > -20) { txt(c, q.m1 + ' kg', x1 + 10, top1 - 4, CP, '600 12px system-ui, sans-serif', 'right'); }
+      if (x2 < w + 20) { txt(c, q.m2 + ' kg', x2 - 10, top2 - 4, CV, '600 12px system-ui, sans-serif', 'left'); }
+      var yh = yg - 1.18 * k * 0.98;
+      if (q.push && contact) {
+        /* forces égales et opposées, appliquées au point de contact des mains */
+        var xc = (x1 + x2) / 2, L = Math.max(1.05 * k, (x2 - x1) / 2 + 0.35 * k), ya = yh;
+        arrow(c, xc, ya, xc + L, ya, CF, 3); vecLabel(c, 'F', xc + L + 20, ya + 5, CF, '1/2');
+        arrow(c, xc, ya, xc - L, ya, CF, 3); vecLabel(c, 'F', xc - L - 22, ya + 5, CF, '2/1');
+        c.fillStyle = CF; c.beginPath(); c.arc(xc, ya, 3.5, 0, 2 * Math.PI); c.fill();
+      } else if (s > T0) {
+        /* vitesses acquises */
+        var yv = yg - 0.62 * k;
+        if (x1 > 0) { arrow(c, x1, yv, x1 + q.v1 * 0.55 * k, yv, CV, 3); }
+        if (x2 < w) { arrow(c, x2, yv, x2 + q.v2 * 0.55 * k, yv, CV, 3); }
       }
       msg.textContent = s <= T0 ? 'Les deux patineurs sont immobiles, mains contre mains.'
         : (q.push ? 'Ils se poussent : chacun exerce sur l\u2019autre une force de même norme, de sens opposé (troisième loi).'
@@ -454,7 +522,7 @@ draft = false
     }
     [r1, r2].forEach(function (r) { r.addEventListener('input', function () { t = 0; draw(); }); });
     btn.addEventListener('click', function () { playing = !playing; playLabel(btn, playing); });
-    function setup() { S = canvasCtx(cv); draw(); }
+    function setup() { var w = cv.clientWidth, k = w / (w < 520 ? 6 : 8.5); cv.style.height = Math.round(Math.min(300, Math.max(190, 2.3 * k + 60))) + 'px'; S = canvasCtx(cv); draw(); }
     watchVisible(cv, function (v) { visible = v; });
     if (RM) { t = T0 + TP + 1; }
     playLabel(btn, playing); setup(); onResize(setup); requestAnimationFrame(step);
