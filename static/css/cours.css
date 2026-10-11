@@ -462,3 +462,6 @@ details.nt-d[open] > summary::after { content: "−"; color: #fff; background: v
 .nt-def .nt-tag { background: linear-gradient(135deg, #3F2E9E, #6B5BD2); box-shadow: 0 2px 8px rgba(63, 46, 158, 0.35); }
 .nt-def:hover { box-shadow: 0 12px 30px rgba(107, 91, 210, 0.32); }
 details.nt-d.nt-plus { --c: #64748B; --bg: #F4F5F7; --c-ink: #475569; }
+
+/* protocoles des cours de seconde : on garde les gestes utiles, sans l'étiquette « ECE » */
+.nt-sans-ece .nt-ece::before { content: none; display: none; }

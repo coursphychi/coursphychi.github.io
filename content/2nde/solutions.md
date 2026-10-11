@@ -24,7 +24,7 @@ td, th {
 # Solutions
 
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/2nde/solutions"> Cours </a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/2nde/solutions"><b>Cours 📽️</b> </a> + <a href="../cours/solutions"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
 
 
 [![](/cm-sol.png)](/cm-sol.pdf)
@@ -224,44 +224,6 @@ On cherche à obtenir $\pu{250 mL}$ d'une solution d'hydrogénocarbonate de sodi
 
 
 {{< /quizdown >}}
-
-
-
-
-## Définitions
-
-{{%notice type="def" title="Solution aqueuse" round="true"%}}
-Mélange homogène dans lequel l’eau est le constituant ultra-majoritaire. Elle y joue le rôle de solvant, les espèces chimiques dissoutes sont qualifiées de solutés.
-{{%/notice%}}
-
->Exemple :<br>
-Le vinaigre est, en première approximation, une solution aqueuse d’acide éthanoïque (soluté).
-
-
-{{%notice type="def" title="Concentration en masse" round="true"%}}
-Masse d’une espèce chimique dissoute par litre de solution. La concentration en masse peut s’exprimer en g/L.
-{{%/notice%}}
-
->Exemple :<br>
-Une solution de chlorure de sodium de concentration en masse 10&nbsp;g/L est obtenue en introduisant 10&nbsp;g de chlorure de sodium dans une fiole jaugée de 1,0&nbsp;L et en ajoutant de l’eau jusqu’à obtenir un volume final de mélange égal à 1,0&nbsp;L.
-
-
-{{%notice type="def" title="Concentration maximale d’un soluté" round="true"%}}
-Masse maximale d’une espèce chimique qui peut être dissoute par litre de solution.
-{{%/notice%}}
-
->Exemple :<br>
-La concentration maximale du chlorure de sodium dans l’eau à 25 °C est égale à $\pu{3,6E2 g}$ de sel par litre de solution.
-
-
-{{%notice type="def" title="Dosage par étalonnage" round="true"%}}
-Méthode de détermination d’une concentration, généralement non destructive, utilisant
-une courbe de référence liant la valeur d’une grandeur physique (absorbance, conductivité, masse volumique, etc.) à la concentration d’un soluté. La courbe de référence, appelée **courbe d’étalonnage**, doit être monotone sur l’intervalle de concentration encadrant la concentration inconnue. La courbe n’est pas nécessairement une droite, mais cette situation permet d’obtenir une précision constante quelle que soit la valeur de la concentration recherchée.
-{{%/notice%}}
-
->Exemples :<br>
-Dosage du chlorure de sodium dans du sérum physiologique par mesure de la conductance, dosage du sucre dans une boisson sucrée par mesure de masse volumique, dosage des ions permanganate par mesure d’absorbance.
-
 
 
 
