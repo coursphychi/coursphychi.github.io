@@ -7,6 +7,17 @@ hidden = "true"
 <link rel="stylesheet" href="/css/cours.css">
 <script src="/js/cours.js" defer></script>
 
+<style>
+.nt-tr-ans { display: flex; align-items: center; justify-content: center; gap: 0.5em; flex-wrap: wrap; margin: 0.6em 0; }
+.nt-champ { display: inline-flex; align-items: center; gap: 0.35em; white-space: nowrap; margin: 0 0.7em; }
+.nt-champ label { display: inline; margin: 0; font-weight: 600; }
+.nt-champ input[type="text"] { width: 4.8em !important; min-width: 0; margin: 0; padding: 0.25em 0.5em; text-align: right; font: inherit; border: 1.5px solid var(--line); border-radius: 8px; }
+.nt-champ .nt-u { color: var(--slate); }
+.nt-ql-q { font-size: 1.05em; text-align: center; margin: 0.5em 0 0.7em !important; min-height: 1.6em; }
+.nt-lab [hidden] { display: none !important; }
+.nt-etal-calc p { margin: 0.25em 0 !important; }
+</style>
+
 <div class="nt-quizbar">
 <button type="button" class="nt-btn nt-quiz-toggle" aria-pressed="false"><i class="fa-solid fa-eye-slash"></i>&nbsp; Mode révision</button>
 <p>Le mode révision masque les mots-clés&nbsp;: essayez de les retrouver de mémoire, puis cliquez dessus pour vérifier.</p>
@@ -286,43 +297,53 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
 </ol>
 </div>
 
-<div class="nt-b nt-demo-box">
-<p class="nt-tag"><i class="fa-solid fa-eye"></i>Remarque</p>
-<p class="nt-ece">Cette <a href="https://youtu.be/aTcJy2S1eCs" target="_blank">petite vidéo</a> présente le spectrophotomètre du lycée et son utilisation.</p>
-</div>
+{{< youtube-plus id="aTcJy2S1eCs" ratio="16x9" width="500" shadow=true rounded=true >}}
 
 
 <div class="nt-lab" id="lab-gamme">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive (1/2)</p>
 <p class="nt-lab-title">Établir la courbe d'étalonnage</p>
-<p class="nt-note">Solution mère&nbsp;: colorant bleu de concentration $C_0 = \pu{0,120 mol*L-1}$. Chaque solution fille est préparée dans une fiole jaugée de $\pu{50,0 mL}$&nbsp;: $C = C_0\times\dfrac{V_{\text{mère}}}{V_{\text{fiole}}}$.</p>
-<div class="nt-gamme">
-<div class="nt-tubes" aria-hidden="true"></div>
-<canvas style="height:250px;" aria-label="Absorbance des solutions étalons en fonction de leur concentration"></canvas>
-</div>
-<div class="nt-scroll"><table class="nt-t nt-gamme-tab"><thead><tr><th>Solution</th><th>$V_{\text{mère}}$ prélevé (mL)</th><th>$C$ (mol·L<sup>−1</sup>)</th><th>$A$ mesurée</th></tr></thead><tbody></tbody></table></div>
-<div class="nt-btns">
-<button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-vial"></i>&nbsp; Préparer et mesurer la solution suivante</button>
-<button type="button" class="nt-btn" data-act="all">Tout préparer</button>
-<button type="button" class="nt-btn" data-act="reset">Recommencer</button>
-</div>
+<p class="nt-note">Solution mère&nbsp;: colorant bleu de concentration $C_0 = \pu{0,120 mol*L-1}$, dans une burette graduée&nbsp;; eau distillée dans une seconde burette. Chaque tube contient $\pu{10,0 mL}$ de solution&nbsp;: $C = C_0\times\dfrac{V_{\text{mère}}}{V_{\text{tube}}}$.</p>
+<canvas class="scene" style="height:390px;" aria-label="Deux burettes graduées, l'une de solution mère colorée, l'autre d'eau distillée, et la gamme étalon en cours de préparation"></canvas>
+<p class="nt-ql-q nt-tein-q"></p>
+<div class="nt-tein-prep"><div class="nt-tr-ans">
+<span class="nt-champ"><label for="gam-vm">solution mère&nbsp;:</label><input id="gam-vm" type="text" inputmode="decimal" data-p="vm"><span class="nt-u">mL</span></span>
+<span class="nt-champ"><label for="gam-ve">eau distillée&nbsp;:</label><input id="gam-ve" type="text" inputmode="decimal" data-p="ve"><span class="nt-u">mL</span></span>
+<button type="button" class="nt-btn nt-btn-main" data-act="prep"><i class="fa-solid fa-vial"></i>&nbsp; Préparer et mesurer le tube</button>
+<button type="button" class="nt-btn nt-btn-main" data-act="prepok" hidden><i class="fa-solid fa-vial-circle-check"></i>&nbsp; Préparer le tube avec les bons volumes</button>
+</div></div>
 <p class="nt-msg" aria-live="polite"></p>
+<div>
+<div class="nt-scroll"><table class="nt-t nt-gamme-tab"><thead><tr><th>Tube</th><th>$V_{\text{mère}}$ (mL)</th><th>$V_{\text{eau}}$ (mL)</th><th>$C$ (mol·L<sup>−1</sup>)</th><th>$A$</th></tr></thead><tbody></tbody></table></div>
+<canvas class="graph" style="height:270px; margin-top:10px; background:#fff; border-radius:10px;" aria-label="Absorbance des solutions étalons en fonction de leur concentration"></canvas>
 </div>
+<div class="nt-read" aria-live="polite"><span>tubes bien préparés&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns">
+<button type="button" class="nt-btn" data-act="all">Tout préparer</button>
+<button type="button" class="nt-btn" data-act="reset"><i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer</button>
+</div>
+</div>
+
+<div class="nt-b nt-warn">
+<p class="nt-tag"><i class="fa-solid fa-triangle-exclamation"></i>Une méthode rapide, mais pas la plus précise</p>
+<p>Préparer une gamme avec deux burettes graduées est rapide et économe en solution, mais ce n'est pas la méthode de dilution la plus précise&nbsp;: la lecture d'une burette graduée est moins précise qu'un volume délivré par une pipette jaugée et ajusté dans une fiole jaugée, surtout pour les petits volumes.</p>
+<p>La méthode de référence, avec <b>pipette jaugée et fiole jaugée</b>, reste à <b>maîtriser</b>&nbsp;: elle est attendue aux épreuves écrites comme aux ECE. <a href="https://coursphychi.github.io/tspe/cours/dilution/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i>&nbsp; Le cours sur les dilutions</a></p>
+</div>
+
 
 <div class="nt-lab" id="lab-etal">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive (2/2)</p>
 <p class="nt-lab-title">Exploiter la courbe&nbsp;: doser une solution mystère</p>
 <div class="nt-gamme">
-<div class="nt-tubes" aria-hidden="true"><div class="nt-tubebox"><div class="nt-tube"><div class="nt-liq nt-liq-x" style="height:80%;"></div></div><span class="nt-tube-lab">mystère</span></div></div>
-<canvas style="height:280px;" aria-label="Courbe d'étalonnage et lecture de la concentration de la solution mystère"></canvas>
+<div class="nt-tubes" aria-hidden="true"><div class="nt-tubebox"><div class="nt-tube"><div class="nt-liq" style="height:80%;background:rgba(37,99,235,.95);"></div></div><span class="nt-tube-lab">mystère</span></div><div class="nt-tubebox nt-tube-dil" hidden><div class="nt-tube"><div class="nt-liq" style="height:80%;background:rgba(37,99,235,.77);"></div></div><span class="nt-tube-lab">diluée ×2</span></div></div>
+<canvas style="height:300px;" aria-label="Courbe d'étalonnage et détermination de la concentration de la solution mystère"></canvas>
 </div>
-<div class="nt-read" aria-live="polite"><span>coefficient directeur $k$ = <b class="out-k"></b></span><span>$A_x$ = <b class="out-ax"></b></span><span>$C_x$ = <b class="out-cx"></b></span></div>
-<div class="nt-btns">
-<button type="button" class="nt-btn nt-btn-main" data-act="new"><i class="fa-solid fa-flask"></i>&nbsp; Nouvelle solution mystère</button>
-<label class="nt-check"><input type="checkbox" data-p="large"> Étendre la gamme aux fortes concentrations</label>
-</div>
+<div class="nt-read" aria-live="polite"><span>coefficient directeur $k$ = <b class="out-k"></b></span><span><b class="out-ax"></b></span><span>$C_x$ = <b class="out-cx"></b></span></div>
 <p class="nt-msg" aria-live="polite"></p>
+<div class="nt-b nt-demo-box nt-etal-calc" hidden></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Étape suivante</button></div>
 </div>
+
 
 
 ### Conductimétrique {.nt-h3}
@@ -793,91 +814,216 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
   (function () {
     var root = document.getElementById('lab-gamme');
     if (!root) { return; }
-    var cv = $(root, 'canvas'), tubes = $(root, '.nt-tubes'), tb = $(root, '.nt-gamme-tab tbody'), msg = $(root, '.nt-msg'), S, done = 0;
-    var bNext = $(root, '[data-act="next"]');
-    /* le libellé du bouton suit l'étape : le blanc d'abord, puis les solutions étalons */
-    function label() {
-      if (done === 0) { bNext.innerHTML = '<i class="fa-solid fa-vial"></i>&nbsp; Préparer le blanc et faire le zéro'; bNext.disabled = false; }
-      else if (done < SOL.length) { bNext.innerHTML = '<i class="fa-solid fa-vial"></i>&nbsp; Préparer et mesurer la solution S' + done; bNext.disabled = false; }
-      else { bNext.innerHTML = '<i class="fa-solid fa-check"></i>&nbsp; Gamme étalon terminée'; bNext.disabled = true; }
+    var cvS = $(root, 'canvas.scene'), cvG = $(root, 'canvas.graph'), tb = $(root, '.nt-gamme-tab tbody'), msg = $(root, '.nt-msg'), qEl = $(root, '.nt-tein-q');
+    var iM = $(root, '[data-p="vm"]'), iE = $(root, '[data-p="ve"]'), bP = $(root, '[data-act="prep"]'), bOK = $(root, '[data-act="prepok"]'), prep = $(root, '.nt-tein-prep'), sc = $(root, '.out-score');
+    var S, SG, VT = 10, BUR = 50, VM = [0, 2, 4, 6, 8, 10], SOL = VM.map(function (v, i) { return { n: 'S' + i, vm: v, c: ETAL.C0 * v / VT }; });
+    var idx = 0, faits = [], good = 0, Lm = BUR, Le = BUR, anim = null, attente = null, last = null;
+    function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+    function tx(c, s, x, y, color, font, align) { c.save(); c.font = font; c.textAlign = align || 'center'; c.fillStyle = color; c.fillText(s, x, y); c.restore(); }
+    function num(s) { return parseFloat(String(s).replace(',', '.').replace(/\s/g, '')); }
+    function couleur(cc) { return cc <= 0 ? 'rgba(186,230,253,.55)' : ETAL.color(cc); }
+    function geo() { var w = S.w, h = S.h, large = w >= 600, b1 = large ? w * 0.1 : 34, b2 = large ? w * 0.26 : 92, r0 = large ? w * 0.38 : 132, slot = (w - 12 - r0) / 6; return { w: w, h: h, b1: b1, b2: b2, r0: r0, slot: slot, tw: Math.min(24, slot * 0.6), bt: 46, bb: 208, yt: 266, th: 96 }; }
+    function slotX(g, i) { return g.r0 + (i + 0.5) * g.slot; }
+    function tube(c, x, yt, tw, th, vol, coul, contour, lab, labCol) {   /* tube à essai ouvert en haut */
+      var r = tw / 2, yb = yt + th;
+      function corps() { c.beginPath(); c.moveTo(x - r, yt); c.lineTo(x - r, yb - r); c.arc(x, yb - r, r, Math.PI, 0, true); c.lineTo(x + r, yt); }
+      if (vol > 0) { var hl = Math.min(th - 6, vol / 13 * th); c.save(); corps(); c.closePath(); c.clip(); c.fillStyle = coul; c.fillRect(x - r, yb - hl, tw, hl + 2); var g = c.createLinearGradient(x - r, 0, x + r, 0); g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.3, 'rgba(255,255,255,.45)'); g.addColorStop(0.55, 'rgba(255,255,255,0)'); c.fillStyle = g; c.fillRect(x - r, yt, tw, th); c.restore(); }
+      corps(); c.strokeStyle = contour || '#64748B'; c.lineWidth = contour ? 2.2 : 1.4; c.stroke();
+      if (lab) { tx(c, lab, x, yb + 16, labCol || '#334155', '600 11px system-ui, sans-serif'); }
     }
-    var VM = [0, 10, 20, 30, 40, 50], SOL = VM.map(function (v, i) { return { n: 'S' + i, vm: v, c: ETAL.C0 * v / ETAL.VF }; });
-    tubes.innerHTML = '<div class="nt-tubebox"><div class="nt-tube nt-tube-mere"><div class="nt-liq" style="height:85%;background:' + ETAL.color(ETAL.C0) + ';"></div></div><span class="nt-tube-lab">mère</span></div>' +
-      SOL.map(function (s) { return '<div class="nt-tubebox"><div class="nt-tube"><div class="nt-liq"></div></div><span class="nt-tube-lab">' + s.n + '</span></div>'; }).join('');
-    var T = $$(tubes, '.nt-tube').slice(1);
-    function draw() {
-      var c = S.ctx, w = S.w, h = S.h, L = 46, Rr = w - 12, Tp = 12, B = h - 32, CM = 0.13, AM = 1.6;
+    function burette(c, g, x, reste, coul, l1, l2) {   /* burette graduée ouverte en haut, robinet à clé, pointe effilée */
+      var top = g.bt, bot = g.bb, k = (bot - top) / BUR, yl = top + (BUR - reste) * k, r = 9;
+      var gv = c.createLinearGradient(x - r, 0, x + r, 0); gv.addColorStop(0, 'rgba(203,213,225,.55)'); gv.addColorStop(0.35, 'rgba(255,255,255,.2)'); gv.addColorStop(1, 'rgba(203,213,225,.55)');
+      c.fillStyle = gv; c.fillRect(x - r, top - 6, 2 * r, bot - top + 6);
+      c.fillStyle = coul; c.beginPath(); c.moveTo(x - r + 1, yl - 2); c.quadraticCurveTo(x, yl + 4, x + r - 1, yl - 2); c.lineTo(x + r - 1, bot); c.lineTo(x + 3, bot + 12); c.lineTo(x - 3, bot + 12); c.lineTo(x - r + 1, bot); c.closePath(); c.fill();
+      c.strokeStyle = '#64748B'; c.lineWidth = 1.4; c.lineJoin = 'round';
+      c.beginPath(); c.moveTo(x - r - 3, top - 10); c.lineTo(x - r, top - 4); c.lineTo(x - r, bot); c.lineTo(x - 3, bot + 12); c.stroke();
+      c.beginPath(); c.moveTo(x + r + 3, top - 10); c.lineTo(x + r, top - 4); c.lineTo(x + r, bot); c.lineTo(x + 3, bot + 12); c.stroke();
+      for (var v = 0; v <= BUR; v += 1) { var y = top + v * k, L = v % 10 === 0 ? 9 : (v % 5 === 0 ? 6 : 3); c.strokeStyle = 'rgba(30,41,59,.75)'; c.lineWidth = v % 5 === 0 ? 0.9 : 0.6; c.beginPath(); c.moveTo(x - r + 1, y); c.lineTo(x - r + 1 + L, y); c.stroke(); }
+      [0, 10, 20, 30, 40, 50].forEach(function (v) { tx(c, String(v), x + r + 4, top + v * k + 3.5, '#334155', '9.5px system-ui, sans-serif', 'left'); });
+      c.fillStyle = coul; c.fillRect(x - 2, bot + 12, 4, 9);
+      c.strokeStyle = '#64748B'; c.lineWidth = 1.2; c.beginPath(); c.moveTo(x - 3, bot + 12); c.lineTo(x - 3, bot + 21); c.moveTo(x + 3, bot + 12); c.lineTo(x + 3, bot + 21); c.stroke();
+      var kg = c.createLinearGradient(0, bot + 14, 0, bot + 22); kg.addColorStop(0, '#60A5FA'); kg.addColorStop(1, '#1D4ED8'); c.fillStyle = kg; rr(c, x - 7, bot + 14, 14, 8, 3); c.fill();
+      c.fillStyle = '#1E3A8A'; rr(c, x + 6, bot + 15.5, 11, 5, 2.5); c.fill();
+      c.fillStyle = coul; c.beginPath(); c.moveTo(x - 2.5, bot + 22); c.lineTo(x - 0.8, bot + 34); c.lineTo(x + 0.8, bot + 34); c.lineTo(x + 2.5, bot + 22); c.closePath(); c.fill();
+      c.strokeStyle = '#64748B'; c.lineWidth = 1.1; c.beginPath(); c.moveTo(x - 2.5, bot + 22); c.lineTo(x - 0.8, bot + 34); c.lineTo(x + 0.8, bot + 34); c.lineTo(x + 2.5, bot + 22); c.stroke();
+      tx(c, l1, x, 13, '#334155', '700 11px system-ui, sans-serif'); if (l2) { tx(c, l2, x, 26, '#64748B', '10.5px system-ui, sans-serif'); }
+    }
+    function scene() {
+      var c = S.ctx, g = geo(); c.clearRect(0, 0, g.w, g.h);
+      burette(c, g, g.b1, Lm, ETAL.color(ETAL.C0), 'solution mère', '0,120 mol/L');
+      burette(c, g, g.b2, Le, '#BFDBFE', 'eau distillée', '');
+      tx(c, 'gamme étalon', g.r0 + g.slot * 3, g.yt - 14, '#475569', '600 11px system-ui, sans-serif');
+      c.strokeStyle = '#CBD5E1'; c.lineWidth = 3; c.beginPath(); c.moveTo(g.r0 + 4, g.yt + 34); c.lineTo(g.r0 + g.slot * 6 - 4, g.yt + 34); c.stroke();
+      SOL.forEach(function (s, i) {
+        if (i < faits.length) { tube(c, slotX(g, i), g.yt, g.tw, g.th, VT, couleur(s.c), null, s.n); }
+        else { c.setLineDash([3, 3]); tube(c, slotX(g, i), g.yt, g.tw, g.th, 0, '', '#CBD5E1', s.n, '#94A3B8'); c.setLineDash([]); }
+      });
+      if (anim) {
+        var v = anim.vm + anim.ve;
+        tube(c, anim.x, g.yt, g.tw, g.th, v, v > 0 ? couleur(ETAL.C0 * anim.vm / v) : '', '#2563EB');
+        if (anim.ph === 'pour1' || anim.ph === 'pour2') { var bx = anim.ph === 'pour1' ? g.b1 : g.b2, ys = g.yt + g.th - Math.min(g.th - 6, v / 13 * g.th); c.strokeStyle = anim.ph === 'pour1' ? ETAL.color(ETAL.C0) : '#93C5FD'; c.lineWidth = 2; c.beginPath(); c.moveTo(bx, g.bb + 34); c.lineTo(bx, ys); c.stroke(); }
+      }
+    }
+    function graphe() {
+      var c = SG.ctx, w = SG.w, h = SG.h, L = 46, Rr = w - 12, Tp = 12, B = h - 32, CM = 0.13, AM = 1.6;
       function X(v) { return L + v / CM * (Rr - L); }
       function Y(a) { return B - a / AM * (B - Tp); }
-      c.clearRect(0, 0, w, h); axes(c, w, h, L, Rr, Tp, B, CM, AM, 0.024, 0.4);
-      var P = SOL.slice(0, done);
-      if (done === SOL.length) {
+      c.clearRect(0, 0, w, h);
+      for (var gx = 0; gx <= CM + 1e-9; gx += 0.012) { c.strokeStyle = '#EEF2F6'; c.lineWidth = 1; c.beginPath(); c.moveTo(X(gx), Tp); c.lineTo(X(gx), B); c.stroke(); }
+      for (var ga = 0; ga <= AM + 1e-9; ga += 0.2) { c.strokeStyle = '#EEF2F6'; c.lineWidth = 1; c.beginPath(); c.moveTo(L, Y(ga)); c.lineTo(Rr, Y(ga)); c.stroke(); }
+      axes(c, w, h, L, Rr, Tp, B, CM, AM, 0.024, 0.4);
+      var P = SOL.slice(1, faits.length);
+      if (faits.length === SOL.length) {
         var k = P.reduce(function (s, p) { return s + p.c * ETAL.A(p.c); }, 0) / P.reduce(function (s, p) { return s + p.c * p.c; }, 0);
         c.strokeStyle = col('--blue'); c.lineWidth = 2; c.setLineDash([6, 4]); c.beginPath(); c.moveTo(X(0), Y(0)); c.lineTo(X(CM), Y(k * CM)); c.stroke(); c.setLineDash([]);
-        c.fillStyle = col('--blue'); c.font = '700 12px system-ui, sans-serif'; c.textAlign = 'left';
-        c.textAlign = 'right'; c.fillText('A = ' + fr(k, 1) + ' \u00d7 C', X(0.06) - 8, Y(k * 0.06) - 10);
+        tx(c, 'A = ' + fr(k, 1) + ' \u00d7 C', X(0.06) - 8, Y(k * 0.06) - 10, col('--blue'), '700 12px system-ui, sans-serif', 'right');
       }
-      P.forEach(function (p, i) {
-        c.fillStyle = i === done - 1 ? col('--amber') : col('--blue');
-        c.beginPath(); c.arc(X(p.c), Y(ETAL.A(p.c)), i === done - 1 ? 6 : 5, 0, 2 * Math.PI); c.fill();
-      });
+      if (faits.length > 0) { c.fillStyle = col('--blue'); c.beginPath(); c.arc(X(0), Y(0), 5, 0, 2 * Math.PI); c.fill(); }
+      P.forEach(function (p, i) { var der = i === P.length - 1 && faits.length < SOL.length + 1; c.fillStyle = der ? col('--amber') : col('--blue'); c.beginPath(); c.arc(X(p.c), Y(ETAL.A(p.c)), der ? 6 : 5, 0, 2 * Math.PI); c.fill(); });
     }
-    function step() {
-      if (done >= SOL.length) { return; }
-      var s = SOL[done], A = ETAL.A(s.c);
-      T.forEach(function (x) { x.classList.remove('nt-tube-active'); });
-      var liq = T[done].querySelector('.nt-liq'); T[done].classList.add('nt-tube-active');
-      liq.style.height = '85%'; liq.style.background = s.c === 0 ? 'rgba(186, 230, 253, .45)' : ETAL.color(s.c);
-      tb.insertAdjacentHTML('beforeend', '<tr><td><b>' + s.n + '</b></td><td>' + fr(s.vm, 1) + '</td><td>' + fr(s.c, 3) + '</td><td>' + fr(A, 2) + '</td></tr>');
-      done++;
-      if (s.vm === 0) { msg.textContent = 'S0 ne contient que de l\u2019eau distillée (le solvant) : c\u2019est le « blanc ». On le place dans le spectrophotomètre et on règle l\u2019absorbance à zéro : l\u2019appareil ne mesurera ensuite que l\u2019absorbance de l\u2019espèce colorée.'; }
-      else if (s.vm === ETAL.VF) { msg.textContent = 'S5 est la solution mère elle-même (aucune dilution) : C = ' + fr(s.c, 3) + ' mol\u00b7L\u207b\u00b9, A = ' + fr(A, 2) + '.'; }
-      else { msg.textContent = s.n + ' : on prélève ' + fr(s.vm, 1) + ' mL de solution mère à la pipette jaugée, on complète à 50,0 mL avec de l\u2019eau distillée. C = 0,120 \u00d7 ' + s.vm + '/50 = ' + fr(s.c, 3) + ' mol\u00b7L\u207b\u00b9. On mesure A = ' + fr(A, 2) + '.'; }
-      if (done === SOL.length) { msg.textContent += ' Les points sont alignés sur une droite passant par l\u2019origine : la loi de Beer-Lambert est vérifiée, et la droite d\u2019étalonnage est prête à servir.'; }
-      draw(); label();
+    function draw() { if (S) { scene(); } if (SG) { graphe(); } }
+    function question() {
+      if (idx >= SOL.length) { prep.hidden = true; qEl.innerHTML = 'La gamme étalon est prête, et toutes les absorbances sont mesurées.'; return; }
+      var s = SOL[idx];
+      qEl.innerHTML = 'Tube ' + s.n + '&nbsp;: préparer ' + fr(VT, 1) + '&nbsp;mL de solution de concentration <b>' + fr(s.c, 3) + '&nbsp;mol·L<sup>−1</sup></b>' + (idx === 0 ? ' (le blanc)' : '') + '. Quels volumes verser&nbsp;?';
+      iM.value = ''; iE.value = ''; iM.disabled = iE.disabled = bP.disabled = false; bP.hidden = false; bOK.hidden = true;
     }
+    function mesurer(s) {   /* le tube préparé est mesuré au spectrophotomètre */
+      var A = s.vm === 0 ? 0 : ETAL.A(s.c);
+      tb.insertAdjacentHTML('beforeend', '<tr><td><b>' + s.n + '</b></td><td>' + fr(s.vm, 1) + '</td><td>' + fr(VT - s.vm, 1) + '</td><td>' + fr(s.c, 3) + '</td><td>' + fr(A, 2) + '</td></tr>');
+      if (s.vm === 0) { msg.innerHTML = 'S0 ne contient que de l\u2019eau distillée (le solvant)&nbsp;: c\u2019est le <b>blanc</b>. On le place dans le spectrophotomètre et on règle l\u2019absorbance à zéro.'; }
+      else { msg.innerHTML += ' Mesure au spectrophotomètre&nbsp;: A = ' + fr(A, 2) + '.'; }
+      if (faits.length === SOL.length) { msg.innerHTML += ' <b>La gamme est complète</b>&nbsp;: les points sont alignés sur une droite passant par l\u2019origine. La loi de Beer-Lambert est vérifiée, et la droite d\u2019étalonnage est prête à servir.'; }
+    }
+    function lancer(VMx, VEx, s) { var g = geo(); anim = { ph: 'move1', t: 0, x: g.b1 - 60, x0: g.b1 - 60, VM: VMx, VE: VEx, vm: 0, ve: 0, s: s }; }
+    bP.addEventListener('click', function () {
+      if (anim || idx >= SOL.length) { return; }
+      var s = SOL[idx], vm = num(iM.value), ve = num(iE.value), VMx = s.vm, VEx = VT - s.vm;
+      if (isNaN(vm) || isNaN(ve)) { msg.textContent = 'Indiquez les deux volumes.'; return; }
+      var ok = Math.abs(vm - VMx) < 0.051 && Math.abs(ve - VEx) < 0.051; if (ok) { good++; }
+      sc.textContent = good + ' / ' + (idx + 1);
+      msg.innerHTML = (ok ? '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' : '<span style="color:#E11D48;">Non.</span> ') + 'La quantité de matière de colorant se conserve&nbsp;: C<sub>0</sub> × V<sub>mère</sub> = C × V<sub>tube</sub>, donc V<sub>mère</sub> = ' + fr(s.c, 3) + ' × ' + fr(VT, 1) + ' / ' + fr(ETAL.C0, 3) + ' = <b>' + fr(VMx, 1) + '&nbsp;mL</b> de solution mère, et V<sub>eau</sub> = ' + fr(VT, 1) + ' \u2212 ' + fr(VMx, 1) + ' = <b>' + fr(VEx, 1) + '&nbsp;mL</b> d\u2019eau.';
+      iM.disabled = iE.disabled = bP.disabled = true;
+      if (ok) { lancer(VMx, VEx, s); } else { attente = [VMx, VEx, s]; bP.hidden = true; bOK.hidden = false; }
+    });
+    bOK.addEventListener('click', function () { if (!attente || anim) { return; } bOK.hidden = true; bP.hidden = false; lancer(attente[0], attente[1], attente[2]); attente = null; });
+    function step(dt) {
+      if (!anim) { return; }
+      var g = geo(), a = anim, D = 0.6, Q = RM ? 20 : 6;
+      function ease(u) { return u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2; }
+      a.t += dt;
+      if (a.ph === 'move1') { a.x = a.x0 + (g.b1 - a.x0) * ease(Math.min(1, a.t / D)); if (a.t >= D) { a.ph = 'pour1'; a.t = 0; } }
+      else if (a.ph === 'pour1') { var d1 = Math.min(a.VM - a.vm, Q * dt); a.vm += d1; Lm -= d1; if (a.vm >= a.VM - 1e-9) { a.ph = 'move2'; a.t = 0; a.x0 = a.x; } }
+      else if (a.ph === 'move2') { a.x = a.x0 + (g.b2 - a.x0) * ease(Math.min(1, a.t / D)); if (a.t >= D) { a.ph = 'pour2'; a.t = 0; } }
+      else if (a.ph === 'pour2') { var d2 = Math.min(a.VE - a.ve, Q * dt); a.ve += d2; Le -= d2; if (a.ve >= a.VE - 1e-9) { a.ph = 'rack'; a.t = 0; a.x0 = a.x; } }
+      else if (a.ph === 'rack') { var xt = slotX(g, idx); a.x = a.x0 + (xt - a.x0) * ease(Math.min(1, a.t / (D * 1.4))); if (a.t >= D * 1.4) { faits.push(a.s); idx++; anim = null; mesurer(a.s); question(); } }
+    }
+    function loop(ts) { var dt = last === null ? 0 : Math.min(0.05, (ts - last) / 1000); last = ts; step(dt); draw(); requestAnimationFrame(loop); }
     function reset() {
-      done = 0; tb.innerHTML = '';
-      T.forEach(function (x) { x.classList.remove('nt-tube-active'); var l = x.querySelector('.nt-liq'); l.style.height = '0'; });
-      msg.textContent = 'Commencez par le blanc, puis préparez les solutions étalons une à une.'; draw(); label();
+      idx = 0; faits = []; good = 0; Lm = BUR; Le = BUR; anim = null; attente = null; tb.innerHTML = ''; sc.textContent = '0 / 0'; prep.hidden = false;
+      msg.innerHTML = 'Chaque tube doit contenir ' + fr(VT, 1) + '&nbsp;mL au total. On prélève la solution mère avec la première burette et on complète avec l\u2019eau distillée de la seconde. On commence par le blanc.';
+      question(); draw();
     }
-    bNext.addEventListener('click', step);
-    $(root, '[data-act="all"]').addEventListener('click', function () { while (done < SOL.length) { step(); } });
+    $(root, '[data-act="all"]').addEventListener('click', function () {   /* toute la gamme d'un coup, avec les bons volumes */
+      if (anim) { return; }
+      while (idx < SOL.length) { var s = SOL[idx]; Lm -= s.vm; Le -= VT - s.vm; faits.push(s); idx++; mesurer(s); }
+      msg.innerHTML = 'Toute la gamme est préparée avec les bons volumes, et les absorbances sont mesurées (S0, le blanc, sert à faire le zéro). <b>Les points sont alignés sur une droite passant par l\u2019origine</b>&nbsp;: la loi de Beer-Lambert est vérifiée, et la droite d\u2019étalonnage est prête à servir.';
+      question(); draw();
+    });
     $(root, '[data-act="reset"]').addEventListener('click', reset);
-    function setup() { S = canvasCtx(cv); draw(); }
-    setup(); onResize(setup); reset();
+    [iM, iE].forEach(function (x) { x.addEventListener('keydown', function (e) { if (e.key === 'Enter') { bP.click(); } }); });
+    function setup() { S = canvasCtx(cvS); SG = canvasCtx(cvG); draw(); }
+    setup(); reset(); onResize(setup); requestAnimationFrame(loop);
   })();
   /* --- 5b. Exploiter la courbe : doser une solution mystère --- */
   (function () {
     var root = document.getElementById('lab-etal');
     if (!root) { return; }
-    var cv = $(root, 'canvas'), cb = $(root, '[data-p="large"]'), btn = $(root, '[data-act="new"]'), liqX = $(root, '.nt-liq-x');
-    var oA = $(root, '.out-ax'), oC = $(root, '.out-cx'), oK = $(root, '.out-k'), msg = $(root, '.nt-msg'), S;
-    var STD = [0, 0.024, 0.048, 0.072, 0.096, 0.120], BIG = [0.16, 0.20, 0.25, 0.30], cx = 0.065;
+    var cv = $(root, 'canvas'), bN = $(root, '[data-act="next"]'), tubeD = $(root, '.nt-tube-dil'), calc = $(root, '.nt-etal-calc');
+    var oA = $(root, '.out-ax'), oC = $(root, '.out-cx'), oK = $(root, '.out-k'), msg = $(root, '.nt-msg'), S, etape = 0;
+    var STD = [0, 0.024, 0.048, 0.072, 0.096, 0.120], BIG = [0.15, 0.18, 0.21, 0.24, 0.27, 0.30], CX = 0.200, F = 2;
+    function tx(c, s, x, y, color, font, align) { c.save(); c.font = font; c.textAlign = align || 'center'; c.fillStyle = color; c.fillText(s, x, y); c.restore(); }
+    function etiquette(c, s, x, y, color, align) {   /* texte sur fond blanc : jamais coupé par un trait de construction */
+      c.save(); c.font = '700 12px system-ui, sans-serif'; var lw = c.measureText(s).width + 10, xx = align === 'left' ? x : (align === 'right' ? x - lw : x - lw / 2);
+      c.fillStyle = 'rgba(255,255,255,.95)'; c.beginPath(); c.moveTo(xx + 5, y - 13); c.arcTo(xx + lw, y - 13, xx + lw, y + 5, 5); c.arcTo(xx + lw, y + 5, xx, y + 5, 5); c.arcTo(xx, y + 5, xx, y - 13, 5); c.arcTo(xx, y - 13, xx + lw, y - 13, 5); c.closePath(); c.fill();
+      c.fillStyle = color; c.textAlign = 'left'; c.fillText(s, xx + 5, y); c.restore();
+    }
+    /* régression linéaire sur les étalons (modèle A = k × C) et coefficient de détermination */
+    var P0 = STD.map(function (cc) { return [cc, ETAL.A(cc)]; });
+    var k = P0.reduce(function (s, p) { return s + p[0] * p[1]; }, 0) / P0.reduce(function (s, p) { return s + p[0] * p[0]; }, 0);
+    var mA = P0.reduce(function (s, p) { return s + p[1]; }, 0) / P0.length, r2 = 1 - P0.reduce(function (s, p) { return s + Math.pow(p[1] - k * p[0], 2); }, 0) / P0.reduce(function (s, p) { return s + Math.pow(p[1] - mA, 2); }, 0);
+    var Ax = ETAL.A(CX), Cext = Ax / k, Ad = ETAL.A(CX / F), Cd = Ad / k, Cres = F * Cd;
+    var TXT = [
+      'On mesure l\u2019absorbance de la solution mystère&nbsp;: A<sub>x</sub> = ' + fr(Ax, 2) + '. C\u2019est <b>plus que l\u2019absorbance de l\u2019étalon le plus concentré</b> (' + fr(ETAL.A(0.120), 2) + ')&nbsp;: la solution mystère est <b>hors de la gamme</b>, la droite d\u2019étalonnage ne la coupe pas.',
+      'Tentation&nbsp;: <b>prolonger la droite</b> au-delà de la gamme. On lirait C<sub>x</sub> ≈ ' + fr(Cext, 3) + '&nbsp;mol·L<sup>−1</sup>. Mais rien ne garantit que la relation reste linéaire au-delà du dernier étalon…',
+      'Si l\u2019on étend la gamme aux fortes concentrations, les points (en rouge) <b>s\u2019écartent de la droite</b>&nbsp;: la loi de Beer-Lambert n\u2019est valable que pour des absorbances modérées, et le spectrophotomètre sature. La vraie concentration, lue sur la courbe réelle, vaut ' + fr(CX, 3) + '&nbsp;mol·L<sup>−1</sup>&nbsp;: l\u2019extrapolation se trompait de ' + Math.round((CX - Cext) / CX * 100) + '&nbsp;%. <b>Extrapoler est dangereux.</b>',
+      'On <b>dilue la solution mystère deux fois</b> (par exemple 10,0&nbsp;mL prélevés à la pipette jaugée, dans une fiole jaugée de 20,0&nbsp;mL complétée à l\u2019eau distillée). Sa concentration est divisée par 2, et son absorbance A\u2032 = ' + fr(Ad, 2) + ' tombe <b>dans la gamme</b>.',
+      '<b>Lecture graphique</b>&nbsp;: on reporte A\u2032 sur la droite d\u2019étalonnage et on lit C\u2032 ≈ ' + fr(Cd, 3) + '&nbsp;mol·L<sup>−1</sup>. La solution mystère étant deux fois plus concentrée&nbsp;: C<sub>x</sub> = 2 × C\u2032 ≈ <b>' + fr(Cres, 3) + '&nbsp;mol·L<sup>−1</sup></b>.',
+      '<b>Par le calcul</b>&nbsp;: une régression linéaire (avec un tableur scientifique comme Regressi) donne l\u2019équation de la droite d\u2019étalonnage, A = k × C. On en déduit C\u2032 = A\u2032 / k, puis C<sub>x</sub> = 2 × C\u2032 (détail ci-dessous). Cette méthode évite l\u2019imprécision de la lecture graphique.'
+    ];
     function draw() {
-      var P = (cb.checked ? STD.concat(BIG) : STD).map(function (cc) { return [cc, ETAL.A(cc)]; }), lin = P.filter(function (p) { return p[0] <= 0.12; });
-      var k = lin.reduce(function (s, p) { return s + p[0] * p[1]; }, 0) / lin.reduce(function (s, p) { return s + p[0] * p[0]; }, 0);
-      var Ax = ETAL.meas(ETAL.K * cx), Cx = Ax / k, CM = cb.checked ? 0.32 : 0.16, AM = cb.checked ? 2.6 : 2.0;
+      var large = etape <= 2, CM = large ? 0.32 : 0.13, AM = large ? 2.6 : 1.8;   /* 1,8 : la ligne de A′ passe sous l'encadré de régression */
       var c = S.ctx, w = S.w, h = S.h, L = 46, Rr = w - 14, T = 12, B = h - 32;
       function X(v) { return L + v / CM * (Rr - L); }
       function Y(a) { return B - a / AM * (B - T); }
       c.clearRect(0, 0, w, h);
-      if (cb.checked) { c.fillStyle = 'rgba(225,29,72,.07)'; c.fillRect(X(0.13), T, Rr - X(0.13), B - T); c.fillStyle = col('--rose'); c.font = '700 11px system-ui, sans-serif'; c.textAlign = 'center'; c.fillText('hors du domaine de validité', (X(0.13) + Rr) / 2, T + 14); }
-      axes(c, w, h, L, Rr, T, B, CM, AM, cb.checked ? 0.05 : 0.04, 0.5);
-      c.strokeStyle = col('--blue'); c.lineWidth = 2; c.setLineDash([6, 4]); c.beginPath(); c.moveTo(X(0), Y(0)); c.lineTo(X(Math.min(CM, AM / k)), Y(Math.min(AM, k * CM))); c.stroke(); c.setLineDash([]);
-      P.forEach(function (p) { c.fillStyle = p[0] > 0.12 ? col('--rose') : col('--blue'); c.beginPath(); c.arc(X(p[0]), Y(p[1]), 5, 0, 2 * Math.PI); c.fill(); });
-      var inRange = Ax <= ETAL.A(0.120) * 1.02;
-      c.strokeStyle = col('--amber'); c.lineWidth = 1.8; c.setLineDash([4, 4]);
-      c.beginPath(); c.moveTo(L, Y(Ax)); c.lineTo(X(Cx), Y(Ax)); c.lineTo(X(Cx), B); c.stroke(); c.setLineDash([]);
-      c.fillStyle = col('--amber'); c.beginPath(); c.arc(X(Cx), Y(Ax), 6, 0, 2 * Math.PI); c.fill();
-      c.font = '700 12px system-ui, sans-serif'; c.textAlign = 'left'; c.fillText('A\u2093', L + 4, Y(Ax) - 6); c.textAlign = 'center'; c.fillText('C\u2093', X(Cx), B - 6);
-      liqX.style.background = ETAL.color(cx);
-      oA.textContent = fr(Ax, 2); oC.textContent = fr(Cx, 3) + ' mol\u00b7L\u207b\u00b9'; oK.textContent = fr(k, 1) + ' L\u00b7mol\u207b\u00b9';
-      msg.textContent = inRange ? 'On reporte A\u2093 sur la droite d\u2019étalonnage et on lit C\u2093, ou on calcule C\u2093 = A\u2093 / k.' :
-        'A\u2093 est plus grande que l\u2019absorbance de l\u2019étalon le plus concentré : la solution mystère sort de la gamme. Il faut la diluer (par exemple 2 fois), refaire la mesure, puis multiplier le résultat par le facteur de dilution.';
+      if (etape === 2) { c.fillStyle = 'rgba(225,29,72,.07)'; c.fillRect(X(0.13), T, Rr - X(0.13), B - T); }   /* zone en arrière-plan ; son texte est écrit après la grille */
+      for (var gx = 0; gx <= CM + 1e-9; gx += large ? 0.02 : 0.01) { c.strokeStyle = '#EEF2F6'; c.lineWidth = 1; c.beginPath(); c.moveTo(X(gx), T); c.lineTo(X(gx), B); c.stroke(); }
+      for (var ga = 0; ga <= AM + 1e-9; ga += 0.1) { c.strokeStyle = '#EEF2F6'; c.lineWidth = 1; c.beginPath(); c.moveTo(L, Y(ga)); c.lineTo(Rr, Y(ga)); c.stroke(); }
+      axes(c, w, h, L, Rr, T, B, CM, AM, large ? 0.04 : 0.024, large ? 0.5 : 0.4);
+      /* droite d'étalonnage dans la gamme, et son prolongement (à partir de l'étape 1) */
+      c.strokeStyle = col('--blue'); c.lineWidth = 2; c.beginPath(); c.moveTo(X(0), Y(0)); c.lineTo(X(0.120), Y(k * 0.120)); c.stroke();
+      if (etape >= 1 && etape <= 2) { c.strokeStyle = 'rgba(100,116,139,.7)'; c.setLineDash([7, 5]); c.beginPath(); c.moveTo(X(0.120), Y(k * 0.120)); c.lineTo(X(Math.min(CM, AM / k)), Y(Math.min(AM, k * CM))); c.stroke(); c.setLineDash([]); }
+      if (!large) { c.strokeStyle = col('--blue'); c.lineWidth = 2; c.setLineDash([6, 4]); c.beginPath(); c.moveTo(X(0.120), Y(k * 0.120)); c.lineTo(X(CM), Y(k * CM)); c.stroke(); c.setLineDash([]); }
+      /* courbe réelle et étalons supplémentaires (étape 2) */
+      if (etape === 2) {
+        c.strokeStyle = col('--rose'); c.lineWidth = 2; c.beginPath();
+        for (var q = 0; q <= 100; q++) { var cc = 0.12 + (0.30 - 0.12) * q / 100, aa = ETAL.meas(ETAL.K * cc); if (q === 0) { c.moveTo(X(cc), Y(aa)); } else { c.lineTo(X(cc), Y(aa)); } }
+        c.stroke();
+        BIG.forEach(function (cc) { c.fillStyle = col('--rose'); c.beginPath(); c.arc(X(cc), Y(ETAL.A(cc)), 5, 0, 2 * Math.PI); c.fill(); });
+      }
+      P0.forEach(function (p) { c.fillStyle = col('--blue'); c.beginPath(); c.arc(X(p[0]), Y(p[1]), 5, 0, 2 * Math.PI); c.fill(); });
+      var am = col('--amber');
+      if (large) {   /* absorbance de la solution mystère */
+        c.strokeStyle = am; c.lineWidth = 1.8; c.setLineDash([4, 4]); c.beginPath(); c.moveTo(L, Y(Ax));
+        if (etape === 0) { c.lineTo(Rr, Y(Ax)); c.stroke(); c.setLineDash([]); }
+        else { var xr = etape === 1 ? Cext : CX; c.lineTo(X(xr), Y(Ax)); c.lineTo(X(xr), B); c.stroke(); c.setLineDash([]); c.fillStyle = etape === 1 ? '#64748B' : col('--rose'); c.beginPath(); c.arc(X(xr), Y(Ax), 6, 0, 2 * Math.PI); c.fill();
+          if (etape === 2) { c.strokeStyle = 'rgba(100,116,139,.8)'; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(X(Cext), Y(Ax)); c.lineTo(X(Cext), B); c.stroke(); c.setLineDash([]); etiquette(c, fr(Cext, 3) + ' ?', X(Cext) - 4, B - 8, '#64748B', 'right'); etiquette(c, fr(CX, 3), X(CX) + 4, B - 8, col('--rose'), 'left'); }
+          else { etiquette(c, 'C\u2093 \u2248 ' + fr(Cext, 3) + ' ?', X(Cext) + 4, B - 8, '#64748B', 'left'); } }
+        etiquette(c, 'A\u2093 = ' + fr(Ax, 2), L + 4, Y(Ax) - 6, am, 'left');
+      } else {   /* solution diluée */
+        c.strokeStyle = am; c.lineWidth = 1.8; c.setLineDash([4, 4]); c.beginPath(); c.moveTo(L, Y(Ad));
+        if (etape >= 4) { c.lineTo(X(Cd), Y(Ad)); c.lineTo(X(Cd), B); } else { c.lineTo(Rr, Y(Ad)); }
+        c.stroke(); c.setLineDash([]);
+        if (etape >= 4) { c.fillStyle = am; c.beginPath(); c.arc(X(Cd), Y(Ad), 6, 0, 2 * Math.PI); c.fill(); etiquette(c, 'C\u2032 \u2248 ' + fr(Cd, 3), X(Cd) + 5, B - 8, am, 'left'); }
+        if (etape >= 4) { etiquette(c, 'A\u2032 = ' + fr(Ad, 2), X(Cd) + 10, Y(Ad) - 8, am, 'left'); } else { etiquette(c, 'A\u2032 = ' + fr(Ad, 2), L + 4, Y(Ad) - 6, am, 'left'); }   /* à droite du point : la zone en haut à gauche reste libre pour l'encadré de régression */
+        if (etape >= 5) {   /* encadré de régression linéaire, comme dans un tableur scientifique */
+          var bx = L + 14, by = T + 10, bw = 210, bh = 70;
+          c.fillStyle = 'rgba(15,23,42,.9)'; c.beginPath(); c.moveTo(bx + 8, by); c.arcTo(bx + bw, by, bx + bw, by + bh, 8); c.arcTo(bx + bw, by + bh, bx, by + bh, 8); c.arcTo(bx, by + bh, bx, by, 8); c.arcTo(bx, by, bx + bw, by, 8); c.closePath(); c.fill();
+          tx(c, 'Régression linéaire', bx + 10, by + 17, '#93C5FD', '700 11px system-ui, sans-serif', 'left');
+          tx(c, 'modèle : A = k \u00d7 C', bx + 10, by + 34, '#E2E8F0', '12px ui-monospace, Menlo, monospace', 'left');
+          tx(c, 'k = ' + fr(k, 2) + ' L\u00b7mol\u207b\u00b9', bx + 10, by + 50, '#4ADE80', '700 12px ui-monospace, Menlo, monospace', 'left');
+          tx(c, 'r\u00b2 = ' + fr(r2, 4), bx + 10, by + 64, '#E2E8F0', '12px ui-monospace, Menlo, monospace', 'left');
+        }
+      }
+      if (etape === 2) {   /* écrit en dernier, sur une pastille : aucun tracé ne le traverse */
+        c.save(); c.font = '700 11px system-ui, sans-serif'; var lz = 'hors du domaine de validité', lw = c.measureText(lz).width + 14, xz = (X(0.13) + Rr) / 2;
+        c.fillStyle = 'rgba(255,241,242,.97)'; c.beginPath(); c.moveTo(xz - lw / 2 + 6, T + 3); c.arcTo(xz + lw / 2, T + 3, xz + lw / 2, T + 21, 6); c.arcTo(xz + lw / 2, T + 21, xz - lw / 2, T + 21, 6); c.arcTo(xz - lw / 2, T + 21, xz - lw / 2, T + 3, 6); c.arcTo(xz - lw / 2, T + 3, xz + lw / 2, T + 3, 6); c.closePath(); c.fill();
+        c.restore(); tx(c, lz, xz, T + 16, col('--rose'), '700 11px system-ui, sans-serif');
+      }
+      oK.textContent = fr(k, 1) + ' L\u00b7mol\u207b\u00b9';
+      oA.textContent = large ? 'A\u2093 = ' + fr(Ax, 2) : 'A\u2032 = ' + fr(Ad, 2);
+      oC.textContent = etape >= 4 ? fr(Cres, 3) + ' mol\u00b7L\u207b\u00b9' : '?';
+      tubeD.hidden = etape < 3;
+      calc.hidden = etape < 5;
+      msg.innerHTML = TXT[etape];
+      bN.innerHTML = etape < TXT.length - 1 ? '<i class="fa-solid fa-forward-step"></i>&nbsp; Étape suivante' : '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer';
     }
-    btn.addEventListener('click', function () { cx = 0.015 + Math.random() * 0.145; draw(); });
-    cb.addEventListener('change', draw);
+    calc.innerHTML = '<p><b>Équation de la droite</b> (régression linéaire)&nbsp;: A = k × C, avec k = ' + fr(k, 2) + '&nbsp;L·mol<sup>−1</sup>.</p>' +
+      '<p>Solution diluée&nbsp;: C\u2032 = A\u2032 / k = ' + fr(Ad, 2) + ' / ' + fr(k, 2) + ' = ' + fr(Cd, 4) + '&nbsp;mol·L<sup>−1</sup>.</p>' +
+      '<p>Solution mystère, deux fois plus concentrée&nbsp;: C<sub>x</sub> = 2 × C\u2032 = <b>' + fr(Cres, 3) + '&nbsp;mol·L<sup>−1</sup></b>.</p>';
+    bN.addEventListener('click', function () { etape = etape < TXT.length - 1 ? etape + 1 : 0; draw(); });
     function setup() { S = canvasCtx(cv); draw(); }
     setup(); onResize(setup);
   })();
