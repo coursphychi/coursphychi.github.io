@@ -286,6 +286,12 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
 </ol>
 </div>
 
+<div class="nt-b nt-demo-box">
+<p class="nt-tag"><i class="fa-solid fa-eye"></i>Remarque</p>
+<p class="nt-ece">Cette <a href="https://youtu.be/aTcJy2S1eCs" target="_blank">petite vidéo</a> présente le spectrophotomètre du lycée et son utilisation.</p>
+</div>
+
+
 <div class="nt-lab" id="lab-gamme">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive (1/2)</p>
 <p class="nt-lab-title">Établir la courbe d'étalonnage</p>
@@ -413,7 +419,7 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
 <p class="nt-note">Conductivités molaires ioniques à 25&nbsp;°C. Faites varier $C$&nbsp;: toutes les contributions, et donc $\sigma$, sont proportionnelles à $C$.</p>
 </div>
 
-<svg class="nt-svg nt-svg-m" viewBox="-30 0 730 390" role="img" aria-label="Mesure de la conductivité d'une solution : la cellule conductimétrique, reliée au conductimètre, est plongée dans un bécher contenant la solution ; les deux plaques sont immergées"><rect x="20" y="364" width="660" height="10" rx="4" fill="var(--slate)" opacity=".85"/><path d="M78,246 L78,340 Q78,350 88,350 L212,350 Q222,350 222,340 L222,246" fill="#BAE6FD" fill-opacity=".6"/><path d="M70,226 L70,342 Q70,358 86,358 L214,358 Q230,358 230,342 L230,226" fill="none" stroke="var(--slate)" stroke-width="2.5"/><line x1="78" y1="246" x2="222" y2="246" stroke="#38BDF8" stroke-width="1.5"/><rect x="141" y="84" width="18" height="198" rx="6" fill="#CBD5E1" stroke="var(--slate)" stroke-width="1.5"/><path d="M130,280 L170,280 L170,328 Q170,334 164,334 L136,334 Q130,334 130,328 Z" fill="#E0F2FE" fill-opacity=".75" stroke="var(--slate)" stroke-width="1.5"/><rect x="138" y="290" width="5" height="38" rx="1" fill="#475569"/><rect x="157" y="290" width="5" height="38" rx="1" fill="#475569"/><path d="M150,84 C150,24 450,20 492,252" fill="none" stroke="var(--ink)" stroke-width="2.2"/><rect x="470" y="252" width="200" height="112" rx="14" fill="var(--slate)"/><rect x="490" y="268" width="160" height="46" rx="6" fill="#0B1220"/><text x="570" y="299" font-size="20" text-anchor="middle" fill="#4ADE80" font-family="monospace">1,413 mS/cm</text><circle cx="510" cy="338" r="9" fill="#94A3B8"/><circle cx="540" cy="338" r="9" fill="#94A3B8"/><rect x="570" y="330" width="80" height="16" rx="8" fill="#94A3B8"/><text class="nt-hole" x="590" y="242" font-size="13.5" text-anchor="middle" fill="var(--ink)" font-weight="600">conductimètre</text><line x1="141" y1="150" x2="124" y2="150" stroke="var(--muted)" stroke-width="1"/><text class="nt-hole" x="120" y="146" font-size="13.5" text-anchor="end" fill="var(--ink)" font-weight="600"><tspan x="120">cellule</tspan><tspan x="120" dy="16">conductimétrique</tspan></text><line x1="162" y1="310" x2="248" y2="296" stroke="var(--muted)" stroke-width="1"/><text class="nt-hole" x="252" y="300" font-size="13.5" text-anchor="start" fill="var(--ink)" font-weight="600">plaques immergées</text><line x1="222" y1="338" x2="248" y2="334" stroke="var(--muted)" stroke-width="1"/><text class="nt-hole" x="252" y="338" font-size="13.5" text-anchor="start" fill="var(--ink)" font-weight="600">solution (étalon ou à doser)</text><line x1="70" y1="290" x2="60" y2="290" stroke="var(--muted)" stroke-width="1"/><text class="nt-hole" x="56" y="294" font-size="13.5" text-anchor="end" fill="var(--ink)" font-weight="600">bécher</text></svg>
+<svg class='nt-svg' viewBox='0 0 740 410' role='img' aria-label="Mesure de la conductivité d'une solution : la cellule conductimétrique, tenue par une potence et reliée au conductimètre, est plongée dans un bécher contenant la solution ; les deux plaques sont immergées"><defs><linearGradient id='cMet' x1='0' x2='1'><stop offset='0' stop-color='#94A3B8'/><stop offset='.45' stop-color='#E2E8F0'/><stop offset='1' stop-color='#64748B'/></linearGradient><linearGradient id='cVer' x1='0' x2='1'><stop offset='0' stop-color='#E2E8F0' stop-opacity='.65'/><stop offset='.3' stop-color='#fff' stop-opacity='.2'/><stop offset='1' stop-color='#CBD5E1' stop-opacity='.55'/></linearGradient><linearGradient id='cSol' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#BAE6FD' stop-opacity='.75'/><stop offset='1' stop-color='#7DD3FC' stop-opacity='.8'/></linearGradient><linearGradient id='cCel' x1='0' x2='1'><stop offset='0' stop-color='#475569'/><stop offset='.4' stop-color='#94A3B8'/><stop offset='1' stop-color='#334155'/></linearGradient><linearGradient id='cApp' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#E2E8F0'/><stop offset='1' stop-color='#CBD5E1'/></linearGradient></defs><rect x='10' y='372' width='720' height='12' rx='4' fill='#CBD5E1'/><rect x='10' y='384' width='720' height='4' rx='2' fill='#94A3B8'/><rect x='34' y='358' width='120' height='14' rx='4' fill='#334155'/><rect x='60' y='26' width='9' height='334' rx='4' fill='url(#cMet)'/><rect x='54' y='118' width='22' height='22' rx='4' fill='#1E293B'/><circle cx='65' cy='129' r='4' fill='#94A3B8'/><rect x='76' y='125' width='140' height='8' rx='3' fill='url(#cMet)'/><rect x='212' y='116' width='12' height='26' rx='3' fill='#1E293B'/><rect x='244' y='116' width='12' height='26' rx='3' fill='#1E293B'/><rect x='166' y='262' width='156' height='106' rx='8' fill='url(#cSol)'/><path d='M168,262 Q244,268 320,262' fill='none' stroke='#0EA5E9' stroke-width='1.4'/><rect x='224' y='64' width='20' height='14' rx='4' fill='#0F172A'/><rect x='226' y='78' width='16' height='232' rx='5' fill='url(#cCel)'/><path d='M216,306 L252,306 L252,352 Q252,358 246,358 L222,358 Q216,358 216,352 Z' fill='#F1F5F9' fill-opacity='.55' stroke='#475569' stroke-width='1.4'/><rect x='220' y='326' width='6' height='10' rx='2' fill='#BAE6FD'/><rect x='242' y='326' width='6' height='10' rx='2' fill='#BAE6FD'/><rect x='226' y='314' width='4' height='38' rx='1' fill='#1F2937'/><rect x='238' y='314' width='4' height='38' rx='1' fill='#1F2937'/><path d='M164,240 Q160,236 156,236 L156,232' fill='none' stroke='#64748B' stroke-width='2'/><path d='M160,236 L164,240 L164,362 Q164,370 172,370 L316,370 Q324,370 324,362 L324,236' fill='url(#cVer)' stroke='#64748B' stroke-width='2.2' stroke-linejoin='round'/><line x1='304' y1='352' x2='316' y2='352' stroke='#64748B' stroke-width='1'/><line x1='304' y1='338' x2='310' y2='338' stroke='#64748B' stroke-width='1'/><line x1='304' y1='324' x2='316' y2='324' stroke='#64748B' stroke-width='1'/><line x1='304' y1='310' x2='310' y2='310' stroke='#64748B' stroke-width='1'/><line x1='304' y1='296' x2='316' y2='296' stroke='#64748B' stroke-width='1'/><line x1='304' y1='282' x2='310' y2='282' stroke='#64748B' stroke-width='1'/><line x1='304' y1='268' x2='316' y2='268' stroke='#64748B' stroke-width='1'/><line x1='304' y1='254' x2='310' y2='254' stroke='#64748B' stroke-width='1'/><path d='M234,64 C236,-6 590,0 546,262' fill='none' stroke='#0F172A' stroke-width='3' stroke-linecap='round'/><g transform='translate(40,0)'><rect x='470' y='256' width='200' height='112' rx='14' fill='url(#cApp)' stroke='#64748B' stroke-width='1.5'/><rect x='496' y='250' width='20' height='12' rx='3' fill='#334155'/><rect x='486' y='272' width='168' height='46' rx='8' fill='#0B1220'/><text x='642' y='303' font-size='22' text-anchor='end' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>1,413</text><text x='642' y='314' font-size='9' text-anchor='end' fill='#86EFAC' font-family='ui-monospace, Menlo, monospace'>mS/cm   25,0 °C</text><rect x='488' y='330' width='40' height='22' rx='6' fill='#475569'/><text x='508' y='345' font-size='10' text-anchor='middle' fill='#F8FAFC' font-family='system-ui, sans-serif' font-weight='700'>CAL</text><rect x='540' y='330' width='40' height='22' rx='6' fill='#475569'/><text x='560' y='345' font-size='10' text-anchor='middle' fill='#F8FAFC' font-family='system-ui, sans-serif' font-weight='700'>°C</text><rect x='592' y='330' width='40' height='22' rx='6' fill='#475569'/><text x='612' y='345' font-size='10' text-anchor='middle' fill='#F8FAFC' font-family='system-ui, sans-serif' font-weight='700'>mode</text><circle cx='648' cy='341' r='7' fill='#16A34A'/></g><line x1='94' y1='36' x2='69' y2='50' stroke='#64748B' stroke-width='1'/><circle cx='69' cy='50' r='2' fill='#64748B'/><text x='96' y='40' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>potence</text><line x1='296' y1='94' x2='244' y2='150' stroke='#64748B' stroke-width='1'/><circle cx='244' cy='150' r='2' fill='#64748B'/><text x='300' y='98' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>cellule</text><text x='300' y='113' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>conductimétrique</text><line x1='368' y1='308' x2='242' y2='334' stroke='#64748B' stroke-width='1'/><circle cx='242' cy='334' r='2' fill='#64748B'/><text x='372' y='312' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>deux plaques</text><text x='372' y='327' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>(électrodes)</text><text x='372' y='342' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>immergées</text><text x='372' y='360' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'></text><line x1='134' y1='218' x2='168' y2='252' stroke='#64748B' stroke-width='1'/><circle cx='168' cy='252' r='2' fill='#64748B'/><text x='130' y='222' font-size='12.5' text-anchor='end' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>bécher</text><line x1='368' y1='258' x2='318' y2='290' stroke='#64748B' stroke-width='1'/><circle cx='318' cy='290' r='2' fill='#64748B'/><text x='372' y='262' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>solution</text><text x='372' y='277' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>(étalon ou à doser)</text><text x='610' y='244' font-size='12.5' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>conductimètre</text></svg>
 
 <p class="nt-cap">Mesure de la conductivité d'une solution. En mode révision, les légendes sont masquées.</p>
 
@@ -466,7 +472,7 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
 <div class="nt-lab" id="lab-gaz">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
 <p class="nt-lab-title">Un gaz parfait dans une enceinte</p>
-<canvas style="height:220px;" aria-label="Particules de gaz qui s'agitent dans une enceinte fermée par un piston"></canvas>
+<canvas style="height:270px;" aria-label="Particules de gaz qui s'agitent dans une enceinte fermée par un piston, posée sur un thermostat ; un manomètre indique la pression"></canvas>
 <div class="nt-ctrls">
 <label class="nt-ctrl">Quantité de matière $n$&nbsp;: <b class="out-n"></b><input type="range" data-p="n" min="0.5" max="3" step="0.1" value="1"></label>
 <label class="nt-ctrl">Température $T$&nbsp;: <b class="out-T"></b><input type="range" data-p="T" min="150" max="600" step="1" value="293"></label>
@@ -477,12 +483,6 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
 <p class="nt-msg">Plus les particules sont nombreuses, rapides (température élevée) ou à l'étroit (petit volume), plus elles frappent souvent les parois&nbsp;: la pression augmente. À $n$ et $T$ fixés, réduisez le volume de moitié&nbsp;: la pression double (loi de Mariotte).</p>
 </div>
 
-<details class="nt-d nt-plus">
-<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Une simulation plus complète</span></summary>
-<div class="nt-d-body">
-<p>La simulation <a href="https://phet.colorado.edu/sims/html/gases-intro/latest/gases-intro_all.html?locale=fr" target="_blank" rel="noopener">«&nbsp;Gaz : introduction&nbsp;» de PhET</a> permet de jouer sur les mêmes grandeurs, de chauffer l'enceinte ou de déplacer sa paroi.</p>
-</div>
-</details>
 
 <p class="nt-lead">La loi des gaz parfaits permet donc de déterminer la quantité de matière d'un gaz si on connaît sa pression, son volume et sa température&nbsp;:</p>
 
@@ -910,10 +910,15 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
     if (!root) { return; }
     var cv = $(root, 'canvas'), rN = $(root, '[data-p="n"]'), rT = $(root, '[data-p="T"]'), rV = $(root, '[data-p="V"]');
     var oN = $(root, '.out-n'), oT = $(root, '.out-T'), oV = $(root, '.out-V'), oP = $(root, '.out-P'), oPV = $(root, '.out-pv'), oNRT = $(root, '.out-nrt');
-    var btn = $(root, '[data-act="play"]'), S, playing = !RM, visible = true, last = null, PART = [], hits = 0, hitT = 0, R = 8.314;
+    var btn = $(root, '[data-act="play"]'), S, playing = !RM, visible = true, last = null, PART = [], chocs = [], pm = null, R = 8.314;
+    /* outils de dessin propres à ce module */
+    function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+    function tx(c, s, x, y, color, font, align) { c.save(); c.font = font; c.textAlign = align || 'center'; c.fillStyle = color; c.fillText(s, x, y); c.restore(); }
+    function chaud(u) { u = Math.max(0, Math.min(1, u)); var a = [[37, 99, 235], [147, 197, 253], [253, 230, 138], [249, 115, 22], [220, 38, 38]], k = u * 4, i = Math.min(3, Math.floor(k)), f = k - i; return 'rgb(' + [0, 1, 2].map(function (j) { return Math.round(a[i][j] + (a[i + 1][j] - a[i][j]) * f); }).join(',') + ')'; }
+    function maxwell() { var a = 0; for (var i = 0; i < 3; i++) { var u = Math.sqrt(-2 * Math.log(Math.random() + 1e-9)) * Math.cos(2 * Math.PI * Math.random()); a += u * u; } return Math.sqrt(a / 3); }
     function sync() {
       var N = Math.round(parseFloat(rN.value) * 40);
-      while (PART.length < N) { var a = Math.random() * 2 * Math.PI; PART.push({ x: Math.random(), y: Math.random(), dx: Math.cos(a), dy: Math.sin(a) }); }
+      while (PART.length < N) { PART.push({ x: Math.random(), y: Math.random(), a: Math.random() * 2 * Math.PI, f: maxwell() }); }
       PART.length = N;
     }
     function upd() {
@@ -925,23 +930,52 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
     }
     function draw(dt) {
       if (!S) { return; }
-      var c = S.ctx, w = S.w, h = S.h, V = parseFloat(rV.value), T = parseFloat(rT.value);
-      var bx = 20, by = 16, bh = h - 32, bwMax = w - 60, bw = bwMax * V / 40, sp = 0.18 * Math.sqrt(T / 300);
+      var c = S.ctx, w = S.w, h = S.h, n = parseFloat(rN.value), V = parseFloat(rV.value), T = parseFloat(rT.value), Pbar = n * R * T / (V * 1e-3) / 1e5;
+      var x0 = 22, y0 = 22, bh = h - 78, Wmax = Math.min(w - 210, 520), bw = Wmax * V / 40, v = 80 * Math.sqrt(T / 300), uT = (T - 150) / 450;
       c.clearRect(0, 0, w, h);
-      c.fillStyle = 'rgba(56,189,248,.08)'; c.fillRect(bx, by, bw, bh);
-      c.strokeStyle = col('--slate'); c.lineWidth = 3; c.beginPath(); c.moveTo(bx + bw, by); c.lineTo(bx, by); c.lineTo(bx, by + bh); c.lineTo(bx + bw, by + bh); c.stroke();
-      c.fillStyle = col('--slate'); c.fillRect(bx + bw, by - 6, 10, bh + 12); c.fillRect(bx + bw + 10, by + bh / 2 - 4, 30, 8);
-      var t = T / 600, pc = 'rgb(' + Math.round(42 + 190 * t) + ',' + Math.round(107 - 40 * t) + ',' + Math.round(196 - 150 * t) + ')';
+      /* plaque chauffante */
+      var py = y0 + bh + 12;
+      rr(c, x0 - 8, py, Wmax + 16, 14, 4); c.fillStyle = '#CBD5E1'; c.fill();
+      var gp = c.createLinearGradient(0, py, 0, py + 6); gp.addColorStop(0, chaud(uT)); gp.addColorStop(1, 'rgba(255,255,255,0)'); c.fillStyle = gp; c.fillRect(x0 - 4, py, Wmax + 8, 5);
+      tx(c, 'thermostat à ' + Math.round(T) + ' K', x0 + Wmax / 2, py + 30, '#64748B', '600 10.5px system-ui, sans-serif');
+      /* enceinte */
+      var gv = c.createLinearGradient(0, y0, 0, y0 + bh); gv.addColorStop(0, '#F8FAFC'); gv.addColorStop(0.5, '#EEF2F7'); gv.addColorStop(1, '#F8FAFC');
+      c.fillStyle = gv; c.fillRect(x0, y0, bw, bh);
       PART.forEach(function (p) {
-        p.x += p.dx * sp * dt * (bh / bw); p.y += p.dy * sp * dt;
-        if (p.x < 0) { p.x = -p.x; p.dx = -p.dx; hits++; } if (p.x > 1) { p.x = 2 - p.x; p.dx = -p.dx; hits++; }
-        if (p.y < 0) { p.y = -p.y; p.dy = -p.dy; hits++; } if (p.y > 1) { p.y = 2 - p.y; p.dy = -p.dy; hits++; }
-        c.fillStyle = pc; c.beginPath(); c.arc(bx + 6 + p.x * (bw - 12), by + 6 + p.y * (bh - 12), 4, 0, 2 * Math.PI); c.fill();
+        var sp = v * p.f * dt, nx = p.x + Math.cos(p.a) * sp / bw, ny = p.y + Math.sin(p.a) * sp / bh, hit = null;
+        if (nx < 0) { p.a = Math.PI - p.a; nx = 0; hit = [x0, y0 + p.y * bh]; } else if (nx > 1) { p.a = Math.PI - p.a; nx = 1; hit = [x0 + bw, y0 + p.y * bh]; }
+        if (ny < 0) { p.a = -p.a; ny = 0; hit = [x0 + p.x * bw, y0]; } else if (ny > 1) { p.a = -p.a; ny = 1; hit = [x0 + p.x * bw, y0 + bh]; }
+        if (hit && chocs.length < 90) { chocs.push({ x: hit[0], y: hit[1], t: 0 }); }
+        p.x = nx; p.y = ny;
+        var X = x0 + 5 + p.x * (bw - 10), Y = y0 + 5 + p.y * (bh - 10), co = chaud(Math.min(1, 0.12 + uT * 0.75 * p.f));
+        c.strokeStyle = co; c.globalAlpha = 0.35; c.lineWidth = 2.4; c.beginPath(); c.moveTo(X, Y); c.lineTo(X - Math.cos(p.a) * v * p.f * 0.06, Y - Math.sin(p.a) * v * p.f * 0.06); c.stroke(); c.globalAlpha = 1;
+        c.fillStyle = co; c.beginPath(); c.arc(X, Y, 4, 0, 2 * Math.PI); c.fill();
+        c.fillStyle = 'rgba(255,255,255,.55)'; c.beginPath(); c.arc(X - 1.2, Y - 1.2, 1.3, 0, 2 * Math.PI); c.fill();
       });
+      chocs = chocs.filter(function (k) { k.t += dt; return k.t < 0.25; });
+      chocs.forEach(function (k) { c.strokeStyle = 'rgba(220,38,38,' + (0.6 * (1 - k.t / 0.25)) + ')'; c.lineWidth = 1.5; c.beginPath(); c.arc(k.x, k.y, 3 + 14 * k.t, 0, 2 * Math.PI); c.stroke(); });
+      /* parois, piston, tige */
+      c.strokeStyle = '#475569'; c.lineWidth = 3; c.lineCap = 'round'; c.beginPath(); c.moveTo(x0 + bw + 2, y0); c.lineTo(x0, y0); c.lineTo(x0, y0 + bh); c.lineTo(x0 + bw + 2, y0 + bh); c.stroke();
+      c.strokeStyle = 'rgba(71,85,105,.3)'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(x0 + bw + 2, y0); c.lineTo(x0 + Wmax + 24, y0); c.moveTo(x0 + bw + 2, y0 + bh); c.lineTo(x0 + Wmax + 24, y0 + bh); c.stroke();
+      var gpi = c.createLinearGradient(x0 + bw, 0, x0 + bw + 14, 0); gpi.addColorStop(0, '#94A3B8'); gpi.addColorStop(0.5, '#E2E8F0'); gpi.addColorStop(1, '#64748B');
+      c.fillStyle = gpi; rr(c, x0 + bw, y0 - 2, 14, bh + 4, 3); c.fill();
+      c.fillStyle = '#94A3B8'; c.fillRect(x0 + bw + 14, y0 + bh / 2 - 4, 40, 8); c.fillStyle = '#334155'; rr(c, x0 + bw + 52, y0 + bh / 2 - 14, 10, 28, 3); c.fill();
+      /* manomètre (en bar), relié au haut de l'enceinte */
+      var gx = w - 76, gy = y0 + 62, rg = 54, pmax = 30, a0 = 0.75 * Math.PI, a1 = 2.25 * Math.PI, ang = a0 + (a1 - a0) * Math.min(1, Pbar / pmax);
+      pm = pm === null ? ang : pm + (ang - pm) * Math.min(1, dt * 6);
+      c.strokeStyle = '#94A3B8'; c.lineWidth = 3; c.lineJoin = 'round'; c.beginPath(); c.moveTo(x0 + 28, y0); c.arcTo(x0 + 28, y0 - 12, x0 + 42, y0 - 12, 8); c.arcTo(gx, y0 - 12, gx, gy - rg, 8); c.lineTo(gx, gy - rg); c.stroke();
+      c.fillStyle = '#64748B'; rr(c, gx - 6, gy - rg - 7, 12, 8, 2); c.fill();
+      var gf = c.createRadialGradient(gx - 12, gy - 14, 6, gx, gy, rg); gf.addColorStop(0, '#FFFFFF'); gf.addColorStop(1, '#E2E8F0');
+      c.fillStyle = gf; c.beginPath(); c.arc(gx, gy, rg, 0, 2 * Math.PI); c.fill(); c.strokeStyle = '#334155'; c.lineWidth = 4; c.stroke();
+      [['#22C55E', 0, 0.5], ['#F59E0B', 0.5, 0.75], ['#EF4444', 0.75, 1]].forEach(function (z) { c.strokeStyle = z[0]; c.lineWidth = 5; c.beginPath(); c.arc(gx, gy, rg - 8, a0 + (a1 - a0) * z[1], a0 + (a1 - a0) * z[2]); c.stroke(); });
+      for (var k = 0; k <= 6; k++) { var a = a0 + (a1 - a0) * k / 6; c.strokeStyle = '#334155'; c.lineWidth = 2; c.beginPath(); c.moveTo(gx + (rg - 13) * Math.cos(a), gy + (rg - 13) * Math.sin(a)); c.lineTo(gx + (rg - 20) * Math.cos(a), gy + (rg - 20) * Math.sin(a)); c.stroke(); tx(c, String(k * 5), gx + (rg - 30) * Math.cos(a), gy + (rg - 30) * Math.sin(a) + 4, '#334155', '600 9.5px system-ui, sans-serif'); }
+      c.save(); c.translate(gx, gy); c.rotate(pm); c.fillStyle = '#DC2626'; c.beginPath(); c.moveTo(-6, -2.5); c.lineTo(rg - 16, 0); c.lineTo(-6, 2.5); c.closePath(); c.fill(); c.restore();
+      c.fillStyle = '#1E293B'; c.beginPath(); c.arc(gx, gy, 4.5, 0, 2 * Math.PI); c.fill();
+      tx(c, 'bar', gx, gy + 26, '#475569', '600 10px system-ui, sans-serif'); tx(c, 'manomètre', gx, gy + rg + 18, '#475569', '600 11px system-ui, sans-serif');
     }
     function step(ts) {
       var dt = last === null ? 0 : Math.min(0.05, (ts - last) / 1000); last = ts;
-      if (visible) { draw(playing ? dt : 0); }
+      if (visible) { draw(playing ? (RM ? dt * 0.4 : dt) : 0); }
       requestAnimationFrame(step);
     }
     [rN, rT, rV].forEach(function (x) { x.addEventListener('input', function () { upd(); if (!playing) { draw(0); } }); });
