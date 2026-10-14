@@ -10,6 +10,20 @@ draft = false
 .nt-ql-q { font-size: 1.05em; text-align: center; margin: 0.5em 0 0.7em !important; min-height: 1.6em; }
 .nt-ql-btns { display: flex; flex-wrap: wrap; gap: 0.45em; justify-content: center; }
 .nt-big-score { font-size: 1.8em; font-weight: 800; color: var(--blue); margin-right: 0.3em; }
+.nt-prog { display: flex; flex-wrap: wrap; gap: 0.4em; justify-content: center; margin: 0.3em 0 0.5em; }
+.nt-prog i { width: 0.85em; height: 0.85em; border-radius: 50%; background: #E2E8F0; transition: background .25s; }
+.nt-prog i.ok { background: #22C55E; } .nt-prog i.ko { background: #F43F5E; } .nt-prog i.cur { box-shadow: 0 0 0 2.5px var(--blue); }
+.nt-qnum { text-align: center; font-size: 0.82em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); margin: 0; }
+.nt-qcard { background: linear-gradient(180deg, #FFFFFF, #F8FAFC); border: 1px solid var(--line); border-radius: 16px; padding: 0.9em 1em 1em; margin: 0.4em auto 0.6em; max-width: 620px; box-shadow: 0 6px 18px rgba(15,23,42,.06); }
+.nt-qvis { text-align: center; margin: 0.1em 0 0.3em; }
+.nt-qdata { display: inline-flex; flex-wrap: wrap; gap: 0.3em 1em; justify-content: center; align-items: center; font-family: Georgia, serif; font-size: 1.4em; color: #0F172A; }
+.nt-qdata span { white-space: nowrap; }
+.nt-ql-btns .nt-choix { padding: 0.6em 1.1em; border-radius: 12px; font-size: 1em; transition: transform .12s, box-shadow .12s; }
+.nt-ql-btns .nt-choix:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,.18); }
+.nt-choix-ok { background: #DCFCE7 !important; border-color: #16A34A !important; color: #166534 !important; }
+.nt-choix-ko { background: #FFE4E6 !important; border-color: #E11D48 !important; color: #9F1239 !important; }
+.nt-msg.nt-fb { border-radius: 12px; padding: 0.6em 0.9em; text-align: left; }
+.nt-msg.nt-fb.ok { background: #F0FDF4; border-left: 4px solid #22C55E; } .nt-msg.nt-fb.ko { background: #FFF1F2; border-left: 4px solid #F43F5E; }
 .nt-lab .nt-msg { margin-top: 1em !important; }
 .nt-lab [hidden] { display: none !important; }
 .nt-tr-ans { display: flex; align-items: center; justify-content: center; gap: 0.5em; flex-wrap: wrap; margin: 0.6em 0; }
@@ -91,8 +105,13 @@ draft = false
 <div class="nt-lab nt-trainer" id="lab-pv">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Entraînement</p>
 <p class="nt-lab-title">Utiliser la loi des gaz parfaits</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<div class="nt-qvis" aria-live="polite"></div>
 <p class="nt-ql-q nt-tr-q"></p>
-<div class="nt-tr-zone"><div class="nt-tr-ans"><span class="nt-champ"><label for="pv-rep">Réponse&nbsp;:</label><input id="pv-rep" type="text" inputmode="decimal"><span class="nt-u nt-tr-unit"></span></span><button type="button" class="nt-btn" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+<div class="nt-tr-zone"><div class="nt-tr-ans"><span class="nt-champ"><label for="pv-rep">Réponse&nbsp;:</label><input id="pv-rep" type="text" inputmode="decimal"><span class="nt-u nt-tr-unit"></span></span><button type="button" class="nt-btn nt-btn-main" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
@@ -263,8 +282,12 @@ draft = false
 <div class="nt-lab nt-quizlab" id="quiz-signes">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
 <p class="nt-lab-title">Le signe des transferts d'énergie</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
 <p class="nt-ql-q"></p>
 <div class="nt-ql-btns"></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
@@ -425,8 +448,12 @@ draft = false
 <div class="nt-lab nt-quizlab" id="quiz-modes">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
 <p class="nt-lab-title">Quel mode de transfert thermique&nbsp;?</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
 <p class="nt-ql-q"></p>
 <div class="nt-ql-btns"></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
@@ -799,31 +826,35 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
     ]
   };
   var MODES = ['conduction', 'convection', 'rayonnement'];
-  $$(document, '.nt-quizlab').forEach(function (root) {
+  $$(document, '.nt-quizlab').forEach(function (root) {   /* interface : numéro de question, pastilles de progression, carte, retour coloré */
     var D = QUIZ[root.id]; if (!D) { return; }
-    var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), next = $(root, '[data-act="next"]'), lbl = next.innerHTML;
-    var order = [], k = 0, good = 0, answered = false, fini = false;
+    var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), next = $(root, '[data-act="next"]'), prog = $(root, '.nt-prog'), num0 = $(root, '.nt-qnum'), lbl = next.innerHTML;
+    var order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+    function progres() {
+      prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join('');
+      num0.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length;
+    }
     function show() {
       answered = false; var q = D[order[k]], choix = typeof q[1] === 'number' ? MODES : q[1], bon = typeof q[1] === 'number' ? q[1] : q[2], ex = typeof q[1] === 'number' ? q[2] : q[3];
-      qEl.innerHTML = q[0]; msg.textContent = ''; bx.innerHTML = '';
+      qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
       choix.forEach(function (cTxt, i) {
-        var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn'; b.innerHTML = cTxt;
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = cTxt;
         b.addEventListener('click', function () {
-          if (answered) { return; } answered = true;
-          if (i === bon) { good++; b.classList.add('nt-btn-main'); msg.innerHTML = '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' + ex; }
-          else { b.style.borderColor = '#E11D48'; b.style.color = '#E11D48'; msg.innerHTML = '<span style="color:#E11D48;">Non.</span> ' + ex; }
-          sc.textContent = good + ' / ' + (k + 1);
+          if (answered) { return; } answered = true; var ok = i === bon; res[k] = ok; if (ok) { good++; }
+          b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[bon].classList.add('nt-choix-ok'); }
+          msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + ex;
+          sc.textContent = good + ' / ' + (k + 1); progres();
         });
         bx.appendChild(b);
       });
-      next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl;
+      next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
     }
-    function start() { order = shuffle(D.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+    function start() { order = shuffle(D.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
     next.addEventListener('click', function () {
       if (fini) { start(); return; }
-      if (!answered) { msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+      if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
       k++;
-      if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilanTxt(good / order.length); msg.textContent = ''; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
+      if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilanTxt(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
       show();
     });
     start();
@@ -897,48 +928,50 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
     var root = document.getElementById('lab-pv');
     if (!root) { return; }
     var qEl = $(root, '.nt-tr-q'), inp = $(root, 'input[type="text"]'), uEl = $(root, '.nt-tr-unit'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), bV = $(root, '[data-act="check"]'), bN = $(root, '[data-act="next"]'), lblN = bN.innerHTML;
-    var R = 8.314, NQ = 6, n = 0, good = 0, cur, done = false, fini = false;
+    var R = 8.314, NQ = 6, n = 0, good = 0, cur, done = false, fini = false, res = [], vis = $(root, '.nt-qvis'), prog = $(root, '.nt-prog'), num0 = $(root, '.nt-qnum');
+    function progres() { prog.innerHTML = Array.apply(null, Array(NQ)).map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === n - (done ? 1 : 0) && !fini ? ' cur' : '') + '"></i>'; }).join(''); num0.textContent = fini ? 'Bilan' : 'Question ' + Math.min(NQ, n + (done ? 0 : 1)) + ' sur ' + NQ; }
     var G = [
       function () {   /* pression d'un gaz dans un récipient */
         var VL = pick([0.5, 1, 2, 5, 10, 20]), th = pick([0, 20, 25, 37, 80, 100]), nn = pick([0.01, 0.02, 0.05, 0.1, 0.2, 0.5]), T = th + 273.15, P = nn * R * T / (VL / 1000);
-        return { q: nb(nn, 2) + '&nbsp;mol de gaz sont enfermées dans un récipient de ' + nb(VL, 2) + '&nbsp;L, à ' + th + '&nbsp;°C. Calculer la pression du gaz, en <b>kPa</b>.', rep: P / 1000, unit: 'kPa',
+        return { vis: '<span><i>n</i> = ' + nb(nn, 2) + '&nbsp;mol</span><span><i>V</i> = ' + nb(VL, 2) + '&nbsp;L</span><span><i>θ</i> = ' + th + '&nbsp;°C</span>', q: nb(nn, 2) + '&nbsp;mol de gaz sont enfermées dans un récipient de ' + nb(VL, 2) + '&nbsp;L, à ' + th + '&nbsp;°C. Calculer la pression du gaz, en <b>kPa</b>.', rep: P / 1000, unit: 'kPa',
           expl: 'Conversions&nbsp;: V = ' + nb(VL, 2) + '&nbsp;L = ' + nb(VL / 1000, 2) + '&nbsp;m³ et T = ' + th + ' + 273,15 = ' + fr(T, 2) + '&nbsp;K. Puis P = nRT / V = ' + nb(nn, 2) + ' × 8,314 × ' + fr(T, 2) + ' / ' + nb(VL / 1000, 2) + ' ≈ ' + nb(P, 3) + '&nbsp;Pa, soit ' + nb(P / 1000, 3) + '&nbsp;kPa.' };
       },
       function () {   /* quantité de matière d'air dans une pièce ou un ballon */
         var V = pick([[0.002, '2,0 L'], [0.005, '5,0 L'], [30, '30 m³'], [50, '50 m³']]), th = pick([15, 20, 25]), Pb = pick([1.0, 1.013, 2.0]), T = th + 273.15, nn = Pb * 1e5 * V[0] / (R * T);
-        return { q: 'Quelle quantité de matière d\u2019air contient un volume de ' + V[1] + ', à ' + th + '&nbsp;°C et sous ' + fr(Pb, Pb === 1.013 ? 3 : 1) + '&nbsp;bar&nbsp;? Réponse en <b>mol</b>.', rep: nn, unit: 'mol',
+        return { vis: '<span><i>V</i> = ' + V[1].replace(' ', '&nbsp;') + '</span><span><i>θ</i> = ' + th + '&nbsp;°C</span><span><i>P</i> = ' + fr(Pb, Pb === 1.013 ? 3 : 1) + '&nbsp;bar</span>', q: 'Quelle quantité de matière d\u2019air contient un volume de ' + V[1] + ', à ' + th + '&nbsp;°C et sous ' + fr(Pb, Pb === 1.013 ? 3 : 1) + '&nbsp;bar&nbsp;? Réponse en <b>mol</b>.', rep: nn, unit: 'mol',
           expl: 'Conversions&nbsp;: P = ' + fr(Pb, Pb === 1.013 ? 3 : 1) + '&nbsp;bar = ' + nb(Pb * 1e5, 4) + '&nbsp;Pa (1&nbsp;bar = 10<sup>5</sup>&nbsp;Pa), V = ' + nb(V[0], 2) + '&nbsp;m³ et T = ' + fr(T, 2) + '&nbsp;K. Puis n = PV / (RT) ≈ ' + nb(nn, 3) + '&nbsp;mol.' };
       },
       function () {   /* volume molaire */
         var th = pick([0, 20, 25]), T = th + 273.15, Vm = R * T / 101325 * 1000;
-        return { q: 'Calculer le volume occupé par une mole de gaz parfait à ' + th + '&nbsp;°C, sous la pression atmosphérique normale (1&nbsp;013&nbsp;hPa). Réponse en <b>L</b>.', rep: Vm, unit: 'L',
+        return { vis: '<span><i>n</i> = 1&nbsp;mol</span><span><i>θ</i> = ' + th + '&nbsp;°C</span><span><i>P</i> = 1&nbsp;013&nbsp;hPa</span>', q: 'Calculer le volume occupé par une mole de gaz parfait à ' + th + '&nbsp;°C, sous la pression atmosphérique normale (1&nbsp;013&nbsp;hPa). Réponse en <b>L</b>.', rep: Vm, unit: 'L',
           expl: 'V = nRT / P = 1 × 8,314 × ' + fr(T, 2) + ' / 101&nbsp;325 ≈ ' + nb(Vm / 1000, 3) + '&nbsp;m³, soit ' + nb(Vm, 3) + '&nbsp;L. C\u2019est le volume molaire&nbsp;: il ne dépend pas de la nature du gaz&nbsp;!' };
       },
-      function () {   /* température d'un gaz */
-        var VL = pick([1, 2, 10]), nn = pick([0.05, 0.1, 0.5]), PkPa = pick([120, 150, 200, 250]), T = PkPa * 1000 * VL / 1000 / (nn * R);
-        return { q: 'Un récipient de ' + VL + '&nbsp;L contient ' + nb(nn, 2) + '&nbsp;mol de gaz, à la pression de ' + PkPa + '&nbsp;kPa. Quelle est sa température, en <b>K</b>&nbsp;?', rep: T, unit: 'K',
-          expl: 'T = PV / (nR) = ' + PkPa + '&nbsp;000 × ' + nb(VL / 1000, 2) + ' / (' + nb(nn, 2) + ' × 8,314) ≈ ' + nb(T, 3) + '&nbsp;K, soit ' + nb(T - 273.15, 3) + '&nbsp;°C.' };
+      function () {   /* température d'un gaz : on part d'une température réaliste, pour rester dans le domaine du gaz parfait */
+        var VL = pick([1, 2, 5, 10]), nn = pick([0.05, 0.1, 0.2]), T0 = pick([250, 280, 300, 330, 360, 400]), PkPa = Number((nn * R * T0 / (VL / 1000) / 1000).toPrecision(3)), T = PkPa * 1000 * VL / 1000 / (nn * R);
+        return { vis: '<span><i>V</i> = ' + VL + '&nbsp;L</span><span><i>n</i> = ' + nb(nn, 2) + '&nbsp;mol</span><span><i>P</i> = ' + nb(PkPa, 3) + '&nbsp;kPa</span>', q: 'Un récipient de ' + VL + '&nbsp;L contient ' + nb(nn, 2) + '&nbsp;mol de gaz, à la pression de ' + nb(PkPa, 3) + '&nbsp;kPa. Quelle est sa température, en <b>K</b>&nbsp;?', rep: T, unit: 'K',
+          expl: 'T = PV / (nR) = ' + nb(PkPa * 1000, 3) + ' × ' + nb(VL / 1000, 2) + ' / (' + nb(nn, 2) + ' × 8,314) ≈ ' + nb(T, 3) + '&nbsp;K, soit ' + nb(T - 273.15, 3) + '&nbsp;°C.' };
       },
       function () {   /* transformation à quantité de matière constante */
         var P1 = pick([100, 150, 200]), T1 = pick([280, 290, 300]), T2 = pick([320, 330, 350, 360]), V = pick([1, 2]), P2 = P1 * T2 / T1;
-        return { q: 'Un pneu (volume constant) contient de l\u2019air à ' + P1 + '&nbsp;kPa et ' + T1 + '&nbsp;K. Après un long trajet, l\u2019air est à ' + T2 + '&nbsp;K. Quelle est sa nouvelle pression, en <b>kPa</b>&nbsp;?', rep: P2, unit: 'kPa',
+        return { vis: '<span><i>P</i><sub>1</sub> = ' + P1 + '&nbsp;kPa</span><span><i>T</i><sub>1</sub> = ' + T1 + '&nbsp;K</span><span>→ <i>T</i><sub>2</sub> = ' + T2 + '&nbsp;K</span>', q: 'Un pneu (volume constant) contient de l\u2019air à ' + P1 + '&nbsp;kPa et ' + T1 + '&nbsp;K. Après un long trajet, l\u2019air est à ' + T2 + '&nbsp;K. Quelle est sa nouvelle pression, en <b>kPa</b>&nbsp;?', rep: P2, unit: 'kPa',
           expl: 'n, R et V sont constants, donc P / T = nR / V est constant&nbsp;: P<sub>2</sub> = P<sub>1</sub> × T<sub>2</sub> / T<sub>1</sub> = ' + P1 + ' × ' + T2 + ' / ' + T1 + ' ≈ ' + nb(P2, 3) + '&nbsp;kPa. Inutile de connaître n ou V&nbsp;!' };
       }
     ];
-    function nouveau() { cur = pick(G)(); qEl.innerHTML = cur.q; uEl.textContent = cur.unit; inp.value = ''; msg.textContent = ''; done = false; bV.disabled = false; inp.disabled = false; bN.innerHTML = n === NQ - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lblN; }
-    function start() { n = 0; good = 0; fini = false; sc.textContent = '0 / 0'; $(root, '.nt-tr-zone').hidden = false; nouveau(); }
+    function nouveau() { cur = pick(G)(); qEl.innerHTML = cur.q; vis.innerHTML = '<span class="nt-qdata">' + cur.vis + '</span>'; vis.hidden = false; uEl.textContent = cur.unit; inp.value = ''; msg.textContent = ''; msg.className = 'nt-msg'; done = false; bV.disabled = false; inp.disabled = false; bN.innerHTML = n === NQ - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lblN; progres(); }
+    function start() { n = 0; good = 0; fini = false; res = []; sc.textContent = '0 / 0'; $(root, '.nt-tr-zone').hidden = false; nouveau(); }
     bV.addEventListener('click', function () {
       if (done || fini) { return; }
-      var v = num(inp.value); if (isNaN(v)) { msg.textContent = 'Entrez une valeur numérique.'; return; }
-      var ok = Math.abs(v - cur.rep) <= Math.abs(cur.rep) * 0.02; done = true; n++; if (ok) { good++; }
+      var v = num(inp.value); if (isNaN(v)) { msg.className = 'nt-msg'; msg.textContent = 'Entrez une valeur numérique.'; return; }
+      var ok = Math.abs(v - cur.rep) <= Math.abs(cur.rep) * 0.02; done = true; res[n] = ok; n++; if (ok) { good++; }
       bV.disabled = true; inp.disabled = true; sc.textContent = good + ' / ' + n;
-      msg.innerHTML = (ok ? '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' : '<span style="color:#E11D48;">Non</span>&nbsp;: la réponse est ' + nb(cur.rep, 3) + '&nbsp;' + cur.unit + '. ') + cur.expl;
+      msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko');
+      msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non</b>&nbsp;: la réponse est ' + nb(cur.rep, 3) + '&nbsp;' + cur.unit + '. ') + cur.expl; progres();
     });
     inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { bV.click(); } });
     bN.addEventListener('click', function () {
       if (fini) { start(); return; }
-      if (!done) { msg.textContent = 'Validez d\u2019abord votre réponse.'; return; }
-      if (n >= NQ) { fini = true; $(root, '.nt-tr-zone').hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + NQ + '</span> ' + bilanTxt(good / NQ); msg.textContent = ''; bN.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
+      if (!done) { msg.className = 'nt-msg'; msg.textContent = 'Validez d\u2019abord votre réponse.'; return; }
+      if (n >= NQ) { fini = true; $(root, '.nt-tr-zone').hidden = true; vis.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + NQ + '</span> ' + bilanTxt(good / NQ); msg.textContent = ''; msg.className = 'nt-msg'; progres(); bN.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
       nouveau();
     });
     start();

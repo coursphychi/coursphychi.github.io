@@ -10,6 +10,21 @@ draft = false
 .nt-ql-q { font-size: 1.05em; text-align: center; margin: 0.5em 0 0.7em !important; min-height: 1.6em; }
 .nt-ql-btns { display: flex; flex-wrap: wrap; gap: 0.45em; justify-content: center; }
 .nt-big-score { font-size: 1.8em; font-weight: 800; color: var(--blue); margin-right: 0.3em; }
+.nt-prog { display: flex; flex-wrap: wrap; gap: 0.4em; justify-content: center; margin: 0.3em 0 0.5em; }
+.nt-prog i { width: 0.85em; height: 0.85em; border-radius: 50%; background: #E2E8F0; transition: background .25s; }
+.nt-prog i.ok { background: #22C55E; } .nt-prog i.ko { background: #F43F5E; } .nt-prog i.cur { box-shadow: 0 0 0 2.5px var(--blue); }
+.nt-qnum { text-align: center; font-size: 0.82em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); margin: 0; }
+.nt-qcard { background: linear-gradient(180deg, #FFFFFF, #F8FAFC); border: 1px solid var(--line); border-radius: 16px; padding: 0.9em 1em 1em; margin: 0.4em auto 0.6em; max-width: 620px; box-shadow: 0 6px 18px rgba(15,23,42,.06); }
+.nt-qvis { text-align: center; margin: 0.1em 0 0.3em; }
+.nt-qdata { display: inline-flex; flex-wrap: wrap; gap: 0.4em 0.8em; justify-content: center; align-items: center; font-family: Georgia, serif; font-size: 1.55em; color: #0F172A; }
+.nt-qdata span { white-space: nowrap; }
+.nt-qdata i { display: inline-block; width: 0.75em; height: 0.75em; border-radius: 50%; margin-right: 0.3em; vertical-align: -0.05em; box-shadow: 0 0 0 2px #fff, 0 0 0 3px #CBD5E1; }
+.nt-ql-btns .nt-choix { padding: 0.6em 1.1em; border-radius: 12px; font-size: 1em; transition: transform .12s, box-shadow .12s; }
+.nt-ql-btns .nt-choix:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,.18); }
+.nt-choix-ok { background: #DCFCE7 !important; border-color: #16A34A !important; color: #166534 !important; }
+.nt-choix-ko { background: #FFE4E6 !important; border-color: #E11D48 !important; color: #9F1239 !important; }
+.nt-msg.nt-fb { border-radius: 12px; padding: 0.6em 0.9em; text-align: left; }
+.nt-msg.nt-fb.ok { background: #F0FDF4; border-left: 4px solid #22C55E; } .nt-msg.nt-fb.ko { background: #FFF1F2; border-left: 4px solid #F43F5E; }
 .nt-lab .nt-msg { margin-top: 1em !important; }
 .nt-lab [hidden] { display: none !important; }
 .nt-tr-ans { display: flex; align-items: center; justify-content: center; gap: 0.5em; flex-wrap: wrap; margin: 0.6em 0; }
@@ -306,8 +321,12 @@ draft = false
 <div class="nt-lab nt-quizlab" id="quiz-app">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
 <p class="nt-lab-title">Quelle interaction entre la lumière et la matière&nbsp;?</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
 <p class="nt-ql-q"></p>
 <div class="nt-ql-btns"></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
@@ -367,8 +386,13 @@ draft = false
 <div class="nt-lab nt-trainer" id="lab-calc">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Entraînement</p>
 <p class="nt-lab-title">Photons et effet photoélectrique</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<div class="nt-qvis" aria-live="polite"></div>
 <p class="nt-ql-q nt-tr-q"></p>
-<div class="nt-tr-zone"><div class="nt-tr-ans"><span class="nt-champ"><label for="ph-rep">Réponse&nbsp;:</label><input id="ph-rep" type="text" inputmode="decimal"><span class="nt-u nt-tr-unit"></span></span><button type="button" class="nt-btn" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+<div class="nt-tr-zone"><div class="nt-tr-ans"><span class="nt-champ"><label for="ph-rep">Réponse&nbsp;:</label><input id="ph-rep" type="text" inputmode="decimal"><span class="nt-u nt-tr-unit"></span></span><button type="button" class="nt-btn nt-btn-main" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
@@ -545,30 +569,34 @@ draft = false
     ]
   };
   var CHOIX = ['effet photoélectrique externe', 'effet photoélectrique interne', 'émission de photons'];
-  $$(document, '.nt-quizlab').forEach(function (root) {
+  $$(document, '.nt-quizlab').forEach(function (root) {   /* interface : numéro de question, pastilles de progression, carte, retour coloré */
     var D = QUIZ[root.id]; if (!D) { return; }
-    var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), next = $(root, '[data-act="next"]'), lbl = next.innerHTML;
-    var order = [], k = 0, good = 0, answered = false, fini = false;
+    var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), next = $(root, '[data-act="next"]'), prog = $(root, '.nt-prog'), num0 = $(root, '.nt-qnum'), lbl = next.innerHTML;
+    var order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+    function progres() {
+      prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join('');
+      num0.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length;
+    }
     function show() {
-      answered = false; var q = D[order[k]]; qEl.innerHTML = q[0]; msg.textContent = ''; bx.innerHTML = '';
+      answered = false; var q = D[order[k]]; qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
       CHOIX.forEach(function (cTxt, i) {
-        var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn'; b.innerHTML = cTxt;
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = cTxt;
         b.addEventListener('click', function () {
-          if (answered) { return; } answered = true;
-          if (i === q[1]) { good++; b.classList.add('nt-btn-main'); msg.innerHTML = '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' + q[2]; }
-          else { b.style.borderColor = '#E11D48'; b.style.color = '#E11D48'; msg.innerHTML = '<span style="color:#E11D48;">Non.</span> ' + q[2]; }
-          sc.textContent = good + ' / ' + (k + 1);
+          if (answered) { return; } answered = true; var ok = i === q[1]; res[k] = ok; if (ok) { good++; }
+          b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[q[1]].classList.add('nt-choix-ok'); }
+          msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2];
+          sc.textContent = good + ' / ' + (k + 1); progres();
         });
         bx.appendChild(b);
       });
-      next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl;
+      next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
     }
-    function start() { order = shuffle(D.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+    function start() { order = shuffle(D.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
     next.addEventListener('click', function () {
       if (fini) { start(); return; }
-      if (!answered) { msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+      if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
       k++;
-      if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilanTxt(good / order.length); msg.textContent = ''; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
+      if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilanTxt(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
       show();
     });
     start();
@@ -808,41 +836,43 @@ draft = false
     var root = document.getElementById('lab-calc');
     if (!root) { return; }
     var qEl = $(root, '.nt-tr-q'), inp = $(root, 'input[type="text"]'), uEl = $(root, '.nt-tr-unit'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), bV = $(root, '[data-act="check"]'), bN = $(root, '[data-act="next"]'), lblN = bN.innerHTML;
-    var NQ = 6, n = 0, good = 0, cur, done = false, fini = false;
+    var NQ = 6, n = 0, good = 0, cur, done = false, fini = false, res = [], vis = $(root, '.nt-qvis'), prog = $(root, '.nt-prog'), num0 = $(root, '.nt-qnum');
+    function progres() { prog.innerHTML = Array.apply(null, Array(NQ)).map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === n - (done ? 1 : 0) && !fini ? ' cur' : '') + '"></i>'; }).join(''); num0.textContent = fini ? 'Bilan' : 'Question ' + Math.min(NQ, n + (done ? 0 : 1)) + ' sur ' + NQ; }
     var G = [
       function () { var l = pick([254, 400, 450, 532, 589, 633, 700]), E = H * C / (l * 1e-9) / QE;
-        return { q: 'Quelle est l\u2019énergie d\u2019un photon de longueur d\u2019onde λ = ' + l + '&nbsp;nm, en <b>eV</b>&nbsp;?', rep: E, unit: 'eV',
+        return { vis: '<span><i style="background:' + couleur(l) + '"></i>λ = ' + l + '&nbsp;nm</span>', q: 'Quelle est l\u2019énergie d\u2019un photon de longueur d\u2019onde λ = ' + l + '&nbsp;nm, en <b>eV</b>&nbsp;?', rep: E, unit: 'eV',
           expl: 'E = hc / λ = 6,63 × 10<sup>−34</sup> × 3,00 × 10<sup>8</sup> / (' + l + ' × 10<sup>−9</sup>) = ' + sciH(E * QE, 3) + '&nbsp;J, soit ' + fr(E, 2) + '&nbsp;eV (1&nbsp;eV = 1,60 × 10<sup>−19</sup>&nbsp;J).' }; },
       function () { var nu = pick([4.5, 5.0, 6.0, 7.5, 9.0, 12]) * 1e14, E = H * nu;
-        return { q: 'Quelle est l\u2019énergie d\u2019un photon de fréquence ν = ' + sciH(nu, 2) + '&nbsp;Hz&nbsp;? Réponse en <b>10<sup>−19</sup>&nbsp;J</b>.', rep: E / 1e-19, unit: '× 10⁻¹⁹ J',
+        return { vis: '<span>ν = ' + sciH(nu, 2) + '&nbsp;Hz</span>', q: 'Quelle est l\u2019énergie d\u2019un photon de fréquence ν = ' + sciH(nu, 2) + '&nbsp;Hz&nbsp;? Réponse en <b>10<sup>−19</sup>&nbsp;J</b>.', rep: E / 1e-19, unit: '× 10⁻¹⁹ J',
           expl: 'E = hν = 6,63 × 10<sup>−34</sup> × ' + sciH(nu, 2) + ' = ' + sciH(E, 3) + '&nbsp;J.' }; },
       function () { var m = pick(METAUX), l0 = H * C / (m[1] * QE) * 1e9;
-        return { q: 'Le travail d\u2019extraction du ' + m[0] + ' vaut ' + fr(m[1], 2) + '&nbsp;eV. Quelle est la longueur d\u2019onde seuil λ<sub>0</sub> au-delà de laquelle aucun électron n\u2019est éjecté, en <b>nm</b>&nbsp;?', rep: l0, unit: 'nm',
+        return { vis: '<span>' + m[0] + '</span><span>W<sub>ext</sub> = ' + fr(m[1], 2) + '&nbsp;eV</span>', q: 'Le travail d\u2019extraction du ' + m[0] + ' vaut ' + fr(m[1], 2) + '&nbsp;eV. Quelle est la longueur d\u2019onde seuil λ<sub>0</sub> au-delà de laquelle aucun électron n\u2019est éjecté, en <b>nm</b>&nbsp;?', rep: l0, unit: 'nm',
           expl: 'Au seuil, hc / λ<sub>0</sub> = W<sub>ext</sub>, donc λ<sub>0</sub> = hc / W<sub>ext</sub> = 6,63 × 10<sup>−34</sup> × 3,00 × 10<sup>8</sup> / (' + fr(m[1], 2) + ' × 1,60 × 10<sup>−19</sup>) ≈ ' + Math.round(l0) + '&nbsp;nm. Pour λ &gt; λ<sub>0</sub>, les photons n\u2019ont pas assez d\u2019énergie.' }; },
       function () { var m = pick(METAUX.slice(0, 3)), l = pick([250, 300, 350, 400]), Ec = H * C / (l * 1e-9) / QE - m[1];
-        return { q: 'On éclaire du ' + m[0] + ' (W<sub>ext</sub> = ' + fr(m[1], 2) + '&nbsp;eV) avec une lumière de longueur d\u2019onde ' + l + '&nbsp;nm. Quelle est l\u2019énergie cinétique maximale des électrons éjectés, en <b>eV</b>&nbsp;?', rep: Ec, unit: 'eV',
+        return { vis: '<span>' + m[0] + '</span><span>W<sub>ext</sub> = ' + fr(m[1], 2) + '&nbsp;eV</span>' + '<span><i style="background:' + couleur(l) + '"></i>λ = ' + l + '&nbsp;nm</span>', q: 'On éclaire du ' + m[0] + ' (W<sub>ext</sub> = ' + fr(m[1], 2) + '&nbsp;eV) avec une lumière de longueur d\u2019onde ' + l + '&nbsp;nm. Quelle est l\u2019énergie cinétique maximale des électrons éjectés, en <b>eV</b>&nbsp;?', rep: Ec, unit: 'eV',
           expl: 'E<sub>photon</sub> = hc / λ ≈ ' + fr(Ec + m[1], 2) + '&nbsp;eV, puis E<sub>c</sub> = hν − W<sub>ext</sub> = ' + fr(Ec + m[1], 2) + ' − ' + fr(m[1], 2) + ' = ' + fr(Ec, 2) + '&nbsp;eV.' }; },
       function () { var m = pick(METAUX.slice(0, 3)), l = pick([250, 300, 350, 400]), Ec = H * C / (l * 1e-9) / QE - m[1];
-        return { q: 'Même situation (' + m[0] + ', W<sub>ext</sub> = ' + fr(m[1], 2) + '&nbsp;eV, λ = ' + l + '&nbsp;nm). Quelle tension d\u2019arrêt U<sub>a</sub> faut-il appliquer pour annuler le courant, en <b>V</b>&nbsp;?', rep: Ec, unit: 'V',
+        return { vis: '<span>' + m[0] + '</span><span>W<sub>ext</sub> = ' + fr(m[1], 2) + '&nbsp;eV</span>' + '<span><i style="background:' + couleur(l) + '"></i>λ = ' + l + '&nbsp;nm</span>', q: 'Même situation (' + m[0] + ', W<sub>ext</sub> = ' + fr(m[1], 2) + '&nbsp;eV, λ = ' + l + '&nbsp;nm). Quelle tension d\u2019arrêt U<sub>a</sub> faut-il appliquer pour annuler le courant, en <b>V</b>&nbsp;?', rep: Ec, unit: 'V',
           expl: 'eU<sub>a</sub> = E<sub>c</sub> = hν − W<sub>ext</sub> = ' + fr(Ec, 2) + '&nbsp;eV, donc U<sub>a</sub> = ' + fr(Ec, 2) + '&nbsp;V. (Une énergie de 1&nbsp;eV correspond à une tension de 1&nbsp;V pour une charge e.)' }; },
       function () { var l = pick([532, 633, 650]), Pm = pick([1, 2, 5]), N = Pm * 1e-3 * l * 1e-9 / (H * C);
-        return { q: 'Un pointeur laser de puissance ' + Pm + '&nbsp;mW émet à λ = ' + l + '&nbsp;nm. Combien de photons émet-il chaque seconde&nbsp;? Réponse en <b>10<sup>15</sup> photons par seconde</b>.', rep: N / 1e15, unit: '× 10¹⁵ /s',
+        return { vis: '<span>P = ' + Pm + '&nbsp;mW</span>' + '<span><i style="background:' + couleur(l) + '"></i>λ = ' + l + '&nbsp;nm</span>', q: 'Un pointeur laser de puissance ' + Pm + '&nbsp;mW émet à λ = ' + l + '&nbsp;nm. Combien de photons émet-il chaque seconde&nbsp;? Réponse en <b>10<sup>15</sup> photons par seconde</b>.', rep: N / 1e15, unit: '× 10¹⁵ /s',
           expl: 'Énergie d\u2019un photon&nbsp;: E = hc / λ = ' + sciH(H * C / (l * 1e-9), 3) + '&nbsp;J. Nombre de photons par seconde&nbsp;: N = P / E = ' + Pm + ' × 10<sup>−3</sup> / ' + sciH(H * C / (l * 1e-9), 3) + ' ≈ ' + sciH(N, 3) + '. Un flux énorme&nbsp;!' }; }
     ];
-    function nouveau() { cur = pick(G)(); qEl.innerHTML = cur.q; uEl.textContent = cur.unit; inp.value = ''; msg.textContent = ''; done = false; bV.disabled = false; inp.disabled = false; bN.innerHTML = n === NQ - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lblN; }
-    function start() { n = 0; good = 0; fini = false; sc.textContent = '0 / 0'; $(root, '.nt-tr-zone').hidden = false; nouveau(); }
+    function nouveau() { cur = pick(G)(); qEl.innerHTML = cur.q; vis.innerHTML = '<span class="nt-qdata">' + cur.vis + '</span>'; vis.hidden = false; uEl.textContent = cur.unit; inp.value = ''; msg.textContent = ''; msg.className = 'nt-msg'; done = false; bV.disabled = false; inp.disabled = false; bN.innerHTML = n === NQ - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lblN; progres(); }
+    function start() { n = 0; good = 0; fini = false; res = []; sc.textContent = '0 / 0'; $(root, '.nt-tr-zone').hidden = false; nouveau(); }
     bV.addEventListener('click', function () {
       if (done || fini) { return; }
-      var v = num(inp.value); if (isNaN(v)) { msg.textContent = 'Entrez une valeur numérique.'; return; }
-      var ok = Math.abs(v - cur.rep) <= Math.abs(cur.rep) * 0.03; done = true; n++; if (ok) { good++; }
+      var v = num(inp.value); if (isNaN(v)) { msg.className = 'nt-msg'; msg.textContent = 'Entrez une valeur numérique.'; return; }
+      var ok = Math.abs(v - cur.rep) <= Math.abs(cur.rep) * 0.03; done = true; res[n] = ok; n++; if (ok) { good++; }
       bV.disabled = true; inp.disabled = true; sc.textContent = good + ' / ' + n;
-      msg.innerHTML = (ok ? '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' : '<span style="color:#E11D48;">Non</span>&nbsp;: la réponse est ' + nb(cur.rep, 3) + '&nbsp;' + cur.unit + '. ') + cur.expl;
+      msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko');
+      msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non</b>&nbsp;: la réponse est ' + nb(cur.rep, 3) + '&nbsp;' + cur.unit + '. ') + cur.expl; progres();
     });
     inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { bV.click(); } });
     bN.addEventListener('click', function () {
       if (fini) { start(); return; }
-      if (!done) { msg.textContent = 'Validez d\u2019abord votre réponse.'; return; }
-      if (n >= NQ) { fini = true; $(root, '.nt-tr-zone').hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + NQ + '</span> ' + bilanTxt(good / NQ); msg.textContent = ''; bN.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
+      if (!done) { msg.className = 'nt-msg'; msg.textContent = 'Validez d\u2019abord votre réponse.'; return; }
+      if (n >= NQ) { fini = true; $(root, '.nt-tr-zone').hidden = true; vis.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + NQ + '</span> ' + bilanTxt(good / NQ); msg.textContent = ''; msg.className = 'nt-msg'; progres(); bN.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
       nouveau();
     });
     start();

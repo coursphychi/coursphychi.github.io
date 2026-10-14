@@ -9,6 +9,16 @@ draft = false
 <style>
 .nt-ql-q { font-size: 1.05em; text-align: center; margin: 0.5em 0 0.7em !important; min-height: 1.6em; }
 .nt-big-score { font-size: 1.8em; font-weight: 800; color: var(--blue); margin-right: 0.3em; }
+.nt-prog { display: flex; flex-wrap: wrap; gap: 0.4em; justify-content: center; margin: 0.3em 0 0.5em; }
+.nt-prog i { width: 0.85em; height: 0.85em; border-radius: 50%; background: #E2E8F0; transition: background .25s; }
+.nt-prog i.ok { background: #22C55E; } .nt-prog i.ko { background: #F43F5E; } .nt-prog i.cur { box-shadow: 0 0 0 2.5px var(--blue); }
+.nt-qnum { text-align: center; font-size: 0.82em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); margin: 0; }
+.nt-qcard { background: linear-gradient(180deg, #FFFFFF, #F8FAFC); border: 1px solid var(--line); border-radius: 16px; padding: 0.9em 1em 1em; margin: 0.4em auto 0.6em; max-width: 620px; box-shadow: 0 6px 18px rgba(15,23,42,.06); }
+.nt-qvis { text-align: center; margin: 0.1em 0 0.3em; }
+.nt-qdata { display: inline-flex; flex-wrap: wrap; gap: 0.3em 1em; justify-content: center; align-items: center; font-family: Georgia, serif; font-size: 1.4em; color: #0F172A; }
+.nt-qdata span { white-space: nowrap; }
+.nt-msg.nt-fb { border-radius: 12px; padding: 0.6em 0.9em; text-align: left; }
+.nt-msg.nt-fb.ok { background: #F0FDF4; border-left: 4px solid #22C55E; } .nt-msg.nt-fb.ko { background: #FFF1F2; border-left: 4px solid #F43F5E; }
 .nt-lab .nt-msg { margin-top: 1em !important; }
 .nt-lab [hidden] { display: none !important; }
 .nt-tr-ans { display: flex; align-items: center; justify-content: center; gap: 0.5em; flex-wrap: wrap; margin: 0.6em 0; }
@@ -199,15 +209,7 @@ draft = false
 </div>
 </details>
 
-<div class="nt-lab nt-trainer" id="lab-calc">
-<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Entraînement</p>
-<p class="nt-lab-title">Capacité, charge, constante de temps</p>
-<p class="nt-ql-q nt-tr-q"></p>
-<div class="nt-tr-zone"><div class="nt-tr-ans"><span class="nt-champ"><label for="rc-rep">Réponse&nbsp;:</label><input id="rc-rep" type="text" inputmode="decimal"><span class="nt-u nt-tr-unit"></span></span><button type="button" class="nt-btn" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
-<p class="nt-msg" aria-live="polite"></p>
-<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
-<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
-</div>
+
 
 ## Le circuit RC série {.nt-h2}
 
@@ -369,6 +371,22 @@ $$u_C(t) = A\,\mathrm{e}^{-t/RC} + E$$</p></li>
 </div>
 
 <p class="nt-center"><a href="https://www.geogebra.org/m/w9aqhfvg" target="_blank" rel="noopener"><i class="fa-solid fa-chart-line"></i>&nbsp; Applet GeoGebra&nbsp;: la constante de temps</a></p>
+
+<div class="nt-lab nt-trainer" id="lab-calc">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Entraînement</p>
+<p class="nt-lab-title">Capacité, charge, constante de temps</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<div class="nt-qvis" aria-live="polite"></div>
+<p class="nt-ql-q nt-tr-q"></p>
+<div class="nt-tr-zone"><div class="nt-tr-ans"><span class="nt-champ"><label for="rc-rep">Réponse&nbsp;:</label><input id="rc-rep" type="text" inputmode="decimal"><span class="nt-u nt-tr-unit"></span></span><button type="button" class="nt-btn nt-btn-main" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 
 <script>
 (function () {
@@ -643,38 +661,40 @@ $$u_C(t) = A\,\mathrm{e}^{-t/RC} + E$$</p></li>
     var root = document.getElementById('lab-calc');
     if (!root) { return; }
     var qEl = $(root, '.nt-tr-q'), inp = $(root, 'input[type="text"]'), uEl = $(root, '.nt-tr-unit'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), bV = $(root, '[data-act="check"]'), bN = $(root, '[data-act="next"]'), lblN = bN.innerHTML;
-    var NQ = 6, n = 0, good = 0, cur, done = false, fini = false;
+    var NQ = 6, n = 0, good = 0, cur, done = false, fini = false, res = [], vis = $(root, '.nt-qvis'), prog = $(root, '.nt-prog'), num0 = $(root, '.nt-qnum');
+    function progres() { prog.innerHTML = Array.apply(null, Array(NQ)).map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === n - (done ? 1 : 0) && !fini ? ' cur' : '') + '"></i>'; }).join(''); num0.textContent = fini ? 'Bilan' : 'Question ' + Math.min(NQ, n + (done ? 0 : 1)) + ' sur ' + NQ; }
     var G = [
       function () { var Cu = pick([2.2, 4.7, 10, 22, 47, 100, 220, 470]), U = pick([3, 5, 6, 9, 12]), q = Cu * U;
-        return { q: 'Un condensateur de capacité ' + nb(Cu, 2) + '&nbsp;µF est chargé sous ' + U + '&nbsp;V. Quelle charge q porte son armature positive, en <b>µC</b>&nbsp;?', rep: q, unit: 'µC',
+        return { vis: '<span><i>C</i> = ' + nb(Cu, 2) + '&nbsp;µF</span><span><i>u</i><sub>C</sub> = ' + U + '&nbsp;V</span>', q: 'Un condensateur de capacité ' + nb(Cu, 2) + '&nbsp;µF est chargé sous ' + U + '&nbsp;V. Quelle charge q porte son armature positive, en <b>µC</b>&nbsp;?', rep: q, unit: 'µC',
           expl: 'q = C × u<sub>C</sub> = ' + nb(Cu, 2) + ' × 10<sup>−6</sup> × ' + U + ' = ' + nb(q, 3) + ' × 10<sup>−6</sup>&nbsp;C = ' + nb(q, 3) + '&nbsp;µC.' }; },
       function () { var Cu = pick([10, 22, 47, 100, 220]), U = pick([4, 5, 10, 12]), q = Cu * U;
-        return { q: 'L\u2019armature positive d\u2019un condensateur porte ' + nb(q, 3) + '&nbsp;µC quand la tension à ses bornes vaut ' + U + '&nbsp;V. Quelle est sa capacité, en <b>µF</b>&nbsp;?', rep: Cu, unit: 'µF',
+        return { vis: '<span><i>q</i> = ' + nb(q, 3) + '&nbsp;µC</span><span><i>u</i><sub>C</sub> = ' + U + '&nbsp;V</span>', q: 'L\u2019armature positive d\u2019un condensateur porte ' + nb(q, 3) + '&nbsp;µC quand la tension à ses bornes vaut ' + U + '&nbsp;V. Quelle est sa capacité, en <b>µF</b>&nbsp;?', rep: Cu, unit: 'µF',
           expl: 'C = q / u<sub>C</sub> = ' + nb(q, 3) + ' × 10<sup>−6</sup> / ' + U + ' = ' + nb(Cu, 2) + ' × 10<sup>−6</sup>&nbsp;F = ' + nb(Cu, 2) + '&nbsp;µF.' }; },
       function () { var Rk = pick([1, 2.2, 4.7, 10, 22, 47]), Cu = pick([10, 22, 47, 100, 220]), T = Rk * Cu;
-        return { q: 'Un circuit RC série comporte R = ' + nb(Rk, 2) + '&nbsp;k\u03a9 et C = ' + Cu + '&nbsp;µF. Calculer sa constante de temps τ, en <b>ms</b>.', rep: T, unit: 'ms',
+        return { vis: '<span><i>R</i> = ' + nb(Rk, 2) + '&nbsp;k\u03a9</span><span><i>C</i> = ' + Cu + '&nbsp;µF</span>', q: 'Un circuit RC série comporte R = ' + nb(Rk, 2) + '&nbsp;k\u03a9 et C = ' + Cu + '&nbsp;µF. Calculer sa constante de temps τ, en <b>ms</b>.', rep: T, unit: 'ms',
           expl: 'τ = R × C = ' + nb(Rk, 2) + ' × 10<sup>3</sup> × ' + Cu + ' × 10<sup>−6</sup> = ' + nb(T / 1000, 3) + '&nbsp;s = ' + nb(T, 3) + '&nbsp;ms. (Astuce&nbsp;: kΩ × µF donne des ms.)' }; },
       function () { var E = pick([5, 6, 10, 12]), ch = Math.random() < 0.5, u = ch ? E * (1 - Math.exp(-1)) : E * Math.exp(-1);
-        return { q: (ch ? 'On charge' : 'On décharge') + ' un condensateur ' + (ch ? 'initialement déchargé, sous la tension E = ' + E + '&nbsp;V' : 'initialement chargé sous E = ' + E + '&nbsp;V') + '. Quelle est la tension u<sub>C</sub> à ses bornes à l\u2019instant t = τ, en <b>V</b>&nbsp;?', rep: u, unit: 'V',
+        return { vis: '<span>' + (ch ? 'charge' : 'décharge') + '</span><span><i>E</i> = ' + E + '&nbsp;V</span><span><i>t</i> = <i>τ</i></span>', q: (ch ? 'On charge' : 'On décharge') + ' un condensateur ' + (ch ? 'initialement déchargé, sous la tension E = ' + E + '&nbsp;V' : 'initialement chargé sous E = ' + E + '&nbsp;V') + '. Quelle est la tension u<sub>C</sub> à ses bornes à l\u2019instant t = τ, en <b>V</b>&nbsp;?', rep: u, unit: 'V',
           expl: ch ? 'u<sub>C</sub>(τ) = E(1 − e<sup>−1</sup>) ≈ 0,63 × E = ' + nb(u, 3) + '&nbsp;V&nbsp;: à t = τ, la charge a parcouru 63&nbsp;% du chemin.' : 'u<sub>C</sub>(τ) = E × e<sup>−1</sup> ≈ 0,37 × E = ' + nb(u, 3) + '&nbsp;V&nbsp;: à t = τ, il reste 37&nbsp;% de la tension initiale.' }; },
       function () { var Rk = pick([10, 22, 47, 100]), Cu = pick([100, 220, 470, 1000]), T = Rk * Cu / 1000;
-        return { q: 'Au bout de combien de temps peut-on considérer qu\u2019un condensateur (C = ' + Cu + '&nbsp;µF), qui se charge à travers R = ' + Rk + '&nbsp;k\u03a9, est chargé, à mieux de 99&nbsp;%&nbsp;? Réponse en <b>s</b>.', rep: 5 * T, unit: 's',
+        return { vis: '<span><i>R</i> = ' + Rk + '&nbsp;k\u03a9</span><span><i>C</i> = ' + Cu + '&nbsp;µF</span><span>charge à 99&nbsp;%</span>', q: 'Au bout de combien de temps peut-on considérer qu\u2019un condensateur (C = ' + Cu + '&nbsp;µF), qui se charge à travers R = ' + Rk + '&nbsp;k\u03a9, est chargé, à mieux de 99&nbsp;%&nbsp;? Réponse en <b>s</b>.', rep: 5 * T, unit: 's',
           expl: 'τ = RC = ' + nb(T, 3) + '&nbsp;s. On atteint le régime permanent à mieux de 99&nbsp;% au bout de 5τ = ' + nb(5 * T, 3) + '&nbsp;s.' }; }
     ];
-    function nouveau() { cur = pick(G)(); qEl.innerHTML = cur.q; uEl.textContent = cur.unit; inp.value = ''; msg.textContent = ''; done = false; bV.disabled = false; inp.disabled = false; bN.innerHTML = n === NQ - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lblN; }
-    function start() { n = 0; good = 0; fini = false; sc.textContent = '0 / 0'; $(root, '.nt-tr-zone').hidden = false; nouveau(); }
+    function nouveau() { cur = pick(G)(); qEl.innerHTML = cur.q; vis.innerHTML = '<span class="nt-qdata">' + cur.vis + '</span>'; vis.hidden = false; uEl.textContent = cur.unit; inp.value = ''; msg.textContent = ''; msg.className = 'nt-msg'; done = false; bV.disabled = false; inp.disabled = false; bN.innerHTML = n === NQ - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lblN; progres(); }
+    function start() { n = 0; good = 0; fini = false; res = []; sc.textContent = '0 / 0'; $(root, '.nt-tr-zone').hidden = false; nouveau(); }
     bV.addEventListener('click', function () {
       if (done || fini) { return; }
-      var v = num(inp.value); if (isNaN(v)) { msg.textContent = 'Entrez une valeur numérique.'; return; }
-      var ok = Math.abs(v - cur.rep) <= Math.abs(cur.rep) * 0.025; done = true; n++; if (ok) { good++; }
+      var v = num(inp.value); if (isNaN(v)) { msg.className = 'nt-msg'; msg.textContent = 'Entrez une valeur numérique.'; return; }
+      var ok = Math.abs(v - cur.rep) <= Math.abs(cur.rep) * 0.025; done = true; res[n] = ok; n++; if (ok) { good++; }
       bV.disabled = true; inp.disabled = true; sc.textContent = good + ' / ' + n;
-      msg.innerHTML = (ok ? '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' : '<span style="color:#E11D48;">Non</span>&nbsp;: la réponse est ' + nb(cur.rep, 3) + '&nbsp;' + cur.unit + '. ') + cur.expl;
+      msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko');
+      msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non</b>&nbsp;: la réponse est ' + nb(cur.rep, 3) + '&nbsp;' + cur.unit + '. ') + cur.expl; progres();
     });
     inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { bV.click(); } });
     bN.addEventListener('click', function () {
       if (fini) { start(); return; }
-      if (!done) { msg.textContent = 'Validez d\u2019abord votre réponse.'; return; }
-      if (n >= NQ) { fini = true; $(root, '.nt-tr-zone').hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + NQ + '</span> ' + bilanTxt(good / NQ); msg.textContent = ''; bN.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
+      if (!done) { msg.className = 'nt-msg'; msg.textContent = 'Validez d\u2019abord votre réponse.'; return; }
+      if (n >= NQ) { fini = true; $(root, '.nt-tr-zone').hidden = true; vis.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + NQ + '</span> ' + bilanTxt(good / NQ); msg.textContent = ''; msg.className = 'nt-msg'; progres(); bN.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
       nouveau();
     });
     start();
