@@ -11,6 +11,17 @@ hidden="true"
 .nt-ql-q { font-size: 1.08em; text-align: center; margin: 0.5em 0 0.7em !important; min-height: 1.6em; }
 .nt-ql-btns { display: flex; flex-wrap: wrap; gap: 0.45em; justify-content: center; }
 .nt-big-score { font-size: 1.8em; font-weight: 800; color: var(--blue); margin-right: 0.3em; }
+.nt-prog { display: flex; flex-wrap: wrap; gap: 0.4em; justify-content: center; margin: 0.3em 0 0.5em; }
+.nt-prog i { width: 0.85em; height: 0.85em; border-radius: 50%; background: #E2E8F0; transition: background .25s; }
+.nt-prog i.ok { background: #22C55E; } .nt-prog i.ko { background: #F43F5E; } .nt-prog i.cur { box-shadow: 0 0 0 2.5px var(--blue); }
+.nt-qnum { text-align: center; font-size: 0.82em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); margin: 0; }
+.nt-qcard { background: linear-gradient(180deg, #FFFFFF, #F8FAFC); border: 1px solid var(--line); border-radius: 16px; padding: 0.9em 1em 1em; margin: 0.4em auto 0.6em; max-width: 620px; box-shadow: 0 6px 18px rgba(15,23,42,.06); }
+.nt-ql-btns .nt-choix { padding: 0.6em 1.1em; border-radius: 12px; font-size: 1em; transition: transform .12s, box-shadow .12s; }
+.nt-ql-btns .nt-choix:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,.18); }
+.nt-choix-ok { background: #DCFCE7 !important; border-color: #16A34A !important; color: #166534 !important; }
+.nt-choix-ko { background: #FFE4E6 !important; border-color: #E11D48 !important; color: #9F1239 !important; }
+.nt-msg.nt-fb { border-radius: 12px; padding: 0.6em 0.9em; text-align: left; }
+.nt-msg.nt-fb.ok { background: #F0FDF4; border-left: 4px solid #22C55E; } .nt-msg.nt-fb.ko { background: #FFF1F2; border-left: 4px solid #F43F5E; }
 .nt-quizlab .nt-msg, .nt-lab .nt-msg { margin-top: 1em !important; }
 .nt-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.8em; margin: 1em 0; }
 .nt-figs figure { margin: 0; text-align: center; }
@@ -101,8 +112,12 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
 <div class="nt-lab nt-quizlab" id="quiz-echelle">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
 <p class="nt-lab-title">Microscopique ou macroscopique&nbsp;?</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
 <p class="nt-ql-q"></p>
 <div class="nt-ql-btns"></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
@@ -175,8 +190,12 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
 <div class="nt-lab nt-quizlab" id="quiz-melange">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
 <p class="nt-lab-title">Corps pur, mélange homogène ou mélange hétérogène&nbsp;?</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
 <p class="nt-ql-q"></p>
 <div class="nt-ql-btns"></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
@@ -554,37 +573,43 @@ Pour «&nbsp;voir&nbsp;» les atomes, on utilise un faisceau d'électrons, dans 
       ['Un zeste d\u2019orange semble sec&nbsp;: contient-il quand même de l\u2019eau&nbsp;?', 0, 'On le frotte sur un peu de sulfate de cuivre anhydre&nbsp;: s\u2019il bleuit, il contient de l\u2019eau.']
     ] }
   };
-  $$(document, '.nt-quizlab').forEach(function (root) {
+  $$(document, '.nt-quizlab').forEach(function (root) {   /* interface : numéro de question, pastilles de progression, carte, retour coloré */
     var D = QUIZ[root.id]; if (!D) { return; }
-    var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), next = $(root, '[data-act="next"]'), lbl = next.innerHTML;
-    var order = [], k = 0, good = 0, answered = false, fini = false;
+    var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), next = $(root, '[data-act="next"]'), prog = $(root, '.nt-prog'), num0 = $(root, '.nt-qnum'), lbl = next.innerHTML;
+    var order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+    function progres() {
+      prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join('');
+      num0.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length;
+    }
     D.choices.forEach(function (c, i) {
-      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn'; b.textContent = c;
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.textContent = c;
       b.addEventListener('click', function () {
         if (answered || fini) { return; }
-        answered = true; var q = D.q[order[k]];
-        if (i === q[1]) { good++; b.classList.add('nt-btn-main'); msg.innerHTML = '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' + q[2]; }
-        else { b.style.borderColor = '#E11D48'; b.style.color = '#E11D48'; msg.innerHTML = '<span style="color:#E11D48;">Non</span>&nbsp;: la bonne réponse est «&nbsp;' + D.choices[q[1]] + '&nbsp;». ' + q[2]; }
-        sc.textContent = good + ' / ' + (k + 1);
+        answered = true; var q = D.q[order[k]], ok = i === q[1]; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[q[1]].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko');
+        msg.innerHTML = ok ? '<b>Bravo&nbsp;!</b> ' + q[2] : '<b>Non</b>&nbsp;: la bonne réponse est «&nbsp;' + D.choices[q[1]] + '&nbsp;». ' + q[2];
+        sc.textContent = good + ' / ' + (k + 1); progres();
         if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([msg]); }
       });
       bx.appendChild(b);
     });
     function show() {
       answered = false; var q = D.q[order[k]];
-      qEl.innerHTML = q[0]; msg.textContent = '';
-      $$(bx, 'button').forEach(function (b) { b.classList.remove('nt-btn-main'); b.style.borderColor = ''; b.style.color = ''; });
+      qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg';
+      $$(bx, 'button').forEach(function (b) { b.classList.remove('nt-choix-ok', 'nt-choix-ko'); });
       next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl;
+      progres();
       if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([qEl]); }
     }
-    function start() { order = shuffle(D.q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+    function start() { order = shuffle(D.q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
     next.addEventListener('click', function () {
       if (fini) { start(); return; }
-      if (!answered) { msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+      if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
       k++;
       if (k >= order.length) {
         fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilanTxt(good / order.length);
-        msg.textContent = ''; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return;
+        msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return;
       }
       show();
     });
