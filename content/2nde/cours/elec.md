@@ -15,6 +15,13 @@ hidden = true
 .nt-prog i { width: 0.85em; height: 0.85em; border-radius: 50%; background: #E2E8F0; transition: background .25s; }
 .nt-prog i.ok { background: #22C55E; } .nt-prog i.ko { background: #F43F5E; } .nt-prog i.cur { box-shadow: 0 0 0 2.5px var(--blue); }
 .nt-qnum { text-align: center; font-size: 0.82em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); margin: 0; }
+.nt-qcard-large { max-width: 720px; }
+.nt-qcard .nt-tr-svg { margin: 0 0 0.5em; }
+.nt-tr-ans { display: flex; align-items: center; justify-content: center; gap: 0.5em; flex-wrap: wrap; margin: 0.6em 0; }
+.nt-champ { display: inline-flex; align-items: center; gap: 0.35em; white-space: nowrap; margin: 0 0.7em; }
+.nt-champ label { display: inline; margin: 0; font-weight: 600; }
+.nt-champ input[type="text"] { width: 5.5em !important; min-width: 0; margin: 0; padding: 0.25em 0.5em; text-align: right; font: inherit; border: 1.5px solid var(--line); border-radius: 8px; }
+.nt-champ .nt-u { color: var(--slate); }
 .nt-qcard { background: linear-gradient(180deg, #FFFFFF, #F8FAFC); border: 1px solid var(--line); border-radius: 16px; padding: 0.9em 1em 1em; margin: 0.4em auto 0.6em; max-width: 620px; box-shadow: 0 6px 18px rgba(15,23,42,.06); }
 .nt-ql-btns .nt-choix { padding: 0.6em 1.1em; border-radius: 12px; font-size: 1em; transition: transform .12s, box-shadow .12s; }
 .nt-ql-btns .nt-choix:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,.18); }
@@ -238,9 +245,13 @@ hidden = true
 <div class="nt-lab nt-trainer" id="lab-noeuds">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Entraînement</p>
 <p class="nt-lab-title">Appliquer la loi des nœuds</p>
-<div class="nt-tr-zone"><div class="nt-svgbox nt-tr-svg"></div></div>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard nt-qcard-large">
+<div class="nt-svgbox nt-tr-svg"></div>
 <p class="nt-ql-q nt-tr-q"></p>
-<div class="nt-tr-zone"><div class="nt-tr-ans"><label>Réponse&nbsp;: <input type="text" inputmode="decimal" aria-label="Votre réponse"></label><span class="nt-tr-unit"></span><button type="button" class="nt-btn" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+<div class="nt-tr-zone"><div class="nt-tr-ans"><span class="nt-champ"><label for="kir-noeuds">Réponse&nbsp;:</label><input id="kir-noeuds" type="text" inputmode="decimal"><span class="nt-u nt-tr-unit"></span></span><button type="button" class="nt-btn nt-btn-main" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Circuit suivant</button></div>
@@ -265,9 +276,13 @@ hidden = true
 <div class="nt-lab nt-trainer" id="lab-mailles">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Entraînement</p>
 <p class="nt-lab-title">Appliquer la loi des mailles</p>
-<div class="nt-tr-zone"><div class="nt-svgbox nt-tr-svg"></div></div>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard nt-qcard-large">
+<div class="nt-svgbox nt-tr-svg"></div>
 <p class="nt-ql-q nt-tr-q"></p>
-<div class="nt-tr-zone"><div class="nt-tr-ans"><label>Réponse&nbsp;: <input type="text" inputmode="decimal" aria-label="Votre réponse"></label><span class="nt-tr-unit"></span><button type="button" class="nt-btn" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+<div class="nt-tr-zone"><div class="nt-tr-ans"><span class="nt-champ"><label for="kir-mailles">Réponse&nbsp;:</label><input id="kir-mailles" type="text" inputmode="decimal"><span class="nt-u nt-tr-unit"></span></span><button type="button" class="nt-btn nt-btn-main" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Circuit suivant</button></div>
@@ -826,25 +841,27 @@ hidden = true
       }
     ]
   };
-  ['noeuds', 'mailles'].forEach(function (type) {
+  ['noeuds', 'mailles'].forEach(function (type) {   /* interface : numéro de question, pastilles, carte (circuit, question, réponse), retour coloré */
     var root = document.getElementById('lab-' + type);
     if (!root) { return; }
-    var box = $(root, '.nt-tr-svg'), qEl = $(root, '.nt-tr-q'), inp = $(root, 'input[type="text"]'), uEl = $(root, '.nt-tr-unit'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score');
-    var bV = $(root, '[data-act="check"]'), bN = $(root, '[data-act="next"]'), lblN = bN.innerHTML, NQ = 6, n = 0, good = 0, cur = null, done = false, fini = false;
-    function nouveau() { cur = pick(PB[type])(); box.innerHTML = cur.svg; qEl.innerHTML = cur.q; uEl.textContent = cur.unit; inp.value = ''; msg.textContent = ''; done = false; bV.disabled = false; inp.disabled = false; bN.innerHTML = n === NQ - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lblN; }
-    function start() { n = 0; good = 0; fini = false; sc.textContent = '0 / 0'; $(root, '.nt-tr-zone').hidden = false; nouveau(); }
+    var box = $(root, '.nt-tr-svg'), qEl = $(root, '.nt-tr-q'), inp = $(root, 'input[type="text"]'), uEl = $(root, '.nt-tr-unit'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), zone = $(root, '.nt-tr-zone'), prog = $(root, '.nt-prog'), num0 = $(root, '.nt-qnum');
+    var bV = $(root, '[data-act="check"]'), bN = $(root, '[data-act="next"]'), lblN = bN.innerHTML, NQ = 6, n = 0, good = 0, cur = null, done = false, fini = false, res = [];
+    function progres() { prog.innerHTML = Array.apply(null, Array(NQ)).map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === n - (done ? 1 : 0) && !fini ? ' cur' : '') + '"></i>'; }).join(''); num0.textContent = fini ? 'Bilan' : 'Question ' + Math.min(NQ, n + (done ? 0 : 1)) + ' sur ' + NQ; }
+    function nouveau() { cur = pick(PB[type])(); box.innerHTML = cur.svg; box.hidden = false; qEl.innerHTML = cur.q; uEl.textContent = cur.unit; inp.value = ''; msg.textContent = ''; msg.className = 'nt-msg'; done = false; bV.disabled = false; inp.disabled = false; bN.innerHTML = n === NQ - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lblN; progres(); }
+    function start() { n = 0; good = 0; fini = false; res = []; sc.textContent = '0 / 0'; zone.hidden = false; nouveau(); }
     bV.addEventListener('click', function () {
       if (done || fini) { return; }
-      var v = num(inp.value); if (isNaN(v)) { msg.textContent = 'Entrez une valeur numérique.'; return; }
-      var ok = Math.abs(v - cur.rep) <= Math.max(0.051, Math.abs(cur.rep) * 0.01); done = true; n++; if (ok) { good++; }
+      var v = num(inp.value); if (isNaN(v)) { msg.className = 'nt-msg'; msg.textContent = 'Entrez une valeur numérique.'; return; }
+      var ok = Math.abs(v - cur.rep) <= Math.max(0.051, Math.abs(cur.rep) * 0.01); done = true; res[n] = ok; n++; if (ok) { good++; }
       bV.disabled = true; inp.disabled = true; sc.textContent = good + ' / ' + n;
-      msg.innerHTML = (ok ? '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' : '<span style="color:#E11D48;">Non</span>&nbsp;: la réponse est ' + fr(cur.rep, cur.unit === 'V' ? 1 : 0) + '&nbsp;' + cur.unit + '. ') + cur.expl;
+      msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko');
+      msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non</b>&nbsp;: la réponse est ' + fr(cur.rep, cur.unit === 'V' ? 1 : 0) + '&nbsp;' + cur.unit + '. ') + cur.expl; progres();
     });
     inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { bV.click(); } });
     bN.addEventListener('click', function () {
       if (fini) { start(); return; }
-      if (!done) { msg.textContent = 'Validez d\u2019abord votre réponse.'; return; }
-      if (n >= NQ) { fini = true; $(root, '.nt-tr-zone').hidden = true; box.innerHTML = ''; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + NQ + '</span> ' + bilanTxt(good / NQ); msg.textContent = ''; bN.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
+      if (!done) { msg.className = 'nt-msg'; msg.textContent = 'Validez d\u2019abord votre réponse.'; return; }
+      if (n >= NQ) { fini = true; zone.hidden = true; box.hidden = true; box.innerHTML = ''; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + NQ + '</span> ' + bilanTxt(good / NQ); msg.textContent = ''; msg.className = 'nt-msg'; bN.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
       nouveau();
     });
     start();
