@@ -11,25 +11,40 @@ hidden = true
 .nt-ql-q { font-size: 1.05em; text-align: center; margin: 0.5em 0 0.7em !important; min-height: 1.6em; }
 .nt-ql-btns { display: flex; flex-wrap: wrap; gap: 0.45em; justify-content: center; }
 .nt-big-score { font-size: 1.8em; font-weight: 800; color: var(--blue); margin-right: 0.3em; }
+.nt-prog { display: flex; flex-wrap: wrap; gap: 0.4em; justify-content: center; margin: 0.3em 0 0.5em; }
+.nt-prog i { width: 0.85em; height: 0.85em; border-radius: 50%; background: #E2E8F0; transition: background .25s; }
+.nt-prog i.ok { background: #22C55E; } .nt-prog i.ko { background: #F43F5E; } .nt-prog i.cur { box-shadow: 0 0 0 2.5px var(--blue); }
+.nt-qnum { text-align: center; font-size: 0.82em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); margin: 0; }
+.nt-qcard { background: linear-gradient(180deg, #FFFFFF, #F8FAFC); border: 1px solid var(--line); border-radius: 16px; padding: 0.9em 1em 1em; margin: 0.4em auto 0.6em; max-width: 620px; box-shadow: 0 6px 18px rgba(15,23,42,.06); }
+.nt-ql-btns .nt-choix { padding: 0.6em 1.1em; border-radius: 12px; font-size: 1em; transition: transform .12s, box-shadow .12s; }
+.nt-ql-btns .nt-choix:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,.18); }
+.nt-choix-ok { background: #DCFCE7 !important; border-color: #16A34A !important; color: #166534 !important; }
+.nt-choix-ko { background: #FFE4E6 !important; border-color: #E11D48 !important; color: #9F1239 !important; }
+.nt-msg.nt-fb { border-radius: 12px; padding: 0.6em 0.9em; text-align: left; }
+.nt-msg.nt-fb.ok { background: #F0FDF4; border-left: 4px solid #22C55E; } .nt-msg.nt-fb.ko { background: #FFF1F2; border-left: 4px solid #F43F5E; }
 .nt-lab .nt-msg { margin-top: 1em !important; }
 .nt-lab [hidden] { display: none !important; }
 .nt-svgbox { margin: 0.6em 0; }
 .nt-svgbox svg { display: block; width: 100%; height: auto; }
 .nt-tr-ans { display: flex; align-items: center; justify-content: center; gap: 0.5em; flex-wrap: wrap; margin: 0.6em 0; }
 .nt-tr-ans input { font: inherit; width: 7em; padding: 0.3em 0.6em; border: 1.5px solid var(--line); border-radius: 8px; }
-.nt-multi-ctrl { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.6em 1em; margin: 0.5em 0; }
-.nt-multi-ctrl fieldset { border: 1.5px solid var(--fc); background: var(--fb); border-radius: 12px; padding: 0.5em 0.9em 0.7em; margin: 0; }
-.nt-multi-ctrl legend { font-size: 0.85em; font-weight: 700; color: var(--fc); padding: 0.1em 0.6em; background: #fff; border: 1.5px solid var(--fc); border-radius: 999px; }
-.nt-multi-ctrl fieldset:nth-child(1) { --fc: #B45309; --fb: #FFFBEB; }
-.nt-multi-ctrl fieldset:nth-child(2) { --fc: #BE123C; --fb: #FFF1F2; }
-.nt-multi-ctrl fieldset:nth-child(3) { --fc: #1D4ED8; --fb: #EFF6FF; }
-.nt-multi-ctrl label { position: relative; display: flex; align-items: center; gap: 0.55em; font-size: 0.92em; padding: 0.42em 0.75em; margin: 0.3em 0; border-radius: 10px; background: #fff; border: 1.5px solid color-mix(in srgb, var(--fc) 22%, #fff); cursor: pointer; transition: border-color .15s, background .15s, color .15s, box-shadow .15s; }
-.nt-multi-ctrl label:hover { border-color: var(--fc); box-shadow: 0 2px 8px color-mix(in srgb, var(--fc) 18%, transparent); }
-.nt-multi-ctrl input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
-.nt-multi-ctrl label::before { content: ""; flex: none; width: 15px; height: 15px; border-radius: 50%; border: 2px solid var(--fc); background: #fff; box-sizing: border-box; transition: all .15s; }
-.nt-multi-ctrl label:has(input:checked) { background: var(--fc); border-color: var(--fc); color: #fff; font-weight: 600; box-shadow: 0 3px 10px color-mix(in srgb, var(--fc) 30%, transparent); }
-.nt-multi-ctrl label:has(input:checked)::before { border-color: #fff; background: var(--fc); box-shadow: inset 0 0 0 3px #fff; }
-.nt-multi-ctrl label:has(input:focus-visible) { outline: 3px solid color-mix(in srgb, var(--fc) 45%, transparent); outline-offset: 2px; }
+.nt-multi-ctrl { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.8em; margin: 0.8em 0 0.4em; align-items: stretch; }
+.nt-multi-ctrl fieldset { border: 1px solid var(--line); background: #fff; border-radius: 14px; padding: 0.7em 0.9em 0.8em; margin: 0; box-shadow: 0 4px 14px rgba(15,23,42,.05); min-width: 0; }
+.nt-multi-ctrl legend { float: left; width: 100%; display: flex; align-items: center; gap: 0.5em; font-size: 0.86em; font-weight: 700; color: #1E293B; padding: 0; margin: 0 0 0.55em; }
+.nt-multi-ctrl legend + * { clear: both; }
+.nt-step { display: inline-grid; place-items: center; width: 1.6em; height: 1.6em; border-radius: 50%; background: var(--fc); color: #fff; font-size: 0.85em; flex: none; }
+.nt-optnote { font-size: 0.8em; color: var(--slate); margin: -0.35em 0 0.45em !important; }
+.nt-optrow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35em; margin: 0.25em 0; }
+.nt-optcol { display: flex; flex-direction: column; gap: 0.35em; }
+.nt-optcat { width: 5.2em; font-size: 0.78em; color: var(--slate); }
+.nt-opt { position: relative; display: inline-flex; align-items: center; cursor: pointer; margin: 0; }
+.nt-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.nt-opt span { display: inline-flex; align-items: center; gap: 0.4em; padding: 0.32em 0.8em; border-radius: 999px; border: 1.5px solid #E2E8F0; background: #F8FAFC; font-size: 0.9em; line-height: 1.25; transition: border-color .15s, background .15s, box-shadow .15s; }
+.nt-optcol .nt-opt span { width: 100%; border-radius: 10px; }
+.nt-opt:hover span { border-color: color-mix(in srgb, var(--fc) 55%, #fff); }
+.nt-opt input:checked + span { background: var(--fb); border-color: var(--fc); color: #0F172A; font-weight: 600; box-shadow: 0 2px 8px color-mix(in srgb, var(--fc) 22%, transparent); }
+.nt-opt input:checked + span::before { content: "\2713"; color: var(--fc); font-weight: 800; }
+.nt-opt input:focus-visible + span { outline: 3px solid color-mix(in srgb, var(--fc) 40%, transparent); outline-offset: 2px; }
 .nt-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.8em; margin: 1em 0; }
 .nt-figs figure { margin: 0; text-align: center; }
 .nt-figs img { width: 100%; border-radius: 10px; }
@@ -157,8 +172,12 @@ hidden = true
 <div class="nt-lab nt-quizlab" id="quiz-multi">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
 <p class="nt-lab-title">Les branchements du multimètre</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
 <p class="nt-ql-q"></p>
 <div class="nt-ql-btns"></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
@@ -170,23 +189,29 @@ hidden = true
 <p class="nt-note">Le circuit&nbsp;: un générateur de 6,0&nbsp;V, un conducteur ohmique et une lampe. Mesurez l'intensité dans la lampe, la tension à ses bornes, puis sa résistance. Testez aussi les mauvais branchements, pour voir ce qu'ils provoquent.</p>
 <div class="nt-svgbox nt-multi-svg"></div>
 <div class="nt-multi-ctrl">
-<fieldset><legend>Position du sélecteur sur le multimètre</legend>
-<label><input type="radio" name="msel" value="V20" checked> V, calibre 20&nbsp;V</label>
-<label><input type="radio" name="msel" value="V2"> V, calibre 2&nbsp;V</label>
-<label><input type="radio" name="msel" value="A10"> A, calibre 10&nbsp;A</label>
-<label><input type="radio" name="msel" value="A200"> A, calibre 200&nbsp;mA</label>
-<label><input type="radio" name="msel" value="O200"> &Omega;, calibre 200&nbsp;&Omega;</label>
-<label><input type="radio" name="msel" value="O2k"> &Omega;, calibre 2&nbsp;k&Omega;</label>
+<fieldset style="--fc:#B45309; --fb:#FEF3C7;"><legend><span class="nt-step">1</span>Position du sélecteur</legend>
+<div class="nt-optrow"><span class="nt-optcat">tension</span>
+<label class="nt-opt"><input type="radio" name="msel" value="V20" checked><span>20&nbsp;V</span></label>
+<label class="nt-opt"><input type="radio" name="msel" value="V2"><span>2&nbsp;V</span></label></div>
+<div class="nt-optrow"><span class="nt-optcat">intensité</span>
+<label class="nt-opt"><input type="radio" name="msel" value="A10"><span>10&nbsp;A</span></label>
+<label class="nt-opt"><input type="radio" name="msel" value="A200"><span>200&nbsp;mA</span></label></div>
+<div class="nt-optrow"><span class="nt-optcat">résistance</span>
+<label class="nt-opt"><input type="radio" name="msel" value="O200"><span>200&nbsp;&Omega;</span></label>
+<label class="nt-opt"><input type="radio" name="msel" value="O2k"><span>2&nbsp;k&Omega;</span></label></div>
 </fieldset>
-<fieldset><legend>Borne du fil rouge (l'autre fil est sur COM)</legend>
-<label><input type="radio" name="mbor" value="VO" checked> borne V&nbsp;&Omega;</label>
-<label><input type="radio" name="mbor" value="mA"> borne mA</label>
-<label><input type="radio" name="mbor" value="10A"> borne 10&nbsp;A</label>
+<fieldset style="--fc:#BE123C; --fb:#FFE4E6;"><legend><span class="nt-step">2</span>Borne du fil rouge</legend>
+<p class="nt-optnote">l'autre fil est sur COM</p>
+<div class="nt-optrow">
+<label class="nt-opt"><input type="radio" name="mbor" value="VO" checked><span>V&nbsp;&Omega;</span></label>
+<label class="nt-opt"><input type="radio" name="mbor" value="mA"><span>mA</span></label>
+<label class="nt-opt"><input type="radio" name="mbor" value="10A"><span>10&nbsp;A</span></label></div>
 </fieldset>
-<fieldset><legend>Branchement de l'appareil</legend>
-<label><input type="radio" name="mpos" value="deriv" checked> en dérivation aux bornes de la lampe</label>
-<label><input type="radio" name="mpos" value="serie"> en série dans le circuit</label>
-<label><input type="radio" name="mpos" value="hors"> aux bornes de la lampe sortie du circuit</label>
+<fieldset style="--fc:#1D4ED8; --fb:#DBEAFE;"><legend><span class="nt-step">3</span>Branchement de l'appareil</legend>
+<div class="nt-optcol">
+<label class="nt-opt"><input type="radio" name="mpos" value="deriv" checked><span>en dérivation, aux bornes de la lampe</span></label>
+<label class="nt-opt"><input type="radio" name="mpos" value="serie"><span>en série dans le circuit</span></label>
+<label class="nt-opt"><input type="radio" name="mpos" value="hors"><span>aux bornes de la lampe sortie du circuit</span></label></div>
 </fieldset>
 </div>
 <p class="nt-msg" aria-live="polite"></p>
@@ -570,30 +595,34 @@ hidden = true
       ['Vers quelle borne du voltmètre pointe la flèche qui représente la tension mesurée&nbsp;?', ['la borne V', 'la borne COM'], 0, 'Par convention, la flèche de tension pointe vers la borne V du voltmètre.']
     ]
   };
-  $$(document, '.nt-quizlab').forEach(function (root) {
+  $$(document, '.nt-quizlab').forEach(function (root) {   /* interface : numéro de question, pastilles de progression, carte, retour coloré */
     var D = QUIZ[root.id]; if (!D) { return; }
-    var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), next = $(root, '[data-act="next"]'), lbl = next.innerHTML;
-    var order = [], k = 0, good = 0, answered = false, fini = false;
+    var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), next = $(root, '[data-act="next"]'), prog = $(root, '.nt-prog'), num0 = $(root, '.nt-qnum'), lbl = next.innerHTML;
+    var order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+    function progres() {
+      prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join('');
+      num0.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length;
+    }
     function show() {
-      answered = false; var q = D[order[k]]; qEl.innerHTML = q[0]; msg.textContent = ''; bx.innerHTML = '';
+      answered = false; var q = D[order[k]]; qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
       q[1].forEach(function (cTxt, i) {
-        var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn'; b.innerHTML = cTxt;
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = cTxt;
         b.addEventListener('click', function () {
-          if (answered) { return; } answered = true;
-          if (i === q[2]) { good++; b.classList.add('nt-btn-main'); msg.innerHTML = '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' + q[3]; }
-          else { b.style.borderColor = '#E11D48'; b.style.color = '#E11D48'; msg.innerHTML = '<span style="color:#E11D48;">Non.</span> ' + q[3]; }
-          sc.textContent = good + ' / ' + (k + 1);
+          if (answered) { return; } answered = true; var ok = i === q[2]; res[k] = ok; if (ok) { good++; }
+          b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[q[2]].classList.add('nt-choix-ok'); }
+          msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[3];
+          sc.textContent = good + ' / ' + (k + 1); progres();
         });
         bx.appendChild(b);
       });
-      next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl;
+      next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
     }
-    function start() { order = shuffle(D.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+    function start() { order = shuffle(D.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
     next.addEventListener('click', function () {
       if (fini) { start(); return; }
-      if (!answered) { msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+      if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
       k++;
-      if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilanTxt(good / order.length); msg.textContent = ''; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
+      if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilanTxt(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
       show();
     });
     start();
@@ -649,6 +678,9 @@ hidden = true
       else { r.aff = f === 'A' ? lit(Icc, cal, u) : lit(0.004, cal, u); r.txt = '<b>Court-circuit&nbsp;!</b> Par la borne A, l\u2019appareil est presque un fil&nbsp;: il court-circuite la lampe, qui s\u2019éteint, et une intensité élevée (' + fr(Icc, 2) + '&nbsp;A) le traverse. Un ampèremètre se branche <b>en série</b>.'; }
       return r;
     }
+    function gauche(svg, x, y) {   /* appareil vertical : étiquettes V et COM passées à gauche (CI.meter les met à droite, côté où arrivent les cordons) */
+      return svg.replace("x='" + (x + 10) + "' y='" + (y - 16) + "'", "x='" + (x - 9) + "' y='" + (y - 16) + "'").replace("x='" + (x + 10) + "' y='" + (y + 24) + "'", "x='" + (x - 9) + "' y='" + (y + 24) + "'").replace(/text-anchor='start'/g, "text-anchor='end'");
+    }
     function dessin(sel, bor, pos, r) {
       var s = SEL[sel], L = s[0] === 'O' ? '\u03a9' : s[0], b = '', inSerie = pos === 'serie', hors = pos === 'hors', ap;   /* ap : position du symbole de l'appareil dans le circuit */
       /* ---- circuit : générateur à gauche, conducteur ohmique en haut, lampe à droite ---- */
@@ -656,13 +688,13 @@ hidden = true
         b += CI.wire([[50, 60], [250, 60], [250, 210], [50, 210], [50, 60]]);
         b += CI.gen(50, 135, 'v', 't') + CI.res(150, 60, 'h') + CI.lamp(250, 135, r.lampe);
         if (inSerie) { b += CI.meter(150, 210, L, 'r'); ap = [150, 210]; }
-        else { b += CI.wire([[250, 95], [310, 95], [310, 175], [250, 175]]) + CI.node(250, 95) + CI.node(250, 175) + CI.meter(310, 135, L, 't'); ap = [310, 135]; }
+        else { b += CI.wire([[250, 95], [310, 95], [310, 175], [250, 175]]) + CI.node(250, 95) + CI.node(250, 175) + gauche(CI.meter(310, 135, L, 't'), 310, 135); ap = [310, 135]; }
       } else {
-        b += CI.lamp(180, 135, 0) + CI.wire([[180, 121], [180, 95], [260, 95], [260, 175], [180, 175], [180, 149]]) + CI.meter(260, 135, L, 't') + CI.text(180, 210, 'lampe sortie du circuit', '#64748B', 11.5);
+        b += CI.lamp(180, 135, 0) + CI.wire([[180, 121], [180, 95], [260, 95], [260, 175], [180, 175], [180, 149]]) + gauche(CI.meter(260, 135, L, 't'), 260, 135) + CI.text(180, 210, 'lampe sortie du circuit', '#64748B', 11.5);
         ap = [260, 135];
       }
       /* ---- le multimètre ---- */
-      var mx = 360, mw = 190, cxm = mx + mw / 2;
+      var mx = 410, mw = 190, cxm = mx + mw / 2;
       b += "<defs><linearGradient id='gMm' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#FCD34D'/><stop offset='1' stop-color='#F59E0B'/></linearGradient>"
          + "<radialGradient id='gKnob' cx='.4' cy='.35' r='.7'><stop offset='0' stop-color='#64748B'/><stop offset='1' stop-color='#1E293B'/></radialGradient></defs>";
       b += "<rect x='" + mx + "' y='8' width='" + mw + "' height='272' rx='22' fill='url(#gMm)' stroke='#B45309' stroke-width='1.5'/>";
@@ -690,11 +722,24 @@ hidden = true
         b += "<circle cx='" + x + "' cy='232' r='4' fill='" + (used ? '#F8FAFC' : '#475569') + "'/>";
         b += "<text x='" + x + "' y='259' font-size='10' text-anchor='middle' fill='#E2E8F0' font-family='system-ui, sans-serif' font-weight='700'>" + p[1] + "</text>";
       });
-      /* câbles : de la borne utilisée et de COM vers l'appareil dans le circuit */
-      var xr = cxm + BOR.filter(function (p) { return p[0] === bor; })[0][2], xc = cxm + 20;
-      b += "<path d='M" + xr + ",232 C" + xr + ",286 " + (ap[0] + 40) + "," + Math.min(282, ap[1] + 110) + " " + (ap[0] + 9) + "," + (ap[1] + 9) + "' fill='none' stroke='#DC2626' stroke-width='2' stroke-opacity='.55'/>";
-      b += "<path d='M" + xc + ",232 C" + xc + ",288 " + (ap[0] + 10) + "," + Math.min(286, ap[1] + 120) + " " + (ap[0] - 9) + "," + (ap[1] + 9) + "' fill='none' stroke='#0F172A' stroke-width='2' stroke-opacity='.45'/>";
-      return CI.svg(560, 290, b, 'Le circuit, l\u2019appareil de mesure branché, et le multimètre avec son écran, son sélecteur rotatif et ses bornes', 'nt-svg');
+      /* cordons : de la borne utilisée et de COM jusqu'aux bornes de l'appareil dans le circuit (cercle de rayon 13) ;
+         appareil vertical (voltmètre, ohmmètre) : borne V en haut, COM en bas ; appareil horizontal (ampèremètre) : borne A à droite, COM à gauche */
+      var xr = cxm + BOR.filter(function (p) { return p[0] === bor; })[0][2], xc = cxm + 20, vertical = !inSerie, pr, pc;
+      /* cordons souples : une seule courbe continue, sans coude ; ils passent sous le multimètre (bas du boîtier : y = 280)
+         appareil vertical : le rouge arrive sur la borne du haut par au-dessus, le noir sur celle du bas par en dessous ; appareil horizontal : un simple arc */
+      function fil(d, col, op) { return "<path d='" + d + "' fill='none' stroke='" + col + "' stroke-width='2.2' stroke-opacity='" + op + "' stroke-linecap='round'/>"; }
+      if (vertical) {   /* départ vertical, arc en U sous le boîtier, remontée dans l'espace libre, puis arrivée en biais sur la borne (sans longer les fils du circuit) */
+        pr = [ap[0] + 2, ap[1] - 13]; pc = [ap[0] + 2, ap[1] + 13];
+        var xg = mx - 30, xn = mx - 54;
+        b += fil('M' + xr + ',232 L' + xr + ',286 C' + xr + ',326 ' + xg + ',326 ' + xg + ',288 C' + xg + ',' + (pr[1] + 10) + ' ' + (pr[0] + 30) + ',' + (pr[1] - 30) + ' ' + pr[0] + ',' + pr[1], '#DC2626', 0.65);
+        b += fil('M' + xc + ',232 L' + xc + ',286 C' + xc + ',318 ' + xn + ',318 ' + xn + ',288 C' + xn + ',' + (pc[1] + 60) + ' ' + (pc[0] + 30) + ',' + (pc[1] + 30) + ' ' + pc[0] + ',' + pc[1], '#0F172A', 0.55);
+      } else {
+        pr = [ap[0] + 13, ap[1] + 2]; pc = [ap[0] - 13, ap[1] + 2];
+        b += fil('M' + xr + ',232 L' + xr + ',286 C' + xr + ',324 ' + pr[0] + ',330 ' + pr[0] + ',' + pr[1], '#DC2626', 0.65);
+        b += fil('M' + xc + ',232 L' + xc + ',286 C' + xc + ',318 ' + pc[0] + ',322 ' + pc[0] + ',' + pc[1], '#0F172A', 0.55);
+      }
+      b += "<circle cx='" + pr[0] + "' cy='" + pr[1] + "' r='3.2' fill='#DC2626'/><circle cx='" + pc[0] + "' cy='" + pc[1] + "' r='3.2' fill='#0F172A'/>";   /* fiches */
+      return CI.svg(610, 324, b, 'Le circuit, l\u2019appareil de mesure branché, et le multimètre avec son écran, son sélecteur rotatif et ses bornes', 'nt-svg');
     }
     function maj() {
       var sel = $(root, '[name="msel"]:checked').value, bor = $(root, '[name="mbor"]:checked').value, pos = $(root, '[name="mpos"]:checked').value;

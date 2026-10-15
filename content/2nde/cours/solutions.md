@@ -11,6 +11,20 @@ hidden = "true"
 .nt-ql-q { font-size: 1.05em; text-align: center; margin: 0.5em 0 0.7em !important; min-height: 1.6em; }
 .nt-ql-btns { display: flex; flex-wrap: wrap; gap: 0.45em; justify-content: center; }
 .nt-big-score { font-size: 1.8em; font-weight: 800; color: var(--blue); margin-right: 0.3em; }
+.nt-prog { display: flex; flex-wrap: wrap; gap: 0.4em; justify-content: center; margin: 0.3em 0 0.5em; }
+.nt-prog i { width: 0.85em; height: 0.85em; border-radius: 50%; background: #E2E8F0; transition: background .25s; }
+.nt-prog i.ok { background: #22C55E; } .nt-prog i.ko { background: #F43F5E; } .nt-prog i.cur { box-shadow: 0 0 0 2.5px var(--blue); }
+.nt-qnum { text-align: center; font-size: 0.82em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); margin: 0; }
+.nt-qcard { background: linear-gradient(180deg, #FFFFFF, #F8FAFC); border: 1px solid var(--line); border-radius: 16px; padding: 0.9em 1em 1em; margin: 0.4em auto 0.6em; max-width: 620px; box-shadow: 0 6px 18px rgba(15,23,42,.06); }
+.nt-qvis { text-align: center; margin: 0.1em 0 0.3em; }
+.nt-qdata { display: inline-flex; flex-wrap: wrap; gap: 0.3em 1em; justify-content: center; align-items: center; font-family: Georgia, serif; font-size: 1.4em; color: #0F172A; }
+.nt-qdata span { white-space: nowrap; }
+.nt-ql-btns .nt-choix { padding: 0.6em 1.1em; border-radius: 12px; font-size: 1em; transition: transform .12s, box-shadow .12s; }
+.nt-ql-btns .nt-choix:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,.18); }
+.nt-choix-ok { background: #DCFCE7 !important; border-color: #16A34A !important; color: #166534 !important; }
+.nt-choix-ko { background: #FFE4E6 !important; border-color: #E11D48 !important; color: #9F1239 !important; }
+.nt-msg.nt-fb { border-radius: 12px; padding: 0.6em 0.9em; text-align: left; }
+.nt-msg.nt-fb.ok { background: #F0FDF4; border-left: 4px solid #22C55E; } .nt-msg.nt-fb.ko { background: #FFF1F2; border-left: 4px solid #F43F5E; }
 .nt-lab .nt-msg { margin-top: 1em !important; }
 .nt-lab [hidden] { display: none !important; }
 .nt-tr-ans { display: flex; align-items: center; justify-content: center; gap: 0.5em; flex-wrap: wrap; margin: 0.6em 0; }
@@ -72,8 +86,12 @@ hidden = "true"
 <div class="nt-lab nt-quizlab" id="quiz-sol">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
 <p class="nt-lab-title">Solvant, soluté, solution</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
 <p class="nt-ql-q"></p>
 <div class="nt-ql-btns"></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
@@ -174,8 +192,13 @@ hidden = "true"
 <div class="nt-lab nt-trainer" id="lab-calc">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Entraînement</p>
 <p class="nt-lab-title">Calculer une concentration, une masse ou un volume</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<div class="nt-qvis" aria-live="polite"></div>
 <p class="nt-ql-q nt-tr-q"></p>
-<div class="nt-tr-zone"><div class="nt-tr-ans"><label>Réponse&nbsp;: <input type="text" inputmode="decimal" aria-label="Votre réponse"></label><span class="nt-tr-unit"></span><button type="button" class="nt-btn" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+<div class="nt-tr-zone"><div class="nt-tr-ans"><span class="nt-champ"><label for="sol-rep">Réponse&nbsp;:</label><input id="sol-rep" type="text" inputmode="decimal"><span class="nt-u nt-tr-unit"></span></span><button type="button" class="nt-btn nt-btn-main" data-act="check"><i class="fa-solid fa-check"></i>&nbsp; Valider</button></div></div>
+</div>
 <p class="nt-msg" aria-live="polite"></p>
 <div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
@@ -434,30 +457,34 @@ hidden = "true"
       ['Dans une eau minérale, les «&nbsp;minéraux&nbsp;» (calcium, magnésium…) sont…', ['en suspension', 'dissous, sous forme d\u2019ions'], 1, 'Ils sont dissous, sous forme d\u2019ions (Ca<sup>2+</sup>, Mg<sup>2+</sup>…)&nbsp;: c\u2019est pourquoi on ne les voit pas, et l\u2019eau reste limpide.']
     ]
   };
-  $$(document, '.nt-quizlab').forEach(function (root) {
+  $$(document, '.nt-quizlab').forEach(function (root) {   /* interface : numéro de question, pastilles de progression, carte, retour coloré */
     var D = QUIZ[root.id]; if (!D) { return; }
-    var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), next = $(root, '[data-act="next"]'), lbl = next.innerHTML;
-    var order = [], k = 0, good = 0, answered = false, fini = false;
+    var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), next = $(root, '[data-act="next"]'), prog = $(root, '.nt-prog'), num0 = $(root, '.nt-qnum'), lbl = next.innerHTML;
+    var order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+    function progres() {
+      prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join('');
+      num0.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length;
+    }
     function show() {
-      answered = false; var q = D[order[k]]; qEl.innerHTML = q[0]; msg.textContent = ''; bx.innerHTML = '';
+      answered = false; var q = D[order[k]]; qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
       q[1].forEach(function (cTxt, i) {
-        var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn'; b.innerHTML = cTxt;
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = cTxt;
         b.addEventListener('click', function () {
-          if (answered) { return; } answered = true;
-          if (i === q[2]) { good++; b.classList.add('nt-btn-main'); msg.innerHTML = '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' + q[3]; }
-          else { b.style.borderColor = '#E11D48'; b.style.color = '#E11D48'; msg.innerHTML = '<span style="color:#E11D48;">Non.</span> ' + q[3]; }
-          sc.textContent = good + ' / ' + (k + 1);
+          if (answered) { return; } answered = true; var ok = i === q[2]; res[k] = ok; if (ok) { good++; }
+          b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[q[2]].classList.add('nt-choix-ok'); }
+          msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[3];
+          sc.textContent = good + ' / ' + (k + 1); progres();
         });
         bx.appendChild(b);
       });
-      next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl;
+      next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
     }
-    function start() { order = shuffle(D.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+    function start() { order = shuffle(D.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
     next.addEventListener('click', function () {
       if (fini) { start(); return; }
-      if (!answered) { msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+      if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
       k++;
-      if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilanTxt(good / order.length); msg.textContent = ''; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
+      if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilanTxt(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
       show();
     });
     start();
@@ -515,49 +542,52 @@ hidden = "true"
     var root = document.getElementById('lab-calc');
     if (!root) { return; }
     var qEl = $(root, '.nt-tr-q'), inp = $(root, 'input[type="text"]'), uEl = $(root, '.nt-tr-unit'), msg = $(root, '.nt-msg'), sc = $(root, '.out-score'), bV = $(root, '[data-act="check"]'), bN = $(root, '[data-act="next"]'), lblN = bN.innerHTML;
-    var NQ = 6, n = 0, good = 0, cur, done = false, fini = false;
+    var NQ = 6, n = 0, good = 0, cur, done = false, fini = false, res = [], vis = $(root, '.nt-qvis'), prog = $(root, '.nt-prog'), num0 = $(root, '.nt-qnum');
+    function progres() { prog.innerHTML = Array.apply(null, Array(NQ)).map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === n - (done ? 1 : 0) && !fini ? ' cur' : '') + '"></i>'; }).join(''); num0.textContent = fini ? 'Bilan' : 'Question ' + Math.min(NQ, n + (done ? 0 : 1)) + ' sur ' + NQ; }
     var CTX = ['du sucre', 'du sel', 'du sulfate de cuivre', 'du glucose', 'un colorant alimentaire'];
     var G = [
       function () {   /* trouver Cm : masse et volume, avec conversion des mL */
-        var m = pick([1.5, 2, 4, 5, 7.5, 10, 12, 15, 20, 25]), VmL = pick([50, 100, 200, 250, 500]), Cm = m / (VmL / 1000), s = pick(CTX);
-        return { q: 'On dissout ' + nb(m) + '&nbsp;g ' + s + ' dans de l\u2019eau, pour obtenir ' + VmL + '&nbsp;mL de solution. Calculer la concentration en masse C<sub>m</sub>.', rep: Cm, unit: 'g/L',
+        var m, VmL, Cm, s = pick(CTX);
+        do { m = pick([1.5, 2, 4, 5, 7.5, 10, 12, 15, 20, 25]); VmL = pick([50, 100, 200, 250, 500]); Cm = m / (VmL / 1000); } while (Cm > 100);   /* au plus 100 g/L : en dessous de la solubilité de tous les solutés proposés */
+        return { vis: '<span><i>m</i> = ' + nb(m) + '&nbsp;g</span><span><i>V</i> = ' + VmL + '&nbsp;mL</span>', q: 'On dissout ' + nb(m) + '&nbsp;g ' + s + ' dans de l\u2019eau, pour obtenir ' + VmL + '&nbsp;mL de solution. Calculer la concentration en masse C<sub>m</sub>.', rep: Cm, unit: 'g/L',
           expl: 'C<sub>m</sub> = m / V, avec V en litres&nbsp;: ' + VmL + '&nbsp;mL = ' + nb(VmL / 1000) + '&nbsp;L, donc C<sub>m</sub> = ' + nb(m) + ' / ' + nb(VmL / 1000) + ' = ' + nb(Cm) + '&nbsp;g/L.' };
       },
       function () {   /* trouver m */
         var Cm = pick([2, 4, 5, 8, 9, 10, 12, 20, 50]), VmL = pick([100, 200, 250, 500, 1000, 2000]), m = Cm * VmL / 1000, s = pick(CTX);
-        return { q: 'On veut préparer ' + (VmL >= 1000 ? nb(VmL / 1000) + '&nbsp;L' : VmL + '&nbsp;mL') + ' d\u2019une solution ' + s.replace('du ', 'de ').replace('un ', 'd\u2019un ') + ' de concentration en masse ' + nb(Cm) + '&nbsp;g/L. Quelle masse de soluté faut-il peser&nbsp;?', rep: m, unit: 'g',
+        return { vis: '<span><i>V</i> = ' + (VmL >= 1000 ? nb(VmL / 1000) + '&nbsp;L' : VmL + '&nbsp;mL') + '</span><span><i>C</i><sub>m</sub> = ' + nb(Cm) + '&nbsp;g/L</span>', q: 'On veut préparer ' + (VmL >= 1000 ? nb(VmL / 1000) + '&nbsp;L' : VmL + '&nbsp;mL') + ' d\u2019une solution ' + s.replace('du ', 'de ').replace('un ', 'd\u2019un ') + ' de concentration en masse ' + nb(Cm) + '&nbsp;g/L. Quelle masse de soluté faut-il peser&nbsp;?', rep: m, unit: 'g',
           expl: 'C<sub>m</sub> = m / V, donc m = C<sub>m</sub> × V = ' + nb(Cm) + ' × ' + nb(VmL / 1000) + ' = ' + nb(m) + '&nbsp;g (V en litres).' };
       },
       function () {   /* trouver V */
         var Cm = pick([2, 4, 5, 9, 10, 20, 25]), m = pick([0.5, 1, 2, 4.5, 5, 10]), V = m / Cm;
-        return { q: 'On dispose de ' + nb(m) + '&nbsp;g de soluté. Quel volume de solution (en L) peut-on préparer, à la concentration en masse de ' + nb(Cm) + '&nbsp;g/L&nbsp;?', rep: V, unit: 'L',
+        return { vis: '<span><i>m</i> = ' + nb(m) + '&nbsp;g</span><span><i>C</i><sub>m</sub> = ' + nb(Cm) + '&nbsp;g/L</span>', q: 'On dispose de ' + nb(m) + '&nbsp;g de soluté. Quel volume de solution (en L) peut-on préparer, à la concentration en masse de ' + nb(Cm) + '&nbsp;g/L&nbsp;?', rep: V, unit: 'L',
           expl: 'C<sub>m</sub> = m / V, donc V = m / C<sub>m</sub> = ' + nb(m) + ' / ' + nb(Cm) + ' = ' + nb(V) + '&nbsp;L' + (V < 1 ? ', soit ' + nb(V * 1000) + '&nbsp;mL.' : '.') };
       },
       function () {   /* conversions mg/L et m³ (type piscine) */
         var Cmg = pick([1, 2, 3, 5]), Vm3 = pick([20, 40, 50, 80, 100]), m = Cmg / 1000 * Vm3 * 1000;
-        return { q: 'Une piscine de ' + Vm3 + '&nbsp;m³ doit contenir des ions hypochlorite à la concentration en masse de ' + Cmg + '&nbsp;mg/L. Quelle masse d\u2019ions hypochlorite faut-il y verser (en g)&nbsp;?', rep: m, unit: 'g',
+        return { vis: '<span><i>V</i> = ' + Vm3 + '&nbsp;m³</span><span><i>C</i><sub>m</sub> = ' + Cmg + '&nbsp;mg/L</span>', q: 'Une piscine de ' + Vm3 + '&nbsp;m³ doit contenir des ions hypochlorite à la concentration en masse de ' + Cmg + '&nbsp;mg/L. Quelle masse d\u2019ions hypochlorite faut-il y verser (en g)&nbsp;?', rep: m, unit: 'g',
           expl: 'On convertit&nbsp;: ' + Cmg + '&nbsp;mg/L = ' + nb(Cmg / 1000) + '&nbsp;g/L et ' + Vm3 + '&nbsp;m³ = ' + nb(Vm3 * 1000) + '&nbsp;L (1&nbsp;m³ = 1&nbsp;000&nbsp;L). Puis m = C<sub>m</sub> × V = ' + nb(Cmg / 1000) + ' × ' + nb(Vm3 * 1000) + ' = ' + nb(m) + '&nbsp;g.' };
       },
       function () {   /* saturée ou non ? */
         var Cmax = pick([3.3, 9, 36, 200]), V = pick([0.1, 0.2, 0.25, 0.5]), mmax = Cmax * V, m = Math.round(mmax * pick([0.6, 0.8, 1.2, 1.5]) * 100) / 100;
-        return { q: 'La concentration maximale d\u2019un soluté vaut ' + nb(Cmax) + '&nbsp;g/L. Quelle masse maximale (en g) peut-on dissoudre dans ' + nb(V * 1000) + '&nbsp;mL de solution&nbsp;?', rep: mmax, unit: 'g',
+        return { vis: '<span><i>C</i><sub>max</sub> = ' + nb(Cmax) + '&nbsp;g/L</span><span><i>V</i> = ' + nb(V * 1000) + '&nbsp;mL</span>', q: 'La concentration maximale d\u2019un soluté vaut ' + nb(Cmax) + '&nbsp;g/L. Quelle masse maximale (en g) peut-on dissoudre dans ' + nb(V * 1000) + '&nbsp;mL de solution&nbsp;?', rep: mmax, unit: 'g',
           expl: 'm<sub>max</sub> = C<sub>max</sub> × V = ' + nb(Cmax) + ' × ' + nb(V) + ' = ' + nb(mmax) + '&nbsp;g. Au-delà, la solution est saturée et le soluté ne se dissout plus.' };
       }
     ];
-    function nouveau() { cur = pick(G)(); qEl.innerHTML = cur.q; uEl.textContent = cur.unit; inp.value = ''; msg.textContent = ''; done = false; bV.disabled = false; inp.disabled = false; bN.innerHTML = n === NQ - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lblN; }
-    function start() { n = 0; good = 0; fini = false; sc.textContent = '0 / 0'; $(root, '.nt-tr-zone').hidden = false; nouveau(); }
+    function nouveau() { cur = pick(G)(); qEl.innerHTML = cur.q; vis.innerHTML = '<span class="nt-qdata">' + cur.vis + '</span>'; vis.hidden = false; uEl.textContent = cur.unit; inp.value = ''; msg.textContent = ''; msg.className = 'nt-msg'; done = false; bV.disabled = false; inp.disabled = false; bN.innerHTML = n === NQ - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lblN; progres(); }
+    function start() { n = 0; good = 0; fini = false; res = []; sc.textContent = '0 / 0'; $(root, '.nt-tr-zone').hidden = false; nouveau(); }
     bV.addEventListener('click', function () {
       if (done || fini) { return; }
-      var v = num(inp.value); if (isNaN(v)) { msg.textContent = 'Entrez une valeur numérique.'; return; }
-      var ok = Math.abs(v - cur.rep) <= Math.abs(cur.rep) * 0.02 + 1e-9; done = true; n++; if (ok) { good++; }
+      var v = num(inp.value); if (isNaN(v)) { msg.className = 'nt-msg'; msg.textContent = 'Entrez une valeur numérique.'; return; }
+      var ok = Math.abs(v - cur.rep) <= Math.abs(cur.rep) * 0.02 + 1e-9; done = true; res[n] = ok; n++; if (ok) { good++; }
       bV.disabled = true; inp.disabled = true; sc.textContent = good + ' / ' + n;
-      msg.innerHTML = (ok ? '<span style="color:#16A34A;">Bravo&nbsp;!</span> ' : '<span style="color:#E11D48;">Non</span>&nbsp;: la réponse est ' + nb(cur.rep) + '&nbsp;' + cur.unit + '. ') + cur.expl;
+      msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko');
+      msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non</b>&nbsp;: la réponse est ' + nb(cur.rep) + '&nbsp;' + cur.unit + '. ') + cur.expl; progres();
     });
     inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { bV.click(); } });
     bN.addEventListener('click', function () {
       if (fini) { start(); return; }
-      if (!done) { msg.textContent = 'Validez d\u2019abord votre réponse.'; return; }
-      if (n >= NQ) { fini = true; $(root, '.nt-tr-zone').hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + NQ + '</span> ' + bilanTxt(good / NQ); msg.textContent = ''; bN.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
+      if (!done) { msg.className = 'nt-msg'; msg.textContent = 'Validez d\u2019abord votre réponse.'; return; }
+      if (n >= NQ) { fini = true; $(root, '.nt-tr-zone').hidden = true; vis.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + NQ + '</span> ' + bilanTxt(good / NQ); msg.textContent = ''; msg.className = 'nt-msg'; progres(); bN.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; return; }
       nouveau();
     });
     start();
