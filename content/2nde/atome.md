@@ -23,7 +23,7 @@ td, th {
 # Entités chimiques / Atome et Noyau
 
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/2nde/atome"> Cours </a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/2nde/atome"><b>Cours 📽️</b> </a> + <a href="../cours/atome"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
 
 
 [![](/cm-atome.png)](/cm-atome.pdf)
@@ -39,7 +39,7 @@ td, th {
 </tr>
 <tr>
 <th rowspan="1">TP</th>
-<td><a href="/tpsel.pdf"><b>Identification d'un sel</b></a> + <a href="/compterenducorr.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
+<td><a href="/tpsel.pdf"><b>Identification d'un sel</b></a><!-- + <a href="/compterenducorr.pdf"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a>--></td>
 </tr>
 <tr>
 <th rowspan="1">Activité</th>
@@ -51,19 +51,3 @@ td, th {
 </tr>
 </table>
 </div>
-
-<br>
-
-
-## Définitions
-
-{{%notice type="def" title="Élément chimique" round="true"%}}
-Ensemble des atomes (isolés ou engagés dans un édifice polyatomique neutre ou chargé) et des ions monoatomiques comportant un même nombre de protons dans leur noyau.
-{{%/notice%}}
-
->Exemple :<br>
-Le dichlore gazeux, les cristaux de chlorure de sodium et les ions hypochlorite comportent des atomes de chlore ou des ions chlorure de même Z&nbsp;=&nbsp;17, caractérisant l’élément chlore.
-
-
-
-
