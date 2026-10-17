@@ -128,7 +128,8 @@ details.nt-d[open] > summary::after { content: "−"; }
 details.nt-d[open] > summary { border-bottom: 1px dashed color-mix(in srgb, var(--c) 40%, #fff); }
 details.nt-d > summary:focus-visible { outline: 3px solid var(--c); outline-offset: 2px; border-radius: 8px; }
 .nt-d-body { padding: 0.5em 1.2em 0.9em; overflow-x: auto; }
-.nt-d-body p { margin: 0.5em 0 !important; line-height: 1.6; }
+/* :where() annule la spécificité de .nt-d-body : les paragraphes à classe propre (.nt-cap, .nt-big…) gardent leurs marges dans les repliables */
+:where(.nt-d-body) p { margin: 0.5em 0 !important; line-height: 1.6; }
 .nt-demo-box { --c: var(--slate); --bg: var(--slate-bg); }
 
 /* --- Grilles et cartes « hauteur / intensité / timbre » --- */
@@ -149,7 +150,7 @@ details.nt-d > summary:focus-visible { outline: 3px solid var(--c); outline-offs
 .nt-svg { display: block; width: 100%; height: auto; max-width: 760px; margin: 1em auto; }
 .nt-svg-m { max-width: 560px; }
 .nt-svg-s { max-width: 440px; }
-.nt-cap { text-align: center; font-size: 0.9em; color: var(--slate); margin: -0.3em auto 1.2em !important; max-width: 44em; }
+.nt-cap { text-align: center; font-size: 0.9em; color: var(--slate); margin: -0.3em auto 1.2em !important; max-width: 44em; text-wrap: balance; }
 .nt-t { width: 100%; min-width: 420px; border-collapse: collapse !important; margin: 0.4em 0 !important; }
 .nt-t th { background: var(--blue-bg) !important; color: var(--blue); border: 0 !important; border-bottom: 2px solid var(--blue) !important; font-size: 0.88em; padding: 7px 8px !important; text-align: center; }
 .nt-t td { background: none !important; border: 0 !important; border-bottom: 1px solid var(--line) !important; padding: 7px 8px !important; text-align: center; }

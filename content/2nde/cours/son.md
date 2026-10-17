@@ -1,7 +1,6 @@
 +++
 title = "Le son"
 draft = false
-hidden = true 
 +++
 
 <link rel="stylesheet" href="/css/cours.css">
@@ -65,8 +64,9 @@ hidden = true
 .nt-heart { display: inline-block; font-size: 2.2em; vertical-align: middle; animation: nt-pulse 0.8s infinite; }
 @keyframes nt-pulse { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.18); } 30% { transform: scale(1); } 45% { transform: scale(1.1); } }
 @media (prefers-reduced-motion: reduce) { .nt-heart { animation: none; } }
-.nt-lamp { display: grid; grid-template-columns: minmax(130px, 0.6fr) 1.4fr; gap: 14px; align-items: center; }
+.nt-lamp { display: grid; grid-template-columns: minmax(200px, 1fr) 1.2fr; gap: 10px 18px; align-items: center; margin: 0.4em 0 0.6em; }
 @media (max-width: 600px) { .nt-lamp { grid-template-columns: 1fr; } }
+#lab-feu .nt-lamp canvas { background: transparent; border: 0; border-radius: 0; }
 .nt-svg-l { max-width: 720px; }
 /* course des signaux : calculs */
 .nt-calc { display: grid; gap: 0.4em; max-width: 600px; margin: 0.8em auto 0; }
@@ -1554,13 +1554,16 @@ void loop() {
     var t = 0.4, run = false, t1 = null, t2 = null, cnv, cnvF = null;
     function teinte(tt) { var u = ((tt % TT) + TT) % TT / TT; return ((120 - 360 * u) % 360 + 360) % 360; }   /* vert → jaune → rouge → magenta → bleu → cyan → vert */
     function coul(tt, l) { return 'hsl(' + teinte(tt).toFixed(1) + ', 88%, ' + (l || 52) + '%)'; }
-    function draw(o) {
+    function draw(o) {   /* une source lumineuse ronde, sans boîtier : halo, disque dégradé, reflet */
       var ctx = o.ctx, W = o.W, H = o.H, cx = W / 2, cy = H / 2, r = Math.min(W, H) * 0.3; ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = '#1E293B'; rr(ctx, cx - r - 16, cy - r - 16, 2 * r + 32, 2 * r + 32, 18); ctx.fill();
-      var g = ctx.createRadialGradient(cx, cy, r * 0.3, cx, cy, r * 1.45); g.addColorStop(0, coul(t, 60)); g.addColorStop(1, 'rgba(30,41,59,0)');
-      ctx.globalAlpha = 0.55; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, r * 1.45, 0, 2 * Math.PI); ctx.fill(); ctx.globalAlpha = 1;
-      var g2 = ctx.createRadialGradient(cx - r * 0.3, cy - r * 0.3, r * 0.1, cx, cy, r); g2.addColorStop(0, coul(t, 78)); g2.addColorStop(1, coul(t, 48));
-      ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = '#0F172A'; ctx.lineWidth = 1; ctx.stroke();
+      var g = ctx.createRadialGradient(cx, cy, r * 0.6, cx, cy, r * 1.62);
+      g.addColorStop(0, coul(t, 62)); g.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.globalAlpha = 0.5; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, r * 1.62, 0, 2 * Math.PI); ctx.fill(); ctx.globalAlpha = 1;
+      var g2 = ctx.createRadialGradient(cx - r * 0.25, cy - r * 0.3, r * 0.05, cx, cy, r);
+      g2.addColorStop(0, coul(t, 88)); g2.addColorStop(0.45, coul(t, 64)); g2.addColorStop(1, coul(t, 44));
+      ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 2 * Math.PI); ctx.fill();
+      ctx.strokeStyle = 'rgba(15,23,42,0.12)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.save(); ctx.globalAlpha = 0.35; ctx.fillStyle = '#FFFFFF'; ctx.beginPath(); ctx.ellipse(cx - r * 0.32, cy - r * 0.42, r * 0.34, r * 0.16, -0.5, 0, 2 * Math.PI); ctx.fill(); ctx.restore();
     }
     function drawF(o) {   /* enregistrement de la couleur au cours des 12 dernières secondes */
       var ctx = o.ctx, W = o.W, H = o.H, x0 = 12, x1 = W - 12, span = 12, y0 = 16, h = 26; ctx.clearRect(0, 0, W, H);
@@ -1575,7 +1578,7 @@ void loop() {
       if (run) { out.textContent = fmt(t - t1, 2); }
       return true;
     }
-    cnv = Canvas($(root, '.nt-lamp canvas'), function (W) { return Math.min(190, Math.max(150, W * 0.8)); }, draw);
+    cnv = Canvas($(root, '.nt-lamp canvas'), function (W) { return Math.min(260, Math.max(200, W * 0.85)); }, draw);
     var loop = Loop(root, step); loop.kick();
     chk.addEventListener('change', function () { cvF.hidden = !chk.checked; if (chk.checked) { if (!cnvF) { cnvF = Canvas(cvF, function () { return 62; }, drawF); } else { cnvF.size(); } } });
     bCh.addEventListener('click', function () {
