@@ -128,7 +128,7 @@ L'unité de la fréquence, le hertz (Hz), est équivalent à&nbsp;:
 
 ## Intensité sonore
 
-Lorsque l'amplitude du signal sonore double, l'intensité sonore&nbsp;:
+Supposons que l'on reçoive le son émis par une source sonore. Si une deuxième source sonore identique se met à émettre à la même distance, alors l'intensité sonore reçue&nbsp;:
 
 - [x] double
 - [ ] ne varie pas
@@ -137,7 +137,7 @@ Lorsque l'amplitude du signal sonore double, l'intensité sonore&nbsp;:
 
 ## Niveau sonore
 
-Lorsque l'amplitude du signal sonore double, le niveau sonore&nbsp;:
+Supposons que l'on reçoive le son émis par une source sonore. Si une deuxième source sonore identique se met à émettre à la même distance, alors le niveau d'intensité sonore reçue&nbsp;:
 
 - [ ] double
 - [ ] ne varie pas
@@ -147,7 +147,7 @@ Lorsque l'amplitude du signal sonore double, le niveau sonore&nbsp;:
 ## Tympan 
 
 Une onde sonore produit une succession locale de surpressions/dépressions dans le milieu de propagation. Au niveau de l'oreille, cette variation de la pression acoustique met en mouvement la membrane du tympan.<br><br>
-Au seuil d'audibilité correspondant au niveau sonore de $\pu{0 dB}$, la surpression est de $20 \text{ μPa}$ (le tympan ne bouge alors que de quelques nanomètres) alors qu'au seuil de douleur ($\pu{120 dB}$), la surpression est de $\pu{20 Pa}$. L'intensité sonore étant proportionnelle au carré de la pression acoustique, combien de fois est-elle plus grande au seuil de douleur qu'au seuil d'audibilité&nbsp;?
+Au seuil d'audibilité correspondant au niveau d'intensité sonore de $\pu{0 dB}$, la surpression est de $20 \text{ μPa}$ (le tympan ne bouge alors que de quelques nanomètres) alors qu'au seuil de douleur ($\pu{120 dB}$), la surpression est de $\pu{20 Pa}$. L'intensité sonore étant proportionnelle au carré de la pression acoustique, combien de fois est-elle plus grande au seuil de douleur qu'au seuil d'audibilité&nbsp;?
 
 - [x] mille milliards
 - [x] $10^{12}$
