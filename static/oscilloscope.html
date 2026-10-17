@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acquisition sonore — Analyse temporelle</title>
+  <style>
+    :root {
+      --bg-page: #0b1120;
+      --bg-panel: #1e293b;
+      --bg-screen: #090d16;
+      --border-color: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --signal-dim: rgba(56, 189, 248, 0.38);
+      --signal-bright: #38bdf8;
+      --vert-accent: #34d399;
+      --cursor-1: #f59e0b;
+      --cursor-2: #ec4899;
+      --accent-btn: #2563eb;
+      --freeze-btn: #d97706;
+      --resume-btn: #059669;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Barre supérieure de contrôles */
+    header {
+      background-color: var(--bg-panel);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #64748b;
+      transition: background-color 0.2s, box-shadow 0.2s;
+    }
+    .status-dot.live {
+      background-color: #ef4444;
+      box-shadow: 0 0 8px #ef4444;
+    }
+    .status-dot.frozen {
+      background-color: #f59e0b;
+      box-shadow: 0 0 8px #f59e0b;
+    }
+
+    .controls-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .control-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .control-box label {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .scale-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.92rem;
+      font-weight: 700;
+      min-width: 96px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .scale-value.time-val {
+      color: var(--signal-bright);
+    }
+
+    .scale-value.vert-val {
+      color: var(--vert-accent);
+      min-width: 110px;
+    }
+
+    input[type="range"] {
+      cursor: pointer;
+      width: 115px;
+    }
+
+    #timebaseSlider {
+      accent-color: var(--signal-bright);
+    }
+
+    #vSensSlider {
+      accent-color: var(--vert-accent);
+    }
+
+    button {
+      background-color: var(--accent-btn);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: filter 0.15s, transform 0.1s, background-color 0.2s;
+    }
+
+    button:hover:not(:disabled) {
+      filter: brightness(1.12);
+    }
+
+    button:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    button.btn-freeze {
+      background-color: var(--freeze-btn);
+    }
+
+    button.btn-resume {
+      background-color: var(--resume-btn);
+    }
+
+    /* Zone principale : Écran de l'oscilloscope */
+    main {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 18px;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .canvas-container {
+      flex: 1;
+      position: relative;
+      background-color: var(--bg-screen);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    .badge-scale {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid var(--vert-accent);
+      color: var(--vert-accent);
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .badge-scale.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Barre inférieure : Mesures par curseurs */
+    footer {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .readouts {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .metric {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      background: rgba(15, 23, 42, 0.7);
+      border-left: 4px solid transparent;
+      font-size: 0.9rem;
+    }
+
+    .metric.c1 {
+      border-left-color: var(--cursor-1);
+    }
+
+    .metric.c2 {
+      border-left-color: var(--cursor-2);
+    }
+
+    .metric.dt {
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      background: rgba(56, 189, 248, 0.12);
+      padding: 6px 14px;
+    }
+
+    .metric-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .metric-val {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-main);
+    }
+
+    .metric.dt .metric-val {
+      color: #38bdf8;
+      font-size: 1.1rem;
+    }
+
+    .hint {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    kbd {
+      background: #334155;
+      color: #f8fafc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <span id="statusDot" class="status-dot"></span>
+      <span>Oscillogramme Acoustique</span>
+    </div>
+
+    <div class="controls-group">
+      <!-- Réglage de la sensibilité verticale -->
+      <div class="control-box">
+        <label for="vSensSlider">Sensibilité verticale :</label>
+        <input type="range" id="vSensSlider" min="-0.30" max="2.00" step="0.01" value="0.40">
+        <span id="vSensDisplay" class="scale-value vert-val">10.0 u.a./div</span>
+      </div>
+
+      <!-- Réglage de la sensibilité temporelle -->
+      <div class="control-box">
+        <label for="timebaseSlider">Sensibilité temporelle :</label>
+        <input type="range" id="timebaseSlider" min="0" max="7" step="1" value="3">
+        <span id="timebaseDisplay" class="scale-value time-val">2.0 ms/div</span>
+      </div>
+
+      <!-- Boutons d'acquisition et de gel -->
+      <button id="btnStart">🎤 Activer le micro</button>
+      <button id="btnFreeze" class="btn-freeze" disabled>❄️ Figer la capture</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="canvas-container" id="canvasContainer">
+      <canvas id="oscCanvas"></canvas>
+      <div id="scaleBadge" class="badge-scale">
+        Amplitude normalisée automatiquement (pleine hauteur)
+      </div>
+    </div>
+
+    <footer>
+      <div class="readouts">
+        <div class="metric c1">
+          <span class="metric-label">Curseur 1 (t₁) :</span>
+          <span class="metric-val" id="valT1">— ms</span>
+        </div>
+        <div class="metric c2">
+          <span class="metric-label">Curseur 2 (t₂) :</span>
+          <span class="metric-val" id="valT2">— ms</span>
+        </div>
+        <div class="metric dt">
+          <span class="metric-label">Durée Δt = |t₂ − t₁| :</span>
+          <span class="metric-val" id="valDT">— ms</span>
+        </div>
+      </div>
+
+      <div class="hint">
+        Glisser les marqueurs verticaux pour mesurer une ou plusieurs périodes • <kbd>Espace</kbd> pour figer/reprendre
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // --- Paramètres de la grille (10 div horizontales × 8 div verticales) ---
+    const TIMEBASES_MS_PER_DIV = [0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0];
+    const NUM_DIV_X = 10;
+    const NUM_DIV_Y = 8; // 4 divisions au-dessus de 0, 4 en dessous
+    // Convention : pleine échelle WebAudio (1.0) = 100 u.a. => à gain=1, 1 div = 25 u.a.
+    const BASE_UA_PER_DIV = 25;
+
+    // --- Éléments du DOM ---
+    const canvas = document.getElementById('oscCanvas');
+    const ctx = canvas.getContext('2d');
+    const btnStart = document.getElementById('btnStart');
+    const btnFreeze = document.getElementById('btnFreeze');
+    const timebaseSlider = document.getElementById('timebaseSlider');
+    const timebaseDisplay = document.getElementById('timebaseDisplay');
+    const vSensSlider = document.getElementById('vSensSlider');
+    const vSensDisplay = document.getElementById('vSensDisplay');
+    const statusDot = document.getElementById('statusDot');
+    const scaleBadge = document.getElementById('scaleBadge');
+    const valT1 = document.getElementById('valT1');
+    const valT2 = document.getElementById('valT2');
+    const valDT = document.getElementById('valDT');
+
+    // --- État Audio & Acquisition ---
+    let audioCtx = null;
+    let analyser = null;
+    let mediaStream = null;
+    let sampleRate = 48000;
+    const FFT_SIZE = 32768; // ~680 ms de réserve à 48 kHz
+    let liveBuffer = new Float32Array(FFT_SIZE);
+    let frozenBuffer = new Float32Array(FFT_SIZE);
+
+    let isRunning = false;
+    let isFrozen = false;
+    let frozenTriggerIndex = 0;
+
+    // Gestion du gain vertical et de la sensibilité verticale
+    let currentGain = 2.5;
+    let targetGain = 2.5;
+    let savedLiveGain = 2.5; // Mémorise le réglage direct avant un gel
+
+    // --- Curseurs verticaux (positions relatives entre 0.0 et 1.0) ---
+    const cursors = [
+      { id: 1, u: 0.25, color: '#f59e0b', label: 't₁', active: false, hover: false },
+      { id: 2, u: 0.75, color: '#ec4899', label: 't₂', active: false, hover: false }
+    ];
+    let draggedCursor = null;
+
+    // --- Gestion du redimensionnement Haute Définition (Retina) ---
+    let width = 0;
+    let height = 0;
+    const PADDING = { top: 28, right: 24, bottom: 38, left: 56 };
+
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // --- Gestion de la sensibilité verticale (u.a./div) ---
+    function formatUaPerDiv(uaPerDiv) {
+      if (uaPerDiv >= 10) return uaPerDiv.toFixed(1);
+      if (uaPerDiv >= 1) return uaPerDiv.toFixed(2);
+      return uaPerDiv.toFixed(2);
+    }
+
+    function setVerticalGain(newGain, updateSlider = true) {
+      const clampedGain = Math.max(0.5, Math.min(100, newGain));
+      targetGain = clampedGain;
+
+      if (updateSlider) {
+        vSensSlider.value = Math.log10(clampedGain).toFixed(2);
+      }
+
+      const uaPerDiv = BASE_UA_PER_DIV / clampedGain;
+      vSensDisplay.textContent = `${formatUaPerDiv(uaPerDiv)} u.a./div`;
+    }
+
+    vSensSlider.addEventListener('input', () => {
+      const gainFromSlider = Math.pow(10, parseFloat(vSensSlider.value));
+      setVerticalGain(gainFromSlider, false);
+
+      if (!isFrozen) {
+        savedLiveGain = targetGain;
+      } else {
+        // Si l'utilisateur ajuste manuellement l'échelle pendant le gel, on masque le badge auto
+        scaleBadge.classList.remove('visible');
+      }
+    });
+
+    // --- Lecture de la sensibilité temporelle (ms/div) ---
+    function getMsPerDiv() {
+      return TIMEBASES_MS_PER_DIV[parseInt(timebaseSlider.value, 10)];
+    }
+
+    function getTotalWindowMs() {
+      return getMsPerDiv() * NUM_DIV_X;
+    }
+
+    function formatTimeMs(ms) {
+      const msPerDiv = getMsPerDiv();
+      const decimals = msPerDiv < 1 ? 3 : (msPerDiv < 10 ? 2 : 1);
+      return ms.toFixed(decimals);
+    }
+
+    function updateTimebaseUI() {
+      const msPerDiv = getMsPerDiv();
+      timebaseDisplay.textContent = `${msPerDiv} ms/div`;
+      updateCursorReadouts();
+    }
+
+    timebaseSlider.addEventListener('input', updateTimebaseUI);
+
+    // --- Activation du Microphone ---
+    btnStart.addEventListener('click', async () => {
+      try {
+        mediaStream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            echoCancellation: false,
+            noiseSuppression: false,
+            autoGainControl: false
+          }
+        });
+
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+        sampleRate = audioCtx.sampleRate;
+
+        const source = audioCtx.createMediaStreamSource(mediaStream);
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = FFT_SIZE;
+        analyser.smoothingTimeConstant = 0;
+        source.connect(analyser);
+
+        isRunning = true;
+        isFrozen = false;
+        btnStart.style.display = 'none';
+        btnFreeze.disabled = false;
+        statusDot.className = 'status-dot live';
+      } catch (err) {
+        alert("Impossible d'accéder au microphone. Vérifiez les permissions du navigateur.\n\nDétail : " + err.message);
+      }
+    });
+
+    // --- Figer / Reprendre la capture ---
+    function toggleFreeze() {
+      if (!isRunning) return;
+
+      isFrozen = !isFrozen;
+
+      if (isFrozen) {
+        savedLiveGain = targetGain;
+
+        // Copie du buffer courant et verrouillage du point de déclenchement
+        frozenBuffer.set(liveBuffer);
+        const samplesToShow = (getTotalWindowMs() / 1000) * sampleRate;
+        frozenTriggerIndex = findRisingEdgeTrigger(frozenBuffer, samplesToShow);
+
+        // Adaptation automatique de l'amplitude pour occuper toute la hauteur
+        computeFrozenAutoScale();
+
+        btnFreeze.textContent = '▶️ Reprendre l\'acquisition';
+        btnFreeze.className = 'btn-resume';
+        statusDot.className = 'status-dot frozen';
+        scaleBadge.classList.add('visible');
+      } else {
+        // Restauration de la sensibilité verticale utilisée en direct
+        setVerticalGain(savedLiveGain, true);
+
+        btnFreeze.textContent = '❄️ Figer la capture';
+        btnFreeze.className = 'btn-freeze';
+        statusDot.className = 'status-dot live';
+        scaleBadge.classList.remove('visible');
+      }
+    }
+
+    btnFreeze.addEventListener('click', toggleFreeze);
+
+    window.addEventListener('keydown', (e) => {
+      if (
+        e.code === 'Space' &&
+        isRunning &&
+        document.activeElement !== timebaseSlider &&
+        document.activeElement !== vSensSlider
+      ) {
+        e.preventDefault();
+        toggleFreeze();
+      }
+    });
+
+    // --- Recherche d'un point de déclenchement (Trigger front montant) ---
+    function findRisingEdgeTrigger(buffer, samplesNeeded) {
+      const maxSearch = Math.floor(buffer.length - samplesNeeded - 2);
+      const startSearch = Math.floor(buffer.length * 0.15);
+
+      if (maxSearch <= startSearch) return 0;
+
+      let peak = 0;
+      for (let i = startSearch; i < maxSearch; i++) {
+        const abs = Math.abs(buffer[i]);
+        if (abs > peak) peak = abs;
+      }
+
+      if (peak < 0.002) return startSearch;
+      const hysteresis = peak * 0.12;
+
+      let armed = false;
+      for (let i = startSearch; i < maxSearch; i++) {
+        if (!armed && buffer[i] < -hysteresis) {
+          armed = true;
+        } else if (armed && buffer[i] <= 0 && buffer[i + 1] > 0) {
+          const y0 = buffer[i];
+          const y1 = buffer[i + 1];
+          const frac = -y0 / (y1 - y0);
+          return i + frac;
+        }
+      }
+      return startSearch;
+    }
+
+    // --- Calcul du facteur d'échelle automatique à l'état figé ---
+    function computeFrozenAutoScale() {
+      const samplesInWindow = (getTotalWindowMs() / 1000) * sampleRate;
+      const startIdx = Math.floor(frozenTriggerIndex);
+      const endIdx = Math.min(frozenBuffer.length - 1, Math.ceil(frozenTriggerIndex + samplesInWindow));
+
+      let maxAbs = 0;
+      for (let i = startIdx; i <= endIdx; i++) {
+        const val = Math.abs(frozenBuffer[i]);
+        if (val > maxAbs) maxAbs = val;
+      }
+
+      // Adaptation pour occuper 92 % de la demi-hauteur disponible (et mise à jour du slider)
+      if (maxAbs > 0.0005) {
+        setVerticalGain(0.92 / maxAbs, true);
+      }
+    }
+
+    // --- Interpolation linéaire dans le buffer ---
+    function sampleAt(buffer, floatIndex) {
+      const i0 = Math.floor(floatIndex);
+      const frac = floatIndex - i0;
+      if (i0 < 0 || i0 >= buffer.length - 1) return 0;
+      return buffer[i0] * (1 - frac) + buffer[i0 + 1] * frac;
+    }
+
+    // --- Mise à jour des afficheurs numériques des curseurs ---
+    function updateCursorReadouts() {
+      const totalMs = getTotalWindowMs();
+      const t1 = cursors[0].u * totalMs;
+      const t2 = cursors[1].u * totalMs;
+      const dt = Math.abs(t2 - t1);
+
+      valT1.textContent = `${formatTimeMs(t1)} ms`;
+      valT2.textContent = `${formatTimeMs(t2)} ms`;
+      valDT.textContent = `${formatTimeMs(dt)} ms`;
+    }
+
+    // --- Gestion de la souris et du tactile pour les marqueurs ---
+    function getPlotArea() {
+      return {
+        x: PADDING.left,
+        y: PADDING.top,
+        w: width - PADDING.left - PADDING.right,
+        h: height - PADDING.top - PADDING.bottom
+      };
+    }
+
+    function getPointerPos(evt) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+      const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function onPointerDown(evt) {
+      const pos = getPointerPos(evt);
+      const plot = getPlotArea();
+      const hitRadius = 16;
+
+      let closest = null;
+      let minDist = Infinity;
+
+      for (const c of cursors) {
+        const cx = plot.x + c.u * plot.w;
+        const dist = Math.abs(pos.x - cx);
+        if (dist <= hitRadius && dist < minDist) {
+          minDist = dist;
+          closest = c;
+        }
+      }
+
+      if (closest) {
+        draggedCursor = closest;
+        closest.active = true;
+        canvas.style.cursor = 'ew-resize';
+        evt.preventDefault();
+      }
+    }
+
+    function onPointerMove(evt) {
+      const pos = getPointerPos(evt);
+      const plot = getPlotArea();
+
+      if (draggedCursor) {
+        let newU = (pos.x - plot.x) / plot.w;
+        newU = Math.max(0, Math.min(1, newU));
+        draggedCursor.u = newU;
+        updateCursorReadouts();
+        evt.preventDefault();
+        return;
+      }
+
+      let anyHover = false;
+      for (const c of cursors) {
+        const cx = plot.x + c.u * plot.w;
+        c.hover = Math.abs(pos.x - cx) <= 14;
+        if (c.hover) anyHover = true;
+      }
+      canvas.style.cursor = anyHover ? 'ew-resize' : 'default';
+    }
+
+    function onPointerUp() {
+      if (draggedCursor) {
+        draggedCursor.active = false;
+        draggedCursor = null;
+      }
+    }
+
+    canvas.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+
+    canvas.addEventListener('touchstart', onPointerDown, { passive: false });
+    window.addEventListener('touchmove', onPointerMove, { passive: false });
+    window.addEventListener('touchend', onPointerUp);
+
+    // --- Dessin de la grille et des graduations ---
+    function drawGridAndAxes(plot) {
+      const msPerDiv = getMsPerDiv();
+      const midX = plot.x + plot.w / 2;
+      const midY = plot.y + plot.h / 2;
+
+      ctx.save();
+
+      // Cadre principal
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(plot.x, plot.y, plot.w, plot.h);
+
+      // 1. Lignes verticales (divisions temporelles) + graduations en ms
+      ctx.font = '12px ui-monospace, SFMono-Regular, Menlo, monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+
+      for (let i = 0; i <= NUM_DIV_X; i++) {
+        const x = plot.x + (i / NUM_DIV_X) * plot.w;
+        const isCenterX = (i === NUM_DIV_X / 2);
+
+        if (i > 0 && i < NUM_DIV_X) {
+          ctx.strokeStyle = isCenterX ? 'rgba(148, 163, 184, 0.35)' : 'rgba(148, 163, 184, 0.15)';
+          ctx.lineWidth = isCenterX ? 1.3 : 1;
+          ctx.beginPath();
+          ctx.moveTo(x, plot.y);
+          ctx.lineTo(x, plot.y + plot.h);
+          ctx.stroke();
+        }
+
+        // Sous-graduations horizontales (5 par division)
+        if (i < NUM_DIV_X) {
+          const divWidth = plot.w / NUM_DIV_X;
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+          ctx.lineWidth = 1;
+
+          for (let sub = 1; sub < 5; sub++) {
+            const sx = x + (sub / 5) * divWidth;
+            ctx.beginPath();
+            ctx.moveTo(sx, midY - 4);
+            ctx.lineTo(sx, midY + 4);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(sx, plot.y + plot.h - 4);
+            ctx.lineTo(sx, plot.y + plot.h);
+            ctx.stroke();
+          }
+        }
+
+        // Étiquette de temps en bas de chaque division
+        const tVal = i * msPerDiv;
+        const decimals = msPerDiv < 1 ? 1 : 0;
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillText(`${tVal.toFixed(decimals)} ms`, x, plot.y + plot.h + 10);
+      }
+
+      // 2. Lignes horizontales (divisions verticales) + sous-graduations
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+
+      for (let j = 0; j <= NUM_DIV_Y; j++) {
+        const y = plot.y + (j / NUM_DIV_Y) * plot.h;
+        const isCenterY = (j === NUM_DIV_Y / 2);
+
+        if (j > 0 && j < NUM_DIV_Y) {
+          ctx.strokeStyle = isCenterY ? 'rgba(148, 163, 184, 0.45)' : 'rgba(148, 163, 184, 0.14)';
+          ctx.lineWidth = isCenterY ? 1.4 : 1;
+          ctx.beginPath();
+          ctx.moveTo(plot.x, y);
+          ctx.lineTo(plot.x + plot.w, y);
+          ctx.stroke();
+        }
+
+        // Sous-graduations verticales (5 par division sur l'axe vertical central et à gauche)
+        if (j < NUM_DIV_Y) {
+          const divHeight = plot.h / NUM_DIV_Y;
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+          ctx.lineWidth = 1;
+
+          for (let sub = 1; sub < 5; sub++) {
+            const sy = y + (sub / 5) * divHeight;
+            ctx.beginPath();
+            ctx.moveTo(midX - 4, sy);
+            ctx.lineTo(midX + 4, sy);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(plot.x, sy);
+            ctx.lineTo(plot.x + 4, sy);
+            ctx.stroke();
+          }
+        }
+
+        // Étiquettes en divisions sur l'axe vertical gauche (toutes les 2 divisions)
+        const divFromZero = (NUM_DIV_Y / 2) - j;
+        if (divFromZero % 2 === 0) {
+          let label = '0';
+          if (divFromZero > 0) label = `+${divFromZero} div`;
+          if (divFromZero < 0) label = `${divFromZero} div`;
+          ctx.fillStyle = isCenterY ? '#e2e8f0' : '#94a3b8';
+          ctx.fillText(label, plot.x - 8, y);
+        }
+      }
+
+      ctx.restore();
+    }
+
+    // --- Dessin de la courbe du signal ---
+    function drawSignal(plot, buffer, trigIdx, gain) {
+      const samplesInWindow = (getTotalWindowMs() / 1000) * sampleRate;
+      const midY = plot.y + plot.h / 2;
+      const halfH = plot.h / 2;
+
+      const uMin = Math.min(cursors[0].u, cursors[1].u);
+      const uMax = Math.max(cursors[0].u, cursors[1].u);
+      const xMin = plot.x + uMin * plot.w;
+      const xMax = plot.x + uMax * plot.w;
+
+      const stepPx = 1.5;
+      const points = [];
+      for (let px = 0; px <= plot.w; px += stepPx) {
+        const u = px / plot.w;
+        const sampleIdx = trigIdx + u * samplesInWindow;
+        const rawY = sampleAt(buffer, sampleIdx);
+        const clampedY = Math.max(-0.99, Math.min(0.99, rawY * gain));
+        points.push({
+          x: plot.x + px,
+          y: midY - clampedY * halfH
+        });
+      }
+
+      // 1. Tracé global (atténué en dehors des marqueurs)
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(plot.x, plot.y, plot.w, plot.h);
+      ctx.clip();
+
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+      ctx.lineWidth = 2;
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      points.forEach((pt, idx) => {
+        if (idx === 0) ctx.moveTo(pt.x, pt.y);
+        else ctx.lineTo(pt.x, pt.y);
+      });
+      ctx.stroke();
+
+      // 2. Mise en brillance de la portion de courbe située ENTRE les deux marqueurs
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(xMin, plot.y, Math.max(1, xMax - xMin), plot.h);
+      ctx.clip();
+
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 2.8;
+      ctx.shadowColor = '#38bdf8';
+      ctx.shadowBlur = 10;
+      ctx.beginPath();
+      points.forEach((pt, idx) => {
+        if (idx === 0) ctx.moveTo(pt.x, pt.y);
+        else ctx.lineTo(pt.x, pt.y);
+      });
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.restore();
+    }
+
+    // --- Dessin des marqueurs verticaux et de la zone en surbrillance ---
+    function drawCursors(plot, buffer, trigIdx, gain) {
+      const u1 = cursors[0].u;
+      const u2 = cursors[1].u;
+      const x1 = plot.x + u1 * plot.w;
+      const x2 = plot.x + u2 * plot.w;
+      const leftX = Math.min(x1, x2);
+      const rightX = Math.max(x1, x2);
+
+      const totalMs = getTotalWindowMs();
+      const samplesInWindow = (totalMs / 1000) * sampleRate;
+      const midY = plot.y + plot.h / 2;
+      const halfH = plot.h / 2;
+
+      ctx.save();
+
+      // 1. Bande lumineuse entre les deux marqueurs
+      const grad = ctx.createLinearGradient(leftX, 0, rightX, 0);
+      grad.addColorStop(0, 'rgba(245, 158, 11, 0.14)');
+      grad.addColorStop(0.5, 'rgba(56, 189, 248, 0.10)');
+      grad.addColorStop(1, 'rgba(236, 72, 153, 0.14)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(leftX, plot.y, rightX - leftX, plot.h);
+
+      // 2. Flèche de cote horizontale et étiquette Δt directe sur le graphe
+      const arrowY = plot.y + 28;
+      const dt = Math.abs(u2 - u1) * totalMs;
+      const dtText = `Δt = ${formatTimeMs(dt)} ms`;
+
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(leftX, arrowY);
+      ctx.lineTo(rightX, arrowY);
+      ctx.stroke();
+
+      if (rightX - leftX > 24) {
+        ctx.fillStyle = '#e2e8f0';
+        ctx.beginPath();
+        ctx.moveTo(leftX, arrowY);
+        ctx.lineTo(leftX + 7, arrowY - 4);
+        ctx.lineTo(leftX + 7, arrowY + 4);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(rightX, arrowY);
+        ctx.lineTo(rightX - 7, arrowY - 4);
+        ctx.lineTo(rightX - 7, arrowY + 4);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      // Cartouche Δt au centre de la flèche
+      ctx.font = 'bold 12.5px ui-monospace, SFMono-Regular, Menlo, monospace';
+      const textWidth = ctx.measureText(dtText).width;
+      const centerX = (leftX + rightX) / 2;
+      const pillW = textWidth + 16;
+      const pillH = 22;
+
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.roundRect(centerX - pillW / 2, arrowY - pillH / 2, pillW, pillH, 6);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(dtText, centerX, arrowY);
+
+      // 3. Tracé de chaque marqueur vertical
+      for (const c of cursors) {
+        const cx = plot.x + c.u * plot.w;
+        const isHighlighted = c.active || c.hover;
+
+        ctx.save();
+        ctx.strokeStyle = c.color;
+        ctx.lineWidth = isHighlighted ? 3 : 2;
+        if (isHighlighted) {
+          ctx.shadowColor = c.color;
+          ctx.shadowBlur = 14;
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(cx, plot.y);
+        ctx.lineTo(cx, plot.y + plot.h);
+        ctx.stroke();
+
+        // Poignée supérieure du marqueur
+        const handleW = 28;
+        const handleH = 18;
+        ctx.fillStyle = c.color;
+        ctx.beginPath();
+        ctx.roundRect(cx - handleW / 2, plot.y - handleH, handleW, handleH, [5, 5, 0, 0]);
+        ctx.fill();
+
+        ctx.fillStyle = '#090d16';
+        ctx.font = 'bold 11px system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowBlur = 0;
+        ctx.fillText(c.label, cx, plot.y - handleH / 2);
+
+        // Point d'intersection lumineux avec la courbe
+        if (isRunning) {
+          const sampleIdx = trigIdx + c.u * samplesInWindow;
+          const rawY = sampleAt(buffer, sampleIdx);
+          const clampedY = Math.max(-0.99, Math.min(0.99, rawY * gain));
+          const cy = midY - clampedY * halfH;
+
+          ctx.fillStyle = '#ffffff';
+          ctx.strokeStyle = c.color;
+          ctx.lineWidth = 2.5;
+          ctx.shadowColor = c.color;
+          ctx.shadowBlur = 10;
+          ctx.beginPath();
+          ctx.arc(cx, cy, isHighlighted ? 6 : 4.5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        }
+
+        ctx.restore();
+      }
+
+      ctx.restore();
+    }
+
+    // --- Boucle de rendu principale ---
+    function renderLoop() {
+      ctx.clearRect(0, 0, width, height);
+      const plot = getPlotArea();
+
+      drawGridAndAxes(plot);
+
+      let activeBuffer = liveBuffer;
+      let trigIdx = 0;
+
+      if (isRunning) {
+        if (!isFrozen) {
+          analyser.getFloatTimeDomainData(liveBuffer);
+          const samplesToShow = (getTotalWindowMs() / 1000) * sampleRate;
+          trigIdx = findRisingEdgeTrigger(liveBuffer, samplesToShow);
+        } else {
+          activeBuffer = frozenBuffer;
+          trigIdx = frozenTriggerIndex;
+        }
+
+        // Lissage fluide des changements d'échelle verticale (manuels ou automatiques)
+        currentGain += (targetGain - currentGain) * 0.2;
+        drawSignal(plot, activeBuffer, trigIdx, currentGain);
+      }
+
+      drawCursors(plot, activeBuffer, trigIdx, currentGain);
+
+      requestAnimationFrame(renderLoop);
+    }
+
+    // Initialisation au chargement
+    setVerticalGain(2.5, true);
+    updateTimebaseUI();
+    requestAnimationFrame(renderLoop);
+  </script>
+</body>
+</html>

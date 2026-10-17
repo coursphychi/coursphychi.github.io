@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronomètre Sonore</title>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .container {
+            background: var(--card);
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border);
+            width: 100%;
+            max-width: 580px;
+            padding: 2.25rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.75rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: #f1f5f9;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .status-badge.armed { background: #fef3c7; color: #b45309; }
+        .status-badge.running { background: #d1fae5; color: #047857; }
+        .status-badge.stopped { background: #dbeafe; color: #1d4ed8; }
+
+        .timer-display {
+            font-family: 'SF Mono', 'Fira Code', 'Roboto Mono', monospace;
+            font-size: 4rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 1rem 0 1.75rem 0;
+            padding: 1.5rem 1rem;
+            background: #0f172a;
+            color: #f8fafc;
+            border-radius: 1rem;
+            letter-spacing: -0.03em;
+            font-variant-numeric: tabular-nums;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+        }
+
+        .timer-unit {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .calibration-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 0.85rem;
+            padding: 1.25rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .calibration-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .calibration-help {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+            margin-bottom: 1.1rem;
+            line-height: 1.45;
+        }
+
+        .meter-wrapper {
+            position: relative;
+            height: 28px;
+            background: #e2e8f0;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 0.75rem;
+        }
+
+        .meter-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--success) 0%, var(--warning) 70%, var(--danger) 100%);
+            transition: width 0.04s linear;
+        }
+
+        .threshold-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #0f172a;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 0.85rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .settings-row input {
+            width: 75px;
+            padding: 0.3rem 0.5rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.4rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+        }
+
+        button {
+            padding: 0.85rem 1.25rem;
+            border-radius: 0.65rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            grid-column: span 2;
+        }
+        .btn-primary:hover { background: var(--primary-hover); }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: var(--text);
+            border: 1px solid #cbd5e1;
+        }
+        .btn-secondary:hover:not(:disabled) { background: #e2e8f0; }
+
+        button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .peak-indicator {
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Chronomètre Sonore</h1>
+        <div id="statusBadge" class="status-badge">Microphone inactif</div>
+    </header>
+
+    <div class="timer-display">
+        <span id="timeValue">0.000</span><span class="timer-unit"> s</span>
+    </div>
+
+    <div class="calibration-box">
+        <div class="calibration-header">
+            <span>Réglage du seuil de déclenchement</span>
+            <span id="thresholdValue">Seuil : 35 %</span>
+        </div>
+        <p class="calibration-help">
+            Ajustez le curseur pour que la barre noire soit bien au-dessus du bruit ambiant (barre colorée), mais soit franchie lors d'un claquement de mains.
+        </p>
+
+        <div class="meter-wrapper">
+            <div id="meterBar" class="meter-bar"></div>
+            <div id="thresholdLine" class="threshold-line" style="left: 35%;"></div>
+        </div>
+
+        <div class="slider-container">
+            <input type="range" id="thresholdSlider" min="2" max="98" value="35">
+        </div>
+
+        <div class="settings-row">
+            <label for="cooldownInput">Délai minimal entre 2 sons (anti-écho) :</label>
+            <div>
+                <input type="number" id="cooldownInput" value="250" min="50" max="2000" step="50"> ms
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="initBtn" class="btn-primary">Activer le microphone</button>
+        <button id="armBtn" class="btn-secondary" disabled>Armer / Réinitialiser</button>
+        <button id="manualStopBtn" class="btn-secondary" disabled>Arrêt manuel</button>
+    </div>
+</div>
+
+<script>
+    let audioCtx = null;
+    let state = 'UNINITIALIZED'; // UNINITIALIZED, ARMED, RUNNING, STOPPED
+    let threshold = 0.35;
+    let startTimeAudio = 0;
+    let elapsedTime = 0;
+    let currentPeak = 0;
+    let animFrameId = null;
+
+    const statusBadge = document.getElementById('statusBadge');
+    const timeValue = document.getElementById('timeValue');
+    const meterBar = document.getElementById('meterBar');
+    const thresholdLine = document.getElementById('thresholdLine');
+    const thresholdSlider = document.getElementById('thresholdSlider');
+    const thresholdValue = document.getElementById('thresholdValue');
+    const cooldownInput = document.getElementById('cooldownInput');
+    const initBtn = document.getElementById('initBtn');
+    const armBtn = document.getElementById('armBtn');
+    const manualStopBtn = document.getElementById('manualStopBtn');
+
+    // Mise à jour du seuil
+    thresholdSlider.addEventListener('input', (e) => {
+        const val = e.target.value;
+        threshold = val / 100;
+        thresholdLine.style.left = `${val}%`;
+        thresholdValue.textContent = `Seuil : ${val} %`;
+    });
+
+    // Activation initiale du microphone
+    initBtn.addEventListener('click', async () => {
+        try {
+            // Désactivation des traitements automatiques (AGC, réduction de bruit)
+            // indispensable pour ne pas fausser l'amplitude des claquements
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: {
+                    echoCancellation: false,
+                    noiseSuppression: false,
+                    autoGainControl: false
+                }
+            });
+
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const source = audioCtx.createMediaStreamSource(stream);
+
+            // Buffer de 1024 échantillons (~21 ms à 48 kHz) avec détection à l'échantillon près
+            const processor = audioCtx.createScriptProcessor(1024, 1, 1);
+
+            source.connect(processor);
+            processor.connect(audioCtx.destination);
+
+            processor.onaudioprocess = processAudioBuffer;
+
+            initBtn.style.display = 'none';
+            armBtn.disabled = false;
+            armChronometer();
+            updateUI();
+        } catch (err) {
+            alert("Impossible d'accéder au microphone. Vérifiez les autorisations du navigateur (HTTPS ou localhost requis).");
+            console.error(err);
+        }
+    });
+
+    // Traitement haute fréquence du flux audio
+    function processAudioBuffer(event) {
+        const input = event.inputBuffer.getChannelData(0);
+        const sampleRate = event.inputBuffer.sampleRate;
+        const bufferTime = event.playbackTime || audioCtx.currentTime;
+        const cooldownSec = (parseFloat(cooldownInput.value) || 250) / 1000;
+
+        let localMax = 0;
+
+        for (let i = 0; i < input.length; i++) {
+            const absVal = Math.abs(input[i]);
+            if (absVal > localMax) localMax = absVal;
+
+            if (absVal >= threshold) {
+                // Horodatage exact à l'échantillon près (résolution ~0.02 ms)
+                const exactSampleTime = bufferTime + (i / sampleRate);
+
+                if (state === 'ARMED') {
+                    startTimeAudio = exactSampleTime;
+                    state = 'RUNNING';
+                    onStateChange();
+                } else if (state === 'RUNNING') {
+                    const currentDuration = exactSampleTime - startTimeAudio;
+                    if (currentDuration > cooldownSec) {
+                        elapsedTime = currentDuration;
+                        state = 'STOPPED';
+                        onStateChange();
+                    }
+                }
+            }
+        }
+
+        // Lissage visuel pour le vu-mètre
+        currentPeak = Math.max(localMax, currentPeak * 0.85);
+    }
+
+    function armChronometer() {
+        state = 'ARMED';
+        elapsedTime = 0;
+        timeValue.textContent = '0.000';
+        onStateChange();
+    }
+
+    function onStateChange() {
+        if (state === 'ARMED') {
+            statusBadge.textContent = 'Prêt — En attente du 1er son';
+            statusBadge.className = 'status-badge armed';
+            manualStopBtn.disabled = true;
+        } else if (state === 'RUNNING') {
+            statusBadge.textContent = 'En cours — En attente du 2nd son';
+            statusBadge.className = 'status-badge running';
+            manualStopBtn.disabled = false;
+        } else if (state === 'STOPPED') {
+            statusBadge.textContent = 'Terminé';
+            statusBadge.className = 'status-badge stopped';
+            timeValue.textContent = elapsedTime.toFixed(3);
+            manualStopBtn.disabled = true;
+        }
+    }
+
+    function updateUI() {
+        // Mise à jour de la jauge sonore
+        const displayPercent = Math.min(100, currentPeak * 100);
+        meterBar.style.width = `${displayPercent}%`;
+
+        // Mise à jour de l'affichage du temps pendant que le chrono tourne
+        if (state === 'RUNNING' && audioCtx) {
+            const currentElapsed = Math.max(0, audioCtx.currentTime - startTimeAudio);
+            timeValue.textContent = currentElapsed.toFixed(3);
+        }
+
+        animFrameId = requestAnimationFrame(updateUI);
+    }
+
+    armBtn.addEventListener('click', armChronometer);
+
+    manualStopBtn.addEventListener('click', () => {
+        if (state === 'RUNNING' && audioCtx) {
+            elapsedTime = audioCtx.currentTime - startTimeAudio;
+            state = 'STOPPED';
+            onStateChange();
+        }
+    });
+</script>
+
+</body>
+</html>
