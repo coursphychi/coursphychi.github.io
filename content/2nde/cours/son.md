@@ -1,6 +1,7 @@
 +++
 title = "Le son"
 draft = false
+hidden = true
 +++
 
 <link rel="stylesheet" href="/css/cours.css">
