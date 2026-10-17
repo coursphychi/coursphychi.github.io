@@ -603,7 +603,8 @@ void loop() {
 <summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Tout le monde entend-il jusqu'à 20&nbsp;000&nbsp;Hz&nbsp;?</span></summary>
 <div class="nt-d-body">
 <p>Non&nbsp;! Les limites de 20&nbsp;Hz et 20&nbsp;000&nbsp;Hz sont celles d'une oreille jeune et en bonne santé. Avec l'âge, on perd progressivement les aigus&nbsp;: c'est la <b>presbyacousie</b>. Beaucoup d'adultes n'entendent plus au-delà de 15&nbsp;000&nbsp;Hz, parfois bien moins. Une exposition répétée à des sons trop forts accélère cette perte, et elle est définitive.</p>
-<p>Testez-vous avec le générateur de sons ci-dessus (à volume modéré)&nbsp;: à partir de quelle fréquence n'entendez-vous plus rien&nbsp;? Comparez avec vos camarades… et avec vos professeurs. Attention, certains haut-parleurs ne reproduisent pas non plus les fréquences les plus aiguës.</p>
+<p>Testez-vous avec le générateur de sons ci-dessus (à volume modéré)&nbsp;: à partir de quelle fréquence n'entendez-vous plus rien&nbsp;?<br>
+Attention, certains haut-parleurs ne reproduisent pas les fréquences les plus aiguës.</p>
 </div>
 </details>
 

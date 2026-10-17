@@ -42,14 +42,14 @@ td, th {
 <td style="border-top:none;border-bottom:none;"><a href="/exosonar.pdf"><b>Sonar</b></a> + <a href="/exosonar-corr.pdf" style="color:#ff0000"><b style="color:#FF644E;"><i class="fa-solid fa-pen-nib"></i></b></a></td>
 </tr>
 <tr>
-<td style="border-top:none;"><a href="/exotessiture.pdf"><b>Tessiture</b></a> + <a href="https://www.desmos.com/calculator/jo42kizxcc"><b style="color:#00AB8E;"><i class="fa-solid fa-computer"></i></b></a></td>
+<td style="border-top:none;"><a href="/exotessiture.pdf"><b>Tessiture</b></a> + <a href="https://www.desmos.com/calculator/jo42kizxcc"><b style="color:#FEAE00;"><i class="fa-solid fa-wave-square"></i></b></a></td>
 </tr>
 <tr>
 <th rowspan="2">TP</th>
-<td style="border-bottom:none;"><a href="/tpvitson2nde.pdf"><b>Mesure de la vitesse du son</b></a> + <a href="/deuxmicros.html"><b style="color:#00AB8E;"><i class="fa-solid fa-computer"></i></b></a></td>
+<td style="border-bottom:none;"><a href="/tpvitson2nde.pdf"><b>Mesure de la vitesse du son</b></a> + <a href="/deuxmicros.html"><b style="color:#FEAE00;"><i class="fa-solid fa-stopwatch"></i></b></a></td>
 </tr>
 <tr>
-<td style="border-top:none;"><a href="/tpmusic.pdf"><b>Analyse d'un son musical</b></a> + <a href="/oscilloscope.html"><b style="color:#00AB8E;"><i class="fa-solid fa-computer"></i></b></a></td>
+<td style="border-top:none;"><a href="/tpmusic.pdf"><b>Analyse d'un son musical</b></a> + <a href="/oscilloscope.html"><b style="color:#FEAE00;"><i class="fa-solid fa-music"></i></b></a></td>
 </tr>
 <tr>
 <th rowspan="1">Webapp</th>
