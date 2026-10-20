@@ -202,7 +202,7 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
 
 ### Et sur Terre&nbsp;? {.nt-h3}
 
-<p>Sur Terre, un objet lâché tombe&nbsp;: son vecteur vitesse n'est pas constant, il subit une action, celle de la Terre. Mais cette action est <b>verticale</b>. Dans la direction horizontale, si l'on néglige l'action de l'air, rien n'agit sur lui&nbsp;: le principe d'inertie s'applique alors à cette seule direction, et l'objet <b>conserve sa vitesse horizontale</b>.</p>
+<p>Sur Terre, un objet lâché tombe&nbsp;: son vecteur vitesse n'est pas constant, il subit une action, celle de la Terre. Mais cette action est <b>verticale</b>. Dans la direction horizontale, si l'on néglige l'action de l'air, rien n'agit sur lui&nbsp;: le principe d'inertie s'applique alors à cette seule direction, et l'objet <b>conserve sa vitesse horizontale</b>. Nous détaillerons ce raisonnement dans la partie 3, une fois les forces introduites.</p>
 
 <div class="nt-lab" id="lab-velo">
 <p class="nt-tag"><i class="fa-solid fa-bicycle"></i>Animation</p>
@@ -214,9 +214,9 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
 <p class="nt-msg" aria-live="polite"></p>
 </div>
 
-<div class="nt-b nt-prop">
-<p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir</p>
-<p>Le principe d'inertie peut s'appliquer à une seule direction&nbsp;: un système soumis uniquement à son poids, qui est vertical, ne subit aucune action horizontale et <span class="imp nt-hole">conserve sa vitesse horizontale</span>.</p>
+<div class="nt-b nt-demo-box">
+<p class="nt-tag"><i class="fa-solid fa-eye"></i>Première approche</p>
+<p>Le principe d'inertie peut s'appliquer à une seule direction&nbsp;: un objet qui ne subit que l'action de la Terre, verticale, ne subit aucune action horizontale et conserve donc sa vitesse horizontale. Nous y reviendrons en détail dans la partie 3.</p>
 </div>
 
 ### Un principe valable dans certains référentiels seulement {.nt-h3}
@@ -372,9 +372,11 @@ La réaction du support compense donc le poids, et la force de propulsion compen
 
 <p>Sur Terre, deux obstacles empêchent cependant d'observer les beaux mouvements rectilignes uniformes de la station&nbsp;:</p>
 <ul class="nt-facts">
-<li><b>Le poids</b> agit toujours… à moins qu'une autre force ne le compense. C'est le cas si l'objet repose sur un support horizontal&nbsp;: la réaction du support compense exactement le poids.</li>
-<li><b>Les frottements</b> freinent l'objet en mouvement. Il y en avait aussi dans l'ISS, ceux de l'air, mais ils sont beaucoup plus faibles que ceux d'un support solide.</li>
+<li><b>Les frottements</b> freinent l'objet en mouvement. Il y en avait aussi dans l'ISS, ceux de l'air, mais ils sont beaucoup plus faibles que ceux d'un support solide. Leur effet dépend de la durée d'observation (partie 3.1).</li>
+<li><b>Le poids</b> agit toujours… à moins qu'une autre force ne le compense, comme la réaction d'un support horizontal. Et même quand il n'est pas compensé, il n'agit que verticalement&nbsp;: le principe d'inertie s'applique encore horizontalement (partie 3.2).</li>
 </ul>
+
+### Frottements et échelle de temps {.nt-h3}
 
 <p>Si l'on diminue fortement les frottements, sur de la glace ou sur un coussin d'air, le principe d'inertie est plutôt bien illustré&nbsp;: le mouvement se conserve… du moins pendant un certain temps.</p>
 
@@ -394,7 +396,9 @@ La réaction du support compense donc le poids, et la force de propulsion compen
 
 ### La vitesse horizontale se conserve {.nt-h3}
 
-<p>Sur Terre, un objet lancé ne suit pas une ligne droite&nbsp;: il retombe, car son poids n'est compensé par rien. Le principe d'inertie semble ne plus servir à rien… Pourtant, il continue de s'appliquer, à condition de regarder le mouvement <b>direction par direction</b>.</p>
+<p>Dans la partie 1, la balle lâchée depuis un vélo nous a montré qu'un objet qui ne subit que l'action de la Terre conserve sa vitesse horizontale. Maintenant que nous savons modéliser les actions par des forces, détaillons ce raisonnement.</p>
+
+<p>Un objet lancé ne suit pas une ligne droite&nbsp;: il retombe, car son poids n'est compensé par rien. Le principe d'inertie semble ne plus servir à rien… Pourtant, il continue de s'appliquer, à condition de regarder le mouvement <b>direction par direction</b>&nbsp;:</p>
 
 <div class="nt-dirs">
 <div class="nt-dir nt-dir-h"><b><i class="fa-solid fa-arrows-left-right"></i>&nbsp; Horizontalement</b><span>Le poids est vertical&nbsp;: il ne tire ni vers l'avant, ni vers l'arrière.</span><span>Si l'on néglige les frottements de l'air, <b>aucune action horizontale</b> ne s'exerce.</span><span>D'après le principe d'inertie, la <b>vitesse horizontale reste constante</b>.</span><span class="nt-dir-res">mouvement horizontal uniforme</span></div>
@@ -583,7 +587,7 @@ $${\color{#2563EB}g} = \pu{6,67E-11 N * m2 * kg-2} \times \dfrac{\pu{5,97E24 kg}
 <summary><span class="nt-tag"><i class="fa-solid fa-comment-dots"></i>Réponse</span><span class="nt-sum">Presque autant qu'au sol&nbsp;!</span></summary>
 <div class="nt-d-body">
 <p>À 400&nbsp;km d'altitude, la distance au centre de la Terre vaut $R_\text{T} + \pu{400 km} = \pu{6,77E6 m}$, d'où $g = G\,\dfrac{M_\text{T}}{(\pu{6,77E6 m})^2} \approx \pu{8,7 N*kg-1}$, soit environ 89&nbsp;% de sa valeur au sol.</p>
-<p>Les astronautes ne flottent donc pas parce qu'il n'y aurait «&nbsp;plus de pesanteur&nbsp;»&nbsp;! Ils flottent parce que la station et tout ce qu'elle contient <b>tombent ensemble</b> vers la Terre, en permanence&nbsp;: ils sont en <b>chute libre</b>. La station va si vite horizontalement (environ $\pu{28 000 km*h-1}$) qu'en tombant, elle «&nbsp;rate&nbsp;» sans cesse la Terre et tourne autour.</p>
+<p>Les astronautes ne flottent donc pas parce qu'il n'y aurait «&nbsp;plus de pesanteur&nbsp;»&nbsp;! Ils flottent parce que la station et tout ce qu'elle contient <b>tombent ensemble</b> vers la Terre, en permanence, sous l'effet de leur seul poids&nbsp;: ils sont en <b>chute libre</b> (voir la partie 5.2). La station va si vite horizontalement (environ $\pu{28 000 km*h-1}$) qu'en tombant, elle «&nbsp;rate&nbsp;» sans cesse la Terre et tourne autour.</p>
 </div>
 </details>
 
@@ -1001,8 +1005,8 @@ plt.show()
     var chkC = $(root, '[data-in="chrono"]'), chkV = $(root, '[data-in="vec"]'), msg = $(root, '.nt-msg'), bL = $(root, '[data-act="lancer"]');
     var OBJ = [], t = 0, TF = 5, run = false, cnv, DTP = 0.5;
     function geo(o) {   /* intérieur du module (zone où les objets peuvent se déplacer) */
-      var mx = Math.max(26, o.W * 0.07), my = o.H * 0.13;
-      return { x0: mx, y0: my, w: o.W - 2 * mx, h: o.H * 0.6, cx: o.W / 2, cy: my + o.H * 0.3 };
+      var mx = Math.max(26, o.W * 0.07), my = o.H * 0.13, w = Math.min(o.W - 2 * mx, o.H * 3.2);   /* largeur plafonnée : le module garde ses proportions sur un très grand écran */
+      return { x0: (o.W - w) / 2, y0: my, w: w, h: o.H * 0.6, cx: o.W / 2, cy: my + o.H * 0.3 };
     }
     function tirage() {   /* 5 objets partent du centre : un sans vitesse, les autres avec de petites vitesses aléatoires */
       var z = geo(cnv), types = shuffle(['balle', 'stylo', 'eau', 'pomme', 'cube']), a0 = Math.random() * 2 * Math.PI, L = [];
@@ -1019,7 +1023,7 @@ plt.show()
       return L;
     }
     function draw(o) {
-      var ctx = o.ctx, W = o.W, H = o.H, z = geo(o); ctx.clearRect(0, 0, W, H); fondEspace(ctx, W, H); moduleCoupe(ctx, z, W, 'bords');
+      var ctx = o.ctx, W = o.W, H = o.H, z = geo(o); ctx.clearRect(0, 0, W, H); fondEspace(ctx, W, H); moduleCoupe(ctx, z, W, z.x0 > 140 ? 'attaches' : 'bords');
       var mob = OBJ.filter(function (ob) { return ob.vx || ob.vy; }), fix = OBJ.filter(function (ob) { return !ob.vx && !ob.vy; });
       mob.forEach(function (ob) {
         if (chkC.checked) { ob.rec.forEach(function (p) { dessinObjet(ctx, ob, z.cx + p[0], z.cy + p[1], 0.18); croix(ctx, z.cx + p[0], z.cy + p[1], ROUGE, 3.5); }); }
@@ -1406,41 +1410,68 @@ plt.show()
   (function () {
     var root = document.getElementById('lab-rugby'); if (!root) { return; }
     var chkC = $(root, '[data-in="chrono"]'), chkV = $(root, '[data-in="comp"]'), msg = $(root, '.nt-msg'), bG = $(root, '[data-act="go"]');
-    var G = 9.8, VX = 8, VY = 14, TV = 2 * VY / G, DTP = 0.25, RAL = 0.55, t = -1, cnv, NU = [[3, 0.1], [15, 0.18], [26, 0.08]];
+    var G = 9.8, VX = 8, VY = 14, TV = 2 * VY / G, DTP = 0.25, RAL = 0.55, t = -1, cnv, NU = [[4, 0.12], [14, 0.2], [23, 0.1]];
     function pos(t) { var q = Math.min(Math.max(t, 0), TV); return [2 + VX * q, Math.max(0, VY * q - 0.5 * G * q * q)]; }   /* abscisse et altitude du ballon (m) */
-    function ballon(ctx, x, y, r, a, al) { ctx.save(); ctx.globalAlpha = al; ctx.translate(x, y); ctx.rotate(a); var g = ctx.createRadialGradient(-r * 0.3, -r * 0.3, 1, 0, 0, r * 1.4); g.addColorStop(0, '#FFFFFF'); g.addColorStop(1, '#D1D5DB'); ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(0, 0, r * 1.45, r, 0, 0, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = '#B91C1C'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.ellipse(0, 0, r * 0.55, r * 0.95, 0, -1.2, 1.2); ctx.stroke(); ctx.restore(); }
+    function ballon(ctx, x, y, r, a, al) {   /* ballon de rugby : ovale, coutures et lacets */
+      ctx.save(); ctx.globalAlpha = al; ctx.translate(x, y); ctx.rotate(a);
+      var g = ctx.createRadialGradient(-r * 0.4, -r * 0.4, 1, 0, 0, r * 1.5); g.addColorStop(0, '#FFFFFF'); g.addColorStop(0.6, '#E5E7EB'); g.addColorStop(1, '#9CA3AF');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(0, 0, r * 1.5, r, 0, 0, 2 * Math.PI); ctx.fill();
+      ctx.strokeStyle = '#1D4ED8'; ctx.lineWidth = Math.max(1, r * 0.18); ctx.beginPath(); ctx.ellipse(0, 0, r * 1.5, r * 0.45, 0, Math.PI * 1.05, Math.PI * 1.95); ctx.stroke();
+      ctx.strokeStyle = '#475569'; ctx.lineWidth = 1; for (var l = -2; l <= 2; l++) { ctx.beginPath(); ctx.moveTo(l * r * 0.22, -r * 0.62); ctx.lineTo(l * r * 0.22, -r * 0.36); ctx.stroke(); }
+      ctx.restore();
+    }
+    function joueur(ctx, px, py, k, frappe) {   /* rugbyman de profil, tourné vers la droite (pieds en (px, py)) */
+      ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      var hanche = [px, py - 0.95 * k], pied = frappe ? [px + 0.78 * k, py - 1.15 * k] : [px + 0.32 * k, py], genou = frappe ? [px + 0.42 * k, py - 0.62 * k] : [px + 0.24 * k, py - 0.48 * k];
+      function seg(a, b, c, w) { ctx.strokeStyle = c; ctx.lineWidth = w; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
+      seg(hanche, [px - 0.22 * k, py - 0.48 * k], '#F2C9A0', 0.15 * k); seg([px - 0.22 * k, py - 0.48 * k], [px - 0.16 * k, py - 0.08 * k], '#B91C1C', 0.14 * k);   /* jambe d'appui : cuisse, chaussette */
+      ctx.fillStyle = '#111827'; rr(ctx, px - 0.26 * k, py - 0.1 * k, 0.32 * k, 0.1 * k, 0.04 * k); ctx.fill();
+      seg(hanche, genou, '#F2C9A0', 0.15 * k); seg(genou, pied, '#B91C1C', 0.14 * k);   /* jambe de frappe */
+      ctx.save(); ctx.translate(pied[0], pied[1]); ctx.rotate(frappe ? -0.6 : 0); ctx.fillStyle = '#111827'; rr(ctx, -0.06 * k, -0.06 * k, 0.32 * k, 0.11 * k, 0.04 * k); ctx.fill(); ctx.restore();
+      ctx.fillStyle = '#F8FAFC'; rr(ctx, px - 0.24 * k, py - 1.12 * k, 0.48 * k, 0.32 * k, 0.08 * k); ctx.fill();   /* short */
+      var gm = ctx.createLinearGradient(px - 0.25 * k, 0, px + 0.25 * k, 0); gm.addColorStop(0, '#B91C1C'); gm.addColorStop(1, '#EF4444'); ctx.fillStyle = gm; rr(ctx, px - 0.26 * k, py - 1.82 * k, 0.52 * k, 0.78 * k, 0.12 * k); ctx.fill();   /* maillot */
+      ctx.fillStyle = '#FFFFFF'; ctx.fillRect(px - 0.26 * k, py - 1.5 * k, 0.52 * k, 0.07 * k); ctx.font = 'bold ' + Math.round(0.22 * k) + 'px ' + FONT; ctx.textAlign = 'center'; ctx.fillText('10', px, py - 1.2 * k);
+      seg([px + 0.1 * k, py - 1.7 * k], [px + 0.45 * k, py - 1.35 * k], '#B91C1C', 0.12 * k); seg([px - 0.1 * k, py - 1.7 * k], [px - 0.48 * k, py - 1.45 * k], '#B91C1C', 0.12 * k);   /* bras écartés pour l'équilibre */
+      ctx.fillStyle = '#F2C9A0'; ctx.beginPath(); ctx.arc(px + 0.02 * k, py - 2.02 * k, 0.17 * k, 0, 2 * Math.PI); ctx.fill(); ctx.fillStyle = '#3F2A1D'; ctx.beginPath(); ctx.arc(px - 0.01 * k, py - 2.08 * k, 0.17 * k, Math.PI * 0.95, Math.PI * 2.0); ctx.fill();
+      ctx.restore();
+    }
     function draw(o) {
-      var ctx = o.ctx, W = o.W, H = o.H, sol = H - 40, k = Math.min((W - 40) / 28, (sol - 30) / 11), x0 = 30, sx = function (x) { return x0 + x * k; }, sy = function (y) { return sol - y * k; };
-      ctx.clearRect(0, 0, W, H); var gs = ctx.createLinearGradient(0, 0, 0, sol); gs.addColorStop(0, '#7DD3FC'); gs.addColorStop(1, '#E0F2FE'); ctx.fillStyle = gs; ctx.fillRect(0, 0, W, sol);
-      ctx.fillStyle = '#FDE68A'; ctx.beginPath(); ctx.arc(W - 40, 26, 14, 0, 2 * Math.PI); ctx.fill();   /* Soleil, haut dans le ciel */
-      NU.forEach(function (n) { ctx.fillStyle = 'rgba(255,255,255,0.85)'; ctx.beginPath(); ctx.ellipse(sx(n[0]), n[1] * H, 30, 9, 0, 0, 2 * Math.PI); ctx.ellipse(sx(n[0]) + 16, n[1] * H - 6, 16, 9, 0, 0, 2 * Math.PI); ctx.fill(); });
-      for (var b = 0; b < 8; b++) { ctx.fillStyle = b % 2 ? '#22C55E' : '#16A34A'; ctx.fillRect(b * W / 8, sol, W / 8 + 1, H - sol); }   /* pelouse tondue en bandes */
-      ctx.fillStyle = 'rgba(255,255,255,0.85)'; [5, 15, 25].forEach(function (m) { ctx.fillRect(sx(m) - 1, sol, 2, H - sol); });
-      ctx.strokeStyle = '#F8FAFC'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(sx(27), sol); ctx.lineTo(sx(27), sol - 3.4 * k); ctx.moveTo(sx(27) + 10, sol); ctx.lineTo(sx(27) + 10, sol - 3.4 * k); ctx.moveTo(sx(27), sol - 1.2 * k); ctx.lineTo(sx(27) + 10, sol - 1.2 * k); ctx.stroke();   /* poteaux, en perspective */
-      ctx.strokeStyle = 'rgba(15,23,42,0.35)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(sx(0.5), sol); ctx.lineTo(sx(0.5), sy(10.5)); ctx.stroke();   /* axe vertical : projection du ballon */
-      for (var m2 = 0; m2 <= 10; m2 += 2) { ctx.fillStyle = 'rgba(15,23,42,0.45)'; ctx.fillRect(sx(0.5) - 3, sy(m2), 6, 1); }
+      var ctx = o.ctx, W = o.W, H = o.H, sol = H - 46, k = Math.min((W - 40) / 28, (sol - 34) / 11.5), x0 = (W - 28 * k) / 2, sx = function (x) { return x0 + x * k; }, sy = function (y) { return sol - y * k; };   /* scène centrée */
+      ctx.clearRect(0, 0, W, H);
+      var gs = ctx.createLinearGradient(0, 0, 0, sol); gs.addColorStop(0, '#38BDF8'); gs.addColorStop(0.7, '#BAE6FD'); gs.addColorStop(1, '#E0F2FE'); ctx.fillStyle = gs; ctx.fillRect(0, 0, W, sol);
+      var gsol = ctx.createRadialGradient(W - 44, 30, 2, W - 44, 30, 40); gsol.addColorStop(0, 'rgba(254,240,138,1)'); gsol.addColorStop(0.4, 'rgba(253,224,71,0.9)'); gsol.addColorStop(1, 'rgba(253,224,71,0)'); ctx.fillStyle = gsol; ctx.beginPath(); ctx.arc(W - 44, 30, 40, 0, 2 * Math.PI); ctx.fill();   /* Soleil, haut dans le ciel */
+      NU.forEach(function (n) { var cxn = x0 + n[0] * k; ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.beginPath(); ctx.ellipse(cxn, n[1] * H, 34, 10, 0, 0, 2 * Math.PI); ctx.ellipse(cxn + 18, n[1] * H - 7, 18, 10, 0, 0, 2 * Math.PI); ctx.ellipse(cxn - 16, n[1] * H - 3, 14, 8, 0, 0, 2 * Math.PI); ctx.fill(); });
+      var ht = sol - 0.065 * H;   /* tribune lointaine, discrète, avec le public */
+      ctx.fillStyle = '#94A3B8'; ctx.fillRect(0, ht - 6, W, 0.065 * H + 6); ctx.fillStyle = '#CBD5E1'; ctx.fillRect(0, ht - 9, W, 3);
+      for (var cx2 = 4; cx2 < W; cx2 += 6) { for (var r2 = 0; r2 < 2; r2++) { ctx.fillStyle = ['rgba(248,113,113,0.7)', 'rgba(251,191,36,0.7)', 'rgba(96,165,250,0.7)', 'rgba(248,250,252,0.8)', 'rgba(52,211,153,0.7)'][(cx2 * 7 + r2 * 13) % 5]; ctx.beginPath(); ctx.arc(cx2 + (r2 % 2) * 3, ht + 2 + r2 * 0.028 * H, 1.6, 0, 2 * Math.PI); ctx.fill(); } }
+      ctx.fillStyle = '#64748B'; ctx.fillRect(0, sol - 4, W, 4);
+      for (var b = 0; b < 12; b++) { ctx.fillStyle = b % 2 ? '#22C55E' : '#16A34A'; ctx.fillRect(b * W / 12, sol, W / 12 + 1, H - sol); }   /* pelouse tondue en bandes */
+      ctx.fillStyle = 'rgba(255,255,255,0.85)'; [-2, 8, 18, 28].forEach(function (m) { if (sx(m) > 0 && sx(m) < W) { ctx.fillRect(sx(m) - 1, sol, 2, H - sol); } });
+      var xp = sx(27.2);   /* poteaux en H */
+      ctx.strokeStyle = '#F8FAFC'; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(xp, sol); ctx.lineTo(xp, sy(9)); ctx.moveTo(xp + 12, sol - 4); ctx.lineTo(xp + 12, sy(9) - 4); ctx.moveTo(xp, sy(3)); ctx.lineTo(xp + 12, sy(3) - 4); ctx.stroke(); ctx.fillStyle = '#EF4444'; ctx.fillRect(xp - 3, sol - 0.8 * k, 18, 0.8 * k);
+      var axe = sx(0.4);   /* axe vertical gradué : projection du ballon */
+      ctx.strokeStyle = 'rgba(15,23,42,0.55)'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(axe, sol); ctx.lineTo(axe, sy(10.6)); ctx.stroke();
+      for (var m2 = 0; m2 <= 10; m2 += 2) { ctx.fillStyle = 'rgba(15,23,42,0.6)'; ctx.fillRect(axe - 4, sy(m2), 8, 1.2); if (m2) { pill(ctx, m2 + ' m', axe - 8, sy(m2), { size: 9.5, col: '#0F172A', bg: 'rgba(255,255,255,0.75)', align: 'right' }); } }
       var tt = Math.max(t, 0);
-      if (chkC.checked && t >= 0) { for (var tj = 0; tj <= Math.min(tt, TV) + 1e-9; tj += DTP) { var q = pos(tj); ballon(ctx, sx(q[0]), sy(q[1]) - 0.25 * k, 0.22 * k, 0, 0.45); croix(ctx, sx(q[0]), sol - 3, '#0F172A', 3.5); croix(ctx, sx(0.5), sy(q[1]) - 0.25 * k, ROUGE, 3.5); } }
+      if (t >= 0) { ctx.save(); ctx.setLineDash([2, 5]); ctx.strokeStyle = 'rgba(15,23,42,0.35)'; ctx.lineWidth = 1.5; ctx.beginPath(); for (var i = 0; i <= 60; i++) { var ti = Math.min(tt, TV) * i / 60, q0 = pos(ti); if (i) { ctx.lineTo(sx(q0[0]), sy(q0[1]) - 0.25 * k); } else { ctx.moveTo(sx(q0[0]), sy(q0[1]) - 0.25 * k); } } ctx.stroke(); ctx.restore(); }
+      if (chkC.checked && t >= 0) { for (var tj = 0; tj <= Math.min(tt, TV) + 1e-9; tj += DTP) { var q = pos(tj); ballon(ctx, sx(q[0]), sy(q[1]) - 0.25 * k, 0.2 * k, -tj * 4, 0.4); croix(ctx, sx(q[0]), sol + 10, '#F8FAFC', 4); croix(ctx, axe, sy(q[1]) - 0.25 * k, ROUGE, 4); } }
       var bq = pos(tt), bx = sx(bq[0]), by = sy(bq[1]) - 0.25 * k;
-      ctx.fillStyle = 'rgba(15,23,42,' + (0.35 - Math.min(0.2, bq[1] * 0.02)).toFixed(2) + ')'; ctx.beginPath(); ctx.ellipse(bx, sol - 1, 0.32 * k, 0.07 * k, 0, 0, 2 * Math.PI); ctx.fill();   /* ombre, juste sous le ballon */
-      ctx.save(); ctx.setLineDash([3, 4]); ctx.strokeStyle = 'rgba(15,23,42,0.35)'; ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx, sol - 2); ctx.moveTo(bx, by); ctx.lineTo(sx(0.5), by); ctx.stroke(); ctx.restore();
-      ctx.fillStyle = ROUGE; ctx.beginPath(); ctx.arc(sx(0.5), by, 4, 0, 2 * Math.PI); ctx.fill();
-      var px = sx(1.6), py = sol, frappe = t >= 0 && t < 0.3, pied = frappe ? [px + 0.75 * k, py - 1.35 * k] : [px + 0.3 * k, py];   /* le joueur : jambe levée au moment de la frappe */
-      ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#1E3A8A'; ctx.lineWidth = 0.13 * k; ctx.beginPath(); ctx.moveTo(px, py - 1.0 * k); ctx.lineTo(px - 0.25 * k, py - 0.5 * k); ctx.lineTo(px - 0.2 * k, py); ctx.moveTo(px, py - 1.0 * k); ctx.lineTo((px + pied[0]) / 2 + (frappe ? 0 : 0.1 * k), (py - 1.0 * k + pied[1]) / 2 + (frappe ? 0.15 * k : 0)); ctx.lineTo(pied[0], pied[1]); ctx.stroke();
-      ctx.strokeStyle = '#DC2626'; ctx.lineWidth = 0.11 * k; ctx.beginPath(); ctx.moveTo(px, py - 1.6 * k); ctx.lineTo(px - 0.45 * k, py - 1.2 * k); ctx.moveTo(px, py - 1.6 * k); ctx.lineTo(px + 0.4 * k, py - 1.15 * k); ctx.stroke();
-      ctx.fillStyle = '#DC2626'; rr(ctx, px - 0.18 * k, py - 1.75 * k, 0.36 * k, 0.8 * k, 5); ctx.fill(); ctx.fillStyle = '#F2C9A0'; ctx.beginPath(); ctx.arc(px, py - 1.95 * k, 0.17 * k, 0, 2 * Math.PI); ctx.fill(); ctx.restore();
+      ctx.fillStyle = 'rgba(15,23,42,' + (0.38 - Math.min(0.22, bq[1] * 0.022)).toFixed(2) + ')'; ctx.beginPath(); ctx.ellipse(bx, sol + 2, 0.32 * k, 0.08 * k, 0, 0, 2 * Math.PI); ctx.fill();   /* ombre, juste sous le ballon */
+      ctx.save(); ctx.setLineDash([3, 4]); ctx.strokeStyle = 'rgba(15,23,42,0.4)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(bx, by + 0.2 * k); ctx.lineTo(bx, sol); ctx.moveTo(bx - 0.3 * k, by); ctx.lineTo(axe, by); ctx.stroke(); ctx.restore();
+      ctx.fillStyle = ROUGE; ctx.beginPath(); ctx.arc(axe, by, 4.5, 0, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 1.5; ctx.stroke();
+      joueur(ctx, sx(1.4), sol, k, t >= 0 && t < 0.3);
       ballon(ctx, bx, by, 0.22 * k, t > 0 && t < TV ? -t * 4 : 0, 1);
       if (t > 0 && t < TV) {
         var vy = VY - G * t, f = 0.11 * k;
-        vec(ctx, bx, by, bx + VX * f, by - vy * f, ORANGE, 2.8, 11);
-        if (chkV.checked) { ctx.save(); ctx.setLineDash([4, 3]); vec(ctx, bx, by, bx + VX * f, by, '#047857', 2, 9); if (Math.abs(vy) > 0.3) { vec(ctx, bx, by, bx, by - vy * f, '#BE123C', 2, 9); } ctx.restore(); }
-        vec(ctx, bx, sol + 14, bx + VX * f, sol + 14, '#047857', 2.4, 9);   /* la vitesse de l'ombre */
+        if (chkV.checked) { ctx.save(); ctx.setLineDash([4, 3]); vec(ctx, bx, by, bx + VX * f, by, '#047857', 2.2, 9); if (Math.abs(vy) > 0.3) { vec(ctx, bx, by, bx, by - vy * f, '#BE123C', 2.2, 9); } ctx.restore(); }
+        vec(ctx, bx, by, bx + VX * f, by - vy * f, ORANGE, 3, 12);
+        vec(ctx, bx, sol + 26, bx + VX * f, sol + 26, '#047857', 2.6, 10);   /* la vitesse de l'ombre, toujours la même */
       }
-      pill(ctx, 'ombre\u00A0: ' + (t > 0 && t < TV ? fmt(VX, 0) : '0') + ' m·s⁻¹', Math.min(W - 80, bx + 0.5 * k), sol + 28, { size: 11, col: '#065F46', bg: 'rgba(255,255,255,0.9)', align: 'left' });
+      pill(ctx, 'vitesse de l\u2019ombre\u00A0: ' + (t > 0 && t < TV ? fmt(VX, 0) : '0') + ' m·s⁻¹', Math.min(W - 10, Math.max(150, bx + 0.6 * k + 140)), sol + 26, { size: 11, col: '#065F46', bg: 'rgba(255,255,255,0.92)', align: 'right' });
     }
     var loop = Loop(root, function (dt) { if (t < 0) { return false; } t += dt * RAL; if (t >= TV) { t = TV; draw(cnv); fin(); return false; } draw(cnv); return true; });
-    function fin() { bG.disabled = false; msg.innerHTML = 'Sur le sol, les positions successives de l\u2019ombre (croix noires) sont <b>également espacées</b>&nbsp;: la vitesse horizontale du ballon est restée constante, égale à 8&nbsp;m·s⁻¹. Sur l\u2019axe vertical (croix rouges), les positions se resserrent à la montée puis s\u2019écartent à la descente&nbsp;: la vitesse verticale varie, car le poids agit verticalement.'; }
-    cnv = Canvas($(root, 'canvas'), function (W) { return W < 520 ? 280 : 330; }, draw);
+    function fin() { bG.disabled = false; msg.innerHTML = 'Sur le sol, les positions successives de l\u2019ombre (croix blanches) sont <b>également espacées</b>&nbsp;: la vitesse horizontale du ballon est restée constante, égale à 8&nbsp;m·s⁻¹. Sur l\u2019axe vertical (croix rouges), les positions se resserrent à la montée puis s\u2019écartent à la descente&nbsp;: la vitesse verticale varie, car le poids agit verticalement.'; }
+    cnv = Canvas($(root, 'canvas'), function (W) { return W < 520 ? 300 : 360; }, draw);
     bG.addEventListener('click', function () { t = 0; bG.disabled = true; msg.textContent = 'Le ballon s\u2019élève… regardez son ombre.'; if (RM) { t = TV; draw(cnv); fin(); return; } loop.kick(); });
     [chkC, chkV].forEach(function (c) { c.addEventListener('change', function () { draw(cnv); }); });
     msg.textContent = 'Le Soleil est haut dans le ciel\u00A0: l\u2019ombre du ballon est juste en dessous de lui. Tapez la chandelle\u00A0!'; draw(cnv);
@@ -1562,7 +1593,7 @@ plt.show()
       ctx.strokeStyle = '#64748B'; ctx.lineWidth = 1.5; rr(ctx, x + 5 * s, y - 21 * s, 42 * s, 42 * s, 3 * s); ctx.stroke(); ctx.fillStyle = '#334155'; rr(ctx, x + 18 * s, y - 24 * s, 16 * s, 4 * s, 2 * s); ctx.fill();
       ctx.fillStyle = '#FBBF24'; ctx.fillRect(x + 8 * s, y + 8 * s, 14 * s, 6 * s); ctx.fillStyle = '#1F2937'; ctx.fillRect(x + 9 * s, y + 10 * s, 12 * s, 1.5 * s);
     }
-    function geo(o) { var W = o.W, H = o.H, mx = Math.max(26, W * 0.07), z = { x0: mx, y0: H * 0.13, w: W - 2 * mx, h: H * 0.62 }; z.cx = z.x0 + z.w / 2; z.cy = z.y0 + z.h / 2; z.k = z.w / 8; z.s = z.k / 55; return z; }
+    function geo(o) { var W = o.W, H = o.H, mx = Math.max(26, W * 0.07), wm = Math.min(W - 2 * mx, H * 3.2), z = { x0: (W - wm) / 2, y0: H * 0.13, w: wm, h: H * 0.62 };   /* largeur plafonnée : personnages et module restent à l'échelle */ z.cx = z.x0 + z.w / 2; z.cy = z.y0 + z.h / 2; z.k = z.w / 8; z.s = z.k / 55; return z; }
     function scene(o) {   /* positions à l'écran : hanches de l'astronaute, bord gauche de l'objet, mains */
       var z = geo(o), k = z.k, s = z.s, e = etat(Math.max(t, 0)), xo = z.cx + 0.1 * k + e[1] * k, yh = z.cy + 10 * s;
       var dx0 = 14 * s, ha = z.cx + 0.1 * k - dx0 - 3 * s + e[0] * k, ep = [ha + 3 * s, yh - 27 * s];
@@ -1571,7 +1602,7 @@ plt.show()
     }
     function draw(o) {
       var ctx = o.ctx, W = o.W, H = o.H, S = scene(o), z = S.z, k = z.k, s = z.s, cy = z.cy, xo = S.xo, e = S.e;
-      ctx.clearRect(0, 0, W, H); fondEspace(ctx, W, H); moduleCoupe(ctx, z, W, 'bords');
+      ctx.clearRect(0, 0, W, H); fondEspace(ctx, W, H); moduleCoupe(ctx, z, W, z.x0 > 140 ? 'attaches' : 'bords');
       personne(ctx, S.ha, S.yh, s, { mains: [[S.main[0], S.main[1] - 3 * s], [S.main[0], S.main[1] + 3 * s]] });
       forme(ctx, xo, cy, s);
       if (t >= 0 && t <= TP) { var Fv = (M * m / (M + m)) * (U / TP), Lf = Math.min(0.9 * k, 18 + 12 * Math.log10(1 + Fv)); vec(ctx, xo + 2, cy - 30 * s, xo + 2 + Lf, cy - 30 * s, FORCE, 3, 12); vec(ctx, xo - 2, cy - 30 * s, xo - 2 - Lf, cy - 30 * s, FORCE, 3, 12); pill(ctx, 'deux forces de même intensité\u00A0: ' + sci(Fv, 1) + ' N', z.cx, z.y0 + 16, { size: 11.5, col: FORCE_T, stroke: '#FECACA' }); }
