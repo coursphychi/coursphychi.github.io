@@ -11,46 +11,54 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <style>
   :root {
-    --papier: #F2F4F9;
+    --papier: #F0F3F9;
+    --enonce: #FFFFFF;
+    --enonce-pied: #F7F9FC;
     --carte: #FFFFFF;
-    --encre: #16223F;
-    --encre-2: #2A3A66;
-    --gris: #636D86;
-    --trait: #D5DBE7;
-    --trait-fort: #B3BCCD;
-    --survol: #EEF1F8;
-    --feutre: rgba(255, 219, 40, .88);
-    --feutre-bord: rgba(255, 219, 40, .5);
-    --feutre-reflet: rgba(255, 255, 255, .16);
+    --encre: #14203B;
+    --encre-2: #283A66;
+    --gris: #5A657E;
+    --trait: #D5DCE8;
+    --trait-fort: #AEB8CC;
+    --survol: #EDF1F9;
+    --feutre: rgba(255, 220, 45, .88);
+    --feutre-bord: rgba(255, 210, 20, .52);
+    --feutre-reflet: rgba(255, 255, 255, .22);
     --feutre-melange: multiply;
     --feutre-texte: inherit;
-    --stylo: #1D5BCC;
-    --juste: #137A48;
-    --juste-fond: #E4F4EA;
-    --faux: #C22A1F;
+    --stylo: #1856C9;
+    --stylo-fond: rgba(24, 86, 201, .09);
+    --juste: #117543;
+    --juste-fond: #E3F5EB;
+    --faux: #BD271C;
     --faux-fond: #FCEAE8;
+    --ombre: 0 2px 8px rgba(20, 32, 59, .05);
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --papier: #0F1526;
-      --carte: #172038;
-      --encre: #E7EBF5;
-      --encre-2: #C9D2EA;
-      --gris: #9BA5BF;
-      --trait: #2B3553;
-      --trait-fort: #45507A;
-      --survol: #1E2945;
-      --feutre: rgba(255, 205, 30, .36);
-      --feutre-bord: rgba(255, 205, 30, .16);
-      --feutre-reflet: transparent;
+      --papier: #0C1221;
+      --enonce: #131C31;
+      --enonce-pied: #17223B;
+      --carte: #162038;
+      --encre: #E9EDF7;
+      --encre-2: #C8D2EB;
+      --gris: #94A0BC;
+      --trait: #273250;
+      --trait-fort: #414F78;
+      --survol: #1C2947;
+      --feutre: rgba(250, 196, 25, .42);
+      --feutre-bord: rgba(250, 196, 25, .22);
+      --feutre-reflet: rgba(255, 255, 255, .06);
       --feutre-melange: normal;
-      --feutre-texte: #FFF3C4;
-      --stylo: #86B4FF;
-      --juste: #56D08F;
-      --juste-fond: rgba(86, 208, 143, .13);
-      --faux: #FF8074;
-      --faux-fond: rgba(255, 128, 116, .13);
+      --feutre-texte: #FFF7D6;
+      --stylo: #84B3FF;
+      --stylo-fond: rgba(132, 179, 255, .13);
+      --juste: #52D18C;
+      --juste-fond: rgba(82, 209, 140, .14);
+      --faux: #FF8075;
+      --faux-fond: rgba(255, 128, 117, .14);
+      --ombre: 0 4px 14px rgba(0, 0, 0, .22);
       color-scheme: dark;
     }
   }
@@ -62,143 +70,235 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  .quiz { max-width: 40rem; margin: 0 auto; padding: 1.2rem 1.1rem 2.5rem; min-height: 100vh; display: flex; flex-direction: column; }
+  .quiz {
+    max-width: 41rem;
+    margin: 0 auto;
+    padding: 1.1rem 1.1rem 2.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
   /* ---------- en-tête ---------- */
   .top { display: flex; justify-content: space-between; align-items: center; gap: .8rem; }
-  .title { font-weight: 700; font-size: 1rem; letter-spacing: .01em; }
-  .meta { display: flex; align-items: center; gap: .75rem; color: var(--gris); font-size: .95rem; font-variant-numeric: tabular-nums; }
+  .title { font-weight: 700; font-size: 1.05rem; letter-spacing: .01em; }
+  .meta {
+    display: flex; align-items: center; gap: .65rem;
+    color: var(--gris); font-size: .92rem; font-variant-numeric: tabular-nums;
+  }
   .chrono:empty { display: none; }
+  .count { font-weight: 700; color: var(--encre-2); }
   .serie {
-    font-size: .85rem; font-weight: 700; color: var(--juste); background: var(--juste-fond);
+    font-size: .82rem; font-weight: 700; color: var(--juste); background: var(--juste-fond);
     padding: .12rem .55rem; border-radius: 999px; white-space: nowrap;
   }
   .serie:empty { display: none; }
   .serie.pop { animation: pop .35s ease-out; }
 
   /* escalier : la hauteur de chaque marche encode la difficulté de la question */
-  .ticks { display: flex; align-items: flex-end; gap: 4px; height: 26px; margin-top: .7rem; }
-  .tick { flex: 1; height: var(--h, 30%); min-height: 4px; border-radius: 3px 3px 1px 1px; background: var(--trait); transition: background-color .2s; }
+  .ticks { display: flex; align-items: flex-end; gap: 5px; height: 24px; margin-top: .65rem; }
+  .tick {
+    flex: 1; height: var(--h, 30%); min-height: 4px;
+    border-radius: 3px 3px 1px 1px; background: var(--trait);
+    transition: background-color .2s, transform .2s;
+  }
   .tick.current { background: var(--encre); }
   .tick.ok { background: var(--juste); }
   .tick.ko { background: var(--faux); }
 
-  /* ---------- question ---------- */
-  .stage { flex: 1; padding: 1.4rem 0 1rem; }
+  /* ---------- carte d'énoncé ---------- */
+  .stage { flex: 1; padding: 1.15rem 0 1rem; }
   .fade { animation: appear .2s ease-out; }
   @keyframes appear { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
-  .context { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: .45rem; margin: 0 0 .3rem; min-height: 1.7em; color: var(--gris); font-size: .98rem; }
-  .niveau { font-size: .78rem; font-weight: 700; color: var(--encre-2); border: 1px solid var(--trait-fort); border-radius: 999px; padding: .05rem .5rem; }
-  .relation {
-    --taille-rel: clamp(2rem, 8.5vw, 3.3rem);
-    font-size: var(--taille-rel);
-    min-height: calc(2.8 * var(--taille-rel));
-    display: flex; align-items: center; justify-content: center;
-    overflow-x: auto; padding: .2em .25em;
+  .problem-card {
+    background: var(--enonce);
+    border: 1.5px solid var(--trait);
+    border-radius: 14px;
+    box-shadow: var(--ombre);
+    overflow: hidden;
+    margin-bottom: 1rem;
   }
-  .prompt { text-align: center; margin: .6rem 0 1.1rem; font-size: 1.15rem; font-weight: 700; }
-  .prompt .var { font-size: 1.1em; margin-left: .2em; }
+  .context {
+    display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+    gap: .45rem; margin: 0; padding: .6rem .9rem 0;
+    min-height: 1.8rem; color: var(--gris); font-size: .92rem;
+  }
+  .context:empty { min-height: .6rem; padding: 0; }
+  .niveau {
+    font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+    color: var(--encre-2); background: var(--enonce-pied);
+    border: 1px solid var(--trait); border-radius: 999px; padding: .05rem .5rem;
+  }
+  .relation {
+    --taille-rel: clamp(1.95rem, 7.8vw, 3.05rem);
+    font-size: var(--taille-rel);
+    min-height: calc(2.85 * var(--taille-rel));
+    display: flex; align-items: center; justify-content: center;
+    overflow-x: auto; padding: .45em .55em;
+  }
+  .prompt {
+    display: flex; justify-content: center; align-items: center; gap: .4rem;
+    margin: 0; padding: .65rem .9rem;
+    background: var(--enonce-pied); border-top: 1px solid var(--trait);
+    font-size: 1.05rem; font-weight: 700; color: var(--encre-2);
+  }
+  .prompt .var { font-size: 1.18em; color: var(--encre); padding: .1em .05em; }
 
-  /* le surligneur : la grandeur cherchée, partout où elle apparaît */
-  /* Le trait est un pseudo-élément placé derrière la lettre : il ne change pas la mise en page
-     de la formule, dépasse un peu de chaque côté comme un vrai coup de feutre, suit la pente
-     de l'italique et reçoit une légère rotation propre à chaque occurrence (voir math()). */
-  .hl-cible { position: relative; z-index: 0; color: var(--feutre-texte); }
+  /* ---------- surligneur et repérage des termes ---------- */
+  .hl-cible {
+    position: relative; z-index: 0; display: inline-block;
+    margin: 0 .08em; padding: 0 .04em;
+    color: var(--feutre-texte);
+  }
   .hl-cible::before {
     content: ""; position: absolute; z-index: -1; pointer-events: none;
-    left: -.17em; right: -.07em; top: .16em; bottom: .02em;
-    border-radius: .55em .28em .5em .32em / .45em .6em .4em .55em;
+    left: -.1em; right: -.06em; top: .14em; bottom: .02em;
+    border-radius: .5em .26em .46em .3em / .42em .56em .38em .5em;
     background:
-      linear-gradient(to bottom, transparent 30%, var(--feutre-reflet) 36%, transparent 46%),
-      linear-gradient(100deg, var(--feutre-bord) 0%, var(--feutre) 13%, var(--feutre) 80%, var(--feutre-bord) 100%);
-    transform: rotate(var(--rot, -1deg)) skewX(-9deg);
+      linear-gradient(to bottom, transparent 28%, var(--feutre-reflet) 35%, transparent 45%),
+      linear-gradient(100deg, var(--feutre-bord) 0%, var(--feutre) 14%, var(--feutre) 84%, var(--feutre-bord) 100%);
+    transform: rotate(var(--rot, -1deg)) skewX(-8deg);
     mix-blend-mode: var(--feutre-melange);
   }
-  /* variante discrète : une bande basse, ajustée, sans effet de main */
   .surlignage-discret .hl-cible::before {
-    left: -.02em; right: -.02em; top: 50%; bottom: 17%;
-    border-radius: .1em; transform: none;
+    left: -.02em; right: -.02em; top: 52%; bottom: 14%;
+    border-radius: .12em; transform: none;
     background: var(--feutre);
   }
-  /* le terme déplacé à l'étape en cours de la correction */
-  .hl-bouge { color: var(--stylo); }
+  .hl-bouge {
+    color: var(--stylo);
+    font-weight: 700;
+  }
 
-  /* les propositions sont des touches : un relief en bas, enfoncé au clic */
+  /* ---------- propositions (touches) ---------- */
   .options { display: flex; flex-direction: column; gap: .65rem; }
   .option {
     position: relative; display: flex; align-items: center; gap: .8rem;
-    width: 100%; min-height: 4.4rem; padding: .6rem 1rem;
+    width: 100%; min-height: 4.8rem; padding: .65rem 1rem;
     background: var(--carte); color: var(--encre);
     border: 1.5px solid var(--trait); border-bottom-width: 4px; border-radius: 12px;
     font: inherit; text-align: left; cursor: pointer;
+    box-shadow: var(--ombre);
     transition: transform .08s, border-color .12s, background-color .12s;
   }
   .option .key {
-    flex: none; display: grid; place-items: center; width: 1.7rem; height: 1.7rem;
-    font-size: .85rem; font-weight: 700; color: var(--gris);
+    flex: none; display: grid; place-items: center; width: 1.75rem; height: 1.75rem;
+    font-size: .82rem; font-weight: 700; color: var(--gris);
+    background: var(--enonce-pied);
     border: 1.5px solid var(--trait-fort); border-bottom-width: 3px; border-radius: 6px;
   }
-  .option .expr { flex: 1; text-align: center; font-size: 1.45rem; overflow-x: auto; padding: .15em .25em; }
+  .option .expr { flex: 1; text-align: center; font-size: 1.42rem; overflow-x: auto; padding: .4em .3em; }
   .option:hover:not(:disabled) { border-color: var(--trait-fort); background: var(--survol); }
+  .option:hover:not(:disabled) .key { color: var(--encre); border-color: var(--encre-2); }
   .option:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
-  .option:disabled { cursor: default; }
+  .option:disabled { cursor: default; box-shadow: none; }
   .option.is-correct { border-color: var(--juste); background: var(--juste-fond); color: var(--juste); animation: pop .32s ease-out; }
-  .option.is-correct .key { border-color: var(--juste); color: var(--juste); }
+  .option.is-correct .key { border-color: var(--juste); color: var(--juste); background: transparent; }
   .option.is-wrong { border-color: var(--faux); background: var(--faux-fond); color: var(--faux); animation: shake .32s ease-in-out; }
-  .option.is-wrong .key { border-color: var(--faux); color: var(--faux); }
-  .option.is-dim { opacity: .38; }
-  @keyframes pop { 0% { transform: scale(1); } 45% { transform: scale(1.025); } 100% { transform: scale(1); } }
+  .option.is-wrong .key { border-color: var(--faux); color: var(--faux); background: transparent; }
+  .option.is-dim { opacity: .4; }
+  @keyframes pop { 0% { transform: scale(1); } 45% { transform: scale(1.02); } 100% { transform: scale(1); } }
   @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 55% { transform: translateX(4px); } 80% { transform: translateX(-2px); } }
   @media (hover: none) { .option .key { display: none; } }
 
-  .dunno-row { text-align: center; margin-top: .55rem; min-height: 2.3rem; }
+  .dunno-row { text-align: center; margin-top: .5rem; min-height: 2.2rem; }
   .link {
-    background: none; border: 0; padding: .35rem .5rem; font: inherit; font-size: .95rem;
+    background: none; border: 0; padding: .35rem .6rem; font: inherit; font-size: .92rem;
     color: var(--gris); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
   }
   .link:hover { color: var(--encre); }
   .nowrap { white-space: nowrap; }
 
-  /* ---------- correction ---------- */
-  .feedback { margin: 1rem auto 0; max-width: 34rem; }
-  .feedback:empty { min-height: 3.2em; }
-  .verdict { margin: 0; text-align: center; font-weight: 700; font-size: 1.1rem; }
-  .feedback.ok .verdict { color: var(--juste); }
-  .feedback.ko .verdict { color: var(--faux); }
-  .steps { counter-reset: etape; margin: .9rem 0 0; padding: .2rem 0 .2rem .9rem; border-left: 3px solid var(--trait); text-align: left; }
-  .feedback.ko .steps { border-color: var(--faux); }
-  .step { position: relative; padding: .45rem .6rem .45rem 2.2rem; border-radius: 8px; }
+  /* ---------- correction pas à pas ---------- */
+  .feedback { margin: .9rem auto 0; max-width: 36rem; }
+  .feedback:empty { min-height: 2.6em; }
+  .verdict {
+    margin: 0; text-align: center; font-weight: 700; font-size: 1.05rem;
+    padding: .35rem .8rem; border-radius: 8px;
+  }
+  .feedback.ok .verdict { color: var(--juste); background: var(--juste-fond); }
+  .feedback.ko .verdict { color: var(--faux); background: var(--faux-fond); }
+
+  .steps {
+    counter-reset: etape;
+    margin: .75rem 0 0;
+    background: var(--enonce);
+    border: 1.5px solid var(--trait);
+    border-radius: 12px;
+    padding: .65rem .85rem;
+    text-align: left;
+  }
+  .step {
+    position: relative;
+    padding: .45rem .55rem .5rem 2.15rem;
+    border-radius: 8px;
+  }
+  .step + .step { margin-top: .35rem; }
   .step:not(.depart) { counter-increment: etape; }
   .step:not(.depart)::before {
-    content: counter(etape); position: absolute; left: .35rem; top: .5rem;
+    content: counter(etape); position: absolute; left: .4rem; top: .55rem;
     width: 1.35rem; height: 1.35rem; display: grid; place-items: center;
-    font-size: .75rem; font-weight: 700; color: var(--gris);
-    border: 1.5px solid var(--trait-fort); border-radius: 50%;
+    font-size: .74rem; font-weight: 700; color: var(--stylo);
+    background: var(--stylo-fond);
+    border: 1.5px solid var(--stylo); border-radius: 50%;
   }
-  .step.depart { padding-left: .6rem; }
-  .step .note { font-size: .95rem; color: var(--gris); }
-  .step .eq { font-size: 1.2rem; overflow-x: auto; padding: .15em .25em; }
-  .step.err { background: var(--faux-fond); }
-  .step.err::before { border-color: var(--faux); color: var(--faux); }
-  .step.err .note { color: var(--faux); }
-  .step .blame { font-size: .93rem; color: var(--faux); font-weight: 700; padding-top: .15rem; }
-  .step.final { background: var(--juste-fond); }
-  .step.final::before { border-color: var(--juste); color: var(--juste); }
-  /* si l'erreur a été commise à la dernière étape, c'est elle qu'on signale */
-  .step.final.err { background: var(--faux-fond); }
+  .step.depart {
+    padding-left: .55rem;
+    border-bottom: 1px dashed var(--trait);
+    padding-bottom: .6rem;
+    margin-bottom: .35rem;
+  }
+  .step.depart .depart-label {
+    font-size: .76rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--gris); margin-bottom: .1rem;
+  }
+  .step .note {
+    font-size: .92rem; color: var(--encre-2);
+    margin-bottom: .18rem;
+  }
+  .step .eq {
+    font-size: 1.22rem; overflow-x: auto;
+    padding: .4em .35em; text-align: center;
+  }
+  .step.err { background: var(--faux-fond); border: 1px solid var(--faux); }
+  .step.err::before { border-color: var(--faux); color: var(--faux); background: transparent; }
+  .step.err .note { color: var(--faux); font-weight: 700; }
+  .step .blame {
+    font-size: .9rem; color: var(--faux); font-weight: 700;
+    margin-top: .25rem; padding-top: .25rem;
+    border-top: 1px solid rgba(194, 42, 31, .25);
+  }
+  .step.final { background: var(--juste-fond); border: 1px solid var(--juste); }
+  .step.final::before { border-color: var(--juste); color: var(--juste); background: transparent; }
+  .step.final.err { background: var(--faux-fond); border-color: var(--faux); }
   .step.final.err::before { border-color: var(--faux); color: var(--faux); }
 
-  details.check { margin-top: .9rem; text-align: left; }
-  details.check summary { cursor: pointer; color: var(--gris); font-size: .95rem; padding: .25rem 0; }
-  details.check .line { padding: .2rem 0; font-size: .98rem; }
-  details.check .bad { color: var(--faux); }
-  details.check .good { color: var(--juste); }
+  /* ---------- vérification numérique ---------- */
+  details.check {
+    margin-top: .65rem; text-align: left;
+    background: var(--enonce); border: 1px solid var(--trait);
+    border-radius: 10px; padding: .45rem .8rem;
+  }
+  details.check summary {
+    cursor: pointer; color: var(--encre-2); font-size: .9rem;
+    font-weight: 700; padding: .15rem 0;
+  }
+  details.check .check-body { padding-top: .45rem; border-top: 1px solid var(--trait); margin-top: .35rem; }
+  details.check .line { padding: .25rem 0; font-size: .92rem; }
+  details.check .bad {
+    color: var(--faux); background: var(--faux-fond);
+    padding: .35rem .55rem; border-radius: 6px; margin-top: .25rem;
+  }
+  details.check .good {
+    color: var(--juste); background: var(--juste-fond);
+    padding: .35rem .55rem; border-radius: 6px; margin-top: .25rem;
+  }
 
   .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; min-height: 3rem; margin-top: .9rem; }
   button:focus-visible, summary:focus-visible { outline: 3px solid var(--stylo); outline-offset: 2px; }
   .btn {
-    font: inherit; font-size: 1.02rem; font-weight: 700; padding: .6rem 1.5rem;
+    font: inherit; font-size: 1rem; font-weight: 700; padding: .6rem 1.5rem;
     border: 0; border-bottom: 3px solid rgba(0, 0, 0, .28); border-radius: 10px;
     background: var(--encre); color: var(--papier); cursor: pointer;
   }
@@ -206,22 +306,40 @@
   .btn:active { transform: translateY(2px); border-bottom-width: 1px; }
   [hidden] { display: none !important; }
 
-  /* ---------- résultat ---------- */
-  .result { text-align: center; padding-top: 2rem; }
-  .score { font-size: clamp(2.8rem, 12vw, 4.2rem); margin: 0; }
-  .times { color: var(--gris); margin: .5rem 0 0; font-size: 1rem; }
-  .times .record { color: var(--encre); font-weight: 700; }
-  .palier { margin: .9rem auto 0; max-width: 30rem; font-size: 1.05rem; }
+  /* ---------- écran de résultat ---------- */
+  .result { text-align: center; padding-top: 1.5rem; }
+  .result-card {
+    background: var(--enonce); border: 1.5px solid var(--trait);
+    border-radius: 14px; padding: 1.4rem 1.2rem; box-shadow: var(--ombre);
+  }
+  .score { font-size: clamp(2.6rem, 11vw, 3.8rem); margin: 0; padding: .15em 0; }
+  .times { color: var(--gris); margin: .45rem 0 0; font-size: .95rem; }
+  .times .record { color: var(--juste); font-weight: 700; }
+  .palier { margin: .8rem auto 0; max-width: 30rem; font-size: 1rem; }
   .palier strong { font-weight: 700; }
-  .comment { max-width: 32rem; margin: 1rem auto 1.8rem; font-size: 1.05rem; line-height: 1.6; }
-  .recap { text-align: left; margin-top: 1rem; border-top: 1px solid var(--trait); }
-  .recap h2 { font-size: 1.05rem; margin: 1.3rem 0 .2rem; }
-  .item { padding: 1rem 0; border-bottom: 1px solid var(--trait); }
-  .item .ctx { font-size: .9rem; color: var(--gris); display: flex; align-items: center; gap: .45rem; flex-wrap: wrap; }
-  .item .rel { font-size: 1.35rem; overflow-x: auto; padding: .35em .25em .15em; }
-  .item .line { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1rem; margin-top: .5rem; }
-  .item .lab { min-width: 8.5rem; font-size: .9rem; color: var(--gris); }
-  .item .m { font-size: 1.15rem; padding: .15em 0; }
+  .comment { max-width: 32rem; margin: .8rem auto .2rem; font-size: .98rem; line-height: 1.55; color: var(--encre-2); }
+
+  .recap { text-align: left; margin-top: 1.4rem; }
+  .recap h2 { font-size: 1.05rem; margin: 0 0 .7rem; }
+  .item {
+    background: var(--enonce); border: 1.5px solid var(--trait);
+    border-radius: 12px; padding: .9rem 1rem; margin-bottom: .9rem;
+    box-shadow: var(--ombre);
+  }
+  .item .ctx { font-size: .88rem; color: var(--gris); display: flex; align-items: center; gap: .45rem; flex-wrap: wrap; }
+  .item .rel { font-size: 1.35rem; text-align: center; overflow-x: auto; padding: .45em .3em; }
+  .item .comp {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+    gap: .5rem; margin: .45rem 0;
+  }
+  .item .box {
+    padding: .5rem .65rem; border-radius: 8px;
+    display: flex; flex-direction: column; gap: .15rem;
+  }
+  .item .box.bad-box { background: var(--faux-fond); border: 1px solid var(--faux); }
+  .item .box.good-box { background: var(--juste-fond); border: 1px solid var(--juste); }
+  .item .lab { font-size: .76rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--gris); }
+  .item .m { font-size: 1.12rem; overflow-x: auto; padding: .35em .15em; }
   .item .bad { color: var(--faux); }
   .item .good { color: var(--juste); }
 
@@ -237,29 +355,37 @@
   <header>
     <div class="top">
       <span class="title">Isoler une grandeur</span>
-      <span class="meta"><span class="serie" id="serie" aria-live="polite"></span><span class="chrono" id="chrono"></span><span class="count" id="count"></span></span>
+      <span class="meta">
+        <span class="serie" id="serie" aria-live="polite"></span>
+        <span class="chrono" id="chrono"></span>
+        <span class="count" id="count"></span>
+      </span>
     </div>
     <div class="ticks" id="ticks" aria-hidden="true" title="Chaque barre est une question ; sa hauteur indique sa difficulté."></div>
   </header>
 
   <section class="stage" id="screen-q" aria-live="polite">
-    <p class="context" id="context"></p>
-    <div class="relation" id="relation"></div>
-    <p class="prompt">Isoler <span class="var" id="target"></span></p>
+    <div class="problem-card">
+      <p class="context" id="context"></p>
+      <div class="relation" id="relation"></div>
+      <p class="prompt">Isoler <span class="var" id="target"></span></p>
+    </div>
     <div class="options" id="options"></div>
-    <div class="dunno-row" id="dunno-row"><button class="link" id="dunno" type="button">Je ne sais pas</button></div>
+    <div class="dunno-row" id="dunno-row"><button class="link" id="dunno" type="button">Je ne sais pas (voir la méthode)</button></div>
     <div class="feedback" id="feedback"></div>
     <div class="actions"><button class="btn" id="next" type="button" hidden>Question suivante</button></div>
   </section>
 
   <section class="result" id="screen-end" hidden>
-    <p class="score" id="score"></p>
-    <p class="times" id="times"></p>
-    <p class="palier" id="palier"></p>
-    <p class="comment" id="comment"></p>
+    <div class="result-card">
+      <p class="score" id="score"></p>
+      <p class="times" id="times"></p>
+      <p class="palier" id="palier"></p>
+      <p class="comment" id="comment"></p>
+    </div>
     <div class="recap" id="recap" hidden></div>
     <div class="actions">
-      <button class="btn" id="restart" type="button">Recommencer</button>
+      <button class="btn" id="restart" type="button">Recommencer une série</button>
     </div>
     <div class="actions"><button class="link" id="chrono-toggle" type="button"></button></div>
   </section>
@@ -303,7 +429,6 @@ const isAdditive = t => !isLeaf(t) && (t.op === '+' || t.op === '-');
 
 const rnd = n => Math.floor(Math.random() * n);
 const randint = (a, b) => a + rnd(b - a + 1);
-const pick = a => a[rnd(a.length)];
 function shuffle(a) {
   const b = a.slice();
   for (let i = b.length - 1; i > 0; i--) { const j = rnd(i + 1); [b[i], b[j]] = [b[j], b[i]]; }
@@ -506,8 +631,6 @@ function solveFor(side, other, target, err) {
    parce que c'est là que se concentrent les erreurs. */
 function traceSolve(side, other, target, echange) {
   const rows = [];
-  /* une ligne de calcul : l'égalité obtenue, et la phrase qui dit ce qu'on a fait ;
-     le terme déplacé est marqué dans les deux, pour qu'on le suive de l'un à l'autre */
   const pas = (l, r, bouge, gabarit, step) => {
     HL.bouge = new Set(bouge ? leaves(bouge) : []);
     const note = gabarit ? gabarit.replace('#', () => '$' + tex(norm(bouge)) + '$') : null;
@@ -515,26 +638,26 @@ function traceSolve(side, other, target, echange) {
     HL.bouge = new Set();
   };
   let e = side, O = other, step = 0;
-  pas(e, O, null, echange ? 'on écrit la relation en plaçant à gauche le membre qui contient la grandeur cherchée' : null, -1);
+  pas(e, O, null, echange ? 'On écrit la relation en plaçant à gauche le membre qui contient la grandeur cherchée' : null, -1);
   rows[0].depart = !echange;
   while (!isLeaf(e)) {
     const inL = contains(e.l, target);
     const X = inL ? e.r : e.l;
     const T = inL ? e.l : e.r;
-    if (e.op === '+') { const R = sub(O, X); pas(T, R, X, 'on retranche # aux deux membres', step); O = R; }
-    else if (e.op === '-' && inL) { const R = add(O, X); pas(T, R, X, 'on ajoute # aux deux membres', step); O = R; }
+    if (e.op === '+') { const R = sub(O, X); pas(T, R, X, 'On retranche # aux deux membres', step); O = R; }
+    else if (e.op === '-' && inL) { const R = add(O, X); pas(T, R, X, 'On ajoute # aux deux membres', step); O = R; }
     else if (e.op === '-') {
-      pas(X, add(O, T), T, 'on ajoute # aux deux membres, pour que la grandeur cherchée ne soit plus retranchée', step);
+      pas(X, add(O, T), T, 'On ajoute # aux deux membres, pour que la grandeur cherchée ne soit plus retranchée', step);
       const R = sub(X, O);
-      pas(T, R, O, 'on retranche # aux deux membres', step);
+      pas(T, R, O, 'On retranche # aux deux membres', step);
       O = R;
     }
-    else if (e.op === '*') { const R = div(O, X); pas(T, R, X, 'on divise les deux membres par #', step); O = R; }
-    else if (e.op === '/' && inL) { const R = mul(O, X); pas(T, R, X, 'on multiplie les deux membres par #', step); O = R; }
+    else if (e.op === '*') { const R = div(O, X); pas(T, R, X, 'On divise les deux membres par #', step); O = R; }
+    else if (e.op === '/' && inL) { const R = mul(O, X); pas(T, R, X, 'On multiplie les deux membres par #', step); O = R; }
     else {
-      pas(X, mul(O, T), T, 'on multiplie les deux membres par #, pour que la grandeur cherchée ne soit plus au dénominateur', step);
+      pas(X, mul(O, T), T, 'On multiplie les deux membres par #, pour que la grandeur cherchée ne soit plus au dénominateur', step);
       const R = div(X, O);
-      pas(T, R, O, 'on divise les deux membres par #', step);
+      pas(T, R, O, 'On divise les deux membres par #', step);
       O = R;
     }
     e = T; step++;
@@ -615,8 +738,6 @@ function makeQuestion(lhs, rhs, target, opts) {
   }
   if (cands.length < 2) return null;
 
-  /* distracteurs de même allure que la bonne réponse ; erreurs de priorité favorisées ;
-     types d'erreur encore absents de la série favorisés, pour les balayer tous */
   const shape = shapeOf(correct);
   cands.forEach(c => {
     c.score = Math.min(shapeDist(shape, shapeOf(c.tree)), 1.8) - (c.partial ? 1 : 0)
@@ -652,12 +773,8 @@ function makeQuestion(lhs, rhs, target, opts) {
 
 /* =====================================================================
    Relations de physique-chimie du lycée
-   Programmes : enseignement commun de seconde et spécialité de première
-   et de terminale (BO spécial n° 1 du 22 janvier 2019).
-   family : deux relations de même famille ne figurent pas dans la même série.
-   niveau : '2de', '1re' ou 'Tle' ; voir CONFIG.niveaux.
    ===================================================================== */
-const COUVERTURE = new Set();   // types d'erreur déjà rencontrés dans la série en cours
+const COUVERTURE = new Set();
 const R = (label, family, niveau, f, targets) => ({ label, family, niveau, f, targets });
 const s = sym;
 const k2 = num(2);
@@ -850,10 +967,6 @@ const PHYSICS = [
     () => [s('eta', '\\eta', 'η'), div(s('nexp', 'n_\\text{exp}', 'nexp'), s('nmax', 'n_\\text{max}', 'nmax'))], ['nexp', 'nmax'])
 ];
 
-/* Difficulté estimée : on cumule les obstacles rencontrés sur le chemin vers la cible.
-   Une étape coûte 1 ; la cible au dénominateur coûte 2 de plus (la transformation se fait
-   en deux temps), la cible retranchée 1,5 de plus, un facteur écarté composé 0,5 de plus.
-   Le maximum correspond à « isoler e dans a = b + c/(d − e) ». */
 function difficulty(lhs, rhs, target) {
   const onLeft = contains(lhs, target);
   const other = onLeft ? rhs : lhs;
@@ -872,9 +985,6 @@ function difficulty(lhs, rhs, target) {
   return 1.5 * cout + 0.5 * nVars + (isLeaf(other) ? 0 : 1) + (all.some(id => id[0] === '#') ? 0.5 : 0);
 }
 
-/* Mode lettres : chaque relation du catalogue garde sa structure, mais ses symboles sont
-   remplacés par a, b, c… dans l'ordre où on les lit dans la relation affichée. Les élèves
-   s'entraînent ainsi sur exactement les formes algébriques qu'ils retrouveront en physique. */
 const LETTRES = 'abcdefgh';
 function enLettres(l, r, cible, swap) {
   const [A, B] = swap ? [r, l] : [l, r];
@@ -899,7 +1009,6 @@ function physicsPairs() {
     r.targets.forEach(tg => {
       let family = r.family;
       if (lettres) {
-        /* deux relations de même structure donnent la même question en lettres : on n'en garde qu'une */
         MULT = CONFIG.multSymbolLettres;
         const [L, R, c] = enLettres(l, rr, tg, false);
         const rel = txt(L) + ' = ' + txt(R);
@@ -933,14 +1042,6 @@ function tenter(candidats, i, used, vus) {
   return null;
 }
 
-/* =====================================================================
-   Série de questions
-   Les couples (relation, grandeur) sont rangés par difficulté, puis découpés
-   en autant de bandes qu'il y a de questions : la série balaie ainsi toute
-   l'échelle. Les bandes hautes sont resserrées (CONFIG.courbe), de sorte que
-   la dernière question vienne toujours du sommet. Le tri final garantit une
-   difficulté croissante.
-   ===================================================================== */
 function buildSeries(nq = CONFIG.nbQuestions) {
   COUVERTURE.clear();
   const pairs = physicsPairs();
@@ -980,8 +1081,7 @@ const NQ = CONFIG.nbQuestions;
 const NIVEAU_NOM = { '2de': 'seconde', '1re': 'première', 'Tle': 'terminale' };
 const state = { i: 0, questions: [], answers: [], locked: false, timer: null, serie: 0, meilleureSerie: 0 };
 
-/* Chronomètre : il ne tourne que pendant la recherche de la réponse.
-   Le temps de lecture des corrections n'est pas compté, et l'onglet masqué met en pause. */
+/* Chronomètre */
 const chrono = {
   visible: CONFIG.chrono, cumul: 0, depuis: null, arme: false, tick: null,
   reset() { this.stop(); this.cumul = 0; this.afficher(); },
@@ -1002,13 +1102,13 @@ function duree(ms) {
   const s = Math.round(ms / 1000);
   return s < 60 ? s + ' s' : Math.floor(s / 60) + ' min ' + String(s % 60).padStart(2, '0') + ' s';
 }
-function moyenne(ms) {   // une décimale sous la dizaine de secondes, pour rester informatif
+function moyenne(ms) {
   return ms < 10000 ? String(Math.round(ms / 100) / 10).replace('.', ',') + ' s' : duree(ms);
 }
 document.addEventListener('visibilitychange', () => { if (document.hidden) chrono.pause(); else if (chrono.arme) chrono.demarrer(); });
 
-let record = null;    // meilleure performance de la séance : score d'abord, temps ensuite
-let dernier = null;   // dernière partie terminée : { score, ms, bat } 
+let record = null;
+let dernier = null;
 
 const KATEX_OPTS = { throwOnError: false, displayMode: false, strict: 'ignore', trust: c => c.command === '\\htmlClass' };
 function math(el, texStr, txtStr) {
@@ -1017,16 +1117,18 @@ function math(el, texStr, txtStr) {
     el.querySelectorAll('.hl-cible').forEach(n => n.style.setProperty('--rot', (Math.random() * 1.8 - 1.5).toFixed(2) + 'deg'));
   } else el.textContent = txtStr;
 }
-/* nom de la relation suivi d'une pastille de niveau */
+
 function contexte(el, q) {
   el.textContent = '';
   if (q.label) { const n = document.createElement('span'); n.textContent = q.label; el.appendChild(n); }
   if (q.niveau) { const c = document.createElement('span'); c.className = 'niveau'; c.textContent = NIVEAU_NOM[q.niveau]; el.appendChild(c); }
 }
+
 function majSerie() {
   els.serie.textContent = state.serie >= 2 ? state.serie + ' de suite' : '';
 }
-/* Les relations longues sont réduites avant d'être coupées en deux lignes */
+
+/* Les relations longues sont réduites par rapport à leur propre taille calculée */
 function ajuster(el) {
   if (!el || !el.clientWidth) return;
   el.style.fontSize = '';
@@ -1040,6 +1142,17 @@ function ajuster(el) {
   if (el.scrollWidth > el.clientWidth + 1) el.classList.remove('nowrap');
 }
 
+function ajusterTout() {
+  if (!els.screenQ.hidden) {
+    ajuster(els.relation);
+    els.options.querySelectorAll('.expr').forEach(ajuster);
+    els.feedback.querySelectorAll('.eq').forEach(ajuster);
+  } else if (!els.screenEnd.hidden) {
+    els.recap.querySelectorAll('.rel, .eq').forEach(ajuster);
+  }
+}
+window.addEventListener('resize', ajusterTout);
+
 function plain(texStr) {
   return texStr
     .replace(/\\htmlClass\{[^{}]*\}/g, '')
@@ -1048,19 +1161,19 @@ function plain(texStr) {
     .replace(/\\times/g, '×').replace(/\\cdot/g, '·').replace(/\\,/g, ' ')
     .replace(/\\approx/g, '≈').replace(/\^\{([^{}]*)\}/g, '^$1').replace(/[{}\\]/g, '');
 }
-/* texte mêlant prose et formules délimitées par $ */
+
 function rich(el, str) {
   el.textContent = '';
   String(str).split('$').forEach((part, i) => {
     if (i % 2 === 0) { if (part) el.appendChild(document.createTextNode(part)); return; }
     const sp = document.createElement('span');
     math(sp, part, plain(part));
-    if (plain(part).length < 32) sp.className = 'nowrap';   // une courte formule ne se coupe pas en fin de ligne
+    if (plain(part).length < 32) sp.className = 'nowrap';
     el.appendChild(sp);
   });
 }
 
-/* Correction : le calcul refait ligne à ligne, avec l'étape fautive signalée */
+/* Correction pas à pas */
 function renderSteps(box, q, chosen) {
   const wrap = document.createElement('div');
   wrap.className = 'steps';
@@ -1070,6 +1183,12 @@ function renderSteps(box, q, chosen) {
       && !q.steps.slice(i + 1).some(x => x.step === chosen.errStep);
     const div = document.createElement('div');
     div.className = 'step' + (r.depart ? ' depart' : '') + (blame ? ' err' : '') + (r.final ? ' final' : '');
+    if (r.depart) {
+      const dl = document.createElement('div');
+      dl.className = 'depart-label';
+      dl.textContent = 'Relation de départ';
+      div.appendChild(dl);
+    }
     if (r.note) { const n = document.createElement('div'); n.className = 'note'; rich(n, r.note); div.appendChild(n); }
     const eq = document.createElement('div');
     eq.className = 'eq';
@@ -1079,7 +1198,7 @@ function renderSteps(box, q, chosen) {
     if (blame && chosen.msg) {
       const b = document.createElement('div');
       b.className = 'blame';
-      rich(b, 'L’erreur est ici. ' + chosen.msg);
+      rich(b, 'L’erreur est ici : ' + chosen.msg);
       div.appendChild(b);
     }
     wrap.appendChild(div);
@@ -1094,20 +1213,23 @@ function renderCheck(box, q, chosen) {
   const det = document.createElement('details');
   det.className = 'check';
   const sum = document.createElement('summary');
-  sum.textContent = 'Vérifier avec des nombres';
+  sum.textContent = 'Vérifier avec des nombres simples';
   det.appendChild(sum);
+  const body = document.createElement('div');
+  body.className = 'check-body';
   const intro = document.createElement('div');
   intro.className = 'line';
-  rich(intro, 'On remplace par des valeurs simples : ' + c.donnees + '.');
-  det.appendChild(intro);
+  rich(intro, 'En remplaçant par : ' + c.donnees + '.');
+  body.appendChild(intro);
   const l1 = document.createElement('div');
   l1.className = 'line bad';
-  rich(l1, 'Proposition choisie : ' + c.mauvais + ', et la relation de départ devient ' + c.mauvaisRel + ' : fausse.');
-  det.appendChild(l1);
+  rich(l1, 'Proposition choisie : ' + c.mauvais + ' → la relation de départ donne ' + c.mauvaisRel + ' (fausse).');
+  body.appendChild(l1);
   const l2 = document.createElement('div');
   l2.className = 'line good';
-  rich(l2, 'Réponse attendue : ' + c.bon + ', et la relation de départ devient ' + c.bonRel + ' : vraie.');
-  det.appendChild(l2);
+  rich(l2, 'Réponse attendue : ' + c.bon + ' → la relation de départ donne ' + c.bonRel + ' (vraie).');
+  body.appendChild(l2);
+  det.appendChild(body);
   box.appendChild(det);
 }
 
@@ -1128,7 +1250,7 @@ function start() {
   state.questions.forEach(q => {
     const t = document.createElement('span');
     t.className = 'tick';
-    t.style.setProperty('--h', Math.round(16 + 84 * (q.score - smin) / Math.max(1e-9, smax - smin)) + '%');
+    t.style.setProperty('--h', Math.round(18 + 82 * (q.score - smin) / Math.max(1e-9, smax - smin)) + '%');
     els.ticks.appendChild(t);
   });
   show('q');
@@ -1198,7 +1320,7 @@ function answer(k) {
   els.feedback.className = 'feedback ' + (ok ? 'ok' : chosen ? 'ko' : '');
   const v = document.createElement('p');
   v.className = 'verdict';
-  v.textContent = ok ? 'Juste.' : chosen ? 'Pas tout à fait.' : 'Voici le calcul, étape par étape.';
+  v.textContent = ok ? 'Juste.' : chosen ? 'Pas tout à fait — observons les étapes :' : 'Voici la résolution étape par étape :';
   els.feedback.appendChild(v);
 
   if (ok) {
@@ -1211,7 +1333,7 @@ function answer(k) {
   els.next.hidden = false;
   els.next.focus({ preventScroll: true });
   if (els.feedback.getBoundingClientRect().bottom > window.innerHeight) {
-    els.feedback.scrollIntoView({ block: 'nearest' });
+    els.feedback.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 }
 
@@ -1261,7 +1383,7 @@ function showEnd() {
   els.recap.hidden = wrong.length === 0;
   if (wrong.length) {
     const h = document.createElement('h2');
-    h.textContent = wrong.length === 1 ? 'L’erreur à revoir' : 'Les erreurs à revoir';
+    h.textContent = wrong.length === 1 ? 'L’erreur à revoir' : 'Les erreurs à revoir (' + wrong.length + ')';
     els.recap.appendChild(h);
     wrong.forEach(a => {
       const good = a.q.options.find(o => o.ok);
@@ -1270,8 +1392,10 @@ function showEnd() {
       item.innerHTML =
         (a.q.label ? '<div class="ctx"></div>' : '') +
         '<div class="rel"></div>' +
-        '<div class="line"><span class="lab">Réponse donnée</span><span class="m bad"></span></div>' +
-        '<div class="line"><span class="lab">Réponse attendue</span><span class="m good"></span></div>';
+        '<div class="comp">' +
+          '<div class="box bad-box"><span class="lab">Réponse donnée</span><span class="m bad"></span></div>' +
+          '<div class="box good-box"><span class="lab">Réponse attendue</span><span class="m good"></span></div>' +
+        '</div>';
       if (a.q.label) contexte(item.querySelector('.ctx'), a.q);
       math(item.querySelector('.rel'), a.q.relTex, a.q.relTxt);
       ajuster(item.querySelector('.rel'));
