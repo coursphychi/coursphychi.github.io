@@ -466,3 +466,7 @@ details.nt-d.nt-plus { --c: #64748B; --bg: #F4F5F7; --c-ink: #475569; }
 
 /* protocoles des cours de seconde : on garde les gestes utiles, sans l'étiquette « ECE » */
 .nt-sans-ece .nt-ece::before { content: none; display: none; }
+
+/* boutons et étiquettes : retour à la ligne automatique sur les petits écrans plutôt que de déborder */
+.nt-btn, .nt-chip, .nt-seg label span { max-width: 100%; white-space: normal; overflow-wrap: anywhere; text-align: center; line-height: 1.35; }
+.nt-ql-btns .nt-choix, .nt-btns > .nt-btn, .nt-chips .nt-chip { flex: 0 1 auto; min-width: 0; }

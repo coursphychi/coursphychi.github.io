@@ -440,11 +440,14 @@ details.nt-d pre code { background: none; color: inherit; padding: 0; }
 <summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Tracer positions et vecteurs vitesse avec Python</span></summary>
 <div class="nt-d-body">
 <p>Un programme peut faire tout le travail&nbsp;: à partir des coordonnées $(x, y)$ des positions successives, relevées par exemple sur une vidéo, il calcule les vecteurs vitesse et les trace. Lancez-le avec ▶, puis modifiez les positions ou la durée <code>dt</code> et relancez.</p>
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto">}}
 import matplotlib.pyplot as plt
+plt.style.use('bmh')
+
 dt = 0.04                                       # durée entre deux positions (s)
 x = [0.00, 0.20, 0.39, 0.57, 0.74, 0.90, 1.05]  # abscisses (m)
 y = [0.00, 0.17, 0.30, 0.39, 0.44, 0.45, 0.42]  # ordonnées (m)
+
 plt.plot(x, y, 'r+')                            # positions successives
 for i in range(len(x) - 1):
     vx = (x[i+1] - x[i]) / dt                   # coordonnées du vecteur vitesse
