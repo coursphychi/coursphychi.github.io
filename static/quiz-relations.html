@@ -91,8 +91,9 @@
   .context { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: .45rem; margin: 0 0 .3rem; min-height: 1.7em; color: var(--gris); font-size: .98rem; }
   .niveau { font-size: .78rem; font-weight: 700; color: var(--encre-2); border: 1px solid var(--trait-fort); border-radius: 999px; padding: .05rem .5rem; }
   .relation {
-    font-size: clamp(2rem, 8.5vw, 3.3rem);
-    min-height: 2.8em;
+    --taille-rel: clamp(2rem, 8.5vw, 3.3rem);
+    font-size: var(--taille-rel);
+    min-height: calc(2.8 * var(--taille-rel));
     display: flex; align-items: center; justify-content: center;
     overflow-x: auto; padding: .2em .25em;
   }
@@ -1030,8 +1031,12 @@ function ajuster(el) {
   if (!el || !el.clientWidth) return;
   el.style.fontSize = '';
   el.classList.add('nowrap');
+  const base = parseFloat(getComputedStyle(el).fontSize);
   let f = 100;
-  while (el.scrollWidth > el.clientWidth + 1 && f > 58) { f -= 6; el.style.fontSize = f + '%'; }
+  while (el.scrollWidth > el.clientWidth + 1 && f > 58) {
+    f -= 6;
+    el.style.fontSize = (base * f / 100) + 'px';
+  }
   if (el.scrollWidth > el.clientWidth + 1) el.classList.remove('nowrap');
 }
 
