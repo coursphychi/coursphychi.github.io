@@ -203,8 +203,10 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
 <p>Pour déterminer la quantité de matière d'une espèce dans un échantillon de masse $m$&nbsp;:</p>
 <ol class="nt-steps">
 <li><p>Déterminer la masse $m_\text{entité}$ d'<b>une</b> entité (atome, molécule…), par exemple à partir du nombre de nucléons qu'elle contient.</p></li>
-<li><p>En déduire le <b>nombre d'entités</b>&nbsp;: $N = \dfrac{m}{m_\text{entité}}$ (avec $m$ et $m_\text{entité}$ dans la même unité).</p></li>
-<li><p>En déduire la <b>quantité de matière</b>&nbsp;: $n = \dfrac{N}{N_\text{A}}$.</p></li>
+<li><p>En déduire le <b>nombre d'entités</b>&nbsp;:<br>
+$N = \dfrac{m}{m_\text{entité}}$ (avec $m$ et $m_\text{entité}$ dans la même unité).</p></li>
+<li><p>En déduire la <b>quantité de matière</b>&nbsp;:<br>
+$n = \dfrac{N}{N_\text{A}}$.</p></li>
 </ol>
 </div>
 
@@ -225,9 +227,12 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
 <details class="nt-d nt-rep">
 <summary><span class="nt-tag"><i class="fa-solid fa-comment-dots"></i>Réponse</span><span class="nt-sum">Environ 53 moles</span></summary>
 <div class="nt-d-body">
-<p><b>Masse d'une molécule.</b> En négligeant la masse des électrons, une molécule d'eau contient $2 \times 1 + 16 = 18$ nucléons&nbsp;: $m_{\ce{H2O}} \approx 18 \times \pu{1,7E-27 kg} \approx \pu{3,1E-26 kg}$.</p>
-<p><b>Nombre de molécules.</b> $N = \dfrac{\pu{1,0 kg}}{\pu{3,1E-26 kg}} \approx \pu{3,2E25}$ molécules.</p>
-<p><b>Quantité de matière.</b> $n = \dfrac{N}{N_\text{A}} = \dfrac{\pu{3,2E25}}{\pu{6,02E23 mol-1}} \approx \pu{53 mol}$.</p>
+<p><b>Masse d'une molécule&nbsp;:</b><br>
+En négligeant la masse des électrons, une molécule d'eau contient $2 \times 1 + 16 = 18$ nucléons&nbsp;: $m_{\ce{H2O}} \approx 18 \times \pu{1,7E-27 kg} \approx \pu{3,1E-26 kg}$.</p>
+<p><b>Nombre de molécules&nbsp;:</b><br>
+$N = \dfrac{\pu{1,0 kg}}{\pu{3,1E-26 kg}} \approx \pu{3,2E25}$ molécules.</p>
+<p><b>Quantité de matière&nbsp;:</b><br>
+$n = \dfrac{N}{N_\text{A}} = \dfrac{\pu{3,2E25}}{\pu{6,02E23 mol-1}} \approx \pu{53 mol}$</p>
 <p>La valeur précise est d'environ $\pu{55,5 mol}$&nbsp;: l'écart vient surtout de l'arrondi de la masse du nucléon ($\pu{1,67E-27 kg}$ plutôt que $\pu{1,7E-27 kg}$).</p>
 </div>
 </details>
@@ -259,13 +264,17 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
 </div>
 
 <details class="nt-d nt-rep">
-<summary><span class="nt-tag"><i class="fa-solid fa-comment-dots"></i>Réponse</span><span class="nt-sum">Pour une salle de 10 m × 5 m × 3 m</span></summary>
+<summary><span class="nt-tag"><i class="fa-solid fa-comment-dots"></i>Détails</span><span class="nt-sum">Pour une salle de 10 m × 5 m × 3 m</span></summary>
 <div class="nt-d-body">
 <p><b>Volume de la salle.</b> $V = \pu{10 m} \times \pu{5 m} \times \pu{3 m} = \pu{150 m3}$.</p>
-<p><b>Masse d'air.</b> $m_\text{air} = \rho_\text{air} \times V = \pu{1,2 kg*m-3} \times \pu{150 m3} = \pu{180 kg}$.</p>
-<p><b>Masses de chaque gaz.</b> $m_{\ce{O2}} = 23\,\% \times \pu{180 kg} \approx \pu{41 kg}$ et $m_{\ce{N2}} = 76\,\% \times \pu{180 kg} \approx \pu{137 kg}$.</p>
-<p><b>Nombres de molécules.</b> $N_{\ce{O2}} = \dfrac{\pu{41 kg}}{\pu{5,3E-26 kg}} \approx \pu{7,7E26}$ et $N_{\ce{N2}} = \dfrac{\pu{137 kg}}{\pu{4,7E-26 kg}} \approx \pu{2,9E27}$.</p>
-<p><b>Quantités de matière.</b> $n_{\ce{O2}} = \dfrac{\pu{7,7E26}}{\pu{6,02E23 mol-1}} \approx \pu{1,3E3 mol}$ et $n_{\ce{N2}} = \dfrac{\pu{2,9E27}}{\pu{6,02E23 mol-1}} \approx \pu{4,8E3 mol}$.</p>
+<p><b>Masse d'air&nbsp;:</b><br>
+$m_\text{air} = \rho_\text{air} \times V = \pu{1,2 kg*m-3} \times \pu{150 m3} = \pu{180 kg}$.</p>
+<p><b>Masses de chaque gaz&nbsp;:</b><br>
+$m_{\ce{O2}} = 23\,\% \times \pu{180 kg} \approx \pu{41 kg}$ et $m_{\ce{N2}} = 76\,\% \times \pu{180 kg} \approx \pu{137 kg}$.</p>
+<p><b>Nombres de molécules&nbsp;:</b><br>
+$N_{\ce{O2}} = \dfrac{\pu{41 kg}}{\pu{5,3E-26 kg}} \approx \pu{7,7E26}$ et $N_{\ce{N2}} = \dfrac{\pu{137 kg}}{\pu{4,7E-26 kg}} \approx \pu{2,9E27}$.</p>
+<p><b>Quantités de matière&nbsp;:</b><br>
+$n_{\ce{O2}} = \dfrac{\pu{7,7E26}}{\pu{6,02E23 mol-1}} \approx \pu{1,3E3 mol}$ et $n_{\ce{N2}} = \dfrac{\pu{2,9E27}}{\pu{6,02E23 mol-1}} \approx \pu{4,8E3 mol}$.</p>
 <p>Il y a donc environ <b>1&nbsp;300&nbsp;moles de dioxygène</b> et <b>4&nbsp;800&nbsp;moles de diazote</b> dans la salle&nbsp;!</p>
 </div>
 </details>
@@ -324,8 +333,9 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
 <summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Divulgâchage&nbsp;: la masse molaire</span></summary>
 <div class="nt-d-body">
 <p>Vous verrez l'an prochain (pour ceux qui feront de la physique-chimie) que les deux étapes du calcul, $N = \dfrac{m}{m_\text{entité}}$ puis $n = \dfrac{N}{N_\text{A}}$, peuvent se résumer en un seul calcul, grâce à la <b>masse molaire</b> $M$ de l'entité&nbsp;: la masse d'une mole de cette entité, en $\pu{g*mol-1}$.</p>
-<p class="nt-big">$n = \dfrac{m}{M}$ &nbsp; avec &nbsp; $M = N_\text{A} \times m_\text{entité}$</p>
-<p>Les masses molaires sont alors toujours données. Par exemple, avec $M(\ce{H2O}) = \pu{18 g*mol-1}$, un verre de $\pu{200 mL}$ d'eau (soit $\pu{200 g}$) contient $n = \dfrac{\pu{200 g}}{\pu{18 g*mol-1}} \approx \pu{11 mol}$ de molécules d'eau.</p>
+<p style="text-align:center;">$n = \dfrac{m}{M}$ &nbsp; avec &nbsp; $M = N_\text{A} \times m_\text{entité}$</p>
+<p>Les masses molaires sont alors toujours données.</p> 
+<p>Par exemple, avec $M(\ce{H2O}) = \pu{18 g*mol-1}$, un verre de $\pu{200 mL}$ d'eau (soit $\pu{200 g}$) contient $n = \dfrac{\pu{200 g}}{\pu{18 g*mol-1}} \approx \pu{11 mol}$ de molécules d'eau.</p>
 </div>
 </details>
 
