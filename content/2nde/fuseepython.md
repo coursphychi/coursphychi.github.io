@@ -7,12 +7,8 @@ hidden = true
 <link rel="stylesheet" href="/css/cours.css">
 <script src="/js/cours.js" defer></script>
 
-<div class="nt-quizbar">
-<button type="button" class="nt-btn nt-quiz-toggle" aria-pressed="false"><i class="fa-solid fa-eye-slash"></i>&nbsp; Mode révision</button>
-<p>Le mode révision masque les mots-clés&nbsp;: essayez de les retrouver de mémoire, puis cliquez dessus pour vérifier.</p>
-</div>
 
-<p class="nt-lead">Cette activité présente un exemple d'exploitation des données d'un pointage vidéo en Python à partir du décollage d'une fusée Ariane&nbsp;5. Vous pouvez exécuter et modifier librement chaque fenêtre de code directement dans la page&nbsp;: seule la boucle de calcul de la vitesse présentée plus loin est exigible.</p>
+<p class="nt-lead">Cette activité présente un exemple d'exploitation des données d'un pointage vidéo en Python à partir du décollage d'une fusée Ariane&nbsp;5. Vous pouvez exécuter et modifier librement chaque fenêtre de code directement dans la page&nbsp;: seule la boucle de calcul de la vitesse présentée plus loin est à comprendre.</p>
 
 ## Vidéo du décollage et acquisition {.nt-h2}
 
