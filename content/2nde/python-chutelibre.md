@@ -9,7 +9,10 @@ hidden = "true"
 
 <p class="nt-lead">On souhaite modéliser et étudier à l'aide du langage Python les positions successives, les vecteurs vitesse et les variations de vitesse d'une balle lancée verticalement vers le haut.</p>
 
-<img src="https://coursphychi.github.io/lanceballepython.png" alt="Chronophotographie d'une balle lancée verticalement vers le haut" class="nt-svg nt-svg-s" style="border-radius:12px;">
+<div style="position:relative;margin-left:auto;margin-right:auto;width:400px;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
+<img src="/lanceballepython.png" style="box-shadow:none;background:none;">
+</div>
+
 
 ## Modélisation physique et chute libre {.nt-h2}
 
