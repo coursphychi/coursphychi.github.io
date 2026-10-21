@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableur - Attraction gravitationnelle</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --selection-bg: rgba(26, 115, 232, 0.12);
+      --header-bg: #f8f9fa;
+      --border-color: #dadce0;
+      --table-header-bg: #e8eaed;
+      --readonly-bg: #f1f3f4;
+      --text-color: #202124;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f4f6f8;
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      user-select: none;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: #1a73e8;
+    }
+
+    .instructions {
+      font-size: 0.92rem;
+      color: #5f6368;
+      background: #e8f0fe;
+      border-left: 4px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+
+    /* Barre de formule fixe en haut lors du défilement */
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      padding: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .cell-address {
+      width: 55px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 6px 4px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: var(--header-bg);
+      color: #3c4043;
+    }
+
+    .fx-icon {
+      font-style: italic;
+      font-weight: bold;
+      font-family: Georgia, serif;
+      color: #5f6368;
+      padding: 0 6px;
+      font-size: 1.05rem;
+    }
+
+    .formula-input {
+      flex: 1;
+      padding: 7px 10px;
+      font-size: 0.95rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .formula-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+    }
+
+    .btn {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      color: #3c4043;
+      padding: 7px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background 0.15s;
+    }
+
+    .btn:hover {
+      background: #f1f3f4;
+    }
+
+    /* Grille du tableur */
+    .sheet-section {
+      margin-bottom: 28px;
+    }
+
+    .sheet-wrapper {
+      overflow-x: auto;
+      position: relative;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    table.spreadsheet {
+      border-collapse: collapse;
+      width: 100%;
+      table-layout: fixed;
+      background: #fff;
+    }
+
+    table.spreadsheet th,
+    table.spreadsheet td {
+      border: 1px solid var(--border-color);
+      height: 30px;
+      padding: 0;
+      position: relative;
+      box-sizing: border-box;
+      font-size: 0.92rem;
+    }
+
+    table.spreadsheet th.col-header {
+      background: var(--header-bg);
+      color: #5f6368;
+      font-weight: 600;
+      text-align: center;
+      height: 26px;
+      font-size: 0.82rem;
+    }
+
+    table.spreadsheet th.corner-header {
+      width: 42px;
+      background: var(--header-bg);
+    }
+
+    table.spreadsheet td.row-header {
+      background: var(--header-bg);
+      color: #5f6368;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.82rem;
+      width: 42px;
+    }
+
+    table.spreadsheet td.table-title-cell {
+      background: var(--table-header-bg);
+      font-weight: 600;
+      text-align: center;
+      color: #202124;
+      padding: 4px 6px;
+      font-size: 0.88rem;
+    }
+
+    table.spreadsheet td.readonly-cell {
+      background: var(--readonly-bg);
+      color: #3c4043;
+    }
+
+    .cell-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+      box-sizing: border-box;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: cell;
+    }
+
+    .cell-editor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding: 0 6px;
+      box-sizing: border-box;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.92rem;
+      text-align: center;
+      outline: none;
+      background: #fff;
+      z-index: 5;
+    }
+
+    td.selected {
+      outline: 2px solid var(--primary);
+      outline-offset: -2px;
+      z-index: 3;
+    }
+
+    td.in-fill-range {
+      background-color: var(--selection-bg) !important;
+      outline: 1px dashed var(--primary);
+      outline-offset: -1px;
+    }
+
+    /* Poignée de recopie (petit carré en bas à droite) */
+    .fill-handle {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      background-color: var(--primary);
+      border: 1px solid #fff;
+      bottom: -4px;
+      right: -4px;
+      cursor: crosshair;
+      z-index: 10;
+      display: none;
+    }
+
+    td.selected .fill-handle {
+      display: block;
+    }
+
+    /* Boîte de question sous chaque tableau */
+    .question-box {
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: #f8f9fa;
+      border-left: 4px solid #34a853;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .question-box label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #202124;
+      font-size: 0.98rem;
+    }
+
+    .question-box textarea {
+      width: 100%;
+      min-height: 60px;
+      padding: 8px 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      box-sizing: border-box;
+      resize: vertical;
+      user-select: text;
+    }
+
+    .question-box textarea:focus {
+      outline: none;
+      border-color: #34a853;
+      box-shadow: 0 0 0 2px rgba(52, 168, 83, 0.15);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Exploration par tableur : Force d'attraction gravitationnelle</h1>
+
+  <div class="instructions">
+    <strong>Mode d'emploi du tableur :</strong><br>
+    • <strong>Saisir une formule :</strong> Cliquez sur une cellule vide et commencez par le signe <code>=</code> (ex : <code>=A2*B2</code>, <code>=D2/E2</code> ou <code>=1/C14^2</code>), puis appuyez sur <kbd>Entrée</kbd>. Vous pouvez aussi cliquer directement sur les cellules pour insérer leur nom dans votre formule.<br>
+    • <strong>Dérouler une formule :</strong> Sélectionnez la cellule contenant votre formule, puis cliquez sur le <strong>petit carré bleu</strong> en bas à droite de la cellule et glissez-le vers le bas sur toute la colonne.
+  </div>
+
+  <!-- Barre de formule -->
+  <div class="toolbar">
+    <div id="activeCellRef" class="cell-address">D2</div>
+    <div class="fx-icon">fx</div>
+    <input type="text" id="formulaInput" class="formula-input" placeholder="Sélectionnez une cellule et tapez une valeur ou une formule commençant par =">
+    <button class="btn" id="resetBtn" title="Effacer toutes les réponses saisies">Réinitialiser</button>
+  </div>
+
+  <!-- Premier tableau (Lignes 1 à 11) -->
+  <div class="sheet-section">
+    <div class="sheet-wrapper">
+      <table class="spreadsheet" id="table1"></table>
+    </div>
+    <div class="question-box">
+      <label for="q1">Qu'est-ce que la dernière colonne permet de déduire de la force d'attraction gravitationnelle ?</label>
+      <textarea id="q1" placeholder="Rédigez votre déduction ici..."></textarea>
+    </div>
+  </div>
+
+  <!-- Deuxième tableau (Lignes 13 à 22) -->
+  <div class="sheet-section">
+    <div class="sheet-wrapper">
+      <table class="spreadsheet" id="table2"></table>
+    </div>
+    <div class="question-box">
+      <label for="q2">Qu'est-ce que la dernière colonne permet de déduire de la force d'attraction gravitationnelle ?</label>
+      <textarea id="q2" placeholder="Rédigez votre déduction ici..."></textarea>
+    </div>
+  </div>
+</div>
+
+<script>
+  const COLS = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+  // Structure initiale fidèle à la feuille Google Sheets (Lignes 1 à 22)
+  const INITIAL_SHEET = {
+    // Tableau 1 : Lignes 1 à 11
+    1:  { A: 'm1 (milliards de kg)', B: 'm2 (milliards de kg)', C: 'd (en km)', D: 'F (en N)', E: 'm1×m2', F: 'F/(m1×m2)', isHeader: true },
+    2:  { A: '1',  B: '10', C: '4', D: '', E: '', F: '' },
+    3:  { A: '2',  B: '10', C: '4', D: '', E: '', F: '' },
+    4:  { A: '3',  B: '10', C: '4', D: '', E: '', F: '' },
+    5:  { A: '4',  B: '10', C: '4', D: '', E: '', F: '' },
+    6:  { A: '5',  B: '10', C: '4', D: '', E: '', F: '' },
+    7:  { A: '6',  B: '10', C: '4', D: '', E: '', F: '' },
+    8:  { A: '7',  B: '10', C: '4', D: '', E: '', F: '' },
+    9:  { A: '8',  B: '10', C: '4', D: '', E: '', F: '' },
+    10: { A: '9',  B: '10', C: '4', D: '', E: '', F: '' },
+    11: { A: '10', B: '10', C: '4', D: '', E: '', F: '' },
+
+    // Tableau 2 : Lignes 13 à 22
+    13: { A: 'm1 (milliards de kg)', B: 'm2 (milliards de kg)', C: 'd (en km)', D: 'F (en N)', E: '1/d²', F: 'F/(1/d²)', isHeader: true },
+    14: { A: '10', B: '4', C: '2.2', D: '', E: '', F: '' },
+    15: { A: '10', B: '4', C: '2.8', D: '', E: '', F: '' },
+    16: { A: '10', B: '4', C: '3.4', D: '', E: '', F: '' },
+    17: { A: '10', B: '4', C: '4',   D: '', E: '', F: '' },
+    18: { A: '10', B: '4', C: '4.6', D: '', E: '', F: '' },
+    19: { A: '10', B: '4', C: '5.2', D: '', E: '', F: '' },
+    20: { A: '10', B: '4', C: '5.8', D: '', E: '', F: '' },
+    21: { A: '10', B: '4', C: '6.4', D: '', E: '', F: '' },
+    22: { A: '10', B: '4', C: '7',   D: '', E: '', F: '' }
+  };
+
+  let cellData = {}; // Stocke { raw: string, computed: any, readonly: boolean }
+  let selectedCell = 'D2';
+  let editingCell = null;
+  let isFormulaBarFocused = false;
+
+  // Variables pour le glisser-déposer de la poignée de recopie
+  let isDraggingFill = false;
+  let fillStartCell = null;
+  let fillTargetCells = [];
+
+  function initData() {
+    cellData = {};
+    for (const [rowStr, rowObj] of Object.entries(INITIAL_SHEET)) {
+      const r = parseInt(rowStr, 10);
+      COLS.forEach(c => {
+        const id = `${c}${r}`;
+        const val = rowObj[c] !== undefined ? String(rowObj[c]) : '';
+        const isHeader = !!rowObj.isHeader;
+        const isFixedColumn = !isHeader && (c === 'A' || c === 'B' || c === 'C');
+        cellData[id] = {
+          raw: val,
+          computed: val,
+          isHeader: isHeader,
+          readonly: isHeader || isFixedColumn
+        };
+      });
+    }
+    recalculateAll();
+  }
+
+  function buildTableDOM(tableId, startRow, endRow) {
+    const table = document.getElementById(tableId);
+    table.innerHTML = '';
+
+    // En-tête des lettres de colonnes (A à F)
+    const thead = document.createElement('thead');
+    const trHead = document.createElement('tr');
+    const thCorner = document.createElement('th');
+    thCorner.className = 'corner-header';
+    trHead.appendChild(thCorner);
+
+    COLS.forEach(c => {
+      const th = document.createElement('th');
+      th.className = 'col-header';
+      th.textContent = c;
+      trHead.appendChild(th);
+    });
+    thead.appendChild(trHead);
+    table.appendChild(thead);
+
+    // Corps de la table
+    const tbody = document.createElement('tbody');
+    for (let r = startRow; r <= endRow; r++) {
+      const tr = document.createElement('tr');
+
+      const tdRowNum = document.createElement('td');
+      tdRowNum.className = 'row-header';
+      tdRowNum.textContent = r;
+      tr.appendChild(tdRowNum);
+
+      COLS.forEach(c => {
+        const id = `${c}${r}`;
+        const info = cellData[id];
+        const td = document.createElement('td');
+        td.dataset.cell = id;
+
+        if (info.isHeader) {
+          td.className = 'table-title-cell';
+        } else if (info.readonly) {
+          td.className = 'readonly-cell';
+        }
+
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'cell-content';
+        td.appendChild(contentDiv);
+
+        // Poignée de recopie uniquement sur les cellules de données
+        if (!info.isHeader) {
+          const handle = document.createElement('div');
+          handle.className = 'fill-handle';
+          handle.addEventListener('mousedown', (e) => startFillDrag(e, id));
+          td.appendChild(handle);
+        }
+
+        td.addEventListener('mousedown', (e) => onCellMouseDown(e, id));
+        td.addEventListener('dblclick', () => startCellInlineEdit(id));
+        td.addEventListener('mouseenter', () => onCellMouseEnter(id));
+
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+  }
+
+  // Formatage soigné des nombres pour l'affichage (virgule française)
+  function formatDisplayValue(val) {
+    if (val === '' || val === null || val === undefined) return '';
+    if (typeof val === 'number') {
+      if (!isFinite(val) || isNaN(val)) return '#ERREUR!';
+      if (val === 0) return '0';
+      const abs = Math.abs(val);
+      if (abs >= 1e6 || abs < 1e-4) {
+        return val.toExponential(3).replace('.', ',');
+      }
+      return Number(val.toPrecision(6)).toString().replace('.', ',');
+    }
+    return String(val).replace('.', ',');
+  }
+
+  function evaluateCell(id, visited = new Set()) {
+    const cell = cellData[id];
+    if (!cell) return 0;
+    if (visited.has(id)) return '#REF!';
+    visited.add(id);
+
+    const raw = (cell.raw || '').trim();
+    if (raw === '') return '';
+
+    if (!raw.startsWith('=')) {
+      const normalized = raw.replace(',', '.');
+      const num = Number(normalized);
+      return (!isNaN(num) && normalized !== '') ? num : raw;
+    }
+
+    // Traitement de la formule
+    let expr = raw.substring(1).trim();
+    // Remplacer les virgules décimales par des points
+    expr = expr.replace(/(\d),(\d)/g, '$1.$2');
+    // Remplacer les symboles mathématiques usuels
+    expr = expr.replace(/×/g, '*').replace(/÷/g, '/').replace(/²/g, '^2');
+
+    let refError = false;
+    // Remplacer les références de cellules (ex: A2, $A$2)
+    expr = expr.replace(/\$?([A-Fa-f])\$?(\d{1,2})/g, (match, colLetter, rowDigits) => {
+      const refId = `${colLetter.toUpperCase()}${parseInt(rowDigits, 10)}`;
+      if (!cellData[refId] || cellData[refId].isHeader) {
+        refError = true;
+        return 'NaN';
+      }
+      const refVal = evaluateCell(refId, new Set(visited));
+      if (refVal === '' || refVal === null) return '0';
+      if (typeof refVal === 'string' && refVal.startsWith('#')) {
+        refError = true;
+        return 'NaN';
+      }
+      const n = Number(refVal);
+      if (isNaN(n)) {
+        refError = true;
+        return 'NaN';
+      }
+      return `(${n})`;
+    });
+
+    if (refError) return '#VALEUR!';
+
+    // Supporter l'opérateur puissance ^
+    expr = expr.replace(/\^/g, '**');
+
+    // Vérification de sécurité : n'autoriser que chiffres, opérateurs, parenthèses et notation scientifique
+    if (!/^[0-9+\-*/().\sEef]+$/i.test(expr)) {
+      return '#FORMULE!';
+    }
+
+    try {
+      const result = Function(`"use strict"; return (${expr});`)();
+      if (typeof result === 'number' && !isNaN(result) && isFinite(result)) {
+        return result;
+      }
+      return '#ERREUR!';
+    } catch (err) {
+      return '#ERREUR!';
+    }
+  }
+
+  function recalculateAll() {
+    for (const id of Object.keys(cellData)) {
+      if (!cellData[id].isHeader) {
+        cellData[id].computed = evaluateCell(id);
+      }
+    }
+    renderGridValues();
+  }
+
+  function renderGridValues() {
+    document.querySelectorAll('td[data-cell]').forEach(td => {
+      const id = td.dataset.cell;
+      const cell = cellData[id];
+      const contentDiv = td.querySelector('.cell-content');
+      if (id !== editingCell) {
+        if (cell.isHeader) {
+          contentDiv.textContent = cell.raw;
+        } else {
+          contentDiv.textContent = formatDisplayValue(cell.computed);
+        }
+      }
+      td.classList.toggle('selected', id === selectedCell);
+    });
+  }
+
+  function selectCell(id) {
+    if (editingCell && editingCell !== id) {
+      commitInlineEdit();
+    }
+    selectedCell = id;
+    document.getElementById('activeCellRef').textContent = id;
+    const formulaInput = document.getElementById('formulaInput');
+    formulaInput.value = cellData[id].raw;
+    formulaInput.disabled = cellData[id].readonly;
+    renderGridValues();
+  }
+
+  function onCellMouseDown(e, id) {
+    if (e.target.classList.contains('fill-handle')) return;
+
+    // Si l'élève est en train de taper une formule commençant par '=', cliquer sur une cellule insère sa coordonnée
+    const formulaInput = document.getElementById('formulaInput');
+    if (editingCell && editingCell !== id) {
+      const inlineInput = document.querySelector('.cell-editor');
+      if (inlineInput && inlineInput.value.trim().startsWith('=')) {
+        e.preventDefault();
+        insertRefIntoInput(inlineInput, id);
+        formulaInput.value = inlineInput.value;
+        return;
+      }
+    } else if (isFormulaBarFocused && selectedCell !== id && formulaInput.value.trim().startsWith('=')) {
+      e.preventDefault();
+      insertRefIntoInput(formulaInput, id);
+      return;
+    }
+
+    selectCell(id);
+  }
+
+  function insertRefIntoInput(inputEl, refId) {
+    const start = inputEl.selectionStart ?? inputEl.value.length;
+    const end = inputEl.selectionEnd ?? inputEl.value.length;
+    const val = inputEl.value;
+    inputEl.value = val.slice(0, start) + refId + val.slice(end);
+    const pos = start + refId.length;
+    inputEl.setSelectionRange(pos, pos);
+    inputEl.focus();
+  }
+
+  function startCellInlineEdit(id, initialChar = null) {
+    const cell = cellData[id];
+    if (!cell || cell.readonly) return;
+
+    selectCell(id);
+    editingCell = id;
+
+    const td = document.querySelector(`td[data-cell="${id}"]`);
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'cell-editor';
+    input.value = initialChar !== null ? initialChar : cell.raw;
+
+    const formulaInput = document.getElementById('formulaInput');
+    formulaInput.value = input.value;
+
+    input.addEventListener('input', () => {
+      formulaInput.value = input.value;
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const currentId = editingCell;
+        commitInlineEdit();
+        moveSelectionByOffset(currentId, 1, 0);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        cancelInlineEdit();
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        const currentId = editingCell;
+        commitInlineEdit();
+        moveSelectionByOffset(currentId, 0, e.shiftKey ? -1 : 1);
+      }
+    });
+
+    td.appendChild(input);
+    input.focus();
+    const len = input.value.length;
+    input.setSelectionRange(len, len);
+  }
+
+  function commitInlineEdit() {
+    if (!editingCell) return;
+    const td = document.querySelector(`td[data-cell="${editingCell}"]`);
+    const input = td ? td.querySelector('.cell-editor') : null;
+    if (input) {
+      cellData[editingCell].raw = input.value;
+      input.remove();
+    }
+    editingCell = null;
+    recalculateAll();
+    document.getElementById('formulaInput').value = cellData[selectedCell].raw;
+  }
+
+  function cancelInlineEdit() {
+    if (!editingCell) return;
+    const td = document.querySelector(`td[data-cell="${editingCell}"]`);
+    const input = td ? td.querySelector('.cell-editor') : null;
+    if (input) input.remove();
+    editingCell = null;
+    document.getElementById('formulaInput').value = cellData[selectedCell].raw;
+    renderGridValues();
+  }
+
+  function parseCellId(id) {
+    const match = id.match(/^([A-F])(\d+)$/);
+    return { col: match[1], row: parseInt(match[2], 10) };
+  }
+
+  function moveSelectionByOffset(id, dRow, dCol) {
+    const { col, row } = parseCellId(id);
+    const colIdx = COLS.indexOf(col);
+    const nextColIdx = Math.min(Math.max(0, colIdx + dCol), COLS.length - 1);
+    let nextRow = row + dRow;
+    if (nextRow === 12) nextRow += (dRow > 0 ? 1 : -1); // Sauter la ligne 12 entre les deux tableaux
+    const nextId = `${COLS[nextColIdx]}${nextRow}`;
+    if (cellData[nextId]) {
+      selectCell(nextId);
+    }
+  }
+
+  // --- Poignée de recopie (glisser-déposer pour dérouler les formules) ---
+  function startFillDrag(e, id) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (editingCell) commitInlineEdit();
+
+    isDraggingFill = true;
+    fillStartCell = id;
+    fillTargetCells = [];
+  }
+
+  function onCellMouseEnter(id) {
+    if (!isDraggingFill || !fillStartCell) return;
+
+    const start = parseCellId(fillStartCell);
+    const current = parseCellId(id);
+
+    // On déroule sur la même colonne, à l'intérieur du même tableau
+    if (start.col !== current.col) return;
+    const inTable1 = start.row <= 11 && current.row <= 11 && current.row >= 2;
+    const inTable2 = start.row >= 14 && current.row >= 14 && current.row <= 22;
+    if (!inTable1 && !inTable2) return;
+
+    // Nettoyer le marquage visuel précédent
+    document.querySelectorAll('td.in-fill-range').forEach(td => td.classList.remove('in-fill-range'));
+    fillTargetCells = [];
+
+    const minR = Math.min(start.row, current.row);
+    const maxR = Math.max(start.row, current.row);
+
+    for (let r = minR; r <= maxR; r++) {
+      const targetId = `${start.col}${r}`;
+      if (targetId !== fillStartCell && cellData[targetId] && !cellData[targetId].readonly) {
+        fillTargetCells.push(targetId);
+        const td = document.querySelector(`td[data-cell="${targetId}"]`);
+        if (td) td.classList.add('in-fill-range');
+      }
+    }
+  }
+
+  function shiftFormulaReferences(formula, rowDelta, colDelta) {
+    if (!formula.startsWith('=')) return formula;
+    return formula.replace(/(\$?)([A-Fa-f])(\$?)(\d{1,2})/g, (match, colDollar, colChar, rowDollar, rowDigits) => {
+      let colIdx = COLS.indexOf(colChar.toUpperCase());
+      let rowNum = parseInt(rowDigits, 10);
+
+      if (!colDollar) colIdx = Math.min(Math.max(0, colIdx + colDelta), COLS.length - 1);
+      if (!rowDollar) rowNum = Math.max(1, rowNum + rowDelta);
+
+      return `${colDollar}${COLS[colIdx]}${rowDollar}${rowNum}`;
+    });
+  }
+
+  window.addEventListener('mouseup', () => {
+    if (!isDraggingFill) return;
+    isDraggingFill = false;
+
+    if (fillStartCell && fillTargetCells.length > 0) {
+      const start = parseCellId(fillStartCell);
+      const sourceRaw = cellData[fillStartCell].raw;
+
+      fillTargetCells.forEach(targetId => {
+        const target = parseCellId(targetId);
+        const dRow = target.row - start.row;
+        const dCol = COLS.indexOf(target.col) - COLS.indexOf(start.col);
+        cellData[targetId].raw = shiftFormulaReferences(sourceRaw, dRow, dCol);
+      });
+
+      recalculateAll();
+    }
+
+    document.querySelectorAll('td.in-fill-range').forEach(td => td.classList.remove('in-fill-range'));
+    fillStartCell = null;
+    fillTargetCells = [];
+  });
+
+  // --- Événements de la barre de formule et du clavier ---
+  const formulaInput = document.getElementById('formulaInput');
+
+  formulaInput.addEventListener('focus', () => {
+    isFormulaBarFocused = true;
+  });
+
+  formulaInput.addEventListener('blur', () => {
+    setTimeout(() => { isFormulaBarFocused = false; }, 150);
+  });
+
+  formulaInput.addEventListener('input', () => {
+    if (cellData[selectedCell] && !cellData[selectedCell].readonly) {
+      cellData[selectedCell].raw = formulaInput.value;
+      recalculateAll();
+    }
+  });
+
+  formulaInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      formulaInput.blur();
+      moveSelectionByOffset(selectedCell, 1, 0);
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    // Ne pas intercepter les touches si l'élève écrit dans la barre de formule ou dans une zone de texte (questions)
+    if (document.activeElement === formulaInput || document.activeElement.tagName === 'TEXTAREA') {
+      return;
+    }
+    if (editingCell) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      moveSelectionByOffset(selectedCell, 1, 0);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      moveSelectionByOffset(selectedCell, -1, 0);
+    } else if (e.key === 'ArrowRight' || (e.key === 'Tab' && !e.shiftKey)) {
+      e.preventDefault();
+      moveSelectionByOffset(selectedCell, 0, 1);
+    } else if (e.key === 'ArrowLeft' || (e.key === 'Tab' && e.shiftKey)) {
+      e.preventDefault();
+      moveSelectionByOffset(selectedCell, 0, -1);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      startCellInlineEdit(selectedCell);
+    } else if (e.key === 'Backspace' || e.key === 'Delete') {
+      if (cellData[selectedCell] && !cellData[selectedCell].readonly) {
+        e.preventDefault();
+        cellData[selectedCell].raw = '';
+        formulaInput.value = '';
+        recalculateAll();
+      }
+    } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      if (cellData[selectedCell] && !cellData[selectedCell].readonly) {
+        e.preventDefault();
+        startCellInlineEdit(selectedCell, e.key);
+      }
+    }
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if (confirm('Voulez-vous vraiment effacer toutes les cellules complétées ?')) {
+      initData();
+      selectCell('D2');
+      document.getElementById('q1').value = '';
+      document.getElementById('q2').value = '';
+    }
+  });
+
+  // Initialisation au chargement
+  initData();
+  buildTableDOM('table1', 1, 11);
+  buildTableDOM('table2', 13, 22);
+  selectCell('D2');
+</script>
+
+</body>
+</html>

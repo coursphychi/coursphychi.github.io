@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio d'acquisition — Webcam TP</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --panel-hover: #334155;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --success: #10b981;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem;
+      gap: 1.25rem;
+    }
+
+    /* En-tête */
+    header {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      background: var(--panel);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand h1 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .status-badge.active {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .camera-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    select {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+      min-width: 220px;
+      cursor: pointer;
+    }
+
+    select:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Grille principale */
+    main {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.25rem;
+      flex: 1;
+    }
+
+    @media (max-width: 960px) {
+      main { grid-template-columns: 1fr; }
+    }
+
+    /* Zone vidéo */
+    .stage-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.2s ease;
+    }
+
+    video.mirrored {
+      transform: scaleX(-1);
+    }
+
+    /* Superpositions sur la vidéo (Grille, Flash, Timer, Message) */
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px);
+      background-size: 25% 25%;
+    }
+
+    /* Axe central renforcé sur la grille */
+    .grid-overlay::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, transparent calc(50% - 0.5px), rgba(59, 130, 246, 0.6) calc(50% - 0.5px), rgba(59, 130, 246, 0.6) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+        linear-gradient(to bottom, transparent calc(50% - 0.5px), rgba(59, 130, 246, 0.6) calc(50% - 0.5px), rgba(59, 130, 246, 0.6) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+    }
+
+    .grid-overlay.visible { opacity: 1; }
+
+    .flash-overlay {
+      position: absolute;
+      inset: 0;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease-out;
+    }
+
+    .flash-overlay.trigger {
+      opacity: 0.85;
+      transition: none;
+    }
+
+    .rec-indicator {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #fca5a5;
+    }
+
+    .rec-indicator.active { display: inline-flex; }
+
+    .rec-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--danger);
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.85); }
+    }
+
+    .specs-badge {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: none;
+    }
+
+    .placeholder-msg {
+      position: absolute;
+      text-align: center;
+      color: var(--text-muted);
+      padding: 1.5rem;
+      max-width: 420px;
+    }
+
+    .placeholder-msg svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--text-muted);
+      margin-bottom: 0.75rem;
+      opacity: 0.6;
+    }
+
+    /* Barre d'actions sous la vidéo */
+    .control-bar {
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-group {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 0.6rem 1.1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    button:hover:not(:disabled) {
+      background: var(--panel-hover);
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    button svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+
+    .btn-record {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    .btn-record:hover:not(:disabled) {
+      background: rgba(239, 68, 68, 0.25);
+    }
+
+    .btn-record.recording {
+      background: var(--danger);
+      border-color: var(--danger);
+      color: white;
+    }
+
+    .btn-toggle.active {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--primary);
+      color: #93c5fd;
+    }
+
+    /* Galerie latérale */
+    .gallery-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100vh - 120px);
+      min-height: 400px;
+    }
+
+    .gallery-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .gallery-header h2 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .count-pill {
+      background: var(--bg);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .gallery-list {
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      flex: 1;
+    }
+
+    .empty-gallery {
+      margin: auto;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 2rem 1rem;
+    }
+
+    .media-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .media-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-info {
+      padding: 0.65rem 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .media-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .media-type {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .media-type.photo { color: #38bdf8; }
+    .media-type.video { color: #f472b6; }
+
+    .media-time {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .media-actions {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .btn-icon {
+      padding: 0.45rem;
+      border-radius: 6px;
+      color: var(--text);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--panel);
+      border: 1px solid var(--border);
+    }
+
+    .btn-icon:hover { background: var(--panel-hover); }
+    .btn-icon svg { width: 16px; height: 16px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+        <circle cx="12" cy="13" r="3"/>
+      </svg>
+      <h1>Acquisition Photo & Vidéo</h1>
+      <span id="statusBadge" class="status-badge">
+        <span class="status-dot"></span>
+        <span id="statusText">En attente</span>
+      </span>
+    </div>
+
+    <div class="camera-controls">
+      <select id="cameraSelect" disabled title="Choisir la caméra">
+        <option value="">-- Aucune caméra active --</option>
+      </select>
+      <button id="btnStartCam" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Activer la webcam
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Colonne principale : Retour direct + Commandes -->
+    <section class="stage-card">
+      <div class="viewport">
+        <div id="placeholder" class="placeholder-msg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+          <p>Branchez la webcam USB puis cliquez sur <strong>Activer la webcam</strong> en haut à droite.</p>
+        </div>
+
+        <video id="preview" autoplay muted playsinline></video>
+        <div id="gridOverlay" class="grid-overlay"></div>
+        <div id="flashOverlay" class="flash-overlay"></div>
+
+        <div id="recIndicator" class="rec-indicator">
+          <span class="rec-dot"></span>
+          <span id="recTimer">00:00.0</span>
+        </div>
+
+        <div id="specsBadge" class="specs-badge"></div>
+      </div>
+
+      <div class="control-bar">
+        <div class="btn-group">
+          <button id="btnSnapshot" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+            Prendre une photo
+          </button>
+
+          <button id="btnRecord" class="btn-record" disabled>
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <circle cx="12" cy="12" r="7"/>
+            </svg>
+            <span id="recordLabel">Enregistrer une vidéo</span>
+          </button>
+        </div>
+
+        <div class="btn-group">
+          <button id="btnGrid" class="btn-toggle" title="Afficher un quadrillage de repérage" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>
+            </svg>
+            Grille
+          </button>
+
+          <button id="btnMirror" class="btn-toggle" title="Inverser horizontalement l'image" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3m8-18h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3M12 20v2m0-6v2m0-6v2m0-6v2m0-6v2"/>
+            </svg>
+            Miroir
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colonne droite : Historique des captures -->
+    <aside class="gallery-card">
+      <div class="gallery-header">
+        <h2>Captures de la séance</h2>
+        <span id="captureCount" class="count-pill">0</span>
+      </div>
+      <div id="galleryList" class="gallery-list">
+        <div id="emptyGallery" class="empty-gallery">
+          Les photos et vidéos capturées apparaîtront ici pour téléchargement.
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const preview = document.getElementById('preview');
+    const placeholder = document.getElementById('placeholder');
+    const btnStartCam = document.getElementById('btnStartCam');
+    const cameraSelect = document.getElementById('cameraSelect');
+    const btnSnapshot = document.getElementById('btnSnapshot');
+    const btnRecord = document.getElementById('btnRecord');
+    const recordLabel = document.getElementById('recordLabel');
+    const btnGrid = document.getElementById('btnGrid');
+    const btnMirror = document.getElementById('btnMirror');
+    const gridOverlay = document.getElementById('gridOverlay');
+    const flashOverlay = document.getElementById('flashOverlay');
+    const statusBadge = document.getElementById('statusBadge');
+    const statusText = document.getElementById('statusText');
+    const specsBadge = document.getElementById('specsBadge');
+    const recIndicator = document.getElementById('recIndicator');
+    const recTimer = document.getElementById('recTimer');
+    const galleryList = document.getElementById('galleryList');
+    const emptyGallery = document.getElementById('emptyGallery');
+    const captureCount = document.getElementById('captureCount');
+
+    let stream = null;
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let timerInterval = null;
+    let recordStartTime = 0;
+    let isMirrored = false;
+    let itemsCount = 0;
+
+    // 1. Arrêt propre du flux en cours
+    function stopCurrentStream() {
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
+      }
+    }
+
+    // 2. Démarrage de la caméra
+    async function startCamera(deviceId = null) {
+      stopCurrentStream();
+
+      const constraints = {
+        video: {
+          width: { ideal: 1920 },
+          height: { ideal: 1080 },
+          frameRate: { ideal: 30 }
+        },
+        audio: false
+      };
+
+      if (deviceId) {
+        constraints.video.deviceId = { exact: deviceId };
+      }
+
+      try {
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        preview.srcObject = stream;
+        placeholder.style.display = 'none';
+
+        // Activation des boutons
+        btnSnapshot.disabled = false;
+        btnRecord.disabled = false;
+        btnGrid.disabled = false;
+        btnMirror.disabled = false;
+        btnStartCam.textContent = "Actualiser";
+
+        const activeTrack = stream.getVideoTracks()[0];
+        const settings = activeTrack.getSettings();
+
+        statusBadge.classList.add('active');
+        statusText.textContent = "Caméra active";
+
+        // Affichage de la vraie résolution obtenue
+        preview.onloadedmetadata = () => {
+          const fps = settings.frameRate ? ` • ${Math.round(settings.frameRate)} fps` : '';
+          specsBadge.textContent = `${preview.videoWidth}×${preview.videoHeight}${fps}`;
+          specsBadge.style.display = 'block';
+        };
+
+        await updateCameraList(settings.deviceId);
+
+      } catch (err) {
+        statusBadge.classList.remove('active');
+        btnSnapshot.disabled = true;
+        btnRecord.disabled = true;
+
+        if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+          statusText.textContent = "Aucune caméra USB";
+          placeholder.innerHTML = "<p>Aucune webcam détectée.<br>Branchez la caméra USB sur l'ordinateur.</p>";
+        } else if (err.name === 'NotReadableError') {
+          statusText.textContent = "Caméra occupée";
+          placeholder.innerHTML = "<p>La webcam est déjà utilisée par un autre logiciel ou un autre onglet.</p>";
+        } else {
+          statusText.textContent = "Accès refusé";
+          placeholder.innerHTML = `<p>Erreur : ${err.message}</p>`;
+        }
+        placeholder.style.display = 'block';
+      }
+    }
+
+    // 3. Mise à jour de la liste déroulante des caméras
+    async function updateCameraList(selectedDeviceId = null) {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoDevices = devices.filter(d => d.kind === 'videoinput');
+
+      cameraSelect.innerHTML = '';
+
+      if (videoDevices.length === 0) {
+        cameraSelect.innerHTML = '<option value="">Aucune caméra détectée</option>';
+        cameraSelect.disabled = true;
+        return;
+      }
+
+      videoDevices.forEach((device, idx) => {
+        const option = document.createElement('option');
+        option.value = device.deviceId;
+        option.textContent = device.label || `Caméra ${idx + 1}`;
+        if (device.deviceId === selectedDeviceId) option.selected = true;
+        cameraSelect.appendChild(option);
+      });
+
+      cameraSelect.disabled = false;
+    }
+
+    // 4. Capture PHOTO haute résolution (PNG)
+    btnSnapshot.addEventListener('click', () => {
+      if (!stream || !preview.videoWidth) return;
+
+      // Effet visuel de flash
+      flashOverlay.classList.add('trigger');
+      setTimeout(() => flashOverlay.classList.remove('trigger'), 80);
+
+      // Création d'un canevas aux dimensions natives de la caméra
+      const canvas = document.createElement('canvas');
+      canvas.width = preview.videoWidth;
+      canvas.height = preview.videoHeight;
+      const ctx = canvas.getContext('2d');
+
+      // Respect de l'état miroir si l'élève l'a activé
+      if (isMirrored) {
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+      }
+
+      ctx.drawImage(preview, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
+        addMediaToGallery({
+          type: 'photo',
+          url: url,
+          ext: 'png',
+          meta: `${canvas.width}×${canvas.height} px`
+        });
+      }, 'image/png');
+    });
+
+    // 5. Capture VIDÉO
+    btnRecord.addEventListener('click', () => {
+      if (mediaRecorder && mediaRecorder.state === "recording") {
+        stopRecording();
+      } else {
+        startRecording();
+      }
+    });
+
+    function startRecording() {
+      recordedChunks = [];
+      const mimeType = MediaRecorder.isTypeSupported('video/mp4') ? 'video/mp4' : 'video/webm';
+      const ext = mimeType === 'video/mp4' ? 'mp4' : 'webm';
+
+      mediaRecorder = new MediaRecorder(stream, { mimeType });
+
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) recordedChunks.push(e.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const durationSec = ((Date.now() - recordStartTime) / 1000).toFixed(1);
+        const blob = new Blob(recordedChunks, { type: mimeType });
+        const url = URL.createObjectURL(blob);
+
+        addMediaToGallery({
+          type: 'video',
+          url: url,
+          ext: ext,
+          meta: `${durationSec} s • ${ext.toUpperCase()}`
+        });
+      };
+
+      mediaRecorder.start();
+      recordStartTime = Date.now();
+
+      // Interface en mode enregistrement
+      btnRecord.classList.add('recording');
+      recordLabel.textContent = "Arrêter la vidéo";
+      cameraSelect.disabled = true;
+      recIndicator.classList.add('active');
+
+      timerInterval = setInterval(() => {
+        const elapsed = (Date.now() - recordStartTime) / 1000;
+        const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+        const secs = (elapsed % 60).toFixed(1).padStart(4, '0');
+        recTimer.textContent = `${mins}:${secs}`;
+      }, 100);
+    }
+
+    function stopRecording() {
+      mediaRecorder.stop();
+      clearInterval(timerInterval);
+      btnRecord.classList.remove('recording');
+      recordLabel.textContent = "Enregistrer une vidéo";
+      cameraSelect.disabled = false;
+      recIndicator.classList.remove('active');
+    }
+
+    // 6. Ajout d'un élément dans la galerie de droite
+    function addMediaToGallery({ type, url, ext, meta }) {
+      emptyGallery.style.display = 'none';
+      itemsCount++;
+      captureCount.textContent = itemsCount;
+
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const fileName = `${type}_${now.getHours()}h${now.getMinutes()}m${now.getSeconds()}s.${ext}`;
+
+      const card = document.createElement('div');
+      card.className = 'media-item';
+
+      const previewHtml = type === 'photo'
+        ? `<img src="${url}" class="media-thumb" alt="Capture photo">`
+        : `<video src="${url}" class="media-thumb" controls preload="metadata"></video>`;
+
+      card.innerHTML = `
+        ${previewHtml}
+        <div class="media-info">
+          <div class="media-meta">
+            <span class="media-type ${type}">${type === 'photo' ? 'Photo' : 'Vidéo'} • ${meta}</span>
+            <span class="media-time">Capturé à ${timeStr}</span>
+          </div>
+          <div class="media-actions">
+            <a href="${url}" download="${fileName}" class="btn-icon" title="Enregistrer sur le PC">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </a>
+            <button type="button" class="btn-icon btn-delete" title="Supprimer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Suppression d'une capture
+      card.querySelector('.btn-delete').addEventListener('click', () => {
+        URL.revokeObjectURL(url);
+        card.remove();
+        itemsCount--;
+        captureCount.textContent = itemsCount;
+        if (itemsCount === 0) emptyGallery.style.display = 'block';
+      });
+
+      // Insérer la capture la plus récente en haut de la liste
+      galleryList.prepend(card);
+    }
+
+    // 7. Options Grille & Miroir
+    btnGrid.addEventListener('click', () => {
+      gridOverlay.classList.toggle('visible');
+      btnGrid.classList.toggle('active');
+    });
+
+    btnMirror.addEventListener('click', () => {
+      isMirrored = !isMirrored;
+      preview.classList.toggle('mirrored', isMirrored);
+      btnMirror.classList.toggle('active', isMirrored);
+    });
+
+    // 8. Événements Caméra et branchement USB à chaud
+    btnStartCam.addEventListener('click', () => startCamera(cameraSelect.value || null));
+
+    cameraSelect.addEventListener('change', () => {
+      if (cameraSelect.value) startCamera(cameraSelect.value);
+    });
+
+    navigator.mediaDevices.addEventListener('devicechange', async () => {
+      if (stream) {
+        const activeTrack = stream.getVideoTracks()[0];
+        if (activeTrack.readyState === 'ended') {
+          await startCamera();
+        } else {
+          await updateCameraList(activeTrack.getSettings().deviceId);
+        }
+      } else {
+        await startCamera();
+      }
+    });
+  </script>
+</body>
+</html>

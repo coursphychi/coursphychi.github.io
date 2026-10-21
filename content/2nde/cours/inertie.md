@@ -1625,32 +1625,32 @@ plt.show()
   /* =================== 10. De quoi dépend l'attraction gravitationnelle ? =================== */
   (function () {
     var root = document.getElementById('lab-grav'); if (!root) { return; }
-    var inA = $(root, '[data-in="ma"]'), inB = $(root, '[data-in="mb"]'), inD = $(root, '[data-in="d"]'), msg = $(root, '.nt-msg'), cnv, GG = 6.67e-11, FMAX = GG * 4e3 * 4e3 / 4;   /* force maximale : 4 t et 4 t à 2 m */
+    var inA = $(root, '[data-in="ma"]'), inB = $(root, '[data-in="mb"]'), inD = $(root, '[data-in="d"]'), msg = $(root, '.nt-msg'), cnv, GG = 6.67e-11, FMAX = GG * 4e9 * 4e9 / 4e6;   /* force maximale : 4E9 kg et 4E9 kg à 2 km */
     function boule(ctx, x, y, r, c1, c2) {
       ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.beginPath(); ctx.ellipse(x, y + r + 6, r * 0.9, r * 0.18, 0, 0, 2 * Math.PI); ctx.fill();
       var g = ctx.createRadialGradient(x - r * 0.35, y - r * 0.4, r * 0.1, x, y, r); g.addColorStop(0, c1); g.addColorStop(1, c2); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill();
       ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.beginPath(); ctx.ellipse(x - r * 0.35, y - r * 0.45, r * 0.28, r * 0.16, -0.6, 0, 2 * Math.PI); ctx.fill();
     }
     function draw(o) {
-      var ctx = o.ctx, W = o.W, H = o.H, a = +inA.value, b = +inB.value, d = +inD.value, F = GG * a * 1e3 * b * 1e3 / (d * d);
+      var ctx = o.ctx, W = o.W, H = o.H, a = +inA.value, b = +inB.value, d = +inD.value, F = GG * a * 1e9 * b * 1e9 / (d * d *1e6);
       var u = (W - Math.min(150, W * 0.16)) / 4, cx = W / 2, y = H * 0.46, xa = cx - d * u / 2, xb = cx + d * u / 2, ra = 13 + 7 * Math.cbrt(a), rb = 13 + 7 * Math.cbrt(b);
-      var Lmax = u - 5, L = F / FMAX * Lmax;   /* même échelle pour toutes les forces : à 2 m avec 4 t et 4 t, les pointes se touchent presque ; ailleurs, elles ne peuvent pas se croiser */
+      var Lmax = u - 5, L = F / FMAX * Lmax;   /* même échelle pour toutes les forces : à 2 km avec 4E9 kg et 4E9 kg, les pointes se touchent presque ; ailleurs, elles ne peuvent pas se croiser */
       ctx.clearRect(0, 0, W, H); var g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#0B1026'); g.addColorStop(1, '#1E293B'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
       ETOILES.forEach(function (e2) { ctx.fillStyle = 'rgba(255,255,255,' + e2[2] * 0.7 + ')'; ctx.fillRect(e2[0] * W, e2[1] * H, 1.2, 1.2); });
       var yd = y + Math.max(ra, rb) + 44; ctx.strokeStyle = 'rgba(203,213,225,0.7)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(xa, yd - 6); ctx.lineTo(xa, yd + 6); ctx.moveTo(xb, yd - 6); ctx.lineTo(xb, yd + 6); ctx.stroke();
       vec(ctx, cx, yd, xa + 1, yd, 'rgba(203,213,225,0.8)', 1, 7); vec(ctx, cx, yd, xb - 1, yd, 'rgba(203,213,225,0.8)', 1, 7);
-      pill(ctx, 'AB = ' + fmt(d, d % 1 ? 1 : 0) + ' m', cx, yd, { size: 11.5, col: '#E2E8F0', bg: '#1E293B' });
+      pill(ctx, 'AB = ' + fmt(d, d % 1 ? 1 : 0) + ' km', cx, yd, { size: 11.5, col: '#E2E8F0', bg: '#1E293B' });
       boule(ctx, xa, y, ra, '#FDE68A', '#D97706'); boule(ctx, xb, y, rb, '#BAE6FD', '#1D4ED8');
-      [[xa, ra, 'A', a], [xb, rb, 'B', b]].forEach(function (q) { txt(ctx, q[2], q[0], y + q[1] + 18, { size: 16, serif: true, col: '#F8FAFC' }); txt(ctx, q[3] + ' t', q[0] + 14, y + q[1] + 18, { size: 11.5, col: '#CBD5E1', align: 'left' }); });
+      [[xa, ra, 'A', a], [xb, rb, 'B', b]].forEach(function (q) { txt(ctx, q[2], q[0], y + q[1] + 18, { size: 16, serif: true, col: '#F8FAFC' }); txt(ctx, q[3] + '\u00d710\u2079\u00A0kg', q[0] + 14, y + q[1] + 18, { size: 11.5, col: '#CBD5E1', align: 'left' }); });
       if (L > 0.5) { vec(ctx, xb, y, xb - L, y, FORCE, 3, Math.min(12, L * 0.8)); vec(ctx, xa, y, xa + L, y, FORCE, 3, Math.min(12, L * 0.8)); }
       ctx.save(); ctx.fillStyle = '#F87171'; ctx.beginPath(); ctx.arc(xa, y, 2.5, 0, 2 * Math.PI); ctx.arc(xb, y, 2.5, 0, 2 * Math.PI); ctx.fill(); ctx.restore();
       var ya = L > ra + 14 ? y - 12 : y - ra - 8, yb2 = L > rb + 14 ? y - 12 : y - rb - 8; nomForce(ctx, 'B\u2192A', xa + Math.max(L, 2 * ra + 20) / 2, ya, '#FCA5A5', 'center'); nomForce(ctx, 'A\u2192B', xb - Math.max(L, 2 * rb + 20) / 2, yb2, '#FCA5A5', 'center');   /* légendes au-dessus des flèches, hors des boules */
       pill(ctx, 'F = ' + sci(F, 1) + ' N', cx, 18, { size: 13, col: '#FCA5A5', bg: 'rgba(15,23,42,0.75)' });
-      $(root, '.out-ma').textContent = a + '\u00A0t'; $(root, '.out-mb').textContent = b + '\u00A0t'; $(root, '.out-d').textContent = fmt(d, d % 1 ? 1 : 0) + '\u00A0m';
+      $(root, '.out-ma').textContent = a + '\u00d710\u2079\u00A0kg'; $(root, '.out-mb').textContent = b + '\u00d710\u2079\u00A0kg'; $(root, '.out-d').textContent = fmt(d, d % 1 ? 1 : 0) + '\u00A0km';
     }
     cnv = Canvas($(root, 'canvas'), function (W) { return W < 520 ? 210 : 240; }, draw);
     [inA, inB, inD].forEach(function (i) { i.addEventListener('input', function () { draw(cnv); }); });
-    msg.innerHTML = 'Doublez la masse de A, puis celle de B, puis la distance&nbsp;: comment varie la force&nbsp;? Remarquez que les deux flèches ont toujours <b>la même longueur</b>, même quand les masses sont différentes. (Pour des objets de quelques tonnes, ces forces sont minuscules&nbsp;: quelques millionièmes à quelques dix-millièmes de newton.)';
+    msg.innerHTML = 'Doublez la masse de A, puis celle de B, puis la distance&nbsp;: comment varie la force&nbsp;? Remarquez que les deux flèches ont toujours <b>la même longueur</b>, même quand les masses sont différentes.';
     draw(cnv);
   })();
 
