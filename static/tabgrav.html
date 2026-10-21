@@ -296,7 +296,7 @@
 
   <!-- Barre de formule -->
   <div class="toolbar">
-    <div id="activeCellRef" class="cell-address">D2</div>
+    <div id="activeCellRef" class="cell-address">E2</div>
     <div class="fx-icon">fx</div>
     <input type="text" id="formulaInput" class="formula-input" placeholder="Sélectionnez une cellule et tapez une valeur ou une formule commençant par =">
     <button class="btn" id="resetBtn" title="Effacer toutes les réponses saisies">Réinitialiser</button>
@@ -357,7 +357,7 @@
   };
 
   let cellData = {}; // Stocke { raw: string, computed: any, readonly: boolean }
-  let selectedCell = 'D2';
+  let selectedCell = 'E2';
   let editingCell = null;
   let isFormulaBarFocused = false;
 
@@ -825,7 +825,7 @@
   document.getElementById('resetBtn').addEventListener('click', () => {
     if (confirm('Voulez-vous vraiment effacer toutes les cellules complétées ?')) {
       initData();
-      selectCell('D2');
+      selectCell('E2');
       document.getElementById('q1').value = '';
       document.getElementById('q2').value = '';
     }
@@ -835,7 +835,7 @@
   initData();
   buildTableDOM('table1', 1, 11);
   buildTableDOM('table2', 13, 22);
-  selectCell('D2');
+  selectCell('E2');
 </script>
 
 </body>
