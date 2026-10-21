@@ -53,7 +53,7 @@ td, th {
 </tr>
 <tr>
 <th rowspan="1">TP</th>
-<td><a href="/tppointage.pdf"><b>Réalisation d'un pointage vidéo</b></a><!-- + <a href="https://youtu.be/X2tYBrzbBVk" style="font-weight:bold;color:#bb1010">Correction</a>--></td>
+<td><a href="/tppointage.pdf"><b>Réalisation d'un pointage vidéo</b></a> + <a href="/pointage.html" target="_blank"><b style="color:#FF968D"><i class="fa-solid fa-video"></i></a></b><!-- + <a href="https://youtu.be/X2tYBrzbBVk" style="font-weight:bold;color:#bb1010">Correction</a>--></td>
 </tr>
 </table>
 </div>
