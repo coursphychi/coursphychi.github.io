@@ -48,7 +48,7 @@ td, th {
 <td style="border-bottom:none;border-top:none;"><a href="/act-vectvitesse.pdf"><b>Vecteur vitesse d'un lézard</b></a></td>
 </tr>
 <tr>
-<td style="border-top:none;"><a href="https://colab.research.google.com/drive/1yhtJ1G8p43MxcBnc1tX8R9VgLIPkmGPK?usp=sharing", target="_blank"
+<td style="border-top:none;"><a href="../fuseepython", target="_blank"
 ><b>Décollage d'une fusée (Python)</b></a></td>
 </tr>
 <tr>
