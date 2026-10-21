@@ -23,7 +23,7 @@ td, th {
 # Transformation physique&nbsp;:<br>les changements d'état
 
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/2nde/chgt"> Cours </a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/2nde/chgt"><b>Cours 📽️</b> </a> + <a href="../cours/chgt_etat"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
 
 
 [![](/cm-chgt.png)](/cm-chgt.pdf)
