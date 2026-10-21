@@ -162,9 +162,11 @@
     border:0;padding:0;margin:0;background:transparent;color:transparent;
     outline:none;font:inherit}
   .tk-canvas{display:flex;justify-content:center}
-  /* Pyodide : figures matplotlib insérées dans le flux de la console */
+  /* Pyodide : figures matplotlib et plotly insérées dans le flux de la console */
   .tk-plot{display:block;max-width:100%;height:auto;margin:8px 0;
     background:#fff;border-radius:6px}
+  .tk-plotly{width:100%;min-height:420px;margin:8px 0;
+    background:#fff;border-radius:6px;overflow:hidden}
   .tk-stderr{color:var(--tk-warn)}                 /* avertissements (warnings) : orangé, pas rouge */
   .tk-status{font-family:var(--tk-font);font-size:12.5px;color:var(--tk-muted);
     margin-bottom:8px;animation:tk-pulse 1.6s ease-in-out infinite}
@@ -231,8 +233,8 @@
     --tk-errline:rgba(224,88,76,.20);
     color-scheme:dark;                   /* barres de défilement, champs natifs */
   }
-  /* figures matplotlib : on garde leur fond blanc, posé comme une carte */
-  html.tk-dark .tk-plot{box-shadow:0 0 0 1px var(--tk-border)}
+  /* figures matplotlib et plotly : on garde leur fond blanc, posé comme une carte */
+  html.tk-dark .tk-plot, html.tk-dark .tk-plotly{box-shadow:0 0 0 1px var(--tk-border)}
 
   /* Éditeur CodeMirror : thème « tkdark » (couleurs inspirées de One Dark) */
   .cm-s-tkdark.CodeMirror{background:var(--tk-bg);color:#d7dce2}
@@ -257,7 +259,7 @@
   .cm-s-tkdark .cm-meta{color:#e5c07b}
   .cm-s-tkdark .cm-bracket,.cm-s-tkdark .cm-punctuation{color:#abb2bf}
   .cm-s-tkdark .cm-error{color:#ff7b72}
-  .cm-s-tkdark .CodeMirror-matchingbracket{color:#e3e7ec !important;background:#3a4450;outline:1px solid #5a6674}
+  .cm-s-tkdark .CodeMirror-matchingbracket{color:#e3e7ec !important;background:#3a4450;outline:1px solid #5a4450}
   .cm-s-tkdark .CodeMirror-nonmatchingbracket{color:#ff7b72 !important}
 </style>
 </head>
@@ -296,12 +298,16 @@ var LIBS = {
   // Pour changer de version : remplacer 314.0.7 ci-dessous (voir pyodide.org).
   pyodide: ["https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.js"],
 
+  // Plotly.js : bibliothèque de rendu interactif côté navigateur (version épinglée).
+  // Peut être rapatriée en local dans static/trinket/plotly.min.js en 1re position.
+  plotlyJs: ["https://cdn.plot.ly/plotly-2.35.2.min.js"],
+
   // Paquets PyPI (Python PUR) absents de Pyodide, installés automatiquement
   // (via micropip) quand le code les importe. Forme : { nom_importé: "nom_PyPI" }.
   // Liste blanche volontaire : on n'installe PAS n'importe quel nom tapé dans
   // l'éditeur (une faute de frappe pourrait tirer un paquet malveillant homonyme).
   // Pour un besoin ponctuel, préférer le paramètre packages="…" du shortcode.
-  pypiAuto: { seaborn: "seaborn" },
+  pypiAuto: { seaborn: "seaborn", plotly: "plotly" },
 
   cmCss: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css",
   cmJs:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js",
@@ -1376,13 +1382,15 @@ function runPython(code, done){
 
 /* =====================================================================
    MOTEUR PYODIDE — lang="pyodide"
-   Vrai CPython compilé en WebAssembly : numpy, matplotlib, scipy, sympy…
+   Vrai CPython compilé en WebAssembly : numpy, matplotlib, plotly, scipy, sympy…
    • Chargé une seule fois (le runtime reste en mémoire ; relancer est rapide).
    • Les paquets sont détectés automatiquement d'après les `import` du code.
    • Chaque exécution repart avec des variables vierges.
    • matplotlib : backend standard "Agg" ; plt.show() insère l'image PNG dans
      la console, à sa place parmi les print(). Les figures non montrées sont
      affichées à la fin (comme dans un notebook).
+   • plotly : fig.show() transmet le JSON à Plotly.js pour un rendu interactif
+     dans la console.
    • input() : boîte de dialogue du navigateur (Pyodide tourne de façon
      synchrone, la saisie inline de Skulpt n'est pas possible ici).
    • Les fichiers écrits (open(..., "w")) apparaissent dans « Fichiers générés ».
@@ -1390,6 +1398,7 @@ function runPython(code, done){
 var _pyo = null;                 // promesse de l'instance Pyodide
 var _pyoLastLine = "";           // dernière ligne affichée (sert d'invite à input())
 var _pyoMpl = false;             // matplotlib déjà configuré ?
+var _pyoPlotly = false;          // plotly déjà configuré ?
 
 // Python d'amorçage : dossier de travail propre + utilitaires fichiers.
 var PYO_BOOT =
@@ -1450,6 +1459,18 @@ var PYO_MPL =
   "    _tk_plt.close('all')\n" +
   "_tk_plt.show = _tk_show\n";
 
+// Python de configuration de plotly (exécuté une fois, après son installation).
+// Surcharge BaseFigure.show() et plotly.io.show() pour envoyer le JSON au JS.
+var PYO_PLOTLY =
+  "import plotly.basedatatypes as _tk_pbd\n" +
+  "import plotly.io as _tk_pio\n" +
+  "import tkbridge\n" +
+  "def _tk_plotly_show(self, *args, **kwargs):\n" +
+  "    _tk_flush()\n" +
+  "    tkbridge.plotly(self.to_json())\n" +
+  "_tk_pbd.BaseFigure.show = _tk_plotly_show\n" +
+  "_tk_pio.show = _tk_plotly_show\n";
+
 function pyoWrite(text, isErr){
   if (!text) return;
   _pyoLastLine = (_pyoLastLine + text).split("\n").pop();
@@ -1466,6 +1487,19 @@ function pyoImage(b64){
   img.onload = function(){ img.style.width = Math.round(img.naturalWidth / 1.44) + "px"; };
   img.src = "data:image/png;base64," + b64;
   els.stdout.appendChild(img);
+}
+function pyoPlotly(jsonStr){
+  var div = el("div", {class:"tk-plotly"});
+  els.stdout.appendChild(div);
+  loadFirst(LIBS.plotlyJs).then(function(){
+    var spec = JSON.parse(jsonStr);
+    var config = Object.assign({ responsive: true, displaylogo: false }, spec.config || {});
+    window.Plotly.newPlot(div, spec.data || [], spec.layout || {}, config).then(function(){
+      scheduleOutFit();
+    });
+  }).catch(function(){
+    div.textContent = "Impossible de charger la bibliothèque graphique Plotly.js.";
+  });
 }
 // Petite ligne d'état discrète pendant les téléchargements.
 function pyoStatus(msg){
@@ -1491,7 +1525,7 @@ function getPyodide(){
       els.stdout.appendChild(s); _pyoLastLine = "";
       return v;
     }});
-    py.registerJsModule("tkbridge", { image: pyoImage });
+    py.registerJsModule("tkbridge", { image: pyoImage, plotly: pyoPlotly });
     return py.runPythonAsync(PYO_BOOT).then(function(){ return py; });
   });
   _pyo.catch(function(){ _pyo = null; });   // autoriser un nouvel essai
@@ -1548,6 +1582,14 @@ function runPyodide(code, done){
     if (!_pyoMpl && py.runPython("import importlib.util as _u; _u.find_spec('matplotlib') is not None")){
       pyoStatus("Préparation de matplotlib…");
       return py.runPythonAsync(PYO_MPL).then(function(){ _pyoMpl = true; });
+    }
+  }).then(function(){
+    // plotly : on précharge aussi pandas (requis en interne par plotly.express)
+    if (!_pyoPlotly && py.runPython("import importlib.util as _u; _u.find_spec('plotly') is not None")){
+      pyoStatus("Préparation de plotly…");
+      return py.loadPackage("pandas").then(function(){
+        return py.runPythonAsync(PYO_PLOTLY);
+      }).then(function(){ _pyoPlotly = true; });
     }
   }).then(function(){
     pyoStatus(null);

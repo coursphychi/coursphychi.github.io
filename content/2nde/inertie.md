@@ -39,11 +39,11 @@ td, th {
 <td style="border-bottom:none;"><a href="/tpinertie.pdf"><b>Principe d'inertie</b></a>  + <a href="https://presentationssite.github.io/2nde/tpinertie"><b>Accroche</b></a> <!--+ <a href="/correcdessinert.pdf" style="color:#229922;"><b>Plus "beaux" dessins</b></a>--> + <a href="/webcam.html" style="color:#992299;"><b><i class="fa-solid fa-video"></i></b></a></td>
 </tr>
 <tr>
-<td style="border-top:none;"><a href="/tppoids.pdf"><b>Lien entre masse et poids</b></a> + <a href="https://colab.research.google.com/drive/1uIE16VldDMLuSSRNpXRIz5i8eiGaiTST?usp=sharing" style="color:#992299;"><b>Python <i class="fa-solid fa-computer"></i></b></a></td>
+<td style="border-top:none;"><a href="/tppoids.pdf"><b>Lien entre masse et poids</b></a> + <a href="../masse-poids" style="color:#992299;"><b>Python <i class="fa-solid fa-computer"></i></b></a></td>
 </tr>
 <tr>
 <th rowspan="1">Activité</th>
-<td><a href="https://colab.research.google.com/drive/1p-QxzfllfrySCHkR9YHZUNAVhRrLh2aK?usp=sharing"><b>Chute libre d'une balle (Python)</b></a></td>
+<td><a href="../python-chutelibre"><b>Chute libre d'une balle (Python)</b></a></td>
 </tr>
 <tr>
 <th rowspan="1">Simulation</th>
