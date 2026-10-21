@@ -249,9 +249,9 @@ details.nt-d.nt-exd pre code { background: none; color: inherit; padding: 0; }
 
 <p>Commençons par l'inverse&nbsp;: convertissons des km/h en m/s, en prenant l'exemple de $\pu{72 km/h}$. Une vitesse de 72&nbsp;km/h signifie que l'on parcourt 72&nbsp;km en 1&nbsp;heure&nbsp;; il suffit de remplacer chaque unité par sa valeur en mètres ou en secondes&nbsp;:</p>
 
-<div class="nt-scroll"><p class="nt-big">$\pu{72 km/h} = \dfrac{\pu{72 km}}{\pu{1 h}} = \dfrac{\pu{72E3 m}}{\pu{3600 s}} = \dfrac{\pu{72E3 m}}{\pu{3,6E3 s}}$</p></div>
+<div class="nt-scroll"><p style="text-align:center;">$\pu{72 km/h} = \dfrac{\pu{72 km}}{\pu{1 h}} = \dfrac{\pu{72E3 m}}{\pu{3600 s}} = \dfrac{\pu{72E3 m}}{\pu{3,6E3 s}}$</p></div>
 
-<div class="nt-scroll"><p class="nt-big">donc $\pu{72 km/h} = \dfrac{72}{\textcolor{#E11D48}{3,6}}\ \pu{m/s} = \pu{20 m/s}$</p></div>
+<div class="nt-scroll"><p style="text-align:center;">donc $\pu{72 km/h} = \dfrac{72}{\textcolor{#E11D48}{3,6}}\ \pu{m/s} = \pu{20 m/s}$</p></div>
 
 <div class="nt-b nt-prop">
 <p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir</p>
