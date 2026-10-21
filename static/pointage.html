@@ -17,7 +17,7 @@
       --danger: #ef4444;
       --success: #10b981;
       --warning: #f59e0b;
-      --radius: 12px;
+      --radius: 10px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,40 +26,50 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden; /* Garantit qu'aucun cadre ne déborde de la fenêtre */
       display: flex;
       flex-direction: column;
-      padding: 1rem;
-      gap: 1rem;
+      padding: 0.65rem;
+      gap: 0.65rem;
     }
 
-    /* En-tête et navigation par étapes */
+    /* En-tête compact */
     header {
-      max-width: 1440px;
       width: 100%;
-      margin: 0 auto;
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 0.75rem 1.25rem;
+      padding: 0.5rem 1rem;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
+      flex-shrink: 0;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.65rem;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1rem;
+    }
+
+    .layout-pill {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
     }
 
     .stepper {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.4rem;
       flex-wrap: wrap;
     }
 
@@ -67,14 +77,11 @@
       background: var(--bg);
       color: var(--text-muted);
       border: 1px solid var(--border);
-      padding: 0.45rem 0.9rem;
-      border-radius: 8px;
-      font-size: 0.88rem;
+      padding: 0.38rem 0.8rem;
+      border-radius: 7px;
+      font-size: 0.84rem;
       font-weight: 500;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
       transition: all 0.15s;
     }
 
@@ -89,15 +96,21 @@
       cursor: not-allowed;
     }
 
-    /* Disposition empilée (les cadres les uns au-dessus des autres) */
+    /* Conteneur principal adaptatif (Côte à côte OU Empilé) */
     main {
-      max-width: 1440px;
       width: 100%;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
       flex: 1;
+      min-height: 0;
+      display: flex;
+      gap: 0.65rem;
+    }
+
+    main.layout-side {
+      flex-direction: row;
+    }
+
+    main.layout-stack {
+      flex-direction: column;
     }
 
     .card {
@@ -109,28 +122,51 @@
       overflow: hidden;
     }
 
-    /* Zone visuelle principale : aussi grande que possible */
+    /* Cadre Vidéo / Pointage : prend tout l'espace restant */
+    .stage-card {
+      flex: 1;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    /* Zone noire contenant la boîte média dimensionnée au pixel près */
     .viewport {
       position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      max-height: 78vh;
+      flex: 1;
+      min-width: 0;
+      min-height: 0;
       background: #020617;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       user-select: none;
+      padding: 6px;
     }
 
-    video, canvas#workCanvas {
+    /* Boîte ajustée exactement aux proportions de la caméra (portrait ou paysage) */
+    .media-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    video#liveVideo {
+      position: absolute;
+      object-fit: fill;
+      pointer-events: none;
+    }
+
+    canvas#workCanvas {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      display: none;
+      cursor: crosshair;
     }
-
-    video.mirrored { transform: scaleX(-1); }
-    canvas#workCanvas { display: none; cursor: crosshair; }
 
     .grid-overlay {
       position: absolute;
@@ -139,27 +175,28 @@
       opacity: 0;
       transition: opacity 0.2s;
       background-image:
-        linear-gradient(to right, rgba(255,255,255,0.18) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.18) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px);
       background-size: 25% 25%;
     }
     .grid-overlay.visible { opacity: 1; }
 
     .badge-overlay {
       position: absolute;
-      top: 0.85rem;
-      left: 0.85rem;
+      top: 0.65rem;
+      left: 0.65rem;
       background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(4px);
       border: 1px solid var(--border);
-      padding: 0.35rem 0.75rem;
+      padding: 0.3rem 0.7rem;
       border-radius: 999px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-variant-numeric: tabular-nums;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.45rem;
       pointer-events: none;
+      z-index: 5;
     }
 
     .rec-dot {
@@ -171,29 +208,30 @@
     }
     @keyframes pulse { 50% { opacity: 0.3; } }
 
-    /* Barre de contrôle sous la vidéo / le canvas */
+    /* Barre de contrôle sous la vidéo */
     .bottom-bar {
-      padding: 0.85rem 1.25rem;
+      padding: 0.55rem 0.9rem;
       border-top: 1px solid var(--border);
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
+      flex-shrink: 0;
     }
 
     .toolbar-group {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.45rem;
       flex-wrap: wrap;
     }
 
     button, select, input[type="number"] {
       font-family: inherit;
-      font-size: 0.9rem;
-      padding: 0.5rem 0.9rem;
-      border-radius: 8px;
+      font-size: 0.84rem;
+      padding: 0.42rem 0.75rem;
+      border-radius: 7px;
       border: 1px solid var(--border);
       background: var(--bg);
       color: var(--text);
@@ -204,7 +242,7 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       font-weight: 500;
       transition: background 0.15s;
     }
@@ -214,16 +252,15 @@
 
     .btn-primary { background: var(--primary); border-color: var(--primary); color: white; }
     .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
-
     .btn-danger { background: var(--danger); border-color: var(--danger); color: white; }
     .btn-success { background: var(--success); border-color: var(--success); color: white; }
 
-    /* Barre de navigation dans les frames */
+    /* Navigation Frame par Frame */
     .frame-nav {
       width: 100%;
       display: none;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.65rem;
     }
 
     .frame-nav input[type="range"] {
@@ -234,23 +271,33 @@
 
     .frame-counter {
       font-variant-numeric: tabular-nums;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
-      min-width: 170px;
+      min-width: 165px;
       text-align: right;
     }
 
-    /* Cadre inférieur (Panneau contextuel pleine largeur) */
-    .bottom-panel {
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
+    /* Cadre des contrôles / résultats : s'adapte selon le mode Côte à côte ou Empilé */
+    .context-card {
+      padding: 0.9rem 1.05rem;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    main.layout-side .context-card {
+      width: 370px;
+      height: 100%;
+    }
+
+    main.layout-stack .context-card {
+      width: 100%;
+      max-height: 29vh;
     }
 
     .side-section {
       display: none;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     .side-section.active { display: flex; }
@@ -260,87 +307,95 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
+      gap: 0.6rem;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 0.65rem;
+      padding-bottom: 0.45rem;
     }
 
     .section-header h2 {
-      font-size: 1.05rem;
+      font-size: 0.96rem;
       font-weight: 600;
     }
 
-    .section-grid {
+    .section-body {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
       align-items: center;
+    }
+
+    main.layout-side .section-body {
+      grid-template-columns: 1fr;
     }
 
     .help-box {
       background: rgba(59, 130, 246, 0.1);
       border: 1px solid rgba(59, 130, 246, 0.3);
       color: #bfdbfe;
-      padding: 0.8rem 1rem;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      line-height: 1.5;
+      padding: 0.6rem 0.8rem;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      line-height: 1.42;
     }
 
     .field-row {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.3rem;
     }
 
     .field-row label {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
     }
 
     .input-group {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.45rem;
       align-items: center;
     }
 
-    .input-group input { width: 140px; }
+    .input-group input { width: 120px; }
 
     .stat-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 0.75rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
     }
 
     .stat-box {
       background: var(--bg);
       border: 1px solid var(--border);
-      padding: 0.7rem 0.9rem;
-      border-radius: 8px;
+      padding: 0.5rem 0.7rem;
+      border-radius: 7px;
     }
 
-    .stat-box .label { font-size: 0.76rem; color: var(--text-muted); }
-    .stat-box .val { font-size: 1.05rem; font-weight: 600; margin-top: 0.2rem; font-variant-numeric: tabular-nums; }
+    .stat-box .label { font-size: 0.72rem; color: var(--text-muted); }
+    .stat-box .val { font-size: 0.94rem; font-weight: 600; margin-top: 0.1rem; font-variant-numeric: tabular-nums; }
 
-    /* Tableau des résultats pleine largeur */
+    /* Tableau des résultats */
     .table-container {
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 7px;
       overflow: auto;
-      max-height: 420px;
+      max-height: 52vh;
       background: var(--bg);
+    }
+
+    main.layout-stack .table-container {
+      max-height: 16vh;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       font-variant-numeric: tabular-nums;
       text-align: right;
     }
 
     th, td {
-      padding: 0.55rem 0.85rem;
+      padding: 0.4rem 0.55rem;
       border-bottom: 1px solid var(--border);
     }
 
@@ -360,36 +415,47 @@
 
   <header>
     <div class="brand">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
         <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
       </svg>
-      <span>ChronoPointage Web</span>
+      <span>ChronoPointage</span>
+      <span id="layoutInfoPill" class="layout-pill">Auto</span>
     </div>
 
     <div class="stepper">
       <button class="step-btn active" id="tabStep1">1. Acquisition</button>
       <button class="step-btn" id="tabStep2" disabled>2. Échelle & Origine</button>
       <button class="step-btn" id="tabStep3" disabled>3. Pointage</button>
-      <button class="step-btn" id="tabStep4" disabled>4. Traitement (Tableau)</button>
+      <button class="step-btn" id="tabStep4" disabled>4. Traitement</button>
+    </div>
+
+    <div class="toolbar-group">
+      <label for="layoutModeSelect" style="font-size:0.8rem; color:var(--text-muted);">Disposition :</label>
+      <select id="layoutModeSelect" title="Choix de l'agencement des cadres">
+        <option value="auto">Auto (image maximale)</option>
+        <option value="side">Côte à côte</option>
+        <option value="stack">Empilé (haut / bas)</option>
+      </select>
     </div>
   </header>
 
-  <main>
-    <!-- CADRE SUPÉRIEUR : Vidéo en direct ou Canevas de pointage (pleine largeur) -->
-    <section class="card">
+  <main id="mainContainer" class="layout-side">
+    <!-- CADRE 1 : Vidéo / Pointage -->
+    <section class="card stage-card">
       <div class="viewport" id="viewport">
-        <video id="liveVideo" autoplay muted playsinline></video>
-        <canvas id="workCanvas"></canvas>
-        <div id="gridOverlay" class="grid-overlay"></div>
+        <div id="mediaBox" class="media-box">
+          <video id="liveVideo" autoplay muted playsinline></video>
+          <canvas id="workCanvas"></canvas>
+          <div id="gridOverlay" class="grid-overlay"></div>
+        </div>
 
         <div id="overlayBadge" class="badge-overlay">
           <span id="overlayText">Caméra inactive</span>
         </div>
       </div>
 
-      <!-- Barre d'outils directement sous l'image -->
-      <div class="bottom-bar">
-        <!-- Contrôles Étape 1 (Caméra) -->
+      <!-- Barre d'outils sous l'image -->
+      <div class="bottom-bar" id="bottomBar">
         <div id="camToolbar" class="toolbar-group" style="width: 100%; justify-content: space-between;">
           <div class="toolbar-group">
             <button id="btnStartCam" class="btn-primary">Activer la caméra</button>
@@ -397,16 +463,16 @@
             <button id="btnRecord" class="btn-danger" disabled>● Enregistrer</button>
           </div>
           <div class="toolbar-group">
-            <button id="btnGrid">Grille</button>
-            <button id="btnMirror">Miroir</button>
-            <label style="cursor:pointer; padding:0.5rem 0.9rem; border:1px solid var(--border); border-radius:8px; background:var(--bg); font-size:0.9rem;">
-              Importer une vidéo…
+            <button id="btnRotate" title="Pivoter le flux de 90° (pratique si la webcam est fixée verticalement)">↻ Pivoter 90°</button>
+            <button id="btnMirror" title="Inverser gauche/droite">Miroir</button>
+            <button id="btnGrid" title="Afficher une grille d'alignement">Grille</button>
+            <label style="cursor:pointer; padding:0.42rem 0.75rem; border:1px solid var(--border); border-radius:7px; background:var(--bg); font-size:0.84rem;">
+              Importer vidéo…
               <input type="file" id="fileInput" accept="video/*" style="display:none;">
             </label>
           </div>
         </div>
 
-        <!-- Contrôles Étapes 2, 3, 4 (Navigation Frame par Frame) -->
         <div id="frameNav" class="frame-nav">
           <button id="btnPrevFrame" title="Frame précédente (Flèche gauche)">◀</button>
           <input type="range" id="frameSlider" min="0" max="0" value="0">
@@ -416,30 +482,28 @@
       </div>
     </section>
 
-    <!-- CADRE INFÉRIEUR : Réglages, instructions et tableau (pleine largeur) -->
-    <section class="card bottom-panel">
+    <!-- CADRE 2 : Panneau de contrôle & Tableau (s'adapte sur le côté ou en bas) -->
+    <aside class="card context-card" id="contextCard">
 
-      <!-- PANNEAU 1 : ACQUISITION -->
+      <!-- ÉTAPE 1 : ACQUISITION -->
       <div class="side-section active" id="panelStep1">
         <div class="section-header">
           <h2>1. Acquisition vidéo</h2>
           <div id="downloadContainer" class="toolbar-group" style="display:none;">
-            <a id="downloadVideoBtn" style="padding:0.5rem 0.9rem; border-radius:8px; background:var(--bg); border:1px solid var(--border); color:var(--text); text-decoration:none; font-size:0.88rem;">
-              ⬇ Télécharger la vidéo brute
+            <a id="downloadVideoBtn" style="padding:0.4rem 0.7rem; border-radius:7px; background:var(--bg); border:1px solid var(--border); color:var(--text); text-decoration:none; font-size:0.8rem;">
+              ⬇ Vidéo brute
             </a>
-            <button id="btnGoToScale" class="btn-primary">
-              Passer à l'étalonnage →
-            </button>
+            <button id="btnGoToScale" class="btn-primary">Étalonnage →</button>
           </div>
         </div>
 
-        <div class="section-grid">
+        <div class="section-body">
           <div class="help-box">
-            Placez un objet de longueur connue (règle, étalon) dans le plan du mouvement, puis cliquez sur <strong>Enregistrer</strong> pour capturer une séquence.
+            Placez un étalon de longueur connue dans le plan du mouvement. Si votre webcam est montée verticalement sur une potence (chute libre), cliquez sur <strong>↻ Pivoter 90°</strong> pour passer en portrait.
           </div>
           <div class="stat-grid">
             <div class="stat-box">
-              <div class="label">Résolution</div>
+              <div class="label">Format effectif</div>
               <div class="val" id="statRes">—</div>
             </div>
             <div class="stat-box">
@@ -450,24 +514,23 @@
         </div>
       </div>
 
-      <!-- PANNEAU 2 : ÉCHELLE & REPÈRE -->
+      <!-- ÉTAPE 2 : ÉCHELLE & REPÈRE -->
       <div class="side-section" id="panelStep2">
         <div class="section-header">
-          <h2>2. Étalonnage et choix du repère</h2>
+          <h2>2. Étalonnage & Repère</h2>
           <div class="toolbar-group">
-            <button id="btnCenterOrigin">Recentrer l'origine O au milieu</button>
-            <button id="btnGoToTrack" class="btn-primary">Valider l'échelle et pointer →</button>
+            <button id="btnCenterOrigin">Centrer O</button>
+            <button id="btnGoToTrack" class="btn-primary">Pointer →</button>
           </div>
         </div>
 
-        <div class="section-grid">
+        <div class="section-body">
           <div class="help-box">
-            • Déplacez à la souris les extrémités <strong>A</strong> et <strong>B</strong> du segment jaune sur votre étalon de longueur.<br>
-            • Déplacez l'origine <strong>O</strong> du repère bleu $(O, x, y)$ à l'endroit souhaité.
+            Déplacez les extrémités <strong>A</strong> et <strong>B</strong> du segment jaune sur l'étalon, ainsi que l'origine <strong>O</strong> du repère $(O, x, y)$.
           </div>
 
           <div class="field-row">
-            <label for="scaleMeters">Longueur réelle du segment AB (en mètres) :</label>
+            <label for="scaleMeters">Longueur réelle du segment AB :</label>
             <div class="input-group">
               <input type="number" id="scaleMeters" value="1.00" step="0.01" min="0.001">
               <span>m</span>
@@ -476,7 +539,7 @@
 
           <div class="stat-grid">
             <div class="stat-box">
-              <div class="label">Longueur AB (pixels)</div>
+              <div class="label">Segment AB</div>
               <div class="val" id="statPxLen">— px</div>
             </div>
             <div class="stat-box">
@@ -487,21 +550,20 @@
         </div>
       </div>
 
-      <!-- PANNEAU 3 : POINTAGE -->
+      <!-- ÉTAPE 3 : POINTAGE -->
       <div class="side-section" id="panelStep3">
         <div class="section-header">
           <h2>3. Pointage image par image</h2>
           <div class="toolbar-group">
-            <button id="btnDeletePoint">Effacer le point de cette frame</button>
+            <button id="btnDeletePoint">Effacer ce point</button>
             <button id="btnClearAllPoints">Tout effacer</button>
-            <button id="btnGoToTable" class="btn-success">Traitement (Tableau & Vitesses) →</button>
+            <button id="btnGoToTable" class="btn-success">Traitement →</button>
           </div>
         </div>
 
-        <div class="section-grid">
+        <div class="section-body">
           <div class="help-box">
-            • <strong>Cliquez sur l'objet dans l'image ci-dessus</strong> : la position est enregistrée et la vidéo avance automatiquement à la frame suivante.<br>
-            • <strong>Pour corriger un point</strong> : revenez sur la frame avec le curseur ou les flèches ◀ ▶ du clavier et recliquez au bon endroit.
+            <strong>Cliquez sur l'objet</strong> pour enregistrer sa position et avancer d'une frame. Revenez sur n'importe quelle frame avec ◀ ▶ pour corriger un point.
           </div>
 
           <div class="stat-grid">
@@ -510,33 +572,29 @@
               <div class="val" id="statTrackedCount">0 / 0</div>
             </div>
             <div class="stat-box">
-              <div class="label">Δt moyen détecté</div>
+              <div class="label">Δt moyen</div>
               <div class="val" id="statDt">— ms</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- PANNEAU 4 : TRAITEMENT -->
+      <!-- ÉTAPE 4 : TRAITEMENT -->
       <div class="side-section" id="panelStep4">
         <div class="section-header">
-          <h2>4. Tableau des positions et vitesses</h2>
+          <h2>4. Résultats cinématiques</h2>
           <div class="toolbar-group">
-            <span id="copyFeedback" style="font-size:0.85rem; color:#34d399; margin-right:0.5rem;"></span>
-            <button id="btnCopyPython" class="btn-primary">Copier les listes pour Python</button>
-            <button id="btnExportCSV">Exporter en CSV</button>
+            <span id="copyFeedback" style="font-size:0.8rem; color:#34d399;"></span>
+            <button id="btnCopyPython" class="btn-primary">Copier Python</button>
+            <button id="btnExportCSV">CSV</button>
           </div>
-        </div>
-
-        <div class="help-box">
-          Les coordonnées $(x, y)$ sont exprimées dans le repère $(O, x, y)$ choisi. Les composantes de vitesse $v_x$ et $v_y$ sont calculées par différence finie centrée : $v(t_i) = \frac{x_{i+1} - x_{i-1}}{t_{i+1} - t_{i-1}}$. Cliquez sur une ligne du tableau pour afficher la frame correspondante au-dessus.
         </div>
 
         <div class="table-container">
           <table>
             <thead>
               <tr>
-                <th>Frame</th>
+                <th>#</th>
                 <th>t (s)</th>
                 <th>x (m)</th>
                 <th>y (m)</th>
@@ -549,19 +607,23 @@
         </div>
       </div>
 
-    </section>
+    </aside>
   </main>
 
   <script>
     // --- ÉLÉMENTS DOM ---
+    const mainContainer = document.getElementById('mainContainer');
+    const viewport = document.getElementById('viewport');
+    const mediaBox = document.getElementById('mediaBox');
     const liveVideo = document.getElementById('liveVideo');
     const workCanvas = document.getElementById('workCanvas');
     const ctx = workCanvas.getContext('2d');
     const gridOverlay = document.getElementById('gridOverlay');
     const overlayBadge = document.getElementById('overlayBadge');
     const overlayText = document.getElementById('overlayText');
+    const layoutModeSelect = document.getElementById('layoutModeSelect');
+    const layoutInfoPill = document.getElementById('layoutInfoPill');
 
-    // Boutons d'étapes
     const tabs = [
       document.getElementById('tabStep1'),
       document.getElementById('tabStep2'),
@@ -575,14 +637,14 @@
       document.getElementById('panelStep4')
     ];
 
-    // Contrôles Caméra & Navigation
     const camToolbar = document.getElementById('camToolbar');
     const frameNav = document.getElementById('frameNav');
     const btnStartCam = document.getElementById('btnStartCam');
     const cameraSelect = document.getElementById('cameraSelect');
     const btnRecord = document.getElementById('btnRecord');
-    const btnGrid = document.getElementById('btnGrid');
+    const btnRotate = document.getElementById('btnRotate');
     const btnMirror = document.getElementById('btnMirror');
+    const btnGrid = document.getElementById('btnGrid');
     const fileInput = document.getElementById('fileInput');
 
     const btnPrevFrame = document.getElementById('btnPrevFrame');
@@ -590,7 +652,6 @@
     const frameSlider = document.getElementById('frameSlider');
     const frameCounter = document.getElementById('frameCounter');
 
-    // Contrôles Panneaux
     const statRes = document.getElementById('statRes');
     const statFps = document.getElementById('statFps');
     const downloadContainer = document.getElementById('downloadContainer');
@@ -614,26 +675,105 @@
     const btnExportCSV = document.getElementById('btnExportCSV');
     const copyFeedback = document.getElementById('copyFeedback');
 
-    // --- ÉTAT DE L'APPLICATION ---
+    // --- ÉTAT ---
     let currentStep = 1;
     let stream = null;
     let isMirrored = false;
+    let camRotation = 0; // 0, 90, 180, 270 degrés
     let isRecording = false;
     let mediaRecorder = null;
     let recordedChunks = [];
 
-    // Tampon des frames : [{ bitmap: HTMLCanvasElement, time: Number (en secondes) }]
     let frames = [];
     let currentFrameIndex = 0;
 
-    // Étalonnage & Repère (en coordonnées pixels de l'image native)
     let scaleA = { x: 200, y: 300 };
     let scaleB = { x: 500, y: 300 };
     let origin = { x: 150, y: 400 };
-    let draggingHandle = null; // 'A', 'B', ou 'O'
-
-    // Pointage : tableau de même taille que `frames` contenant `{ xPx, yPx }` ou `null`
+    let draggingHandle = null;
     let points = [];
+
+    // =========================================================================
+    // MOTEUR D'AGENCEMENT ADAPTATIF (PORTRAIT / PAYSAGE SANS DÉBORDEMENT)
+    // =========================================================================
+
+    function getEffectiveMediaDimensions() {
+      // Si on travaille sur les frames déjà enregistrées ou importées
+      if (currentStep > 1 && frames.length > 0) {
+        return { w: frames[0].bitmap.width, h: frames[0].bitmap.height };
+      }
+      // Si la webcam est active en direct
+      if (liveVideo.videoWidth && liveVideo.videoHeight) {
+        const swapped = (camRotation % 180 !== 0);
+        return {
+          w: swapped ? liveVideo.videoHeight : liveVideo.videoWidth,
+          h: swapped ? liveVideo.videoWidth : liveVideo.videoHeight
+        };
+      }
+      // Format 16:9 par défaut avant activation
+      return { w: 1280, h: 720 };
+    }
+
+    function fitBox(mediaW, mediaH, maxW, maxH) {
+      if (maxW <= 0 || maxH <= 0) return { w: 0, h: 0, area: 0 };
+      const scale = Math.min(maxW / mediaW, maxH / mediaH);
+      const w = Math.floor(mediaW * scale);
+      const h = Math.floor(mediaH * scale);
+      return { w, h, area: w * h };
+    }
+
+    function updateLayout() {
+      const { w: mediaW, h: mediaH } = getEffectiveMediaDimensions();
+      const mainW = mainContainer.clientWidth;
+      const mainH = mainContainer.clientHeight;
+      const bottomBarH = document.getElementById('bottomBar').offsetHeight || 50;
+      const gap = 11;
+      const pad = 12;
+
+      let chosenMode = layoutModeSelect.value;
+
+      if (chosenMode === 'auto') {
+        // Simulation géométrique 1 : Mode Côte à côte (panneau latéral de 370 px)
+        const sideW = mainW - 370 - gap - pad;
+        const sideH = mainH - bottomBarH - pad;
+        const fitSide = fitBox(mediaW, mediaH, sideW, sideH);
+
+        // Simulation géométrique 2 : Mode Empilé (panneau en bas ~175 px)
+        const stackPanelH = (currentStep === 4) ? 210 : 165;
+        const stackW = mainW - pad;
+        const stackH = mainH - stackPanelH - gap - bottomBarH - pad;
+        const fitStack = fitBox(mediaW, mediaH, stackW, stackH);
+
+        chosenMode = (fitSide.area >= fitStack.area) ? 'side' : 'stack';
+      }
+
+      mainContainer.classList.toggle('layout-side', chosenMode === 'side');
+      mainContainer.classList.toggle('layout-stack', chosenMode === 'stack');
+
+      const orientLabel = mediaH > mediaW ? 'Portrait' : 'Paysage';
+      const modeLabel = chosenMode === 'side' ? 'Côte à côte' : 'Empilé';
+      layoutInfoPill.textContent = `${orientLabel} (${mediaW}×${mediaH}) • ${modeLabel}`;
+
+      // Ajustement au pixel près de #mediaBox dans l'espace réel de .viewport
+      const vpW = viewport.clientWidth - pad;
+      const vpH = viewport.clientHeight - pad;
+      const finalFit = fitBox(mediaW, mediaH, vpW, vpH);
+
+      mediaBox.style.width = `${finalFit.w}px`;
+      mediaBox.style.height = `${finalFit.h}px`;
+
+      // Ajustement de la balise <video> (gère la rotation 90°/270° sans bandes noires)
+      const swapped = (camRotation % 180 !== 0);
+      liveVideo.style.width = `${swapped ? finalFit.h : finalFit.w}px`;
+      liveVideo.style.height = `${swapped ? finalFit.w : finalFit.h}px`;
+      const mirrorScale = isMirrored ? ' scaleX(-1)' : '';
+      liveVideo.style.transform = `rotate(${camRotation}deg)${mirrorScale}`;
+
+      if (currentStep > 1) renderCanvas();
+    }
+
+    window.addEventListener('resize', updateLayout);
+    layoutModeSelect.addEventListener('change', updateLayout);
 
     // =========================================================================
     // 1. GESTION DE LA CAMÉRA ET CAPTURE DES TRAMES HORODATÉES
@@ -654,7 +794,6 @@
         audio: false
       };
 
-      // On n'applique l'identifiant que si le menu déroulant est actif et contient un vrai ID
       if (deviceId && !cameraSelect.disabled) {
         constraints.video.deviceId = { ideal: deviceId };
       }
@@ -663,7 +802,6 @@
         try {
           stream = await navigator.mediaDevices.getUserMedia(constraints);
         } catch (firstErr) {
-          console.warn("Repli sur les contraintes vidéo minimales :", firstErr);
           stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
         }
 
@@ -674,9 +812,10 @@
         const settings = track.getSettings();
 
         liveVideo.onloadedmetadata = () => {
-          statRes.textContent = `${liveVideo.videoWidth}×${liveVideo.videoHeight}`;
+          updateResolutionStats();
           statFps.textContent = settings.frameRate ? `${Math.round(settings.frameRate)} fps` : 'Auto';
           overlayText.textContent = `Direct : ${track.label || 'Webcam'}`;
+          updateLayout();
         };
 
         await updateCameraList(settings.deviceId);
@@ -684,6 +823,11 @@
         console.error(err);
         overlayText.textContent = "Erreur caméra : " + err.message;
       }
+    }
+
+    function updateResolutionStats() {
+      const { w, h } = getEffectiveMediaDimensions();
+      statRes.textContent = `${w}×${h}`;
     }
 
     async function updateCameraList(selectedId = null) {
@@ -708,25 +852,44 @@
       if (!isRecording) startCamera();
     });
 
-    btnGrid.addEventListener('click', () => gridOverlay.classList.toggle('visible'));
-    btnMirror.addEventListener('click', () => {
-      isMirrored = !isMirrored;
-      liveVideo.classList.toggle('mirrored', isMirrored);
+    btnRotate.addEventListener('click', () => {
+      camRotation = (camRotation + 90) % 360;
+      updateResolutionStats();
+      updateLayout();
     });
 
-    // --- ENREGISTREMENT HYBRIDE (Frames horodatées + Fichier vidéo) ---
-    btnRecord.addEventListener('click', () => {
-      if (isRecording) {
-        stopRecording();
-      } else {
-        startRecording();
-      }
+    btnMirror.addEventListener('click', () => {
+      isMirrored = !isMirrored;
+      updateLayout();
     });
+
+    btnGrid.addEventListener('click', () => gridOverlay.classList.toggle('visible'));
+
+    // --- ENREGISTREMENT HYBRIDE ---
+    btnRecord.addEventListener('click', () => {
+      if (isRecording) stopRecording();
+      else startRecording();
+    });
+
+    function drawTransformedVideoToCanvas(targetCanvas) {
+      const rawW = liveVideo.videoWidth;
+      const rawH = liveVideo.videoHeight;
+      const swapped = (camRotation % 180 !== 0);
+      targetCanvas.width = swapped ? rawH : rawW;
+      targetCanvas.height = swapped ? rawW : rawH;
+
+      const c = targetCanvas.getContext('2d');
+      c.save();
+      c.translate(targetCanvas.width / 2, targetCanvas.height / 2);
+      c.rotate((camRotation * Math.PI) / 180);
+      if (isMirrored) c.scale(-1, 1);
+      c.drawImage(liveVideo, -rawW / 2, -rawH / 2, rawW, rawH);
+      c.restore();
+    }
 
     function startRecording() {
       if (!stream || !liveVideo.videoWidth) return;
 
-      frames.forEach(f => f.bitmap.close && f.bitmap.close());
       frames = [];
       points = [];
       isRecording = true;
@@ -734,7 +897,6 @@
       btnRecord.textContent = "■ Arrêter";
       overlayBadge.innerHTML = '<span class="rec-dot"></span><span id="overlayText">Enregistrement...</span>';
 
-      // A. Enregistrement du fichier vidéo téléchargeable
       recordedChunks = [];
       const mime = MediaRecorder.isTypeSupported('video/mp4') ? 'video/mp4' : 'video/webm';
       mediaRecorder = new MediaRecorder(stream, { mimeType: mime });
@@ -748,16 +910,12 @@
       };
       mediaRecorder.start();
 
-      // B. Capture trame par trame avec horloge monotone `now` (compatible Safari/Chrome/Firefox)
-      const w = liveVideo.videoWidth;
-      const h = liveVideo.videoHeight;
       let firstTime = null;
       let lastPresentedFrames = -1;
 
       const captureFrame = (now, metadata) => {
         if (!isRecording) return;
 
-        // Évite de dupliquer une trame si l'écran rafraîchit plus vite que la webcam
         if (metadata && metadata.presentedFrames !== undefined) {
           if (metadata.presentedFrames === lastPresentedFrames) {
             liveVideo.requestVideoFrameCallback(captureFrame);
@@ -771,14 +929,7 @@
         const relTime = rawTime - firstTime;
 
         const offCanvas = document.createElement('canvas');
-        offCanvas.width = w;
-        offCanvas.height = h;
-        const offCtx = offCanvas.getContext('2d');
-        if (isMirrored) {
-          offCtx.translate(w, 0);
-          offCtx.scale(-1, 1);
-        }
-        offCtx.drawImage(liveVideo, 0, 0, w, h);
+        drawTransformedVideoToCanvas(offCanvas);
 
         frames.push({ bitmap: offCanvas, time: relTime });
         document.getElementById('overlayText').textContent = `${frames.length} frames (${relTime.toFixed(2)} s)`;
@@ -811,12 +962,12 @@
       }
     }
 
-    // --- IMPORT D'UN FICHIER VIDÉO EXISTANT ---
+    // --- IMPORT D'UNE VIDÉO EXISTANTE ---
     fileInput.addEventListener('change', async (e) => {
       const file = e.target.files[0];
       if (!file) return;
 
-      overlayBadge.innerHTML = `<span id="overlayText">Extraction des frames de la vidéo...</span>`;
+      overlayBadge.innerHTML = `<span id="overlayText">Extraction des frames...</span>`;
       frames = [];
       points = [];
 
@@ -828,7 +979,6 @@
       await new Promise(res => { tempVideo.onloadedmetadata = res; });
       const w = tempVideo.videoWidth;
       const h = tempVideo.videoHeight;
-      statRes.textContent = `${w}×${h}`;
 
       if ('requestVideoFrameCallback' in tempVideo) {
         let firstT = null;
@@ -861,9 +1011,16 @@
       const h = frames[0].bitmap.height;
       workCanvas.width = w;
       workCanvas.height = h;
+      statRes.textContent = `${w}×${h}`;
 
-      scaleA = { x: Math.round(w * 0.25), y: Math.round(h * 0.5) };
-      scaleB = { x: Math.round(w * 0.75), y: Math.round(h * 0.5) };
+      // Position initiale adaptée selon que l'image est portrait ou paysage
+      if (h > w) {
+        scaleA = { x: Math.round(w * 0.3), y: Math.round(h * 0.25) };
+        scaleB = { x: Math.round(w * 0.3), y: Math.round(h * 0.75) };
+      } else {
+        scaleA = { x: Math.round(w * 0.25), y: Math.round(h * 0.5) };
+        scaleB = { x: Math.round(w * 0.75), y: Math.round(h * 0.5) };
+      }
       origin = { x: Math.round(w * 0.2), y: Math.round(h * 0.8) };
 
       frameSlider.max = frames.length - 1;
@@ -882,6 +1039,7 @@
 
       updateScaleStats();
       updateTrackingStats();
+      updateLayout();
     }
 
     // =========================================================================
@@ -906,11 +1064,10 @@
         if (step === 4) computeKinematicsTable();
         goToFrame(currentFrameIndex);
       }
+      updateLayout();
     }
 
-    tabs.forEach((btn, idx) => {
-      btn.addEventListener('click', () => switchStep(idx + 1));
-    });
+    tabs.forEach((btn, idx) => btn.addEventListener('click', () => switchStep(idx + 1)));
     btnGoToScale.addEventListener('click', () => switchStep(2));
     btnGoToTrack.addEventListener('click', () => switchStep(3));
     btnGoToTable.addEventListener('click', () => switchStep(4));
@@ -937,7 +1094,7 @@
     });
 
     // =========================================================================
-    // 3. DESSIN SUR LE CANEVAS (IMAGE + REPÈRE + ÉTALON + POINTS)
+    // 3. DESSIN SUR LE CANEVAS & POINTAGE
     // =========================================================================
 
     function renderCanvas() {
@@ -948,7 +1105,7 @@
       ctx.clearRect(0, 0, w, h);
       ctx.drawImage(frames[currentFrameIndex].bitmap, 0, 0, w, h);
 
-      // Dessin du repère (O, x, y)
+      // Repère (O, x, y)
       ctx.save();
       ctx.strokeStyle = 'rgba(59, 130, 246, 0.85)';
       ctx.fillStyle = 'rgba(59, 130, 246, 0.95)';
@@ -963,8 +1120,8 @@
       ctx.setLineDash([]);
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.moveTo(origin.x, origin.y); ctx.lineTo(origin.x + 60, origin.y);
-      ctx.moveTo(origin.x, origin.y); ctx.lineTo(origin.x, origin.y - 60);
+      ctx.moveTo(origin.x, origin.y); ctx.lineTo(origin.x + 55, origin.y);
+      ctx.moveTo(origin.x, origin.y); ctx.lineTo(origin.x, origin.y - 55);
       ctx.stroke();
 
       ctx.beginPath();
@@ -972,11 +1129,11 @@
       ctx.fill();
       ctx.font = 'bold 15px system-ui';
       ctx.fillText('O', origin.x - 18, origin.y + 18);
-      ctx.fillText('x', origin.x + 66, origin.y + 5);
-      ctx.fillText('y', origin.x - 5, origin.y - 68);
+      ctx.fillText('x', origin.x + 62, origin.y + 5);
+      ctx.fillText('y', origin.x - 5, origin.y - 62);
       ctx.restore();
 
-      // Dessin du segment d'étalonnage AB (à l'étape 2)
+      // Segment d'étalonnage AB
       if (currentStep === 2) {
         ctx.save();
         ctx.strokeStyle = '#f59e0b';
@@ -1003,7 +1160,7 @@
         ctx.restore();
       }
 
-      // Dessin des points pointés
+      // Points pointés
       ctx.save();
       for (let i = 0; i < points.length; i++) {
         const p = points[i];
@@ -1011,7 +1168,6 @@
 
         const isCurrent = (i === currentFrameIndex);
         ctx.strokeStyle = isCurrent ? '#10b981' : '#ef4444';
-        ctx.fillStyle = isCurrent ? '#10b981' : '#ef4444';
         ctx.lineWidth = isCurrent ? 3 : 2;
 
         const r = isCurrent ? 10 : 6;
@@ -1029,42 +1185,26 @@
       ctx.restore();
     }
 
+    // Coordonnées directes (puisque #mediaBox épouse exactement les dimensions de l'image)
     function getCanvasCoords(evt) {
       const rect = workCanvas.getBoundingClientRect();
-      const canvasRatio = workCanvas.width / workCanvas.height;
-      const rectRatio = rect.width / rect.height;
-
-      let renderW = rect.width, renderH = rect.height, offsetX = 0, offsetY = 0;
-
-      if (rectRatio > canvasRatio) {
-        renderW = rect.height * canvasRatio;
-        offsetX = (rect.width - renderW) / 2;
-      } else {
-        renderH = rect.width / canvasRatio;
-        offsetY = (rect.height - renderH) / 2;
-      }
-
       const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
       const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
-
-      const x = ((clientX - rect.left - offsetX) / renderW) * workCanvas.width;
-      const y = ((clientY - rect.top - offsetY) / renderH) * workCanvas.height;
-      return { x, y };
+      return {
+        x: ((clientX - rect.left) / rect.width) * workCanvas.width,
+        y: ((clientY - rect.top) / rect.height) * workCanvas.height
+      };
     }
 
     function dist(p1, p2) {
       return Math.hypot(p1.x - p2.x, p1.y - p2.y);
     }
 
-    // =========================================================================
-    // 4. INTERACTIONS SOURIS (ÉCHELLE, ORIGINE ET POINTAGE)
-    // =========================================================================
-
     workCanvas.addEventListener('mousedown', (e) => {
       const pos = getCanvasCoords(e);
       if (pos.x < 0 || pos.x > workCanvas.width || pos.y < 0 || pos.y > workCanvas.height) return;
 
-      const hitRadius = Math.max(18, workCanvas.width * 0.018);
+      const hitRadius = Math.max(18, Math.min(workCanvas.width, workCanvas.height) * 0.025);
 
       if (currentStep === 2) {
         if (dist(pos, scaleA) < hitRadius) { draggingHandle = 'A'; return; }
@@ -1101,9 +1241,7 @@
       renderCanvas();
     });
 
-    window.addEventListener('mouseup', () => {
-      draggingHandle = null;
-    });
+    window.addEventListener('mouseup', () => { draggingHandle = null; });
 
     function getPixelsPerMeter() {
       const pxLen = dist(scaleA, scaleB);
@@ -1143,22 +1281,20 @@
     });
 
     // =========================================================================
-    // 5. TRAITEMENT CINÉMATIQUE : POSITIONS (x, y) ET VITESSES (vx, vy)
+    // 4. TRAITEMENT CINÉMATIQUE
     // =========================================================================
 
     function getKinematicData() {
       const pxPerMeter = getPixelsPerMeter();
-
       const valid = [];
+
       for (let i = 0; i < frames.length; i++) {
         if (points[i] !== null) {
-          const xMeters = (points[i].xPx - origin.x) / pxPerMeter;
-          const yMeters = (origin.y - points[i].yPx) / pxPerMeter;
           valid.push({
             frameIdx: i,
             t: frames[i].time,
-            x: xMeters,
-            y: yMeters,
+            x: (points[i].xPx - origin.x) / pxPerMeter,
+            y: (origin.y - points[i].yPx) / pxPerMeter,
             vx: null,
             vy: null
           });
@@ -1172,7 +1308,6 @@
           valid[k].vy = (valid[k + 1].y - valid[k - 1].y) / dt;
         }
       }
-
       return valid;
     }
 
@@ -1181,7 +1316,7 @@
       resultsTableBody.innerHTML = '';
 
       if (data.length === 0) {
-        resultsTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:1.5rem;">Aucun point pointé pour l'instant.</td></tr>`;
+        resultsTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted); padding:1rem;">Aucun point pointé.</td></tr>`;
         return;
       }
 
@@ -1205,19 +1340,15 @@
       const data = getKinematicData();
       if (data.length === 0) return;
 
-      const tArr = data.map(d => d.t.toFixed(4)).join(', ');
-      const xArr = data.map(d => d.x.toFixed(4)).join(', ');
-      const yArr = data.map(d => d.y.toFixed(4)).join(', ');
-
       const pyCode =
 `# Données issues du pointage vidéo
-t = [${tArr}]
-x = [${xArr}]
-y = [${yArr}]`;
+t = [${data.map(d => d.t.toFixed(4)).join(', ')}]
+x = [${data.map(d => d.x.toFixed(4)).join(', ')}]
+y = [${data.map(d => d.y.toFixed(4)).join(', ')}]`;
 
       navigator.clipboard.writeText(pyCode).then(() => {
-        copyFeedback.textContent = "✓ Listes t, x, y copiées pour Python !";
-        setTimeout(() => { copyFeedback.textContent = ""; }, 3000);
+        copyFeedback.textContent = "✓ Copié !";
+        setTimeout(() => { copyFeedback.textContent = ""; }, 2500);
       });
     });
 
@@ -1238,6 +1369,9 @@ y = [${yArr}]`;
       a.download = `pointage_${Date.now()}.csv`;
       a.click();
     });
+
+    // Calcul initial au chargement
+    updateLayout();
   </script>
 </body>
 </html>
