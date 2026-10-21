@@ -296,7 +296,7 @@
 
   <!-- Barre de formule -->
   <div class="toolbar">
-    <div id="activeCellRef" class="cell-address">E2</div>
+    <div id="activeCellRef" class="cell-address">D2</div>
     <div class="fx-icon">fx</div>
     <input type="text" id="formulaInput" class="formula-input" placeholder="Sélectionnez une cellule et tapez une valeur ou une formule commençant par =">
     <button class="btn" id="resetBtn" title="Effacer toutes les réponses saisies">Réinitialiser</button>
@@ -332,32 +332,32 @@
   const INITIAL_SHEET = {
     // Tableau 1 : Lignes 1 à 11
     1:  { A: 'm1 (milliards de kg)', B: 'm2 (milliards de kg)', C: 'd (en km)', D: 'F (en N)', E: 'm1×m2', F: 'F/(m1×m2)', isHeader: true },
-    2:  { A: '1',  B: '10', C: '4', D: '41,7', E: '', F: '' },
-    3:  { A: '2',  B: '10', C: '4', D: '83,4', E: '', F: '' },
-    4:  { A: '3',  B: '10', C: '4', D: '125,1', E: '', F: '' },
-    5:  { A: '4',  B: '10', C: '4', D: '166,8', E: '', F: '' },
-    6:  { A: '5',  B: '10', C: '4', D: '208,4', E: '', F: '' },
-    7:  { A: '6',  B: '10', C: '4', D: '250,1', E: '', F: '' },
-    8:  { A: '7',  B: '10', C: '4', D: '291,8', E: '', F: '' },
-    9:  { A: '8',  B: '10', C: '4', D: '333,5', E: '', F: '' },
-    10: { A: '9',  B: '10', C: '4', D: '375,2', E: '', F: '' },
-    11: { A: '10', B: '10', C: '4', D: '416,9', E: '', F: '' },
+    2:  { A: '1',  B: '10', C: '4', D: '', E: '', F: '' },
+    3:  { A: '2',  B: '10', C: '4', D: '', E: '', F: '' },
+    4:  { A: '3',  B: '10', C: '4', D: '', E: '', F: '' },
+    5:  { A: '4',  B: '10', C: '4', D: '', E: '', F: '' },
+    6:  { A: '5',  B: '10', C: '4', D: '', E: '', F: '' },
+    7:  { A: '6',  B: '10', C: '4', D: '', E: '', F: '' },
+    8:  { A: '7',  B: '10', C: '4', D: '', E: '', F: '' },
+    9:  { A: '8',  B: '10', C: '4', D: '', E: '', F: '' },
+    10: { A: '9',  B: '10', C: '4', D: '', E: '', F: '' },
+    11: { A: '10', B: '10', C: '4', D: '', E: '', F: '' },
 
     // Tableau 2 : Lignes 13 à 22
     13: { A: 'm1 (milliards de kg)', B: 'm2 (milliards de kg)', C: 'd (en km)', D: 'F (en N)', E: '1/d²', F: 'F/(1/d²)', isHeader: true },
-    14: { A: '10', B: '4', C: '2.2', D: '551,2', E: '', F: '' },
-    15: { A: '10', B: '4', C: '2.8', D: '340,3', E: '', F: '' },
-    16: { A: '10', B: '4', C: '3.4', D: '230,8', E: '', F: '' },
-    17: { A: '10', B: '4', C: '4',   D: '166,8', E: '', F: '' },
-    18: { A: '10', B: '4', C: '4.6', D: '126,1', E: '', F: '' },
-    19: { A: '10', B: '4', C: '5.2', D: '98,7', E: '', F: '' },
-    20: { A: '10', B: '4', C: '5.8', D: '79,3', E: '', F: '' },
-    21: { A: '10', B: '4', C: '6.4', D: '65,1', E: '', F: '' },
-    22: { A: '10', B: '4', C: '7',   D: '54,4', E: '', F: '' }
+    14: { A: '10', B: '4', C: '2.2', D: '', E: '', F: '' },
+    15: { A: '10', B: '4', C: '2.8', D: '', E: '', F: '' },
+    16: { A: '10', B: '4', C: '3.4', D: '', E: '', F: '' },
+    17: { A: '10', B: '4', C: '4',   D: '', E: '', F: '' },
+    18: { A: '10', B: '4', C: '4.6', D: '', E: '', F: '' },
+    19: { A: '10', B: '4', C: '5.2', D: '', E: '', F: '' },
+    20: { A: '10', B: '4', C: '5.8', D: '', E: '', F: '' },
+    21: { A: '10', B: '4', C: '6.4', D: '', E: '', F: '' },
+    22: { A: '10', B: '4', C: '7',   D: '', E: '', F: '' }
   };
 
   let cellData = {}; // Stocke { raw: string, computed: any, readonly: boolean }
-  let selectedCell = 'E2';
+  let selectedCell = 'D2';
   let editingCell = null;
   let isFormulaBarFocused = false;
 
@@ -374,7 +374,7 @@
         const id = `${c}${r}`;
         const val = rowObj[c] !== undefined ? String(rowObj[c]) : '';
         const isHeader = !!rowObj.isHeader;
-        const isFixedColumn = !isHeader && (c === 'A' || c === 'B' || c === 'C' || c === 'D');
+        const isFixedColumn = !isHeader && (c === 'A' || c === 'B' || c === 'C');
         cellData[id] = {
           raw: val,
           computed: val,
@@ -825,7 +825,7 @@
   document.getElementById('resetBtn').addEventListener('click', () => {
     if (confirm('Voulez-vous vraiment effacer toutes les cellules complétées ?')) {
       initData();
-      selectCell('E2');
+      selectCell('D2');
       document.getElementById('q1').value = '';
       document.getElementById('q2').value = '';
     }
@@ -835,7 +835,7 @@
   initData();
   buildTableDOM('table1', 1, 11);
   buildTableDOM('table2', 13, 22);
-  selectCell('E2');
+  selectCell('D2');
 </script>
 
 </body>
