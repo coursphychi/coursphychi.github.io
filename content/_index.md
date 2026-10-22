@@ -88,10 +88,10 @@ a.alarm-link:hover svg {
     <td><a href = "/2nde" >2NDE</a></td>  <td><a href = "/1spe" >1SPÉ</a></td><td><a href = "/tspe">TSPÉ</a></td>
   </tr>
   <tr>
-<td><a href = "/tsti2d"> TSTI2D </a></td>  <td><a href = "/colles"> Colles </a></td><td><a href = "/outils.html">LABO</a></td>
+<td><a href = "/tsti2d"> TSTI2D </a></td>  <td><a href = "/1es"> 1ES </a></td><td><a href = "/tes">TES</a></td>
   </tr>
     <tr>
-  <td><a href = "/1es"> 1ES </a></td>  <td><a href = "/tes" >TES</a></td><td><a href = "https://sciencesilencieuse.github.io" >MORE</a></td>
+  <td><a href = "/colles">Colles </a></td>  <td><a href = "/outils.html" >LABO</a></td><td><a href = "https://sciencesilencieuse.github.io" >MORE</a></td>
   </tr>
 </table>
 </div>
