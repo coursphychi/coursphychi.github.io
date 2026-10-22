@@ -259,7 +259,7 @@
   .cm-s-tkdark .cm-meta{color:#e5c07b}
   .cm-s-tkdark .cm-bracket,.cm-s-tkdark .cm-punctuation{color:#abb2bf}
   .cm-s-tkdark .cm-error{color:#ff7b72}
-  .cm-s-tkdark .CodeMirror-matchingbracket{color:#e3e7ec !important;background:#3a4450;outline:1px solid #5a4450}
+  .cm-s-tkdark .CodeMirror-matchingbracket{color:#e3e7ec !important;background:#3a4450;outline:1px solid #5a6674}
   .cm-s-tkdark .CodeMirror-nonmatchingbracket{color:#ff7b72 !important}
 </style>
 </head>
@@ -1551,6 +1551,7 @@ function cleanPyTraceback(msg){
 function runPyodide(code, done){
   _pyoLastLine = "";
   var py, ns = null, failed = null, pipFailed = {};
+  var quietOpt = { messageCallback: function(){}, errorCallback: function(){} };
   getPyodide().then(function(p){
     py = p;
     return py.loadPackagesFromImports(code, {
@@ -1567,7 +1568,7 @@ function runPyodide(code, done){
     });
     if (!req.length) return;
     pyoStatus("Installation depuis PyPI : " + req.join(", ") + "…");
-    return py.loadPackage("micropip").then(function(){
+    return py.loadPackage("micropip", quietOpt).then(function(){
       // un paquet à la fois : l'échec de l'un n'empêche pas les autres
       return req.reduce(function(chain, pkg){
         return chain.then(function(){
@@ -1587,12 +1588,14 @@ function runPyodide(code, done){
     // plotly : on précharge aussi pandas (requis en interne par plotly.express)
     if (!_pyoPlotly && py.runPython("import importlib.util as _u; _u.find_spec('plotly') is not None")){
       pyoStatus("Préparation de plotly…");
-      return py.loadPackage("pandas").then(function(){
+      return py.loadPackage("pandas", quietOpt).then(function(){
         return py.runPythonAsync(PYO_PLOTLY);
       }).then(function(){ _pyoPlotly = true; });
     }
   }).then(function(){
     pyoStatus(null);
+    els.stdout.textContent = "";                 // efface les éventuels messages d'installation (micropip…)
+    _pyoLastLine = "";
     py.globals.get("_tk_clean")();
     var d = allData(true);                       // data= du shortcode + fichiers importés
     for (var name in d){
