@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labo numérique</title>
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #26354d;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-main);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.08) 0px, transparent 50%);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 3rem 1.5rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.75rem);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grille responsive automatique */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Style des cartes */
+        .tool-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        /* Lueur subtile en haut de la carte au survol */
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            opacity: 0.7;
+            transition: opacity 0.25s ease, height 0.25s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--bg-card-hover);
+            border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5),
+                        0 0 20px -5px color-mix(in srgb, var(--accent) 20%, transparent);
+        }
+
+        .tool-card:hover::before {
+            opacity: 1;
+            height: 4px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+        }
+
+        .icon-wrapper {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+            color: var(--accent);
+            transition: transform 0.25s ease, background-color 0.25s ease;
+        }
+
+        .tool-card:hover .icon-wrapper {
+            transform: scale(1.08);
+            background-color: color-mix(in srgb, var(--accent) 25%, transparent);
+        }
+
+        .icon-wrapper svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 1.75;
+        }
+
+        .category-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+        }
+
+        .tool-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .arrow-icon {
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: all 0.25s ease;
+            color: var(--accent);
+            width: 20px;
+            height: 20px;
+        }
+
+        .tool-card:hover .arrow-icon {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .tool-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 2rem 1rem;
+            }
+            header {
+                margin-bottom: 2rem;
+            }
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Labo numérique</h1>
+            <p class="subtitle">Outils d'acquisition, de mesure et de traitement de données pour les travaux pratiques.</p>
+        </header>
+
+        <main class="tools-grid">
+
+            <!-- 1. Pointage vidéo -->
+            <a href="/webcam.html" class="tool-card" style="--accent: #38bdf8;">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <!-- Icône : Caméra + Réticule de pointage -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                            <circle cx="12" cy="13" r="4"/>
+                            <line x1="12" y1="7" x2="12" y2="9"/>
+                            <line x1="12" y1="17" x2="12" y2="19"/>
+                            <line x1="6" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="13" x2="18" y2="13"/>
+                        </svg>
+                    </div>
+                    <span class="category-tag">Mécanique</span>
+                </div>
+                <h2 class="tool-title">
+                    Pointage vidéo
+                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </h2>
+                <p class="tool-desc">Enregistrement par webcam et pointage image par image pour l'étude cinématique des mouvements.</p>
+            </a>
+
+            <!-- 2. Oscilloscope audio -->
+            <a href="/oscilloscope.html" class="tool-card" style="--accent: #10b981;">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <!-- Icône : Signal sinusoïdal sur écran -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="18" rx="2" ry="2"/>
+                            <path d="M6 12c1.5-4 3-4 4.5 0s3 4 4.5 0 3-4 3 0"/>
+                            <line x1="2" y1="12" x2="4" y2="12" stroke-opacity="0.4"/>
+                            <line x1="20" y1="12" x2="22" y2="12" stroke-opacity="0.4"/>
+                        </svg>
+                    </div>
+                    <span class="category-tag">Ondes & Signaux</span>
+                </div>
+                <h2 class="tool-title">
+                    Oscilloscope audio
+                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </h2>
+                <p class="tool-desc">Visualisation temporelle d'un signal sonore capté par le microphone.</p>
+            </a>
+
+            <!-- 3. Chronomètre acoustique -->
+            <a href="/deuxmicros.html" class="tool-card" style="--accent: #f59e0b;">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <!-- Icône : Onde sonore + Chronomètre -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 10v3"/>
+                            <path d="M6 6v11"/>
+                            <path d="M10 3v18"/>
+                            <circle cx="17" cy="14" r="5"/>
+                            <polyline points="17 12 17 14 18.5 15"/>
+                            <path d="M15 6h4"/>
+                        </svg>
+                    </div>
+                    <span class="category-tag">Acoustique</span>
+                </div>
+                <h2 class="tool-title">
+                    Chronomètre sonore
+                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </h2>
+                <p class="tool-desc">Mesure précise de durées avec déclenchement et arrêt automatiques au dépassement d'un seuil sonore.</p>
+            </a>
+
+            <!-- 4. Minuteur -->
+            <a href="/minuteur.html" class="tool-card" style="--accent: #f43f5e;">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <!-- Icône : Chronomètre / Sablier moderne -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="10" x2="14" y1="2" y2="2"/>
+                            <line x1="12" x2="15" y1="14" y2="11"/>
+                            <circle cx="12" cy="14" r="8"/>
+                        </svg>
+                    </div>
+                    <span class="category-tag">Mesure & Gestion</span>
+                </div>
+                <h2 class="tool-title">
+                    Minuteur
+                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </h2>
+                <p class="tool-desc">Compte à rebours visuel et sonore pour le suivi temporel des expériences, réactions chimiques ou épreuves.</p>
+            </a>
+
+            <!-- 5. Console Python -->
+            <a href="/labpython.html" class="tool-card" style="--accent: #eab308;">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <!-- Icône : Terminal de code -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="4 17 10 11 4 5"/>
+                            <line x1="12" x2="20" y1="19" y2="19"/>
+                        </svg>
+                    </div>
+                    <span class="category-tag">Programmation</span>
+                </div>
+                <h2 class="tool-title">
+                    Labo Python
+                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </h2>
+                <p class="tool-desc">Environnement d'exécution Python directement dans le navigateur avec bibliothèques scientifiques préchargées.</p>
+            </a>
+
+            <!-- 6. Régression linéaire -->
+            <a href="/labreg.html" class="tool-card" style="--accent: #a855f7;">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <!-- Icône : Nuage de points et droite de régression -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18"/>
+                            <circle cx="7.5" cy="14.5" r="1.5" fill="currentColor"/>
+                            <circle cx="12" cy="9" r="1.5" fill="currentColor"/>
+                            <circle cx="16.5" cy="11.5" r="1.5" fill="currentColor"/>
+                            <circle cx="19" cy="6" r="1.5" fill="currentColor"/>
+                            <line x1="5" y1="17" x2="20" y2="5" stroke-dasharray="2 2"/>
+                        </svg>
+                    </div>
+                    <span class="category-tag">Traitement</span>
+                </div>
+                <h2 class="tool-title">
+                    Régression linéaire
+                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </h2>
+                <p class="tool-desc">Tracé de nuages de points, modélisation graphique, calcul des paramètres d'ajustement et des incertitudes.</p>
+            </a>
+
+        </main>
+    </div>
+
+</body>
+</html>

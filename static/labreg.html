@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaboReg — Analyse de Données & Régression Linéaire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Personnalisation des barres de défilement pour un aspect scientifique épuré */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .input-cell:focus {
+            box-shadow: inset 0 0 0 2px #4f46e5;
+            background-color: #eef2ff;
+        }
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-subtle {
+            animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-900">
+
+    <!-- EN-TÊTE DE L'APPLICATION -->
+    <header class="bg-white border-b border-slate-200 px-4 py-2.5 shadow-sm z-20 sticky top-0">
+        <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-3">
+            <!-- Logo & Titre -->
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white shadow-sm shadow-indigo-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-bold text-base sm:text-lg text-slate-900 leading-none">LaboReg</h1>
+                        <span class="text-[11px] font-medium px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">Physique-Chimie</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-0.5 hidden sm:block">Régression linéaire par moindres carrés et incertitudes-types u(a), u(b)</p>
+                </div>
+            </div>
+
+            <!-- Barre d'outils rapide -->
+            <div class="flex flex-wrap items-center gap-2">
+                <!-- Bouton de réinitialisation de la vue si en plein écran -->
+                <button id="resetViewBtn" onclick="setLayoutMode('split')" class="hidden items-center gap-1.5 text-xs font-semibold bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg px-3 py-2 transition shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
+                    </svg>
+                    <span>Vue partagée (Tableau + Graphique)</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENEUR PRINCIPAL -->
+    <main id="mainGrid" class="flex-1 max-w-[1600px] w-full mx-auto p-3 sm:p-4 grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+
+        <!-- ==========================================
+             PANNEAU GAUCHE : TABLEAU DE DONNÉES (x, y)
+             ========================================== -->
+        <section id="dataPanel" class="lg:col-span-5 bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col overflow-hidden transition-all duration-200">
+            
+            <!-- En-tête du panneau de données -->
+            <div class="px-4 py-3 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+                    <h2 class="font-semibold text-sm text-slate-800">Tableau des mesures</h2>
+                    <span id="validPointsBadge" class="text-xs font-mono font-medium px-2 py-0.5 rounded-md bg-slate-200 text-slate-700">0 pt</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <button onclick="openPasteModal()" title="Coller depuis Excel / LibreOffice Calc" class="text-xs font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                        <span class="hidden sm:inline">Coller</span>
+                    </button>
+                    <button onclick="clearAllData()" title="Vider toutes les valeurs" class="text-xs font-medium text-slate-600 hover:text-red-600 hover:bg-red-50 px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                        <span class="hidden sm:inline">Vider</span>
+                    </button>
+                    <!-- Bouton Plein Écran Données -->
+                    <button id="fullscreenDataBtn" onclick="toggleFullscreen('data')" title="Agrandir le tableau de données en plein écran" class="text-xs font-medium text-slate-700 hover:text-indigo-700 bg-white hover:bg-indigo-50 px-2.5 py-1.5 rounded-lg border border-slate-300 transition flex items-center gap-1 shadow-sm">
+                        <svg id="fullscreenDataIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+                        </svg>
+                        <span id="fullscreenDataText">Plein écran</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paramétrage des Grandeurs et Unités (Axes X et Y) -->
+            <div class="p-3 bg-slate-50/40 border-b border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <!-- Grandeur X -->
+                <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-2xs">
+                    <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center justify-between">
+                        <span>Grandeur en Abscisse (X)</span>
+                        <span class="text-indigo-600 font-mono">Axe horizontal</span>
+                    </div>
+                    <div class="flex gap-1.5">
+                        <div class="flex-1">
+                            <label for="xSymbol" class="sr-only">Symbole X</label>
+                            <input id="xSymbol" type="text" value="x" placeholder="Nom (ex: I)" oninput="updateLabels()" class="w-full text-xs font-mono font-semibold bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-slate-800 focus:outline-none focus:border-indigo-500 focus:bg-white" title="Symbole ou nom de la grandeur en abscisse">
+                        </div>
+                        <div class="w-24">
+                            <label for="xUnit" class="sr-only">Unité X</label>
+                            <input id="xUnit" type="text" value="" placeholder="Unité (ex: A)" oninput="updateLabels()" class="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-slate-600 focus:outline-none focus:border-indigo-500 focus:bg-white" title="Unité de la grandeur en abscisse">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grandeur Y -->
+                <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-2xs">
+                    <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center justify-between">
+                        <span>Grandeur en Ordonnée (Y)</span>
+                        <span class="text-emerald-600 font-mono">Axe vertical</span>
+                    </div>
+                    <div class="flex gap-1.5">
+                        <div class="flex-1">
+                            <label for="ySymbol" class="sr-only">Symbole Y</label>
+                            <input id="ySymbol" type="text" value="y" placeholder="Nom (ex: U)" oninput="updateLabels()" class="w-full text-xs font-mono font-semibold bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-slate-800 focus:outline-none focus:border-indigo-500 focus:bg-white" title="Symbole ou nom de la grandeur en ordonnée">
+                        </div>
+                        <div class="w-24">
+                            <label for="yUnit" class="sr-only">Unité Y</label>
+                            <input id="yUnit" type="text" value="" placeholder="Unité (ex: V)" oninput="updateLabels()" class="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-slate-600 focus:outline-none focus:border-indigo-500 focus:bg-white" title="Unité de la grandeur en ordonnée">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tableau des valeurs (x, y) -->
+            <div id="tableScrollContainer" class="overflow-y-auto max-h-[440px] divide-y divide-slate-200">
+                <table class="w-full border-collapse text-left">
+                    <thead class="bg-slate-100 sticky top-0 z-10 border-b border-slate-200 text-xs font-semibold text-slate-600">
+                        <tr>
+                            <th class="py-2.5 px-3 w-12 text-center text-slate-400 font-mono">#</th>
+                            <th class="py-2.5 px-3 border-l border-slate-200">
+                                <span id="thXLabel" class="font-mono text-indigo-950">x</span>
+                            </th>
+                            <th class="py-2.5 px-3 border-l border-slate-200">
+                                <span id="thYLabel" class="font-mono text-indigo-950">y</span>
+                            </th>
+                            <th class="py-2.5 px-2 w-12 text-center border-l border-slate-200" title="État du point">État</th>
+                            <th class="py-2.5 px-2 w-10 text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTableBody" class="divide-y divide-slate-100 text-sm font-mono">
+                        <!-- Lignes générées dynamiquement par JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pied du tableau : Ajouter ligne & Astuces clavier -->
+            <div class="p-3 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                <button onclick="addRow(true)" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg px-3 py-2 transition flex items-center gap-1.5 shadow-2xs">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    <span>Ajouter une ligne</span>
+                </button>
+                <div class="text-[11px] text-slate-500 flex items-center gap-1.5">
+                    <kbd class="px-1.5 py-0.5 bg-white border border-slate-300 rounded text-[10px] font-mono text-slate-600 shadow-2xs">Entrée</kbd>
+                    <span>ou</span>
+                    <kbd class="px-1.5 py-0.5 bg-white border border-slate-300 rounded text-[10px] font-mono text-slate-600 shadow-2xs">Tab</kbd>
+                    <span>pour naviguer • Virgule ou point acceptés</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             PANNEAU DROIT : GRAPHIQUE & RÉGRESSION
+             ========================================== -->
+        <section id="graphPanel" class="lg:col-span-7 flex flex-col gap-4 transition-all duration-200">
+            
+            <!-- Carte du Graphique -->
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col overflow-hidden">
+                
+                <!-- Barre d'outils du Graphique -->
+                <div class="px-4 py-3 bg-slate-50/80 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                        <h2 id="graphTitle" class="font-semibold text-sm text-slate-800">Graphique : y en fonction de x</h2>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2">
+                        <!-- Option Inclure l'origine (0,0) -->
+                        <label class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50 select-none">
+                            <input id="forceOriginCheckbox" type="checkbox" checked onchange="renderAll()" class="rounded text-indigo-600 focus:ring-indigo-500 w-3.5 h-3.5">
+                            <span>Inclure (0 ; 0)</span>
+                        </label>
+
+                        <!-- Bouton Export PNG -->
+                        <button onclick="exportCanvasPNG()" title="Télécharger le graphique en image PNG" class="text-xs font-medium text-slate-600 hover:text-indigo-600 bg-white hover:bg-indigo-50 px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            <span class="hidden sm:inline">PNG</span>
+                        </button>
+
+                        <!-- Bouton Plein Écran Graphique -->
+                        <button id="fullscreenGraphBtn" onclick="toggleFullscreen('graph')" title="Agrandir le graphique en plein écran" class="text-xs font-medium text-slate-700 hover:text-indigo-700 bg-white hover:bg-indigo-50 px-2.5 py-1.5 rounded-lg border border-slate-300 transition flex items-center gap-1 shadow-sm">
+                            <svg id="fullscreenGraphIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+                            </svg>
+                            <span id="fullscreenGraphText">Plein écran</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Zone du Canevas Graphique -->
+                <div id="canvasWrapper" class="relative w-full h-[380px] sm:h-[440px] bg-white select-none">
+                    <canvas id="plotCanvas" class="w-full h-full block cursor-crosshair"></canvas>
+                    
+                    <!-- Infobulle au survol d'un point -->
+                    <div id="pointTooltip" class="hidden absolute pointer-events-none bg-slate-900/95 text-white text-xs font-mono px-2.5 py-1.5 rounded-lg shadow-lg border border-slate-700 z-20 whitespace-nowrap"></div>
+                    
+                    <!-- Coordonnées du curseur en bas à droite du graphique -->
+                    <div id="cursorCoords" class="hidden sm:block absolute bottom-2 right-3 text-[11px] font-mono text-slate-400 bg-white/80 px-2 py-0.5 rounded pointer-events-none border border-slate-100">
+                        Curseur : —
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carte de Modélisation : Régression Linéaire & Incertitudes-types -->
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="p-4 bg-gradient-to-r from-slate-50 to-indigo-50/30 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                        <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                            </svg>
+                            <span>Modélisation & Régression Linéaire</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Méthode des moindres carrés ordinaires et évaluation des incertitudes-types (type A)</p>
+                    </div>
+
+                    <!-- Choix du modèle + Bouton d'activation -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <!-- Sélecteur de modèle (Affine vs Linéaire) -->
+                        <div class="inline-flex rounded-lg bg-slate-200/80 p-1 border border-slate-300/80">
+                            <button id="modelAffineBtn" type="button" onclick="setRegressionModel('affine')" class="px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white text-indigo-700 shadow-2xs">
+                                Affine : y = a·x + b
+                            </button>
+                            <button id="modelLinearBtn" type="button" onclick="setRegressionModel('linear')" class="px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+                                Linéaire : y = a·x
+                            </button>
+                        </div>
+
+                        <!-- Bouton Tracer / Masquer la régression -->
+                        <button id="toggleRegressionBtn" onclick="toggleRegression()" class="px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-200 transition flex items-center gap-1.5 cursor-pointer">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                            <span id="toggleRegressionText">Tracer la régression</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Corps des résultats de la régression -->
+                <div id="regressionResultsContainer" class="p-4">
+                    <!-- État initial : Régression non activée -->
+                    <div id="regressionInactivePrompt" class="text-center py-6 px-4 rounded-xl border border-dashed border-slate-200 bg-slate-50/50">
+                        <p class="text-xs text-slate-500">
+                            Saisissez vos couples de mesures <span class="font-mono font-semibold text-slate-700">(x, y)</span> puis cliquez sur 
+                            <button onclick="toggleRegression()" class="text-indigo-600 font-semibold underline hover:text-indigo-800">Tracer la régression</button> 
+                            pour afficher la droite modèle, son équation et les incertitudes-types <span class="font-mono">a ± u(a)</span> et <span class="font-mono">b ± u(b)</span>.
+                        </p>
+                    </div>
+
+                    <!-- Message d'avertissement si nombre de points insuffisant -->
+                    <div id="regressionWarningBox" class="hidden p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start gap-3">
+                        <svg class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        <div id="regressionWarningText" class="leading-relaxed"></div>
+                    </div>
+
+                    <!-- Panneau détaillé des résultats (visible quand la régression est active et valide) -->
+                    <div id="regressionActiveDetails" class="hidden space-y-4">
+                        
+                        <!-- Bandeau Équation de la droite & Réglage CS -->
+                        <div class="p-3.5 rounded-xl bg-indigo-950 text-white flex flex-wrap items-center justify-between gap-3 shadow-inner">
+                            <div>
+                                <div class="text-[10px] font-semibold uppercase tracking-wider text-indigo-300 mb-1">Équation de la droite modélisée</div>
+                                <div id="equationDisplay" class="font-mono text-sm sm:text-base font-bold text-white tracking-tight break-all">
+                                    y = a · x + b
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="flex items-center gap-1.5 bg-indigo-900/80 px-2.5 py-1.5 rounded-lg border border-indigo-700/70 text-xs">
+                                    <label for="sigFigsSelect" class="text-indigo-200 text-[11px]">Chiffres sig. sur u :</label>
+                                    <select id="sigFigsSelect" onchange="renderAll()" class="bg-indigo-950 text-white font-mono font-semibold text-xs rounded px-1.5 py-0.5 border border-indigo-600 focus:outline-none">
+                                        <option value="1">1 CS</option>
+                                        <option value="2" selected>2 CS</option>
+                                        <option value="3">3 CS</option>
+                                    </select>
+                                </div>
+                                <button onclick="copyResultsToClipboard()" id="copyResultsBtn" class="text-xs font-medium bg-indigo-800 hover:bg-indigo-700 text-indigo-100 px-2.5 py-1.5 rounded-lg border border-indigo-600 transition flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                    </svg>
+                                    <span id="copyBtnLabel">Copier</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cartes a ± u(a) et b ± u(b) -->
+                        <div id="paramsCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            
+                            <!-- Coefficient directeur a ± u(a) -->
+                            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between text-xs font-semibold text-slate-500 mb-1">
+                                        <span>Coefficient directeur (pente)</span>
+                                        <span id="unitABadge" class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-100">sans unité</span>
+                                    </div>
+                                    <div id="resultAFormatted" class="font-mono text-base sm:text-lg font-bold text-slate-900 my-1 bg-white p-2.5 rounded-lg border border-slate-200 shadow-2xs">
+                                        a = — ± —
+                                    </div>
+                                </div>
+                                <div class="mt-2 pt-2 border-t border-slate-200/80 grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-500">
+                                    <div>Valeur brute : <span id="rawAVal" class="text-slate-700 font-medium">—</span></div>
+                                    <div>u(a) brute : <span id="rawUAVal" class="text-slate-700 font-medium">—</span></div>
+                                </div>
+                            </div>
+
+                            <!-- Ordonnée à l'origine b ± u(b) -->
+                            <div id="cardParameterB" class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between text-xs font-semibold text-slate-500 mb-1">
+                                        <span>Ordonnée à l'origine</span>
+                                        <span id="unitBBadge" class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-100">sans unité</span>
+                                    </div>
+                                    <div id="resultBFormatted" class="font-mono text-base sm:text-lg font-bold text-slate-900 my-1 bg-white p-2.5 rounded-lg border border-slate-200 shadow-2xs">
+                                        b = — ± —
+                                    </div>
+                                </div>
+                                <div class="mt-2 pt-2 border-t border-slate-200/80 grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-500">
+                                    <div>Valeur brute : <span id="rawBVal" class="text-slate-700 font-medium">—</span></div>
+                                    <div>u(b) brute : <span id="rawUBVal" class="text-slate-700 font-medium">—</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Indicateurs statistiques complémentaires -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+                                <span class="text-slate-400 block text-[11px]">Points utilisés (N)</span>
+                                <span id="statN" class="font-mono font-bold text-slate-800 text-sm">—</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+                                <span class="text-slate-400 block text-[11px]">Degrés de liberté (ddl)</span>
+                                <span id="statDOF" class="font-mono font-bold text-slate-800 text-sm">—</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+                                <span class="text-slate-400 block text-[11px]">Coeff. détermination R²</span>
+                                <span id="statR2" class="font-mono font-bold text-indigo-700 text-sm">—</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+                                <span class="text-slate-400 block text-[11px]">Écart-type résiduel s_y/x</span>
+                                <span id="statSyx" class="font-mono font-bold text-slate-800 text-sm">—</span>
+                            </div>
+                        </div>
+
+                        <!-- Accordéon de rappel des formules statistiques utilisées -->
+                        <details class="group bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-600">
+                            <summary class="px-3 py-2 font-medium cursor-pointer flex items-center justify-between hover:text-indigo-700 select-none">
+                                <span>Voir les formules d'incertitudes-types utilisées (moindres carrés ordinaires)</span>
+                                <svg class="w-4 h-4 transition-transform group-open:rotate-180 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </summary>
+                            <div class="p-3 border-t border-slate-200 bg-white space-y-2 font-mono text-[11px] text-slate-700 leading-relaxed">
+                                <div id="formulaExplanationAffine">
+                                    <p class="font-sans font-semibold text-slate-900 mb-1">Modèle affine y = a·x + b (avec N ≥ 3 points, N - 2 degrés de liberté) :</p>
+                                    <p>• a = Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(xᵢ - x̄)²  et  b = ȳ - a·x̄</p>
+                                    <p>• Variance résiduelle : s²_{y/x} = [1 / (N - 2)] · Σ(yᵢ - (a·xᵢ + b))²</p>
+                                    <p>• Incertitude-type sur la pente : u(a) = √[ s²_{y/x} / Σ(xᵢ - x̄)² ]</p>
+                                    <p>• Incertitude-type sur l'ordonnée à l'origine : u(b) = √[ s²_{y/x} · (1/N + x̄² / Σ(xᵢ - x̄)²) ]</p>
+                                </div>
+                                <div id="formulaExplanationLinear" class="hidden">
+                                    <p class="font-sans font-semibold text-slate-900 mb-1">Modèle linéaire y = a·x (passage par l'origine, avec N ≥ 2 points, N - 1 degrés de liberté) :</p>
+                                    <p>• a = Σ(xᵢ·yᵢ) / Σ(xᵢ²)</p>
+                                    <p>• Variance résiduelle : s²_{y/x} = [1 / (N - 1)] · Σ(yᵢ - a·xᵢ)²</p>
+                                    <p>• Incertitude-type sur la pente : u(a) = √[ s²_{y/x} / Σ(xᵢ²) ]</p>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODALE DE COPIER-COLLER DEPUIS UN TABLEUR -->
+    <div id="pasteModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 overflow-hidden">
+            <div class="px-5 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                <h3 class="font-bold text-sm text-slate-900">Coller des données depuis un tableur (Excel, Calc, CSV)</h3>
+                <button onclick="closePasteModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-5 space-y-3">
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Collez ci-dessous deux colonnes de nombres (séparées par une tabulation, un point-virgule ou un espace). Les virgules et points décimaux sont automatiquement reconnus.
+                </p>
+                <textarea id="pasteTextarea" rows="7" placeholder="Exemple :&#10;0,0&#9;0,00&#10;1,5&#9;3,12&#10;3,0&#9;6,05&#10;4,5&#9;9,18" class="w-full font-mono text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-slate-50"></textarea>
+            </div>
+            <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 flex justify-end gap-2">
+                <button onclick="closePasteModal()" class="px-3.5 py-2 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-200 transition">Annuler</button>
+                <button onclick="importPastedData()" class="px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition">Importer les mesures</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         LOGIQUE JAVASCRIPT DE L'APPLICATION
+         ========================================== -->
+    <script>
+        /**
+         * État global de l'application
+         */
+        const state = {
+            rows: [
+                { id: 1, x: '', y: '' },
+                { id: 2, x: '', y: '' },
+                { id: 3, x: '', y: '' },
+                { id: 4, x: '', y: '' },
+                { id: 5, x: '', y: '' },
+                { id: 6, x: '', y: '' }
+            ],
+            nextId: 7,
+            xSymbol: 'x',
+            xUnit: '',
+            ySymbol: 'y',
+            yUnit: '',
+            layoutMode: 'split', // 'split' | 'data' | 'graph'
+            regressionActive: false,
+            regressionModel: 'affine', // 'affine' (y = ax + b) | 'linear' (y = ax)
+            hoveredPointIndex: null,
+            lastCalculation: null,
+            screenPoints: [] // Coordonnées pixels des points pour détection du survol
+        };
+
+        /**
+         * Analyse une chaîne de caractères pour la convertir en nombre flottant
+         * Accepte aussi bien la virgule que le point décimal, ainsi que les espaces.
+         */
+        function parseNumberFR(str) {
+            if (typeof str === 'number') return Number.isFinite(str) ? str : NaN;
+            if (!str || typeof str !== 'string') return NaN;
+            const cleaned = str.trim().replace(/\s+/g, '').replace(',', '.');
+            if (cleaned === '' || cleaned === '-' || cleaned === '+' || cleaned === '.') return NaN;
+            const val = Number(cleaned);
+            return Number.isFinite(val) ? val : NaN;
+        }
+
+        /**
+         * Retourne la liste des points (x, y) valides actuellement présents dans le tableau
+         */
+        function getValidPoints() {
+            const pts = [];
+            state.rows.forEach((row, idx) => {
+                const vx = parseNumberFR(row.x);
+                const vy = parseNumberFR(row.y);
+                if (!Number.isNaN(vx) && !Number.isNaN(vy)) {
+                    pts.push({ x: vx, y: vy, rowIndex: idx + 1, id: row.id });
+                }
+            });
+            return pts;
+        }
+
+        /**
+         * Formate l'intitulé d'un axe avec son unité : ex "U (V)" ou "x"
+         */
+        function getAxisLabel(symbol, unit) {
+            const s = (symbol || '').trim() || 'x';
+            const u = (unit || '').trim();
+            return u ? `${s} (${u})` : s;
+        }
+
+        /**
+         * Mise à jour des étiquettes des grandeurs X et Y
+         */
+        function updateLabels() {
+            state.xSymbol = document.getElementById('xSymbol').value.trim() || 'x';
+            state.xUnit = document.getElementById('xUnit').value.trim();
+            state.ySymbol = document.getElementById('ySymbol').value.trim() || 'y';
+            state.yUnit = document.getElementById('yUnit').value.trim();
+
+            const xLabel = getAxisLabel(state.xSymbol, state.xUnit);
+            const yLabel = getAxisLabel(state.ySymbol, state.yUnit);
+
+            document.getElementById('thXLabel').textContent = xLabel;
+            document.getElementById('thYLabel').textContent = yLabel;
+            document.getElementById('graphTitle').textContent = `Graphique : ${state.ySymbol} en fonction de ${state.xSymbol}`;
+
+            // Met à jour le texte des boutons de modèles avec les vrais symboles
+            document.getElementById('modelAffineBtn').textContent = `Affine : ${state.ySymbol} = a·${state.xSymbol} + b`;
+            document.getElementById('modelLinearBtn').textContent = `Linéaire : ${state.ySymbol} = a·${state.xSymbol}`;
+
+            renderAll();
+        }
+
+        /**
+         * Construit ou met à jour le tableau HTML des lignes de saisie
+         */
+        function renderTable() {
+            const tbody = document.getElementById('dataTableBody');
+            tbody.innerHTML = '';
+
+            state.rows.forEach((row, index) => {
+                const vx = parseNumberFR(row.x);
+                const vy = parseNumberFR(row.y);
+                const isComplete = !Number.isNaN(vx) && !Number.isNaN(vy);
+                const isEmpty = row.x.trim() === '' && row.y.trim() === '';
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50/80 transition-colors group';
+
+                // Numéro de ligne
+                const tdIndex = document.createElement('td');
+                tdIndex.className = 'py-1.5 px-2 text-center text-xs text-slate-400 select-none bg-slate-50/50';
+                tdIndex.textContent = index + 1;
+
+                // Cellule X
+                const tdX = document.createElement('td');
+                tdX.className = 'p-0 border-l border-slate-200';
+                const inputX = document.createElement('input');
+                inputX.type = 'text';
+                inputX.inputMode = 'decimal';
+                inputX.value = row.x;
+                inputX.placeholder = '—';
+                inputX.dataset.row = index;
+                inputX.dataset.col = 'x';
+                inputX.className = 'input-cell w-full py-2 px-3 bg-transparent text-slate-800 focus:outline-none text-sm';
+                inputX.addEventListener('input', (e) => handleCellInput(index, 'x', e.target.value, tr));
+                inputX.addEventListener('keydown', (e) => handleCellKeydown(e, index, 'x'));
+                inputX.addEventListener('paste', (e) => handleDirectTablePaste(e, index, 'x'));
+                tdX.appendChild(inputX);
+
+                // Cellule Y
+                const tdY = document.createElement('td');
+                tdY.className = 'p-0 border-l border-slate-200';
+                const inputY = document.createElement('input');
+                inputY.type = 'text';
+                inputY.inputMode = 'decimal';
+                inputY.value = row.y;
+                inputY.placeholder = '—';
+                inputY.dataset.row = index;
+                inputY.dataset.col = 'y';
+                inputY.className = 'input-cell w-full py-2 px-3 bg-transparent text-slate-800 focus:outline-none text-sm';
+                inputY.addEventListener('input', (e) => handleCellInput(index, 'y', e.target.value, tr));
+                inputY.addEventListener('keydown', (e) => handleCellKeydown(e, index, 'y'));
+                inputY.addEventListener('paste', (e) => handleDirectTablePaste(e, index, 'y'));
+                tdY.appendChild(inputY);
+
+                // Indicateur d'état du point
+                const tdStatus = document.createElement('td');
+                tdStatus.className = 'py-1.5 px-2 text-center border-l border-slate-200 status-cell';
+                tdStatus.innerHTML = getRowStatusIcon(isComplete, isEmpty);
+
+                // Bouton supprimer la ligne
+                const tdAction = document.createElement('td');
+                tdAction.className = 'py-1.5 px-1.5 text-center';
+                const delBtn = document.createElement('button');
+                delBtn.type = 'button';
+                delBtn.title = 'Supprimer cette ligne';
+                delBtn.className = 'text-slate-300 hover:text-red-500 p-1 rounded opacity-60 group-hover:opacity-100 transition';
+                delBtn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>`;
+                delBtn.onclick = () => removeRow(index);
+                tdAction.appendChild(delBtn);
+
+                tr.appendChild(tdIndex);
+                tr.appendChild(tdX);
+                tr.appendChild(tdY);
+                tr.appendChild(tdStatus);
+                tr.appendChild(tdAction);
+                tbody.appendChild(tr);
+            });
+        }
+
+        /**
+         * Génère l'icône d'état pour une ligne donnée (point tracé, incomplet ou vide)
+         */
+        function getRowStatusIcon(isComplete, isEmpty) {
+            if (isComplete) {
+                return `<span class="inline-flex w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-50" title="Point valide affiché sur le graphique"></span>`;
+            }
+            if (isEmpty) {
+                return `<span class="inline-flex w-2 h-2 rounded-full bg-slate-200" title="Ligne vide"></span>`;
+            }
+            return `<span class="inline-flex w-2.5 h-2.5 rounded-full bg-amber-400 ring-4 ring-amber-50" title="Coordonnée incomplète ou invalide"></span>`;
+        }
+
+        /**
+         * Gère la saisie en temps réel dans une cellule sans perdre le focus clavier
+         */
+        function handleCellInput(rowIndex, col, value, trElement) {
+            state.rows[rowIndex][col] = value;
+            const vx = parseNumberFR(state.rows[rowIndex].x);
+            const vy = parseNumberFR(state.rows[rowIndex].y);
+            const isComplete = !Number.isNaN(vx) && !Number.isNaN(vy);
+            const isEmpty = state.rows[rowIndex].x.trim() === '' && state.rows[rowIndex].y.trim() === '';
+
+            const statusCell = trElement.querySelector('.status-cell');
+            if (statusCell) {
+                statusCell.innerHTML = getRowStatusIcon(isComplete, isEmpty);
+            }
+
+            renderAll();
+        }
+
+        /**
+         * Navigation fluide au clavier (Entrée, Flèches) et ajout automatique de ligne
+         */
+        function handleCellKeydown(e, rowIndex, col) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (col === 'x') {
+                    focusCell(rowIndex, 'y');
+                } else {
+                    if (rowIndex === state.rows.length - 1) {
+                        addRow(false);
+                    }
+                    focusCell(rowIndex + 1, 'x');
+                }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (rowIndex < state.rows.length - 1) {
+                    focusCell(rowIndex + 1, col);
+                } else {
+                    addRow(false);
+                    focusCell(rowIndex + 1, col);
+                }
+            } else if (e.key === 'ArrowUp' && rowIndex > 0) {
+                e.preventDefault();
+                focusCell(rowIndex - 1, col);
+            }
+        }
+
+        /**
+         * Place le curseur dans une cellule spécifique du tableau
+         */
+        function focusCell(rowIndex, col) {
+            const input = document.querySelector(`input[data-row="${rowIndex}"][data-col="${col}"]`);
+            if (input) {
+                input.focus();
+                input.select();
+            }
+        }
+
+        /**
+         * Ajoute une nouvelle ligne au tableau
+         */
+        function addRow(shouldFocus = true) {
+            state.rows.push({ id: state.nextId++, x: '', y: '' });
+            renderTable();
+            renderAll();
+            if (shouldFocus) {
+                focusCell(state.rows.length - 1, 'x');
+            }
+        }
+
+        /**
+         * Supprime une ligne spécifique
+         */
+        function removeRow(index) {
+            if (state.rows.length <= 1) {
+                state.rows[0] = { id: state.nextId++, x: '', y: '' };
+            } else {
+                state.rows.splice(index, 1);
+            }
+            renderTable();
+            renderAll();
+        }
+
+        /**
+         * Vide toutes les mesures du tableau
+         */
+        function clearAllData() {
+            state.rows = Array.from({ length: 6 }, () => ({ id: state.nextId++, x: '', y: '' }));
+            renderTable();
+            renderAll();
+            focusCell(0, 'x');
+        }
+
+        /**
+         * Gère le collage direct de plusieurs lignes dans une cellule du tableau
+         */
+        function handleDirectTablePaste(e, startRowIndex, startCol) {
+            const clipboardText = (e.clipboardData || window.clipboardData).getData('text');
+            if (!clipboardText || (!clipboardText.includes('\n') && !clipboardText.includes('\t'))) {
+                return; // Collage simple d'une valeur unique : comportement natif
+            }
+            e.preventDefault();
+            parseAndInsertTextData(clipboardText, startRowIndex);
+        }
+
+        /**
+         * Analyse un bloc de texte multi-lignes (tableur) et l'insère dans le tableau
+         */
+        function parseAndInsertTextData(rawText, startRowIndex = 0) {
+            const lines = rawText.trim().split(/\r?\n/).filter(l => l.trim() !== '');
+            if (lines.length === 0) return;
+
+            let writeIndex = startRowIndex;
+            lines.forEach(line => {
+                // Séparation par tabulation, point-virgule ou espaces multiples
+                const parts = line.trim().split(/[\t;]+|\s{2,}/);
+                if (parts.length >= 2) {
+                    const xVal = parts[0].trim();
+                    const yVal = parts[1].trim();
+                    if (!Number.isNaN(parseNumberFR(xVal)) || !Number.isNaN(parseNumberFR(yVal))) {
+                        if (writeIndex >= state.rows.length) {
+                            state.rows.push({ id: state.nextId++, x: xVal, y: yVal });
+                        } else {
+                            state.rows[writeIndex].x = xVal;
+                            state.rows[writeIndex].y = yVal;
+                        }
+                        writeIndex++;
+                    }
+                }
+            });
+
+            renderTable();
+            renderAll();
+        }
+
+        /**
+         * Gestion de la fenêtre modale de collage
+         */
+        function openPasteModal() {
+            const modal = document.getElementById('pasteModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('pasteTextarea').focus();
+        }
+
+        function closePasteModal() {
+            const modal = document.getElementById('pasteModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function importPastedData() {
+            const text = document.getElementById('pasteTextarea').value;
+            if (text.trim()) {
+                state.rows = [];
+                parseAndInsertTextData(text, 0);
+                while (state.rows.length < 5) {
+                    state.rows.push({ id: state.nextId++, x: '', y: '' });
+                }
+                renderTable();
+                renderAll();
+            }
+            document.getElementById('pasteTextarea').value = '';
+            closePasteModal();
+        }
+
+        /**
+         * Gestion du mode Plein Écran / Focus (Données ou Graphique)
+         */
+        function toggleFullscreen(target) {
+            if (state.layoutMode === target) {
+                setLayoutMode('split');
+            } else {
+                setLayoutMode(target);
+            }
+        }
+
+        function setLayoutMode(mode) {
+            state.layoutMode = mode;
+            const dataPanel = document.getElementById('dataPanel');
+            const graphPanel = document.getElementById('graphPanel');
+            const resetViewBtn = document.getElementById('resetViewBtn');
+            const tableScroll = document.getElementById('tableScrollContainer');
+            const canvasWrapper = document.getElementById('canvasWrapper');
+
+            const fsDataText = document.getElementById('fullscreenDataText');
+            const fsGraphText = document.getElementById('fullscreenGraphText');
+
+            if (mode === 'split') {
+                dataPanel.className = 'lg:col-span-5 bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col overflow-hidden transition-all duration-200';
+                graphPanel.className = 'lg:col-span-7 flex flex-col gap-4 transition-all duration-200';
+                tableScroll.className = 'overflow-y-auto max-h-[440px] divide-y divide-slate-200';
+                canvasWrapper.className = 'relative w-full h-[380px] sm:h-[440px] bg-white select-none';
+                resetViewBtn.classList.add('hidden');
+                resetViewBtn.classList.remove('inline-flex');
+                fsDataText.textContent = 'Plein écran';
+                fsGraphText.textContent = 'Plein écran';
+            } else if (mode === 'data') {
+                dataPanel.className = 'lg:col-span-12 bg-white rounded-xl border border-indigo-300 shadow-md flex flex-col overflow-hidden transition-all duration-200';
+                graphPanel.className = 'hidden';
+                tableScroll.className = 'overflow-y-auto max-h-[72vh] divide-y divide-slate-200';
+                resetViewBtn.classList.remove('hidden');
+                resetViewBtn.classList.add('inline-flex');
+                fsDataText.textContent = 'Quitter plein écran';
+            } else if (mode === 'graph') {
+                dataPanel.className = 'hidden';
+                graphPanel.className = 'lg:col-span-12 flex flex-col gap-4 transition-all duration-200';
+                canvasWrapper.className = 'relative w-full h-[55vh] min-h-[420px] max-h-[680px] bg-white select-none';
+                resetViewBtn.classList.remove('hidden');
+                resetViewBtn.classList.add('inline-flex');
+                fsGraphText.textContent = 'Quitter plein écran';
+            }
+
+            // Redessiner le canevas après le redimensionnement du DOM
+            requestAnimationFrame(() => {
+                renderAll();
+            });
+        }
+
+        /**
+         * Choix du modèle de régression : 'affine' (y = a*x + b) ou 'linear' (y = a*x)
+         */
+        function setRegressionModel(model) {
+            state.regressionModel = model;
+            const affineBtn = document.getElementById('modelAffineBtn');
+            const linearBtn = document.getElementById('modelLinearBtn');
+
+            if (model === 'affine') {
+                affineBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white text-indigo-700 shadow-2xs';
+                linearBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+                document.getElementById('formulaExplanationAffine').classList.remove('hidden');
+                document.getElementById('formulaExplanationLinear').classList.add('hidden');
+            } else {
+                linearBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white text-indigo-700 shadow-2xs';
+                affineBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+                document.getElementById('formulaExplanationAffine').classList.add('hidden');
+                document.getElementById('formulaExplanationLinear').classList.remove('hidden');
+            }
+
+            // Si l'utilisateur clique sur un modèle, on active automatiquement l'affichage de la régression
+            if (!state.regressionActive && getValidPoints().length >= 2) {
+                state.regressionActive = true;
+                updateRegressionButtonUI();
+            }
+
+            renderAll();
+        }
+
+        /**
+         * Active ou désactive le tracé et le calcul de la régression linéaire
+         */
+        function toggleRegression() {
+            state.regressionActive = !state.regressionActive;
+            updateRegressionButtonUI();
+            renderAll();
+        }
+
+        function updateRegressionButtonUI() {
+            const btn = document.getElementById('toggleRegressionBtn');
+            const txt = document.getElementById('toggleRegressionText');
+            if (state.regressionActive) {
+                btn.className = 'px-4 py-2 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-200 transition flex items-center gap-1.5 cursor-pointer';
+                txt.textContent = 'Régression active';
+            } else {
+                btn.className = 'px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-200 transition flex items-center gap-1.5 cursor-pointer';
+                txt.textContent = 'Tracer la régression';
+            }
+        }
+
+        /**
+         * ============================================================================
+         * CALCUL MATHÉMATIQUE RIGOUREUX DE LA RÉGRESSION & DES INCERTITUDES-TYPES
+         * ============================================================================
+         */
+        function computeLinearRegression(points, model) {
+            const N = points.length;
+
+            if (model === 'affine') {
+                if (N < 2) {
+                    return { valid: false, reason: `Il faut au moins 2 points valides pour tracer une droite affine (actuellement N = ${N}).` };
+                }
+
+                // Moyennes x̄ et ȳ
+                let sumX = 0, sumY = 0;
+                for (const p of points) {
+                    sumX += p.x;
+                    sumY += p.y;
+                }
+                const meanX = sumX / N;
+                const meanY = sumY / N;
+
+                // Sommes des carrés des écarts Sxx, Syy, Sxy
+                let Sxx = 0, Syy = 0, Sxy = 0;
+                for (const p of points) {
+                    const dx = p.x - meanX;
+                    const dy = p.y - meanY;
+                    Sxx += dx * dx;
+                    Syy += dy * dy;
+                    Sxy += dx * dy;
+                }
+
+                if (Sxx === 0) {
+                    return { valid: false, reason: `Impossible de calculer la régression : toutes les abscisses x sont identiques (droite verticale).` };
+                }
+
+                const a = Sxy / Sxx;
+                const b = meanY - a * meanX;
+
+                // Somme des carrés des résidus SSR = Σ (y_i - (a*x_i + b))²
+                let ssr = 0;
+                for (const p of points) {
+                    const residual = p.y - (a * p.x + b);
+                    ssr += residual * residual;
+                }
+
+                // Coefficient de détermination R²
+                const r2 = Syy === 0 ? (ssr === 0 ? 1 : 0) : Math.max(0, Math.min(1, 1 - ssr / Syy));
+
+                // Pour calculer les incertitudes-types u(a) et u(b) d'un modèle à 2 paramètres, il faut N >= 3 (ddl = N - 2)
+                if (N < 3) {
+                    return {
+                        valid: true,
+                        hasUncertainty: false,
+                        model: 'affine',
+                        N,
+                        dof: 0,
+                        a, b,
+                        ua: NaN, ub: NaN,
+                        syx: NaN,
+                        r2,
+                        warning: `La droite passe exactement par les 2 points, mais au moins N = 3 points sont nécessaires pour évaluer les incertitudes-types u(a) et u(b) en modèle affine (N - 2 degrés de liberté).`
+                    };
+                }
+
+                const dof = N - 2;
+                const syx2 = Math.max(0, ssr / dof); // Variance résiduelle s²_{y/x}
+                const syx = Math.sqrt(syx2);
+                const ua = Math.sqrt(syx2 / Sxx);
+                const ub = Math.sqrt(syx2 * (1 / N + (meanX * meanX) / Sxx));
+
+                return {
+                    valid: true,
+                    hasUncertainty: true,
+                    model: 'affine',
+                    N,
+                    dof,
+                    a, b,
+                    ua, ub,
+                    syx,
+                    r2
+                };
+
+            } else {
+                // MODÈLE LINÉAIRE : y = a * x (passage forcé par l'origine)
+                if (N < 1) {
+                    return { valid: false, reason: `Ajoutez au moins 2 points (x, y) pour calculer la régression linéaire et son incertitude-type.` };
+                }
+
+                let sumXX = 0, sumXY = 0, sumY = 0;
+                for (const p of points) {
+                    sumXX += p.x * p.x;
+                    sumXY += p.x * p.y;
+                    sumY += p.y;
+                }
+
+                if (sumXX === 0) {
+                    return { valid: false, reason: `Impossible de calculer la pente : toutes les valeurs de x sont nulles.` };
+                }
+
+                const a = sumXY / sumXX;
+                const b = 0;
+
+                // Résidus par rapport à y = a*x
+                let ssr = 0;
+                const meanY = sumY / N;
+                let sstCentered = 0;
+                let sstUncentered = 0;
+                for (const p of points) {
+                    const res = p.y - a * p.x;
+                    ssr += res * res;
+                    sstCentered += (p.y - meanY) * (p.y - meanY);
+                    sstUncentered += p.y * p.y;
+                }
+
+                const r2 = sstUncentered === 0 ? 1 : Math.max(0, Math.min(1, 1 - ssr / sstUncentered));
+
+                if (N < 2) {
+                    return {
+                        valid: true,
+                        hasUncertainty: false,
+                        model: 'linear',
+                        N,
+                        dof: 0,
+                        a, b: 0,
+                        ua: NaN, ub: 0,
+                        syx: NaN,
+                        r2,
+                        warning: `Au moins N = 2 points sont requis pour évaluer l'incertitude-type u(a) du modèle linéaire (N - 1 degrés de liberté).`
+                    };
+                }
+
+                const dof = N - 1;
+                const syx2 = Math.max(0, ssr / dof);
+                const syx = Math.sqrt(syx2);
+                const ua = Math.sqrt(syx2 / sumXX);
+
+                return {
+                    valid: true,
+                    hasUncertainty: true,
+                    model: 'linear',
+                    N,
+                    dof,
+                    a, b: 0,
+                    ua, ub: 0,
+                    syx,
+                    r2
+                };
+            }
+        }
+
+        /**
+         * Formate un résultat scientifique (valeur ± incertitude-type) avec accord cohérent
+         * du nombre de chiffres significatifs sur l'incertitude et la valeur mesurée.
+         */
+        function formatValueWithUncertainty(val, u, sigFigs = 2) {
+            const replaceDot = (s) => s.replace('.', ',');
+
+            if (Number.isNaN(u)) {
+                return {
+                    valueStr: replaceDot(Number(val.toPrecision(4)).toString()),
+                    uStr: 'non défini',
+                    expStr: ''
+                };
+            }
+
+            // Cas particulier d'un alignement mathématiquement parfait (u = 0)
+            if (u === 0 || u < 1e-15 * Math.max(1, Math.abs(val))) {
+                return {
+                    valueStr: replaceDot(Number(val.toPrecision(5)).toString()),
+                    uStr: '0 (alignement parfait)',
+                    expStr: ''
+                };
+            }
+
+            // Ordre de grandeur de l'incertitude-type
+            const orderU = Math.floor(Math.log10(Math.abs(u)));
+            const lsdPlace = orderU - sigFigs + 1; // Position du dernier chiffre significatif
+
+            // Choix de la notation scientifique si très grand ou très petit
+            const maxOrder = Math.max(Math.abs(val) > 0 ? Math.floor(Math.log10(Math.abs(val))) : orderU, orderU);
+            if (maxOrder >= 4 || maxOrder <= -3) {
+                const commonExp = maxOrder;
+                const scale = Math.pow(10, commonExp);
+                const scaledVal = val / scale;
+                const scaledU = u / scale;
+                const decimals = Math.max(0, commonExp - lsdPlace);
+                return {
+                    valueStr: replaceDot(scaledVal.toFixed(decimals)),
+                    uStr: replaceDot(scaledU.toFixed(decimals)),
+                    expStr: `× 10^${commonExp}`
+                };
+            }
+
+            if (lsdPlace < 0) {
+                const decimals = -lsdPlace;
+                return {
+                    valueStr: replaceDot(val.toFixed(decimals)),
+                    uStr: replaceDot(u.toFixed(decimals)),
+                    expStr: ''
+                };
+            } else {
+                const factor = Math.pow(10, lsdPlace);
+                const rVal = Math.round(val / factor) * factor;
+                const rU = Math.round(u / factor) * factor;
+                return {
+                    valueStr: replaceDot(rVal.toFixed(0)),
+                    uStr: replaceDot(rU.toFixed(0)),
+                    expStr: ''
+                };
+            }
+        }
+
+        /**
+         * Formate un nombre flottant pour l'affichage brut ou équation
+         */
+        function formatNumberClean(num, precision = 4) {
+            if (!Number.isFinite(num)) return '—';
+            if (Math.abs(num) < 1e-14) return '0';
+            if (Math.abs(num) >= 1e4 || Math.abs(num) < 1e-3) {
+                return num.toExponential(precision - 1).replace('.', ',');
+            }
+            return Number(num.toPrecision(precision)).toString().replace('.', ',');
+        }
+
+        /**
+         * Met à jour l'interface des résultats de régression
+         */
+        function updateRegressionUI(points) {
+            const promptEl = document.getElementById('regressionInactivePrompt');
+            const warningBox = document.getElementById('regressionWarningBox');
+            const warningText = document.getElementById('regressionWarningText');
+            const detailsEl = document.getElementById('regressionActiveDetails');
+
+            if (!state.regressionActive) {
+                promptEl.classList.remove('hidden');
+                warningBox.classList.add('hidden');
+                detailsEl.classList.add('hidden');
+                state.lastCalculation = null;
+                return;
+            }
+
+            promptEl.classList.add('hidden');
+            const res = computeLinearRegression(points, state.regressionModel);
+            state.lastCalculation = res;
+
+            if (!res.valid) {
+                warningBox.classList.remove('hidden');
+                warningText.textContent = res.reason;
+                detailsEl.classList.add('hidden');
+                return;
+            }
+
+            if (res.warning) {
+                warningBox.classList.remove('hidden');
+                warningText.textContent = res.warning;
+            } else {
+                warningBox.classList.add('hidden');
+            }
+
+            detailsEl.classList.remove('hidden');
+
+            const sigFigs = parseInt(document.getElementById('sigFigsSelect').value, 10) || 2;
+            const fmtA = formatValueWithUncertainty(res.a, res.ua, sigFigs);
+            const fmtB = formatValueWithUncertainty(res.b, res.ub, sigFigs);
+
+            // Unités de a et de b
+            const unitA = state.yUnit && state.xUnit
+                ? `${state.yUnit}·${state.xUnit}⁻¹`
+                : (state.yUnit ? state.yUnit : (state.xUnit ? `${state.xUnit}⁻¹` : 'sans unité'));
+            const unitB = state.yUnit || 'sans unité';
+
+            document.getElementById('unitABadge').textContent = unitA;
+            document.getElementById('unitBBadge').textContent = unitB;
+
+            // Affichage de l'équation en haut du panneau
+            const ySym = state.ySymbol || 'y';
+            const xSym = state.xSymbol || 'x';
+            const aEq = formatNumberClean(res.a, 4);
+            if (res.model === 'affine') {
+                const sign = res.b >= 0 ? '+' : '−';
+                const bEq = formatNumberClean(Math.abs(res.b), 4);
+                document.getElementById('equationDisplay').textContent = `${ySym} = ${aEq} × ${xSym} ${sign} ${bEq}`;
+            } else {
+                document.getElementById('equationDisplay').textContent = `${ySym} = ${aEq} × ${xSym}`;
+            }
+
+            // Affichage de a ± u(a)
+            const unitASuffix = unitA !== 'sans unité' ? ` ${unitA}` : '';
+            if (fmtA.expStr) {
+                document.getElementById('resultAFormatted').innerHTML = `a = (${fmtA.valueStr} ± ${fmtA.uStr}) ${fmtA.expStr}<span class="text-xs font-normal text-slate-500">${unitASuffix}</span>`;
+            } else {
+                document.getElementById('resultAFormatted').innerHTML = `a = ${fmtA.valueStr} ± ${fmtA.uStr}<span class="text-xs font-normal text-slate-500">${unitASuffix}</span>`;
+            }
+
+            document.getElementById('rawAVal').textContent = formatNumberClean(res.a, 6);
+            document.getElementById('rawUAVal').textContent = Number.isNaN(res.ua) ? '—' : formatNumberClean(res.ua, 4);
+
+            // Affichage ou masquage de b ± u(b) selon le modèle choisi
+            const cardB = document.getElementById('cardParameterB');
+            const paramsGrid = document.getElementById('paramsCardsGrid');
+            if (res.model === 'affine') {
+                cardB.classList.remove('hidden');
+                paramsGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-3';
+                const unitBSuffix = unitB !== 'sans unité' ? ` ${unitB}` : '';
+                if (fmtB.expStr) {
+                    document.getElementById('resultBFormatted').innerHTML = `b = (${fmtB.valueStr} ± ${fmtB.uStr}) ${fmtB.expStr}<span class="text-xs font-normal text-slate-500">${unitBSuffix}</span>`;
+                } else {
+                    document.getElementById('resultBFormatted').innerHTML = `b = ${fmtB.valueStr} ± ${fmtB.uStr}<span class="text-xs font-normal text-slate-500">${unitBSuffix}</span>`;
+                }
+                document.getElementById('rawBVal').textContent = formatNumberClean(res.b, 6);
+                document.getElementById('rawUBVal').textContent = Number.isNaN(res.ub) ? '—' : formatNumberClean(res.ub, 4);
+            } else {
+                cardB.classList.add('hidden');
+                paramsGrid.className = 'grid grid-cols-1 gap-3';
+            }
+
+            // Statistiques complémentaires
+            document.getElementById('statN').textContent = res.N;
+            document.getElementById('statDOF').textContent = res.dof;
+            document.getElementById('statR2').textContent = res.r2.toFixed(5).replace('.', ',');
+            document.getElementById('statSyx').textContent = Number.isNaN(res.syx) ? '—' : formatNumberClean(res.syx, 4);
+        }
+
+        /**
+         * ============================================================================
+         * MOTEUR DE RENDU GRAPHIQUE SCIENTIFIQUE SUR CANEVAS 2D (HAUTE RÉSOLUTION)
+         * ============================================================================
+         */
+        function computeNiceStep(range, targetSteps = 7) {
+            if (range <= 0 || !Number.isFinite(range)) return 1;
+            const roughStep = range / targetSteps;
+            const mag = Math.floor(Math.log10(roughStep));
+            const magPow = Math.pow(10, mag);
+            const residual = roughStep / magPow;
+
+            let niceResidual;
+            if (residual > 5) niceResidual = 10;
+            else if (residual > 2) niceResidual = 5;
+            else if (residual > 1) niceResidual = 2;
+            else niceResidual = 1;
+
+            return niceResidual * magPow;
+        }
+
+        function formatTickValue(val, step) {
+            if (Math.abs(val) < 1e-12) return '0';
+            if (Math.abs(val) >= 1e5 || (Math.abs(val) > 0 && Math.abs(val) < 1e-3)) {
+                return val.toExponential(1).replace('.', ',');
+            }
+            const decimals = step < 1 ? Math.max(0, -Math.floor(Math.log10(step)) + 1) : 0;
+            return Number(val.toFixed(Math.min(6, decimals))).toString().replace('.', ',');
+        }
+
+        function drawGraph(points) {
+            const canvas = document.getElementById('plotCanvas');
+            const wrapper = document.getElementById('canvasWrapper');
+            const dpr = window.devicePixelRatio || 1;
+            const width = wrapper.clientWidth;
+            const height = wrapper.clientHeight;
+
+            if (width === 0 || height === 0) return;
+
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            // Fond blanc net
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, width, height);
+
+            // Marges pour graduations et titres des axes
+            const padLeft = 68;
+            const padRight = 28;
+            const padTop = 28;
+            const padBottom = 50;
+
+            const plotW = Math.max(50, width - padLeft - padRight);
+            const plotH = Math.max(50, height - padTop - padBottom);
+
+            // Détermination des bornes X et Y
+            const includeOrigin = document.getElementById('forceOriginCheckbox').checked || state.regressionModel === 'linear';
+            let xMin, xMax, yMin, yMax;
+
+            if (points.length === 0) {
+                xMin = 0; xMax = 10;
+                yMin = 0; yMax = 10;
+            } else {
+                xMin = Math.min(...points.map(p => p.x));
+                xMax = Math.max(...points.map(p => p.x));
+                yMin = Math.min(...points.map(p => p.y));
+                yMax = Math.max(...points.map(p => p.y));
+
+                if (includeOrigin) {
+                    xMin = Math.min(0, xMin);
+                    xMax = Math.max(0, xMax);
+                    yMin = Math.min(0, yMin);
+                    yMax = Math.max(0, yMax);
+                }
+
+                // Si un seul point ou valeurs constantes, on élargit la fenêtre
+                if (xMax === xMin) {
+                    const deltaX = Math.abs(xMin) * 0.2 || 1;
+                    xMin -= deltaX;
+                    xMax += deltaX;
+                } else {
+                    const spanX = xMax - xMin;
+                    xMin -= spanX * 0.06;
+                    xMax += spanX * 0.08;
+                }
+
+                if (yMax === yMin) {
+                    const deltaY = Math.abs(yMin) * 0.2 || 1;
+                    yMin -= deltaY;
+                    yMax += deltaY;
+                } else {
+                    const spanY = yMax - yMin;
+                    yMin -= spanY * 0.06;
+                    yMax += spanY * 0.1;
+                }
+            }
+
+            const xStep = computeNiceStep(xMax - xMin, Math.max(4, Math.floor(plotW / 85)));
+            const yStep = computeNiceStep(yMax - yMin, Math.max(4, Math.floor(plotH / 65)));
+
+            // Alignement souple sur les graduations
+            xMin = Math.floor(xMin / xStep) * xStep;
+            xMax = Math.ceil(xMax / xStep) * xStep;
+            yMin = Math.floor(yMin / yStep) * yStep;
+            yMax = Math.ceil(yMax / yStep) * yStep;
+
+            // Fonctions de transformation (Monde <-> Pixels)
+            const toScreenX = (x) => padLeft + ((x - xMin) / (xMax - xMin)) * plotW;
+            const toScreenY = (y) => padTop + plotH - ((y - yMin) / (yMax - yMin)) * plotH;
+            const toWorldX = (px) => xMin + ((px - padLeft) / plotW) * (xMax - xMin);
+            const toWorldY = (py) => yMin + ((padTop + plotH - py) / plotH) * (yMax - yMin);
+
+            // Sauvegarde de la transformation pour l'interaction souris
+            state.currentTransform = { padLeft, padRight, padTop, padBottom, plotW, plotH, toWorldX, toWorldY };
+
+            // 1. Tracé de la grille secondaire et principale
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(padLeft, padTop, plotW, plotH);
+            ctx.clip();
+
+            // Sous-grille fine
+            ctx.strokeStyle = '#f8fafc';
+            ctx.lineWidth = 1;
+            const subXStep = xStep / 5;
+            for (let x = xMin; x <= xMax + subXStep * 0.1; x += subXStep) {
+                const sx = Math.round(toScreenX(x)) + 0.5;
+                ctx.beginPath();
+                ctx.moveTo(sx, padTop);
+                ctx.lineTo(sx, padTop + plotH);
+                ctx.stroke();
+            }
+            const subYStep = yStep / 5;
+            for (let y = yMin; y <= yMax + subYStep * 0.1; y += subYStep) {
+                const sy = Math.round(toScreenY(y)) + 0.5;
+                ctx.beginPath();
+                ctx.moveTo(padLeft, sy);
+                ctx.lineTo(padLeft + plotW, sy);
+                ctx.stroke();
+            }
+
+            // Grille principale
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 1;
+            for (let x = xMin; x <= xMax + xStep * 0.01; x += xStep) {
+                const sx = Math.round(toScreenX(x)) + 0.5;
+                ctx.beginPath();
+                ctx.moveTo(sx, padTop);
+                ctx.lineTo(sx, padTop + plotH);
+                ctx.stroke();
+            }
+            for (let y = yMin; y <= yMax + yStep * 0.01; y += yStep) {
+                const sy = Math.round(toScreenY(y)) + 0.5;
+                ctx.beginPath();
+                ctx.moveTo(padLeft, sy);
+                ctx.lineTo(padLeft + plotW, sy);
+                ctx.stroke();
+            }
+
+            // Axes passant par zéro s'ils sont dans la zone visible
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1.5;
+            if (xMin <= 0 && xMax >= 0) {
+                const sx0 = Math.round(toScreenX(0)) + 0.5;
+                ctx.beginPath();
+                ctx.moveTo(sx0, padTop);
+                ctx.lineTo(sx0, padTop + plotH);
+                ctx.stroke();
+            }
+            if (yMin <= 0 && yMax >= 0) {
+                const sy0 = Math.round(toScreenY(0)) + 0.5;
+                ctx.beginPath();
+                ctx.moveTo(padLeft, sy0);
+                ctx.lineTo(padLeft + plotW, sy0);
+                ctx.stroke();
+            }
+
+            // 2. Tracé de la droite de régression (si active et valide)
+            if (state.regressionActive && state.lastCalculation && state.lastCalculation.valid) {
+                const { a, b } = state.lastCalculation;
+                const yAtMin = a * xMin + b;
+                const yAtMax = a * xMax + b;
+
+                ctx.strokeStyle = '#e11d48'; // Rouge-rose scientifique très lisible
+                ctx.lineWidth = 2.25;
+                ctx.beginPath();
+                ctx.moveTo(toScreenX(xMin), toScreenY(yAtMin));
+                ctx.lineTo(toScreenX(xMax), toScreenY(yAtMax));
+                ctx.stroke();
+
+                // Segments de résidus en pointillés fins de chaque point vers la droite
+                ctx.strokeStyle = 'rgba(225, 29, 72, 0.35)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([3, 3]);
+                for (const p of points) {
+                    const yFit = a * p.x + b;
+                    ctx.beginPath();
+                    ctx.moveTo(toScreenX(p.x), toScreenY(p.y));
+                    ctx.lineTo(toScreenX(p.x), toScreenY(yFit));
+                    ctx.stroke();
+                }
+                ctx.setLineDash([]);
+            }
+
+            // 3. Tracé des points expérimentaux (croix "+" ou marqueurs scientifiques)
+            state.screenPoints = [];
+            points.forEach((p, idx) => {
+                const sx = toScreenX(p.x);
+                const sy = toScreenY(p.y);
+                state.screenPoints.push({ sx, sy, p, idx });
+
+                const isHovered = state.hoveredPointIndex === idx;
+
+                if (isHovered) {
+                    ctx.fillStyle = 'rgba(79, 70, 229, 0.16)';
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, 11, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Cercle extérieur blanc pour le contraste
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(sx, sy, 5.5, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Croix scientifique + point central
+                ctx.strokeStyle = isHovered ? '#312e81' : '#4f46e5';
+                ctx.lineWidth = isHovered ? 2.5 : 2;
+                const size = isHovered ? 6.5 : 5;
+                ctx.beginPath();
+                ctx.moveTo(sx - size, sy);
+                ctx.lineTo(sx + size, sy);
+                ctx.moveTo(sx, sy - size);
+                ctx.lineTo(sx, sy + size);
+                ctx.stroke();
+
+                ctx.fillStyle = '#4f46e5';
+                ctx.beginPath();
+                ctx.arc(sx, sy, 2.2, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            ctx.restore();
+
+            // 4. Bordure du cadre du graphique
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1.2;
+            ctx.strokeRect(padLeft, padTop, plotW, plotH);
+
+            // 5. Graduations et valeurs numériques sur les axes
+            ctx.fillStyle = '#475569';
+            ctx.font = '500 11px "JetBrains Mono", monospace';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+
+            for (let x = xMin; x <= xMax + xStep * 0.01; x += xStep) {
+                const sx = toScreenX(x);
+                if (sx >= padLeft - 2 && sx <= padLeft + plotW + 2) {
+                    ctx.strokeStyle = '#94a3b8';
+                    ctx.beginPath();
+                    ctx.moveTo(sx, padTop + plotH);
+                    ctx.lineTo(sx, padTop + plotH + 5);
+                    ctx.stroke();
+                    ctx.fillText(formatTickValue(x, xStep), sx, padTop + plotH + 8);
+                }
+            }
+
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            for (let y = yMin; y <= yMax + yStep * 0.01; y += yStep) {
+                const sy = toScreenY(y);
+                if (sy >= padTop - 2 && sy <= padTop + plotH + 2) {
+                    ctx.strokeStyle = '#94a3b8';
+                    ctx.beginPath();
+                    ctx.moveTo(padLeft - 5, sy);
+                    ctx.lineTo(padLeft, sy);
+                    ctx.stroke();
+                    ctx.fillText(formatTickValue(y, yStep), padLeft - 8, sy);
+                }
+            }
+
+            // 6. Titres des axes X et Y
+            ctx.fillStyle = '#0f172a';
+            ctx.font = '600 12px "Inter", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillText(getAxisLabel(state.xSymbol, state.xUnit), padLeft + plotW / 2, height - 6);
+
+            ctx.save();
+            ctx.translate(16, padTop + plotH / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            ctx.fillText(getAxisLabel(state.ySymbol, state.yUnit), 0, 0);
+            ctx.restore();
+
+            // 7. Cartouche d'information directement sur le graphique si la régression est tracée
+            if (state.regressionActive && state.lastCalculation && state.lastCalculation.valid) {
+                drawEquationOverlayOnCanvas(ctx, padLeft + 12, padTop + 12, state.lastCalculation);
+            } else if (points.length === 0) {
+                // Message d'invite discret au centre du graphique vide
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '500 13px "Inter", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('Saisissez des couples (x, y) dans le tableau pour afficher les points', padLeft + plotW / 2, padTop + plotH / 2);
+            }
+        }
+
+        /**
+         * Dessine un encadré synthétique sur le canevas contenant l'équation et les incertitudes-types
+         * (très pratique lors de la projection en plein écran ou de l'export PNG)
+         */
+        function drawEquationOverlayOnCanvas(ctx, x, y, res) {
+            const sigFigs = parseInt(document.getElementById('sigFigsSelect').value, 10) || 2;
+            const fmtA = formatValueWithUncertainty(res.a, res.ua, sigFigs);
+            const fmtB = formatValueWithUncertainty(res.b, res.ub, sigFigs);
+
+            const lines = [];
+            const eqText = document.getElementById('equationDisplay').textContent;
+            lines.push({ text: `Modèle : ${eqText}`, bold: true, color: '#0f172a' });
+
+            const aLine = fmtA.expStr
+                ? `a = (${fmtA.valueStr} ± ${fmtA.uStr}) ${fmtA.expStr}`
+                : `a = ${fmtA.valueStr} ± ${fmtA.uStr}`;
+            lines.push({ text: aLine, bold: false, color: '#334155' });
+
+            if (res.model === 'affine') {
+                const bLine = fmtB.expStr
+                    ? `b = (${fmtB.valueStr} ± ${fmtB.uStr}) ${fmtB.expStr}`
+                    : `b = ${fmtB.valueStr} ± ${fmtB.uStr}`;
+                lines.push({ text: bLine, bold: false, color: '#334155' });
+            }
+
+            lines.push({ text: `R² = ${res.r2.toFixed(4).replace('.', ',')}  (N = ${res.N} pts)`, bold: false, color: '#64748b' });
+
+            ctx.save();
+            ctx.font = '600 11.5px "JetBrains Mono", monospace';
+            let maxW = 0;
+            lines.forEach(l => {
+                const w = ctx.measureText(l.text).width;
+                if (w > maxW) maxW = w;
+            });
+
+            const boxW = maxW + 22;
+            const boxH = lines.length * 18 + 14;
+
+            // Fond semi-transparent avec bordure fine
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.roundRect(x, y, boxW, boxH, 8);
+            ctx.fill();
+            ctx.stroke();
+
+            // Liseré rouge sur la gauche rappelant la droite de régression
+            ctx.fillStyle = '#e11d48';
+            ctx.beginPath();
+            ctx.roundRect(x, y, 4, boxH, [8, 0, 0, 8]);
+            ctx.fill();
+
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            lines.forEach((l, i) => {
+                ctx.font = `${l.bold ? '700' : '500'} 11px "JetBrains Mono", monospace`;
+                ctx.fillStyle = l.color;
+                ctx.fillText(l.text, x + 12, y + 8 + i * 18);
+            });
+            ctx.restore();
+        }
+
+        /**
+         * Rafraîchit tous les éléments dépendant des données (compteur, calculs, graphique)
+         */
+        function renderAll() {
+            const validPoints = getValidPoints();
+            const badge = document.getElementById('validPointsBadge');
+            badge.textContent = `${validPoints.length} ${validPoints.length > 1 ? 'pts' : 'pt'}`;
+
+            updateRegressionUI(validPoints);
+            drawGraph(validPoints);
+        }
+
+        /**
+         * Copie les résultats de la régression dans le presse-papiers
+         */
+        function copyResultsToClipboard() {
+            if (!state.lastCalculation || !state.lastCalculation.valid) return;
+            const eq = document.getElementById('equationDisplay').textContent;
+            const aText = document.getElementById('resultAFormatted').textContent.trim();
+            const bText = state.lastCalculation.model === 'affine'
+                ? '\n' + document.getElementById('resultBFormatted').textContent.trim()
+                : '';
+            const r2Text = `\nR² = ${document.getElementById('statR2').textContent} (N = ${state.lastCalculation.N})`;
+
+            const fullText = `Modélisation linéaire (${state.ySymbol} en fonction de ${state.xSymbol}) :\n${eq}\n${aText}${bText}${r2Text}`;
+
+            const tempArea = document.createElement('textarea');
+            tempArea.value = fullText;
+            document.body.appendChild(tempArea);
+            tempArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempArea);
+
+            const label = document.getElementById('copyBtnLabel');
+            label.textContent = 'Copié !';
+            setTimeout(() => { label.textContent = 'Copier'; }, 1800);
+        }
+
+        /**
+         * Télécharge le graphique actuel sous forme d'image PNG
+         */
+        function exportCanvasPNG() {
+            const canvas = document.getElementById('plotCanvas');
+            const link = document.createElement('a');
+            link.download = `regression_${state.ySymbol}_${state.xSymbol}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        /**
+         * Initialisation des événements (survol du canevas, redimensionnement, exemples)
+         */
+        function initEvents() {
+            const canvas = document.getElementById('plotCanvas');
+            const tooltip = document.getElementById('pointTooltip');
+            const cursorCoords = document.getElementById('cursorCoords');
+
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const mx = e.clientX - rect.left;
+                const my = e.clientY - rect.top;
+
+                // Mise à jour des coordonnées du curseur
+                if (state.currentTransform) {
+                    const { padLeft, plotW, padTop, plotH, toWorldX, toWorldY } = state.currentTransform;
+                    if (mx >= padLeft && mx <= padLeft + plotW && my >= padTop && my <= padTop + plotH) {
+                        const wx = toWorldX(mx);
+                        const wy = toWorldY(my);
+                        cursorCoords.textContent = `${state.xSymbol} = ${formatNumberClean(wx, 3)} | ${state.ySymbol} = ${formatNumberClean(wy, 3)}`;
+                    } else {
+                        cursorCoords.textContent = 'Curseur : —';
+                    }
+                }
+
+                // Détection du point le plus proche du curseur
+                let foundIdx = null;
+                let minDist = 14;
+                state.screenPoints.forEach((sp) => {
+                    const dist = Math.hypot(sp.sx - mx, sp.sy - my);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        foundIdx = sp.idx;
+                    }
+                });
+
+                if (foundIdx !== state.hoveredPointIndex) {
+                    state.hoveredPointIndex = foundIdx;
+                    drawGraph(getValidPoints());
+                }
+
+                if (foundIdx !== null) {
+                    const sp = state.screenPoints[foundIdx];
+                    const xStr = sp.p.x.toString().replace('.', ',');
+                    const yStr = sp.p.y.toString().replace('.', ',');
+                    tooltip.innerHTML = `Point #${sp.p.rowIndex} : (${state.xSymbol} = ${xStr} ; ${state.ySymbol} = ${yStr})`;
+                    tooltip.style.left = `${Math.min(rect.width - 180, Math.max(10, sp.sx + 12))}px`;
+                    tooltip.style.top = `${Math.max(10, sp.sy - 34)}px`;
+                    tooltip.classList.remove('hidden');
+                } else {
+                    tooltip.classList.add('hidden');
+                }
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                if (state.hoveredPointIndex !== null) {
+                    state.hoveredPointIndex = null;
+                    drawGraph(getValidPoints());
+                }
+                tooltip.classList.add('hidden');
+                cursorCoords.textContent = 'Curseur : —';
+            });
+
+            // Redimensionnement réactif de la fenêtre
+            window.addEventListener('resize', () => {
+                renderAll();
+            });
+        }
+
+        // Démarrage au chargement de la page
+        window.onload = function () {
+            renderTable();
+            updateLabels();
+            initEvents();
+            renderAll();
+        };
+    </script>
+</body>
+</html>
