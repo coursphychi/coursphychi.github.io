@@ -24,9 +24,9 @@ td, th {
 
 - Dans le programme suivant, il faut dans un premier temps que vous modifiiez la liste des masses (`masses`) et la liste des poids (`poids`) avec vos propres valeurs.
 
-- Exécuter le programme et constater que le faisceau de droites ne prend pas vos points en sandwich.
+- Exécuter le programme et constater que les deux droites ne prennent pas vos points en sandwich.
 
-- Modifier alors `borne_inf` et `borne_sup` pour que cela soit le cas.
+- Modifier alors `borne_inf` et `borne_sup` pour que cela soit le cas (et le plus serré possible).
 
 
 {{< runpython lang="pyodide" height="auto">}}
@@ -39,8 +39,6 @@ masses = [0.100,0.200,0.300,0.400,0.500]
 # liste des poids correspondants (en N)
 poids = [2.1,4.3,6.2,8.9,10.9]
 
-# Ajout des fonctions linéaires
-N = 11
 ###################### PARTIE À MODIFIER ################################
 borne_inf = 12  # plus petit coefficient directeur
 borne_sup = 30  # plus grand coefficient dirrecteur
@@ -49,21 +47,15 @@ borne_sup = 30  # plus grand coefficient dirrecteur
 # Création du graphique
 fig = go.Figure()
 
-# on va tracer N fonctions linéaires dont les coefficients directeurs seront répartis entre borne_inf et borne_sup
-coefficients = np.linspace(borne_inf, borne_sup, N)
+coefficients = [borne_inf,borne_sup]
 x_vals = np.linspace(0, max(masses), 100)  # Valeurs de x pour tracer les fonctions linéaires
 
-# Obtention d'une séquence de couleurs
-echelle_couleurs = px.colors.sequential.thermal
-step = len(echelle_couleurs) / N
-couleurs = [echelle_couleurs[int(i * step)] for i in range(N)]
-
 # Tracé des droites
-for idx, coeff in enumerate(coefficients):
+for coeff in coefficients:
     y_vals = coeff * x_vals
     fig.add_trace(go.Scatter(x=x_vals, y=y_vals, mode='lines',
                              hovertemplate=f'Coefficient = {coeff:.2f}<extra></extra>',
-                             name=f'Coefficient = {coeff:.2f}', line=dict(color=couleurs[idx])))
+                             name=f'Coefficient = {coeff:.2f}'))
 
 # Ajout des points de coordonnées (masse, poids)
 fig.add_trace(go.Scatter(x=masses, y=poids, mode='markers', name='Mesures', marker_color="crimson", marker_size=10, marker_symbol='x'))

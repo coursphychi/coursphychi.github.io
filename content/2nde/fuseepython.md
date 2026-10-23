@@ -70,7 +70,7 @@ print("Liste altitude =", altitude)
 </ul>
 </div>
 
-<p>Exécutez le programme ci-dessous (moteur instantané) pour observer le calcul de la liste <code>vitesse</code>&nbsp;:</p>
+<p>Exécutez le programme ci-dessous pour observer le calcul de la liste <code>vitesse</code>&nbsp;:</p>
 
 {{< runpython height="auto" >}}
 temps = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0, 3.2, 3.4, 3.6, 3.8, 4.0, 4.2, 4.4, 4.6, 4.8, 5.0, 5.2, 5.4]
@@ -134,7 +134,7 @@ print(vitesse)
 
 ## Représentations graphiques interactives {.nt-h2}
 
-<p class="nt-lead">Exécutez les deux fenêtres ci-dessous pour tracer les graphiques interactifs de l'<b>altitude</b> puis de la <b>vitesse</b> en fonction du temps. Vous pouvez passer la souris sur chaque point du graphique pour lire directement ses coordonnées.</p>
+<p class="nt-lead">Exécutez les deux fenêtres ci-dessous pour tracer les graphiques interactifs de l'<b>altitude</b> puis de la <b>vitesse</b> en fonction du temps. Vous pouvez passer la souris sur chaque point du graphique (ou les toucher) pour lire directement ses coordonnées.</p>
 
 ### Graphique de l'altitude en fonction du temps {.nt-h3}
 
