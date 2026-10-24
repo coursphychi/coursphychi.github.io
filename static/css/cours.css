@@ -269,10 +269,10 @@ body.nt-quiz .nt-b .nt-hole:focus-visible { outline-color: var(--c-ink); }
 .nt-wheel .nt-wseg:focus-visible { outline: none; stroke: var(--ink); stroke-width: 3; }
 
 /* --- Étapes numérotées (protocoles, méthodes, démonstrations) --- */
-ol.nt-steps { list-style: none !important; padding: 0 !important; margin: 0.9em 0 0.3em !important; }
-ol.nt-steps > li { position: relative; padding: 0.2em 0 1.05em 3em; min-height: 2.2em; }
+ol.nt-steps { counter-reset: ntstep; list-style: none !important; padding: 0 !important; margin: 0.9em 0 0.3em !important; }
+ol.nt-steps > li { counter-increment: ntstep; position: relative; padding: 0.2em 0 1.05em 3em; min-height: 2.2em; }
 ol.nt-steps > li::before {
-  content: counter(list-item); position: absolute; left: 0; top: 0; width: 2.15em; height: 2.15em; border-radius: 50%;
+  content: counter(ntstep); position: absolute; left: 0; top: 0; width: 2.15em; height: 2.15em; border-radius: 50%;
   display: grid; place-items: center; font-weight: 800; color: #fff;
   background: linear-gradient(135deg, var(--c, var(--blue)), color-mix(in srgb, var(--c, var(--blue)) 55%, #fff));
   box-shadow: 0 3px 9px color-mix(in srgb, var(--c, var(--blue)) 35%, transparent);
@@ -381,7 +381,9 @@ table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody td, table.nt-t:no
 table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr:nth-child(even) > td, table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr:nth-child(even) > th { background: color-mix(in srgb, var(--tc) 8%, #fff) !important; }
 table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr + tr > * { border-top: 1px solid color-mix(in srgb, var(--tc) 14%, #fff) !important; }
 table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr > * + * { border-left: 1px solid rgba(15, 23, 42, 0.05) !important; }
-table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr > :first-child { text-align: left; font-weight: 600; color: var(--navy); }
+table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr > :first-child { text-align: center; font-weight: 600; color: var(--navy); }
+/* tableau dont toutes les colonnes sont sur le même plan (pas de colonne d'en-tête) */
+table.nt-t.nt-t-egal:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr > :first-child { font-weight: inherit; color: inherit; }
 table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr:hover > td, table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr:hover > th { background: color-mix(in srgb, var(--tc) 20%, #fff) !important; }
 
 /* ==================================================================

@@ -630,6 +630,7 @@ hidden = true
         });
         bx.appendChild(b);
       });
+      if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([qEl, bx]).catch(function () {}); }   /* formules de la question et des réponses */
       next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
     }
     function start() { order = shuffle(D.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }

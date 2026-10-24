@@ -2089,6 +2089,7 @@ Attention, certains haut-parleurs ne reproduisent pas les fréquences les plus a
           });
           bx.appendChild(b);
         });
+        typeset(bx);   /* les réponses peuvent contenir des formules */
       },
       bilan: function (g) { var r = g / Q.length; qEl.innerHTML = '<span class="nt-big-score">' + g + '&nbsp;/&nbsp;' + Q.length + '</span><br>' + (r >= 0.85 ? 'Excellent&nbsp;: le chapitre est maîtrisé&nbsp;!' : (r >= 0.5 ? 'Bien. Relisez les explications des questions manquées, puis recommencez.' : 'Relisez le cours, puis recommencez&nbsp;: les questions seront mélangées.')); bx.innerHTML = ''; bx.hidden = true; }
     });

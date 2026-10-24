@@ -407,13 +407,19 @@ La réaction du support compense donc le poids, et la force de propulsion compen
 
 <p>Pour «&nbsp;voir&nbsp;» la vitesse horizontale, il suffit de regarder l'ombre de l'objet sur le sol, quand le Soleil est haut dans le ciel&nbsp;: elle ne garde que le mouvement horizontal. Lors d'une chandelle au rugby, l'ombre du ballon avance à vitesse constante, alors que le ballon monte puis redescend.</p>
 
+<div class="nt-b nt-ask">
+<p class="nt-tag"><i class="fa-solid fa-circle-question"></i>Question</p>
+<p>Lors d'une chandelle, un coéquipier du botteur veut récupérer le ballon à sa chute. Quel doit être son mouvement&nbsp;?</p>
+</div>
+
 <div class="nt-lab" id="lab-rugby">
 <p class="nt-tag"><i class="fa-solid fa-football"></i>Animation</p>
 <p class="nt-lab-title">La chandelle au rugby</p>
-<canvas role="img" aria-label="Un joueur tape une chandelle ; le ballon monte puis redescend, et son ombre avance sur le sol à vitesse constante ; à gauche, la projection verticale du ballon."></canvas>
-<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="go"><i class="fa-solid fa-play"></i>&nbsp; Taper la chandelle</button><label class="nt-check"><input type="checkbox" data-in="chrono" checked> Chronophotographie</label><label class="nt-check"><input type="checkbox" data-in="comp" checked> Décomposer la vitesse</label></div>
+<canvas role="img" aria-label="Un joueur tape une chandelle ; le ballon monte puis redescend, et son ombre avance sur le sol à vitesse constante ; à gauche, la projection verticale du ballon. Un coéquipier, lancé à la vitesse de l'ombre, passe à hauteur du botteur au moment du coup de pied et récupère le ballon à sa chute."></canvas>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="go"><i class="fa-solid fa-play"></i>&nbsp; Taper la chandelle</button><label class="nt-check"><input type="checkbox" data-in="chrono" checked> Chronophotographie</label><label class="nt-check"><input type="checkbox" data-in="comp" checked> Décomposer la vitesse</label><label class="nt-check"><input type="checkbox" data-in="coureur" checked> Coéquipier</label></div>
 <p class="nt-msg" aria-live="polite"></p>
 </div>
+
 
 <p>C'est exactement ce qui se passait pour la <b>balle lâchée depuis le vélo</b>&nbsp;: elle conservait la vitesse horizontale du cycliste, et tombait donc à côté de lui. C'est aussi ce qu'on a vu dans le chapitre sur le mouvement, avec la balle qui rebondit sur une remorque tirée par un tracteur&nbsp;: tant que le tracteur roule à vitesse constante, la balle retombe toujours sur le trampoline… mais s'il accélère ou freine pendant qu'elle est en l'air, elle garde sa vitesse horizontale et le rate&nbsp;!</p>
 
@@ -474,9 +480,9 @@ La force du livre sur la Terre, réciproque à celle de la Terre sur le livre, n
 
 <div class="nt-lab" id="lab-pousse">
 <p class="nt-tag"><i class="fa-solid fa-user-astronaut"></i>Animation</p>
-<p class="nt-lab-title">Un astronaute pousse un objet</p>
-<div class="nt-btns"><span class="nt-note">L'astronaute (100&nbsp;kg avec sa combinaison) pousse&nbsp;:</span><div class="nt-seg" role="radiogroup"><label><input type="radio" name="ps-m" value="0.06" checked><span>une balle (60 g)</span></label><label><input type="radio" name="ps-m" value="10"><span>un sac (10 kg)</span></label><label><input type="radio" name="ps-m" value="100"><span>un collègue (100 kg)</span></label><label><input type="radio" name="ps-m" value="400"><span>une caisse (400 kg)</span></label></div></div>
-<canvas role="img" aria-label="Un astronaute flottant pousse un objet ; pendant la poussée, deux forces opposées de même intensité ; ensuite, les deux s'éloignent."></canvas>
+<p class="nt-lab-title">Une astronaute pousse un objet</p>
+<div class="nt-btns"><span class="nt-note">L'astronaute (65&nbsp;kg) pousse&nbsp;:</span><div class="nt-seg" role="radiogroup"><label><input type="radio" name="ps-m" value="0.06" checked><span>une balle (60 g)</span></label><label><input type="radio" name="ps-m" value="10"><span>un sac (10 kg)</span></label><label><input type="radio" name="ps-m" value="65"><span>un collègue (65 kg)</span></label><label><input type="radio" name="ps-m" value="400"><span>une caisse (400 kg)</span></label></div></div>
+<canvas role="img" aria-label="Une astronaute flottante pousse un objet ; pendant la poussée, deux forces opposées de même intensité ; ensuite, les deux s'éloignent."></canvas>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="pousser"><i class="fa-solid fa-hand"></i>&nbsp; Pousser</button><button type="button" class="nt-btn" data-act="reset"><i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer</button></div>
 <p class="nt-msg" aria-live="polite"></p>
 </div>
@@ -904,6 +910,50 @@ plt.show()
     P.bilan = function () { if (P.choix < 0) { return ''; } return P.choix === bon ? '<b>Votre prédiction («&nbsp;' + choix[P.choix] + '&nbsp;») était juste&nbsp;!</b>' : '<b>Vous aviez prédit «&nbsp;' + choix[P.choix] + '&nbsp;»</b>&nbsp;: ce n\u2019est pas ce qu\u2019on observe.'; };
     return P;
   }
+  /* =================== La Terre vue de l'espace (dessin réutilisable) ===================
+     terreRealiste(ctx, cx, cy, R, opt) : océans, continents en projection orthographique, désert, banquise,
+     nuages, ombre du côté nuit et halo d'atmosphère. opt.lon0, opt.lat0 : centre de la vue (degrés).
+     Le dessin est mis en cache (une image par taille), ce qui permet de l'appeler à chaque image d'une animation. */
+  var TERRE_CACHE = {};
+  var TERRE_CONT = {
+    afrique: [[-17,21],[-16,28],[-10,32],[-5,36],[10,37],[11,33],[20,32],[32,31],[34,28],[43,12],[51,12],[48,4],[40,-4],[40,-15],[35,-24],[32,-29],[27,-34],[20,-35],[18,-30],[15,-23],[12,-17],[13,-8],[9,-1],[9,4],[5,6],[-2,5],[-8,4],[-13,8],[-17,14]],
+    europe: [[-9,37],[-9,43],[-2,44],[-5,48],[2,51],[5,53],[8,57],[5,59],[5,62],[14,67],[20,70],[28,71],[31,69],[40,66],[44,68],[60,69],[60,55],[50,47],[40,47],[36,45],[30,45],[28,41],[23,40],[24,36],[22,37],[19,40],[16,38],[12,44],[8,44],[3,43],[-1,37]],
+    arabie: [[34,28],[36,33],[42,37],[48,30],[56,26],[60,22],[52,17],[45,13],[43,15],[39,22]],
+    asie: [[60,69],[75,72],[90,75],[110,73],[110,50],[100,40],[90,28],[80,24],[72,22],[66,25],[60,25],[56,26],[48,30],[42,37],[36,45],[40,47],[50,47],[60,55]],
+    inde: [[68,24],[72,21],[73,16],[77,8],[80,13],[81,17],[87,22],[90,26],[80,28],[72,27]],
+    madagascar: [[44,-25],[47,-25],[50,-15],[49,-12],[44,-16]],
+    amsud: [[-35,-5],[-40,-3],[-50,0],[-60,8],[-70,12],[-77,8],[-80,-2],[-75,-15],[-70,-20],[-72,-35],[-68,-50],[-65,-55],[-58,-38],[-48,-26],[-40,-22],[-39,-13]],
+    groenland: [[-45,60],[-40,65],[-22,70],[-20,77],[-30,83],[-55,82],[-60,76],[-53,68]]
+  };
+  var TERRE_DESERTS = [[10, 23, 22, 8], [45, 22, 9, 5], [20, -24, 6, 4], [62, 42, 10, 4]];   /* lon, lat, demi-largeurs (degrés) : Sahara, Arabie, Kalahari, Asie centrale */
+  function terreRealiste(ctx, cx, cy, R, opt) {
+    opt = opt || {}; var lon0 = opt.lon0 === undefined ? 15 : opt.lon0, lat0 = opt.lat0 === undefined ? 18 : opt.lat0, cle = Math.round(R) + ':' + lon0 + ':' + lat0, dpr = window.devicePixelRatio || 1;
+    var c = TERRE_CACHE[cle];
+    if (!c) {
+      var M = Math.ceil(R * 1.25), S = 2 * M; c = document.createElement('canvas'); c.width = Math.round(S * dpr); c.height = Math.round(S * dpr); var g = c.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var x0 = M, y0 = M, rad = Math.PI / 180, sl0 = Math.sin(lat0 * rad), cl0 = Math.cos(lat0 * rad);
+      function proj(lon, lat) { var l = (lon - lon0) * rad, p = lat * rad, cc = sl0 * Math.sin(p) + cl0 * Math.cos(p) * Math.cos(l); return [x0 + R * Math.cos(p) * Math.sin(l), y0 - R * (cl0 * Math.sin(p) - sl0 * Math.cos(p) * Math.cos(l)), cc]; }
+      var ha = g.createRadialGradient(x0, y0, R * 0.96, x0, y0, R * 1.22); ha.addColorStop(0, 'rgba(125,211,252,0.55)'); ha.addColorStop(0.35, 'rgba(56,189,248,0.18)'); ha.addColorStop(1, 'rgba(56,189,248,0)'); g.fillStyle = ha; g.beginPath(); g.arc(x0, y0, R * 1.22, 0, 2 * Math.PI); g.fill();   /* halo d'atmosphère */
+      g.save(); g.beginPath(); g.arc(x0, y0, R, 0, 2 * Math.PI); g.clip();
+      var oc = g.createRadialGradient(x0 - R * 0.35, y0 - R * 0.35, R * 0.05, x0, y0, R * 1.05); oc.addColorStop(0, '#2F7FD6'); oc.addColorStop(0.55, '#1D4ED8'); oc.addColorStop(1, '#0B1E5B'); g.fillStyle = oc; g.fillRect(x0 - R, y0 - R, 2 * R, 2 * R);   /* océans */
+      g.save(); g.beginPath(); Object.keys(TERRE_CONT).forEach(function (k) { var pts = TERRE_CONT[k], vis = pts.some(function (q) { return proj(q[0], q[1])[2] > 0; }); if (!vis) { return; } var n = 0; pts.forEach(function (q) { var P = proj(q[0], q[1]); if (P[2] < 0) { var dx = P[0] - x0, dy = P[1] - y0, dd = Math.hypot(dx, dy) || 1; P = [x0 + dx / dd * R * 1.01, y0 + dy / dd * R * 1.01]; } if (n++) { g.lineTo(P[0], P[1]); } else { g.moveTo(P[0], P[1]); } }); g.closePath(); });   /* points de la face cachée ramenés sur le bord du disque */
+      var tg = g.createLinearGradient(x0, y0 - R, x0, y0 + R); tg.addColorStop(0, '#3F6212'); tg.addColorStop(0.45, '#4D7C0F'); tg.addColorStop(0.7, '#65A30D'); tg.addColorStop(1, '#3F6212'); g.fillStyle = tg; g.fill(); g.clip();   /* terres, puis déserts à l'intérieur des terres seulement */
+      TERRE_DESERTS.forEach(function (d) { var P = proj(d[0], d[1]); if (P[2] <= 0) { return; } var dg = g.createRadialGradient(P[0], P[1], 0, P[0], P[1], R * d[2] * rad * 1.1); dg.addColorStop(0, 'rgba(214,180,120,0.95)'); dg.addColorStop(0.7, 'rgba(194,160,100,0.7)'); dg.addColorStop(1, 'rgba(194,160,100,0)'); g.fillStyle = dg; g.beginPath(); g.ellipse(P[0], P[1], R * d[2] * rad * 1.2, R * d[3] * rad * 1.3, 0, 0, 2 * Math.PI); g.fill(); });
+      g.restore();
+      var pn = proj(0, 90); if (pn[2] > 0) { var pg = g.createRadialGradient(pn[0], pn[1], 0, pn[0], pn[1], R * 0.32); pg.addColorStop(0, 'rgba(255,255,255,0.95)'); pg.addColorStop(0.6, 'rgba(240,249,255,0.8)'); pg.addColorStop(1, 'rgba(240,249,255,0)'); g.fillStyle = pg; g.beginPath(); g.ellipse(pn[0], pn[1], R * 0.42, R * 0.42 * Math.max(0.2, pn[2]), 0, 0, 2 * Math.PI); g.fill(); }   /* banquise arctique */
+      var ps = proj(0, -90); if (ps[2] > 0) { g.fillStyle = 'rgba(255,255,255,0.9)'; g.beginPath(); g.ellipse(ps[0], ps[1], R * 0.35, R * 0.35 * Math.max(0.2, ps[2]), 0, 0, 2 * Math.PI); g.fill(); }
+      var NUAGES = [[-30, 45, 28, 0.35], [20, 55, 30, -0.2], [-20, 5, 35, 0.1], [40, -10, 22, 0.3], [0, -40, 40, -0.15], [70, 30, 25, 0.2], [-60, -15, 20, -0.3], [30, 10, 12, 0.5]];
+      NUAGES.forEach(function (n, i) { for (var b = 0; b < 22; b++) {   /* nuages : chapelets de taches floues le long d'une courbe */
+        var u = b / 21, P = proj(n[0] + (u - 0.5) * n[2] * 1.6, n[1] + Math.sin(u * Math.PI * 1.3 + n[3] * 4) * n[2] * 0.25); if (P[2] <= 0.08) { continue; }
+        var rr2 = R * (0.05 + 0.04 * Math.abs(Math.sin(i * 3.1 + b * 1.3))) * (0.6 + 0.4 * P[2]), cg = g.createRadialGradient(P[0], P[1], 0, P[0], P[1], rr2); cg.addColorStop(0, 'rgba(255,255,255,' + (0.32 * P[2]).toFixed(2) + ')'); cg.addColorStop(0.5, 'rgba(255,255,255,' + (0.18 * P[2]).toFixed(2) + ')'); cg.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = cg; g.beginPath(); g.ellipse(P[0], P[1], rr2 * 1.6, rr2, n[3], 0, 2 * Math.PI); g.fill(); } });
+      var sp = g.createRadialGradient(x0 - R * 0.45, y0 - R * 0.45, 0, x0 - R * 0.45, y0 - R * 0.45, R * 0.5); sp.addColorStop(0, 'rgba(255,255,255,0.22)'); sp.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = sp; g.fillRect(x0 - R, y0 - R, 2 * R, 2 * R);   /* reflet du Soleil */
+      var nu = g.createRadialGradient(x0 - R * 0.55, y0 - R * 0.55, R * 0.4, x0 - R * 0.2, y0 - R * 0.2, R * 1.7); nu.addColorStop(0, 'rgba(2,6,23,0)'); nu.addColorStop(0.6, 'rgba(2,6,23,0.15)'); nu.addColorStop(1, 'rgba(2,6,23,0.75)'); g.fillStyle = nu; g.fillRect(x0 - R, y0 - R, 2 * R, 2 * R);   /* côté nuit */
+      g.restore();
+      g.strokeStyle = 'rgba(186,230,253,0.55)'; g.lineWidth = Math.max(1, R * 0.012); g.beginPath(); g.arc(x0, y0, R, Math.PI * 0.9, Math.PI * 1.75); g.stroke();   /* liseré lumineux de l'atmosphère, côté jour */
+      c.M = M; TERRE_CACHE[cle] = c;
+    }
+    ctx.drawImage(c, cx - c.M, cy - c.M, 2 * c.M, 2 * c.M);
+  }
   /* =================== quiz à choix =================== */
   function Quiz(root, BANQUE, nb, fabrique) {
     var qEl = $(root, '.nt-ql-q'), bx = $(root, '.nt-ql-btns'), Q = [];
@@ -920,7 +970,7 @@ plt.show()
           });
           bx.appendChild(b);
         });
-        typeset(qEl);
+        typeset(qEl); typeset(bx);   /* les réponses peuvent contenir des formules */
       },
       bilan: function (g) { qEl.innerHTML = '<span class="nt-big-score">' + g + '&nbsp;/&nbsp;' + nb + '</span><br>' + (g / nb >= 0.85 ? 'Excellent&nbsp;!' : 'Relisez les explications des questions manquées, puis recommencez&nbsp;: les questions seront mélangées.'); bx.innerHTML = ''; bx.hidden = true; }
     });
@@ -1090,9 +1140,13 @@ plt.show()
       ctx.strokeStyle = '#334155'; ctx.lineWidth = 4.5; var pa = S.X * 3; ctx.beginPath(); ctx.moveTo(x - 0.22 * k, sol - 0.95 * k); ctx.lineTo(x + 0.05 * k, sol - 0.6 * k + 0.08 * k * Math.sin(pa)); ctx.lineTo(x - 0.05 * k + 0.15 * k * Math.cos(pa), yw + 0.12 * k * Math.sin(pa)); ctx.stroke();
       ctx.strokeStyle = '#475569'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x + 0.42 * k, sol - 0.85 * k); ctx.lineTo(x + 0.47 * k, sol - 1.08 * k); ctx.lineTo(x + 0.36 * k, sol - 1.12 * k); ctx.stroke();   /* potence et guidon */
       ctx.fillStyle = '#111827'; rr(ctx, x + 0.31 * k, sol - 1.15 * k, 0.1 * k, 0.06 * k, 2); ctx.fill();
-      ctx.strokeStyle = '#1E3A8A'; ctx.lineWidth = 3.5; ctx.beginPath(); ctx.moveTo(x - 0.05 * k, sol - 1.38 * k); ctx.lineTo(x + 0.18 * k, sol - 1.22 * k); ctx.lineTo(x + 0.35 * k, sol - 1.12 * k); ctx.stroke();   /* bras sur le guidon */
-      if (!S.lache) { ctx.beginPath(); ctx.moveTo(x - 0.05 * k, sol - 1.4 * k); ctx.lineTo(x + 0.3 * k, sol - 1.3 * k); ctx.lineTo(x + 0.5 * k, sol - HB * k + 0.05 * k); ctx.stroke(); }   /* bras tendu qui tient la balle */
-      ctx.fillStyle = '#FCD9B6'; ctx.beginPath(); ctx.arc(x, sol - 1.58 * k, 0.11 * k, 0, 2 * Math.PI); ctx.fill(); ctx.fillStyle = '#F59E0B'; ctx.beginPath(); ctx.arc(x - 0.01 * k, sol - 1.62 * k, 0.12 * k, Math.PI, 2 * Math.PI); ctx.fill();
+      var PEAU = '#7B4A2D';   /* cycliste noir : peau brun foncé */
+      function brasV(pts) { ctx.lineWidth = 3.6; ctx.strokeStyle = '#1E3A8A'; ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); ctx.lineTo(pts[1][0], pts[1][1]); ctx.stroke(); ctx.strokeStyle = PEAU; ctx.lineWidth = 3.2; ctx.beginPath(); ctx.moveTo(pts[1][0], pts[1][1]); ctx.lineTo(pts[2][0], pts[2][1]); ctx.stroke(); ctx.fillStyle = PEAU; ctx.beginPath(); ctx.arc(pts[2][0], pts[2][1], 0.035 * k, 0, 2 * Math.PI); ctx.fill(); }   /* manche courte, puis avant-bras et main */
+      brasV([[x - 0.05 * k, sol - 1.38 * k], [x + 0.18 * k, sol - 1.22 * k], [x + 0.35 * k, sol - 1.12 * k]]);   /* bras sur le guidon */
+      if (!S.lache) { brasV([[x - 0.05 * k, sol - 1.4 * k], [x + 0.3 * k, sol - 1.3 * k], [x + 0.5 * k, sol - HB * k + 0.05 * k]]); }   /* bras tendu qui tient la balle */
+      ctx.fillStyle = PEAU; ctx.beginPath(); ctx.arc(x, sol - 1.58 * k, 0.11 * k, 0, 2 * Math.PI); ctx.fill(); ctx.beginPath(); ctx.arc(x + 0.105 * k, sol - 1.57 * k, 0.025 * k, 0, 2 * Math.PI); ctx.fill();   /* tête et nez */
+      ctx.fillStyle = '#111827'; ctx.beginPath(); ctx.arc(x - 0.03 * k, sol - 1.6 * k, 0.1 * k, Math.PI * 0.7, Math.PI * 1.25); ctx.fill();   /* cheveux courts, sous le casque */
+      ctx.fillStyle = '#F59E0B'; ctx.beginPath(); ctx.arc(x - 0.01 * k, sol - 1.62 * k, 0.12 * k, Math.PI, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = '#111827'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x + 0.015 * k, sol - 1.62 * k); ctx.lineTo(x + 0.005 * k, sol - 1.49 * k); ctx.stroke();   /* casque et sa jugulaire, près du cou */
       ctx.restore();
     }
     function draw(o) {
@@ -1409,9 +1463,11 @@ plt.show()
   /* =================== 7 c. La chandelle au rugby =================== */
   (function () {
     var root = document.getElementById('lab-rugby'); if (!root) { return; }
-    var chkC = $(root, '[data-in="chrono"]'), chkV = $(root, '[data-in="comp"]'), msg = $(root, '.nt-msg'), bG = $(root, '[data-act="go"]');
-    var G = 9.8, VX = 8, VY = 14, TV = 2 * VY / G, DTP = 0.25, RAL = 0.55, t = -1, cnv, NU = [[4, 0.12], [14, 0.2], [23, 0.1]];
-    function pos(t) { var q = Math.min(Math.max(t, 0), TV); return [2 + VX * q, Math.max(0, VY * q - 0.5 * G * q * q)]; }   /* abscisse et altitude du ballon (m) */
+    var chkC = $(root, '[data-in="chrono"]'), chkV = $(root, '[data-in="comp"]'), chkR = $(root, '[data-in="coureur"]'), msg = $(root, '.nt-msg'), bG = $(root, '[data-act="go"]'), on = false;
+    var G = 9.8, VX = 8, VY = 14, TV = 2 * VY / G, HC = 1.3, TC = (VY + Math.sqrt(VY * VY - 2 * G * HC)) / G, T0 = -0.9, DTP = 0.25, RAL = 0.55, t = -1, cnv, NU = [[4, 0.12], [14, 0.2], [23, 0.1]];
+    function tVol() { return chkR.checked ? TC : TV; }   /* fin du vol : le coéquipier attrape le ballon à hauteur des mains, sinon il touche le sol */
+    function tFin() { return chkR.checked ? TC + 0.4 : TV; }
+    function pos(t) { if (chkR.checked && t > TC) { return [2 + VX * t, HC]; } var q = Math.min(Math.max(t, 0), TV); return [2 + VX * q, Math.max(0, VY * q - 0.5 * G * q * q)]; }   /* abscisse et altitude du ballon (m) ; une fois attrapé, il suit le coureur */
     function ballon(ctx, x, y, r, a, al) {   /* ballon de rugby : ovale, coutures et lacets */
       ctx.save(); ctx.globalAlpha = al; ctx.translate(x, y); ctx.rotate(a);
       var g = ctx.createRadialGradient(-r * 0.4, -r * 0.4, 1, 0, 0, r * 1.5); g.addColorStop(0, '#FFFFFF'); g.addColorStop(0.6, '#E5E7EB'); g.addColorStop(1, '#9CA3AF');
@@ -1420,19 +1476,62 @@ plt.show()
       ctx.strokeStyle = '#475569'; ctx.lineWidth = 1; for (var l = -2; l <= 2; l++) { ctx.beginPath(); ctx.moveTo(l * r * 0.22, -r * 0.62); ctx.lineTo(l * r * 0.22, -r * 0.36); ctx.stroke(); }
       ctx.restore();
     }
-    function joueur(ctx, px, py, k, frappe) {   /* rugbyman de profil, tourné vers la droite (pieds en (px, py)) */
+    function joueur(ctx, px, py, k, frappe) {   /* botteur vu de profil, tourné vers la droite : même gabarit et même dessin que le coureur */
+      function P(q) { return [px + q[0] * k, py - q[1] * k]; }   /* coordonnées en mètres ; origine au sol, sous les hanches */
+      function seg(a, b, c, w) { var r1 = P(a), r2 = P(b); ctx.strokeStyle = c; ctx.lineWidth = w * k; ctx.beginPath(); ctx.moveTo(r1[0], r1[1]); ctx.lineTo(r2[0], r2[1]); ctx.stroke(); }
+      function poly(pts, col) { ctx.fillStyle = col; ctx.beginPath(); pts.forEach(function (q, i) { var r = P(q); if (i) { ctx.lineTo(r[0], r[1]); } else { ctx.moveTo(r[0], r[1]); } }); ctx.closePath(); ctx.fill(); }
+      function chaussure(q, a, c) { var r = P(q); ctx.save(); ctx.translate(r[0], r[1]); ctx.rotate(a); ctx.fillStyle = c; rr(ctx, -0.07 * k, -0.07 * k, 0.27 * k, 0.1 * k, 0.04 * k); ctx.fill(); ctx.restore(); }
+      function jambe(g, f, a, proche) { seg(H, g, proche ? '#F2C9A0' : '#B08A68', 0.13); seg(g, f, proche ? '#111827' : '#64748B', 0.11); if (proche) { seg(g, [g[0] + (f[0] - g[0]) * 0.12, g[1] + (f[1] - g[1]) * 0.12], '#FACC15', 0.115); } chaussure(f, a, proche ? '#F8FAFC' : '#94A3B8'); }
+      function bras(c, m, proche) { var mc = [E[0] + (c[0] - E[0]) * 0.42, E[1] + (c[1] - E[1]) * 0.42]; seg(E, c, proche ? '#F2C9A0' : '#B08A68', 0.09); seg(c, m, proche ? '#F2C9A0' : '#B08A68', 0.085); seg(E, mc, proche ? '#111827' : '#334155', 0.13); seg(E, mc, proche ? '#FACC15' : '#CA8A04', 0.105); }
+      var H = [0, 1.03], E = frappe ? [0.06, 1.6] : [0.1, 1.59], T = frappe ? [0.12, 1.88] : [0.17, 1.87];   /* le genou est toujours du côté où il plie naturellement : vers l'avant, ou au-dessus de la jambe levée */   /* au moment de la frappe, le buste se redresse un peu */
       ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      var hanche = [px, py - 0.95 * k], pied = frappe ? [px + 0.78 * k, py - 1.15 * k] : [px + 0.32 * k, py], genou = frappe ? [px + 0.42 * k, py - 0.62 * k] : [px + 0.24 * k, py - 0.48 * k];
-      function seg(a, b, c, w) { ctx.strokeStyle = c; ctx.lineWidth = w; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
-      seg(hanche, [px - 0.22 * k, py - 0.48 * k], '#F2C9A0', 0.15 * k); seg([px - 0.22 * k, py - 0.48 * k], [px - 0.16 * k, py - 0.08 * k], '#B91C1C', 0.14 * k);   /* jambe d'appui : cuisse, chaussette */
-      ctx.fillStyle = '#111827'; rr(ctx, px - 0.26 * k, py - 0.1 * k, 0.32 * k, 0.1 * k, 0.04 * k); ctx.fill();
-      seg(hanche, genou, '#F2C9A0', 0.15 * k); seg(genou, pied, '#B91C1C', 0.14 * k);   /* jambe de frappe */
-      ctx.save(); ctx.translate(pied[0], pied[1]); ctx.rotate(frappe ? -0.6 : 0); ctx.fillStyle = '#111827'; rr(ctx, -0.06 * k, -0.06 * k, 0.32 * k, 0.11 * k, 0.04 * k); ctx.fill(); ctx.restore();
-      ctx.fillStyle = '#F8FAFC'; rr(ctx, px - 0.24 * k, py - 1.12 * k, 0.48 * k, 0.32 * k, 0.08 * k); ctx.fill();   /* short */
-      var gm = ctx.createLinearGradient(px - 0.25 * k, 0, px + 0.25 * k, 0); gm.addColorStop(0, '#B91C1C'); gm.addColorStop(1, '#EF4444'); ctx.fillStyle = gm; rr(ctx, px - 0.26 * k, py - 1.82 * k, 0.52 * k, 0.78 * k, 0.12 * k); ctx.fill();   /* maillot */
-      ctx.fillStyle = '#FFFFFF'; ctx.fillRect(px - 0.26 * k, py - 1.5 * k, 0.52 * k, 0.07 * k); ctx.font = 'bold ' + Math.round(0.22 * k) + 'px ' + FONT; ctx.textAlign = 'center'; ctx.fillText('10', px, py - 1.2 * k);
-      seg([px + 0.1 * k, py - 1.7 * k], [px + 0.45 * k, py - 1.35 * k], '#B91C1C', 0.12 * k); seg([px - 0.1 * k, py - 1.7 * k], [px - 0.48 * k, py - 1.45 * k], '#B91C1C', 0.12 * k);   /* bras écartés pour l'équilibre */
-      ctx.fillStyle = '#F2C9A0'; ctx.beginPath(); ctx.arc(px + 0.02 * k, py - 2.02 * k, 0.17 * k, 0, 2 * Math.PI); ctx.fill(); ctx.fillStyle = '#3F2A1D'; ctx.beginPath(); ctx.arc(px - 0.01 * k, py - 2.08 * k, 0.17 * k, Math.PI * 0.95, Math.PI * 2.0); ctx.fill();
+      if (frappe) {
+        bras([-0.22, 1.4], [-0.5, 1.5], false);   /* bras éloigné écarté vers l'arrière, pour l'équilibre */
+        jambe([-0.02, 0.53], [-0.1, 0.06], 0, false);   /* jambe d'appui */
+      } else {
+        bras([0.05, 1.28], [0.3, 1.2], false);
+        jambe([-0.08, 0.52], [-0.16, 0.06], 0, false);
+      }
+      poly([[-0.16, 1.13], [0.17, 1.13], [0.16, 0.86], [-0.13, 0.86]], '#111827');   /* short noir */
+      var gj = ctx.createLinearGradient(px - 0.15 * k, 0, px + 0.3 * k, 0); gj.addColorStop(0, '#EAB308'); gj.addColorStop(1, '#FDE047');
+      var top = frappe ? [[0.2, 1.64], [-0.08, 1.66]] : [[0.25, 1.63], [-0.03, 1.66]];
+      poly([[-0.15, 1.09], [0.17, 1.09], top[0], top[1]], gj);   /* maillot jaune */
+      poly([[-0.15, 1.09], [0.17, 1.09], [0.18, 1.17], [-0.14, 1.17]], '#111827'); poly([[top[1][0] + 0.04, top[1][1] - 0.04], [top[0][0] - 0.06, top[0][1] - 0.04], [top[0][0] - 0.07, top[0][1] + 0.04], [top[1][0] + 0.08, top[1][1] + 0.03]], '#111827');   /* bas du maillot et col noirs */
+      if (frappe) { jambe([0.45, 1.27], [0.98, 1.2], -0.15, true); } else { jambe([0.1, 0.52], [0.18, 0.06], 0, true); }   /* jambe de frappe, lancée vers l'avant et vers le haut */
+      var tt = P(T); ctx.fillStyle = '#F2C9A0'; ctx.beginPath(); ctx.arc(tt[0], tt[1], 0.14 * k, 0, 2 * Math.PI); ctx.fill(); ctx.fillStyle = '#1F2937'; ctx.beginPath(); ctx.arc(tt[0] - 0.02 * k, tt[1] - 0.03 * k, 0.14 * k, Math.PI * 0.95, Math.PI * 2.0); ctx.fill();
+      if (frappe) { bras([0.32, 1.42], [0.55, 1.6], true); } else { bras([0.12, 1.27], [0.36, 1.22], true); }   /* bras proche, au premier plan */
+      ctx.restore();
+    }
+    function coureur(ctx, X, sol, k, xh, tient) {   /* coéquipier qui court vers la droite ; xh : abscisse des hanches (m) ; X : passage des mètres aux pixels */
+      /* cycle de course (modèle des animateurs : contact, appui, passage, envol) : chaque pied posé reste FIXE au sol
+         pendant l'appui, pendant que les hanches avancent ; puis il revient vers l'avant en décrivant un arc. */
+      var Z = 1.15, S = 3.6, D = 0.26, AV = 0.4, L1 = 0.55, L2 = 0.55;   /* Z : taille du personnage, comparable à celle du botteur */   /* foulée complète (deux pas) en m, part de l'appui, pied posé à 0,36 m devant les hanches, cuisse et jambe */
+      var ph0 = ((xh / S) % 1 + 1) % 1;
+      function pied(dec) {   /* position du pied (m) et phase, pour la jambe décalée de dec */
+        var ph = (ph0 + dec) % 1;
+        if (ph < D) { var xc = xh - ph * S + AV; return { x: xc, y: 0, ph: ph, appui: true }; }   /* appui : le pied ne bouge pas */
+        var u = (ph - D) / (1 - D), xa = -(D * S - AV), xb = AV, e = (1 - Math.cos(Math.PI * u)) / 2;
+        return { x: xh + xa + (xb - xa) * e, y: 0.7 * Math.pow(Math.sin(Math.PI * Math.min(1, u * 1.15)), 1.2) * (u < 0.85 ? 1 : (1 - u) / 0.15), ph: ph, appui: false };   /* retour : talon qui remonte, puis genou qui avance */
+      }
+      var pa = pied(0), pb = pied(0.5), envol = !pa.appui && !pb.appui, yh = 1.03 + (envol ? 0.07 : 0);   /* les hanches montent un peu pendant la phase d'envol */
+      function genou(f) { var dx = f.x - xh, dy = f.y - yh, d = Math.min(Math.hypot(dx, dy), L1 + L2 - 0.001), a = Math.acos((L1 * L1 + d * d - L2 * L2) / (2 * L1 * d)), b = Math.atan2(dy, dx) + a; return [xh + L1 * Math.cos(b), yh + L1 * Math.sin(b)]; }   /* genou toujours vers l'avant */
+      function P(q) { return [X(q[0]), sol - q[1] * k]; }
+      function seg(a, b, c, w) { var r1 = P(a), r2 = P(b); ctx.strokeStyle = c; ctx.lineWidth = w * k; ctx.beginPath(); ctx.moveTo(r1[0], r1[1]); ctx.lineTo(r2[0], r2[1]); ctx.stroke(); }
+      function jambe(f, proche) { var g = genou(f), fx = f.x, fy = f.y; if (f.appui) { fy = 0; } seg([xh, yh], g, proche ? '#F2C9A0' : '#B08A68', 0.13); seg(g, [fx, fy + 0.04], proche ? '#111827' : '#64748B', 0.11); if (proche) { var g2 = [g[0] + (fx - g[0]) * 0.12, g[1] + (fy - g[1]) * 0.12]; seg(g, g2, '#FACC15', 0.115); } var r = P([fx, fy]); ctx.save(); ctx.translate(r[0], r[1]); ctx.rotate(f.appui ? 0 : -0.35 * Math.sin(Math.PI * (f.ph - D) / (1 - D))); ctx.fillStyle = proche ? '#F8FAFC' : '#94A3B8'; rr(ctx, -0.07 * k, -0.07 * k, 0.27 * k, 0.1 * k, 0.04 * k); ctx.fill(); ctx.restore(); }
+      var E = [xh + 0.15, yh + 0.56], T = [xh + 0.24, yh + 0.84];   /* épaule et tête : buste penché vers l'avant */
+      function bras(f, proche) {   /* le bras balance en opposition avec la jambe du même côté ; manche courte jaune, puis la peau */
+        var w = Math.cos(2 * Math.PI * f.ph), th = tient ? 1.4 : 0.75 * w, c = [E[0] + 0.33 * Math.sin(th), E[1] - 0.33 * Math.cos(th)], m = tient ? [c[0] + 0.28, c[1] + 0.02] : [c[0] + 0.3 * Math.sin(th + 1.7), c[1] - 0.3 * Math.cos(th + 1.7)], mc = [E[0] + 0.14 * Math.sin(th), E[1] - 0.14 * Math.cos(th)];
+        seg(E, c, proche ? '#F2C9A0' : '#B08A68', 0.09); seg(c, m, proche ? '#F2C9A0' : '#B08A68', 0.085); seg(E, mc, proche ? '#111827' : '#334155', 0.13); seg(E, mc, proche ? '#FACC15' : '#CA8A04', 0.105);
+      }
+      function poly(pts, col) { ctx.fillStyle = col; ctx.beginPath(); pts.forEach(function (q, i) { var r = P(q); if (i) { ctx.lineTo(r[0], r[1]); } else { ctx.moveTo(r[0], r[1]); } }); ctx.closePath(); ctx.fill(); }
+      ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      bras(pa, false); jambe(pb, false);   /* côté éloigné : bras opposé à la jambe proche, dessinés derrière le corps */
+      poly([[xh - 0.16, yh + 0.1], [xh + 0.17, yh + 0.1], [xh + 0.16, yh - 0.17], [xh - 0.13, yh - 0.17]], '#111827');   /* short noir */
+      var gj = ctx.createLinearGradient(X(xh - 0.15), 0, X(xh + 0.3), 0); gj.addColorStop(0, '#EAB308'); gj.addColorStop(1, '#FDE047'); poly([[xh - 0.15, yh + 0.06], [xh + 0.17, yh + 0.06], [xh + 0.31, yh + 0.6], [xh + 0.03, yh + 0.64]], gj);   /* maillot jaune */
+      poly([[xh - 0.15, yh + 0.06], [xh + 0.17, yh + 0.06], [xh + 0.19, yh + 0.14], [xh - 0.13, yh + 0.14]], '#111827'); poly([[xh + 0.07, yh + 0.6], [xh + 0.25, yh + 0.57], [xh + 0.23, yh + 0.65], [xh + 0.12, yh + 0.67]], '#111827');   /* bas du maillot et col noirs */
+      jambe(pa, true);
+      var tt = P(T); ctx.fillStyle = '#F2C9A0'; ctx.beginPath(); ctx.arc(tt[0], tt[1], 0.14 * k, 0, 2 * Math.PI); ctx.fill(); ctx.fillStyle = '#1F2937'; ctx.beginPath(); ctx.arc(tt[0] - 0.02 * k, tt[1] - 0.03 * k, 0.14 * k, Math.PI * 0.95, Math.PI * 2.0); ctx.fill();
+      bras(pb, true);   /* bras proche, en opposition avec la jambe proche */
       ctx.restore();
     }
     function draw(o) {
@@ -1453,27 +1552,29 @@ plt.show()
       ctx.strokeStyle = 'rgba(15,23,42,0.55)'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(axe, sol); ctx.lineTo(axe, sy(10.6)); ctx.stroke();
       for (var m2 = 0; m2 <= 10; m2 += 2) { ctx.fillStyle = 'rgba(15,23,42,0.6)'; ctx.fillRect(axe - 4, sy(m2), 8, 1.2); if (m2) { pill(ctx, m2 + ' m', axe - 8, sy(m2), { size: 9.5, col: '#0F172A', bg: 'rgba(255,255,255,0.75)', align: 'right' }); } }
       var tt = Math.max(t, 0);
-      if (t >= 0) { ctx.save(); ctx.setLineDash([2, 5]); ctx.strokeStyle = 'rgba(15,23,42,0.35)'; ctx.lineWidth = 1.5; ctx.beginPath(); for (var i = 0; i <= 60; i++) { var ti = Math.min(tt, TV) * i / 60, q0 = pos(ti); if (i) { ctx.lineTo(sx(q0[0]), sy(q0[1]) - 0.25 * k); } else { ctx.moveTo(sx(q0[0]), sy(q0[1]) - 0.25 * k); } } ctx.stroke(); ctx.restore(); }
-      if (chkC.checked && t >= 0) { for (var tj = 0; tj <= Math.min(tt, TV) + 1e-9; tj += DTP) { var q = pos(tj); ballon(ctx, sx(q[0]), sy(q[1]) - 0.25 * k, 0.2 * k, -tj * 4, 0.4); croix(ctx, sx(q[0]), sol + 10, '#F8FAFC', 4); croix(ctx, axe, sy(q[1]) - 0.25 * k, ROUGE, 4); } }
+      if (t >= 0) { ctx.save(); ctx.setLineDash([2, 5]); ctx.strokeStyle = 'rgba(15,23,42,0.35)'; ctx.lineWidth = 1.5; ctx.beginPath(); for (var i = 0; i <= 60; i++) { var ti = Math.min(tt, tVol()) * i / 60, q0 = pos(ti); if (i) { ctx.lineTo(sx(q0[0]), sy(q0[1]) - 0.25 * k); } else { ctx.moveTo(sx(q0[0]), sy(q0[1]) - 0.25 * k); } } ctx.stroke(); ctx.restore(); }
+      if (chkC.checked && t >= 0) { for (var tj = 0; tj <= Math.min(tt, tVol()) + 1e-9; tj += DTP) { var q = pos(tj); ballon(ctx, sx(q[0]), sy(q[1]) - 0.25 * k, 0.2 * k, -tj * 4, 0.4); croix(ctx, sx(q[0]), sol + 10, '#F8FAFC', 4); croix(ctx, axe, sy(q[1]) - 0.25 * k, ROUGE, 4); } }
       var bq = pos(tt), bx = sx(bq[0]), by = sy(bq[1]) - 0.25 * k;
       ctx.fillStyle = 'rgba(15,23,42,' + (0.38 - Math.min(0.22, bq[1] * 0.022)).toFixed(2) + ')'; ctx.beginPath(); ctx.ellipse(bx, sol + 2, 0.32 * k, 0.08 * k, 0, 0, 2 * Math.PI); ctx.fill();   /* ombre, juste sous le ballon */
       ctx.save(); ctx.setLineDash([3, 4]); ctx.strokeStyle = 'rgba(15,23,42,0.4)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(bx, by + 0.2 * k); ctx.lineTo(bx, sol); ctx.moveTo(bx - 0.3 * k, by); ctx.lineTo(axe, by); ctx.stroke(); ctx.restore();
       ctx.fillStyle = ROUGE; ctx.beginPath(); ctx.arc(axe, by, 4.5, 0, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 1.5; ctx.stroke();
       joueur(ctx, sx(1.4), sol, k, t >= 0 && t < 0.3);
+      if (chkR.checked) { coureur(ctx, function (x) { return sx(x); }, sol + 0.12 * k, k, 2 + VX * t - 0.72, t > TC); }   /* le coéquipier, au premier plan, à la vitesse de l'ombre */
       ballon(ctx, bx, by, 0.22 * k, t > 0 && t < TV ? -t * 4 : 0, 1);
-      if (t > 0 && t < TV) {
+      if (t > 0 && t < tVol()) {
         var vy = VY - G * t, f = 0.11 * k;
         if (chkV.checked) { ctx.save(); ctx.setLineDash([4, 3]); vec(ctx, bx, by, bx + VX * f, by, '#047857', 2.2, 9); if (Math.abs(vy) > 0.3) { vec(ctx, bx, by, bx, by - vy * f, '#BE123C', 2.2, 9); } ctx.restore(); }
         vec(ctx, bx, by, bx + VX * f, by - vy * f, ORANGE, 3, 12);
         vec(ctx, bx, sol + 26, bx + VX * f, sol + 26, '#047857', 2.6, 10);   /* la vitesse de l'ombre, toujours la même */
       }
-      pill(ctx, 'vitesse de l\u2019ombre\u00A0: ' + (t > 0 && t < TV ? fmt(VX, 0) : '0') + ' m·s⁻¹', Math.min(W - 10, Math.max(150, bx + 0.6 * k + 140)), sol + 26, { size: 11, col: '#065F46', bg: 'rgba(255,255,255,0.92)', align: 'right' });
+      pill(ctx, 'vitesse de l\u2019ombre\u00A0: ' + (t > 0 && t < tVol() ? fmt(VX, 0) : '0') + ' m·s⁻¹', Math.min(W - 10, Math.max(150, bx + 0.6 * k + 140)), sol + 26, { size: 11, col: '#065F46', bg: 'rgba(255,255,255,0.92)', align: 'right' });
     }
-    var loop = Loop(root, function (dt) { if (t < 0) { return false; } t += dt * RAL; if (t >= TV) { t = TV; draw(cnv); fin(); return false; } draw(cnv); return true; });
-    function fin() { bG.disabled = false; msg.innerHTML = 'Sur le sol, les positions successives de l\u2019ombre (croix blanches) sont <b>également espacées</b>&nbsp;: la vitesse horizontale du ballon est restée constante, égale à 8&nbsp;m·s⁻¹. Sur l\u2019axe vertical (croix rouges), les positions se resserrent à la montée puis s\u2019écartent à la descente&nbsp;: la vitesse verticale varie, car le poids agit verticalement.'; }
+    var loop = Loop(root, function (dt) { if (!on) { return false; } t += dt * RAL; if (t >= tFin()) { t = tFin(); on = false; draw(cnv); fin(); return false; } draw(cnv); return true; });
+    function fin() { bG.disabled = false; msg.innerHTML = 'Sur le sol, les positions successives de l\u2019ombre (croix blanches) sont <b>également espacées</b>&nbsp;: la vitesse horizontale du ballon est restée constante, égale à 8&nbsp;m·s⁻¹. Sur l\u2019axe vertical (croix rouges), les positions se resserrent à la montée puis s\u2019écartent à la descente&nbsp;: la vitesse verticale varie, car le poids agit verticalement.' + (chkR.checked ? ' Le coéquipier a couru en ligne droite, à la vitesse constante de l\u2019ombre&nbsp;: il est resté <b>sous le ballon</b> pendant tout le vol, et l\u2019a récupéré à sa chute.' : ''); }
     cnv = Canvas($(root, 'canvas'), function (W) { return W < 520 ? 300 : 360; }, draw);
-    bG.addEventListener('click', function () { t = 0; bG.disabled = true; msg.textContent = 'Le ballon s\u2019élève… regardez son ombre.'; if (RM) { t = TV; draw(cnv); fin(); return; } loop.kick(); });
+    bG.addEventListener('click', function () { t = chkR.checked ? T0 : 0; on = true; bG.disabled = true; msg.textContent = 'Le ballon s\u2019élève… regardez son ombre.'; if (RM) { t = tFin(); on = false; draw(cnv); fin(); return; } loop.kick(); });
     [chkC, chkV].forEach(function (c) { c.addEventListener('change', function () { draw(cnv); }); });
+    chkR.addEventListener('change', function () { if (!on) { t = -1; } draw(cnv); });
     msg.textContent = 'Le Soleil est haut dans le ciel\u00A0: l\u2019ombre du ballon est juste en dessous de lui. Tapez la chandelle\u00A0!'; draw(cnv);
   })();
 
@@ -1556,24 +1657,31 @@ plt.show()
       var a = 15 * s, dx = h[0] - epaule[0], dy = h[1] - epaule[1], L = Math.min(Math.hypot(dx, dy), 2 * a - 0.01), an = Math.atan2(dy, dx), b = Math.acos(L / (2 * a)), cx = epaule[0] + a * Math.cos(an + b), cy = epaule[1] + a * Math.sin(an + b);
       var hx = epaule[0] + L * Math.cos(an), hy = epaule[1] + L * Math.sin(an);
       membre([epaule, [cx, cy], [hx, hy]], col, 5.5 * s);
-      ctx.fillStyle = '#0F172A'; ctx.beginPath(); ctx.arc(hx, hy, 3.4 * s, 0, 2 * Math.PI); ctx.fill();
+      ctx.fillStyle = o.mainsPeau ? '#F2C9A0' : '#0F172A'; ctx.beginPath(); ctx.arc(hx, hy, 3.4 * s, 0, 2 * Math.PI); ctx.fill(); if (o.mainsPeau) { ctx.strokeStyle = 'rgba(146,64,14,0.45)'; ctx.lineWidth = 0.8 * s; ctx.stroke(); }   /* mains (gantées, ou de la couleur du visage) */
     }
-    if (bras) { brasIK(bras[0], '#1E3A8A'); } else { membre([epaule, [9 * s, -14 * s], [17 * s, -10 * s]], '#1E3A8A', 5.5 * s); }   /* bras arrière-plan */
+    var m1 = o.haut2 ? haut : '#1E3A8A', m2 = o.haut2 || '#2B4BC0';   /* manches de la couleur du polo */
+    if (bras) { brasIK(bras[0], m1); } else { membre([epaule, [9 * s, -14 * s], [17 * s, -10 * s]], m1, 5.5 * s); }   /* bras arrière-plan */
     membre([[-2 * s, 0], [7 * s, 14 * s], [1 * s, 30 * s]], bas, 7 * s); membre([[3 * s, 0], [12 * s, 12 * s], [9 * s, 29 * s]], bas, 7 * s);   /* jambes pliées, en apesanteur */
-    ctx.fillStyle = '#E2E8F0'; rr(ctx, -4 * s, 27 * s, 12 * s, 6 * s, 3 * s); ctx.fill(); rr(ctx, 4 * s, 26 * s, 12 * s, 6 * s, 3 * s); ctx.fill();   /* chaussons */
-    var gt = ctx.createLinearGradient(-9 * s, 0, 10 * s, 0); gt.addColorStop(0, haut); gt.addColorStop(1, '#3B5BDB'); ctx.fillStyle = gt;
-    ctx.beginPath(); ctx.moveTo(-7 * s, 2 * s); ctx.lineTo(-8 * s, -26 * s); ctx.quadraticCurveTo(-6 * s, -33 * s, 2 * s, -33 * s); ctx.quadraticCurveTo(9 * s, -32 * s, 9 * s, -24 * s); ctx.lineTo(8 * s, 2 * s); ctx.closePath(); ctx.fill();   /* torse (polo) */
-    ctx.fillStyle = '#93C5FD'; rr(ctx, -5 * s, -30 * s, 4 * s, 4 * s, 1 * s); ctx.fill();   /* écusson */
+    ctx.fillStyle = o.chaussons || '#E2E8F0'; ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 0.9 * s; rr(ctx, -4 * s, 27 * s, 12 * s, 6 * s, 3 * s); ctx.fill(); ctx.stroke(); rr(ctx, 4 * s, 26 * s, 12 * s, 6 * s, 3 * s); ctx.fill(); ctx.stroke();   /* chaussettes, bordées d'un trait fin pour se détacher du fond */
+    var gt = ctx.createLinearGradient(-9 * s, 0, 10 * s, 0); gt.addColorStop(0, haut); gt.addColorStop(1, o.haut2 || '#3B5BDB'); ctx.fillStyle = gt;
+    ctx.beginPath(); ctx.moveTo(-7 * s, 2 * s); ctx.lineTo(-8 * s, -26 * s); ctx.quadraticCurveTo(-6 * s, -33 * s, 2 * s, -33 * s); ctx.quadraticCurveTo(9 * s, -32 * s, 9 * s, -26 * s);
+    if (o.femme) { ctx.quadraticCurveTo(13 * s, -22 * s, 11.5 * s, -17 * s); ctx.quadraticCurveTo(10 * s, -14.5 * s, 8 * s, -14 * s); ctx.lineTo(7.5 * s, -6 * s); ctx.quadraticCurveTo(9 * s, -2 * s, 8.5 * s, 2 * s); } else { ctx.lineTo(8 * s, 2 * s); }   /* silhouette féminine : poitrine et taille marquée */
+    ctx.closePath(); ctx.fill();   /* torse (polo) */
     ctx.fillStyle = '#F2C9A0'; ctx.fillRect(-1 * s, -37 * s, 5 * s, 5 * s);   /* cou */
     ctx.beginPath(); ctx.ellipse(2 * s, -44 * s, 8 * s, 9 * s, 0, 0, 2 * Math.PI); ctx.fill();   /* tête */
-    ctx.fillStyle = o.cheveux || '#7C2D12'; ctx.beginPath(); ctx.ellipse(0, -48 * s, 8.5 * s, 6.5 * s, -0.2, Math.PI * 0.9, Math.PI * 2.05); ctx.fill();
-    ctx.fillStyle = '#1E293B'; ctx.beginPath(); ctx.arc(6.5 * s, -45 * s, 1.1 * s, 0, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = '#B45309'; ctx.lineWidth = 1 * s; ctx.beginPath(); ctx.arc(6 * s, -40.5 * s, 2 * s, 0.2, 1.4); ctx.stroke();   /* œil et sourire */
-    if (bras) { brasIK(bras[1] || bras[0], '#2B4BC0'); } else { membre([epaule, [10 * s, -18 * s], [18 * s, -14 * s]], '#2B4BC0', 5.5 * s); ctx.fillStyle = '#F2C9A0'; ctx.beginPath(); ctx.arc(18 * s, -14 * s, 3 * s, 0, 2 * Math.PI); ctx.fill(); }   /* bras au premier plan */
+    ctx.fillStyle = o.cheveux || '#7C2D12';
+    if (o.femme) {   /* cheveux longs qui flottent vers le haut : il n'y a pas de pesanteur apparente dans la station */
+      ctx.beginPath(); ctx.moveTo(9 * s, -49 * s); ctx.bezierCurveTo(8 * s, -57 * s, 2 * s, -62 * s, -4 * s, -61 * s); ctx.bezierCurveTo(-9 * s, -66 * s, -16 * s, -63 * s, -15 * s, -57 * s); ctx.bezierCurveTo(-18 * s, -53 * s, -15 * s, -47 * s, -12 * s, -46 * s); ctx.bezierCurveTo(-14 * s, -42 * s, -11 * s, -38 * s, -8 * s, -39 * s); ctx.lineTo(-6 * s, -44 * s); ctx.closePath(); ctx.fill();   /* chevelure qui flotte en apesanteur, en un léger halo */
+      ctx.strokeStyle = 'rgba(255,255,255,0.22)'; ctx.lineWidth = 1 * s; ctx.beginPath(); ctx.moveTo(-3 * s, -58 * s); ctx.quadraticCurveTo(-9 * s, -61 * s, -12 * s, -56 * s); ctx.stroke(); ctx.beginPath(); ctx.moveTo(2 * s, -56 * s); ctx.quadraticCurveTo(-2 * s, -58 * s, -5 * s, -55 * s); ctx.stroke();   /* reflets */
+    } else { ctx.beginPath(); ctx.ellipse(0, -48 * s, 8.5 * s, 6.5 * s, -0.2, Math.PI * 0.9, Math.PI * 2.05); ctx.fill(); }
+    ctx.fillStyle = '#1E293B'; ctx.beginPath(); ctx.arc(6.5 * s, -45 * s, 1.1 * s, 0, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = '#B45309'; ctx.lineWidth = 1 * s; ctx.beginPath(); ctx.arc(6 * s, -40.5 * s, 2 * s, 0.2, 1.4); ctx.stroke();
+    if (o.femme) { ctx.fillStyle = '#FCD34D'; ctx.beginPath(); ctx.arc(1 * s, -41.5 * s, 1 * s, 0, 2 * Math.PI); ctx.fill(); }   /* boucle d'oreille */   /* œil et sourire */
+    if (bras) { brasIK(bras[1] || bras[0], m2); } else { membre([epaule, [10 * s, -18 * s], [18 * s, -14 * s]], m2, 5.5 * s); ctx.fillStyle = '#F2C9A0'; ctx.beginPath(); ctx.arc(18 * s, -14 * s, 3 * s, 0, 2 * Math.PI); ctx.fill(); }   /* bras au premier plan */
     ctx.restore();
   }
   (function () {
     var root = document.getElementById('lab-pousse'); if (!root) { return; }
-    var msg = $(root, '.nt-msg'), bP = $(root, '[data-act="pousser"]'), M = 100, m = 0.06, U = 1.6, TP = 0.25, RAL = 0.35, t = -1, cnv, fini = false;   /* vitesse relative finale U (m·s⁻¹), durée de la poussée TP (s) */
+    var msg = $(root, '.nt-msg'), bP = $(root, '[data-act="pousser"]'), M = 65, m = 0.06, U = 1.6, TP = 0.25, RAL = 0.35, t = -1, cnv, fini = false;   /* vitesse relative finale U (m·s⁻¹), durée de la poussée TP (s) */
     function vit() { return [-U * m / (M + m), U * M / (M + m)]; }   /* vitesses finales de l'astronaute et de l'objet */
     function etat(t) {   /* positions (m) et vitesses (m·s⁻¹) : accélération constante pendant la poussée, puis vitesse constante */
       var v = vit(); if (t <= 0) { return [0, 0, 0, 0]; }
@@ -1588,7 +1696,7 @@ plt.show()
         var gs = ctx.createLinearGradient(0, y - 11 * s, 0, y + 11 * s); gs.addColorStop(0, '#F97316'); gs.addColorStop(1, '#C2410C'); ctx.fillStyle = gs; rr(ctx, x, y - 11 * s, 30 * s, 22 * s, 10 * s); ctx.fill();
         ctx.strokeStyle = '#7C2D12'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x + 4 * s, y - 6 * s); ctx.lineTo(x + 26 * s, y - 6 * s); ctx.stroke(); ctx.strokeStyle = '#1F2937'; ctx.lineWidth = 2 * s; ctx.beginPath(); ctx.moveTo(x + 9 * s, y - 11 * s); ctx.quadraticCurveTo(x + 15 * s, y - 20 * s, x + 21 * s, y - 11 * s); ctx.stroke(); return;
       }
-      if (m < 200) { personne(ctx, x + 9 * s, y + 14 * s, s, { haut: '#047857', cheveux: '#1F2937' }); return; }   /* le collègue, dos à l'astronaute */
+      if (m < 200) { personne(ctx, x + 9 * s, y + 14 * s, s, { haut: '#047857', haut2: '#10B981', chaussons: '#FFFFFF', cheveux: '#1F2937' }); return; }   /* le collègue, dos à l'astronaute */
       var gc = ctx.createLinearGradient(x, y - 26 * s, x + 52 * s, y + 26 * s); gc.addColorStop(0, '#F1F5F9'); gc.addColorStop(1, '#94A3B8'); ctx.fillStyle = gc; rr(ctx, x, y - 26 * s, 52 * s, 52 * s, 5 * s); ctx.fill();   /* caisse de rangement */
       ctx.strokeStyle = '#64748B'; ctx.lineWidth = 1.5; rr(ctx, x + 5 * s, y - 21 * s, 42 * s, 42 * s, 3 * s); ctx.stroke(); ctx.fillStyle = '#334155'; rr(ctx, x + 18 * s, y - 24 * s, 16 * s, 4 * s, 2 * s); ctx.fill();
       ctx.fillStyle = '#FBBF24'; ctx.fillRect(x + 8 * s, y + 8 * s, 14 * s, 6 * s); ctx.fillStyle = '#1F2937'; ctx.fillRect(x + 9 * s, y + 10 * s, 12 * s, 1.5 * s);
@@ -1603,7 +1711,7 @@ plt.show()
     function draw(o) {
       var ctx = o.ctx, W = o.W, H = o.H, S = scene(o), z = S.z, k = z.k, s = z.s, cy = z.cy, xo = S.xo, e = S.e;
       ctx.clearRect(0, 0, W, H); fondEspace(ctx, W, H); moduleCoupe(ctx, z, W, z.x0 > 140 ? 'attaches' : 'bords');
-      personne(ctx, S.ha, S.yh, s, { mains: [[S.main[0], S.main[1] - 3 * s], [S.main[0], S.main[1] + 3 * s]] });
+      personne(ctx, S.ha, S.yh, s, { femme: true, mainsPeau: true, chaussons: '#FFFFFF', cheveux: '#5B3A1E', haut: '#9D174D', haut2: '#DB2777', mains: [[S.main[0], S.main[1] - 3 * s], [S.main[0], S.main[1] + 3 * s]] });   /* l'astronaute qui pousse est une femme */
       forme(ctx, xo, cy, s);
       if (t >= 0 && t <= TP) { var Fv = (M * m / (M + m)) * (U / TP), Lf = Math.min(0.9 * k, 18 + 12 * Math.log10(1 + Fv)); vec(ctx, xo + 2, cy - 30 * s, xo + 2 + Lf, cy - 30 * s, FORCE, 3, 12); vec(ctx, xo - 2, cy - 30 * s, xo - 2 - Lf, cy - 30 * s, FORCE, 3, 12); pill(ctx, 'deux forces de même intensité\u00A0: ' + sci(Fv, 1) + ' N', z.cx, z.y0 + 16, { size: 11.5, col: FORCE_T, stroke: '#FECACA' }); }
       if (t > 0) { [[S.ha, e[2], 'astronaute'], [xo + largeur(s) / 2, e[3], 'objet']].forEach(function (q) { if (Math.abs(q[1]) > 0.005) { vec(ctx, q[0], cy + 0.72 * k, q[0] + q[1] * k * 0.8, cy + 0.72 * k, ORANGE, 2.6, 10); } var gauche = q[2] === 'astronaute', xl = q[0] + (gauche ? -6 : 6); if (gauche && xl < 150) { gauche = false; xl = Math.max(z.x0 + 4, q[0] - 20); } if (!gauche && q[2] === 'objet' && xl > W - 150) { gauche = true; xl = Math.min(z.x0 + z.w - 4, q[0] + 20); } pill(ctx, q[2] + '\u00A0: ' + (Math.abs(q[1]) < 0.01 ? sci(Math.abs(q[1]), 1) : fmt(Math.abs(q[1]), 2)) + ' m·s⁻¹', xl, cy + 0.98 * k, { size: 11, col: ORANGE_T, stroke: '#FDE68A', align: gauche ? 'right' : 'left' }); }); }   /* étiquettes ramenées dans le cadre */
@@ -1615,7 +1723,7 @@ plt.show()
     var loop = Loop(root, function (dt) { if (t < 0 || fini) { return false; } var t0 = t; t += dt * RAL; if (bute(cnv)) { t = t0; fini = true; draw(cnv); return false; } draw(cnv); return t < TP + 12; });   /* même ralenti pendant et après la poussée */
     cnv = Canvas($(root, 'canvas'), function (W) { return W < 520 ? 260 : 320; }, draw);
     function reset() { t = -1; fini = false; bP.disabled = false; draw(cnv); msg.textContent = 'Choisissez ce que pousse l\u2019astronaute, puis poussez.'; }
-    bP.addEventListener('click', function () { if (t >= 0) { return; } t = 0; bP.disabled = true; msg.innerHTML = 'Pendant la poussée, l\u2019astronaute exerce une force sur l\u2019objet, et l\u2019objet une force <b>de même intensité, de sens opposé</b> sur l\u2019astronaute&nbsp;: leurs vitesses augmentent. Dès que le contact cesse, chacun garde la vitesse acquise&nbsp;: ' + (m < 1 ? 'la balle part vite, l\u2019astronaute bouge à peine.' : (m < 100 ? 'l\u2019objet, plus léger, part plus vite que l\u2019astronaute.' : (m === 100 ? 'même masse, même vitesse&nbsp;!' : 'la caisse, plus lourde, part plus lentement que l\u2019astronaute.'))); loop.kick(); });
+    bP.addEventListener('click', function () { if (t >= 0) { return; } t = 0; bP.disabled = true; msg.innerHTML = 'Pendant la poussée, l\u2019astronaute exerce une force sur l\u2019objet, et l\u2019objet une force <b>de même intensité, de sens opposé</b> sur l\u2019astronaute&nbsp;: leurs vitesses augmentent. Dès que le contact cesse, chacun garde la vitesse acquise&nbsp;: ' + (m < 1 ? 'la balle part vite, l\u2019astronaute bouge à peine.' : (m < M ? 'l\u2019objet, plus léger, part plus vite que l\u2019astronaute.' : (m === M ? 'même masse, même vitesse&nbsp;!' : 'la caisse, plus lourde, part plus lentement que l\u2019astronaute.'))); loop.kick(); });
     $(root, '[data-act="reset"]').addEventListener('click', reset);
     $$(root, 'input[name="ps-m"]').forEach(function (r) { r.addEventListener('change', function () { m = +r.value; reset(); }); });
     reset();
@@ -1861,7 +1969,7 @@ plt.show()
       var ctx = o.ctx, W = o.W, H = o.H, k = Math.min(W, H) * 0.27 / R, cx = W / 2, cy = H * 0.36, X = function (x) { return cx + x * k; }, Y = function (y) { return cy - y * k; };
       ctx.clearRect(0, 0, W, H); var g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#020617'); g.addColorStop(1, '#0F172A'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
       ETOILES.forEach(function (e) { ctx.fillStyle = 'rgba(255,255,255,' + e[2] * 0.8 + ')'; ctx.fillRect(e[0] * W, e[1] * H, 1.3, 1.3); });
-      terreIcone(ctx, cx, cy, R * k);
+      terreRealiste(ctx, cx, cy, R * k, { lon0: 15, lat0: 18 });
       ctx.fillStyle = '#CBD5E1'; ctx.fillRect(cx - 1.5, Y(R + H0), 3, H0 * k); ctx.fillStyle = '#475569'; rr(ctx, cx - 7, Y(R + H0) - 5, 14, 7, 2); ctx.fill();   /* tour de 400 km et canon */
       TR.forEach(function (tr) { ctx.strokeStyle = tr.col; ctx.lineWidth = 2.6; ctx.globalAlpha = tr === cur ? 1 : 0.8; ctx.beginPath(); tr.pts.forEach(function (q, i) { if (i) { ctx.lineTo(X(q[0]), Y(q[1])); } else { ctx.moveTo(X(q[0]), Y(q[1])); } }); ctx.stroke(); ctx.globalAlpha = 1; });
       if (cur) {
@@ -1888,7 +1996,7 @@ plt.show()
       ['La masse d\u2019un astronaute sur la Lune est…', ['la même que sur Terre', 'six fois plus petite que sur Terre', 'nulle'], 'La masse ne dépend pas du lieu&nbsp;; c\u2019est le poids qui change.'],
       ['Un ourson pousse une voiture avec une force de 3&nbsp;N. La voiture pousse l\u2019ourson avec une force de…', ['3 N, de sens opposé', '0 N', 'moins de 3 N, car la voiture est plus lourde'], 'Principe des actions réciproques&nbsp;: même intensité, sens opposé.'],
       ['Si l\u2019on double la distance entre deux astres, la force d\u2019attraction gravitationnelle est…', ['divisée par 4', 'divisée par 2', 'multipliée par 2'], 'Elle est inversement proportionnelle au carré de la distance.'],
-      ['La Terre attire la Lune avec une force $F$. La Lune attire la Terre avec une force…', ['de même intensité <i><b>F</b></i>', '81 fois plus petite', '81 fois plus grande'], 'Actions réciproques&nbsp;: même intensité, quelles que soient les masses.'],
+      ['La Terre attire la Lune avec une force $F$. La Lune attire la Terre avec une force…', ['de même intensité $F$', '81 fois plus petite', '81 fois plus grande'], 'Actions réciproques&nbsp;: même intensité, quelles que soient les masses.'],
       ['À bord de l\u2019ISS, à 400&nbsp;km d\u2019altitude, l\u2019intensité de la pesanteur vaut environ…', ['8,7 N·kg⁻¹', '0 N·kg⁻¹', '98 N·kg⁻¹'], 'Presque autant qu\u2019au sol&nbsp;: les astronautes flottent parce qu\u2019ils sont en chute libre avec la station.'],
       ['Dans le vide, une plume et une boule de bowling lâchées ensemble…', ['touchent le sol en même temps', 'la boule arrive bien avant', 'la plume flotte'], 'La chute libre ne dépend pas de la masse.'],
       ['En chute libre, le vecteur variation de vitesse $\\overrightarrow{\\Delta v}$ est…', ['vertical, vers le bas', 'dans le sens du mouvement', 'nul'], 'Il a la direction et le sens de la somme des forces, ici le poids.'],

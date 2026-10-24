@@ -1313,7 +1313,7 @@ plt.show()
           });
           bx.appendChild(b);
         });
-        typeset(qEl);
+        typeset(qEl); typeset(bx);   /* les réponses peuvent contenir des formules */
       },
       bilan: function (g) { qEl.innerHTML = '<span class="nt-big-score">' + g + '&nbsp;/&nbsp;' + nb + '</span><br>' + (g / nb >= 0.85 ? 'Excellent&nbsp;!' : 'Relisez les explications des questions manquées, puis recommencez&nbsp;: les questions seront mélangées.'); bx.innerHTML = ''; bx.hidden = true; }
     });
