@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -19,6 +20,22 @@
                 }
             }
         }
+        // Détection initiale du thème (préférence utilisateur ou environnement système)
+        ;(function() {
+            try {
+                const saved = localStorage.getItem('laboreg-theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (saved === 'dark' || (!saved && systemDark)) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch (e) {
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                }
+            }
+        })();
     </script>
     <style>
         /* Personnalisation des barres de défilement pour un aspect scientifique épuré */
@@ -30,16 +47,29 @@
             background: #f1f5f9;
             border-radius: 4px;
         }
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 4px;
         }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
         }
         .input-cell:focus {
             box-shadow: inset 0 0 0 2px #4f46e5;
             background-color: #eef2ff;
+        }
+        .dark .input-cell:focus {
+            box-shadow: inset 0 0 0 2px #6366f1;
+            background-color: rgba(79, 70, 229, 0.18);
         }
         @keyframes pulse-subtle {
             0%, 100% { opacity: 1; }
@@ -50,35 +80,53 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col text-slate-800 antialiased selection:bg-indigo-100 selection:text-indigo-900">
+<body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-indigo-100 dark:selection:bg-indigo-900 selection:text-indigo-900 dark:selection:text-indigo-100 transition-colors duration-200">
 
     <!-- EN-TÊTE DE L'APPLICATION -->
-    <header class="bg-white border-b border-slate-200 px-4 py-2.5 shadow-sm z-20 sticky top-0">
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 py-2.5 shadow-sm z-20 sticky top-0 transition-colors duration-200">
         <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-3">
             <!-- Logo & Titre -->
             <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white shadow-sm shadow-indigo-200">
+                <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white shadow-sm shadow-indigo-200 dark:shadow-none">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
                     </svg>
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <h1 class="font-bold text-base sm:text-lg text-slate-900 leading-none">LaboReg</h1>
-                        <span class="text-[11px] font-medium px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">Physique-Chimie</span>
+                        <h1 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white leading-none">LaboReg</h1>
+                        <span class="text-[11px] font-medium px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">Physique-Chimie</span>
                     </div>
-                    <p class="text-xs text-slate-500 mt-0.5 hidden sm:block">Régression linéaire par moindres carrés et incertitudes-types u(a), u(b)</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 hidden sm:block">Régression linéaire par moindres carrés et incertitudes-types u(a), u(b)</p>
                 </div>
             </div>
 
             <!-- Barre d'outils rapide -->
             <div class="flex flex-wrap items-center gap-2">
                 <!-- Bouton de réinitialisation de la vue si en plein écran -->
-                <button id="resetViewBtn" onclick="setLayoutMode('split')" class="hidden items-center gap-1.5 text-xs font-semibold bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg px-3 py-2 transition shadow-sm">
+                <button id="resetViewBtn" onclick="setLayoutMode('split')" class="hidden items-center gap-1.5 text-xs font-semibold bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-100 dark:hover:bg-amber-900/70 text-amber-800 dark:text-amber-200 border border-amber-300 dark:border-amber-700 rounded-lg px-3 py-2 transition shadow-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
                     </svg>
                     <span>Vue partagée (Tableau + Graphique)</span>
+                </button>
+
+                <!-- Switch Thème Clair / Sombre -->
+                <button id="themeToggleBtn" type="button" onclick="toggleTheme()" title="Basculer entre le thème clair et le thème sombre" aria-label="Changer de thème" class="flex items-center gap-2 text-xs font-medium text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200/80 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-full p-1 pr-2.5 transition cursor-pointer shadow-2xs">
+                    <span class="relative flex items-center w-11 h-6 rounded-full bg-slate-300 dark:bg-indigo-600 transition-colors p-0.5">
+                        <!-- Pastille mobile du switch -->
+                        <span class="w-5 h-5 rounded-full bg-white shadow-sm transform transition-transform duration-200 translate-x-0 dark:translate-x-5 flex items-center justify-center">
+                            <!-- Icône Soleil (Thème Clair) -->
+                            <svg class="w-3.5 h-3.5 text-amber-500 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                            </svg>
+                            <!-- Icône Lune (Thème Sombre) -->
+                            <svg class="w-3.5 h-3.5 text-indigo-600 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                            </svg>
+                        </span>
+                    </span>
+                    <span id="themeToggleText" class="hidden sm:inline font-medium">Clair</span>
                 </button>
             </div>
         </div>
@@ -90,30 +138,30 @@
         <!-- ==========================================
              PANNEAU GAUCHE : TABLEAU DE DONNÉES (x, y)
              ========================================== -->
-        <section id="dataPanel" class="lg:col-span-5 bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col overflow-hidden transition-all duration-200">
+        <section id="dataPanel" class="lg:col-span-5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col overflow-hidden transition-all duration-200">
             
             <!-- En-tête du panneau de données -->
-            <div class="px-4 py-3 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between gap-2">
+            <div class="px-4 py-3 bg-slate-50/80 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
-                    <h2 class="font-semibold text-sm text-slate-800">Tableau des mesures</h2>
-                    <span id="validPointsBadge" class="text-xs font-mono font-medium px-2 py-0.5 rounded-md bg-slate-200 text-slate-700">0 pt</span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+                    <h2 class="font-semibold text-sm text-slate-800 dark:text-slate-100">Tableau des mesures</h2>
+                    <span id="validPointsBadge" class="text-xs font-mono font-medium px-2 py-0.5 rounded-md bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200">0 pt</span>
                 </div>
                 <div class="flex items-center gap-1.5">
-                    <button onclick="openPasteModal()" title="Coller depuis Excel / LibreOffice Calc" class="text-xs font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1">
+                    <button onclick="openPasteModal()" title="Coller depuis Excel / LibreOffice Calc" class="text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 transition flex items-center gap-1">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                         </svg>
                         <span class="hidden sm:inline">Coller</span>
                     </button>
-                    <button onclick="clearAllData()" title="Vider toutes les valeurs" class="text-xs font-medium text-slate-600 hover:text-red-600 hover:bg-red-50 px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1">
+                    <button onclick="clearAllData()" title="Vider toutes les valeurs" class="text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 transition flex items-center gap-1">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                         </svg>
                         <span class="hidden sm:inline">Vider</span>
                     </button>
                     <!-- Bouton Plein Écran Données -->
-                    <button id="fullscreenDataBtn" onclick="toggleFullscreen('data')" title="Agrandir le tableau de données en plein écran" class="text-xs font-medium text-slate-700 hover:text-indigo-700 bg-white hover:bg-indigo-50 px-2.5 py-1.5 rounded-lg border border-slate-300 transition flex items-center gap-1 shadow-sm">
+                    <button id="fullscreenDataBtn" onclick="toggleFullscreen('data')" title="Agrandir le tableau de données en plein écran" class="text-xs font-medium text-slate-700 dark:text-slate-200 hover:text-indigo-700 dark:hover:text-indigo-300 bg-white dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 transition flex items-center gap-1 shadow-sm">
                         <svg id="fullscreenDataIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
                         </svg>
@@ -123,78 +171,78 @@
             </div>
 
             <!-- Paramétrage des Grandeurs et Unités (Axes X et Y) -->
-            <div class="p-3 bg-slate-50/40 border-b border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div class="p-3 bg-slate-50/40 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <!-- Grandeur X -->
-                <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-2xs">
-                    <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center justify-between">
+                <div class="bg-white dark:bg-slate-800/80 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-2xs">
+                    <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-1.5 flex items-center justify-between">
                         <span>Grandeur en Abscisse (X)</span>
-                        <span class="text-indigo-600 font-mono">Axe horizontal</span>
+                        <span class="text-indigo-600 dark:text-indigo-400 font-mono">Axe horizontal</span>
                     </div>
                     <div class="flex gap-1.5">
                         <div class="flex-1">
                             <label for="xSymbol" class="sr-only">Symbole X</label>
-                            <input id="xSymbol" type="text" value="x" placeholder="Nom (ex: I)" oninput="updateLabels()" class="w-full text-xs font-mono font-semibold bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-slate-800 focus:outline-none focus:border-indigo-500 focus:bg-white" title="Symbole ou nom de la grandeur en abscisse">
+                            <input id="xSymbol" type="text" value="x" placeholder="Nom (ex: I)" oninput="updateLabels()" class="w-full text-xs font-mono font-semibold bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded px-2 py-1.5 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-950" title="Symbole ou nom de la grandeur en abscisse">
                         </div>
                         <div class="w-24">
                             <label for="xUnit" class="sr-only">Unité X</label>
-                            <input id="xUnit" type="text" value="" placeholder="Unité (ex: A)" oninput="updateLabels()" class="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-slate-600 focus:outline-none focus:border-indigo-500 focus:bg-white" title="Unité de la grandeur en abscisse">
+                            <input id="xUnit" type="text" value="" placeholder="Unité (ex: A)" oninput="updateLabels()" class="w-full text-xs font-mono bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded px-2 py-1.5 text-slate-600 dark:text-slate-300 focus:outline-none focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-950" title="Unité de la grandeur en abscisse">
                         </div>
                     </div>
                 </div>
 
                 <!-- Grandeur Y -->
-                <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-2xs">
-                    <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center justify-between">
+                <div class="bg-white dark:bg-slate-800/80 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700/80 shadow-2xs">
+                    <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-1.5 flex items-center justify-between">
                         <span>Grandeur en Ordonnée (Y)</span>
-                        <span class="text-emerald-600 font-mono">Axe vertical</span>
+                        <span class="text-emerald-600 dark:text-emerald-400 font-mono">Axe vertical</span>
                     </div>
                     <div class="flex gap-1.5">
                         <div class="flex-1">
                             <label for="ySymbol" class="sr-only">Symbole Y</label>
-                            <input id="ySymbol" type="text" value="y" placeholder="Nom (ex: U)" oninput="updateLabels()" class="w-full text-xs font-mono font-semibold bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-slate-800 focus:outline-none focus:border-indigo-500 focus:bg-white" title="Symbole ou nom de la grandeur en ordonnée">
+                            <input id="ySymbol" type="text" value="y" placeholder="Nom (ex: U)" oninput="updateLabels()" class="w-full text-xs font-mono font-semibold bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded px-2 py-1.5 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-950" title="Symbole ou nom de la grandeur en ordonnée">
                         </div>
                         <div class="w-24">
                             <label for="yUnit" class="sr-only">Unité Y</label>
-                            <input id="yUnit" type="text" value="" placeholder="Unité (ex: V)" oninput="updateLabels()" class="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-slate-600 focus:outline-none focus:border-indigo-500 focus:bg-white" title="Unité de la grandeur en ordonnée">
+                            <input id="yUnit" type="text" value="" placeholder="Unité (ex: V)" oninput="updateLabels()" class="w-full text-xs font-mono bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded px-2 py-1.5 text-slate-600 dark:text-slate-300 focus:outline-none focus:border-indigo-500 focus:bg-white dark:focus:bg-slate-950" title="Unité de la grandeur en ordonnée">
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Tableau des valeurs (x, y) -->
-            <div id="tableScrollContainer" class="overflow-y-auto max-h-[440px] divide-y divide-slate-200">
+            <div id="tableScrollContainer" class="overflow-y-auto max-h-[440px] divide-y divide-slate-200 dark:divide-slate-800">
                 <table class="w-full border-collapse text-left">
-                    <thead class="bg-slate-100 sticky top-0 z-10 border-b border-slate-200 text-xs font-semibold text-slate-600">
+                    <thead class="bg-slate-100 dark:bg-slate-800 sticky top-0 z-10 border-b border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-300">
                         <tr>
-                            <th class="py-2.5 px-3 w-12 text-center text-slate-400 font-mono">#</th>
-                            <th class="py-2.5 px-3 border-l border-slate-200">
-                                <span id="thXLabel" class="font-mono text-indigo-950">x</span>
+                            <th class="py-2.5 px-3 w-12 text-center text-slate-400 dark:text-slate-500 font-mono">#</th>
+                            <th class="py-2.5 px-3 border-l border-slate-200 dark:border-slate-700">
+                                <span id="thXLabel" class="font-mono text-indigo-950 dark:text-indigo-200">x</span>
                             </th>
-                            <th class="py-2.5 px-3 border-l border-slate-200">
-                                <span id="thYLabel" class="font-mono text-indigo-950">y</span>
+                            <th class="py-2.5 px-3 border-l border-slate-200 dark:border-slate-700">
+                                <span id="thYLabel" class="font-mono text-indigo-950 dark:text-indigo-200">y</span>
                             </th>
-                            <th class="py-2.5 px-2 w-12 text-center border-l border-slate-200" title="État du point">État</th>
+                            <th class="py-2.5 px-2 w-12 text-center border-l border-slate-200 dark:border-slate-700" title="État du point">État</th>
                             <th class="py-2.5 px-2 w-10 text-center"></th>
                         </tr>
                     </thead>
-                    <tbody id="dataTableBody" class="divide-y divide-slate-100 text-sm font-mono">
+                    <tbody id="dataTableBody" class="divide-y divide-slate-100 dark:divide-slate-800 text-sm font-mono">
                         <!-- Lignes générées dynamiquement par JavaScript -->
                     </tbody>
                 </table>
             </div>
 
             <!-- Pied du tableau : Ajouter ligne & Astuces clavier -->
-            <div class="p-3 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
-                <button onclick="addRow(true)" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-lg px-3 py-2 transition flex items-center gap-1.5 shadow-2xs">
+            <div class="p-3 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                <button onclick="addRow(true)" class="text-xs font-semibold text-indigo-600 dark:text-indigo-300 hover:text-indigo-800 dark:hover:text-indigo-200 bg-indigo-50 dark:bg-indigo-950/70 hover:bg-indigo-100 dark:hover:bg-indigo-900/70 border border-indigo-200 dark:border-indigo-800 rounded-lg px-3 py-2 transition flex items-center gap-1.5 shadow-2xs">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                     </svg>
                     <span>Ajouter une ligne</span>
                 </button>
-                <div class="text-[11px] text-slate-500 flex items-center gap-1.5">
-                    <kbd class="px-1.5 py-0.5 bg-white border border-slate-300 rounded text-[10px] font-mono text-slate-600 shadow-2xs">Entrée</kbd>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                    <kbd class="px-1.5 py-0.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded text-[10px] font-mono text-slate-600 dark:text-slate-300 shadow-2xs">Entrée</kbd>
                     <span>ou</span>
-                    <kbd class="px-1.5 py-0.5 bg-white border border-slate-300 rounded text-[10px] font-mono text-slate-600 shadow-2xs">Tab</kbd>
+                    <kbd class="px-1.5 py-0.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded text-[10px] font-mono text-slate-600 dark:text-slate-300 shadow-2xs">Tab</kbd>
                     <span>pour naviguer • Virgule ou point acceptés</span>
                 </div>
             </div>
@@ -206,24 +254,24 @@
         <section id="graphPanel" class="lg:col-span-7 flex flex-col gap-4 transition-all duration-200">
             
             <!-- Carte du Graphique -->
-            <div class="bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col overflow-hidden">
+            <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col overflow-hidden transition-colors duration-200">
                 
                 <!-- Barre d'outils du Graphique -->
-                <div class="px-4 py-3 bg-slate-50/80 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                <div class="px-4 py-3 bg-slate-50/80 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
                     <div class="flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                        <h2 id="graphTitle" class="font-semibold text-sm text-slate-800">Graphique : y en fonction de x</h2>
+                        <h2 id="graphTitle" class="font-semibold text-sm text-slate-800 dark:text-slate-100">Graphique : y en fonction de x</h2>
                     </div>
 
                     <div class="flex flex-wrap items-center gap-2">
                         <!-- Option Inclure l'origine (0,0) -->
-                        <label class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50 select-none">
+                        <label class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/80 select-none">
                             <input id="forceOriginCheckbox" type="checkbox" checked onchange="renderAll()" class="rounded text-indigo-600 focus:ring-indigo-500 w-3.5 h-3.5">
                             <span>Inclure (0 ; 0)</span>
                         </label>
 
                         <!-- Bouton Export PNG -->
-                        <button onclick="exportCanvasPNG()" title="Télécharger le graphique en image PNG" class="text-xs font-medium text-slate-600 hover:text-indigo-600 bg-white hover:bg-indigo-50 px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1">
+                        <button onclick="exportCanvasPNG()" title="Télécharger le graphique en image PNG" class="text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 bg-white dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 transition flex items-center gap-1">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                             </svg>
@@ -231,7 +279,7 @@
                         </button>
 
                         <!-- Bouton Plein Écran Graphique -->
-                        <button id="fullscreenGraphBtn" onclick="toggleFullscreen('graph')" title="Agrandir le graphique en plein écran" class="text-xs font-medium text-slate-700 hover:text-indigo-700 bg-white hover:bg-indigo-50 px-2.5 py-1.5 rounded-lg border border-slate-300 transition flex items-center gap-1 shadow-sm">
+                        <button id="fullscreenGraphBtn" onclick="toggleFullscreen('graph')" title="Agrandir le graphique en plein écran" class="text-xs font-medium text-slate-700 dark:text-slate-200 hover:text-indigo-700 dark:hover:text-indigo-300 bg-white dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 transition flex items-center gap-1 shadow-sm">
                             <svg id="fullscreenGraphIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
                             </svg>
@@ -241,46 +289,46 @@
                 </div>
 
                 <!-- Zone du Canevas Graphique -->
-                <div id="canvasWrapper" class="relative w-full h-[380px] sm:h-[440px] bg-white select-none">
+                <div id="canvasWrapper" class="relative w-full h-[380px] sm:h-[440px] bg-white dark:bg-slate-900 select-none">
                     <canvas id="plotCanvas" class="w-full h-full block cursor-crosshair"></canvas>
                     
                     <!-- Infobulle au survol d'un point -->
-                    <div id="pointTooltip" class="hidden absolute pointer-events-none bg-slate-900/95 text-white text-xs font-mono px-2.5 py-1.5 rounded-lg shadow-lg border border-slate-700 z-20 whitespace-nowrap"></div>
+                    <div id="pointTooltip" class="hidden absolute pointer-events-none bg-slate-900/95 dark:bg-slate-800/95 text-white text-xs font-mono px-2.5 py-1.5 rounded-lg shadow-lg border border-slate-700 dark:border-slate-600 z-20 whitespace-nowrap"></div>
                     
                     <!-- Coordonnées du curseur en bas à droite du graphique -->
-                    <div id="cursorCoords" class="hidden sm:block absolute bottom-2 right-3 text-[11px] font-mono text-slate-400 bg-white/80 px-2 py-0.5 rounded pointer-events-none border border-slate-100">
+                    <div id="cursorCoords" class="hidden sm:block absolute bottom-2 right-3 text-[11px] font-mono text-slate-400 dark:text-slate-400 bg-white/80 dark:bg-slate-900/80 px-2 py-0.5 rounded pointer-events-none border border-slate-100 dark:border-slate-800">
                         Curseur : —
                     </div>
                 </div>
             </div>
 
             <!-- Carte de Modélisation : Régression Linéaire & Incertitudes-types -->
-            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                <div class="p-4 bg-gradient-to-r from-slate-50 to-indigo-50/30 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+            <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-colors duration-200">
+                <div class="p-4 bg-gradient-to-r from-slate-50 to-indigo-50/30 dark:from-slate-800/60 dark:to-indigo-950/30 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
                     <div>
-                        <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
-                            <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
                             </svg>
                             <span>Modélisation & Régression Linéaire</span>
                         </h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Méthode des moindres carrés ordinaires et évaluation des incertitudes-types (type A)</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Méthode des moindres carrés ordinaires et évaluation des incertitudes-types (type A)</p>
                     </div>
 
                     <!-- Choix du modèle + Bouton d'activation -->
                     <div class="flex flex-wrap items-center gap-2">
                         <!-- Sélecteur de modèle (Affine vs Linéaire) -->
-                        <div class="inline-flex rounded-lg bg-slate-200/80 p-1 border border-slate-300/80">
-                            <button id="modelAffineBtn" type="button" onclick="setRegressionModel('affine')" class="px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white text-indigo-700 shadow-2xs">
+                        <div class="inline-flex rounded-lg bg-slate-200/80 dark:bg-slate-800 p-1 border border-slate-300/80 dark:border-slate-700">
+                            <button id="modelAffineBtn" type="button" onclick="setRegressionModel('affine')" class="px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-2xs">
                                 Affine : y = a·x + b
                             </button>
-                            <button id="modelLinearBtn" type="button" onclick="setRegressionModel('linear')" class="px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 hover:text-slate-900">
+                            <button id="modelLinearBtn" type="button" onclick="setRegressionModel('linear')" class="px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100">
                                 Linéaire : y = a·x
                             </button>
                         </div>
 
                         <!-- Bouton Tracer / Masquer la régression -->
-                        <button id="toggleRegressionBtn" onclick="toggleRegression()" class="px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-200 transition flex items-center gap-1.5 cursor-pointer">
+                        <button id="toggleRegressionBtn" onclick="toggleRegression()" class="px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-200 dark:shadow-none transition flex items-center gap-1.5 cursor-pointer">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
                             </svg>
@@ -292,17 +340,17 @@
                 <!-- Corps des résultats de la régression -->
                 <div id="regressionResultsContainer" class="p-4">
                     <!-- État initial : Régression non activée -->
-                    <div id="regressionInactivePrompt" class="text-center py-6 px-4 rounded-xl border border-dashed border-slate-200 bg-slate-50/50">
-                        <p class="text-xs text-slate-500">
-                            Saisissez vos couples de mesures <span class="font-mono font-semibold text-slate-700">(x, y)</span> puis cliquez sur 
-                            <button onclick="toggleRegression()" class="text-indigo-600 font-semibold underline hover:text-indigo-800">Tracer la régression</button> 
+                    <div id="regressionInactivePrompt" class="text-center py-6 px-4 rounded-xl border border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/40">
+                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                            Saisissez vos couples de mesures <span class="font-mono font-semibold text-slate-700 dark:text-slate-200">(x, y)</span> puis cliquez sur 
+                            <button onclick="toggleRegression()" class="text-indigo-600 dark:text-indigo-400 font-semibold underline hover:text-indigo-800 dark:hover:text-indigo-300">Tracer la régression</button> 
                             pour afficher la droite modèle, son équation et les incertitudes-types <span class="font-mono">a ± u(a)</span> et <span class="font-mono">b ± u(b)</span>.
                         </p>
                     </div>
 
                     <!-- Message d'avertissement si nombre de points insuffisant -->
-                    <div id="regressionWarningBox" class="hidden p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start gap-3">
-                        <svg class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div id="regressionWarningBox" class="hidden p-4 rounded-xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs flex items-start gap-3">
+                        <svg class="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                         </svg>
                         <div id="regressionWarningText" class="leading-relaxed"></div>
@@ -312,23 +360,23 @@
                     <div id="regressionActiveDetails" class="hidden space-y-4">
                         
                         <!-- Bandeau Équation de la droite & Réglage CS -->
-                        <div class="p-3.5 rounded-xl bg-indigo-950 text-white flex flex-wrap items-center justify-between gap-3 shadow-inner">
+                        <div class="p-3.5 rounded-xl bg-indigo-950 dark:bg-slate-800 text-white border border-transparent dark:border-slate-700 flex flex-wrap items-center justify-between gap-3 shadow-inner">
                             <div>
-                                <div class="text-[10px] font-semibold uppercase tracking-wider text-indigo-300 mb-1">Équation de la droite modélisée</div>
+                                <div class="text-[10px] font-semibold uppercase tracking-wider text-indigo-300 dark:text-indigo-400 mb-1">Équation de la droite modélisée</div>
                                 <div id="equationDisplay" class="font-mono text-sm sm:text-base font-bold text-white tracking-tight break-all">
                                     y = a · x + b
                                 </div>
                             </div>
                             <div class="flex items-center gap-3">
-                                <div class="flex items-center gap-1.5 bg-indigo-900/80 px-2.5 py-1.5 rounded-lg border border-indigo-700/70 text-xs">
-                                    <label for="sigFigsSelect" class="text-indigo-200 text-[11px]">Chiffres sig. sur u :</label>
-                                    <select id="sigFigsSelect" onchange="renderAll()" class="bg-indigo-950 text-white font-mono font-semibold text-xs rounded px-1.5 py-0.5 border border-indigo-600 focus:outline-none">
+                                <div class="flex items-center gap-1.5 bg-indigo-900/80 dark:bg-slate-900 px-2.5 py-1.5 rounded-lg border border-indigo-700/70 dark:border-slate-700 text-xs">
+                                    <label for="sigFigsSelect" class="text-indigo-200 dark:text-slate-300 text-[11px]">Chiffres sig. sur u :</label>
+                                    <select id="sigFigsSelect" onchange="renderAll()" class="bg-indigo-950 dark:bg-slate-800 text-white font-mono font-semibold text-xs rounded px-1.5 py-0.5 border border-indigo-600 dark:border-slate-600 focus:outline-none">
                                         <option value="1">1 CS</option>
                                         <option value="2" selected>2 CS</option>
                                         <option value="3">3 CS</option>
                                     </select>
                                 </div>
-                                <button onclick="copyResultsToClipboard()" id="copyResultsBtn" class="text-xs font-medium bg-indigo-800 hover:bg-indigo-700 text-indigo-100 px-2.5 py-1.5 rounded-lg border border-indigo-600 transition flex items-center gap-1">
+                                <button onclick="copyResultsToClipboard()" id="copyResultsBtn" class="text-xs font-medium bg-indigo-800 dark:bg-indigo-600 hover:bg-indigo-700 dark:hover:bg-indigo-500 text-indigo-100 dark:text-white px-2.5 py-1.5 rounded-lg border border-indigo-600 dark:border-indigo-500 transition flex items-center gap-1">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                                     </svg>
@@ -341,78 +389,78 @@
                         <div id="paramsCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
                             
                             <!-- Coefficient directeur a ± u(a) -->
-                            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 flex flex-col justify-between">
                                 <div>
-                                    <div class="flex items-center justify-between text-xs font-semibold text-slate-500 mb-1">
+                                    <div class="flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">
                                         <span>Coefficient directeur (pente)</span>
-                                        <span id="unitABadge" class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-100">sans unité</span>
+                                        <span id="unitABadge" class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">sans unité</span>
                                     </div>
-                                    <div id="resultAFormatted" class="font-mono text-base sm:text-lg font-bold text-slate-900 my-1 bg-white p-2.5 rounded-lg border border-slate-200 shadow-2xs">
+                                    <div id="resultAFormatted" class="font-mono text-base sm:text-lg font-bold text-slate-900 dark:text-white my-1 bg-white dark:bg-slate-900 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 shadow-2xs">
                                         a = — ± —
                                     </div>
                                 </div>
-                                <div class="mt-2 pt-2 border-t border-slate-200/80 grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-500">
-                                    <div>Valeur brute : <span id="rawAVal" class="text-slate-700 font-medium">—</span></div>
-                                    <div>u(a) brute : <span id="rawUAVal" class="text-slate-700 font-medium">—</span></div>
+                                <div class="mt-2 pt-2 border-t border-slate-200/80 dark:border-slate-700/80 grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                                    <div>Valeur brute : <span id="rawAVal" class="text-slate-700 dark:text-slate-200 font-medium">—</span></div>
+                                    <div>u(a) brute : <span id="rawUAVal" class="text-slate-700 dark:text-slate-200 font-medium">—</span></div>
                                 </div>
                             </div>
 
                             <!-- Ordonnée à l'origine b ± u(b) -->
-                            <div id="cardParameterB" class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+                            <div id="cardParameterB" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 flex flex-col justify-between">
                                 <div>
-                                    <div class="flex items-center justify-between text-xs font-semibold text-slate-500 mb-1">
+                                    <div class="flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">
                                         <span>Ordonnée à l'origine</span>
-                                        <span id="unitBBadge" class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-100">sans unité</span>
+                                        <span id="unitBBadge" class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800">sans unité</span>
                                     </div>
-                                    <div id="resultBFormatted" class="font-mono text-base sm:text-lg font-bold text-slate-900 my-1 bg-white p-2.5 rounded-lg border border-slate-200 shadow-2xs">
+                                    <div id="resultBFormatted" class="font-mono text-base sm:text-lg font-bold text-slate-900 dark:text-white my-1 bg-white dark:bg-slate-900 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 shadow-2xs">
                                         b = — ± —
                                     </div>
                                 </div>
-                                <div class="mt-2 pt-2 border-t border-slate-200/80 grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-500">
-                                    <div>Valeur brute : <span id="rawBVal" class="text-slate-700 font-medium">—</span></div>
-                                    <div>u(b) brute : <span id="rawUBVal" class="text-slate-700 font-medium">—</span></div>
+                                <div class="mt-2 pt-2 border-t border-slate-200/80 dark:border-slate-700/80 grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                                    <div>Valeur brute : <span id="rawBVal" class="text-slate-700 dark:text-slate-200 font-medium">—</span></div>
+                                    <div>u(b) brute : <span id="rawUBVal" class="text-slate-700 dark:text-slate-200 font-medium">—</span></div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Indicateurs statistiques complémentaires -->
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                                <span class="text-slate-400 block text-[11px]">Points utilisés (N)</span>
-                                <span id="statN" class="font-mono font-bold text-slate-800 text-sm">—</span>
+                            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80">
+                                <span class="text-slate-400 dark:text-slate-400 block text-[11px]">Points utilisés (N)</span>
+                                <span id="statN" class="font-mono font-bold text-slate-800 dark:text-slate-100 text-sm">—</span>
                             </div>
-                            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                                <span class="text-slate-400 block text-[11px]">Degrés de liberté (ddl)</span>
-                                <span id="statDOF" class="font-mono font-bold text-slate-800 text-sm">—</span>
+                            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80">
+                                <span class="text-slate-400 dark:text-slate-400 block text-[11px]">Degrés de liberté (ddl)</span>
+                                <span id="statDOF" class="font-mono font-bold text-slate-800 dark:text-slate-100 text-sm">—</span>
                             </div>
-                            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                                <span class="text-slate-400 block text-[11px]">Coeff. détermination R²</span>
-                                <span id="statR2" class="font-mono font-bold text-indigo-700 text-sm">—</span>
+                            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80">
+                                <span class="text-slate-400 dark:text-slate-400 block text-[11px]">Coeff. détermination R²</span>
+                                <span id="statR2" class="font-mono font-bold text-indigo-700 dark:text-indigo-400 text-sm">—</span>
                             </div>
-                            <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                                <span class="text-slate-400 block text-[11px]">Écart-type résiduel s_y/x</span>
-                                <span id="statSyx" class="font-mono font-bold text-slate-800 text-sm">—</span>
+                            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80">
+                                <span class="text-slate-400 dark:text-slate-400 block text-[11px]">Écart-type résiduel s_y/x</span>
+                                <span id="statSyx" class="font-mono font-bold text-slate-800 dark:text-slate-100 text-sm">—</span>
                             </div>
                         </div>
 
                         <!-- Accordéon de rappel des formules statistiques utilisées -->
-                        <details class="group bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-600">
-                            <summary class="px-3 py-2 font-medium cursor-pointer flex items-center justify-between hover:text-indigo-700 select-none">
+                        <details class="group bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-700/80 text-xs text-slate-600 dark:text-slate-300">
+                            <summary class="px-3 py-2 font-medium cursor-pointer flex items-center justify-between hover:text-indigo-700 dark:hover:text-indigo-300 select-none">
                                 <span>Voir les formules d'incertitudes-types utilisées (moindres carrés ordinaires)</span>
                                 <svg class="w-4 h-4 transition-transform group-open:rotate-180 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                 </svg>
                             </summary>
-                            <div class="p-3 border-t border-slate-200 bg-white space-y-2 font-mono text-[11px] text-slate-700 leading-relaxed">
+                            <div class="p-3 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 space-y-2 font-mono text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed">
                                 <div id="formulaExplanationAffine">
-                                    <p class="font-sans font-semibold text-slate-900 mb-1">Modèle affine y = a·x + b (avec N ≥ 3 points, N - 2 degrés de liberté) :</p>
+                                    <p class="font-sans font-semibold text-slate-900 dark:text-slate-100 mb-1">Modèle affine y = a·x + b (avec N ≥ 3 points, N - 2 degrés de liberté) :</p>
                                     <p>• a = Σ(xᵢ - x̄)(yᵢ - ȳ) / Σ(xᵢ - x̄)²  et  b = ȳ - a·x̄</p>
                                     <p>• Variance résiduelle : s²_{y/x} = [1 / (N - 2)] · Σ(yᵢ - (a·xᵢ + b))²</p>
                                     <p>• Incertitude-type sur la pente : u(a) = √[ s²_{y/x} / Σ(xᵢ - x̄)² ]</p>
                                     <p>• Incertitude-type sur l'ordonnée à l'origine : u(b) = √[ s²_{y/x} · (1/N + x̄² / Σ(xᵢ - x̄)²) ]</p>
                                 </div>
                                 <div id="formulaExplanationLinear" class="hidden">
-                                    <p class="font-sans font-semibold text-slate-900 mb-1">Modèle linéaire y = a·x (passage par l'origine, avec N ≥ 2 points, N - 1 degrés de liberté) :</p>
+                                    <p class="font-sans font-semibold text-slate-900 dark:text-slate-100 mb-1">Modèle linéaire y = a·x (passage par l'origine, avec N ≥ 2 points, N - 1 degrés de liberté) :</p>
                                     <p>• a = Σ(xᵢ·yᵢ) / Σ(xᵢ²)</p>
                                     <p>• Variance résiduelle : s²_{y/x} = [1 / (N - 1)] · Σ(yᵢ - a·xᵢ)²</p>
                                     <p>• Incertitude-type sur la pente : u(a) = √[ s²_{y/x} / Σ(xᵢ²) ]</p>
@@ -426,24 +474,24 @@
     </main>
 
     <!-- MODALE DE COPIER-COLLER DEPUIS UN TABLEUR -->
-    <div id="pasteModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 overflow-hidden">
-            <div class="px-5 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                <h3 class="font-bold text-sm text-slate-900">Coller des données depuis un tableur (Excel, Calc, CSV)</h3>
-                <button onclick="closePasteModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+    <div id="pasteModal" class="fixed inset-0 bg-slate-900/50 dark:bg-slate-950/75 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+            <div class="px-5 py-4 bg-slate-50 dark:bg-slate-800/70 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100">Coller des données depuis un tableur (Excel, Calc, CSV)</h3>
+                <button onclick="closePasteModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-lg">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
             <div class="p-5 space-y-3">
-                <p class="text-xs text-slate-600 leading-relaxed">
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                     Collez ci-dessous deux colonnes de nombres (séparées par une tabulation, un point-virgule ou un espace). Les virgules et points décimaux sont automatiquement reconnus.
                 </p>
-                <textarea id="pasteTextarea" rows="7" placeholder="Exemple :&#10;0,0&#9;0,00&#10;1,5&#9;3,12&#10;3,0&#9;6,05&#10;4,5&#9;9,18" class="w-full font-mono text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-slate-50"></textarea>
+                <textarea id="pasteTextarea" rows="7" placeholder="Exemple :&#10;0,0&#9;0,00&#10;1,5&#9;3,12&#10;3,0&#9;6,05&#10;4,5&#9;9,18" class="w-full font-mono text-xs p-3 rounded-xl border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100"></textarea>
             </div>
-            <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 flex justify-end gap-2">
-                <button onclick="closePasteModal()" class="px-3.5 py-2 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-200 transition">Annuler</button>
+            <div class="px-5 py-3 bg-slate-50 dark:bg-slate-800/70 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-2">
+                <button onclick="closePasteModal()" class="px-3.5 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">Annuler</button>
                 <button onclick="importPastedData()" class="px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition">Importer les mesures</button>
             </div>
         </div>
@@ -475,8 +523,41 @@
             regressionModel: 'affine', // 'affine' (y = ax + b) | 'linear' (y = ax)
             hoveredPointIndex: null,
             lastCalculation: null,
-            screenPoints: [] // Coordonnées pixels des points pour détection du survol
+            screenPoints: [], // Coordonnées pixels des points pour détection du survol
+            userOverrodeTheme: false
         };
+
+        /**
+         * Vérifie si le thème sombre est actuellement actif
+         */
+        function isDarkMode() {
+            return document.documentElement.classList.contains('dark');
+        }
+
+        /**
+         * Met à jour l'étiquette du switch de thème
+         */
+        function syncThemeUI() {
+            const label = document.getElementById('themeToggleText');
+            if (label) {
+                label.textContent = isDarkMode() ? 'Sombre' : 'Clair';
+            }
+        }
+
+        /**
+         * Bascule manuellement entre le thème clair et le thème sombre
+         */
+        function toggleTheme() {
+            state.userOverrodeTheme = true;
+            const root = document.documentElement;
+            const willBeDark = !root.classList.contains('dark');
+            root.classList.toggle('dark', willBeDark);
+            try {
+                localStorage.setItem('laboreg-theme', willBeDark ? 'dark' : 'light');
+            } catch (e) {}
+            syncThemeUI();
+            renderAll();
+        }
 
         /**
          * Analyse une chaîne de caractères pour la convertir en nombre flottant
@@ -552,16 +633,16 @@
                 const isEmpty = row.x.trim() === '' && row.y.trim() === '';
 
                 const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50/80 transition-colors group';
+                tr.className = 'hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors group';
 
                 // Numéro de ligne
                 const tdIndex = document.createElement('td');
-                tdIndex.className = 'py-1.5 px-2 text-center text-xs text-slate-400 select-none bg-slate-50/50';
+                tdIndex.className = 'py-1.5 px-2 text-center text-xs text-slate-400 dark:text-slate-500 select-none bg-slate-50/50 dark:bg-slate-900/60';
                 tdIndex.textContent = index + 1;
 
                 // Cellule X
                 const tdX = document.createElement('td');
-                tdX.className = 'p-0 border-l border-slate-200';
+                tdX.className = 'p-0 border-l border-slate-200 dark:border-slate-800';
                 const inputX = document.createElement('input');
                 inputX.type = 'text';
                 inputX.inputMode = 'decimal';
@@ -569,7 +650,7 @@
                 inputX.placeholder = '—';
                 inputX.dataset.row = index;
                 inputX.dataset.col = 'x';
-                inputX.className = 'input-cell w-full py-2 px-3 bg-transparent text-slate-800 focus:outline-none text-sm';
+                inputX.className = 'input-cell w-full py-2 px-3 bg-transparent text-slate-800 dark:text-slate-100 placeholder-slate-300 dark:placeholder-slate-600 focus:outline-none text-sm';
                 inputX.addEventListener('input', (e) => handleCellInput(index, 'x', e.target.value, tr));
                 inputX.addEventListener('keydown', (e) => handleCellKeydown(e, index, 'x'));
                 inputX.addEventListener('paste', (e) => handleDirectTablePaste(e, index, 'x'));
@@ -577,7 +658,7 @@
 
                 // Cellule Y
                 const tdY = document.createElement('td');
-                tdY.className = 'p-0 border-l border-slate-200';
+                tdY.className = 'p-0 border-l border-slate-200 dark:border-slate-800';
                 const inputY = document.createElement('input');
                 inputY.type = 'text';
                 inputY.inputMode = 'decimal';
@@ -585,7 +666,7 @@
                 inputY.placeholder = '—';
                 inputY.dataset.row = index;
                 inputY.dataset.col = 'y';
-                inputY.className = 'input-cell w-full py-2 px-3 bg-transparent text-slate-800 focus:outline-none text-sm';
+                inputY.className = 'input-cell w-full py-2 px-3 bg-transparent text-slate-800 dark:text-slate-100 placeholder-slate-300 dark:placeholder-slate-600 focus:outline-none text-sm';
                 inputY.addEventListener('input', (e) => handleCellInput(index, 'y', e.target.value, tr));
                 inputY.addEventListener('keydown', (e) => handleCellKeydown(e, index, 'y'));
                 inputY.addEventListener('paste', (e) => handleDirectTablePaste(e, index, 'y'));
@@ -593,7 +674,7 @@
 
                 // Indicateur d'état du point
                 const tdStatus = document.createElement('td');
-                tdStatus.className = 'py-1.5 px-2 text-center border-l border-slate-200 status-cell';
+                tdStatus.className = 'py-1.5 px-2 text-center border-l border-slate-200 dark:border-slate-800 status-cell';
                 tdStatus.innerHTML = getRowStatusIcon(isComplete, isEmpty);
 
                 // Bouton supprimer la ligne
@@ -602,7 +683,7 @@
                 const delBtn = document.createElement('button');
                 delBtn.type = 'button';
                 delBtn.title = 'Supprimer cette ligne';
-                delBtn.className = 'text-slate-300 hover:text-red-500 p-1 rounded opacity-60 group-hover:opacity-100 transition';
+                delBtn.className = 'text-slate-300 dark:text-slate-600 hover:text-red-500 dark:hover:text-red-400 p-1 rounded opacity-60 group-hover:opacity-100 transition';
                 delBtn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>`;
                 delBtn.onclick = () => removeRow(index);
                 tdAction.appendChild(delBtn);
@@ -621,12 +702,12 @@
          */
         function getRowStatusIcon(isComplete, isEmpty) {
             if (isComplete) {
-                return `<span class="inline-flex w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-50" title="Point valide affiché sur le graphique"></span>`;
+                return `<span class="inline-flex w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-50 dark:ring-emerald-950" title="Point valide affiché sur le graphique"></span>`;
             }
             if (isEmpty) {
-                return `<span class="inline-flex w-2 h-2 rounded-full bg-slate-200" title="Ligne vide"></span>`;
+                return `<span class="inline-flex w-2 h-2 rounded-full bg-slate-200 dark:bg-slate-700" title="Ligne vide"></span>`;
             }
-            return `<span class="inline-flex w-2.5 h-2.5 rounded-full bg-amber-400 ring-4 ring-amber-50" title="Coordonnée incomplète ou invalide"></span>`;
+            return `<span class="inline-flex w-2.5 h-2.5 rounded-full bg-amber-400 ring-4 ring-amber-50 dark:ring-amber-950" title="Coordonnée incomplète ou invalide"></span>`;
         }
 
         /**
@@ -817,25 +898,25 @@
             const fsGraphText = document.getElementById('fullscreenGraphText');
 
             if (mode === 'split') {
-                dataPanel.className = 'lg:col-span-5 bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col overflow-hidden transition-all duration-200';
+                dataPanel.className = 'lg:col-span-5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col overflow-hidden transition-all duration-200';
                 graphPanel.className = 'lg:col-span-7 flex flex-col gap-4 transition-all duration-200';
-                tableScroll.className = 'overflow-y-auto max-h-[440px] divide-y divide-slate-200';
-                canvasWrapper.className = 'relative w-full h-[380px] sm:h-[440px] bg-white select-none';
+                tableScroll.className = 'overflow-y-auto max-h-[440px] divide-y divide-slate-200 dark:divide-slate-800';
+                canvasWrapper.className = 'relative w-full h-[380px] sm:h-[440px] bg-white dark:bg-slate-900 select-none';
                 resetViewBtn.classList.add('hidden');
                 resetViewBtn.classList.remove('inline-flex');
                 fsDataText.textContent = 'Plein écran';
                 fsGraphText.textContent = 'Plein écran';
             } else if (mode === 'data') {
-                dataPanel.className = 'lg:col-span-12 bg-white rounded-xl border border-indigo-300 shadow-md flex flex-col overflow-hidden transition-all duration-200';
+                dataPanel.className = 'lg:col-span-12 bg-white dark:bg-slate-900 rounded-xl border border-indigo-300 dark:border-indigo-700 shadow-md flex flex-col overflow-hidden transition-all duration-200';
                 graphPanel.className = 'hidden';
-                tableScroll.className = 'overflow-y-auto max-h-[72vh] divide-y divide-slate-200';
+                tableScroll.className = 'overflow-y-auto max-h-[72vh] divide-y divide-slate-200 dark:divide-slate-800';
                 resetViewBtn.classList.remove('hidden');
                 resetViewBtn.classList.add('inline-flex');
                 fsDataText.textContent = 'Quitter plein écran';
             } else if (mode === 'graph') {
                 dataPanel.className = 'hidden';
                 graphPanel.className = 'lg:col-span-12 flex flex-col gap-4 transition-all duration-200';
-                canvasWrapper.className = 'relative w-full h-[55vh] min-h-[420px] max-h-[680px] bg-white select-none';
+                canvasWrapper.className = 'relative w-full h-[55vh] min-h-[420px] max-h-[680px] bg-white dark:bg-slate-900 select-none';
                 resetViewBtn.classList.remove('hidden');
                 resetViewBtn.classList.add('inline-flex');
                 fsGraphText.textContent = 'Quitter plein écran';
@@ -856,13 +937,13 @@
             const linearBtn = document.getElementById('modelLinearBtn');
 
             if (model === 'affine') {
-                affineBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white text-indigo-700 shadow-2xs';
-                linearBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+                affineBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-2xs';
+                linearBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100';
                 document.getElementById('formulaExplanationAffine').classList.remove('hidden');
                 document.getElementById('formulaExplanationLinear').classList.add('hidden');
             } else {
-                linearBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white text-indigo-700 shadow-2xs';
-                affineBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 hover:text-slate-900';
+                linearBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition bg-white dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 shadow-2xs';
+                affineBtn.className = 'px-3 py-1.5 rounded-md text-xs font-semibold transition text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100';
                 document.getElementById('formulaExplanationAffine').classList.add('hidden');
                 document.getElementById('formulaExplanationLinear').classList.remove('hidden');
             }
@@ -889,10 +970,10 @@
             const btn = document.getElementById('toggleRegressionBtn');
             const txt = document.getElementById('toggleRegressionText');
             if (state.regressionActive) {
-                btn.className = 'px-4 py-2 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-200 transition flex items-center gap-1.5 cursor-pointer';
+                btn.className = 'px-4 py-2 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-200 dark:shadow-none transition flex items-center gap-1.5 cursor-pointer';
                 txt.textContent = 'Régression active';
             } else {
-                btn.className = 'px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-200 transition flex items-center gap-1.5 cursor-pointer';
+                btn.className = 'px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-200 dark:shadow-none transition flex items-center gap-1.5 cursor-pointer';
                 txt.textContent = 'Tracer la régression';
             }
         }
@@ -1187,9 +1268,9 @@
             // Affichage de a ± u(a)
             const unitASuffix = unitA !== 'sans unité' ? ` ${unitA}` : '';
             if (fmtA.expStr) {
-                document.getElementById('resultAFormatted').innerHTML = `a = (${fmtA.valueStr} ± ${fmtA.uStr}) ${fmtA.expStr}<span class="text-xs font-normal text-slate-500">${unitASuffix}</span>`;
+                document.getElementById('resultAFormatted').innerHTML = `a = (${fmtA.valueStr} ± ${fmtA.uStr}) ${fmtA.expStr}<span class="text-xs font-normal text-slate-500 dark:text-slate-400">${unitASuffix}</span>`;
             } else {
-                document.getElementById('resultAFormatted').innerHTML = `a = ${fmtA.valueStr} ± ${fmtA.uStr}<span class="text-xs font-normal text-slate-500">${unitASuffix}</span>`;
+                document.getElementById('resultAFormatted').innerHTML = `a = ${fmtA.valueStr} ± ${fmtA.uStr}<span class="text-xs font-normal text-slate-500 dark:text-slate-400">${unitASuffix}</span>`;
             }
 
             document.getElementById('rawAVal').textContent = formatNumberClean(res.a, 6);
@@ -1203,9 +1284,9 @@
                 paramsGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-3';
                 const unitBSuffix = unitB !== 'sans unité' ? ` ${unitB}` : '';
                 if (fmtB.expStr) {
-                    document.getElementById('resultBFormatted').innerHTML = `b = (${fmtB.valueStr} ± ${fmtB.uStr}) ${fmtB.expStr}<span class="text-xs font-normal text-slate-500">${unitBSuffix}</span>`;
+                    document.getElementById('resultBFormatted').innerHTML = `b = (${fmtB.valueStr} ± ${fmtB.uStr}) ${fmtB.expStr}<span class="text-xs font-normal text-slate-500 dark:text-slate-400">${unitBSuffix}</span>`;
                 } else {
-                    document.getElementById('resultBFormatted').innerHTML = `b = ${fmtB.valueStr} ± ${fmtB.uStr}<span class="text-xs font-normal text-slate-500">${unitBSuffix}</span>`;
+                    document.getElementById('resultBFormatted').innerHTML = `b = ${fmtB.valueStr} ± ${fmtB.uStr}<span class="text-xs font-normal text-slate-500 dark:text-slate-400">${unitBSuffix}</span>`;
                 }
                 document.getElementById('rawBVal').textContent = formatNumberClean(res.b, 6);
                 document.getElementById('rawUBVal').textContent = Number.isNaN(res.ub) ? '—' : formatNumberClean(res.ub, 4);
@@ -1266,8 +1347,28 @@
             const ctx = canvas.getContext('2d');
             ctx.scale(dpr, dpr);
 
-            // Fond blanc net
-            ctx.fillStyle = '#ffffff';
+            const dark = isDarkMode();
+            const palette = {
+                bg: dark ? '#0f172a' : '#ffffff',
+                subGrid: dark ? '#162033' : '#f8fafc',
+                mainGrid: dark ? '#1e293b' : '#e2e8f0',
+                zeroAxis: dark ? '#64748b' : '#94a3b8',
+                frameBorder: dark ? '#334155' : '#cbd5e1',
+                tickMark: dark ? '#64748b' : '#94a3b8',
+                tickText: dark ? '#94a3b8' : '#475569',
+                axisTitle: dark ? '#f1f5f9' : '#0f172a',
+                regLine: dark ? '#fb7185' : '#e11d48',
+                residualLine: dark ? 'rgba(251, 113, 133, 0.4)' : 'rgba(225, 29, 72, 0.35)',
+                pointHalo: dark ? 'rgba(99, 102, 241, 0.25)' : 'rgba(79, 70, 229, 0.16)',
+                pointBg: dark ? '#0f172a' : '#ffffff',
+                pointStroke: dark ? '#818cf8' : '#4f46e5',
+                pointStrokeHover: dark ? '#c7d2fe' : '#312e81',
+                pointCenter: dark ? '#818cf8' : '#4f46e5',
+                emptyText: dark ? '#64748b' : '#94a3b8'
+            };
+
+            // Fond adapté au thème
+            ctx.fillStyle = palette.bg;
             ctx.fillRect(0, 0, width, height);
 
             // Marges pour graduations et titres des axes
@@ -1346,7 +1447,7 @@
             ctx.clip();
 
             // Sous-grille fine
-            ctx.strokeStyle = '#f8fafc';
+            ctx.strokeStyle = palette.subGrid;
             ctx.lineWidth = 1;
             const subXStep = xStep / 5;
             for (let x = xMin; x <= xMax + subXStep * 0.1; x += subXStep) {
@@ -1366,7 +1467,7 @@
             }
 
             // Grille principale
-            ctx.strokeStyle = '#e2e8f0';
+            ctx.strokeStyle = palette.mainGrid;
             ctx.lineWidth = 1;
             for (let x = xMin; x <= xMax + xStep * 0.01; x += xStep) {
                 const sx = Math.round(toScreenX(x)) + 0.5;
@@ -1384,7 +1485,7 @@
             }
 
             // Axes passant par zéro s'ils sont dans la zone visible
-            ctx.strokeStyle = '#94a3b8';
+            ctx.strokeStyle = palette.zeroAxis;
             ctx.lineWidth = 1.5;
             if (xMin <= 0 && xMax >= 0) {
                 const sx0 = Math.round(toScreenX(0)) + 0.5;
@@ -1407,7 +1508,7 @@
                 const yAtMin = a * xMin + b;
                 const yAtMax = a * xMax + b;
 
-                ctx.strokeStyle = '#e11d48'; // Rouge-rose scientifique très lisible
+                ctx.strokeStyle = palette.regLine;
                 ctx.lineWidth = 2.25;
                 ctx.beginPath();
                 ctx.moveTo(toScreenX(xMin), toScreenY(yAtMin));
@@ -1415,7 +1516,7 @@
                 ctx.stroke();
 
                 // Segments de résidus en pointillés fins de chaque point vers la droite
-                ctx.strokeStyle = 'rgba(225, 29, 72, 0.35)';
+                ctx.strokeStyle = palette.residualLine;
                 ctx.lineWidth = 1;
                 ctx.setLineDash([3, 3]);
                 for (const p of points) {
@@ -1438,20 +1539,20 @@
                 const isHovered = state.hoveredPointIndex === idx;
 
                 if (isHovered) {
-                    ctx.fillStyle = 'rgba(79, 70, 229, 0.16)';
+                    ctx.fillStyle = palette.pointHalo;
                     ctx.beginPath();
                     ctx.arc(sx, sy, 11, 0, Math.PI * 2);
                     ctx.fill();
                 }
 
-                // Cercle extérieur blanc pour le contraste
-                ctx.fillStyle = '#ffffff';
+                // Cercle extérieur contrasté
+                ctx.fillStyle = palette.pointBg;
                 ctx.beginPath();
                 ctx.arc(sx, sy, 5.5, 0, Math.PI * 2);
                 ctx.fill();
 
                 // Croix scientifique + point central
-                ctx.strokeStyle = isHovered ? '#312e81' : '#4f46e5';
+                ctx.strokeStyle = isHovered ? palette.pointStrokeHover : palette.pointStroke;
                 ctx.lineWidth = isHovered ? 2.5 : 2;
                 const size = isHovered ? 6.5 : 5;
                 ctx.beginPath();
@@ -1461,7 +1562,7 @@
                 ctx.lineTo(sx, sy + size);
                 ctx.stroke();
 
-                ctx.fillStyle = '#4f46e5';
+                ctx.fillStyle = palette.pointCenter;
                 ctx.beginPath();
                 ctx.arc(sx, sy, 2.2, 0, Math.PI * 2);
                 ctx.fill();
@@ -1470,12 +1571,12 @@
             ctx.restore();
 
             // 4. Bordure du cadre du graphique
-            ctx.strokeStyle = '#cbd5e1';
+            ctx.strokeStyle = palette.frameBorder;
             ctx.lineWidth = 1.2;
             ctx.strokeRect(padLeft, padTop, plotW, plotH);
 
             // 5. Graduations et valeurs numériques sur les axes
-            ctx.fillStyle = '#475569';
+            ctx.fillStyle = palette.tickText;
             ctx.font = '500 11px "JetBrains Mono", monospace';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top';
@@ -1483,7 +1584,7 @@
             for (let x = xMin; x <= xMax + xStep * 0.01; x += xStep) {
                 const sx = toScreenX(x);
                 if (sx >= padLeft - 2 && sx <= padLeft + plotW + 2) {
-                    ctx.strokeStyle = '#94a3b8';
+                    ctx.strokeStyle = palette.tickMark;
                     ctx.beginPath();
                     ctx.moveTo(sx, padTop + plotH);
                     ctx.lineTo(sx, padTop + plotH + 5);
@@ -1497,7 +1598,7 @@
             for (let y = yMin; y <= yMax + yStep * 0.01; y += yStep) {
                 const sy = toScreenY(y);
                 if (sy >= padTop - 2 && sy <= padTop + plotH + 2) {
-                    ctx.strokeStyle = '#94a3b8';
+                    ctx.strokeStyle = palette.tickMark;
                     ctx.beginPath();
                     ctx.moveTo(padLeft - 5, sy);
                     ctx.lineTo(padLeft, sy);
@@ -1507,7 +1608,7 @@
             }
 
             // 6. Titres des axes X et Y
-            ctx.fillStyle = '#0f172a';
+            ctx.fillStyle = palette.axisTitle;
             ctx.font = '600 12px "Inter", sans-serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'bottom';
@@ -1526,7 +1627,7 @@
                 drawEquationOverlayOnCanvas(ctx, padLeft + 12, padTop + 12, state.lastCalculation);
             } else if (points.length === 0) {
                 // Message d'invite discret au centre du graphique vide
-                ctx.fillStyle = '#94a3b8';
+                ctx.fillStyle = palette.emptyText;
                 ctx.font = '500 13px "Inter", sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
@@ -1539,27 +1640,28 @@
          * (très pratique lors de la projection en plein écran ou de l'export PNG)
          */
         function drawEquationOverlayOnCanvas(ctx, x, y, res) {
+            const dark = isDarkMode();
             const sigFigs = parseInt(document.getElementById('sigFigsSelect').value, 10) || 2;
             const fmtA = formatValueWithUncertainty(res.a, res.ua, sigFigs);
             const fmtB = formatValueWithUncertainty(res.b, res.ub, sigFigs);
 
             const lines = [];
             const eqText = document.getElementById('equationDisplay').textContent;
-            lines.push({ text: `Modèle : ${eqText}`, bold: true, color: '#0f172a' });
+            lines.push({ text: `Modèle : ${eqText}`, bold: true, color: dark ? '#f8fafc' : '#0f172a' });
 
             const aLine = fmtA.expStr
                 ? `a = (${fmtA.valueStr} ± ${fmtA.uStr}) ${fmtA.expStr}`
                 : `a = ${fmtA.valueStr} ± ${fmtA.uStr}`;
-            lines.push({ text: aLine, bold: false, color: '#334155' });
+            lines.push({ text: aLine, bold: false, color: dark ? '#cbd5e1' : '#334155' });
 
             if (res.model === 'affine') {
                 const bLine = fmtB.expStr
                     ? `b = (${fmtB.valueStr} ± ${fmtB.uStr}) ${fmtB.expStr}`
                     : `b = ${fmtB.valueStr} ± ${fmtB.uStr}`;
-                lines.push({ text: bLine, bold: false, color: '#334155' });
+                lines.push({ text: bLine, bold: false, color: dark ? '#cbd5e1' : '#334155' });
             }
 
-            lines.push({ text: `R² = ${res.r2.toFixed(4).replace('.', ',')}  (N = ${res.N} pts)`, bold: false, color: '#64748b' });
+            lines.push({ text: `R² = ${res.r2.toFixed(4).replace('.', ',')}  (N = ${res.N} pts)`, bold: false, color: dark ? '#94a3b8' : '#64748b' });
 
             ctx.save();
             ctx.font = '600 11.5px "JetBrains Mono", monospace';
@@ -1572,9 +1674,9 @@
             const boxW = maxW + 22;
             const boxH = lines.length * 18 + 14;
 
-            // Fond semi-transparent avec bordure fine
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
-            ctx.strokeStyle = '#cbd5e1';
+            // Fond semi-transparent avec bordure fine adapté au thème
+            ctx.fillStyle = dark ? 'rgba(30, 41, 59, 0.92)' : 'rgba(255, 255, 255, 0.92)';
+            ctx.strokeStyle = dark ? '#475569' : '#cbd5e1';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.roundRect(x, y, boxW, boxH, 8);
@@ -1582,7 +1684,7 @@
             ctx.stroke();
 
             // Liseré rouge sur la gauche rappelant la droite de régression
-            ctx.fillStyle = '#e11d48';
+            ctx.fillStyle = dark ? '#fb7185' : '#e11d48';
             ctx.beginPath();
             ctx.roundRect(x, y, 4, boxH, [8, 0, 0, 8]);
             ctx.fill();
@@ -1713,10 +1815,30 @@
             window.addEventListener('resize', () => {
                 renderAll();
             });
+
+            // Écoute des changements de thème du système d'exploitation en temps réel
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const handleSystemThemeChange = (e) => {
+                let hasSaved = false;
+                try {
+                    hasSaved = !!localStorage.getItem('laboreg-theme');
+                } catch (err) {}
+                if (!state.userOverrodeTheme && !hasSaved) {
+                    document.documentElement.classList.toggle('dark', e.matches);
+                    syncThemeUI();
+                    renderAll();
+                }
+            };
+            if (mediaQuery.addEventListener) {
+                mediaQuery.addEventListener('change', handleSystemThemeChange);
+            } else if (mediaQuery.addListener) {
+                mediaQuery.addListener(handleSystemThemeChange);
+            }
         }
 
         // Démarrage au chargement de la page
         window.onload = function () {
+            syncThemeUI();
             renderTable();
             updateLabels();
             initEvents();
