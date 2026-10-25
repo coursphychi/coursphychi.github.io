@@ -353,9 +353,20 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
 
 <div class="nt-b nt-def">
 <p class="nt-tag"><i class="fa-solid fa-book-open"></i>Définition</p>
-<p>L'<span class="imp nt-hole">indice optique</span> (ou indice de réfraction) $n$ d'un milieu transparent est le rapport entre la vitesse de la lumière dans le vide, $c$, et sa vitesse $v$ dans ce milieu&nbsp;:</p>
-<p style="text-align:center">$n = \dfrac{c}{v}$</p>
-<p>C'est un nombre <b>sans unité</b>. Comme la lumière ne va jamais plus vite que dans le vide, $n \geq 1$.</p>
+<p>L'<span class="imp nt-hole">indice optique</span> (ou indice de réfraction) $n$ d'un milieu transparent est le rapport entre la vitesse de la lumière dans le vide, $c$, et sa vitesse $v$ dans ce milieu. Il caractérise le milieu vis-à-vis de la lumière.</p>
+</div>
+
+<div class="nt-f">
+<p class="nt-tag"><i class="fa-solid fa-square-root-variable"></i>Formule</p>
+<p class="nt-f-math">$n = \dfrac{c}{v}$</p>
+<div class="nt-f-units"><span><b>sans unité</b></span></div>
+</div>
+
+<div class="nt-b nt-prop">
+<p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir</p>
+<p>L'indice optique est toujours <b>plus grand (ou égal) à 1</b>.</p>
+<p>En effet, <b>la lumière ne va jamais plus vite que dans le vide</b> ($v≤c$).<br>
+Et $v ≤ c$ entraîne $n=\frac{c}{v}≥1$.</p>
 </div>
 
 <div class="nt-scroll"><table class="nt-t">

@@ -40,7 +40,7 @@ td, th {
 </tr>
 <tr>
 <th rowspan="1">Exos</th>
-<td><a href="/exoslumiere.pdf"><b>Lumière et lentilles</b></a></td>
+<td><a href="/act-refraction.pdf"><b>Spectres et lois de Snell-Descartes</b></a></td>
 </tr>
 <tr>
 <th rowspan="1">Animation</th>

@@ -23,6 +23,8 @@ td, th {
 # Formation des images et lentille convergente
 
 
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold;"><a href="https://presentationssite.github.io/2nde/lumiere"><a href="../cours/lentille">Cours <b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
+
 [![](/cm-lentille.png)](/cm-lentille.pdf)
 
 
@@ -42,7 +44,7 @@ td, th {
 </tr>
 <tr>
 <th rowspan="1">Exos</th>
-<td><a href="/exoslumiere.pdf"><b>Lumière et lentilles</b></a></td>
+<td><a href="/act-2lentilles.pdf"><b>Constructions, grandissement et distance focale</b></a></td>
 </tr>
 <tr>
 <th rowspan="2">Vidéos</th>
