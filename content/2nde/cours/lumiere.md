@@ -377,11 +377,25 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
 ### Les lois de Snell-Descartes {.nt-h3}
 
 <div class="nt-b nt-prop">
-<p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir&nbsp;: lois de Snell-Descartes</p>
-<p><b>Réflexion.</b> Le rayon réfléchi est dans le plan formé par le rayon incident et la normale (le <b>plan d'incidence</b>), et l'angle de réflexion est égal à l'angle d'incidence&nbsp;: $r = i_1$.</p>
-<p><b>Réfraction.</b> Le rayon réfracté est dans le plan d'incidence, et les angles d'incidence et de réfraction vérifient&nbsp;:</p>
-<p style="text-align:center">${\color{#9A3412}n_1 \times \sin(i_1) = n_2 \times \sin(i_2)}$</p>
-<p>où $n_1$ et $n_2$ sont les indices optiques du milieu d'incidence et du milieu de réfraction.</p>
+<p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir&nbsp;: loi de la réflexion</p>
+<p>Le rayon réfléchi est dans le plan formé par le rayon incident et la normale (le <b>plan d'incidence</b>), et l'angle de réflexion est égal à l'angle d'incidence.</p>
+</div>
+
+<div class="nt-f">
+<p class="nt-tag"><i class="fa-solid fa-square-root-variable"></i>Formule</p>
+<p class="nt-f-math">$r = i_1$</p>
+<div class="nt-f-units"><span>$i_1$&nbsp;: angle d'incidence</span><span>$r$&nbsp;: angle de réflexion</span><span>angles mesurés à partir de la <b>normale</b></span></div>
+</div>
+
+<div class="nt-b nt-prop">
+<p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir&nbsp;: loi de la réfraction</p>
+<p>Le rayon réfracté est lui aussi dans le plan d'incidence, et les angles d'incidence et de réfraction sont liés aux indices optiques des deux milieux.</p>
+</div>
+
+<div class="nt-f">
+<p class="nt-tag"><i class="fa-solid fa-square-root-variable"></i>Formule</p>
+<p class="nt-f-math">$n_1 \times \sin(i_1) = n_2 \times \sin(i_2)$</p>
+<div class="nt-f-units"><span>$n_1$&nbsp;: indice du milieu d'incidence (sans unité)</span><span>$n_2$&nbsp;: indice du milieu de réfraction (sans unité)</span><span>$i_1$, $i_2$&nbsp;: angles d'incidence et de réfraction, mesurés à partir de la <b>normale</b></span></div>
 </div>
 
 <div class="nt-lab" id="lab-snell">
@@ -985,19 +999,32 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
       [x, x + w].forEach(function (xx) { var g = ctx.createLinearGradient(xx - 3, 0, xx + 3, 0); g.addColorStop(0, 'rgba(186,230,253,0.15)'); g.addColorStop(0.5, 'rgba(224,242,254,0.55)'); g.addColorStop(1, 'rgba(186,230,253,0.15)'); ctx.fillStyle = g; ctx.fillRect(xx - 3, y - 4, 6, h + 8); });
       for (var k = 0; k < 18; k++) { ctx.fillStyle = 'rgba(203,213,225,0.35)'; ctx.beginPath(); ctx.arc(x + 8 + ((k * 37) % 100) / 100 * (w - 16), y + 5 + ((k * 61) % 100) / 100 * (h - 10), 1.1, 0, 2 * Math.PI); ctx.fill(); }
     }
-    function spectroscope(ctx, x, y) {   /* fente et collimateur tournés vers la gauche, boîtier du prisme, lunette d'observation */
-      var g = ctx.createLinearGradient(0, y - 22, 0, y + 22); g.addColorStop(0, '#475569'); g.addColorStop(1, '#1E293B');
-      ctx.fillStyle = '#334155'; rr(ctx, x - 34, y - 7, 38, 14, 3); ctx.fill(); ctx.fillStyle = '#0F172A'; ctx.fillRect(x - 36, y - 5, 3, 10);   /* collimateur et sa fente */
-      ctx.fillStyle = g; rr(ctx, x, y - 22, 60, 44, 8); ctx.fill(); ctx.strokeStyle = '#64748B'; ctx.lineWidth = 1; ctx.stroke();
-      ctx.fillStyle = 'rgba(186,230,253,0.5)'; ctx.beginPath(); ctx.moveTo(x + 30, y - 13); ctx.lineTo(x + 41, y + 11); ctx.lineTo(x + 19, y + 11); ctx.closePath(); ctx.fill();
-      ctx.save(); ctx.translate(x + 58, y - 4); ctx.rotate(-0.35); ctx.fillStyle = '#334155'; rr(ctx, 0, -6, 34, 12, 3); ctx.fill(); ctx.fillStyle = '#0F172A'; ctx.fillRect(32, -6, 4, 12); ctx.restore();   /* lunette */
-      txt(ctx, 'spectroscope', x + 30, y + 36, { size: 10, col: '#94A3B8' });
+    function metal(ctx, y0, y1, a, b) { var g = ctx.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, a); g.addColorStop(0.45, '#E2E8F0'); g.addColorStop(1, b); return g; }
+    function tubeOpt(ctx, x, y, L, r, ang, bague) {   /* tube optique métallique, d'axe incliné de ang, partant de (x, y) */
+      ctx.save(); ctx.translate(x, y); ctx.rotate(ang);
+      ctx.fillStyle = metal(ctx, -r, r, '#64748B', '#1E293B'); rr(ctx, 0, -r, L, 2 * r, 2); ctx.fill();
+      ctx.fillStyle = metal(ctx, -r - 2, r + 2, '#A16207', '#713F12'); bague.forEach(function (u) { rr(ctx, u * L - 3, -r - 2, 6, 2 * r + 4, 1.5); ctx.fill(); });   /* bagues en laiton */
+      ctx.restore();
+    }
+    function spectroscope(ctx, x, y) {   /* spectroscope à prisme : collimateur tourné vers la source, plateau et prisme, lunette d'observation */
+      var cx = x + 34, cy = y + 4;
+      ctx.fillStyle = metal(ctx, cy + 26, cy + 40, '#475569', '#0F172A'); ctx.beginPath(); ctx.ellipse(cx, cy + 36, 30, 6, 0, 0, 2 * Math.PI); ctx.fill();   /* pied */
+      ctx.fillStyle = metal(ctx, 0, 1, '#475569', '#1E293B'); ctx.fillStyle = '#334155'; ctx.fillRect(cx - 4, cy + 8, 8, 28);
+      tubeOpt(ctx, x - 44, y, 64, 6, 0, [0.12, 0.85]);   /* collimateur */
+      ctx.fillStyle = '#0F172A'; rr(ctx, x - 52, y - 9, 10, 18, 2); ctx.fill(); ctx.fillStyle = '#F8FAFC'; ctx.fillRect(x - 48, y - 6, 1.5, 12);   /* fente d'entrée, éclairée */
+      ctx.fillStyle = metal(ctx, cy - 2, cy + 10, '#64748B', '#1E293B'); ctx.beginPath(); ctx.ellipse(cx, cy + 6, 26, 6, 0, 0, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = 'rgba(226,232,240,0.5)'; ctx.lineWidth = 1; ctx.stroke();   /* plateau */
+      var gp = ctx.createLinearGradient(cx - 12, cy - 22, cx + 12, cy + 4); gp.addColorStop(0, 'rgba(224,242,254,0.85)'); gp.addColorStop(0.5, 'rgba(125,211,252,0.45)'); gp.addColorStop(1, 'rgba(224,242,254,0.75)');
+      ctx.fillStyle = gp; ctx.beginPath(); ctx.moveTo(cx, cy - 22); ctx.lineTo(cx + 13, cy + 4); ctx.lineTo(cx - 13, cy + 4); ctx.closePath(); ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.8)'; ctx.lineWidth = 1; ctx.stroke();   /* prisme en verre */
+      ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.beginPath(); ctx.moveTo(cx - 3, cy - 14); ctx.lineTo(cx - 8, cy); ctx.stroke();
+      tubeOpt(ctx, cx + 10, cy - 8, 58, 6, -0.5, [0.1, 0.8]);   /* lunette */
+      ctx.save(); ctx.translate(cx + 10, cy - 8); ctx.rotate(-0.5); ctx.fillStyle = '#0F172A'; rr(ctx, 58, -8, 9, 16, 2); ctx.fill(); ctx.restore();   /* oculaire */
+      txt(ctx, 'spectroscope', cx, cy + 54, { size: 10, col: '#94A3B8' });
     }
     function fil(ctx, a, c1, c2, b) { ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.bezierCurveTo(c1[0], c1[1], c2[0], c2[1], b[0], b[1]); ctx.stroke(); }
     function draw(o) {
       var ctx = o.ctx, W = o.W, H = o.H, two = W >= 600, sx = 20, sw = W - 40, top = 44, bas = 150, mid = (top + bas) / 2;
       ctx.clearRect(0, 0, W, H); var gf = ctx.createLinearGradient(0, 0, 0, H); gf.addColorStop(0, '#0B1120'); gf.addColorStop(1, '#111827'); ctx.fillStyle = gf; ctx.fillRect(0, 0, W, H);
-      var lx = W * (two ? 0.4 : 0.42), spx = lx + (two ? 130 : 80);
+      var lx = W * (two ? 0.4 : 0.36), spx = Math.min(lx + (two ? 130 : 86), W - 110);   /* le spectroscope tient toujours dans la largeur */
       if (mode === 'em') {
         txt(ctx, two ? 'Lampe à décharge\u00A0: ' + NOMS[el] + ' traversé par une décharge électrique' : 'Lampe à ' + NOMS[el] + ' (décharge)', W / 2, 16, { size: 11.5, col: '#F8FAFC', bold: true });
         var gx = two ? lx - 150 : 16, gy = mid - 20;   /* générateur haute tension */
@@ -1070,7 +1097,7 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
   function secteur(ctx, x, y, r, a0, a1, col, lab, ang) {   /* angle repéré par un secteur coloré et une étiquette */
     ctx.save(); ctx.fillStyle = col; ctx.globalAlpha = 0.16; ctx.beginPath(); ctx.moveTo(x, y); ctx.arc(x, y, r, Math.min(a0, a1), Math.max(a0, a1)); ctx.closePath(); ctx.fill(); ctx.restore();
     ctx.strokeStyle = col; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.arc(x, y, r, Math.min(a0, a1), Math.max(a0, a1)); ctx.stroke();
-    var am = (a0 + a1) / 2; pill(ctx, lab, x + (r + 26) * Math.cos(am), y + (r + 18) * Math.sin(am), { size: 11.5, col: col, stroke: '#E2E8F0' });
+    var am = (a0 + a1) / 2; return function () { pill(ctx, lab, x + (r + 26) * Math.cos(am), y + (r + 18) * Math.sin(am), { size: 11.5, col: col, stroke: '#E2E8F0' }); };   /* l'étiquette est dessinée plus tard, au premier plan */
   }
   (function () {
     var root = document.getElementById('lab-snell'); if (!root) { return; }
@@ -1103,8 +1130,9 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
       if (!tot) { faisceau(ctx, Ix, Iy, Ix + L * Math.sin(i2), Iy + L * Math.cos(i2), REFR, Math.max(0.4, 1 - R)); }
       laser(ctx, Ax, Ay, Math.atan2(Iy - Ay, Ix - Ax));
       var gI = ctx.createRadialGradient(Ix, Iy, 0, Ix, Iy, 12); gI.addColorStop(0, 'rgba(255,255,255,0.95)'); gI.addColorStop(1, 'rgba(255,255,255,0)'); ctx.fillStyle = gI; ctx.beginPath(); ctx.arc(Ix, Iy, 12, 0, 2 * Math.PI); ctx.fill(); txt(ctx, 'I', Ix - 12, Iy + 13, { size: 13, col: '#0F172A', bold: true, serif: true });
-      var r0 = 52; if (i1 > 0.03) { secteur(ctx, Ix, Iy, r0, -Math.PI / 2 - i1, -Math.PI / 2, INC, 'i\u2081 = ' + fmt(deg(i1), 0) + '°'); secteur(ctx, Ix, Iy, r0 + 16, -Math.PI / 2, -Math.PI / 2 + i1, REFL, 'r = ' + fmt(deg(i1), 0) + '°'); }
-      if (!tot && i2 > 0.03) { secteur(ctx, Ix, Iy, r0, Math.PI / 2 - i2, Math.PI / 2, REFR, 'i\u2082 = ' + fmt(deg(i2), 1) + '°'); }
+      var r0 = 52, etiq = []; if (i1 > 0.03) { etiq.push(secteur(ctx, Ix, Iy, r0 + 16, -Math.PI / 2, -Math.PI / 2 + i1, REFL, 'r = ' + fmt(deg(i1), 0) + '°')); etiq.push(secteur(ctx, Ix, Iy, r0, -Math.PI / 2 - i1, -Math.PI / 2, INC, 'i\u2081 = ' + fmt(deg(i1), 0) + '°')); }
+      if (!tot && i2 > 0.03) { etiq.push(secteur(ctx, Ix, Iy, r0, Math.PI / 2 - i2, Math.PI / 2, REFR, 'i\u2082 = ' + fmt(deg(i2), 1) + '°')); }
+      etiq.forEach(function (f) { f(); });   /* toutes les étiquettes d'angles au premier plan */
       if (tot) { pill(ctx, 'réflexion totale\u00A0: plus de rayon réfracté\u00A0!', Ix, Iy + 48, { size: 12, col: '#B91C1C', stroke: '#FECACA' }); }
       pill(ctx, '\u25CF incident', W - 10, 16, { size: 10.5, col: INC, align: 'right', stroke: GRID2 }); pill(ctx, '\u25CF réfléchi', W - 10, 38, { size: 10.5, col: REFL, align: 'right', stroke: GRID2 }); pill(ctx, '\u25CF réfracté', W - 10, 60, { size: 10.5, col: REFR, align: 'right', stroke: GRID2 });
     }
@@ -1154,10 +1182,10 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
     cnv = Canvas($(root, 'canvas'), function (W) { return W < 640 ? 600 : 300; }, draw);
     inI.addEventListener('input', function () { texte(); draw(cnv); });
     $(root, '[data-act="mesure"]').addEventListener('click', function () {
-      var i1 = +inI.value; if (i1 === 0) { msg.textContent = 'Pour i\u2081 = 0°, le rayon n\u2019est pas dévié\u00A0: choisissez un angle non nul.'; return; }
-      var mes = Math.round(i2De(i1) + (Math.random() - 0.5) * 1.2);   /* mesure au degré près, avec une petite incertitude */
+      var i1 = +inI.value;   /* la mesure (0 ; 0) est une mesure comme une autre : le rayon n'est pas dévié */
+      var mes = i1 === 0 ? 0 : Math.round(i2De(i1) + (Math.random() - 0.5) * 1.2);   /* mesure au degré près, avec une petite incertitude */
       M = M.filter(function (m) { return m[0] !== i1; }); M.push([i1, mes]); bD.disabled = M.length < 3;
-      msg.innerHTML = 'Mesure&nbsp;: pour $i_1 = ' + i1 + '°$, on lit $i_2 \\approx ' + mes + '°$. ' + (M.length < 3 ? 'Faites au moins trois mesures.' : 'Les points semblent alignés avec l\u2019origine&nbsp;: tracez la droite.'); typeset(msg); draw(cnv);
+      msg.innerHTML = 'Mesure&nbsp;: pour $i_1 = ' + i1 + '°$, on lit $i_2 \\approx ' + mes + '°$. ' + (i1 === 0 ? 'Sous incidence normale, le rayon n\u2019est pas dévié. ' : '') + (M.length < 3 ? 'Faites au moins trois mesures.' : 'Les points semblent alignés avec l\u2019origine&nbsp;: tracez la droite.'); typeset(msg); draw(cnv);
     });
     bD.addEventListener('click', function () { fit = true; draw(cnv); var a = pente(); msg.innerHTML = 'Les points sont alignés sur une droite passant par l\u2019origine&nbsp;: $\\sin(i_1)$ est proportionnel à $\\sin(i_2)$, comme le prévoit la loi de la réfraction $1{,}00 \\times \\sin(i_1) = n \\times \\sin(i_2)$. Le coefficient directeur de la droite est l\u2019indice du plexiglas&nbsp;: $n \\approx ' + String(fmt(a, 2)).replace(',', '{,}') + '$ (valeur exacte de cette simulation&nbsp;: ' + fmt(n, 2) + ').'; typeset(msg); });
     $(root, '[data-act="reset"]').addEventListener('click', function () { nouveau(); draw(cnv); msg.textContent = 'Nouveau bloc de plexiglas, d\u2019indice inconnu. Mesurez i\u2082 pour plusieurs angles d\u2019incidence.'; });
@@ -1316,7 +1344,7 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
   (function () {
     var root = document.getElementById('lab-mirage'); if (!root) { return; }
     var chk = $(root, '[data-in="couches"]'), msg = $(root, '.nt-msg'), type = 'chaud', cnv, t = 0;
-    var P = { chaud: [0.012, 8], froid: [0.012, 60] };   /* variation d'indice et épaisseur de la couche : très exagérées, pour que la courbure se voie */
+    var P = { chaud: [0.012, 8], froid: [0.02, 60] };   /* variation d'indice et épaisseur de la couche : très exagérées, pour que la courbure se voie */
     function n(h) { var K = P[type][0], LC = P[type][1]; return type === 'chaud' ? 1 + K * (1 - Math.exp(-h / LC)) : 1 + K * Math.exp(-h / LC); }
     function dn(h) { var K = P[type][0], LC = P[type][1]; return type === 'chaud' ? K / LC * Math.exp(-h / LC) : -K / LC * Math.exp(-h / LC); }   /* dérivée de l'indice par rapport à la hauteur */
     function rayon(x0, h0, th, xmax) {   /* intégration de la trajectoire d'un rayon (vers la droite) dans l'air stratifié */
@@ -1330,7 +1358,7 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
     function arbre(ctx, x, Y, al) { ctx.save(); ctx.globalAlpha = al; ctx.fillStyle = '#78350F'; ctx.fillRect(x - 4, Y(42), 8, 42); var cs = [[0, 62, 22, '#166534'], [-12, 54, 15, '#15803D'], [12, 54, 15, '#15803D'], [0, 74, 14, '#22C55E']]; cs.forEach(function (c) { ctx.fillStyle = c[3]; ctx.beginPath(); ctx.arc(x + c[0], Y(c[1]), c[2], 0, 2 * Math.PI); ctx.fill(); }); ctx.restore(); }
     function bateau(ctx, x, Y, al) { ctx.save(); ctx.globalAlpha = al; ctx.fillStyle = '#1E293B'; ctx.beginPath(); ctx.moveTo(x - 26, Y(10)); ctx.lineTo(x + 26, Y(10)); ctx.lineTo(x + 18, Y(0)); ctx.lineTo(x - 18, Y(0)); ctx.fill(); ctx.fillStyle = '#B91C1C'; ctx.fillRect(x - 26, Y(10), 52, 2); ctx.fillStyle = '#475569'; ctx.fillRect(x - 1.5, Y(44), 3, 34); ctx.fillStyle = '#F8FAFC'; ctx.beginPath(); ctx.moveTo(x + 2, Y(42)); ctx.lineTo(x + 20, Y(14)); ctx.lineTo(x + 2, Y(14)); ctx.fill(); ctx.beginPath(); ctx.moveTo(x - 2, Y(38)); ctx.lineTo(x - 15, Y(14)); ctx.lineTo(x - 2, Y(14)); ctx.fill(); ctx.restore(); }
     function draw(o) {
-      var ctx = o.ctx, W = o.W, H = o.H, G = H - 92, xe = 46, he = 40, xo = W - 70, Y = function (h) { return G - h; }, chaud = type === 'chaud';
+      var ctx = o.ctx, W = o.W, H = o.H, G = H - 92, xe = 46, he = 40, xo = W - 70, D = 760, SX = function (x) { return xe + x * (xo - xe) / D; }, Y = function (h) { return G - h; }, chaud = type === 'chaud';   /* les rayons sont calculés sur une distance fixe D, puis le dessin est comprimé horizontalement : même résultat sur ordinateur et sur téléphone */
       ctx.clearRect(0, 0, W, H);
       var gc = ctx.createLinearGradient(0, 0, 0, G); gc.addColorStop(0, chaud ? '#3B82F6' : '#64748B'); gc.addColorStop(1, chaud ? '#BFDBFE' : '#CBD5E1'); ctx.fillStyle = gc; ctx.fillRect(0, 0, W, G);
       if (chaud) { var gs = ctx.createRadialGradient(W * 0.8, 30, 2, W * 0.8, 30, 40); gs.addColorStop(0, '#FFFFFF'); gs.addColorStop(0.3, 'rgba(254,240,138,0.9)'); gs.addColorStop(1, 'rgba(254,240,138,0)'); ctx.fillStyle = gs; ctx.beginPath(); ctx.arc(W * 0.8, 30, 40, 0, 2 * Math.PI); ctx.fill(); }
@@ -1342,18 +1370,18 @@ details.nt-d pre { overflow-x: auto; margin: 0.6em 0 !important; padding: 0.7em 
       var hObj = chaud ? 82 : 44, obj = chaud ? arbre : bateau;
       obj(ctx, xo, Y, 1);
       var R = [];   /* rayons tracés depuis l'œil (principe du retour inverse) : direction de départ, trajet, hauteur atteinte au niveau de l'objet */
-      for (var th = -0.2; th <= 0.2; th += 0.0015) { var pts = rayon(xe, he, th, xo), f = pts[pts.length - 1]; if (f[0] >= xo - 1 && f[1] > 0 && f[1] <= hObj) { R.push([th, pts, f[1]]); } }
+      for (var th = -0.2; th <= 0.2; th += 0.0015) { var pts = rayon(0, he, th, D), f = pts[pts.length - 1]; if (f[0] >= D - 1 && f[1] > 0 && f[1] <= hObj) { R.push([th, pts, f[1]]); } }
       var br = [], cur = []; R.forEach(function (r) { if (cur.length > 1) { var s0 = Math.sign(cur[cur.length - 1][2] - cur[cur.length - 2][2]), s1 = Math.sign(r[2] - cur[cur.length - 1][2]); if (s0 && s1 && s0 !== s1) { br.push(cur); cur = [cur[cur.length - 1]]; } } cur.push(r); }); if (cur.length) { br.push(cur); }   /* branches : on coupe là où la hauteur atteinte change de sens */
       var directe = chaud ? br.reduce(function (m, b) { return !m || b[b.length - 1][0] > m[m.length - 1][0] ? b : m; }, null) : null;   /* vue directe : la branche qui part le plus haut */
       var RAY = '#EA580C';   /* une seule couleur pour les rayons de lumière ; les prolongements imaginés par l'œil sont dans la même couleur, en pointillés */
       var DIRECT = '#6D28D9';   /* rayons directs, de l'arbre à l'œil sans passer près du sol */
       function trace(r, col) {   /* rayon réel, de l'objet vers l'œil, avec un halo discret et une flèche */
-        col = col || RAY; ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.globalAlpha = 0.1; ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.beginPath(); r[1].forEach(function (q, i) { if (i) { ctx.lineTo(q[0], Y(q[1])); } else { ctx.moveTo(q[0], Y(q[1])); } }); ctx.stroke(); ctx.globalAlpha = 1; ctx.lineWidth = 1.4; ctx.stroke(); ctx.restore();
-        var k = Math.floor(r[1].length * 0.5), a = r[1][k + 1] || r[1][k], b = r[1][k]; vec(ctx, a[0], Y(a[1]), b[0], Y(b[1]), col, 1.4, 9);   /* la lumière va de l'objet vers l'œil */
+        col = col || RAY; ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.globalAlpha = 0.1; ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.beginPath(); r[1].forEach(function (q, i) { if (i) { ctx.lineTo(SX(q[0]), Y(q[1])); } else { ctx.moveTo(SX(q[0]), Y(q[1])); } }); ctx.stroke(); ctx.globalAlpha = 1; ctx.lineWidth = 1.4; ctx.stroke(); ctx.restore();
+        var k = Math.floor(r[1].length * 0.5), a = r[1][k + 1] || r[1][k], b = r[1][k]; vec(ctx, SX(a[0]), Y(a[1]), SX(b[0]), Y(b[1]), col, 1.4, 9);   /* la lumière va de l'objet vers l'œil */
       }
-      function hApp(r) { return he + Math.tan(r[0]) * (xo - xe); }   /* hauteur où l'œil croit voir le point : dans le prolongement du rayon reçu */
+      function hApp(r) { return he + Math.tan(r[0]) * D; }   /* hauteur où l'œil croit voir le point : dans le prolongement du rayon reçu */
       function viser(b, h) {   /* direction de départ, dans une branche, du rayon qui atteint la hauteur h de l'objet */
-        for (var i = 1; i < b.length; i++) { var a = b[i - 1], c = b[i]; if ((a[2] - h) * (c[2] - h) <= 0 && a[2] !== c[2]) { var th = a[0] + (c[0] - a[0]) * (h - a[2]) / (c[2] - a[2]), pts = rayon(xe, he, th, xo); return [th, pts, h]; } }
+        for (var i = 1; i < b.length; i++) { var a = b[i - 1], c = b[i]; if ((a[2] - h) * (c[2] - h) <= 0 && a[2] !== c[2]) { var th = a[0] + (c[0] - a[0]) * (h - a[2]) / (c[2] - a[2]), pts = rayon(0, he, th, D); return [th, pts, h]; } }
         return null;
       }
       var mir = br.filter(function (b) { return b !== directe && b.length >= 3; }), hs = [];
