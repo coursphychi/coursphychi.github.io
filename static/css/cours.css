@@ -472,3 +472,10 @@ details.nt-d.nt-plus { --c: #64748B; --bg: #F4F5F7; --c-ink: #475569; }
 /* boutons et étiquettes : retour à la ligne automatique sur les petits écrans plutôt que de déborder */
 .nt-btn, .nt-chip, .nt-seg label span { max-width: 100%; white-space: normal; overflow-wrap: anywhere; text-align: center; line-height: 1.35; }
 .nt-ql-btns .nt-choix, .nt-btns > .nt-btn, .nt-chips .nt-chip { flex: 0 1 auto; min-width: 0; }
+
+/* --- Tableau à l'intérieur d'un « À retenir » : teintes chaudes, accordées au cadre --- */
+.nt-prop table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tr > :nth-child(3n+1) { --tc: #9A3412; }
+.nt-prop table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tr > :nth-child(3n+2) { --tc: #C2410C; }
+.nt-prop table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tr > :nth-child(3n+3) { --tc: #B45309; }
+.nt-prop table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr > :first-child { color: #9A3412; }
+.nt-prop table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody td { background: rgba(255, 251, 235, 0.75) !important; }
