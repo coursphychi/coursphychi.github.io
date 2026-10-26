@@ -380,16 +380,16 @@ draft = false
         }
       }
       /* compositions initiale et finale */
-      var top = 120, bh = h - top - 40, bw = (w - 120) / 8, keys = ['A', 'B', 'C', 'D'], cols = [CA, CB, CC, CD], mx = 12;
+      var etroit = w < 500, ml = etroit ? 10 : 50, gap = etroit ? 14 : 30, top = 120, bh = h - top - 40, bw = (w - 2 * ml - gap) / 8, keys = ['A', 'B', 'C', 'D'], cols = [CA, CB, CC, CD], mx = 12;   /* marges réduites sur téléphone */
       var fin = { A: n.A - x, B: n.B - x, C: n.C + x, D: n.D + x };
-      [['état initial', n, 50], ['état final (équilibre)', fin, 50 + 4 * bw + 30]].forEach(function (blk) {
-        txt(c, blk[0], blk[2] + 2 * bw - 6, top - 6, col('--slate'), '700 12px system-ui, sans-serif');
+      [['état initial', n, ml], [etroit ? 'état final' : 'état final (équilibre)', fin, ml + 4 * bw + gap]].forEach(function (blk) {
+        txt(c, blk[0], blk[2] + 2 * bw - 6, top - 6, col('--slate'), (etroit ? '700 11px' : '700 12px') + ' system-ui, sans-serif');
         keys.forEach(function (k, i) {
           var x0 = blk[2] + i * bw, v = Math.max(0, blk[1][k]), hh = v / mx * bh;
           c.fillStyle = '#E2E8F0'; c.fillRect(x0 + 4, top + 4, bw - 14, bh);
           c.fillStyle = cols[i]; c.fillRect(x0 + 4, top + 4 + bh - hh, bw - 14, hh);
           txt(c, k, x0 + bw / 2 - 3, top + bh + 22, cols[i], '700 14px system-ui, sans-serif');
-          txt(c, fr(v, 2), x0 + bw / 2 - 3, top + bh - hh - 2, col('--ink'), '600 11px system-ui, sans-serif');
+          txt(c, fr(v, 2), x0 + bw / 2 - 3, top + bh - hh - 2, col('--ink'), (etroit ? '600 9.5px' : '600 11px') + ' system-ui, sans-serif');
         });
       });
       if (isNaN(Q)) { msg.innerHTML = 'Sans réactifs ni produits en quantité suffisante, le quotient de réaction n\u2019est pas défini.'; }

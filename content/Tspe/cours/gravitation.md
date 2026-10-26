@@ -231,7 +231,7 @@ draft = false
 <button type="button" class="nt-btn nt-btn-main" data-act="play"><i class="fa-solid fa-pause"></i>&nbsp; Pause</button>
 </div>
 <div class="nt-read" aria-live="polite"><span>$v = \sqrt{GM_\mathrm{T}/R}$ = <b class="out-v"></b></span><span>$T$ = <b class="out-T"></b></span></div>
-<p class="nt-note">Plus le satellite est haut, plus il va lentement, et plus sa période est longue&nbsp;: l'ISS fait le tour de la Terre en 1&nbsp;h&nbsp;30 environ, à près de 28&nbsp;000&nbsp;km/h.</p>
+<p class="nt-note">Plus le satellite est haut, plus il va lentement, et plus sa période est longue&nbsp;: l'ISS fait le tour de la Terre en 1&nbsp;h&nbsp;30 environ, à près de 28&nbsp;000&nbsp;km·h⁻¹.</p>
 </div>
 
 ### Le satellite géostationnaire {.nt-h3}
@@ -296,10 +296,10 @@ draft = false
 <canvas style="height:420px;" aria-label="Trajectoires d'un objet lancé horizontalement depuis une montagne, selon sa vitesse : il retombe, se satellise ou s'échappe"></canvas>
 <label class="nt-ctrl">Vitesse de lancement $v_0$&nbsp;: <b class="out-v"></b><input type="range" min="1" max="12" step="0.05" value="5"></label>
 <div class="nt-btns">
-<button type="button" class="nt-btn" data-v="5">5 km/s</button>
+<button type="button" class="nt-btn" data-v="5">5 km·s⁻¹</button>
 <button type="button" class="nt-btn" data-v="v1">vitesse de l'orbite circulaire</button>
-<button type="button" class="nt-btn" data-v="9.5">9,5 km/s</button>
-<button type="button" class="nt-btn" data-v="11.5">11,5 km/s</button>
+<button type="button" class="nt-btn" data-v="9.5">9,5 km·s⁻¹</button>
+<button type="button" class="nt-btn" data-v="11.5">11,5 km·s⁻¹</button>
 <button type="button" class="nt-btn nt-btn-main" data-act="play"><i class="fa-solid fa-pause"></i>&nbsp; Pause</button>
 </div>
 <p class="nt-msg" aria-live="polite"></p>
@@ -308,7 +308,7 @@ draft = false
 <div class="nt-b nt-prop">
 <p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir</p>
 <p>Une orbite circulaire de rayon $R$ donné correspond à <span class="imp nt-hole">une et une seule vitesse</span>&nbsp;: $v = \sqrt{GM/R}$. Plus lent, l'objet retombe&nbsp;; plus rapide, son orbite devient elliptique (elle n'est plus circulaire).</p>
-<p>Au-delà de la <span class="imp nt-hole">vitesse de libération</span> (11,2&nbsp;km/s depuis la surface de la Terre), l'objet échappe définitivement à l'attraction gravitationnelle de la Terre.</p>
+<p>Au-delà de la <span class="imp nt-hole">vitesse de libération</span> (11,2&nbsp;km·s⁻¹ depuis la surface de la Terre), l'objet échappe définitivement à l'attraction gravitationnelle de la Terre.</p>
 </div>
 
 <details class="nt-d nt-plus">
@@ -326,7 +326,7 @@ draft = false
 </tbody>
 </table>
 </div>
-<p><b>Les débris spatiaux.</b> Autour de la Terre gravitent des satellites en service, des étages de fusée abandonnés et une multitude de débris. Le 10 février 2009, le satellite de téléphonie Iridium 33 et le satellite militaire russe hors service Kosmos-2251 sont entrés en collision à 776&nbsp;km d'altitude au-dessus de la Sibérie, à environ 11,6&nbsp;km/s&nbsp;: la collision a produit des centaines de débris. Les agences de surveillance préviennent désormais les opérateurs, et la Station spatiale internationale manœuvre régulièrement pour éviter des débris.</p>
+<p><b>Les débris spatiaux.</b> Autour de la Terre gravitent des satellites en service, des étages de fusée abandonnés et une multitude de débris. Le 10 février 2009, le satellite de téléphonie Iridium 33 et le satellite militaire russe hors service Kosmos-2251 sont entrés en collision à 776&nbsp;km d'altitude au-dessus de la Sibérie, à environ 11,6&nbsp;km·s⁻¹&nbsp;: la collision a produit des centaines de débris. Les agences de surveillance préviennent désormais les opérateurs, et la Station spatiale internationale manœuvre régulièrement pour éviter des débris.</p>
 <p><b>À explorer en ligne&nbsp;:</b></p>
 <ul class="nt-facts">
 <li><a href="https://satellitetracker3d.com/track?norad-id=25544" target="_blank" rel="noopener">Suivre l'ISS en temps réel</a>&nbsp;: on peut y vérifier que les orbites sont des ellipses dont la Terre occupe un foyer, que les satellites lointains vont moins vite, et utiliser les périodes affichées pour tester la troisième loi de Kepler et retrouver la masse de la Terre.</li>
@@ -451,8 +451,9 @@ draft = false
       c.stroke();
       sun(c, cx, cy, 12); c.fillStyle = CS; c.beginPath(); c.arc(cx, cy, 7, 0, 2 * Math.PI); c.fill();
       var peri = P([1 - e, 0]), aph = P([-1 - e, 0]);
-      txt(c, 'périhélie', peri[0] + 8, peri[1] + 4, col('--slate'), '700 12px system-ui, sans-serif', 'left');
-      txt(c, 'aphélie', aph[0] - 8, aph[1] + 4, col('--slate'), '700 12px system-ui, sans-serif', 'right');
+      c.font = '700 12px system-ui, sans-serif'; var lp = c.measureText('périhélie').width, la = c.measureText('aphélie').width;   /* étiquettes à l'extérieur de l'orbite si la place le permet, sinon à l'intérieur */
+      if (peri[0] + 8 + lp < w - 4) { txt(c, 'périhélie', peri[0] + 8, peri[1] + 4, col('--slate'), '700 12px system-ui, sans-serif', 'left'); } else { txt(c, 'périhélie', peri[0] - 10, peri[1] + 18, col('--slate'), '700 12px system-ui, sans-serif', 'right'); }
+      if (aph[0] - 8 - la > 4) { txt(c, 'aphélie', aph[0] - 8, aph[1] + 4, col('--slate'), '700 12px system-ui, sans-serif', 'right'); } else { txt(c, 'aphélie', aph[0] + 10, aph[1] + 4, col('--slate'), '700 12px system-ui, sans-serif', 'left'); }
       /* planète et vecteur vitesse */
       var Mm = (t % 1) * 2 * Math.PI, pos = keplerPos(e, Mm), pp = P(pos), dM = 1e-3, p2 = keplerPos(e, Mm + dM);
       var vx = (p2[0] - pos[0]) / dM, vy = (p2[1] - pos[1]) / dM, v = Math.hypot(vx, vy);
@@ -510,11 +511,12 @@ draft = false
       c.stroke(); c.restore(); c.setLineDash([]);
       var lx = lg ? Math.pow(10, xmin + 0.35 * (xmax - xmin)) : 0.45 * xmax;   /* étiquette posée le long de la droite */
       txt(c, 'T\u00b2 = k a\u00b3', fx(lx) - 6, fy(k * lx) - 10, '#059669', '700 12px system-ui, sans-serif', 'right');
-      s.pts.forEach(function (p, i) {
-        var x = fx(X[i]), y = fy(Y[i]);
-        c.fillStyle = CPL; c.beginPath(); c.arc(x, y, 5.5, 0, 2 * Math.PI); c.fill();
-        txt(c, p[0], x + 9, y - 7, col('--ink'), '600 11px system-ui, sans-serif', 'left');
-      });
+      var pris = [];   /* étiquettes : jamais coupées par le bord, et jamais l'une sur l'autre (on omet celles qui ne trouvent pas de place) */
+      c.font = '600 11px system-ui, sans-serif';
+      s.pts.forEach(function (p, i) { var x = fx(X[i]), y = fy(Y[i]); c.fillStyle = CPL; c.beginPath(); c.arc(x, y, 5.5, 0, 2 * Math.PI); c.fill(); });
+      s.pts.slice().reverse().forEach(function (p) { var i = s.pts.indexOf(p), x = fx(X[i]), y = fy(Y[i]), lw = c.measureText(p[0]).width, lx = x + 9 + lw > w - 4 ? x - 9 - lw : x + 9, ly = y - 7;
+        if (pris.some(function (q) { return lx < q[0] + q[2] + 4 && q[0] < lx + lw + 4 && Math.abs(ly - q[1]) < 13; })) { return; }
+        pris.push([lx, ly, lw]); txt(c, p[0], lx, ly, col('--ink'), '600 11px system-ui, sans-serif', 'left'); });
     }
     function sup(n) { var m = { '-': '\u207b', 0: '\u2070', 1: '\u00b9', 2: '\u00b2', 3: '\u00b3', 4: '\u2074', 5: '\u2075', 6: '\u2076', 7: '\u2077', 8: '\u2078', 9: '\u2079' }; return String(n).split('').map(function (ch) { return m[ch]; }).join(''); }
     $$(root, 'input[name="sys"]').forEach(function (x) { x.addEventListener('change', function () { sys = x.value; draw(); }); });
@@ -527,6 +529,17 @@ draft = false
     var root = document.getElementById('lab-circ');
     if (!root) { return; }
     var cv = $(root, 'canvas'), rH = $(root, 'input[type="range"]'), oH = $(root, '.out-h'), oV = $(root, '.out-v'), oT = $(root, '.out-T'), btn = $(root, '[data-act="play"]'), S, th = 0;
+    function nomVecteur(c, s, x, y, color) {   /* nom de vecteur : lettre en italique surmontée d'une flèche, centré en (x, y) */
+      x = Math.max(12, Math.min(S.w - 12, x)); y = Math.max(20, Math.min(S.h - 10, y));   /* l'étiquette reste dans le cadre */
+      c.font = 'italic 700 16px Georgia, serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.lineJoin = 'round';
+      var w = c.measureText(s).width, yf = y - 11;
+      c.lineWidth = 4; c.strokeStyle = 'rgba(11,18,32,.85)'; c.strokeText(s, x, y);   /* liseré sombre : lisible sur le fond et sur la Terre */
+      c.fillStyle = color; c.fillText(s, x, y);
+      c.strokeStyle = 'rgba(11,18,32,.85)'; c.lineWidth = 4; c.beginPath(); c.moveTo(x - w / 2 - 1, yf); c.lineTo(x + w / 2 + 3, yf); c.stroke();
+      c.strokeStyle = color; c.lineWidth = 1.4; c.beginPath(); c.moveTo(x - w / 2 - 1, yf); c.lineTo(x + w / 2 + 2, yf); c.stroke();
+      c.fillStyle = color; c.beginPath(); c.moveTo(x + w / 2 + 5, yf); c.lineTo(x + w / 2 + 0.5, yf - 2.6); c.lineTo(x + w / 2 + 0.5, yf + 2.6); c.closePath(); c.fill();
+      c.textBaseline = 'alphabetic';
+    }
     function draw(dt) {
       if (!S) { return; }
       var h = +rH.value * 1000, R = RE + h, v = Math.sqrt(GRAV * ME / R), T = 2 * Math.PI * R / v;
@@ -539,24 +552,28 @@ draft = false
       c.fillStyle = '#0B1220'; c.fillRect(0, 0, w, hh);
       [[2.02e7 + RE, 'GPS'], [3.5786e7 + RE, 'géostationnaire']].forEach(function (q) {
         c.strokeStyle = 'rgba(148,163,184,.35)'; c.setLineDash([3, 5]); c.lineWidth = 1; c.beginPath(); c.arc(cx, cy, q[0] * k, 0, 2 * Math.PI); c.stroke(); c.setLineDash([]);
-        c.fillStyle = 'rgba(203,213,225,.75)'; c.font = '600 11px system-ui, sans-serif'; c.textAlign = 'left'; c.fillText(q[1], cx + q[0] * k * 0.72 + 4, cy - q[0] * k * 0.72 - 4);
+        c.fillStyle = 'rgba(203,213,225,.75)'; c.font = '600 11px system-ui, sans-serif'; c.textAlign = 'left'; c.fillText(q[1], Math.min(cx + q[0] * k * 0.72 + 4, w - c.measureText(q[1]).width - 6), cy - q[0] * k * 0.72 - 4);   /* le nom reste dans le cadre */
       });
       var g = c.createRadialGradient(cx - RE * k * 0.3, cy - RE * k * 0.3, 2, cx, cy, RE * k); g.addColorStop(0, '#93C5FD'); g.addColorStop(1, '#1D4ED8');
       c.fillStyle = g; c.beginPath(); c.arc(cx, cy, RE * k, 0, 2 * Math.PI); c.fill();
       c.strokeStyle = '#FDE68A'; c.lineWidth = 1.8; c.beginPath(); c.arc(cx, cy, R * k, 0, 2 * Math.PI); c.stroke();
       var sx = cx + R * k * Math.cos(th), sy = cy - R * k * Math.sin(th), ut = [-Math.sin(th), -Math.cos(th)], un = [-Math.cos(th), Math.sin(th)];
-      arrow(c, sx, sy, sx + ut[0] * v / 1000 * 9, sy + ut[1] * v / 1000 * 9, CV, 2.8);
-      var a = GRAV * ME / (R * R); arrow(c, sx, sy, sx + un[0] * (8 + a * 5), sy + un[1] * (8 + a * 5), '#34D399', 2.8);
+      var Lv = v / 1000 * 9, a = GRAV * ME / (R * R), La = 8 + a * 5;   /* longueurs des flèches (échelles arbitraires) */
+      arrow(c, sx, sy, sx + ut[0] * Lv, sy + ut[1] * Lv, CV, 2.8);
+      arrow(c, sx, sy, sx + un[0] * La, sy + un[1] * La, '#34D399', 2.8);
       c.fillStyle = '#F8FAFC'; c.beginPath(); c.arc(sx, sy, 5, 0, 2 * Math.PI); c.fill();
-      c.fillStyle = '#FDE68A'; c.font = '700 12px system-ui, sans-serif'; c.textAlign = 'left'; c.fillText('v', sx + ut[0] * v / 1000 * 9 + 6, sy + ut[1] * v / 1000 * 9);
-      c.fillStyle = '#34D399'; c.fillText('a', sx + un[0] * (8 + a * 5) + 6, sy + un[1] * (8 + a * 5) + 4);
-      c.fillStyle = 'rgba(248,250,252,.6)'; c.font = '11px system-ui, sans-serif'; c.textAlign = 'right'; c.fillText('animation accélérée 3 000 fois (orbites à l\u2019échelle)', w - 10, hh - 10);
+      /* étiquettes : un peu devant la pointe de chaque flèche ; celle de v est en plus décalée vers l'extérieur de l'orbite.
+         Comme les flèches, elles tournent avec le satellite : leur mouvement est circulaire. */
+      nomVecteur(c, 'v', sx + ut[0] * (Lv + 13) - un[0] * 14, sy + ut[1] * (Lv + 13) - un[1] * 14, '#FDE68A');
+      nomVecteur(c, 'a', sx + un[0] * (La + 14), sy + un[1] * (La + 14), '#34D399');
+      c.fillStyle = 'rgba(248,250,252,.6)'; c.font = '11px system-ui, sans-serif'; c.textAlign = 'right'; c.fillText(w < 500 ? 'accélérée 3 000 fois, orbites à l\u2019échelle' : 'animation accélérée 3 000 fois (orbites à l\u2019échelle)', w - 10, hh - 10);
     }
     rH.addEventListener('input', function () { draw(0); });
     $$(root, '[data-h]').forEach(function (b) { b.addEventListener('click', function () { rH.value = b.getAttribute('data-h'); draw(0); }); });
     function setup() { S = canvasCtx(cv); draw(0); }
     setup(); onResize(setup); loopVisible(cv, btn, draw);
   })();
+
   /* ================= 5. Le canon de Newton ================= */
   (function () {
     var root = document.getElementById('lab-canon');
@@ -577,14 +594,14 @@ draft = false
       }
       traj = out; t = 0;
       var en = 0.5 * v0 * v0 - GM / R0;
-      if (Math.abs(v0 - V1) < 60) { msg.textContent = 'Orbite circulaire : à cette altitude, il faut exactement v\u2081 = ' + fr(V1 / 1000, 2) + ' km/s. Période : ' + Math.round(2 * Math.PI * R0 / V1 / 60) + ' min.'; }
+      if (Math.abs(v0 - V1) < 60) { msg.textContent = 'Orbite circulaire : à cette altitude, il faut exactement v\u2081 = ' + fr(V1 / 1000, 2) + ' km·s⁻¹. Période : ' + Math.round(2 * Math.PI * R0 / V1 / 60) + ' min.'; }
       else if (v0 < V1) {
         var lastP = out[out.length - 1];
         msg.textContent = Math.hypot(lastP[0], lastP[1]) < RE + 1 ? 'Trop lent : l\u2019objet retombe sur la Terre (sa trajectoire est une portion d\u2019ellipse). Plus on lance vite, plus il tombe loin.'
           : 'Orbite elliptique : le point de lancement devient l\u2019apogée (point le plus éloigné de la Terre).';
       }
       else if (en < 0) { var a = -GM / (2 * en); msg.textContent = 'Orbite elliptique : le point de lancement devient le périgée. Période : ' + (2 * Math.PI * Math.sqrt(a * a * a / GM) / 3600).toFixed(1).replace('.', ',') + ' h.'; }
-      else { msg.textContent = 'Vitesse supérieure à la vitesse de libération (' + fr(VL / 1000, 1) + ' km/s à cette altitude) : l\u2019objet échappe à l\u2019attraction de la Terre et ne revient jamais.'; }
+      else { msg.textContent = 'Vitesse supérieure à la vitesse de libération (' + fr(VL / 1000, 1) + ' km·s⁻¹ à cette altitude) : l\u2019objet échappe à l\u2019attraction de la Terre et ne revient jamais.'; }
     }
     function draw(dt) {
       if (!S) { return; }

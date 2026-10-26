@@ -479,3 +479,10 @@ details.nt-d.nt-plus { --c: #64748B; --bg: #F4F5F7; --c-ink: #475569; }
 .nt-prop table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tr > :nth-child(3n+3) { --tc: #B45309; }
 .nt-prop table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody tr > :first-child { color: #9A3412; }
 .nt-prop table.nt-t:not(.nt-t-ir):not(.nt-t-pente):not(.nt-t-cmp) tbody td { background: rgba(255, 251, 235, 0.75) !important; }
+
+/* --- Formules trop larges pour l'écran (téléphone) : elles défilent dans leur propre paragraphe au lieu d'élargir toute la page --- */
+p:has(> mjx-container), .nt-f-math, .nt-center { overflow-x: auto; overflow-y: hidden; }
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+.nt-f { box-sizing: border-box; }
+@media (max-width: 600px) { .nt-f { padding: 0.5em 1em 0.7em; } }
+li:has(mjx-container), td:has(mjx-container), .nt-f-units > span:has(mjx-container) { overflow-x: auto; overflow-y: hidden; }

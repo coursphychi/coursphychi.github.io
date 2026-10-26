@@ -541,10 +541,12 @@ draft = false
     for (var gy = o.y0; gy <= o.y1 + 1e-9; gy += o.dy) { c.beginPath(); c.moveTo(L, Y(gy)); c.lineTo(R, Y(gy)); c.stroke(); }
     c.strokeStyle = col('--ink'); c.beginPath(); c.moveTo(L, T); c.lineTo(L, B); c.lineTo(R, B); c.stroke();
     c.fillStyle = col('--muted'); c.font = '11px system-ui, sans-serif'; c.textAlign = 'center';
-    for (gx = o.x0; gx <= o.x1 + 1e-9; gx += o.dx) { c.fillText(fr(gx, o.ndx || 0), X(gx), B + 14); }
+    var px = Math.abs(X(o.x0 + o.dx) - X(o.x0)), sx = Math.max(1, Math.ceil(34 / px)), ix = 0;   /* sur un écran étroit, on n'écrit qu'une graduation sur deux (ou trois…) */
+    for (gx = o.x0; gx <= o.x1 + 1e-9; gx += o.dx, ix++) { if (ix % sx === 0) { c.fillText(fr(gx, o.ndx || 0), X(gx), B + 14); } }
     c.fillText(o.xl, (L + R) / 2, h - 3);
     c.textAlign = 'right';
-    for (gy = o.y0; gy <= o.y1 + 1e-9; gy += o.dy) { c.fillText(fr(gy, o.ndy || 0), L - 5, Y(gy) + 4); }
+    var py = Math.abs(Y(o.y0 + o.dy) - Y(o.y0)), sy = Math.max(1, Math.ceil(15 / py)), iy = 0;
+    for (gy = o.y0; gy <= o.y1 + 1e-9; gy += o.dy, iy++) { if (iy % sy === 0) { c.fillText(fr(gy, o.ndy || 0), L - 5, Y(gy) + 4); } }
     c.save(); c.translate(12, (T + B) / 2); c.rotate(-Math.PI / 2); c.textAlign = 'center'; c.fillText(o.yl, 0, 0); c.restore();
     return { X: X, Y: Y, L: L, R: R, T: T, B: B };
   }
@@ -576,7 +578,7 @@ draft = false
       var dt = 45, ta = Math.max(0, Math.min(255, t0 - dt / 2)), tb = ta + dt, ya = y0 + s * (ta - t0), yb = y0 + s * (tb - t0);
       c.fillStyle = 'rgba(56,189,248,.35)'; c.beginPath(); c.moveTo(F.X(ta), F.Y(ya)); c.lineTo(F.X(tb), F.Y(ya)); c.lineTo(F.X(tb), F.Y(yb)); c.closePath(); c.fill();
       c.restore();
-      txt(c, '\u0394t = 45 s', (F.X(ta) + F.X(tb)) / 2, F.Y(ya) + (s > 0 ? 15 : -7), CT);
+      txt(c, '\u0394t = 45 s', F.X(t0) - 6, F.Y(ya) + (s > 0 ? 15 : -7), CT, '700 12px system-ui, sans-serif', 'right');   /* à gauche du pointillé vertical, qui ne le coupe plus */
       txt(c, '\u0394C = ' + fr(s * dt, 2), F.X(tb) + 6, (F.Y(ya) + F.Y(yb)) / 2 + 4, CT, '700 12px system-ui, sans-serif', 'left');
       c.strokeStyle = 'rgba(30,41,59,.5)'; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(F.X(t0), F.Y(y0)); c.lineTo(F.X(t0), F.B); c.stroke(); c.setLineDash([]);
       c.fillStyle = CT; c.beginPath(); c.arc(F.X(t0), F.Y(y0), 5, 0, 2 * Math.PI); c.fill();
@@ -613,7 +615,7 @@ draft = false
       PTS.forEach(function (p) { c.fillStyle = CR; c.beginPath(); c.arc(F.X(p[0]), F.Y(A(p[0]) * p[1]), 3.5, 0, 2 * Math.PI); c.fill(); });
       if (th < TM) {
         c.strokeStyle = CK; c.setLineDash([4, 4]); c.lineWidth = 1.5; c.beginPath(); c.moveTo(F.L, F.Y(a0 / 2)); c.lineTo(F.X(th), F.Y(a0 / 2)); c.lineTo(F.X(th), F.B); c.stroke(); c.setLineDash([]);
-        txt(c, 't\u00bd', F.X(th), F.B - 6, CK);
+        txt(c, 't\u00bd', F.X(th) + 5, F.B - 6, CK, '700 12px system-ui, sans-serif', 'left');
       }
       var g = S2.ctx; g.clearRect(0, 0, S2.w, S2.h);
       var lmin = Math.log(a0 * 1e-2) - k * TM - 0.3, lmax = Math.log(5e-2) + 0.2;
@@ -655,7 +657,7 @@ draft = false
         c.strokeStyle = CT; c.setLineDash([5, 4]); c.lineWidth = 1.8; c.beginPath(); c.moveTo(F.L, F.Y(m.half)); c.lineTo(F.X(TH), F.Y(m.half)); c.lineTo(F.X(TH), F.B); c.stroke(); c.setLineDash([]);
         c.fillStyle = CT; c.beginPath(); c.arc(F.X(TH), F.Y(m.half), 5, 0, 2 * Math.PI); c.fill();
         txt(c, m.lab[1], F.L + 8, F.Y(m.half) - 6, CT, '700 12px system-ui, sans-serif', 'left');
-        txt(c, 't\u00bd \u2248 ' + Math.round(TH) + ' s', F.X(TH), F.B - 8, CT);
+        txt(c, 't\u00bd \u2248 ' + Math.round(TH) + ' s', F.X(TH) + 6, F.B - 8, CT, '700 12px system-ui, sans-serif', 'left');   /* à droite du pointillé */
       }
       msg.textContent = 'La transformation est presque terminée vers ' + Math.round(5 * TH) + ' s, soit environ 5 t\u00bd (il reste alors 3 % du réactif limitant) : le temps de demi-réaction n\u2019est pas la moitié de la durée de la réaction !';
     }

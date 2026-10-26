@@ -324,8 +324,9 @@ draft = false
       var al = +rA.value * Math.PI / 180, c = S.ctx, w = S.w, h = S.h, y0 = h / 2 + 10, xL = w * 0.45, f = Math.min(w * 0.22, 170), H = h * 0.36;
       oA.textContent = Math.round(+rA.value) + '\u00b0';
       c.clearRect(0, 0, w, h);
-      c.strokeStyle = col('--slate'); c.lineWidth = 1.2; c.beginPath(); c.moveTo(14, y0); c.lineTo(w - 14, y0); c.stroke();
-      txt(c, 'axe optique', w - 16, y0 + 18, col('--slate'), '600 11px system-ui, sans-serif', 'right');
+      c.strokeStyle = col('--slate'); c.lineWidth = 1.2; c.beginPath(); c.moveTo(14, y0); c.lineTo(w - 18, y0); c.stroke();
+      c.fillStyle = col('--slate'); c.beginPath(); c.moveTo(w - 8, y0); c.lineTo(w - 18, y0 - 4.5); c.lineTo(w - 18, y0 + 4.5); c.closePath(); c.fill();   /* axe optique orienté */
+      if (w >= 500) { txt(c, 'axe optique', w - 16, y0 + 18, col('--slate'), '600 11px system-ui, sans-serif', 'right'); }   /* sur téléphone, la place manque : l'axe orienté suffit */
       lens(c, xL, y0, H, COB);
       tick(c, xL - f, y0, CF); tick(c, xL + f, y0, CF);
       lab(c, 'O', '', xL + 6, y0 + 20, col('--ink')); lab(c, 'F', '', xL - f - 4, y0 + 22, CF); lab(c, "F'", '', xL + f - 4, y0 + 22, CF);
@@ -333,7 +334,7 @@ draft = false
       if (mode === 'inf') {
         /* faisceau parallèle incliné de α (venant d'en haut à gauche) : converge dans le plan focal image */
         c.strokeStyle = 'rgba(100,116,139,.6)'; c.setLineDash([5, 4]); c.lineWidth = 1.2; c.beginPath(); c.moveTo(xL + f, y0 - H); c.lineTo(xL + f, y0 + H); c.stroke(); c.setLineDash([]);
-        txt(c, 'plan focal image', xL + f + 6, y0 - H + 4, CF, '600 11px system-ui, sans-serif', 'left');
+        c.font = '600 11px system-ui, sans-serif'; if (xL + f + 6 + c.measureText('plan focal image').width < w - 4) { txt(c, 'plan focal image', xL + f + 6, y0 - H + 4, CF, '600 11px system-ui, sans-serif', 'left'); } else { txt(c, 'plan focal image', xL + f - 6, y0 - H + 4, CF, '600 11px system-ui, sans-serif', 'right'); }   /* à gauche du plan s'il n'y a pas la place à droite */
         var By = y0 + f * t;
         hs.forEach(function (hk) {
           var yl = y0 + hk, x0 = 20, ys = yl - (xL - x0) * t, xe = Math.min(w - 20, xL + f + 90);
@@ -366,11 +367,12 @@ draft = false
   /* ================= 2. Lunette : géométrie et tracé communs au tuto et à l'œil réduit ================= */
   function scope(c, w, h, P) {
     /* P : al (rad), fob, foc, step (0 à 6), eye ('simple' ou 'reduit') */
-    var y0 = h / 2 + 8, Lw = w - (P.eye === 'reduit' ? 330 : 270), k = Lw / (P.fob + P.foc), xOb = 70, xF = xOb + P.fob * k, xOc = xF + P.foc * k;
+    var etroit = w < 600, y0 = h / 2 + 8, xOb = etroit ? 34 : 70, Lw = etroit ? w * (P.eye === 'reduit' ? 0.42 : 0.62) : w - (P.eye === 'reduit' ? 330 : 270), k = Lw / (P.fob + P.foc), xF = xOb + P.fob * k, xOc = xF + P.foc * k;   /* sur téléphone, les marges deviennent proportionnelles à la largeur */
     var Hob = h * 0.36, Hoc = Math.min(Hob, Math.max(h * 0.2, Hob * 1.1 * P.foc / P.fob + h * 0.12));
     var t = Math.tan(P.al), Biy = y0 + P.fob * k * t, sl = (y0 - Biy) / (xOc - xF), xEnd = w - 12, step = P.step;
     c.clearRect(0, 0, w, h);
-    c.strokeStyle = col('--slate'); c.lineWidth = 1.2; c.beginPath(); c.moveTo(10, y0); c.lineTo(w - 10, y0); c.stroke();
+    c.strokeStyle = col('--slate'); c.lineWidth = 1.2; c.beginPath(); c.moveTo(10, y0); c.lineTo(w - 14, y0); c.stroke();
+    c.fillStyle = col('--slate'); c.beginPath(); c.moveTo(w - 4, y0); c.lineTo(w - 14, y0 - 4.5); c.lineTo(w - 14, y0 + 4.5); c.closePath(); c.fill();   /* axe optique orienté */
     lens(c, xOb, y0, Hob, COB, 'objectif'); lens(c, xOc, y0, Hoc, COC, 'oculaire');
     tick(c, xF, y0, CF); tick(c, xOc + P.foc * k, y0, CF);
     lab(c, 'O', 'ob', xOb - 26, y0 + 20, COB); lab(c, 'O', 'oc', xOc + 6, y0 + 20, COC);

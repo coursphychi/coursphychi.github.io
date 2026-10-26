@@ -352,7 +352,7 @@ draft = false
     function newQ() {
       var type = mode === 'mix' ? rnd(['pip', 'fio', 'deux', 'F']) : mode, pr = rnd(pairs()), p = pr[0], f = pr[1], F = f / p, Fs = (F % 1 === 0) ? String(F) : fr(F, 1);
       var Cm = rnd([1.0, 2.0, 5.0, 1.5, 2.5]) * Math.pow(10, -rnd([1, 2, 3])), Cf = Cm / F, useC = Math.random() < 0.5;
-      var data = useC ? 'La solution mère a une concentration $C_\\text{mère}$ = ' + sci(Cm) + '&nbsp;mol/L&nbsp;; on veut une solution fille de concentration $C_\\text{fille}$ = ' + sci(Cf) + '&nbsp;mol/L.'
+      var data = useC ? 'La solution mère a une concentration $C_\\text{mère}$ = ' + sci(Cm) + '&nbsp;mol·L⁻¹&nbsp;; on veut une solution fille de concentration $C_\\text{fille}$ = ' + sci(Cf) + '&nbsp;mol·L⁻¹.'
                       : 'On veut diluer la solution mère <b>' + Fs + '&nbsp;fois</b> (facteur de dilution $F$ = ' + Fs + ').';
       var q;
       if (type === 'pip') { q = data + ' On dispose d\u2019une fiole jaugée de <b>' + f + '&nbsp;mL</b>. Quelle pipette jaugée faut-il utiliser&nbsp;?'; }

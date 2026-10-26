@@ -225,7 +225,7 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
 <summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">La «&nbsp;tension de Hubble&nbsp;», une des grandes crises de la physique actuelle</span></summary>
 <div class="nt-d-body">
 <p>On sait mesurer $H_0$ de deux façons indépendantes. La première exploite le fond diffus cosmologique (voir plus bas) et un modèle de l'histoire de l'Univers. La seconde mesure directement les distances et les vitesses de galaxies proches, à l'aide d'étoiles variables (céphéides) et de supernovæ. Au début des années 2020, les deux méthodes donnent des valeurs incompatibles&nbsp;:</p>
-<svg class="nt-svg nt-svg-m" viewBox="0 0 560 220" role="img" aria-label="Deux mesures incompatibles de la constante de Hubble : 67,4 ± 0,5 et 73,0 ± 1,0 km/s/Mpc"><rect x="186.0" y="20" width="40.0" height="150" fill="var(--blue)" opacity=".12"/><rect x="390.0" y="20" width="80.0" height="150" fill="var(--rose)" opacity=".12"/><line x1="70" y1="170" x2="550" y2="170" stroke="var(--ink)" stroke-width="1.5"/><line x1="70" y1="170" x2="70" y2="176" stroke="var(--ink)"/><text x="70" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">64</text><line x1="150" y1="170" x2="150" y2="176" stroke="var(--ink)"/><text x="150" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">66</text><line x1="230" y1="170" x2="230" y2="176" stroke="var(--ink)"/><text x="230" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">68</text><line x1="310" y1="170" x2="310" y2="176" stroke="var(--ink)"/><text x="310" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">70</text><line x1="390" y1="170" x2="390" y2="176" stroke="var(--ink)"/><text x="390" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">72</text><line x1="470" y1="170" x2="470" y2="176" stroke="var(--ink)"/><text x="470" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">74</text><line x1="550" y1="170" x2="550" y2="176" stroke="var(--ink)"/><text x="550" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">76</text><text x="310" y="212" font-size="12" text-anchor="middle" fill="var(--slate)">H₀ (km·s⁻¹·Mpc⁻¹)</text><line x1="186.0" y1="70" x2="226.0" y2="70" stroke="var(--blue)" stroke-width="2.5"/><line x1="186.0" y1="63" x2="186.0" y2="77" stroke="var(--blue)" stroke-width="2.5"/><line x1="226.0" y1="63" x2="226.0" y2="77" stroke="var(--blue)" stroke-width="2.5"/><circle cx="206.0" cy="70" r="6" fill="var(--blue)"/><text x="238.0" y="75" font-size="13" text-anchor="start" fill="var(--blue)" font-weight="700">fond diffus cosmologique (Planck)</text><line x1="390.0" y1="125" x2="470.0" y2="125" stroke="var(--rose)" stroke-width="2.5"/><line x1="390.0" y1="118" x2="390.0" y2="132" stroke="var(--rose)" stroke-width="2.5"/><line x1="470.0" y1="118" x2="470.0" y2="132" stroke="var(--rose)" stroke-width="2.5"/><circle cx="430.0" cy="125" r="6" fill="var(--rose)"/><text x="378.0" y="130" font-size="13" text-anchor="end" fill="var(--rose)" font-weight="700">céphéides et supernovæ (SH0ES)</text></svg>
+<svg class="nt-svg nt-svg-m" viewBox="0 0 560 220" role="img" aria-label="Deux mesures incompatibles de la constante de Hubble : 67,4 ± 0,5 et 73,0 ± 1,0 km·s⁻¹·Mpc⁻¹"><rect x="186.0" y="20" width="40.0" height="150" fill="var(--blue)" opacity=".12"/><rect x="390.0" y="20" width="80.0" height="150" fill="var(--rose)" opacity=".12"/><line x1="70" y1="170" x2="550" y2="170" stroke="var(--ink)" stroke-width="1.5"/><line x1="70" y1="170" x2="70" y2="176" stroke="var(--ink)"/><text x="70" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">64</text><line x1="150" y1="170" x2="150" y2="176" stroke="var(--ink)"/><text x="150" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">66</text><line x1="230" y1="170" x2="230" y2="176" stroke="var(--ink)"/><text x="230" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">68</text><line x1="310" y1="170" x2="310" y2="176" stroke="var(--ink)"/><text x="310" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">70</text><line x1="390" y1="170" x2="390" y2="176" stroke="var(--ink)"/><text x="390" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">72</text><line x1="470" y1="170" x2="470" y2="176" stroke="var(--ink)"/><text x="470" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">74</text><line x1="550" y1="170" x2="550" y2="176" stroke="var(--ink)"/><text x="550" y="192" font-size="12" text-anchor="middle" fill="var(--ink)">76</text><text x="310" y="212" font-size="12" text-anchor="middle" fill="var(--slate)">H₀ (km·s⁻¹·Mpc⁻¹)</text><line x1="186.0" y1="70" x2="226.0" y2="70" stroke="var(--blue)" stroke-width="2.5"/><line x1="186.0" y1="63" x2="186.0" y2="77" stroke="var(--blue)" stroke-width="2.5"/><line x1="226.0" y1="63" x2="226.0" y2="77" stroke="var(--blue)" stroke-width="2.5"/><circle cx="206.0" cy="70" r="6" fill="var(--blue)"/><text x="238.0" y="75" font-size="13" text-anchor="start" fill="var(--blue)" font-weight="700">fond diffus cosmologique (Planck)</text><line x1="390.0" y1="125" x2="470.0" y2="125" stroke="var(--rose)" stroke-width="2.5"/><line x1="390.0" y1="118" x2="390.0" y2="132" stroke="var(--rose)" stroke-width="2.5"/><line x1="470.0" y1="118" x2="470.0" y2="132" stroke="var(--rose)" stroke-width="2.5"/><circle cx="430.0" cy="125" r="6" fill="var(--rose)"/><text x="378.0" y="130" font-size="13" text-anchor="end" fill="var(--rose)" font-weight="700">céphéides et supernovæ (SH0ES)</text></svg>
 <p>L'écart dépasse cinq fois les incertitudes&nbsp;: en physique, on parle de «&nbsp;tension&nbsp;». Soit l'une des mesures comporte une erreur systématique encore inconnue, soit notre modèle de l'Univers est incomplet. La question est toujours ouverte.</p>
 </div>
 </details>
@@ -255,13 +255,13 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
 <button type="button" class="nt-btn" data-preset="0.00315,365.25">Terre</button>
 <button type="button" class="nt-btn nt-btn-main" data-act="play"><i class="fa-solid fa-pause"></i>&nbsp; Pause</button>
 </div>
-<p class="nt-msg">Pour une étoile semblable au Soleil. Jupiter fait osciller le Soleil à environ 13&nbsp;m/s, ce qui décale ses raies d'environ trois cent-millièmes de nanomètre&nbsp;; la Terre ne le fait osciller qu'à 9&nbsp;cm/s, un effet encore 150 fois plus petit, à la limite des meilleurs spectrographes actuels.</p>
+<p class="nt-msg">Pour une étoile semblable au Soleil. Jupiter fait osciller le Soleil à environ 13&nbsp;m·s⁻¹, ce qui décale ses raies d'environ trois cent-millièmes de nanomètre&nbsp;; la Terre ne le fait osciller qu'à 9&nbsp;cm·s⁻¹, un effet encore 150 fois plus petit, à la limite des meilleurs spectrographes actuels.</p>
 </div>
 
 <div class="nt-b nt-ex">
 <p class="nt-tag"><i class="fa-solid fa-satellite-dish"></i>Anisotropie dipolaire du CMB</p>
 <p>Le fond diffus cosmologique (CMB, pour <i>cosmic microwave background</i>) est un rayonnement micro-onde qui baigne tout l'Univers, émis environ 380&nbsp;000 ans après le Big Bang. Il nous parvient de toutes les directions, avec un spectre dont l'intensité est maximale vers 160&nbsp;GHz.</p>
-<p>Pourtant, dans une direction du ciel, toutes ses fréquences sont très légèrement plus élevées que la moyenne, et dans la direction opposée, légèrement plus basses&nbsp;: c'est l'effet Doppler dû à notre propre mouvement à travers ce rayonnement. Cette anisotropie dipolaire permet de savoir dans quelle direction et à quelle vitesse nous nous déplaçons par rapport à lui&nbsp;: environ 370&nbsp;km/s pour le Soleil, vers la constellation de la Coupe.</p>
+<p>Pourtant, dans une direction du ciel, toutes ses fréquences sont très légèrement plus élevées que la moyenne, et dans la direction opposée, légèrement plus basses&nbsp;: c'est l'effet Doppler dû à notre propre mouvement à travers ce rayonnement. Cette anisotropie dipolaire permet de savoir dans quelle direction et à quelle vitesse nous nous déplaçons par rapport à lui&nbsp;: environ 370&nbsp;km·s⁻¹ pour le Soleil, vers la constellation de la Coupe.</p>
 </div>
 
 <svg class="nt-svg nt-svg-m" viewBox="0 0 560 300" role="img" aria-label="Carte de tout le ciel : les fréquences du fond diffus cosmologique sont légèrement augmentées dans la direction de notre mouvement et légèrement diminuées dans la direction opposée"><defs><linearGradient id="gDip" x1="0" x2="1"><stop offset="0" stop-color="#3B82F6"/><stop offset=".5" stop-color="#F1F5F9"/><stop offset="1" stop-color="#EF4444"/></linearGradient></defs><ellipse cx="280" cy="140" rx="250" ry="125" fill="url(#gDip)" stroke="var(--slate)" stroke-width="1.5"/><ellipse cx="280" cy="140" rx="125" ry="125" fill="none" stroke="var(--slate)" stroke-opacity=".25"/><line x1="30" y1="140" x2="530" y2="140" stroke="var(--slate)" stroke-opacity=".25"/><circle cx="110" cy="140" r="7" fill="#fff" stroke="var(--ink)" stroke-width="2"/><text x="110" y="120" font-size="14" text-anchor="middle" font-weight="700" fill="#fff">Δf &gt; 0</text><text x="110" y="170" font-size="12" text-anchor="middle" font-weight="700" fill="#fff">+ 0,12 %</text><circle cx="450" cy="140" r="7" fill="#fff" stroke="var(--ink)" stroke-width="2"/><text x="450" y="120" font-size="14" text-anchor="middle" font-weight="700" fill="#fff">Δf &lt; 0</text><text x="450" y="170" font-size="12" text-anchor="middle" font-weight="700" fill="#fff">− 0,12 %</text><text x="160" y="290" font-size="13" text-anchor="middle" fill="#1D4ED8" font-weight="700">direction de notre mouvement</text><text x="420" y="290" font-size="13" text-anchor="middle" fill="#B91C1C" font-weight="700">direction opposée</text></svg>
@@ -457,9 +457,9 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
       btn.innerHTML = '<i class="fa-solid fa-stop"></i>&nbsp; Arrêter';
       requestAnimationFrame(step);
     });
-    rV.addEventListener('input', function () { oV.textContent = rV.value + ' km/h'; compute(); drawScene(); drawGraph(); });
+    rV.addEventListener('input', function () { oV.textContent = rV.value + ' km·h⁻¹'; compute(); drawScene(); drawGraph(); });
     document.addEventListener('visibilitychange', function () { if (document.hidden && osc) { sound(false); } });
-    function setup() { S1 = canvasCtx(cvS); S2 = canvasCtx(cvG); oV.textContent = rV.value + ' km/h'; compute(); drawScene(); drawGraph(); }
+    function setup() { S1 = canvasCtx(cvS); S2 = canvasCtx(cvG); oV.textContent = rV.value + ' km·h⁻¹'; compute(); drawScene(); drawGraph(); }
     setup(); onResize(setup);
   })();
   /* ================= 2. Fronts d'onde d'un émetteur en mouvement ================= */
@@ -502,14 +502,15 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
         if (a == null || bb == null) { return; }
         c.strokeStyle = color; c.fillStyle = color; c.lineWidth = 2;
         c.beginPath(); c.moveTo(a, y); c.lineTo(bb, y); c.moveTo(a, y - 5); c.lineTo(a, y + 5); c.moveTo(bb, y - 5); c.lineTo(bb, y + 5); c.stroke();
-        c.textAlign = 'center'; c.fillText(label, (a + bb) / 2, y - 8);
+        var lw = c.measureText(label).width, xm = Math.max(lw / 2 + 4, Math.min(w - lw / 2 - 4, (a + bb) / 2));   /* l'étiquette reste dans le cadre */
+        c.textAlign = 'center'; c.fillText(label, xm, y - 8);
       }
       var aR = crestsR.filter(function (q) { return q > xs + 4 && q < w - 40; }).sort(function (p, q) { return p - q; });
       var aL = crestsL.filter(function (q) { return q < xs - 4 && q > 40; }).sort(function (p, q) { return q - p; });
       /* on mesure l'écart entre les deux crêtes les plus proches de chaque récepteur */
       if (aR.length >= 2) { mark(aR[aR.length - 2], aR[aR.length - 1], yc + 46, col('--blue'), '\u03bb devant'); }
       if (aL.length >= 2) { mark(aL[aL.length - 1], aL[aL.length - 2], yc + 46, col('--rose'), '\u03bb derrière'); }
-      oB.textContent = fr(b, 2) + ' c  (soit ' + Math.round(b * 340) + ' m/s pour le son dans l\u2019air)';
+      oB.textContent = fr(b, 2) + ' c  (soit ' + Math.round(b * 340) + ' m·s⁻¹ pour le son dans l\u2019air)';
       oA.textContent = fr(1 - b, 2) + ' \u03bb'; oR.textContent = fr(1 + b, 2) + ' \u03bb';
       oFA.textContent = fr(1 / (1 - b), 2) + ' f'; oFR.textContent = fr(1 / (1 + b), 2) + ' f';
     }
@@ -548,8 +549,8 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
       LINES.forEach(function (l) { var a = X(l), b = X(l * k); c.beginPath(); c.moveTo(a, 68); c.lineTo(b, 104); c.stroke(); });
       c.setLineDash([]);
       c.fillStyle = col('--muted'); c.font = '11px system-ui, sans-serif'; c.textAlign = 'center';
-      [400, 450, 500, 550, 600, 650, 700, 750].forEach(function (l) { c.fillText(l + ' nm', Math.min(w - 22, Math.max(20, X(l))), h - 4); });
-      oV.textContent = (v > 0 ? '+ ' : (v < 0 ? '\u2212 ' : '')) + Math.abs(v).toLocaleString('fr-FR') + ' km/s';
+      (w < 500 ? [400, 500, 600, 700] : [400, 450, 500, 550, 600, 650, 700, 750]).forEach(function (l) {   /* moins de graduations sur téléphone */ c.fillText(l + ' nm', Math.min(w - 22, Math.max(20, X(l))), h - 4); });
+      oV.textContent = (v > 0 ? '+ ' : (v < 0 ? '\u2212 ' : '')) + Math.abs(v).toLocaleString('fr-FR') + ' km·s⁻¹';
       oL.textContent = fr(656.3 * k, 1) + ' nm'; oD.textContent = (v >= 0 ? '+ ' : '\u2212 ') + fr(Math.abs(656.3 * k - 656.3), 1) + ' nm';
       msg.textContent = v > 0 ? 'La source s\u2019éloigne : les raies sont décalées vers les grandes longueurs d\u2019onde, c\u2019est le décalage vers le rouge.' :
         (v < 0 ? 'La source se rapproche : les raies sont décalées vers les courtes longueurs d\u2019onde, c\u2019est le décalage vers le bleu.' : 'La source est immobile par rapport à nous : aucun décalage.');
@@ -640,7 +641,7 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
       var m = mass(), P = period(), k = K();
       oM.textContent = (m < 0.1 ? fr(m * 317.8, 1) + ' masses terrestres' : fr(m, 2) + ' masse' + (m >= 2 ? 's' : '') + ' de Jupiter');
       oP.textContent = P < 100 ? fr(P, 1) + ' jours' : Math.round(P).toLocaleString('fr-FR') + ' jours';
-      oK.textContent = k < 1 ? fr(k * 100, 1) + ' cm/s' : fr(k, k < 10 ? 1 : 0) + ' m/s';
+      oK.textContent = k < 1 ? fr(k * 100, 1) + ' cm·s⁻¹' : fr(k, k < 10 ? 1 : 0) + ' m·s⁻¹';
       oL.innerHTML = sci(656.3 * k / 2.998e8, 1) + ' nm';
     }
     function draw() {
@@ -660,11 +661,11 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
       c.fillStyle = '#E2E8F0'; c.font = '600 11px system-ui, sans-serif'; c.textAlign = 'center';
       c.fillText('vers la Terre \u2193', cx, h - 6);
       /* vitesse radiale */
-      var g = S2.ctx, W = S2.w, H = S2.h, L = 50, Rr = W - 8, Tm = 12, Bm = H - 22, ym = (Tm + Bm) / 2, A = (Bm - Tm) / 2 * 0.85;
+      var kt = k < 1 ? fr(k * 100, 0) + ' cm·s⁻¹' : fr(k, 0) + ' m·s⁻¹', g = S2.ctx; g.font = '11px system-ui, sans-serif';
+      var W = S2.w, H = S2.h, L = Math.max(50, g.measureText('\u2212' + kt).width + 10), Rr = W - 8,   /* marge gauche assez large pour la graduation */ Tm = 12, Bm = H - 22, ym = (Tm + Bm) / 2, A = (Bm - Tm) / 2 * 0.85;
       g.clearRect(0, 0, W, H);
       g.strokeStyle = col('--line'); g.beginPath(); g.moveTo(L, ym); g.lineTo(Rr, ym); g.moveTo(L, Tm); g.lineTo(L, Bm); g.stroke();
       g.fillStyle = col('--muted'); g.font = '11px system-ui, sans-serif'; g.textAlign = 'right';
-      var kt = k < 1 ? fr(k * 100, 0) + ' cm/s' : fr(k, 0) + ' m/s';
       g.fillText('+' + kt, L - 4, ym - A + 4); g.fillText('\u2212' + kt, L - 4, ym + A + 4); g.fillText('0', L - 4, ym + 4);
       g.textAlign = 'center'; g.fillText('temps \u2192 (deux périodes orbitales)', (L + Rr) / 2, H - 4);
       g.strokeStyle = col('--blue'); g.lineWidth = 2.2; g.beginPath();
@@ -735,7 +736,7 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
       g.textAlign = 'center';
       [0, 10, 20, 30].forEach(function (r) { g.fillText(r, X(r), B + 13); });
       g.fillText('distance au centre (kpc)', (L + Rr) / 2, H - 2);
-      g.save(); g.translate(10, (T + B) / 2); g.rotate(-Math.PI / 2); g.fillText('vitesse (km/s)', 0, 0); g.restore();
+      g.save(); g.translate(10, (T + B) / 2); g.rotate(-Math.PI / 2); g.fillText('vitesse (km·s⁻¹)', 0, 0); g.restore();
       function curve(f, color, dash) {
         g.strokeStyle = color; g.lineWidth = 2.4; g.setLineDash(dash); g.beginPath();
         for (var q = 0; q <= 150; q++) { var r = 0.2 + q / 150 * (RMAX - 0.2); if (q === 0) { g.moveTo(X(r), Y(f(r))); } else { g.lineTo(X(r), Y(f(r))); } }
@@ -746,7 +747,7 @@ C'est presque toujours le cas en pratique&nbsp;: une voiture roule à moins d'un
       var RR = rng(3);
       g.fillStyle = col('--ink');
       for (var r2 = 2; r2 <= RMAX; r2 += 2) { var vv = vTot(r2) * (1 + (RR() - 0.5) * 0.06); g.beginPath(); g.arc(X(r2), Y(vv), 3.4, 0, 2 * Math.PI); g.fill(); }
-      msg.textContent = halo ? 'Avec un halo de matière noire, la vitesse prévue reste presque constante loin du centre, comme les mesures : les étoiles lointaines filent aussi vite (en km/s) que celles proches du centre.' :
+      msg.textContent = halo ? 'Avec un halo de matière noire, la vitesse prévue reste presque constante loin du centre, comme les mesures : les étoiles lointaines filent aussi vite (en km·s⁻¹) que celles proches du centre.' :
         'Avec la seule matière visible, la vitesse devrait diminuer loin du centre (comme pour les planètes du Système solaire). Les mesures (points noirs) ne suivent pas cette prévision.';
     }
     function step(ts) {

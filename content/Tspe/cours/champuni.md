@@ -266,7 +266,7 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
 <p class="nt-center">$-\dfrac{g}{2v_0^2}x_\mathrm{sol}^2 + h = r \Rightarrow x_\mathrm{sol} = \pm v_0\sqrt{\dfrac{2(h-r)}{g}}$</p>
 <p>Seule la solution positive (devant le serveur) nous intéresse. Il faut donc $v_0\sqrt{\dfrac{2(h-r)}{g}} < L$, soit $v_0 < L\sqrt{\dfrac{g}{2(h-r)}} = 18\times \sqrt{\dfrac{9{,}8}{2\times (3{,}50-0{,}10)}} = \pu{22 m*s-1}$.</p></li>
 </ol>
-<p>La vitesse du service doit finalement être comprise entre 20 et 22&nbsp;m/s. Easy peasy.</p>
+<p>La vitesse du service doit finalement être comprise entre 20 et 22&nbsp;m·s⁻¹. Easy peasy.</p>
 </div>
 </details>
 
@@ -364,7 +364,7 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
 <div class="nt-d-body">
 <p>La pièce part sans vitesse ($E_c = 0$) à l'altitude $h$, et arrive au sol ($E_{pp} = 0$) avec la vitesse $v$. La conservation de l'énergie mécanique donne&nbsp;:</p>
 <p class="nt-center">$mgh = \dfrac12 m v^2 \Rightarrow v = \sqrt{2gh} = \sqrt{2\times 9{,}81\times 276} = \pu{73,6 m*s-1}$, soit environ $\pu{265 km*h-1}$.</p>
-<p>Pas besoin des équations horaires, et la masse de la pièce n'intervient pas. En réalité, les frottements de l'air limitent la vitesse de la pièce à quelques dizaines de km/h.</p>
+<p>Pas besoin des équations horaires, et la masse de la pièce n'intervient pas. En réalité, les frottements de l'air limitent la vitesse de la pièce à quelques dizaines de km·h⁻¹.</p>
 </div>
 </details>
 
@@ -765,7 +765,9 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
       c.strokeStyle = '#64748B'; c.fillStyle = '#64748B'; c.lineWidth = 1;
       c.beginPath(); c.moveTo(x, y0); c.lineTo(x, y1); c.stroke();
       [[y0, y1 < y0 ? -1 : 1], [y1, y1 < y0 ? 1 : -1]].forEach(function (p) { c.beginPath(); c.moveTo(x, p[0]); c.lineTo(x - 3.5, p[0] + p[1] * 7); c.lineTo(x + 3.5, p[0] + p[1] * 7); c.closePath(); c.fill(); });   /* pointe exactement à l'altitude visée */
-      c.save(); c.translate(x - 6, (y0 + y1) / 2); c.rotate(-Math.PI / 2); txt(c, s, 0, 0, '#475569', '600 10.5px system-ui, sans-serif'); c.restore();
+      c.font = '600 10.5px system-ui, sans-serif';
+      if (c.measureText(s).width + 6 < Math.abs(y1 - y0)) { c.save(); c.translate(x - 6, (y0 + y1) / 2); c.rotate(-Math.PI / 2); txt(c, s, 0, 0, '#475569', '600 10.5px system-ui, sans-serif'); c.restore(); }
+      else { txt(c, s, x, Math.min(y0, y1) - 8, '#475569', '600 10.5px system-ui, sans-serif'); }   /* cote trop courte (téléphone) : texte horizontal, au-dessus */
     }
     function draw(dt) {
       if (!S) { return; }
@@ -979,7 +981,7 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
       }
       c.fillStyle = col('--ink'); c.beginPath(); c.arc(X(Lm + Dm), Y(Math.min(zI, 0.02)), 4, 0, 2 * Math.PI); c.fill();
       txt(c, 'I', X(Lm + Dm) - 10, Y(Math.min(zI, 0.02)) - 6, col('--ink'), 'italic 700 13px Georgia, serif');
-      txt(c, 'gouttes non chargées \u2192 gouttière', X(Lm + Dm) - 8, yO + 18, col('--slate'), '600 11px system-ui, sans-serif', 'right');
+      txt(c, w < 500 ? 'non chargées \u2192 gouttière' : 'gouttes non chargées \u2192 gouttière', X(Lm + Dm) - 8, w < 500 ? Y(-0.006) + 30 : yO + 18, col('--slate'), '600 11px system-ui, sans-serif', 'right');   /* sous les plaques sur téléphone, pour ne rien chevaucher */
       vecLabel(c, 'E', X(Lm * 0.15), Y(0.003) + 6, CA); arrow(c, X(Lm * 0.15) + 14, Y(0.004), X(Lm * 0.15) + 14, Y(-0.003), CA, 2);
     }
     [rQ, rE, rV].forEach(function (r) { r.addEventListener('input', function () { draw(0); }); });
@@ -1002,15 +1004,15 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
       c.clearRect(0, 0, w, h);
       c.strokeStyle = col('--ink'); c.lineWidth = 1; c.beginPath(); c.moveTo(L, T); c.lineTo(L, B); c.lineTo(R, B); c.stroke();
       c.strokeStyle = col('--muted'); c.setLineDash([5, 4]); c.beginPath(); c.moveTo(L, Y(c0)); c.lineTo(R, Y(c0)); c.stroke(); c.setLineDash([]);
-      txt(c, 'c (vitesse de la lumière)', R - 4, Y(c0) - 6, col('--slate'), '600 11px system-ui, sans-serif', 'right');
+      if (w >= 500) txt(c, 'c (vitesse de la lumière)', L + 8, Y(c0) - 6, col('--slate'), '600 11px system-ui, sans-serif', 'left');   /* à gauche, au-dessus de la ligne : les courbes y sont encore bien plus bas */
       [[0, '0'], [0.5, '0,5 c'], [1, 'c'], [1.5, '1,5 c']].forEach(function (q) { txt(c, q[1], L - 6, Y(q[0] * c0) + 4, col('--muted'), '10px system-ui, sans-serif', 'right'); });
       txt(c, 'vitesse', L + 4, T + 10, col('--muted'), '11px system-ui, sans-serif', 'left');
-      [0, 100, 200, 300, 400, 500].forEach(function (u) { txt(c, u + ' kV', X(u * 1e3), B + 14, col('--muted'), '10px system-ui, sans-serif'); });
+      (w < 500 ? [0, 250, 500] : [0, 100, 200, 300, 400, 500]).forEach(function (u) { txt(c, u + ' kV', Math.min(X(u * 1e3), R - 12), B + 14, col('--muted'), '10px system-ui, sans-serif'); });   /* moins de graduations sur téléphone */
       txt(c, 'tension accélératrice U', (L + R) / 2, h - 3, col('--muted'), '11px system-ui, sans-serif');
       [[vc, CV, 'mécanique de Newton'], [vr, CP, 'relativité restreinte']].forEach(function (f, i) {
         c.strokeStyle = f[1]; c.lineWidth = 2.4; c.beginPath();
         for (var u = 0; u <= UMAX; u += UMAX / 200) { var v = Math.min(f[0](u), 1.6 * c0); if (u === 0) { c.moveTo(X(u), Y(v)); } else { c.lineTo(X(u), Y(v)); } }
-        c.stroke(); txt(c, f[2], X(UMAX * (i ? 0.75 : 0.42)), Y(Math.min(f[0](UMAX * (i ? 0.75 : 0.42)), 1.55 * c0)) + (i ? 18 : -8), f[1], '700 11px system-ui, sans-serif');
+        c.stroke(); if (i) { txt(c, f[2], X(UMAX * 0.75), Y(f[0](UMAX * 0.75)) + 18, f[1], '700 11px system-ui, sans-serif'); } else { txt(c, f[2], R - 4, Y(Math.min(f[0](UMAX), 1.55 * c0)) - 10, f[1], '700 11px system-ui, sans-serif', 'right'); }   /* « Newton » au bout de sa courbe, au-dessus de la ligne c */
         c.fillStyle = f[1]; c.beginPath(); c.arc(X(U), Y(Math.min(f[0](U), 1.6 * c0)), 5, 0, 2 * Math.PI); c.fill();
       });
     }

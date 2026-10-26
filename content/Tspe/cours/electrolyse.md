@@ -250,13 +250,14 @@ draft = false
       txt(c, 'pont salin (K\u207a ; Cl\u207b)', (bp[1][0] + bp[2][0]) / 2, bp[1][1] - 18, '#BE185D', '700 12px system-ui, sans-serif');
       c.fillStyle = '#C2410C'; c.fillRect(G.xC - 30 - G.ew / 2, G.eTop, G.ew, G.eBot - G.eTop);
       c.fillStyle = '#94A3B8'; c.fillRect(G.xA + 30 - G.ew / 2, G.eTop, G.ew, G.eBot - G.eTop);
-      txt(c, 'Cu', G.xC - 30 - 26, G.eTop + 22, '#C2410C', '700 14px system-ui, sans-serif'); txt(c, 'Zn', G.xA + 30 + 24, G.eTop + 22, '#475569', '700 14px system-ui, sans-serif');
+      txt(c, 'Cu', Math.max(12, G.xC - 30 - 26), G.eTop + 22, '#C2410C', '700 14px system-ui, sans-serif'); txt(c, 'Zn', Math.min(G.w - 12, G.xA + 30 + 24), G.eTop + 22, '#475569', '700 14px system-ui, sans-serif');   /* dans le cadre */
       /* polarités : le cuivre reste le pôle ⊕ dans les deux cas ; ce sont les noms qui s'échangent */
       txt(c, '\u2295', G.xC - 30 + 13, G.eTop - 8, CCA, '700 15px system-ui, sans-serif');
       txt(c, '\u2296', G.xA + 30 - 13, G.eTop - 8, CAN, '700 15px system-ui, sans-serif');
       if (el || pi) {
-        txt(c, el ? 'anode' : 'cathode', G.xC - 30 - 12, G.eTop - 12, el ? CAN : CCA, '700 13px system-ui, sans-serif', 'right');
-        txt(c, el ? 'cathode' : 'anode', G.xA + 30 + 12, G.eTop - 12, el ? CCA : CAN, '700 13px system-ui, sans-serif', 'left');
+        c.font = '700 13px system-ui, sans-serif'; var n1 = el ? 'anode' : 'cathode', n2 = el ? 'cathode' : 'anode', l1 = c.measureText(n1).width, l2 = c.measureText(n2).width;   /* à l'extérieur des électrodes s'il y a la place, sinon au-dessus */
+        if (G.xC - 42 - l1 > 2) { txt(c, n1, G.xC - 30 - 12, G.eTop - 12, el ? CAN : CCA, '700 13px system-ui, sans-serif', 'right'); } else { txt(c, n1, Math.max(2, G.xC - 30 - l1 / 2), G.eTop - 26, el ? CAN : CCA, '700 13px system-ui, sans-serif', 'left'); }
+        if (G.xA + 42 + l2 < G.w - 2) { txt(c, n2, G.xA + 30 + 12, G.eTop - 12, el ? CCA : CAN, '700 13px system-ui, sans-serif', 'left'); } else { txt(c, n2, Math.min(G.w - 2, G.xA + 30 + l2 / 2), G.eTop - 26, el ? CCA : CAN, '700 13px system-ui, sans-serif', 'right'); }
       }
       /* circuit et générateur */
       var xa = G.xA + 30, xc = G.xC - 30, wp = [[xa, G.eTop], [xa, G.ytop], [xc, G.ytop], [xc, G.eTop]], xm = (xa + xc) / 2;
@@ -291,8 +292,11 @@ draft = false
           }
           c.globalAlpha = 1;
         }
-        txt(c, pi ? 'réduction : Cu\u00b2\u207a + 2 e\u207b \u2192 Cu' : 'oxydation : Cu \u2192 Cu\u00b2\u207a + 2 e\u207b', G.xC, G.by + G.bh + 24, pi ? CCA : CAN, '700 13px system-ui, sans-serif');
-        txt(c, pi ? 'oxydation : Zn \u2192 Zn\u00b2\u207a + 2 e\u207b' : 'réduction : Zn\u00b2\u207a + 2 e\u207b \u2192 Zn', G.xA, G.by + G.bh + 24, pi ? CAN : CCA, '700 13px system-ui, sans-serif');
+        [[pi ? 'réduction' : 'oxydation', pi ? 'Cu\u00b2\u207a + 2 e\u207b \u2192 Cu' : 'Cu \u2192 Cu\u00b2\u207a + 2 e\u207b', G.xC, pi ? CCA : CAN], [pi ? 'oxydation' : 'réduction', pi ? 'Zn \u2192 Zn\u00b2\u207a + 2 e\u207b' : 'Zn\u00b2\u207a + 2 e\u207b \u2192 Zn', G.xA, pi ? CAN : CCA]].forEach(function (q) {
+          c.font = '700 13px system-ui, sans-serif'; var t1 = q[0] + ' : ' + q[1], lw = c.measureText(t1).width, dem = Math.abs(G.xA - G.xC) / 2 - 8;
+          if (lw <= dem * 2 && q[2] - lw / 2 > 2 && q[2] + lw / 2 < G.w - 2) { txt(c, t1, q[2], G.by + G.bh + 24, q[3], '700 13px system-ui, sans-serif'); }
+          else { var x2 = Math.max(4 + c.measureText(q[1]).width * 0.5, Math.min(G.w - 4 - c.measureText(q[1]).width * 0.5, q[2])); txt(c, q[0] + ' :', x2, G.by + G.bh + 20, q[3], '700 12px system-ui, sans-serif'); txt(c, q[1], x2, G.by + G.bh + 36, q[3], '700 12px system-ui, sans-serif'); }   /* sur deux lignes, dans le cadre, sur téléphone */
+        });
       } else {
         txt(c, 'aucun courant', G.w / 2, G.by + G.bh + 24, '#475569', '700 13px system-ui, sans-serif');
       }

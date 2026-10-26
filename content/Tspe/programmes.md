@@ -23,7 +23,8 @@ td, th {
 
 # Programmes
 
-Ensemble des codes python rencontrés (dans les TP, activités, exercices, etc.) rangés par chapitre.
+Ensemble des codes python rencontrés (dans les TP, activités, exercices, etc.) rangés par chapitre.<br>
+Tout est exécutable directement dans cette page.
 
 
 ## Titrages
@@ -1062,9 +1063,11 @@ Pour récupérer un tableau de données des positions de Mercure dans le référ
 
 Il faut alors enregistrer le fichier de données sous le nom "`ephemerides.csv`".
 
-Vous pouvez télécharger le programme `mercure.py` en cliquant [ici](https://coursphychi.github.io/mercure.py) (ou sur l'icône ordi de la page du cours). Il faudra ensuite que vous placiez le fichier `ephemeride.csv` dans le même dossier que le programme `mercure.py`.
+Vous pouvez télécharger le programme `mercure.py` en cliquant [ici](https://coursphychi.github.io/mercure.py) (ou sur l'icône ordi de la page du cours). Il faudra ensuite que vous placiez le fichier `ephemeride.csv` dans le même dossier que le programme `mercure.py`. 
 
-En exécutant le programme `mercure.py`, on peut alors constater que la deuxième loi de Kepler est plutôt très bien vérifiée pour l'orbite de Mercure.
+Si vous préférez compiler directement le code dans cette page, il faut que vous cliquiez sur l'icône de téléversement (upload) de la fenêtre de code ci-dessous (<i class="fa-solid fa-arrow-up-from-bracket"></i>) et que vous alliez chercher le fichier `ephemeride.csv`.
+
+En exécutant le programme, on peut alors constater que la deuxième loi de Kepler est plutôt très bien vérifiée pour l'orbite de Mercure.
 
 {{< runpython lang="pyodide" height="auto" upload="true" theme="dark" >}}
 # =============================================

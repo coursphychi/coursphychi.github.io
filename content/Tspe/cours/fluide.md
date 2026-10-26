@@ -362,7 +362,7 @@ Les condensats de Bose-Einstein sont aussi superfluides, et le plasma de quarks 
 <details class="nt-d nt-rep">
 <summary><span class="nt-tag"><i class="fa-solid fa-key"></i>Réponse</span><span class="nt-sum">Voir la résolution</span></summary>
 <div class="nt-d-body">
-<p class="nt-center">$v = \sqrt{\dfrac{2\times 3{,}8\times10^{3}}{1{,}2}} \approx \pu{80 m*s-1}$, soit environ 290&nbsp;km/h.</p>
+<p class="nt-center">$v = \sqrt{\dfrac{2\times 3{,}8\times10^{3}}{1{,}2}} \approx \pu{80 m*s-1}$, soit environ 290&nbsp;km·h⁻¹.</p>
 <p class="nt-note">C'est bien l'ordre de grandeur de la vitesse de décollage d'un avion de ligne. Remarquez que l'écart de pression reste faible, environ 4&nbsp;% de la pression atmosphérique&nbsp;: il faut un manomètre sensible.</p>
 </div>
 </details>

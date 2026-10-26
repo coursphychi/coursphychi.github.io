@@ -68,27 +68,3 @@ td, th {
 </table>
 </div>
 
-<br>
-
-## Définitions
-
-
-<div class="notices definition" style="--title: 'Pile';">
-  <p>
-  Système de conversion d’énergie chimique en énergie électrique, obtenu par association de <b style="color:#B51700;">deux demi-piles</b> reliées par une <b style="color:#B51700;">jonction électrolytique interne</b> (pont salin, membrane, etc.) et permettant le <b style="color:#B51700;">transfert d’électrons</b> d’un compartiment à l’autre par l’intermédiaire d’un <b style="color:#B51700;">circuit électrique extérieur</b>.<br>Chaque demi-pile doit contenir :<br>
-  <i class="fa fa-arrow-right"></i> un <b style="color:#B51700;">électrolyte</b> (milieu conducteur par déplacement d’ions)&nbsp;;<br>
-<i class="fa fa-arrow-right"></i> une <b style="color:#B51700;">électrode</b> (interface solide conductrice entre l’électrolyte et le circuit électrique
-extérieur)&nbsp;;<br>
-<i class="fa fa-arrow-right"></i> les deux partenaires, oxydant et réducteur, d’<b style="color:#B51700;">un couple</b>.<br>
-  </p>
-</div>
-
-{{%notice type="def" title="Tension à vide d’une pile" round="true"%}}
-<b style="color:#B51700;">Différence de potentiel</b> mesurée entre les électrodes d’une pile en <b style="color:#B51700;">circuit ouvert</b>, c’est-à-dire quand aucun courant électrique ne la traverse.
-{{%/notice%}}
-
-{{%notice type="def" title="Capacité d’une pile" round="true"%}}
-<b style="color:#B51700;">Charge électrique maximale</b> qu’une pile est susceptible de faire circuler dans un circuit extérieur.<br>
-Cette grandeur est notamment liée aux quantités de matière des réactifs utilisés pour élaborer la pile.<br>
-Elle s’exprime dans le système international en coulombs, mais plus couramment en <b style="color:#B51700;">mAh</b> dans les données commerciales.
-{{%/notice%}}
