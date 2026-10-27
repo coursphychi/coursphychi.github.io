@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
     <style>
         :root {
             --bg-body: #f1f5f9;
@@ -828,8 +830,8 @@
             <div class="beat-banner" id="beatBanner">
                 <div>
                     <strong>Superposition des deux voies :</strong>
-                    Écart fréquentiel $\Delta f = |f_1 - f_2| =$ <span class="beat-value" id="beatFreqText">4,0 Hz</span>
-                    <span id="beatPeriodText" style="color: var(--text-muted); margin-left: 0.4rem;">(Période d'enveloppe : 250 ms)</span>
+                    Écart fréquentiel <span class="tex" data-tex="\Delta f = |f_1 - f_2| =" data-fallback="Δf = |f₁ − f₂| =">Δf = |f₁ − f₂| =</span> <span class="beat-value" id="beatFreqText">4,0 Hz</span>
+                    <span style="color: var(--text-muted); margin-left: 0.4rem;">(<span id="beatPeriodLabel">Période des battements :</span> <span id="beatPeriodTex"></span> <span id="beatPeriodValue">250 ms</span>)</span>
                 </div>
                 <div class="scope-ctrl-group">
                     <span>Sortie Audio :</span>
@@ -954,6 +956,57 @@
     let panner1 = null, panner2 = null;
     let masterGain = null;
 
+    // --- Modèle de phase partagé entre le son et l'affichage ---
+    // Chaque voie est décrite par des segments {t, phi, f} : à partir de l'instant t,
+    // la phase vaut phi + 2π·f·(t' − t). Les changements de fréquence sont programmés
+    // à l'échantillon près (setValueAtTime) à ces mêmes instants, si bien que l'oscilloscope
+    // calcule exactement la phase des oscillateurs Web Audio.
+    // Avant le démarrage du moteur audio, l'horloge utilisée est performance.now().
+    const LOOKAHEAD = 0.03; // s : marge pour que l'événement soit encore dans le futur côté audio
+    const phaseModels = { 1: [], 2: [] };
+
+    function modelNow() {
+        return audioCtx ? audioCtx.currentTime + LOOKAHEAD : performance.now() / 1000;
+    }
+
+    function segmentAt(chNum, t) {
+        const segs = phaseModels[chNum];
+        for (let i = segs.length - 1; i > 0; i--) {
+            if (segs[i].t <= t) return segs[i];
+        }
+        return segs[0];
+    }
+
+    function phaseAt(chNum, t) {
+        const seg = segmentAt(chNum, t);
+        return seg.phi + 2 * Math.PI * seg.f * (t - seg.t);
+    }
+
+    function scheduleFreq(chNum) {
+        const f = chNum === 1 ? state.ch1.freq : state.ch2.freq;
+        const segs = phaseModels[chNum];
+        const last = segs[segs.length - 1];
+        if (last && last.f === f) return;
+        const t = last ? Math.max(modelNow(), last.t) : modelNow();
+        if (audioCtx) (chNum === 1 ? osc1 : osc2).frequency.setValueAtTime(f, t);
+        segs.push({ t, phi: last ? phaseAt(chNum, t) : 0, f });
+        // Oubli des segments trop anciens pour être encore affichés
+        while (segs.length > 1 && segs[1].t < t - 2) segs.shift();
+    }
+
+    // Instant (horloge du modèle) de l'échantillon actuellement entendu
+    function heardTime() {
+        if (!audioCtx) return performance.now() / 1000;
+        if (audioCtx.state !== 'running') return audioCtx.currentTime;
+        if (audioCtx.getOutputTimestamp) {
+            const ts = audioCtx.getOutputTimestamp();
+            if (ts.contextTime > 0 && ts.performanceTime > 0) {
+                return ts.contextTime + (performance.now() - ts.performanceTime) / 1000;
+            }
+        }
+        return audioCtx.currentTime - (audioCtx.outputLatency || audioCtx.baseLatency || 0);
+    }
+
     function initAudio() {
         if (audioCtx) return;
         const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -977,7 +1030,6 @@
         } else {
             osc1.connect(gain1).connect(masterGain);
         }
-        osc1.start();
 
         // Voie 2
         osc2 = audioCtx.createOscillator();
@@ -993,7 +1045,13 @@
         } else {
             osc2.connect(gain2).connect(masterGain);
         }
-        osc2.start();
+
+        // Démarrage simultané des deux oscillateurs (phase nulle à t0) : origine du modèle de phase
+        const t0 = audioCtx.currentTime + LOOKAHEAD;
+        osc1.start(t0);
+        osc2.start(t0);
+        phaseModels[1] = [{ t: t0, phi: 0, f: state.ch1.freq }];
+        phaseModels[2] = [{ t: t0, phi: 0, f: state.ch2.freq }];
     }
 
     function syncAudioEngine() {
@@ -1001,10 +1059,7 @@
         const now = audioCtx.currentTime;
 
         osc1.type = state.ch1.wave;
-        osc1.frequency.setTargetAtTime(state.ch1.freq, now, 0.012);
-
         osc2.type = state.ch2.wave;
-        osc2.frequency.setTargetAtTime(state.ch2.freq, now, 0.012);
 
         if (state.isPlaying) {
             const g1 = state.ch1.amp * (state.dualMode ? 0.5 : 0.85);
@@ -1181,9 +1236,25 @@
         document.getElementById(`noteCh${chNum}`).textContent = getMusicalNoteInfo(ch.freq);
 
         renderDial(chNum);
+        scheduleFreq(chNum);
         updateBeatBanner();
         syncAudioEngine();
     }
+
+    // Rendu LaTeX (KaTeX), avec texte de secours si la bibliothèque n'a pas pu être chargée
+    function renderTex(el, tex, fallback) {
+        if (el.dataset.rendered === tex) return;
+        el.dataset.rendered = tex;
+        if (window.katex) {
+            try {
+                katex.render(tex, el, { throwOnError: false });
+                return;
+            } catch (e) { /* texte de secours ci-dessous */ }
+        }
+        el.textContent = fallback;
+    }
+
+    document.querySelectorAll('.tex').forEach(el => renderTex(el, el.dataset.tex, el.dataset.fallback));
 
     function updateBeatBanner() {
         const banner = document.getElementById('beatBanner');
@@ -1194,11 +1265,17 @@
         banner.classList.add('visible');
         const df = Math.abs(state.ch1.freq - state.ch2.freq);
         document.getElementById('beatFreqText').textContent = `${df.toFixed(1).replace('.', ',')} Hz`;
-        const periodEl = document.getElementById('beatPeriodText');
+        const labelEl = document.getElementById('beatPeriodLabel');
+        const texEl = document.getElementById('beatPeriodTex');
+        const valueEl = document.getElementById('beatPeriodValue');
         if (df > 0.05) {
-            periodEl.textContent = `(Période des battements T_batt = ${formatPeriod(df)})`;
+            labelEl.textContent = 'Période des battements :';
+            renderTex(texEl, 'T_{\\text{batt}} = \\frac{1}{\\Delta f} =', 'T_batt = 1/Δf =');
+            valueEl.textContent = formatPeriod(df);
         } else {
-            periodEl.textContent = `(Unisson parfait : Δf = 0 Hz)`;
+            labelEl.textContent = 'Unisson parfait :';
+            renderTex(texEl, '\\Delta f = 0\\ \\text{Hz}', 'Δf = 0 Hz');
+            valueEl.textContent = '';
         }
     }
 
@@ -1387,13 +1464,22 @@
             case 'triangle':
                 return u < 0.25 ? (4 * u) : (u < 0.75 ? (2 - 4 * u) : (-4 + 4 * u));
             case 'sawtooth':
-                return 2 * u - 1;
+                // Même convention que l'OscillatorNode Web Audio : départ à 0, croissant
+                return u < 0.5 ? 2 * u : 2 * u - 2;
             default:
                 return Math.sin(p);
         }
     }
 
-    let animPhaseOffset = 0;
+    // Déclenchement sur front montant de la voie 1 : dernier passage par une phase
+    // multiple de 2π avant l'instant t (null si la période dépasse la fenêtre)
+    function triggerTime(t, windowSec) {
+        const seg = segmentAt(1, t);
+        if (1 / seg.f > windowSec) return null;
+        const k = Math.floor(phaseAt(1, t) / (2 * Math.PI));
+        const tz = seg.t + (2 * Math.PI * k - seg.phi) / (2 * Math.PI * seg.f);
+        return tz >= seg.t || seg === phaseModels[1][0] ? tz : null;
+    }
 
     function drawScope() {
         requestAnimationFrame(drawScope);
@@ -1448,9 +1534,17 @@
         const windowSec = (state.timePerDivMs * divsX) / 1000;
         const maxRadiusY = H * 0.38;
 
-        // Légère dérive de phase relative si Δf != 0 pour rendre les battements vivants à l'écran
-        if (state.isPlaying) {
-            animPhaseOffset += 0.015;
+        // Le bord droit de l'écran correspond à l'instant actuellement entendu (latence de sortie
+        // comprise) : l'amplitude de la somme affichée suit donc l'intensité sonore perçue.
+        const tEnd = heardTime();
+        const tTrig = triggerTime(tEnd - windowSec, windowSec);
+        const tStart = tTrig !== null ? tTrig : tEnd - windowSec;
+        const phases1 = new Float64Array(Math.floor(W) + 1);
+        const phases2 = new Float64Array(Math.floor(W) + 1);
+        for (let px = 0; px < phases1.length; px++) {
+            const t = tStart + (px / W) * windowSec;
+            phases1[px] = phaseAt(1, t);
+            phases2[px] = phaseAt(2, t);
         }
 
         const style = getComputedStyle(document.documentElement);
@@ -1462,14 +1556,13 @@
         const showSum = state.dualMode && (state.traceMode === 'all' || state.traceMode === 'sum');
         const scaleFactor = state.dualMode ? 0.5 : 0.85;
 
-        // Tracé Voie 1 (verrouillée en phase à t=0 à gauche pour un trigger parfait)
+        // Tracé Voie 1 (déclenchement sur front montant au bord gauche)
         if (showSingleCh) {
             ctx.beginPath();
             ctx.strokeStyle = colCh1;
             ctx.lineWidth = state.dualMode && state.traceMode === 'all' ? 1.8 : 2.6;
-            for (let px = 0; px <= W; px++) {
-                const t = (px / W) * windowSec;
-                const yVal = state.ch1.amp * scaleFactor * evalWaveform(state.ch1.wave, 2 * Math.PI * state.ch1.freq * t);
+            for (let px = 0; px < phases1.length; px++) {
+                const yVal = state.ch1.amp * scaleFactor * evalWaveform(state.ch1.wave, phases1[px]);
                 const py = H / 2 - yVal * maxRadiusY;
                 if (px === 0) ctx.moveTo(px, py);
                 else ctx.lineTo(px, py);
@@ -1482,9 +1575,8 @@
             ctx.beginPath();
             ctx.strokeStyle = colCh2;
             ctx.lineWidth = state.traceMode === 'all' ? 1.8 : 2.6;
-            for (let px = 0; px <= W; px++) {
-                const t = (px / W) * windowSec;
-                const yVal = state.ch2.amp * scaleFactor * evalWaveform(state.ch2.wave, 2 * Math.PI * state.ch2.freq * t + animPhaseOffset);
+            for (let px = 0; px < phases2.length; px++) {
+                const yVal = state.ch2.amp * scaleFactor * evalWaveform(state.ch2.wave, phases2[px]);
                 const py = H / 2 - yVal * maxRadiusY;
                 if (px === 0) ctx.moveTo(px, py);
                 else ctx.lineTo(px, py);
@@ -1497,10 +1589,9 @@
             ctx.beginPath();
             ctx.strokeStyle = colSum;
             ctx.lineWidth = 2.6;
-            for (let px = 0; px <= W; px++) {
-                const t = (px / W) * windowSec;
-                const y1 = state.ch1.amp * 0.5 * evalWaveform(state.ch1.wave, 2 * Math.PI * state.ch1.freq * t);
-                const y2 = state.ch2.amp * 0.5 * evalWaveform(state.ch2.wave, 2 * Math.PI * state.ch2.freq * t + animPhaseOffset);
+            for (let px = 0; px < phases1.length; px++) {
+                const y1 = state.ch1.amp * 0.5 * evalWaveform(state.ch1.wave, phases1[px]);
+                const y2 = state.ch2.amp * 0.5 * evalWaveform(state.ch2.wave, phases2[px]);
                 const py = H / 2 - (y1 + y2) * maxRadiusY;
                 if (px === 0) ctx.moveTo(px, py);
                 else ctx.lineTo(px, py);
