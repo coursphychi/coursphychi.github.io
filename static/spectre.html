@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyseur de spectre et sonomètre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <style>
+        :root {
+            --bg-body: #f1f5f9;
+            --bg-panel: #ffffff;
+            --bg-recessed: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+            --border-subtle: #e2e8f0;
+            --ch1: #0ea5e9;
+            --ch1-glow: rgba(14, 165, 233, 0.25);
+            --ch2: #f59e0b;
+            --ch2-glow: rgba(245, 158, 11, 0.25);
+            --sum: #10b981;
+            --sum-glow: rgba(16, 185, 129, 0.15);
+            --danger: #ef4444;
+            --scope-bg: #090d16;
+            --shadow-panel: 0 10px 25px -5px rgba(15, 23, 42, 0.07), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+            --radius: 16px;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0b1120;
+            --bg-panel: #151f32;
+            --bg-recessed: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #26354d;
+            --border-subtle: #1e293b;
+            --ch1: #38bdf8;
+            --ch1-glow: rgba(56, 189, 248, 0.3);
+            --ch2: #fbbf24;
+            --ch2-glow: rgba(251, 191, 36, 0.3);
+            --sum: #34d399;
+            --sum-glow: rgba(52, 211, 153, 0.15);
+            --scope-bg: #050811;
+            --shadow-panel: 0 12px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 1.5rem 1rem 3rem;
+            transition: background-color 0.25s, color 0.25s;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        /* En-tête */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--sum), var(--ch1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 12px var(--ch1-glow);
+            flex-shrink: 0;
+        }
+
+        h1 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-power {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.65rem 1.25rem;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border: 2px solid var(--border);
+            background-color: var(--bg-panel);
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-panel);
+        }
+
+        .btn-power .led {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .btn-power.active {
+            border-color: var(--sum);
+            background-color: rgba(16, 185, 129, 0.12);
+            color: var(--sum);
+        }
+
+        .btn-power.active .led {
+            background-color: var(--sum);
+            box-shadow: 0 0 10px var(--sum);
+        }
+
+        .theme-toggle {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.15s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--ch1);
+        }
+
+        .chassis {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .panel {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-panel);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .panel-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .ctrl-group {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        select, .btn-small {
+            background: var(--bg-recessed);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.35rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .btn-small:hover {
+            border-color: var(--text-muted);
+        }
+
+        .btn-small.active {
+            border-color: var(--ch1);
+            background: var(--ch1-glow);
+        }
+
+        select {
+            max-width: 100%;
+        }
+
+        /* Sélecteurs segmentés */
+        .seg {
+            display: inline-grid;
+            grid-auto-flow: column;
+            grid-auto-columns: 1fr;
+            gap: 0.25rem;
+            background: var(--bg-recessed);
+            padding: 0.22rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .seg-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.35rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.15s;
+        }
+
+        .seg-btn:hover {
+            color: var(--text-main);
+        }
+
+        .seg-btn.active {
+            background: var(--ch1);
+            color: #ffffff;
+        }
+
+        .meter-panel .seg-btn.active {
+            background: var(--sum);
+            color: #0f172a;
+        }
+
+        /* --- Sonomètre --- */
+        .meter-grid {
+            display: grid;
+            grid-template-columns: minmax(300px, 400px) 1fr;
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+
+        @media (max-width: 860px) {
+            .meter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .meter-unit {
+            background-color: var(--bg-recessed);
+            border: 1.5px solid var(--border-subtle);
+            border-top: 4px solid var(--sum);
+            border-radius: 14px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .lcd {
+            background: var(--bg-panel);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 0.6rem 1rem 0.5rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+            position: relative;
+        }
+
+        .lcd-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        .clip-badge {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: var(--danger);
+            padding: 0.12rem 0.45rem;
+            border-radius: 5px;
+            visibility: hidden;
+        }
+
+        .clip-badge.visible {
+            visibility: visible;
+        }
+
+        .lcd-main {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.2rem 0;
+        }
+
+        .lcd-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3.6rem;
+            font-weight: 700;
+            line-height: 1.05;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+        }
+
+        .lcd-unit {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .stat {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.35rem 0.5rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .meter-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            align-items: end;
+        }
+
+        .control-block label, .block-label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
+        }
+
+        .control-block .seg {
+            display: grid;
+        }
+
+        .meter-footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* Bargraphe */
+        .bar-wrap {
+            position: relative;
+            padding-bottom: 2.7rem;
+        }
+
+        .bar-track {
+            position: relative;
+            height: 22px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #10b981 0%, #10b981 44%, #eab308 55%, #f97316 61%, #ef4444 78%, #b91c1c 100%);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .bar-mask {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background: var(--bg-recessed);
+            opacity: 0.9;
+        }
+
+        .bar-peak {
+            position: absolute;
+            top: -3px;
+            height: 28px;
+            width: 3px;
+            margin-left: -1.5px;
+            background: var(--text-main);
+            border-radius: 2px;
+            display: none;
+        }
+
+        .bar-scale {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 26px;
+            height: 2.2rem;
+            font-size: 0.66rem;
+            color: var(--text-muted);
+        }
+
+        .bar-scale span {
+            position: absolute;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            text-align: center;
+            line-height: 1.25;
+        }
+
+        .bar-scale b {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .bar-scale .mark {
+            top: 0.95rem;
+        }
+
+        .bar-scale .mark::before {
+            content: '▲';
+            display: block;
+            font-size: 0.5rem;
+            line-height: 1;
+        }
+
+        /* Historique du niveau */
+        .history-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-height: 260px;
+        }
+
+        .screen {
+            position: relative;
+            background-color: var(--scope-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .history-wrap .screen {
+            flex: 1;
+            min-height: 220px;
+        }
+
+        .screen canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .screen-overlay {
+            position: absolute;
+            top: 10px;
+            left: 14px;
+            right: 14px;
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            pointer-events: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.74rem;
+        }
+
+        .overlay-tag {
+            color: #e2e8f0;
+            background: rgba(15, 23, 42, 0.75);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .overlay-tag.muted {
+            color: #94a3b8;
+        }
+
+        details.calib {
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 1.25rem;
+            padding-top: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        details.calib summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .calib-body {
+            margin-top: 0.85rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .calib-card {
+            background: var(--bg-recessed);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.8rem 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            line-height: 1.45;
+        }
+
+        .calib-card p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .inline-field {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .num-input {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: 88px;
+            padding: 0.3rem 0.5rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg-panel);
+            color: var(--text-main);
+        }
+
+        /* --- Analyseur de spectre --- */
+        .spectrum-screen {
+            height: 340px;
+        }
+
+        .readouts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 760px) {
+            .readouts {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .readout {
+            background: var(--bg-recessed);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.55rem 0.85rem;
+        }
+
+        .readout-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+        }
+
+        .readout-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .readout-sub {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            min-height: 1.1em;
+        }
+
+        .readout.peak .readout-value { color: var(--ch1); }
+        .readout.fund .readout-value { color: var(--ch2); }
+
+        .hint-footer {
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .formula-line {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 520px) {
+            .meter-controls {
+                grid-template-columns: 1fr;
+            }
+            .lcd-value {
+                font-size: 2.8rem;
+            }
+            .spectrum-screen {
+                height: 280px;
+            }
+            .bar-scale .minor {
+                display: none;
+            }
+            .bar-wrap {
+                padding-bottom: 3.9rem;
+            }
+            .bar-scale .mark.alt {
+                top: 2.3rem;
+            }
+            .ctrl-group {
+                flex-wrap: wrap;
+            }
+            #rangeSel {
+                grid-auto-flow: row;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="brand">
+            <div class="brand-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" y1="20" x2="4" y2="14"/>
+                    <line x1="8" y1="20" x2="8" y2="6"/>
+                    <line x1="12" y1="20" x2="12" y2="11"/>
+                    <line x1="16" y1="20" x2="16" y2="15"/>
+                    <line x1="20" y1="20" x2="20" y2="17"/>
+                </svg>
+            </div>
+            <div>
+                <h1>Analyseur de spectre &amp; sonomètre</h1>
+                <div class="subtitle">Niveau sonore pondéré, spectre en fréquences et spectrogramme d'un son capté par le microphone</div>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="btn-power" id="powerBtn" title="Activer ou couper le microphone (Barre d'espace)">
+                <span class="led"></span>
+                <span id="powerText">MICRO : OFF</span>
+            </button>
+            <button class="theme-toggle" id="themeBtn" title="Changer le thème (Clair / Sombre)">🌓</button>
+        </div>
+    </header>
+
+    <div class="chassis">
+        <!-- PANNEAU 1 : SONOMÈTRE -->
+        <div class="panel meter-panel">
+            <div class="panel-header">
+                <span class="panel-title">Sonomètre</span>
+                <div class="toolbar">
+                    <div class="ctrl-group">
+                        <label for="inputSelect">Entrée :</label>
+                        <select id="inputSelect">
+                            <option value="">Microphone par défaut</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="meter-grid">
+                <div class="meter-unit">
+                    <div class="lcd">
+                        <div class="lcd-top">
+                            <span id="lcdIndicator">L<sub>AF</sub></span>
+                            <span class="clip-badge" id="clipBadge">SATURATION</span>
+                        </div>
+                        <div class="lcd-main">
+                            <span class="lcd-value" id="lcdValue">--,-</span>
+                            <span class="lcd-unit" id="lcdUnit">dB(A)</span>
+                        </div>
+                    </div>
+
+                    <div class="bar-wrap">
+                        <div class="bar-track">
+                            <div class="bar-mask" id="barMask"></div>
+                        </div>
+                        <div class="bar-peak" id="barPeak" title="Niveau maximal"></div>
+                        <div class="bar-scale" id="barScale"></div>
+                    </div>
+
+                    <div class="meter-controls">
+                        <div class="control-block">
+                            <label>Pondération fréquentielle</label>
+                            <div class="seg" id="weightSel">
+                                <button class="seg-btn active" data-w="A" title="Pondération A : sensibilité de l'oreille aux niveaux modérés">A</button>
+                                <button class="seg-btn" data-w="C" title="Pondération C : niveaux élevés, basses fréquences prises en compte">C</button>
+                                <button class="seg-btn" data-w="Z" title="Pondération Z : aucune pondération (linéaire)">Z</button>
+                            </div>
+                        </div>
+                        <div class="control-block">
+                            <label>Constante de temps</label>
+                            <div class="seg" id="timeSel">
+                                <button class="seg-btn active" data-t="F" title="Rapide : τ = 125 ms">Rapide</button>
+                                <button class="seg-btn" data-t="S" title="Lent : τ = 1 s">Lent</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-row">
+                        <div class="stat" title="Niveau équivalent : moyenne énergétique depuis la dernière remise à zéro">
+                            <div class="stat-label" id="leqLabel">L<sub>Aeq</sub></div>
+                            <div class="stat-value" id="leqValue">--,-</div>
+                        </div>
+                        <div class="stat" title="Niveau maximal (avec la constante de temps choisie)">
+                            <div class="stat-label" id="lmaxLabel">L<sub>AFmax</sub></div>
+                            <div class="stat-value" id="lmaxValue">--,-</div>
+                        </div>
+                        <div class="stat" title="Niveau minimal (avec la constante de temps choisie)">
+                            <div class="stat-label" id="lminLabel">L<sub>AFmin</sub></div>
+                            <div class="stat-value" id="lminValue">--,-</div>
+                        </div>
+                    </div>
+
+                    <div class="meter-footer-row">
+                        <span>Durée de mesure : <strong id="durationText">0 s</strong></span>
+                        <button class="btn-small" id="resetStatsBtn">↺ Remise à zéro</button>
+                    </div>
+                </div>
+
+                <div class="history-wrap">
+                    <div class="screen">
+                        <canvas id="historyCanvas"></canvas>
+                        <div class="screen-overlay">
+                            <span class="overlay-tag">Niveau sur 60 s</span>
+                            <span class="overlay-tag muted" id="historyTag">dB(A)</span>
+                        </div>
+                    </div>
+                    <div class="formula-line">
+                        Niveau d'intensité sonore :
+                        <span class="tex" data-tex="L = 10\log\left(\dfrac{I}{I_0}\right)" data-fallback="L = 10 log(I / I₀)">L = 10 log(I / I₀)</span>
+                        avec <span class="tex" data-tex="I_0 = 1{,}0 \times 10^{-12}\ \text{W}\cdot\text{m}^{-2}" data-fallback="I₀ = 1,0 × 10⁻¹² W·m⁻²">I₀ = 1,0 × 10⁻¹² W·m⁻²</span>
+                    </div>
+                </div>
+            </div>
+
+            <details class="calib">
+                <summary>Étalonnage du microphone</summary>
+                <div class="calib-body">
+                    <div class="calib-card">
+                        <p>Un microphone d'ordinateur ou de téléphone n'est pas étalonné : sa sensibilité varie de plusieurs dizaines de décibels d'un appareil à l'autre. <strong>Sans étalonnage, les niveaux affichés sont indicatifs</strong> (les écarts entre deux mesures restent en revanche fiables).</p>
+                        <div class="inline-field">
+                            <label for="calibInput">Décalage d'étalonnage :</label>
+                            <input type="number" class="num-input" id="calibInput" step="0.1" value="100.0">
+                            <span>dB</span>
+                            <button class="btn-small" id="calibDefaultBtn" title="Revenir à la valeur par défaut (100 dB)">Défaut</button>
+                        </div>
+                    </div>
+                    <div class="calib-card">
+                        <p>Placer le microphone tout près d'un sonomètre de référence (ou d'un calibreur acoustique), produire un son stable, entrer la valeur lue sur l'appareil de référence puis cliquer sur « Étalonner ».</p>
+                        <div class="inline-field">
+                            <label for="refInput">Valeur de référence :</label>
+                            <input type="number" class="num-input" id="refInput" step="0.1" value="94.0">
+                            <span>dB</span>
+                            <button class="btn-small" id="calibBtn">🎯 Étalonner</button>
+                        </div>
+                        <p id="calibStatus"></p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- PANNEAU 2 : ANALYSEUR DE SPECTRE -->
+        <div class="panel">
+            <div class="panel-header">
+                <span class="panel-title">Analyse spectrale</span>
+                <div class="toolbar">
+                    <div class="seg" id="viewSel">
+                        <button class="seg-btn active" data-view="spectrum">Spectre</button>
+                        <button class="seg-btn" data-view="spectrogram">Spectrogramme</button>
+                    </div>
+                    <button class="btn-small" id="freezeBtn">❄️ Figer</button>
+                </div>
+            </div>
+
+            <div class="toolbar" style="margin-bottom: 1rem;">
+                <div class="ctrl-group">
+                    <span>Fréquences :</span>
+                    <div class="seg" id="rangeSel">
+                        <button class="seg-btn" data-min="0" data-max="1000" data-log="0">0–1 kHz</button>
+                        <button class="seg-btn active" data-min="0" data-max="5000" data-log="0">0–5 kHz</button>
+                        <button class="seg-btn" data-min="0" data-max="20000" data-log="0">0–20 kHz</button>
+                        <button class="seg-btn" data-min="20" data-max="20000" data-log="1">20–20k Log</button>
+                    </div>
+                </div>
+                <div class="ctrl-group" id="yScaleGroup">
+                    <span>Échelle :</span>
+                    <div class="seg" id="yScaleSel">
+                        <button class="seg-btn active" data-y="db">dB</button>
+                        <button class="seg-btn" data-y="lin">Amplitude</button>
+                    </div>
+                </div>
+                <div class="ctrl-group">
+                    <label for="fftSelect">Points N :</label>
+                    <select id="fftSelect">
+                        <option value="2048">2 048</option>
+                        <option value="4096">4 096</option>
+                        <option value="8192" selected>8 192</option>
+                        <option value="16384">16 384</option>
+                        <option value="32768">32 768</option>
+                    </select>
+                </div>
+                <div class="ctrl-group">
+                    <label for="smoothSelect">Lissage :</label>
+                    <select id="smoothSelect">
+                        <option value="0">Aucun</option>
+                        <option value="0.5" selected>Moyen</option>
+                        <option value="0.8">Fort</option>
+                    </select>
+                </div>
+                <button class="btn-small active" id="harmBtn" title="Repérer les harmoniques du fondamental détecté">🎼 Harmoniques</button>
+                <button class="btn-small" id="holdBtn" title="Conserver le maximum atteint par chaque fréquence">📈 Maximum</button>
+            </div>
+
+            <div class="screen spectrum-screen" id="spectrumScreen">
+                <canvas id="spectrumCanvas"></canvas>
+            </div>
+
+            <div class="readouts">
+                <div class="readout peak">
+                    <div class="readout-label">Pic principal</div>
+                    <div class="readout-value" id="peakValue">—</div>
+                    <div class="readout-sub" id="peakSub"></div>
+                </div>
+                <div class="readout fund">
+                    <div class="readout-label">Fondamental estimé f₁</div>
+                    <div class="readout-value" id="fundValue">—</div>
+                    <div class="readout-sub" id="fundSub"></div>
+                </div>
+                <div class="readout">
+                    <div class="readout-label">Résolution fréquentielle</div>
+                    <div class="readout-value"><span class="tex" data-tex="\Delta f = \frac{f_e}{N} =" data-fallback="Δf = fe/N =">Δf = fe/N =</span> <span id="resValue">5,86 Hz</span></div>
+                    <div class="readout-sub" id="resSub"></div>
+                </div>
+            </div>
+
+            <div class="hint-footer">
+                Survolez le graphique pour lire la fréquence et le niveau. Augmenter N affine la résolution mais allonge la durée analysée (réponse plus lente).<br>
+                Les niveaux du spectre sont relatifs (0 dB = pleine échelle numérique du micro).
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- 1. Gestion du thème Clair / Sombre ---
+    const themeBtn = document.getElementById('themeBtn');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function storageGet(key) {
+        try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+
+    function storageSet(key, value) {
+        try { localStorage.setItem(key, value); } catch (e) { /* stockage indisponible */ }
+    }
+
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        storageSet('theme_pref', theme);
+    }
+
+    const savedTheme = storageGet('theme_pref');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else if (prefersDark.matches) {
+        setTheme('dark');
+    }
+
+    themeBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Rendu LaTeX (KaTeX), avec texte de secours si la bibliothèque n'a pas pu être chargée
+    function renderTex(el, tex, fallback) {
+        if (window.katex) {
+            try {
+                katex.render(tex, el, { throwOnError: false });
+                return;
+            } catch (e) { /* texte de secours ci-dessous */ }
+        }
+        el.textContent = fallback;
+    }
+
+    document.querySelectorAll('.tex').forEach(el => renderTex(el, el.dataset.tex, el.dataset.fallback));
+
+    // --- 2. État ---
+    const DEFAULT_CALIB = 100;
+    const storedCalib = parseFloat(storageGet('spectre_calib'));
+
+    const state = {
+        running: false,
+        frozen: false,
+        weighting: 'A',
+        timeW: 'F',
+        calib: isNaN(storedCalib) ? DEFAULT_CALIB : storedCalib,
+        view: 'spectrum',
+        fMin: 0,
+        fMax: 5000,
+        logF: false,
+        yScale: 'db',
+        fftSize: 8192,
+        smoothing: 0.5,
+        harmonics: true,
+        peakHold: false,
+        dbMin: -120,
+        dbMax: -10
+    };
+
+    // --- 3. Filtres de pondération A et C (IEC 61672) ---
+    // Fonctions de transfert analogiques découpées en cellules du 2e ordre, puis
+    // discrétisées par transformation bilinéaire (avec précompensation des pulsations).
+    function bilinear(n, d, fs) {
+        // n, d : coefficients [c2, c1, c0] de c2·s² + c1·s + c0
+        const K = 2 * fs, K2 = K * K;
+        const a0 = d[0] * K2 + d[1] * K + d[2];
+        return {
+            b0: (n[0] * K2 + n[1] * K + n[2]) / a0,
+            b1: 2 * (n[2] - n[0] * K2) / a0,
+            b2: (n[0] * K2 - n[1] * K + n[2]) / a0,
+            a1: 2 * (d[2] - d[0] * K2) / a0,
+            a2: (d[0] * K2 - d[1] * K + d[2]) / a0
+        };
+    }
+
+    function sectionsGain(secs, f, fs) {
+        const w = 2 * Math.PI * f / fs;
+        const c1 = Math.cos(w), s1 = Math.sin(w), c2 = Math.cos(2 * w), s2 = Math.sin(2 * w);
+        let g = 1;
+        for (const s of secs) {
+            const nr = s.b0 + s.b1 * c1 + s.b2 * c2, ni = -(s.b1 * s1 + s.b2 * s2);
+            const dr = 1 + s.a1 * c1 + s.a2 * c2, di = -(s.a1 * s1 + s.a2 * s2);
+            g *= Math.hypot(nr, ni) / Math.hypot(dr, di);
+        }
+        return g;
+    }
+
+    function weightingSections(type, fs) {
+        if (type === 'Z') return [];
+        const warp = f => 2 * fs * Math.tan(Math.PI * f / fs);
+        const w1 = warp(20.598997), w2 = warp(107.65265), w3 = warp(737.86223), w4 = warp(12194.217);
+        const secs = [bilinear([1, 0, 0], [1, 2 * w1, w1 * w1], fs)];
+        if (type === 'A') secs.push(bilinear([1, 0, 0], [1, w2 + w3, w2 * w3], fs));
+        secs.push(bilinear([0, 0, 1], [1, 2 * w4, w4 * w4], fs));
+        // Normalisation : gain unité à 1 kHz
+        const g = sectionsGain(secs, 1000, fs);
+        secs[0].b0 /= g;
+        secs[0].b1 /= g;
+        secs[0].b2 /= g;
+        return secs;
+    }
+
+    // --- 4. Calcul du niveau sonore ---
+    // Filtrage de pondération, puis moyennes quadratiques exponentielles (τ = 125 ms et 1 s)
+    // et sommes pour le niveau équivalent, transmises toutes les 50 ms.
+    // Le même code tourne dans un AudioWorklet ou, à défaut (page ouverte en local,
+    // navigateur ancien), dans un ScriptProcessorNode.
+    const LEVEL_CORE_CODE = `
+    class LevelCore {
+        constructor(sections, fs) {
+            this.setSections(sections);
+            this.aF = Math.exp(-1 / (0.125 * fs));
+            this.aS = Math.exp(-1 / (1.0 * fs));
+            this.msF = 0;
+            this.msS = 0;
+            this.sum = 0;
+            this.n = 0;
+            this.peak = 0;
+            this.reportEvery = Math.round(0.05 * fs);
+        }
+        setSections(sections) {
+            this.sections = sections;
+            this.z = sections.map(() => [0, 0]);
+            this.primed = false;
+        }
+        // Traite un bloc d'échantillons ; renvoie un bilan toutes les 50 ms, sinon null
+        processBlock(x0) {
+            const secs = this.sections;
+            const len = x0.length;
+            const buf = new Float64Array(len);
+            for (let i = 0; i < len; i++) {
+                let x = x0[i];
+                const ax = Math.abs(x);
+                if (ax > this.peak) this.peak = ax;
+                for (let k = 0; k < secs.length; k++) {
+                    const s = secs[k], z = this.z[k];
+                    const y = s.b0 * x + z[0];
+                    z[0] = s.b1 * x - s.a1 * y + z[1];
+                    z[1] = s.b2 * x - s.a2 * y;
+                    x = y;
+                }
+                buf[i] = x * x;
+            }
+            if (!this.primed) {
+                // Initialisation des moyennes sur le premier bloc (évite une montée depuis 0)
+                let m = 0;
+                for (let i = 0; i < len; i++) m += buf[i];
+                this.msF = this.msS = m / len;
+                this.primed = true;
+            }
+            for (let i = 0; i < len; i++) {
+                const x2 = buf[i];
+                this.msF = this.aF * this.msF + (1 - this.aF) * x2;
+                this.msS = this.aS * this.msS + (1 - this.aS) * x2;
+                this.sum += x2;
+            }
+            this.n += len;
+            if (this.n < this.reportEvery) return null;
+            const report = { msF: this.msF, msS: this.msS, sum: this.sum, n: this.n, peak: this.peak };
+            this.sum = 0;
+            this.n = 0;
+            this.peak = 0;
+            return report;
+        }
+    }`;
+
+    const WORKLET_CODE = LEVEL_CORE_CODE + `
+    class SoundLevelProcessor extends AudioWorkletProcessor {
+        constructor(options) {
+            super();
+            this.core = new LevelCore(options.processorOptions.sections, sampleRate);
+            this.port.onmessage = (e) => {
+                if (e.data.sections) this.core.setSections(e.data.sections);
+            };
+        }
+        process(inputs) {
+            const input = inputs[0];
+            if (input && input[0]) {
+                const report = this.core.processBlock(input[0]);
+                if (report) this.port.postMessage(report);
+            }
+            return true;
+        }
+    }
+    registerProcessor('sound-level-processor', SoundLevelProcessor);
+    `;
+
+    // Moteur du sonomètre : AudioWorklet si possible, ScriptProcessorNode sinon
+    async function createLevelEngine(source) {
+        const sections = weightingSections(state.weighting, sampleRate);
+        try {
+            const url = URL.createObjectURL(new Blob([WORKLET_CODE], { type: 'application/javascript' }));
+            await audioCtx.audioWorklet.addModule(url);
+            URL.revokeObjectURL(url);
+            const node = new AudioWorkletNode(audioCtx, 'sound-level-processor', {
+                numberOfInputs: 1,
+                numberOfOutputs: 0,
+                channelCount: 1,
+                channelCountMode: 'explicit',
+                processorOptions: { sections }
+            });
+            node.port.onmessage = (e) => onLevelReport(e.data);
+            source.connect(node);
+            return { setSections: s => node.port.postMessage({ sections: s }) };
+        } catch (err) {
+            const LevelCore = new Function(LEVEL_CORE_CODE + '; return LevelCore;')();
+            const core = new LevelCore(sections, sampleRate);
+            const node = audioCtx.createScriptProcessor(2048, 1, 1);
+            node.onaudioprocess = (e) => {
+                const report = core.processBlock(e.inputBuffer.getChannelData(0));
+                if (report) onLevelReport(report);
+            };
+            source.connect(node);
+            node.connect(audioCtx.destination); // nécessaire pour que le nœud soit sollicité (sortie muette)
+            return { setSections: s => core.setSections(s), node };
+        }
+    }
+
+    // --- 5. Moteur audio ---
+    let audioCtx = null;
+    let mediaStream = null;
+    let analyser = null;
+    let levelEngine = null;
+    let sampleRate = 48000;
+    let freqData = null;
+    let holdData = null;
+
+    const meter = {
+        msF: 0,
+        msS: 0,
+        sum: 0,
+        n: 0,
+        lmax: -Infinity,
+        lmin: Infinity,
+        holdUntil: 0,
+        clipUntil: 0,
+        startTime: 0,
+        history: []
+    };
+
+    const powerBtn = document.getElementById('powerBtn');
+    const powerText = document.getElementById('powerText');
+    const inputSelect = document.getElementById('inputSelect');
+
+    async function startAudio() {
+        const deviceId = inputSelect.value;
+        const constraints = {
+            audio: {
+                echoCancellation: false,
+                noiseSuppression: false,
+                autoGainControl: false
+            }
+        };
+        if (deviceId) constraints.audio.deviceId = { exact: deviceId };
+
+        try {
+            mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+        } catch (err) {
+            alert("Impossible d'accéder au microphone. Vérifiez les permissions du navigateur.\n\nDétail : " + err.message);
+            return false;
+        }
+
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+        sampleRate = audioCtx.sampleRate;
+        const source = audioCtx.createMediaStreamSource(mediaStream);
+
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = state.fftSize;
+        analyser.smoothingTimeConstant = state.smoothing;
+        source.connect(analyser);
+        allocateSpectrumBuffers();
+
+        levelEngine = await createLevelEngine(source);
+
+        if (audioCtx.state === 'suspended') await audioCtx.resume();
+        resetStats();
+        updateResolution();
+        populateDevices();
+        return true;
+    }
+
+    function stopAudio() {
+        if (mediaStream) mediaStream.getTracks().forEach(t => t.stop());
+        if (audioCtx) audioCtx.close();
+        mediaStream = null;
+        audioCtx = null;
+        analyser = null;
+        levelEngine = null;
+    }
+
+    async function togglePower() {
+        if (state.running) {
+            stopAudio();
+            state.running = false;
+        } else {
+            state.running = await startAudio();
+        }
+        powerBtn.classList.toggle('active', state.running);
+        powerText.textContent = state.running ? 'MICRO : ON' : 'MICRO : OFF';
+        if (!state.running) {
+            document.getElementById('lcdValue').textContent = '--,-';
+        }
+    }
+
+    powerBtn.addEventListener('click', togglePower);
+    window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' && !['INPUT', 'SELECT', 'BUTTON'].includes(document.activeElement.tagName)) {
+            e.preventDefault();
+            togglePower();
+        }
+    });
+
+    async function populateDevices() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return;
+        const devices = (await navigator.mediaDevices.enumerateDevices()).filter(d => d.kind === 'audioinput');
+        const current = inputSelect.value;
+        inputSelect.innerHTML = '';
+        const def = document.createElement('option');
+        def.value = '';
+        def.textContent = 'Microphone par défaut';
+        inputSelect.appendChild(def);
+        devices.forEach((d, i) => {
+            if (!d.deviceId || d.deviceId === 'default') return;
+            const opt = document.createElement('option');
+            opt.value = d.deviceId;
+            opt.textContent = d.label || `Microphone ${i + 1}`;
+            inputSelect.appendChild(opt);
+        });
+        inputSelect.value = current;
+    }
+
+    inputSelect.addEventListener('change', async () => {
+        if (!state.running) return;
+        stopAudio();
+        state.running = await startAudio();
+        powerBtn.classList.toggle('active', state.running);
+        powerText.textContent = state.running ? 'MICRO : ON' : 'MICRO : OFF';
+    });
+
+    // --- 6. Sonomètre : calculs et affichage ---
+    const BAR_MIN = 20, BAR_MAX = 120;
+    const HISTORY_SEC = 60;
+
+    function levelOf(ms) {
+        return ms > 0 ? 10 * Math.log10(ms) + state.calib : -Infinity;
+    }
+
+    function currentLevel() {
+        return levelOf(state.timeW === 'F' ? meter.msF : meter.msS);
+    }
+
+    function fmtDb(L) {
+        if (!isFinite(L)) return '--,-';
+        return Math.max(0, L).toFixed(1).replace('.', ',');
+    }
+
+    function resetStats() {
+        meter.sum = 0;
+        meter.n = 0;
+        meter.lmax = -Infinity;
+        meter.lmin = Infinity;
+        // Laisse aux filtres et aux moyennes le temps de se stabiliser
+        meter.holdUntil = performance.now() + (state.timeW === 'S' ? 2000 : 500);
+        meter.startTime = meter.holdUntil;
+        updateMeterLabels();
+    }
+
+    function onLevelReport(d) {
+        meter.msF = d.msF;
+        meter.msS = d.msS;
+        const now = performance.now();
+        if (d.peak >= 0.99) meter.clipUntil = now + 1500;
+        const L = currentLevel();
+        if (now >= meter.holdUntil) {
+            meter.sum += d.sum;
+            meter.n += d.n;
+            if (L > meter.lmax) meter.lmax = L;
+            if (L < meter.lmin) meter.lmin = L;
+        }
+        meter.history.push({ t: now, L });
+        while (meter.history.length && meter.history[0].t < now - HISTORY_SEC * 1000) meter.history.shift();
+    }
+
+    function updateMeterLabels() {
+        const w = state.weighting, t = state.timeW;
+        document.getElementById('lcdIndicator').innerHTML = `L<sub>${w}${t}</sub> · ${t === 'F' ? 'Rapide (125 ms)' : 'Lent (1 s)'}`;
+        document.getElementById('lcdUnit').textContent = `dB(${w})`;
+        document.getElementById('leqLabel').innerHTML = `L<sub>${w}eq</sub>`;
+        document.getElementById('lmaxLabel').innerHTML = `L<sub>${w}${t}max</sub>`;
+        document.getElementById('lminLabel').innerHTML = `L<sub>${w}${t}min</sub>`;
+        document.getElementById('historyTag').textContent = `dB(${w})`;
+    }
+
+    // Graduations et repères du bargraphe
+    (function buildBarScale() {
+        const scale = document.getElementById('barScale');
+        const marks = [
+            [30, 'Chuchotement'],
+            [60, 'Conversation'],
+            [85, 'Risque'],
+            [120, 'Douleur']
+        ];
+        // Étiquettes extrêmes alignées sur les bords pour ne pas déborder
+        const place = v => {
+            const pct = (v - BAR_MIN) / (BAR_MAX - BAR_MIN) * 100;
+            const shift = v === BAR_MIN ? '0' : v === BAR_MAX ? '-100%' : '-50%';
+            const align = v === BAR_MIN ? 'left' : v === BAR_MAX ? 'right' : 'center';
+            return `left:${pct}%; transform:translateX(${shift}); text-align:${align}`;
+        };
+        let html = '';
+        for (let v = BAR_MIN; v <= BAR_MAX; v += 10) {
+            html += `<span class="${v % 20 ? 'minor' : ''}" style="${place(v)}"><b>${v}</b></span>`;
+        }
+        for (const [v, name] of marks) {
+            html += `<span class="mark${v === 60 ? ' alt' : ''}" style="${place(v)}">${name}</span>`;
+        }
+        scale.innerHTML = html;
+    })();
+
+    const barMask = document.getElementById('barMask');
+    const barPeak = document.getElementById('barPeak');
+    let lastLcdUpdate = 0;
+
+    function barPct(L) {
+        return Math.max(0, Math.min(100, (L - BAR_MIN) / (BAR_MAX - BAR_MIN) * 100));
+    }
+
+    function updateMeterDisplay(now) {
+        const active = state.running && levelEngine;
+        const L = active ? currentLevel() : -Infinity;
+        barMask.style.width = `${100 - (isFinite(L) ? barPct(L) : 0)}%`;
+        if (active && isFinite(meter.lmax)) {
+            barPeak.style.display = 'block';
+            barPeak.style.left = `${barPct(meter.lmax)}%`;
+        } else {
+            barPeak.style.display = 'none';
+        }
+        document.getElementById('clipBadge').classList.toggle('visible', active && now < meter.clipUntil);
+
+        // Affichage numérique rafraîchi 4 fois par seconde pour rester lisible
+        if (now - lastLcdUpdate < 250) return;
+        lastLcdUpdate = now;
+        document.getElementById('lcdValue').textContent = fmtDb(L);
+        const leq = meter.n > 0 ? levelOf(meter.sum / meter.n) : -Infinity;
+        document.getElementById('leqValue').textContent = active ? fmtDb(leq) : '--,-';
+        document.getElementById('lmaxValue').textContent = active ? fmtDb(meter.lmax) : '--,-';
+        document.getElementById('lminValue').textContent = active ? fmtDb(meter.lmin) : '--,-';
+        const dur = active ? Math.max(0, (now - meter.startTime) / 1000) : 0;
+        document.getElementById('durationText').textContent = dur < 60
+            ? `${Math.floor(dur)} s`
+            : `${Math.floor(dur / 60)} min ${String(Math.floor(dur % 60)).padStart(2, '0')} s`;
+    }
+
+    document.querySelectorAll('#weightSel .seg-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#weightSel .seg-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            state.weighting = btn.dataset.w;
+            if (levelEngine) levelEngine.setSections(weightingSections(state.weighting, sampleRate));
+            meter.history = [];
+            resetStats();
+        });
+    });
+
+    document.querySelectorAll('#timeSel .seg-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#timeSel .seg-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            state.timeW = btn.dataset.t;
+            resetStats();
+        });
+    });
+
+    document.getElementById('resetStatsBtn').addEventListener('click', resetStats);
+
+    // Étalonnage
+    const calibInput = document.getElementById('calibInput');
+    const calibStatus = document.getElementById('calibStatus');
+
+    function setCalib(value) {
+        state.calib = Math.round(value * 10) / 10;
+        calibInput.value = state.calib.toFixed(1);
+        storageSet('spectre_calib', String(state.calib));
+        meter.history = [];
+        resetStats();
+    }
+
+    calibInput.value = state.calib.toFixed(1);
+    calibInput.addEventListener('change', () => {
+        const v = parseFloat(calibInput.value);
+        if (!isNaN(v)) setCalib(v);
+    });
+
+    document.getElementById('calibDefaultBtn').addEventListener('click', () => {
+        setCalib(DEFAULT_CALIB);
+        calibStatus.textContent = 'Décalage remis à sa valeur par défaut.';
+    });
+
+    document.getElementById('calibBtn').addEventListener('click', () => {
+        const ref = parseFloat(document.getElementById('refInput').value);
+        if (!state.running || !levelEngine || !(meter.msS > 0)) {
+            calibStatus.textContent = 'Activez d\'abord le microphone et produisez un son stable.';
+            return;
+        }
+        if (isNaN(ref)) return;
+        // Moyenne lente (τ = 1 s) pour une valeur stable
+        setCalib(ref - 10 * Math.log10(meter.msS));
+        calibStatus.textContent = `Étalonné : ${ref.toFixed(1).replace('.', ',')} dB(${state.weighting}) ↔ décalage de ${state.calib.toFixed(1).replace('.', ',')} dB (mémorisé sur cet appareil).`;
+    });
+
+    // Historique du niveau sonore
+    const historyCanvas = document.getElementById('historyCanvas');
+    const hctx = historyCanvas.getContext('2d');
+
+    function fitCanvas(cv) {
+        const dpr = window.devicePixelRatio || 1;
+        const rect = cv.getBoundingClientRect();
+        const w = Math.round(rect.width * dpr), h = Math.round(rect.height * dpr);
+        if (cv.width !== w || cv.height !== h) {
+            cv.width = w;
+            cv.height = h;
+        }
+        return { W: rect.width, H: rect.height, dpr };
+    }
+
+    function drawHistory(now) {
+        const { W, H, dpr } = fitCanvas(historyCanvas);
+        hctx.save();
+        hctx.scale(dpr, dpr);
+        hctx.clearRect(0, 0, W, H);
+
+        const left = 38, right = 10, top = 40, bottom = 22;
+        const pw = W - left - right, ph = H - top - bottom;
+        const yOf = L => top + ph * (1 - (Math.max(BAR_MIN, Math.min(BAR_MAX, L)) - BAR_MIN) / (BAR_MAX - BAR_MIN));
+
+        hctx.font = '10px JetBrains Mono, monospace';
+        hctx.textAlign = 'right';
+        hctx.textBaseline = 'middle';
+        for (let v = BAR_MIN; v <= BAR_MAX; v += 10) {
+            const y = yOf(v);
+            hctx.strokeStyle = 'rgba(148, 163, 184, 0.14)';
+            hctx.beginPath();
+            hctx.moveTo(left, y);
+            hctx.lineTo(left + pw, y);
+            hctx.stroke();
+            if (v % 20 === 0) {
+                hctx.fillStyle = '#94a3b8';
+                hctx.fillText(String(v), left - 6, y);
+            }
+        }
+
+        // Seuil de risque auditif (85 dB)
+        const y85 = yOf(85);
+        hctx.strokeStyle = 'rgba(239, 68, 68, 0.75)';
+        hctx.setLineDash([5, 4]);
+        hctx.beginPath();
+        hctx.moveTo(left, y85);
+        hctx.lineTo(left + pw, y85);
+        hctx.stroke();
+        hctx.setLineDash([]);
+        hctx.fillStyle = 'rgba(239, 68, 68, 0.9)';
+        hctx.textAlign = 'left';
+        hctx.textBaseline = 'bottom';
+        hctx.fillText('85 dB', left + 4, y85 - 2);
+
+        // Axe des temps
+        hctx.fillStyle = '#94a3b8';
+        hctx.textAlign = 'center';
+        hctx.textBaseline = 'top';
+        for (let s = 0; s <= HISTORY_SEC; s += 10) {
+            const x = left + pw * (1 - s / HISTORY_SEC);
+            hctx.fillText(s === 0 ? '0 s' : `−${s}`, x, top + ph + 6);
+        }
+
+        if (meter.history.length > 1 && state.running) {
+            const col = getComputedStyle(document.documentElement).getPropertyValue('--sum').trim();
+            const xOf = t => left + pw * (1 - (now - t) / (HISTORY_SEC * 1000));
+            hctx.beginPath();
+            let started = false;
+            for (const p of meter.history) {
+                if (!isFinite(p.L)) continue;
+                const x = xOf(p.t), y = yOf(p.L);
+                if (!started) { hctx.moveTo(x, y); started = true; } else hctx.lineTo(x, y);
+            }
+            hctx.strokeStyle = col;
+            hctx.lineWidth = 2;
+            hctx.stroke();
+        }
+        hctx.restore();
+    }
+
+    // --- 7. Analyseur de spectre ---
+    const spectrumCanvas = document.getElementById('spectrumCanvas');
+    const sctx = spectrumCanvas.getContext('2d');
+    const sgCanvas = document.createElement('canvas'); // image du spectrogramme (pixels physiques)
+    const sgCtx = sgCanvas.getContext('2d');
+    const SG_SPEED = 60; // colonnes (px CSS) par seconde
+    let sgCarry = 0;
+    let lastFrameTime = performance.now();
+    let cursor = null; // position du pointeur au-dessus du graphique
+    let analysis = { peak: null, f0: null };
+
+    const PLOT = { left: 50, right: 14, top: 14, bottom: 26 };
+    const MAX_HARMONICS = 12;
+
+    function allocateSpectrumBuffers() {
+        freqData = new Float32Array(analyser.frequencyBinCount);
+        holdData = new Float32Array(analyser.frequencyBinCount).fill(-Infinity);
+    }
+
+    function binHz() {
+        return sampleRate / state.fftSize;
+    }
+
+    function displayFMax() {
+        return Math.min(state.fMax, sampleRate / 2);
+    }
+
+    // Abscisse normalisée [0, 1] ↔ fréquence
+    function freqToFrac(f) {
+        const fMax = displayFMax();
+        if (state.logF) return Math.log(f / state.fMin) / Math.log(fMax / state.fMin);
+        return (f - state.fMin) / (fMax - state.fMin);
+    }
+
+    function fracToFreq(u) {
+        const fMax = displayFMax();
+        if (state.logF) return state.fMin * Math.pow(fMax / state.fMin, u);
+        return state.fMin + u * (fMax - state.fMin);
+    }
+
+    function getMusicalNoteInfo(freq) {
+        if (freq < 16 || freq > 8000) return '';
+        const notes = ['Do', 'Do♯', 'Ré', 'Ré♯', 'Mi', 'Fa', 'Fa♯', 'Sol', 'Sol♯', 'La', 'La♯', 'Si'];
+        const midi = Math.round(12 * Math.log2(freq / 440) + 69);
+        const noteName = notes[((midi % 12) + 12) % 12];
+        const octave = Math.floor(midi / 12) - 2; // Convention française (La3 = 440 Hz)
+        const exact = 440 * Math.pow(2, (midi - 69) / 12);
+        const cents = Math.round(1200 * Math.log2(freq / exact));
+        return `≈ ${noteName}${octave} (${cents >= 0 ? '+' : '−'}${Math.abs(cents)} cents)`;
+    }
+
+    function fmtHz(f) {
+        if (f >= 1000) return `${(f / 1000).toFixed(f >= 10000 ? 2 : 3).replace('.', ',')} kHz`;
+        return `${f.toFixed(1).replace('.', ',')} Hz`;
+    }
+
+    // Affinage d'un maximum par interpolation parabolique sur les niveaux en dB
+    function refinePeak(data, k) {
+        const a = data[k - 1], b = data[k], c = data[k + 1];
+        const den = a - 2 * b + c;
+        const delta = (isFinite(a) && isFinite(c) && den < 0) ? 0.5 * (a - c) / den : 0;
+        return { f: (k + delta) * binHz(), db: b - 0.25 * (a - c) * delta };
+    }
+
+    function localMaxIndex(data, k1, k2) {
+        let best = -1, bestDb = -Infinity;
+        for (let k = Math.max(1, k1); k <= Math.min(data.length - 2, k2); k++) {
+            if (data[k] > bestDb) { bestDb = data[k]; best = k; }
+        }
+        return best;
+    }
+
+    function analyseSpectrum(data) {
+        const bw = binHz();
+        const kMin = Math.max(2, Math.ceil(Math.max(state.fMin, 20) / bw));
+        const kMax = Math.min(data.length - 2, Math.floor(displayFMax() / bw));
+        const kp = localMaxIndex(data, kMin, kMax);
+        if (kp < 0 || data[kp] < -95) return { peak: null, f0: null };
+        const peak = refinePeak(data, kp);
+
+        // Fondamental : plus petit sous-multiple f/n du pic principal présentant lui-même
+        // un pic marqué (au plus 30 dB sous le pic principal, émergeant du bruit local)
+        let f0 = peak.f;
+        for (let n = 8; n >= 2; n--) {
+            const fc = peak.f / n;
+            if (fc < 30) continue;
+            const k1 = Math.floor(fc * 0.97 / bw), k2 = Math.ceil(fc * 1.03 / bw);
+            const k = localMaxIndex(data, k1, k2);
+            if (k < 0 || k === k1 || k === k2) continue;
+            if (data[k] < peak.db - 30) continue;
+            const span = Math.max(3, Math.round(fc * 0.25 / bw));
+            let floor = 0, cnt = 0;
+            for (let j = Math.max(1, k - span); j <= Math.min(data.length - 1, k + span); j++) {
+                if (Math.abs(j - k) > 2) { floor += data[j]; cnt++; }
+            }
+            if (cnt && data[k] - floor / cnt > 12) {
+                f0 = refinePeak(data, k).f;
+                break;
+            }
+        }
+        return { peak, f0 };
+    }
+
+    function niceStep(range, target) {
+        const raw = range / target;
+        const p = Math.pow(10, Math.floor(Math.log10(raw)));
+        const m = raw / p;
+        return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p;
+    }
+
+    function freqTicks(plotLen) {
+        if (state.logF) {
+            const all = plotLen < 500 ? [20, 100, 200, 1000, 2000, 10000, 20000] : [20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000];
+            return all.filter(f => f >= state.fMin && f <= displayFMax());
+        }
+        const step = niceStep(displayFMax() - state.fMin, Math.max(3, Math.min(10, plotLen / 70)));
+        const ticks = [];
+        for (let f = Math.ceil(state.fMin / step) * step; f <= displayFMax() + 1e-6; f += step) ticks.push(f);
+        return ticks;
+    }
+
+    function tickLabel(f) {
+        if (f >= 1000) return `${(f / 1000).toString().replace('.', ',')}k`;
+        return String(f);
+    }
+
+    // Palette du spectrogramme (type « magma »)
+    const LUT = (() => {
+        const stops = [[0, 0, 4], [40, 11, 84], [101, 21, 110], [159, 42, 99], [212, 72, 66], [245, 125, 21], [250, 193, 39], [252, 255, 164]];
+        const lut = new Uint8ClampedArray(256 * 3);
+        for (let i = 0; i < 256; i++) {
+            const x = i / 255 * (stops.length - 1);
+            const j = Math.min(stops.length - 2, Math.floor(x)), t = x - j;
+            for (let c = 0; c < 3; c++) lut[i * 3 + c] = stops[j][c] + t * (stops[j + 1][c] - stops[j][c]);
+        }
+        return lut;
+    })();
+
+    function clearSpectrogram() {
+        sgCtx.fillStyle = 'rgb(0, 0, 4)';
+        sgCtx.fillRect(0, 0, sgCanvas.width, sgCanvas.height);
+    }
+
+    function pushSpectrogramColumns(nCols, dpr) {
+        const w = sgCanvas.width, h = sgCanvas.height;
+        const shift = Math.min(w, Math.round(nCols * dpr));
+        if (shift <= 0) return;
+        sgCtx.drawImage(sgCanvas, -shift, 0);
+        const img = sgCtx.createImageData(1, h);
+        const bw = binHz();
+        for (let row = 0; row < h; row++) {
+            const fHi = fracToFreq(1 - row / h), fLo = fracToFreq(1 - (row + 1) / h);
+            let k1 = Math.max(1, Math.round(fLo / bw)), k2 = Math.max(k1, Math.round(fHi / bw));
+            k2 = Math.min(k2, freqData.length - 1);
+            let v = -Infinity;
+            for (let k = k1; k <= k2; k++) if (freqData[k] > v) v = freqData[k];
+            const u = Math.max(0, Math.min(1, (v - state.dbMin) / (state.dbMax - state.dbMin)));
+            const idx = Math.round(u * 255) * 3;
+            img.data[row * 4] = LUT[idx];
+            img.data[row * 4 + 1] = LUT[idx + 1];
+            img.data[row * 4 + 2] = LUT[idx + 2];
+            img.data[row * 4 + 3] = 255;
+        }
+        for (let c = 0; c < shift; c++) sgCtx.putImageData(img, w - 1 - c, 0);
+    }
+
+    function drawSpectrum(now) {
+        const { W, H, dpr } = fitCanvas(spectrumCanvas);
+        const pw = W - PLOT.left - PLOT.right, ph = H - PLOT.top - PLOT.bottom;
+        const style = getComputedStyle(document.documentElement);
+        const colCh1 = style.getPropertyValue('--ch1').trim();
+        const colCh2 = style.getPropertyValue('--ch2').trim();
+
+        // Acquisition
+        const dt = Math.min(0.25, (now - lastFrameTime) / 1000);
+        lastFrameTime = now;
+        const live = state.running && analyser && !state.frozen;
+        if (live) {
+            analyser.getFloatFrequencyData(freqData);
+            if (state.peakHold) {
+                for (let k = 0; k < freqData.length; k++) if (freqData[k] > holdData[k]) holdData[k] = freqData[k];
+            }
+            analysis = analyseSpectrum(freqData);
+        }
+
+        // Image du spectrogramme à la taille de la zone de tracé
+        const sgW = Math.max(1, Math.round(pw * dpr)), sgH = Math.max(1, Math.round(ph * dpr));
+        if (sgCanvas.width !== sgW || sgCanvas.height !== sgH) {
+            sgCanvas.width = sgW;
+            sgCanvas.height = sgH;
+            clearSpectrogram();
+        }
+        if (live) {
+            sgCarry += dt * SG_SPEED;
+            const n = Math.floor(sgCarry);
+            sgCarry -= n;
+            pushSpectrogramColumns(n, dpr);
+        }
+
+        sctx.save();
+        sctx.scale(dpr, dpr);
+        sctx.clearRect(0, 0, W, H);
+
+        const xOf = f => PLOT.left + freqToFrac(f) * pw;
+        const spectro = state.view === 'spectrogram';
+        const linY = state.yScale === 'lin' && !spectro;
+
+        if (spectro) {
+            sctx.drawImage(sgCanvas, PLOT.left, PLOT.top, pw, ph);
+        }
+
+        // Grille et graduations
+        sctx.font = '10px JetBrains Mono, monospace';
+        sctx.lineWidth = 1;
+        const ticks = freqTicks(spectro ? ph : pw);
+        if (spectro) {
+            // Fréquences en ordonnée
+            sctx.textAlign = 'right';
+            sctx.textBaseline = 'middle';
+            for (const f of ticks) {
+                const y = PLOT.top + ph * (1 - freqToFrac(f));
+                sctx.strokeStyle = 'rgba(148, 163, 184, 0.18)';
+                sctx.beginPath();
+                sctx.moveTo(PLOT.left, y);
+                sctx.lineTo(PLOT.left + pw, y);
+                sctx.stroke();
+                sctx.fillStyle = '#94a3b8';
+                sctx.fillText(tickLabel(f), PLOT.left - 6, y);
+            }
+            sctx.textAlign = 'center';
+            sctx.textBaseline = 'top';
+            const span = pw / SG_SPEED;
+            const step = span > 12 ? 5 : 2;
+            for (let s = 0; s <= span; s += step) {
+                const x = PLOT.left + pw * (1 - s / span);
+                sctx.fillText(s === 0 ? '0 s' : `−${s}`, x, PLOT.top + ph + 6);
+            }
+            sctx.save();
+            sctx.translate(12, PLOT.top + ph / 2);
+            sctx.rotate(-Math.PI / 2);
+            sctx.fillText('Fréquence (Hz)', 0, -6);
+            sctx.restore();
+        } else {
+            sctx.textAlign = 'center';
+            sctx.textBaseline = 'top';
+            for (const f of ticks) {
+                const x = xOf(f);
+                sctx.strokeStyle = 'rgba(148, 163, 184, 0.14)';
+                sctx.beginPath();
+                sctx.moveTo(x, PLOT.top);
+                sctx.lineTo(x, PLOT.top + ph);
+                sctx.stroke();
+                sctx.fillStyle = '#94a3b8';
+                sctx.fillText(tickLabel(f), x, PLOT.top + ph + 6);
+            }
+            sctx.textAlign = 'right';
+            sctx.textBaseline = 'middle';
+            if (linY) {
+                for (let v = 0; v <= 1.0001; v += 0.25) {
+                    const y = PLOT.top + ph * (1 - v);
+                    sctx.strokeStyle = 'rgba(148, 163, 184, 0.14)';
+                    sctx.beginPath();
+                    sctx.moveTo(PLOT.left, y);
+                    sctx.lineTo(PLOT.left + pw, y);
+                    sctx.stroke();
+                    sctx.fillStyle = '#94a3b8';
+                    sctx.fillText(v.toFixed(2).replace('.', ','), PLOT.left - 6, y);
+                }
+            } else {
+                for (let v = state.dbMax; v >= state.dbMin; v -= 10) {
+                    const y = PLOT.top + ph * (state.dbMax - v) / (state.dbMax - state.dbMin);
+                    sctx.strokeStyle = 'rgba(148, 163, 184, 0.14)';
+                    sctx.beginPath();
+                    sctx.moveTo(PLOT.left, y);
+                    sctx.lineTo(PLOT.left + pw, y);
+                    sctx.stroke();
+                    if ((v - state.dbMax) % 20 === 0) {
+                        sctx.fillStyle = '#94a3b8';
+                        sctx.fillText(`${v}`, PLOT.left - 6, y);
+                    }
+                }
+            }
+            sctx.save();
+            sctx.fillStyle = '#94a3b8';
+            sctx.textAlign = 'center';
+            sctx.translate(12, PLOT.top + ph / 2);
+            sctx.rotate(-Math.PI / 2);
+            sctx.fillText(linY ? 'Amplitude relative' : 'Niveau (dB)', 0, -6);
+            sctx.restore();
+        }
+
+        if (!state.running || !freqData) {
+            sctx.fillStyle = '#94a3b8';
+            sctx.font = '600 14px Inter, sans-serif';
+            sctx.textAlign = 'center';
+            sctx.textBaseline = 'middle';
+            sctx.fillText('Activez le microphone pour lancer l\'analyse', PLOT.left + pw / 2, PLOT.top + ph / 2);
+            sctx.restore();
+            return;
+        }
+
+        const bw = binHz();
+        const kMin = Math.max(1, Math.floor(state.fMin / bw));
+        const kMax = Math.min(freqData.length - 1, Math.ceil(displayFMax() / bw));
+
+        if (!spectro) {
+            // Normalisation de l'échelle linéaire sur le maximum affiché
+            let aMax = 0;
+            if (linY) {
+                const src = state.peakHold ? holdData : freqData;
+                for (let k = kMin; k <= kMax; k++) aMax = Math.max(aMax, Math.pow(10, src[k] / 20));
+                aMax = aMax || 1;
+            }
+            const yOf = db => {
+                if (linY) return PLOT.top + ph * (1 - Math.pow(10, db / 20) / aMax);
+                const v = Math.max(state.dbMin, Math.min(state.dbMax, db));
+                return PLOT.top + ph * (state.dbMax - v) / (state.dbMax - state.dbMin);
+            };
+
+            // Construction du tracé : un point par pixel (maximum des raies qui s'y projettent)
+            const buildPath = (data) => {
+                const pts = [];
+                let curPx = null, curDb = -Infinity, curX = 0;
+                for (let k = kMin; k <= kMax; k++) {
+                    const f = k * bw;
+                    if (state.logF && f < state.fMin) continue;
+                    const x = xOf(f);
+                    const px = Math.floor(x);
+                    if (px !== curPx) {
+                        if (curPx !== null) pts.push([curX, yOf(curDb)]);
+                        curPx = px;
+                        curDb = data[k];
+                        curX = x;
+                    } else if (data[k] > curDb) {
+                        curDb = data[k];
+                        curX = x;
+                    }
+                }
+                if (curPx !== null) pts.push([curX, yOf(curDb)]);
+                return pts;
+            };
+
+            sctx.save();
+            sctx.beginPath();
+            sctx.rect(PLOT.left, PLOT.top, pw, ph);
+            sctx.clip();
+
+            if (state.peakHold) {
+                const hp = buildPath(holdData);
+                sctx.beginPath();
+                hp.forEach(([x, y], i) => i ? sctx.lineTo(x, y) : sctx.moveTo(x, y));
+                sctx.strokeStyle = colCh2;
+                sctx.globalAlpha = 0.75;
+                sctx.lineWidth = 1.2;
+                sctx.stroke();
+                sctx.globalAlpha = 1;
+            }
+
+            const pts = buildPath(freqData);
+            if (pts.length) {
+                sctx.beginPath();
+                sctx.moveTo(pts[0][0], PLOT.top + ph);
+                pts.forEach(([x, y]) => sctx.lineTo(x, y));
+                sctx.lineTo(pts[pts.length - 1][0], PLOT.top + ph);
+                sctx.closePath();
+                const grad = sctx.createLinearGradient(0, PLOT.top, 0, PLOT.top + ph);
+                grad.addColorStop(0, 'rgba(56, 189, 248, 0.35)');
+                grad.addColorStop(1, 'rgba(56, 189, 248, 0.02)');
+                sctx.fillStyle = grad;
+                sctx.fill();
+                sctx.beginPath();
+                pts.forEach(([x, y], i) => i ? sctx.lineTo(x, y) : sctx.moveTo(x, y));
+                sctx.strokeStyle = colCh1;
+                sctx.lineWidth = 1.6;
+                sctx.stroke();
+            }
+            sctx.restore();
+        }
+
+        // Repères des harmoniques f_n = n·f₁
+        if (state.harmonics && analysis.f0) {
+            const subs = '₀₁₂₃₄₅₆₇₈₉';
+            const label = n => 'f' + String(n).split('').map(c => subs[+c]).join('');
+            sctx.save();
+            sctx.setLineDash([4, 4]);
+            sctx.strokeStyle = colCh2;
+            sctx.fillStyle = colCh2;
+            sctx.globalAlpha = 0.85;
+            sctx.font = '600 10px JetBrains Mono, monospace';
+            sctx.textAlign = spectro ? 'right' : 'center';
+            sctx.textBaseline = spectro ? 'middle' : 'top';
+            // Position (px) de la dernière étiquette écrite, pour éviter les chevauchements
+            let lastLabel = null;
+            for (let n = 1; n <= MAX_HARMONICS; n++) {
+                const f = n * analysis.f0;
+                if (f > displayFMax()) break;
+                if (f < state.fMin) continue;
+                const pos = freqToFrac(f);
+                sctx.beginPath();
+                if (spectro) {
+                    const y = PLOT.top + ph * (1 - pos);
+                    sctx.moveTo(PLOT.left + pw - 22, y);
+                    sctx.lineTo(PLOT.left + pw, y);
+                    sctx.stroke();
+                    if (lastLabel === null || lastLabel - y > 12) {
+                        sctx.fillText(label(n), PLOT.left + pw - 25, y);
+                        lastLabel = y;
+                    }
+                } else {
+                    const x = PLOT.left + pos * pw;
+                    sctx.moveTo(x, PLOT.top + 14);
+                    sctx.lineTo(x, PLOT.top + ph);
+                    sctx.stroke();
+                    if (lastLabel === null || x - lastLabel > 22) {
+                        sctx.fillText(label(n), x, PLOT.top + 1);
+                        lastLabel = x;
+                    }
+                }
+            }
+            sctx.restore();
+        }
+
+        // Curseur de lecture
+        if (cursor && cursor.x >= PLOT.left && cursor.x <= PLOT.left + pw && cursor.y >= PLOT.top && cursor.y <= PLOT.top + ph) {
+            const u = spectro ? 1 - (cursor.y - PLOT.top) / ph : (cursor.x - PLOT.left) / pw;
+            const f = fracToFreq(u);
+            const k = Math.max(1, Math.min(freqData.length - 1, Math.round(f / bw)));
+            const db = freqData[k];
+            sctx.save();
+            sctx.strokeStyle = 'rgba(226, 232, 240, 0.6)';
+            sctx.lineWidth = 1;
+            sctx.beginPath();
+            if (spectro) {
+                sctx.moveTo(PLOT.left, cursor.y);
+                sctx.lineTo(PLOT.left + pw, cursor.y);
+            } else {
+                sctx.moveTo(cursor.x, PLOT.top);
+                sctx.lineTo(cursor.x, PLOT.top + ph);
+            }
+            sctx.stroke();
+            const text = spectro ? fmtHz(f) : `${fmtHz(f)} · ${isFinite(db) ? db.toFixed(1).replace('.', ',') : '−∞'} dB`;
+            sctx.font = '600 11px JetBrains Mono, monospace';
+            const tw = sctx.measureText(text).width + 14;
+            let tx = cursor.x + 10;
+            if (tx + tw > PLOT.left + pw) tx = cursor.x - 10 - tw;
+            const ty = Math.max(PLOT.top + 4, Math.min(PLOT.top + ph - 26, cursor.y - 30));
+            sctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+            sctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+            sctx.beginPath();
+            sctx.rect(tx, ty, tw, 22);
+            sctx.fill();
+            sctx.stroke();
+            sctx.fillStyle = '#e2e8f0';
+            sctx.textAlign = 'left';
+            sctx.textBaseline = 'middle';
+            sctx.fillText(text, tx + 7, ty + 11);
+            sctx.restore();
+        }
+
+        sctx.restore();
+    }
+
+    let lastReadoutUpdate = 0;
+
+    function updateReadouts(now) {
+        if (now - lastReadoutUpdate < 200) return;
+        lastReadoutUpdate = now;
+        const { peak, f0 } = state.running ? analysis : { peak: null, f0: null };
+        document.getElementById('peakValue').textContent = peak ? fmtHz(peak.f) : '—';
+        document.getElementById('peakSub').textContent = peak ? `${peak.db.toFixed(1).replace('.', ',')} dB  ${getMusicalNoteInfo(peak.f)}` : '';
+        document.getElementById('fundValue').textContent = f0 ? fmtHz(f0) : '—';
+        let fundSub = '';
+        if (f0 && peak) {
+            const n = Math.round(peak.f / f0);
+            fundSub = `${getMusicalNoteInfo(f0)}${n > 1 ? ` · pic principal = harmonique de rang ${n}` : ''}`;
+        }
+        document.getElementById('fundSub').textContent = fundSub;
+    }
+
+    function updateResolution() {
+        document.getElementById('resValue').textContent = `${binHz().toFixed(2).replace('.', ',')} Hz`;
+        const durMs = state.fftSize / sampleRate * 1000;
+        document.getElementById('resSub').textContent =
+            `fe = ${(sampleRate / 1000).toString().replace('.', ',')} kHz, N = ${state.fftSize.toLocaleString('fr-FR')} → durée analysée ${durMs.toFixed(0)} ms`;
+    }
+
+    // Commandes de l'analyseur
+    function bindSeg(id, onSelect) {
+        const container = document.getElementById(id);
+        container.querySelectorAll('.seg-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                container.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                onSelect(btn.dataset);
+            });
+        });
+    }
+
+    bindSeg('viewSel', (d) => {
+        state.view = d.view;
+        document.getElementById('yScaleGroup').style.display = state.view === 'spectrum' ? 'flex' : 'none';
+    });
+
+    bindSeg('rangeSel', (d) => {
+        state.fMin = parseFloat(d.min);
+        state.fMax = parseFloat(d.max);
+        state.logF = d.log === '1';
+        clearSpectrogram();
+    });
+
+    bindSeg('yScaleSel', (d) => {
+        state.yScale = d.y;
+    });
+
+    document.getElementById('fftSelect').addEventListener('change', (e) => {
+        state.fftSize = parseInt(e.target.value, 10);
+        if (analyser) {
+            analyser.fftSize = state.fftSize;
+            allocateSpectrumBuffers();
+        }
+        updateResolution();
+    });
+
+    document.getElementById('smoothSelect').addEventListener('change', (e) => {
+        state.smoothing = parseFloat(e.target.value);
+        if (analyser) analyser.smoothingTimeConstant = state.smoothing;
+    });
+
+    const harmBtn = document.getElementById('harmBtn');
+    harmBtn.addEventListener('click', () => {
+        state.harmonics = !state.harmonics;
+        harmBtn.classList.toggle('active', state.harmonics);
+    });
+
+    const holdBtn = document.getElementById('holdBtn');
+    holdBtn.addEventListener('click', () => {
+        state.peakHold = !state.peakHold;
+        holdBtn.classList.toggle('active', state.peakHold);
+        if (holdData) holdData.fill(-Infinity);
+    });
+
+    const freezeBtn = document.getElementById('freezeBtn');
+    freezeBtn.addEventListener('click', () => {
+        state.frozen = !state.frozen;
+        freezeBtn.textContent = state.frozen ? '▶️ Reprendre' : '❄️ Figer';
+        freezeBtn.classList.toggle('active', state.frozen);
+    });
+
+    spectrumCanvas.addEventListener('pointermove', (e) => {
+        const rect = spectrumCanvas.getBoundingClientRect();
+        cursor = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    });
+    spectrumCanvas.addEventListener('pointerleave', () => { cursor = null; });
+
+    // --- 8. Boucle d'affichage ---
+    function frame(now) {
+        requestAnimationFrame(frame);
+        updateMeterDisplay(now);
+        drawHistory(now);
+        drawSpectrum(now);
+        updateReadouts(now);
+    }
+
+    updateMeterLabels();
+    updateResolution();
+    requestAnimationFrame(frame);
+</script>
+
+</body>
+</html>
