@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analyse statistique - Incertitude de type A</title>
     
+    <!-- Police moderne Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
     <!-- MathJax pour le rendu des formules LaTeX -->
     <script>
         window.MathJax = {
@@ -16,42 +21,54 @@
 
     <style>
         :root {
-            --bg-body: #f8fafc;
+            --bg-body: #f1f5f9;
             --bg-card: #ffffff;
-            --bg-subtle: #f1f5f9;
+            --bg-subtle: #f8fafc;
+            --bg-lane: #f8fafc;
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
+            --border-strong: #cbd5e1;
             --primary: #2563eb;
-            --primary-light: rgba(37, 99, 235, 0.12);
-            --success: #16a34a;
-            --success-bg: #dcfce7;
-            --success-text: #14532d;
-            --danger: #dc2626;
-            --danger-bg: #fee2e2;
-            --danger-text: #7f1d1d;
-            --warning: #d97706;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-            --radius: 12px;
+            --primary-hover: #1d4ed8;
+            --primary-light: rgba(37, 99, 235, 0.08);
+            --primary-border: rgba(37, 99, 235, 0.35);
+            --success: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.08);
+            --success-border: rgba(16, 185, 129, 0.4);
+            --success-text: #065f46;
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68, 0.08);
+            --danger-border: rgba(239, 68, 68, 0.4);
+            --danger-text: #991b1b;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+            --shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+            --radius: 14px;
+            --radius-sm: 8px;
         }
 
         [data-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --bg-subtle: #334155;
-            --text-main: #f8fafc;
+            --bg-body: #0b1120;
+            --bg-card: #151f32;
+            --bg-subtle: #1e293b;
+            --bg-lane: #111827;
+            --text-main: #f1f5f9;
             --text-muted: #94a3b8;
-            --border: #334155;
+            --border: #26354d;
+            --border-strong: #334155;
             --primary: #3b82f6;
-            --primary-light: rgba(59, 130, 246, 0.2);
-            --success: #22c55e;
-            --success-bg: rgba(34, 197, 94, 0.15);
-            --success-text: #86efac;
-            --danger: #ef4444;
-            --danger-bg: rgba(239, 68, 68, 0.15);
-            --danger-text: #fca5a5;
-            --warning: #f59e0b;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --primary-hover: #60a5fa;
+            --primary-light: rgba(59, 130, 246, 0.12);
+            --primary-border: rgba(59, 130, 246, 0.45);
+            --success: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.12);
+            --success-border: rgba(16, 185, 129, 0.45);
+            --success-text: #a7f3d0;
+            --danger: #f87171;
+            --danger-bg: rgba(239, 68, 68, 0.14);
+            --danger-border: rgba(248, 113, 113, 0.45);
+            --danger-text: #fecaca;
+            --shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.4);
         }
 
         * {
@@ -61,16 +78,17 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
             line-height: 1.6;
-            padding: 2rem 1rem;
-            transition: background-color 0.2s, color 0.2s;
+            padding: 1.75rem 1.25rem 3.5rem;
+            transition: background-color 0.25s, color 0.25s;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -78,20 +96,44 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
+            margin-bottom: 1.75rem;
+            padding-bottom: 1.1rem;
             border-bottom: 1px solid var(--border);
+            gap: 1rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+            flex-shrink: 0;
         }
 
         h1 {
-            font-size: 1.6rem;
+            font-size: 1.45rem;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
         }
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 400;
         }
 
         .theme-toggle {
@@ -100,30 +142,34 @@
             color: var(--text-main);
             width: 40px;
             height: 40px;
-            border-radius: 50%;
+            flex-shrink: 0;
+            border-radius: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.1rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.15s, background-color 0.2s;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.15s ease;
         }
 
         .theme-toggle:hover {
-            transform: scale(1.05);
+            border-color: var(--primary);
+            transform: translateY(-1px);
         }
 
-        .grid {
+        .top-grid {
             display: grid;
-            grid-template-columns: 350px 1fr;
+            grid-template-columns: 390px 1fr;
             gap: 1.5rem;
+            align-items: stretch;
+            margin-bottom: 1.5rem;
         }
 
-        @media (max-width: 850px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
+        .full-width-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .card {
@@ -132,48 +178,104 @@
             border-radius: var(--radius);
             padding: 1.5rem;
             box-shadow: var(--shadow);
-            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.15rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
         }
 
         .card-title {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            color: var(--text-main);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.55rem;
+            letter-spacing: -0.01em;
+        }
+
+        .step-num {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid var(--primary-border);
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
             color: var(--text-main);
+            padding: 0.4rem 0.75rem;
+            border-radius: 7px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.15s ease;
+        }
+
+        .btn-action:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
         }
 
         label {
             display: block;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
             color: var(--text-muted);
         }
 
         textarea, input[type="text"] {
             width: 100%;
-            background-color: var(--bg-body);
+            background-color: var(--bg-subtle);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            padding: 0.65rem 0.8rem;
             color: var(--text-main);
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 0.9rem;
-            transition: border-color 0.2s;
-            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 0.88rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            margin-bottom: 0.95rem;
         }
 
         textarea:focus, input[type="text"]:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
         }
 
         textarea {
             resize: vertical;
-            min-height: 130px;
+            min-height: 108px;
+            line-height: 1.5;
         }
 
         .row-inputs {
@@ -184,17 +286,18 @@
 
         .radio-group {
             display: flex;
-            gap: 0.5rem;
-            background: var(--bg-body);
-            padding: 0.3rem;
-            border-radius: 8px;
+            gap: 0.35rem;
+            background: var(--bg-subtle);
+            padding: 0.25rem;
+            border-radius: var(--radius-sm);
             border: 1px solid var(--border);
-            margin-bottom: 1rem;
+            margin-bottom: 0.95rem;
         }
 
         .radio-option {
             flex: 1;
             text-align: center;
+            margin: 0;
         }
 
         .radio-option input {
@@ -203,9 +306,9 @@
 
         .radio-option span {
             display: block;
-            padding: 0.4rem;
+            padding: 0.42rem 0.3rem;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
             font-weight: 500;
             color: var(--text-muted);
@@ -215,96 +318,133 @@
         .radio-option input:checked + span {
             background-color: var(--primary);
             color: #ffffff;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
         }
 
-        .btn-sample {
-            background: var(--bg-subtle);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 0.4rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: color 0.2s, border-color 0.2s;
-        }
-
-        .btn-sample:hover {
-            color: var(--text-main);
-            border-color: var(--text-muted);
-        }
-
+        /* Formules du cadre 1 */
         .formula-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 0.9rem;
+            margin-bottom: 1.25rem;
         }
 
         .formula-box {
-            background-color: var(--bg-body);
+            background-color: var(--bg-subtle);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
+            border-radius: 10px;
+            padding: 0.95rem 1rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow-x: auto;
         }
 
         .formula-box .label {
-            font-size: 0.8rem;
+            font-size: 0.73rem;
             color: var(--text-muted);
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
         }
 
         .formula-math {
-            font-size: 0.95rem;
-            margin: 0.4rem 0;
+            font-size: 0.9rem;
+            margin: 0.2rem 0;
             overflow-x: auto;
         }
 
         .result-banner {
-            background-color: var(--primary-light);
-            border: 2px solid var(--primary);
-            border-radius: 10px;
-            padding: 1.25rem;
+            background: var(--primary-light);
+            border: 1.5px solid var(--primary-border);
+            border-radius: 12px;
+            padding: 1.25rem 1rem;
             text-align: center;
-            margin-top: 1rem;
+            margin-top: auto;
+            overflow-x: auto;
         }
 
         .result-banner .title {
-            font-size: 0.85rem;
+            font-size: 0.76rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
             color: var(--primary);
             font-weight: 700;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.35rem;
         }
 
         .result-banner .final-value {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 700;
+            overflow-x: auto;
+            padding: 0.15rem 0;
         }
 
+        /* Cadre 2 : Graphique et Plein écran */
+        #graphCard.fullscreen-fallback,
+        #graphCard:fullscreen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+            margin: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--bg-card);
+            overflow-y: auto;
+        }
+
+        #graphCard:fullscreen .svg-container,
+        #graphCard.fullscreen-fallback .svg-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-height: calc(100vh - 100px);
+        }
+
+        #graphCard:fullscreen svg,
+        #graphCard.fullscreen-fallback svg {
+            max-height: 100%;
+            width: auto;
+            max-width: 100%;
+        }
+
+        .svg-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            user-select: none;
+        }
+
+        /* Cadre 3 : Compatibilité Z-score */
         .zscore-box {
-            border-radius: 10px;
-            padding: 1.25rem;
-            margin-top: 1rem;
-            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.35rem 1.5rem;
+            border: 1.5px solid var(--border);
             transition: all 0.2s;
         }
 
         .zscore-ok {
             background-color: var(--success-bg);
-            border-color: var(--success);
+            border-color: var(--success-border);
             color: var(--success-text);
         }
 
         .zscore-ko {
             background-color: var(--danger-bg);
-            border-color: var(--danger);
+            border-color: var(--danger-border);
             color: var(--danger-text);
         }
 
@@ -313,72 +453,115 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.75rem;
             margin-bottom: 0.75rem;
         }
 
         .badge {
-            padding: 0.25rem 0.75rem;
+            padding: 0.32rem 0.85rem;
             border-radius: 999px;
-            font-size: 0.8rem;
+            font-size: 0.76rem;
             font-weight: 700;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
         }
 
         .zscore-ok .badge {
             background-color: var(--success);
-            color: white;
+            color: #ffffff;
         }
 
         .zscore-ko .badge {
             background-color: var(--danger);
-            color: white;
+            color: #ffffff;
+        }
+
+        .zscore-formula-wrap {
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin: 0.65rem 0;
+            overflow-x: auto;
+        }
+
+        [data-theme="dark"] .zscore-formula-wrap {
+            background: rgba(15, 23, 42, 0.35);
         }
 
         .prob-details {
-            font-size: 0.9rem;
-            margin-top: 0.75rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid rgba(128, 128, 128, 0.25);
+            font-size: 0.88rem;
+            margin-top: 0.85rem;
+            padding-top: 0.85rem;
+            border-top: 1px solid rgba(128, 128, 128, 0.22);
         }
 
-        .svg-container {
-            width: 100%;
-            overflow-x: auto;
-            margin-top: 0.5rem;
-        }
-
-        svg {
-            width: 100%;
-            height: auto;
-            display: block;
+        .prob-details ul {
+            margin-top: 0.45rem;
+            margin-left: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
         }
 
         .warning-msg {
-            padding: 1rem;
+            padding: 1.5rem;
             background-color: var(--bg-subtle);
-            border-radius: 8px;
+            border: 1px dashed var(--border-strong);
+            border-radius: 10px;
             color: var(--text-muted);
             text-align: center;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
+            margin: auto 0;
         }
 
         .data-badges {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.35rem;
-            margin-top: 0.5rem;
-            max-height: 90px;
+            gap: 0.3rem;
+            margin-top: 0.45rem;
+            max-height: 70px;
             overflow-y: auto;
         }
 
         .data-badge {
             background: var(--bg-subtle);
+            border: 1px solid var(--border);
             color: var(--text-main);
-            font-family: monospace;
-            font-size: 0.75rem;
-            padding: 0.15rem 0.45rem;
-            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            padding: 0.12rem 0.45rem;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 940px) {
+            .top-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.65rem 2.5rem;
+            }
+            h1 {
+                font-size: 1.2rem;
+            }
+            .card {
+                padding: 1.1rem;
+            }
+            .formula-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-banner .final-value {
+                font-size: 1.12rem;
+            }
+            .zscore-box {
+                padding: 1rem;
+            }
+            #graphCard.fullscreen-fallback,
+            #graphCard:fullscreen {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -386,107 +569,122 @@
 
 <div class="container">
     <header>
-        <div>
-            <h1>Analyse statistique de type A</h1>
-            <div class="subtitle">Évaluation des incertitudes de répétabilité &bull; Spécialité Physique-Chimie</div>
+        <div class="brand">
+            <div class="brand-icon">σ</div>
+            <div>
+                <h1>Analyse statistique de type A</h1>
+                <div class="subtitle">Évaluation des incertitudes de répétabilité &bull; Écriture scientifique normalisée</div>
+            </div>
         </div>
         <button class="theme-toggle" id="themeBtn" title="Changer le thème (Clair / Sombre)">🌓</button>
     </header>
 
-    <div class="grid">
-        <!-- Colonne de gauche : Paramètres et Saisie -->
-        <div>
-            <div class="card">
-                <div class="card-title" style="justify-content: space-between;">
-                    <span>Saisie des mesures</span>
-                    <button class="btn-sample" id="loadSampleBtn">Exemple</button>
+    <!-- PARTIE HAUTE : Saisie (gauche) + Cadre 1 Calculs (droite) -->
+    <div class="top-grid">
+        <!-- Cadre de Saisie -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Paramètres & Mesures</span>
+                <div class="btn-group">
+                    <input type="file" id="csvFileInput" accept=".csv,.txt,.tsv" style="display: none;">
+                    <button class="btn-action" id="importCsvBtn" title="Importer un fichier CSV ou texte">📂 CSV</button>
+                    <button class="btn-action" id="loadSampleBtn" title="Charger les valeurs d'exemple">✨ Exemple</button>
                 </div>
-
-                <div class="row-inputs">
-                    <div>
-                        <label for="symInput">Symbole grandeur</label>
-                        <input type="text" id="symInput" value="f'" placeholder="ex: c, g, V...">
-                    </div>
-                    <div>
-                        <label for="unitInput">Unité</label>
-                        <input type="text" id="unitInput" value="cm" placeholder="ex: m·s⁻¹, mol·L⁻¹">
-                    </div>
-                </div>
-
-                <label for="dataInput">Valeurs mesurées (séparées par espace, retour à la ligne ou point-virgule)</label>
-                <textarea id="dataInput"></textarea>
-
-                <label>Chiffres significatifs pour l'incertitude-type $u$</label>
-                <div class="radio-group">
-                    <label class="radio-option">
-                        <input type="radio" name="csRadio" value="1" checked>
-                        <span>1 chiffre significatif (Recommandé)</span>
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="csRadio" value="2">
-                        <span>2 chiffres significatifs</span>
-                    </label>
-                </div>
-
-                <label for="refInput">Valeur de référence (optionnelle)</label>
-                <input type="text" id="refInput" value="12.5" placeholder="Laisser vide si aucune">
-
-                <div id="parsedSummary" style="font-size: 0.8rem; color: var(--text-muted);"></div>
-                <div class="data-badges" id="dataBadges"></div>
             </div>
+
+            <div class="row-inputs">
+                <div>
+                    <label for="symInput">Symbole grandeur</label>
+                    <input type="text" id="symInput" value="f'" placeholder="ex: c, g, V...">
+                </div>
+                <div>
+                    <label for="unitInput">Unité</label>
+                    <input type="text" id="unitInput" value="cm" placeholder="ex: m·s⁻¹, mol·L⁻¹">
+                </div>
+            </div>
+
+            <label for="dataInput">Valeurs mesurées (espace, retour à la ligne, point-virgule ou import CSV)</label>
+            <textarea id="dataInput"></textarea>
+
+            <label>Chiffres significatifs pour l'incertitude-type $u$ (arrondie par excès)</label>
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" name="csRadio" value="1" checked>
+                    <span>1 CS (Recommandé)</span>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="csRadio" value="2">
+                    <span>2 CS</span>
+                </label>
+            </div>
+
+            <label for="refInput">Valeur de référence (optionnelle)</label>
+            <input type="text" id="refInput" value="12,5" placeholder="Laisser vide si aucune">
+
+            <div id="parsedSummary" style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;"></div>
+            <div class="data-badges" id="dataBadges"></div>
         </div>
 
-        <!-- Colonne de droite : Résultats et Graphique -->
-        <div>
-            <div id="errorBox" class="card warning-msg" style="display: none;">
-                Veuillez saisir au moins <strong>2 valeurs numériques</strong> valides pour effectuer une analyse statistique de type A.
+        <!-- Cadre 1 : Calculs Statistiques -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title"><span class="step-num">1</span> Calculs statistiques et incertitude-type</span>
             </div>
 
-            <div id="resultsContent">
-                <!-- Carte Calculs Statistiques -->
-                <div class="card">
-                    <div class="card-title">1. Calculs statistiques et incertitude-type</div>
-                    
-                    <div class="formula-grid">
-                        <div class="formula-box">
-                            <div class="label">Moyenne arithmétique</div>
-                            <div class="formula-math" id="mathMean"></div>
-                        </div>
-                        <div class="formula-box">
-                            <div class="label">Écart-type expérimental ($N-1$)</div>
-                            <div class="formula-math" id="mathStd"></div>
-                        </div>
-                        <div class="formula-box">
-                            <div class="label">Incertitude-type (Type A)</div>
-                            <div class="formula-math" id="mathUnc"></div>
-                        </div>
-                    </div>
+            <div id="errorBox" class="warning-msg" style="display: none;">
+                Veuillez saisir ou importer au moins <strong>2 valeurs numériques</strong> valides pour effectuer une analyse statistique de type A.
+            </div>
 
-                    <div class="result-banner">
-                        <div class="title">Écriture du résultat de la mesure</div>
-                        <div class="final-value" id="finalResultMath"></div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;" id="relUncText"></div>
+            <div id="calcContent" style="display: flex; flex-direction: column; flex: 1;">
+                <div class="formula-grid">
+                    <div class="formula-box">
+                        <div class="label">Moyenne arithmétique</div>
+                        <div class="formula-math" id="mathMean"></div>
+                    </div>
+                    <div class="formula-box">
+                        <div class="label">Écart-type expérimental ($N-1$)</div>
+                        <div class="formula-math" id="mathStd"></div>
+                    </div>
+                    <div class="formula-box">
+                        <div class="label">Incertitude-type (Type A)</div>
+                        <div class="formula-math" id="mathUnc"></div>
                     </div>
                 </div>
 
-                <!-- Carte Représentation Graphique -->
-                <div class="card">
-                    <div class="card-title">2. Visualisation de la dispersion et écart normalisé</div>
-                    <div class="svg-container" id="svgContainer"></div>
-                </div>
-
-                <!-- Carte Comparaison Valeur de Référence -->
-                <div class="card" id="refCard">
-                    <div class="card-title">3. Compatibilité avec la valeur de référence</div>
-                    <div id="zscoreContainer"></div>
+                <div class="result-banner">
+                    <div class="title">Résultat de la mesure en notation scientifique (incertitude arrondie par excès)</div>
+                    <div class="final-value" id="finalResultMath"></div>
+                    <div style="font-size: 0.84rem; color: var(--text-muted); margin-top: 0.35rem;" id="relUncText"></div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- PARTIE BASSE PLEINE LARGEUR : Cadre 2 (Graphique) & Cadre 3 (Compatibilité) -->
+    <div class="full-width-stack" id="bottomStack">
+        <!-- Cadre 2 : Représentation Graphique -->
+        <div class="card" id="graphCard">
+            <div class="card-header">
+                <span class="card-title"><span class="step-num">2</span> Visualisation de la dispersion et de l'écart normalisé</span>
+                <button class="btn-action" id="fullscreenBtn" title="Afficher le graphique en plein écran">
+                    <span id="fsIcon">⛶</span> <span id="fsText">Plein écran</span>
+                </button>
+            </div>
+            <div class="svg-container" id="svgContainer"></div>
+        </div>
+
+        <!-- Cadre 3 : Compatibilité avec la valeur de référence -->
+        <div class="card" id="refCard">
+            <div class="card-header">
+                <span class="card-title"><span class="step-num">3</span> Compatibilité avec la valeur de référence</span>
+            </div>
+            <div id="zscoreContainer"></div>
         </div>
     </div>
 </div>
 
 <script>
-    // --- Gestion du thème ---
+    // --- 1. Gestion du thème Clair / Sombre ---
     const themeBtn = document.getElementById('themeBtn');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     
@@ -507,25 +705,121 @@
         setTheme(current === 'dark' ? 'light' : 'dark');
     });
 
-    // --- Fonctions Mathématiques et Statistiques ---
+    // --- 2. Gestion du mode Plein Écran pour le Cadre 2 ---
+    const graphCard = document.getElementById('graphCard');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const fsIcon = document.getElementById('fsIcon');
+    const fsText = document.getElementById('fsText');
 
-    // Fonction d'erreur erf(x) (Approximation d'Abramowitz & Stegun)
-    function erf(x) {
-        const sign = (x >= 0) ? 1 : -1;
-        x = Math.abs(x);
-        const a1 =  0.254829592, a2 = -0.284496736, a3 =  1.421413741;
-        const a4 = -1.453152027, a5 =  1.061405429, p  =  0.3275911;
-        const t = 1.0 / (1.0 + p * x);
-        const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
-        return sign * y;
+    function updateFsButtonState(isFs) {
+        fsIcon.textContent = isFs ? '✕' : '⛶';
+        fsText.textContent = isFs ? 'Quitter le plein écran' : 'Plein écran';
     }
 
-    // p-value bilatérale pour la loi Normale standard N(0,1)
+    fullscreenBtn.addEventListener('click', () => {
+        const isNativeFs = document.fullscreenElement === graphCard;
+        const isFallbackFs = graphCard.classList.contains('fullscreen-fallback');
+
+        if (!isNativeFs && !isFallbackFs) {
+            if (graphCard.requestFullscreen) {
+                graphCard.requestFullscreen().catch(() => {
+                    graphCard.classList.add('fullscreen-fallback');
+                    updateFsButtonState(true);
+                });
+            } else {
+                graphCard.classList.add('fullscreen-fallback');
+                updateFsButtonState(true);
+            }
+        } else {
+            if (isNativeFs && document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+            graphCard.classList.remove('fullscreen-fallback');
+            updateFsButtonState(false);
+        }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+        updateFsButtonState(document.fullscreenElement === graphCard);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && graphCard.classList.contains('fullscreen-fallback')) {
+            graphCard.classList.remove('fullscreen-fallback');
+            updateFsButtonState(false);
+        }
+    });
+
+    // --- 3. Import de fichier CSV ---
+    const importCsvBtn = document.getElementById('importCsvBtn');
+    const csvFileInput = document.getElementById('csvFileInput');
+    const dataInput = document.getElementById('dataInput');
+
+    importCsvBtn.addEventListener('click', () => csvFileInput.click());
+
+    csvFileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const content = event.target.result;
+            const extracted = parseCsvContent(content);
+            if (extracted.length > 0) {
+                dataInput.value = extracted.map(n => n.toString().replace('.', ',')).join(' ; ');
+                updateAnalysis();
+            } else {
+                alert("Aucune valeur numérique valide n'a été détectée dans ce fichier.");
+            }
+            csvFileInput.value = "";
+        };
+        reader.readAsText(file);
+    });
+
+    function parseCsvContent(text) {
+        const lines = text.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
+        const numbers = [];
+
+        for (let line of lines) {
+            let tokens;
+            if (line.includes(';') || line.includes('\t')) {
+                tokens = line.split(/[;\t]+/);
+            } else {
+                const commaDecimalSingle = /^-?\d+,\d+(e[+-]?\d+)?$/i.test(line);
+                if (commaDecimalSingle) {
+                    tokens = [line];
+                } else {
+                    tokens = line.split(/[,;\s]+/);
+                }
+            }
+
+            for (let token of tokens) {
+                let cleaned = token.trim().replace(/^["']|["']$/g, '').replace(',', '.');
+                if (cleaned !== "") {
+                    const val = Number(cleaned);
+                    if (!isNaN(val) && isFinite(val)) {
+                        numbers.push(val);
+                    }
+                }
+            }
+        }
+        return numbers;
+    }
+
+    // --- 4. Fonctions Mathématiques, Probabilités et Formatage Scientifique ---
+    function erfc(x) {
+        const z = Math.abs(x);
+        const t = 1.0 / (1.0 + 0.5 * z);
+        const ans = t * Math.exp(-z * z - 1.26551223 + t * (1.00002368 + t * (0.37409196 +
+            t * (0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 +
+            t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))));
+        return x >= 0 ? ans : 2.0 - ans;
+    }
+
     function normalTwoTailedP(z) {
-        return 1 - erf(Math.abs(z) / Math.SQRT2);
+        return erfc(Math.abs(z) / Math.SQRT2);
     }
 
-    // Fonctions pour la loi de Student (Fonction Bêta incomplète régularisée)
     function logGamma(z) {
         const c = [
             76.18009172947146, -86.50532032941677, 24.01409824083091,
@@ -540,8 +834,8 @@
     }
 
     function betacf(a, b, x) {
-        const MAXIT = 100, EPS = 3e-7, FPMIN = 1e-30;
-        let qab = a + b, qap = a + 1,qam = a - 1;
+        const MAXIT = 150, EPS = 3e-12, FPMIN = 1e-30;
+        let qab = a + b, qap = a + 1, qam = a - 1;
         let c = 1, d = 1 - qab * x / qap;
         if (Math.abs(d) < FPMIN) d = FPMIN;
         d = 1 / d;
@@ -579,69 +873,129 @@
         }
     }
 
-    // p-value bilatérale pour la loi de Student à df degrés de liberté
     function studentTwoTailedP(t, df) {
         const x = df / (df + t * t);
         return betai(0.5 * df, 0.5, x);
     }
 
-    // Formatage scientifique / chiffres significatifs pour l'écriture finale
-    function formatMeasurement(mean, u, cs) {
+    function toSuperscript(n) {
+        const map = { '-': '⁻', '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' };
+        return n.toString().split('').map(ch => map[ch] || ch).join('');
+    }
+
+    function formatSciLatex(val, sigFigs = 4, trimZeros = true) {
+        if (!isFinite(val)) return "-";
+        if (val === 0) return "0";
+        const sign = val < 0 ? "-" : "";
+        const absVal = Math.abs(val);
+        let exp = Math.floor(Math.log10(absVal));
+        let mant = absVal / Math.pow(10, exp);
+
+        const decimals = Math.max(0, sigFigs - 1);
+        let roundedMant = Number(mant.toFixed(decimals));
+        if (roundedMant >= 10) {
+            roundedMant /= 10;
+            exp += 1;
+        }
+
+        let mantStr = roundedMant.toFixed(decimals);
+        if (trimZeros && decimals > 0) {
+            mantStr = mantStr.replace(/\.?0+$/, '');
+        }
+        mantStr = mantStr.replace('.', '{,}');
+
+        return `${sign}${mantStr} \\times 10^{${exp}}`;
+    }
+
+    function formatSciSvg(val, sigFigs = 4, trimZeros = true) {
+        if (!isFinite(val)) return "-";
+        if (val === 0) return "0";
+        const sign = val < 0 ? "−" : "";
+        const absVal = Math.abs(val);
+        let exp = Math.floor(Math.log10(absVal));
+        let mant = absVal / Math.pow(10, exp);
+
+        const decimals = Math.max(0, sigFigs - 1);
+        let roundedMant = Number(mant.toFixed(decimals));
+        if (roundedMant >= 10) {
+            roundedMant /= 10;
+            exp += 1;
+        }
+
+        let mantStr = roundedMant.toFixed(decimals);
+        if (trimZeros && decimals > 0) {
+            mantStr = mantStr.replace(/\.?0+$/, '');
+        }
+        mantStr = mantStr.replace('.', ',');
+
+        return `${sign}${mantStr} × 10${toSuperscript(exp)}`;
+    }
+
+    function formatProbLatex(pPercent) {
+        if (!isFinite(pPercent) || pPercent <= 0) return "< 10^{-99}\\,\\%";
+        if (pPercent >= 0.1) {
+            return pPercent.toFixed(2).replace('.', '{,}') + "\\,\\%";
+        }
+        return formatSciLatex(pPercent, 3, false) + "\\,\\%";
+    }
+
+    function formatMeasurementSci(mean, u, cs) {
         if (u === 0 || !isFinite(u)) {
-            return { meanStr: mean.toString().replace('.', '{,}'), uStr: "0", exp: 0, useSci: false };
+            const expM = mean === 0 ? 0 : Math.floor(Math.log10(Math.abs(mean)));
+            const mantM = mean === 0 ? 0 : mean / Math.pow(10, expM);
+            return {
+                meanStr: Number(mantM.toPrecision(4)).toString().replace('.', '{,}'),
+                uStr: "0",
+                uRoundedVal: 0,
+                uRoundedLatex: "0",
+                exp: expM
+            };
         }
         
-        // Ordre de grandeur de l'incertitude
         let expU = Math.floor(Math.log10(Math.abs(u)));
         let factor = Math.pow(10, expU - (cs - 1));
+        let uRoundedInt = Math.ceil((u / factor) - 1e-12);
         
-        // Arrondi de l'incertitude (au plus proche, ou légèrement majoré)
-        let uRoundedInt = Math.round(u / factor);
-        
-        // Si l'arrondi fait gagner une décimale (ex: 9.9 -> 10)
         if (uRoundedInt >= Math.pow(10, cs)) {
             expU += 1;
             factor = Math.pow(10, expU - (cs - 1));
-            uRoundedInt = Math.round(u / factor);
+            uRoundedInt = Math.ceil((u / factor) - 1e-12);
         }
 
         const uRounded = uRoundedInt * factor;
-        const decimalsPlace = expU - (cs - 1); // puissance de 10 du dernier chiffre significatif
+        const decimalsPlace = expU - (cs - 1);
 
-        // Décider si on passe en écriture scientifique
-        const absMean = Math.abs(mean) > 0 ? Math.abs(mean) : uRounded;
-        const expMean = Math.floor(Math.log10(absMean));
+        const uMant = uRounded / Math.pow(10, expU);
+        const uRoundedLatex = `${uMant.toFixed(cs - 1).replace('.', '{,}')} \\times 10^{${expU}}`;
 
-        // On utilise la notation scientifique si très grand, très petit, ou si le dernier chiffre significatif est >= 10^1 (ex: incertitude sur les dizaines)
-        if (expMean >= 4 || expMean <= -3 || decimalsPlace > 0) {
-            const commonExp = expMean;
-            const scaledMean = mean / Math.pow(10, commonExp);
-            const scaledU = uRounded / Math.pow(10, commonExp);
-            const dec = Math.max(0, commonExp - decimalsPlace);
-            return {
-                meanStr: scaledMean.toFixed(dec).replace('.', '{,}'),
-                uStr: scaledU.toFixed(dec).replace('.', '{,}'),
-                exp: commonExp,
-                useSci: true
-            };
-        } else {
-            const dec = Math.max(0, -decimalsPlace);
-            return {
-                meanStr: mean.toFixed(dec).replace('.', '{,}'),
-                uStr: uRounded.toFixed(dec).replace('.', '{,}'),
-                exp: 0,
-                useSci: false
-            };
+        const absMean = Math.abs(mean);
+        let commonExp = absMean > 0 ? Math.floor(Math.log10(absMean)) : expU;
+
+        if (expU > commonExp) {
+            commonExp = expU;
         }
+
+        let dec = Math.max(0, commonExp - decimalsPlace);
+        let scaledMean = mean / Math.pow(10, commonExp);
+        let scaledU = uRounded / Math.pow(10, commonExp);
+
+        if (Math.abs(Number(scaledMean.toFixed(dec))) >= 10) {
+            commonExp += 1;
+            dec = Math.max(0, commonExp - decimalsPlace);
+            scaledMean = mean / Math.pow(10, commonExp);
+            scaledU = uRounded / Math.pow(10, commonExp);
+        }
+
+        return {
+            meanStr: scaledMean.toFixed(dec).replace('.', '{,}'),
+            uStr: scaledU.toFixed(dec).replace('.', '{,}'),
+            uRoundedVal: uRounded,
+            uRoundedLatex: uRoundedLatex,
+            exp: commonExp
+        };
     }
 
-    function formatNumberSimple(val, precision = 4) {
-        if (!isFinite(val)) return "-";
-        return Number(val.toPrecision(precision)).toString().replace('.', '{,}');
-    }
-
-    // --- Éléments du DOM ---
-    const dataInput = document.getElementById('dataInput');
+    // --- 5. Éléments du DOM & Événements ---
     const symInput = document.getElementById('symInput');
     const unitInput = document.getElementById('unitInput');
     const refInput = document.getElementById('refInput');
@@ -661,10 +1015,16 @@
     loadSampleBtn.addEventListener('click', loadSample);
     [dataInput, symInput, unitInput, refInput].forEach(el => el.addEventListener('input', updateAnalysis));
     csRadios.forEach(r => r.addEventListener('change', updateAnalysis));
+    window.addEventListener('resize', () => {
+        if (currentState.valid) {
+            drawSVG(currentState.values, currentState.mean, currentState.std, currentState.u, currentState.refVal, currentState.sym, currentState.unit);
+        }
+    });
 
-    // --- Fonction principale de calcul et d'affichage ---
+    let currentState = { valid: false };
+
+    // --- 6. Fonction principale d'analyse ---
     function updateAnalysis() {
-        // 1. Extraction des données
         const rawText = dataInput.value.trim();
         const tokens = rawText.split(/[\s;\n\t]+/).filter(t => t.length > 0);
         const values = [];
@@ -682,53 +1042,64 @@
         const unitLatex = unit ? `\\text{ ${unit}}` : "";
         const cs = parseInt(document.querySelector('input[name="csRadio"]:checked').value, 10);
 
-        // Affichage des badges de valeurs reconnues
         document.getElementById('parsedSummary').textContent = `${N} valeur${N > 1 ? 's' : ''} reconnue${N > 1 ? 's' : ''}`;
-        const badgesContainer = document.getElementById('dataBadges');
-        badgesContainer.innerHTML = values.map(v => `<span class="data-badge">${v.toString().replace('.', ',')}</span>`).join('');
+        document.getElementById('dataBadges').innerHTML = values.map(v => `<span class="data-badge">${formatSciSvg(v, 4, true)}</span>`).join('');
 
         if (N < 2) {
+            currentState.valid = false;
             document.getElementById('errorBox').style.display = 'block';
-            document.getElementById('resultsContent').style.display = 'none';
+            document.getElementById('calcContent').style.display = 'none';
+            document.getElementById('bottomStack').style.display = 'none';
             return;
         }
-        document.getElementById('errorBox').style.display = 'none';
-        document.getElementById('resultsContent').style.display = 'block';
 
-        // 2. Calculs statistiques
+        document.getElementById('errorBox').style.display = 'none';
+        document.getElementById('calcContent').style.display = 'flex';
+        document.getElementById('bottomStack').style.display = 'flex';
+
+        // Calculs statistiques
         const sum = values.reduce((a, b) => a + b, 0);
         const mean = sum / N;
         const variance = values.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0) / (N - 1);
         const std = Math.sqrt(variance);
         const u = std / Math.sqrt(N);
 
-        // 3. Mise à jour des formules LaTeX
-        const meanLatex = `$$\\bar{${sym}} = \\frac{1}{N}\\sum_{i=1}^{N} ${sym}_i = \\frac{${formatNumberSimple(sum, 5)}}{${N}} \\approx ${formatNumberSimple(mean, 5)}${unitLatex}$$`;
-        const stdLatex = `$$s = \\sqrt{\\frac{1}{N-1}\\sum_{i=1}^{N} (${sym}_i - \\bar{${sym}})^2} \\approx ${formatNumberSimple(std, 4)}${unitLatex}$$`;
-        const uncLatex = `$$u(${sym}) = \\frac{s}{\\sqrt{N}} = \\frac{${formatNumberSimple(std, 4)}}{\\sqrt{${N}}} \\approx ${formatNumberSimple(u, 4)}${unitLatex}$$`;
+        const formatted = formatMeasurementSci(mean, u, cs);
+
+        // Formules LaTeX multi-lignes avec alignement sur les "=" via \begin{aligned}
+        const meanLatex = `$$\\begin{aligned}
+            \\bar{${sym}} &= \\frac{1}{N}\\sum_{i=1}^{N} ${sym}_i \\\\
+            &= \\frac{${formatSciLatex(sum, 5)}}{${N}} \\\\
+            &\\approx ${formatSciLatex(mean, 5)}${unitLatex}
+        \\end{aligned}$$`;
+
+        const stdLatex = `$$\\begin{aligned}
+            s &= \\sqrt{\\frac{1}{N-1}\\sum_{i=1}^{N} (${sym}_i - \\bar{${sym}})^2} \\\\
+            &\\approx ${formatSciLatex(std, 4)}${unitLatex}
+        \\end{aligned}$$`;
+
+        const uncLatex = `$$\\begin{aligned}
+            u(${sym}) &= \\frac{s}{\\sqrt{N}} \\\\
+            &= \\frac{${formatSciLatex(std, 4)}}{\\sqrt{${N}}} \\\\
+            &\\approx ${formatSciLatex(u, 4)}${unitLatex}
+        \\end{aligned}$$`;
 
         document.getElementById('mathMean').innerHTML = meanLatex;
         document.getElementById('mathStd').innerHTML = stdLatex;
         document.getElementById('mathUnc').innerHTML = uncLatex;
 
-        // 4. Écriture du résultat final
-        const formatted = formatMeasurement(mean, u, cs);
-        let finalLatex = "";
-        if (formatted.useSci) {
-            finalLatex = `$$${sym} = (${formatted.meanStr} \\pm ${formatted.uStr}) \\times 10^{${formatted.exp}}${unitLatex}$$`;
-        } else {
-            finalLatex = `$$${sym} = (${formatted.meanStr} \\pm ${formatted.uStr})${unitLatex}$$`;
-        }
+        // Résultat final
+        const finalLatex = `$$${sym} = (${formatted.meanStr} \\pm ${formatted.uStr}) \\times 10^{${formatted.exp}}${unitLatex}$$`;
         document.getElementById('finalResultMath').innerHTML = finalLatex;
 
         if (mean !== 0) {
-            const relUnc = (u / Math.abs(mean)) * 100;
-            document.getElementById('relUncText').innerHTML = `Incertitude relative : $\\displaystyle \\frac{u(${sym})}{|\\bar{${sym}}|} \\approx ${formatNumberSimple(relUnc, 2)}\\,\\%$`;
+            const relUnc = (formatted.uRoundedVal / Math.abs(mean)) * 100;
+            document.getElementById('relUncText').innerHTML = `Incertitude-type majorée : $u(${sym}) = ${formatted.uRoundedLatex}${unitLatex}$ &bull; Incertitude relative : $\\dfrac{u(${sym})}{|\\bar{${sym}}|} \\approx ${formatSciLatex(relUnc, 2)}\\,\\%$`;
         } else {
             document.getElementById('relUncText').innerHTML = "";
         }
 
-        // 5. Valeur de référence et Z-score
+        // Valeur de référence et Z-score
         const refRaw = refInput.value.trim().replace(',', '.');
         const hasRef = refRaw !== "" && !isNaN(parseFloat(refRaw));
         const refVal = hasRef ? parseFloat(refRaw) : null;
@@ -737,38 +1108,33 @@
         const zscoreContainer = document.getElementById('zscoreContainer');
 
         if (hasRef && u > 0) {
-            refCard.style.display = 'block';
+            refCard.style.display = 'flex';
             const z = Math.abs(mean - refVal) / u;
             const isCompatible = z <= 2;
 
-            // Probabilités (p-value bilatérale)
             const pNormal = normalTwoTailedP(z) * 100;
             const pStudent = studentTwoTailedP(z, N - 1) * 100;
 
             const statusClass = isCompatible ? 'zscore-ok' : 'zscore-ko';
             const badgeText = isCompatible ? 'Mesure compatible (z ≤ 2)' : 'Mesure non compatible (z > 2)';
-
-            const formatProb = (p) => {
-                if (p < 0.001) return "< 0{,}001\\,\\%";
-                return p.toFixed(2).replace('.', '{,}') + "\\,\\%";
-            };
+            const zDisplay = z >= 100 || (z > 0 && z < 0.01) ? formatSciLatex(z, 3, false) : z.toFixed(2).replace('.', '{,}');
 
             zscoreContainer.innerHTML = `
                 <div class="zscore-box ${statusClass}">
                     <div class="zscore-header">
-                        <div style="font-weight: 700; font-size: 1.05rem;">
-                            Écart normalisé pour $${sym}_{\\text{réf}} = ${refVal.toString().replace('.', '{,}')}${unitLatex}$
+                        <div style="font-weight: 700; font-size: 1.02rem;">
+                            Écart normalisé pour $${sym}_{\\text{réf}} = ${formatSciLatex(refVal, 4)}${unitLatex}$
                         </div>
                         <span class="badge">${badgeText}</span>
                     </div>
-                    <div>
-                        $$z = \\frac{|\\bar{${sym}} - ${sym}_{\\text{réf}}|}{u(${sym})} = \\frac{|${formatNumberSimple(mean, 5)} - ${refVal.toString().replace('.', '{,}')}|}{${formatNumberSimple(u, 4)}} \\approx \\mathbf{${z.toFixed(2).replace('.', '{,}')}}$$
+                    <div class="zscore-formula-wrap">
+                        $$z = \\frac{|\\bar{${sym}} - ${sym}_{\\text{réf}}|}{u(${sym})} = \\frac{|${formatSciLatex(mean, 5)} - ${formatSciLatex(refVal, 4)}|}{${formatSciLatex(u, 4)}} \\approx \\mathbf{${zDisplay}}$$
                     </div>
                     <div class="prob-details">
-                        <strong>Interprétation probabiliste (probabilité d'observer un écart au moins aussi grand par simple fluctuation aléatoire si la valeur de référence est exacte) :</strong>
-                        <ul style="margin-top: 0.4rem; margin-left: 1.2rem;">
-                            <li>Modèle gaussien standard : $P(|Z| \\ge ${z.toFixed(2).replace('.', '{,}')}) = \\mathbf{${formatProb(pNormal)}}$ (seuil à $z=2 \\leftrightarrow 4{,}55\\,\\%$).</li>
-                            <li>Loi de Student à $\\nu = N-1 = ${N - 1}$ degrés de liberté : $P(|T| \\ge ${z.toFixed(2).replace('.', '{,}')}) = \\mathbf{${formatProb(pStudent)}}$.</li>
+                        <strong>Probabilité de compatibilité (probabilité d'observer un écart au moins aussi grand par fluctuation d'échantillonnage si $${sym}_{\\text{réf}}$ est la valeur vraie) :</strong>
+                        <ul>
+                            <li>Loi normale centrée réduite : $P(|Z| \\ge ${zDisplay}) = \\mathbf{${formatProbLatex(pNormal)}}$ (seuil critique à $z=2 \\leftrightarrow 4{,}55\\,\\%$).</li>
+                            <li>Loi de Student à $\\nu = N-1 = ${N - 1}$ degrés de liberté : $P(|T| \\ge ${zDisplay}) = \\mathbf{${formatProbLatex(pStudent)}}$.</li>
                         </ul>
                     </div>
                 </div>
@@ -777,27 +1143,27 @@
             refCard.style.display = 'none';
         }
 
-        // 6. Dessin du graphique SVG
+        currentState = { valid: true, values, mean, std, u, refVal, sym, unit };
         drawSVG(values, mean, std, u, refVal, sym, unit);
 
-        // 7. Rendu MathJax
         if (window.MathJax && window.MathJax.typesetPromise) {
             window.MathJax.typesetPromise();
         }
     }
 
-    // --- Génération du Graphique SVG ---
+    // --- 7. Génération du Graphique SVG Structuré en 3 Couloirs ---
     function drawSVG(values, mean, std, u, refVal, sym, unit) {
         const container = document.getElementById('svgContainer');
-        const width = 720;
-        const height = 275;
-        const padLeft = 55;
-        const padRight = 55;
+        const isMobile = window.innerWidth < 640;
+
+        const width = isMobile ? 640 : 960;
+        const height = 345;
+        const padLeft = isMobile ? 38 : 56;
+        const padRight = isMobile ? 38 : 56;
         const plotWidth = width - padLeft - padRight;
 
-        // Détermination des bornes du graphique
-        let minVal = Math.min(...values, mean - 3.5 * u, mean - 1.2 * std);
-        let maxVal = Math.max(...values, mean + 3.5 * u, mean + 1.2 * std);
+        let minVal = Math.min(...values, mean - 3.5 * u, mean - 1.25 * std);
+        let maxVal = Math.max(...values, mean + 3.5 * u, mean + 1.25 * std);
 
         if (refVal !== null) {
             minVal = Math.min(minVal, refVal);
@@ -810,143 +1176,229 @@
         maxVal += span * 0.12;
 
         const scaleX = (val) => padLeft + ((val - minVal) / (maxVal - minVal)) * plotWidth;
+        const clampX = (x, margin = 55) => Math.max(padLeft + margin, Math.min(width - padRight - margin, x));
 
-        // Positions verticales des éléments
-        const yData = 65;      // Nuage de points des mesures
-        const yUAxis = 155;    // Axe gradué en incertitudes-types u(x)
-        const yValAxis = 225;  // Axe des valeurs physiques
+        const yHeaderLabels = 24;
+        const yDataBoxTop = 44;
+        const yDataCenter = 92;
+        const yStdWhisker = 128;
+        const yDataBoxBot = 148;
+
+        const yZArrow = 178;
+
+        const yUBandTop = 205;
+        const yUAxis = 233;
+
+        const yValAxis = 290;
 
         let svg = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
 
-        // Styles internes au SVG utilisant les variables CSS du thème
+        svg += `<defs>
+            <marker id="arrow-ok" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--success)" />
+            </marker>
+            <marker id="arrow-ko" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--danger)" />
+            </marker>
+        </defs>`;
+
         svg += `<style>
+            .lane-bg { fill: var(--bg-lane); stroke: var(--border); stroke-width: 1; }
             .axis-line { stroke: var(--text-muted); stroke-width: 1.5; }
-            .tick-text { fill: var(--text-muted); font-size: 11px; font-family: sans-serif; }
-            .label-text { fill: var(--text-main); font-size: 12px; font-weight: 600; font-family: sans-serif; }
-            .data-point { fill: var(--primary); fill-opacity: 0.7; stroke: var(--bg-card); stroke-width: 1.5; }
-            .mean-line { stroke: var(--primary); stroke-width: 2.5; }
+            .grid-line { stroke: var(--border); stroke-width: 1; stroke-dasharray: 3,3; }
+            .tick-text { fill: var(--text-muted); font-size: 11px; font-family: 'Inter', -apple-system, sans-serif; }
+            .section-tag { fill: var(--text-muted); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'Inter', sans-serif; }
+            .data-point { fill: var(--primary); fill-opacity: 0.8; stroke: var(--bg-card); stroke-width: 1.5; transition: r 0.15s; }
+            .data-point:hover { r: 7px; fill-opacity: 1; }
+            .pill-label { font-size: 11.5px; font-weight: 700; font-family: 'Inter', -apple-system, sans-serif; }
         </style>`;
 
-        // 1. Bande de compatibilité [mean - 2u, mean + 2u] et [mean - u, mean + u] sur l'axe u
-        if (u > 0) {
-            const xMinus2U = Math.max(padLeft, scaleX(mean - 2 * u));
-            const xPlus2U = Math.min(width - padRight, scaleX(mean + 2 * u));
-            const xMinus1U = Math.max(padLeft, scaleX(mean - u));
-            const xPlus1U = Math.min(width - padRight, scaleX(mean + u));
-
-            // Zone ±2u (Vert)
-            svg += `<rect x="${xMinus2U}" y="${yUAxis - 18}" width="${Math.max(0, xPlus2U - xMinus2U)}" height="36" fill="var(--success)" fill-opacity="0.15" rx="4" />`;
-            // Zone ±1u
-            svg += `<rect x="${xMinus1U}" y="${yUAxis - 18}" width="${Math.max(0, xPlus1U - xMinus1U)}" height="36" fill="var(--success)" fill-opacity="0.25" rx="2" />`;
-        }
-
-        // 2. Intervalle de l'écart-type expérimental [mean - s, mean + s] autour des points
-        if (std > 0) {
-            const xMinusS = Math.max(padLeft, scaleX(mean - std));
-            const xPlusS = Math.min(width - padRight, scaleX(mean + std));
-            svg += `<line x1="${xMinusS}" y1="${yData}" x2="${xPlusS}" y2="${yData}" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="4,3" />`;
-            svg += `<line x1="${xMinusS}" y1="${yData - 8}" x2="${xMinusS}" y2="${yData + 8}" stroke="var(--text-muted)" stroke-width="2" />`;
-            svg += `<line x1="${xPlusS}" y1="${yData - 8}" x2="${xPlusS}" y2="${yData + 8}" stroke="var(--text-muted)" stroke-width="2" />`;
-            svg += `<text x="${(xMinusS + xPlusS) / 2}" y="${yData - 22}" text-anchor="middle" class="tick-text">Dispersion : x̄ ± s</text>`;
-        }
-
-        // 3. Ligne verticale de la moyenne
-        const xMean = scaleX(mean);
-        svg += `<line x1="${xMean}" y1="25" x2="${xMean}" y2="${yValAxis}" class="mean-line" />`;
-        svg += `<text x="${xMean}" y="18" text-anchor="middle" fill="var(--primary)" font-size="12" font-weight="bold">Moyenne x̄</text>`;
-
-        // 4. Affichage des points de mesure (avec léger décalage vertical si superposition)
-        svg += `<text x="${padLeft}" y="${yData - 22}" text-anchor="start" class="label-text">Mesures individuelles (${values.length})</text>`;
-        
-        // Gestion simple d'empilement pour les points proches
-        const sortedIndices = values.map((v, i) => ({ v, i })).sort((a, b) => a.v - b.v);
-        const yOffsets = [];
-        const pixelThreshold = 9;
-        
-        for (let k = 0; k < sortedIndices.length; k++) {
-            const xPos = scaleX(sortedIndices[k].v);
-            let level = 0;
-            for (let j = 0; j < k; j++) {
-                const prevX = scaleX(sortedIndices[j].v);
-                if (Math.abs(xPos - prevX) < pixelThreshold && yOffsets[j] === level) {
-                    level = (level <= 0) ? -level + 1 : -level;
-                }
-            }
-            yOffsets.push(level);
-            const yPos = yData + level * 7;
-            svg += `<circle cx="${xPos}" cy="${yPos}" r="5" class="data-point">
-                        <title>Mesure : ${sortedIndices[k].v.toString().replace('.', ',')} ${unit}</title>
-                    </circle>`;
-        }
-
-        // 5. Axe gradué en multiples de l'incertitude-type u(x)
-        svg += `<text x="${padLeft}" y="${yUAxis - 26}" text-anchor="start" class="label-text">Écart à la moyenne gradué en incertitude-type u</text>`;
-        svg += `<line x1="${padLeft}" y1="${yUAxis}" x2="${width - padRight}" y2="${yUAxis}" class="axis-line" />`;
+        svg += `<rect x="${padLeft}" y="${yDataBoxTop}" width="${plotWidth}" height="${yDataBoxBot - yDataBoxTop}" rx="8" class="lane-bg" />`;
+        svg += `<text x="${padLeft + 12}" y="${yDataBoxTop + 17}" class="section-tag">Mesures individuelles (N = ${values.length})</text>`;
 
         if (u > 0) {
-            const maxK = Math.min(15, Math.floor((maxVal - minVal) / u));
-            const stepK = maxK > 8 ? 2 : 1;
+            const xM2 = Math.max(padLeft, scaleX(mean - 2 * u));
+            const xP2 = Math.min(width - padRight, scaleX(mean + 2 * u));
+            const xM1 = Math.max(padLeft, scaleX(mean - u));
+            const xP1 = Math.min(width - padRight, scaleX(mean + u));
+
+            const maxK = Math.min(16, Math.floor((maxVal - minVal) / u));
+            const stepK = maxK > 9 ? 2 : 1;
             for (let k = -maxK; k <= maxK; k += stepK) {
                 const valK = mean + k * u;
                 if (valK >= minVal && valK <= maxVal) {
                     const xK = scaleX(valK);
-                    svg += `<line x1="${xK}" y1="${yUAxis - 6}" x2="${xK}" y2="${yUAxis + 6}" class="axis-line" />`;
-                    let labelK = k === 0 ? "0" : (k > 0 ? `+${k}u` : `${k}u`);
-                    svg += `<text x="${xK}" y="${yUAxis + 20}" text-anchor="middle" class="tick-text" font-weight="${Math.abs(k) <= 2 ? 'bold' : 'normal'}">${labelK}</text>`;
+                    svg += `<line x1="${xK}" y1="${yUBandTop}" x2="${xK}" y2="${yValAxis}" class="grid-line" />`;
+                }
+            }
+
+            if (xP2 > xM2) {
+                svg += `<rect x="${xM2}" y="${yUBandTop}" width="${xP2 - xM2}" height="28" fill="var(--success)" fill-opacity="0.14" rx="4" />`;
+            }
+            if (xP1 > xM1) {
+                svg += `<rect x="${xM1}" y="${yUBandTop}" width="${xP1 - xM1}" height="28" fill="var(--success)" fill-opacity="0.25" rx="3" />`;
+            }
+
+            svg += `<text x="${padLeft + 6}" y="${yUBandTop - 6}" class="section-tag">Écart à la moyenne gradué en incertitude-type u (zone verte : ±2u)</text>`;
+        }
+
+        const xMean = scaleX(mean);
+        if (std > 0) {
+            const xMinusS = Math.max(padLeft + 4, scaleX(mean - std));
+            const xPlusS = Math.min(width - padRight - 4, scaleX(mean + std));
+            svg += `<line x1="${xMinusS}" y1="${yStdWhisker}" x2="${xPlusS}" y2="${yStdWhisker}" stroke="var(--text-muted)" stroke-width="2" />`;
+            svg += `<line x1="${xMinusS}" y1="${yStdWhisker - 5}" x2="${xMinusS}" y2="${yStdWhisker + 5}" stroke="var(--text-muted)" stroke-width="2" />`;
+            svg += `<line x1="${xPlusS}" y1="${yStdWhisker - 5}" x2="${xPlusS}" y2="${yStdWhisker + 5}" stroke="var(--text-muted)" stroke-width="2" />`;
+            
+            svg += `<rect x="${xMean - 44}" y="${yStdWhisker - 9}" width="88" height="18" rx="4" fill="var(--bg-lane)" />`;
+            svg += `<text x="${xMean}" y="${yStdWhisker + 4}" text-anchor="middle" class="tick-text" font-weight="600">x̄ − s ← → x̄ + s</text>`;
+        }
+
+        const sorted = values.map((v, i) => ({ v, i })).sort((a, b) => a.v - b.v);
+        const placed = [];
+        const minDistPx = 11;
+
+        for (let item of sorted) {
+            const cx = scaleX(item.v);
+            let level = 0;
+            let found = false;
+            while (!found && Math.abs(level) < 5) {
+                const cy = yDataCenter + level * 9;
+                const collision = placed.some(p => Math.hypot(p.cx - cx, p.cy - cy) < minDistPx);
+                if (!collision) {
+                    placed.push({ cx, cy, v: item.v });
+                    found = true;
+                } else {
+                    level = level <= 0 ? -level + 1 : -level;
+                }
+            }
+            if (!found) {
+                placed.push({ cx, cy: yDataCenter, v: item.v });
+            }
+        }
+
+        for (let p of placed) {
+            svg += `<circle cx="${p.cx}" cy="${p.cy}" r="5.2" class="data-point">
+                        <title>Mesure : ${formatSciSvg(p.v, 4, true)} ${unit}</title>
+                    </circle>`;
+        }
+
+        const hasRef = refVal !== null && u > 0;
+        const xRef = hasRef ? scaleX(refVal) : null;
+        const z = hasRef ? Math.abs(mean - refVal) / u : 0;
+        const refColor = z <= 2 ? "var(--success)" : "var(--danger)";
+        const arrowMarker = z <= 2 ? "url(#arrow-ok)" : "url(#arrow-ko)";
+
+        svg += `<line x1="${xMean}" y1="${yHeaderLabels + 8}" x2="${xMean}" y2="${yValAxis}" stroke="var(--primary)" stroke-width="2.2" />`;
+
+        const meanBadgeTxt = `x̄ = ${formatSciSvg(mean, 4, true)}`;
+        const meanW = meanBadgeTxt.length * 6.8 + 18;
+
+        if (hasRef) {
+            svg += `<line x1="${xRef}" y1="${yHeaderLabels + 8}" x2="${xRef}" y2="${yValAxis}" stroke="${refColor}" stroke-width="2.2" stroke-dasharray="6,4" />`;
+
+            const refBadgeTxt = `Réf = ${formatSciSvg(refVal, 4, true)}`;
+            const refW = refBadgeTxt.length * 6.8 + 18;
+
+            let xLabelMean = clampX(xMean, meanW / 2 + 4);
+            let xLabelRef = clampX(xRef, refW / 2 + 4);
+            const minGapLabels = (meanW + refW) / 2 + 12;
+
+            if (Math.abs(xLabelMean - xLabelRef) < minGapLabels) {
+                const mid = clampX((xLabelMean + xLabelRef) / 2, minGapLabels);
+                if (xMean <= xRef) {
+                    xLabelMean = mid - minGapLabels / 2;
+                    xLabelRef = mid + minGapLabels / 2;
+                } else {
+                    xLabelRef = mid - minGapLabels / 2;
+                    xLabelMean = mid + minGapLabels / 2;
+                }
+            }
+
+            if (Math.abs(xLabelMean - xMean) > 4) {
+                svg += `<line x1="${xLabelMean}" y1="${yHeaderLabels + 8}" x2="${xMean}" y2="${yDataBoxTop}" stroke="var(--primary)" stroke-width="1.2" />`;
+            }
+            if (Math.abs(xLabelRef - xRef) > 4) {
+                svg += `<line x1="${xLabelRef}" y1="${yHeaderLabels + 8}" x2="${xRef}" y2="${yDataBoxTop}" stroke="${refColor}" stroke-width="1.2" />`;
+            }
+
+            svg += `<rect x="${xLabelMean - meanW / 2}" y="${yHeaderLabels - 14}" width="${meanW}" height="22" rx="6" fill="var(--bg-card)" stroke="var(--primary)" stroke-width="1.5" />`;
+            svg += `<text x="${xLabelMean}" y="${yHeaderLabels + 1}" text-anchor="middle" fill="var(--primary)" class="pill-label">${meanBadgeTxt}</text>`;
+
+            svg += `<rect x="${xLabelRef - refW / 2}" y="${yHeaderLabels - 14}" width="${refW}" height="22" rx="6" fill="var(--bg-card)" stroke="${refColor}" stroke-width="1.5" />`;
+            svg += `<text x="${xLabelRef}" y="${yHeaderLabels + 1}" text-anchor="middle" fill="${refColor}" class="pill-label">${refBadgeTxt}</text>`;
+
+            const distPx = Math.abs(xRef - xMean);
+            const zSvgStr = z >= 100 || (z > 0 && z < 0.01) ? formatSciSvg(z, 3, false) : z.toFixed(2).replace('.', ',');
+            const zText = `z = ${zSvgStr}`;
+            const zBoxW = zText.length * 7.2 + 18;
+
+            if (distPx > 14) {
+                svg += `<line x1="${xMean}" y1="${yZArrow}" x2="${xRef}" y2="${yZArrow}" stroke="${refColor}" stroke-width="2" marker-start="${arrowMarker}" marker-end="${arrowMarker}" />`;
+            }
+            
+            const xZLabel = clampX((xMean + xRef) / 2, zBoxW / 2 + 5);
+            svg += `<rect x="${xZLabel - zBoxW / 2}" y="${yZArrow - 11}" width="${zBoxW}" height="22" rx="11" fill="var(--bg-card)" stroke="${refColor}" stroke-width="1.5" />`;
+            svg += `<text x="${xZLabel}" y="${yZArrow + 4}" text-anchor="middle" fill="${refColor}" class="pill-label">${zText}</text>`;
+
+        } else {
+            const xLabelMean = clampX(xMean, meanW / 2 + 6);
+            svg += `<rect x="${xLabelMean - meanW / 2}" y="${yHeaderLabels - 14}" width="${meanW}" height="22" rx="6" fill="var(--bg-card)" stroke="var(--primary)" stroke-width="1.5" />`;
+            svg += `<text x="${xLabelMean}" y="${yHeaderLabels + 1}" text-anchor="middle" fill="var(--primary)" class="pill-label">${meanBadgeTxt}</text>`;
+        }
+
+        svg += `<line x1="${padLeft}" y1="${yUAxis}" x2="${width - padRight}" y2="${yUAxis}" class="axis-line" />`;
+
+        if (u > 0) {
+            const maxK = Math.min(16, Math.floor((maxVal - minVal) / u));
+            const pxPerU = Math.abs(scaleX(mean + u) - scaleX(mean));
+            let stepK = 1;
+            if (pxPerU < 22) stepK = 4;
+            else if (pxPerU < 38) stepK = 2;
+
+            for (let k = -maxK; k <= maxK; k += stepK) {
+                const valK = mean + k * u;
+                if (valK >= minVal && valK <= maxVal) {
+                    const xK = scaleX(valK);
+                    if (xK >= padLeft + 10 && xK <= width - padRight - 10) {
+                        svg += `<line x1="${xK}" y1="${yUAxis - 5}" x2="${xK}" y2="${yUAxis + 5}" class="axis-line" />`;
+                        const labelK = k === 0 ? "0" : (k > 0 ? `+${k}u` : `${k}u`);
+                        const isKey = Math.abs(k) <= 2;
+                        svg += `<text x="${xK}" y="${yUAxis + 19}" text-anchor="middle" class="tick-text" font-weight="${isKey ? '700' : '400'}" style="${isKey ? 'fill: var(--text-main);' : ''}">${labelK}</text>`;
+                    }
                 }
             }
         }
 
-        // 6. Affichage de la valeur de référence et du segment d'écart normalisé
-        if (refVal !== null && u > 0) {
-            const xRef = scaleX(refVal);
-            const z = Math.abs(mean - refVal) / u;
-            const refColor = z <= 2 ? "var(--success)" : "var(--danger)";
-
-            // Ligne verticale de la référence
-            svg += `<line x1="${xRef}" y1="30" x2="${xRef}" y2="${yValAxis}" stroke="${refColor}" stroke-width="2.5" stroke-dasharray="5,3" />`;
-            svg += `<polygon points="${xRef},${yUAxis} ${xRef - 5},${yUAxis - 10} ${xRef + 5},${yUAxis - 10}" fill="${refColor}" />`;
-            
-            // Étiquette Réf
-            const alignRef = (xRef > width - 100) ? "end" : (xRef < 100 ? "start" : "middle");
-            svg += `<text x="${xRef}" y="42" text-anchor="${alignRef}" fill="${refColor}" font-size="12" font-weight="bold">Réf (${refVal.toString().replace('.', ',')})</text>`;
-
-            // Flèche de l'écart entre xMean et xRef
-            const yArrow = yUAxis - 12;
-            svg += `<line x1="${xMean}" y1="${yArrow}" x2="${xRef}" y2="${yArrow}" stroke="${refColor}" stroke-width="2" />`;
-            svg += `<text x="${(xMean + xRef) / 2}" y="${yArrow - 5}" text-anchor="middle" fill="${refColor}" font-size="11" font-weight="bold">z = ${z.toFixed(2).replace('.', ',')}</text>`;
-        }
-
-        // 7. Axe principal des valeurs (bas)
         svg += `<line x1="${padLeft}" y1="${yValAxis}" x2="${width - padRight}" y2="${yValAxis}" class="axis-line" />`;
-        const numTicks = 6;
-        const rawStep = (maxVal - minVal) / numTicks;
+        
+        const targetTicks = isMobile ? 4 : 6;
+        const rawStep = (maxVal - minVal) / targetTicks;
         const mag = Math.pow(10, Math.floor(Math.log10(rawStep)));
         const residual = rawStep / mag;
         let niceStep = mag;
         if (residual > 5) niceStep = 10 * mag;
-        else if (residual > 2) niceStep = 5 * mag;
-        else if (residual > 1) niceStep = 2 * mag;
+        else if (residual > 2.5) niceStep = 5 * mag;
+        else if (residual > 1.5) niceStep = 2 * mag;
 
         const firstTick = Math.ceil(minVal / niceStep) * niceStep;
-        const decimals = Math.max(0, -Math.floor(Math.log10(niceStep)));
 
         for (let t = firstTick; t <= maxVal + niceStep * 0.001; t += niceStep) {
             const xT = scaleX(t);
-            if (xT >= padLeft && xT <= width - padRight) {
+            if (xT >= padLeft + 25 && xT <= width - padRight - 25) {
                 svg += `<line x1="${xT}" y1="${yValAxis - 5}" x2="${xT}" y2="${yValAxis + 5}" class="axis-line" />`;
-                svg += `<text x="${xT}" y="${yValAxis + 20}" text-anchor="middle" class="tick-text">${t.toFixed(decimals).replace('.', ',')}</text>`;
+                const tickLabel = Math.abs(t) < niceStep * 1e-6 ? "0" : formatSciSvg(t, 4, true);
+                svg += `<text x="${xT}" y="${yValAxis + 20}" text-anchor="middle" class="tick-text">${tickLabel}</text>`;
             }
         }
 
-        const axisTitle = unit ? `${sym} (${unit})` : sym;
-        svg += `<text x="${width - padRight}" y="${yValAxis + 40}" text-anchor="end" class="label-text">${axisTitle}</text>`;
+        const axisTitle = unit ? `Grandeur mesurée : ${sym} (${unit})` : `Grandeur mesurée : ${sym}`;
+        svg += `<text x="${width - padRight}" y="${yValAxis + 42}" text-anchor="end" fill="var(--text-main)" font-size="12" font-weight="600" font-family="'Inter', sans-serif">${axisTitle}</text>`;
 
         svg += `</svg>`;
         container.innerHTML = svg;
     }
 
-    // Initialisation au chargement avec les données d'exemple
     window.addEventListener('DOMContentLoaded', loadSample);
 </script>
 

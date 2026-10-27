@@ -126,7 +126,7 @@ details.nt-etape-d > summary .nt-tag { color: var(--c); }
 <div class="nt-b nt-proto">
 <p class="nt-tag"><i class="fa-solid fa-flask-vial"></i>En vue des ECE</p>
 <ul class="nt-facts">
-<li>Banc Kofler&nbsp;: l'étalonner avec une substance de température de fusion connue, proche de celle attendue&nbsp;; déposer quelques cristaux bien secs, les pousser vers les zones froides, et repérer la limite entre solide et liquide.</li>
+<li>Banc Kofler&nbsp;: l'étalonner avec une substance de température de fusion connue, proche de celle attendue&nbsp;; déposer quelques cristaux bien secs, les pousser vers les zones chaudes, et repérer la limite entre solide et liquide.</li>
 <li>CCM&nbsp;: tracer la ligne de dépôt au <b>crayon à papier</b> (l'encre migrerait), faire des dépôts petits et bien séparés, verser l'éluant <b>sous</b> la ligne de dépôt, fermer la cuve pour la saturer en vapeur, et retirer la plaque avant que l'éluant n'atteigne le haut, en marquant aussitôt le front.</li>
 <li>Révéler les taches incolores sous lampe UV (en les entourant au crayon), ou en trempant la plaque dans une solution de permanganate de potassium&nbsp;: les espèces oxydables apparaissent en taches jaune-brun sur fond violet.</li>
 </ul>
@@ -151,7 +151,7 @@ details.nt-etape-d > summary .nt-tag { color: var(--c); }
 </div>
 
 <details class="nt-d nt-plus">
-<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Les gestes en vidéo</span></summary>
+<summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Les gestes en vidéo (Balblareau)</span></summary>
 <div class="nt-d-body">
 <ul class="nt-facts">
 <li>Transformation&nbsp;: <a href="https://www.youtube.com/watch?v=gRBG7RdY00I" target="_blank" rel="noopener">le montage à reflux</a>.</li>
@@ -184,10 +184,15 @@ details.nt-etape-d > summary .nt-tag { color: var(--c); }
 <ul class="nt-facts">
 <li><b>Température.</b> Les réactions catalysées par des enzymes ont un pic d'efficacité dans un domaine de température restreint&nbsp;: au-delà, l'enzyme est dénaturée et la réaction ralentit. Il existe aussi des réactions dont la vitesse ne dépend pas de la température («&nbsp;non-Arrhenius&nbsp;»), et même des réactions sans énergie d'activation, comme certaines réactions entre radicaux, dont la vitesse diminue quand la température augmente («&nbsp;anti-Arrhenius&nbsp;»).</li>
 <li><b>Concentration.</b> Si le mélange n'est pas stœchiométrique, augmenter la concentration d'un réactif accélère la réaction, mais augmente aussi la quantité de produit à former&nbsp;: la durée de la transformation ne diminue pas forcément.</li>
-<li>À l'inverse, on ralentit fortement une réaction en la plongeant dans l'eau glacée (une trempe), qui agit à la fois sur la température et sur la concentration. C'est aussi le principe du réfrigérateur&nbsp;!</li>
 </ul>
 </div>
 </details>
+
+<div class="nt-b nt-warn">
+<p class="nt-tag"><i class="fa-solid fa-triangle-exclamation"></i>À savoir</p>
+<p>À l'inverse, on ralentit fortement une réaction en la plongeant dans l'eau glacée (une <b>trempe</b>), qui agit à la fois sur la température (c'est aussi le principe du réfrigérateur) et sur la concentration&nbsp;!</p>
+</div>
+
 
 ### Optimiser le rendement {.nt-h3}
 
