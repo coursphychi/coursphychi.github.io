@@ -285,11 +285,6 @@
             color: #ffffff;
         }
 
-        .meter-panel .seg-btn.active {
-            background: var(--sum);
-            color: #0f172a;
-        }
-
         /* --- Sonomètre --- */
         .meter-grid {
             display: grid;
@@ -396,27 +391,6 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 1rem;
             font-weight: 700;
-        }
-
-        .meter-controls {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
-            align-items: end;
-        }
-
-        .control-block label, .block-label {
-            display: block;
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            color: var(--text-muted);
-            margin-bottom: 0.35rem;
-        }
-
-        .control-block .seg {
-            display: grid;
         }
 
         .meter-footer-row {
@@ -677,9 +651,6 @@
         }
 
         @media (max-width: 520px) {
-            .meter-controls {
-                grid-template-columns: 1fr;
-            }
             .lcd-value {
                 font-size: 2.8rem;
             }
@@ -721,7 +692,7 @@
             </div>
             <div>
                 <h1>Analyseur de spectre &amp; sonomètre</h1>
-                <div class="subtitle">Niveau sonore pondéré, spectre en fréquences et spectrogramme d'un son capté par le microphone</div>
+                <div class="subtitle">Niveau sonore, spectre en fréquences et spectrogramme d'un son capté par le microphone</div>
             </div>
         </div>
         <div class="header-actions">
@@ -752,12 +723,12 @@
                 <div class="meter-unit">
                     <div class="lcd">
                         <div class="lcd-top">
-                            <span id="lcdIndicator">L<sub>AF</sub></span>
+                            <span>Niveau sonore L · τ = 125 ms</span>
                             <span class="clip-badge" id="clipBadge">SATURATION</span>
                         </div>
                         <div class="lcd-main">
                             <span class="lcd-value" id="lcdValue">--,-</span>
-                            <span class="lcd-unit" id="lcdUnit">dB(A)</span>
+                            <span class="lcd-unit">dB</span>
                         </div>
                     </div>
 
@@ -769,35 +740,17 @@
                         <div class="bar-scale" id="barScale"></div>
                     </div>
 
-                    <div class="meter-controls">
-                        <div class="control-block">
-                            <label>Pondération fréquentielle</label>
-                            <div class="seg" id="weightSel">
-                                <button class="seg-btn active" data-w="A" title="Pondération A : sensibilité de l'oreille aux niveaux modérés">A</button>
-                                <button class="seg-btn" data-w="C" title="Pondération C : niveaux élevés, basses fréquences prises en compte">C</button>
-                                <button class="seg-btn" data-w="Z" title="Pondération Z : aucune pondération (linéaire)">Z</button>
-                            </div>
-                        </div>
-                        <div class="control-block">
-                            <label>Constante de temps</label>
-                            <div class="seg" id="timeSel">
-                                <button class="seg-btn active" data-t="F" title="Rapide : τ = 125 ms">Rapide</button>
-                                <button class="seg-btn" data-t="S" title="Lent : τ = 1 s">Lent</button>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="stats-row">
                         <div class="stat" title="Niveau équivalent : moyenne énergétique depuis la dernière remise à zéro">
-                            <div class="stat-label" id="leqLabel">L<sub>Aeq</sub></div>
+                            <div class="stat-label">L<sub>eq</sub></div>
                             <div class="stat-value" id="leqValue">--,-</div>
                         </div>
-                        <div class="stat" title="Niveau maximal (avec la constante de temps choisie)">
-                            <div class="stat-label" id="lmaxLabel">L<sub>AFmax</sub></div>
+                        <div class="stat" title="Niveau maximal atteint">
+                            <div class="stat-label">L<sub>max</sub></div>
                             <div class="stat-value" id="lmaxValue">--,-</div>
                         </div>
-                        <div class="stat" title="Niveau minimal (avec la constante de temps choisie)">
-                            <div class="stat-label" id="lminLabel">L<sub>AFmin</sub></div>
+                        <div class="stat" title="Niveau minimal atteint">
+                            <div class="stat-label">L<sub>min</sub></div>
                             <div class="stat-value" id="lminValue">--,-</div>
                         </div>
                     </div>
@@ -813,7 +766,7 @@
                         <canvas id="historyCanvas"></canvas>
                         <div class="screen-overlay">
                             <span class="overlay-tag">Niveau sur 60 s</span>
-                            <span class="overlay-tag muted" id="historyTag">dB(A)</span>
+                            <span class="overlay-tag muted">dB</span>
                         </div>
                     </div>
                     <div class="formula-line">
@@ -982,8 +935,6 @@
     const state = {
         running: false,
         frozen: false,
-        weighting: 'A',
-        timeW: 'F',
         calib: isNaN(storedCalib) ? DEFAULT_CALIB : storedCalib,
         view: 'spectrum',
         fMin: 0,
@@ -998,99 +949,39 @@
         dbMax: -10
     };
 
-    // --- 3. Filtres de pondération A et C (IEC 61672) ---
-    // Fonctions de transfert analogiques découpées en cellules du 2e ordre, puis
-    // discrétisées par transformation bilinéaire (avec précompensation des pulsations).
-    function bilinear(n, d, fs) {
-        // n, d : coefficients [c2, c1, c0] de c2·s² + c1·s + c0
-        const K = 2 * fs, K2 = K * K;
-        const a0 = d[0] * K2 + d[1] * K + d[2];
-        return {
-            b0: (n[0] * K2 + n[1] * K + n[2]) / a0,
-            b1: 2 * (n[2] - n[0] * K2) / a0,
-            b2: (n[0] * K2 - n[1] * K + n[2]) / a0,
-            a1: 2 * (d[2] - d[0] * K2) / a0,
-            a2: (d[0] * K2 - d[1] * K + d[2]) / a0
-        };
-    }
-
-    function sectionsGain(secs, f, fs) {
-        const w = 2 * Math.PI * f / fs;
-        const c1 = Math.cos(w), s1 = Math.sin(w), c2 = Math.cos(2 * w), s2 = Math.sin(2 * w);
-        let g = 1;
-        for (const s of secs) {
-            const nr = s.b0 + s.b1 * c1 + s.b2 * c2, ni = -(s.b1 * s1 + s.b2 * s2);
-            const dr = 1 + s.a1 * c1 + s.a2 * c2, di = -(s.a1 * s1 + s.a2 * s2);
-            g *= Math.hypot(nr, ni) / Math.hypot(dr, di);
-        }
-        return g;
-    }
-
-    function weightingSections(type, fs) {
-        if (type === 'Z') return [];
-        const warp = f => 2 * fs * Math.tan(Math.PI * f / fs);
-        const w1 = warp(20.598997), w2 = warp(107.65265), w3 = warp(737.86223), w4 = warp(12194.217);
-        const secs = [bilinear([1, 0, 0], [1, 2 * w1, w1 * w1], fs)];
-        if (type === 'A') secs.push(bilinear([1, 0, 0], [1, w2 + w3, w2 * w3], fs));
-        secs.push(bilinear([0, 0, 1], [1, 2 * w4, w4 * w4], fs));
-        // Normalisation : gain unité à 1 kHz
-        const g = sectionsGain(secs, 1000, fs);
-        secs[0].b0 /= g;
-        secs[0].b1 /= g;
-        secs[0].b2 /= g;
-        return secs;
-    }
-
-    // --- 4. Calcul du niveau sonore ---
-    // Filtrage de pondération, puis moyennes quadratiques exponentielles (τ = 125 ms et 1 s)
-    // et sommes pour le niveau équivalent, transmises toutes les 50 ms.
+    // --- 3. Calcul du niveau sonore ---
+    // Moyennes quadratiques exponentielles (τ = 125 ms pour l'affichage, τ = 1 s pour
+    // l'étalonnage) et sommes pour le niveau équivalent, transmises toutes les 50 ms.
     // Le même code tourne dans un AudioWorklet ou, à défaut (page ouverte en local,
     // navigateur ancien), dans un ScriptProcessorNode.
     const LEVEL_CORE_CODE = `
     class LevelCore {
-        constructor(sections, fs) {
-            this.setSections(sections);
+        constructor(fs) {
             this.aF = Math.exp(-1 / (0.125 * fs));
             this.aS = Math.exp(-1 / (1.0 * fs));
             this.msF = 0;
             this.msS = 0;
+            this.primed = false;
             this.sum = 0;
             this.n = 0;
             this.peak = 0;
             this.reportEvery = Math.round(0.05 * fs);
         }
-        setSections(sections) {
-            this.sections = sections;
-            this.z = sections.map(() => [0, 0]);
-            this.primed = false;
-        }
         // Traite un bloc d'échantillons ; renvoie un bilan toutes les 50 ms, sinon null
         processBlock(x0) {
-            const secs = this.sections;
             const len = x0.length;
-            const buf = new Float64Array(len);
-            for (let i = 0; i < len; i++) {
-                let x = x0[i];
-                const ax = Math.abs(x);
-                if (ax > this.peak) this.peak = ax;
-                for (let k = 0; k < secs.length; k++) {
-                    const s = secs[k], z = this.z[k];
-                    const y = s.b0 * x + z[0];
-                    z[0] = s.b1 * x - s.a1 * y + z[1];
-                    z[1] = s.b2 * x - s.a2 * y;
-                    x = y;
-                }
-                buf[i] = x * x;
-            }
             if (!this.primed) {
                 // Initialisation des moyennes sur le premier bloc (évite une montée depuis 0)
                 let m = 0;
-                for (let i = 0; i < len; i++) m += buf[i];
+                for (let i = 0; i < len; i++) m += x0[i] * x0[i];
                 this.msF = this.msS = m / len;
                 this.primed = true;
             }
             for (let i = 0; i < len; i++) {
-                const x2 = buf[i];
+                const x = x0[i];
+                const ax = Math.abs(x);
+                if (ax > this.peak) this.peak = ax;
+                const x2 = x * x;
                 this.msF = this.aF * this.msF + (1 - this.aF) * x2;
                 this.msS = this.aS * this.msS + (1 - this.aS) * x2;
                 this.sum += x2;
@@ -1109,10 +1000,7 @@
     class SoundLevelProcessor extends AudioWorkletProcessor {
         constructor(options) {
             super();
-            this.core = new LevelCore(options.processorOptions.sections, sampleRate);
-            this.port.onmessage = (e) => {
-                if (e.data.sections) this.core.setSections(e.data.sections);
-            };
+            this.core = new LevelCore(sampleRate);
         }
         process(inputs) {
             const input = inputs[0];
@@ -1128,7 +1016,6 @@
 
     // Moteur du sonomètre : AudioWorklet si possible, ScriptProcessorNode sinon
     async function createLevelEngine(source) {
-        const sections = weightingSections(state.weighting, sampleRate);
         try {
             const url = URL.createObjectURL(new Blob([WORKLET_CODE], { type: 'application/javascript' }));
             await audioCtx.audioWorklet.addModule(url);
@@ -1137,15 +1024,14 @@
                 numberOfInputs: 1,
                 numberOfOutputs: 0,
                 channelCount: 1,
-                channelCountMode: 'explicit',
-                processorOptions: { sections }
+                channelCountMode: 'explicit'
             });
             node.port.onmessage = (e) => onLevelReport(e.data);
             source.connect(node);
-            return { setSections: s => node.port.postMessage({ sections: s }) };
+            return { node };
         } catch (err) {
             const LevelCore = new Function(LEVEL_CORE_CODE + '; return LevelCore;')();
-            const core = new LevelCore(sections, sampleRate);
+            const core = new LevelCore(sampleRate);
             const node = audioCtx.createScriptProcessor(2048, 1, 1);
             node.onaudioprocess = (e) => {
                 const report = core.processBlock(e.inputBuffer.getChannelData(0));
@@ -1153,11 +1039,11 @@
             };
             source.connect(node);
             node.connect(audioCtx.destination); // nécessaire pour que le nœud soit sollicité (sortie muette)
-            return { setSections: s => core.setSections(s), node };
+            return { node };
         }
     }
 
-    // --- 5. Moteur audio ---
+    // --- 4. Moteur audio ---
     let audioCtx = null;
     let mediaStream = null;
     let analyser = null;
@@ -1279,7 +1165,7 @@
         powerText.textContent = state.running ? 'MICRO : ON' : 'MICRO : OFF';
     });
 
-    // --- 6. Sonomètre : calculs et affichage ---
+    // --- 5. Sonomètre : calculs et affichage ---
     const BAR_MIN = 20, BAR_MAX = 120;
     const HISTORY_SEC = 60;
 
@@ -1288,7 +1174,7 @@
     }
 
     function currentLevel() {
-        return levelOf(state.timeW === 'F' ? meter.msF : meter.msS);
+        return levelOf(meter.msF);
     }
 
     function fmtDb(L) {
@@ -1301,10 +1187,9 @@
         meter.n = 0;
         meter.lmax = -Infinity;
         meter.lmin = Infinity;
-        // Laisse aux filtres et aux moyennes le temps de se stabiliser
-        meter.holdUntil = performance.now() + (state.timeW === 'S' ? 2000 : 500);
+        // Laisse à la moyenne le temps de se stabiliser
+        meter.holdUntil = performance.now() + 500;
         meter.startTime = meter.holdUntil;
-        updateMeterLabels();
     }
 
     function onLevelReport(d) {
@@ -1321,16 +1206,6 @@
         }
         meter.history.push({ t: now, L });
         while (meter.history.length && meter.history[0].t < now - HISTORY_SEC * 1000) meter.history.shift();
-    }
-
-    function updateMeterLabels() {
-        const w = state.weighting, t = state.timeW;
-        document.getElementById('lcdIndicator').innerHTML = `L<sub>${w}${t}</sub> · ${t === 'F' ? 'Rapide (125 ms)' : 'Lent (1 s)'}`;
-        document.getElementById('lcdUnit').textContent = `dB(${w})`;
-        document.getElementById('leqLabel').innerHTML = `L<sub>${w}eq</sub>`;
-        document.getElementById('lmaxLabel').innerHTML = `L<sub>${w}${t}max</sub>`;
-        document.getElementById('lminLabel').innerHTML = `L<sub>${w}${t}min</sub>`;
-        document.getElementById('historyTag').textContent = `dB(${w})`;
     }
 
     // Graduations et repères du bargraphe
@@ -1393,26 +1268,6 @@
             : `${Math.floor(dur / 60)} min ${String(Math.floor(dur % 60)).padStart(2, '0')} s`;
     }
 
-    document.querySelectorAll('#weightSel .seg-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('#weightSel .seg-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            state.weighting = btn.dataset.w;
-            if (levelEngine) levelEngine.setSections(weightingSections(state.weighting, sampleRate));
-            meter.history = [];
-            resetStats();
-        });
-    });
-
-    document.querySelectorAll('#timeSel .seg-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('#timeSel .seg-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            state.timeW = btn.dataset.t;
-            resetStats();
-        });
-    });
-
     document.getElementById('resetStatsBtn').addEventListener('click', resetStats);
 
     // Étalonnage
@@ -1447,7 +1302,7 @@
         if (isNaN(ref)) return;
         // Moyenne lente (τ = 1 s) pour une valeur stable
         setCalib(ref - 10 * Math.log10(meter.msS));
-        calibStatus.textContent = `Étalonné : ${ref.toFixed(1).replace('.', ',')} dB(${state.weighting}) ↔ décalage de ${state.calib.toFixed(1).replace('.', ',')} dB (mémorisé sur cet appareil).`;
+        calibStatus.textContent = `Étalonné : ${ref.toFixed(1).replace('.', ',')} dB ↔ décalage de ${state.calib.toFixed(1).replace('.', ',')} dB (mémorisé sur cet appareil).`;
     });
 
     // Historique du niveau sonore
@@ -1531,7 +1386,7 @@
         hctx.restore();
     }
 
-    // --- 7. Analyseur de spectre ---
+    // --- 6. Analyseur de spectre ---
     const spectrumCanvas = document.getElementById('spectrumCanvas');
     const sctx = spectrumCanvas.getContext('2d');
     const sgCanvas = document.createElement('canvas'); // image du spectrogramme (pixels physiques)
@@ -2085,7 +1940,7 @@
     });
     spectrumCanvas.addEventListener('pointerleave', () => { cursor = null; });
 
-    // --- 8. Boucle d'affichage ---
+    // --- 7. Boucle d'affichage ---
     function frame(now) {
         requestAnimationFrame(frame);
         updateMeterDisplay(now);
@@ -2094,7 +1949,6 @@
         updateReadouts(now);
     }
 
-    updateMeterLabels();
     updateResolution();
     requestAnimationFrame(frame);
 </script>
