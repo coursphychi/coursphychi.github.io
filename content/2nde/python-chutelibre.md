@@ -59,7 +59,7 @@ hidden = "true"
 
 <p>Cliquez sur le bouton <b>▶ Exécuter</b> pour afficher le contenu des deux listes&nbsp;:</p>
 
-{{< runpython height="auto" >}}
+{{< runpython height="auto"    >}}
 g = 9.8         # intensité de la pesanteur (m/s^2)
 v0 = 5          # vitesse initiale (m/s)
 tmax = 2*v0/g   # durée pour revenir à l'altitude initiale
@@ -102,7 +102,7 @@ print("Liste des instants T :", T)
 <p>Dans la fenêtre de code ci-dessous, complétez la fin du programme pour afficher le <b>7<sup>e</sup> élément</b> de la liste <code>Y</code> ainsi que son <b>dernier élément</b>.</p>
 </div>
 
-{{< runpython height="auto" >}}
+{{< runpython height="auto"    >}}
 g = 9.8
 v0 = 5
 tmax = 2*v0/g
@@ -137,7 +137,7 @@ print("Dernier élément de Y :", Y[-1])</code></pre>
 
 <p>Exécutez les deux petits exemples ci-dessous pour observer le fonctionnement d'une boucle <code>for</code> qui parcourt la liste <code>Y</code>, puis d'un test de parité avec <code>if / else</code>&nbsp;:</p>
 
-{{< runpython height="auto" >}}
+{{< runpython height="auto"    >}}
 g = 9.8
 v0 = 5
 tmax = 2*v0/g
@@ -151,7 +151,7 @@ for i in range(N):
     print(f"Point n°{i} : y = {Y[i]:.2f} m")
 {{< /runpython >}}
 
-{{< runpython height="auto" >}}
+{{< runpython height="auto"    >}}
 # Exemple d'utilisation de if / else sur les entiers de 0 à 19 :
 for i in range(20):
     if i % 2 == 0: # i % 2 calcule le reste de la division euclidienne de i par 2
@@ -179,7 +179,7 @@ for i in range(20):
 
 <p>Exécutez le programme ci-dessous (le premier lancement de <code>matplotlib</code> prend quelques secondes)&nbsp;:</p>
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto"    >}}
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-v0_8")
 
@@ -248,7 +248,7 @@ plt.show()
 <p>Observez le bloc de calcul des vecteurs déplacement dans le programme ci-dessous, puis exécutez-le. Pourquoi a-t-on écrit <code>for i in range(N-1):</code> (soit $N-1$ éléments) plutôt que <code>for i in range(N):</code>&nbsp;?</p>
 </div>
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto"   >}}
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-v0_8")
 
@@ -324,7 +324,7 @@ D'un point de vue informatique, la formule utilise <code>Y[i+1]</code>&nbsp;: si
 <p>Dans la fenêtre ci-dessous, complétez la ligne <code>V[i] = ...</code> permettant de calculer la coordonnée verticale de chaque vecteur vitesse à partir de <code>MMprime[i]</code> et de <code>Dt</code>, puis exécutez le programme pour tracer les vecteurs vitesse.</p>
 </div>
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto"    >}}
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-v0_8")
 
@@ -418,7 +418,7 @@ plt.show()
 </div>
 
 
-{{< runpython lang="pyodide" height="auto" >}}
+{{< runpython lang="pyodide" height="auto"    >}}
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-v0_8")
 
@@ -503,7 +503,7 @@ Dans la fenêtre ci-dessous, écrivez les instructions <code>print(...)</code> p
 </div>
 <p></p>
 
-{{< runpython height="auto" >}}
+{{< runpython height="auto"    >}}
 g = 9.8
 v0 = 5
 tmax = 2*v0/g

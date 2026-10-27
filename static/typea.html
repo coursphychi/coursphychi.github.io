@@ -382,6 +382,34 @@
             padding: 0.15rem 0;
         }
 
+        /* État vierge d'accueil */
+        .empty-state {
+            padding: 2.5rem 1.5rem;
+            background-color: var(--bg-subtle);
+            border: 1px dashed var(--border-strong);
+            border-radius: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 0.92rem;
+            margin: auto 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .empty-state-icon {
+            font-size: 2rem;
+            opacity: 0.7;
+            line-height: 1;
+        }
+
+        .empty-state-title {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
         /* Cadre 2 : Graphique et Plein écran */
         #graphCard.fullscreen-fallback,
         #graphCard:fullscreen {
@@ -503,17 +531,6 @@
             gap: 0.3rem;
         }
 
-        .warning-msg {
-            padding: 1.5rem;
-            background-color: var(--bg-subtle);
-            border: 1px dashed var(--border-strong);
-            border-radius: 10px;
-            color: var(--text-muted);
-            text-align: center;
-            font-size: 0.92rem;
-            margin: auto 0;
-        }
-
         .data-badges {
             display: flex;
             flex-wrap: wrap;
@@ -588,23 +605,24 @@
                 <div class="btn-group">
                     <input type="file" id="csvFileInput" accept=".csv,.txt,.tsv" style="display: none;">
                     <button class="btn-action" id="importCsvBtn" title="Importer un fichier CSV ou texte">📂 CSV</button>
-                    <button class="btn-action" id="loadSampleBtn" title="Charger les valeurs d'exemple">✨ Exemple</button>
+                    <button class="btn-action" id="loadSampleBtn" title="Charger un jeu de données d'exemple">✨ Exemple</button>
+                    <button class="btn-action" id="clearBtn" title="Tout effacer" style="display: none;">🗑️ Effacer</button>
                 </div>
             </div>
 
             <div class="row-inputs">
                 <div>
                     <label for="symInput">Symbole grandeur</label>
-                    <input type="text" id="symInput" value="f'" placeholder="ex: c, g, V...">
+                    <input type="text" id="symInput" value="" placeholder="ex: f', c, g, V...">
                 </div>
                 <div>
                     <label for="unitInput">Unité</label>
-                    <input type="text" id="unitInput" value="cm" placeholder="ex: m·s⁻¹, mol·L⁻¹">
+                    <input type="text" id="unitInput" value="" placeholder="ex: cm, m·s⁻¹...">
                 </div>
             </div>
 
             <label for="dataInput">Valeurs mesurées (espace, retour à la ligne, point-virgule ou import CSV)</label>
-            <textarea id="dataInput"></textarea>
+            <textarea id="dataInput" placeholder="Saisissez ou collez vos mesures ici (ex: 12,1 ; 12,4 ; 11,9...)"></textarea>
 
             <label>Chiffres significatifs pour l'incertitude-type $u$ (arrondie par excès)</label>
             <div class="radio-group">
@@ -619,7 +637,7 @@
             </div>
 
             <label for="refInput">Valeur de référence (optionnelle)</label>
-            <input type="text" id="refInput" value="12,5" placeholder="Laisser vide si aucune">
+            <input type="text" id="refInput" value="" placeholder="Laisser vide si aucune">
 
             <div id="parsedSummary" style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;"></div>
             <div class="data-badges" id="dataBadges"></div>
@@ -631,11 +649,13 @@
                 <span class="card-title"><span class="step-num">1</span> Calculs statistiques et incertitude-type</span>
             </div>
 
-            <div id="errorBox" class="warning-msg" style="display: none;">
-                Veuillez saisir ou importer au moins <strong>2 valeurs numériques</strong> valides pour effectuer une analyse statistique de type A.
+            <div id="emptyStateBox" class="empty-state">
+                <div class="empty-state-icon">📊</div>
+                <div class="empty-state-title">En attente de données expérimentales</div>
+                <div>Saisissez au moins <strong>2 valeurs mesurées</strong> dans le cadre ci-contre, importez un fichier <strong>CSV</strong> ou cliquez sur <strong>✨ Exemple</strong> pour lancer l'analyse.</div>
             </div>
 
-            <div id="calcContent" style="display: flex; flex-direction: column; flex: 1;">
+            <div id="calcContent" style="display: none; flex-direction: column; flex: 1;">
                 <div class="formula-grid">
                     <div class="formula-box">
                         <div class="label">Moyenne arithmétique</div>
@@ -661,7 +681,7 @@
     </div>
 
     <!-- PARTIE BASSE PLEINE LARGEUR : Cadre 2 (Graphique) & Cadre 3 (Compatibilité) -->
-    <div class="full-width-stack" id="bottomStack">
+    <div class="full-width-stack" id="bottomStack" style="display: none;">
         <!-- Cadre 2 : Représentation Graphique -->
         <div class="card" id="graphCard">
             <div class="card-header">
@@ -1001,6 +1021,7 @@
     const refInput = document.getElementById('refInput');
     const csRadios = document.querySelectorAll('input[name="csRadio"]');
     const loadSampleBtn = document.getElementById('loadSampleBtn');
+    const clearBtn = document.getElementById('clearBtn');
 
     const sampleData = [12.1, 12.4, 11.9, 12.3, 12.2, 12.6, 12.0, 12.3, 12.5, 12.1, 12.2, 12.4];
 
@@ -1012,7 +1033,16 @@
         updateAnalysis();
     }
 
+    function clearAll() {
+        symInput.value = "";
+        unitInput.value = "";
+        refInput.value = "";
+        dataInput.value = "";
+        updateAnalysis();
+    }
+
     loadSampleBtn.addEventListener('click', loadSample);
+    clearBtn.addEventListener('click', clearAll);
     [dataInput, symInput, unitInput, refInput].forEach(el => el.addEventListener('input', updateAnalysis));
     csRadios.forEach(r => r.addEventListener('change', updateAnalysis));
     window.addEventListener('resize', () => {
@@ -1042,18 +1072,26 @@
         const unitLatex = unit ? `\\text{ ${unit}}` : "";
         const cs = parseInt(document.querySelector('input[name="csRadio"]:checked').value, 10);
 
-        document.getElementById('parsedSummary').textContent = `${N} valeur${N > 1 ? 's' : ''} reconnue${N > 1 ? 's' : ''}`;
-        document.getElementById('dataBadges').innerHTML = values.map(v => `<span class="data-badge">${formatSciSvg(v, 4, true)}</span>`).join('');
+        const hasAnyInput = rawText !== "" || symInput.value.trim() !== "" || unitInput.value.trim() !== "" || refInput.value.trim() !== "";
+        clearBtn.style.display = hasAnyInput ? 'inline-flex' : 'none';
+
+        if (N > 0) {
+            document.getElementById('parsedSummary').textContent = `${N} valeur${N > 1 ? 's' : ''} reconnue${N > 1 ? 's' : ''}`;
+            document.getElementById('dataBadges').innerHTML = values.map(v => `<span class="data-badge">${formatSciSvg(v, 4, true)}</span>`).join('');
+        } else {
+            document.getElementById('parsedSummary').textContent = "";
+            document.getElementById('dataBadges').innerHTML = "";
+        }
 
         if (N < 2) {
             currentState.valid = false;
-            document.getElementById('errorBox').style.display = 'block';
+            document.getElementById('emptyStateBox').style.display = 'flex';
             document.getElementById('calcContent').style.display = 'none';
             document.getElementById('bottomStack').style.display = 'none';
             return;
         }
 
-        document.getElementById('errorBox').style.display = 'none';
+        document.getElementById('emptyStateBox').style.display = 'none';
         document.getElementById('calcContent').style.display = 'flex';
         document.getElementById('bottomStack').style.display = 'flex';
 
@@ -1399,7 +1437,8 @@
         container.innerHTML = svg;
     }
 
-    window.addEventListener('DOMContentLoaded', loadSample);
+    // Initialisation à vide au chargement
+    window.addEventListener('DOMContentLoaded', updateAnalysis);
 </script>
 
 </body>

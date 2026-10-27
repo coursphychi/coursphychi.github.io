@@ -162,11 +162,9 @@
     border:0;padding:0;margin:0;background:transparent;color:transparent;
     outline:none;font:inherit}
   .tk-canvas{display:flex;justify-content:center}
-  /* Pyodide : figures matplotlib et plotly insérées dans le flux de la console */
+  /* Pyodide : figures matplotlib insérées dans le flux de la console */
   .tk-plot{display:block;max-width:100%;height:auto;margin:8px 0;
     background:#fff;border-radius:6px}
-  .tk-plotly{width:100%;min-height:420px;margin:8px 0;
-    background:#fff;border-radius:6px;overflow:hidden}
   .tk-stderr{color:var(--tk-warn)}                 /* avertissements (warnings) : orangé, pas rouge */
   .tk-status{font-family:var(--tk-font);font-size:12.5px;color:var(--tk-muted);
     margin-bottom:8px;animation:tk-pulse 1.6s ease-in-out infinite}
@@ -233,8 +231,8 @@
     --tk-errline:rgba(224,88,76,.20);
     color-scheme:dark;                   /* barres de défilement, champs natifs */
   }
-  /* figures matplotlib et plotly : on garde leur fond blanc, posé comme une carte */
-  html.tk-dark .tk-plot, html.tk-dark .tk-plotly{box-shadow:0 0 0 1px var(--tk-border)}
+  /* figures matplotlib : on garde leur fond blanc, posé comme une carte */
+  html.tk-dark .tk-plot{box-shadow:0 0 0 1px var(--tk-border)}
 
   /* Éditeur CodeMirror : thème « tkdark » (couleurs inspirées de One Dark) */
   .cm-s-tkdark.CodeMirror{background:var(--tk-bg);color:#d7dce2}
@@ -298,16 +296,12 @@ var LIBS = {
   // Pour changer de version : remplacer 314.0.7 ci-dessous (voir pyodide.org).
   pyodide: ["https://cdn.jsdelivr.net/pyodide/v314.0.7/full/pyodide.js"],
 
-  // Plotly.js : bibliothèque de rendu interactif côté navigateur (version épinglée).
-  // Peut être rapatriée en local dans static/trinket/plotly.min.js en 1re position.
-  plotlyJs: ["https://cdn.plot.ly/plotly-2.35.2.min.js"],
-
   // Paquets PyPI (Python PUR) absents de Pyodide, installés automatiquement
   // (via micropip) quand le code les importe. Forme : { nom_importé: "nom_PyPI" }.
   // Liste blanche volontaire : on n'installe PAS n'importe quel nom tapé dans
   // l'éditeur (une faute de frappe pourrait tirer un paquet malveillant homonyme).
   // Pour un besoin ponctuel, préférer le paramètre packages="…" du shortcode.
-  pypiAuto: { seaborn: "seaborn", plotly: "plotly" },
+  pypiAuto: { seaborn: "seaborn" },
 
   cmCss: "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css",
   cmJs:  "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js",
@@ -886,7 +880,7 @@ function outFitEnabled(fe){
 }
 function setFrameHeight(fe, h){
   var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  fe.style.transition = still ? "" : "height .18s ease";
+  fe.style.transition = still ? "" : "height .18s ease, width .18s ease";
   fe.style.height = h + "px";
 }
 // Hauteur du contenu réel de l'onglet Résultat (indépendante de la taille
@@ -902,6 +896,72 @@ function outContentHeight(){
   var cs = window.getComputedStyle(pane);
   return Math.ceil(bottom + (parseFloat(cs.paddingBottom) || 0));
 }
+/* ---- Largeur adaptée au graphe ----------------------------------------
+   Si la sortie contient un graphe (figure matplotlib, dessin turtle), la
+   fenêtre prend la largeur utile : max(graphe, plus longue ligne de texte,
+   barre d'outils), sans dépasser la place disponible ni width=. Le bloc du
+   shortcode est centré : une fenêtre plus étroite se centre d'elle-même.
+   Sans graphe, ou de retour sur l'onglet Code : largeur d'origine. */
+var OUT_MIN_W = 320;                     // largeur minimale (px)
+function graphWidth(){
+  var w = 0, i, v, imgs = els.outPane.querySelectorAll("img.tk-plot"), cvs = els.canvas.querySelectorAll("canvas");
+  for (i = 0; i < imgs.length; i++){
+    v = parseFloat(imgs[i].style.width) || (imgs[i].naturalWidth ? imgs[i].naturalWidth / 1.44 : 0);
+    if (v > w) w = v;
+  }
+  for (i = 0; i < cvs.length; i++){ v = parseFloat(cvs[i].style.width) || cvs[i].width || 0; if (v > w) w = v; }
+  return Math.ceil(w);
+}
+// Largeur « naturelle » d'un bloc de texte : sa plus longue ligne, sans retour à la ligne.
+function textNaturalWidth(node){
+  if (!node || !node.textContent) return 0;
+  var m = textNaturalWidth.m;
+  if (!m){
+    m = textNaturalWidth.m = document.createElement("pre");
+    m.setAttribute("aria-hidden", "true");
+    document.body.appendChild(m);
+  }
+  m.className = node.className;
+  m.style.cssText = "position:absolute;left:-99999px;top:0;visibility:hidden;white-space:pre;display:inline-block;width:auto;margin:0";
+  m.textContent = node.textContent;
+  return Math.ceil(m.offsetWidth);
+}
+// Place nécessaire à la barre (onglets + boutons, ■ compris même s'il est caché).
+function barMinWidth(){
+  var bar = document.getElementById("tk-bar"), w = 44;
+  if (!bar) return OUT_MIN_W;
+  for (var i = 0; i < bar.children.length; i++){
+    var c = bar.children[i], cs = window.getComputedStyle(c);
+    if (cs.display === "none") continue;
+    if (parseFloat(cs.flexGrow) > 0) continue;   // séparateur extensible (.tk-spacer) : c'est de l'espace libre, pas un besoin
+    w += c.offsetWidth + (parseFloat(cs.marginLeft) || 0) + (parseFloat(cs.marginRight) || 0);
+  }
+  return Math.ceil(w);
+}
+function restoreWidth(fe){
+  var b = fe.dataset.tkBaseW;
+  if (b && fe.style.width !== b) fe.style.width = b;
+}
+function fitOutWidth(fe){
+  if (!fe.dataset.tkBaseW) fe.dataset.tkBaseW = fe.style.width || "100%";   // largeur d'origine
+  var g = graphWidth();
+  if (!g){ restoreWidth(fe); return; }                                   // pas de graphe
+  var pane = els.outPane, cs = window.getComputedStyle(pane);
+  var pad = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+  var scroll = pane.offsetWidth - pane.clientWidth;                      // barre de défilement éventuelle
+  var need = Math.max(g, textNaturalWidth(els.stdout), textNaturalWidth(els.errBox)) + pad + scroll + 2;
+  need = Math.max(need, barMinWidth(), OUT_MIN_W);
+  var avail = fe.parentElement ? fe.parentElement.clientWidth : 0;
+  var cap = CFG.width > 0 ? CFG.width : Infinity;
+  if (avail) cap = Math.min(cap, avail);
+  var W = Math.ceil(Math.min(need, cap));
+  if (avail && W >= avail){ restoreWidth(fe); return; }                  // toute la place : rien à changer
+  if (fe.style.width !== W + "px"){
+    fe.style.width = W + "px";
+    fe.style.marginLeft = fe.style.marginRight = "auto";                 // centrage, même si display:block
+  }
+}
+
 function scheduleOutFit(){
   if (_outFitPending) return;
   _outFitPending = true;
@@ -910,6 +970,7 @@ function scheduleOutFit(){
 function fitOutHeight(){
   var fe = hostFrame();
   if (!fe || !outFitEnabled(fe) || els.outPane.hidden) return;
+  fitOutWidth(fe);
   baseHeight(fe);                        // (mémorise l'origine si ce n'est déjà fait)
   var want = Math.ceil(chromeHeight() + outContentHeight() + 2);   // +2 : bordures
   var screenH = 0;
@@ -924,6 +985,8 @@ function fitOutHeight(){
 // Retour sur l'onglet Code : hauteur d'origine.
 function restoreCodeHeight(){
   _lastOutFitH = -1;
+  var fw = hostFrame();
+  if (fw && outFitEnabled(fw)) restoreWidth(fw);         // le code reprend toute sa largeur
   if (CFG.autoheight){ _lastCodeH = -1; scheduleCodeFit(); return; }   // "auto" : ré-épouser le code
   var fe = hostFrame();
   if (fe && outFitEnabled(fe)) setFrameHeight(fe, baseHeight(fe));
@@ -1382,23 +1445,22 @@ function runPython(code, done){
 
 /* =====================================================================
    MOTEUR PYODIDE — lang="pyodide"
-   Vrai CPython compilé en WebAssembly : numpy, matplotlib, plotly, scipy, sympy…
+   Vrai CPython compilé en WebAssembly : numpy, matplotlib, scipy, sympy…
    • Chargé une seule fois (le runtime reste en mémoire ; relancer est rapide).
    • Les paquets sont détectés automatiquement d'après les `import` du code.
    • Chaque exécution repart avec des variables vierges.
    • matplotlib : backend standard "Agg" ; plt.show() insère l'image PNG dans
      la console, à sa place parmi les print(). Les figures non montrées sont
      affichées à la fin (comme dans un notebook).
-   • plotly : fig.show() transmet le JSON à Plotly.js pour un rendu interactif
-     dans la console.
    • input() : boîte de dialogue du navigateur (Pyodide tourne de façon
      synchrone, la saisie inline de Skulpt n'est pas possible ici).
    • Les fichiers écrits (open(..., "w")) apparaissent dans « Fichiers générés ».
 ===================================================================== */
-var _pyo = null;                 // promesse de l'instance Pyodide
+var _pyHost = null;              // API de pyhost.js (instance partagée par la page)
+// Jeton propre à CE chargement du player : permet à l'hôte de savoir si la
+// fenêtre qui détient le tour existe encore (un rechargement change le jeton).
+window.__tkToken = Math.random().toString(36).slice(2) + Date.now().toString(36);
 var _pyoLastLine = "";           // dernière ligne affichée (sert d'invite à input())
-var _pyoMpl = false;             // matplotlib déjà configuré ?
-var _pyoPlotly = false;          // plotly déjà configuré ?
 
 // Python d'amorçage : dossier de travail propre + utilitaires fichiers.
 var PYO_BOOT =
@@ -1459,18 +1521,6 @@ var PYO_MPL =
   "    _tk_plt.close('all')\n" +
   "_tk_plt.show = _tk_show\n";
 
-// Python de configuration de plotly (exécuté une fois, après son installation).
-// Surcharge BaseFigure.show() et plotly.io.show() pour envoyer le JSON au JS.
-var PYO_PLOTLY =
-  "import plotly.basedatatypes as _tk_pbd\n" +
-  "import plotly.io as _tk_pio\n" +
-  "import tkbridge\n" +
-  "def _tk_plotly_show(self, *args, **kwargs):\n" +
-  "    _tk_flush()\n" +
-  "    tkbridge.plotly(self.to_json())\n" +
-  "_tk_pbd.BaseFigure.show = _tk_plotly_show\n" +
-  "_tk_pio.show = _tk_plotly_show\n";
-
 function pyoWrite(text, isErr){
   if (!text) return;
   _pyoLastLine = (_pyoLastLine + text).split("\n").pop();
@@ -1488,19 +1538,6 @@ function pyoImage(b64){
   img.src = "data:image/png;base64," + b64;
   els.stdout.appendChild(img);
 }
-function pyoPlotly(jsonStr){
-  var div = el("div", {class:"tk-plotly"});
-  els.stdout.appendChild(div);
-  loadFirst(LIBS.plotlyJs).then(function(){
-    var spec = JSON.parse(jsonStr);
-    var config = Object.assign({ responsive: true, displaylogo: false }, spec.config || {});
-    window.Plotly.newPlot(div, spec.data || [], spec.layout || {}, config).then(function(){
-      scheduleOutFit();
-    });
-  }).catch(function(){
-    div.textContent = "Impossible de charger la bibliothèque graphique Plotly.js.";
-  });
-}
 // Petite ligne d'état discrète pendant les téléchargements.
 function pyoStatus(msg){
   var s = els.outPane.querySelector(".tk-status");
@@ -1509,27 +1546,54 @@ function pyoStatus(msg){
   s.textContent = msg;
 }
 
-function getPyodide(){
-  if (_pyo) return _pyo;
-  pyoStatus("Démarrage de Python… (la première fois peut prendre quelques secondes)");
-  _pyo = loadFirst(LIBS.pyodide).then(function(url){
-    return window.loadPyodide({ indexURL: url.replace(/[^\/]*$/, "") });
-  }).then(function(py){
-    var decOut = new TextDecoder(), decErr = new TextDecoder();
-    py.setStdout({ write: function(b){ pyoWrite(decOut.decode(b, {stream:true}), false); return b.length; } });
-    py.setStderr({ write: function(b){ pyoWrite(decErr.decode(b, {stream:true}), true);  return b.length; } });
-    py.setStdin({ stdin: function(){
+/* ---- Instance partagée : hébergée par la PAGE (même origine), sinon locale ---- */
+function hostWindow(){
+  try {
+    var p = window.parent;
+    if (p && p !== window && p.location.origin === location.origin && p.document) return p;
+  } catch(e){}
+  return window;                         // autre domaine, ou player ouvert seul
+}
+// Charge pyhost.js dans la fenêtre W (une seule fois pour toute la page).
+function loadHostInto(W){
+  return new Promise(function(res, rej){
+    if (W.__tkPyHost) return res(W.__tkPyHost);
+    var d = W.document, sc = d.querySelector("script[data-tk-pyhost]");
+    if (!sc){
+      sc = d.createElement("script");
+      sc.src = new URL("pyhost.js", location.href).href;
+      sc.setAttribute("data-tk-pyhost", "");
+      sc.onerror = function(){ sc.setAttribute("data-tk-failed", ""); };
+      d.head.appendChild(sc);
+    }
+    var t0 = Date.now();
+    (function wait(){
+      if (W.__tkPyHost) return res(W.__tkPyHost);
+      if (sc.hasAttribute("data-tk-failed") || Date.now() - t0 > 10000) return rej(new Error("pyhost.js"));
+      setTimeout(wait, 40);
+    })();
+  });
+}
+function getPyHost(){
+  if (_pyHost) return Promise.resolve(_pyHost);
+  var H = hostWindow(), p = loadHostInto(H);
+  if (H !== window) p = p.catch(function(){ return loadHostInto(window); });   // secours : instance locale
+  return p.then(function(api){ _pyHost = api; return api; });
+}
+// Relais de CETTE fenêtre (sorties, input(), figures) pour la durée de son tour.
+function pyoHandlers(){
+  var decOut = new TextDecoder(), decErr = new TextDecoder();
+  return {
+    out: function(b, isErr){ pyoWrite((isErr ? decErr : decOut).decode(b, {stream:true}), isErr); },
+    stdin: function(){
       var v = window.prompt(_pyoLastLine || "Entrée :", "");
       if (v === null) v = "";
       var s = el("span", {class:"tk-instyle"}); s.textContent = v + "\n";   // écho en bleu
       els.stdout.appendChild(s); _pyoLastLine = "";
       return v;
-    }});
-    py.registerJsModule("tkbridge", { image: pyoImage, plotly: pyoPlotly });
-    return py.runPythonAsync(PYO_BOOT).then(function(){ return py; });
-  });
-  _pyo.catch(function(){ _pyo = null; });   // autoriser un nouvel essai
-  return _pyo;
+    },
+    image: pyoImage
+  };
 }
 
 // Traceback Pyodide → uniquement les lignes du programme de l'élève.
@@ -1550,10 +1614,20 @@ function cleanPyTraceback(msg){
 
 function runPyodide(code, done){
   _pyoLastLine = "";
-  var py, ns = null, failed = null, pipFailed = {};
-  var quietOpt = { messageCallback: function(){}, errorCallback: function(){} };
-  getPyodide().then(function(p){
+  var api, py, ns = null, failed = null, pipFailed = {};
+  var indexURL = [].concat(LIBS.pyodide)[0].replace(/[^\/]*$/, "");
+  getPyHost().then(function(a){
+    api = a;
+    if (!api.state.ready) pyoStatus("Démarrage de Python… (une seule fois pour toute la page)");
+    return api.get(indexURL, PYO_BOOT);
+  }).then(function(p){
     py = p;
+    // une exécution à la fois sur la page : les sorties doivent aller à la bonne fenêtre
+    return api.acquire(window.__tkToken, pyoHandlers(), function(){
+      pyoStatus("En attente : une autre fenêtre Python de la page est en cours d'exécution…");
+    });
+  }).then(function(){
+    pyoStatus(null);
     return py.loadPackagesFromImports(code, {
       messageCallback: function(msg){ if (/^Loading /.test(msg)) pyoStatus("Chargement des bibliothèques : " + msg.replace(/^Loading /, "")); },
       errorCallback:   function(){}
@@ -1568,7 +1642,7 @@ function runPyodide(code, done){
     });
     if (!req.length) return;
     pyoStatus("Installation depuis PyPI : " + req.join(", ") + "…");
-    return py.loadPackage("micropip", quietOpt).then(function(){
+    return py.loadPackage("micropip").then(function(){
       // un paquet à la fois : l'échec de l'un n'empêche pas les autres
       return req.reduce(function(chain, pkg){
         return chain.then(function(){
@@ -1580,36 +1654,26 @@ function runPyodide(code, done){
     });
   }).then(function(){
     // matplotlib a pu arriver comme dépendance (seaborn…) : on le cherche côté Python
-    if (!_pyoMpl && py.runPython("import importlib.util as _u; _u.find_spec('matplotlib') is not None")){
+    if (!api.state.mpl && py.runPython("import importlib.util as _u; _u.find_spec('matplotlib') is not None")){
       pyoStatus("Préparation de matplotlib…");
-      return py.runPythonAsync(PYO_MPL).then(function(){ _pyoMpl = true; });
-    }
-  }).then(function(){
-    // plotly : on précharge aussi pandas (requis en interne par plotly.express)
-    if (!_pyoPlotly && py.runPython("import importlib.util as _u; _u.find_spec('plotly') is not None")){
-      pyoStatus("Préparation de plotly…");
-      return py.loadPackage("pandas", quietOpt).then(function(){
-        return py.runPythonAsync(PYO_PLOTLY);
-      }).then(function(){ _pyoPlotly = true; });
+      return py.runPythonAsync(PYO_MPL).then(function(){ api.state.mpl = true; });
     }
   }).then(function(){
     pyoStatus(null);
-    els.stdout.textContent = "";                 // efface les éventuels messages d'installation (micropip…)
-    _pyoLastLine = "";
     py.globals.get("_tk_clean")();
     var d = allData(true);                       // data= du shortcode + fichiers importés
     for (var name in d){
       if (/^[^\/\\]+$/.test(name) && name !== "." && name !== "..")
         py.FS.writeFile("/tmp/tk-run/" + name, d[name]);   // texte (UTF-8) ou octets
     }
-    if (_pyoMpl) py.runPython("_tk_plt.close('all')");
+    if (api.state.mpl) py.runPython("_tk_plt.close('all')");
     ns = py.globals.get("dict")();              // variables vierges à chaque exécution
     ns.set("__name__", "__main__");
     return py.runPythonAsync(code, { globals: ns, filename: "main.py" })
              .catch(function(err){ failed = err; });
   }).then(function(){
     try { py.globals.get("_tk_flush")(); } catch(e){}
-    if (_pyoMpl && !failed){ try { py.globals.get("_tk_show")(); } catch(e){} }   // figures restantes
+    if (api.state.mpl && !failed){ try { py.globals.get("_tk_show")(); } catch(e){} }   // figures restantes
     try {
       var f = py.globals.get("_tk_files")();
       var files = f.toJs({ dict_converter: Object.fromEntries }); f.destroy();
@@ -1617,6 +1681,7 @@ function runPyodide(code, done){
       if (Object.keys(files).length) renderFiles(files);
     } catch(e){}
     if (ns){ try { ns.destroy(); } catch(e){} }
+    api.release(window.__tkToken);               // au tour de la fenêtre suivante
     if (failed){
       if (failed.type){
         var pre = cleanPyTraceback(failed.message);
@@ -1637,6 +1702,7 @@ function runPyodide(code, done){
     done();
   }).catch(function(err){
     pyoStatus(null);
+    if (api) api.release(window.__tkToken);
     showError(py ? String(err)
       : "Impossible de charger Python scientifique (Pyodide).\n"
         + "Vérifie ta connexion : il est téléchargé depuis cdn.jsdelivr.net.");
