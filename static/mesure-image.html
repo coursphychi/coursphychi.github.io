@@ -24,7 +24,6 @@
             --ch2-glow: rgba(245, 158, 11, 0.25);
             --sum: #10b981;
             --angle: #a855f7;
-            --point: #f43f5e;
             --danger: #ef4444;
             --scope-bg: #090d16;
             --shadow-panel: 0 10px 25px -5px rgba(15, 23, 42, 0.07), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
@@ -45,7 +44,6 @@
             --ch2-glow: rgba(251, 191, 36, 0.3);
             --sum: #34d399;
             --angle: #c084fc;
-            --point: #fb7185;
             --scope-bg: #050811;
             --shadow-panel: 0 12px 30px -5px rgba(0, 0, 0, 0.5);
         }
@@ -206,6 +204,11 @@
         }
 
         select, .btn-small, .file-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            line-height: 1.2;
             background: var(--bg-recessed);
             border: 1px solid var(--border);
             color: var(--text-main);
@@ -272,6 +275,7 @@
             white-space: nowrap;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.35rem;
             transition: all 0.15s;
         }
@@ -429,6 +433,7 @@
             border: 1px solid var(--border);
             background: var(--bg-panel);
             color: var(--text-main);
+            text-align: center;
         }
 
         .stat-grid {
@@ -441,7 +446,12 @@
             background: var(--bg-recessed);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 0.4rem 0.6rem;
+            padding: 0.45rem 0.6rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .stat-label {
@@ -513,6 +523,7 @@
             font-weight: 700;
             font-size: 0.9rem;
             flex: 1;
+            text-align: center;
         }
 
         .measure-list .m-sub {
@@ -538,37 +549,6 @@
             font-size: 0.8rem;
             color: var(--text-muted);
             font-style: italic;
-        }
-
-        .table-wrap {
-            max-height: 260px;
-            overflow: auto;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-top: 0.6rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.76rem;
-        }
-
-        th, td {
-            padding: 0.3rem 0.5rem;
-            text-align: right;
-            border-bottom: 1px solid var(--border-subtle);
-            white-space: nowrap;
-        }
-
-        th {
-            position: sticky;
-            top: 0;
-            background: var(--bg-recessed);
-            color: var(--text-muted);
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
         }
 
         .feedback {
@@ -615,7 +595,13 @@
             background: var(--bg-recessed);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 0.5rem 0.75rem;
+            padding: 0.55rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.15rem;
+            text-align: center;
         }
 
         .readout-label {
@@ -679,7 +665,7 @@
             </div>
             <div>
                 <h1>Banc de mesure sur image</h1>
-                <div class="subtitle">Étalonnage, règle et rapporteur virtuels, profil de luminosité et pointage sur une photo</div>
+                <div class="subtitle">Étalonnage, règle et rapporteur virtuels, profil de luminosité sur une photo</div>
             </div>
         </div>
         <button class="theme-toggle" id="themeBtn" title="Changer le thème (Clair / Sombre)">🌓</button>
@@ -695,7 +681,6 @@
                         <button class="seg-btn" data-tool="dist" title="Mesurer une distance (D)"><span class="dot" style="background: var(--ch1);"></span>Distance</button>
                         <button class="seg-btn" data-tool="angle" title="Mesurer un angle (A)"><span class="dot" style="background: var(--angle);"></span>Angle</button>
                         <button class="seg-btn" data-tool="profile" title="Tracer un profil de luminosité (P)"><span class="dot" style="background: var(--sum);"></span>Profil I(x)</button>
-                        <button class="seg-btn" data-tool="points" title="Pointer des positions successives (C)"><span class="dot" style="background: var(--point);"></span>Pointage</button>
                     </div>
                     <div class="toolbar">
                         <button class="btn-small" id="zoomOutBtn" title="Dézoomer">−</button>
@@ -776,7 +761,7 @@
                     </div>
                     <div class="readout">
                         <div class="readout-label">Écart Δx · nombre n</div>
-                        <div class="readout-value" style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+                        <div class="readout-value" style="display: flex; align-items: center; justify-content: center; gap: 0.4rem; flex-wrap: wrap;">
                             <span id="dxValue">—</span>
                             <span style="color: var(--text-muted); font-size: 0.8rem;">n =</span>
                             <input type="number" class="num-input" id="nInput" value="1" min="1" step="1" style="width: 64px;" title="Nombre d'interfranges compris entre les deux curseurs">
@@ -861,34 +846,6 @@
                 <div class="empty-note" id="measureEmpty">Choisissez l'outil Distance ou Angle, puis cliquez sur l'image.</div>
             </div>
 
-            <!-- 4. POINTAGE -->
-            <div class="panel">
-                <div class="panel-header">
-                    <span class="panel-title"><span class="step-num">4</span> Pointage</span>
-                    <div class="toolbar">
-                        <span class="feedback" id="pointsFeedback"></span>
-                        <button class="btn-small" id="pointsCopyBtn">Copier Python</button>
-                        <button class="btn-small" id="pointsCsvBtn">CSV</button>
-                        <button class="btn-small" id="pointsClearBtn">Effacer</button>
-                    </div>
-                </div>
-                <div class="help-box" style="border-left-color: var(--point);">
-                    Chronophotographie : avec l'outil <strong>Pointage</strong>, cliquez sur les positions successives du mobile, dans l'ordre. Déplacez l'origine <strong>O</strong> du repère (axe y vers le haut).
-                </div>
-                <div class="field-row">
-                    <label for="dtInput">Durée entre deux images Δt :</label>
-                    <input type="number" class="num-input" id="dtInput" value="0.040" step="any" min="0">
-                    <span>s</span>
-                </div>
-                <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr><th>Point</th><th>t (s)</th><th id="thX">x</th><th id="thY">y</th></tr>
-                        </thead>
-                        <tbody id="pointsBody"></tbody>
-                    </table>
-                </div>
-            </div>
         </aside>
     </div>
 </div>
@@ -956,9 +913,6 @@
         usedChannel: 'lum',
         band: 5,
         snap: true,
-        origin: { x: 0, y: 0 },
-        points: [],
-        dt: 0.04,
         pending: null,      // tracé en cours : { type, pts }
         hover: null,        // position du pointeur dans l'image
         overCanvas: false,
@@ -969,7 +923,7 @@
     const COLORS = {};
     function readColors() {
         const st = getComputedStyle(document.documentElement);
-        ['ch1', 'ch2', 'sum', 'angle', 'point'].forEach(k => COLORS[k] = st.getPropertyValue('--' + k).trim());
+        ['ch1', 'ch2', 'sum', 'angle'].forEach(k => COLORS[k] = st.getPropertyValue('--' + k).trim());
     }
 
     // --- 3. Unités et formatage ---
@@ -1001,7 +955,7 @@
         return calibrated() ? `${fmtNum(toUnits(px))} ${S.calib.unit}` : `${fmtNum(px, 4)} px`;
     }
 
-    // Nombre de décimales cohérent avec la résolution (1 px) pour les tableaux
+    // Nombre de décimales cohérent avec la résolution (1 px) pour les exports
     function tableDecimals() {
         if (!calibrated()) return 1;
         return Math.max(0, Math.min(6, Math.ceil(-Math.log10(1 / pxPerUnit())) + 1));
@@ -1051,8 +1005,6 @@
         S.counters = { dist: 0, angle: 0 };
         S.profile = null;
         S.profileData = null;
-        S.points = [];
-        S.origin = { x: Math.round(W * 0.1), y: Math.round(H * 0.85) };
         S.pending = null;
         S.selected = null;
         document.getElementById('profilePanel').style.display = 'none';
@@ -1227,7 +1179,7 @@
     });
 
     function allPoints() {
-        const pts = [S.calib.a, S.calib.b, S.origin, ...S.points];
+        const pts = [S.calib.a, S.calib.b];
         S.objects.forEach(o => pts.push(...o.pts));
         if (S.profile) pts.push(S.profile.a, S.profile.b);
         return pts;
@@ -1313,8 +1265,9 @@
         ctx.stroke();
         ctx.fillStyle = '#f8fafc';
         ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(text, x, y + 0.5 * u);
+        ctx.textBaseline = 'alphabetic';
+        // Centrage vertical sur la hauteur des capitales
+        ctx.fillText(text, x, y + ctx.measureText('H').actualBoundingBoxAscent / 2);
         ctx.restore();
     }
 
@@ -1481,64 +1434,6 @@
             }
         }
 
-        // Pointage : repère et points
-        if (S.points.length || S.tool === 'points') {
-            const O = T(S.origin);
-            const len = 60 * u;
-            ctx.save();
-            ctx.strokeStyle = COLORS.point;
-            ctx.fillStyle = COLORS.point;
-            ctx.lineWidth = 2 * u;
-            [[len, 0, 'x'], [0, -len, 'y']].forEach(([dx, dy, name]) => {
-                ctx.beginPath();
-                ctx.moveTo(O.x, O.y);
-                ctx.lineTo(O.x + dx, O.y + dy);
-                ctx.stroke();
-                const ang = Math.atan2(dy, dx);
-                ctx.beginPath();
-                ctx.moveTo(O.x + dx, O.y + dy);
-                ctx.lineTo(O.x + dx - 9 * u * Math.cos(ang - 0.4), O.y + dy - 9 * u * Math.sin(ang - 0.4));
-                ctx.lineTo(O.x + dx - 9 * u * Math.cos(ang + 0.4), O.y + dy - 9 * u * Math.sin(ang + 0.4));
-                ctx.closePath();
-                ctx.fill();
-                ctx.font = `700 ${13 * u}px Inter, sans-serif`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(name, O.x + dx * 1.25 + (dx ? 0 : 10 * u), O.y + dy * 1.2 + (dy ? 0 : -10 * u));
-            });
-            ctx.restore();
-            if (withHandles) drawHandle(ctx, O, COLORS.point, u, sel === S.origin, 'O');
-
-            S.points.forEach((p, i) => {
-                const P = T(p);
-                ctx.save();
-                ctx.strokeStyle = 'rgba(0, 0, 0, 0.6)';
-                ctx.lineWidth = 4 * u;
-                const r = 6 * u;
-                const cross = () => {
-                    ctx.beginPath();
-                    ctx.moveTo(P.x - r, P.y - r);
-                    ctx.lineTo(P.x + r, P.y + r);
-                    ctx.moveTo(P.x - r, P.y + r);
-                    ctx.lineTo(P.x + r, P.y - r);
-                    ctx.stroke();
-                };
-                cross();
-                ctx.strokeStyle = sel === p ? '#ffffff' : COLORS.point;
-                ctx.lineWidth = 2 * u;
-                cross();
-                ctx.font = `700 ${11 * u}px Inter, sans-serif`;
-                ctx.fillStyle = COLORS.point;
-                ctx.strokeStyle = 'rgba(0, 0, 0, 0.7)';
-                ctx.lineWidth = 3 * u;
-                ctx.textAlign = 'left';
-                ctx.textBaseline = 'top';
-                ctx.strokeText(`M${i}`, P.x + 7 * u, P.y + 5 * u);
-                ctx.fillText(`M${i}`, P.x + 7 * u, P.y + 5 * u);
-                ctx.restore();
-            });
-        }
-
         // Tracé en cours
         if (S.pending && withHandles) {
             const pts = S.pending.pts.map(T);
@@ -1606,14 +1501,20 @@
     }
 
     // Loupe : agrandissement des pixels autour du pointeur pendant un placement précis
+    let loupeRight = false;
+
     function drawLoupe(W, H) {
-        const active = S.overCanvas && S.hover && ((S.drag && S.drag.kind === 'handle') || ['dist', 'angle', 'profile', 'points'].includes(S.tool));
+        const active = S.overCanvas && S.hover && ((S.drag && S.drag.kind === 'handle') || ['dist', 'angle', 'profile'].includes(S.tool));
         if (!active) return;
-        const R = 70;
+        const R = 70, M = 12;
         const ls = Math.max(2, Math.min(24, S.view.s * 4));
         const ptr = toScreen(S.hover);
-        const cx = ptr.x < W / 2 && ptr.y < H / 2 ? W - R - 12 : R + 12;
-        const cy = R + 12;
+        // En haut à gauche par défaut ; à droite seulement quand le pointeur s'approche
+        // de la position de gauche (avec une marge pour éviter les allers-retours)
+        const dLeft = Math.hypot(ptr.x - (R + M), ptr.y - (R + M));
+        loupeRight = loupeRight ? dLeft < R + 70 : dLeft < R + 40;
+        const cx = loupeRight ? W - R - M : R + M;
+        const cy = R + M;
         const T = p => ({ x: cx + (p.x - S.hover.x) * ls, y: cy + (p.y - S.hover.y) * ls });
         vctx.save();
         vctx.beginPath();
@@ -1653,8 +1554,7 @@
         move: 'Glisser : déplacer la vue ou une poignée · Molette : zoom · Flèches : ajuster la poignée sélectionnée au pixel près · Suppr : effacer la mesure sélectionnée',
         dist: 'Distance : cliquez sur les deux extrémités (ou cliquez-glissez). Échap : annuler.',
         angle: 'Angle : cliquez sur le sommet, puis sur un point de chaque côté de l\'angle. Échap : annuler.',
-        profile: 'Profil : cliquez sur le début (x = 0) puis sur la fin de la ligne d\'analyse (ou cliquez-glissez), perpendiculairement aux franges.',
-        points: 'Pointage : cliquez sur les positions successives du mobile, dans l\'ordre. Déplacez l\'origine O du repère si besoin.'
+        profile: 'Profil : cliquez sur le début (x = 0) puis sur la fin de la ligne d\'analyse (ou cliquez-glissez), perpendiculairement aux franges.'
     };
     const NEEDED = { dist: 2, angle: 3, profile: 2 };
 
@@ -1677,10 +1577,6 @@
         S.objects.forEach(o => o.pts.forEach(p => h.push({ p, owner: o })));
         if (S.profile) {
             h.push({ p: S.profile.a, owner: 'profile' }, { p: S.profile.b, owner: 'profile' });
-        }
-        if (S.points.length || S.tool === 'points') {
-            h.push({ p: S.origin, owner: 'origin' });
-            S.points.forEach(p => h.push({ p, owner: 'point' }));
         }
         return h;
     }
@@ -1756,14 +1652,6 @@
             requestRender();
             return;
         }
-        if (S.tool === 'points') {
-            const p = { x: m.x, y: m.y };
-            S.points.push(p);
-            S.selected = { p, owner: 'point' };
-            updatePanels();
-            requestRender();
-            return;
-        }
         if (NEEDED[S.tool]) {
             if (!S.pending) S.pending = { type: S.tool, pts: [] };
             S.pending.pts.push({ x: m.x, y: m.y });
@@ -1824,13 +1712,12 @@
     function deleteSelected() {
         const sel = S.selected;
         if (!sel) return;
-        if (sel.owner === 'point') S.points = S.points.filter(p => p !== sel.p);
-        else if (sel.owner === 'profile') {
+        if (sel.owner === 'profile') {
             S.profile = null;
             S.profileData = null;
             document.getElementById('profilePanel').style.display = 'none';
         } else if (typeof sel.owner === 'object') S.objects = S.objects.filter(o => o !== sel.owner);
-        else return; // l'étalon et l'origine ne se suppriment pas
+        else return; // l'étalon ne se supprime pas
         S.selected = null;
         updatePanels();
         requestRender();
@@ -1869,7 +1756,7 @@
             requestRender();
             return;
         }
-        const shortcuts = { m: 'move', d: 'dist', a: 'angle', p: 'profile', c: 'points' };
+        const shortcuts = { m: 'move', d: 'dist', a: 'angle', p: 'profile' };
         if (shortcuts[e.key.toLowerCase()] && !e.ctrlKey && !e.metaKey && !e.altKey) setTool(shortcuts[e.key.toLowerCase()]);
     });
 
@@ -1907,12 +1794,7 @@
         if (!S.hover || !S.img) return;
         const { x, y } = S.hover;
         const [r, g, b] = rawPixel(x, y);
-        let txt = `x = ${Math.floor(x)} px ; y = ${Math.floor(y)} px · RVB (${r}, ${g}, ${b})`;
-        if (calibrated() && (S.points.length || S.tool === 'points')) {
-            const d = tableDecimals();
-            txt += ` · repère O : (${toUnits(x - S.origin.x).toFixed(d).replace('.', ',')} ; ${toUnits(S.origin.y - y).toFixed(d).replace('.', ',')}) ${S.calib.unit}`;
-        }
-        document.getElementById('statusCoords').textContent = txt;
+        document.getElementById('statusCoords').textContent = `x = ${Math.floor(x)} px ; y = ${Math.floor(y)} px · RVB (${r}, ${g}, ${b})`;
     }
 
     // --- 9. Profil de luminosité ---
@@ -2256,15 +2138,6 @@
         });
         document.getElementById('measureEmpty').style.display = S.objects.length ? 'none' : 'block';
 
-        // Tableau de pointage
-        const u = unitLabel(), d = tableDecimals();
-        document.getElementById('thX').textContent = `x (${u})`;
-        document.getElementById('thY').textContent = `y (${u})`;
-        const body = document.getElementById('pointsBody');
-        body.innerHTML = pointsData().map(r =>
-            `<tr><td>M${r.i}</td><td>${r.t.toFixed(3).replace('.', ',')}</td><td>${r.x.toFixed(d).replace('.', ',')}</td><td>${r.y.toFixed(d).replace('.', ',')}</td></tr>`
-        ).join('') || '<tr><td colspan="4" style="text-align:center; color: var(--text-muted); font-family: Inter, sans-serif;">Aucun point</td></tr>';
-
         // Profil
         if (S.profileData) {
             const dx = Math.abs(S.cursors[1] - S.cursors[0]);
@@ -2276,15 +2149,6 @@
             document.getElementById('satWarn').classList.toggle('visible', S.profileData.saturated > 0.01);
         }
         requestRender();
-    }
-
-    function pointsData() {
-        return S.points.map((p, i) => ({
-            i,
-            t: i * S.dt,
-            x: toUnits(p.x - S.origin.x),
-            y: toUnits(S.origin.y - p.y)
-        }));
     }
 
     function download(content, name, type) {
@@ -2305,28 +2169,6 @@
     function copyText(text, feedbackId) {
         navigator.clipboard.writeText(text).then(() => flash(feedbackId, '✓ Copié !'), () => flash(feedbackId, 'Copie impossible'));
     }
-
-    document.getElementById('pointsCopyBtn').addEventListener('click', () => {
-        const data = pointsData();
-        if (!data.length) return;
-        const d = tableDecimals() + 1;
-        copyText(`# Unité des positions : ${unitLabel()}\nt = [${data.map(r => r.t.toFixed(4)).join(', ')}]\nx = [${data.map(r => r.x.toFixed(d)).join(', ')}]\ny = [${data.map(r => r.y.toFixed(d)).join(', ')}]`, 'pointsFeedback');
-    });
-
-    document.getElementById('pointsCsvBtn').addEventListener('click', () => {
-        const data = pointsData();
-        if (!data.length) return;
-        const u = unitLabel(), d = tableDecimals() + 1;
-        let csv = `point;t_s;x_${u};y_${u}\n`;
-        data.forEach(r => { csv += `M${r.i};${r.t.toFixed(4)};${r.x.toFixed(d)};${r.y.toFixed(d)}\n`; });
-        download(csv, `pointage_image_${Date.now()}.csv`, 'text/csv;charset=utf-8;');
-    });
-
-    document.getElementById('pointsClearBtn').addEventListener('click', () => {
-        S.points = [];
-        if (S.selected && S.selected.owner === 'point') S.selected = null;
-        updatePanels();
-    });
 
     document.getElementById('clearMeasuresBtn').addEventListener('click', () => {
         S.objects = [];
@@ -2372,7 +2214,7 @@
         c.toBlob(blob => download(blob, `mesure_image_${Date.now()}.png`), 'image/png');
     });
 
-    // Étalonnage et pas de temps
+    // Étalonnage
     const calibLen = document.getElementById('calibLen');
     const calibUnit = document.getElementById('calibUnit');
     calibLen.addEventListener('input', () => {
@@ -2388,14 +2230,6 @@
         S.calib.set = true;
         updatePanels();
     });
-    document.getElementById('dtInput').addEventListener('input', (e) => {
-        const v = parseFloat(e.target.value.replace(',', '.'));
-        if (v >= 0) {
-            S.dt = v;
-            updatePanels();
-        }
-    });
-
     setTool('move');
     updatePanels();
 </script>
