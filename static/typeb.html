@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incertitude de type B - Simulation de Monte-Carlo</title>
+    
+    <!-- Police moderne Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- MathJax pour le rendu des formules LaTeX -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-subtle: #f8fafc;
+            --bg-lane: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --border-strong: #cbd5e1;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: rgba(37, 99, 235, 0.08);
+            --primary-border: rgba(37, 99, 235, 0.35);
+            --success: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.08);
+            --success-border: rgba(16, 185, 129, 0.4);
+            --success-text: #065f46;
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68, 0.08);
+            --danger-border: rgba(239, 68, 68, 0.4);
+            --danger-text: #991b1b;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+            --shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+            --radius: 14px;
+            --radius-sm: 8px;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0b1120;
+            --bg-card: #151f32;
+            --bg-subtle: #1e293b;
+            --bg-lane: #111827;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #26354d;
+            --border-strong: #334155;
+            --primary: #3b82f6;
+            --primary-hover: #60a5fa;
+            --primary-light: rgba(59, 130, 246, 0.12);
+            --primary-border: rgba(59, 130, 246, 0.45);
+            --success: #10b981;
+            --success-bg: rgba(16, 185, 129, 0.12);
+            --success-border: rgba(16, 185, 129, 0.45);
+            --success-text: #a7f3d0;
+            --danger: #f87171;
+            --danger-bg: rgba(239, 68, 68, 0.14);
+            --danger-border: rgba(248, 113, 113, 0.45);
+            --danger-text: #fecaca;
+            --shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 1.75rem 1.25rem 3.5rem;
+            transition: background-color 0.25s, color 0.25s;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.75rem;
+            padding-bottom: 1.1rem;
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+            flex-shrink: 0;
+        }
+
+        h1 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.15s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .top-grid {
+            display: grid;
+            grid-template-columns: 390px 1fr;
+            gap: 1.5rem;
+            align-items: stretch;
+            margin-bottom: 1.5rem;
+        }
+
+        .full-width-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.15rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            letter-spacing: -0.01em;
+        }
+
+        .step-num {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid var(--primary-border);
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.4rem 0.75rem;
+            border-radius: 7px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.15s ease;
+        }
+
+        .btn-action:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            color: var(--text-muted);
+        }
+
+        textarea, input[type="text"] {
+            width: 100%;
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 0.65rem 0.8rem;
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 0.88rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            margin-bottom: 0.95rem;
+        }
+
+        textarea:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 108px;
+            line-height: 1.5;
+        }
+
+        .row-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 0.35rem;
+            background: var(--bg-subtle);
+            padding: 0.25rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            margin-bottom: 0.95rem;
+        }
+
+        .radio-option {
+            flex: 1;
+            text-align: center;
+            margin: 0;
+        }
+
+        .radio-option input {
+            display: none;
+        }
+
+        .radio-option span {
+            display: block;
+            padding: 0.42rem 0.3rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.15s;
+        }
+
+        .radio-option input:checked + span {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Formules du cadre 1 */
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .formula-box {
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.95rem 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: auto;
+        }
+
+        .formula-box .label {
+            font-size: 0.73rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+        }
+
+        .formula-math {
+            font-size: 0.9rem;
+            margin: 0.2rem 0;
+            overflow-x: auto;
+        }
+
+        .result-banner {
+            background: var(--primary-light);
+            border: 1.5px solid var(--primary-border);
+            border-radius: 12px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+            margin-top: auto;
+            overflow-x: auto;
+        }
+
+        .result-banner .title {
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+
+        .result-banner .final-value {
+            font-size: 1.35rem;
+            font-weight: 700;
+            overflow-x: auto;
+            padding: 0.15rem 0;
+        }
+
+        /* État vierge d'accueil */
+        .empty-state {
+            padding: 2.5rem 1.5rem;
+            background-color: var(--bg-subtle);
+            border: 1px dashed var(--border-strong);
+            border-radius: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 0.92rem;
+            margin: auto 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .empty-state-icon {
+            font-size: 2rem;
+            opacity: 0.7;
+            line-height: 1;
+        }
+
+        .empty-state-title {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        /* Cadre 2 : Graphique et Plein écran */
+        #graphCard.fullscreen-fallback,
+        #graphCard:fullscreen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+            margin: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--bg-card);
+            overflow-y: auto;
+        }
+
+        #graphCard:fullscreen .svg-container,
+        #graphCard.fullscreen-fallback .svg-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-height: calc(100vh - 100px);
+        }
+
+        #graphCard:fullscreen svg,
+        #graphCard.fullscreen-fallback svg {
+            max-height: 100%;
+            width: auto;
+            max-width: 100%;
+        }
+
+        .svg-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            user-select: none;
+        }
+
+        /* Cadre 3 : Compatibilité Z-score */
+        .zscore-box {
+            border-radius: 12px;
+            padding: 1.35rem 1.5rem;
+            border: 1.5px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .zscore-ok {
+            background-color: var(--success-bg);
+            border-color: var(--success-border);
+            color: var(--success-text);
+        }
+
+        .zscore-ko {
+            background-color: var(--danger-bg);
+            border-color: var(--danger-border);
+            color: var(--danger-text);
+        }
+
+        .zscore-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .badge {
+            padding: 0.32rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .zscore-ok .badge {
+            background-color: var(--success);
+            color: #ffffff;
+        }
+
+        .zscore-ko .badge {
+            background-color: var(--danger);
+            color: #ffffff;
+        }
+
+        .zscore-formula-wrap {
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin: 0.65rem 0;
+            overflow-x: auto;
+        }
+
+        [data-theme="dark"] .zscore-formula-wrap {
+            background: rgba(15, 23, 42, 0.35);
+        }
+
+        .prob-details {
+            font-size: 0.88rem;
+            margin-top: 0.85rem;
+            padding-top: 0.85rem;
+            border-top: 1px solid rgba(128, 128, 128, 0.22);
+        }
+
+        .prob-details ul {
+            margin-top: 0.45rem;
+            margin-left: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .data-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-top: 0.45rem;
+            max-height: 70px;
+            overflow-y: auto;
+        }
+
+        .data-badge {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            padding: 0.12rem 0.45rem;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 940px) {
+            .top-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.65rem 2.5rem;
+            }
+            h1 {
+                font-size: 1.2rem;
+            }
+            .card {
+                padding: 1.1rem;
+            }
+            .formula-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-banner .final-value {
+                font-size: 1.12rem;
+            }
+            .zscore-box {
+                padding: 1rem;
+            }
+            #graphCard.fullscreen-fallback,
+            #graphCard:fullscreen {
+                padding: 1rem;
+            }
+        }
+
+        /* --- Compléments propres à l'incertitude de type B --- */
+        .right-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-width: 0;
+        }
+
+        .right-stack > .card:first-child {
+            flex: 1;
+        }
+
+        #calcContent .formula-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        #calcContent .formula-box.wide {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 600px) {
+            #calcContent .formula-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .v-plabel {
+            white-space: nowrap;
+        }
+        select, input[type="number"] {
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 0.5rem 0.6rem;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.84rem;
+        }
+
+        input[type="number"] {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+        }
+
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .formula-input {
+            font-size: 1rem !important;
+            margin-bottom: 0.45rem !important;
+        }
+
+        .formula-preview {
+            min-height: 2.6rem;
+            padding: 0.35rem 0.75rem;
+            margin-bottom: 0.95rem;
+            border-radius: var(--radius-sm);
+            background: var(--bg-subtle);
+            border: 1px dashed var(--border-strong);
+            overflow-x: auto;
+            text-align: center;
+        }
+
+        .formula-error {
+            color: var(--danger);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.4rem 0;
+            text-align: left;
+        }
+
+        .hint {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+            margin: -0.55rem 0 0.95rem;
+        }
+
+        .var-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 0.95rem;
+        }
+
+        .var-card {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.6rem 0.7rem;
+            display: grid;
+            grid-template-columns: 4.2rem minmax(0, 1fr) minmax(0, 0.8fr);
+            gap: 0.45rem 0.5rem;
+            align-items: center;
+        }
+
+        .var-card .var-sym {
+            grid-row: span 2;
+            font-size: 1.05rem;
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        .var-card input, .var-card select {
+            width: 100%;
+            margin: 0;
+            min-width: 0;
+        }
+
+        .var-card input[type="text"] {
+            padding: 0.5rem 0.6rem;
+            font-size: 0.84rem;
+        }
+
+        .var-card .var-param {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .var-card .var-u {
+            grid-column: 2 / -1;
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .options-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .check-line {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 0.95rem;
+        }
+
+        .btn-primary-full {
+            width: 100%;
+            justify-content: center;
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 0.6rem 0.75rem;
+        }
+
+        .btn-primary-full:hover {
+            background: var(--primary-hover);
+            color: #ffffff;
+        }
+
+        details.assistant {
+            margin-top: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.6rem 0.8rem;
+            background: var(--bg-subtle);
+        }
+
+        details.assistant summary {
+            cursor: pointer;
+            font-size: 0.84rem;
+            font-weight: 600;
+        }
+
+        .assistant-body {
+            margin-top: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            font-size: 0.82rem;
+        }
+
+        .assistant-body .field {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+        }
+
+        .assistant-body .field label {
+            margin: 0;
+        }
+
+        .assistant-body input[type="number"] {
+            width: 6.5rem;
+        }
+
+        .assistant-result {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            padding: 0.45rem 0.6rem;
+            border-radius: 7px;
+            background: var(--primary-light);
+            border: 1px solid var(--primary-border);
+        }
+
+        .compare-ok {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .stats-line {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+        }
+
+        /* Budget d'incertitude */
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+
+        .budget-table th {
+            text-align: left;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            padding: 0.45rem 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .budget-table td {
+            padding: 0.55rem 0.5rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        .budget-table td.num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .budget-table tr.top-contrib td {
+            background: var(--primary-light);
+        }
+
+        .bar-cell {
+            min-width: 140px;
+            width: 35%;
+        }
+
+        .bar {
+            height: 14px;
+            border-radius: 4px;
+            background: var(--border);
+            overflow: hidden;
+        }
+
+        .bar span {
+            display: block;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .bar-pct {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .law-icon {
+            vertical-align: middle;
+            margin-right: 0.35rem;
+        }
+
+        .budget-wrap {
+            overflow-x: auto;
+        }
+
+        .budget-conclusion {
+            margin-top: 1rem;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            background: var(--success-bg);
+            border: 1px solid var(--success-border);
+            color: var(--success-text);
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        .method-note {
+            margin-top: 0.85rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 600px) {
+            .var-card {
+                grid-template-columns: 3.4rem minmax(0, 1fr) minmax(0, 0.9fr);
+            }
+            .options-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="brand">
+            <div class="brand-icon">🎲</div>
+            <div>
+                <h1>Incertitude de type B : simulation de Monte-Carlo</h1>
+                <div class="subtitle">Propagation des incertitudes par tirages aléatoires &bull; Budget d'incertitude &bull; Écriture scientifique normalisée</div>
+            </div>
+        </div>
+        <button class="theme-toggle" id="themeBtn" title="Changer le thème (Clair / Sombre)">🌓</button>
+    </header>
+
+    <div class="top-grid">
+        <!-- Cadre de saisie -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Modèle & grandeurs d'entrée</span>
+                <div class="btn-group">
+                    <select id="exampleSelect" title="Charger un exemple">
+                        <option value="">✨ Exemples…</option>
+                        <option value="titrage">Titrage : c_A = c_B·V_E / V_A</option>
+                        <option value="lentille">Lentille : 1/f' = 1/OA' − 1/OA</option>
+                        <option value="pendule">Pendule : g = 4π²L / T²</option>
+                        <option value="snell">Réfraction : n₂ = n₁ sin i₁ / sin i₂</option>
+                        <option value="ohm">Loi d'Ohm : R = U / I</option>
+                    </select>
+                </div>
+            </div>
+
+            <label for="formulaInput">Formule (grandeur calculée = expression)</label>
+            <input type="text" id="formulaInput" class="formula-input" value="" placeholder="ex : c_A = c_B*V_E/V_A   ou   1/f' = 1/OA' - 1/OA" spellcheck="false" autocomplete="off">
+            <div class="hint">Opérations + − * / ^ et parenthèses ; fonctions sqrt, sin, cos, tan, asin, acos, atan, ln, log, exp ; constante pi. Indices avec « _ » (c_B), primes autorisés (OA').</div>
+            <div class="formula-preview" id="formulaPreview"></div>
+            <div class="formula-error" id="runError" style="display: none; margin: -0.6rem 0 0.8rem;"></div>
+
+            <div id="targetRow" style="display: none;">
+                <label for="targetSelect">Grandeur calculée</label>
+                <select id="targetSelect" style="width: 100%; margin-bottom: 0.95rem;"></select>
+            </div>
+
+            <label for="unitInput">Unité du résultat</label>
+            <input type="text" id="unitInput" value="" placeholder="ex : mol·L⁻¹, cm, m·s⁻²…">
+
+            <label>Grandeurs mesurées et incertitudes</label>
+            <div class="var-list" id="varList"></div>
+
+            <label id="degLine" class="check-line" style="display: none;"><input type="checkbox" id="degCheck" checked> Angles exprimés en degrés</label>
+
+            <div class="options-row">
+                <div>
+                    <label>Nombre de tirages N</label>
+                    <div class="radio-group">
+                        <label class="radio-option"><input type="radio" name="nRadio" value="10000"><span>10⁴</span></label>
+                        <label class="radio-option"><input type="radio" name="nRadio" value="100000" checked><span>10⁵</span></label>
+                        <label class="radio-option"><input type="radio" name="nRadio" value="1000000"><span>10⁶</span></label>
+                    </div>
+                </div>
+                <div>
+                    <label>Chiffres significatifs de $u$</label>
+                    <div class="radio-group">
+                        <label class="radio-option"><input type="radio" name="csRadio" value="1" checked><span>1 CS</span></label>
+                        <label class="radio-option"><input type="radio" name="csRadio" value="2"><span>2 CS</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-action btn-primary-full" id="runBtn" title="Effectuer un nouveau tirage aléatoire">🎲 Nouveau tirage</button>
+
+            <details class="assistant">
+                <summary>🧮 Assistant : demi-étendue d'un instrument</summary>
+                <div class="assistant-body">
+                    <select id="asType">
+                        <option value="lecture">Lecture sur une graduation (une lecture)</option>
+                        <option value="double">Double lecture (règle : origine et extrémité)</option>
+                        <option value="verrerie">Verrerie jaugée, classe A</option>
+                        <option value="multimetre">Multimètre numérique</option>
+                        <option value="elargie">Incertitude élargie U fournie (k = 2)</option>
+                    </select>
+                    <div class="field" data-for="lecture double"><label for="asGrad">Graduation :</label><input type="number" id="asGrad" value="1" step="any" min="0"></div>
+                    <div class="field" data-for="verrerie">
+                        <select id="asGlass">
+                            <option value="0.015">Pipette jaugée 5 mL : ± 0,015 mL</option>
+                            <option value="0.02" selected>Pipette jaugée 10 mL : ± 0,02 mL</option>
+                            <option value="0.03">Pipette jaugée 20 mL : ± 0,03 mL</option>
+                            <option value="0.03">Pipette jaugée 25 mL : ± 0,03 mL</option>
+                            <option value="0.06">Fiole jaugée 50 mL : ± 0,06 mL</option>
+                            <option value="0.1">Fiole jaugée 100 mL : ± 0,10 mL</option>
+                            <option value="0.15">Fiole jaugée 250 mL : ± 0,15 mL</option>
+                            <option value="0.25">Fiole jaugée 500 mL : ± 0,25 mL</option>
+                            <option value="0.03">Burette 25 mL : ± 0,03 mL</option>
+                            <option value="0.05">Burette 50 mL : ± 0,05 mL</option>
+                        </select>
+                    </div>
+                    <div class="field" data-for="multimetre"><label for="asPct">p =</label><input type="number" id="asPct" value="0.5" step="any" min="0"><span>% de la lecture</span></div>
+                    <div class="field" data-for="multimetre"><label for="asDigits">n =</label><input type="number" id="asDigits" value="2" step="1" min="0"><span>digits de</span><input type="number" id="asRes" value="0.01" step="any" min="0"></div>
+                    <div class="field" data-for="elargie"><label for="asU">U =</label><input type="number" id="asU" value="0.1" step="any" min="0"></div>
+                    <div class="field"><label for="asTarget">Appliquer à :</label><select id="asTarget"></select></div>
+                    <div class="assistant-result" id="asResult"></div>
+                    <button class="btn-action" id="asApply" style="align-self: flex-start;">Appliquer</button>
+                    <div class="hint" style="margin: 0;">Tolérances usuelles de la classe A (normes ISO) : vérifiez l'inscription portée par la verrerie. En classe B, elles sont doublées.</div>
+                </div>
+            </details>
+        </div>
+
+        <div class="right-stack">
+        <!-- Cadre 1 : résultat -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title"><span class="step-num">1</span> Résultat de la simulation</span>
+            </div>
+
+            <div id="emptyStateBox" class="empty-state">
+                <div class="empty-state-icon">🎲</div>
+                <div class="empty-state-title">En attente d'un modèle</div>
+                <div>Saisissez une <strong>formule</strong>, puis la valeur et la <strong>demi-étendue</strong> de chaque grandeur mesurée, ou choisissez un <strong>✨ exemple</strong>.<br>Le programme tire au hasard $N$ valeurs de chaque grandeur selon sa loi, calcule les $N$ résultats correspondants et en déduit l'incertitude-type : l'écart-type de ces résultats.</div>
+            </div>
+
+            <div id="calcContent" style="display: none; flex-direction: column; flex: 1;">
+                <div class="formula-grid">
+                    <div class="formula-box">
+                        <div class="label">Modèle</div>
+                        <div class="formula-math" id="mathModel"></div>
+                    </div>
+                    <div class="formula-box">
+                        <div class="label">Simulation ($N$ tirages)</div>
+                        <div class="formula-math" id="mathSim"></div>
+                    </div>
+                    <div class="formula-box wide">
+                        <div class="label">Formule de propagation (calcul classique, linéarisé)</div>
+                        <div class="formula-math" id="mathProp"></div>
+                    </div>
+                </div>
+
+                <div class="result-banner">
+                    <div class="title">Résultat de la mesure en notation scientifique (incertitude arrondie par excès)</div>
+                    <div class="final-value" id="finalResultMath"></div>
+                    <div class="stats-line" id="relUncText"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cadre 2 : histogramme -->
+        <div class="card" id="histCard" style="display: none;">
+            <div class="card-header">
+                <span class="card-title"><span class="step-num">2</span> Distribution des valeurs simulées</span>
+            </div>
+            <div class="svg-container" id="histContainer"></div>
+        </div>
+        </div>
+    </div>
+
+    <div class="full-width-stack" id="bottomStack" style="display: none;">
+        <!-- Cadre 3 : budget -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title"><span class="step-num">3</span> Budget d'incertitude : quelle mesure pèse le plus ?</span>
+            </div>
+            <div class="budget-wrap">
+                <table class="budget-table">
+                    <thead>
+                        <tr>
+                            <th>Grandeur</th>
+                            <th>Loi</th>
+                            <th>Incertitude-type $u(x_i)$</th>
+                            <th>Part de $u$ due à $x_i$</th>
+                            <th>Contribution à la variance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="budgetBody"></tbody>
+                </table>
+            </div>
+            <div class="budget-conclusion" id="budgetConclusion"></div>
+            <div class="method-note" id="methodNote"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- 1. Thème clair / sombre ---
+    const themeBtn = document.getElementById('themeBtn');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function storageGet(key) {
+        try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+
+    function storageSet(key, value) {
+        try { localStorage.setItem(key, value); } catch (e) { /* stockage indisponible */ }
+    }
+
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        storageSet('theme_pref', theme);
+    }
+
+    const savedTheme = storageGet('theme_pref');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else if (prefersDark.matches) {
+        setTheme('dark');
+    }
+
+    themeBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+        if (lastRun) drawHistogram(lastRun);
+    });
+
+    function typeset(elements) {
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise(elements).catch(() => {});
+        }
+    }
+
+    // --- 2. Analyse de la formule (lecture, arbre syntaxique, LaTeX) ---
+    const FUNCS = ['sqrt', 'sin', 'cos', 'tan', 'asin', 'acos', 'atan', 'ln', 'log', 'exp', 'abs'];
+    const GREEK = ['alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi',
+        'rho', 'sigma', 'tau', 'phi', 'chi', 'psi', 'omega', 'Gamma', 'Delta', 'Theta', 'Lambda', 'Xi', 'Sigma', 'Phi', 'Psi', 'Omega'];
+
+    function tokenize(src) {
+        const s = src.replace(/[·×∙⋅]/g, '*').replace(/[−–]/g, '-').replace(/÷/g, '/')
+            .replace(/²/g, '^2').replace(/³/g, '^3').replace(/π/g, 'pi').replace(/’/g, "'");
+        const tokens = [];
+        const re = /\s*(?:(\d+(?:[.,]\d+)?(?:[eE][+-]?\d+)?)|([A-Za-zÀ-ÖØ-öø-ÿΑ-Ωα-ωµ_][A-Za-z0-9À-ÖØ-öø-ÿΑ-Ωα-ωµ_']*)|([-+*/^()=]))/y;
+        let pos = 0;
+        while (pos < s.length) {
+            if (/^\s*$/.test(s.slice(pos))) break;
+            re.lastIndex = pos;
+            const m = re.exec(s);
+            if (!m) throw new Error(`Caractère non reconnu : « ${s.slice(pos).trim()[0]} »`);
+            if (m[1]) tokens.push({ k: 'num', v: parseFloat(m[1].replace(',', '.')) });
+            else if (m[2]) tokens.push({ k: 'id', v: m[2] });
+            else tokens.push({ k: 'op', v: m[3] });
+            pos = re.lastIndex;
+        }
+        return tokens;
+    }
+
+    // Analyse descendante récursive (priorités : + − < * / < signe < ^)
+    function parseExpr(tokens) {
+        let i = 0;
+        const peek = () => tokens[i];
+        const isOp = (v) => tokens[i] && tokens[i].k === 'op' && tokens[i].v === v;
+        const expect = (v) => {
+            if (!isOp(v)) throw new Error(`« ${v} » attendu`);
+            i++;
+        };
+
+        function expr() {
+            let a = term();
+            while (isOp('+') || isOp('-')) {
+                const op = tokens[i++].v;
+                a = { t: 'bin', op, a, b: term() };
+            }
+            return a;
+        }
+
+        function term() {
+            let a = unary();
+            for (;;) {
+                if (isOp('*') || isOp('/')) {
+                    const op = tokens[i++].v;
+                    a = { t: 'bin', op, a, b: unary() };
+                } else if (peek() && (peek().k === 'num' || peek().k === 'id' || (peek().k === 'op' && peek().v === '('))) {
+                    a = { t: 'bin', op: '*', a, b: unary() }; // multiplication implicite : 4 pi^2 L
+                } else {
+                    return a;
+                }
+            }
+        }
+
+        function unary() {
+            if (isOp('-')) { i++; return { t: 'neg', a: unary() }; }
+            if (isOp('+')) { i++; return unary(); }
+            return power();
+        }
+
+        function power() {
+            const base = primary();
+            if (isOp('^')) {
+                i++;
+                return { t: 'bin', op: '^', a: base, b: unary() };
+            }
+            return base;
+        }
+
+        function primary() {
+            const tk = tokens[i];
+            if (!tk) throw new Error('Expression incomplète');
+            if (tk.k === 'num') { i++; return { t: 'num', v: tk.v }; }
+            if (tk.k === 'id') {
+                i++;
+                if (FUNCS.includes(tk.v) && isOp('(')) {
+                    i++;
+                    const a = expr();
+                    expect(')');
+                    return { t: 'call', f: tk.v, a };
+                }
+                if (tk.v === 'pi') return { t: 'pi' };
+                return { t: 'var', name: tk.v };
+            }
+            if (isOp('(')) {
+                i++;
+                const a = expr();
+                expect(')');
+                return a;
+            }
+            throw new Error(`« ${tk.v} » inattendu`);
+        }
+
+        const tree = expr();
+        if (i < tokens.length) throw new Error(`« ${tokens[i].v} » inattendu`);
+        return tree;
+    }
+
+    function collectVars(node, out = []) {
+        if (node.t === 'var' && !out.includes(node.name)) out.push(node.name);
+        if (node.a) collectVars(node.a, out);
+        if (node.b) collectVars(node.b, out);
+        return out;
+    }
+
+    function hasTrig(node) {
+        if (node.t === 'call' && ['sin', 'cos', 'tan', 'asin', 'acos', 'atan'].includes(node.f)) return true;
+        return (node.a && hasTrig(node.a)) || (node.b && hasTrig(node.b));
+    }
+
+    // Écriture LaTeX d'un nom de grandeur : indices (c_B → c_{B}), lettres grecques, primes
+    function varTex(name) {
+        const m = name.match(/^([^']*)('*)$/);
+        const body = m[1], primes = m[2];
+        const k = body.indexOf('_');
+        const conv = (s) => GREEK.includes(s) ? `\\${s}` : s;
+        const main = k < 0 ? conv(body) : conv(body.slice(0, k));
+        const sub = k < 0 ? '' : `_{${conv(body.slice(k + 1)).replace(/_/g, ',')}}`;
+        return `${main}${sub}${primes}`;
+    }
+
+    function fmtNumTex(v) {
+        return String(Number(v.toPrecision(10))).replace('.', '{,}');
+    }
+
+    const PREC = { '+': 1, '-': 1, '*': 2, '/': 2 };
+
+    function toTex(n) {
+        switch (n.t) {
+            case 'num': return fmtNumTex(n.v);
+            case 'pi': return '\\pi';
+            case 'var': return varTex(n.name);
+            case 'neg': {
+                const a = toTex(n.a);
+                return (n.a.t === 'bin' && PREC[n.a.op] === 1) ? `-\\left(${a}\\right)` : `-${a}`;
+            }
+            case 'call': {
+                const a = toTex(n.a);
+                if (n.f === 'sqrt') return `\\sqrt{${a}}`;
+                if (n.f === 'abs') return `\\left|${a}\\right|`;
+                const names = { sin: '\\sin', cos: '\\cos', tan: '\\tan', asin: '\\arcsin', acos: '\\arccos', atan: '\\arctan', ln: '\\ln', log: '\\log', exp: '\\exp' };
+                return `${names[n.f]}\\left(${a}\\right)`;
+            }
+            case 'bin': {
+                const A = toTex(n.a), B = toTex(n.b);
+                if (n.op === '/') return `\\dfrac{${A}}{${B}}`;
+                if (n.op === '^') {
+                    const atomic = ['num', 'var', 'pi'].includes(n.a.t) && !(n.a.t === 'num' && n.a.v < 0);
+                    return atomic ? `${A}^{${B}}` : `\\left(${A}\\right)^{${B}}`;
+                }
+                const wrap = (child, tex, right) => {
+                    const p = child.t === 'bin' ? (PREC[child.op] || 3) : child.t === 'neg' ? 1.5 : 3;
+                    const need = n.op === '*' ? p < 2 : (right && n.op === '-' && p <= 1) || (right && child.t === 'neg');
+                    return need ? `\\left(${tex}\\right)` : tex;
+                };
+                if (n.op === '*') {
+                    const left = wrap(n.a, A, false), right = wrap(n.b, B, true);
+                    // Facteurs constants accolés : 4π²L plutôt que 4π² × L
+                    const juxtapose = !collectVars(n.a).length && n.b.t !== 'num' && !(n.b.t === 'bin' && n.b.op === '^' && n.b.a.t === 'num');
+                    return juxtapose ? `${left}\\,${right}` : `${left} \\times ${right}`;
+                }
+                return `${A} ${n.op} ${wrap(n.b, B, true)}`;
+            }
+        }
+        return '';
+    }
+
+    // Exposants d'un modèle « produit de puissances » (y = k · x₁^a · x₂^b …), sinon null
+    function monomial(n) {
+        const constant = (m) => {
+            if (m.t === 'num') return m.v;
+            if (m.t === 'neg') { const c = constant(m.a); return c === null ? null : -c; }
+            if (m.t === 'bin' && m.op === '/') { const a = constant(m.a), b = constant(m.b); return a === null || b === null ? null : a / b; }
+            return null;
+        };
+        switch (n.t) {
+            case 'num': case 'pi': return {};
+            case 'var': return { [n.name]: 1 };
+            case 'neg': return monomial(n.a);
+            case 'call': {
+                if (n.f !== 'sqrt') return null;
+                const m = monomial(n.a);
+                if (!m) return null;
+                Object.keys(m).forEach(k => { m[k] *= 0.5; });
+                return m;
+            }
+            case 'bin': {
+                if (n.op === '+' || n.op === '-') return null;
+                if (n.op === '^') {
+                    const e = constant(n.b), m = monomial(n.a);
+                    if (e === null || !m) return null;
+                    Object.keys(m).forEach(k => { m[k] *= e; });
+                    return m;
+                }
+                const a = monomial(n.a), b = monomial(n.b);
+                if (!a || !b) return null;
+                const s = n.op === '*' ? 1 : -1;
+                Object.keys(b).forEach(k => { a[k] = (a[k] || 0) + s * b[k]; });
+                return a;
+            }
+        }
+        return null;
+    }
+
+    // Compilation de l'arbre en fonction rapide v ↦ valeur (v : tableau des valeurs des grandeurs)
+    function compile(n, index, deg) {
+        const toRad = deg ? Math.PI / 180 : 1;
+        switch (n.t) {
+            case 'num': { const c = n.v; return () => c; }
+            case 'pi': return () => Math.PI;
+            case 'var': { const k = index[n.name]; return v => v[k]; }
+            case 'neg': { const a = compile(n.a, index, deg); return v => -a(v); }
+            case 'call': {
+                const a = compile(n.a, index, deg);
+                switch (n.f) {
+                    case 'sqrt': return v => Math.sqrt(a(v));
+                    case 'sin': return v => Math.sin(a(v) * toRad);
+                    case 'cos': return v => Math.cos(a(v) * toRad);
+                    case 'tan': return v => Math.tan(a(v) * toRad);
+                    case 'asin': return v => Math.asin(a(v)) / toRad;
+                    case 'acos': return v => Math.acos(a(v)) / toRad;
+                    case 'atan': return v => Math.atan(a(v)) / toRad;
+                    case 'ln': return v => Math.log(a(v));
+                    case 'log': return v => Math.log10(a(v));
+                    case 'exp': return v => Math.exp(a(v));
+                    case 'abs': return v => Math.abs(a(v));
+                }
+                break;
+            }
+            case 'bin': {
+                const a = compile(n.a, index, deg), b = compile(n.b, index, deg);
+                switch (n.op) {
+                    case '+': return v => a(v) + b(v);
+                    case '-': return v => a(v) - b(v);
+                    case '*': return v => a(v) * b(v);
+                    case '/': return v => a(v) / b(v);
+                    case '^': return v => Math.pow(a(v), b(v));
+                }
+            }
+        }
+        throw new Error('Expression non prise en charge');
+    }
+
+    // Modèle complet : grandeur calculée, grandeurs d'entrée, fonction de calcul
+    function buildModel(text, chosenTarget) {
+        const sides = text.split('=');
+        if (sides.length !== 2 || !sides[0].trim() || !sides[1].trim()) {
+            throw new Error('Écrivez une égalité avec un seul signe « = », par exemple c = n/V.');
+        }
+        const lhs = parseExpr(tokenize(sides[0]));
+        const rhs = parseExpr(tokenize(sides[1]));
+        const lv = collectVars(lhs), rv = collectVars(rhs);
+        let target, candidates = [];
+        const explicit = lhs.t === 'var' && !rv.includes(lhs.name);
+        if (explicit) {
+            target = lhs.name;
+        } else {
+            candidates = lv.filter(v => !rv.includes(v));
+            if (!candidates.length) throw new Error('La grandeur calculée doit figurer dans le membre de gauche seulement.');
+            target = candidates.includes(chosenTarget) ? chosenTarget : candidates[0];
+        }
+        const inputs = [...lv, ...rv].filter((v, k, arr) => v !== target && arr.indexOf(v) === k);
+        if (!inputs.length) throw new Error('Aucune grandeur mesurée dans la formule.');
+        return { lhs, rhs, target, inputs, explicit, candidates: candidates.length > 1 ? candidates : [] };
+    }
+
+    // --- 3. Lois de probabilité ---
+    const LAWS = {
+        uniform: { label: 'Uniforme', param: 'a', u: a => a / Math.sqrt(3), uTex: 'a/\\sqrt{3}' },
+        triangular: { label: 'Triangulaire', param: 'a', u: a => a / Math.sqrt(6), uTex: 'a/\\sqrt{6}' },
+        normal: { label: 'Normale', param: 'u', u: s => s, uTex: 'u' },
+        constant: { label: 'Constante', param: null, u: () => 0, uTex: '0' }
+    };
+
+    function gaussian() {
+        let r = 0, s = 0;
+        while (r === 0) r = Math.random();
+        s = Math.random();
+        return Math.sqrt(-2 * Math.log(r)) * Math.cos(2 * Math.PI * s);
+    }
+
+    function draw(input, N) {
+        const out = new Float64Array(N);
+        const x = input.value, p = input.param;
+        switch (input.law) {
+            case 'uniform': for (let k = 0; k < N; k++) out[k] = x + p * (2 * Math.random() - 1); break;
+            case 'triangular': for (let k = 0; k < N; k++) out[k] = x + p * (Math.random() + Math.random() - 1); break;
+            case 'normal': for (let k = 0; k < N; k++) out[k] = x + p * gaussian(); break;
+            default: out.fill(x);
+        }
+        return out;
+    }
+
+    // Icône de la loi (densité de probabilité)
+    function lawIcon(law) {
+        const paths = {
+            uniform: 'M2 16 L8 16 L8 5 L28 5 L28 16 L34 16',
+            triangular: 'M2 16 L8 16 L18 4 L28 16 L34 16',
+            normal: 'M2 16 C10 16 12 3 18 3 C24 3 26 16 34 16',
+            constant: 'M2 16 L17 16 L17 3 L19 3 L19 16 L34 16'
+        };
+        return `<svg class="law-icon" width="36" height="18" viewBox="0 0 36 18" style="width:36px;display:inline-block"><path d="${paths[law]}" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>`;
+    }
+
+    // --- 4. Saisie des grandeurs d'entrée ---
+    const formulaInput = document.getElementById('formulaInput');
+    const unitInput = document.getElementById('unitInput');
+    const varList = document.getElementById('varList');
+    const targetSelect = document.getElementById('targetSelect');
+    const degCheck = document.getElementById('degCheck');
+
+    const inputState = {}; // mémoire des saisies par nom de grandeur
+    let model = null;
+    let lastRun = null;
+
+    function parseNum(s) {
+        const v = parseFloat(String(s).replace(',', '.').replace(/\s/g, ''));
+        return isFinite(v) ? v : NaN;
+    }
+
+    function fmtPlain(v, sig = 4) {
+        if (!isFinite(v)) return '—';
+        if (v === 0) return '0';
+        const a = Math.abs(v);
+        if (a >= 1e-3 && a < 1e5) return String(Number(v.toPrecision(sig))).replace('.', ',');
+        return formatSciSvg(v, sig, true);
+    }
+
+    function escAttr(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+    }
+
+    function renderVarCards() {
+        const names = model ? model.inputs : [];
+        varList.innerHTML = '';
+        names.forEach(name => {
+            const st = inputState[name] || (inputState[name] = { value: '', unit: '', law: 'uniform', param: '' });
+            const card = document.createElement('div');
+            card.className = 'var-card';
+            card.innerHTML = `
+                <div class="var-sym">$${varTex(name)}$</div>
+                <input type="text" class="v-value" placeholder="valeur" value="${escAttr(st.value)}" title="Valeur mesurée">
+                <input type="text" class="v-unit" placeholder="unité" value="${escAttr(st.unit)}" title="Unité (facultative)">
+                <select class="v-law" title="Loi de probabilité">
+                    <option value="uniform">Uniforme (a)</option>
+                    <option value="triangular">Triangulaire (a)</option>
+                    <option value="normal">Normale (u)</option>
+                    <option value="constant">Constante</option>
+                </select>
+                <div class="var-param"><span class="v-plabel">a =</span><input type="text" class="v-param" placeholder="0" value="${escAttr(st.param)}"></div>
+                <div class="var-u"></div>`;
+            const sel = card.querySelector('.v-law');
+            sel.value = st.law;
+            const sync = () => {
+                st.value = card.querySelector('.v-value').value;
+                st.unit = card.querySelector('.v-unit').value;
+                st.law = sel.value;
+                st.param = card.querySelector('.v-param').value;
+                const law = LAWS[st.law];
+                card.querySelector('.var-param').style.visibility = law.param ? 'visible' : 'hidden';
+                card.querySelector('.v-plabel').textContent = law.param === 'u' ? 'u =' : 'a =';
+                const p = parseNum(st.param);
+                const u = law.param ? law.u(p) : 0;
+                card.querySelector('.var-u').textContent = law.param
+                    ? (isFinite(u) ? `u = ${law.param === 'a' ? `a/√${st.law === 'uniform' ? 3 : 6} = ` : ''}${fmtPlain(u, 3)} ${st.unit}` : 'demi-étendue à saisir')
+                    : 'aucune incertitude';
+            };
+            card.querySelectorAll('input, select').forEach(el => el.addEventListener('input', () => { sync(); scheduleRun(); }));
+            sel.addEventListener('change', () => { sync(); scheduleRun(); });
+            sync();
+            varList.appendChild(card);
+        });
+        typeset([varList]);
+        // Liste des grandeurs pour l'assistant
+        const asTarget = document.getElementById('asTarget');
+        asTarget.innerHTML = names.map(n => `<option value="${escAttr(n)}">${escAttr(n)}</option>`).join('');
+        updateAssistant();
+    }
+
+    function updateModel() {
+        const preview = document.getElementById('formulaPreview');
+        const text = formulaInput.value.trim();
+        if (!text) {
+            model = null;
+            preview.innerHTML = '';
+            renderVarCards();
+            showEmpty();
+            return;
+        }
+        try {
+            const previousInputs = model ? model.inputs.join('|') : '';
+            model = buildModel(text, targetSelect.value);
+            preview.innerHTML = `$$${toTex(model.lhs)} = ${toTex(model.rhs)}$$`;
+            typeset([preview]);
+            document.getElementById('targetRow').style.display = model.candidates.length ? 'block' : 'none';
+            if (model.candidates.length) {
+                targetSelect.innerHTML = model.candidates.map(c => `<option value="${escAttr(c)}">${escAttr(c)}</option>`).join('');
+                targetSelect.value = model.target;
+            }
+            document.getElementById('degLine').style.display = (hasTrig(model.lhs) || hasTrig(model.rhs)) ? 'flex' : 'none';
+            if (model.inputs.join('|') !== previousInputs) renderVarCards();
+            scheduleRun();
+        } catch (err) {
+            model = null;
+            preview.innerHTML = `<div class="formula-error">⚠ ${err.message}</div>`;
+            renderVarCards();
+            showEmpty();
+        }
+    }
+
+    formulaInput.addEventListener('input', updateModel);
+    targetSelect.addEventListener('change', updateModel);
+    unitInput.addEventListener('input', scheduleRun);
+    degCheck.addEventListener('change', scheduleRun);
+    document.querySelectorAll('input[name="nRadio"], input[name="csRadio"]').forEach(r => r.addEventListener('change', scheduleRun));
+    document.getElementById('runBtn').addEventListener('click', () => run());
+
+    // --- 5. Simulation de Monte-Carlo ---
+    let runTimer = null;
+    function scheduleRun() {
+        clearTimeout(runTimer);
+        runTimer = setTimeout(run, 350);
+    }
+
+    function showEmpty() {
+        lastRun = null;
+        document.getElementById('emptyStateBox').style.display = 'flex';
+        document.getElementById('calcContent').style.display = 'none';
+        document.getElementById('bottomStack').style.display = 'none';
+        document.getElementById('histCard').style.display = 'none';
+    }
+
+    // Prépare le calcul y = f(x₁, …, xₙ), par évaluation directe ou résolution numérique (Newton)
+    function makeSolver(m, deg) {
+        const n = m.inputs.length;
+        const index = {};
+        m.inputs.forEach((name, k) => { index[name] = k; });
+        index[m.target] = n;
+        if (m.explicit) {
+            const f = compile(m.rhs, index, deg);
+            return { n, evalAt: (v) => f(v) };
+        }
+        const L = compile(m.lhs, index, deg), R = compile(m.rhs, index, deg);
+        const g = (v) => L(v) - R(v);
+        const newton = (v, t0) => {
+            let t = t0;
+            for (let it = 0; it < 60; it++) {
+                v[n] = t;
+                const gt = g(v);
+                if (!isFinite(gt)) return NaN;
+                const h = 1e-7 * Math.max(Math.abs(t), 1e-9);
+                v[n] = t + h;
+                const d = (g(v) - gt) / h;
+                if (!isFinite(d) || d === 0) return NaN;
+                const step = gt / d;
+                t -= step;
+                if (Math.abs(step) <= 1e-13 * Math.max(1, Math.abs(t))) return t;
+            }
+            return NaN;
+        };
+        // Point de départ : plusieurs essais sur une grille logarithmique, pour la valeur nominale
+        let seed = NaN;
+        const start = (v) => {
+            for (const mag of [1, 10, 0.1, 100, 0.01, 1e3, 1e-3, 1e4, 1e-4, 1e6, 1e-6]) {
+                for (const sgn of [1, -1]) {
+                    const t = newton(v, sgn * mag);
+                    if (isFinite(t)) return t;
+                }
+            }
+            return NaN;
+        };
+        return {
+            n,
+            evalAt: (v) => {
+                if (!isFinite(seed)) seed = start(v);
+                const t = isFinite(seed) ? newton(v, seed) : NaN;
+                return isFinite(t) ? t : start(v);
+            },
+            resetSeed: () => { seed = NaN; }
+        };
+    }
+
+    function readInputs() {
+        return model.inputs.map(name => {
+            const st = inputState[name];
+            const value = parseNum(st.value);
+            const law = LAWS[st.law].param ? st.law : 'constant';
+            const param = law === 'constant' ? 0 : Math.abs(parseNum(st.param));
+            return { name, value, law, param, unit: st.unit.trim(), u: LAWS[law].u(param) };
+        });
+    }
+
+    function simulate(solver, inputs, N, onlyIndex) {
+        const n = inputs.length;
+        const cols = inputs.map((inp, k) => (onlyIndex === undefined || onlyIndex === k) ? draw(inp, N) : null);
+        const v = new Float64Array(n + 1);
+        const y = new Float64Array(N);
+        let bad = 0, m = 0;
+        for (let k = 0; k < N; k++) {
+            for (let j = 0; j < n; j++) v[j] = cols[j] ? cols[j][k] : inputs[j].value;
+            const r = solver.evalAt(v);
+            if (isFinite(r)) y[m++] = r;
+            else bad++;
+        }
+        return { y: y.subarray(0, m), bad };
+    }
+
+    function meanStd(a) {
+        let s = 0;
+        for (let k = 0; k < a.length; k++) s += a[k];
+        const mean = s / a.length;
+        let q = 0;
+        for (let k = 0; k < a.length; k++) q += (a[k] - mean) ** 2;
+        return { mean, std: Math.sqrt(q / (a.length - 1)) };
+    }
+
+    function run() {
+        clearTimeout(runTimer);
+        if (!model) return showEmpty();
+        const inputs = readInputs();
+        if (inputs.some(i => !isFinite(i.value)) || inputs.some(i => i.law !== 'constant' && !isFinite(i.param))) return showEmpty();
+        if (inputs.every(i => i.u === 0)) return showEmpty();
+
+        const deg = degCheck.checked;
+        const N = parseInt(document.querySelector('input[name="nRadio"]:checked').value, 10);
+        const solver = makeSolver(model, deg);
+        const nominalV = new Float64Array(inputs.length + 1);
+        inputs.forEach((inp, k) => { nominalV[k] = inp.value; });
+        const yNominal = solver.evalAt(nominalV);
+        const runError = document.getElementById('runError');
+        runError.style.display = isFinite(yNominal) ? 'none' : 'block';
+        if (!isFinite(yNominal)) {
+            runError.textContent = '⚠ Le calcul n\'aboutit pas avec ces valeurs (division par zéro, racine d\'un nombre négatif…).';
+            return showEmpty();
+        }
+
+        const { y, bad } = simulate(solver, inputs, N);
+        if (y.length < 2) return showEmpty();
+        const { mean, std } = meanStd(y);
+        const sorted = Float64Array.from(y).sort();
+        const pct = q => sorted[Math.min(sorted.length - 1, Math.max(0, Math.round(q * (sorted.length - 1))))];
+
+        // Budget : une seule grandeur varie à la fois (les autres restent à leur valeur mesurée)
+        const Nb = Math.min(N, 100000);
+        const budget = inputs.map((inp, k) => {
+            if (inp.u === 0) return { inp, ui: 0 };
+            const r = simulate(solver, inputs, Nb, k);
+            return { inp, ui: meanStd(r.y).std };
+        });
+
+        // Propagation linéarisée : u(y)² = Σ (∂y/∂xᵢ)² u(xᵢ)², dérivées calculées numériquement
+        const sens = inputs.map((inp, k) => {
+            if (inp.u === 0) return 0;
+            const h = inp.u * 1e-3;
+            const vp = Float64Array.from(nominalV), vm = Float64Array.from(nominalV);
+            vp[k] += h;
+            vm[k] -= h;
+            return (solver.evalAt(vp) - solver.evalAt(vm)) / (2 * h);
+        });
+        const uLin = Math.sqrt(inputs.reduce((s, inp, k) => s + (sens[k] * inp.u) ** 2, 0));
+
+        lastRun = { inputs, N, y, mean, std, bad, p025: pct(0.025), p975: pct(0.975), lo: pct(0.001), hi: pct(0.999), budget, uLin, yNominal };
+        render(lastRun);
+    }
+
+    // --- 6. Mise en forme (identique à l'outil « type A ») ---
+    function toSuperscript(n) {
+        const map = { '-': '⁻', '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' };
+        return n.toString().split('').map(ch => map[ch] || ch).join('');
+    }
+
+    function formatSciLatex(val, sigFigs = 4, trimZeros = true) {
+        if (!isFinite(val)) return '-';
+        if (val === 0) return '0';
+        const sign = val < 0 ? '-' : '';
+        const absVal = Math.abs(val);
+        let exp = Math.floor(Math.log10(absVal));
+        const mant = absVal / Math.pow(10, exp);
+        const decimals = Math.max(0, sigFigs - 1);
+        let roundedMant = Number(mant.toFixed(decimals));
+        if (roundedMant >= 10) {
+            roundedMant /= 10;
+            exp += 1;
+        }
+        let mantStr = roundedMant.toFixed(decimals);
+        if (trimZeros && decimals > 0) mantStr = mantStr.replace(/\.?0+$/, '');
+        mantStr = mantStr.replace('.', '{,}');
+        return exp === 0 ? `${sign}${mantStr}` : `${sign}${mantStr} \\times 10^{${exp}}`;
+    }
+
+    function formatSciSvg(val, sigFigs = 4, trimZeros = true) {
+        if (!isFinite(val)) return '-';
+        if (val === 0) return '0';
+        const sign = val < 0 ? '−' : '';
+        const absVal = Math.abs(val);
+        let exp = Math.floor(Math.log10(absVal));
+        const mant = absVal / Math.pow(10, exp);
+        const decimals = Math.max(0, sigFigs - 1);
+        let roundedMant = Number(mant.toFixed(decimals));
+        if (roundedMant >= 10) {
+            roundedMant /= 10;
+            exp += 1;
+        }
+        let mantStr = roundedMant.toFixed(decimals);
+        if (trimZeros && decimals > 0) mantStr = mantStr.replace(/\.?0+$/, '');
+        mantStr = mantStr.replace('.', ',');
+        return `${sign}${mantStr} × 10${toSuperscript(exp)}`;
+    }
+
+    function formatMeasurementSci(mean, u, cs) {
+        let expU = Math.floor(Math.log10(Math.abs(u)));
+        let factor = Math.pow(10, expU - (cs - 1));
+        let uRoundedInt = Math.ceil((u / factor) - 1e-12);
+        if (uRoundedInt >= Math.pow(10, cs)) {
+            expU += 1;
+            factor = Math.pow(10, expU - (cs - 1));
+            uRoundedInt = Math.ceil((u / factor) - 1e-12);
+        }
+        const uRounded = uRoundedInt * factor;
+        const decimalsPlace = expU - (cs - 1);
+        const uMant = uRounded / Math.pow(10, expU);
+        const uRoundedLatex = `${uMant.toFixed(cs - 1).replace('.', '{,}')} \\times 10^{${expU}}`;
+        const absMean = Math.abs(mean);
+        let commonExp = absMean > 0 ? Math.floor(Math.log10(absMean)) : expU;
+        if (expU > commonExp) commonExp = expU;
+        let dec = Math.max(0, commonExp - decimalsPlace);
+        let scaledMean = mean / Math.pow(10, commonExp);
+        let scaledU = uRounded / Math.pow(10, commonExp);
+        if (Math.abs(Number(scaledMean.toFixed(dec))) >= 10) {
+            commonExp += 1;
+            dec = Math.max(0, commonExp - decimalsPlace);
+            scaledMean = mean / Math.pow(10, commonExp);
+            scaledU = uRounded / Math.pow(10, commonExp);
+        }
+        return {
+            meanStr: scaledMean.toFixed(dec).replace('.', '{,}'),
+            uStr: scaledU.toFixed(dec).replace('.', '{,}'),
+            uRoundedVal: uRounded,
+            uRoundedLatex,
+            exp: commonExp
+        };
+    }
+
+    function unitTex(unit) {
+        return unit ? `\\,\\text{${unit.replace(/[\\{}$]/g, '')}}` : '';
+    }
+
+    function render(R) {
+        const { inputs, N, mean, std, bad } = R;
+        const sym = varTex(model.target);
+        const unit = unitInput.value.trim();
+        const uT = unitTex(unit);
+        const cs = parseInt(document.querySelector('input[name="csRadio"]:checked').value, 10);
+
+        document.getElementById('emptyStateBox').style.display = 'none';
+        document.getElementById('calcContent').style.display = 'flex';
+        document.getElementById('bottomStack').style.display = 'flex';
+        document.getElementById('histCard').style.display = 'flex';
+
+        document.getElementById('mathModel').innerHTML = `$$${toTex(model.lhs)} = ${toTex(model.rhs)}$$`
+            + (model.explicit ? '' : `<div class="stats-line" style="text-align:center">Équation résolue numériquement pour $${sym}$ à chaque tirage</div>`);
+
+        document.getElementById('mathSim').innerHTML = `$$\\begin{aligned}
+            N &= ${formatSciLatex(N, 1)} \\\\
+            \\bar{${sym}} &\\approx ${formatSciLatex(mean, 5)}${uT} \\\\
+            u(${sym}) = s &\\approx ${formatSciLatex(std, 3)}${uT}
+        \\end{aligned}$$`;
+
+        // Formule de propagation : forme relative pour un produit de puissances, forme générale sinon
+        const mono = model.explicit ? monomial(model.rhs) : null;
+        const agree = Math.abs(R.uLin - std) / std < 0.05;
+        let prop;
+        if (mono && Object.keys(mono).length && R.yNominal !== 0) {
+            const terms = inputs.filter(i => i.u > 0 && mono[i.name]).map(i => {
+                const e = Math.abs(mono[i.name]);
+                const coef = Math.abs(e - 1) < 1e-12 ? '' : `${fmtNumTex(e)}\\,`;
+                return `\\left(${coef}\\dfrac{u(${varTex(i.name)})}{${varTex(i.name)}}\\right)^2`;
+            });
+            const rel = Math.sqrt(inputs.reduce((s, i) => s + (mono[i.name] ? (mono[i.name] * i.u / i.value) ** 2 : 0), 0));
+            prop = `$$\\dfrac{u(${sym})}{${sym}} = \\sqrt{${terms.join(' + ')}}$$
+                <div class="stats-line" style="text-align:center">soit $u(${sym}) \\approx ${formatSciLatex(rel * Math.abs(R.yNominal), 3)}${uT}$</div>`;
+        } else {
+            prop = `$$u(${sym}) = \\sqrt{\\sum_i \\left(\\dfrac{\\partial ${sym}}{\\partial x_i}\\right)^2 u(x_i)^2} \\approx ${formatSciLatex(R.uLin, 3)}${uT}$$`;
+        }
+        prop += `<div class="stats-line" style="text-align:center">${agree
+            ? '<span class="compare-ok">✓ Accord avec la simulation</span>'
+            : `Écart de ${fmtPlain(Math.abs(R.uLin - std) / std * 100, 2)} % avec la simulation : le modèle n'est pas linéaire à l'échelle des incertitudes, la simulation est plus fiable.`}</div>`;
+        document.getElementById('mathProp').innerHTML = prop;
+
+        // Résultat final
+        const f = formatMeasurementSci(mean, std, cs);
+        const expTex = f.exp === 0 ? '' : ` \\times 10^{${f.exp}}`;
+        document.getElementById('finalResultMath').innerHTML = `$$${sym} = (${f.meanStr} \\pm ${f.uStr})${expTex}${uT}$$`;
+        let line = `Incertitude-type majorée : $u(${sym}) = ${f.uRoundedLatex}${uT}$`;
+        if (mean !== 0) line += ` &bull; Incertitude relative : $\\dfrac{u(${sym})}{|\\bar{${sym}}|} \\approx ${formatSciLatex(f.uRoundedVal / Math.abs(mean) * 100, 2)}\\,\\%$`;
+        line += `<br>95 % des valeurs simulées sont comprises entre $${formatSciLatex(R.p025, 4)}$ et $${formatSciLatex(R.p975, 4)}${uT}$`;
+        if (bad) line += `<br>⚠ ${bad} tirage${bad > 1 ? 's' : ''} sans résultat (calcul impossible) ignoré${bad > 1 ? 's' : ''}.`;
+        document.getElementById('relUncText').innerHTML = line;
+
+        renderBudget(R, sym, uT);
+        drawHistogram(R);
+        typeset([document.getElementById('calcContent'), document.getElementById('bottomStack'), document.getElementById('histCard')]);
+    }
+
+    // Nombre saisi par l'élève, écrit en LaTeX sans perdre ses chiffres significatifs
+    function typedTex(s) {
+        return String(s).trim().replace(/\s/g, '').replace(/[.,]/g, '{,}').replace(/[^0-9{},+\-eE]/g, '');
+    }
+
+    function renderBudget(R, sym, uT) {
+        const total = R.budget.reduce((s, b) => s + b.ui * b.ui, 0);
+        const rows = R.budget.map(b => ({ ...b, share: total > 0 ? b.ui * b.ui / total : 0 }));
+        const sorted = [...rows].sort((a, b) => b.share - a.share);
+        const top = sorted[0];
+        document.getElementById('budgetBody').innerHTML = sorted.map(b => {
+            const law = LAWS[b.inp.law];
+            const st = inputState[b.inp.name];
+            const lawTxt = b.inp.law === 'constant' ? 'Constante'
+                : `${law.label}, $${law.param} = ${typedTex(st.param)}${unitTex(b.inp.unit)}$`;
+            const contrib = b.inp.u === 0 ? '<span class="bar-pct">—</span>' : `<div style="display:flex;align-items:center;gap:0.5rem">
+                    <div class="bar" style="flex:1"><span style="width:${(b.share * 100).toFixed(1)}%"></span></div>
+                    <span class="bar-pct">${(b.share * 100).toFixed(1).replace('.', ',')} %</span>
+                </div>`;
+            return `<tr class="${b === top && b.share > 0 ? 'top-contrib' : ''}">
+                <td>$${varTex(b.inp.name)} = ${typedTex(st.value)}${unitTex(b.inp.unit)}$</td>
+                <td>${lawIcon(b.inp.law)}${lawTxt}</td>
+                <td class="num">${b.inp.u === 0 ? '—' : `$${formatSciLatex(b.inp.u, 3)}${unitTex(b.inp.unit)}$`}</td>
+                <td class="num">${b.inp.u === 0 ? '—' : `$${formatSciLatex(b.ui, 3)}${uT}$`}</td>
+                <td class="bar-cell">${contrib}</td>
+            </tr>`;
+        }).join('');
+
+        const quad = Math.sqrt(total);
+        const second = sorted[1];
+        const pctTxt = b => `${(b.share * 100).toFixed(0)} %`;
+        let conclusion = '';
+        if (top && top.share > 0) {
+            if (second && second.share > 0.8 * top.share) {
+                conclusion = `Les mesures de $${varTex(top.inp.name)}$ et de $${varTex(second.inp.name)}$ pèsent à peu près autant (<strong>${pctTxt(top)}</strong> et <strong>${pctTxt(second)}</strong> de la variance) : pour réduire nettement l'incertitude, il faut améliorer les deux.`;
+            } else {
+                conclusion = `La mesure de $${varTex(top.inp.name)}$ apporte <strong>${pctTxt(top)}</strong> de la variance du résultat : c'est elle qu'il faut améliorer en priorité${top.share > 0.8 ? ' ; les autres sources sont presque négligeables' : ''}.`;
+            }
+        }
+        document.getElementById('budgetConclusion').innerHTML = conclusion;
+        document.getElementById('methodNote').innerHTML = `Méthode : pour chaque grandeur $x_i$, on relance la simulation en ne faisant varier qu'elle ; l'écart-type obtenu est la part $u_i(${sym})$ due à $x_i$, et sa contribution vaut $u_i^2 / \\sum_j u_j^2$. `
+            + `Les parts se combinent quadratiquement : $\\sqrt{\\sum_i u_i^2} \\approx ${formatSciLatex(quad, 3)}${uT}$, à comparer à $u(${sym}) \\approx ${formatSciLatex(R.std, 3)}${uT}$ obtenu en faisant tout varier à la fois.`;
+    }
+
+    // --- 7. Histogramme (SVG) ---
+    function niceStep(range, target) {
+        const raw = range / target;
+        const p = Math.pow(10, Math.floor(Math.log10(raw)));
+        const m = raw / p;
+        return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p;
+    }
+
+    function drawHistogram(R) {
+        const container = document.getElementById('histContainer');
+        const css = getComputedStyle(document.documentElement);
+        const col = k => css.getPropertyValue(k).trim();
+        const W = Math.max(320, container.clientWidth || 800);
+        const H = W < 640 ? 260 : 320;
+        const pad = { l: 16, r: 16, t: 34, b: 46 };
+        const pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+        // Domaine : du 0,1 % au 99,9 % des valeurs, élargi à ±4 écarts-types
+        let lo = Math.min(R.lo, R.mean - 4 * R.std), hi = Math.max(R.hi, R.mean + 4 * R.std);
+        const nb = W < 640 ? 40 : 70;
+        const w = (hi - lo) / nb;
+        const counts = new Float64Array(nb);
+        for (let k = 0; k < R.y.length; k++) {
+            const b = Math.floor((R.y[k] - lo) / w);
+            if (b >= 0 && b < nb) counts[b]++;
+        }
+        const dens = Array.from(counts, c => c / (R.y.length * w));
+        const gauss = x => Math.exp(-0.5 * ((x - R.mean) / R.std) ** 2) / (R.std * Math.sqrt(2 * Math.PI));
+        const top = Math.max(...dens, gauss(R.mean)) * 1.08;
+        const X = x => pad.l + (x - lo) / (hi - lo) * pw;
+        const Y = d => pad.t + ph * (1 - d / top);
+
+        let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">`;
+        // Bande ±u
+        svg += `<rect x="${X(R.mean - R.std)}" y="${pad.t}" width="${X(R.mean + R.std) - X(R.mean - R.std)}" height="${ph}" fill="${col('--success-bg')}"/>`;
+        // Barres
+        dens.forEach((d, k) => {
+            const x0 = X(lo + k * w), x1 = X(lo + (k + 1) * w);
+            svg += `<rect x="${x0 + 0.5}" y="${Y(d)}" width="${Math.max(0.5, x1 - x0 - 1)}" height="${pad.t + ph - Y(d)}" fill="${col('--primary-light')}" stroke="${col('--primary')}" stroke-width="0.8"/>`;
+        });
+        // Gaussienne de même moyenne et même écart-type
+        let path = '';
+        for (let k = 0; k <= 200; k++) {
+            const x = lo + (hi - lo) * k / 200;
+            path += `${k ? 'L' : 'M'}${X(x).toFixed(1)} ${Y(gauss(x)).toFixed(1)} `;
+        }
+        svg += `<path d="${path}" fill="none" stroke="${col('--success')}" stroke-width="2"/>`;
+        // Repères : moyenne, ±u, intervalle à 95 %
+        const vline = (x, color, dash, label, yLab) => {
+            svg += `<line x1="${X(x)}" x2="${X(x)}" y1="${pad.t}" y2="${pad.t + ph}" stroke="${color}" stroke-width="1.6" ${dash ? 'stroke-dasharray="5 4"' : ''}/>`;
+            if (label) svg += `<text x="${X(x)}" y="${yLab}" text-anchor="middle" font-size="11" font-weight="600" fill="${color}">${label}</text>`;
+        };
+        vline(R.mean, col('--text-main'), false, 'moyenne', pad.t - 18);
+        vline(R.mean - R.std, col('--success'), true, '−u', pad.t - 4);
+        vline(R.mean + R.std, col('--success'), true, '+u', pad.t - 4);
+        vline(R.p025, col('--danger'), true, '2,5 %', pad.t + 12);
+        vline(R.p975, col('--danger'), true, '97,5 %', pad.t + 12);
+        // Axe horizontal
+        svg += `<line x1="${pad.l}" x2="${pad.l + pw}" y1="${pad.t + ph}" y2="${pad.t + ph}" stroke="${col('--border-strong')}"/>`;
+        const step = niceStep(hi - lo, W < 640 ? 4 : 8);
+        for (let x = Math.ceil(lo / step) * step; x <= hi + 1e-12 * Math.abs(hi); x += step) {
+            svg += `<line x1="${X(x)}" x2="${X(x)}" y1="${pad.t + ph}" y2="${pad.t + ph + 5}" stroke="${col('--border-strong')}"/>`;
+            svg += `<text x="${X(x)}" y="${pad.t + ph + 18}" text-anchor="middle" font-size="11" fill="${col('--text-muted')}">${fmtPlain(Math.abs(x) < step * 1e-9 ? 0 : x, 6)}</text>`;
+        }
+        const unit = unitInput.value.trim();
+        svg += `<text x="${pad.l + pw}" y="${H - 6}" text-anchor="end" font-size="11" font-weight="600" fill="${col('--text-muted')}">${model.target}${unit ? ` (${unit})` : ''}</text>`;
+        const caption = W < 640 ? 'Courbe verte : loi normale' : `Histogramme des ${formatSciSvg(R.y.length, 3)} valeurs simulées · courbe verte : loi normale de même moyenne et même écart-type`;
+        svg += `<text x="${pad.l}" y="${H - 6}" font-size="11" fill="${col('--text-muted')}">${caption}</text>`;
+        svg += '</svg>';
+        container.innerHTML = svg;
+    }
+
+    window.addEventListener('resize', () => { if (lastRun) drawHistogram(lastRun); });
+
+    // --- 8. Assistant : demi-étendue d'un instrument ---
+    const asType = document.getElementById('asType');
+
+    function assistantResult() {
+        const type = asType.value;
+        const name = document.getElementById('asTarget').value;
+        const st = name ? inputState[name] : null;
+        switch (type) {
+            case 'lecture': {
+                const g = parseNum(document.getElementById('asGrad').value);
+                return { law: 'uniform', param: g / 2, text: `Loi uniforme, a = graduation / 2 = ${fmtPlain(g / 2)}` };
+            }
+            case 'double': {
+                const g = parseNum(document.getElementById('asGrad').value);
+                return { law: 'triangular', param: g, text: `Deux lectures indépendantes (± g/2 chacune) : leur différence suit une loi triangulaire de demi-étendue a = g = ${fmtPlain(g)}` };
+            }
+            case 'verrerie': {
+                const t = parseNum(document.getElementById('asGlass').value);
+                return { law: 'uniform', param: t, text: `Loi uniforme, a = tolérance = ${fmtPlain(t)} mL` };
+            }
+            case 'multimetre': {
+                const p = parseNum(document.getElementById('asPct').value), n = parseNum(document.getElementById('asDigits').value), r = parseNum(document.getElementById('asRes').value);
+                const x = st ? Math.abs(parseNum(st.value)) : NaN;
+                const a = p / 100 * x + n * r;
+                return { law: 'uniform', param: a, text: isFinite(x) ? `a = ${fmtPlain(p)} % × ${fmtPlain(x)} + ${fmtPlain(n)} × ${fmtPlain(r)} = ${fmtPlain(a)}` : 'Saisissez d\'abord la valeur lue sur le multimètre.' };
+            }
+            case 'elargie': {
+                const U = parseNum(document.getElementById('asU').value);
+                return { law: 'normal', param: U / 2, text: `Loi normale, u = U / 2 = ${fmtPlain(U / 2)}` };
+            }
+        }
+        return null;
+    }
+
+    function updateAssistant() {
+        const type = asType.value;
+        document.querySelectorAll('.assistant-body .field[data-for]').forEach(f => {
+            f.style.display = f.dataset.for.split(' ').includes(type) ? 'flex' : 'none';
+        });
+        const r = assistantResult();
+        document.getElementById('asResult').textContent = r ? r.text : '';
+    }
+
+    document.querySelectorAll('.assistant-body input, .assistant-body select').forEach(el => el.addEventListener('input', updateAssistant));
+    asType.addEventListener('change', updateAssistant);
+
+    document.getElementById('asApply').addEventListener('click', () => {
+        const name = document.getElementById('asTarget').value;
+        const r = assistantResult();
+        if (!name || !r || !isFinite(r.param)) return;
+        inputState[name].law = r.law;
+        inputState[name].param = String(Number(r.param.toPrecision(4))).replace('.', ',');
+        renderVarCards();
+        scheduleRun();
+    });
+
+    // --- 9. Exemples ---
+    const EXAMPLES = {
+        titrage: {
+            formula: 'c_A = c_B*V_E/V_A', unit: 'mol·L⁻¹',
+            vars: {
+                c_B: { value: '0,100', unit: 'mol·L⁻¹', law: 'normal', param: '0,0005' },
+                V_E: { value: '12,4', unit: 'mL', law: 'uniform', param: '0,1' },
+                V_A: { value: '10,00', unit: 'mL', law: 'uniform', param: '0,02' }
+            }
+        },
+        lentille: {
+            formula: "1/f' = 1/OA' - 1/OA", unit: 'cm',
+            vars: {
+                "OA'": { value: '60,0', unit: 'cm', law: 'uniform', param: '2' },
+                OA: { value: '-30,0', unit: 'cm', law: 'uniform', param: '0,5' }
+            }
+        },
+        pendule: {
+            formula: 'g = 4*pi^2*L/T^2', unit: 'm·s⁻²',
+            vars: {
+                L: { value: '0,500', unit: 'm', law: 'triangular', param: '0,001' },
+                T: { value: '1,419', unit: 's', law: 'normal', param: '0,004' }
+            }
+        },
+        snell: {
+            formula: 'n_2 = n_1*sin(i_1)/sin(i_2)', unit: '', deg: true,
+            vars: {
+                n_1: { value: '1,000', unit: '', law: 'constant', param: '' },
+                i_1: { value: '40', unit: '°', law: 'uniform', param: '1' },
+                i_2: { value: '25', unit: '°', law: 'uniform', param: '1' }
+            }
+        },
+        ohm: {
+            formula: 'R = U/I', unit: 'kΩ',
+            vars: {
+                U: { value: '5,02', unit: 'V', law: 'uniform', param: '0,0451' },
+                I: { value: '21,3', unit: 'mA', law: 'uniform', param: '0,513' }
+            }
+        }
+    };
+
+    document.getElementById('exampleSelect').addEventListener('change', (e) => {
+        const ex = EXAMPLES[e.target.value];
+        e.target.value = '';
+        if (!ex) return;
+        Object.entries(ex.vars).forEach(([k, v]) => { inputState[k] = { ...v }; });
+        formulaInput.value = ex.formula;
+        unitInput.value = ex.unit;
+        if (ex.deg !== undefined) degCheck.checked = ex.deg; // seuls les modèles trigonométriques fixent l'unité d'angle
+        model = null; // force la reconstruction des cartes
+        updateModel();
+    });
+
+    updateAssistant();
+</script>
+
+</body>
+</html>
