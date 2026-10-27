@@ -589,7 +589,8 @@
             min-width: 0;
         }
 
-        .right-stack > .card:first-child {
+        .right-stack > .card:last-child,
+        .right-stack > .card.is-empty {
             flex: 1;
         }
 
@@ -791,11 +792,6 @@
             border: 1px solid var(--primary-border);
         }
 
-        .compare-ok {
-            color: var(--success);
-            font-weight: 600;
-        }
-
         .stats-line {
             font-size: 0.84rem;
             color: var(--text-muted);
@@ -940,6 +936,9 @@
             <label for="unitInput">Unité du résultat</label>
             <input type="text" id="unitInput" value="" placeholder="ex : mol·L⁻¹, cm, m·s⁻²…">
 
+            <label for="refInput">Valeur de référence (optionnelle)</label>
+            <input type="text" id="refInput" value="" placeholder="Laisser vide si aucune">
+
             <label>Grandeurs mesurées et incertitudes</label>
             <div class="var-list" id="varList"></div>
 
@@ -1002,10 +1001,10 @@
         </div>
 
         <div class="right-stack">
-        <!-- Cadre 1 : résultat -->
-        <div class="card">
+        <!-- Cadre 1 : histogramme -->
+        <div class="card is-empty" id="histCard">
             <div class="card-header">
-                <span class="card-title"><span class="step-num">1</span> Résultat de la simulation</span>
+                <span class="card-title"><span class="step-num">1</span> Distribution des valeurs simulées</span>
             </div>
 
             <div id="emptyStateBox" class="empty-state">
@@ -1014,19 +1013,28 @@
                 <div>Saisissez une <strong>formule</strong>, puis la valeur et la <strong>demi-étendue</strong> de chaque grandeur mesurée, ou choisissez un <strong>✨ exemple</strong>.<br>Le programme tire au hasard $N$ valeurs de chaque grandeur selon sa loi, calcule les $N$ résultats correspondants et en déduit l'incertitude-type : l'écart-type de ces résultats.</div>
             </div>
 
-            <div id="calcContent" style="display: none; flex-direction: column; flex: 1;">
+            <div class="svg-container" id="histContainer"></div>
+        </div>
+
+        <!-- Cadre 2 : résultat -->
+        <div class="card" id="resultCard" style="display: none;">
+            <div class="card-header">
+                <span class="card-title"><span class="step-num">2</span> Résultat de la simulation</span>
+            </div>
+
+            <div id="calcContent" style="display: flex; flex-direction: column; flex: 1;">
                 <div class="formula-grid">
                     <div class="formula-box">
                         <div class="label">Modèle</div>
                         <div class="formula-math" id="mathModel"></div>
                     </div>
                     <div class="formula-box">
-                        <div class="label">Simulation ($N$ tirages)</div>
-                        <div class="formula-math" id="mathSim"></div>
+                        <div class="label">Moyenne des $N$ valeurs simulées</div>
+                        <div class="formula-math" id="mathMean"></div>
                     </div>
                     <div class="formula-box wide">
-                        <div class="label">Formule de propagation (calcul classique, linéarisé)</div>
-                        <div class="formula-math" id="mathProp"></div>
+                        <div class="label">Incertitude-type simulée</div>
+                        <div class="formula-math" id="mathUnc"></div>
                     </div>
                 </div>
 
@@ -1036,14 +1044,6 @@
                     <div class="stats-line" id="relUncText"></div>
                 </div>
             </div>
-        </div>
-
-        <!-- Cadre 2 : histogramme -->
-        <div class="card" id="histCard" style="display: none;">
-            <div class="card-header">
-                <span class="card-title"><span class="step-num">2</span> Distribution des valeurs simulées</span>
-            </div>
-            <div class="svg-container" id="histContainer"></div>
         </div>
         </div>
     </div>
@@ -1070,6 +1070,14 @@
             </div>
             <div class="budget-conclusion" id="budgetConclusion"></div>
             <div class="method-note" id="methodNote"></div>
+        </div>
+
+        <!-- Cadre 4 : compatibilité avec la valeur de référence -->
+        <div class="card" id="refCard" style="display: none;">
+            <div class="card-header">
+                <span class="card-title"><span class="step-num">4</span> Compatibilité avec la valeur de référence</span>
+            </div>
+            <div id="zscoreContainer"></div>
         </div>
     </div>
 </div>
@@ -1281,43 +1289,6 @@
         return '';
     }
 
-    // Exposants d'un modèle « produit de puissances » (y = k · x₁^a · x₂^b …), sinon null
-    function monomial(n) {
-        const constant = (m) => {
-            if (m.t === 'num') return m.v;
-            if (m.t === 'neg') { const c = constant(m.a); return c === null ? null : -c; }
-            if (m.t === 'bin' && m.op === '/') { const a = constant(m.a), b = constant(m.b); return a === null || b === null ? null : a / b; }
-            return null;
-        };
-        switch (n.t) {
-            case 'num': case 'pi': return {};
-            case 'var': return { [n.name]: 1 };
-            case 'neg': return monomial(n.a);
-            case 'call': {
-                if (n.f !== 'sqrt') return null;
-                const m = monomial(n.a);
-                if (!m) return null;
-                Object.keys(m).forEach(k => { m[k] *= 0.5; });
-                return m;
-            }
-            case 'bin': {
-                if (n.op === '+' || n.op === '-') return null;
-                if (n.op === '^') {
-                    const e = constant(n.b), m = monomial(n.a);
-                    if (e === null || !m) return null;
-                    Object.keys(m).forEach(k => { m[k] *= e; });
-                    return m;
-                }
-                const a = monomial(n.a), b = monomial(n.b);
-                if (!a || !b) return null;
-                const s = n.op === '*' ? 1 : -1;
-                Object.keys(b).forEach(k => { a[k] = (a[k] || 0) + s * b[k]; });
-                return a;
-            }
-        }
-        return null;
-    }
-
     // Compilation de l'arbre en fonction rapide v ↦ valeur (v : tableau des valeurs des grandeurs)
     function compile(n, index, deg) {
         const toRad = deg ? Math.PI / 180 : 1;
@@ -1527,6 +1498,8 @@
     formulaInput.addEventListener('input', updateModel);
     targetSelect.addEventListener('change', updateModel);
     unitInput.addEventListener('input', scheduleRun);
+    const refInput = document.getElementById('refInput');
+    refInput.addEventListener('input', scheduleRun);
     degCheck.addEventListener('change', scheduleRun);
     document.querySelectorAll('input[name="nRadio"], input[name="csRadio"]').forEach(r => r.addEventListener('change', scheduleRun));
     document.getElementById('runBtn').addEventListener('click', () => run());
@@ -1541,9 +1514,10 @@
     function showEmpty() {
         lastRun = null;
         document.getElementById('emptyStateBox').style.display = 'flex';
-        document.getElementById('calcContent').style.display = 'none';
+        document.getElementById('histContainer').innerHTML = '';
+        document.getElementById('histCard').classList.add('is-empty');
+        document.getElementById('resultCard').style.display = 'none';
         document.getElementById('bottomStack').style.display = 'none';
-        document.getElementById('histCard').style.display = 'none';
     }
 
     // Prépare le calcul y = f(x₁, …, xₙ), par évaluation directe ou résolution numérique (Newton)
@@ -1664,18 +1638,7 @@
             return { inp, ui: meanStd(r.y).std };
         });
 
-        // Propagation linéarisée : u(y)² = Σ (∂y/∂xᵢ)² u(xᵢ)², dérivées calculées numériquement
-        const sens = inputs.map((inp, k) => {
-            if (inp.u === 0) return 0;
-            const h = inp.u * 1e-3;
-            const vp = Float64Array.from(nominalV), vm = Float64Array.from(nominalV);
-            vp[k] += h;
-            vm[k] -= h;
-            return (solver.evalAt(vp) - solver.evalAt(vm)) / (2 * h);
-        });
-        const uLin = Math.sqrt(inputs.reduce((s, inp, k) => s + (sens[k] * inp.u) ** 2, 0));
-
-        lastRun = { inputs, N, y, mean, std, bad, p025: pct(0.025), p975: pct(0.975), lo: pct(0.001), hi: pct(0.999), budget, uLin, yNominal };
+        lastRun = { inputs, N, y, mean, std, bad, p025: pct(0.025), p975: pct(0.975), lo: pct(0.001), hi: pct(0.999), budget };
         render(lastRun);
     }
 
@@ -1769,39 +1732,21 @@
         const cs = parseInt(document.querySelector('input[name="csRadio"]:checked').value, 10);
 
         document.getElementById('emptyStateBox').style.display = 'none';
-        document.getElementById('calcContent').style.display = 'flex';
+        document.getElementById('histCard').classList.remove('is-empty');
+        document.getElementById('resultCard').style.display = 'flex';
         document.getElementById('bottomStack').style.display = 'flex';
-        document.getElementById('histCard').style.display = 'flex';
 
         document.getElementById('mathModel').innerHTML = `$$${toTex(model.lhs)} = ${toTex(model.rhs)}$$`
             + (model.explicit ? '' : `<div class="stats-line" style="text-align:center">Équation résolue numériquement pour $${sym}$ à chaque tirage</div>`);
 
-        document.getElementById('mathSim').innerHTML = `$$\\begin{aligned}
-            N &= ${formatSciLatex(N, 1)} \\\\
-            \\bar{${sym}} &\\approx ${formatSciLatex(mean, 5)}${uT} \\\\
-            u(${sym}) = s &\\approx ${formatSciLatex(std, 3)}${uT}
-        \\end{aligned}$$`;
+        document.getElementById('mathMean').innerHTML = `$$\\begin{aligned}
+            \\bar{${sym}} &= \\frac{1}{N}\\sum_{k=1}^{N} ${sym}_k \\\\
+            &\\approx ${formatSciLatex(mean, 5)}${uT}
+        \\end{aligned}$$
+            <div class="stats-line" style="text-align:center">avec $N = ${formatSciLatex(N, 1)}$ tirages</div>`;
 
-        // Formule de propagation : forme relative pour un produit de puissances, forme générale sinon
-        const mono = model.explicit ? monomial(model.rhs) : null;
-        const agree = Math.abs(R.uLin - std) / std < 0.05;
-        let prop;
-        if (mono && Object.keys(mono).length && R.yNominal !== 0) {
-            const terms = inputs.filter(i => i.u > 0 && mono[i.name]).map(i => {
-                const e = Math.abs(mono[i.name]);
-                const coef = Math.abs(e - 1) < 1e-12 ? '' : `${fmtNumTex(e)}\\,`;
-                return `\\left(${coef}\\dfrac{u(${varTex(i.name)})}{${varTex(i.name)}}\\right)^2`;
-            });
-            const rel = Math.sqrt(inputs.reduce((s, i) => s + (mono[i.name] ? (mono[i.name] * i.u / i.value) ** 2 : 0), 0));
-            prop = `$$\\dfrac{u(${sym})}{${sym}} = \\sqrt{${terms.join(' + ')}}$$
-                <div class="stats-line" style="text-align:center">soit $u(${sym}) \\approx ${formatSciLatex(rel * Math.abs(R.yNominal), 3)}${uT}$</div>`;
-        } else {
-            prop = `$$u(${sym}) = \\sqrt{\\sum_i \\left(\\dfrac{\\partial ${sym}}{\\partial x_i}\\right)^2 u(x_i)^2} \\approx ${formatSciLatex(R.uLin, 3)}${uT}$$`;
-        }
-        prop += `<div class="stats-line" style="text-align:center">${agree
-            ? '<span class="compare-ok">✓ Accord avec la simulation</span>'
-            : `Écart de ${fmtPlain(Math.abs(R.uLin - std) / std * 100, 2)} % avec la simulation : le modèle n'est pas linéaire à l'échelle des incertitudes, la simulation est plus fiable.`}</div>`;
-        document.getElementById('mathProp').innerHTML = prop;
+        document.getElementById('mathUnc').innerHTML = `$$u(${sym}) = s = \\sqrt{\\frac{1}{N-1}\\sum_{k=1}^{N} \\left(${sym}_k - \\bar{${sym}}\\right)^2} \\approx ${formatSciLatex(std, 3)}${uT}$$
+            <div class="stats-line" style="text-align:center">L'incertitude-type simulée est l'<strong>écart-type des $N$ valeurs aléatoires obtenues</strong> : elle mesure la dispersion du résultat due aux incertitudes de toutes les grandeurs d'entrée (largeur de l'histogramme, zone verte $\\pm u$).</div>`;
 
         // Résultat final
         const f = formatMeasurementSci(mean, std, cs);
@@ -1814,8 +1759,73 @@
         document.getElementById('relUncText').innerHTML = line;
 
         renderBudget(R, sym, uT);
+        renderZScore(R, sym, uT, f);
         drawHistogram(R);
-        typeset([document.getElementById('calcContent'), document.getElementById('bottomStack'), document.getElementById('histCard')]);
+        typeset([document.getElementById('resultCard'), document.getElementById('bottomStack'), document.getElementById('histCard')]);
+    }
+
+    // --- Compatibilité avec une valeur de référence (écart normalisé) ---
+    function erfc(x) {
+        const z = Math.abs(x);
+        const t = 1.0 / (1.0 + 0.5 * z);
+        const ans = t * Math.exp(-z * z - 1.26551223 + t * (1.00002368 + t * (0.37409196 +
+            t * (0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 +
+            t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))));
+        return x >= 0 ? ans : 2.0 - ans;
+    }
+
+    function formatProbLatex(pPercent) {
+        if (!isFinite(pPercent) || pPercent <= 0) return '< 10^{-99}\\,\\%';
+        if (pPercent >= 0.1) return pPercent.toFixed(2).replace('.', '{,}') + '\\,\\%';
+        return formatSciLatex(pPercent, 3, false) + '\\,\\%';
+    }
+
+    function readRef() {
+        const v = parseNum(refInput.value);
+        return refInput.value.trim() && isFinite(v) ? v : null;
+    }
+
+    function renderZScore(R, sym, uT, f) {
+        const refCard = document.getElementById('refCard');
+        const ref = readRef();
+        if (ref === null || !(R.std > 0)) {
+            refCard.style.display = 'none';
+            return;
+        }
+        refCard.style.display = 'flex';
+        const z = Math.abs(R.mean - ref) / R.std;
+        const ok = z <= 2;
+        const zDisplay = z >= 100 || (z > 0 && z < 0.01) ? formatSciLatex(z, 3, false) : z.toFixed(2).replace('.', '{,}');
+        const pNormal = erfc(z / Math.SQRT2) * 100;
+        // Proportion des tirages aussi éloignés de la moyenne que la référence (lue sur la simulation)
+        const d = Math.abs(ref - R.mean);
+        let far = 0;
+        for (let k = 0; k < R.y.length; k++) if (Math.abs(R.y[k] - R.mean) >= d) far++;
+        const pSim = far / R.y.length * 100;
+        const pSimTex = far === 0 ? `< ${formatProbLatex(100 / R.y.length)}` : `= ${formatProbLatex(pSim)}`;
+        const story = ok
+            ? `La valeur de référence est à ${zDisplay.replace('{,}', ',')} incertitude${z >= 2 ? 's' : ''}-type${z >= 2 ? 's' : ''} du résultat : cet écart s'explique par les incertitudes de mesure. Le résultat est <strong>compatible</strong> avec la référence, et l'incertitude annoncée est cohérente.`
+            : `La valeur de référence est à plus de deux incertitudes-types du résultat : les incertitudes prises en compte ne suffisent pas à expliquer l'écart. Il faut chercher une <strong>erreur systématique</strong> (protocole, étalonnage, lecture, modèle) ou une <strong>source d'incertitude oubliée ou sous-estimée</strong> dans le budget.`;
+        document.getElementById('zscoreContainer').innerHTML = `
+            <div class="zscore-box ${ok ? 'zscore-ok' : 'zscore-ko'}">
+                <div class="zscore-header">
+                    <div style="font-weight: 700; font-size: 1.02rem;">
+                        Écart normalisé pour $${sym}_{\\text{réf}} = ${formatSciLatex(ref, 4)}${uT}$
+                    </div>
+                    <span class="badge">${ok ? 'Mesure compatible (z ≤ 2)' : 'Mesure non compatible (z > 2)'}</span>
+                </div>
+                <div class="zscore-formula-wrap">
+                    $$z = \\frac{|\\bar{${sym}} - ${sym}_{\\text{réf}}|}{u(${sym})} = \\frac{|${formatSciLatex(R.mean, 5)} - ${formatSciLatex(ref, 4)}|}{${formatSciLatex(R.std, 4)}} \\approx \\mathbf{${zDisplay}}$$
+                </div>
+                <div>${story}</div>
+                <div class="prob-details">
+                    <strong>Probabilité d'observer un écart au moins aussi grand par le seul jeu des incertitudes, si $${sym}_{\\text{réf}}$ est la valeur vraie :</strong>
+                    <ul>
+                        <li>Lue directement sur la simulation (proportion des $N$ tirages qui s'écartent de la moyenne d'au moins $|\\bar{${sym}} - ${sym}_{\\text{réf}}|$) : $P ${pSimTex}$.</li>
+                        <li>Si la distribution était gaussienne : $P(|Z| \\ge ${zDisplay}) = ${formatProbLatex(pNormal)}$ (seuil critique à $z = 2 \\leftrightarrow 4{,}55\\,\\%$).</li>
+                    </ul>
+                </div>
+            </div>`;
     }
 
     // Nombre saisi par l'élève, écrit en LaTeX sans perdre ses chiffres significatifs
@@ -1876,11 +1886,17 @@
         const col = k => css.getPropertyValue(k).trim();
         const W = Math.max(320, container.clientWidth || 800);
         const H = W < 640 ? 260 : 320;
-        const pad = { l: 16, r: 16, t: 34, b: 46 };
+        const ref = readRef();
+        const refShown = ref !== null && Math.abs(ref - R.mean) <= 10 * R.std;
+        const pad = { l: 16, r: 16, t: refShown ? 66 : 52, b: 46 };
         const pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
 
         // Domaine : du 0,1 % au 99,9 % des valeurs, élargi à ±4 écarts-types
         let lo = Math.min(R.lo, R.mean - 4 * R.std), hi = Math.max(R.hi, R.mean + 4 * R.std);
+        if (refShown) {
+            lo = Math.min(lo, ref - 0.5 * R.std);
+            hi = Math.max(hi, ref + 0.5 * R.std);
+        }
         const nb = W < 640 ? 40 : 70;
         const w = (hi - lo) / nb;
         const counts = new Float64Array(nb);
@@ -1909,16 +1925,19 @@
             path += `${k ? 'L' : 'M'}${X(x).toFixed(1)} ${Y(gauss(x)).toFixed(1)} `;
         }
         svg += `<path d="${path}" fill="none" stroke="${col('--success')}" stroke-width="2"/>`;
-        // Repères : moyenne, ±u, intervalle à 95 %
-        const vline = (x, color, dash, label, yLab) => {
-            svg += `<line x1="${X(x)}" x2="${X(x)}" y1="${pad.t}" y2="${pad.t + ph}" stroke="${color}" stroke-width="1.6" ${dash ? 'stroke-dasharray="5 4"' : ''}/>`;
-            if (label) svg += `<text x="${X(x)}" y="${yLab}" text-anchor="middle" font-size="11" font-weight="600" fill="${color}">${label}</text>`;
+        // Repères : moyenne, ±u, intervalle à 95 %, valeur de référence.
+        // Chaque étiquette est placée au-dessus de son trait, sur sa propre ligne.
+        const vline = (x, color, dash, label, row) => {
+            const yLab = pad.t - 6 - 14 * row;
+            svg += `<line x1="${X(x)}" x2="${X(x)}" y1="${yLab + 3}" y2="${pad.t + ph}" stroke="${color}" stroke-width="1.6" ${dash ? 'stroke-dasharray="5 4"' : ''}/>`;
+            svg += `<text x="${X(x)}" y="${yLab}" text-anchor="middle" font-size="11" font-weight="600" fill="${color}">${label}</text>`;
         };
-        vline(R.mean, col('--text-main'), false, 'moyenne', pad.t - 18);
-        vline(R.mean - R.std, col('--success'), true, '−u', pad.t - 4);
-        vline(R.mean + R.std, col('--success'), true, '+u', pad.t - 4);
-        vline(R.p025, col('--danger'), true, '2,5 %', pad.t + 12);
-        vline(R.p975, col('--danger'), true, '97,5 %', pad.t + 12);
+        vline(R.p025, col('--danger'), true, '2,5 %', 0);
+        vline(R.p975, col('--danger'), true, '97,5 %', 0);
+        vline(R.mean - R.std, col('--success'), true, '−u', 1);
+        vline(R.mean + R.std, col('--success'), true, '+u', 1);
+        vline(R.mean, col('--text-main'), false, 'moyenne', 2);
+        if (refShown) vline(ref, '#8b5cf6', false, 'référence', 3);
         // Axe horizontal
         svg += `<line x1="${pad.l}" x2="${pad.l + pw}" y1="${pad.t + ph}" y2="${pad.t + ph}" stroke="${col('--border-strong')}"/>`;
         const step = niceStep(hi - lo, W < 640 ? 4 : 8);
