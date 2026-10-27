@@ -645,6 +645,17 @@
             flex: 1;
         }
 
+        .example-credit {
+            display: block;
+            margin-top: 0.35rem;
+            font-size: 0.78rem;
+            font-style: italic;
+        }
+
+        .example-credit a {
+            color: var(--ch1);
+        }
+
         .thumb {
             position: relative;
             aspect-ratio: 16 / 10;
@@ -905,7 +916,7 @@
                 </div>
 
                 <div class="example-info" id="exampleInfo" style="display: none;">
-                    <div><strong id="exampleTitle"></strong> <span id="exampleText"></span></div>
+                    <div><strong id="exampleTitle"></strong> <span id="exampleText"></span><span class="example-credit" id="exampleCredit"></span></div>
                     <button class="del-btn" id="exampleClose" title="Masquer l'explication">✕</button>
                 </div>
 
@@ -1478,6 +1489,10 @@
             title: 'Angle limite de réfraction.',
             text: 'Un pointeur laser vertical éclaire une feuille blanche placée sous la cuve. La lumière diffusée par le papier entre dans l\'eau en se réfractant : l\'angle de réfraction ne peut pas dépasser l\'angle limite iℓ, d\'où ce cône lumineux. Avec l\'outil Angle, cliquez sur le point lumineux au fond (sommet), sur le faisceau vertical (la normale), puis sur le bord du cône : l\'angle obtenu est iℓ, et n(eau) = 1 / sin iℓ. Valeur attendue : iℓ ≈ 49° pour n = 1,33 (les bords du cône sont flous : discutez l\'incertitude).',
             tool: 'angle',
+            credit: {
+                text: 'Photo : E. Etkina, G. Planinšič et M. Vollmer, « A simple optics experiment to engage students in scientific inquiry », Am. J. Phys. 81 (11), 815–822 (2013).',
+                url: 'https://doi.org/10.1119/1.4822176'
+            },
             load: done => {
                 const im = new Image();
                 im.onload = () => done(im);
@@ -1501,6 +1516,17 @@
         }
         document.getElementById('exampleTitle').textContent = ex.title;
         document.getElementById('exampleText').textContent = ex.text;
+        const credit = document.getElementById('exampleCredit');
+        credit.textContent = '';
+        if (ex.credit) {
+            credit.append(ex.credit.text + ' ');
+            const a = document.createElement('a');
+            a.href = ex.credit.url;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.textContent = `doi:${ex.credit.url.replace('https://doi.org/', '')}`;
+            credit.append(a);
+        }
         box.style.display = 'flex';
     }
 
