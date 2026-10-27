@@ -147,6 +147,16 @@
             }
         }
 
+        /* Sur grand écran, étalonnage et mesures restent visibles pendant le défilement */
+        @media (min-width: 1051px) and (min-height: 860px) {
+            .side-col {
+                position: sticky;
+                top: 1rem;
+                max-height: calc(100vh - 2rem);
+                overflow-y: auto;
+            }
+        }
+
         .main-col, .side-col {
             display: flex;
             flex-direction: column;
@@ -560,11 +570,79 @@
         }
 
         /* Affichage : canaux, histogramme, contraste */
+        .display-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            gap: 1.25rem;
+            align-items: center;
+        }
+
+        @media (max-width: 860px) {
+            .display-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
         .thumb-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 0.5rem;
-            margin-bottom: 0.6rem;
+        }
+
+        @media (max-width: 520px) {
+            .thumb-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .display-channels {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            min-width: 0;
+        }
+
+        .channel-options {
+            justify-content: center;
+        }
+
+        .display-adjust {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+        }
+
+        .adjust-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.35rem;
+        }
+
+        .example-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+            padding: 0.65rem 0.85rem;
+            background: var(--bg-recessed);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--ch2);
+            border-radius: 8px;
+            font-size: 0.84rem;
+            line-height: 1.55;
+            color: var(--text-muted);
+        }
+
+        .example-info strong {
+            color: var(--text-main);
+        }
+
+        .example-info > div {
+            flex: 1;
         }
 
         .thumb {
@@ -618,7 +696,7 @@
 
         .hist-wrap {
             position: relative;
-            height: 90px;
+            height: 80px;
             background: var(--scope-bg);
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -660,8 +738,6 @@
             font-size: 0.78rem;
             font-weight: 600;
             color: var(--text-muted);
-            text-align: center;
-            margin: 0.5rem 0 0.4rem;
         }
 
         .sat-note.warn-on {
@@ -812,7 +888,13 @@
                         <div class="toolbar">
                             <label class="file-btn btn-primary">📂 Importer une photo<input type="file" accept="image/*" class="file-input"></label>
                             <button class="btn-small webcam-btn">📷 Webcam</button>
-                            <button class="btn-small example-btn">🧪 Image d'exemple</button>
+                            <select class="example-select" title="Charger une image d'exemple">
+                                <option value="">🧪 Exemples…</option>
+                                <option value="laser">Interférences (laser rouge)</option>
+                                <option value="white">Interférences en lumière blanche</option>
+                                <option value="refraction">Angle limite (cuve à eau)</option>
+                                <option value="stars">Champ d'étoiles (photométrie)</option>
+                            </select>
                         </div>
                     </div>
                     <div class="cam-bar">
@@ -822,10 +904,54 @@
                     </div>
                 </div>
 
+                <div class="example-info" id="exampleInfo" style="display: none;">
+                    <div><strong id="exampleTitle"></strong> <span id="exampleText"></span></div>
+                    <button class="del-btn" id="exampleClose" title="Masquer l'explication">✕</button>
+                </div>
+
                 <div class="status-bar">
                     <span id="toolHelp">Molette : zoom · Glisser : déplacer la vue · Flèches : ajuster la poignée sélectionnée au pixel près</span>
                     <span class="status-coords" id="statusCoords"></span>
                 </div>
+            </div>
+
+            <!-- AFFICHAGE ET CANAUX -->
+            <div class="panel" id="displayPanel" style="display: none;">
+                <div class="panel-header">
+                    <span class="panel-title">Affichage et canaux de couleur</span>
+                    <button class="btn-small" id="displayResetBtn">Réinitialiser</button>
+                </div>
+                <div class="display-grid">
+                    <div class="display-channels">
+                    <div class="thumb-grid" id="thumbGrid">
+                        <button class="thumb active" data-mode="rgb" title="Image en couleurs"><canvas></canvas><span>Couleurs</span></button>
+                        <button class="thumb" data-mode="r" title="Canal rouge seul"><canvas></canvas><span>Rouge (R)</span></button>
+                        <button class="thumb" data-mode="g" title="Canal vert seul"><canvas></canvas><span>Vert (V)</span></button>
+                        <button class="thumb" data-mode="b" title="Canal bleu seul"><canvas></canvas><span>Bleu (B)</span></button>
+                    </div>
+                    <div class="toolbar channel-options">
+                        <label class="check-row" style="margin: 0;"><input type="checkbox" id="tintCheck" checked> Canal seul dans sa couleur</label>
+                        <select id="lutSelect" title="Palette utilisée pour un canal seul">
+                            <option value="gray">Palette : canal</option>
+                            <option value="fire">Fausses couleurs : feu</option>
+                            <option value="rainbow">Fausses couleurs : arc-en-ciel</option>
+                        </select>
+                    </div>
+                    </div>
+                    <div class="display-adjust">
+                        <div class="hist-wrap"><canvas id="histCanvas"></canvas></div>
+                        <div class="range-row"><span>Min</span><input type="range" id="minRange" min="0" max="254" value="0"><span class="rv" id="minVal">0</span></div>
+                        <div class="range-row"><span>Max</span><input type="range" id="maxRange" min="1" max="255" value="255"><span class="rv" id="maxVal">255</span></div>
+                        <div class="adjust-foot">
+                            <span class="sat-note" id="satNote"></span>
+                            <div class="toolbar">
+                                <button class="btn-small" id="autoContrastBtn" title="Étaler les valeurs présentes sur toute l'échelle (0,35 % des pixels écrêtés de chaque côté)">Contraste auto</button>
+                                <button class="btn-small" id="invertBtn" title="Négatif de l'image">Inverser</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="empty-note" style="margin-top: 0.75rem; text-align: center;">Ces réglages ne changent que l'affichage : les mesures utilisent toujours les valeurs d'origine des pixels.</div>
             </div>
 
             <!-- PROFIL DE LUMINOSITÉ -->
@@ -903,7 +1029,13 @@
                 <div class="toolbar" style="margin-bottom: 0.75rem;">
                     <label class="file-btn">📂 Importer<input type="file" accept="image/*" class="file-input"></label>
                     <button class="btn-small webcam-btn">📷 Webcam</button>
-                    <button class="btn-small example-btn">🧪 Exemple</button>
+                    <select class="example-select" title="Charger une image d'exemple">
+                        <option value="">🧪 Exemples…</option>
+                        <option value="laser">Interférences (laser rouge)</option>
+                        <option value="white">Interférences en lumière blanche</option>
+                        <option value="refraction">Angle limite (cuve à eau)</option>
+                        <option value="stars">Champ d'étoiles (photométrie)</option>
+                    </select>
                 </div>
                 <div class="stat-grid">
                     <div class="stat">
@@ -917,39 +1049,10 @@
                 </div>
             </div>
 
-            <!-- 2. AFFICHAGE -->
+            <!-- 2. ÉTALONNAGE -->
             <div class="panel">
                 <div class="panel-header">
-                    <span class="panel-title"><span class="step-num">2</span> Affichage</span>
-                    <button class="btn-small" id="displayResetBtn">Réinitialiser</button>
-                </div>
-                <div class="thumb-grid" id="thumbGrid">
-                    <button class="thumb active" data-mode="rgb" title="Image en couleurs"><canvas></canvas><span>Couleurs</span></button>
-                    <button class="thumb" data-mode="r" title="Canal rouge seul"><canvas></canvas><span>Rouge (R)</span></button>
-                    <button class="thumb" data-mode="g" title="Canal vert seul"><canvas></canvas><span>Vert (V)</span></button>
-                    <button class="thumb" data-mode="b" title="Canal bleu seul"><canvas></canvas><span>Bleu (B)</span></button>
-                </div>
-                <label class="check-row"><input type="checkbox" id="tintCheck" checked> Canal seul affiché dans sa couleur</label>
-                <div class="hist-wrap"><canvas id="histCanvas"></canvas></div>
-                <div class="range-row"><span>Min</span><input type="range" id="minRange" min="0" max="254" value="0"><span class="rv" id="minVal">0</span></div>
-                <div class="range-row"><span>Max</span><input type="range" id="maxRange" min="1" max="255" value="255"><span class="rv" id="maxVal">255</span></div>
-                <div class="sat-note" id="satNote"></div>
-                <div class="toolbar" style="justify-content: center;">
-                    <button class="btn-small" id="autoContrastBtn" title="Étaler les valeurs présentes sur toute l'échelle (0,35 % des pixels écrêtés de chaque côté)">Contraste auto</button>
-                    <button class="btn-small" id="invertBtn" title="Négatif de l'image">Inverser</button>
-                    <select id="lutSelect" title="Palette utilisée pour un canal seul">
-                        <option value="gray">Palette : canal</option>
-                        <option value="fire">Fausses couleurs : feu</option>
-                        <option value="rainbow">Fausses couleurs : arc-en-ciel</option>
-                    </select>
-                </div>
-                <div class="empty-note" style="margin-top: 0.6rem; text-align: center;">Ces réglages ne changent que l'affichage : les mesures utilisent toujours les valeurs d'origine des pixels.</div>
-            </div>
-
-            <!-- 3. ÉTALONNAGE -->
-            <div class="panel">
-                <div class="panel-header">
-                    <span class="panel-title"><span class="step-num">3</span> Étalonnage</span>
+                    <span class="panel-title"><span class="step-num">2</span> Étalonnage</span>
                     <span class="calib-state" id="calibState">À faire</span>
                 </div>
                 <div class="help-box" style="border-left-color: var(--ch2);">
@@ -980,7 +1083,7 @@
             <!-- 3. MESURES -->
             <div class="panel">
                 <div class="panel-header">
-                    <span class="panel-title"><span class="step-num">4</span> Mesures</span>
+                    <span class="panel-title"><span class="step-num">3</span> Mesures</span>
                     <div class="toolbar">
                         <button class="btn-small" id="measuresCsvBtn" title="Exporter la liste des mesures">CSV</button>
                         <button class="btn-small" id="clearMeasuresBtn">Tout effacer</button>
@@ -1126,6 +1229,8 @@
     const emptyState = document.getElementById('emptyState');
 
     function setImage(source, w, h) {
+        showExampleInfo(null);
+        document.getElementById('displayPanel').style.display = '';
         const c = document.createElement('canvas');
         c.width = w;
         c.height = h;
@@ -1193,37 +1298,33 @@
         if (item) loadFile(item.getAsFile());
     });
 
-    // Image d'exemple : franges d'interférence modulées par la diffraction, et règle graduée
-    function makeExample() {
-        const W = 1600, H = 900;
+    // --- Images d'exemple ---
+    // Générateur pseudo-aléatoire à graine fixe : les exemples sont identiques à chaque chargement
+    function seededRandom(seed) {
+        return () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    }
+
+    function blankCanvas(W, H, color) {
         const c = document.createElement('canvas');
         c.width = W;
         c.height = H;
         const cx = c.getContext('2d');
-        cx.fillStyle = '#0b0b0e';
+        cx.fillStyle = color;
         cx.fillRect(0, 0, W, H);
+        return { c, cx };
+    }
 
-        const img = cx.getImageData(0, 0, W, H);
-        const i0 = 38;      // interfrange (px)
-        const half = 230;   // demi-largeur de la tache centrale de diffraction (px)
-        const xc = W / 2, yc = 330;
-        for (let y = 140; y < 520; y++) {
-            const vy = Math.exp(-Math.pow((y - yc) / 120, 2));
-            for (let x = 0; x < W; x++) {
-                const u = Math.PI * (x - xc) / half;
-                const sinc = u === 0 ? 1 : Math.sin(u) / u;
-                const I = 0.95 * sinc * sinc * Math.pow(Math.cos(Math.PI * (x - xc) / i0), 2) * vy;
-                const v = Math.pow(Math.min(1, I + 0.015 * Math.random()), 1 / 2.2); // codage gamma comme un appareil photo
-                const k = (y * W + x) * 4;
-                img.data[k] = Math.round(255 * v);
-                img.data[k + 1] = Math.round(40 * v * v);
-                img.data[k + 2] = Math.round(30 * v * v);
-            }
-        }
-        cx.putImageData(img, 0, 0);
+    function drawCaption(cx, text) {
+        cx.fillStyle = '#94a3b8';
+        cx.font = '600 22px Inter, sans-serif';
+        cx.textAlign = 'left';
+        cx.textBaseline = 'alphabetic';
+        cx.fillText(text, 40, 60);
+    }
 
-        // Règle : 1 mm = 10 px
-        const rx = 300, ry = 700, mm = 10;
+    // Règle graduée : 1 mm = 10 px, de 0 à 10 cm
+    function drawRuler(cx, rx, ry) {
+        const mm = 10;
         cx.fillStyle = '#e7e2cf';
         cx.fillRect(rx - 30, ry, 1000 + 60, 110);
         cx.strokeStyle = '#1f2937';
@@ -1242,14 +1343,186 @@
         }
         cx.font = '600 18px Inter, sans-serif';
         cx.fillText('cm', rx + 1000 + 2, ry + 96);
-        cx.fillStyle = '#94a3b8';
-        cx.font = '600 22px Inter, sans-serif';
-        cx.textAlign = 'left';
-        cx.fillText('Image d\'exemple : franges d\'interférence (fentes d\'Young) photographiées avec une règle', 40, 60);
-        setImage(c, W, H);
     }
 
-    document.querySelectorAll('.example-btn').forEach(b => b.addEventListener('click', makeExample));
+    // Fentes d'Young : franges modulées par la diffraction, en laser rouge ou en lumière blanche.
+    // Interfrange et largeur de la tache centrale proportionnels à λ (i = λD/a).
+    function makeFringes(white) {
+        const W = 1600, H = 900, xc = W / 2;
+        const { c, cx } = blankCanvas(W, H, '#0b0b0e');
+        const rnd = seededRandom(white ? 7 : 3);
+        const img = cx.getImageData(0, 0, W, H);
+        // Profil horizontal de chaque canal (R, V, B), entre 0 et 1
+        const prof = [new Float64Array(W), new Float64Array(W), new Float64Array(W)];
+        if (!white) {
+            const i0 = 38, half = 230; // interfrange et demi-largeur de la tache centrale (px)
+            for (let x = 0; x < W; x++) {
+                const u = Math.PI * (x - xc) / half;
+                const sinc = u === 0 ? 1 : Math.sin(u) / u;
+                prof[0][x] = sinc * sinc * Math.pow(Math.cos(Math.PI * (x - xc) / i0), 2);
+            }
+        } else {
+            // Sensibilités spectrales (gaussiennes) des trois canaux d'un capteur photo
+            const sens = [[600, 35], [535, 35], [455, 28]];
+            const i550 = 40, half550 = 300;
+            for (let ch = 0; ch < 3; ch++) {
+                let norm = 0;
+                for (let l = 400; l <= 700; l += 4) {
+                    const wgt = Math.exp(-Math.pow((l - sens[ch][0]) / sens[ch][1], 2));
+                    norm += wgt;
+                    const k = l / 550;
+                    for (let x = 0; x < W; x++) {
+                        const u = Math.PI * (x - xc) / (half550 * k);
+                        const sinc = u === 0 ? 1 : Math.sin(u) / u;
+                        prof[ch][x] += wgt * sinc * sinc * Math.pow(Math.cos(Math.PI * (x - xc) / (i550 * k)), 2);
+                    }
+                }
+                for (let x = 0; x < W; x++) prof[ch][x] /= norm;
+            }
+        }
+        for (let y = 140; y < 520; y++) {
+            const vy = Math.exp(-Math.pow((y - 330) / 120, 2));
+            for (let x = 0; x < W; x++) {
+                const k = (y * W + x) * 4;
+                if (!white) {
+                    const v = Math.pow(Math.min(1, 0.95 * prof[0][x] * vy + 0.015 * rnd()), 1 / 2.2); // codage gamma
+                    img.data[k] = Math.round(255 * v);
+                    img.data[k + 1] = Math.round(40 * v * v);
+                    img.data[k + 2] = Math.round(30 * v * v);
+                } else {
+                    for (let ch = 0; ch < 3; ch++) {
+                        img.data[k + ch] = Math.round(255 * Math.pow(Math.min(1, 0.92 * prof[ch][x] * vy + 0.015 * rnd()), 1 / 2.2));
+                    }
+                }
+            }
+        }
+        cx.putImageData(img, 0, 0);
+        drawRuler(cx, 300, 700);
+        drawCaption(cx, white
+            ? 'Fentes d\'Young éclairées en lumière blanche, photographiées avec une règle (image simulée)'
+            : 'Fentes d\'Young éclairées par un laser rouge, photographiées avec une règle (image simulée)');
+        return c;
+    }
+
+    // Champ d'étoiles : profils gaussiens, flux F = F₅ × 10^(−0,4 (m − 5)) en luminance
+    function makeStars() {
+        const W = 1200, H = 800;
+        const { c, cx } = blankCanvas(W, H, '#000');
+        const rnd = seededRandom(11);
+        const buf = [new Float32Array(W * H), new Float32Array(W * H), new Float32Array(W * H)];
+        const sky = [10, 12, 18];
+        for (let q = 0; q < W * H; q++) {
+            for (let ch = 0; ch < 3; ch++) buf[ch][q] = sky[ch] + (rnd() + rnd() + rnd() - 1.5) * 3;
+        }
+        // Couleurs normalisées pour que la luminance (0,2126 R + 0,7152 V + 0,0722 B) vaille 1
+        const tints = { white: [1, 1, 1], yellow: [1.15, 1, 0.75], red: [1.55, 0.9, 0.55], blue: [0.7, 0.95, 1.7] };
+        Object.keys(tints).forEach(k => {
+            const t = tints[k], n = 0.2126 * t[0] + 0.7152 * t[1] + 0.0722 * t[2];
+            tints[k] = t.map(v => v / n);
+        });
+        const sig = 2.6;
+        const addStar = (x, y, m, tint) => {
+            const F = 9000 * Math.pow(10, -0.4 * (m - 5));
+            const a = F / (2 * Math.PI * sig * sig);
+            const R = Math.ceil(5 * sig);
+            for (let yy = Math.max(0, Math.floor(y - R)); yy <= Math.min(H - 1, y + R); yy++) {
+                for (let xx = Math.max(0, Math.floor(x - R)); xx <= Math.min(W - 1, x + R); xx++) {
+                    const g = a * Math.exp(-((xx + 0.5 - x) ** 2 + (yy + 0.5 - y) ** 2) / (2 * sig * sig));
+                    for (let ch = 0; ch < 3; ch++) buf[ch][yy * W + xx] += g * tints[tint][ch];
+                }
+            }
+        };
+        const named = [
+            ['A', 330, 420, 5.0, 'yellow'],
+            ['B', 760, 300, 6.3, 'white'],
+            ['C', 930, 600, 3.6, 'white'],
+            ['D', 560, 640, 5.5, 'red'],
+            ['E', 200, 210, 5.5, 'blue']
+        ];
+        named.forEach(([, x, y, m, t]) => addStar(x, y, m, t));
+        const kinds = ['white', 'yellow', 'red', 'blue'];
+        for (let k = 0; k < 160; k++) {
+            const x = 20 + rnd() * (W - 40), y = 90 + rnd() * (H - 110);
+            if (named.some(([, nx, ny]) => Math.hypot(nx - x, ny - y) < 60)) continue;
+            addStar(x, y, 7.5 + 3.5 * rnd(), kinds[Math.floor(rnd() * 4)]);
+        }
+        const img = cx.createImageData(W, H);
+        for (let q = 0; q < W * H; q++) {
+            for (let ch = 0; ch < 3; ch++) img.data[q * 4 + ch] = Math.max(0, Math.min(255, Math.round(buf[ch][q])));
+            img.data[q * 4 + 3] = 255;
+        }
+        cx.putImageData(img, 0, 0);
+        cx.fillStyle = '#9ca3af';
+        cx.font = '600 20px Inter, sans-serif';
+        cx.textAlign = 'left';
+        named.forEach(([name, x, y]) => cx.fillText(name, x + 18, y - 14));
+        cx.font = '600 18px Inter, sans-serif';
+        cx.fillText('Champ d\'étoiles simulé — A : étoile de référence, magnitude m = 5,0', 24, 40);
+        return c;
+    }
+
+    const EXAMPLES = {
+        laser: {
+            title: 'Interférences en lumière laser.',
+            text: 'Étalonnez sur la règle (A et B sur deux graduations, longueur en cm), tracez un profil perpendiculaire aux franges, puis mesurez l\'interfrange i sur plusieurs franges. Astuce : les franges sombres se pointent plus précisément que les brillantes, dont les maxima sont décalés par l\'enveloppe de diffraction.',
+            tool: 'move',
+            load: done => done(makeFringes(false))
+        },
+        white: {
+            title: 'Interférences en lumière blanche.',
+            text: 'La frange centrale est blanche, les suivantes sont irisées : l\'interfrange i = λD/a dépend de la longueur d\'onde. Cliquez sur les vignettes R, V et B sous l\'image : chaque canal montre des franges d\'espacement différent. Tracez un profil, choisissez successivement les canaux Rouge, Vert et Bleu dans le menu « Canal » et mesurez i : on trouve i(R) > i(V) > i(B), car λ(rouge) > λ(vert) > λ(bleu).',
+            tool: 'move',
+            load: done => done(makeFringes(true))
+        },
+        refraction: {
+            title: 'Angle limite de réfraction.',
+            text: 'Un pointeur laser vertical éclaire une feuille blanche placée sous la cuve. La lumière diffusée par le papier entre dans l\'eau en se réfractant : l\'angle de réfraction ne peut pas dépasser l\'angle limite iℓ, d\'où ce cône lumineux. Avec l\'outil Angle, cliquez sur le point lumineux au fond (sommet), sur le faisceau vertical (la normale), puis sur le bord du cône : l\'angle obtenu est iℓ, et n(eau) = 1 / sin iℓ. Valeur attendue : iℓ ≈ 49° pour n = 1,33 (les bords du cône sont flous : discutez l\'incertitude).',
+            tool: 'angle',
+            load: done => {
+                const im = new Image();
+                im.onload = () => done(im);
+                im.onerror = () => alert('Impossible de charger la photo d\'exemple.');
+                im.src = 'images/exemple-angle-limite.webp';
+            }
+        },
+        stars: {
+            title: 'Photométrie d\'étoiles.',
+            text: 'L\'éclat d\'une étoile se mesure par son flux Φ : la somme des valeurs des pixels de l\'étoile, moins le fond de ciel. Avec l\'outil Photométrie, placez une ouverture sur A (la référence, m = 5,0), puis sur B avec le même rayon (environ trois fois la largeur apparente de l\'étoile) : l\'outil affiche Δm = −2,5 log(Φ_B / Φ_A), d\'où m_B = m_A + Δm. L\'étoile C est saturée : l\'alerte ⚠ signale que son flux est sous-estimé. Enfin, mesurez D et E en affichant le canal bleu puis le canal rouge : l\'étoile relativement plus brillante dans le bleu est la plus chaude.',
+            tool: 'phot',
+            load: done => done(makeStars())
+        }
+    };
+
+    function showExampleInfo(ex) {
+        const box = document.getElementById('exampleInfo');
+        if (!ex) {
+            box.style.display = 'none';
+            return;
+        }
+        document.getElementById('exampleTitle').textContent = ex.title;
+        document.getElementById('exampleText').textContent = ex.text;
+        box.style.display = 'flex';
+    }
+
+    function loadExample(name) {
+        const ex = EXAMPLES[name];
+        if (!ex) return;
+        stopWebcam();
+        ex.load(src => {
+            setImage(src, src.naturalWidth || src.width, src.naturalHeight || src.height);
+            showExampleInfo(ex);
+            setTool(ex.tool);
+        });
+    }
+
+    document.querySelectorAll('.example-select').forEach(sel => {
+        sel.addEventListener('change', () => {
+            loadExample(sel.value);
+            sel.value = '';
+        });
+    });
+
+    document.getElementById('exampleClose').addEventListener('click', () => showExampleInfo(null));
 
     // Webcam
     const camVideo = document.getElementById('camVideo');
