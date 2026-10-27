@@ -24,6 +24,7 @@
             --ch2-glow: rgba(245, 158, 11, 0.25);
             --sum: #10b981;
             --angle: #a855f7;
+            --phot: #ec4899;
             --danger: #ef4444;
             --scope-bg: #090d16;
             --shadow-panel: 0 10px 25px -5px rgba(15, 23, 42, 0.07), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
@@ -44,6 +45,7 @@
             --ch2-glow: rgba(251, 191, 36, 0.3);
             --sum: #34d399;
             --angle: #c084fc;
+            --phot: #f472b6;
             --scope-bg: #050811;
             --shadow-panel: 0 12px 30px -5px rgba(0, 0, 0, 0.5);
         }
@@ -557,6 +559,115 @@
             font-weight: 600;
         }
 
+        /* Affichage : canaux, histogramme, contraste */
+        .thumb-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .thumb {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            padding: 0;
+            border: 2px solid var(--border);
+            border-radius: 9px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--scope-bg);
+        }
+
+        .thumb canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .thumb span {
+            position: absolute;
+            left: 50%;
+            bottom: 5px;
+            transform: translateX(-50%);
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: rgba(15, 23, 42, 0.78);
+            padding: 0.1rem 0.45rem;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+        .thumb.active {
+            border-color: var(--ch1);
+            box-shadow: 0 0 0 2px var(--ch1-glow);
+        }
+
+        .check-row {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            margin-bottom: 0.6rem;
+        }
+
+        .hist-wrap {
+            position: relative;
+            height: 90px;
+            background: var(--scope-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 0.6rem;
+        }
+
+        .hist-wrap canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .range-row {
+            display: grid;
+            grid-template-columns: 2.4rem 1fr 2.4rem;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .range-row input[type="range"] {
+            width: 100%;
+            accent-color: var(--ch1);
+        }
+
+        .range-row .rv {
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            color: var(--text-main);
+        }
+
+        .sat-note {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-align: center;
+            margin: 0.5rem 0 0.4rem;
+        }
+
+        .sat-note.warn-on {
+            color: var(--danger);
+        }
+
         /* Profil d'intensité */
         .profile-screen {
             position: relative;
@@ -665,7 +776,7 @@
             </div>
             <div>
                 <h1>Banc de mesure sur image</h1>
-                <div class="subtitle">Étalonnage, règle et rapporteur virtuels, profil de luminosité sur une photo</div>
+                <div class="subtitle">Étalonnage, règle et rapporteur virtuels, canaux de couleur, profil de luminosité et photométrie sur une photo</div>
             </div>
         </div>
         <button class="theme-toggle" id="themeBtn" title="Changer le thème (Clair / Sombre)">🌓</button>
@@ -681,6 +792,7 @@
                         <button class="seg-btn" data-tool="dist" title="Mesurer une distance (D)"><span class="dot" style="background: var(--ch1);"></span>Distance</button>
                         <button class="seg-btn" data-tool="angle" title="Mesurer un angle (A)"><span class="dot" style="background: var(--angle);"></span>Angle</button>
                         <button class="seg-btn" data-tool="profile" title="Tracer un profil de luminosité (P)"><span class="dot" style="background: var(--sum);"></span>Profil I(x)</button>
+                        <button class="seg-btn" data-tool="phot" title="Photométrie d'ouverture (F)"><span class="dot" style="background: var(--phot);"></span>Photométrie</button>
                     </div>
                     <div class="toolbar">
                         <button class="btn-small" id="zoomOutBtn" title="Dézoomer">−</button>
@@ -805,10 +917,39 @@
                 </div>
             </div>
 
-            <!-- 2. ÉTALONNAGE -->
+            <!-- 2. AFFICHAGE -->
             <div class="panel">
                 <div class="panel-header">
-                    <span class="panel-title"><span class="step-num">2</span> Étalonnage</span>
+                    <span class="panel-title"><span class="step-num">2</span> Affichage</span>
+                    <button class="btn-small" id="displayResetBtn">Réinitialiser</button>
+                </div>
+                <div class="thumb-grid" id="thumbGrid">
+                    <button class="thumb active" data-mode="rgb" title="Image en couleurs"><canvas></canvas><span>Couleurs</span></button>
+                    <button class="thumb" data-mode="r" title="Canal rouge seul"><canvas></canvas><span>Rouge (R)</span></button>
+                    <button class="thumb" data-mode="g" title="Canal vert seul"><canvas></canvas><span>Vert (V)</span></button>
+                    <button class="thumb" data-mode="b" title="Canal bleu seul"><canvas></canvas><span>Bleu (B)</span></button>
+                </div>
+                <label class="check-row"><input type="checkbox" id="tintCheck" checked> Canal seul affiché dans sa couleur</label>
+                <div class="hist-wrap"><canvas id="histCanvas"></canvas></div>
+                <div class="range-row"><span>Min</span><input type="range" id="minRange" min="0" max="254" value="0"><span class="rv" id="minVal">0</span></div>
+                <div class="range-row"><span>Max</span><input type="range" id="maxRange" min="1" max="255" value="255"><span class="rv" id="maxVal">255</span></div>
+                <div class="sat-note" id="satNote"></div>
+                <div class="toolbar" style="justify-content: center;">
+                    <button class="btn-small" id="autoContrastBtn" title="Étaler les valeurs présentes sur toute l'échelle (0,35 % des pixels écrêtés de chaque côté)">Contraste auto</button>
+                    <button class="btn-small" id="invertBtn" title="Négatif de l'image">Inverser</button>
+                    <select id="lutSelect" title="Palette utilisée pour un canal seul">
+                        <option value="gray">Palette : canal</option>
+                        <option value="fire">Fausses couleurs : feu</option>
+                        <option value="rainbow">Fausses couleurs : arc-en-ciel</option>
+                    </select>
+                </div>
+                <div class="empty-note" style="margin-top: 0.6rem; text-align: center;">Ces réglages ne changent que l'affichage : les mesures utilisent toujours les valeurs d'origine des pixels.</div>
+            </div>
+
+            <!-- 3. ÉTALONNAGE -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title"><span class="step-num">3</span> Étalonnage</span>
                     <span class="calib-state" id="calibState">À faire</span>
                 </div>
                 <div class="help-box" style="border-left-color: var(--ch2);">
@@ -839,11 +980,14 @@
             <!-- 3. MESURES -->
             <div class="panel">
                 <div class="panel-header">
-                    <span class="panel-title"><span class="step-num">3</span> Mesures</span>
-                    <button class="btn-small" id="clearMeasuresBtn">Tout effacer</button>
+                    <span class="panel-title"><span class="step-num">4</span> Mesures</span>
+                    <div class="toolbar">
+                        <button class="btn-small" id="measuresCsvBtn" title="Exporter la liste des mesures">CSV</button>
+                        <button class="btn-small" id="clearMeasuresBtn">Tout effacer</button>
+                    </div>
                 </div>
                 <ul class="measure-list" id="measureList"></ul>
-                <div class="empty-note" id="measureEmpty">Choisissez l'outil Distance ou Angle, puis cliquez sur l'image.</div>
+                <div class="empty-note" id="measureEmpty">Choisissez l'outil Distance, Angle ou Photométrie, puis cliquez sur l'image.</div>
             </div>
 
         </aside>
@@ -898,6 +1042,9 @@
     const S = {
         img: null,          // canevas contenant l'image à sa résolution native
         data: null,         // pixels RGBA de l'image
+        disp: null,         // canevas affiché (canal, contraste, palette appliqués)
+        hist: null,         // histogrammes { r, g, b } (256 classes)
+        display: { mode: 'rgb', tint: true, min: 0, max: 255, invert: false, lut: 'gray' },
         W: 0,
         H: 0,
         view: { s: 1, tx: 0, ty: 0 },
@@ -905,7 +1052,7 @@
         tool: 'move',
         calib: { a: { x: 0, y: 0 }, b: { x: 0, y: 0 }, len: 10, unit: 'cm', set: false },
         objects: [],        // mesures : { type: 'dist' | 'angle', n, pts }
-        counters: { dist: 0, angle: 0 },
+        counters: { dist: 0, angle: 0, phot: 0 },
         profile: null,      // { a, b }
         profileData: null,  // { values: Float64Array, step (px), saturated (fraction) }
         cursors: [0, 0],    // positions des curseurs le long du profil (px)
@@ -923,7 +1070,7 @@
     const COLORS = {};
     function readColors() {
         const st = getComputedStyle(document.documentElement);
-        ['ch1', 'ch2', 'sum', 'angle'].forEach(k => COLORS[k] = st.getPropertyValue('--' + k).trim());
+        ['ch1', 'ch2', 'sum', 'angle', 'phot'].forEach(k => COLORS[k] = st.getPropertyValue('--' + k).trim());
     }
 
     // --- 3. Unités et formatage ---
@@ -988,6 +1135,7 @@
         S.data = cx.getImageData(0, 0, w, h).data;
         S.W = w;
         S.H = h;
+        onPixelsChanged();
         resetMeasurements();
         emptyState.style.display = 'none';
         document.getElementById('imgSize').textContent = `${w} × ${h}`;
@@ -1002,7 +1150,7 @@
         S.calib.b = { x: Math.round(W * 0.7), y: Math.round(H * 0.9) };
         S.calib.set = false;
         S.objects = [];
-        S.counters = { dist: 0, angle: 0 };
+        S.counters = { dist: 0, angle: 0, phot: 0 };
         S.profile = null;
         S.profileData = null;
         S.pending = null;
@@ -1170,6 +1318,7 @@
         S.data = cx.getImageData(0, 0, H, W).data;
         S.W = H;
         S.H = W;
+        onPixelsChanged();
         document.getElementById('imgSize').textContent = `${S.W} × ${S.H}`;
         S.autoFit = true;
         sizeStage();
@@ -1183,6 +1332,300 @@
         S.objects.forEach(o => pts.push(...o.pts));
         if (S.profile) pts.push(S.profile.a, S.profile.b);
         return pts;
+    }
+
+    // --- Affichage : canaux, contraste, palettes, histogramme ---
+    const CHANNEL_INDEX = { r: 0, g: 1, b: 2 };
+    const CHANNEL_NAMES = { lum: 'luminance', r: 'rouge', g: 'vert', b: 'bleu' };
+
+    // Palettes de fausses couleurs : t ∈ [0, 1] → [R, V, B]
+    const LUT_STOPS = {
+        fire: [[0, 0, 0], [40, 0, 110], [140, 0, 160], [220, 40, 40], [255, 140, 0], [255, 230, 60], [255, 255, 255]],
+        rainbow: [[20, 0, 80], [0, 60, 255], [0, 200, 255], [0, 220, 80], [240, 230, 0], [255, 120, 0], [230, 0, 0]]
+    };
+
+    function lutColor(name, t) {
+        const st = LUT_STOPS[name];
+        const x = Math.max(0, Math.min(1, t)) * (st.length - 1);
+        const j = Math.min(st.length - 2, Math.floor(x)), f = x - j;
+        return [0, 1, 2].map(c => st[j][c] + f * (st[j + 1][c] - st[j][c]));
+    }
+
+    function onPixelsChanged() {
+        const { data } = S;
+        const r = new Uint32Array(256), g = new Uint32Array(256), b = new Uint32Array(256);
+        for (let k = 0; k < data.length; k += 4) {
+            r[data[k]]++;
+            g[data[k + 1]]++;
+            b[data[k + 2]]++;
+        }
+        S.hist = { r, g, b };
+        S.disp = document.createElement('canvas');
+        S.disp.width = S.W;
+        S.disp.height = S.H;
+        photCache = new WeakMap();
+        buildDisplay();
+        renderThumbs();
+    }
+
+    // Construit l'image affichée à partir des pixels d'origine (sans jamais les modifier)
+    function buildDisplay() {
+        if (!S.img) return;
+        const { mode, tint, min, max, invert, lut } = S.display;
+        const level = new Uint8ClampedArray(256);
+        for (let v = 0; v < 256; v++) {
+            let t = Math.max(0, Math.min(1, (v - min) / Math.max(1, max - min)));
+            if (invert) t = 1 - t;
+            level[v] = Math.round(255 * t);
+        }
+        const ctx = S.disp.getContext('2d');
+        const out = ctx.createImageData(S.W, S.H);
+        const o = out.data, d = S.data;
+        if (mode === 'rgb') {
+            for (let k = 0; k < d.length; k += 4) {
+                o[k] = level[d[k]];
+                o[k + 1] = level[d[k + 1]];
+                o[k + 2] = level[d[k + 2]];
+                o[k + 3] = 255;
+            }
+        } else {
+            const ci = CHANNEL_INDEX[mode];
+            const pal = new Uint8ClampedArray(256 * 3);
+            for (let v = 0; v < 256; v++) {
+                const L = level[v];
+                const c = lut !== 'gray' ? lutColor(lut, L / 255) : tint ? [ci === 0 ? L : 0, ci === 1 ? L : 0, ci === 2 ? L : 0] : [L, L, L];
+                pal[v * 3] = c[0];
+                pal[v * 3 + 1] = c[1];
+                pal[v * 3 + 2] = c[2];
+            }
+            for (let k = 0; k < d.length; k += 4) {
+                const q = d[k + ci] * 3;
+                o[k] = pal[q];
+                o[k + 1] = pal[q + 1];
+                o[k + 2] = pal[q + 2];
+                o[k + 3] = 255;
+            }
+        }
+        ctx.putImageData(out, 0, 0);
+        drawHistogram();
+    }
+
+    // Vignettes de la décomposition en canaux (chaque canal dans sa couleur)
+    function renderThumbs() {
+        document.querySelectorAll('#thumbGrid .thumb').forEach(btn => {
+            const cv = btn.querySelector('canvas');
+            const dpr = window.devicePixelRatio || 1;
+            const r = cv.getBoundingClientRect();
+            cv.width = Math.max(1, Math.round(r.width * dpr));
+            cv.height = Math.max(1, Math.round(r.height * dpr));
+            const ctx = cv.getContext('2d', { willReadFrequently: true });
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, cv.width, cv.height);
+            if (!S.img) return;
+            const k = Math.min(cv.width / S.W, cv.height / S.H);
+            const w = Math.max(1, Math.round(S.W * k)), h = Math.max(1, Math.round(S.H * k));
+            const x0 = Math.round((cv.width - w) / 2), y0 = Math.round((cv.height - h) / 2);
+            ctx.drawImage(S.img, x0, y0, w, h);
+            const ci = CHANNEL_INDEX[btn.dataset.mode];
+            if (ci === undefined) return;
+            const im = ctx.getImageData(x0, y0, w, h);
+            for (let q = 0; q < im.data.length; q += 4) {
+                for (let c = 0; c < 3; c++) if (c !== ci) im.data[q + c] = 0;
+            }
+            ctx.putImageData(im, x0, y0);
+        });
+    }
+
+    function drawHistogram() {
+        const cv = document.getElementById('histCanvas');
+        const { W, H, dpr } = fitCanvas(cv);
+        const ctx = cv.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        const note = document.getElementById('satNote');
+        if (!S.hist) {
+            note.textContent = '';
+            return;
+        }
+        const { mode, min, max } = S.display;
+        const chans = mode === 'rgb' ? ['r', 'g', 'b'] : [mode];
+        const colors = { r: 'rgba(239, 68, 68, 0.75)', g: 'rgba(34, 197, 94, 0.75)', b: 'rgba(59, 130, 246, 0.75)' };
+        // Échelle logarithmique : les petites populations restent visibles
+        let top = 1;
+        chans.forEach(c => { for (let v = 0; v < 256; v++) top = Math.max(top, S.hist[c][v]); });
+        const yOf = n => H - 2 - (H - 6) * Math.log1p(n) / Math.log1p(top);
+        ctx.globalCompositeOperation = 'lighter';
+        chans.forEach(c => {
+            ctx.beginPath();
+            ctx.moveTo(0, H);
+            for (let v = 0; v < 256; v++) ctx.lineTo((v + 0.5) / 256 * W, yOf(S.hist[c][v]));
+            ctx.lineTo(W, H);
+            ctx.closePath();
+            ctx.fillStyle = colors[c];
+            ctx.fill();
+        });
+        ctx.globalCompositeOperation = 'source-over';
+        // Zones hors de la plage affichée
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+        ctx.fillRect(0, 0, min / 256 * W, H);
+        ctx.fillRect((max + 1) / 256 * W, 0, W, H);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.setLineDash([3, 3]);
+        [min, max + 1].forEach(v => {
+            ctx.beginPath();
+            ctx.moveTo(v / 256 * W, 0);
+            ctx.lineTo(v / 256 * W, H);
+            ctx.stroke();
+        });
+        ctx.setLineDash([]);
+        const N = S.W * S.H;
+        const pct = c => S.hist[c][255] / N * 100;
+        const fmtPct = c => `${fmtNum(pct(c), 2)} %`;
+        note.textContent = mode === 'rgb'
+            ? `Pixels saturés (255) : R ${fmtPct('r')} · V ${fmtPct('g')} · B ${fmtPct('b')}`
+            : `Pixels saturés (255) dans ce canal : ${fmtPct(mode)}`;
+        note.classList.toggle('warn-on', chans.some(c => pct(c) > 0.5));
+    }
+
+    let displayQueued = false;
+    function scheduleDisplay() {
+        if (displayQueued) return;
+        displayQueued = true;
+        requestAnimationFrame(() => {
+            displayQueued = false;
+            buildDisplay();
+            requestRender();
+        });
+    }
+
+    const minRange = document.getElementById('minRange');
+    const maxRange = document.getElementById('maxRange');
+
+    function syncDisplayControls() {
+        const D = S.display;
+        minRange.value = D.min;
+        maxRange.value = D.max;
+        document.getElementById('minVal').textContent = D.min;
+        document.getElementById('maxVal').textContent = D.max;
+        document.getElementById('tintCheck').checked = D.tint;
+        document.getElementById('invertBtn').classList.toggle('active', D.invert);
+        document.getElementById('lutSelect').value = D.lut;
+        document.getElementById('lutSelect').disabled = D.mode === 'rgb';
+        document.getElementById('tintCheck').disabled = D.mode === 'rgb' || D.lut !== 'gray';
+        document.querySelectorAll('#thumbGrid .thumb').forEach(b => b.classList.toggle('active', b.dataset.mode === D.mode));
+    }
+
+    document.querySelectorAll('#thumbGrid .thumb').forEach(btn => {
+        btn.addEventListener('click', () => {
+            S.display.mode = btn.dataset.mode;
+            syncDisplayControls();
+            scheduleDisplay();
+            updatePanels(); // la photométrie mesure le canal affiché
+        });
+    });
+
+    minRange.addEventListener('input', () => {
+        S.display.min = Math.min(parseInt(minRange.value, 10), S.display.max - 1);
+        syncDisplayControls();
+        scheduleDisplay();
+    });
+
+    maxRange.addEventListener('input', () => {
+        S.display.max = Math.max(parseInt(maxRange.value, 10), S.display.min + 1);
+        syncDisplayControls();
+        scheduleDisplay();
+    });
+
+    document.getElementById('tintCheck').addEventListener('change', (e) => {
+        S.display.tint = e.target.checked;
+        scheduleDisplay();
+    });
+
+    document.getElementById('invertBtn').addEventListener('click', () => {
+        S.display.invert = !S.display.invert;
+        syncDisplayControls();
+        scheduleDisplay();
+    });
+
+    document.getElementById('lutSelect').addEventListener('change', (e) => {
+        S.display.lut = e.target.value;
+        syncDisplayControls();
+        scheduleDisplay();
+    });
+
+    // Contraste automatique : 0,35 % des pixels écrêtés de chaque côté (comme ImageJ / SalsaJ)
+    document.getElementById('autoContrastBtn').addEventListener('click', () => {
+        if (!S.hist) return;
+        const chans = S.display.mode === 'rgb' ? ['r', 'g', 'b'] : [S.display.mode];
+        const h = new Float64Array(256);
+        chans.forEach(c => { for (let v = 0; v < 256; v++) h[v] += S.hist[c][v]; });
+        const total = h.reduce((a, b) => a + b, 0);
+        let cum = 0, lo = 0, hi = 255;
+        for (let v = 0; v < 256; v++) {
+            cum += h[v];
+            if (cum <= total * 0.0035) lo = v + 1;
+            if (cum < total * 0.9965) hi = v + 1;
+        }
+        S.display.min = Math.min(lo, 254);
+        S.display.max = Math.max(Math.min(hi, 255), S.display.min + 1);
+        syncDisplayControls();
+        scheduleDisplay();
+    });
+
+    document.getElementById('displayResetBtn').addEventListener('click', () => {
+        S.display = { mode: 'rgb', tint: true, min: 0, max: 255, invert: false, lut: 'gray' };
+        syncDisplayControls();
+        scheduleDisplay();
+        updatePanels();
+    });
+
+    // --- Photométrie d'ouverture ---
+    // Flux = somme des valeurs des pixels dans l'ouverture − (nombre de pixels × fond de ciel),
+    // le fond étant la médiane des pixels de l'anneau [PHOT_IN·r ; PHOT_OUT·r].
+    const PHOT_IN = 1.5, PHOT_OUT = 2.2;
+    let photCache = new WeakMap();
+
+    function photChannel() {
+        return S.display.mode === 'rgb' ? 'lum' : S.display.mode;
+    }
+
+    function pixelValue(k, ch) {
+        const d = S.data;
+        if (ch === 'lum') return 0.2126 * d[k] + 0.7152 * d[k + 1] + 0.0722 * d[k + 2];
+        return d[k + CHANNEL_INDEX[ch]];
+    }
+
+    function photStats(o) {
+        const [c, e] = o.pts;
+        const r = dist(c, e), ch = photChannel();
+        const key = `${c.x},${c.y},${r},${ch}`;
+        const cached = photCache.get(o);
+        if (cached && cached.key === key) return cached.st;
+        const rOut = PHOT_OUT * r, r2 = r * r, in2 = (PHOT_IN * r) ** 2, out2 = rOut * rOut;
+        const x0 = Math.max(0, Math.floor(c.x - rOut)), x1 = Math.min(S.W - 1, Math.ceil(c.x + rOut));
+        const y0 = Math.max(0, Math.floor(c.y - rOut)), y1 = Math.min(S.H - 1, Math.ceil(c.y + rOut));
+        let n = 0, sum = 0, max = 0;
+        const sky = [];
+        for (let y = y0; y <= y1; y++) {
+            for (let x = x0; x <= x1; x++) {
+                const d2 = (x + 0.5 - c.x) ** 2 + (y + 0.5 - c.y) ** 2;
+                if (d2 > out2) continue;
+                const k = (y * S.W + x) * 4;
+                const v = pixelValue(k, ch);
+                if (d2 <= r2) {
+                    n++;
+                    sum += v;
+                    if (v > max) max = v;
+                } else if (d2 >= in2) {
+                    sky.push(v);
+                }
+            }
+        }
+        sky.sort((a, b) => a - b);
+        const bg = sky.length ? sky[Math.floor(sky.length / 2)] : 0;
+        const st = { r, n, sum, bg, net: sum - n * bg, saturated: max >= 254.5, channel: ch };
+        photCache.set(o, { key, st });
+        return st;
     }
 
     // --- 5. Vue : zoom et déplacement ---
@@ -1360,6 +1803,24 @@
         }
     }
 
+    // Ouverture (cercle plein) et anneau de mesure du fond de ciel (pointillés)
+    function drawAperture(ctx, C, r, color, u) {
+        ctx.save();
+        [[r, 2, []], [PHOT_IN * r, 1.2, [5, 4]], [PHOT_OUT * r, 1.2, [5, 4]]].forEach(([rad, w, dash]) => {
+            ctx.beginPath();
+            ctx.arc(C.x, C.y, rad, 0, 2 * Math.PI);
+            ctx.setLineDash([]);
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.55)';
+            ctx.lineWidth = (w + 2) * u;
+            ctx.stroke();
+            ctx.setLineDash(dash.map(d => d * u));
+            ctx.strokeStyle = color;
+            ctx.lineWidth = w * u;
+            ctx.stroke();
+        });
+        ctx.restore();
+    }
+
     function drawOverlays(ctx, T, u, withHandles) {
         const sel = S.selected ? S.selected.p : null;
 
@@ -1382,10 +1843,15 @@
                 drawEndTicks(ctx, P[0], P[1], COLORS.ch1, u);
                 const l = labelOffset(P[0], P[1], u);
                 drawLabel(ctx, `D${o.n} = ${fmtLen(dist(o.pts[0], o.pts[1]))}`, l.x, l.y, COLORS.ch1, u);
-            } else {
+            } else if (o.type === 'angle') {
                 drawAngle(ctx, P[0], P[1], P[2], COLORS.angle, u, `α${o.n} = ${fmtNum(angleDeg(o.pts[0], o.pts[1], o.pts[2]), 3)}°`);
+            } else {
+                drawAperture(ctx, P[0], dist(P[0], P[1]), COLORS.phot, u);
+                const st = photStats(o);
+                drawLabel(ctx, `Φ${o.n} = ${fmtNum(st.net, 4)}${st.saturated ? ' ⚠' : ''}`, P[0].x, P[0].y - 2.2 * dist(P[0], P[1]) - 16 * u, COLORS.phot, u);
             }
-            if (withHandles) P.forEach((p, i) => drawHandle(ctx, p, o.type === 'dist' ? COLORS.ch1 : COLORS.angle, u, sel === o.pts[i]));
+            const col = o.type === 'dist' ? COLORS.ch1 : o.type === 'angle' ? COLORS.angle : COLORS.phot;
+            if (withHandles) P.forEach((p, i) => drawHandle(ctx, p, col, u, sel === o.pts[i]));
         });
 
         // Profil
@@ -1438,8 +1904,10 @@
         if (S.pending && withHandles) {
             const pts = S.pending.pts.map(T);
             const H = S.hover ? T(S.hover) : null;
-            const col = S.pending.type === 'dist' ? COLORS.ch1 : S.pending.type === 'angle' ? COLORS.angle : COLORS.sum;
-            if (S.pending.type === 'angle') {
+            const col = { dist: COLORS.ch1, angle: COLORS.angle, profile: COLORS.sum, phot: COLORS.phot }[S.pending.type];
+            if (S.pending.type === 'phot') {
+                if (H) drawAperture(ctx, pts[0], dist(pts[0], H), col, u);
+            } else if (S.pending.type === 'angle') {
                 if (pts.length === 1 && H) drawSegment(ctx, pts[0], H, col, u, true);
                 if (pts.length === 2) {
                     drawSegment(ctx, pts[0], pts[1], col, u);
@@ -1491,7 +1959,7 @@
         vctx.save();
         vctx.imageSmoothingEnabled = s < 2; // pixels nets aux forts grossissements
         vctx.setTransform(dpr * s, 0, 0, dpr * s, dpr * tx, dpr * ty);
-        vctx.drawImage(S.img, 0, 0);
+        vctx.drawImage(S.disp, 0, 0);
         vctx.restore();
 
         drawOverlays(vctx, toScreen, 1, true);
@@ -1504,7 +1972,7 @@
     let loupeRight = false;
 
     function drawLoupe(W, H) {
-        const active = S.overCanvas && S.hover && ((S.drag && S.drag.kind === 'handle') || ['dist', 'angle', 'profile'].includes(S.tool));
+        const active = S.overCanvas && S.hover && ((S.drag && S.drag.kind === 'handle') || ['dist', 'angle', 'profile', 'phot'].includes(S.tool));
         if (!active) return;
         const R = 70, M = 12;
         const ls = Math.max(2, Math.min(24, S.view.s * 4));
@@ -1523,7 +1991,7 @@
         vctx.fill();
         vctx.clip();
         vctx.imageSmoothingEnabled = false;
-        vctx.drawImage(S.img, S.hover.x - R / ls, S.hover.y - R / ls, 2 * R / ls, 2 * R / ls, cx - R, cy - R, 2 * R, 2 * R);
+        vctx.drawImage(S.disp, S.hover.x - R / ls, S.hover.y - R / ls, 2 * R / ls, 2 * R / ls, cx - R, cy - R, 2 * R, 2 * R);
         drawOverlays(vctx, T, 1, false);
         vctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
         vctx.lineWidth = 1;
@@ -1554,9 +2022,10 @@
         move: 'Glisser : déplacer la vue ou une poignée · Molette : zoom · Flèches : ajuster la poignée sélectionnée au pixel près · Suppr : effacer la mesure sélectionnée',
         dist: 'Distance : cliquez sur les deux extrémités (ou cliquez-glissez). Échap : annuler.',
         angle: 'Angle : cliquez sur le sommet, puis sur un point de chaque côté de l\'angle. Échap : annuler.',
-        profile: 'Profil : cliquez sur le début (x = 0) puis sur la fin de la ligne d\'analyse (ou cliquez-glissez), perpendiculairement aux franges.'
+        profile: 'Profil : cliquez sur le début (x = 0) puis sur la fin de la ligne d\'analyse (ou cliquez-glissez), perpendiculairement aux franges.',
+        phot: 'Photométrie : cliquez au centre de l\'étoile (ou de la tache), puis au bord de l\'ouverture. Le fond de ciel est mesuré dans l\'anneau en pointillés.'
     };
-    const NEEDED = { dist: 2, angle: 3, profile: 2 };
+    const NEEDED = { dist: 2, angle: 3, profile: 2, phot: 2 };
 
     function setTool(tool) {
         S.tool = tool;
@@ -1608,7 +2077,7 @@
             computeProfile();
             if (S.snap) S.cursors = S.cursors.map(snapCursor);
         } else {
-            if (type === 'dist' && dist(pts[0], pts[1]) < 2) return;
+            if ((type === 'dist' || type === 'phot') && dist(pts[0], pts[1]) < 2) return;
             S.objects.push({ type, n: ++S.counters[type], pts });
         }
         updatePanels();
@@ -1622,6 +2091,17 @@
             computeProfile();
         }
         updatePanels();
+    }
+
+    // Déplace une poignée ; le centre d'une ouverture de photométrie entraîne son bord (rayon conservé)
+    function moveHandle(h, p) {
+        const o = h.owner;
+        if (o && o.type === 'phot' && h.p === o.pts[0]) {
+            o.pts[1].x += p.x - h.p.x;
+            o.pts[1].y += p.y - h.p.y;
+        }
+        h.p.x = p.x;
+        h.p.y = p.y;
     }
 
     let pressStart = null;
@@ -1673,8 +2153,7 @@
             S.autoFit = false;
         } else if (S.drag && S.drag.kind === 'handle') {
             const p = clampToImage({ x: m.x + S.drag.dx, y: m.y + S.drag.dy });
-            S.drag.h.p.x = p.x;
-            S.drag.h.p.y = p.y;
+            moveHandle(S.drag.h, p);
             S.hover = p;
             onGeometryChange(S.drag.h.owner);
         }
@@ -1750,13 +2229,12 @@
             e.preventDefault();
             const step = e.shiftKey ? 10 : 1;
             const p = clampToImage({ x: S.selected.p.x + arrows[e.key][0] * step, y: S.selected.p.y + arrows[e.key][1] * step });
-            S.selected.p.x = p.x;
-            S.selected.p.y = p.y;
+            moveHandle(S.selected, p);
             onGeometryChange(S.selected.owner);
             requestRender();
             return;
         }
-        const shortcuts = { m: 'move', d: 'dist', a: 'angle', p: 'profile' };
+        const shortcuts = { m: 'move', d: 'dist', a: 'angle', p: 'profile', f: 'phot' };
         if (shortcuts[e.key.toLowerCase()] && !e.ctrlKey && !e.metaKey && !e.altKey) setTool(shortcuts[e.key.toLowerCase()]);
     });
 
@@ -2114,13 +2592,11 @@
         S.objects.forEach(o => {
             const li = document.createElement('li');
             if (S.selected && S.selected.owner === o) li.classList.add('selected');
-            const isDist = o.type === 'dist';
-            const value = isDist ? fmtLen(dist(o.pts[0], o.pts[1])) : `${fmtNum(angleDeg(o.pts[0], o.pts[1], o.pts[2]), 3)}°`;
-            const sub = isDist && calibrated() ? `${fmtNum(dist(o.pts[0], o.pts[1]), 4)} px` : '';
-            li.innerHTML = `<span class="dot" style="background:${isDist ? 'var(--ch1)' : 'var(--angle)'}"></span>
-                <span class="m-name">${isDist ? 'D' : 'α'}${o.n}</span>
-                <span class="m-value">${value}</span>
-                <span class="m-sub">${sub}</span>
+            const m = measureInfo(o);
+            li.innerHTML = `<span class="dot" style="background:var(--${m.color})"></span>
+                <span class="m-name">${m.name}</span>
+                <span class="m-value" title="${m.title}">${m.value}</span>
+                <span class="m-sub">${m.sub}</span>
                 <button class="del-btn" title="Supprimer">✕</button>`;
             li.addEventListener('click', () => {
                 S.selected = { p: o.pts[0], owner: o };
@@ -2151,6 +2627,34 @@
         requestRender();
     }
 
+    // Nom, valeur et détails d'une mesure (liste et export)
+    function measureInfo(o) {
+        if (o.type === 'dist') {
+            const d = dist(o.pts[0], o.pts[1]);
+            return { name: `D${o.n}`, color: 'ch1', value: fmtLen(d), sub: calibrated() ? `${fmtNum(d, 4)} px` : '', title: '',
+                raw: [calibrated() ? toUnits(d) : d, unitLabel(), ''] };
+        }
+        if (o.type === 'angle') {
+            const a = angleDeg(o.pts[0], o.pts[1], o.pts[2]);
+            return { name: `α${o.n}`, color: 'angle', value: `${fmtNum(a, 3)}°`, sub: '', title: '', raw: [a, '°', ''] };
+        }
+        const st = photStats(o);
+        // Écart de magnitude par rapport à la première ouverture : Δm = −2,5 log(Φ / Φ_réf)
+        const ref = S.objects.find(x => x.type === 'phot');
+        let dm = '';
+        if (ref !== o && st.net > 0 && photStats(ref).net > 0) {
+            dm = ` · Δm = ${fmtNum(-2.5 * Math.log10(st.net / photStats(ref).net), 3)}`;
+        }
+        const details = `${CHANNEL_NAMES[st.channel]}, r = ${fmtNum(st.r, 3)} px, fond ${fmtNum(st.bg, 3)}/px`;
+        return {
+            name: `Φ${o.n}`, color: 'phot',
+            value: `${fmtNum(st.net, 4)}${st.saturated ? ' ⚠' : ''}`,
+            sub: `fond ${fmtNum(st.bg, 3)}/px${dm}`,
+            title: st.saturated ? 'Pixels saturés dans l\'ouverture : flux sous-estimé' : `Somme des valeurs des pixels moins le fond (${details})`,
+            raw: [st.net, 'u.a.', details + dm]
+        };
+    }
+
     function download(content, name, type) {
         const blob = content instanceof Blob ? content : new Blob([content], { type });
         const a = document.createElement('a');
@@ -2170,9 +2674,19 @@
         navigator.clipboard.writeText(text).then(() => flash(feedbackId, '✓ Copié !'), () => flash(feedbackId, 'Copie impossible'));
     }
 
+    document.getElementById('measuresCsvBtn').addEventListener('click', () => {
+        if (!S.objects.length) return;
+        let csv = 'mesure;valeur;unite;details\n';
+        S.objects.forEach(o => {
+            const m = measureInfo(o);
+            csv += `${m.name};${Number(m.raw[0].toPrecision(6))};${m.raw[1]};${m.raw[2]}\n`;
+        });
+        download('\ufeff' + csv, `mesures_${Date.now()}.csv`, 'text/csv;charset=utf-8;');
+    });
+
     document.getElementById('clearMeasuresBtn').addEventListener('click', () => {
         S.objects = [];
-        S.counters = { dist: 0, angle: 0 };
+        S.counters = { dist: 0, angle: 0, phot: 0 };
         if (S.selected && typeof S.selected.owner === 'object') S.selected = null;
         updatePanels();
     });
@@ -2203,7 +2717,7 @@
         c.width = S.W;
         c.height = S.H;
         const cx = c.getContext('2d');
-        cx.drawImage(S.img, 0, 0);
+        cx.drawImage(S.disp, 0, 0);
         readColors();
         const sel = S.selected, pending = S.pending;
         S.selected = null;
@@ -2230,6 +2744,10 @@
         S.calib.set = true;
         updatePanels();
     });
+    new ResizeObserver(() => renderThumbs()).observe(document.getElementById('thumbGrid'));
+
+    syncDisplayControls();
+    drawHistogram();
     setTool('move');
     updatePanels();
 </script>
