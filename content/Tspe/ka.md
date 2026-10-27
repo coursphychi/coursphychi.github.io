@@ -74,34 +74,6 @@ td, th {
 </table>
 </div>
 
-<br>
 
-## Définitions
-
-
-<div class="notices definition" style="--title: 'Acide fort / Base forte';">
-  <p>
-Un acide ou une base est dit fort(e) au sens de Brönsted dans l'eau si le <b style="color:#B51700;">taux d’avancement</b> de la réaction modélisant son échange d’ion hydrogène avec l’eau est <b style="color:#B51700;">proche de 1</b>.<br>
-La notion d’acide fort ou de base forte constitue un modèle introduit pour simplifier la détermination de la composition finale du système.
-  </p>
-</div>
-
-> Exemple&nbsp;:<br>
-le chlorure d’hydrogène $\ce{HCℓ (g)}$ est un acide fort dans l’eau. Sa dissolution dans l’eau permet d’obtenir de l’acide chlorhydrique, solution modélisée par un mélange d’ions oxonium $\ce{H3O+ (aq)}$ et d’ions chlorure $\ce{Cℓ^- (aq)}$.
-
-
-{{%notice type="def" title="Constante d'acidité" round="true"%}}
-Constante d’équilibre de la réaction entre un acide et l’eau, écrite avec un nombre stœchiométrique 1 pour l’espèce $\ce{H3O^+}$.<br>
-Cette grandeur est caractéristique d’un couple acide-base à une température donnée.
-{{%/notice%}}
-
-<blockquote>
-<p>
-Exemple&nbsp;:<br>
-La constante d’acidité du couple acide éthanoïque/ion éthanoate est la constante d’équilibre de la réaction d’équation&nbsp;:<br>
-<p style="overflow-x:auto;">
-$\ce{CH3COOH(aq) + H2O(ℓ)\rightleftharpoons CH3COO^-(aq) + H3O^+(aq)}$
-</p></p>
-</blockquote>
 
 
