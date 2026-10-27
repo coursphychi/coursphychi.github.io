@@ -435,6 +435,22 @@ $\pu{1,0 mA*h} = \pu{1E-3 A}\times\pu{3600 s} = \pu{3,6 C}$
 </div>
 </details>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur les piles</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -521,9 +537,13 @@ $\pu{1,0 mA*h} = \pu{1E-3 A}\times\pu{3600 s} = \pu{3,6 C}$
       var ewA = G.ew * (1 - 0.45 * wear), ewC = G.ew * (1 + 0.35 * wear);
       c.fillStyle = '#C2410C'; c.fillRect(G.xC - 30 - ewC / 2, G.eTop, ewC, G.eBot - G.eTop);
       c.fillStyle = '#94A3B8'; c.fillRect(G.xA + 30 - ewA / 2, G.eTop, ewA, G.eBot - G.eTop);
-      txt(c, 'Cu', G.xC - 30 - 26, G.eTop + 22, '#C2410C', '700 14px system-ui, sans-serif'); txt(c, 'Zn', G.xA + 30 + 24, G.eTop + 22, '#475569', '700 14px system-ui, sans-serif');
+      txt(c, 'Cu', Math.max(12, G.xC - 30 - 26), G.eTop + 22, '#C2410C', '700 14px system-ui, sans-serif'); txt(c, 'Zn', Math.min(G.w - 12, G.xA + 30 + 24), G.eTop + 22, '#475569', '700 14px system-ui, sans-serif');   /* dans le cadre */
       /* noms des électrodes à l'extérieur du fil, signes juste à côté du fil, près du métal */
-      if (on) { txt(c, 'cathode', G.xC - 30 - 12, G.eTop - 12, CCA, '700 13px system-ui, sans-serif', 'right'); txt(c, 'anode', G.xA + 30 + 12, G.eTop - 12, CAN, '700 13px system-ui, sans-serif', 'left'); }
+      if (on) {   /* à l'extérieur des électrodes s'il y a la place, sinon au-dessus */
+        c.font = '700 13px system-ui, sans-serif'; var l1 = c.measureText('cathode').width, l2 = c.measureText('anode').width;
+        if (G.xC - 42 - l1 > 2) { txt(c, 'cathode', G.xC - 30 - 12, G.eTop - 12, CCA, '700 13px system-ui, sans-serif', 'right'); } else { txt(c, 'cathode', Math.max(2, G.xC - 30 - l1 / 2), G.eTop - 26, CCA, '700 13px system-ui, sans-serif', 'left'); }
+        if (G.xA + 42 + l2 < G.w - 2) { txt(c, 'anode', G.xA + 30 + 12, G.eTop - 12, CAN, '700 13px system-ui, sans-serif', 'left'); } else { txt(c, 'anode', Math.min(G.w - 2, G.xA + 30 + l2 / 2), G.eTop - 26, CAN, '700 13px system-ui, sans-serif', 'right'); }
+      }
       txt(c, '\u2295', G.xC - 30 + 13, G.eTop - 8, CCA, '700 15px system-ui, sans-serif');
       txt(c, '\u2296', G.xA + 30 - 13, G.eTop - 8, CAN, '700 15px system-ui, sans-serif');
       /* fils et appareil */
@@ -580,8 +600,11 @@ $\pu{1,0 mA*h} = \pu{1E-3 A}\times\pu{3600 s} = \pu{3,6 C}$
           c.globalAlpha = 1;
         }
         if (cbR.checked) {
-          txt(c, 'réduction : Cu\u00b2\u207a + 2 e\u207b \u2192 Cu', G.xC, G.by + G.bh + 24, CCA, '700 13px system-ui, sans-serif');
-          txt(c, 'oxydation : Zn \u2192 Zn\u00b2\u207a + 2 e\u207b', G.xA, G.by + G.bh + 24, CAN, '700 13px system-ui, sans-serif');
+          [['réduction', 'Cu\u00b2\u207a + 2 e\u207b \u2192 Cu', G.xC, CCA], ['oxydation', 'Zn \u2192 Zn\u00b2\u207a + 2 e\u207b', G.xA, CAN]].forEach(function (q) {
+            c.font = '700 13px system-ui, sans-serif'; var t1 = q[0] + ' : ' + q[1], lw = c.measureText(t1).width;
+            if (lw <= Math.abs(G.xA - G.xC) - 16 && q[2] - lw / 2 > 2 && q[2] + lw / 2 < G.w - 2) { txt(c, t1, q[2], G.by + G.bh + 24, q[3], '700 13px system-ui, sans-serif'); }
+            else { c.font = '700 12px system-ui, sans-serif'; var x2 = Math.max(4 + c.measureText(q[1]).width / 2, Math.min(G.w - 4 - c.measureText(q[1]).width / 2, q[2])); txt(c, q[0] + ' :', x2, G.by + G.bh + 20, q[3], '700 12px system-ui, sans-serif'); txt(c, q[1], x2, G.by + G.bh + 36, q[3], '700 12px system-ui, sans-serif'); }   /* sur deux lignes, dans le cadre, sur téléphone */
+          });
         }
       }
     }
@@ -622,5 +645,126 @@ $\pu{1,0 mA*h} = \pu{1E-3 A}\times\pu{3600 s} = \pu{3,6 C}$
     [rM, rV, rC, rI].forEach(function (r) { r.addEventListener('input', upd); });
     upd();
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Une réaction d'oxydoréduction est un transfert…",
+    [
+    "d'électrons, du réducteur d'un couple vers l'oxydant d'un autre couple",
+    "d'ions hydrogène",
+    "d'électrons, de l'oxydant vers le réducteur",
+    "de neutrons"
+    ],
+    "Le réducteur cède des électrons, l'oxydant les capte."
+    ],
+    [
+    "Un oxydant est une espèce capable de…",
+    [
+    "capter un ou plusieurs électrons",
+    "céder un ou plusieurs électrons",
+    "céder un ion $\\ce{H+}$",
+    "capter un ion $\\ce{H+}$"
+    ],
+    "Un réducteur, lui, cède des électrons."
+    ],
+    [
+    "Dans une pile, les électrons circulent dans le circuit extérieur…",
+    [
+    "de la borne négative vers la borne positive",
+    "de la borne positive vers la borne négative",
+    "dans le pont salin",
+    "dans les deux sens"
+    ],
+    "Le courant conventionnel circule en sens inverse, de la borne positive vers la borne négative."
+    ],
+    [
+    "Le pont salin d'une pile…",
+    [
+    "ferme le circuit et maintient la neutralité électrique des solutions, par déplacement d'ions",
+    "transporte les électrons",
+    "sert de réservoir d'énergie",
+    "empêche le courant de circuler"
+    ],
+    "Dans le pont salin et les solutions, le courant est assuré par des ions, pas par des électrons."
+    ],
+    [
+    "L'électrode où se produit l'oxydation, dans une pile, est…",
+    [
+    "l'anode, qui est le pôle négatif",
+    "la cathode, qui est le pôle négatif",
+    "l'anode, qui est le pôle positif",
+    "la cathode, qui est le pôle positif"
+    ],
+    "Le réducteur y cède des électrons, qui partent dans le circuit."
+    ],
+    [
+    "La tension à vide d'une pile se mesure…",
+    [
+    "avec un voltmètre, la pile ne débitant aucun courant",
+    "avec un ampèremètre",
+    "en court-circuitant la pile",
+    "en pesant les électrodes"
+    ],
+    "On parle aussi de force électromotrice."
+    ],
+    [
+    "La capacité électrique $Q$ d'une pile est…",
+    [
+    "la charge électrique maximale qu'elle peut débiter",
+    "sa tension à vide",
+    "sa puissance",
+    "sa masse"
+    ],
+    "$Q = n(\\mathrm{e^-}) \\times \\mathcal{F}$, souvent exprimée en mA·h."
+    ],
+    [
+    "Une pile convertit…",
+    [
+    "de l'énergie chimique en énergie électrique",
+    "de l'énergie électrique en énergie chimique",
+    "de l'énergie thermique en énergie électrique",
+    "de l'énergie lumineuse en énergie électrique"
+    ],
+    "L'électrolyse réalise la conversion inverse&nbsp;: c'est ainsi qu'on recharge un accumulateur."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

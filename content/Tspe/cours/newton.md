@@ -194,6 +194,22 @@ draft = false
 </div>
 </details>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur les lois de Newton</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -527,5 +543,126 @@ draft = false
     if (RM) { t = T0 + TP + 1; }
     playLabel(btn, playing); setup(); onResize(setup); requestAnimationFrame(step);
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "D'après le principe d'inertie, dans un référentiel galiléen, un système pseudo-isolé est…",
+    [
+    "immobile ou en mouvement rectiligne uniforme",
+    "forcément immobile",
+    "en mouvement circulaire uniforme",
+    "en mouvement accéléré"
+    ],
+    "Et réciproquement."
+    ],
+    [
+    "Un système est pseudo-isolé lorsque…",
+    [
+    "les forces qu'il subit se compensent",
+    "il ne subit aucune force",
+    "il est immobile",
+    "il est très léger"
+    ],
+    "La somme vectorielle des forces extérieures est nulle."
+    ],
+    [
+    "La deuxième loi de Newton s'écrit, dans un référentiel galiléen, pour un système de masse constante…",
+    [
+    "$\\sum \\vec{F}_\\text{ext} = m\\,\\vec{a}$",
+    "$\\sum \\vec{F}_\\text{ext} = m\\,\\vec{v}$",
+    "$\\sum \\vec{F}_\\text{ext} = \\vec{0}$",
+    "$\\vec{F} = \\dfrac{m}{\\vec{a}}$"
+    ],
+    "C'est le principe fondamental de la dynamique."
+    ],
+    [
+    "Un référentiel galiléen est un référentiel dans lequel…",
+    [
+    "le principe d'inertie est vérifié",
+    "la Terre est immobile",
+    "tous les objets sont immobiles",
+    "il n'y a pas de forces"
+    ],
+    "Le référentiel terrestre peut être considéré comme galiléen pour des mouvements de courte durée."
+    ],
+    [
+    "Une voiture freine en ligne droite. Le vecteur accélération est…",
+    [
+    "opposé au vecteur vitesse",
+    "dans le sens du vecteur vitesse",
+    "nul",
+    "perpendiculaire à la vitesse"
+    ],
+    "La norme de la vitesse diminue&nbsp;: $\\vec{a}$ est de sens opposé à $\\vec{v}$."
+    ],
+    [
+    "D'après la troisième loi de Newton, si A exerce une force sur B, alors B exerce sur A une force…",
+    [
+    "de même direction, de même valeur et de sens opposé",
+    "de même sens",
+    "plus faible",
+    "nulle si A est plus lourd"
+    ],
+    "$\\vec{F}_{\\mathrm{B}/\\mathrm{A}} = -\\vec{F}_{\\mathrm{A}/\\mathrm{B}}$."
+    ],
+    [
+    "La Terre attire une pomme. La pomme attire la Terre avec une force…",
+    [
+    "de même valeur",
+    "beaucoup plus faible",
+    "nulle",
+    "beaucoup plus grande"
+    ],
+    "Les actions réciproques ont la même valeur&nbsp;; c'est l'effet (l'accélération) qui diffère, à cause des masses."
+    ],
+    [
+    "Le centre de masse d'un système…",
+    [
+    "a le mouvement le plus simple, celui que l'on étudie en mécanique du point",
+    "est toujours le centre géométrique",
+    "est toujours immobile",
+    "est toujours à l'intérieur de l'objet"
+    ],
+    "Lors d'un lancer de bâton, par exemple, seul le centre de masse décrit une parabole."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

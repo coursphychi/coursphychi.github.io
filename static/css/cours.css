@@ -486,3 +486,23 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 .nt-f { box-sizing: border-box; }
 @media (max-width: 600px) { .nt-f { padding: 0.5em 1em 0.7em; } }
 li:has(mjx-container), td:has(mjx-container), .nt-f-units > span:has(mjx-container) { overflow-x: auto; overflow-y: hidden; }
+
+/* --- Quiz (questions à choix, pastilles de progression, bilan) : communs à tous les cours --- */
+.nt-big-score { font-size: 1.8em; font-weight: 800; color: var(--blue); margin-right: 0.3em; }
+.nt-prog { display: flex; flex-wrap: wrap; gap: 0.4em; justify-content: center; margin: 0.3em 0 0.5em; }
+.nt-prog i { width: 0.85em; height: 0.85em; border-radius: 50%; background: #E2E8F0; transition: background .25s; }
+.nt-prog i.ok { background: #22C55E; } .nt-prog i.ko { background: #F43F5E; } .nt-prog i.cur { box-shadow: 0 0 0 2.5px var(--blue); }
+.nt-qnum { text-align: center; font-size: 0.82em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); margin: 0; }
+.nt-qcard { background: linear-gradient(180deg, #FFFFFF, #F8FAFC); border: 1px solid var(--line); border-radius: 16px; padding: 0.9em 1em 1em; margin: 0.4em auto 0.6em; max-width: 620px; box-shadow: 0 6px 18px rgba(15,23,42,.06); }
+.nt-qvis { text-align: center; margin: 0.1em 0 0.3em; }
+.nt-qdata { display: inline-flex; flex-wrap: wrap; gap: 0.3em 1em; justify-content: center; align-items: center; font-family: Georgia, serif; font-size: 1.4em; color: #0F172A; }
+.nt-qdata span { white-space: nowrap; }
+.nt-ql-btns .nt-choix { padding: 0.6em 1.1em; border-radius: 12px; font-size: 1em; transition: transform .12s, box-shadow .12s; }
+.nt-ql-btns .nt-choix:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,.18); }
+.nt-choix-ok { background: #DCFCE7 !important; border-color: #16A34A !important; color: #166534 !important; }
+.nt-choix-ko { background: #FFE4E6 !important; border-color: #E11D48 !important; color: #9F1239 !important; }
+.nt-msg.nt-fb { border-radius: 12px; padding: 0.6em 0.9em; text-align: left; }
+.nt-msg.nt-fb.ok { background: #F0FDF4; border-left: 4px solid #22C55E; } .nt-msg.nt-fb.ko { background: #FFF1F2; border-left: 4px solid #F43F5E; }
+
+/* --- Réponses des quiz : un peu plus d'espace entre les cases (sélecteur plus précis que les styles propres à chaque page) --- */
+.nt-quizlab .nt-ql-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75em 0.8em; margin-top: 0.5em; }

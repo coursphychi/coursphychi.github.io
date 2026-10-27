@@ -245,7 +245,7 @@ d'où&nbsp;:
 <p>Comme son nom l'indique, un tel titrage est suivi par <span class="imp nt-hole">conductimétrie</span>.</p>
 </div>
 
-<svg class='nt-svg nt-svg-m' viewBox='-70 0 720 486' role='img' aria-label="Montage de titrage conductimétrique : burette graduée contenant la solution titrante au-dessus d'un bécher contenant la solution titrée, agité par un agitateur magnétique"><defs><linearGradient id='gVerre' x1='0' x2='1'><stop offset='0' stop-color='#E2E8F0'/><stop offset='.45' stop-color='#FFFFFF'/><stop offset='1' stop-color='#E2E8F0'/></linearGradient><linearGradient id='gTige' x1='0' x2='1'><stop offset='0' stop-color='#94A3B8'/><stop offset='.5' stop-color='#E2E8F0'/><stop offset='1' stop-color='#94A3B8'/></linearGradient><linearGradient id='gSolT' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#E0F2FE'/><stop offset='1' stop-color='#BAE6FD'/></linearGradient></defs><rect x='56' y='462' width='310' height='12' rx='3' fill='#64748B'/><rect x='86' y='40' width='9' height='424' rx='3' fill='url(#gTige)'/><rect x='82' y='108' width='17' height='20' rx='3' fill='#475569'/><rect x='99' y='115' width='110' height='6' rx='2' fill='#94A3B8'/><path d='M209,110 L218,110 Q222,110 222,114 L222,122 Q222,126 218,126 L209,126 Z' fill='#475569'/><path d='M222,111 L224,111 M222,125 L224,125' stroke='#475569' stroke-width='3' stroke-linecap='round'/><path d='M217,34 Q222,36 224.0,52 L224.0,270 L242.0,270 L242.0,52 Q244,36 249,34' fill='url(#gVerre)' stroke='#475569' stroke-width='1.3' stroke-linejoin='round'/><path d='M225.0,64 Q233,69 241.0,64 L241.0,270 L225.0,270 Z' fill='#EC4899' fill-opacity='.45'/><path d='M225.0,64 Q233,69 241.0,64' fill='none' stroke='#EC4899' stroke-width='1'/><line x1='224.0' y1='64.0' x2='233.0' y2='64.0' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='71.7' x2='230.0' y2='71.7' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='79.4' x2='230.0' y2='79.4' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='87.0' x2='230.0' y2='87.0' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='94.7' x2='230.0' y2='94.7' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='102.4' x2='233.0' y2='102.4' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='110.1' x2='230.0' y2='110.1' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='117.8' x2='230.0' y2='117.8' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='125.4' x2='230.0' y2='125.4' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='133.1' x2='230.0' y2='133.1' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='140.8' x2='233.0' y2='140.8' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='148.5' x2='230.0' y2='148.5' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='156.2' x2='230.0' y2='156.2' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='163.8' x2='230.0' y2='163.8' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='171.5' x2='230.0' y2='171.5' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='179.2' x2='233.0' y2='179.2' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='186.9' x2='230.0' y2='186.9' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='194.6' x2='230.0' y2='194.6' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='202.2' x2='230.0' y2='202.2' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='209.9' x2='230.0' y2='209.9' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='217.6' x2='233.0' y2='217.6' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='225.3' x2='230.0' y2='225.3' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='233.0' x2='230.0' y2='233.0' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='240.6' x2='230.0' y2='240.6' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='248.3' x2='230.0' y2='248.3' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='256.0' x2='233.0' y2='256.0' stroke='#475569' stroke-width='.7'/><path d='M224.0,270 L229,284 L229,286 L237,286 L237,284 L242.0,270 Z' fill='url(#gVerre)' stroke='#475569' stroke-width='1.3' stroke-linejoin='round'/><path d='M225.0,270 L230,283 L230,286 L236,286 L236,283 L241.0,270 Z' fill='#EC4899' fill-opacity='.45'/><rect x='220' y='285' width='26' height='14' rx='4' fill='url(#gVerre)' stroke='#475569' stroke-width='1.3'/><rect x='246' y='289' width='10' height='6' fill='#E2E8F0' stroke='#475569' stroke-width='1'/><path d='M256,281 L262,281 L262,303 L256,303 Z' fill='#2563EB' stroke='#1E40AF' stroke-width='1'/><path d='M229,299 L229,316 L230.5,326 L235.5,326 L237,316 L237,299' fill='url(#gVerre)' stroke='#475569' stroke-width='1.3' stroke-linejoin='round'/><rect x='230.5' y='300' width='5' height='24' fill='#EC4899' fill-opacity='.45'/><path d='M233,334 q-3.2,4.5 0,7.5 q3.2,-3 0,-7.5 z' fill='#EC4899' fill-opacity='.8'/><rect x='156' y='410' width='190' height='46' rx='8' fill='#E2E8F0' stroke='#64748B' stroke-width='1.2'/><circle cx='186' cy='433' r='9' fill='#CBD5E1' stroke='#64748B'/><line x1='186' y1='433' x2='191' y2='427' stroke='#334155' stroke-width='1.4'/><circle cx='312' cy='433' r='9' fill='#CBD5E1' stroke='#64748B'/><line x1='312' y1='433' x2='307' y2='427' stroke='#334155' stroke-width='1.4'/><circle cx='250' cy='433' r='3' fill='#22C55E'/><path d='M172,334 L178,336 L178,400 Q178,408 186,408 L314,408 Q322,408 322,400 L322,336' fill='none' stroke='#64748B' stroke-width='1.4' stroke-linejoin='round'/><path d='M179,352 L179,400 Q179,407 186,407 L314,407 Q321,407 321,400 L321,352 Z' fill='url(#gSolT)' opacity='.9'/><line x1='179' y1='352' x2='321' y2='352' stroke='#7DD3FC' stroke-width='1'/><line x1='182' y1='370' x2='190' y2='370' stroke='#94A3B8' stroke-width='.7'/><line x1='182' y1='386' x2='190' y2='386' stroke='#94A3B8' stroke-width='.7'/><rect x='224' y='397' width='30' height='8' rx='4' fill='#FFFFFF' stroke='#0F172A' stroke-width='.8'/><rect x='279' y='216' width='22' height='30' rx='4' fill='#1E293B'/><rect x='284' y='246' width='12' height='112' fill='#E2E8F0' stroke='#64748B' stroke-width='1.2'/><path d='M279,358 L301,358 L301,390 L279,390 Z' fill='#F1F5F9' fill-opacity='.7' stroke='#64748B' stroke-width='1.2'/><rect x='283' y='364' width='3' height='22' fill='#94A3B8'/><rect x='294' y='364' width='3' height='22' fill='#94A3B8'/><path d='M290,216 C290,150 360,140 440,170' fill='none' stroke='#1E293B' stroke-width='2.5'/><rect x='440' y='150' width='160' height='92' rx='10' fill='#F1F5F9' stroke='#64748B' stroke-width='1.3'/><rect x='456' y='164' width='128' height='38' rx='5' fill='#0F172A'/><text x='576' y='190' font-size='14' text-anchor='end' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>1,25 mS/cm</text><text x='520' y='228' font-size='13' text-anchor='middle' fill='#334155' font-family='system-ui, sans-serif'>conductimètre</text><line x1='243' y1='90' x2='300' y2='90' stroke='#64748B' stroke-width='.9'/><text x='306' y='94' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>burette graduée</text><line x1='243' y1='180' x2='300' y2='182' stroke='#64748B' stroke-width='.9'/><text x='306' y='186' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>solution titrante</text><line x1='220' y1='292' x2='160' y2='296' stroke='#64748B' stroke-width='.9'/><text x='154' y='300' font-size='13' text-anchor='end' fill='#334155' font-family='system-ui, sans-serif'>robinet</text><line x1='86' y1='76' x2='22' y2='76' stroke='#64748B' stroke-width='.9'/><text x='16' y='80' font-size='13' text-anchor='end' fill='#334155' font-family='system-ui, sans-serif'>potence</text><line x1='312' y1='372' x2='390' y2='360' stroke='#64748B' stroke-width='.9'/><text x='396' y='364' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>solution titrée</text><line x1='254' y1='401' x2='390' y2='400' stroke='#64748B' stroke-width='.9'/><text x='396' y='404' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>turbulent (barreau aimanté)</text><line x1='346' y1='438' x2='390' y2='438' stroke='#64748B' stroke-width='.9'/><text x='396' y='442' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>agitateur magnétique</text><line x1='298' y1='300' x2='390' y2='300' stroke='#64748B' stroke-width='.9'/><text x='396' y='304' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>cellule conductimétrique</text></svg>
+<svg class='nt-svg nt-svg-m' viewBox='-70 0 720 486' role='img' aria-label="Montage de titrage conductimétrique : burette graduée contenant la solution titrante au-dessus d'un bécher contenant la solution titrée, agité par un agitateur magnétique"><defs><linearGradient id='gVerre' x1='0' x2='1'><stop offset='0' stop-color='#E2E8F0'/><stop offset='.45' stop-color='#FFFFFF'/><stop offset='1' stop-color='#E2E8F0'/></linearGradient><linearGradient id='gTige' x1='0' x2='1'><stop offset='0' stop-color='#94A3B8'/><stop offset='.5' stop-color='#E2E8F0'/><stop offset='1' stop-color='#94A3B8'/></linearGradient><linearGradient id='gSolT' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#E0F2FE'/><stop offset='1' stop-color='#BAE6FD'/></linearGradient></defs><rect x='56' y='462' width='310' height='12' rx='3' fill='#64748B'/><rect x='86' y='40' width='9' height='424' rx='3' fill='url(#gTige)'/><rect x='82' y='108' width='17' height='20' rx='3' fill='#475569'/><rect x='99' y='115' width='110' height='6' rx='2' fill='#94A3B8'/><path d='M209,110 L218,110 Q222,110 222,114 L222,122 Q222,126 218,126 L209,126 Z' fill='#475569'/><path d='M222,111 L224,111 M222,125 L224,125' stroke='#475569' stroke-width='3' stroke-linecap='round'/><path d='M217,34 Q222,36 224.0,52 L224.0,270 L242.0,270 L242.0,52 Q244,36 249,34' fill='url(#gVerre)' stroke='#475569' stroke-width='1.3' stroke-linejoin='round'/><path d='M225.0,64 Q233,69 241.0,64 L241.0,270 L225.0,270 Z' fill='#EC4899' fill-opacity='.45'/><path d='M225.0,64 Q233,69 241.0,64' fill='none' stroke='#EC4899' stroke-width='1'/><line x1='224.0' y1='64.0' x2='233.0' y2='64.0' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='71.7' x2='230.0' y2='71.7' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='79.4' x2='230.0' y2='79.4' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='87.0' x2='230.0' y2='87.0' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='94.7' x2='230.0' y2='94.7' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='102.4' x2='233.0' y2='102.4' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='110.1' x2='230.0' y2='110.1' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='117.8' x2='230.0' y2='117.8' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='125.4' x2='230.0' y2='125.4' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='133.1' x2='230.0' y2='133.1' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='140.8' x2='233.0' y2='140.8' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='148.5' x2='230.0' y2='148.5' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='156.2' x2='230.0' y2='156.2' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='163.8' x2='230.0' y2='163.8' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='171.5' x2='230.0' y2='171.5' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='179.2' x2='233.0' y2='179.2' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='186.9' x2='230.0' y2='186.9' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='194.6' x2='230.0' y2='194.6' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='202.2' x2='230.0' y2='202.2' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='209.9' x2='230.0' y2='209.9' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='217.6' x2='233.0' y2='217.6' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='225.3' x2='230.0' y2='225.3' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='233.0' x2='230.0' y2='233.0' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='240.6' x2='230.0' y2='240.6' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='248.3' x2='230.0' y2='248.3' stroke='#475569' stroke-width='.7'/><line x1='224.0' y1='256.0' x2='233.0' y2='256.0' stroke='#475569' stroke-width='.7'/><path d='M224.0,270 L229,284 L229,286 L237,286 L237,284 L242.0,270 Z' fill='url(#gVerre)' stroke='#475569' stroke-width='1.3' stroke-linejoin='round'/><path d='M225.0,270 L230,283 L230,286 L236,286 L236,283 L241.0,270 Z' fill='#EC4899' fill-opacity='.45'/><rect x='220' y='285' width='26' height='14' rx='4' fill='url(#gVerre)' stroke='#475569' stroke-width='1.3'/><rect x='246' y='289' width='10' height='6' fill='#E2E8F0' stroke='#475569' stroke-width='1'/><path d='M256,281 L262,281 L262,303 L256,303 Z' fill='#2563EB' stroke='#1E40AF' stroke-width='1'/><path d='M229,299 L229,316 L230.5,326 L235.5,326 L237,316 L237,299' fill='url(#gVerre)' stroke='#475569' stroke-width='1.3' stroke-linejoin='round'/><rect x='230.5' y='300' width='5' height='24' fill='#EC4899' fill-opacity='.45'/><path d='M233,334 q-3.2,4.5 0,7.5 q3.2,-3 0,-7.5 z' fill='#EC4899' fill-opacity='.8'/><rect x='156' y='410' width='190' height='46' rx='8' fill='#E2E8F0' stroke='#64748B' stroke-width='1.2'/><circle cx='186' cy='433' r='9' fill='#CBD5E1' stroke='#64748B'/><line x1='186' y1='433' x2='191' y2='427' stroke='#334155' stroke-width='1.4'/><circle cx='312' cy='433' r='9' fill='#CBD5E1' stroke='#64748B'/><line x1='312' y1='433' x2='307' y2='427' stroke='#334155' stroke-width='1.4'/><circle cx='250' cy='433' r='3' fill='#22C55E'/><path d='M172,334 L178,336 L178,400 Q178,408 186,408 L314,408 Q322,408 322,400 L322,336' fill='none' stroke='#64748B' stroke-width='1.4' stroke-linejoin='round'/><path d='M179,352 L179,400 Q179,407 186,407 L314,407 Q321,407 321,400 L321,352 Z' fill='url(#gSolT)' opacity='.9'/><line x1='179' y1='352' x2='321' y2='352' stroke='#7DD3FC' stroke-width='1'/><line x1='182' y1='370' x2='190' y2='370' stroke='#94A3B8' stroke-width='.7'/><line x1='182' y1='386' x2='190' y2='386' stroke='#94A3B8' stroke-width='.7'/><rect x='224' y='397' width='30' height='8' rx='4' fill='#FFFFFF' stroke='#0F172A' stroke-width='.8'/><rect x='279' y='216' width='22' height='30' rx='4' fill='#1E293B'/><rect x='284' y='246' width='12' height='112' fill='#E2E8F0' stroke='#64748B' stroke-width='1.2'/><path d='M279,358 L301,358 L301,390 L279,390 Z' fill='#F1F5F9' fill-opacity='.7' stroke='#64748B' stroke-width='1.2'/><rect x='283' y='364' width='3' height='22' fill='#94A3B8'/><rect x='294' y='364' width='3' height='22' fill='#94A3B8'/><path d='M290,216 C290,150 360,140 440,170' fill='none' stroke='#1E293B' stroke-width='2.5'/><rect x='440' y='150' width='160' height='92' rx='10' fill='#F1F5F9' stroke='#64748B' stroke-width='1.3'/><rect x='456' y='164' width='128' height='38' rx='5' fill='#0F172A'/><text x='576' y='190' font-size='14' text-anchor='end' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>1,25 mS·cm⁻¹</text><text x='520' y='228' font-size='13' text-anchor='middle' fill='#334155' font-family='system-ui, sans-serif'>conductimètre</text><line x1='243' y1='90' x2='300' y2='90' stroke='#64748B' stroke-width='.9'/><text x='306' y='94' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>burette graduée</text><line x1='243' y1='180' x2='300' y2='182' stroke='#64748B' stroke-width='.9'/><text x='306' y='186' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>solution titrante</text><line x1='220' y1='292' x2='160' y2='296' stroke='#64748B' stroke-width='.9'/><text x='154' y='300' font-size='13' text-anchor='end' fill='#334155' font-family='system-ui, sans-serif'>robinet</text><line x1='86' y1='76' x2='22' y2='76' stroke='#64748B' stroke-width='.9'/><text x='16' y='80' font-size='13' text-anchor='end' fill='#334155' font-family='system-ui, sans-serif'>potence</text><line x1='312' y1='372' x2='390' y2='360' stroke='#64748B' stroke-width='.9'/><text x='396' y='364' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>solution titrée</text><line x1='254' y1='401' x2='390' y2='400' stroke='#64748B' stroke-width='.9'/><text x='396' y='404' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>turbulent (barreau aimanté)</text><line x1='346' y1='438' x2='390' y2='438' stroke='#64748B' stroke-width='.9'/><text x='396' y='442' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>agitateur magnétique</text><line x1='298' y1='300' x2='390' y2='300' stroke='#64748B' stroke-width='.9'/><text x='396' y='304' font-size='13' text-anchor='start' fill='#334155' font-family='system-ui, sans-serif'>cellule conductimétrique</text></svg>
 
 <div class="nt-b nt-prop">
 <p class="nt-tag"><i class="fa-solid fa-star"></i>Principe</p>
@@ -410,6 +410,22 @@ d'où&nbsp;:
 <ol class="nt-steps nt-flacon-out" aria-live="polite"></ol>
 </div>
 <p class="nt-note">On raisonne sur un litre de solution, avec $\rho_\text{eau} = \pu{1000 g*L-1}$. Ces solutions commerciales concentrées doivent être diluées avant tout titrage.</p>
+</div>
+
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur les titrages</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
 </div>
 
 <script>
@@ -729,5 +745,126 @@ d'où&nbsp;:
     $$(root, '[data-fl]').forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-fl')); }); });
     show('hcl');
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Un titrage est un dosage…",
+    [
+    "destructif, qui met en jeu une transformation chimique",
+    "non destructif",
+    "par étalonnage",
+    "qui ne nécessite aucune réaction"
+    ],
+    "Le réactif titré est consommé par la réaction support du titrage."
+    ],
+    [
+    "La réaction support d'un titrage doit être…",
+    [
+    "totale, rapide et unique",
+    "lente et non totale",
+    "réversible",
+    "endothermique"
+    ],
+    "Ces conditions garantissent que l'équivalence est bien définie."
+    ],
+    [
+    "À l'équivalence d'un titrage…",
+    [
+    "les réactifs titré et titrant ont été introduits dans les proportions stœchiométriques",
+    "le pH vaut toujours 7",
+    "le titrant est en excès",
+    "la réaction s'arrête par manque de catalyseur"
+    ],
+    "Il y a changement de réactif limitant."
+    ],
+    [
+    "Pour la réaction $\\ce{A + 2 B -> C}$, à l'équivalence on a…",
+    [
+    "$n_\\mathrm{B,versé} = 2\\,n_\\mathrm{A,initial}$",
+    "$n_\\mathrm{A} = 2\\,n_\\mathrm{B}$",
+    "$n_\\mathrm{A} = n_\\mathrm{B}$",
+    "$n_\\mathrm{B} = n_\\mathrm{C}$"
+    ],
+    "$\\dfrac{n_\\mathrm{A}}{1} = \\dfrac{n_\\mathrm{B}}{2}$."
+    ],
+    [
+    "Lors d'un titrage pH-métrique, l'équivalence se repère…",
+    [
+    "au saut de pH, par la méthode des tangentes ou de la dérivée",
+    "au pH 7",
+    "au début du titrage",
+    "au maximum de conductivité"
+    ],
+    "Avec la dérivée, l'équivalence correspond à l'extremum de $\\dfrac{\\mathrm{d}\\mathrm{pH}}{\\mathrm{d}V}$."
+    ],
+    [
+    "Lors d'un titrage conductimétrique, l'équivalence se repère…",
+    [
+    "à la rupture de pente de la courbe $\\sigma = f(V)$",
+    "au saut de pH",
+    "au maximum de la conductivité",
+    "au point d'inflexion"
+    ],
+    "La conductivité varie de façon affine avant et après l'équivalence, avec des pentes différentes."
+    ],
+    [
+    "On titre $\\pu{20,0 mL}$ d'acide par une solution d'hydroxyde de sodium à $\\pu{0,100 mol*L-1}$ (réaction mole à mole). $V_\\mathrm{E} = \\pu{12,0 mL}$. La concentration de l'acide vaut…",
+    [
+    "$\\pu{0,0600 mol*L-1}$",
+    "$\\pu{0,167 mol*L-1}$",
+    "$\\pu{0,100 mol*L-1}$",
+    "$\\pu{0,0120 mol*L-1}$"
+    ],
+    "$C_\\mathrm{A} = \\dfrac{C_\\mathrm{B} V_\\mathrm{E}}{V_\\mathrm{A}} = \\dfrac{0{,}100 \\times 12{,}0}{20{,}0} = \\pu{0,0600 mol*L-1}$."
+    ],
+    [
+    "Le titre massique d'une solution commerciale est…",
+    [
+    "le rapport entre la masse de soluté et la masse de solution",
+    "la masse de soluté par litre",
+    "la densité de la solution",
+    "la concentration en quantité de matière"
+    ],
+    "Il s'exprime souvent en pourcentage."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

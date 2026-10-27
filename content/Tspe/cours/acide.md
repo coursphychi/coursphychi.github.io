@@ -470,6 +470,22 @@ $$
 </div>
 </details>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur les acides et les bases</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -665,5 +681,126 @@ $$
       (function spin() { if (auto && visible) { ry += 0.006; draw(); } requestAnimationFrame(spin); })();
     });
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Selon Brønsted, un acide est une espèce chimique capable de…",
+    [
+    "céder un ion hydrogène $\\ce{H+}$",
+    "capter un ion hydrogène $\\ce{H+}$",
+    "céder un électron",
+    "capter un ion hydroxyde $\\ce{HO-}$"
+    ],
+    "C'est la définition d'un acide de Brønsted&nbsp;; une base, elle, capte un ion $\\ce{H+}$."
+    ],
+    [
+    "Quelle est la base conjuguée de l'acide éthanoïque $\\ce{CH3COOH}$&nbsp;?",
+    [
+    "l'ion éthanoate $\\ce{CH3COO-}$",
+    "l'ion $\\ce{CH3COOH2+}$",
+    "l'ion hydroxyde $\\ce{HO-}$",
+    "l'eau"
+    ],
+    "En cédant un ion $\\ce{H+}$, l'acide éthanoïque devient l'ion éthanoate&nbsp;: couple $\\ce{CH3COOH}/\\ce{CH3COO-}$."
+    ],
+    [
+    "Une espèce amphotère (ou ampholyte) est une espèce qui…",
+    [
+    "est l'acide d'un couple et la base d'un autre couple",
+    "ne réagit ni avec les acides ni avec les bases",
+    "est un acide fort",
+    "contient deux atomes d'hydrogène"
+    ],
+    "Exemple&nbsp;: l'eau, acide du couple $\\ce{H2O}/\\ce{HO-}$ et base du couple $\\ce{H3O+}/\\ce{H2O}$."
+    ],
+    [
+    "Quel couple acide-base fait intervenir l'ion oxonium&nbsp;?",
+    [
+    "$\\ce{H3O+}/\\ce{H2O}$",
+    "$\\ce{H2O}/\\ce{HO-}$",
+    "$\\ce{NH4+}/\\ce{NH3}$",
+    "$\\ce{H2O}/\\ce{H2}$"
+    ],
+    "L'ion oxonium $\\ce{H3O+}$ est l'acide conjugué de l'eau."
+    ],
+    [
+    "Une réaction acido-basique est un transfert d'ion $\\ce{H+}$…",
+    [
+    "de l'acide d'un couple vers la base d'un autre couple",
+    "de la base d'un couple vers l'acide du même couple",
+    "entre deux acides",
+    "entre deux bases"
+    ],
+    "L'acide d'un couple cède un ion $\\ce{H+}$, capté par la base d'un autre couple."
+    ],
+    [
+    "Quelle est la relation entre le pH et la concentration en ions oxonium&nbsp;?",
+    [
+    "$\\mathrm{pH} = -\\log\\left(\\dfrac{[\\ce{H3O+}]}{c^\\circ}\\right)$",
+    "$\\mathrm{pH} = \\log\\left(\\dfrac{[\\ce{H3O+}]}{c^\\circ}\\right)$",
+    "$\\mathrm{pH} = 10^{-[\\ce{H3O+}]}$",
+    "$\\mathrm{pH} = -[\\ce{H3O+}]$"
+    ],
+    "Avec $c^\\circ = \\pu{1 mol*L-1}$, la concentration standard&nbsp;; inversement, $[\\ce{H3O+}] = c^\\circ \\times 10^{-\\mathrm{pH}}$."
+    ],
+    [
+    "Quand la concentration en ions oxonium est multipliée par 10, le pH…",
+    [
+    "diminue de 1",
+    "augmente de 1",
+    "est divisé par 10",
+    "est multiplié par 10"
+    ],
+    "$-\\log(10\\,x) = -\\log(x) - 1$&nbsp;: le pH diminue d'une unité."
+    ],
+    [
+    "Une solution a un pH de 3,0. Sa concentration en ions oxonium vaut…",
+    [
+    "$\\pu{1,0E-3 mol*L-1}$",
+    "$\\pu{3,0 mol*L-1}$",
+    "$\\pu{1,0E3 mol*L-1}$",
+    "$\\pu{3,0E-3 mol*L-1}$"
+    ],
+    "$[\\ce{H3O+}] = c^\\circ \\times 10^{-3{,}0} = \\pu{1,0E-3 mol*L-1}$."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

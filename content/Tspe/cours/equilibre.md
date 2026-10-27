@@ -262,6 +262,22 @@ draft = false
 <p>Le membre de gauche est $Q_r$, celui de droite est $K$&nbsp;: on retrouve $Q_{r,\mathrm{eq}} = K$.</p>
 </div>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur l'équilibre chimique</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -475,5 +491,126 @@ draft = false
     if ('IntersectionObserver' in window) { new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(cv); }
     playLabel(btn, playing); setup(); onResize(setup); requestAnimationFrame(step);
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Une transformation est non totale lorsque, à l'état final…",
+    [
+    "l'avancement final est inférieur à l'avancement maximal : réactifs et produits coexistent",
+    "tous les réactifs ont été consommés",
+    "aucun produit ne s'est formé",
+    "la température a changé"
+    ],
+    "Le système atteint un état d'équilibre chimique."
+    ],
+    [
+    "À l'équilibre chimique, à l'échelle microscopique…",
+    [
+    "les réactions dans les deux sens continuent, avec des vitesses égales",
+    "plus aucune réaction n'a lieu",
+    "seule la réaction directe a lieu",
+    "les entités cessent de bouger"
+    ],
+    "C'est un équilibre dynamique&nbsp;: les quantités de matière n'évoluent plus à notre échelle."
+    ],
+    [
+    "Pour la réaction $\\ce{a A(aq) + b B(aq) = c C(aq) + d D(aq)}$, le quotient de réaction s'écrit…",
+    [
+    "$Q_\\mathrm{r} = \\dfrac{[\\mathrm{C}]^c\\,[\\mathrm{D}]^d}{[\\mathrm{A}]^a\\,[\\mathrm{B}]^b}$, concentrations divisées par $c^\\circ$",
+    "$Q_\\mathrm{r} = \\dfrac{[\\mathrm{A}]^a[\\mathrm{B}]^b}{[\\mathrm{C}]^c[\\mathrm{D}]^d}$",
+    "$Q_\\mathrm{r} = [\\mathrm{C}] + [\\mathrm{D}] - [\\mathrm{A}] - [\\mathrm{B}]$",
+    "$Q_\\mathrm{r} = c \\times d \\times a \\times b$"
+    ],
+    "Produits au numérateur, réactifs au dénominateur, chacun élevé à la puissance de son coefficient&nbsp;; $Q_\\mathrm{r}$ est sans unité."
+    ],
+    [
+    "Dans l'expression du quotient de réaction, le solvant (l'eau) et les solides…",
+    [
+    "n'apparaissent pas (leur activité vaut 1)",
+    "apparaissent au numérateur",
+    "apparaissent au dénominateur",
+    "sont comptés avec leur masse"
+    ],
+    "Leur activité est égale à 1."
+    ],
+    [
+    "La constante d'équilibre $K(T)$ dépend…",
+    [
+    "uniquement de la température",
+    "des concentrations initiales",
+    "du volume de la solution",
+    "de la vitesse de la réaction"
+    ],
+    "C'est la valeur prise par $Q_\\mathrm{r}$ à l'équilibre, pour une température donnée."
+    ],
+    [
+    "Si $Q_{\\mathrm{r,i}} < K$, le système évolue spontanément…",
+    [
+    "dans le sens direct",
+    "dans le sens indirect",
+    "il n'évolue pas",
+    "dans un sens imprévisible"
+    ],
+    "Le système évolue de façon à rapprocher $Q_\\mathrm{r}$ de $K$&nbsp;: $Q_\\mathrm{r}$ doit augmenter, donc les produits se forment."
+    ],
+    [
+    "Si $Q_{\\mathrm{r,i}} = K$…",
+    [
+    "le système est à l'équilibre et n'évolue pas",
+    "le système évolue dans le sens direct",
+    "le système évolue dans le sens indirect",
+    "la réaction est totale"
+    ],
+    "L'état initial est déjà l'état d'équilibre."
+    ],
+    [
+    "Une transformation est considérée comme totale lorsque…",
+    [
+    "$K$ est très grande (en pratique $K > 10^4$)",
+    "$K$ est très petite",
+    "$K = 1$",
+    "$Q_\\mathrm{r} = 0$"
+    ],
+    "Pour $K$ très grande, l'avancement final est pratiquement égal à l'avancement maximal."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

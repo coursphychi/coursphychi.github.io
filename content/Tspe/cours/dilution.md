@@ -266,6 +266,22 @@ draft = false
 <p class="nt-note">Une série compte 8&nbsp;questions. Pour «&nbsp;les deux&nbsp;», plusieurs couples pipette-fiole peuvent convenir&nbsp;: tous sont acceptés.</p>
 </div>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur la dilution</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -401,5 +417,126 @@ draft = false
     inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { btnV.click(); } });
     newQ();
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Diluer une solution, c'est…",
+    [
+    "diminuer sa concentration en ajoutant du solvant",
+    "augmenter sa concentration",
+    "ajouter du soluté",
+    "chauffer la solution"
+    ],
+    "On augmente la quantité de solvant, sans changer la quantité de soluté."
+    ],
+    [
+    "Au cours d'une dilution, quelle grandeur se conserve&nbsp;?",
+    [
+    "la quantité de matière de soluté",
+    "la concentration",
+    "le volume",
+    "la masse de solution"
+    ],
+    "D'où la relation $C_\\text{m} V_\\text{m} = C_\\text{f} V_\\text{f}$."
+    ],
+    [
+    "On prélève $V_\\text{m} = \\pu{10,0 mL}$ de solution mère, que l'on dilue dans une fiole de $\\pu{100,0 mL}$. Le facteur de dilution vaut…",
+    [
+    "10",
+    "0,1",
+    "90",
+    "110"
+    ],
+    "$F = \\dfrac{V_\\text{f}}{V_\\text{m}} = \\dfrac{100{,}0}{10{,}0} = 10$&nbsp;: la solution fille est 10 fois moins concentrée."
+    ],
+    [
+    "Pour prélever précisément le volume de solution mère, on utilise…",
+    [
+    "une pipette jaugée, munie d'une propipette",
+    "une éprouvette graduée",
+    "un bécher",
+    "une pipette graduée à la bouche"
+    ],
+    "La pipette jaugée est la verrerie la plus précise pour un volume donné&nbsp;; on ne pipette jamais à la bouche."
+    ],
+    [
+    "La solution fille est préparée dans…",
+    [
+    "une fiole jaugée",
+    "un erlenmeyer",
+    "un bécher",
+    "une éprouvette"
+    ],
+    "La fiole jaugée garantit un volume final précis, au trait de jauge."
+    ],
+    [
+    "Une solution mère à $\\pu{0,50 mol*L-1}$ est diluée 20 fois. La concentration de la solution fille vaut…",
+    [
+    "$\\pu{0,025 mol*L-1}$",
+    "$\\pu{10 mol*L-1}$",
+    "$\\pu{0,50 mol*L-1}$",
+    "$\\pu{0,25 mol*L-1}$"
+    ],
+    "$C_\\text{f} = \\dfrac{C_\\text{m}}{F} = \\dfrac{0{,}50}{20} = \\pu{0,025 mol*L-1}$."
+    ],
+    [
+    "Avant de prélever la solution mère, on rince la pipette jaugée…",
+    [
+    "avec la solution mère",
+    "avec de l'eau distillée uniquement",
+    "avec la solution fille",
+    "on ne la rince pas"
+    ],
+    "Le rinçage avec la solution à prélever évite de la diluer avec des gouttes d'eau restées dans la pipette."
+    ],
+    [
+    "Pour compléter la fiole jaugée jusqu'au trait de jauge, on ajoute…",
+    [
+    "de l'eau distillée, puis on agite pour homogénéiser",
+    "de la solution mère",
+    "de l'eau du robinet",
+    "rien : le volume est déjà juste"
+    ],
+    "On complète d'abord aux deux tiers, on agite, puis on ajuste le bas du ménisque au trait de jauge."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

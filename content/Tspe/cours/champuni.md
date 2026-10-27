@@ -539,6 +539,22 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
 </div>
 </details>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur le mouvement dans un champ uniforme</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -1246,5 +1262,126 @@ Une autre raison nous fait un poil surestimer la profondeur&nbsp;: le temps que 
   Array.prototype.forEach.call(document.querySelectorAll('a[href="#memo-primitives"]'), function (l) {
     l.addEventListener('click', function () { var d = document.getElementById('memo-primitives'); if (d) { d.open = true; } });
   });
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Dans le champ de pesanteur, un système de masse $m$ subit la force…",
+    [
+    "$\\vec{P} = m\\vec{g}$",
+    "$\\vec{P} = \\dfrac{\\vec{g}}{m}$",
+    "$\\vec{P} = m\\,g\\,\\vec{v}$",
+    "$\\vec{P} = q\\vec{E}$"
+    ],
+    "C'est le poids, de même direction et de même sens que $\\vec{g}$."
+    ],
+    [
+    "Un système est en chute libre lorsque…",
+    [
+    "la seule force qu'il subit est son poids",
+    "il tombe verticalement",
+    "sa vitesse est constante",
+    "il n'est soumis à aucune force"
+    ],
+    "La chute libre n'implique pas un mouvement vertical&nbsp;: un ballon lancé en l'air (frottements négligés) est en chute libre."
+    ],
+    [
+    "En chute libre, le vecteur accélération du centre de masse est…",
+    [
+    "égal à $\\vec{g}$, quelle que soit la masse",
+    "proportionnel à la masse",
+    "nul",
+    "dirigé selon la vitesse"
+    ],
+    "Deuxième loi de Newton&nbsp;: $m\\vec{a} = m\\vec{g}$, donc $\\vec{a} = \\vec{g}$."
+    ],
+    [
+    "Pour obtenir les équations horaires de la vitesse à partir de l'accélération, on cherche…",
+    [
+    "des primitives, en utilisant les conditions initiales",
+    "des dérivées",
+    "la tangente à la trajectoire",
+    "la valeur moyenne de l'accélération"
+    ],
+    "La vitesse est une primitive de l'accélération&nbsp;; les constantes sont fixées par les conditions initiales."
+    ],
+    [
+    "Un projectile lancé obliquement dans le champ de pesanteur (frottements négligés) a une trajectoire…",
+    [
+    "parabolique",
+    "rectiligne",
+    "circulaire",
+    "elliptique"
+    ],
+    "Les équations horaires donnent $z$ fonction du second degré de $x$&nbsp;: une parabole."
+    ],
+    [
+    "Sans frottements, au cours d'un mouvement dans le champ de pesanteur, l'énergie mécanique…",
+    [
+    "se conserve",
+    "augmente",
+    "diminue",
+    "est toujours nulle"
+    ],
+    "Seul le poids, force conservative, travaille&nbsp;: $E_\\mathrm{m} = E_\\mathrm{c} + E_\\mathrm{pp}$ est constante."
+    ],
+    [
+    "Entre les armatures d'un condensateur plan, le champ électrique est…",
+    [
+    "uniforme, perpendiculaire aux armatures, orienté de la plaque positive vers la plaque négative",
+    "uniforme, parallèle aux armatures",
+    "nul",
+    "dirigé de la plaque négative vers la plaque positive"
+    ],
+    "Le champ $\\vec{E}$ est uniforme entre les armatures, orienté vers la plaque chargée négativement."
+    ],
+    [
+    "Un électron (charge $-e$) placé dans un champ électrique uniforme $\\vec{E}$ subit la force…",
+    [
+    "$\\vec{F} = -e\\vec{E}$, de sens opposé à $\\vec{E}$",
+    "$\\vec{F} = e\\vec{E}$, de même sens que $\\vec{E}$",
+    "$\\vec{F} = m\\vec{E}$",
+    "aucune force"
+    ],
+    "$\\vec{F} = q\\vec{E}$ avec $q = -e < 0$&nbsp;: la force est opposée au champ."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

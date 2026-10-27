@@ -783,7 +783,7 @@ vy = [v * cos(2*pi*i/n) for i in range(n)]
 ax = [-v**2 / R * cos(2*pi*i/n) for i in range(n)]
 ay = [-v**2 / R * sin(2*pi*i/n) for i in range(n)]
 
-plt.figure(figsize=(6, 6),dpi=200)
+plt.figure(figsize=(10, 10))
 plt.scatter(x, y, zorder=2)
 v = plt.quiver(x, y, vx, vy, units = "dots", color = "#FEAE00", scale = 0.05)
 a = plt.quiver(x, y, ax, ay, units = "dots", color = "#1DB100", scale = 0.1)
@@ -1311,7 +1311,7 @@ Lambda = ...
 print("La longueur d'onde de l’onde acoustique dans le trombone est", Lambda, "m")
 {{< /runpython >}}
 
-### Scarabé
+### Exercice «&nbsp;[Scarabée](/ds-scarabe.pdf)&nbsp;»
 
 {{< runpython lang="pyodide" height="auto" theme="dark" >}}
 import numpy as np

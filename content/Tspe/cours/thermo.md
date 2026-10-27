@@ -148,7 +148,7 @@ draft = false
 <summary><span class="nt-tag"><i class="fa-solid fa-rocket"></i>Pour aller plus loin</span><span class="nt-sum">Température et agitation moléculaire</span></summary>
 <div class="nt-d-body">
 <p>Pour un gaz parfait monoatomique, l'énergie cinétique moyenne d'une entité est directement proportionnelle à la température absolue&nbsp;: $\langle E_c \rangle = \dfrac{3}{2}\, k_B T$, où $k_B = \pu{1,38E-23 J*K-1}$ est la constante de Boltzmann. C'est ce qui donne un sens physique au zéro absolu&nbsp;: à $T$ = 0&nbsp;K, l'agitation thermique cesse.</p>
-<p>La constante des gaz parfaits n'est autre que la constante de Boltzmann rapportée à une mole&nbsp;: $R = N_A\, k_B$. Dans l'air, à 20&nbsp;°C, les molécules de diazote filent en moyenne à environ 500&nbsp;m/s.</p>
+<p>La constante des gaz parfaits n'est autre que la constante de Boltzmann rapportée à une mole&nbsp;: $R = N_A\, k_B$. Dans l'air, à 20&nbsp;°C, les molécules de diazote filent en moyenne à environ 500&nbsp;m·s⁻¹.</p>
 </div>
 </details>
 
@@ -771,6 +771,22 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
 </div>
 
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur l'énergie et les transferts thermiques</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -797,7 +813,8 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
   /* couleur d'une température (bleu froid → rouge chaud), u entre 0 et 1 */
   function chaud(u) { u = Math.max(0, Math.min(1, u)); var a = [[37, 99, 235], [147, 197, 253], [253, 230, 138], [249, 115, 22], [220, 38, 38]], k = u * 4, i = Math.min(3, Math.floor(k)), f = k - i; return 'rgb(' + [0, 1, 2].map(function (j) { return Math.round(a[i][j] + (a[i + 1][j] - a[i][j]) * f); }).join(',') + ')'; }
   function axes(c, L, R, T, B, xs, ys, xl, yl) {
-    xs.forEach(function (v) { c.strokeStyle = '#E2E8F0'; c.lineWidth = 1; c.beginPath(); c.moveTo(v[0], T); c.lineTo(v[0], B); c.stroke(); txt(c, v[1], v[0], B + 15, '#475569', '11px system-ui, sans-serif'); });
+    var pas = xs.length > 1 ? Math.max(1, Math.ceil(30 / Math.abs(xs[1][0] - xs[0][0]))) : 1;   /* graduations écrites une sur deux (ou trois…) si la place manque */
+    xs.forEach(function (v, i) { c.strokeStyle = '#E2E8F0'; c.lineWidth = 1; c.beginPath(); c.moveTo(v[0], T); c.lineTo(v[0], B); c.stroke(); if (i % pas === 0) { txt(c, v[1], v[0], B + 15, '#475569', '11px system-ui, sans-serif'); } });
     ys.forEach(function (v) { c.strokeStyle = '#E2E8F0'; c.lineWidth = 1; c.beginPath(); c.moveTo(L, v[0]); c.lineTo(R, v[0]); c.stroke(); txt(c, v[1], L - 6, v[0] + 4, '#475569', '11px system-ui, sans-serif', 'right'); });
     c.strokeStyle = '#1E293B'; c.lineWidth = 1.2; c.beginPath(); c.moveTo(L, T); c.lineTo(L, B); c.lineTo(R, B); c.stroke();
     txt(c, xl, R - 30, B + 29, '#475569', '11px system-ui, sans-serif');
@@ -994,8 +1011,10 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
         rr(c, x - bw / 2, T, bw, B - T, 6); c.fillStyle = '#F1F5F9'; c.fill();
         var g = c.createLinearGradient(0, B, 0, yb); g.addColorStop(0, chaud(0.25)); g.addColorStop(1, chaud(0.25 + (th - T0) / 170));
         c.fillStyle = g; c.fillRect(x - bw / 2, yb, bw, B - yb);
-        txt(c, fr(th, 1) + ' °C', x, Math.max(T + 12, yb - 6), '#1E293B', '700 11.5px system-ui, sans-serif');
-        txt(c, m[0], x, B + 15, m[2], '700 11px system-ui, sans-serif'); txt(c, m[1] + ' J/(kg·K)', x, B + 28, '#64748B', '10px system-ui, sans-serif');
+        var et = (R - L) / MAT.length < 80;   /* téléphone : textes plus petits, unité écrite une seule fois */
+        txt(c, et ? fr(th, 0) + '°' : fr(th, 1) + ' °C', x, Math.max(T + 12, yb - 6), '#1E293B', (et ? '700 10px' : '700 11.5px') + ' system-ui, sans-serif');
+        txt(c, et ? m[0].split(' ')[0].replace('aluminium', 'alu.') : m[0], x, B + 15, m[2], (et ? '700 9.5px' : '700 11px') + ' system-ui, sans-serif'); txt(c, et ? String(m[1]) : m[1] + ' J·kg⁻¹·K⁻¹', x, B + 28, '#64748B', (et ? '9px' : '10px') + ' system-ui, sans-serif');
+        if (et && i === 0) { txt(c, 'c en J·kg⁻¹·K⁻¹', L, B + 41, '#64748B', '9px system-ui, sans-serif', 'left'); }
       });
       oT.textContent = fr(t, 1) + ' s'; oQ.textContent = nb(Q / 1000, 3) + ' kJ';
     }
@@ -1055,7 +1074,7 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
         /* bec Bunsen sous le bout gauche : flamme entière visible */
         var fx = bx0 + 6, fy = by + bh + 18 + 52;
         flamme(c, fx, fy, 1.15); bunsen(c, fx, fy);
-        txt(c, 'barre métallique : chaque bille est un atome', (bx0 + bx1) / 2 + 30, by + bh + 46, '#475569', '600 11px system-ui, sans-serif');
+        txt(c, w < 500 ? 'une bille = un atome' : 'barre métallique : chaque bille est un atome', (bx0 + bx1) / 2 + (w < 500 ? 0 : 30), by + bh + 46, '#475569', '600 11px system-ui, sans-serif');
         txt(c, 'atomes agités', bx0 + 40, by - 24, '#B91C1C', '600 10.5px system-ui, sans-serif'); txt(c, 'atomes peu agités', bx1 - 40, by - 24, '#1D4ED8', '600 10.5px system-ui, sans-serif');
       } else if (mode === 'conv') {
         var x0 = Math.max(30, w / 2 - 220), x1 = Math.min(w - 30, w / 2 + 220), y0 = 34, y1 = h - 58, W = x1 - x0, H = y1 - y0;
@@ -1129,10 +1148,10 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
     function draw() {
       var c = S.ctx, w = S.w, h = S.h, Te = +rTe.value, L = couches(), Rt = L.reduce(function (s, x) { return s + x.R; }, 0), Phi = (Ti - Te) / Rt;   /* h : hauteur du dessin */
       oE.textContent = rE.value + ' mm'; oTe.textContent = fr(Te, 0).replace('\u2212', '\u2212') + ' °C';
-      oR.textContent = nb(Rt, 3) + ' K/W'; oF.textContent = nb(Phi, 3) + ' W';
+      oR.textContent = nb(Rt, 3) + ' K·W⁻¹'; oF.textContent = nb(Phi, 3) + ' W';
       c.clearRect(0, 0, w, h);
       /* coupe du mur : épaisseurs à l'échelle (les couches d'air ont une largeur conventionnelle) */
-      var x0 = 30, x1 = w - 30, y0 = 30, y1 = h - 96, airW = 50, tot = L.filter(function (x) { return !x.cv; }).reduce(function (s, x) { return s + x.e; }, 0), k = (x1 - x0 - 2 * airW) / Math.max(0.3, tot), xs = [x0], x = x0;
+      var x0 = 30, x1 = w - 30, y0 = 30, y1 = h - (w < 420 ? 126 : 96), airW = 50, tot = L.filter(function (x) { return !x.cv; }).reduce(function (s, x) { return s + x.e; }, 0), k = (x1 - x0 - 2 * airW) / Math.max(0.3, tot), xs = [x0], x = x0;
       L.forEach(function (cc) { var wd = cc.cv ? airW : cc.e * k; cc.x0 = x; cc.x1 = x + wd; x += wd; });
       L.forEach(function (cc) { c.fillStyle = cc.col; c.fillRect(cc.x0, y0, cc.x1 - cc.x0, y1 - y0); if (!cc.cv && cc.x1 - cc.x0 > 2) { c.strokeStyle = '#94A3B8'; c.lineWidth = 1; c.strokeRect(cc.x0, y0, cc.x1 - cc.x0, y1 - y0); } });
       /* profil de température : chute de température proportionnelle à la résistance de chaque couche (comme U = R I) */
@@ -1149,12 +1168,17 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
       txt(c, '\u03a6 = ' + nb(Phi, 3) + ' W', (x0 + x1) / 2, fy - fw / 2 - 8, '#C2410C', '700 12px system-ui, sans-serif');
       /* résistances de chaque couche */
       var rang = 0;   /* noms des couches : les couches étroites sont écrites en alternance sur deux lignes */
-      L.forEach(function (cc) { var xm = (cc.x0 + cc.x1) / 2, large = cc.x1 - cc.x0 > 70, dy = large ? 0 : (rang++ % 2) * 28; if (cc.x1 - cc.x0 > 2) { txt(c, cc.n, xm, y1 + 16 + dy, '#334155', '600 10.5px system-ui, sans-serif'); txt(c, nb(cc.R, 2) + ' K/W', xm, y1 + 29 + dy, '#64748B', '10px system-ui, sans-serif'); } });
-      txt(c, 'R\u209c\u2095 totale = somme des résistances = ' + nb(Rt, 3) + ' K/W', (x0 + x1) / 2, h - 10, '#0F172A', '700 12px system-ui, sans-serif');
+      var etroitM = x1 - x0 < 420, rangs = [[], [], []];   /* chaque étiquette va sur le premier rang où elle ne chevauche aucune autre */
+      L.forEach(function (cc) { if (cc.x1 - cc.x0 <= 2) { return; } var xm = (cc.x0 + cc.x1) / 2, t2 = nb(cc.R, 2) + ' K·W⁻¹', nom = etroitM ? cc.n.replace('air intérieur', 'air int.').replace('air extérieur', 'air ext.').replace(' de verre', '') : cc.n;   /* noms abrégés sur téléphone */ c.font = '600 10.5px system-ui, sans-serif'; var lw = Math.max(c.measureText(nom).width, c.measureText(t2).width) + 6, r = 0;
+        while (r < 2 && rangs[r].some(function (b) { return xm - lw / 2 < b[1] && b[0] < xm + lw / 2; })) { r++; }
+        rangs[r].push([xm - lw / 2, xm + lw / 2]); var dy = r * 28;
+        txt(c, nom, xm, y1 + 16 + dy, '#334155', '600 10.5px system-ui, sans-serif'); txt(c, t2, xm, y1 + 29 + dy, '#64748B', '10px system-ui, sans-serif'); });
+      txt(c, (etroitM ? 'R\u209c\u2095 totale = ' : 'R\u209c\u2095 totale = somme des résistances = ') + nb(Rt, 3) + ' K·W⁻¹', (x0 + x1) / 2, h - 10, '#0F172A', '700 12px system-ui, sans-serif');
     }
     [rE, rTe].forEach(function (r) { r.addEventListener('input', draw); });
     $$(root, 'input[name="iso"]').forEach(function (r) { r.addEventListener('change', function () { iso = r.value; draw(); }); });
-    function setup() { S = canvasCtx(cv); draw(); }
+    var h0 = null;
+    function setup() { if (h0 === null) { h0 = cv.clientHeight; } cv.style.height = (cv.clientWidth < 420 ? h0 + 34 : h0) + 'px'; S = canvasCtx(cv); draw(); }   /* un peu plus haut sur téléphone : place pour un troisième rang d'étiquettes */
     setup(); onResize(setup);
   })();
   /* ================= Refroidissement d'une tasse de thé : loi de Newton ================= */
@@ -1165,7 +1189,7 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
     var C = 4185, Ssurf = 0.03;
     function draw() {
       var m = +rM.value, hh = +rH.value, T0 = +rT0.value, Te = +rTe.value, tau = m * C / (hh * Ssurf), tmax = 5.5 * tau;
-      oM.textContent = Math.round(m * 1000) + ' g'; oH.textContent = hh + ' W/(m²·K)'; oT0.textContent = T0 + ' °C'; oTe.textContent = Te + ' °C'; oTau.textContent = nb(tau / 60, 3) + ' min';
+      oM.textContent = Math.round(m * 1000) + ' g'; oH.textContent = hh + ' W·m⁻²·K⁻¹'; oT0.textContent = T0 + ' °C'; oTe.textContent = Te + ' °C'; oTau.textContent = nb(tau / 60, 3) + ' min';
       var c = S.ctx, w = S.w, h = S.h, L = 52, R = w - 110, T = 16, B = h - 36, Tlo = Math.min(T0, Te) - 5, Thi = Math.max(T0, Te) + 5;
       function X(s) { return L + s / tmax * (R - L); }
       function Y(th) { return B - (th - Tlo) / (Thi - Tlo) * (B - T); }
@@ -1219,9 +1243,12 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
     var cv = $(root, 'canvas'), rA = $(root, '[data-p="A"]'), rAl = $(root, '[data-p="al"]'), oA = $(root, '.out-A'), oAl = $(root, '.out-al'), oT = $(root, '.out-T'), S, etoiles = [];
     var PHI = 340.4, SIG = 5.67e-8;
     for (var e = 0; e < 90; e++) { etoiles.push([Math.random(), Math.random() * 0.6, 0.4 + Math.random() * 0.6]); }
+    var PRIS = [];   /* pastilles déjà placées : on évite les chevauchements */
     function pastille(c, s2, x, y, col, align) {   /* étiquette dans une pastille sombre, lisible sur le ciel */
-      c.save(); c.font = '700 11.5px system-ui, sans-serif'; var lw = c.measureText(s2).width + 14, xx = align === 'left' ? x : (align === 'right' ? x - lw : x - lw / 2);
+      c.save(); c.font = (S.w < 500 ? '700 10px' : '700 11.5px') + ' system-ui, sans-serif'; var lw = c.measureText(s2).width + 14, xx = align === 'left' ? x : (align === 'right' ? x - lw : x - lw / 2);
       xx = Math.max(4, Math.min(S.w - lw - 4, xx));
+      for (var k = 0; k < 6 && PRIS.some(function (b) { return xx < b[0] + b[2] + 3 && b[0] < xx + lw + 3 && y - 13 < b[1] + 22 && b[1] < y + 9; }); k++) { y += 22; }   /* décalée vers le bas tant qu'elle en chevauche une autre */
+      PRIS.push([xx, y - 13, lw]);
       c.fillStyle = 'rgba(15,23,42,.78)'; rr(c, xx, y - 13, lw, 19, 9); c.fill(); c.strokeStyle = col; c.lineWidth = 1.2; c.stroke();
       c.fillStyle = col; c.textAlign = 'left'; c.fillText(s2, xx + 7, y + 1); c.restore();
     }
@@ -1260,7 +1287,8 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
       fleche(c, x3, yatm(x3, 70) - 4, x3, 14, phE * (1 - al) * k, 'rgba(248,113,113,.95)', 'rgba(254,202,202,.95)');
       fleche(c, x4, yatm(x4, 70) - 4, x4, 14, phE * al / 2 * k, 'rgba(249,115,22,.95)', 'rgba(254,215,170,.95)');
       fleche(c, x4, yatm(x4, 70) + 4, x4, ysurf(x4) - 3, phE * al / 2 * k, 'rgba(249,115,22,.95)', 'rgba(251,146,60,.95)');
-      pastille(c, '\u03c6\u209b = ' + nb(PHI, 4) + ' W/m²', x1 + 18, 40, '#FDE047', 'left');
+      PRIS = [];
+      pastille(c, '\u03c6\u209b = ' + nb(PHI, 4) + ' W·m⁻²', x1 + 18, 40, '#FDE047', 'left');
       pastille(c, 'A\u03c6\u209b = ' + Math.round(A * PHI), x2 + 12, 64, '#FEF9C3', 'left');
       pastille(c, '\u03c6\u2091 = ' + Math.round(phE), x3 + phE * k / 2 + 8, (ysurf(x3) + yatm(x3, 70)) / 2 + 4, '#FCA5A5', 'left');
       if (phE * (1 - al) >= 1) { pastille(c, '(1\u2212\u03b1)\u03c6\u2091 = ' + Math.round(phE * (1 - al)), x3 + Math.max(phE * (1 - al) * k, 3) / 2 + 8, 70, '#FECACA', 'left'); }   /* deux hauteurs différentes : pas de chevauchement */
@@ -1275,5 +1303,126 @@ Où on a utilisé la loi de Newton, $\Phi=hS\left(T_\mathrm{ext}-T\right)$.</p><
     function setup() { S = canvasCtx(cv); draw(); }
     setup(); onResize(setup);
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Dans le modèle du gaz parfait, on néglige…",
+    [
+    "la taille des entités et leurs interactions à distance",
+    "les chocs entre entités",
+    "l'agitation des entités",
+    "la pression"
+    ],
+    "Ce modèle convient aux gaz à basse pression."
+    ],
+    [
+    "L'énergie interne $U$ d'un système est…",
+    [
+    "la somme des énergies cinétiques et potentielles microscopiques de ses entités",
+    "son énergie mécanique",
+    "son énergie cinétique macroscopique",
+    "toujours nulle"
+    ],
+    "Elle dépend notamment de la température."
+    ],
+    [
+    "Pour un système incompressible, la variation d'énergie interne vaut…",
+    [
+    "$\\Delta U = C\\,\\Delta T = m\\,c\\,\\Delta T$",
+    "$\\Delta U = mgh$",
+    "$\\Delta U = \\tfrac{1}{2}mv^2$",
+    "$\\Delta U = 0$"
+    ],
+    "$c$ est la capacité thermique massique, en $\\pu{J*kg-1*K-1}$."
+    ],
+    [
+    "Le premier principe de la thermodynamique, pour un système immobile, s'écrit…",
+    [
+    "$\\Delta U = W + Q$",
+    "$\\Delta U = W - Q$",
+    "$W = Q$",
+    "$\\Delta U = 0$"
+    ],
+    "$W$ et $Q$ sont comptés positivement quand le système reçoit de l'énergie."
+    ],
+    [
+    "Le transfert thermique par rayonnement…",
+    [
+    "peut se faire dans le vide",
+    "nécessite un fluide en mouvement",
+    "se fait de proche en proche dans un solide",
+    "est impossible entre la Terre et le Soleil"
+    ],
+    "C'est l'émission et l'absorption d'ondes électromagnétiques."
+    ],
+    [
+    "La résistance thermique d'une paroi est reliée au flux thermique par…",
+    [
+    "$\\Phi = \\dfrac{T_1 - T_2}{R_\\text{th}}$",
+    "$\\Phi = R_\\text{th} \\times (T_1 - T_2)$",
+    "$\\Phi = \\dfrac{R_\\text{th}}{T_1 - T_2}$",
+    "$\\Phi = T_1 \\times T_2$"
+    ],
+    "Plus la résistance thermique est grande, plus le flux est faible&nbsp;; les résistances en série s'additionnent."
+    ],
+    [
+    "D'après la loi de Newton, un corps chaud qui refroidit dans un thermostat voit sa température…",
+    [
+    "décroître de façon exponentielle vers celle du thermostat",
+    "décroître linéairement jusqu'à 0 °C",
+    "rester constante",
+    "osciller"
+    ],
+    "Le flux est proportionnel à l'écart de température, qui diminue au cours du temps."
+    ],
+    [
+    "L'albédo d'une surface est…",
+    [
+    "la fraction de la puissance lumineuse reçue qui est réfléchie",
+    "sa température",
+    "la puissance qu'elle absorbe",
+    "son épaisseur"
+    ],
+    "L'albédo moyen de la Terre est d'environ 0,3."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

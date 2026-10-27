@@ -345,7 +345,7 @@ Son acide conjugué est l'ion ammonium.</li>
 <p class="nt-cap">Tous possèdent un <b style="color:#E11D48;">groupe carboxyle</b> et un <b style="color:#2A6BC4;">groupe amine</b>, portés par le même atome de carbone, le carbone α. Seule la chaîne latérale R change d'un acide aminé à l'autre.</p>
 
 <div class="nt-b nt-demo-box">
-<p class="nt-tag"><i class="fa-solid fa-eye"></i>Remarque&nbsp;: pourquoi «&nbsp;alpha&nbsp;»&nbsp;?</p>
+<p class="nt-tag"><i class="fa-solid fa-eye"></i>Remarque&nbsp;: pourquoi «&nbsp;α&nbsp;»&nbsp;?</p>
 <p>Le carbone qui porte le groupe amine est le premier qui suit celui du groupe carboxyle. En nomenclature officielle, on l'appellerait le carbone 2, mais la tradition a gardé une ancienne notation par lettres grecques&nbsp;: α pour le premier, β pour le deuxième, etc. Il existe des acides β- ou γ-aminés (comme le GABA, principal neurotransmetteur inhibiteur du système nerveux), mais seuls les acides α-aminés sont incorporés dans les protéines.</p>
 </div>
 
@@ -450,6 +450,22 @@ Son acide conjugué est l'ion ammonium.</li>
 </ul>
 </div>
 </details>
+
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur la force des acides et des bases</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
 
 <script>
 (function () {
@@ -686,5 +702,126 @@ Son acide conjugué est l'ion ammonium.</li>
     function setup() { S = canvasCtx(cv); draw(); }
     setup(); onResize(setup);
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Le produit ionique de l'eau, à 25 °C, vaut…",
+    [
+    "$K_\\mathrm{e} = 1{,}0 \\times 10^{-14}$",
+    "$K_\\mathrm{e} = 1{,}0 \\times 10^{-7}$",
+    "$K_\\mathrm{e} = 7$",
+    "$K_\\mathrm{e} = 14$"
+    ],
+    "$K_\\mathrm{e} = \\dfrac{[\\ce{H3O+}][\\ce{HO-}]}{{c^\\circ}^2}$, d'où $\\mathrm{p}K_\\mathrm{e} = 14$."
+    ],
+    [
+    "Un acide fort est un acide dont la réaction avec l'eau est…",
+    [
+    "quasi totale",
+    "très limitée",
+    "impossible",
+    "lente"
+    ],
+    "Pour un acide fort de concentration $C$, $\\mathrm{pH} = -\\log(C/c^\\circ)$."
+    ],
+    [
+    "Plus la constante d'acidité $K_\\mathrm{A}$ d'un couple est grande, plus…",
+    [
+    "l'acide est fort (il se dissocie davantage)",
+    "la base est forte",
+    "le pH est élevé",
+    "la réaction est lente"
+    ],
+    "Et plus son $\\mathrm{p}K_\\mathrm{A} = -\\log K_\\mathrm{A}$ est petit."
+    ],
+    [
+    "Pour un couple $\\ce{AH}/\\ce{A-}$, quand $\\mathrm{pH} = \\mathrm{p}K_\\mathrm{A}$…",
+    [
+    "$[\\ce{AH}] = [\\ce{A-}]$",
+    "seul $\\ce{AH}$ est présent",
+    "seul $\\ce{A-}$ est présent",
+    "$[\\ce{AH}] = 10\\,[\\ce{A-}]$"
+    ],
+    "D'après $\\mathrm{pH} = \\mathrm{p}K_\\mathrm{A} + \\log\\dfrac{[\\ce{A-}]}{[\\ce{AH}]}$."
+    ],
+    [
+    "Si $\\mathrm{pH} < \\mathrm{p}K_\\mathrm{A}$, l'espèce qui prédomine est…",
+    [
+    "la forme acide $\\ce{AH}$",
+    "la forme basique $\\ce{A-}$",
+    "aucune des deux",
+    "l'eau"
+    ],
+    "Diagramme de prédominance&nbsp;: l'acide à gauche du $\\mathrm{p}K_\\mathrm{A}$, la base à droite."
+    ],
+    [
+    "Un indicateur coloré convient pour un titrage si…",
+    [
+    "sa zone de virage contient le pH à l'équivalence",
+    "il est incolore",
+    "sa zone de virage contient le pH initial",
+    "son $\\mathrm{p}K_\\mathrm{A}$ vaut 7"
+    ],
+    "Le changement de couleur repère alors l'équivalence."
+    ],
+    [
+    "Une solution tampon est une solution dont le pH…",
+    [
+    "varie peu par ajout modéré d'acide, de base, ou par dilution",
+    "vaut toujours 7",
+    "varie beaucoup quand on ajoute un acide",
+    "est toujours acide"
+    ],
+    "Son pouvoir tampon est maximal quand $\\mathrm{pH} = \\mathrm{p}K_\\mathrm{A}$."
+    ],
+    [
+    "Un acide α-aminé peut exister, en solution, sous la forme d'un zwitterion, qui porte…",
+    [
+    "une charge positive et une charge négative",
+    "deux charges positives",
+    "deux charges négatives",
+    "aucune charge"
+    ],
+    "Le groupe amine est protoné ($\\ce{-NH3+}$) et le groupe carboxyle déprotoné ($\\ce{-COO-}$)."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

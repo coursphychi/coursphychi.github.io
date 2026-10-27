@@ -391,7 +391,7 @@ details.nt-etape-d > summary .nt-tag { color: var(--c); }
 <p><b>Voie 2</b>&nbsp;: anhydride éthanoïque et butan-1-ol, sans catalyseur, 20&nbsp;min à 60&nbsp;°C, rendement 90&nbsp;%.</p>
 <div class="nt-rxn"><svg xmlns='http://www.w3.org/2000/svg' class='nt-mol' role='img' viewBox='0 0 208 108' width='208' height='108'><line x1='26.0' y1='87.5' x2='65.0' y2='65.0' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='62.7' y1='65.0' x2='62.7' y2='28.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='67.3' y1='65.0' x2='67.3' y2='28.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='65.0' y1='65.0' x2='96.6' y2='83.2' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='111.3' y1='83.2' x2='142.9' y2='65.0' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='142.9' y1='65.0' x2='181.9' y2='87.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='140.6' y1='65.0' x2='140.6' y2='28.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='145.2' y1='65.0' x2='145.2' y2='28.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><text x='65.0' y='24.7' font-size='14' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif'>O</text><text x='103.9' y='92.2' font-size='14' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif'>O</text><text x='142.9' y='24.7' font-size='14' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif'>O</text></svg><span class='nt-plus'>+</span><svg xmlns='http://www.w3.org/2000/svg' class='nt-mol' role='img' viewBox='0 0 208 62' width='208' height='62'><line x1='33.4' y1='38.2' x2='65.0' y2='20.0' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='65.0' y1='20.0' x2='103.9' y2='42.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='103.9' y1='42.5' x2='142.9' y2='20.0' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='142.9' y1='20.0' x2='181.9' y2='42.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><text x='26.0' y='47.2' font-size='14' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif'>O</text><text x='20.8' y='47.2' font-size='14' text-anchor='end' fill='#DC2626' font-family='system-ui, sans-serif'>H</text></svg><svg viewBox='0 0 141 64' width='141' height='64' aria-hidden='true'><text x='70.5' y='22' font-size='12' text-anchor='middle' fill='#475569' font-family='system-ui, sans-serif'></text><line x1='6' y1='32' x2='129' y2='32' stroke='#475569' stroke-width='1.2'/><polygon points='137,32 127,27 127,37' fill='#475569'/><text x='70.5' y='50' font-size='12' text-anchor='middle' fill='#475569' font-family='system-ui, sans-serif'>20 min, 60 °C</text></svg><svg xmlns='http://www.w3.org/2000/svg' class='nt-mol' role='img' viewBox='0 0 286 108' width='286' height='108'><line x1='26.0' y1='87.5' x2='65.0' y2='65.0' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='62.7' y1='65.0' x2='62.7' y2='28.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='67.3' y1='65.0' x2='67.3' y2='28.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='65.0' y1='65.0' x2='96.6' y2='83.2' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='111.3' y1='83.2' x2='142.9' y2='65.0' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='142.9' y1='65.0' x2='181.9' y2='87.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='181.9' y1='87.5' x2='220.9' y2='65.0' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='220.9' y1='65.0' x2='259.8' y2='87.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><text x='65.0' y='24.7' font-size='14' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif'>O</text><text x='103.9' y='92.2' font-size='14' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif'>O</text></svg><span class='nt-plus'>+</span><svg xmlns='http://www.w3.org/2000/svg' class='nt-mol' role='img' viewBox='0 0 130 108' width='130' height='108'><line x1='26.0' y1='87.5' x2='65.0' y2='65.0' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='62.7' y1='65.0' x2='62.7' y2='28.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='67.3' y1='65.0' x2='67.3' y2='28.5' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><line x1='65.0' y1='65.0' x2='96.6' y2='83.2' stroke='#1E293B' stroke-width='1' stroke-linecap='round'/><text x='65.0' y='24.7' font-size='14' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif'>O</text><text x='103.9' y='92.2' font-size='14' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif'>O</text><text x='109.1' y='92.2' font-size='14' text-anchor='start' fill='#DC2626' font-family='system-ui, sans-serif'>H</text></svg></div>
 <p>Comparer ces deux voies en termes d'économie d'atomes, de déchets, de consommation d'énergie, de toxicité et de rendement.</p>
-<p class="nt-note">Masses molaires (en g/mol)&nbsp;: acide éthanoïque 60,0&nbsp;; butan-1-ol 74,1&nbsp;; anhydride éthanoïque 102,1&nbsp;; éthanoate de butyle 116,2.</p>
+<p class="nt-note">Masses molaires (en g·mol⁻¹)&nbsp;: acide éthanoïque 60,0&nbsp;; butan-1-ol 74,1&nbsp;; anhydride éthanoïque 102,1&nbsp;; éthanoate de butyle 116,2.</p>
 </div>
 
 <details class="nt-d nt-rep">
@@ -412,6 +412,22 @@ details.nt-etape-d > summary .nt-tag { color: var(--c); }
 <p>Aucune voie n'est meilleure sur tous les critères&nbsp;: la voie 1 a une meilleure économie d'atomes (son seul sous-produit est l'eau), mais la voie 2 consomme moins d'énergie, évite l'acide sulfurique concentré et donne un bien meilleur rendement. Son sous-produit, l'acide éthanoïque, peut en outre être récupéré et valorisé. C'est souvent ainsi&nbsp;: l'«&nbsp;écoresponsabilité&nbsp;» d'une synthèse se juge sur l'ensemble des critères.</p>
 </div>
 </details>
+
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur la synthèse organique</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
 
 <script>
 (function () {
@@ -532,5 +548,126 @@ details.nt-etape-d > summary .nt-tag { color: var(--c); }
       });
     });
   });
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Le chauffage à reflux permet…",
+    [
+    "d'accélérer la transformation sans perte de matière",
+    "d'éliminer le solvant",
+    "de purifier le produit",
+    "de refroidir le mélange"
+    ],
+    "Les vapeurs se condensent dans le réfrigérant et retombent dans le ballon."
+    ],
+    [
+    "Pour accélérer une transformation, on peut…",
+    [
+    "augmenter la température ou utiliser un catalyseur",
+    "diminuer la concentration des réactifs",
+    "refroidir le milieu",
+    "ajouter de l'eau"
+    ],
+    "Température, concentration et catalyseur sont des facteurs cinétiques."
+    ],
+    [
+    "Pour améliorer le rendement d'une estérification, transformation non totale, on peut…",
+    [
+    "utiliser un réactif en excès ou éliminer un produit au fur et à mesure",
+    "ajouter un catalyseur",
+    "augmenter la température",
+    "ajouter de l'eau"
+    ],
+    "On déplace l'équilibre&nbsp;; un catalyseur, lui, ne modifie que la vitesse."
+    ],
+    [
+    "Le rendement d'une synthèse est…",
+    [
+    "le rapport entre la quantité de produit obtenue et la quantité maximale attendue",
+    "la masse de produit obtenue",
+    "la durée de la synthèse",
+    "toujours égal à 100 %"
+    ],
+    "$\\eta = \\dfrac{n_\\text{obtenue}}{n_\\text{max}}$."
+    ],
+    [
+    "On peut vérifier la pureté d'un solide obtenu…",
+    [
+    "en mesurant sa température de fusion au banc Kofler",
+    "en le pesant",
+    "en mesurant son volume",
+    "en le chauffant à reflux"
+    ],
+    "Une substance pure fond à une température précise, tabulée."
+    ],
+    [
+    "Une réaction de substitution est une réaction au cours de laquelle…",
+    [
+    "un atome ou un groupe d'atomes est remplacé par un autre",
+    "deux molécules s'unissent",
+    "une molécule perd de petits groupes d'atomes",
+    "une molécule se transforme en sa base conjuguée"
+    ],
+    "Les autres catégories sont l'addition et l'élimination."
+    ],
+    [
+    "Dans une synthèse multi-étapes, on protège un groupe caractéristique pour…",
+    [
+    "l'empêcher de réagir lors d'une étape, puis on le déprotège",
+    "accélérer la réaction",
+    "augmenter le rendement de toutes les étapes",
+    "colorer le produit"
+    ],
+    "Stratégie protection, transformation, déprotection."
+    ],
+    [
+    "Une réaction de polymérisation…",
+    [
+    "assemble un grand nombre de monomères en une macromolécule",
+    "casse un polymère en monomères",
+    "forme toujours de l'eau",
+    "ne concerne que les molécules naturelles"
+    ],
+    "Exemple&nbsp;: le polyéthylène, obtenu à partir de l'éthylène."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

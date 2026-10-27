@@ -191,11 +191,11 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
 
 <div class="nt-b nt-demo-box">
 <p class="nt-tag"><i class="fa-solid fa-arrows-rotate"></i>Rappel&nbsp;: convertir une vitesse</p>
-<p>Dans la vie courante, les vitesses s'expriment souvent en km/h ($\pu{km*h-1}$), mais l'unité du Système international est le m/s ($\pu{m*s-1}$). Comme $1~\text{km} = 1\,000~\text{m}$ et $1~\text{h} = 3\,600~\text{s}$&nbsp;:</p>
+<p>Dans la vie courante, les vitesses s'expriment souvent en kilomètres par heure ($\pu{km*h-1}$), mais l'unité du Système international est le mètre par seconde ($\pu{m*s-1}$). Comme $1~\text{km} = 1\,000~\text{m}$ et $1~\text{h} = 3\,600~\text{s}$&nbsp;:</p>
 <p class="nt-center">$1~\pu{km*h-1} = \dfrac{1\,000~\text{m}}{3\,600~\text{s}} = \dfrac{1}{3{,}6}~\pu{m*s-1}$</p>
-<svg class='nt-svg nt-svg-s' viewBox='0 0 440 200' role='img' aria-label="Conversion des vitesses : pour passer des kilomètres par heure aux mètres par seconde, on divise par 3,6 ; pour passer des mètres par seconde aux kilomètres par heure, on multiplie par 3,6"><defs><marker id='mkB' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#2563EB'/></marker><marker id='mkO' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#EA580C'/></marker></defs><rect x='40' y='70' width='100' height='50' rx='12' fill='#EFF6FF' stroke='#2563EB' stroke-width='1.5'/><text x='90' y='102' font-size='20' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif'>km/h</text><rect x='300' y='70' width='100' height='50' rx='12' fill='#FFF7ED' stroke='#EA580C' stroke-width='1.5'/><text x='350' y='102' font-size='20' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif'>m/s</text><path d='M110,66 Q220,-6 330,66' fill='none' stroke='#2563EB' stroke-width='2.2' marker-end='url(#mkB)'/><text x='220' y='20' font-size='19' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif'>÷ 3,6</text><path d='M330,124 Q220,196 110,124' fill='none' stroke='#EA580C' stroke-width='2.2' marker-end='url(#mkO)'/><text x='220' y='188' font-size='19' text-anchor='middle' fill='#EA580C' font-family='system-ui, sans-serif'>× 3,6</text></svg>
+<svg class='nt-svg nt-svg-s' viewBox='0 0 440 200' role='img' aria-label="Conversion des vitesses : pour passer des kilomètres par heure aux mètres par seconde, on divise par 3,6 ; pour passer des mètres par seconde aux kilomètres par heure, on multiplie par 3,6"><defs><marker id='mkB' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#2563EB'/></marker><marker id='mkO' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M0,0 L10,5 L0,10 z' fill='#EA580C'/></marker></defs><rect x='40' y='70' width='100' height='50' rx='12' fill='#EFF6FF' stroke='#2563EB' stroke-width='1.5'/><text x='90' y='102' font-size='20' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif'>km·h⁻¹</text><rect x='300' y='70' width='100' height='50' rx='12' fill='#FFF7ED' stroke='#EA580C' stroke-width='1.5'/><text x='350' y='102' font-size='20' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif'>m·s⁻¹</text><path d='M110,66 Q220,-6 330,66' fill='none' stroke='#2563EB' stroke-width='2.2' marker-end='url(#mkB)'/><text x='220' y='20' font-size='19' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif'>÷ 3,6</text><path d='M330,124 Q220,196 110,124' fill='none' stroke='#EA580C' stroke-width='2.2' marker-end='url(#mkO)'/><text x='220' y='188' font-size='19' text-anchor='middle' fill='#EA580C' font-family='system-ui, sans-serif'>× 3,6</text></svg>
 <p>Exemples&nbsp;: $90~\pu{km*h-1} = \dfrac{90}{3{,}6}~\pu{m*s-1} = 25~\pu{m*s-1}$, et $10~\pu{m*s-1} = 10 \times 3{,}6~\pu{km*h-1} = 36~\pu{km*h-1}$.</p>
-<p class="nt-note">Pour ne pas se tromper de sens&nbsp;: penser au sprinter qui parcourt le 100&nbsp;m en 10&nbsp;s à peu près. Cela correspond à une vitesse moyenne de $\pu{10 m*s-1}$. On a alors le choix entre $10/3,6$ et $10\times 3,6$ pour la vitesse en km/h&nbsp;; une vitesse de $\pu{36 km*h-1}$ semble la réponse évidente.</p>
+<p class="nt-note">Pour ne pas se tromper de sens&nbsp;: penser au sprinter qui parcourt le 100&nbsp;m en 10&nbsp;s à peu près. Cela correspond à une vitesse moyenne de $\pu{10 m*s-1}$. On a alors le choix entre $10/3,6$ et $10\times 3,6$ pour la vitesse en km·h⁻¹&nbsp;; une vitesse de $\pu{36 km*h-1}$ semble la réponse évidente.</p>
 </div>
 
 ## Vecteur accélération {.nt-h2}
@@ -346,7 +346,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
 
 <div class="nt-b nt-ask">
 <p class="nt-tag"><i class="fa-solid fa-flag-checkered"></i>Exercice</p>
-<p>Avant d'aborder le virage des Combes (virage n°5) du circuit de Spa-Francorchamps, un pilote de F1 freine fortement pour passer sa vitesse de 327&nbsp;km/h à 176&nbsp;km/h en 1,48&nbsp;s.</p>
+<p>Avant d'aborder le virage des Combes (virage n°5) du circuit de Spa-Francorchamps, un pilote de F1 freine fortement pour passer sa vitesse de 327&nbsp;km·h⁻¹ à 176&nbsp;km·h⁻¹ en 1,48&nbsp;s.</p>
 <ol class="nt-steps">
 <li><p>En supposant le mouvement rectiligne uniformément accéléré, décrire le vecteur accélération de la F1.</p></li>
 <li><p>Sur combien de mètres a lieu le freinage&nbsp;?</p></li>
@@ -445,6 +445,22 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
 </div>
 </details>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur la description d'un mouvement</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -481,6 +497,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     if (halo) { c.lineJoin = 'round'; c.lineWidth = 4; c.strokeStyle = 'rgba(248,250,252,.95)'; c.strokeText(s, x, y); }
     c.fillStyle = color; c.fillText(s, x, y);
   }
+  function ind(n) { return String(n).replace(/[0-9]/g, function (d) { return '\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089'[+d]; }); }   /* indice en caractères souscrits : v₃, M₄… */
   function vecLabel(c, s, x, y, color, noBg) {   /* lettre surmontée d'une flèche ; un fin contour clair la détache des tracés (sauf noBg) */
     c.font = 'italic 700 15px Georgia, serif'; c.textAlign = 'center'; c.lineJoin = 'round'; c.lineCap = 'round';
     var w = c.measureText(s).width;
@@ -551,7 +568,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       c.moveTo(X(px), Y(1.45)); c.lineTo(X(xTrain + 1.6) - 9, Y(0.2 + H) - 3);
       c.moveTo(X(px), Y(1.45)); c.lineTo(X(px - 0.2), Y(1.05)); c.stroke();
       c.fillStyle = '#94A3B8'; c.beginPath(); c.arc(X(px), Y(1.72), 0.14 * k, 0, 2 * Math.PI); c.fill();
-      txt(c, mode === 'sol' ? 'Vue depuis le quai (référentiel terrestre)' : 'Vue depuis le wagon (référentiel du train)', w / 2, 20, col('--ink'));
+      txt(c, mode === 'sol' ? (w < 500 ? 'Depuis le quai (terrestre)' : 'Vue depuis le quai (référentiel terrestre)') : (w < 500 ? 'Depuis le wagon (train)' : 'Vue depuis le wagon (référentiel du train)'), w / 2, 20, col('--ink'));   /* titre raccourci sur téléphone */
       msg.textContent = mode === 'sol' ? 'Pour une personne sur le quai, la balle avance avec le train pendant sa chute : sa trajectoire est une portion de parabole.'
         : 'Pour le passager, la balle tombe à la verticale, juste sous sa main : sa trajectoire est un segment de droite.';
     }
@@ -657,10 +674,10 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       var KV = m.kv, KA = m.ka, va, vb, Pa, Pb, la, lb, div, labels = [];
       if (mil) {
         var vm = function (j) { return [(P[j + 1][0] - P[j - 1][0]) / (2 * TAU), (P[j + 1][1] - P[j - 1][1]) / (2 * TAU)]; };
-        va = vm(i - 1); vb = vm(i + 1); Pa = P[i - 1]; Pb = P[i + 1]; la = 'v' + (i - 1); lb = 'v' + (i + 1); div = 2 * TAU;
+        va = vm(i - 1); vb = vm(i + 1); Pa = P[i - 1]; Pb = P[i + 1]; la = 'v' + ind(i - 1); lb = 'v' + ind(i + 1); div = 2 * TAU;
       } else {
         var vp = function (j) { return [(P[j + 1][0] - P[j][0]) / TAU, (P[j + 1][1] - P[j][1]) / TAU]; };
-        va = vp(i); vb = vp(i + 1); Pa = P[i]; Pb = P[i + 1]; la = 'v' + i; lb = 'v' + (i + 1); div = TAU;
+        va = vp(i); vb = vp(i + 1); Pa = P[i]; Pb = P[i + 1]; la = 'v' + ind(i); lb = 'v' + ind(i + 1); div = TAU;
       }
       if (cbV.checked) {
         arrow(c, X(Pa[0]), Y(Pa[1]), X(Pa[0] + va[0] * KV), Y(Pa[1] + va[1] * KV), CV, 2.6);
@@ -688,8 +705,8 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
         /* étiquette de Δv : au milieu du vecteur, du côté opposé au triangle de construction */
         var mx = (X(Mi[0]) + X(e2[0])) / 2, my = (Y(Mi[1]) + Y(e2[1])) / 2, dx = X(e2[0]) - X(Mi[0]), dy = Y(e2[1]) - Y(Mi[1]), nn = Math.hypot(dx, dy) || 1;
         var nx = -dy / nn, ny = dx / nn; if (nx * (X(e1[0]) - mx) + ny * (Y(e1[1]) - my) > 0) { nx = -nx; ny = -ny; }
-        if (mode === 'frein') { labels.push(function () { vecLabel(c, '\u0394v' + i, mx, my + 46, CA); }); }   /* sous l'axe, les étiquettes de vitesse étant au-dessus */
-        else { labels.push(function () { vecLabel(c, '\u0394v' + i, mx + nx * 22, my + ny * 22 + 6, CA); }); }
+        if (mode === 'frein') { labels.push(function () { vecLabel(c, '\u0394v' + ind(i), mx, my + 46, CA); }); }   /* sous l'axe, les étiquettes de vitesse étant au-dessus */
+        else { labels.push(function () { vecLabel(c, '\u0394v' + ind(i), mx + nx * 22, my + ny * 22 + 6, CA); }); }
       }
       /* vraie accélération en M_i (dérivée seconde calculée avec un pas minuscule) */
       var hh = 1e-3, ti = i * TAU, fp = m.f(ti + hh), f0 = m.f(ti), fm = m.f(ti - hh);
@@ -697,10 +714,10 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       if (cbE.checked) { arrow(c, X(Mi[0]), Y(Mi[1]), X(Mi[0] + tx * KA), Y(Mi[1] + ty * KA), 'rgba(30,41,59,.55)', 2, [3, 3]); }
       if (cbA.checked) {
         arrow(c, X(Mi[0]), Y(Mi[1]), X(Mi[0] + ax * KA), Y(Mi[1] + ay * KA), CA, 3.4);
-        labels.push(function () { tipLabel(c, 'a' + i, X(Mi[0]), Y(Mi[1]), X(Mi[0] + ax * KA), Y(Mi[1] + ay * KA), CA); });
+        labels.push(function () { tipLabel(c, 'a' + ind(i), X(Mi[0]), Y(Mi[1]), X(Mi[0] + ax * KA), Y(Mi[1] + ay * KA), CA); });
       }
       /* toutes les étiquettes en dernier, par-dessus les tracés */
-      lab.forEach(function (q) { txt(c, 'M' + q[0], X(q[1][0]) + 4, Y(q[1][1]) + 21, CT, 'italic 700 12px Georgia, serif', 'center', true); });
+      lab.forEach(function (q) { txt(c, 'M' + ind(q[0]), X(q[1][0]) + 4, Y(q[1][1]) + 21, CT, 'italic 700 12px Georgia, serif', 'center', true); });
       labels.forEach(function (f) { f(); });
       var ang = Math.abs(Math.atan2(ax * ty - ay * tx, ax * tx + ay * ty)) * 180 / Math.PI, nr = Math.hypot(ax, ay) / Math.hypot(tx, ty) - 1;
       oE.textContent = fr(ang, 1) + '\u00b0 en direction, ' + (Math.abs(nr) < 0.0005 ? '0' : fr(nr * 100, 1)) + ' % en norme';
@@ -735,7 +752,8 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       var XMIN = Math.floor(lo / stp) * stp - stp, XMAX = Math.ceil(hi / stp) * stp + stp;
       function PX(x) { return 40 + (x - XMIN) / (XMAX - XMIN) * (w - 80); }
       c.strokeStyle = col('--slate'); c.lineWidth = 2; c.beginPath(); c.moveTo(PX(XMIN), trackY + 10); c.lineTo(PX(XMAX), trackY + 10); c.stroke();
-      for (var g = XMIN; g <= XMAX; g += stp) { c.beginPath(); c.moveTo(PX(g), trackY + 6); c.lineTo(PX(g), trackY + 14); c.stroke(); txt(c, g + ' m', PX(g), trackY + 27, col('--muted'), '10px system-ui, sans-serif'); }
+      var sk = Math.max(1, Math.ceil(34 / Math.abs(PX(XMIN + stp) - PX(XMIN)))), ig = 0;   /* graduations écrites une sur deux (ou trois…) si la place manque */
+      for (var g = XMIN; g <= XMAX; g += stp, ig++) { c.beginPath(); c.moveTo(PX(g), trackY + 6); c.lineTo(PX(g), trackY + 14); c.stroke(); if (ig % sk === 0) { txt(c, g + ' m', PX(g), trackY + 27, col('--muted'), '10px system-ui, sans-serif'); } }
       var xc = Math.max(XMIN, Math.min(XMAX, X(q, tt)));
       c.fillStyle = CP; c.beginPath(); if (c.roundRect) { c.roundRect(PX(xc) - 14, trackY - 8, 28, 16, 5); } else { c.rect(PX(xc) - 14, trackY - 8, 28, 16); } c.fill();
       var vv = V(q, tt);
@@ -813,8 +831,8 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       var U = 0.26 * k;
       arrow(c, mx, my, mx + uT[0] * U, my + uT[1] * U, col('--slate'), 1.6); arrow(c, mx, my, mx + uN[0] * U, my + uN[1] * U, col('--slate'), 1.6);
       /* étiquettes des vecteurs unitaires, décalées sur le côté pour ne pas chevaucher v et a */
-      txt(c, 'u\u209c', mx + uT[0] * U * 0.6 - uN[0] * 16, my + uT[1] * U * 0.6 - uN[1] * 16 + 4, col('--slate'), 'italic 700 13px Georgia, serif');
-      txt(c, 'u\u2099', mx + uN[0] * U * 0.6 - uT[0] * 16, my + uN[1] * U * 0.6 - uT[1] * 16 + 4, col('--slate'), 'italic 700 13px Georgia, serif');
+      vecLabel(c, 'u\u209c', mx + uT[0] * U * 0.6 - uN[0] * 18, my + uT[1] * U * 0.6 - uN[1] * 18 + 6, col('--slate'));   /* vecteurs unitaires : notés avec leur flèche */
+      vecLabel(c, 'u\u2099', mx + uN[0] * U * 0.6 - uT[0] * 18, my + uN[1] * U * 0.6 - uT[1] * 18 + 6, col('--slate'));
       c.fillStyle = CT; c.beginPath(); c.arc(mx, my, 6, 0, 2 * Math.PI); c.fill();
       /* le nom du point reste à l'extérieur du cercle, sur le rayon prolongé */
       txt(c, 'M', cx + (R * k + 22) * Math.cos(theta), cy - (R * k + 22) * Math.sin(theta) + 5, CT, 'italic 700 15px Georgia, serif', 'center', true);
@@ -840,5 +858,126 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     watchVisible(cv, function (vv) { visible = vv; });
     reset(); playLabel(btn, playing); setup(); onResize(setup); requestAnimationFrame(step);
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Le vecteur vitesse est…",
+    [
+    "la dérivée du vecteur position par rapport au temps",
+    "la dérivée du vecteur accélération",
+    "la primitive du vecteur position",
+    "le produit de la position par le temps"
+    ],
+    "$\\vec{v} = \\dfrac{\\mathrm{d}\\overrightarrow{\\mathrm{OM}}}{\\mathrm{d}t}$."
+    ],
+    [
+    "Le vecteur vitesse d'un point est toujours…",
+    [
+    "tangent à la trajectoire, dans le sens du mouvement",
+    "perpendiculaire à la trajectoire",
+    "dirigé vers le centre de la trajectoire",
+    "nul dans un virage"
+    ],
+    "C'est une conséquence de sa définition comme dérivée de la position."
+    ],
+    [
+    "Le vecteur accélération est…",
+    [
+    "la dérivée du vecteur vitesse par rapport au temps",
+    "la dérivée du vecteur position",
+    "la vitesse divisée par la durée totale",
+    "toujours tangent à la trajectoire"
+    ],
+    "$\\vec{a} = \\dfrac{\\mathrm{d}\\vec{v}}{\\mathrm{d}t} = \\dfrac{\\mathrm{d}^2\\overrightarrow{\\mathrm{OM}}}{\\mathrm{d}t^2}$, en $\\pu{m*s-2}$."
+    ],
+    [
+    "Dans un mouvement curviligne, le vecteur accélération est orienté…",
+    [
+    "vers l'intérieur de la courbe",
+    "vers l'extérieur de la courbe",
+    "selon la tangente uniquement",
+    "dans le sens opposé à la vitesse"
+    ],
+    "Il a une composante normale dirigée vers l'intérieur du virage."
+    ],
+    [
+    "Un mouvement rectiligne uniforme a…",
+    [
+    "un vecteur vitesse constant et une accélération nulle",
+    "une accélération constante non nulle",
+    "une vitesse qui augmente",
+    "une trajectoire circulaire"
+    ],
+    "Vecteur vitesse constant&nbsp;: même direction, même sens, même norme."
+    ],
+    [
+    "Un mouvement est rectiligne uniformément accéléré si…",
+    [
+    "la trajectoire est une droite et le vecteur accélération est constant",
+    "la vitesse est constante",
+    "l'accélération augmente",
+    "la trajectoire est un cercle"
+    ],
+    "Exemple&nbsp;: la chute libre verticale."
+    ],
+    [
+    "Dans un mouvement circulaire uniforme de rayon $R$, l'accélération vaut…",
+    [
+    "$a = \\dfrac{v^2}{R}$, dirigée vers le centre",
+    "$a = 0$",
+    "$a = v \\times R$, tangente",
+    "$a = \\dfrac{v}{R^2}$"
+    ],
+    "Elle est centripète&nbsp;: dans le repère de Frenet, $a_t = 0$ et $a_n = \\dfrac{v^2}{R}$."
+    ],
+    [
+    "Dans le repère de Frenet, la composante tangentielle de l'accélération vaut…",
+    [
+    "$a_t = \\dfrac{\\mathrm{d}v}{\\mathrm{d}t}$",
+    "$a_t = \\dfrac{v^2}{R}$",
+    "$a_t = v \\times R$",
+    "$a_t = 0$ toujours"
+    ],
+    "Elle traduit la variation de la norme de la vitesse."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

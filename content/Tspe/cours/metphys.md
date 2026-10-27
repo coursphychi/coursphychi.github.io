@@ -440,7 +440,7 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
 <p class="nt-note">Conductivités molaires ioniques à 25&nbsp;°C. Faites varier $C$&nbsp;: toutes les contributions, et donc $\sigma$, sont proportionnelles à $C$.</p>
 </div>
 
-<svg class='nt-svg' viewBox='0 0 740 410' role='img' aria-label="Mesure de la conductivité d'une solution : la cellule conductimétrique, tenue par une potence et reliée au conductimètre, est plongée dans un bécher contenant la solution ; les deux plaques sont immergées"><defs><linearGradient id='cMet' x1='0' x2='1'><stop offset='0' stop-color='#94A3B8'/><stop offset='.45' stop-color='#E2E8F0'/><stop offset='1' stop-color='#64748B'/></linearGradient><linearGradient id='cVer' x1='0' x2='1'><stop offset='0' stop-color='#E2E8F0' stop-opacity='.65'/><stop offset='.3' stop-color='#fff' stop-opacity='.2'/><stop offset='1' stop-color='#CBD5E1' stop-opacity='.55'/></linearGradient><linearGradient id='cSol' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#BAE6FD' stop-opacity='.75'/><stop offset='1' stop-color='#7DD3FC' stop-opacity='.8'/></linearGradient><linearGradient id='cCel' x1='0' x2='1'><stop offset='0' stop-color='#475569'/><stop offset='.4' stop-color='#94A3B8'/><stop offset='1' stop-color='#334155'/></linearGradient><linearGradient id='cApp' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#E2E8F0'/><stop offset='1' stop-color='#CBD5E1'/></linearGradient></defs><rect x='10' y='372' width='720' height='12' rx='4' fill='#CBD5E1'/><rect x='10' y='384' width='720' height='4' rx='2' fill='#94A3B8'/><rect x='34' y='358' width='120' height='14' rx='4' fill='#334155'/><rect x='60' y='26' width='9' height='334' rx='4' fill='url(#cMet)'/><rect x='54' y='118' width='22' height='22' rx='4' fill='#1E293B'/><circle cx='65' cy='129' r='4' fill='#94A3B8'/><rect x='76' y='125' width='140' height='8' rx='3' fill='url(#cMet)'/><rect x='212' y='116' width='12' height='26' rx='3' fill='#1E293B'/><rect x='244' y='116' width='12' height='26' rx='3' fill='#1E293B'/><rect x='166' y='262' width='156' height='106' rx='8' fill='url(#cSol)'/><path d='M168,262 Q244,268 320,262' fill='none' stroke='#0EA5E9' stroke-width='1.4'/><rect x='224' y='64' width='20' height='14' rx='4' fill='#0F172A'/><rect x='226' y='78' width='16' height='232' rx='5' fill='url(#cCel)'/><path d='M216,306 L252,306 L252,352 Q252,358 246,358 L222,358 Q216,358 216,352 Z' fill='#F1F5F9' fill-opacity='.55' stroke='#475569' stroke-width='1.4'/><rect x='220' y='326' width='6' height='10' rx='2' fill='#BAE6FD'/><rect x='242' y='326' width='6' height='10' rx='2' fill='#BAE6FD'/><rect x='226' y='314' width='4' height='38' rx='1' fill='#1F2937'/><rect x='238' y='314' width='4' height='38' rx='1' fill='#1F2937'/><path d='M164,240 Q160,236 156,236 L156,232' fill='none' stroke='#64748B' stroke-width='2'/><path d='M160,236 L164,240 L164,362 Q164,370 172,370 L316,370 Q324,370 324,362 L324,236' fill='url(#cVer)' stroke='#64748B' stroke-width='2.2' stroke-linejoin='round'/><line x1='304' y1='352' x2='316' y2='352' stroke='#64748B' stroke-width='1'/><line x1='304' y1='338' x2='310' y2='338' stroke='#64748B' stroke-width='1'/><line x1='304' y1='324' x2='316' y2='324' stroke='#64748B' stroke-width='1'/><line x1='304' y1='310' x2='310' y2='310' stroke='#64748B' stroke-width='1'/><line x1='304' y1='296' x2='316' y2='296' stroke='#64748B' stroke-width='1'/><line x1='304' y1='282' x2='310' y2='282' stroke='#64748B' stroke-width='1'/><line x1='304' y1='268' x2='316' y2='268' stroke='#64748B' stroke-width='1'/><line x1='304' y1='254' x2='310' y2='254' stroke='#64748B' stroke-width='1'/><path d='M234,64 C236,-6 590,0 546,262' fill='none' stroke='#0F172A' stroke-width='3' stroke-linecap='round'/><g transform='translate(40,0)'><rect x='470' y='256' width='200' height='112' rx='14' fill='url(#cApp)' stroke='#64748B' stroke-width='1.5'/><rect x='496' y='250' width='20' height='12' rx='3' fill='#334155'/><rect x='486' y='272' width='168' height='46' rx='8' fill='#0B1220'/><text x='642' y='303' font-size='22' text-anchor='end' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>1,413</text><text x='642' y='314' font-size='9' text-anchor='end' fill='#86EFAC' font-family='ui-monospace, Menlo, monospace'>mS/cm   25,0 °C</text><rect x='488' y='330' width='40' height='22' rx='6' fill='#475569'/><text x='508' y='345' font-size='10' text-anchor='middle' fill='#F8FAFC' font-family='system-ui, sans-serif' font-weight='700'>CAL</text><rect x='540' y='330' width='40' height='22' rx='6' fill='#475569'/><text x='560' y='345' font-size='10' text-anchor='middle' fill='#F8FAFC' font-family='system-ui, sans-serif' font-weight='700'>°C</text><rect x='592' y='330' width='40' height='22' rx='6' fill='#475569'/><text x='612' y='345' font-size='10' text-anchor='middle' fill='#F8FAFC' font-family='system-ui, sans-serif' font-weight='700'>mode</text><circle cx='648' cy='341' r='7' fill='#16A34A'/></g><line x1='94' y1='36' x2='69' y2='50' stroke='#64748B' stroke-width='1'/><circle cx='69' cy='50' r='2' fill='#64748B'/><text x='96' y='40' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>potence</text><line x1='296' y1='94' x2='244' y2='150' stroke='#64748B' stroke-width='1'/><circle cx='244' cy='150' r='2' fill='#64748B'/><text x='300' y='98' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>cellule</text><text x='300' y='113' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>conductimétrique</text><line x1='368' y1='308' x2='242' y2='334' stroke='#64748B' stroke-width='1'/><circle cx='242' cy='334' r='2' fill='#64748B'/><text x='372' y='312' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>deux plaques</text><text x='372' y='327' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>(électrodes)</text><text x='372' y='342' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>immergées</text><text x='372' y='360' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'></text><line x1='134' y1='218' x2='168' y2='252' stroke='#64748B' stroke-width='1'/><circle cx='168' cy='252' r='2' fill='#64748B'/><text x='130' y='222' font-size='12.5' text-anchor='end' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>bécher</text><line x1='368' y1='258' x2='318' y2='290' stroke='#64748B' stroke-width='1'/><circle cx='318' cy='290' r='2' fill='#64748B'/><text x='372' y='262' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>solution</text><text x='372' y='277' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>(étalon ou à doser)</text><text x='610' y='244' font-size='12.5' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>conductimètre</text></svg>
+<svg class='nt-svg' viewBox='0 0 740 410' role='img' aria-label="Mesure de la conductivité d'une solution : la cellule conductimétrique, tenue par une potence et reliée au conductimètre, est plongée dans un bécher contenant la solution ; les deux plaques sont immergées"><defs><linearGradient id='cMet' x1='0' x2='1'><stop offset='0' stop-color='#94A3B8'/><stop offset='.45' stop-color='#E2E8F0'/><stop offset='1' stop-color='#64748B'/></linearGradient><linearGradient id='cVer' x1='0' x2='1'><stop offset='0' stop-color='#E2E8F0' stop-opacity='.65'/><stop offset='.3' stop-color='#fff' stop-opacity='.2'/><stop offset='1' stop-color='#CBD5E1' stop-opacity='.55'/></linearGradient><linearGradient id='cSol' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#BAE6FD' stop-opacity='.75'/><stop offset='1' stop-color='#7DD3FC' stop-opacity='.8'/></linearGradient><linearGradient id='cCel' x1='0' x2='1'><stop offset='0' stop-color='#475569'/><stop offset='.4' stop-color='#94A3B8'/><stop offset='1' stop-color='#334155'/></linearGradient><linearGradient id='cApp' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#E2E8F0'/><stop offset='1' stop-color='#CBD5E1'/></linearGradient></defs><rect x='10' y='372' width='720' height='12' rx='4' fill='#CBD5E1'/><rect x='10' y='384' width='720' height='4' rx='2' fill='#94A3B8'/><rect x='34' y='358' width='120' height='14' rx='4' fill='#334155'/><rect x='60' y='26' width='9' height='334' rx='4' fill='url(#cMet)'/><rect x='54' y='118' width='22' height='22' rx='4' fill='#1E293B'/><circle cx='65' cy='129' r='4' fill='#94A3B8'/><rect x='76' y='125' width='140' height='8' rx='3' fill='url(#cMet)'/><rect x='212' y='116' width='12' height='26' rx='3' fill='#1E293B'/><rect x='244' y='116' width='12' height='26' rx='3' fill='#1E293B'/><rect x='166' y='262' width='156' height='106' rx='8' fill='url(#cSol)'/><path d='M168,262 Q244,268 320,262' fill='none' stroke='#0EA5E9' stroke-width='1.4'/><rect x='224' y='64' width='20' height='14' rx='4' fill='#0F172A'/><rect x='226' y='78' width='16' height='232' rx='5' fill='url(#cCel)'/><path d='M216,306 L252,306 L252,352 Q252,358 246,358 L222,358 Q216,358 216,352 Z' fill='#F1F5F9' fill-opacity='.55' stroke='#475569' stroke-width='1.4'/><rect x='220' y='326' width='6' height='10' rx='2' fill='#BAE6FD'/><rect x='242' y='326' width='6' height='10' rx='2' fill='#BAE6FD'/><rect x='226' y='314' width='4' height='38' rx='1' fill='#1F2937'/><rect x='238' y='314' width='4' height='38' rx='1' fill='#1F2937'/><path d='M164,240 Q160,236 156,236 L156,232' fill='none' stroke='#64748B' stroke-width='2'/><path d='M160,236 L164,240 L164,362 Q164,370 172,370 L316,370 Q324,370 324,362 L324,236' fill='url(#cVer)' stroke='#64748B' stroke-width='2.2' stroke-linejoin='round'/><line x1='304' y1='352' x2='316' y2='352' stroke='#64748B' stroke-width='1'/><line x1='304' y1='338' x2='310' y2='338' stroke='#64748B' stroke-width='1'/><line x1='304' y1='324' x2='316' y2='324' stroke='#64748B' stroke-width='1'/><line x1='304' y1='310' x2='310' y2='310' stroke='#64748B' stroke-width='1'/><line x1='304' y1='296' x2='316' y2='296' stroke='#64748B' stroke-width='1'/><line x1='304' y1='282' x2='310' y2='282' stroke='#64748B' stroke-width='1'/><line x1='304' y1='268' x2='316' y2='268' stroke='#64748B' stroke-width='1'/><line x1='304' y1='254' x2='310' y2='254' stroke='#64748B' stroke-width='1'/><path d='M234,64 C236,-6 590,0 546,262' fill='none' stroke='#0F172A' stroke-width='3' stroke-linecap='round'/><g transform='translate(40,0)'><rect x='470' y='256' width='200' height='112' rx='14' fill='url(#cApp)' stroke='#64748B' stroke-width='1.5'/><rect x='496' y='250' width='20' height='12' rx='3' fill='#334155'/><rect x='486' y='272' width='168' height='46' rx='8' fill='#0B1220'/><text x='642' y='303' font-size='22' text-anchor='end' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>1,413</text><text x='642' y='314' font-size='9' text-anchor='end' fill='#86EFAC' font-family='ui-monospace, Menlo, monospace'>mS·cm⁻¹   25,0 °C</text><rect x='488' y='330' width='40' height='22' rx='6' fill='#475569'/><text x='508' y='345' font-size='10' text-anchor='middle' fill='#F8FAFC' font-family='system-ui, sans-serif' font-weight='700'>CAL</text><rect x='540' y='330' width='40' height='22' rx='6' fill='#475569'/><text x='560' y='345' font-size='10' text-anchor='middle' fill='#F8FAFC' font-family='system-ui, sans-serif' font-weight='700'>°C</text><rect x='592' y='330' width='40' height='22' rx='6' fill='#475569'/><text x='612' y='345' font-size='10' text-anchor='middle' fill='#F8FAFC' font-family='system-ui, sans-serif' font-weight='700'>mode</text><circle cx='648' cy='341' r='7' fill='#16A34A'/></g><line x1='94' y1='36' x2='69' y2='50' stroke='#64748B' stroke-width='1'/><circle cx='69' cy='50' r='2' fill='#64748B'/><text x='96' y='40' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>potence</text><line x1='296' y1='94' x2='244' y2='150' stroke='#64748B' stroke-width='1'/><circle cx='244' cy='150' r='2' fill='#64748B'/><text x='300' y='98' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>cellule</text><text x='300' y='113' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>conductimétrique</text><line x1='368' y1='308' x2='242' y2='334' stroke='#64748B' stroke-width='1'/><circle cx='242' cy='334' r='2' fill='#64748B'/><text x='372' y='312' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>deux plaques</text><text x='372' y='327' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>(électrodes)</text><text x='372' y='342' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>immergées</text><text x='372' y='360' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'></text><line x1='134' y1='218' x2='168' y2='252' stroke='#64748B' stroke-width='1'/><circle cx='168' cy='252' r='2' fill='#64748B'/><text x='130' y='222' font-size='12.5' text-anchor='end' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>bécher</text><line x1='368' y1='258' x2='318' y2='290' stroke='#64748B' stroke-width='1'/><circle cx='318' cy='290' r='2' fill='#64748B'/><text x='372' y='262' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>solution</text><text x='372' y='277' font-size='12.5' text-anchor='start' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>(étalon ou à doser)</text><text x='610' y='244' font-size='12.5' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='600'>conductimètre</text></svg>
 
 <p class="nt-cap">Mesure de la conductivité d'une solution. En mode révision, les légendes sont masquées.</p>
 
@@ -542,6 +542,22 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
 <li>À 0&nbsp;°C (<span class="nt-hole">$\pu{273,15 K}$</span>) et pression atmosphérique (<span class="nt-hole">$\pu{1 atm}=\pu{1,013 bar}=\pu{1,013E5 Pa}$</span>), $V_m=$ <span class="imp nt-hole">$\pu{22,4E-3 m^3*mol-1}=\pu{22,4 L*mol-1}$</span>&nbsp;;</li>
 <li>Et à 20&nbsp;°C et sous $\pu{1 atm}$, $V_m=$ <span class="imp nt-hole">$\pu{24 L*mol-1}$</span>.</li>
 </ul>
+</div>
+
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur les méthodes physiques d'analyse</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
 </div>
 
 <script>
@@ -770,11 +786,11 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
       c.clearRect(0, 0, w, h);
       c.fillStyle = 'rgba(148,163,184,.12)'; c.fillRect(X(1500), Tp, X(400) - X(1500), B - Tp);
       c.fillStyle = col('--muted'); c.font = '11px system-ui, sans-serif'; c.textAlign = 'center';
-      c.fillText('zone d\u2019empreinte digitale', (X(1500) + X(400)) / 2, B - 6);
+      c.fillText(w < 500 ? 'empreinte' : 'zone d\u2019empreinte digitale', (X(1500) + X(400)) / 2, B - 6);
       c.strokeStyle = col('--ink'); c.lineWidth = 1; c.beginPath(); c.moveTo(L, Tp); c.lineTo(L, B); c.lineTo(Rr, B); c.stroke();
       c.fillStyle = col('--muted');
-      [4000, 3500, 3000, 2500, 2000, 1500, 1000, 500].forEach(function (s) { c.fillText(s, X(s), B + 13); });
-      c.fillText('nombre d\u2019onde (cm\u207b\u00b9)  \u2190 attention, l\u2019axe est orienté vers la gauche', (L + Rr) / 2, h - 3);
+      (w < 500 ? [4000, 3000, 2000, 1000] : [4000, 3500, 3000, 2500, 2000, 1500, 1000, 500]).forEach(function (s) { c.fillText(s, X(s), B + 13); });   /* moins de graduations sur téléphone */
+      c.fillText(w < 500 ? 'nombre d\u2019onde (cm\u207b\u00b9), axe vers la gauche \u2190' : 'nombre d\u2019onde (cm\u207b\u00b9)  \u2190 attention, l\u2019axe est orienté vers la gauche', (L + Rr) / 2, h - 3);
       c.textAlign = 'right'; [0, 50, 100].forEach(function (t) { c.fillText(t, L - 4, Y(t) + 4); });
       c.save(); c.translate(11, (Tp + B) / 2); c.rotate(-Math.PI / 2); c.textAlign = 'center'; c.fillText('transmittance (%)', 0, 0); c.restore();
       c.strokeStyle = col('--blue'); c.lineWidth = 2; c.beginPath();
@@ -805,7 +821,8 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
   function axes(c, w, h, L, Rr, T, B, CM, AM, dc, da) {
     c.strokeStyle = col('--ink'); c.lineWidth = 1; c.beginPath(); c.moveTo(L, T); c.lineTo(L, B); c.lineTo(Rr, B); c.stroke();
     c.fillStyle = col('--muted'); c.font = '11px system-ui, sans-serif'; c.textAlign = 'center';
-    for (var v = 0; v <= CM + 1e-9; v += dc) { c.fillText(fr(v, dc < 0.03 ? 3 : 2), L + v / CM * (Rr - L), B + 13); }
+    var pas = Math.max(1, Math.ceil(34 / (dc / CM * (Rr - L)))), iv = 0;   /* sur un écran étroit, une graduation sur deux (ou trois…) */
+    for (var v = 0; v <= CM + 1e-9; v += dc, iv++) { if (iv % pas === 0) { c.fillText(fr(v, dc < 0.03 ? 3 : 2), L + v / CM * (Rr - L), B + 13); } }
     c.fillText('concentration C (mol\u00b7L\u207b\u00b9)', (L + Rr) / 2, h - 3);
     c.textAlign = 'right'; for (var a = 0; a <= AM + 1e-9; a += da) { c.fillText(fr(a, 1), L - 4, B - a / AM * (B - T) + 4); }
     c.save(); c.translate(11, (T + B) / 2); c.rotate(-Math.PI / 2); c.textAlign = 'center'; c.fillText('absorbance A', 0, 0); c.restore();
@@ -847,11 +864,15 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
       c.fillStyle = '#1E3A8A'; rr(c, x + 6, bot + 15.5, 11, 5, 2.5); c.fill();
       c.fillStyle = coul; c.beginPath(); c.moveTo(x - 2.5, bot + 22); c.lineTo(x - 0.8, bot + 34); c.lineTo(x + 0.8, bot + 34); c.lineTo(x + 2.5, bot + 22); c.closePath(); c.fill();
       c.strokeStyle = '#64748B'; c.lineWidth = 1.1; c.beginPath(); c.moveTo(x - 2.5, bot + 22); c.lineTo(x - 0.8, bot + 34); c.lineTo(x + 0.8, bot + 34); c.lineTo(x + 2.5, bot + 22); c.stroke();
-      tx(c, l1, x, 13, '#334155', '700 11px system-ui, sans-serif'); if (l2) { tx(c, l2, x, 26, '#64748B', '10.5px system-ui, sans-serif'); }
+      if (g.w >= 600) { tx(c, l1, x, 13, '#334155', '700 11px system-ui, sans-serif'); if (l2) { tx(c, l2, x, 26, '#64748B', '10.5px system-ui, sans-serif'); } }
+      else {   /* téléphone : nom sur deux lignes, centré mais jamais coupé par le bord */
+        var m = l1.split(' '), lignes = [[m[0], '700 10.5px'], [m.slice(1).join(' '), '700 10.5px']]; if (l2) { lignes.push([l2, '9.5px']); }
+        lignes.forEach(function (q, i) { c.font = q[1] + ' system-ui, sans-serif'; var xx = Math.max(c.measureText(q[0]).width / 2 + 2, x); tx(c, q[0], xx, 11 + i * 12, i < 2 ? '#334155' : '#64748B', q[1] + ' system-ui, sans-serif'); });
+      }
     }
     function scene() {
       var c = S.ctx, g = geo(); c.clearRect(0, 0, g.w, g.h);
-      burette(c, g, g.b1, Lm, ETAL.color(ETAL.C0), 'solution mère', '0,120 mol/L');
+      burette(c, g, g.b1, Lm, ETAL.color(ETAL.C0), 'solution mère', '0,120 mol·L⁻¹');
       burette(c, g, g.b2, Le, '#BFDBFE', 'eau distillée', '');
       tx(c, 'gamme étalon', g.r0 + g.slot * 3, g.yt - 14, '#475569', '600 11px system-ui, sans-serif');
       c.strokeStyle = '#CBD5E1'; c.lineWidth = 3; c.beginPath(); c.moveTo(g.r0 + 4, g.yt + 34); c.lineTo(g.r0 + g.slot * 6 - 4, g.yt + 34); c.stroke();
@@ -1130,5 +1151,126 @@ Pourtant son nombre d'onde est bien dans l'infrarouge 🧐
     watchVisible(cv, function (v) { visible = v; });
     upd(); playLabel(btn, playing); setup(); onResize(setup); requestAnimationFrame(step);
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Une solution absorbe surtout dans le vert. Elle paraît…",
+    [
+    "magenta (pourpre), la couleur complémentaire du vert",
+    "verte",
+    "noire",
+    "blanche"
+    ],
+    "La couleur perçue est la complémentaire de la couleur absorbée (cercle chromatique)."
+    ],
+    [
+    "D'après la loi de Beer-Lambert, l'absorbance d'une solution diluée est…",
+    [
+    "proportionnelle à la concentration de l'espèce absorbante",
+    "inversement proportionnelle à la concentration",
+    "indépendante de la concentration",
+    "proportionnelle à la transmittance"
+    ],
+    "$A = k \\times C$, tant que la concentration reste modérée."
+    ],
+    [
+    "Pour un dosage par étalonnage spectrophotométrique, on règle le spectrophotomètre…",
+    [
+    "à la longueur d'onde du maximum d'absorbance de l'espèce dosée",
+    "à n'importe quelle longueur d'onde",
+    "dans l'infrarouge",
+    "à la longueur d'onde où l'absorbance est nulle"
+    ],
+    "La mesure est alors la plus sensible et la plus précise."
+    ],
+    [
+    "Sur un spectre infrarouge, une bande large et forte vers $3\\,200$ à $3\\,400~\\pu{cm-1}$ signale…",
+    [
+    "une liaison O–H liée (alcool)",
+    "une liaison C=O",
+    "une liaison C–H",
+    "une liaison C–C"
+    ],
+    "La liaison C=O donne une bande fine et intense vers $1\\,700~\\pu{cm-1}$."
+    ],
+    [
+    "Sur un spectre infrarouge, l'axe horizontal représente…",
+    [
+    "le nombre d'onde, en $\\pu{cm-1}$, orienté vers la gauche",
+    "la longueur d'onde, en nm",
+    "l'absorbance",
+    "la fréquence, en Hz"
+    ],
+    "Le nombre d'onde est l'inverse de la longueur d'onde."
+    ],
+    [
+    "D'après la loi de Kohlrausch, la conductivité d'une solution diluée d'un seul soluté ionique est…",
+    [
+    "proportionnelle à sa concentration",
+    "inversement proportionnelle à sa concentration",
+    "indépendante de sa concentration",
+    "proportionnelle au volume"
+    ],
+    "$\\sigma = k \\times C$, en $\\pu{S*m-1}$."
+    ],
+    [
+    "La loi des gaz parfaits s'écrit…",
+    [
+    "$PV = nRT$, avec $P$ en Pa, $V$ en m³ et $T$ en K",
+    "$PV = nRT$, avec $T$ en °C",
+    "$P = nRTV$",
+    "$\\dfrac{P}{V} = nRT$"
+    ],
+    "$R \\approx \\pu{8,31 J*K-1*mol-1}$&nbsp;: les unités du Système international sont indispensables."
+    ],
+    [
+    "À température et pression fixées, deux gaz parfaits différents occupant le même volume contiennent…",
+    [
+    "la même quantité de matière",
+    "la même masse",
+    "le même nombre d'atomes",
+    "des quantités de matière différentes"
+    ],
+    "Le volume molaire $V_\\mathrm{m} = \\dfrac{RT}{P}$ ne dépend pas de la nature du gaz&nbsp;: les deux gaz contiennent le même nombre d'entités (molécules ou atomes isolés), donc la même quantité de matière. Mais pas forcément le même nombre d'atomes&nbsp;: une mole d'hélium $\\ce{He}$ contient $N_\\mathrm{A}$ atomes, une mole de dioxygène $\\ce{O2}$ en contient $2N_\\mathrm{A}$."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

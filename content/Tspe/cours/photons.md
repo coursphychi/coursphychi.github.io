@@ -398,6 +398,22 @@ draft = false
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
 </div>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur les interactions entre la lumière et la matière</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -607,10 +623,12 @@ draft = false
     if (!root) { return; }
     var cv = $(root, 'canvas'), rL = $(root, 'input[type="range"]'), oL = $(root, '.out-l'), oN = $(root, '.out-nu'), oJ = $(root, '.out-ej'), oV = $(root, '.out-ev'), msg = $(root, '.nt-msg'), S, visible = true, last = null, ph = 0;
     var SEUILS = [['gap du silicium', 1.12, '#0EA5E9'], ['W\u2091\u2093\u209c du césium', 2.14, '#B45309'], ['W\u2091\u2093\u209c du sodium', 2.36, '#64748B'], ['W\u2091\u2093\u209c du zinc', 4.31, '#475569']];
-    function pastille(c, s, x, y, col, bg, align) {   /* étiquette arrondie */
+    function pastille(c, s, x, y, col, bg, align) {   /* étiquette arrondie ; renvoie sa boîte */
       c.save(); c.font = '700 11px system-ui, sans-serif'; var lw = c.measureText(s).width + 14, xx = align === 'right' ? x - lw : (align === 'left' ? x : x - lw / 2);
+      if (align === 'mesure') { c.restore(); return lw; }
       rr(c, xx, y - 13, lw, 19, 9.5); c.fillStyle = bg || '#fff'; c.fill(); c.strokeStyle = col; c.lineWidth = 1.2; c.stroke();
       c.fillStyle = col; c.textAlign = 'left'; c.fillText(s, xx + 7, y + 1); c.restore();
+      return [xx, y - 13, lw, 19];
     }
     function draw(dt) {
       if (!S) { return; }
@@ -648,15 +666,18 @@ draft = false
       var bw = Math.min(100, (x1 - x0) * 0.18), bx = xa + 22, et = Math.min(eV, eMax);
       var gbar = c.createLinearGradient(0, YE(et), 0, yb); gbar.addColorStop(0, coulT); gbar.addColorStop(1, 'rgba(15,23,42,.15)');
       rr(c, bx, YE(et), bw, yb - YE(et), 8); c.fillStyle = gbar; c.fill();
-      pastille(c, 'photon : ' + fr(eV, 2) + ' eV', bx + bw / 2, YE(et) - 10, '#0F172A', '#fff');
-      var possibles = [], xl = bx + bw + 16;
-      SEUILS.forEach(function (s2, i) {
-        var y = YE(s2[1]), ok = eV >= s2[1];
-        c.strokeStyle = s2[2]; c.lineWidth = 1.8; c.setLineDash([7, 4]); c.beginPath(); c.moveTo(xa, y); c.lineTo(x1, y); c.stroke(); c.setLineDash([]);
-        var dy = i === 1 ? 14 : -4;   /* césium et sodium sont proches : l'étiquette du césium passe sous sa ligne */
-        pastille(c, s2[0] + ' : ' + fr(s2[1], 2) + ' eV  ' + (ok ? '\u2714' : '\u2716'), i === 1 ? xl : x1 - 4, y + dy, ok ? '#15803D' : '#B91C1C', ok ? '#F0FDF4' : '#FEF2F2', i === 1 ? 'left' : 'right');
-        if (ok) { possibles.push(s2[0].replace('W\u2091\u2093\u209c du ', 'arracher un électron au ').replace('gap du silicium', 'créer une paire électron-trou dans le silicium')); }
+      var etroit = x1 - x0 < 420, tP = (etroit ? '' : 'photon : ') + fr(eV, 2) + ' eV', wP = pastille(c, tP, 0, 0, '', '', 'mesure');
+      var pris = [pastille(c, tP, Math.max(x0 + wP / 2 + 2, bx + bw / 2), YE(et) - 10, '#0F172A', '#fff')], possibles = [];   /* sur téléphone : « 2,26 eV » suffit */
+      SEUILS.forEach(function (s2) {   /* lignes des seuils d'abord */
+        var y = YE(s2[1]); c.strokeStyle = s2[2]; c.lineWidth = 1.8; c.setLineDash([7, 4]); c.beginPath(); c.moveTo(xa, y); c.lineTo(x1, y); c.stroke(); c.setLineDash([]);
       });
+      SEUILS.slice().reverse().forEach(function (s2) {   /* puis les étiquettes, de haut en bas, sans chevauchement : au-dessus de la ligne si possible, sinon en dessous, etc. */
+        var y = YE(s2[1]), ok = eV >= s2[1], t = (etroit ? s2[0].replace(' du ', ' ') : s2[0]) + ' : ' + fr(s2[1], 2) + ' eV  ' + (ok ? '\u2714' : '\u2716'), lw = pastille(c, t, 0, 0, '', '', 'mesure');
+        var essais = [-4, 16, -24, 36], yy = y - 4;
+        for (var k = 0; k < essais.length; k++) { var cand = [x1 - 4 - lw, y + essais[k] - 13, lw, 19]; if (!pris.some(function (b) { return cand[0] < b[0] + b[2] && b[0] < cand[0] + cand[2] && cand[1] < b[1] + b[3] && b[1] < cand[1] + cand[3]; })) { yy = y + essais[k]; break; } }
+        pris.push(pastille(c, t, x1 - 4, yy, ok ? '#15803D' : '#B91C1C', ok ? '#F0FDF4' : '#FEF2F2', 'right'));
+      });
+      SEUILS.forEach(function (s2) { if (eV >= s2[1]) { possibles.push(s2[0].replace('W\u2091\u2093\u209c du ', 'arracher un électron au ').replace('gap du silicium', 'créer une paire électron-trou dans le silicium')); } });
       msg.innerHTML = possibles.length ? 'Ce photon a assez d\u2019énergie pour&nbsp;: ' + possibles.join('&nbsp;; ') + '.' : 'Ce photon n\u2019a assez d\u2019énergie pour aucun de ces seuils&nbsp;: même un flux de photons très intense n\u2019y changerait rien.';
     }
     function loop(ts) { var dt = last === null ? 0 : Math.min(0.05, (ts - last) / 1000); last = ts; if (visible) { draw(RM ? 0 : dt); } requestAnimationFrame(loop); }
@@ -794,7 +815,7 @@ draft = false
       var G = +rG.value, Rl = Math.pow(10, +rR.value), c = S.ctx, w = S.w, h = S.h;
       var lo = 0, hi = Uco(G); for (var k = 0; k < 50; k++) { var m = (lo + hi) / 2; if (Icell(m, G) > m / Rl) { lo = m; } else { hi = m; } }
       var U = lo, I = Icell(U, G), P = U * I, Pl = G * SURF, M = mpp(G);
-      oG.textContent = G + ' W/m²'; oR.textContent = Rl < 1 ? nb(Rl * 1000, 3) + ' m\u03a9' : nb(Rl, 3) + ' \u03a9'; oU.textContent = fr(U, 3) + ' V'; oI.textContent = fr(I, 2) + ' A'; oP.textContent = fr(P, 2) + ' W'; oE.textContent = fr(P / Pl * 100, 1) + ' %';
+      oG.textContent = G + ' W·m⁻²'; oR.textContent = Rl < 1 ? nb(Rl * 1000, 3) + ' m\u03a9' : nb(Rl, 3) + ' \u03a9'; oU.textContent = fr(U, 3) + ' V'; oI.textContent = fr(I, 2) + ' A'; oP.textContent = fr(P, 2) + ' W'; oE.textContent = fr(P / Pl * 100, 1) + ' %';
       c.clearRect(0, 0, w, h);
       var large = w >= 620, gw = large ? (w - 30) / 2 : w - 10, gh = large ? h : h / 2;
       function panneau(ox, oy, pw, ph, yMax, yLab, f, isP) {
@@ -877,5 +898,126 @@ draft = false
     });
     start();
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "L'énergie d'un photon de fréquence $\\nu$ vaut…",
+    [
+    "$E = h\\nu$",
+    "$E = \\dfrac{h}{\\nu}$",
+    "$E = mc^2$",
+    "$E = h\\lambda$"
+    ],
+    "$h \\approx \\pu{6,63E-34 J*s}$ est la constante de Planck."
+    ],
+    [
+    "Plus la longueur d'onde d'un photon est grande, plus son énergie est…",
+    [
+    "petite",
+    "grande",
+    "inchangée",
+    "négative"
+    ],
+    "$E = \\dfrac{hc}{\\lambda}$&nbsp;: un photon infrarouge transporte moins d'énergie qu'un photon ultraviolet."
+    ],
+    [
+    "L'effet photoélectrique n'a lieu que si…",
+    [
+    "l'énergie des photons est supérieure au travail d'extraction du métal",
+    "la lumière est très intense",
+    "le métal est chauffé",
+    "la lumière est rouge"
+    ],
+    "Il existe une fréquence seuil&nbsp;: augmenter l'intensité ne suffit pas en dessous de ce seuil."
+    ],
+    [
+    "Le bilan énergétique de l'effet photoélectrique s'écrit…",
+    [
+    "$h\\nu = W_\\text{ext} + E_\\text{c}$",
+    "$h\\nu = W_\\text{ext} - E_\\text{c}$",
+    "$E_\\text{c} = h\\nu + W_\\text{ext}$",
+    "$W_\\text{ext} = h\\nu + E_\\text{c}$"
+    ],
+    "L'énergie du photon sert à extraire l'électron&nbsp;; le reste devient de l'énergie cinétique."
+    ],
+    [
+    "L'effet photoélectrique a montré que la lumière…",
+    [
+    "échange de l'énergie avec la matière par quanta, les photons",
+    "est uniquement une onde",
+    "ne transporte pas d'énergie",
+    "est formée d'électrons"
+    ],
+    "Einstein a interprété l'effet photoélectrique en 1905."
+    ],
+    [
+    "Un atome absorbe un photon lorsque l'énergie du photon…",
+    [
+    "est égale à l'écart entre deux de ses niveaux d'énergie",
+    "est quelconque",
+    "est supérieure à tous ses niveaux",
+    "est nulle"
+    ],
+    "Les niveaux d'énergie sont quantifiés."
+    ],
+    [
+    "Dans une cellule photovoltaïque, un photon absorbé peut…",
+    [
+    "faire passer un électron de la bande de valence à la bande de conduction, s'il a une énergie supérieure au gap",
+    "créer un proton",
+    "chauffer le semi-conducteur uniquement",
+    "émettre un électron hors du silicium"
+    ],
+    "Il se crée une paire électron-trou."
+    ],
+    [
+    "Le rendement d'une cellule photovoltaïque est…",
+    [
+    "le rapport entre la puissance électrique fournie et la puissance lumineuse reçue",
+    "la puissance électrique fournie",
+    "le rapport entre la tension et l'intensité",
+    "toujours égal à 1"
+    ],
+    "Il est de l'ordre de 15 à 25&nbsp;% pour les cellules au silicium courantes."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

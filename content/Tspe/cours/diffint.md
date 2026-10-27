@@ -509,6 +509,22 @@ hidden = true
 </div>
 </details>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur la diffraction et les interférences</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -1293,3 +1309,123 @@ hidden = true
 })();
 </script>
 
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "La diffraction est d'autant plus marquée que…",
+    [
+    "la taille de l'ouverture est petite, de l'ordre de la longueur d'onde",
+    "la taille de l'ouverture est grande",
+    "la longueur d'onde est petite",
+    "l'onde est intense"
+    ],
+    "L'écart angulaire $\\theta = \\dfrac{\\lambda}{a}$ augmente quand $a$ diminue."
+    ],
+    [
+    "L'écart angulaire de diffraction par une fente de largeur $a$ vaut…",
+    [
+    "$\\theta = \\dfrac{\\lambda}{a}$",
+    "$\\theta = \\dfrac{a}{\\lambda}$",
+    "$\\theta = \\lambda \\times a$",
+    "$\\theta = \\dfrac{\\lambda}{2a}$"
+    ],
+    "$\\theta$ en radians, $\\lambda$ et $a$ dans la même unité."
+    ],
+    [
+    "La diffraction modifie-t-elle la longueur d'onde de l'onde&nbsp;?",
+    [
+    "non, la fréquence et la longueur d'onde sont conservées",
+    "oui, la longueur d'onde augmente",
+    "oui, la longueur d'onde diminue",
+    "seulement pour la lumière"
+    ],
+    "Seule la direction de propagation est modifiée (étalement)."
+    ],
+    [
+    "Deux ondes peuvent produire des interférences stables si elles sont…",
+    [
+    "cohérentes (synchrones, de même fréquence et de déphasage constant)",
+    "de même amplitude seulement",
+    "de fréquences différentes",
+    "émises par deux lampes distinctes"
+    ],
+    "Deux sources cohérentes s'obtiennent en pratique à partir d'une même source (trous d'Young)."
+    ],
+    [
+    "Les interférences sont constructives en un point M si la différence de marche $\\delta$ vaut…",
+    [
+    "$k\\lambda$, avec $k$ entier",
+    "$\\left(k + \\tfrac{1}{2}\\right)\\lambda$",
+    "$\\lambda/4$",
+    "zéro uniquement"
+    ],
+    "Les deux ondes arrivent en phase."
+    ],
+    [
+    "Les interférences sont destructives si la différence de marche vaut…",
+    [
+    "$\\left(k + \\tfrac{1}{2}\\right)\\lambda$",
+    "$k\\lambda$",
+    "$2\\lambda$",
+    "$\\lambda$"
+    ],
+    "Les deux ondes arrivent en opposition de phase."
+    ],
+    [
+    "Dans l'expérience des trous d'Young, l'interfrange vaut $i = \\dfrac{\\lambda D}{na}$. Si l'on éloigne les deux trous l'un de l'autre ($a$ augmente)…",
+    [
+    "les franges se resserrent",
+    "les franges s'écartent",
+    "les franges ne changent pas",
+    "les franges disparaissent"
+    ],
+    "$i$ est inversement proportionnel à $a$."
+    ],
+    [
+    "Pourquoi la diffraction limite-t-elle la résolution d'un instrument d'optique&nbsp;?",
+    [
+    "l'image d'un point est une tache, d'autant plus large que l'ouverture est petite",
+    "elle change la couleur de la lumière",
+    "elle réduit la vitesse de la lumière",
+    "elle ne la limite pas"
+    ],
+    "Deux points trop proches donnent des taches qui se chevauchent&nbsp;: d'où les grands miroirs des télescopes."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
+})();
+</script>

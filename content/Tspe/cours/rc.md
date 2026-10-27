@@ -83,7 +83,7 @@ draft = false
 <div class="nt-d-body">
 <ul class="nt-facts">
 <li><b>Les collisions.</b> Dans le nuage, entre 0&nbsp;°C et −40&nbsp;°C, de gros grains de grésil (lourds et poreux) heurtent de petits cristaux de glace, en présence d'eau surfondue (restée liquide malgré une température négative). À chaque collision, des charges sont transférées&nbsp;: le grésil se charge négativement, les cristaux positivement.</li>
-<li><b>Le tri par la masse.</b> Les courants ascendants, qui peuvent atteindre 100&nbsp;km/h, emportent les petits cristaux, légers et positifs, vers le sommet du nuage (l'enclume). Le grésil, lourd et négatif, s'accumule dans la partie moyenne et basse.</li>
+<li><b>Le tri par la masse.</b> Les courants ascendants, qui peuvent atteindre 100&nbsp;km·h⁻¹, emportent les petits cristaux, légers et positifs, vers le sommet du nuage (l'enclume). Le grésil, lourd et négatif, s'accumule dans la partie moyenne et basse.</li>
 <li><b>Le résultat.</b> Une zone positive au sommet, une zone négative à la base&nbsp;: des charges opposées en regard. Le champ électrique atteint plusieurs dizaines de kilovolts par mètre, jusqu'au claquage de l'air&nbsp;: l'éclair.</li>
 </ul>
 </div>
@@ -387,6 +387,22 @@ $$u_C(t) = A\,\mathrm{e}^{-t/RC} + E$$</p></li>
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
 </div>
 
+
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur le condensateur et le circuit RC</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
 
 <script>
 (function () {
@@ -721,7 +737,7 @@ $$u_C(t) = A\,\mathrm{e}^{-t/RC} + E$$</p></li>
       function Y(u) { return B - u / um * (B - T0); }
       function U(t) { return cur.ch ? cur.E * (1 - Math.exp(-t / cur.T)) : cur.E * Math.exp(-t / cur.T); }
       c.clearRect(0, 0, w, h);
-      var st = tm / 20; for (var t = 0; t <= tm + 1e-9; t += st) { c.strokeStyle = Math.round(t / st) % 2 ? '#F1F5F9' : '#E2E8F0'; c.lineWidth = 1; c.beginPath(); c.moveTo(X(t), T0); c.lineTo(X(t), B); c.stroke(); if (Math.round(t / st) % 2 === 0) { txt(c, nb(t, 2), X(t), B + 15, '#475569', '11px system-ui'); } }
+      var st = tm / 20; for (var t = 0; t <= tm + 1e-9; t += st) { c.strokeStyle = Math.round(t / st) % 2 ? '#F1F5F9' : '#E2E8F0'; c.lineWidth = 1; c.beginPath(); c.moveTo(X(t), T0); c.lineTo(X(t), B); c.stroke(); if (Math.round(t / st) % (R - L < 400 ? 4 : 2) === 0) { txt(c, nb(t, 2), X(t), B + 15, '#475569', '11px system-ui'); } }   /* une graduation sur quatre sur téléphone */
       for (var u = 0; u <= um + 1e-9; u += 0.5) { c.strokeStyle = u % 1 ? '#F1F5F9' : '#E2E8F0'; c.lineWidth = 1; c.beginPath(); c.moveTo(L, Y(u)); c.lineTo(R, Y(u)); c.stroke(); if (u % 1 === 0) { txt(c, String(u), L - 6, Y(u) + 4, '#475569', '11px system-ui', 'right'); } }
       c.strokeStyle = '#1E293B'; c.lineWidth = 1.2; c.beginPath(); c.moveTo(L, T0); c.lineTo(L, B); c.lineTo(R, B); c.stroke();
       txt(c, 't (' + cur.unit + ') \u2192', R - 30, B + 29, '#475569', '11px system-ui');
@@ -775,5 +791,126 @@ $$u_C(t) = A\,\mathrm{e}^{-t/RC} + E$$</p></li>
     function setup() { S = canvasCtx(cv); draw(); }
     setup(); nouveau(); onResize(setup);
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "L'intensité d'un courant électrique est…",
+    [
+    "un débit de charges électriques : $i = \\dfrac{\\mathrm{d}q}{\\mathrm{d}t}$",
+    "une quantité de charges",
+    "une tension",
+    "une énergie"
+    ],
+    "Elle s'exprime en ampères (coulombs par seconde)."
+    ],
+    [
+    "Un condensateur est constitué…",
+    [
+    "de deux surfaces conductrices en regard, séparées par un isolant",
+    "d'un fil conducteur enroulé",
+    "d'une résistance et d'une bobine",
+    "d'un seul conducteur"
+    ],
+    "Les armatures portent des charges opposées $q$ et $-q$."
+    ],
+    [
+    "La charge $q$ d'une armature d'un condensateur est reliée à la tension $u_C$ par…",
+    [
+    "$q = C \\times u_C$",
+    "$q = \\dfrac{u_C}{C}$",
+    "$q = \\dfrac{C}{u_C}$",
+    "$q = C + u_C$"
+    ],
+    "$C$ est la capacité, en farads."
+    ],
+    [
+    "Le temps caractéristique d'un circuit RC série vaut…",
+    [
+    "$\\tau = RC$",
+    "$\\tau = \\dfrac{R}{C}$",
+    "$\\tau = \\dfrac{C}{R}$",
+    "$\\tau = R + C$"
+    ],
+    "Il s'exprime en secondes."
+    ],
+    [
+    "Lors de la charge d'un condensateur sous la tension $E$, au bout d'une durée $\\tau$, la tension $u_C$ vaut…",
+    [
+    "environ 63 % de $E$",
+    "environ 37 % de $E$",
+    "$E$",
+    "la moitié de $E$"
+    ],
+    "$u_C(\\tau) = E\\left(1 - \\mathrm{e}^{-1}\\right) \\approx 0{,}63\\,E$."
+    ],
+    [
+    "Lors de la décharge, au bout d'une durée $\\tau$, la tension a été divisée par environ…",
+    [
+    "2,7 (elle vaut 37 % de sa valeur initiale)",
+    "2",
+    "10",
+    "1,6"
+    ],
+    "$u_C(\\tau) = E\\,\\mathrm{e}^{-1} \\approx 0{,}37\\,E$."
+    ],
+    [
+    "On considère que le régime permanent est atteint au bout d'environ…",
+    [
+    "$5\\tau$",
+    "$\\tau$",
+    "$\\tau/2$",
+    "$100\\tau$"
+    ],
+    "$\\mathrm{e}^{-5} < 1\\,\\%$&nbsp;: l'écart à la valeur finale est négligeable."
+    ],
+    [
+    "En régime permanent, dans un circuit RC série alimenté par une tension constante, l'intensité du courant est…",
+    [
+    "nulle",
+    "maximale",
+    "égale à $E/R$",
+    "constante non nulle"
+    ],
+    "Le condensateur chargé se comporte comme un interrupteur ouvert."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

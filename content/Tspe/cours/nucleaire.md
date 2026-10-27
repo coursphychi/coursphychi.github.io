@@ -542,6 +542,22 @@ print(f"t1/2 théorique : {log(2)/lbda:.2f} s")</code></pre>
 <p>Les trois règles de base de la radioprotection découlent des propriétés des rayonnements&nbsp;: <b>s'éloigner</b> de la source, <b>réduire la durée</b> d'exposition, et <b>interposer un écran</b> adapté au rayonnement (voir le schéma du pouvoir de pénétration).</p>
 </div>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur la décroissance radioactive</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -579,7 +595,8 @@ print(f"t1/2 théorique : {log(2)/lbda:.2f} s")</code></pre>
     for (var gy = o.y0; gy <= o.y1 + 1e-9; gy += o.dy) { c.beginPath(); c.moveTo(L, Y(gy)); c.lineTo(R, Y(gy)); c.stroke(); }
     c.strokeStyle = col('--ink'); c.beginPath(); c.moveTo(L, T); c.lineTo(L, B); c.lineTo(R, B); c.stroke();
     c.fillStyle = col('--muted'); c.font = '11px system-ui, sans-serif'; c.textAlign = 'center';
-    for (gx = o.x0; gx <= o.x1 + 1e-9; gx += o.dx) { c.fillText(o.fx ? o.fx(gx) : fr(gx, 0), X(gx), B + 14); }
+    var lx0 = c.measureText(o.fx ? o.fx(o.x1) : fr(o.x1, 0)).width, sx = Math.max(1, Math.ceil((lx0 + 8) / Math.abs(X(o.x0 + o.dx) - X(o.x0)))), ix = 0;   /* graduations écrites une sur deux (ou trois…) si la place manque */
+    for (gx = o.x0; gx <= o.x1 + 1e-9; gx += o.dx, ix++) { if (ix % sx === 0) { var tg = o.fx ? o.fx(gx) : fr(gx, 0), wg = c.measureText(tg).width; c.fillText(tg, Math.min(X(gx), w - 2 - wg / 2), B + 14); } }   /* la dernière reste dans le cadre */
     c.fillText(o.xl, (L + R) / 2, h - 3);
     c.textAlign = 'right';
     for (gy = o.y0; gy <= o.y1 + 1e-9; gy += o.dy) { c.fillText(o.fy ? o.fy(gy) : fr(gy, 0), L - 5, Y(gy) + 4); }
@@ -744,7 +761,7 @@ print(f"t1/2 théorique : {log(2)/lbda:.2f} s")</code></pre>
       hist.forEach(function (p, j) { if (j === 0) { g.moveTo(F.X(p[0]), F.Y(p[1])); } else { g.lineTo(F.X(p[0]), F.Y(hist[j - 1][1])); g.lineTo(F.X(p[0]), F.Y(p[1])); } });
       g.stroke();
       txt(g, 'simulation', F.R - 70, F.T + 14, '#D97706', '700 12px system-ui, sans-serif', 'left');
-      txt(g, 'N\u2080 e^(\u2212\u03bbt)', F.R - 70, F.T + 30, '#2A6BC4', '700 12px system-ui, sans-serif', 'left');
+      txt(g, 'N\u2080 e', F.R - 70, F.T + 30, '#2A6BC4', '700 12px system-ui, sans-serif', 'left'); g.font = '700 12px system-ui, sans-serif'; txt(g, '\u2212\u03bbt', F.R - 70 + g.measureText('N\u2080 e').width + 1, F.T + 24, '#2A6BC4', '700 9.5px system-ui, sans-serif', 'left');   /* exposant écrit en exposant, et non avec ^ */
       var n = count(); oN.textContent = n + ' (modèle\u00a0: ' + Math.round(N0 * Math.exp(-LAM * t)) + ')';
     }
     function step(ts) {
@@ -775,7 +792,7 @@ print(f"t1/2 théorique : {log(2)/lbda:.2f} s")</code></pre>
       var A = +r.value, age = Math.log(A0 / A) / LAM, c = S.ctx, w = S.w, h = S.h;
       oA.textContent = fr(A, 3) + ' Bq par gramme de carbone'; oR.textContent = fr(100 * A / A0, 1) + ' %'; oT.textContent = Math.round(age / 10) * 10 > 0 ? Math.round(age / 10) * 10 + ' ans' : '0 an';
       c.clearRect(0, 0, w, h);
-      var F = frame(c, w, h, { x0: 0, x1: 40000, dx: 5000, y0: 0, y1: 0.25, dy: 0.05, xl: 'âge (années)', yl: 'activité (Bq/g de carbone)', L: 54, fx: function (v) { return v === 0 ? '0' : (v / 1000) + '\u202f000'; }, fy: function (v) { return fr(v, 2); } });
+      var F = frame(c, w, h, { x0: 0, x1: 40000, dx: 5000, y0: 0, y1: 0.25, dy: 0.05, xl: 'âge (années)', yl: 'activité (Bq·g⁻¹ de carbone)', L: 54, fx: function (v) { return v === 0 ? '0' : (v / 1000) + '\u202f000'; }, fy: function (v) { return fr(v, 2); } });
       c.strokeStyle = '#2A6BC4'; c.lineWidth = 2.4; c.beginPath();
       for (var s = 0; s <= 40000; s += 200) { var y = F.Y(A0 * Math.exp(-LAM * s)); if (s === 0) { c.moveTo(F.X(s), y); } else { c.lineTo(F.X(s), y); } }
       c.stroke();
@@ -867,5 +884,126 @@ print(f"t1/2 théorique : {log(2)/lbda:.2f} s")</code></pre>
     if ('IntersectionObserver' in window) { new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(cv); }
     playLabel(btn, playing); setup(); onResize(setup); requestAnimationFrame(step);
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Des isotopes sont des noyaux qui ont…",
+    [
+    "le même nombre de protons, mais des nombres de neutrons différents",
+    "le même nombre de neutrons",
+    "le même nombre de nucléons",
+    "des charges différentes"
+    ],
+    "Exemple&nbsp;: le carbone 12 et le carbone 14."
+    ],
+    [
+    "Au cours d'une désintégration, on conserve…",
+    [
+    "la charge électrique et le nombre de nucléons",
+    "la masse",
+    "le nombre de neutrons",
+    "le nombre de protons"
+    ],
+    "Ce sont les lois de conservation de Soddy."
+    ],
+    [
+    "Une désintégration $\\beta^-$ émet…",
+    [
+    "un électron",
+    "un positon",
+    "un noyau d'hélium",
+    "un neutron"
+    ],
+    "Un neutron du noyau se transforme en proton."
+    ],
+    [
+    "Une désintégration α émet…",
+    [
+    "un noyau d'hélium $\\ce{^4_2He}$",
+    "un électron",
+    "un photon",
+    "un positon"
+    ],
+    "Elle concerne surtout les noyaux lourds."
+    ],
+    [
+    "La loi de décroissance radioactive s'écrit…",
+    [
+    "$N(t) = N_0\\,\\mathrm{e}^{-\\lambda t}$",
+    "$N(t) = N_0\\,\\mathrm{e}^{\\lambda t}$",
+    "$N(t) = N_0 - \\lambda t$",
+    "$N(t) = \\dfrac{N_0}{\\lambda t}$"
+    ],
+    "Solution de l'équation différentielle $\\dfrac{\\mathrm{d}N}{\\mathrm{d}t} = -\\lambda N$."
+    ],
+    [
+    "Le temps de demi-vie $t_{1/2}$ est relié à la constante radioactive par…",
+    [
+    "$t_{1/2} = \\dfrac{\\ln 2}{\\lambda}$",
+    "$t_{1/2} = \\lambda \\ln 2$",
+    "$t_{1/2} = \\dfrac{1}{2\\lambda}$",
+    "$t_{1/2} = \\dfrac{\\lambda}{2}$"
+    ],
+    "Au bout de $t_{1/2}$, le nombre de noyaux est divisé par deux."
+    ],
+    [
+    "Au bout de trois demi-vies, le nombre de noyaux radioactifs restants est…",
+    [
+    "$\\dfrac{N_0}{8}$",
+    "$\\dfrac{N_0}{3}$",
+    "$\\dfrac{N_0}{6}$",
+    "nul"
+    ],
+    "$\\dfrac{N_0}{2^3} = \\dfrac{N_0}{8}$."
+    ],
+    [
+    "L'activité $A$ d'un échantillon, en becquerels, est…",
+    [
+    "le nombre de désintégrations par seconde",
+    "le nombre de noyaux restants",
+    "l'énergie émise",
+    "la masse de l'échantillon"
+    ],
+    "$A = \\lambda N$&nbsp;: elle décroît comme $N$."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

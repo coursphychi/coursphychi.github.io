@@ -535,6 +535,22 @@ draft = false
 <div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
 </div>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur la structure des entités organiques</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -637,5 +653,126 @@ draft = false
       (function spin() { if (auto && visible) { ry += 0.006; draw(); } requestAnimationFrame(spin); })();
     });
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Une molécule organique est constituée principalement d'atomes de…",
+    [
+    "carbone et d'hydrogène",
+    "silicium et d'oxygène",
+    "fer et de carbone",
+    "sodium et de chlore"
+    ],
+    "Le squelette carboné porte d'éventuels groupes caractéristiques."
+    ],
+    [
+    "Dans une formule topologique, …",
+    [
+    "les atomes de carbone et les hydrogènes qu'ils portent ne sont pas écrits",
+    "tous les atomes sont écrits",
+    "seuls les atomes de carbone sont écrits",
+    "les liaisons ne sont pas représentées"
+    ],
+    "Chaque extrémité ou sommet d'un segment représente un atome de carbone."
+    ],
+    [
+    "Une chaîne carbonée saturée…",
+    [
+    "ne comporte que des liaisons simples carbone-carbone",
+    "comporte au moins une double liaison",
+    "est forcément cyclique",
+    "est forcément ramifiée"
+    ],
+    "Une chaîne insaturée comporte au moins une liaison multiple."
+    ],
+    [
+    "Deux isomères de constitution ont…",
+    [
+    "la même formule brute, mais des formules semi-développées différentes",
+    "la même formule semi-développée",
+    "des formules brutes différentes",
+    "les mêmes propriétés"
+    ],
+    "Exemple&nbsp;: l'éthanol et le méthoxyméthane, de formule brute $\\ce{C2H6O}$."
+    ],
+    [
+    "Le groupe caractéristique $\\ce{-COOH}$ est celui de la famille…",
+    [
+    "des acides carboxyliques",
+    "des alcools",
+    "des esters",
+    "des cétones"
+    ],
+    "Groupe carboxyle."
+    ],
+    [
+    "Le groupe hydroxyle $\\ce{-OH}$, porté par un carbone tétragonal, caractérise…",
+    [
+    "les alcools",
+    "les aldéhydes",
+    "les amines",
+    "les esters"
+    ],
+    "Exemple&nbsp;: l'éthanol $\\ce{CH3-CH2-OH}$."
+    ],
+    [
+    "Un ester est caractérisé par le groupe…",
+    [
+    "$\\ce{-COO-}$",
+    "$\\ce{-CO-}$",
+    "$\\ce{-NH2}$",
+    "$\\ce{-OH}$"
+    ],
+    "Exemple&nbsp;: l'éthanoate d'éthyle, $\\ce{CH3-COO-CH2-CH3}$."
+    ],
+    [
+    "Un polymère est une macromolécule…",
+    [
+    "formée par la répétition d'un grand nombre d'unités identiques (motifs)",
+    "formée d'un seul atome de carbone",
+    "de petite taille",
+    "toujours naturelle"
+    ],
+    "Il est obtenu par polymérisation de monomères."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>

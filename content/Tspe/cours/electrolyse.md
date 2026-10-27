@@ -178,6 +178,22 @@ draft = false
 </div>
 </details>
 
+## Testez-vous {.nt-h2}
+
+<div class="nt-lab nt-quizlab" id="quiz-final">
+<p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Quiz</p>
+<p class="nt-lab-title">Testez-vous sur les transformations forcées</p>
+<p class="nt-qnum"></p>
+<div class="nt-prog" aria-hidden="true"></div>
+<div class="nt-qcard">
+<p class="nt-ql-q"></p>
+<div class="nt-ql-btns"></div>
+</div>
+<p class="nt-msg" aria-live="polite"></p>
+<div class="nt-read" aria-live="polite"><span>score&nbsp;: <b class="out-score">0 / 0</b></span></div>
+<div class="nt-btns"><button type="button" class="nt-btn nt-btn-main" data-act="next"><i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante</button></div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -331,5 +347,126 @@ draft = false
     [rI, rT].forEach(function (r) { r.addEventListener('input', upd); });
     upd();
   })();
+})();
+</script>
+
+<script>
+/* ================= Quiz de fin de chapitre (autonome) ================= */
+(function () {
+  var root = document.getElementById('quiz-final'); if (!root) { return; }
+  var Q = [
+    [
+    "Une électrolyse est une transformation…",
+    [
+    "forcée, imposée par un générateur",
+    "spontanée",
+    "qui produit de l'énergie électrique",
+    "toujours totale et rapide"
+    ],
+    "Le générateur impose le sens du courant, et le système évolue dans le sens inverse de son évolution spontanée."
+    ],
+    [
+    "Au cours d'une évolution forcée, le quotient de réaction $Q_\\mathrm{r}$…",
+    [
+    "s'éloigne de la constante d'équilibre $K$",
+    "se rapproche de $K$",
+    "reste égal à $K$",
+    "est toujours nul"
+    ],
+    "Une évolution spontanée rapproche $Q_\\mathrm{r}$ de $K$&nbsp;; une évolution forcée l'en éloigne."
+    ],
+    [
+    "Au cours d'une électrolyse, quelle conversion d'énergie a lieu&nbsp;?",
+    [
+    "de l'énergie électrique en énergie chimique",
+    "de l'énergie chimique en énergie électrique",
+    "de l'énergie thermique en énergie électrique",
+    "aucune"
+    ],
+    "C'est l'inverse d'une pile, qui convertit l'énergie chimique en énergie électrique."
+    ],
+    [
+    "L'électrode reliée à la borne négative du générateur est…",
+    [
+    "la cathode, siège d'une réduction",
+    "l'anode, siège d'une oxydation",
+    "la cathode, siège d'une oxydation",
+    "l'anode, siège d'une réduction"
+    ],
+    "Les électrons arrivent à cette électrode, où ils sont captés par un oxydant&nbsp;: réduction."
+    ],
+    [
+    "La charge électrique $Q$ débitée par un générateur de courant d'intensité constante $I$ pendant $\\Delta t$ vaut…",
+    [
+    "$Q = I \\times \\Delta t$",
+    "$Q = \\dfrac{I}{\\Delta t}$",
+    "$Q = \\dfrac{\\Delta t}{I}$",
+    "$Q = I^2 \\times \\Delta t$"
+    ],
+    "Avec $Q$ en coulombs, $I$ en ampères et $\\Delta t$ en secondes."
+    ],
+    [
+    "La quantité d'électrons échangés vaut $n(\\mathrm{e^-}) = \\dfrac{Q}{\\mathcal{F}}$, où $\\mathcal{F}$ est…",
+    [
+    "la constante de Faraday, environ $\\pu{9,65E4 C*mol-1}$",
+    "la charge élémentaire",
+    "la constante d'Avogadro",
+    "la capacité du générateur"
+    ],
+    "$\\mathcal{F} = N_\\mathrm{A} \\times e$&nbsp;: la charge d'une mole d'électrons."
+    ],
+    [
+    "Lors de l'électrolyse de l'eau, on recueille à la cathode…",
+    [
+    "du dihydrogène",
+    "du dioxygène",
+    "du dichlore",
+    "de l'eau"
+    ],
+    "À la cathode, réduction&nbsp;: $\\ce{2 H+ + 2 e- -> H2}$. Le dioxygène se forme à l'anode, en volume deux fois plus petit."
+    ],
+    [
+    "Pour cuivrer un objet métallique par électrolyse, on le relie…",
+    [
+    "à la borne négative du générateur : il est la cathode",
+    "à la borne positive du générateur : il est l'anode",
+    "à aucune borne",
+    "au pont salin"
+    ],
+    "Les ions $\\ce{Cu^2+}$ sont réduits en cuivre métallique sur la cathode."
+    ]
+    ];   /* [question, [bonne réponse, autres réponses…], explication] */
+  function $(s) { return root.querySelector(s); }
+  function melange(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function compose(el) { if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }   /* formules des questions et des réponses */
+  var qEl = $('.nt-ql-q'), bx = $('.nt-ql-btns'), msg = $('.nt-msg'), sc = $('.out-score'), next = $('[data-act="next"]'), prog = $('.nt-prog'), num = $('.nt-qnum');
+  var lbl = '<i class="fa-solid fa-forward-step"></i>&nbsp; Question suivante', order = [], k = 0, good = 0, answered = false, fini = false, res = [];
+  function bilan(r) { return r === 1 ? 'Parfait&nbsp;: tout est juste&nbsp;!' : (r >= 0.75 ? 'Très bien&nbsp;: relisez seulement les points manqués.' : (r >= 0.5 ? 'C\u2019est un début&nbsp;: reprenez les parties du cours correspondant aux erreurs.' : 'Relisez le cours, puis recommencez le quiz.')); }
+  function progres() { prog.innerHTML = order.map(function (_, i) { return '<i class="' + (res[i] === true ? 'ok' : (res[i] === false ? 'ko' : '')) + (i === k && !fini ? ' cur' : '') + '"></i>'; }).join(''); num.textContent = fini ? 'Bilan' : 'Question ' + (k + 1) + ' sur ' + order.length; }
+  function show() {
+    answered = false; var q = Q[order[k]], idx = melange(q[1].map(function (_, i) { return i; }));
+    qEl.innerHTML = q[0]; msg.textContent = ''; msg.className = 'nt-msg'; bx.innerHTML = '';
+    idx.forEach(function (i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nt-btn nt-choix'; b.innerHTML = q[1][i];
+      b.addEventListener('click', function () {
+        if (answered) { return; } answered = true; var ok = i === 0; res[k] = ok; if (ok) { good++; }
+        b.classList.add(ok ? 'nt-choix-ok' : 'nt-choix-ko'); if (!ok) { bx.children[idx.indexOf(0)].classList.add('nt-choix-ok'); }
+        msg.className = 'nt-msg nt-fb ' + (ok ? 'ok' : 'ko'); msg.innerHTML = (ok ? '<b>Bravo&nbsp;!</b> ' : '<b>Non.</b> ') + q[2]; compose(msg);
+        sc.textContent = good + ' / ' + (k + 1); progres();
+      });
+      bx.appendChild(b);
+    });
+    compose(qEl); compose(bx);
+    next.innerHTML = k === order.length - 1 ? '<i class="fa-solid fa-flag-checkered"></i>&nbsp; Voir le bilan' : lbl; progres();
+  }
+  function start() { order = melange(Q.map(function (_, i) { return i; })); k = 0; good = 0; fini = false; res = []; bx.hidden = false; sc.textContent = '0 / 0'; show(); }
+  next.addEventListener('click', function () {
+    if (fini) { start(); return; }
+    if (!answered) { msg.className = 'nt-msg'; msg.textContent = 'Choisissez d\u2019abord une réponse.'; return; }
+    k++;
+    if (k >= order.length) { fini = true; bx.hidden = true; qEl.innerHTML = '<span class="nt-big-score">' + good + ' / ' + order.length + '</span> ' + bilan(good / order.length); msg.textContent = ''; msg.className = 'nt-msg'; next.innerHTML = '<i class="fa-solid fa-rotate-left"></i>&nbsp; Recommencer'; progres(); return; }
+    show();
+  });
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', start); } else { start(); }
 })();
 </script>
