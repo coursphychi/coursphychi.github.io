@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banc de mesure sur image</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <style>
+        :root {
+            --bg-body: #f1f5f9;
+            --bg-panel: #ffffff;
+            --bg-recessed: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+            --border-subtle: #e2e8f0;
+            --ch1: #0ea5e9;
+            --ch1-glow: rgba(14, 165, 233, 0.25);
+            --ch2: #f59e0b;
+            --ch2-glow: rgba(245, 158, 11, 0.25);
+            --sum: #10b981;
+            --angle: #a855f7;
+            --point: #f43f5e;
+            --danger: #ef4444;
+            --scope-bg: #090d16;
+            --shadow-panel: 0 10px 25px -5px rgba(15, 23, 42, 0.07), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+            --radius: 16px;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0b1120;
+            --bg-panel: #151f32;
+            --bg-recessed: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #26354d;
+            --border-subtle: #1e293b;
+            --ch1: #38bdf8;
+            --ch1-glow: rgba(56, 189, 248, 0.3);
+            --ch2: #fbbf24;
+            --ch2-glow: rgba(251, 191, 36, 0.3);
+            --sum: #34d399;
+            --angle: #c084fc;
+            --point: #fb7185;
+            --scope-bg: #050811;
+            --shadow-panel: 0 12px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 1.5rem 1rem 3rem;
+            transition: background-color 0.25s, color 0.25s;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* En-tête */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--ch2), var(--angle));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 12px var(--ch2-glow);
+            flex-shrink: 0;
+        }
+
+        h1 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .theme-toggle {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.15s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--ch1);
+        }
+
+        /* Disposition générale */
+        .workspace {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1050px) {
+            .workspace {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .main-col, .side-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-width: 0;
+        }
+
+        .panel {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-panel);
+            min-width: 0;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .panel-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--bg-recessed);
+            border: 1px solid var(--border);
+            font-size: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        select, .btn-small, .file-btn {
+            background: var(--bg-recessed);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.38rem 0.7rem;
+            border-radius: 7px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            max-width: 100%;
+        }
+
+        .btn-small:hover, .file-btn:hover {
+            border-color: var(--text-muted);
+        }
+
+        .btn-small:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .btn-small.active {
+            border-color: var(--ch1);
+            background: var(--ch1-glow);
+        }
+
+        .btn-primary {
+            background: var(--ch1);
+            border-color: var(--ch1);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.08);
+            border-color: var(--ch1);
+        }
+
+        .file-btn input {
+            display: none;
+        }
+
+        /* Sélecteur d'outils */
+        .seg {
+            display: inline-grid;
+            grid-auto-flow: column;
+            grid-auto-columns: auto;
+            gap: 0.25rem;
+            background: var(--bg-recessed);
+            padding: 0.22rem;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+        }
+
+        .seg-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.4rem 0.7rem;
+            border-radius: 7px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.15s;
+        }
+
+        .seg-btn:hover {
+            color: var(--text-main);
+        }
+
+        .seg-btn.active {
+            background: var(--ch1);
+            color: #ffffff;
+        }
+
+        .seg-btn .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 640px) {
+            #toolSel {
+                grid-auto-flow: row;
+                grid-template-columns: repeat(3, 1fr);
+                width: 100%;
+            }
+        }
+
+        /* Zone image */
+        .stage {
+            position: relative;
+            height: min(68vh, 640px);
+            min-height: 240px;
+            background-color: var(--scope-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7);
+            touch-action: none;
+        }
+
+        .stage canvas, .stage video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .stage video {
+            object-fit: contain;
+            display: none;
+            background: #000;
+        }
+
+        .stage.cam-mode video {
+            display: block;
+        }
+
+        .stage.drag-over {
+            border-color: var(--ch1);
+        }
+
+        .empty-state {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.9rem;
+            text-align: center;
+            padding: 1.5rem;
+            color: #94a3b8;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .empty-state strong {
+            color: #e2e8f0;
+            font-size: 1.05rem;
+        }
+
+        .empty-state .toolbar {
+            justify-content: center;
+        }
+
+        .cam-bar {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            padding: 0.75rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+        }
+
+        .stage.cam-mode .cam-bar {
+            display: flex;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 0.6rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            min-height: 1.3em;
+        }
+
+        .status-coords {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            white-space: nowrap;
+        }
+
+        /* Panneau latéral */
+        .help-box {
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            background: var(--bg-recessed);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--ch1);
+            border-radius: 8px;
+            padding: 0.6rem 0.75rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .field-row {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .num-input {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            width: 92px;
+            padding: 0.32rem 0.5rem;
+            border-radius: 7px;
+            border: 1px solid var(--border);
+            background: var(--bg-panel);
+            color: var(--text-main);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .stat {
+            background: var(--bg-recessed);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.4rem 0.6rem;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.92rem;
+            font-weight: 700;
+        }
+
+        .calib-state {
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 0.18rem 0.55rem;
+            border-radius: 999px;
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--danger);
+        }
+
+        .calib-state.ok {
+            background: rgba(16, 185, 129, 0.14);
+            color: var(--sum);
+        }
+
+        .measure-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .measure-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            background: var(--bg-recessed);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.4rem 0.55rem;
+            cursor: pointer;
+        }
+
+        .measure-list li.selected {
+            border-color: var(--ch1);
+            box-shadow: 0 0 0 2px var(--ch1-glow);
+        }
+
+        .measure-list .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .measure-list .m-name {
+            font-weight: 700;
+            font-size: 0.82rem;
+            min-width: 2.2rem;
+        }
+
+        .measure-list .m-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .measure-list .m-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .del-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.95rem;
+            padding: 0 0.2rem;
+        }
+
+        .del-btn:hover {
+            color: var(--danger);
+        }
+
+        .empty-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .table-wrap {
+            max-height: 260px;
+            overflow: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-top: 0.6rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+        }
+
+        th, td {
+            padding: 0.3rem 0.5rem;
+            text-align: right;
+            border-bottom: 1px solid var(--border-subtle);
+            white-space: nowrap;
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background: var(--bg-recessed);
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        .feedback {
+            font-size: 0.78rem;
+            color: var(--sum);
+            font-weight: 600;
+        }
+
+        /* Profil d'intensité */
+        .profile-screen {
+            position: relative;
+            height: 260px;
+            background-color: var(--scope-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7);
+            touch-action: none;
+        }
+
+        .profile-screen canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: ew-resize;
+        }
+
+        .profile-readouts {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.6rem;
+            margin-top: 0.85rem;
+        }
+
+        @media (max-width: 760px) {
+            .profile-readouts {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .readout {
+            background: var(--bg-recessed);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .readout-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+        }
+
+        .readout-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .readout-label .tex {
+            text-transform: none;
+            font-size: 0.85rem;
+        }
+
+        .readout.c1 .readout-value { color: var(--ch1); }
+        .readout.c2 .readout-value { color: var(--ch2); }
+        .readout.result {
+            border-color: var(--sum);
+        }
+        .readout.result .readout-value { color: var(--sum); }
+
+        .warn {
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--danger);
+            display: none;
+        }
+
+        .warn.visible {
+            display: block;
+        }
+
+        .hint-footer {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="brand">
+            <div class="brand-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="14" rx="2"/>
+                    <path d="M3 21h18"/>
+                    <path d="M7 21v-2M11 21v-1.5M15 21v-2M19 21v-1.5"/>
+                    <path d="M7 14l4-5 3 3 3-4"/>
+                </svg>
+            </div>
+            <div>
+                <h1>Banc de mesure sur image</h1>
+                <div class="subtitle">Étalonnage, règle et rapporteur virtuels, profil de luminosité et pointage sur une photo</div>
+            </div>
+        </div>
+        <button class="theme-toggle" id="themeBtn" title="Changer le thème (Clair / Sombre)">🌓</button>
+    </header>
+
+    <div class="workspace">
+        <div class="main-col">
+            <!-- ZONE IMAGE -->
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="seg" id="toolSel">
+                        <button class="seg-btn active" data-tool="move" title="Déplacer la vue et les poignées (M)">✋ Déplacer</button>
+                        <button class="seg-btn" data-tool="dist" title="Mesurer une distance (D)"><span class="dot" style="background: var(--ch1);"></span>Distance</button>
+                        <button class="seg-btn" data-tool="angle" title="Mesurer un angle (A)"><span class="dot" style="background: var(--angle);"></span>Angle</button>
+                        <button class="seg-btn" data-tool="profile" title="Tracer un profil de luminosité (P)"><span class="dot" style="background: var(--sum);"></span>Profil I(x)</button>
+                        <button class="seg-btn" data-tool="points" title="Pointer des positions successives (C)"><span class="dot" style="background: var(--point);"></span>Pointage</button>
+                    </div>
+                    <div class="toolbar">
+                        <button class="btn-small" id="zoomOutBtn" title="Dézoomer">−</button>
+                        <button class="btn-small" id="zoomInBtn" title="Zoomer">+</button>
+                        <button class="btn-small" id="fitBtn" title="Ajuster l'image à la fenêtre">⤢ Ajuster</button>
+                        <button class="btn-small" id="rotateBtn" title="Pivoter l'image de 90° (sens horaire)">↻ 90°</button>
+                        <button class="btn-small" id="exportPngBtn" title="Enregistrer l'image avec les tracés">⬇ Image annotée</button>
+                    </div>
+                </div>
+
+                <div class="stage" id="stage">
+                    <canvas id="viewCanvas"></canvas>
+                    <video id="camVideo" autoplay muted playsinline></video>
+                    <div class="empty-state" id="emptyState">
+                        <strong>Aucune image chargée</strong>
+                        <div>Importez une photo, glissez-déposez-la ici ou collez-la (Ctrl+V).<br>Vous pouvez aussi prendre une photo avec la webcam.</div>
+                        <div class="toolbar">
+                            <label class="file-btn btn-primary">📂 Importer une photo<input type="file" accept="image/*" class="file-input"></label>
+                            <button class="btn-small webcam-btn">📷 Webcam</button>
+                            <button class="btn-small example-btn">🧪 Image d'exemple</button>
+                        </div>
+                    </div>
+                    <div class="cam-bar">
+                        <select id="cameraSelect"></select>
+                        <button class="btn-small btn-primary" id="captureBtn">📸 Capturer</button>
+                        <button class="btn-small" id="camCancelBtn">Annuler</button>
+                    </div>
+                </div>
+
+                <div class="status-bar">
+                    <span id="toolHelp">Molette : zoom · Glisser : déplacer la vue · Flèches : ajuster la poignée sélectionnée au pixel près</span>
+                    <span class="status-coords" id="statusCoords"></span>
+                </div>
+            </div>
+
+            <!-- PROFIL DE LUMINOSITÉ -->
+            <div class="panel" id="profilePanel" style="display: none;">
+                <div class="panel-header">
+                    <span class="panel-title">Profil de luminosité I(x)</span>
+                    <div class="toolbar">
+                        <label class="field-row" style="margin: 0;">Canal :
+                            <select id="channelSelect">
+                                <option value="auto" selected>Auto</option>
+                                <option value="lum">Luminance</option>
+                                <option value="r">Rouge</option>
+                                <option value="g">Vert</option>
+                                <option value="b">Bleu</option>
+                            </select>
+                        </label>
+                        <label class="field-row" style="margin: 0;" title="Moyenne sur plusieurs lignes de pixels parallèles pour réduire le bruit">Largeur :
+                            <select id="bandSelect">
+                                <option value="1">1 px</option>
+                                <option value="5" selected>5 px</option>
+                                <option value="11">11 px</option>
+                                <option value="21">21 px</option>
+                                <option value="41">41 px</option>
+                            </select>
+                        </label>
+                        <button class="btn-small active" id="snapBtn" title="Placer automatiquement les curseurs sur le maximum ou le minimum le plus proche">🧲 Aimanter</button>
+                        <button class="btn-small" id="profileCopyBtn">Copier Python</button>
+                        <button class="btn-small" id="profileCsvBtn">CSV</button>
+                        <span class="feedback" id="profileFeedback"></span>
+                    </div>
+                </div>
+
+                <div class="profile-screen">
+                    <canvas id="profileCanvas"></canvas>
+                </div>
+
+                <div class="profile-readouts">
+                    <div class="readout c1">
+                        <div class="readout-label">Curseur C₁</div>
+                        <div class="readout-value" id="c1Value">—</div>
+                    </div>
+                    <div class="readout c2">
+                        <div class="readout-label">Curseur C₂</div>
+                        <div class="readout-value" id="c2Value">—</div>
+                    </div>
+                    <div class="readout">
+                        <div class="readout-label">Écart Δx · nombre n</div>
+                        <div class="readout-value" style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+                            <span id="dxValue">—</span>
+                            <span style="color: var(--text-muted); font-size: 0.8rem;">n =</span>
+                            <input type="number" class="num-input" id="nInput" value="1" min="1" step="1" style="width: 64px;" title="Nombre d'interfranges compris entre les deux curseurs">
+                        </div>
+                    </div>
+                    <div class="readout result">
+                        <div class="readout-label"><span class="tex" data-tex="i = \dfrac{\Delta x}{n}" data-fallback="i = Δx / n">i = Δx / n</span></div>
+                        <div class="readout-value" id="iValue">—</div>
+                    </div>
+                </div>
+
+                <div class="warn" id="satWarn">⚠ Pixels saturés le long du profil : le haut des maxima est écrêté. Réduisez l'exposition (ou l'intensité de la source) avant la prise de vue.</div>
+
+                <div class="hint-footer">
+                    Glissez les curseurs sur le graphique (ou cliquez pour déplacer le plus proche). Pour l'interfrange, placez C₁ et C₂ sur deux maxima séparés de n interfranges ; pour une figure de diffraction, sur les deux minima qui bordent la tache centrale (n = 1 donne alors sa largeur L).<br>
+                    La valeur d'un pixel n'est pas proportionnelle à l'intensité lumineuse (correction gamma de l'appareil, saturation) : seules les positions des extrema sont fiables.
+                </div>
+            </div>
+        </div>
+
+        <aside class="side-col">
+            <!-- 1. IMAGE -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title"><span class="step-num">1</span> Image</span>
+                </div>
+                <div class="toolbar" style="margin-bottom: 0.75rem;">
+                    <label class="file-btn">📂 Importer<input type="file" accept="image/*" class="file-input"></label>
+                    <button class="btn-small webcam-btn">📷 Webcam</button>
+                    <button class="btn-small example-btn">🧪 Exemple</button>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat">
+                        <div class="stat-label">Dimensions</div>
+                        <div class="stat-value" id="imgSize">—</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Zoom</div>
+                        <div class="stat-value" id="zoomValue">—</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. ÉTALONNAGE -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title"><span class="step-num">2</span> Étalonnage</span>
+                    <span class="calib-state" id="calibState">À faire</span>
+                </div>
+                <div class="help-box" style="border-left-color: var(--ch2);">
+                    Faites coïncider les extrémités <strong>A</strong> et <strong>B</strong> du segment jaune avec un objet de longueur connue <strong>situé dans le même plan</strong> que l'objet à mesurer, puis indiquez sa longueur.
+                </div>
+                <div class="field-row">
+                    <label for="calibLen">Longueur AB :</label>
+                    <input type="number" class="num-input" id="calibLen" value="10" step="any" min="0">
+                    <select id="calibUnit">
+                        <option value="µm">µm</option>
+                        <option value="mm">mm</option>
+                        <option value="cm" selected>cm</option>
+                        <option value="m">m</option>
+                    </select>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat">
+                        <div class="stat-label">Segment AB</div>
+                        <div class="stat-value" id="calibPx">—</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Résolution</div>
+                        <div class="stat-value" id="calibRes">—</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. MESURES -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title"><span class="step-num">3</span> Mesures</span>
+                    <button class="btn-small" id="clearMeasuresBtn">Tout effacer</button>
+                </div>
+                <ul class="measure-list" id="measureList"></ul>
+                <div class="empty-note" id="measureEmpty">Choisissez l'outil Distance ou Angle, puis cliquez sur l'image.</div>
+            </div>
+
+            <!-- 4. POINTAGE -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title"><span class="step-num">4</span> Pointage</span>
+                    <div class="toolbar">
+                        <span class="feedback" id="pointsFeedback"></span>
+                        <button class="btn-small" id="pointsCopyBtn">Copier Python</button>
+                        <button class="btn-small" id="pointsCsvBtn">CSV</button>
+                        <button class="btn-small" id="pointsClearBtn">Effacer</button>
+                    </div>
+                </div>
+                <div class="help-box" style="border-left-color: var(--point);">
+                    Chronophotographie : avec l'outil <strong>Pointage</strong>, cliquez sur les positions successives du mobile, dans l'ordre. Déplacez l'origine <strong>O</strong> du repère (axe y vers le haut).
+                </div>
+                <div class="field-row">
+                    <label for="dtInput">Durée entre deux images Δt :</label>
+                    <input type="number" class="num-input" id="dtInput" value="0.040" step="any" min="0">
+                    <span>s</span>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Point</th><th>t (s)</th><th id="thX">x</th><th id="thY">y</th></tr>
+                        </thead>
+                        <tbody id="pointsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<script>
+    // --- 1. Thème et rendu LaTeX ---
+    const themeBtn = document.getElementById('themeBtn');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function storageGet(key) {
+        try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+
+    function storageSet(key, value) {
+        try { localStorage.setItem(key, value); } catch (e) { /* stockage indisponible */ }
+    }
+
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        storageSet('theme_pref', theme);
+        requestRender();
+    }
+
+    const savedTheme = storageGet('theme_pref');
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    } else if (prefersDark.matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    themeBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    function renderTex(el, tex, fallback) {
+        if (window.katex) {
+            try {
+                katex.render(tex, el, { throwOnError: false });
+                return;
+            } catch (e) { /* texte de secours ci-dessous */ }
+        }
+        el.textContent = fallback;
+    }
+
+    document.querySelectorAll('.tex').forEach(el => renderTex(el, el.dataset.tex, el.dataset.fallback));
+
+    // --- 2. État ---
+    // Toutes les positions sont en pixels de l'image d'origine (x vers la droite, y vers le bas).
+    const S = {
+        img: null,          // canevas contenant l'image à sa résolution native
+        data: null,         // pixels RGBA de l'image
+        W: 0,
+        H: 0,
+        view: { s: 1, tx: 0, ty: 0 },
+        autoFit: true,
+        tool: 'move',
+        calib: { a: { x: 0, y: 0 }, b: { x: 0, y: 0 }, len: 10, unit: 'cm', set: false },
+        objects: [],        // mesures : { type: 'dist' | 'angle', n, pts }
+        counters: { dist: 0, angle: 0 },
+        profile: null,      // { a, b }
+        profileData: null,  // { values: Float64Array, step (px), saturated (fraction) }
+        cursors: [0, 0],    // positions des curseurs le long du profil (px)
+        channel: 'auto',     // canal choisi ('auto' : le plus contrasté)
+        usedChannel: 'lum',
+        band: 5,
+        snap: true,
+        origin: { x: 0, y: 0 },
+        points: [],
+        dt: 0.04,
+        pending: null,      // tracé en cours : { type, pts }
+        hover: null,        // position du pointeur dans l'image
+        overCanvas: false,
+        drag: null,
+        selected: null      // poignée sélectionnée : { p, owner }
+    };
+
+    const COLORS = {};
+    function readColors() {
+        const st = getComputedStyle(document.documentElement);
+        ['ch1', 'ch2', 'sum', 'angle', 'point'].forEach(k => COLORS[k] = st.getPropertyValue('--' + k).trim());
+    }
+
+    // --- 3. Unités et formatage ---
+    function fmtNum(v, digits = 3) {
+        if (!isFinite(v)) return '—';
+        if (v === 0) return '0';
+        const r = Number(v.toPrecision(digits));
+        return r.toString().replace('.', ',');
+    }
+
+    function pxPerUnit() {
+        const d = dist(S.calib.a, S.calib.b);
+        return S.calib.len > 0 ? d / S.calib.len : NaN;
+    }
+
+    function calibrated() {
+        return S.calib.set && isFinite(pxPerUnit()) && pxPerUnit() > 0;
+    }
+
+    function unitLabel() {
+        return calibrated() ? S.calib.unit : 'px';
+    }
+
+    function toUnits(px) {
+        return calibrated() ? px / pxPerUnit() : px;
+    }
+
+    function fmtLen(px) {
+        return calibrated() ? `${fmtNum(toUnits(px))} ${S.calib.unit}` : `${fmtNum(px, 4)} px`;
+    }
+
+    // Nombre de décimales cohérent avec la résolution (1 px) pour les tableaux
+    function tableDecimals() {
+        if (!calibrated()) return 1;
+        return Math.max(0, Math.min(6, Math.ceil(-Math.log10(1 / pxPerUnit())) + 1));
+    }
+
+    function dist(p, q) {
+        return Math.hypot(q.x - p.x, q.y - p.y);
+    }
+
+    function angleDeg(o, a, b) {
+        const ux = a.x - o.x, uy = a.y - o.y, vx = b.x - o.x, vy = b.y - o.y;
+        const n = Math.hypot(ux, uy) * Math.hypot(vx, vy);
+        if (n === 0) return NaN;
+        return Math.acos(Math.max(-1, Math.min(1, (ux * vx + uy * vy) / n))) * 180 / Math.PI;
+    }
+
+    // --- 4. Chargement de l'image ---
+    const stage = document.getElementById('stage');
+    const viewCanvas = document.getElementById('viewCanvas');
+    const vctx = viewCanvas.getContext('2d');
+    const emptyState = document.getElementById('emptyState');
+
+    function setImage(source, w, h) {
+        const c = document.createElement('canvas');
+        c.width = w;
+        c.height = h;
+        const cx = c.getContext('2d', { willReadFrequently: true });
+        cx.drawImage(source, 0, 0, w, h);
+        S.img = c;
+        S.data = cx.getImageData(0, 0, w, h).data;
+        S.W = w;
+        S.H = h;
+        resetMeasurements();
+        emptyState.style.display = 'none';
+        document.getElementById('imgSize').textContent = `${w} × ${h}`;
+        sizeStage();
+        fitView();
+        updatePanels();
+    }
+
+    function resetMeasurements() {
+        const { W, H } = S;
+        S.calib.a = { x: Math.round(W * 0.3), y: Math.round(H * 0.9) };
+        S.calib.b = { x: Math.round(W * 0.7), y: Math.round(H * 0.9) };
+        S.calib.set = false;
+        S.objects = [];
+        S.counters = { dist: 0, angle: 0 };
+        S.profile = null;
+        S.profileData = null;
+        S.points = [];
+        S.origin = { x: Math.round(W * 0.1), y: Math.round(H * 0.85) };
+        S.pending = null;
+        S.selected = null;
+        document.getElementById('profilePanel').style.display = 'none';
+    }
+
+    function loadFile(file) {
+        if (!file || !file.type.startsWith('image/')) return;
+        const url = URL.createObjectURL(file);
+        const im = new Image();
+        im.onload = () => {
+            setImage(im, im.naturalWidth, im.naturalHeight);
+            URL.revokeObjectURL(url);
+        };
+        im.onerror = () => alert("Impossible de lire cette image.");
+        im.src = url;
+    }
+
+    document.querySelectorAll('.file-input').forEach(inp => {
+        inp.addEventListener('change', () => {
+            loadFile(inp.files[0]);
+            inp.value = '';
+        });
+    });
+
+    stage.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        stage.classList.add('drag-over');
+    });
+    stage.addEventListener('dragleave', () => stage.classList.remove('drag-over'));
+    stage.addEventListener('drop', (e) => {
+        e.preventDefault();
+        stage.classList.remove('drag-over');
+        loadFile(e.dataTransfer.files[0]);
+    });
+
+    window.addEventListener('paste', (e) => {
+        const item = [...(e.clipboardData ? e.clipboardData.items : [])].find(it => it.type.startsWith('image/'));
+        if (item) loadFile(item.getAsFile());
+    });
+
+    // Image d'exemple : franges d'interférence modulées par la diffraction, et règle graduée
+    function makeExample() {
+        const W = 1600, H = 900;
+        const c = document.createElement('canvas');
+        c.width = W;
+        c.height = H;
+        const cx = c.getContext('2d');
+        cx.fillStyle = '#0b0b0e';
+        cx.fillRect(0, 0, W, H);
+
+        const img = cx.getImageData(0, 0, W, H);
+        const i0 = 38;      // interfrange (px)
+        const half = 230;   // demi-largeur de la tache centrale de diffraction (px)
+        const xc = W / 2, yc = 330;
+        for (let y = 140; y < 520; y++) {
+            const vy = Math.exp(-Math.pow((y - yc) / 120, 2));
+            for (let x = 0; x < W; x++) {
+                const u = Math.PI * (x - xc) / half;
+                const sinc = u === 0 ? 1 : Math.sin(u) / u;
+                const I = 0.95 * sinc * sinc * Math.pow(Math.cos(Math.PI * (x - xc) / i0), 2) * vy;
+                const v = Math.pow(Math.min(1, I + 0.015 * Math.random()), 1 / 2.2); // codage gamma comme un appareil photo
+                const k = (y * W + x) * 4;
+                img.data[k] = Math.round(255 * v);
+                img.data[k + 1] = Math.round(40 * v * v);
+                img.data[k + 2] = Math.round(30 * v * v);
+            }
+        }
+        cx.putImageData(img, 0, 0);
+
+        // Règle : 1 mm = 10 px
+        const rx = 300, ry = 700, mm = 10;
+        cx.fillStyle = '#e7e2cf';
+        cx.fillRect(rx - 30, ry, 1000 + 60, 110);
+        cx.strokeStyle = '#1f2937';
+        cx.fillStyle = '#1f2937';
+        cx.font = '600 22px Inter, sans-serif';
+        cx.textAlign = 'center';
+        for (let k = 0; k <= 100; k++) {
+            const x = rx + k * mm;
+            const len = k % 10 === 0 ? 40 : k % 5 === 0 ? 28 : 18;
+            cx.lineWidth = k % 10 === 0 ? 2.2 : 1.4;
+            cx.beginPath();
+            cx.moveTo(x, ry);
+            cx.lineTo(x, ry + len);
+            cx.stroke();
+            if (k % 10 === 0) cx.fillText(String(k / 10), x, ry + 68);
+        }
+        cx.font = '600 18px Inter, sans-serif';
+        cx.fillText('cm', rx + 1000 + 2, ry + 96);
+        cx.fillStyle = '#94a3b8';
+        cx.font = '600 22px Inter, sans-serif';
+        cx.textAlign = 'left';
+        cx.fillText('Image d\'exemple : franges d\'interférence (fentes d\'Young) photographiées avec une règle', 40, 60);
+        setImage(c, W, H);
+    }
+
+    document.querySelectorAll('.example-btn').forEach(b => b.addEventListener('click', makeExample));
+
+    // Webcam
+    const camVideo = document.getElementById('camVideo');
+    const cameraSelect = document.getElementById('cameraSelect');
+    let camStream = null;
+
+    function stopWebcam() {
+        if (camStream) camStream.getTracks().forEach(t => t.stop());
+        camStream = null;
+        camVideo.srcObject = null;
+        stage.classList.remove('cam-mode');
+        emptyState.style.display = S.img ? 'none' : 'flex';
+        requestRender();
+    }
+
+    async function startWebcam(deviceId) {
+        if (camStream) camStream.getTracks().forEach(t => t.stop());
+        const constraints = { video: { width: { ideal: 3840 }, height: { ideal: 2160 } }, audio: false };
+        if (deviceId) constraints.video.deviceId = { exact: deviceId };
+        try {
+            camStream = await navigator.mediaDevices.getUserMedia(constraints);
+        } catch (err) {
+            alert("Impossible d'accéder à la webcam. Vérifiez les permissions du navigateur.\n\nDétail : " + err.message);
+            stopWebcam();
+            return;
+        }
+        camVideo.srcObject = camStream;
+        stage.classList.add('cam-mode');
+        emptyState.style.display = 'none';
+        const devices = (await navigator.mediaDevices.enumerateDevices()).filter(d => d.kind === 'videoinput');
+        const current = camStream.getVideoTracks()[0].getSettings().deviceId;
+        cameraSelect.innerHTML = '';
+        devices.forEach((d, i) => {
+            const opt = document.createElement('option');
+            opt.value = d.deviceId;
+            opt.textContent = d.label || `Caméra ${i + 1}`;
+            if (d.deviceId === current) opt.selected = true;
+            cameraSelect.appendChild(opt);
+        });
+        requestRender();
+    }
+
+    document.querySelectorAll('.webcam-btn').forEach(b => b.addEventListener('click', () => startWebcam()));
+    cameraSelect.addEventListener('change', () => startWebcam(cameraSelect.value));
+    document.getElementById('camCancelBtn').addEventListener('click', stopWebcam);
+    document.getElementById('captureBtn').addEventListener('click', () => {
+        if (!camVideo.videoWidth) return;
+        setImage(camVideo, camVideo.videoWidth, camVideo.videoHeight);
+        stopWebcam();
+    });
+
+    // Rotation de 90° (sens horaire) : image et tracés
+    document.getElementById('rotateBtn').addEventListener('click', () => {
+        if (!S.img) return;
+        const { W, H } = S;
+        const c = document.createElement('canvas');
+        c.width = H;
+        c.height = W;
+        const cx = c.getContext('2d', { willReadFrequently: true });
+        cx.translate(H, 0);
+        cx.rotate(Math.PI / 2);
+        cx.drawImage(S.img, 0, 0);
+        const rot = p => { const x = p.x; p.x = H - p.y; p.y = x; };
+        allPoints().forEach(rot);
+        S.img = c;
+        S.data = cx.getImageData(0, 0, H, W).data;
+        S.W = H;
+        S.H = W;
+        document.getElementById('imgSize').textContent = `${S.W} × ${S.H}`;
+        S.autoFit = true;
+        sizeStage();
+        fitView();
+        computeProfile();
+        updatePanels();
+    });
+
+    function allPoints() {
+        const pts = [S.calib.a, S.calib.b, S.origin, ...S.points];
+        S.objects.forEach(o => pts.push(...o.pts));
+        if (S.profile) pts.push(S.profile.a, S.profile.b);
+        return pts;
+    }
+
+    // --- 5. Vue : zoom et déplacement ---
+    function stageSize() {
+        const r = stage.getBoundingClientRect();
+        return { w: r.width, h: r.height };
+    }
+
+    function fitView() {
+        if (!S.img) return;
+        const { w, h } = stageSize();
+        const s = Math.min(w / S.W, h / S.H) * 0.96;
+        S.view = { s, tx: (w - S.W * s) / 2, ty: (h - S.H * s) / 2 };
+        S.autoFit = true;
+        requestRender();
+    }
+
+    function zoomAt(factor, sx, sy) {
+        if (!S.img) return;
+        const { w, h } = stageSize();
+        const fit = Math.min(w / S.W, h / S.H);
+        const s = Math.max(fit * 0.25, Math.min(40, S.view.s * factor));
+        const k = s / S.view.s;
+        S.view.tx = sx - (sx - S.view.tx) * k;
+        S.view.ty = sy - (sy - S.view.ty) * k;
+        S.view.s = s;
+        S.autoFit = false;
+        requestRender();
+    }
+
+    function toScreen(p) {
+        return { x: p.x * S.view.s + S.view.tx, y: p.y * S.view.s + S.view.ty };
+    }
+
+    function toImage(sx, sy) {
+        return { x: (sx - S.view.tx) / S.view.s, y: (sy - S.view.ty) / S.view.s };
+    }
+
+    function clampToImage(p) {
+        return { x: Math.max(0, Math.min(S.W, p.x)), y: Math.max(0, Math.min(S.H, p.y)) };
+    }
+
+    document.getElementById('zoomInBtn').addEventListener('click', () => {
+        const { w, h } = stageSize();
+        zoomAt(1.5, w / 2, h / 2);
+    });
+    document.getElementById('zoomOutBtn').addEventListener('click', () => {
+        const { w, h } = stageSize();
+        zoomAt(1 / 1.5, w / 2, h / 2);
+    });
+    document.getElementById('fitBtn').addEventListener('click', fitView);
+
+    // Hauteur de la zone adaptée aux proportions de l'image (évite les bandes vides sur mobile)
+    function sizeStage() {
+        if (!S.img) return;
+        const w = stage.clientWidth;
+        const h = Math.round(Math.max(240, Math.min(window.innerHeight * 0.68, 640, w * S.H / S.W + 4)));
+        if (Math.abs(stage.clientHeight - h) > 1) stage.style.height = `${h}px`;
+    }
+
+    new ResizeObserver(() => {
+        sizeStage();
+        if (S.autoFit) fitView();
+        else requestRender();
+    }).observe(stage);
+
+    // --- 6. Dessin des tracés ---
+    // T : conversion d'un point image vers les coordonnées de dessin ; u : épaisseur unitaire
+    function drawLabel(ctx, text, x, y, color, u) {
+        ctx.save();
+        ctx.font = `600 ${12 * u}px Inter, sans-serif`;
+        const w = ctx.measureText(text).width + 12 * u, h = 20 * u;
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.86)';
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.2 * u;
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(x - w / 2, y - h / 2, w, h, 5 * u);
+        else ctx.rect(x - w / 2, y - h / 2, w, h);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#f8fafc';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, x, y + 0.5 * u);
+        ctx.restore();
+    }
+
+    function drawSegment(ctx, A, B, color, u, dashed) {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.55)';
+        ctx.lineWidth = 4 * u;
+        ctx.beginPath();
+        ctx.moveTo(A.x, A.y);
+        ctx.lineTo(B.x, B.y);
+        ctx.stroke();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2 * u;
+        if (dashed) ctx.setLineDash([6 * u, 4 * u]);
+        ctx.stroke();
+        ctx.restore();
+    }
+
+    // Petits traits perpendiculaires aux extrémités (aspect « règle »)
+    function drawEndTicks(ctx, A, B, color, u) {
+        const L = Math.hypot(B.x - A.x, B.y - A.y) || 1;
+        const nx = -(B.y - A.y) / L * 7 * u, ny = (B.x - A.x) / L * 7 * u;
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2 * u;
+        [A, B].forEach(P => {
+            ctx.beginPath();
+            ctx.moveTo(P.x - nx, P.y - ny);
+            ctx.lineTo(P.x + nx, P.y + ny);
+            ctx.stroke();
+        });
+        ctx.restore();
+    }
+
+    function labelOffset(A, B, u, d = 16) {
+        const L = Math.hypot(B.x - A.x, B.y - A.y) || 1;
+        let nx = -(B.y - A.y) / L, ny = (B.x - A.x) / L;
+        if (ny > 0) { nx = -nx; ny = -ny; } // étiquette au-dessus du segment
+        return { x: (A.x + B.x) / 2 + nx * d * u, y: (A.y + B.y) / 2 + ny * d * u };
+    }
+
+    function drawHandle(ctx, P, color, u, selected, letter) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(P.x, P.y, (selected ? 7 : 5.5) * u, 0, 2 * Math.PI);
+        ctx.fillStyle = selected ? color : 'rgba(255, 255, 255, 0.9)';
+        ctx.fill();
+        ctx.lineWidth = 2 * u;
+        ctx.strokeStyle = selected ? '#ffffff' : color;
+        ctx.stroke();
+        ctx.strokeStyle = selected ? '#ffffff' : color;
+        ctx.lineWidth = 1 * u;
+        ctx.beginPath();
+        ctx.moveTo(P.x - 2.5 * u, P.y);
+        ctx.lineTo(P.x + 2.5 * u, P.y);
+        ctx.moveTo(P.x, P.y - 2.5 * u);
+        ctx.lineTo(P.x, P.y + 2.5 * u);
+        ctx.stroke();
+        if (letter) {
+            ctx.font = `700 ${13 * u}px Inter, sans-serif`;
+            ctx.fillStyle = color;
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.lineWidth = 3 * u;
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'bottom';
+            ctx.strokeText(letter, P.x + 8 * u, P.y - 6 * u);
+            ctx.fillText(letter, P.x + 8 * u, P.y - 6 * u);
+        }
+        ctx.restore();
+    }
+
+    function drawAngle(ctx, O, A, B, color, u, label) {
+        drawSegment(ctx, O, A, color, u);
+        drawSegment(ctx, O, B, color, u);
+        const a1 = Math.atan2(A.y - O.y, A.x - O.x), a2 = Math.atan2(B.y - O.y, B.x - O.x);
+        let d = a2 - a1;
+        while (d > Math.PI) d -= 2 * Math.PI;
+        while (d < -Math.PI) d += 2 * Math.PI;
+        const r = Math.max(14 * u, Math.min(44 * u, 0.4 * Math.min(dist(O, A), dist(O, B))));
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2 * u;
+        ctx.beginPath();
+        ctx.arc(O.x, O.y, r, a1, a1 + d, d < 0);
+        ctx.stroke();
+        ctx.restore();
+        if (label) {
+            const am = a1 + d / 2;
+            drawLabel(ctx, label, O.x + Math.cos(am) * (r + 26 * u), O.y + Math.sin(am) * (r + 26 * u), color, u);
+        }
+    }
+
+    function drawOverlays(ctx, T, u, withHandles) {
+        const sel = S.selected ? S.selected.p : null;
+
+        // Étalon AB
+        const A = T(S.calib.a), B = T(S.calib.b);
+        drawSegment(ctx, A, B, COLORS.ch2, u);
+        drawEndTicks(ctx, A, B, COLORS.ch2, u);
+        const lo = labelOffset(A, B, u, 18);
+        drawLabel(ctx, calibrated() ? `Étalon : ${fmtNum(S.calib.len, 4)} ${S.calib.unit}` : 'Étalon AB (à régler)', lo.x, lo.y, COLORS.ch2, u);
+        if (withHandles) {
+            drawHandle(ctx, A, COLORS.ch2, u, sel === S.calib.a, 'A');
+            drawHandle(ctx, B, COLORS.ch2, u, sel === S.calib.b, 'B');
+        }
+
+        // Distances et angles
+        S.objects.forEach(o => {
+            const P = o.pts.map(T);
+            if (o.type === 'dist') {
+                drawSegment(ctx, P[0], P[1], COLORS.ch1, u);
+                drawEndTicks(ctx, P[0], P[1], COLORS.ch1, u);
+                const l = labelOffset(P[0], P[1], u);
+                drawLabel(ctx, `D${o.n} = ${fmtLen(dist(o.pts[0], o.pts[1]))}`, l.x, l.y, COLORS.ch1, u);
+            } else {
+                drawAngle(ctx, P[0], P[1], P[2], COLORS.angle, u, `α${o.n} = ${fmtNum(angleDeg(o.pts[0], o.pts[1], o.pts[2]), 3)}°`);
+            }
+            if (withHandles) P.forEach((p, i) => drawHandle(ctx, p, o.type === 'dist' ? COLORS.ch1 : COLORS.angle, u, sel === o.pts[i]));
+        });
+
+        // Profil
+        if (S.profile) {
+            const Pa = T(S.profile.a), Pb = T(S.profile.b);
+            const L = dist(S.profile.a, S.profile.b);
+            if (S.band > 1 && L > 0) {
+                const hw = (S.band - 1) / 2;
+                const nx = -(S.profile.b.y - S.profile.a.y) / L * hw, ny = (S.profile.b.x - S.profile.a.x) / L * hw;
+                [-1, 1].forEach(sg => {
+                    const a2 = T({ x: S.profile.a.x + sg * nx, y: S.profile.a.y + sg * ny });
+                    const b2 = T({ x: S.profile.b.x + sg * nx, y: S.profile.b.y + sg * ny });
+                    ctx.save();
+                    ctx.strokeStyle = COLORS.sum;
+                    ctx.globalAlpha = 0.6;
+                    ctx.lineWidth = 1 * u;
+                    ctx.setLineDash([4 * u, 4 * u]);
+                    ctx.beginPath();
+                    ctx.moveTo(a2.x, a2.y);
+                    ctx.lineTo(b2.x, b2.y);
+                    ctx.stroke();
+                    ctx.restore();
+                });
+            }
+            drawSegment(ctx, Pa, Pb, COLORS.sum, u);
+            // Repères des curseurs C₁ et C₂ le long du profil
+            if (L > 0) {
+                [[S.cursors[0], COLORS.ch1, 'C₁'], [S.cursors[1], COLORS.ch2, 'C₂']].forEach(([c, col, name]) => {
+                    const f = c / L;
+                    const C = T({ x: S.profile.a.x + f * (S.profile.b.x - S.profile.a.x), y: S.profile.a.y + f * (S.profile.b.y - S.profile.a.y) });
+                    const nx = -(Pb.y - Pa.y), ny = Pb.x - Pa.x, nl = Math.hypot(nx, ny) || 1;
+                    ctx.save();
+                    ctx.strokeStyle = col;
+                    ctx.lineWidth = 2.5 * u;
+                    ctx.beginPath();
+                    ctx.moveTo(C.x - nx / nl * 12 * u, C.y - ny / nl * 12 * u);
+                    ctx.lineTo(C.x + nx / nl * 12 * u, C.y + ny / nl * 12 * u);
+                    ctx.stroke();
+                    ctx.restore();
+                    drawLabel(ctx, name, C.x - nx / nl * 26 * u, C.y - ny / nl * 26 * u, col, u);
+                });
+            }
+            if (withHandles) {
+                drawHandle(ctx, Pa, COLORS.sum, u, sel === S.profile.a, 'x = 0');
+                drawHandle(ctx, Pb, COLORS.sum, u, sel === S.profile.b);
+            }
+        }
+
+        // Pointage : repère et points
+        if (S.points.length || S.tool === 'points') {
+            const O = T(S.origin);
+            const len = 60 * u;
+            ctx.save();
+            ctx.strokeStyle = COLORS.point;
+            ctx.fillStyle = COLORS.point;
+            ctx.lineWidth = 2 * u;
+            [[len, 0, 'x'], [0, -len, 'y']].forEach(([dx, dy, name]) => {
+                ctx.beginPath();
+                ctx.moveTo(O.x, O.y);
+                ctx.lineTo(O.x + dx, O.y + dy);
+                ctx.stroke();
+                const ang = Math.atan2(dy, dx);
+                ctx.beginPath();
+                ctx.moveTo(O.x + dx, O.y + dy);
+                ctx.lineTo(O.x + dx - 9 * u * Math.cos(ang - 0.4), O.y + dy - 9 * u * Math.sin(ang - 0.4));
+                ctx.lineTo(O.x + dx - 9 * u * Math.cos(ang + 0.4), O.y + dy - 9 * u * Math.sin(ang + 0.4));
+                ctx.closePath();
+                ctx.fill();
+                ctx.font = `700 ${13 * u}px Inter, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(name, O.x + dx * 1.25 + (dx ? 0 : 10 * u), O.y + dy * 1.2 + (dy ? 0 : -10 * u));
+            });
+            ctx.restore();
+            if (withHandles) drawHandle(ctx, O, COLORS.point, u, sel === S.origin, 'O');
+
+            S.points.forEach((p, i) => {
+                const P = T(p);
+                ctx.save();
+                ctx.strokeStyle = 'rgba(0, 0, 0, 0.6)';
+                ctx.lineWidth = 4 * u;
+                const r = 6 * u;
+                const cross = () => {
+                    ctx.beginPath();
+                    ctx.moveTo(P.x - r, P.y - r);
+                    ctx.lineTo(P.x + r, P.y + r);
+                    ctx.moveTo(P.x - r, P.y + r);
+                    ctx.lineTo(P.x + r, P.y - r);
+                    ctx.stroke();
+                };
+                cross();
+                ctx.strokeStyle = sel === p ? '#ffffff' : COLORS.point;
+                ctx.lineWidth = 2 * u;
+                cross();
+                ctx.font = `700 ${11 * u}px Inter, sans-serif`;
+                ctx.fillStyle = COLORS.point;
+                ctx.strokeStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.lineWidth = 3 * u;
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
+                ctx.strokeText(`M${i}`, P.x + 7 * u, P.y + 5 * u);
+                ctx.fillText(`M${i}`, P.x + 7 * u, P.y + 5 * u);
+                ctx.restore();
+            });
+        }
+
+        // Tracé en cours
+        if (S.pending && withHandles) {
+            const pts = S.pending.pts.map(T);
+            const H = S.hover ? T(S.hover) : null;
+            const col = S.pending.type === 'dist' ? COLORS.ch1 : S.pending.type === 'angle' ? COLORS.angle : COLORS.sum;
+            if (S.pending.type === 'angle') {
+                if (pts.length === 1 && H) drawSegment(ctx, pts[0], H, col, u, true);
+                if (pts.length === 2) {
+                    drawSegment(ctx, pts[0], pts[1], col, u);
+                    if (H) drawAngle(ctx, pts[0], pts[1], H, col, u, `${fmtNum(angleDeg(S.pending.pts[0], S.pending.pts[1], S.hover), 3)}°`);
+                }
+            } else if (H) {
+                drawSegment(ctx, pts[0], H, col, u, true);
+                if (S.pending.type === 'dist') {
+                    const l = labelOffset(pts[0], H, u);
+                    drawLabel(ctx, fmtLen(dist(S.pending.pts[0], S.hover)), l.x, l.y, col, u);
+                }
+            }
+            pts.forEach(p => drawHandle(ctx, p, col, u, false));
+        }
+    }
+
+    // --- 7. Rendu de la vue ---
+    let renderQueued = false;
+    function requestRender() {
+        if (renderQueued) return;
+        renderQueued = true;
+        requestAnimationFrame(() => {
+            renderQueued = false;
+            render();
+        });
+    }
+
+    function fitCanvas(cv) {
+        const dpr = window.devicePixelRatio || 1;
+        const r = cv.getBoundingClientRect();
+        const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+        if (cv.width !== w || cv.height !== h) {
+            cv.width = w;
+            cv.height = h;
+        }
+        return { W: r.width, H: r.height, dpr };
+    }
+
+    function render() {
+        readColors();
+        const { W, H, dpr } = fitCanvas(viewCanvas);
+        vctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        vctx.clearRect(0, 0, W, H);
+        if (!S.img || stage.classList.contains('cam-mode')) {
+            drawProfileChart();
+            return;
+        }
+        const { s, tx, ty } = S.view;
+        vctx.save();
+        vctx.imageSmoothingEnabled = s < 2; // pixels nets aux forts grossissements
+        vctx.setTransform(dpr * s, 0, 0, dpr * s, dpr * tx, dpr * ty);
+        vctx.drawImage(S.img, 0, 0);
+        vctx.restore();
+
+        drawOverlays(vctx, toScreen, 1, true);
+        drawLoupe(W, H);
+        document.getElementById('zoomValue').textContent = `${fmtNum(s * 100, 3)} %`;
+        drawProfileChart();
+    }
+
+    // Loupe : agrandissement des pixels autour du pointeur pendant un placement précis
+    function drawLoupe(W, H) {
+        const active = S.overCanvas && S.hover && ((S.drag && S.drag.kind === 'handle') || ['dist', 'angle', 'profile', 'points'].includes(S.tool));
+        if (!active) return;
+        const R = 70;
+        const ls = Math.max(2, Math.min(24, S.view.s * 4));
+        const ptr = toScreen(S.hover);
+        const cx = ptr.x < W / 2 && ptr.y < H / 2 ? W - R - 12 : R + 12;
+        const cy = R + 12;
+        const T = p => ({ x: cx + (p.x - S.hover.x) * ls, y: cy + (p.y - S.hover.y) * ls });
+        vctx.save();
+        vctx.beginPath();
+        vctx.arc(cx, cy, R, 0, 2 * Math.PI);
+        vctx.fillStyle = '#000';
+        vctx.fill();
+        vctx.clip();
+        vctx.imageSmoothingEnabled = false;
+        vctx.drawImage(S.img, S.hover.x - R / ls, S.hover.y - R / ls, 2 * R / ls, 2 * R / ls, cx - R, cy - R, 2 * R, 2 * R);
+        drawOverlays(vctx, T, 1, false);
+        vctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+        vctx.lineWidth = 1;
+        vctx.beginPath();
+        vctx.moveTo(cx - R, cy);
+        vctx.lineTo(cx - 6, cy);
+        vctx.moveTo(cx + 6, cy);
+        vctx.lineTo(cx + R, cy);
+        vctx.moveTo(cx, cy - R);
+        vctx.lineTo(cx, cy - 6);
+        vctx.moveTo(cx, cy + 6);
+        vctx.lineTo(cx, cy + R);
+        vctx.stroke();
+        vctx.restore();
+        vctx.beginPath();
+        vctx.arc(cx, cy, R, 0, 2 * Math.PI);
+        vctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        vctx.lineWidth = 2;
+        vctx.stroke();
+        vctx.font = '600 10px JetBrains Mono, monospace';
+        vctx.fillStyle = '#e2e8f0';
+        vctx.textAlign = 'center';
+        vctx.fillText(`× ${fmtNum(ls, 2)}`, cx, cy + R - 10);
+    }
+
+    // --- 8. Interactions sur l'image ---
+    const TOOL_HELP = {
+        move: 'Glisser : déplacer la vue ou une poignée · Molette : zoom · Flèches : ajuster la poignée sélectionnée au pixel près · Suppr : effacer la mesure sélectionnée',
+        dist: 'Distance : cliquez sur les deux extrémités (ou cliquez-glissez). Échap : annuler.',
+        angle: 'Angle : cliquez sur le sommet, puis sur un point de chaque côté de l\'angle. Échap : annuler.',
+        profile: 'Profil : cliquez sur le début (x = 0) puis sur la fin de la ligne d\'analyse (ou cliquez-glissez), perpendiculairement aux franges.',
+        points: 'Pointage : cliquez sur les positions successives du mobile, dans l\'ordre. Déplacez l\'origine O du repère si besoin.'
+    };
+    const NEEDED = { dist: 2, angle: 3, profile: 2 };
+
+    function setTool(tool) {
+        S.tool = tool;
+        S.pending = null;
+        document.querySelectorAll('#toolSel .seg-btn').forEach(b => b.classList.toggle('active', b.dataset.tool === tool));
+        document.getElementById('toolHelp').textContent = TOOL_HELP[tool];
+        viewCanvas.style.cursor = tool === 'move' ? 'grab' : 'crosshair';
+        requestRender();
+    }
+
+    document.querySelectorAll('#toolSel .seg-btn').forEach(b => b.addEventListener('click', () => setTool(b.dataset.tool)));
+
+    function handles() {
+        const h = [
+            { p: S.calib.a, owner: 'calib' },
+            { p: S.calib.b, owner: 'calib' }
+        ];
+        S.objects.forEach(o => o.pts.forEach(p => h.push({ p, owner: o })));
+        if (S.profile) {
+            h.push({ p: S.profile.a, owner: 'profile' }, { p: S.profile.b, owner: 'profile' });
+        }
+        if (S.points.length || S.tool === 'points') {
+            h.push({ p: S.origin, owner: 'origin' });
+            S.points.forEach(p => h.push({ p, owner: 'point' }));
+        }
+        return h;
+    }
+
+    function hitHandle(sx, sy, touch) {
+        const r = touch ? 18 : 10;
+        const hs = handles();
+        for (let i = hs.length - 1; i >= 0; i--) {
+            const P = toScreen(hs[i].p);
+            if (Math.hypot(P.x - sx, P.y - sy) <= r) return hs[i];
+        }
+        return null;
+    }
+
+    function localPos(e) {
+        const r = viewCanvas.getBoundingClientRect();
+        return { sx: e.clientX - r.left, sy: e.clientY - r.top };
+    }
+
+    function finalizePending() {
+        const { type, pts } = S.pending;
+        S.pending = null;
+        if (type === 'profile') {
+            if (dist(pts[0], pts[1]) < 3) return;
+            S.profile = { a: pts[0], b: pts[1] };
+            const L = dist(pts[0], pts[1]);
+            S.cursors = [L * 0.25, L * 0.75];
+            document.getElementById('profilePanel').style.display = '';
+            computeProfile();
+            if (S.snap) S.cursors = S.cursors.map(snapCursor);
+        } else {
+            if (type === 'dist' && dist(pts[0], pts[1]) < 2) return;
+            S.objects.push({ type, n: ++S.counters[type], pts });
+        }
+        updatePanels();
+    }
+
+    function onGeometryChange(owner) {
+        if (owner === 'calib') S.calib.set = true;
+        if (owner === 'profile') {
+            const L = dist(S.profile.a, S.profile.b);
+            S.cursors = S.cursors.map(c => Math.max(0, Math.min(L, c)));
+            computeProfile();
+        }
+        updatePanels();
+    }
+
+    let pressStart = null;
+    let spaceDown = false;
+
+    viewCanvas.addEventListener('contextmenu', e => e.preventDefault());
+
+    viewCanvas.addEventListener('pointerdown', (e) => {
+        if (!S.img) return;
+        viewCanvas.setPointerCapture(e.pointerId);
+        const { sx, sy } = localPos(e);
+        const m = clampToImage(toImage(sx, sy));
+        S.hover = m;
+        const touch = e.pointerType === 'touch';
+
+        // Déplacement de la vue : outil « Déplacer » hors poignée, bouton du milieu/droit, ou Espace
+        const hit = (e.button === 0 && !spaceDown) ? hitHandle(sx, sy, touch) : null;
+        if (e.button === 1 || e.button === 2 || spaceDown || (S.tool === 'move' && !hit)) {
+            S.drag = { kind: 'pan', sx, sy, tx: S.view.tx, ty: S.view.ty };
+            viewCanvas.style.cursor = 'grabbing';
+            return;
+        }
+        if (hit && !S.pending) {
+            S.selected = hit;
+            const P = hit.p;
+            S.drag = { kind: 'handle', h: hit, dx: P.x - m.x, dy: P.y - m.y };
+            updatePanels();
+            requestRender();
+            return;
+        }
+        if (S.tool === 'points') {
+            const p = { x: m.x, y: m.y };
+            S.points.push(p);
+            S.selected = { p, owner: 'point' };
+            updatePanels();
+            requestRender();
+            return;
+        }
+        if (NEEDED[S.tool]) {
+            if (!S.pending) S.pending = { type: S.tool, pts: [] };
+            S.pending.pts.push({ x: m.x, y: m.y });
+            pressStart = { sx, sy, count: S.pending.pts.length };
+            if (S.pending.pts.length === NEEDED[S.pending.type]) finalizePending();
+            requestRender();
+        }
+    });
+
+    viewCanvas.addEventListener('pointermove', (e) => {
+        if (!S.img) return;
+        const { sx, sy } = localPos(e);
+        const m = toImage(sx, sy);
+        S.overCanvas = true;
+        S.hover = clampToImage(m);
+        if (S.drag && S.drag.kind === 'pan') {
+            S.view.tx = S.drag.tx + sx - S.drag.sx;
+            S.view.ty = S.drag.ty + sy - S.drag.sy;
+            S.autoFit = false;
+        } else if (S.drag && S.drag.kind === 'handle') {
+            const p = clampToImage({ x: m.x + S.drag.dx, y: m.y + S.drag.dy });
+            S.drag.h.p.x = p.x;
+            S.drag.h.p.y = p.y;
+            S.hover = p;
+            onGeometryChange(S.drag.h.owner);
+        }
+        updateStatus();
+        requestRender();
+    });
+
+    viewCanvas.addEventListener('pointerup', (e) => {
+        const { sx, sy } = localPos(e);
+        // Cliquer-glisser : le relâchement fixe le point suivant
+        if (S.pending && pressStart && S.pending.pts.length === pressStart.count && Math.hypot(sx - pressStart.sx, sy - pressStart.sy) > 8) {
+            const m = clampToImage(toImage(sx, sy));
+            S.pending.pts.push(m);
+            if (S.pending.pts.length === NEEDED[S.pending.type]) finalizePending();
+        }
+        pressStart = null;
+        S.drag = null;
+        viewCanvas.style.cursor = S.tool === 'move' ? 'grab' : 'crosshair';
+        requestRender();
+    });
+
+    viewCanvas.addEventListener('pointerleave', () => {
+        S.overCanvas = false;
+        document.getElementById('statusCoords').textContent = '';
+        requestRender();
+    });
+
+    viewCanvas.addEventListener('wheel', (e) => {
+        if (!S.img) return;
+        e.preventDefault();
+        const { sx, sy } = localPos(e);
+        zoomAt(Math.pow(1.0015, -e.deltaY), sx, sy);
+    }, { passive: false });
+
+    function deleteSelected() {
+        const sel = S.selected;
+        if (!sel) return;
+        if (sel.owner === 'point') S.points = S.points.filter(p => p !== sel.p);
+        else if (sel.owner === 'profile') {
+            S.profile = null;
+            S.profileData = null;
+            document.getElementById('profilePanel').style.display = 'none';
+        } else if (typeof sel.owner === 'object') S.objects = S.objects.filter(o => o !== sel.owner);
+        else return; // l'étalon et l'origine ne se suppriment pas
+        S.selected = null;
+        updatePanels();
+        requestRender();
+    }
+
+    window.addEventListener('keydown', (e) => {
+        const tag = document.activeElement.tagName;
+        if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+        if (e.code === 'Space') {
+            spaceDown = true;
+            if (S.img) e.preventDefault();
+            return;
+        }
+        if (e.key === 'Escape') {
+            S.pending = null;
+            S.selected = null;
+            updatePanels();
+            requestRender();
+            return;
+        }
+        if (e.key === 'Delete' || e.key === 'Backspace') {
+            if (S.selected) {
+                e.preventDefault();
+                deleteSelected();
+            }
+            return;
+        }
+        const arrows = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+        if (arrows[e.key] && S.selected) {
+            e.preventDefault();
+            const step = e.shiftKey ? 10 : 1;
+            const p = clampToImage({ x: S.selected.p.x + arrows[e.key][0] * step, y: S.selected.p.y + arrows[e.key][1] * step });
+            S.selected.p.x = p.x;
+            S.selected.p.y = p.y;
+            onGeometryChange(S.selected.owner);
+            requestRender();
+            return;
+        }
+        const shortcuts = { m: 'move', d: 'dist', a: 'angle', p: 'profile', c: 'points' };
+        if (shortcuts[e.key.toLowerCase()] && !e.ctrlKey && !e.metaKey && !e.altKey) setTool(shortcuts[e.key.toLowerCase()]);
+    });
+
+    window.addEventListener('keyup', (e) => {
+        if (e.code === 'Space') spaceDown = false;
+    });
+
+    // Lecture de la valeur d'un pixel (interpolation bilinéaire) pour le canal choisi
+    function channelAt(x, y, ch) {
+        const { W, H, data } = S;
+        x = Math.max(0, Math.min(W - 1, x - 0.5));
+        y = Math.max(0, Math.min(H - 1, y - 0.5));
+        const x0 = Math.floor(x), y0 = Math.floor(y);
+        const x1 = Math.min(W - 1, x0 + 1), y1 = Math.min(H - 1, y0 + 1);
+        const fx = x - x0, fy = y - y0;
+        const v = (xi, yi) => {
+            const k = (yi * W + xi) * 4;
+            switch (ch) {
+                case 'r': return data[k];
+                case 'g': return data[k + 1];
+                case 'b': return data[k + 2];
+                default: return 0.2126 * data[k] + 0.7152 * data[k + 1] + 0.0722 * data[k + 2];
+            }
+        };
+        return (v(x0, y0) * (1 - fx) + v(x1, y0) * fx) * (1 - fy) + (v(x0, y1) * (1 - fx) + v(x1, y1) * fx) * fy;
+    }
+
+    function rawPixel(x, y) {
+        const xi = Math.max(0, Math.min(S.W - 1, Math.floor(x))), yi = Math.max(0, Math.min(S.H - 1, Math.floor(y)));
+        const k = (yi * S.W + xi) * 4;
+        return [S.data[k], S.data[k + 1], S.data[k + 2]];
+    }
+
+    function updateStatus() {
+        if (!S.hover || !S.img) return;
+        const { x, y } = S.hover;
+        const [r, g, b] = rawPixel(x, y);
+        let txt = `x = ${Math.floor(x)} px ; y = ${Math.floor(y)} px · RVB (${r}, ${g}, ${b})`;
+        if (calibrated() && (S.points.length || S.tool === 'points')) {
+            const d = tableDecimals();
+            txt += ` · repère O : (${toUnits(x - S.origin.x).toFixed(d).replace('.', ',')} ; ${toUnits(S.origin.y - y).toFixed(d).replace('.', ',')}) ${S.calib.unit}`;
+        }
+        document.getElementById('statusCoords').textContent = txt;
+    }
+
+    // --- 9. Profil de luminosité ---
+    function sampleProfile(ch) {
+        const { a, b } = S.profile;
+        const L = dist(a, b);
+        const n = Math.max(2, Math.round(L) + 1);
+        const step = L / (n - 1);
+        const ux = (b.x - a.x) / (L || 1), uy = (b.y - a.y) / (L || 1);
+        const nx = -uy, ny = ux;
+        const hw = (S.band - 1) / 2;
+        const values = new Float64Array(n);
+        let sat = 0;
+        for (let i = 0; i < n; i++) {
+            const px = a.x + ux * step * i, py = a.y + uy * step * i;
+            let sum = 0;
+            for (let j = -hw; j <= hw; j++) {
+                const v = channelAt(px + nx * j, py + ny * j, ch);
+                if (v >= 254) sat++;
+                sum += v;
+            }
+            values[i] = sum / S.band;
+        }
+        let min = Infinity, max = -Infinity;
+        for (const v of values) { if (v < min) min = v; if (v > max) max = v; }
+        return { values, step, saturated: sat / (n * S.band), range: max - min, channel: ch };
+    }
+
+    // En mode « Auto », on retient le canal le plus contrasté parmi ceux qui ne saturent pas
+    // (une figure produite par un laser rouge n'a presque rien dans les canaux vert et bleu).
+    function computeProfile() {
+        if (!S.profile || !S.img) return;
+        if (S.channel !== 'auto') {
+            S.profileData = sampleProfile(S.channel);
+        } else {
+            const all = ['lum', 'r', 'g', 'b'].map(sampleProfile);
+            const ok = all.filter(d => d.saturated <= 0.01);
+            S.profileData = ok.length
+                ? ok.reduce((best, d) => d.range > best.range ? d : best)
+                : all.reduce((best, d) => d.saturated < best.saturated ? d : best);
+        }
+        const names = { lum: 'luminance', r: 'rouge', g: 'vert', b: 'bleu' };
+        document.querySelector('#channelSelect option[value="auto"]').textContent =
+            S.channel === 'auto' ? `Auto (${names[S.profileData.channel]})` : 'Auto';
+    }
+
+    // Aimantation : extremum local (maximum ou minimum) le plus proche de la position
+    function snapCursor(c) {
+        const pd = S.profileData;
+        if (!pd) return c;
+        const v = pd.values, n = v.length;
+        // Profil lissé (moyenne glissante sur 5 points) pour ne pas s'arrêter sur le bruit
+        const sm = new Float64Array(n);
+        for (let i = 0; i < n; i++) {
+            let s = 0, m = 0;
+            for (let j = i - 2; j <= i + 2; j++) if (j >= 0 && j < n) { s += v[j]; m++; }
+            sm[i] = s / m;
+        }
+        // Remontée (sign = 1) ou descente (sign = −1) de la pente jusqu'à l'extremum
+        const climb = (i, sign) => {
+            for (;;) {
+                let best = i;
+                for (let j = Math.max(0, i - 3); j <= Math.min(n - 1, i + 3); j++) {
+                    if (sign * sm[j] > sign * sm[best]) best = j;
+                }
+                if (best === i) return i;
+                i = best;
+            }
+        };
+        const k = Math.max(0, Math.min(n - 1, Math.round(c / pd.step)));
+        const iMax = climb(k, 1), iMin = climb(k, -1);
+        const best = Math.abs(iMax - k) <= Math.abs(iMin - k) ? iMax : iMin;
+        // Affinage par interpolation parabolique
+        let delta = 0;
+        if (best > 0 && best < n - 1) {
+            const den = sm[best - 1] - 2 * sm[best] + sm[best + 1];
+            if (den !== 0) delta = Math.max(-0.5, Math.min(0.5, 0.5 * (sm[best - 1] - sm[best + 1]) / den));
+        }
+        return (best + delta) * pd.step;
+    }
+
+    const profileCanvas = document.getElementById('profileCanvas');
+    const pctx = profileCanvas.getContext('2d');
+    const CH = { left: 46, right: 14, top: 14, bottom: 30 };
+    let chartHover = null;
+    let chartDrag = null;
+
+    function niceStep(range, target) {
+        const raw = range / target;
+        const p = Math.pow(10, Math.floor(Math.log10(raw)));
+        const m = raw / p;
+        return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p;
+    }
+
+    function drawProfileChart() {
+        if (!S.profile || !S.profileData || document.getElementById('profilePanel').style.display === 'none') return;
+        const { W, H, dpr } = fitCanvas(profileCanvas);
+        pctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        pctx.clearRect(0, 0, W, H);
+        const pw = W - CH.left - CH.right, ph = H - CH.top - CH.bottom;
+        const pd = S.profileData;
+        const Lpx = (pd.values.length - 1) * pd.step;
+        const Lu = toUnits(Lpx);
+        const xOf = px => CH.left + (Lpx > 0 ? px / Lpx : 0) * pw;
+        const yOf = v => CH.top + ph * (1 - v / 255);
+
+        pctx.font = '10px JetBrains Mono, monospace';
+        pctx.lineWidth = 1;
+        // Graduations en x (unités étalonnées)
+        const st = niceStep(Lu || 1, Math.max(3, Math.min(10, pw / 80)));
+        pctx.textAlign = 'center';
+        pctx.textBaseline = 'top';
+        for (let xu = 0; xu <= Lu + 1e-9; xu += st) {
+            const x = CH.left + (xu / Lu) * pw;
+            pctx.strokeStyle = 'rgba(148, 163, 184, 0.14)';
+            pctx.beginPath();
+            pctx.moveTo(x, CH.top);
+            pctx.lineTo(x, CH.top + ph);
+            pctx.stroke();
+            pctx.fillStyle = '#94a3b8';
+            pctx.fillText(fmtNum(xu, 4), x, CH.top + ph + 6);
+        }
+        pctx.textAlign = 'right';
+        pctx.fillText(`x (${unitLabel()})`, CH.left + pw, CH.top + ph + 18);
+        pctx.textBaseline = 'middle';
+        [0, 64, 128, 192, 255].forEach(v => {
+            const y = yOf(v);
+            pctx.strokeStyle = 'rgba(148, 163, 184, 0.14)';
+            pctx.beginPath();
+            pctx.moveTo(CH.left, y);
+            pctx.lineTo(CH.left + pw, y);
+            pctx.stroke();
+            pctx.fillStyle = '#94a3b8';
+            pctx.fillText(String(v), CH.left - 6, y);
+        });
+        pctx.save();
+        pctx.translate(11, CH.top + ph / 2);
+        pctx.rotate(-Math.PI / 2);
+        pctx.textAlign = 'center';
+        pctx.fillText('I (valeur du pixel)', 0, 0);
+        pctx.restore();
+
+        // Niveau de saturation
+        pctx.strokeStyle = 'rgba(239, 68, 68, 0.6)';
+        pctx.setLineDash([5, 4]);
+        pctx.beginPath();
+        pctx.moveTo(CH.left, yOf(255));
+        pctx.lineTo(CH.left + pw, yOf(255));
+        pctx.stroke();
+        pctx.setLineDash([]);
+
+        // Courbe
+        const v = pd.values;
+        pctx.beginPath();
+        for (let i = 0; i < v.length; i++) {
+            const x = xOf(i * pd.step), y = yOf(v[i]);
+            if (i === 0) pctx.moveTo(x, y);
+            else pctx.lineTo(x, y);
+        }
+        pctx.strokeStyle = COLORS.sum;
+        pctx.lineWidth = 1.6;
+        pctx.stroke();
+        pctx.lineTo(xOf(Lpx), CH.top + ph);
+        pctx.lineTo(xOf(0), CH.top + ph);
+        pctx.closePath();
+        pctx.fillStyle = 'rgba(16, 185, 129, 0.12)';
+        pctx.fill();
+
+        // Curseurs
+        [[0, COLORS.ch1, 'C₁'], [1, COLORS.ch2, 'C₂']].forEach(([k, col, name]) => {
+            const x = xOf(S.cursors[k]);
+            pctx.strokeStyle = col;
+            pctx.lineWidth = 2;
+            pctx.beginPath();
+            pctx.moveTo(x, CH.top);
+            pctx.lineTo(x, CH.top + ph);
+            pctx.stroke();
+            pctx.fillStyle = col;
+            pctx.font = '700 11px Inter, sans-serif';
+            pctx.textAlign = 'center';
+            pctx.textBaseline = 'top';
+            pctx.fillText(name, x, CH.top + 2);
+        });
+        // Double flèche Δx
+        const xa = xOf(Math.min(...S.cursors)), xb = xOf(Math.max(...S.cursors));
+        if (xb - xa > 16) {
+            const y = CH.top + 24;
+            pctx.strokeStyle = '#e2e8f0';
+            pctx.fillStyle = '#e2e8f0';
+            pctx.lineWidth = 1.2;
+            pctx.beginPath();
+            pctx.moveTo(xa + 2, y);
+            pctx.lineTo(xb - 2, y);
+            pctx.stroke();
+            [[xa + 2, 1], [xb - 2, -1]].forEach(([x, d]) => {
+                pctx.beginPath();
+                pctx.moveTo(x, y);
+                pctx.lineTo(x + 7 * d, y - 4);
+                pctx.lineTo(x + 7 * d, y + 4);
+                pctx.closePath();
+                pctx.fill();
+            });
+            pctx.font = '600 11px JetBrains Mono, monospace';
+            pctx.textAlign = 'center';
+            pctx.textBaseline = 'bottom';
+            pctx.fillText(`Δx = ${fmtLen(Math.abs(S.cursors[1] - S.cursors[0]))}`, (xa + xb) / 2, y - 4);
+        }
+
+        // Lecture au survol
+        if (chartHover !== null && !chartDrag) {
+            const c = Math.max(0, Math.min(Lpx, (chartHover - CH.left) / pw * Lpx));
+            const i = Math.round(c / pd.step);
+            const x = xOf(c);
+            pctx.strokeStyle = 'rgba(226, 232, 240, 0.45)';
+            pctx.lineWidth = 1;
+            pctx.beginPath();
+            pctx.moveTo(x, CH.top);
+            pctx.lineTo(x, CH.top + ph);
+            pctx.stroke();
+            const text = `x = ${fmtLen(c)} · I = ${fmtNum(v[i], 3)}`;
+            pctx.font = '600 11px JetBrains Mono, monospace';
+            const tw = pctx.measureText(text).width + 14;
+            let tx = x + 10;
+            if (tx + tw > CH.left + pw) tx = x - 10 - tw;
+            pctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+            pctx.fillRect(tx, CH.top + ph - 30, tw, 22);
+            pctx.fillStyle = '#e2e8f0';
+            pctx.textAlign = 'left';
+            pctx.textBaseline = 'middle';
+            pctx.fillText(text, tx + 7, CH.top + ph - 19);
+        }
+    }
+
+    function chartToProfile(sx) {
+        const r = profileCanvas.getBoundingClientRect();
+        const pw = r.width - CH.left - CH.right;
+        const pd = S.profileData;
+        const Lpx = (pd.values.length - 1) * pd.step;
+        return Math.max(0, Math.min(Lpx, (sx - CH.left) / pw * Lpx));
+    }
+
+    profileCanvas.addEventListener('pointerdown', (e) => {
+        if (!S.profileData) return;
+        profileCanvas.setPointerCapture(e.pointerId);
+        const sx = e.clientX - profileCanvas.getBoundingClientRect().left;
+        const c = chartToProfile(sx);
+        const k = Math.abs(c - S.cursors[0]) <= Math.abs(c - S.cursors[1]) ? 0 : 1;
+        chartDrag = { k };
+        S.cursors[k] = c;
+        updatePanels();
+        requestRender();
+    });
+
+    profileCanvas.addEventListener('pointermove', (e) => {
+        if (!S.profileData) return;
+        const sx = e.clientX - profileCanvas.getBoundingClientRect().left;
+        chartHover = sx;
+        if (chartDrag) {
+            S.cursors[chartDrag.k] = chartToProfile(sx);
+            updatePanels();
+        }
+        requestRender();
+    });
+
+    profileCanvas.addEventListener('pointerup', () => {
+        if (chartDrag && S.snap) S.cursors[chartDrag.k] = snapCursor(S.cursors[chartDrag.k]);
+        chartDrag = null;
+        updatePanels();
+        requestRender();
+    });
+
+    profileCanvas.addEventListener('pointerleave', () => {
+        chartHover = null;
+        requestRender();
+    });
+
+    document.getElementById('channelSelect').addEventListener('change', (e) => {
+        S.channel = e.target.value;
+        computeProfile();
+        updatePanels();
+        requestRender();
+    });
+
+    document.getElementById('bandSelect').addEventListener('change', (e) => {
+        S.band = parseInt(e.target.value, 10);
+        computeProfile();
+        updatePanels();
+        requestRender();
+    });
+
+    const snapBtn = document.getElementById('snapBtn');
+    snapBtn.addEventListener('click', () => {
+        S.snap = !S.snap;
+        snapBtn.classList.toggle('active', S.snap);
+        if (S.snap && S.profileData) {
+            S.cursors = S.cursors.map(snapCursor);
+            updatePanels();
+            requestRender();
+        }
+    });
+
+    document.getElementById('nInput').addEventListener('input', updatePanels);
+
+    // --- 10. Panneaux et exports ---
+    function updatePanels() {
+        // Étalonnage
+        const ab = dist(S.calib.a, S.calib.b);
+        document.getElementById('calibPx').textContent = S.img ? `${fmtNum(ab, 4)} px` : '—';
+        const stateEl = document.getElementById('calibState');
+        stateEl.textContent = calibrated() ? 'Réglé' : 'À faire';
+        stateEl.classList.toggle('ok', calibrated());
+        document.getElementById('calibRes').textContent = S.img && calibrated() ? `1 px ≈ ${fmtNum(1 / pxPerUnit(), 2)} ${S.calib.unit}` : '—';
+
+        // Liste des mesures
+        const list = document.getElementById('measureList');
+        list.innerHTML = '';
+        S.objects.forEach(o => {
+            const li = document.createElement('li');
+            if (S.selected && S.selected.owner === o) li.classList.add('selected');
+            const isDist = o.type === 'dist';
+            const value = isDist ? fmtLen(dist(o.pts[0], o.pts[1])) : `${fmtNum(angleDeg(o.pts[0], o.pts[1], o.pts[2]), 3)}°`;
+            const sub = isDist && calibrated() ? `${fmtNum(dist(o.pts[0], o.pts[1]), 4)} px` : '';
+            li.innerHTML = `<span class="dot" style="background:${isDist ? 'var(--ch1)' : 'var(--angle)'}"></span>
+                <span class="m-name">${isDist ? 'D' : 'α'}${o.n}</span>
+                <span class="m-value">${value}</span>
+                <span class="m-sub">${sub}</span>
+                <button class="del-btn" title="Supprimer">✕</button>`;
+            li.addEventListener('click', () => {
+                S.selected = { p: o.pts[0], owner: o };
+                updatePanels();
+                requestRender();
+            });
+            li.querySelector('.del-btn').addEventListener('click', (ev) => {
+                ev.stopPropagation();
+                S.objects = S.objects.filter(x => x !== o);
+                if (S.selected && S.selected.owner === o) S.selected = null;
+                updatePanels();
+                requestRender();
+            });
+            list.appendChild(li);
+        });
+        document.getElementById('measureEmpty').style.display = S.objects.length ? 'none' : 'block';
+
+        // Tableau de pointage
+        const u = unitLabel(), d = tableDecimals();
+        document.getElementById('thX').textContent = `x (${u})`;
+        document.getElementById('thY').textContent = `y (${u})`;
+        const body = document.getElementById('pointsBody');
+        body.innerHTML = pointsData().map(r =>
+            `<tr><td>M${r.i}</td><td>${r.t.toFixed(3).replace('.', ',')}</td><td>${r.x.toFixed(d).replace('.', ',')}</td><td>${r.y.toFixed(d).replace('.', ',')}</td></tr>`
+        ).join('') || '<tr><td colspan="4" style="text-align:center; color: var(--text-muted); font-family: Inter, sans-serif;">Aucun point</td></tr>';
+
+        // Profil
+        if (S.profileData) {
+            const dx = Math.abs(S.cursors[1] - S.cursors[0]);
+            const n = Math.max(1, parseInt(document.getElementById('nInput').value, 10) || 1);
+            document.getElementById('c1Value').textContent = fmtLen(S.cursors[0]);
+            document.getElementById('c2Value').textContent = fmtLen(S.cursors[1]);
+            document.getElementById('dxValue').textContent = fmtLen(dx);
+            document.getElementById('iValue').textContent = fmtLen(dx / n);
+            document.getElementById('satWarn').classList.toggle('visible', S.profileData.saturated > 0.01);
+        }
+        requestRender();
+    }
+
+    function pointsData() {
+        return S.points.map((p, i) => ({
+            i,
+            t: i * S.dt,
+            x: toUnits(p.x - S.origin.x),
+            y: toUnits(S.origin.y - p.y)
+        }));
+    }
+
+    function download(content, name, type) {
+        const blob = content instanceof Blob ? content : new Blob([content], { type });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = name;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
+
+    function flash(id, text) {
+        const el = document.getElementById(id);
+        el.textContent = text;
+        setTimeout(() => { el.textContent = ''; }, 2500);
+    }
+
+    function copyText(text, feedbackId) {
+        navigator.clipboard.writeText(text).then(() => flash(feedbackId, '✓ Copié !'), () => flash(feedbackId, 'Copie impossible'));
+    }
+
+    document.getElementById('pointsCopyBtn').addEventListener('click', () => {
+        const data = pointsData();
+        if (!data.length) return;
+        const d = tableDecimals() + 1;
+        copyText(`# Unité des positions : ${unitLabel()}\nt = [${data.map(r => r.t.toFixed(4)).join(', ')}]\nx = [${data.map(r => r.x.toFixed(d)).join(', ')}]\ny = [${data.map(r => r.y.toFixed(d)).join(', ')}]`, 'pointsFeedback');
+    });
+
+    document.getElementById('pointsCsvBtn').addEventListener('click', () => {
+        const data = pointsData();
+        if (!data.length) return;
+        const u = unitLabel(), d = tableDecimals() + 1;
+        let csv = `point;t_s;x_${u};y_${u}\n`;
+        data.forEach(r => { csv += `M${r.i};${r.t.toFixed(4)};${r.x.toFixed(d)};${r.y.toFixed(d)}\n`; });
+        download(csv, `pointage_image_${Date.now()}.csv`, 'text/csv;charset=utf-8;');
+    });
+
+    document.getElementById('pointsClearBtn').addEventListener('click', () => {
+        S.points = [];
+        if (S.selected && S.selected.owner === 'point') S.selected = null;
+        updatePanels();
+    });
+
+    document.getElementById('clearMeasuresBtn').addEventListener('click', () => {
+        S.objects = [];
+        S.counters = { dist: 0, angle: 0 };
+        if (S.selected && typeof S.selected.owner === 'object') S.selected = null;
+        updatePanels();
+    });
+
+    function profileRows() {
+        const pd = S.profileData;
+        return Array.from(pd.values, (v, i) => ({ x: toUnits(i * pd.step), I: v }));
+    }
+
+    document.getElementById('profileCopyBtn').addEventListener('click', () => {
+        if (!S.profileData) return;
+        const rows = profileRows(), d = tableDecimals() + 1;
+        copyText(`# Profil de luminosité (x en ${unitLabel()}, I = valeur du pixel entre 0 et 255)\nx = [${rows.map(r => r.x.toFixed(d)).join(', ')}]\nI = [${rows.map(r => r.I.toFixed(1)).join(', ')}]`, 'profileFeedback');
+    });
+
+    document.getElementById('profileCsvBtn').addEventListener('click', () => {
+        if (!S.profileData) return;
+        const u = unitLabel(), d = tableDecimals() + 1;
+        let csv = `x_${u};I\n`;
+        profileRows().forEach(r => { csv += `${r.x.toFixed(d)};${r.I.toFixed(1)}\n`; });
+        download(csv, `profil_${Date.now()}.csv`, 'text/csv;charset=utf-8;');
+    });
+
+    // Image annotée à la résolution d'origine
+    document.getElementById('exportPngBtn').addEventListener('click', () => {
+        if (!S.img) return;
+        const c = document.createElement('canvas');
+        c.width = S.W;
+        c.height = S.H;
+        const cx = c.getContext('2d');
+        cx.drawImage(S.img, 0, 0);
+        readColors();
+        const sel = S.selected, pending = S.pending;
+        S.selected = null;
+        S.pending = null;
+        drawOverlays(cx, p => p, Math.max(1, Math.max(S.W, S.H) / 1000), true);
+        S.selected = sel;
+        S.pending = pending;
+        c.toBlob(blob => download(blob, `mesure_image_${Date.now()}.png`), 'image/png');
+    });
+
+    // Étalonnage et pas de temps
+    const calibLen = document.getElementById('calibLen');
+    const calibUnit = document.getElementById('calibUnit');
+    calibLen.addEventListener('input', () => {
+        const v = parseFloat(calibLen.value.replace(',', '.'));
+        if (v > 0) {
+            S.calib.len = v;
+            S.calib.set = true;
+            updatePanels();
+        }
+    });
+    calibUnit.addEventListener('change', () => {
+        S.calib.unit = calibUnit.value;
+        S.calib.set = true;
+        updatePanels();
+    });
+    document.getElementById('dtInput').addEventListener('input', (e) => {
+        const v = parseFloat(e.target.value.replace(',', '.'));
+        if (v >= 0) {
+            S.dt = v;
+            updatePanels();
+        }
+    });
+
+    setTool('move');
+    updatePanels();
+</script>
+
+</body>
+</html>
