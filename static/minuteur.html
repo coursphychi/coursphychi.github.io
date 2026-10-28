@@ -81,7 +81,7 @@
       opacity: 0.8;
     }
     input[type="number"] {
-      width: 70px;
+      width: 62px;
       font-size: 22px;
       font-weight: 800;
       font-family: 'JetBrains Mono', monospace;
@@ -195,7 +195,7 @@
       height: auto;
       touch-action: none;
       cursor: grab;
-      filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.30));
+      filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35));
     }
     #dial.locked {
       cursor: default;
@@ -225,6 +225,10 @@
       margin: 10px 0;
       text-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
       font-variant-numeric: tabular-nums;
+    }
+    .timer.long {
+      font-size: clamp(46px, 7.5vw, 96px);
+      letter-spacing: -2px;
     }
     .timer.urgent {
       animation: pulse 1s ease-in-out infinite;
@@ -475,7 +479,9 @@
     <div class="top">
       <div class="input-group" title="Durée du compte à rebours">
         <i class="fa-solid fa-hourglass-half"></i>
-        <input id="minutes" type="number" min="0" max="599" step="1" value="5" aria-label="Minutes" />
+        <input id="hours" type="number" min="0" max="99" step="1" value="0" aria-label="Heures" />
+        <span class="unit">h</span>
+        <input id="minutes" type="number" min="0" max="59" step="1" value="5" aria-label="Minutes" />
         <span class="unit">min</span>
         <input id="seconds" type="number" min="0" max="59" step="1" value="0" aria-label="Secondes" />
         <span class="unit">s</span>
@@ -493,6 +499,9 @@
       <button class="chip" data-s="300">5 min</button>
       <button class="chip" data-s="600">10 min</button>
       <button class="chip" data-s="900">15 min</button>
+      <button class="chip" data-s="1800">30 min</button>
+      <button class="chip" data-s="3600">1 h</button>
+      <button class="chip" data-s="7200">2 h</button>
     </div>
 
     <div class="main">
@@ -503,7 +512,8 @@
           <span class="scale-label">Un tour =</span>
           <button class="chip" data-scale="120">2 min</button>
           <button class="chip" data-scale="600">10 min</button>
-          <button class="chip active" data-scale="3600">60 min</button>
+          <button class="chip active" data-scale="3600">1 h</button>
+          <button class="chip" data-scale="43200">12 h</button>
         </div>
       </div>
       <div class="readout">
@@ -511,6 +521,7 @@
         <div class="sub">
           <span class="badge" id="status"><i class="fa-solid fa-circle-check"></i> Prêt</span>
           <span class="badge" id="remaining"><i class="fa-solid fa-stopwatch"></i> Restant : 300,0 s</span>
+          <span class="badge" id="endAt" hidden></span>
         </div>
         <div class="sub">
           <button class="rt-toggle" id="rtToggle"><i class="fa-solid fa-bolt"></i> Tester son temps de réaction</button>
@@ -656,14 +667,18 @@
     let remainingMs = totalMs;
     let running = false;
     let rafId = null;
-    let lastTick = null;
     let scaleS = 3600;                 // durée correspondant à un tour de roue (s)
-    const SNAP = { 120: 1, 600: 5, 3600: 15 }; // pas de réglage de la roue (s)
+    const SCALES = [120, 600, 3600, 43200];          // un tour de roue : 2 min, 10 min, 1 h, 12 h
+    const SNAP = { 120: 1, 600: 5, 3600: 15, 43200: 300 }; // pas de réglage de la roue (s)
+    const MAX_S = 99 * 3600 + 59 * 60 + 59;
+    let endAt = null;                                   // instant de fin (performance.now), pendant le décompte
+    let endTimer = null;                                // minuteur de secours si l'onglet passe en arrière-plan
 
     let muted = false;
     let audioCtx = null;
     let alarmInterval = null;
 
+    const hoursEl = $('hours');
     const minutesEl = $('minutes');
     const secondsEl = $('seconds');
     const startBtn = $('start');
@@ -688,20 +703,39 @@
       return !running && remainingMs === totalMs;
     }
 
+    function fmtLong(sec) {
+      sec = Math.ceil(sec);
+      const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60);
+      return h ? `${h} h ${String(m).padStart(2, '0')} min` : `${m} min`;
+    }
+
     function updateUI() {
-      displayEl.textContent = fmtClock(remainingMs / 1000);
+      const clock = fmtClock(remainingMs / 1000);
+      displayEl.textContent = clock;
+      displayEl.classList.toggle('long', clock.length > 5);
       displayEl.classList.toggle('urgent', running && remainingMs < 10000);
-      remainingEl.innerHTML = `<i class="fa-solid fa-stopwatch"></i> Restant : ${(remainingMs / 1000).toFixed(1).replace('.', ',')} s`;
+      remainingEl.innerHTML = remainingMs >= 3600000
+        ? `<i class="fa-solid fa-stopwatch"></i> Restant : ${fmtLong(remainingMs / 1000)}`
+        : `<i class="fa-solid fa-stopwatch"></i> Restant : ${(remainingMs / 1000).toFixed(1).replace('.', ',')} s`;
+      // Heure de fin prévue et temps restant dans le titre de l'onglet (utile pour les longues durées)
+      const endEl = $('endAt');
+      endEl.hidden = !running;
+      if (running) {
+        const end = new Date(Date.now() + remainingMs);
+        endEl.innerHTML = `<i class="fa-solid fa-flag-checkered"></i> Fin à ${end.getHours()} h ${String(end.getMinutes()).padStart(2, '0')}`;
+      }
+      const title = running ? `${clock} · Minuteur` : 'Minuteur Ultimatum';
+      if (document.title !== title) document.title = title;
 
       setBackgroundFromFraction(totalMs > 0 ? remainingMs / totalMs : 0);
 
       startBtn.disabled = running;
       pauseBtn.disabled = !running;
       resetBtn.disabled = isPristine();
-      minutesEl.disabled = secondsEl.disabled = !isPristine();
+      hoursEl.disabled = minutesEl.disabled = secondsEl.disabled = !isPristine();
       document.querySelectorAll('#presets .chip').forEach((b) => { b.disabled = !isPristine(); });
       dial.classList.toggle('locked', !isPristine());
-      renderDial();
+      updateDial();
     }
 
     function setStatus(txt, icon = 'fa-circle-info') {
@@ -710,14 +744,15 @@
 
     // Choix de la durée (en secondes) depuis les champs, la roue ou les préréglages
     function setDuration(seconds, fromInputs) {
-      seconds = clamp(Math.round(seconds), 0, 599 * 60 + 59);
+      seconds = clamp(Math.round(seconds), 0, MAX_S);
       totalMs = remainingMs = seconds * 1000;
       if (!fromInputs) {
-        minutesEl.value = Math.floor(seconds / 60);
+        hoursEl.value = Math.floor(seconds / 3600);
+        minutesEl.value = Math.floor((seconds % 3600) / 60);
         secondsEl.value = seconds % 60;
       }
       // Échelle de la roue : la plus petite qui contient la durée
-      if (fromInputs || seconds > scaleS) setScale([120, 600, 3600].find((sc) => seconds <= sc) || 3600);
+      if (fromInputs || seconds > scaleS) setScale(SCALES.find((sc) => seconds <= sc) || 43200);
       stopAlarm();
       stopBlink();
       setStatus('Prêt', 'fa-circle-check');
@@ -725,12 +760,20 @@
     }
 
     function readInputs() {
-      const m = parseInt(minutesEl.value, 10), s = parseInt(secondsEl.value, 10);
-      return (Number.isFinite(m) ? Math.max(0, m) : 0) * 60 + (Number.isFinite(s) ? clamp(s, 0, 59) : 0);
+      const v = (el, max) => {
+        const x = parseInt(el.value, 10);
+        return Number.isFinite(x) ? clamp(x, 0, max) : 0;
+      };
+      return v(hoursEl, 99) * 3600 + v(minutesEl, 59) * 60 + v(secondsEl, 59);
     }
 
     // --- 3. Roue de réglage (façon minuteur mécanique) ---
-    const CX = 150, CY = 150, R_FACE = 138, R_SECTOR = 104;
+    // La partie fixe (lunette, graduations, chiffres) est construite une fois par échelle ;
+    // seuls le disque, l'anneau, l'aiguille et l'éclairage des graduations suivent le temps.
+    const CX = 150, CY = 150;
+    const R_RING = 140, R_TICK = 131, R_LABEL = 108, R_WELL = 88, R_SECTOR = 84;
+    let dialParts = null;
+    let litTicks = -1;
 
     function polar(r, angDeg) {
       const a = (angDeg - 90) * Math.PI / 180;
@@ -738,48 +781,123 @@
     }
 
     function scaleLabel(sec) {
-      if (scaleS === 120) return String(sec);              // secondes
-      return String(Math.round(sec / 60));                  // minutes
+      if (scaleS === 120) return String(sec);                       // secondes
+      if (scaleS === 43200) return String(Math.round(sec / 3600));  // heures
+      return String(Math.round(sec / 60));                          // minutes
     }
 
-    function renderDial() {
+    function buildDial() {
+      const every = scaleS === 600 ? 6 : 5;
+      let svg = `
+        <defs>
+          <radialGradient id="dFace" cx="50%" cy="30%" r="75%">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.24"/>
+            <stop offset="1" stop-color="#ffffff" stop-opacity="0.05"/>
+          </radialGradient>
+          <linearGradient id="dBezel" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.75"/>
+            <stop offset="1" stop-color="#ffffff" stop-opacity="0.08"/>
+          </linearGradient>
+          <linearGradient id="dColor" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" style="stop-color: var(--c1)"/>
+            <stop offset="1" style="stop-color: var(--c2)"/>
+          </linearGradient>
+          <radialGradient id="dWell" cx="50%" cy="45%" r="60%">
+            <stop offset="0.7" stop-color="#000000" stop-opacity="0.18"/>
+            <stop offset="1" stop-color="#000000" stop-opacity="0.38"/>
+          </radialGradient>
+          <radialGradient id="dHub" cx="38%" cy="32%" r="75%">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset="1" stop-color="#cbd5e1"/>
+          </radialGradient>
+          <filter id="dShadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="2" stdDeviation="2.2" flood-color="#000" flood-opacity="0.35"/>
+          </filter>
+          <filter id="dGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <circle cx="${CX}" cy="${CY}" r="148" fill="none" stroke="url(#dBezel)" stroke-width="2.5"/>
+        <circle cx="${CX}" cy="${CY}" r="146" fill="url(#dFace)"/>
+        <circle cx="${CX}" cy="${CY}" r="${R_RING}" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="5"/>
+        <path id="dArc" fill="none" stroke="url(#dColor)" stroke-width="5" stroke-linecap="round" filter="url(#dGlow)"/>`;
+      for (let k = 0; k < 60; k++) {
+        const major = k % every === 0;
+        const [xa, ya] = polar(R_TICK, k * 6), [xb, yb] = polar(R_TICK - (major ? 13 : 7), k * 6);
+        svg += `<line class="dTick" data-major="${major ? 1 : 0}" x1="${xa.toFixed(2)}" y1="${ya.toFixed(2)}" x2="${xb.toFixed(2)}" y2="${yb.toFixed(2)}" stroke="#fff" stroke-width="${major ? 2.4 : 1.2}" stroke-linecap="round"/>`;
+        if (major) {
+          const [xt, yt] = polar(R_LABEL, k * 6);
+          svg += `<text class="dLabel" data-k="${k}" x="${xt.toFixed(2)}" y="${yt.toFixed(2)}" text-anchor="middle" dominant-baseline="central" font-family="Nunito, sans-serif" font-weight="800" font-size="13" fill="#fff">${scaleLabel(k * scaleS / 60)}</text>`;
+        }
+      }
+      svg += `
+        <circle cx="${CX}" cy="${CY}" r="${R_WELL}" fill="url(#dWell)"/>
+        <circle id="dFull" cx="${CX}" cy="${CY}" r="${R_SECTOR}" fill="url(#dColor)" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
+        <path id="dSector" fill="url(#dColor)" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linejoin="round"/>
+        <line id="dNeedle" x1="${CX}" y1="${CY}" stroke="#fff" stroke-width="3" stroke-linecap="round" filter="url(#dShadow)"/>
+        <g id="dHandle" filter="url(#dShadow)">
+          <circle r="10" fill="#fff"/>
+          <circle r="4.5" style="fill: var(--c1)"/>
+        </g>
+        <circle cx="${CX}" cy="${CY}" r="15" fill="url(#dHub)" filter="url(#dShadow)"/>
+        <circle cx="${CX}" cy="${CY}" r="5" style="fill: var(--c0)"/>`;
+      dial.innerHTML = svg;
+      dialParts = {
+        arc: dial.querySelector('#dArc'),
+        full: dial.querySelector('#dFull'),
+        sector: dial.querySelector('#dSector'),
+        needle: dial.querySelector('#dNeedle'),
+        handle: dial.querySelector('#dHandle'),
+        ticks: [...dial.querySelectorAll('.dTick')],
+        labels: [...dial.querySelectorAll('.dLabel')]
+      };
+      litTicks = -1;
+      updateDial();
+    }
+
+    function updateDial() {
+      if (!dialParts) return;
       const shownS = (isPristine() ? totalMs : remainingMs) / 1000;
       const frac = clamp(shownS / scaleS, 0, 1);
       const ang = frac * 360;
-      let svg = '';
-      svg += `<circle cx="${CX}" cy="${CY}" r="${R_FACE}" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="2"/>`;
-      svg += `<circle cx="${CX}" cy="${CY}" r="${R_SECTOR + 2}" fill="rgba(0,0,0,0.18)"/>`;
-      // Secteur coloré : durée restante
-      if (frac >= 0.9999) {
-        svg += `<circle cx="${CX}" cy="${CY}" r="${R_SECTOR}" fill="var(--c1)" stroke="#fff" stroke-width="2"/>`;
-      } else if (frac > 0) {
+      const P = dialParts;
+      // Disque et anneau de progression
+      const full = frac >= 0.9999;
+      P.full.style.display = full ? '' : 'none';
+      P.sector.style.display = !full && frac > 0 ? '' : 'none';
+      P.arc.style.display = frac > 0 ? '' : 'none';
+      if (!full && frac > 0) {
         const [x1, y1] = polar(R_SECTOR, 0), [x2, y2] = polar(R_SECTOR, ang);
-        svg += `<path d="M${CX} ${CY} L${x1} ${y1} A${R_SECTOR} ${R_SECTOR} 0 ${ang > 180 ? 1 : 0} 1 ${x2} ${y2} Z" fill="var(--c1)" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>`;
+        P.sector.setAttribute('d', `M${CX} ${CY} L${x1} ${y1} A${R_SECTOR} ${R_SECTOR} 0 ${ang > 180 ? 1 : 0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`);
       }
-      // Graduations : 60 traits, repères numérotés
-      const every = scaleS === 600 ? 6 : 5;
-      for (let k = 0; k < 60; k++) {
-        const major = k % every === 0;
-        const [xa, ya] = polar(R_FACE - 4, k * 6), [xb, yb] = polar(R_FACE - (major ? 16 : 10), k * 6);
-        svg += `<line x1="${xa}" y1="${ya}" x2="${xb}" y2="${yb}" stroke="rgba(255,255,255,${major ? 0.95 : 0.5})" stroke-width="${major ? 2.4 : 1.2}" stroke-linecap="round"/>`;
-        if (major) {
-          const [xt, yt] = polar(R_FACE - 27, k * 6);
-          svg += `<text x="${xt}" y="${yt}" text-anchor="middle" dominant-baseline="central" font-family="Nunito, sans-serif" font-weight="800" font-size="13" fill="#fff">${scaleLabel(k * scaleS / 60)}</text>`;
-        }
+      if (frac > 0) {
+        const a = Math.min(ang, 359.99);
+        const [x1, y1] = polar(R_RING, 0), [x2, y2] = polar(R_RING, a);
+        P.arc.setAttribute('d', `M${x1} ${y1} A${R_RING} ${R_RING} 0 ${a > 180 ? 1 : 0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`);
       }
-      // Poignée au bord du secteur
+      // Aiguille et poignée
       const [hx, hy] = polar(R_SECTOR, ang);
-      svg += `<line x1="${CX}" y1="${CY}" x2="${hx}" y2="${hy}" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`;
-      svg += `<circle cx="${hx}" cy="${hy}" r="9" fill="#fff" stroke="rgba(0,0,0,0.25)" stroke-width="2"/>`;
-      svg += `<circle cx="${CX}" cy="${CY}" r="13" fill="#fff" stroke="rgba(0,0,0,0.2)" stroke-width="2"/>`;
-      dial.innerHTML = svg;
+      P.needle.setAttribute('x2', hx.toFixed(2));
+      P.needle.setAttribute('y2', hy.toFixed(2));
+      P.handle.setAttribute('transform', `translate(${hx.toFixed(2)} ${hy.toFixed(2)})`);
+      // Graduations éclairées dans la zone de temps restant (mises à jour seulement si besoin)
+      const lit = frac > 0 ? Math.floor(ang / 6 + 1e-9) + 1 : 0;
+      if (lit !== litTicks) {
+        litTicks = lit;
+        P.ticks.forEach((t, k) => {
+          const on = k < lit;
+          t.setAttribute('stroke-opacity', on ? (t.dataset.major === '1' ? 1 : 0.85) : (t.dataset.major === '1' ? 0.45 : 0.25));
+        });
+        P.labels.forEach((l) => l.setAttribute('fill-opacity', Number(l.dataset.k) < lit ? 1 : 0.5));
+      }
     }
 
     function setScale(sc) {
       scaleS = sc;
-      $('scaleUnit').textContent = `Graduations en ${sc === 120 ? 'secondes' : 'minutes'}`;
+      $('scaleUnit').textContent = `Graduations en ${sc === 120 ? 'secondes' : sc === 43200 ? 'heures' : 'minutes'}`;
       document.querySelectorAll('#scales .chip').forEach((b) => b.classList.toggle('active', Number(b.dataset.scale) === sc));
-      renderDial();
+      buildDial();
     }
 
     document.querySelectorAll('#scales .chip').forEach((b) => b.addEventListener('click', () => setScale(Number(b.dataset.scale))));
@@ -819,7 +937,7 @@
     }, { passive: false });
 
     document.querySelectorAll('#presets .chip').forEach((b) => b.addEventListener('click', () => {
-      setScale([120, 600, 3600].find((sc) => Number(b.dataset.s) <= sc));
+      setScale(SCALES.find((sc) => Number(b.dataset.s) <= sc));
       setDuration(Number(b.dataset.s), false);
     }));
 
@@ -870,23 +988,35 @@
     function startBlink() { document.body.classList.add('blink'); }
 
     // --- 5. Compte à rebours ---
-    function finish() {
+    function stopCountdown() {
       running = false;
-      remainingMs = 0;
       cancelAnimationFrame(rafId);
+      clearTimeout(endTimer);
       rafId = null;
-      lastTick = null;
+      endTimer = null;
+    }
+
+    // Filet de sécurité : si l'onglet est en arrière-plan, l'animation est suspendue,
+    // mais ce minuteur déclenche quand même l'alarme à l'heure prévue.
+    function checkEnd() {
+      if (!running) return;
+      remainingMs = endAt - performance.now();
+      if (remainingMs <= 0) finish();
+      else endTimer = setTimeout(checkEnd, Math.min(remainingMs + 30, 60000));
+    }
+
+    function finish() {
+      stopCountdown();
+      remainingMs = 0;
       setStatus('Terminé !', 'fa-flag-checkered');
       startBlink();
       startAlarm();
       updateUI();
     }
 
-    function tick(ts) {
+    function tick() {
       if (!running) return;
-      if (lastTick == null) lastTick = ts;
-      remainingMs -= ts - lastTick;
-      lastTick = ts;
+      remainingMs = endAt - performance.now();
       if (remainingMs <= 0) {
         finish();
         return;
@@ -898,10 +1028,7 @@
     function resetTimer() {
       stopAlarm();
       stopBlink();
-      running = false;
-      cancelAnimationFrame(rafId);
-      rafId = null;
-      lastTick = null;
+      stopCountdown();
       remainingMs = totalMs;
       setStatus('Prêt', 'fa-circle-check');
       updateUI();
@@ -917,16 +1044,16 @@
       }
       if (!muted) ensureAudioContext();
       running = true;
+      endAt = performance.now() + remainingMs;
       setStatus('En cours…', 'fa-spinner fa-spin');
       updateUI();
       rafId = requestAnimationFrame(tick);
+      endTimer = setTimeout(checkEnd, Math.min(remainingMs + 30, 60000));
     });
 
     pauseBtn.addEventListener('click', () => {
-      running = false;
-      cancelAnimationFrame(rafId);
-      rafId = null;
-      lastTick = null;
+      remainingMs = Math.max(0, endAt - performance.now());
+      stopCountdown();
       setStatus('En pause', 'fa-circle-pause');
       updateUI();
     });
@@ -939,7 +1066,7 @@
       if (muted) stopAlarm();
     });
 
-    [minutesEl, secondsEl].forEach((el) => el.addEventListener('input', () => {
+    [hoursEl, minutesEl, secondsEl].forEach((el) => el.addEventListener('input', () => {
       if (isPristine()) setDuration(readInputs(), true);
     }));
 
