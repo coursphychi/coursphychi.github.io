@@ -447,13 +447,6 @@
       white-space: nowrap;
       font-weight: 500;
     }
-    .car-box {
-      margin-top: 12px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
     .table-scroll {
       overflow-x: auto;
     }
@@ -594,8 +587,7 @@
       <p>En sprint, des capteurs placés dans les starting-blocks mesurent le temps de réaction de chaque coureur après le coup de pistolet. Le règlement de World Athletics considère qu'un humain ne peut pas réagir à un son en moins de <strong>0,100 s</strong> : une réaction plus rapide est donc une anticipation, sanctionnée comme un <strong>faux départ</strong>, même si le coureur est parti après le coup de feu. Ce test applique la même règle : un appui en moins de 100 ms est exclu. Cette limite est discutée : quelques études ont mesuré des réactions légèrement plus rapides chez des sprinters d'élite.</p>
 
       <h4>En voiture : pourquoi compter 1 seconde ?</h4>
-      <p>Sur la route, le danger est <strong>inattendu</strong> : le conducteur ne guette pas un signal précis, il doit d'abord le repérer parmi de nombreuses informations, comprendre qu'il faut freiner, puis déplacer son pied. C'est pourquoi la sécurité routière retient une valeur conventionnelle d'environ <strong>1 s</strong>, bien plus longue que celle mesurée ici. Fatigue, alcool, médicaments ou téléphone l'allongent fortement, jusqu'à 2 s ou davantage. Pendant ce temps, la voiture continue à rouler à vitesse constante : c'est la <strong>distance de réaction</strong> d = v × t<sub>R</sub>.</p>
-      <div class="car-box" id="carBox"></div>
+      <p>Sur la route, le danger est <strong>inattendu</strong> : le conducteur ne guette pas un signal précis, il doit d'abord le repérer parmi de nombreuses informations, comprendre qu'il faut freiner, puis déplacer son pied. C'est pourquoi la sécurité routière retient une valeur conventionnelle d'environ <strong>1 s</strong>, bien plus longue que celle mesurée ici. Fatigue, alcool, médicaments ou téléphone l'allongent fortement, jusqu'à 2 s ou davantage. Pendant ce temps, la voiture continue à rouler à vitesse constante : la distance parcourue est la <strong>distance de réaction</strong> d = v × t<sub>R</sub>. Par exemple, avec t<sub>R</sub> = 1 s, une voiture à 50 km/h (13,9 m/s) parcourt <strong>13,9 m</strong> avant de commencer à freiner, et à 130 km/h (36,1 m/s), <strong>36,1 m</strong>.</p>
 
       <h4>Les limites de cette mesure</h4>
       <p>L'écran (rafraîchi toutes les 17 ms environ), le clavier et la carte son ajoutent chacun quelques millisecondes : les valeurs mesurées ici sont un peu surestimées, de 10 à 50 ms selon le matériel. Comme pour toute mesure répétée, la moyenne de plusieurs essais est plus fiable qu'un essai isolé, et son incertitude-type u = s / √N diminue quand le nombre N d'essais augmente.</p>
@@ -1253,18 +1245,6 @@
       $('trials').innerHTML = RT.trials.filter((t) => t.mode === RT.mode)
         .map((t, k) => `<span class="trial ${t.excluded ? 'excluded' : ''}" title="${t.excluded ? 'Anticipation : essai exclu' : `Essai ${k + 1}`}">${Math.round(t.ms)}</span>`).join('');
 
-      renderCarBox();
-    }
-
-    function renderCarBox() {
-      const best = ['visual', 'choice', 'audio'].map(stats).find((st) => st.mean !== undefined);
-      const lines = [50, 130].map((kmh) => {
-        const v = kmh / 3.6;
-        const own = best ? ` ; avec votre temps mesuré (${fmtComma(best.mean / 1000, 2)} s) : <strong>${fmtComma(v * best.mean / 1000, 1)} m</strong>` : '';
-        return `À ${kmh} km/h (${fmtComma(v, 1)} m/s), avec t<sub>R</sub> = 1 s : <strong>${fmtComma(v, 1)} m</strong> parcourus avant de commencer à freiner${own}.`;
-      });
-      $('carBox').innerHTML = `<i class="fa-solid fa-car-side"></i> ${lines.join('<br><i class="fa-solid fa-car-side" style="visibility:hidden"></i> ')}`
-        + (best ? '' : '<br><em>Faites quelques essais pour comparer avec votre propre temps de réaction.</em>');
     }
 
     $('rtClear').addEventListener('click', () => {
@@ -1291,7 +1271,6 @@
     // --- Initialisation ---
     setDuration(300, false);
     setScale(600);
-    renderCarBox();
   </script>
 </body>
 </html>
