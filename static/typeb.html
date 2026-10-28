@@ -1233,13 +1233,18 @@
     }
 
     // Écriture LaTeX d'un nom de grandeur : indices (c_B → c_{B}), lettres grecques, primes
-    function varTex(name) {
+    // extra : indice supplémentaire (k, réf…), fusionné avec l'indice existant (c_A → c_{A,k})
+    // pour éviter un double indice, que LaTeX refuse
+    function varTex(name, extra) {
         const m = name.match(/^([^']*)('*)$/);
         const body = m[1], primes = m[2];
         const k = body.indexOf('_');
         const conv = (s) => GREEK.includes(s) ? `\\${s}` : s;
         const main = k < 0 ? conv(body) : conv(body.slice(0, k));
-        const sub = k < 0 ? '' : `_{${conv(body.slice(k + 1)).replace(/_/g, ',')}}`;
+        const subs = [];
+        if (k >= 0) subs.push(conv(body.slice(k + 1)).replace(/_/g, ','));
+        if (extra) subs.push(extra);
+        const sub = subs.length ? `_{${subs.join(',')}}` : '';
         return `${main}${sub}${primes}`;
     }
 
@@ -1740,12 +1745,12 @@
             + (model.explicit ? '' : `<div class="stats-line" style="text-align:center">Équation résolue numériquement pour $${sym}$ à chaque tirage</div>`);
 
         document.getElementById('mathMean').innerHTML = `$$\\begin{aligned}
-            \\bar{${sym}} &= \\frac{1}{N}\\sum_{k=1}^{N} ${sym}_k \\\\
+            \\bar{${sym}} &= \\frac{1}{N}\\sum_{k=1}^{N} ${varTex(model.target, 'k')} \\\\
             &\\approx ${formatSciLatex(mean, 5)}${uT}
         \\end{aligned}$$
             <div class="stats-line" style="text-align:center">avec $N = ${formatSciLatex(N, 1)}$ tirages</div>`;
 
-        document.getElementById('mathUnc').innerHTML = `$$u(${sym}) = s = \\sqrt{\\frac{1}{N-1}\\sum_{k=1}^{N} \\left(${sym}_k - \\bar{${sym}}\\right)^2} \\approx ${formatSciLatex(std, 3)}${uT}$$
+        document.getElementById('mathUnc').innerHTML = `$$u(${sym}) = s = \\sqrt{\\frac{1}{N-1}\\sum_{k=1}^{N} \\left(${varTex(model.target, 'k')} - \\bar{${sym}}\\right)^2} \\approx ${formatSciLatex(std, 3)}${uT}$$
             <div class="stats-line" style="text-align:center">L'incertitude-type simulée est l'<strong>écart-type des $N$ valeurs aléatoires obtenues</strong> : elle mesure la dispersion du résultat due aux incertitudes de toutes les grandeurs d'entrée (largeur de l'histogramme, zone verte $\\pm u$).</div>`;
 
         // Résultat final
@@ -1793,6 +1798,7 @@
             return;
         }
         refCard.style.display = 'flex';
+        const symRef = varTex(model.target, '\\text{réf}');
         const z = Math.abs(R.mean - ref) / R.std;
         const ok = z <= 2;
         const zDisplay = z >= 100 || (z > 0 && z < 0.01) ? formatSciLatex(z, 3, false) : z.toFixed(2).replace('.', '{,}');
@@ -1810,18 +1816,18 @@
             <div class="zscore-box ${ok ? 'zscore-ok' : 'zscore-ko'}">
                 <div class="zscore-header">
                     <div style="font-weight: 700; font-size: 1.02rem;">
-                        Écart normalisé pour $${sym}_{\\text{réf}} = ${formatSciLatex(ref, 4)}${uT}$
+                        Écart normalisé pour $${symRef} = ${formatSciLatex(ref, 4)}${uT}$
                     </div>
                     <span class="badge">${ok ? 'Mesure compatible (z ≤ 2)' : 'Mesure non compatible (z > 2)'}</span>
                 </div>
                 <div class="zscore-formula-wrap">
-                    $$z = \\frac{|\\bar{${sym}} - ${sym}_{\\text{réf}}|}{u(${sym})} = \\frac{|${formatSciLatex(R.mean, 5)} - ${formatSciLatex(ref, 4)}|}{${formatSciLatex(R.std, 4)}} \\approx \\mathbf{${zDisplay}}$$
+                    $$z = \\frac{|\\bar{${sym}} - ${symRef}|}{u(${sym})} = \\frac{|${formatSciLatex(R.mean, 5)} - ${formatSciLatex(ref, 4)}|}{${formatSciLatex(R.std, 4)}} \\approx \\mathbf{${zDisplay}}$$
                 </div>
                 <div>${story}</div>
                 <div class="prob-details">
-                    <strong>Probabilité d'observer un écart au moins aussi grand par le seul jeu des incertitudes, si $${sym}_{\\text{réf}}$ est la valeur vraie :</strong>
+                    <strong>Probabilité d'observer un écart au moins aussi grand par le seul jeu des incertitudes, si $${symRef}$ est la valeur vraie :</strong>
                     <ul>
-                        <li>Lue directement sur la simulation (proportion des $N$ tirages qui s'écartent de la moyenne d'au moins $|\\bar{${sym}} - ${sym}_{\\text{réf}}|$) : $P ${pSimTex}$.</li>
+                        <li>Lue directement sur la simulation (proportion des $N$ tirages qui s'écartent de la moyenne d'au moins $|\\bar{${sym}} - ${symRef}|$) : $P ${pSimTex}$.</li>
                         <li>Si la distribution était gaussienne : $P(|Z| \\ge ${zDisplay}) = ${formatProbLatex(pNormal)}$ (seuil critique à $z = 2 \\leftrightarrow 4{,}55\\,\\%$).</li>
                     </ul>
                 </div>
