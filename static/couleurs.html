@@ -1298,13 +1298,13 @@
         actx.lineTo(x + 14 * u, y);
         actx.moveTo(x, y - 14 * u);
         actx.lineTo(x, y + 14 * u);
-        // Liseré blanc pour que la croix reste visible sur un fond sombre
-        actx.strokeStyle = `rgba(255, 255, 255, ${0.8 * alpha})`;
-        actx.lineWidth = 8 * u;
-        actx.stroke();
+        // Léger halo blanc diffus sous la croix, pour qu'elle reste visible sur un fond sombre
+        actx.shadowColor = `rgba(255, 255, 255, ${0.7 * alpha})`;
+        actx.shadowBlur = 5 * u;
         actx.strokeStyle = `rgba(0, 0, 0, ${alpha})`;
         actx.lineWidth = 4 * u;
         actx.stroke();
+        actx.shadowColor = 'transparent';
         if (progress !== null) {
             // Fin anneau de progression autour de la croix, discret
             actx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
