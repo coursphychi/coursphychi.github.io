@@ -1211,7 +1211,7 @@
         const exactNoteFreq = 440 * Math.pow(2, (midi - 69) / 12);
         const diff = Math.abs(freq - exactNoteFreq);
         if (diff < 1.2) {
-            return `Note proche : ${noteName}${octave} (${exactNoteFreq.toFixed(1).replace('.', ',')} Hz)`;
+            return `${noteName}${octave} (${exactNoteFreq.toFixed(1).replace('.', ',')} Hz)`;
         }
         return `≈ ${noteName}${octave}`;
     }
