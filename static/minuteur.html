@@ -363,6 +363,68 @@
       100% { filter: brightness(1); }
     }
 
+    /* --- Chronomètre --- */
+    .sw-controls {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+    }
+    .sw-controls .btn {
+      width: 64px;
+      height: 64px;
+      font-size: 24px;
+    }
+    .sw-controls #swStart {
+      width: 80px;
+      height: 80px;
+      font-size: 30px;
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.65);
+    }
+    .sw-controls #swStart.running {
+      background: rgba(244, 63, 94, 0.45);
+      border-color: #fda4af;
+    }
+    .sw-hint {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0.75;
+    }
+    .sw-laps {
+      max-height: 320px;
+      overflow-y: auto;
+      border-radius: 16px;
+    }
+    .sw-laps td {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+    }
+    .sw-laps td.best {
+      color: #6ee7b7;
+      font-weight: 800;
+    }
+    .sw-laps td.worst {
+      color: #fda4af;
+      font-weight: 800;
+    }
+    .sw-summary {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .sw-summary .res {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    @media (hover: none) {
+      .sw-hint {
+        display: none;
+      }
+    }
+
     /* --- Test du temps de réaction --- */
     .rt-panel {
       align-items: stretch;
@@ -619,9 +681,51 @@
           <span class="badge" id="endAt" hidden></span>
         </div>
         <div class="sub" style="margin-top: 16px;">
+          <button class="rt-toggle" id="swToggle"><i class="fa-solid fa-stopwatch-20"></i> Chronomètre</button>
           <button class="rt-toggle" id="rtToggle"><i class="fa-solid fa-bolt"></i> Tester son temps de réaction</button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- CHRONOMÈTRE (affiché à la demande) -->
+  <div class="panel rt-panel" id="swPanel" hidden>
+    <div class="rt-head">
+      <h2><i class="fa-solid fa-stopwatch-20"></i> Chronomètre</h2>
+    </div>
+
+    <div class="timer-card" style="align-self: center;">
+      <div class="timer" id="swDisplay">00:00,00</div>
+    </div>
+
+    <div class="sw-controls">
+      <button class="btn" id="swReset" title="Remettre à zéro (R)" disabled><i class="fa-solid fa-rotate-left"></i></button>
+      <button class="btn" id="swStart" title="Départ / arrêt (Espace)"><i class="fa-solid fa-play"></i></button>
+      <button class="btn" id="swLap" title="Temps intermédiaire : nouveau tour (T)" disabled><i class="fa-solid fa-flag"></i></button>
+    </div>
+    <div class="sw-hint">Clavier : Espace = départ / arrêt · T = tour · R = remise à zéro</div>
+
+    <div class="sw-summary" id="swSummary" hidden></div>
+    <div class="sw-laps" id="swLapsWrap" hidden>
+      <table class="rt-table sw-laps-table">
+        <thead><tr><th>Tour</th><th>Durée du tour</th><th>Temps cumulé</th></tr></thead>
+        <tbody id="swLaps"></tbody>
+      </table>
+    </div>
+
+    <div class="rt-actions" id="swActions" hidden>
+      <button class="chip" id="swCopy" title="Copier les durées des tours (à coller dans l'outil Incertitude de type A)"><i class="fa-solid fa-copy"></i> Copier les durées des tours</button>
+      <a class="chip" href="/typea.html" target="_blank" rel="noopener" style="text-decoration: none;"><i class="fa-solid fa-chart-simple"></i> Outil type A</a>
+      <span class="feedback" id="swFeedback"></span>
+    </div>
+
+    <div class="explain">
+      <h3><i class="fa-solid fa-book-open"></i> Bien chronométrer</h3>
+      <p>Le chronomètre affiche le centième de seconde, mais la mesure n'est pas aussi précise : c'est <strong>vous</strong> qui déclenchez le départ et l'arrêt. Chaque appui arrive avec un retard (votre <strong>temps de réaction</strong>, de l'ordre de 0,2 s) qui varie d'un essai à l'autre de quelques centièmes à un dixième de seconde. Les retards au départ et à l'arrêt se compensent en partie, mais il reste une incertitude d'environ <strong>0,1 s</strong> sur chaque durée mesurée : bien plus que la résolution de l'affichage.</p>
+      <h4><i class="fa-solid fa-repeat"></i> L'astuce : mesurer plusieurs périodes</h4>
+      <p>Pour un phénomène périodique, comme les oscillations d'un pendule, mesurez la durée de <strong>10 oscillations</strong> puis divisez par 10 : l'incertitude due à vos réflexes est elle aussi divisée par 10. Par exemple, 10 T = (14,8 ± 0,1) s donne T = (1,48 ± 0,01) s.</p>
+      <h4><i class="fa-solid fa-flag"></i> Les tours</h4>
+      <p>Le bouton « tour » enregistre un temps intermédiaire sans arrêter le chronomètre. En l'utilisant à chaque passage du pendule au même point, dans le même sens, vous obtenez une série de périodes : le tableau donne leur moyenne et son incertitude-type (type A), et vous pouvez copier les valeurs pour les analyser dans l'outil « Incertitude de type A ».</p>
     </div>
   </div>
 
@@ -1270,6 +1374,7 @@
         ? '<i class="fa-solid fa-bolt"></i> Tester son temps de réaction'
         : '<i class="fa-solid fa-xmark"></i> Fermer le test de réaction';
       if (!rtPanel.hidden) {
+        if (!swPanel.hidden) $('swToggle').click();
         rtIdle();
         renderRtStats();
         rtPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1402,12 +1507,12 @@
       return x.toFixed(d).replace('.', ',');
     }
 
-    function fmtResult(mean, u) {
+    function fmtResult(mean, u, unit = 'ms') {
       let e = Math.floor(Math.log10(u));
       let ur = Math.ceil(u / 10 ** e - 1e-9) * 10 ** e;
       if (ur >= 10 ** (e + 1)) e += 1;
       const d = Math.max(0, -e);
-      return `(${fmtComma(mean, d)} ± ${fmtComma(ur, d)}) ms`;
+      return `(${fmtComma(mean, d)} ± ${fmtComma(ur, d)}) ${unit}`;
     }
 
     function renderRtStats() {
@@ -1444,6 +1549,129 @@
       const fb = $('rtFeedback');
       navigator.clipboard.writeText(v.join(' ; ')).then(
         () => { fb.textContent = '✓ Copié : collez-les dans l\'outil type A (unité : ms)'; },
+        () => { fb.textContent = 'Copie impossible'; }
+      );
+      setTimeout(() => { fb.textContent = ''; }, 4000);
+    });
+
+    // --- Chronomètre ---
+    // Temps mesuré avec l'horodatage des événements (même base que performance.now())
+    const swPanel = $('swPanel');
+    const SW = { running: false, acc: 0, startAt: 0, laps: [], lastLapAt: 0, raf: null };
+
+    const swElapsed = (now = performance.now()) => SW.acc + (SW.running ? now - SW.startAt : 0);
+
+    // Affichage : mm:ss,cc (ou h:mm:ss,cc au-delà d'une heure)
+    function fmtSw(ms) {
+      const cs = Math.floor(ms / 10);
+      const h = Math.floor(cs / 360000), m = Math.floor(cs / 6000) % 60, sec = Math.floor(cs / 100) % 60, c = cs % 100;
+      const p2 = (x) => String(x).padStart(2, '0');
+      return (h ? `${h}:` : '') + `${p2(m)}:${p2(sec)},${p2(c)}`;
+    }
+
+    // Durée d'un tour : en secondes tant qu'elle reste sous la minute
+    const fmtLap = (ms) => (ms < 60000 ? `${fmtComma(Math.floor(ms / 10) / 100, 2)} s` : fmtSw(ms));
+
+    function swRender() {
+      const t = swElapsed();
+      $('swDisplay').textContent = fmtSw(t);
+      $('swDisplay').classList.toggle('long', t >= 3600000);
+      if (SW.running) SW.raf = requestAnimationFrame(swRender);
+    }
+
+    function swUpdateButtons() {
+      $('swStart').classList.toggle('running', SW.running);
+      $('swStart').innerHTML = SW.running ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
+      $('swLap').disabled = !SW.running;
+      $('swReset').disabled = SW.running || (SW.acc === 0 && !SW.laps.length);
+    }
+
+    function swToggleRun(ts) {
+      if (SW.running) {
+        SW.acc += ts - SW.startAt;
+        SW.running = false;
+        cancelAnimationFrame(SW.raf);
+      } else {
+        SW.startAt = ts;
+        SW.running = true;
+      }
+      swUpdateButtons();
+      swRender();
+    }
+
+    function swLap(ts) {
+      if (!SW.running) return;
+      const total = swElapsed(ts);
+      SW.laps.push({ lap: total - SW.lastLapAt, total });
+      SW.lastLapAt = total;
+      swRenderLaps();
+    }
+
+    function swReset() {
+      if (SW.running) return;
+      SW.acc = 0;
+      SW.laps = [];
+      SW.lastLapAt = 0;
+      swUpdateButtons();
+      swRender();
+      swRenderLaps();
+    }
+
+    function swRenderLaps() {
+      const n = SW.laps.length;
+      $('swLapsWrap').hidden = $('swActions').hidden = n === 0;
+      const v = SW.laps.map((l) => l.lap);
+      const min = Math.min(...v), max = Math.max(...v);
+      $('swLaps').innerHTML = SW.laps.map((l, k) => {
+        const cls = n >= 3 && l.lap === min ? 'best' : n >= 3 && l.lap === max ? 'worst' : '';
+        return `<tr><td>${k + 1}</td><td class="${cls}">${fmtLap(l.lap)}</td><td>${fmtSw(l.total)}</td></tr>`;
+      }).reverse().join('');
+      // Moyenne des tours et incertitude-type de type A sur cette moyenne
+      const sum = $('swSummary');
+      sum.hidden = n < 2;
+      if (n >= 2) {
+        const x = v.map((ms) => ms / 1000);
+        const mean = x.reduce((a, b) => a + b, 0) / n;
+        const sd = Math.sqrt(x.reduce((a, b) => a + (b - mean) ** 2, 0) / (n - 1));
+        sum.innerHTML = `Durée moyenne d'un tour (${n} tours) : <span class="res">${sd > 0 ? fmtResult(mean, sd / Math.sqrt(n), 's') : `${fmtComma(mean, 2)} s`}</span>`;
+      }
+    }
+
+    $('swStart').addEventListener('click', (e) => { $('swStart').blur(); swToggleRun(e.timeStamp); });
+    $('swLap').addEventListener('click', (e) => { $('swLap').blur(); swLap(e.timeStamp); });
+    $('swReset').addEventListener('click', () => { $('swReset').blur(); swReset(); });
+
+    window.addEventListener('keydown', (e) => {
+      if (swPanel.hidden || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
+      const tag = document.activeElement && document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+      const k = e.key.toLowerCase();
+      if (k === ' ') swToggleRun(e.timeStamp);
+      else if (k === 't') swLap(e.timeStamp);
+      else if (k === 'r') swReset();
+      else return;
+      e.preventDefault();
+    });
+
+    $('swToggle').addEventListener('click', () => {
+      $('swToggle').blur(); // sinon la barre d'espace réactiverait ce bouton
+      swPanel.hidden = !swPanel.hidden;
+      $('swToggle').innerHTML = swPanel.hidden
+        ? '<i class="fa-solid fa-stopwatch-20"></i> Chronomètre'
+        : '<i class="fa-solid fa-xmark"></i> Fermer le chronomètre';
+      if (!swPanel.hidden) {
+        if (!rtPanel.hidden) $('rtToggle').click();
+        swPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    $('swCopy').addEventListener('click', () => {
+      $('swCopy').blur();
+      const v = SW.laps.map((l) => fmtComma(Math.floor(l.lap / 10) / 100, 2));
+      if (!v.length) return;
+      const fb = $('swFeedback');
+      navigator.clipboard.writeText(v.join(' ; ')).then(
+        () => { fb.textContent = '✓ Copié : collez-les dans l\'outil type A (unité : s)'; },
         () => { fb.textContent = 'Copie impossible'; }
       );
       setTimeout(() => { fb.textContent = ''; }, 4000);
