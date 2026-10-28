@@ -4,102 +4,126 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Minuteur Ultimatum</title>
-  
+
   <!-- Polices Google Fonts pour un look moderne et digital -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@800&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome pour les icônes (version la plus récente) -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;800&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome pour les icônes -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <style>
-    :root { --bg: hsl(120 80% 35%); }
-    html, body { height: 100%; margin: 0; }
+    /* Couleurs de fond : base sombre (c0) et deux halos (c1, c2), recalculées pendant le compte à rebours */
+    :root {
+      --c0: #064e3b;
+      --c1: #10b981;
+      --c2: #0ea5e9;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { min-height: 100%; background: #04120e; }
     body {
+      min-height: 100vh;
+      margin: 0;
       font-family: 'Nunito', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      display: grid;
-      place-items: center;
-      transition: background 300ms ease;
+      color: #ffffff;
+      background:
+        radial-gradient(70vmax 55vmax at 12% 8%, color-mix(in oklab, var(--c1) 70%, transparent), transparent 65%),
+        radial-gradient(65vmax 55vmax at 92% 95%, color-mix(in oklab, var(--c2) 60%, transparent), transparent 65%),
+        var(--c0);
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      padding: 28px 14px;
       user-select: none;
     }
     .panel {
-      width: min(800px, 90vw);
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 35px;
-      padding: 40px 30px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 25px 80px rgba(0,0,0,0.25), inset 0 0 20px rgba(255,255,255,0.1);
-      color: white;
+      width: min(1000px, 100%);
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 32px;
+      padding: 30px 28px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.30), inset 0 0 24px rgba(255, 255, 255, 0.06);
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .top {
       display: flex;
-      gap: 15px;
+      gap: 12px;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 20px;
-      background: rgba(0,0,0,0.15);
-      padding: 12px 25px;
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 18px;
+      background: rgba(0, 0, 0, 0.18);
+      padding: 12px 20px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.12);
     }
     .input-group {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-size: 20px;
-      color: rgba(255,255,255,0.9);
-      margin-right: 10px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-right: 6px;
+    }
+    .input-group .unit {
+      font-size: 14px;
+      font-weight: 700;
+      opacity: 0.8;
     }
     input[type="number"] {
-      width: 65px;
+      width: 70px;
       font-size: 22px;
       font-weight: 800;
       font-family: 'JetBrains Mono', monospace;
-      padding: 8px 10px;
+      padding: 8px 6px;
       border-radius: 14px;
-      border: 2px solid rgba(255,255,255,0.3);
-      background: rgba(0,0,0,0.3);
-      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.3);
+      color: #ffffff;
       outline: none;
       text-align: center;
       transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     input[type="number"]:focus {
-      border-color: #fff;
-      background: rgba(0,0,0,0.5);
-      box-shadow: 0 0 15px rgba(255,255,255,0.4);
+      border-color: #ffffff;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
       transform: scale(1.05);
     }
-    /* Style des boutons circulaires avec icônes */
+    input[type="number"]:disabled {
+      opacity: 0.5;
+    }
+    /* Boutons circulaires avec icônes */
     .btn {
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.4);
-      background: rgba(255,255,255,0.1);
-      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 20px;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
     .btn:hover:not(:disabled) {
       transform: scale(1.15) translateY(-3px);
-      background: rgba(255,255,255,0.3);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      border-color: #fff;
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border-color: #ffffff;
     }
     .btn:active:not(:disabled) {
       transform: scale(0.95);
@@ -108,44 +132,140 @@
       opacity: 0.35;
       cursor: not-allowed;
       background: transparent;
-      border-color: rgba(255,255,255,0.15);
+      border-color: rgba(255, 255, 255, 0.15);
       box-shadow: none;
     }
-    /* Bouton Démarrer en évidence */
     #start:not(:disabled) {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.65);
+    }
+    /* Pastilles (préréglages, échelles, modes) */
+    .chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .chip {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 999px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chip:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.24);
+    }
+    .chip.active {
+      background: #ffffff;
+      color: #0f172a;
+      border-color: #ffffff;
+    }
+    .chip:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    /* Roue et affichage */
+    .main {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 26px;
+      align-items: center;
+      width: 100%;
+    }
+    @media (max-width: 760px) {
+      .main {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
+    }
+    .dial-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    #dial {
+      width: min(330px, 82vw);
+      height: auto;
+      touch-action: none;
+      cursor: grab;
+      filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.30));
+    }
+    #dial.locked {
+      cursor: default;
+    }
+    #dial:active:not(.locked) {
+      cursor: grabbing;
+    }
+    .scale-label {
+      font-size: 12px;
+      font-weight: 700;
+      opacity: 0.8;
+      margin-right: 4px;
+      align-self: center;
+    }
+    .readout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .timer {
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 800;
-      font-size: clamp(80px, 15vw, 160px);
+      font-size: clamp(64px, 11vw, 140px);
       line-height: 1;
       letter-spacing: -3px;
-      margin: 15px 0;
-      text-shadow: 0 10px 40px rgba(0,0,0,0.35);
-      filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2));
+      margin: 10px 0;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+      font-variant-numeric: tabular-nums;
+    }
+    .timer.urgent {
+      animation: pulse 1s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      50% { transform: scale(1.04); }
     }
     .sub {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 12px;
       font-size: 15px;
       font-weight: 700;
-      margin-top: 15px;
+      margin-top: 14px;
       flex-wrap: wrap;
     }
     .badge {
       padding: 8px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.25);
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: background 0.2s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .rt-toggle {
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      color: #0f172a;
+      background: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 20px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s;
+    }
+    .rt-toggle:hover {
+      transform: translateY(-2px);
     }
     body.blink {
       animation: blink 0.4s steps(2, end) infinite;
@@ -155,27 +275,319 @@
       50% { filter: brightness(1.4) contrast(1.1); }
       100% { filter: brightness(1); }
     }
+
+    /* --- Test du temps de réaction --- */
+    .rt-panel {
+      align-items: stretch;
+      gap: 18px;
+      user-select: text;
+    }
+    .rt-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .rt-head h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .zone {
+      height: 230px;
+      border-radius: 24px;
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 8px;
+      padding: 16px;
+      cursor: pointer;
+      touch-action: manipulation;
+      user-select: none;
+    }
+    .zone .big {
+      font-size: clamp(26px, 5vw, 42px);
+      font-weight: 900;
+      line-height: 1.1;
+    }
+    .zone .small {
+      font-size: 15px;
+      font-weight: 700;
+      opacity: 0.85;
+    }
+    .zone.wait {
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .zone.go {
+      background: #f8fafc;
+      color: #0f172a;
+      border-color: #ffffff;
+    }
+    .zone.go .arrow {
+      font-size: clamp(70px, 14vw, 130px);
+      line-height: 1;
+      color: #4f46e5;
+    }
+    .zone.bad {
+      background: rgba(225, 29, 72, 0.55);
+    }
+    .zone.result .big {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(36px, 7vw, 56px);
+    }
+    .counters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .rt-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .rt-table th, .rt-table td {
+      padding: 10px 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .rt-table th {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+    .rt-table td.res {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+    }
+    .rt-table tr.current td {
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .trials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+    }
+    .trial {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .trial.excluded {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+    .rt-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .feedback {
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .explain {
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: 20px;
+      padding: 18px 22px;
+      line-height: 1.6;
+      font-size: 15.5px;
+    }
+    .explain h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+    }
+    .explain h4 {
+      margin: 16px 0 4px;
+      font-size: 16px;
+    }
+    .explain p {
+      margin: 6px 0;
+    }
+    .explain table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 14.5px;
+    }
+    .explain th, .explain td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      text-align: left;
+      vertical-align: top;
+    }
+    .explain th {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.8;
+    }
+    .explain td.v {
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .car-box {
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .table-scroll {
+      overflow-x: auto;
+    }
+    @media (max-width: 600px) {
+      .panel {
+        padding: 22px 14px;
+        border-radius: 24px;
+      }
+      .top {
+        padding: 10px 12px;
+      }
+      .explain {
+        padding: 14px 14px;
+      }
+      .explain td.v {
+        white-space: normal;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="panel">
     <div class="top">
-      <div class="input-group" title="Durée en minutes">
+      <div class="input-group" title="Durée du compte à rebours">
         <i class="fa-solid fa-hourglass-half"></i>
-        <input id="minutes" type="number" min="0" step="1" value="5" />
+        <input id="minutes" type="number" min="0" max="599" step="1" value="5" aria-label="Minutes" />
+        <span class="unit">min</span>
+        <input id="seconds" type="number" min="0" max="59" step="1" value="0" aria-label="Secondes" />
+        <span class="unit">s</span>
       </div>
-      <!-- Utilisation des attributs 'title' pour l'accessibilité -->
       <button class="btn" id="start" title="Démarrer"><i class="fa-solid fa-play"></i></button>
       <button class="btn" id="pause" title="Pause" disabled><i class="fa-solid fa-pause"></i></button>
       <button class="btn" id="reset" title="Réinitialiser" disabled><i class="fa-solid fa-rotate-left"></i></button>
       <button class="btn" id="mute" title="Activer/Désactiver le son"><i class="fa-solid fa-volume-high"></i></button>
     </div>
 
-    <div class="timer" id="display">05:00</div>
+    <div class="chips" id="presets" style="margin-bottom: 14px;">
+      <button class="chip" data-s="30">30 s</button>
+      <button class="chip" data-s="60">1 min</button>
+      <button class="chip" data-s="120">2 min</button>
+      <button class="chip" data-s="300">5 min</button>
+      <button class="chip" data-s="600">10 min</button>
+      <button class="chip" data-s="900">15 min</button>
+    </div>
 
-    <div class="sub">
-      <span class="badge" id="status"><i class="fa-solid fa-circle-check"></i> Prêt</span>
-      <span class="badge" id="remaining"><i class="fa-solid fa-stopwatch"></i> Restant : 300.0 s</span>
+    <div class="main">
+      <div class="dial-wrap">
+        <svg id="dial" viewBox="0 0 300 300" aria-label="Roue de réglage : faire glisser pour choisir la durée"></svg>
+        <div class="scale-label" id="scaleUnit">Graduations en minutes</div>
+        <div class="chips" id="scales">
+          <span class="scale-label">Un tour =</span>
+          <button class="chip" data-scale="120">2 min</button>
+          <button class="chip" data-scale="600">10 min</button>
+          <button class="chip active" data-scale="3600">60 min</button>
+        </div>
+      </div>
+      <div class="readout">
+        <div class="timer" id="display">05:00</div>
+        <div class="sub">
+          <span class="badge" id="status"><i class="fa-solid fa-circle-check"></i> Prêt</span>
+          <span class="badge" id="remaining"><i class="fa-solid fa-stopwatch"></i> Restant : 300,0 s</span>
+        </div>
+        <div class="sub">
+          <button class="rt-toggle" id="rtToggle"><i class="fa-solid fa-bolt"></i> Tester son temps de réaction</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEST DU TEMPS DE RÉACTION (affiché à la demande) -->
+  <div class="panel rt-panel" id="rtPanel" hidden>
+    <div class="rt-head">
+      <h2><i class="fa-solid fa-bolt"></i> Temps de réaction</h2>
+      <div class="chips" id="rtModes">
+        <button class="chip active" data-mode="visual" title="Réagir à un signal lumineux"><i class="fa-solid fa-eye"></i> Visuel</button>
+        <button class="chip" data-mode="audio" title="Réagir à un bip sonore"><i class="fa-solid fa-volume-high"></i> Sonore</button>
+        <button class="chip" data-mode="choice" title="Appuyer sur la flèche correspondant à la direction affichée"><i class="fa-solid fa-arrows-left-right"></i> Choix (← ou →)</button>
+      </div>
+    </div>
+
+    <div class="zone" id="zone" tabindex="0">
+      <div class="big" id="zoneBig">Appuyez sur une touche pour commencer</div>
+      <div class="small" id="zoneSmall">ou touchez cette zone</div>
+    </div>
+
+    <div class="counters">
+      <span class="badge" id="cValid">Essais valides : 0</span>
+      <span class="badge" id="cFalse">Faux départs : 0</span>
+      <span class="badge" id="cErr" hidden>Erreurs de direction : 0</span>
+    </div>
+
+    <div class="table-scroll">
+      <table class="rt-table">
+        <thead>
+          <tr><th>Mode</th><th>Essais N</th><th>Moyenne t̄</th><th>Écart-type s</th><th>u(t̄) = s / √N</th><th>Résultat</th></tr>
+        </thead>
+        <tbody id="rtStats"></tbody>
+      </table>
+    </div>
+
+    <div class="trials" id="trials"></div>
+    <div class="rt-actions">
+      <button class="chip" id="rtCopy" title="Copier les valeurs valides du mode en cours (à coller dans l'outil Incertitude de type A)"><i class="fa-solid fa-copy"></i> Copier les valeurs</button>
+      <a class="chip" href="/typea.html" target="_blank" rel="noopener" style="text-decoration: none;"><i class="fa-solid fa-chart-simple"></i> Outil type A</a>
+      <button class="chip" id="rtClear"><i class="fa-solid fa-trash"></i> Effacer le mode en cours</button>
+      <span class="feedback" id="rtFeedback"></span>
+    </div>
+
+    <div class="explain">
+      <h3><i class="fa-solid fa-book-open"></i> Les temps de réaction</h3>
+      <p>Le <strong>temps de réaction</strong> est la durée qui sépare l'apparition d'un signal (stimulus) du début de la réponse. Il additionne plusieurs étapes : la <strong>perception</strong> par l'organe sensoriel, la transmission nerveuse jusqu'au cerveau, la <strong>décision</strong>, puis la commande envoyée aux muscles et le début du mouvement. Selon la situation, chacune de ces étapes peut être très courte ou très longue.</p>
+
+      <div class="table-scroll"><table>
+        <thead><tr><th>Situation</th><th>Valeur typique</th><th>Ce qui est mesuré</th></tr></thead>
+        <tbody>
+          <tr><td>Réaction simple à un son</td><td class="v">≈ 0,15 s</td><td>Un seul signal attendu, une seule réponse prévue à l'avance.</td></tr>
+          <tr><td>Réaction simple à un signal lumineux</td><td class="v">≈ 0,20 à 0,25 s</td><td>Idem, mais la rétine convertit la lumière plus lentement que l'oreille ne convertit le son.</td></tr>
+          <tr><td>Réaction de choix (2 possibilités)</td><td class="v">≈ 0,30 à 0,40 s</td><td>Il faut d'abord identifier le signal, puis choisir la bonne réponse.</td></tr>
+          <tr><td>Sprinter au départ (coup de pistolet)</td><td class="v">≈ 0,12 à 0,18 s</td><td>Réaction simple à un son, chez un athlète entraîné et concentré sur ce seul signal.</td></tr>
+          <tr><td>Conducteur face à un imprévu</td><td class="v">≈ 1 s (valeur conventionnelle)</td><td>Détecter un danger inattendu, décider de freiner, déplacer le pied de l'accélérateur à la pédale de frein.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4>Pourquoi un son est-il perçu plus vite qu'une lumière ?</h4>
+      <p>Dans l'oreille interne, les vibrations déforment mécaniquement les cellules ciliées, ce qui produit un signal nerveux presque immédiatement. Dans la rétine, la lumière déclenche une cascade de réactions chimiques dans les photorécepteurs, plus lente de quelques dizaines de millisecondes. Comparez vos modes « Visuel » et « Sonore » pour le constater.</p>
+
+      <h4>Pourquoi un choix ralentit-il la réaction ?</h4>
+      <p>Quand plusieurs réponses sont possibles, le cerveau doit identifier le signal avant de sélectionner le bon geste. Le temps de réaction augmente avec le nombre de possibilités (loi de Hick). Le mode « Choix » vous le montre : il est nettement plus long que le mode « Visuel », avec en prime quelques erreurs de direction quand on va trop vite.</p>
+
+      <h4>Le faux départ en athlétisme : la limite de 0,100 s</h4>
+      <p>En sprint, des capteurs placés dans les starting-blocks mesurent le temps de réaction de chaque coureur après le coup de pistolet. Le règlement de World Athletics considère qu'un humain ne peut pas réagir à un son en moins de <strong>0,100 s</strong> : une réaction plus rapide est donc une anticipation, sanctionnée comme un <strong>faux départ</strong>, même si le coureur est parti après le coup de feu. Ce test applique la même règle : un appui en moins de 100 ms est exclu. Cette limite est discutée : quelques études ont mesuré des réactions légèrement plus rapides chez des sprinters d'élite.</p>
+
+      <h4>En voiture : pourquoi compter 1 seconde ?</h4>
+      <p>Sur la route, le danger est <strong>inattendu</strong> : le conducteur ne guette pas un signal précis, il doit d'abord le repérer parmi de nombreuses informations, comprendre qu'il faut freiner, puis déplacer son pied. C'est pourquoi la sécurité routière retient une valeur conventionnelle d'environ <strong>1 s</strong>, bien plus longue que celle mesurée ici. Fatigue, alcool, médicaments ou téléphone l'allongent fortement, jusqu'à 2 s ou davantage. Pendant ce temps, la voiture continue à rouler à vitesse constante : c'est la <strong>distance de réaction</strong> d = v × t<sub>R</sub>.</p>
+      <div class="car-box" id="carBox"></div>
+
+      <h4>Les limites de cette mesure</h4>
+      <p>L'écran (rafraîchi toutes les 17 ms environ), le clavier et la carte son ajoutent chacun quelques millisecondes : les valeurs mesurées ici sont un peu surestimées, de 10 à 50 ms selon le matériel. Comme pour toute mesure répétée, la moyenne de plusieurs essais est plus fiable qu'un essai isolé, et son incertitude-type u = s / √N diminue quand le nombre N d'essais augmente.</p>
     </div>
   </div>
 
@@ -183,85 +595,259 @@
     const $ = (id) => document.getElementById(id);
     const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 
-    function fmtMMSS(totalSeconds) {
-      totalSeconds = Math.max(0, Math.floor(totalSeconds));
-      const m = Math.floor(totalSeconds / 60);
-      const s = totalSeconds % 60;
-      return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    // --- 1. Couleurs de fond : interpolation dans l'espace OKLab ---
+    // Du calme (émeraude) à l'urgence (rose-rouge), en passant par l'indigo, le violet et l'orange.
+    const STOPS = [
+      { f: 1.00, c0: '#064e3b', c1: '#10b981', c2: '#0ea5e9' },
+      { f: 0.60, c0: '#1e1b4b', c1: '#6366f1', c2: '#06b6d4' },
+      { f: 0.30, c0: '#3b0764', c1: '#a855f7', c2: '#ec4899' },
+      { f: 0.12, c0: '#431407', c1: '#f97316', c2: '#f43f5e' },
+      { f: 0.00, c0: '#4c0519', c1: '#f43f5e', c2: '#fb923c' }
+    ];
+
+    const toLin = (c) => (c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+    const toGamma = (c) => (c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055);
+
+    function hexToOklab(hex) {
+      const [r, g, b] = [1, 3, 5].map((i) => toLin(parseInt(hex.slice(i, i + 2), 16) / 255));
+      const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+      const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+      const s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+      return [
+        0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s,
+        1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s,
+        0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s
+      ];
     }
 
-    function setBackgroundFromFraction(t) {
-      t = clamp(t, 0, 1);
-      const hue = 120 * t; 
-      document.documentElement.style.setProperty("--bg", `hsl(${hue} 80% 35%)`);
+    function oklabToCss([L, a, b]) {
+      const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3;
+      const m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3;
+      const s = (L - 0.0894841775 * a - 1.2914855480 * b) ** 3;
+      const rgb = [
+        4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+        -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+        -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
+      ].map((c) => Math.round(255 * clamp(toGamma(clamp(c, 0, 1)), 0, 1)));
+      return `rgb(${rgb.join(' ')})`;
     }
 
+    const LAB_STOPS = STOPS.map((st) => ({ f: st.f, c0: hexToOklab(st.c0), c1: hexToOklab(st.c1), c2: hexToOklab(st.c2) }));
+    let currentColors = {};
+
+    function setBackgroundFromFraction(frac) {
+      frac = clamp(frac, 0, 1);
+      let k = 0;
+      while (k < LAB_STOPS.length - 2 && frac < LAB_STOPS[k + 1].f) k++;
+      const A = LAB_STOPS[k], B = LAB_STOPS[k + 1];
+      const t = (A.f - frac) / (A.f - B.f);
+      const mix = (p, q) => p.map((v, i) => v + (q[i] - v) * t);
+      ['c0', 'c1', 'c2'].forEach((name) => {
+        const css = oklabToCss(mix(A[name], B[name]));
+        if (currentColors[name] !== css) {
+          document.documentElement.style.setProperty(`--${name}`, css);
+          currentColors[name] = css;
+        }
+      });
+    }
+
+    // --- 2. État du minuteur ---
     let totalMs = 5 * 60 * 1000;
     let remainingMs = totalMs;
     let running = false;
     let rafId = null;
     let lastTick = null;
+    let scaleS = 3600;                 // durée correspondant à un tour de roue (s)
+    const SNAP = { 120: 1, 600: 5, 3600: 15 }; // pas de réglage de la roue (s)
 
     let muted = false;
     let audioCtx = null;
     let alarmInterval = null;
 
-    const minutesEl = $("minutes");
-    const startBtn = $("start");
-    const pauseBtn = $("pause");
-    const resetBtn = $("reset");
-    const muteBtn = $("mute");
-    const displayEl = $("display");
-    const statusEl = $("status");
-    const remainingEl = $("remaining");
+    const minutesEl = $('minutes');
+    const secondsEl = $('seconds');
+    const startBtn = $('start');
+    const pauseBtn = $('pause');
+    const resetBtn = $('reset');
+    const muteBtn = $('mute');
+    const displayEl = $('display');
+    const statusEl = $('status');
+    const remainingEl = $('remaining');
+    const dial = $('dial');
+
+    function fmtClock(totalSeconds) {
+      totalSeconds = Math.max(0, Math.ceil(totalSeconds - 1e-9));
+      const h = Math.floor(totalSeconds / 3600);
+      const m = Math.floor((totalSeconds % 3600) / 60);
+      const s = totalSeconds % 60;
+      const mmss = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      return h > 0 ? `${h}:${mmss}` : mmss;
+    }
+
+    function isPristine() {
+      return !running && remainingMs === totalMs;
+    }
 
     function updateUI() {
-      displayEl.textContent = fmtMMSS(remainingMs / 1000);
-      remainingEl.innerHTML = `<i class="fa-solid fa-stopwatch"></i> Restant : ${(remainingMs/1000).toFixed(1)} s`;
+      displayEl.textContent = fmtClock(remainingMs / 1000);
+      displayEl.classList.toggle('urgent', running && remainingMs < 10000);
+      remainingEl.innerHTML = `<i class="fa-solid fa-stopwatch"></i> Restant : ${(remainingMs / 1000).toFixed(1).replace('.', ',')} s`;
 
-      const frac = totalMs > 0 ? remainingMs / totalMs : 0;
-      setBackgroundFromFraction(frac);
+      setBackgroundFromFraction(totalMs > 0 ? remainingMs / totalMs : 0);
 
       startBtn.disabled = running;
       pauseBtn.disabled = !running;
-      resetBtn.disabled = (remainingMs === totalMs && !running);
-
-      minutesEl.disabled = running;
+      resetBtn.disabled = isPristine();
+      minutesEl.disabled = secondsEl.disabled = !isPristine();
+      document.querySelectorAll('#presets .chip').forEach((b) => { b.disabled = !isPristine(); });
+      dial.classList.toggle('locked', !isPristine());
+      renderDial();
     }
 
-    function setStatus(txt, icon = "fa-circle-info") {
+    function setStatus(txt, icon = 'fa-circle-info') {
       statusEl.innerHTML = `<i class="fa-solid ${icon}"></i> ${txt}`;
     }
 
-    function ensureAudioContext() {
-      if (muted) return null;
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    // Choix de la durée (en secondes) depuis les champs, la roue ou les préréglages
+    function setDuration(seconds, fromInputs) {
+      seconds = clamp(Math.round(seconds), 0, 599 * 60 + 59);
+      totalMs = remainingMs = seconds * 1000;
+      if (!fromInputs) {
+        minutesEl.value = Math.floor(seconds / 60);
+        secondsEl.value = seconds % 60;
       }
-      if (audioCtx.state === "suspended") audioCtx.resume();
+      // Échelle de la roue : la plus petite qui contient la durée
+      if (fromInputs || seconds > scaleS) setScale([120, 600, 3600].find((sc) => seconds <= sc) || 3600);
+      stopAlarm();
+      stopBlink();
+      setStatus('Prêt', 'fa-circle-check');
+      updateUI();
+    }
+
+    function readInputs() {
+      const m = parseInt(minutesEl.value, 10), s = parseInt(secondsEl.value, 10);
+      return (Number.isFinite(m) ? Math.max(0, m) : 0) * 60 + (Number.isFinite(s) ? clamp(s, 0, 59) : 0);
+    }
+
+    // --- 3. Roue de réglage (façon minuteur mécanique) ---
+    const CX = 150, CY = 150, R_FACE = 138, R_SECTOR = 104;
+
+    function polar(r, angDeg) {
+      const a = (angDeg - 90) * Math.PI / 180;
+      return [CX + r * Math.cos(a), CY + r * Math.sin(a)];
+    }
+
+    function scaleLabel(sec) {
+      if (scaleS === 120) return String(sec);              // secondes
+      return String(Math.round(sec / 60));                  // minutes
+    }
+
+    function renderDial() {
+      const shownS = (isPristine() ? totalMs : remainingMs) / 1000;
+      const frac = clamp(shownS / scaleS, 0, 1);
+      const ang = frac * 360;
+      let svg = '';
+      svg += `<circle cx="${CX}" cy="${CY}" r="${R_FACE}" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="2"/>`;
+      svg += `<circle cx="${CX}" cy="${CY}" r="${R_SECTOR + 2}" fill="rgba(0,0,0,0.18)"/>`;
+      // Secteur coloré : durée restante
+      if (frac >= 0.9999) {
+        svg += `<circle cx="${CX}" cy="${CY}" r="${R_SECTOR}" fill="var(--c1)" stroke="#fff" stroke-width="2"/>`;
+      } else if (frac > 0) {
+        const [x1, y1] = polar(R_SECTOR, 0), [x2, y2] = polar(R_SECTOR, ang);
+        svg += `<path d="M${CX} ${CY} L${x1} ${y1} A${R_SECTOR} ${R_SECTOR} 0 ${ang > 180 ? 1 : 0} 1 ${x2} ${y2} Z" fill="var(--c1)" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>`;
+      }
+      // Graduations : 60 traits, repères numérotés
+      const every = scaleS === 600 ? 6 : 5;
+      for (let k = 0; k < 60; k++) {
+        const major = k % every === 0;
+        const [xa, ya] = polar(R_FACE - 4, k * 6), [xb, yb] = polar(R_FACE - (major ? 16 : 10), k * 6);
+        svg += `<line x1="${xa}" y1="${ya}" x2="${xb}" y2="${yb}" stroke="rgba(255,255,255,${major ? 0.95 : 0.5})" stroke-width="${major ? 2.4 : 1.2}" stroke-linecap="round"/>`;
+        if (major) {
+          const [xt, yt] = polar(R_FACE - 27, k * 6);
+          svg += `<text x="${xt}" y="${yt}" text-anchor="middle" dominant-baseline="central" font-family="Nunito, sans-serif" font-weight="800" font-size="13" fill="#fff">${scaleLabel(k * scaleS / 60)}</text>`;
+        }
+      }
+      // Poignée au bord du secteur
+      const [hx, hy] = polar(R_SECTOR, ang);
+      svg += `<line x1="${CX}" y1="${CY}" x2="${hx}" y2="${hy}" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`;
+      svg += `<circle cx="${hx}" cy="${hy}" r="9" fill="#fff" stroke="rgba(0,0,0,0.25)" stroke-width="2"/>`;
+      svg += `<circle cx="${CX}" cy="${CY}" r="13" fill="#fff" stroke="rgba(0,0,0,0.2)" stroke-width="2"/>`;
+      dial.innerHTML = svg;
+    }
+
+    function setScale(sc) {
+      scaleS = sc;
+      $('scaleUnit').textContent = `Graduations en ${sc === 120 ? 'secondes' : 'minutes'}`;
+      document.querySelectorAll('#scales .chip').forEach((b) => b.classList.toggle('active', Number(b.dataset.scale) === sc));
+      renderDial();
+    }
+
+    document.querySelectorAll('#scales .chip').forEach((b) => b.addEventListener('click', () => setScale(Number(b.dataset.scale))));
+
+    // Glisser sur la roue : l'angle compté depuis midi dans le sens horaire donne la durée
+    let dragging = false;
+    function angleFromEvent(e) {
+      const r = dial.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width * 300 - CX, y = (e.clientY - r.top) / r.height * 300 - CY;
+      let a = Math.atan2(x, -y) * 180 / Math.PI;
+      return a < 0 ? a + 360 : a;
+    }
+
+    function setFromAngle(a, moving) {
+      const step = SNAP[scaleS];
+      let sec = Math.round(a / 360 * scaleS / step) * step;
+      const prev = Math.min(totalMs / 1000, scaleS);
+      // Pendant un glissement, pas de saut d'un bord à l'autre en passant par midi
+      if (moving && prev > 0.75 * scaleS && sec < 0.25 * scaleS) sec = scaleS;
+      if (moving && prev < 0.25 * scaleS && sec > 0.75 * scaleS) sec = 0;
+      if (sec !== prev) setDuration(sec, false);
+    }
+
+    dial.addEventListener('pointerdown', (e) => {
+      if (!isPristine()) return;
+      dragging = true;
+      dial.setPointerCapture(e.pointerId);
+      setFromAngle(angleFromEvent(e), false);
+    });
+    dial.addEventListener('pointermove', (e) => { if (dragging) setFromAngle(angleFromEvent(e), true); });
+    dial.addEventListener('pointerup', () => { dragging = false; });
+    dial.addEventListener('wheel', (e) => {
+      if (!isPristine()) return;
+      e.preventDefault();
+      const step = SNAP[scaleS] * (e.shiftKey ? 10 : 1);
+      setDuration(clamp(totalMs / 1000 + (e.deltaY < 0 ? step : -step), 0, scaleS), false);
+    }, { passive: false });
+
+    document.querySelectorAll('#presets .chip').forEach((b) => b.addEventListener('click', () => {
+      setScale([120, 600, 3600].find((sc) => Number(b.dataset.s) <= sc));
+      setDuration(Number(b.dataset.s), false);
+    }));
+
+    // --- 4. Son ---
+    function ensureAudioContext() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
       return audioCtx;
     }
 
-    function beepOnce(freq = 880, durationMs = 140, gain = 0.12) {
+    function beepAt(when, freq = 880, durationMs = 140, gain = 0.12) {
       const ctx = ensureAudioContext();
-      if (!ctx) return;
-
       const o = ctx.createOscillator();
       const g = ctx.createGain();
-
-      o.type = "sine";
+      o.type = 'sine';
       o.frequency.value = freq;
-
-      const now = ctx.currentTime;
-      g.gain.setValueAtTime(0.0001, now);
-      g.gain.exponentialRampToValueAtTime(gain, now + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.0001, now + durationMs/1000);
-
+      g.gain.setValueAtTime(0.0001, when);
+      g.gain.exponentialRampToValueAtTime(gain, when + 0.005);
+      g.gain.exponentialRampToValueAtTime(0.0001, when + durationMs / 1000);
       o.connect(g);
       g.connect(ctx.destination);
+      o.start(when);
+      o.stop(when + durationMs / 1000 + 0.02);
+    }
 
-      o.start(now);
-      o.stop(now + durationMs/1000 + 0.02);
+    function beepOnce(freq, durationMs, gain) {
+      if (muted) return;
+      beepAt(ensureAudioContext().currentTime, freq, durationMs, gain);
     }
 
     function startAlarm() {
@@ -280,23 +866,17 @@
       }
     }
 
-    function stopBlink() {
-      document.body.classList.remove("blink");
-    }
+    function stopBlink() { document.body.classList.remove('blink'); }
+    function startBlink() { document.body.classList.add('blink'); }
 
-    function startBlink() {
-      document.body.classList.add("blink");
-    }
-
+    // --- 5. Compte à rebours ---
     function finish() {
       running = false;
       remainingMs = 0;
       cancelAnimationFrame(rafId);
       rafId = null;
       lastTick = null;
-
-      setBackgroundFromFraction(0);
-      setStatus("Terminé !", "fa-flag-checkered");
+      setStatus('Terminé !', 'fa-flag-checkered');
       startBlink();
       startAlarm();
       updateUI();
@@ -304,95 +884,287 @@
 
     function tick(ts) {
       if (!running) return;
-
       if (lastTick == null) lastTick = ts;
-      const dt = ts - lastTick;
+      remainingMs -= ts - lastTick;
       lastTick = ts;
-
-      remainingMs -= dt;
       if (remainingMs <= 0) {
         finish();
         return;
       }
-
       updateUI();
       rafId = requestAnimationFrame(tick);
     }
 
-    function readMinutes() {
-      const min = parseFloat(minutesEl.value);
-      if (!Number.isFinite(min) || min <= 0) return 0;
-      return min;
-    }
-
-    function resetTimer(toTotal = true) {
+    function resetTimer() {
       stopAlarm();
       stopBlink();
       running = false;
       cancelAnimationFrame(rafId);
       rafId = null;
       lastTick = null;
-
-      if (toTotal) {
-        const mins = readMinutes();
-        totalMs = mins * 60 * 1000;
-        remainingMs = totalMs;
-      } else {
-        remainingMs = totalMs;
-      }
-
-      setStatus("Prêt", "fa-circle-check");
+      remainingMs = totalMs;
+      setStatus('Prêt', 'fa-circle-check');
       updateUI();
     }
 
-    // --- Events ---
-    startBtn.addEventListener("click", () => {
+    startBtn.addEventListener('click', () => {
       stopAlarm();
       stopBlink();
-
-      const mins = readMinutes();
-      if (mins <= 0) {
-        setStatus("Temps invalide", "fa-triangle-exclamation");
+      if (remainingMs <= 0) remainingMs = totalMs;
+      if (totalMs <= 0) {
+        setStatus('Durée nulle', 'fa-triangle-exclamation');
         return;
       }
-
-      if (remainingMs === totalMs) {
-        totalMs = mins * 60 * 1000;
-        remainingMs = totalMs;
-      }
-
-      ensureAudioContext(); 
+      if (!muted) ensureAudioContext();
       running = true;
-      setStatus("En cours…", "fa-spinner fa-spin");
+      setStatus('En cours…', 'fa-spinner fa-spin');
       updateUI();
       rafId = requestAnimationFrame(tick);
     });
 
-    pauseBtn.addEventListener("click", () => {
+    pauseBtn.addEventListener('click', () => {
       running = false;
       cancelAnimationFrame(rafId);
       rafId = null;
       lastTick = null;
-      setStatus("En pause", "fa-circle-pause");
+      setStatus('En pause', 'fa-circle-pause');
       updateUI();
     });
 
-    resetBtn.addEventListener("click", () => {
-      resetTimer(true);
-    });
+    resetBtn.addEventListener('click', resetTimer);
 
-    muteBtn.addEventListener("click", () => {
+    muteBtn.addEventListener('click', () => {
       muted = !muted;
       muteBtn.innerHTML = muted ? '<i class="fa-solid fa-volume-xmark"></i>' : '<i class="fa-solid fa-volume-high"></i>';
       if (muted) stopAlarm();
     });
 
-    minutesEl.addEventListener("change", () => {
-      if (!running) resetTimer(true);
+    [minutesEl, secondsEl].forEach((el) => el.addEventListener('input', () => {
+      if (isPristine()) setDuration(readInputs(), true);
+    }));
+
+    // --- 6. Test du temps de réaction ---
+    const rtPanel = $('rtPanel');
+    const zone = $('zone');
+    const MODE_NAMES = { visual: 'Visuel', audio: 'Sonore', choice: 'Choix (← ou →)' };
+    const RT = {
+      mode: 'visual',
+      state: 'idle',          // idle → wait → go → result → wait…
+      timer: null,
+      onset: null,            // instant du stimulus (horloge de performance.now, en ms)
+      expected: null,         // flèche attendue en mode « choix »
+      trials: [],             // { mode, ms, excluded }
+      falseStarts: { visual: 0, audio: 0, choice: 0 },
+      errors: 0
+    };
+
+    $('rtToggle').addEventListener('click', () => {
+      $('rtToggle').blur(); // sinon la barre d'espace, utilisée pendant le test, réactiverait ce bouton
+      rtPanel.hidden = !rtPanel.hidden;
+      $('rtToggle').innerHTML = rtPanel.hidden
+        ? '<i class="fa-solid fa-bolt"></i> Tester son temps de réaction'
+        : '<i class="fa-solid fa-xmark"></i> Fermer le test de réaction';
+      if (!rtPanel.hidden) {
+        rtIdle();
+        renderRtStats();
+        rtPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        clearTimeout(RT.timer);
+        RT.state = 'idle';
+      }
     });
 
-    // init
-    resetTimer(true);
+    document.querySelectorAll('#rtModes .chip').forEach((b) => b.addEventListener('click', () => {
+      RT.mode = b.dataset.mode;
+      document.querySelectorAll('#rtModes .chip').forEach((x) => x.classList.toggle('active', x === b));
+      $('cErr').hidden = RT.mode !== 'choice';
+      clearTimeout(RT.timer);
+      rtIdle();
+      renderRtStats();
+      b.blur();
+    }));
+
+    function setZone(cls, big, small) {
+      zone.className = `zone ${cls}`;
+      $('zoneBig').innerHTML = big;
+      $('zoneSmall').innerHTML = small || '';
+    }
+
+    function rtIdle() {
+      RT.state = 'idle';
+      const how = RT.mode === 'choice'
+        ? 'Quand une flèche apparaît, appuyez sur la touche ← ou → correspondante (ou touchez la moitié gauche ou droite de la zone).'
+        : RT.mode === 'audio'
+          ? 'Gardez les yeux fermés si vous le souhaitez : appuyez sur une touche dès que vous entendez le bip.'
+          : 'Appuyez sur une touche dès que la zone devient blanche.';
+      setZone('', 'Appuyez sur une touche pour commencer', `${how}<br>(Sur écran tactile, touchez cette zone.)`);
+    }
+
+    function rtStartTrial() {
+      if (RT.mode === 'audio') ensureAudioContext();
+      RT.state = 'wait';
+      RT.onset = null;
+      setZone('wait', RT.mode === 'audio' ? 'Écoutez…' : 'Attendez…', RT.mode === 'audio' ? 'appuyez dès que vous entendez le bip' : 'ne bougez pas avant le signal');
+      // Délai aléatoire, pour que le signal ne puisse pas être anticipé
+      RT.timer = setTimeout(rtStimulus, 1500 + Math.random() * 2500);
+    }
+
+    function rtStimulus() {
+      RT.state = 'go';
+      if (RT.mode === 'audio') {
+        const ctx = ensureAudioContext();
+        const when = ctx.currentTime + 0.05;
+        beepAt(when, 1000, 180, 0.25);
+        // Conversion de l'instant audio en instant « performance.now », latence de sortie comprise
+        let perfAt;
+        if (ctx.getOutputTimestamp) {
+          const ts = ctx.getOutputTimestamp();
+          if (ts.contextTime > 0 && ts.performanceTime > 0) perfAt = ts.performanceTime + (when - ts.contextTime) * 1000;
+        }
+        if (perfAt === undefined) perfAt = performance.now() + (when - ctx.currentTime + (ctx.outputLatency || ctx.baseLatency || 0)) * 1000;
+        RT.onset = perfAt;
+        return; // aucun changement visuel : seul le son compte
+      }
+      if (RT.mode === 'choice') {
+        RT.expected = Math.random() < 0.5 ? 'left' : 'right';
+        setZone('go', `<span class="arrow">${RT.expected === 'left' ? '⬅' : '➡'}</span>`, '');
+      } else {
+        setZone('go', '⚡ MAINTENANT !', '');
+      }
+      // Instant du stimulus : début de l'image qui l'affiche
+      requestAnimationFrame((ts) => { RT.onset = ts; });
+    }
+
+    function rtRespond(ts, dir) {
+      if (RT.state === 'idle' || RT.state === 'result') {
+        rtStartTrial();
+        return;
+      }
+      if (RT.state === 'wait') {
+        clearTimeout(RT.timer);
+        RT.falseStarts[RT.mode]++;
+        RT.state = 'result';
+        setZone('bad', 'Trop tôt : faux départ !', 'Attendez le signal. Appuyez pour recommencer.');
+        renderRtStats();
+        return;
+      }
+      if (RT.state !== 'go' || RT.onset === null) return;
+      const ms = ts - RT.onset;
+      if (ms < 0) return;
+      RT.state = 'result';
+      if (RT.mode === 'choice' && dir !== RT.expected) {
+        RT.errors++;
+        setZone('bad', 'Mauvaise direction !', 'Essai non compté. Appuyez pour recommencer.');
+        renderRtStats();
+        return;
+      }
+      const excluded = ms < 100;
+      RT.trials.push({ mode: RT.mode, ms, excluded });
+      if (excluded) {
+        setZone('bad', `${Math.round(ms)} ms : anticipation`, 'Moins de 100 ms : réaction physiologiquement impossible, essai exclu (faux départ en athlétisme). Appuyez pour continuer.');
+      } else {
+        setZone('result', `${Math.round(ms)} ms`, 'Appuyez pour l\'essai suivant');
+      }
+      renderRtStats();
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (rtPanel.hidden || e.repeat) return;
+      const tag = document.activeElement && document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+      if (['Shift', 'Control', 'Alt', 'Meta', 'Tab', 'CapsLock', 'Escape'].includes(e.key)) return;
+      let dir = null;
+      if (e.key === 'ArrowLeft') dir = 'left';
+      if (e.key === 'ArrowRight') dir = 'right';
+      if (RT.mode === 'choice' && RT.state === 'go' && !dir) return; // en mode choix, seules les flèches comptent
+      e.preventDefault();
+      rtRespond(e.timeStamp, dir);
+    });
+
+    zone.addEventListener('pointerdown', (e) => {
+      const r = zone.getBoundingClientRect();
+      rtRespond(e.timeStamp, e.clientX < r.left + r.width / 2 ? 'left' : 'right');
+    });
+
+    // Statistiques (même écriture que l'outil « Incertitude de type A ») : u arrondie par excès à 1 CS
+    function stats(mode) {
+      const v = RT.trials.filter((t) => t.mode === mode && !t.excluded).map((t) => t.ms);
+      const N = v.length;
+      if (!N) return { N };
+      const mean = v.reduce((a, b) => a + b, 0) / N;
+      if (N < 2) return { N, mean };
+      const s = Math.sqrt(v.reduce((a, b) => a + (b - mean) ** 2, 0) / (N - 1));
+      return { N, mean, s, u: s / Math.sqrt(N) };
+    }
+
+    function fmtComma(x, d) {
+      return x.toFixed(d).replace('.', ',');
+    }
+
+    function fmtResult(mean, u) {
+      let e = Math.floor(Math.log10(u));
+      let ur = Math.ceil(u / 10 ** e - 1e-9) * 10 ** e;
+      if (ur >= 10 ** (e + 1)) e += 1;
+      const d = Math.max(0, -e);
+      return `(${fmtComma(mean, d)} ± ${fmtComma(ur, d)}) ms`;
+    }
+
+    function renderRtStats() {
+      const fs = RT.falseStarts[RT.mode];
+      const cur = stats(RT.mode);
+      $('cValid').textContent = `Essais valides : ${cur.N}`;
+      $('cFalse').textContent = `Faux départs : ${fs}`;
+      $('cErr').textContent = `Erreurs de direction : ${RT.errors}`;
+
+      $('rtStats').innerHTML = Object.keys(MODE_NAMES).map((mode) => {
+        const st = stats(mode);
+        const cell = (x, d = 0) => (x === undefined ? '—' : `${fmtComma(x, d)} ms`);
+        const res = st.u !== undefined ? fmtResult(st.mean, st.u) : st.N === 1 ? 'au moins 2 essais' : '—';
+        return `<tr class="${mode === RT.mode ? 'current' : ''}"><td>${MODE_NAMES[mode]}</td><td>${st.N}</td><td>${cell(st.mean)}</td><td>${cell(st.s)}</td><td>${cell(st.u, 1)}</td><td class="res">${res}</td></tr>`;
+      }).join('');
+
+      $('trials').innerHTML = RT.trials.filter((t) => t.mode === RT.mode)
+        .map((t, k) => `<span class="trial ${t.excluded ? 'excluded' : ''}" title="${t.excluded ? 'Anticipation : essai exclu' : `Essai ${k + 1}`}">${Math.round(t.ms)}</span>`).join('');
+
+      renderCarBox();
+    }
+
+    function renderCarBox() {
+      const best = ['visual', 'choice', 'audio'].map(stats).find((st) => st.mean !== undefined);
+      const lines = [50, 130].map((kmh) => {
+        const v = kmh / 3.6;
+        const own = best ? ` ; avec votre temps mesuré (${fmtComma(best.mean / 1000, 2)} s) : <strong>${fmtComma(v * best.mean / 1000, 1)} m</strong>` : '';
+        return `À ${kmh} km/h (${fmtComma(v, 1)} m/s), avec t<sub>R</sub> = 1 s : <strong>${fmtComma(v, 1)} m</strong> parcourus avant de commencer à freiner${own}.`;
+      });
+      $('carBox').innerHTML = `<i class="fa-solid fa-car-side"></i> ${lines.join('<br><i class="fa-solid fa-car-side" style="visibility:hidden"></i> ')}`
+        + (best ? '' : '<br><em>Faites quelques essais pour comparer avec votre propre temps de réaction.</em>');
+    }
+
+    $('rtClear').addEventListener('click', () => {
+      $('rtClear').blur();
+      RT.trials = RT.trials.filter((t) => t.mode !== RT.mode);
+      RT.falseStarts[RT.mode] = 0;
+      if (RT.mode === 'choice') RT.errors = 0;
+      rtIdle();
+      renderRtStats();
+    });
+
+    $('rtCopy').addEventListener('click', () => {
+      $('rtCopy').blur();
+      const v = RT.trials.filter((t) => t.mode === RT.mode && !t.excluded).map((t) => fmtComma(t.ms, 0));
+      if (!v.length) return;
+      const fb = $('rtFeedback');
+      navigator.clipboard.writeText(v.join(' ; ')).then(
+        () => { fb.textContent = '✓ Copié : collez-les dans l\'outil type A (unité : ms)'; },
+        () => { fb.textContent = 'Copie impossible'; }
+      );
+      setTimeout(() => { fb.textContent = ''; }, 4000);
+    });
+
+    // --- Initialisation ---
+    setDuration(300, false);
+    setScale(600);
+    renderCarBox();
   </script>
 </body>
 </html>
