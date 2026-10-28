@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthèse des couleurs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #f1f5f9;
+            --bg-panel: #ffffff;
+            --bg-recessed: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+            --border-subtle: #e2e8f0;
+            --accent: #8b5cf6;
+            --accent-glow: rgba(139, 92, 246, 0.22);
+            --stage-bg: #090d16;
+            --shadow-panel: 0 10px 25px -5px rgba(15, 23, 42, 0.07), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+            --radius: 16px;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0b1120;
+            --bg-panel: #151f32;
+            --bg-recessed: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #26354d;
+            --border-subtle: #1e293b;
+            --accent: #a78bfa;
+            --accent-glow: rgba(167, 139, 250, 0.25);
+            --stage-bg: #050811;
+            --shadow-panel: 0 12px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 1.5rem 1rem 3rem;
+            transition: background-color 0.25s, color 0.25s;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: conic-gradient(from 0deg, #ef4444, #eab308, #22c55e, #06b6d4, #3b82f6, #d946ef, #ef4444);
+            box-shadow: 0 4px 12px var(--accent-glow);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .brand-icon::after {
+            content: '';
+            position: absolute;
+            inset: 13px;
+            border-radius: 50%;
+            background: #ffffff;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .theme-toggle {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* Onglets */
+        .tabs {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.3rem;
+            box-shadow: var(--shadow-panel);
+        }
+
+        .tab {
+            flex: 1 1 auto;
+            background: transparent;
+            border: none;
+            border-radius: 9px;
+            padding: 0.6rem 0.9rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            color: var(--text-main);
+        }
+
+        .tab.active {
+            background: var(--accent);
+            color: #ffffff;
+        }
+
+        .panel {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-panel);
+            margin-bottom: 1.5rem;
+        }
+
+        .panel-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 860px) {
+            .grid-2 {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .btn-small, select {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            background: var(--bg-recessed);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.42rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .btn-small:hover {
+            border-color: var(--text-muted);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .explain {
+            background: var(--bg-recessed);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--accent);
+            border-radius: 10px;
+            padding: 1rem 1.15rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        .explain h3 {
+            font-size: 0.95rem;
+            margin: 0.6rem 0 0.2rem;
+        }
+
+        .explain h3:first-child {
+            margin-top: 0;
+        }
+
+        .explain p {
+            margin: 0.35rem 0;
+        }
+
+        .muted {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        /* --- Générateur RVB --- */
+        .slider-row {
+            display: grid;
+            grid-template-columns: 2.2rem minmax(0, 1fr) 4.2rem;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 0.35rem;
+        }
+
+        .slider-row .ch-name {
+            font-weight: 800;
+            font-size: 1.05rem;
+            text-align: center;
+        }
+
+        .slider-row input[type="number"] {
+            width: 100%;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.35rem 0.4rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-recessed);
+            color: var(--text-main);
+            text-align: center;
+        }
+
+        .slider-intensity {
+            grid-column: 2 / 3;
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            margin: -0.15rem 0 0.7rem;
+        }
+
+        input[type="range"].track {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 22px;
+            border-radius: 11px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            background: #888;
+        }
+
+        input[type="range"].track::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid #0f172a;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+        }
+
+        input[type="range"].track::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid #0f172a;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+        }
+
+        .swatch {
+            height: 170px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0.75rem;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .code-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 0.95rem;
+            background: rgba(15, 23, 42, 0.78);
+            color: #ffffff;
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .presets {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin: 0.8rem 0 1rem;
+        }
+
+        .preset {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .beams {
+            margin-top: 1rem;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000000;
+            aspect-ratio: 16 / 10;
+            position: relative;
+            isolation: isolate;
+        }
+
+        .beam {
+            position: absolute;
+            width: 46%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+        }
+
+        .beams-caption {
+            position: absolute;
+            left: 0.6rem;
+            bottom: 0.45rem;
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* --- Damier --- */
+        .color-pick {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        input[type="color"] {
+            width: 44px;
+            height: 34px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-recessed);
+            padding: 2px;
+            cursor: pointer;
+        }
+
+        .board-wrap {
+            position: relative;
+            height: 380px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #000000;
+            margin: 1rem 0 0.6rem;
+        }
+
+        .board-wrap canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            image-rendering: pixelated;
+        }
+
+        .board-wrap:fullscreen {
+            border-radius: 0;
+            border: none;
+        }
+
+        .size-row {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            gap: 0.75rem;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .size-row input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent);
+        }
+
+        .size-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            min-width: 7.5rem;
+            text-align: right;
+        }
+
+        .predict {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+            margin: 0.9rem 0;
+        }
+
+        .predict-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--bg-recessed);
+        }
+
+        .predict-card .chip-color {
+            height: 70px;
+        }
+
+        .predict-card .txt {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.82rem;
+            line-height: 1.4;
+        }
+
+        .predict-card .txt strong {
+            display: block;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .warn {
+            color: #b45309;
+            font-weight: 600;
+            font-size: 0.82rem;
+        }
+
+        [data-theme="dark"] .warn {
+            color: #fbbf24;
+        }
+
+        /* --- Illusions --- */
+        .stage {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--stage-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stage canvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .stage:fullscreen {
+            border-radius: 0;
+            border: none;
+        }
+
+        .stage:fullscreen canvas {
+            max-height: 100vh;
+            width: auto;
+        }
+
+        .controls-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .ctrl {
+            display: grid;
+            grid-template-columns: 8.5rem minmax(0, 1fr) auto;
+            gap: 0.6rem;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .ctrl input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent);
+        }
+
+        .ctrl .val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            min-width: 4rem;
+            text-align: right;
+        }
+
+        .ghost-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        .ghost-chip {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .status-line {
+            font-size: 0.9rem;
+            font-weight: 600;
+            min-height: 1.4em;
+        }
+
+        @media (max-width: 600px) {
+            .panel {
+                padding: 1.1rem;
+            }
+            .predict {
+                grid-template-columns: minmax(0, 1fr);
+            }
+            .ctrl {
+                grid-template-columns: minmax(0, 1fr) auto;
+            }
+            .ctrl > label {
+                grid-column: 1 / -1;
+            }
+            .board-wrap {
+                height: 300px;
+            }
+            .size-row {
+                grid-template-columns: minmax(0, 1fr) auto;
+            }
+            .size-row input[type="range"] {
+                grid-column: 1 / -1;
+                grid-row: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="brand">
+            <div class="brand-icon"></div>
+            <div>
+                <h1>Synthèse des couleurs</h1>
+                <div class="subtitle">Synthèse additive, fusion de deux couleurs par l'œil et illusions colorées</div>
+            </div>
+        </div>
+        <button class="theme-toggle" id="themeBtn" title="Changer le thème (Clair / Sombre)">🌓</button>
+    </header>
+
+    <nav class="tabs" id="tabs">
+        <button class="tab active" data-tab="rgb">🎚️ Générateur RVB</button>
+        <button class="tab" data-tab="board">🏁 Damier de fusion</button>
+        <button class="tab" data-tab="lilac">🟣 Lilac chaser</button>
+        <button class="tab" data-tab="after">🖼️ Image complémentaire</button>
+    </nav>
+
+    <!-- 1. GÉNÉRATEUR RVB -->
+    <section class="panel" data-pane="rgb">
+        <div class="grid-2">
+            <div>
+                <div class="panel-title">Trois lumières : rouge, verte et bleue</div>
+                <div class="slider-row">
+                    <span class="ch-name" style="color: #ef4444;">R</span>
+                    <input type="range" class="track" id="rR" min="0" max="255" value="255" aria-label="Rouge">
+                    <input type="number" id="nR" min="0" max="255" value="255" aria-label="Rouge (valeur)">
+                </div>
+                <div class="slider-row"><span></span><div class="slider-intensity" id="iR"></div><span></span></div>
+                <div class="slider-row">
+                    <span class="ch-name" style="color: #22c55e;">V</span>
+                    <input type="range" class="track" id="rG" min="0" max="255" value="160" aria-label="Vert">
+                    <input type="number" id="nG" min="0" max="255" value="160" aria-label="Vert (valeur)">
+                </div>
+                <div class="slider-row"><span></span><div class="slider-intensity" id="iG"></div><span></span></div>
+                <div class="slider-row">
+                    <span class="ch-name" style="color: #3b82f6;">B</span>
+                    <input type="range" class="track" id="rB" min="0" max="255" value="40" aria-label="Bleu">
+                    <input type="number" id="nB" min="0" max="255" value="40" aria-label="Bleu (valeur)">
+                </div>
+                <div class="slider-row"><span></span><div class="slider-intensity" id="iB"></div><span></span></div>
+
+                <div class="presets" id="rgbPresets"></div>
+
+                <div class="toolbar">
+                    <span class="muted">Envoyer cette couleur au damier :</span>
+                    <button class="btn-small" id="toBoardA">Couleur 1</button>
+                    <button class="btn-small" id="toBoardB">Couleur 2</button>
+                </div>
+            </div>
+            <div>
+                <div class="swatch" id="swatch"><span class="code-pill" id="codePill" title="Cliquer pour copier">#FFA028</span></div>
+                <div class="beams" id="beams">
+                    <div class="beam" id="beamR" style="left: 14%; top: 4%;"></div>
+                    <div class="beam" id="beamG" style="left: 40%; top: 4%;"></div>
+                    <div class="beam" id="beamB" style="left: 27%; top: 38%;"></div>
+                    <span class="beams-caption">Les trois faisceaux superposés sur un écran noir</span>
+                </div>
+            </div>
+        </div>
+        <div class="explain" style="margin-top: 1.25rem;">
+            <h3>La synthèse additive</h3>
+            <p>Un écran ne produit que trois lumières : chacun de ses pixels est formé de trois sous-pixels, <strong>rouge</strong>, <strong>vert</strong> et <strong>bleu</strong>. Chaque curseur règle l'une d'elles, de 0 (éteinte) à 255 (intensité maximale). En les superposant, on obtient toutes les couleurs : rouge + vert = <strong>jaune</strong>, rouge + bleu = <strong>magenta</strong>, vert + bleu = <strong>cyan</strong>, et les trois ensemble = <strong>blanc</strong>.</p>
+            <p>Les codes de 0 à 255 ne sont pas proportionnels à l'intensité lumineuse : l'écran applique une <strong>correction gamma</strong>, qui consacre plus de codes aux faibles intensités, auxquelles l'œil est plus sensible. Ainsi, le code 128 ne correspond qu'à environ 22 % de l'intensité maximale (voir sous chaque curseur).</p>
+        </div>
+    </section>
+
+    <!-- 2. DAMIER -->
+    <section class="panel" data-pane="board" hidden>
+        <div class="toolbar" style="justify-content: space-between;">
+            <div class="toolbar">
+                <label class="color-pick">Couleur 1 <input type="color" id="colA" value="#ff0000"></label>
+                <label class="color-pick">Couleur 2 <input type="color" id="colB" value="#00ff00"></label>
+            </div>
+            <div class="toolbar">
+                <span class="muted">Paires :</span>
+                <button class="btn-small" data-pair="#ff0000,#00ff00">Rouge + vert</button>
+                <button class="btn-small" data-pair="#ff0000,#0000ff">Rouge + bleu</button>
+                <button class="btn-small" data-pair="#00ff00,#0000ff">Vert + bleu</button>
+                <button class="btn-small" data-pair="#ffff00,#0000ff">Jaune + bleu</button>
+                <button class="btn-small" data-pair="#000000,#ffffff">Noir + blanc</button>
+            </div>
+        </div>
+
+        <div class="board-wrap" id="boardWrap"><canvas id="board"></canvas></div>
+
+        <div class="size-row">
+            <span>Taille d'un carré</span>
+            <input type="range" id="sizeRange" min="0" max="13" value="9" aria-label="Taille des carrés">
+            <span class="size-value" id="sizeVal"></span>
+        </div>
+        <div class="toolbar" style="margin-top: 0.6rem; justify-content: space-between;">
+            <span class="muted" id="pxInfo"></span>
+            <button class="btn-small btn-primary" id="boardFs">⛶ Plein écran</button>
+        </div>
+        <div class="warn" id="zoomWarn" hidden></div>
+
+        <div class="predict">
+            <div class="predict-card">
+                <div class="chip-color" id="predLinear"></div>
+                <div class="txt"><strong>Ce que l'œil voit de loin : moyenne des intensités lumineuses</strong><span class="mono" id="predLinearTxt"></span></div>
+            </div>
+            <div class="predict-card">
+                <div class="chip-color" id="predNaive"></div>
+                <div class="txt"><strong>Moyenne des codes RVB (prédiction fausse)</strong><span class="mono" id="predNaiveTxt"></span></div>
+            </div>
+        </div>
+
+        <div class="explain">
+            <h3>Quand l'œil ne sépare plus les carrés</h3>
+            <p>Réduisez la taille des carrés, ou reculez : à un moment, le damier se fond en une couleur unie. L'œil ne distingue deux points que s'ils sont vus sous un angle supérieur à environ <strong>1′ d'arc</strong> (1/60 de degré). En deçà, la lumière des deux couleurs se mélange sur la rétine : c'est une <strong>synthèse additive</strong>, exactement comme celle des sous-pixels de l'écran. Un carré de 1 mm se fond ainsi à partir de 3,4 m environ (distance ≈ 3 400 × taille du carré).</p>
+            <p>Les carrés sont dessinés directement en pixels de l'écran, sans lissage ni mélange par le navigateur : la fusion se fait bien dans votre œil. Comparez la couleur obtenue aux deux prédictions : c'est la <strong>moyenne des intensités lumineuses</strong> qui est juste, et non la moyenne des codes RVB. Le rouge et le vert donnent un jaune de code (188, 188, 0), et non (128, 128, 0), plus sombre : c'est encore la correction gamma.</p>
+        </div>
+    </section>
+
+    <!-- 3. LILAC CHASER -->
+    <section class="panel" data-pane="lilac" hidden>
+        <div class="grid-2">
+            <div class="stage" id="lilacStage"><canvas id="lilac" width="640" height="640"></canvas></div>
+            <div class="controls-col">
+                <div class="panel-title" style="margin: 0;">Fixez la croix noire pendant 20 à 30 secondes</div>
+                <div class="ctrl"><label for="lilacColor">Couleur des disques</label><input type="color" id="lilacColor" value="#d79ad8"><span></span></div>
+                <div class="ctrl"><label for="lilacSpeed">Durée d'un pas</label><input type="range" id="lilacSpeed" min="50" max="300" step="10" value="110"><span class="val" id="lilacSpeedVal"></span></div>
+                <div class="ctrl"><label for="lilacBlur">Flou des disques</label><input type="range" id="lilacBlur" min="0" max="100" value="70"><span class="val" id="lilacBlurVal"></span></div>
+                <div class="ghost-row"><span class="ghost-chip" id="ghostChip"></span><span>Couleur attendue du disque « fantôme » : la couleur complémentaire, sur le même fond gris.</span></div>
+                <div class="toolbar">
+                    <button class="btn-small" id="lilacPause">⏸ Pause</button>
+                    <button class="btn-small" id="lilacReset">↺ Couleur d'origine</button>
+                    <button class="btn-small btn-primary" id="lilacFs">⛶ Plein écran</button>
+                </div>
+                <div class="explain">
+                    <h3>Ce que l'on observe</h3>
+                    <p>D'abord, un disque <strong>vert</strong> semble tourner dans le trou laissé par le disque lilas manquant. Puis, si vous fixez bien la croix, les disques lilas <strong>disparaissent</strong> : il ne reste qu'un disque vert qui tourne sur un fond gris.</p>
+                    <h3>Trois phénomènes à la fois</h3>
+                    <p><strong>Image rémanente :</strong> les cônes qui reçoivent longtemps la lumière lilas s'adaptent et deviennent moins sensibles. Quand le disque s'éteint, le gris paraît teinté de la couleur complémentaire, vert. Changez la couleur des disques : le fantôme change de couleur.</p>
+                    <p><strong>Effet de Troxler :</strong> des taches floues et immobiles, vues en vision périphérique pendant que l'œil fixe un point, finissent par s'effacer de la perception.</p>
+                    <p><strong>Mouvement apparent :</strong> le cerveau relie les apparitions successives en un seul objet qui se déplace.</p>
+                    <p class="muted">Illusion créée par Jeremy Hinton en 2005.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. IMAGE COMPLÉMENTAIRE -->
+    <section class="panel" data-pane="after" hidden>
+        <div class="grid-2">
+            <div class="stage" id="afterStage"><canvas id="after" width="900" height="560"></canvas></div>
+            <div class="controls-col">
+                <div class="panel-title" style="margin: 0;">Fixez la croix sans bouger les yeux</div>
+                <div class="ctrl">
+                    <label for="afterDur">Temps de fixation</label>
+                    <select id="afterDur">
+                        <option value="15">15 s</option>
+                        <option value="20" selected>20 s</option>
+                        <option value="30">30 s</option>
+                    </select>
+                    <span></span>
+                </div>
+                <div class="toolbar">
+                    <button class="btn-small btn-primary" id="afterStart">▶ Commencer</button>
+                    <button class="btn-small" id="afterOrig">Voir l'original</button>
+                    <button class="btn-small" id="afterFs">⛶ Plein écran</button>
+                </div>
+                <div class="toolbar">
+                    <label class="btn-small">📂 Utiliser ma photo<input type="file" id="afterFile" accept="image/*" hidden></label>
+                    <button class="btn-small" id="afterDefault">Paysage d'exemple</button>
+                </div>
+                <div class="status-line" id="afterStatus">Cliquez sur « Commencer », puis fixez la croix.</div>
+                <div class="explain">
+                    <h3>Ce que l'on observe</h3>
+                    <p>Après avoir fixé l'image aux couleurs étranges, elle devient soudain en <strong>niveaux de gris</strong>… mais vous la voyez quelques secondes <strong>en couleurs naturelles</strong>, tant que vous ne bougez pas les yeux.</p>
+                    <h3>Pourquoi ?</h3>
+                    <p>L'image affichée a les couleurs <strong>complémentaires</strong> de la photo d'origine, avec la même luminosité : le ciel est orangé, l'herbe rose. En la fixant, chaque zone de la rétine s'adapte à sa couleur. Quand l'image devient grise, chaque zone perçoit la couleur complémentaire de celle à laquelle elle s'est habituée : la complémentaire de la complémentaire, c'est-à-dire la couleur d'origine.</p>
+                    <p>Ce phénomène s'explique par la <strong>théorie des processus antagonistes</strong> (Ewald Hering) : le système visuel code les couleurs par oppositions rouge/vert, bleu/jaune et clair/sombre. Fatiguer l'un des côtés d'une opposition favorise temporairement l'autre.</p>
+                    <p class="muted">Les couleurs complémentaires sont calculées dans l'espace OKLab, conçu pour la vision humaine : on inverse la teinte en conservant la luminosité de chaque pixel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    const $ = (id) => document.getElementById(id);
+    const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+
+    // --- Thème ---
+    function storageGet(key) {
+        try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+
+    function storageSet(key, value) {
+        try { localStorage.setItem(key, value); } catch (e) { /* stockage indisponible */ }
+    }
+
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        storageSet('theme_pref', theme);
+    }
+
+    const savedTheme = storageGet('theme_pref');
+    if (savedTheme) setTheme(savedTheme);
+    else if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
+    $('themeBtn').addEventListener('click', () => {
+        setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // --- Outils de couleur ---
+    // sRGB ↔ intensité lumineuse (linéaire) : fonction de transfert normalisée de l'écran
+    const toLinear = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+    const toCode = (l) => Math.round(255 * (l <= 0.0031308 ? 12.92 * l : 1.055 * Math.pow(l, 1 / 2.4) - 0.055));
+
+    function hexToRgb(hex) {
+        return [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+    }
+
+    function rgbToHex(rgb) {
+        return '#' + rgb.map((v) => clamp(Math.round(v), 0, 255).toString(16).padStart(2, '0')).join('').toUpperCase();
+    }
+
+    // OKLab (espace perceptif) : L = luminosité, a et b = axes vert↔rouge et bleu↔jaune
+    function linToOklab(r, g, b) {
+        const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+        const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+        const s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+        return [
+            0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s,
+            1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s,
+            0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s
+        ];
+    }
+
+    function oklabToLin(L, a, b) {
+        const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3;
+        const m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3;
+        const s = (L - 0.0894841775 * a - 1.2914855480 * b) ** 3;
+        return [
+            4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+            -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+            -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
+        ];
+    }
+
+    // Couleur complémentaire de même luminosité (teinte opposée dans OKLab)
+    function complementary(rgb) {
+        const [L, a, b] = linToOklab(...rgb.map(toLinear));
+        return oklabToLin(L, -a, -b).map((v) => toCode(clamp(v, 0, 1)));
+    }
+
+    // --- Onglets ---
+    let currentTab = 'rgb';
+    document.querySelectorAll('#tabs .tab').forEach((t) => t.addEventListener('click', () => {
+        currentTab = t.dataset.tab;
+        document.querySelectorAll('#tabs .tab').forEach((x) => x.classList.toggle('active', x === t));
+        document.querySelectorAll('[data-pane]').forEach((p) => { p.hidden = p.dataset.pane !== currentTab; });
+        if (currentTab === 'board') drawBoard();
+        if (currentTab === 'lilac') startLilac(); else stopLilac();
+        if (currentTab !== 'after') cancelAfter();
+    }));
+
+    // ======================= 1. Générateur RVB =======================
+    const sliders = { R: $('rR'), G: $('rG'), B: $('rB') };
+    const numbers = { R: $('nR'), G: $('nG'), B: $('nB') };
+
+    function currentRgb() {
+        return ['R', 'G', 'B'].map((k) => Number(sliders[k].value));
+    }
+
+    function updateRgb() {
+        const rgb = currentRgb();
+        const hex = rgbToHex(rgb);
+        $('swatch').style.background = hex;
+        $('codePill').textContent = `${hex} · rgb(${rgb.join(', ')})`;
+        // Piste de chaque curseur : couleur obtenue en ne faisant varier que ce canal
+        ['R', 'G', 'B'].forEach((k, i) => {
+            const lo = [...rgb], hi = [...rgb];
+            lo[i] = 0;
+            hi[i] = 255;
+            sliders[k].style.background = `linear-gradient(90deg, ${rgbToHex(lo)}, ${rgbToHex(hi)})`;
+            numbers[k].value = rgb[i];
+            $('i' + k).textContent = `intensité lumineuse ≈ ${Math.round(toLinear(rgb[i]) * 100)} % du maximum`;
+        });
+        $('beamR').style.background = `rgb(${rgb[0]}, 0, 0)`;
+        $('beamG').style.background = `rgb(0, ${rgb[1]}, 0)`;
+        $('beamB').style.background = `rgb(0, 0, ${rgb[2]})`;
+    }
+
+    ['R', 'G', 'B'].forEach((k) => {
+        sliders[k].addEventListener('input', updateRgb);
+        numbers[k].addEventListener('input', () => {
+            const v = parseInt(numbers[k].value, 10);
+            if (Number.isFinite(v)) {
+                sliders[k].value = clamp(v, 0, 255);
+                updateRgb();
+            }
+        });
+    });
+
+    const PRESETS = [
+        ['Noir', '#000000'], ['Blanc', '#FFFFFF'], ['Rouge', '#FF0000'], ['Vert', '#00FF00'], ['Bleu', '#0000FF'],
+        ['Jaune', '#FFFF00'], ['Cyan', '#00FFFF'], ['Magenta', '#FF00FF'], ['Gris moyen', '#808080'], ['Orange', '#FF8000']
+    ];
+    $('rgbPresets').innerHTML = PRESETS.map(([n, c]) => `<button class="preset" title="${n}" data-c="${c}" style="background:${c}"></button>`).join('');
+    document.querySelectorAll('#rgbPresets .preset').forEach((b) => b.addEventListener('click', () => {
+        hexToRgb(b.dataset.c).forEach((v, i) => { sliders['RGB'[i]].value = v; });
+        updateRgb();
+    }));
+
+    $('codePill').addEventListener('click', () => {
+        const hex = rgbToHex(currentRgb());
+        if (navigator.clipboard) navigator.clipboard.writeText(hex).catch(() => {});
+    });
+
+    $('toBoardA').addEventListener('click', () => { $('colA').value = rgbToHex(currentRgb()).toLowerCase(); drawBoard(); });
+    $('toBoardB').addEventListener('click', () => { $('colB').value = rgbToHex(currentRgb()).toLowerCase(); drawBoard(); });
+
+    // ======================= 2. Damier de fusion =======================
+    const SIZES = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128];
+    const board = $('board');
+    const boardWrap = $('boardWrap');
+
+    function updatePrediction() {
+        const A = hexToRgb($('colA').value), B = hexToRgb($('colB').value);
+        const lin = A.map((v, i) => toCode((toLinear(v) + toLinear(B[i])) / 2));
+        const naive = A.map((v, i) => Math.round((v + B[i]) / 2));
+        $('predLinear').style.background = rgbToHex(lin);
+        $('predNaive').style.background = rgbToHex(naive);
+        $('predLinearTxt').textContent = `${rgbToHex(lin)} · (${lin.join(', ')})`;
+        $('predNaiveTxt').textContent = `${rgbToHex(naive)} · (${naive.join(', ')})`;
+    }
+
+    // Damier dessiné en pixels physiques de l'écran : 1 pixel du canevas = 1 pixel de l'écran
+    function drawBoard() {
+        if (currentTab !== 'board' && !document.fullscreenElement) return;
+        const dpr = window.devicePixelRatio || 1;
+        // Zone intérieure du cadre (bordure exclue), là où se trouve le canevas
+        const rect = boardWrap.getBoundingClientRect();
+        const left = rect.left + boardWrap.clientLeft, top = rect.top + boardWrap.clientTop;
+        const W = Math.max(1, Math.floor(boardWrap.clientWidth * dpr)), H = Math.max(1, Math.floor(boardWrap.clientHeight * dpr));
+        board.width = W;
+        board.height = H;
+        board.style.width = `${W / dpr}px`;
+        board.style.height = `${H / dpr}px`;
+        // Alignement sur la grille des pixels de l'écran (évite tout rééchantillonnage)
+        const fx = ((left * dpr) % 1 + 1) % 1, fy = ((top * dpr) % 1 + 1) % 1;
+        board.style.transform = `translate(${-fx / dpr}px, ${-fy / dpr}px)`;
+
+        const n = SIZES[Number($('sizeRange').value)];
+        const A = hexToRgb($('colA').value), B = hexToRgb($('colB').value);
+        const ctx = board.getContext('2d');
+        const img = ctx.createImageData(W, H);
+        const d = img.data;
+        for (let y = 0; y < H; y++) {
+            const ry = Math.floor(y / n);
+            for (let x = 0; x < W; x++) {
+                const c = ((Math.floor(x / n) + ry) & 1) ? B : A;
+                const k = (y * W + x) * 4;
+                d[k] = c[0];
+                d[k + 1] = c[1];
+                d[k + 2] = c[2];
+                d[k + 3] = 255;
+            }
+        }
+        ctx.putImageData(img, 0, 0);
+
+        const cssSize = n / dpr;
+        $('sizeVal').textContent = `${n} pixel${n > 1 ? 's' : ''} d'écran`;
+        $('pxInfo').textContent = `Soit ${String(Number(cssSize.toFixed(2))).replace('.', ',')} px CSS (rapport de pixels de cet écran : ${String(Number(dpr.toFixed(2))).replace('.', ',')}).`;
+        const fractional = Math.abs(dpr - Math.round(dpr)) > 0.01;
+        $('zoomWarn').hidden = !fractional;
+        $('zoomWarn').textContent = fractional
+            ? 'ℹ Rapport de pixels non entier (zoom du navigateur ou mise à l\'échelle de l\'écran) : le damier reste calé sur les pixels physiques, mais si des motifs parasites (moiré) apparaissent, remettez le zoom à 100 % (Ctrl + 0).'
+            : '';
+        updatePrediction();
+    }
+
+    ['colA', 'colB'].forEach((id) => $(id).addEventListener('input', drawBoard));
+    $('sizeRange').addEventListener('input', drawBoard);
+    document.querySelectorAll('[data-pair]').forEach((b) => b.addEventListener('click', () => {
+        const [a, c] = b.dataset.pair.split(',');
+        $('colA').value = a;
+        $('colB').value = c;
+        drawBoard();
+    }));
+    $('boardFs').addEventListener('click', () => toggleFullscreen(boardWrap));
+    window.addEventListener('resize', () => { if (currentTab === 'board') drawBoard(); });
+    document.addEventListener('fullscreenchange', () => {
+        if (currentTab === 'board') requestAnimationFrame(drawBoard);
+        if (currentTab === 'after') drawAfter();
+    });
+
+    function toggleFullscreen(el) {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+    }
+
+    // ======================= 3. Lilac chaser =======================
+    const lilac = $('lilac');
+    const lctx = lilac.getContext('2d');
+    const LILAC_DEFAULT = '#d79ad8';
+    const LILAC_BG = '#bebebe';
+    let lilacTimer = null, lilacMissing = 0, lilacPaused = false;
+
+    function drawLilac() {
+        const S = lilac.width, c = S / 2, R = S * 0.36;
+        const col = hexToRgb($('lilacColor').value);
+        const blur = Number($('lilacBlur').value) / 100;
+        const r = S * 0.055;
+        lctx.fillStyle = LILAC_BG;
+        lctx.fillRect(0, 0, S, S);
+        for (let k = 0; k < 12; k++) {
+            if (k === lilacMissing) continue;
+            const a = k * Math.PI / 6 - Math.PI / 2;
+            const x = c + R * Math.cos(a), y = c + R * Math.sin(a);
+            // Disque flou : dégradé radial de la couleur vers le gris du fond
+            const outer = r * (1 + 1.4 * blur);
+            const g = lctx.createRadialGradient(x, y, 0, x, y, outer);
+            g.addColorStop(0, `rgb(${col.join(',')})`);
+            g.addColorStop(Math.max(0.01, (1 - blur) * r / outer), `rgb(${col.join(',')})`);
+            g.addColorStop(1, `rgba(${col.join(',')}, 0)`);
+            lctx.fillStyle = g;
+            lctx.beginPath();
+            lctx.arc(x, y, outer, 0, 2 * Math.PI);
+            lctx.fill();
+        }
+        // Croix de fixation
+        lctx.strokeStyle = '#000';
+        lctx.lineWidth = S * 0.006;
+        lctx.beginPath();
+        lctx.moveTo(c - S * 0.022, c);
+        lctx.lineTo(c + S * 0.022, c);
+        lctx.moveTo(c, c - S * 0.022);
+        lctx.lineTo(c, c + S * 0.022);
+        lctx.stroke();
+    }
+
+    function lilacStep() {
+        lilacMissing = (lilacMissing + 1) % 12;
+        drawLilac();
+    }
+
+    function startLilac() {
+        stopLilac();
+        drawLilac();
+        if (!lilacPaused) lilacTimer = setInterval(lilacStep, Number($('lilacSpeed').value));
+    }
+
+    function stopLilac() {
+        clearInterval(lilacTimer);
+        lilacTimer = null;
+    }
+
+    function updateLilacUi() {
+        $('lilacSpeedVal').textContent = `${$('lilacSpeed').value} ms`;
+        $('lilacBlurVal').textContent = `${$('lilacBlur').value} %`;
+        // Couleur du fantôme : complémentaire de même luminosité que le gris du fond
+        const bg = hexToRgb(LILAC_BG).map(toLinear);
+        const [Lb] = linToOklab(...bg);
+        const [, a, b] = linToOklab(...hexToRgb($('lilacColor').value).map(toLinear));
+        const ghost = oklabToLin(Lb, -a, -b).map((v) => toCode(clamp(v, 0, 1)));
+        $('ghostChip').style.background = rgbToHex(ghost);
+    }
+
+    $('lilacColor').addEventListener('input', () => { updateLilacUi(); drawLilac(); });
+    $('lilacBlur').addEventListener('input', () => { updateLilacUi(); drawLilac(); });
+    $('lilacSpeed').addEventListener('input', () => { updateLilacUi(); if (currentTab === 'lilac') startLilac(); });
+    $('lilacPause').addEventListener('click', () => {
+        lilacPaused = !lilacPaused;
+        $('lilacPause').textContent = lilacPaused ? '▶ Reprendre' : '⏸ Pause';
+        if (currentTab === 'lilac') startLilac();
+    });
+    $('lilacReset').addEventListener('click', () => {
+        $('lilacColor').value = LILAC_DEFAULT;
+        updateLilacUi();
+        drawLilac();
+    });
+    $('lilacFs').addEventListener('click', () => toggleFullscreen($('lilacStage')));
+
+    // ======================= 4. Image complémentaire =======================
+    const after = $('after');
+    const actx = after.getContext('2d');
+    const AW = after.width, AH = after.height;
+    let afterImgs = null;      // { orig, comp, gray } : ImageData
+    let afterPhase = 'idle';   // idle | fixing | gray | orig
+    let afterTimer = null, afterRaf = null, afterStartAt = 0;
+
+    // Paysage d'exemple, aux couleurs franches
+    function drawLandscape(ctx) {
+        const sky = ctx.createLinearGradient(0, 0, 0, AH * 0.6);
+        sky.addColorStop(0, '#1d4ed8');
+        sky.addColorStop(1, '#7dd3fc');
+        ctx.fillStyle = sky;
+        ctx.fillRect(0, 0, AW, AH);
+        // Soleil
+        const sun = ctx.createRadialGradient(720, 105, 10, 720, 105, 110);
+        sun.addColorStop(0, '#fde047');
+        sun.addColorStop(0.5, '#facc15');
+        sun.addColorStop(0.55, 'rgba(250, 204, 21, 0.35)');
+        sun.addColorStop(1, 'rgba(250, 204, 21, 0)');
+        ctx.fillStyle = sun;
+        ctx.beginPath();
+        ctx.arc(720, 105, 110, 0, 2 * Math.PI);
+        ctx.fill();
+        // Nuages
+        ctx.fillStyle = '#f8fafc';
+        [[180, 90, 1], [360, 140, 0.8]].forEach(([x, y, k]) => {
+            [[0, 0, 34], [32, -14, 30], [62, 2, 28], [28, 10, 30]].forEach(([dx, dy, r]) => {
+                ctx.beginPath();
+                ctx.arc(x + dx * k, y + dy * k, r * k, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+        });
+        // Collines
+        ctx.fillStyle = '#15803d';
+        ctx.beginPath();
+        ctx.moveTo(0, 330);
+        ctx.bezierCurveTo(200, 230, 380, 300, 520, 270);
+        ctx.bezierCurveTo(680, 240, 800, 300, AW, 260);
+        ctx.lineTo(AW, AH);
+        ctx.lineTo(0, AH);
+        ctx.fill();
+        ctx.fillStyle = '#22c55e';
+        ctx.beginPath();
+        ctx.moveTo(0, 400);
+        ctx.bezierCurveTo(260, 330, 520, 420, AW, 360);
+        ctx.lineTo(AW, AH);
+        ctx.lineTo(0, AH);
+        ctx.fill();
+        // Lac
+        ctx.fillStyle = '#0ea5e9';
+        ctx.beginPath();
+        ctx.ellipse(650, 470, 190, 48, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        // Maison
+        ctx.fillStyle = '#facc15';
+        ctx.fillRect(170, 300, 150, 110);
+        ctx.fillStyle = '#dc2626';
+        ctx.beginPath();
+        ctx.moveTo(150, 305);
+        ctx.lineTo(245, 230);
+        ctx.lineTo(340, 305);
+        ctx.fill();
+        ctx.fillStyle = '#7c2d12';
+        ctx.fillRect(228, 345, 36, 65);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillRect(186, 325, 30, 28);
+        ctx.fillRect(276, 325, 30, 28);
+        // Arbre
+        ctx.fillStyle = '#78350f';
+        ctx.fillRect(581, 300, 18, 90);
+        ctx.fillStyle = '#166534';
+        ctx.beginPath();
+        ctx.arc(590, 285, 50, 0, 2 * Math.PI);
+        ctx.fill();
+        // Fleurs
+        const flowers = ['#ef4444', '#d946ef', '#f97316', '#facc15', '#ef4444'];
+        for (let k = 0; k < 46; k++) {
+            const x = 30 + ((k * 197) % 840), y = 440 + ((k * 53) % 100);
+            if (Math.hypot((x - 650) / 200, (y - 470) / 56) < 1) continue;
+            ctx.fillStyle = flowers[k % flowers.length];
+            ctx.beginPath();
+            ctx.arc(x, y, 8, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    }
+
+    // Prépare l'original, sa version complémentaire (teintes inversées, même luminosité) et sa version grise
+    function prepareAfter(drawSource) {
+        const c = document.createElement('canvas');
+        c.width = AW;
+        c.height = AH;
+        const cx = c.getContext('2d');
+        cx.fillStyle = '#808080';
+        cx.fillRect(0, 0, AW, AH);
+        drawSource(cx);
+        const orig = cx.getImageData(0, 0, AW, AH);
+        const comp = cx.createImageData(AW, AH), gray = cx.createImageData(AW, AH);
+        const o = orig.data, p = comp.data, g = gray.data;
+        const lut = new Float64Array(256);
+        for (let v = 0; v < 256; v++) lut[v] = toLinear(v);
+        for (let k = 0; k < o.length; k += 4) {
+            const [L, a, b] = linToOklab(lut[o[k]], lut[o[k + 1]], lut[o[k + 2]]);
+            const cc = oklabToLin(L, -a, -b);
+            const gg = oklabToLin(L, 0, 0);
+            for (let i = 0; i < 3; i++) {
+                p[k + i] = toCode(clamp(cc[i], 0, 1));
+                g[k + i] = toCode(clamp(gg[i], 0, 1));
+            }
+            p[k + 3] = g[k + 3] = 255;
+        }
+        afterImgs = { orig, comp, gray };
+        cancelAfter();
+    }
+
+    function drawCross(alpha = 1, progress = null) {
+        const x = AW / 2, y = AH / 2;
+        actx.save();
+        actx.beginPath();
+        actx.moveTo(x - 14, y);
+        actx.lineTo(x + 14, y);
+        actx.moveTo(x, y - 14);
+        actx.lineTo(x, y + 14);
+        // Liseré blanc pour que la croix reste visible sur un fond sombre
+        actx.strokeStyle = `rgba(255, 255, 255, ${0.8 * alpha})`;
+        actx.lineWidth = 8;
+        actx.stroke();
+        actx.strokeStyle = `rgba(0, 0, 0, ${alpha})`;
+        actx.lineWidth = 4;
+        actx.stroke();
+        if (progress !== null) {
+            // Fin anneau de progression autour de la croix, discret
+            actx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
+            actx.lineWidth = 2;
+            actx.beginPath();
+            actx.arc(x, y, 24, -Math.PI / 2, -Math.PI / 2 + 2 * Math.PI * progress);
+            actx.stroke();
+        }
+        actx.restore();
+    }
+
+    function drawAfter() {
+        if (!afterImgs) return;
+        const which = afterPhase === 'fixing' ? afterImgs.comp : afterPhase === 'gray' ? afterImgs.gray : afterImgs.orig;
+        actx.putImageData(which, 0, 0);
+        if (afterPhase === 'fixing') {
+            const dur = Number($('afterDur').value) * 1000;
+            drawCross(1, clamp((performance.now() - afterStartAt) / dur, 0, 1));
+        } else if (afterPhase === 'gray') {
+            drawCross(1);
+        }
+    }
+
+    function cancelAfter() {
+        clearTimeout(afterTimer);
+        cancelAnimationFrame(afterRaf);
+        afterPhase = 'idle';
+        $('afterStatus').textContent = 'Cliquez sur « Commencer », puis fixez la croix.';
+        drawAfter();
+    }
+
+    function afterLoop() {
+        if (afterPhase !== 'fixing') return;
+        const dur = Number($('afterDur').value);
+        const left = Math.max(0, dur - (performance.now() - afterStartAt) / 1000);
+        $('afterStatus').textContent = `Fixez la croix… encore ${Math.ceil(left)} s`;
+        drawAfter();
+        afterRaf = requestAnimationFrame(afterLoop);
+    }
+
+    $('afterStart').addEventListener('click', () => {
+        if (!afterImgs) return;
+        clearTimeout(afterTimer);
+        afterPhase = 'fixing';
+        afterStartAt = performance.now();
+        afterLoop();
+        afterTimer = setTimeout(() => {
+            cancelAnimationFrame(afterRaf);
+            afterPhase = 'gray';
+            $('afterStatus').textContent = 'Ne bougez pas les yeux ! L\'image est en niveaux de gris…';
+            drawAfter();
+        }, Number($('afterDur').value) * 1000);
+    });
+
+    $('afterOrig').addEventListener('click', () => {
+        clearTimeout(afterTimer);
+        cancelAnimationFrame(afterRaf);
+        afterPhase = 'orig';
+        $('afterStatus').textContent = 'Image d\'origine.';
+        drawAfter();
+    });
+
+    $('afterFs').addEventListener('click', () => toggleFullscreen($('afterStage')));
+    $('afterDefault').addEventListener('click', () => prepareAfter(drawLandscape));
+    $('afterFile').addEventListener('change', (e) => {
+        const f = e.target.files[0];
+        if (!f) return;
+        const url = URL.createObjectURL(f);
+        const im = new Image();
+        im.onload = () => {
+            // Image recadrée pour remplir le cadre (format 900 × 560)
+            prepareAfter((cx) => {
+                const k = Math.max(AW / im.naturalWidth, AH / im.naturalHeight);
+                const w = im.naturalWidth * k, h = im.naturalHeight * k;
+                cx.drawImage(im, (AW - w) / 2, (AH - h) / 2, w, h);
+            });
+            URL.revokeObjectURL(url);
+        };
+        im.src = url;
+        e.target.value = '';
+    });
+
+    // --- Initialisation ---
+    updateRgb();
+    updateLilacUi();
+    drawLilac();
+    prepareAfter(drawLandscape);
+</script>
+</body>
+</html>
