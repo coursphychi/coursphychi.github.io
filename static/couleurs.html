@@ -508,6 +508,40 @@
             width: auto;
         }
 
+        /* Image complémentaire : en plein écran, le canevas (calculé au format de l'écran) le remplit entièrement */
+        #afterStage:fullscreen {
+            background: #000000;
+        }
+
+        #afterStage:fullscreen canvas {
+            width: 100vw;
+            height: 100vh;
+            max-width: none;
+            max-height: none;
+        }
+
+        .fs-status {
+            display: none;
+        }
+
+        #afterStage:fullscreen .fs-status {
+            display: block;
+            position: absolute;
+            left: 50%;
+            bottom: 1.2rem;
+            transform: translateX(-50%);
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.45);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.85rem;
+            font-weight: 500;
+            width: max-content;
+            max-width: calc(100vw - 2rem);
+            text-align: center;
+            pointer-events: none;
+        }
+
         .controls-col {
             display: flex;
             flex-direction: column;
@@ -731,7 +765,7 @@
     <!-- 4. IMAGE COMPLÉMENTAIRE -->
     <section class="panel" data-pane="after" hidden>
         <div class="grid-2">
-            <div class="stage" id="afterStage"><canvas id="after" width="900" height="560"></canvas></div>
+            <div class="stage" id="afterStage"><canvas id="after" width="900" height="560"></canvas><div class="fs-status" id="afterFsStatus"></div></div>
             <div class="controls-col">
                 <div class="panel-title" style="margin: 0;">Fixez la croix sans bouger les yeux</div>
                 <div class="ctrl">
@@ -752,7 +786,7 @@
                     <label class="btn-small">📂 Utiliser ma photo<input type="file" id="afterFile" accept="image/*" hidden></label>
                     <button class="btn-small" id="afterDefault">Paysage d'exemple</button>
                 </div>
-                <div class="status-line" id="afterStatus">Cliquez sur « Commencer », puis fixez la croix.</div>
+                <div class="status-line" id="afterStatus"></div>
                 <div class="explain">
                     <h3>Ce que l'on observe</h3>
                     <p>Après avoir fixé l'image aux couleurs étranges, elle devient soudain en <strong>niveaux de gris</strong>… mais vous la voyez quelques secondes <strong>en couleurs naturelles</strong>, tant que vous ne bougez pas les yeux.</p>
@@ -972,7 +1006,11 @@
     window.addEventListener('resize', () => { if (currentTab === 'board') drawBoard(); });
     document.addEventListener('fullscreenchange', () => {
         if (currentTab === 'board') requestAnimationFrame(drawBoard);
-        if (currentTab === 'after') drawAfter();
+        if (currentTab === 'after' && !afterStarting) {
+            // Sortie du plein écran : l'expérience s'arrête ; dans tous les cas l'image est recalculée à la bonne taille
+            if (document.fullscreenElement !== afterStage) stopAfter();
+            requestAnimationFrame(() => { renderAfter(); drawAfter(); });
+        }
     });
 
     function toggleFullscreen(el) {
@@ -1065,18 +1103,21 @@
     // ======================= 4. Image complémentaire =======================
     const after = $('after');
     const actx = after.getContext('2d');
-    const AW = after.width, AH = after.height;
-    let afterImgs = null;      // { orig, comp, gray } : ImageData
-    let afterPhase = 'idle';   // idle | fixing | gray | orig
-    let afterTimer = null, afterRaf = null, afterStartAt = 0;
+    const afterStage = $('afterStage');
+    const LW = 900, LH = 560;     // format de référence du paysage (et de l'image hors plein écran)
+    const MAX_PIXELS = 4.2e6;     // limite le temps de calcul en plein écran
+    let afterSrc = null;          // { w, h, draw(ctx) } : image source dans ses propres coordonnées
+    let afterImgs = null;         // { orig, comp, gray } : ImageData à la taille du canevas
+    let afterPhase = 'idle';      // idle | fixing | gray | orig
+    let afterTimer = null, afterRaf = null, afterStartAt = 0, afterStarting = false;
 
     // Paysage d'exemple, aux couleurs franches
     function drawLandscape(ctx) {
-        const sky = ctx.createLinearGradient(0, 0, 0, AH * 0.6);
+        const sky = ctx.createLinearGradient(0, 0, 0, LH * 0.6);
         sky.addColorStop(0, '#1d4ed8');
         sky.addColorStop(1, '#7dd3fc');
         ctx.fillStyle = sky;
-        ctx.fillRect(0, 0, AW, AH);
+        ctx.fillRect(0, 0, LW, LH);
         // Soleil
         const sun = ctx.createRadialGradient(720, 105, 10, 720, 105, 110);
         sun.addColorStop(0, '#fde047');
@@ -1101,16 +1142,16 @@
         ctx.beginPath();
         ctx.moveTo(0, 330);
         ctx.bezierCurveTo(200, 230, 380, 300, 520, 270);
-        ctx.bezierCurveTo(680, 240, 800, 300, AW, 260);
-        ctx.lineTo(AW, AH);
-        ctx.lineTo(0, AH);
+        ctx.bezierCurveTo(680, 240, 800, 300, LW, 260);
+        ctx.lineTo(LW, LH);
+        ctx.lineTo(0, LH);
         ctx.fill();
         ctx.fillStyle = '#22c55e';
         ctx.beginPath();
         ctx.moveTo(0, 400);
-        ctx.bezierCurveTo(260, 330, 520, 420, AW, 360);
-        ctx.lineTo(AW, AH);
-        ctx.lineTo(0, AH);
+        ctx.bezierCurveTo(260, 330, 520, 420, LW, 360);
+        ctx.lineTo(LW, LH);
+        ctx.lineTo(0, LH);
         ctx.fill();
         // Lac
         ctx.fillStyle = '#0ea5e9';
@@ -1150,55 +1191,87 @@
         }
     }
 
-    // Prépare l'original, sa version complémentaire (teintes inversées, même luminosité) et sa version grise
-    function prepareAfter(drawSource) {
+    // Taille du canevas : celle de l'écran en plein écran, le format de référence sinon
+    function afterSize() {
+        if (document.fullscreenElement !== afterStage) return [LW, LH];
+        const w = window.innerWidth, h = window.innerHeight;
+        const s = Math.min(window.devicePixelRatio || 1, Math.sqrt(MAX_PIXELS / (w * h)));
+        return [Math.round(w * s), Math.round(h * s)];
+    }
+
+    // Calcule l'original (recadré pour remplir le canevas), sa version complémentaire
+    // (teintes inversées, même luminosité) et sa version grise
+    function renderAfter() {
+        if (!afterSrc) return;
+        const [W, H] = afterSize();
+        after.width = W;
+        after.height = H;
         const c = document.createElement('canvas');
-        c.width = AW;
-        c.height = AH;
+        c.width = W;
+        c.height = H;
         const cx = c.getContext('2d');
         cx.fillStyle = '#808080';
-        cx.fillRect(0, 0, AW, AH);
-        drawSource(cx);
-        const orig = cx.getImageData(0, 0, AW, AH);
-        const comp = cx.createImageData(AW, AH), gray = cx.createImageData(AW, AH);
+        cx.fillRect(0, 0, W, H);
+        const k = Math.max(W / afterSrc.w, H / afterSrc.h);
+        cx.setTransform(k, 0, 0, k, (W - afterSrc.w * k) / 2, (H - afterSrc.h * k) / 2);
+        afterSrc.draw(cx);
+        cx.setTransform(1, 0, 0, 1, 0, 0);
+        const orig = cx.getImageData(0, 0, W, H);
+        const comp = cx.createImageData(W, H), gray = cx.createImageData(W, H);
         const o = orig.data, p = comp.data, g = gray.data;
         const lut = new Float64Array(256);
         for (let v = 0; v < 256; v++) lut[v] = toLinear(v);
-        for (let k = 0; k < o.length; k += 4) {
-            const [L, a, b] = linToOklab(lut[o[k]], lut[o[k + 1]], lut[o[k + 2]]);
-            const cc = oklabToLin(L, -a, -b);
-            const gg = oklabToLin(L, 0, 0);
-            for (let i = 0; i < 3; i++) {
-                p[k + i] = toCode(clamp(cc[i], 0, 1));
-                g[k + i] = toCode(clamp(gg[i], 0, 1));
+        const memo = new Map();   // une image contient souvent beaucoup de pixels de même couleur
+        for (let k4 = 0; k4 < o.length; k4 += 4) {
+            const key = (o[k4] << 16) | (o[k4 + 1] << 8) | o[k4 + 2];
+            let res = memo.get(key);
+            if (!res) {
+                const [L, a, b] = linToOklab(lut[o[k4]], lut[o[k4 + 1]], lut[o[k4 + 2]]);
+                const cc = oklabToLin(L, -a, -b), gg = oklabToLin(L, 0, 0);
+                res = [...cc, ...gg].map((v) => toCode(clamp(v, 0, 1)));
+                memo.set(key, res);
             }
-            p[k + 3] = g[k + 3] = 255;
+            p[k4] = res[0]; p[k4 + 1] = res[1]; p[k4 + 2] = res[2];
+            g[k4] = res[3]; g[k4 + 1] = res[4]; g[k4 + 2] = res[5];
+            p[k4 + 3] = g[k4 + 3] = 255;
         }
         afterImgs = { orig, comp, gray };
-        cancelAfter();
+    }
+
+    function setAfterSource(src) {
+        afterSrc = src;
+        stopAfter();
+        renderAfter();
+        drawAfter();
+    }
+
+    function setAfterStatus(text) {
+        $('afterStatus').textContent = text;
+        $('afterFsStatus').textContent = text;
     }
 
     function drawCross(alpha = 1, progress = null) {
-        const x = AW / 2, y = AH / 2;
+        const W = after.width, H = after.height;
+        const x = W / 2, y = H / 2, u = Math.min(W, H) / LH;
         actx.save();
         actx.beginPath();
-        actx.moveTo(x - 14, y);
-        actx.lineTo(x + 14, y);
-        actx.moveTo(x, y - 14);
-        actx.lineTo(x, y + 14);
+        actx.moveTo(x - 14 * u, y);
+        actx.lineTo(x + 14 * u, y);
+        actx.moveTo(x, y - 14 * u);
+        actx.lineTo(x, y + 14 * u);
         // Liseré blanc pour que la croix reste visible sur un fond sombre
         actx.strokeStyle = `rgba(255, 255, 255, ${0.8 * alpha})`;
-        actx.lineWidth = 8;
+        actx.lineWidth = 8 * u;
         actx.stroke();
         actx.strokeStyle = `rgba(0, 0, 0, ${alpha})`;
-        actx.lineWidth = 4;
+        actx.lineWidth = 4 * u;
         actx.stroke();
         if (progress !== null) {
             // Fin anneau de progression autour de la croix, discret
             actx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
-            actx.lineWidth = 2;
+            actx.lineWidth = 2 * u;
             actx.beginPath();
-            actx.arc(x, y, 24, -Math.PI / 2, -Math.PI / 2 + 2 * Math.PI * progress);
+            actx.arc(x, y, 24 * u, -Math.PI / 2, -Math.PI / 2 + 2 * Math.PI * progress);
             actx.stroke();
         }
         actx.restore();
@@ -1216,11 +1289,16 @@
         }
     }
 
-    function cancelAfter() {
+    // Interrompt l'expérience et revient à l'image d'origine
+    function stopAfter() {
         clearTimeout(afterTimer);
         cancelAnimationFrame(afterRaf);
         afterPhase = 'idle';
-        $('afterStatus').textContent = 'Cliquez sur « Commencer », puis fixez la croix.';
+        setAfterStatus('Cliquez sur « Commencer » : l\'image passe en plein écran, fixez alors la croix.');
+    }
+
+    function cancelAfter() {
+        stopAfter();
         drawAfter();
     }
 
@@ -1228,47 +1306,62 @@
         if (afterPhase !== 'fixing') return;
         const dur = Number($('afterDur').value);
         const left = Math.max(0, dur - (performance.now() - afterStartAt) / 1000);
-        $('afterStatus').textContent = `Fixez la croix… encore ${Math.ceil(left)} s`;
+        setAfterStatus(`Fixez la croix… encore ${Math.ceil(left)} s`);
         drawAfter();
         afterRaf = requestAnimationFrame(afterLoop);
     }
 
-    $('afterStart').addEventListener('click', () => {
-        if (!afterImgs) return;
-        clearTimeout(afterTimer);
+    const nextFrames = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+    $('afterStart').addEventListener('click', async () => {
+        if (!afterSrc || afterStarting) return;
+        stopAfter();
+        // Bascule en plein écran (si le navigateur le permet) puis recalcule l'image à la taille de l'écran
+        if (document.fullscreenElement !== afterStage && afterStage.requestFullscreen) {
+            afterStarting = true;
+            try {
+                await afterStage.requestFullscreen();
+                await nextFrames();
+            } catch (e) { /* plein écran refusé : l'expérience se fait dans le cadre */ }
+            afterStarting = false;
+        }
+        renderAfter();
         afterPhase = 'fixing';
         afterStartAt = performance.now();
         afterLoop();
         afterTimer = setTimeout(() => {
             cancelAnimationFrame(afterRaf);
             afterPhase = 'gray';
-            $('afterStatus').textContent = 'Ne bougez pas les yeux ! L\'image est en niveaux de gris…';
+            setAfterStatus(document.fullscreenElement === afterStage
+                ? 'Ne bougez pas les yeux !  ·  Clic : image d\'origine  ·  Échap : quitter'
+                : 'Ne bougez pas les yeux ! L\'image est en niveaux de gris…');
             drawAfter();
         }, Number($('afterDur').value) * 1000);
     });
 
-    $('afterOrig').addEventListener('click', () => {
+    function showAfterOriginal() {
         clearTimeout(afterTimer);
         cancelAnimationFrame(afterRaf);
         afterPhase = 'orig';
-        $('afterStatus').textContent = 'Image d\'origine.';
+        setAfterStatus(document.fullscreenElement === afterStage ? 'Image d\'origine  ·  Échap : quitter' : 'Image d\'origine.');
         drawAfter();
+    }
+
+    $('afterOrig').addEventListener('click', showAfterOriginal);
+    afterStage.addEventListener('click', () => {
+        if (afterPhase === 'gray' && document.fullscreenElement === afterStage) showAfterOriginal();
     });
 
-    $('afterFs').addEventListener('click', () => toggleFullscreen($('afterStage')));
-    $('afterDefault').addEventListener('click', () => prepareAfter(drawLandscape));
+    $('afterFs').addEventListener('click', () => toggleFullscreen(afterStage));
+    $('afterDefault').addEventListener('click', () => setAfterSource({ w: LW, h: LH, draw: drawLandscape }));
     $('afterFile').addEventListener('change', (e) => {
         const f = e.target.files[0];
         if (!f) return;
         const url = URL.createObjectURL(f);
         const im = new Image();
         im.onload = () => {
-            // Image recadrée pour remplir le cadre (format 900 × 560)
-            prepareAfter((cx) => {
-                const k = Math.max(AW / im.naturalWidth, AH / im.naturalHeight);
-                const w = im.naturalWidth * k, h = im.naturalHeight * k;
-                cx.drawImage(im, (AW - w) / 2, (AH - h) / 2, w, h);
-            });
+            // Photo recadrée pour remplir le cadre
+            setAfterSource({ w: im.naturalWidth, h: im.naturalHeight, draw: (cx) => cx.drawImage(im, 0, 0) });
             URL.revokeObjectURL(url);
         };
         im.src = url;
@@ -1279,7 +1372,7 @@
     updateRgb();
     updateLilacUi();
     drawLilac();
-    prepareAfter(drawLandscape);
+    setAfterSource({ w: LW, h: LH, draw: drawLandscape });
 </script>
 </body>
 </html>
