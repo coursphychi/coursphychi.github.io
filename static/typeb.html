@@ -1745,12 +1745,12 @@
             + (model.explicit ? '' : `<div class="stats-line" style="text-align:center">Équation résolue numériquement pour $${sym}$ à chaque tirage</div>`);
 
         document.getElementById('mathMean').innerHTML = `$$\\begin{aligned}
-            \\bar{${sym}} &= \\frac{1}{N}\\sum_{k=1}^{N} ${varTex(model.target, 'k')} \\\\
+            \\overline{${sym}} &= \\frac{1}{N}\\sum_{k=1}^{N} ${varTex(model.target, 'k')} \\\\
             &\\approx ${formatSciLatex(mean, 5)}${uT}
         \\end{aligned}$$
             <div class="stats-line" style="text-align:center">avec $N = ${formatSciLatex(N, 1)}$ tirages</div>`;
 
-        document.getElementById('mathUnc').innerHTML = `$$u(${sym}) = s = \\sqrt{\\frac{1}{N-1}\\sum_{k=1}^{N} \\left(${varTex(model.target, 'k')} - \\bar{${sym}}\\right)^2} \\approx ${formatSciLatex(std, 3)}${uT}$$
+        document.getElementById('mathUnc').innerHTML = `$$u(${sym}) = s = \\sqrt{\\frac{1}{N-1}\\sum_{k=1}^{N} \\left(${varTex(model.target, 'k')} - \\overline{${sym}}\\right)^2} \\approx ${formatSciLatex(std, 3)}${uT}$$
             <div class="stats-line" style="text-align:center">L'incertitude-type simulée est l'<strong>écart-type des $N$ valeurs aléatoires obtenues</strong> : elle mesure la dispersion du résultat due aux incertitudes de toutes les grandeurs d'entrée (largeur de l'histogramme, zone verte $\\pm u$).</div>`;
 
         // Résultat final
@@ -1758,7 +1758,7 @@
         const expTex = f.exp === 0 ? '' : ` \\times 10^{${f.exp}}`;
         document.getElementById('finalResultMath').innerHTML = `$$${sym} = (${f.meanStr} \\pm ${f.uStr})${expTex}${uT}$$`;
         let line = `Incertitude-type majorée : $u(${sym}) = ${f.uRoundedLatex}${uT}$`;
-        if (mean !== 0) line += ` &bull; Incertitude relative : $\\dfrac{u(${sym})}{|\\bar{${sym}}|} \\approx ${formatSciLatex(f.uRoundedVal / Math.abs(mean) * 100, 2)}\\,\\%$`;
+        if (mean !== 0) line += ` &bull; Incertitude relative : $\\dfrac{u(${sym})}{|\\overline{${sym}}|} \\approx ${formatSciLatex(f.uRoundedVal / Math.abs(mean) * 100, 2)}\\,\\%$`;
         line += `<br>95 % des valeurs simulées sont comprises entre $${formatSciLatex(R.p025, 4)}$ et $${formatSciLatex(R.p975, 4)}${uT}$`;
         if (bad) line += `<br>⚠ ${bad} tirage${bad > 1 ? 's' : ''} sans résultat (calcul impossible) ignoré${bad > 1 ? 's' : ''}.`;
         document.getElementById('relUncText').innerHTML = line;
@@ -1821,13 +1821,13 @@
                     <span class="badge">${ok ? 'Mesure compatible (z ≤ 2)' : 'Mesure non compatible (z > 2)'}</span>
                 </div>
                 <div class="zscore-formula-wrap">
-                    $$z = \\frac{|\\bar{${sym}} - ${symRef}|}{u(${sym})} = \\frac{|${formatSciLatex(R.mean, 5)} - ${formatSciLatex(ref, 4)}|}{${formatSciLatex(R.std, 4)}} \\approx \\mathbf{${zDisplay}}$$
+                    $$z = \\frac{|\\overline{${sym}} - ${symRef}|}{u(${sym})} = \\frac{|${formatSciLatex(R.mean, 5)} - ${formatSciLatex(ref, 4)}|}{${formatSciLatex(R.std, 4)}} \\approx \\mathbf{${zDisplay}}$$
                 </div>
                 <div>${story}</div>
                 <div class="prob-details">
                     <strong>Probabilité d'observer un écart au moins aussi grand par le seul jeu des incertitudes, si $${symRef}$ est la valeur vraie :</strong>
                     <ul>
-                        <li>Lue directement sur la simulation (proportion des $N$ tirages qui s'écartent de la moyenne d'au moins $|\\bar{${sym}} - ${symRef}|$) : $P ${pSimTex}$.</li>
+                        <li>Lue directement sur la simulation (proportion des $N$ tirages qui s'écartent de la moyenne d'au moins $|\\overline{${sym}} - ${symRef}|$) : $P ${pSimTex}$.</li>
                         <li>Si la distribution était gaussienne : $P(|Z| \\ge ${zDisplay}) = ${formatProbLatex(pNormal)}$ (seuil critique à $z = 2 \\leftrightarrow 4{,}55\\,\\%$).</li>
                     </ul>
                 </div>
