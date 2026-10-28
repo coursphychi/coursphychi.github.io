@@ -508,6 +508,18 @@
             width: auto;
         }
 
+        /* Lilac chaser : en plein écran, le canevas (au format de l'écran) le remplit entièrement */
+        #lilacStage:fullscreen {
+            background: #bebebe;
+        }
+
+        #lilacStage:fullscreen canvas {
+            width: 100vw;
+            height: 100vh;
+            max-width: none;
+            max-height: none;
+        }
+
         /* Image complémentaire : en plein écran, le canevas (calculé au format de l'écran) le remplit entièrement */
         #afterStage:fullscreen {
             background: #000000;
@@ -1003,9 +1015,19 @@
         drawBoard();
     }));
     $('boardFs').addEventListener('click', () => toggleFullscreen(boardWrap));
-    window.addEventListener('resize', () => { if (currentTab === 'board') drawBoard(); });
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        if (currentTab === 'board') drawBoard();
+        if (currentTab === 'lilac') resizeLilac();
+        // Rotation de l'écran en plein écran : l'image complémentaire est recalculée au nouveau format
+        if (currentTab === 'after' && document.fullscreenElement === afterStage && !afterStarting) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => { renderAfter(); drawAfter(); }, 150);
+        }
+    });
     document.addEventListener('fullscreenchange', () => {
         if (currentTab === 'board') requestAnimationFrame(drawBoard);
+        if (currentTab === 'lilac') requestAnimationFrame(resizeLilac);
         if (currentTab === 'after' && !afterStarting) {
             // Sortie du plein écran : l'expérience s'arrête ; dans tous les cas l'image est recalculée à la bonne taille
             if (document.fullscreenElement !== afterStage) stopAfter();
@@ -1020,22 +1042,24 @@
 
     // ======================= 3. Lilac chaser =======================
     const lilac = $('lilac');
+    const lilacStage = $('lilacStage');
     const lctx = lilac.getContext('2d');
     const LILAC_DEFAULT = '#d79ad8';
     const LILAC_BG = '#bebebe';
     let lilacTimer = null, lilacMissing = 0, lilacPaused = false;
 
     function drawLilac() {
-        const S = lilac.width, c = S / 2, R = S * 0.36;
+        const W = lilac.width, H = lilac.height;
+        const S = Math.min(W, H), cx = W / 2, cy = H / 2, R = S * 0.36;
         const col = hexToRgb($('lilacColor').value);
         const blur = Number($('lilacBlur').value) / 100;
         const r = S * 0.055;
         lctx.fillStyle = LILAC_BG;
-        lctx.fillRect(0, 0, S, S);
+        lctx.fillRect(0, 0, W, H);
         for (let k = 0; k < 12; k++) {
             if (k === lilacMissing) continue;
             const a = k * Math.PI / 6 - Math.PI / 2;
-            const x = c + R * Math.cos(a), y = c + R * Math.sin(a);
+            const x = cx + R * Math.cos(a), y = cy + R * Math.sin(a);
             // Disque flou : dégradé radial de la couleur vers le gris du fond
             const outer = r * (1 + 1.4 * blur);
             const g = lctx.createRadialGradient(x, y, 0, x, y, outer);
@@ -1051,11 +1075,26 @@
         lctx.strokeStyle = '#000';
         lctx.lineWidth = S * 0.006;
         lctx.beginPath();
-        lctx.moveTo(c - S * 0.022, c);
-        lctx.lineTo(c + S * 0.022, c);
-        lctx.moveTo(c, c - S * 0.022);
-        lctx.lineTo(c, c + S * 0.022);
+        lctx.moveTo(cx - S * 0.022, cy);
+        lctx.lineTo(cx + S * 0.022, cy);
+        lctx.moveTo(cx, cy - S * 0.022);
+        lctx.lineTo(cx, cy + S * 0.022);
         lctx.stroke();
+    }
+
+    // En plein écran, le canevas prend la taille de l'écran (fond gris partout, cercle centré)
+    function resizeLilac() {
+        let W = 640, H = 640;
+        if (document.fullscreenElement === lilacStage) {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = Math.round(window.innerWidth * dpr);
+            H = Math.round(window.innerHeight * dpr);
+        }
+        if (lilac.width !== W || lilac.height !== H) {
+            lilac.width = W;
+            lilac.height = H;
+        }
+        drawLilac();
     }
 
     function lilacStep() {
@@ -1098,7 +1137,7 @@
         updateLilacUi();
         drawLilac();
     });
-    $('lilacFs').addEventListener('click', () => toggleFullscreen($('lilacStage')));
+    $('lilacFs').addEventListener('click', () => toggleFullscreen(lilacStage));
 
     // ======================= 4. Image complémentaire =======================
     const after = $('after');
