@@ -6,12 +6,11 @@
     <title>Labo numérique</title>
     <style>
         :root {
-            --bg-main: #0f172a;
-            --bg-card: #1e293b;
-            --bg-card-hover: #26354d;
+            --bg-main: #090d16;
+            --bg-card: #111827;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.07);
         }
 
         * {
@@ -24,16 +23,17 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: var(--bg-main);
             background-image: 
-                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.08) 0px, transparent 50%);
+                radial-gradient(at 15% 0%, rgba(56, 189, 248, 0.07) 0px, transparent 45%),
+                radial-gradient(at 85% 100%, rgba(168, 85, 247, 0.07) 0px, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
-            padding: 3rem 1.5rem;
-            line-height: 1.5;
+            padding: 3.5rem 1.5rem;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1140px;
             margin: 0 auto;
         }
 
@@ -43,18 +43,18 @@
         }
 
         h1 {
-            font-size: clamp(2rem, 5vw, 2.75rem);
+            font-size: clamp(2.1rem, 5vw, 2.85rem);
             font-weight: 800;
-            letter-spacing: -0.025em;
+            letter-spacing: -0.03em;
             margin-bottom: 0.75rem;
-            background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 55%, #64748b 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.08rem;
             max-width: 600px;
             margin: 0 auto;
         }
@@ -62,95 +62,115 @@
         /* Grille responsive automatique */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
             gap: 1.5rem;
         }
 
-        /* Style des cartes */
+        /* Style moderne des cartes avec halo coloré interne */
         .tool-card {
+            --accent-2: color-mix(in srgb, var(--accent) 65%, #ffffff);
             position: relative;
             display: flex;
             flex-direction: column;
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
+            background: 
+                radial-gradient(130% 110% at 0% 0%, color-mix(in srgb, var(--accent) 11%, transparent) 0%, transparent 65%),
+                linear-gradient(180deg, rgba(30, 41, 59, 0.65) 0%, rgba(15, 23, 42, 0.85) 100%);
+            border: 1px solid color-mix(in srgb, var(--accent) 16%, rgba(255, 255, 255, 0.06));
+            border-radius: 18px;
             padding: 1.75rem;
             text-decoration: none;
             color: inherit;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 4px 20px -2px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.07);
+            transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
             overflow: hidden;
         }
 
-        /* Lueur subtile en haut de la carte au survol */
+        /* Liseré supérieur en dégradé */
         .tool-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: var(--accent);
-            opacity: 0.7;
-            transition: opacity 0.25s ease, height 0.25s ease;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2), transparent 90%);
+            opacity: 0.75;
+            transition: opacity 0.28s ease, height 0.28s ease;
         }
 
         .tool-card:hover {
             transform: translateY(-5px);
-            background-color: var(--bg-card-hover);
-            border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5),
-                        0 0 20px -5px color-mix(in srgb, var(--accent) 20%, transparent);
+            background: 
+                radial-gradient(130% 120% at 0% 0%, color-mix(in srgb, var(--accent) 20%, transparent) 0%, transparent 70%),
+                linear-gradient(180deg, rgba(38, 52, 74, 0.8) 0%, rgba(17, 25, 44, 0.95) 100%);
+            border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+            box-shadow: 
+                0 16px 32px -10px rgba(0, 0, 0, 0.6),
+                0 0 28px -6px color-mix(in srgb, var(--accent) 28%, transparent),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
         }
 
         .tool-card:hover::before {
             opacity: 1;
-            height: 4px;
+            height: 3px;
         }
 
         .card-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.3rem;
         }
 
+        /* Boîte d'icône effet verre teinté */
         .icon-wrapper {
-            width: 52px;
-            height: 52px;
-            border-radius: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: color-mix(in srgb, var(--accent) 15%, transparent);
-            color: var(--accent);
-            transition: transform 0.25s ease, background-color 0.25s ease;
+            background: linear-gradient(135deg, 
+                color-mix(in srgb, var(--accent) 22%, transparent) 0%, 
+                color-mix(in srgb, var(--accent) 8%, transparent) 100%);
+            border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+            color: var(--accent-2);
+            transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
         }
 
         .tool-card:hover .icon-wrapper {
-            transform: scale(1.08);
-            background-color: color-mix(in srgb, var(--accent) 25%, transparent);
+            transform: scale(1.06);
+            border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+            box-shadow: 0 0 18px -3px color-mix(in srgb, var(--accent) 40%, transparent),
+                        inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
         }
 
         .icon-wrapper svg {
-            width: 28px;
-            height: 28px;
-            stroke-width: 1.75;
+            width: 26px;
+            height: 26px;
+            stroke-width: 1.8;
         }
 
+        /* Badge de catégorie teinté */
         .category-tag {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 0.25rem 0.75rem;
+            letter-spacing: 0.06em;
+            padding: 0.28rem 0.75rem;
             border-radius: 999px;
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-muted);
+            background-color: color-mix(in srgb, var(--accent) 12%, rgba(255, 255, 255, 0.02));
+            border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+            color: var(--accent-2);
         }
 
         .tool-title {
-            font-size: 1.25rem;
+            font-size: 1.22rem;
             font-weight: 700;
+            letter-spacing: -0.015em;
             margin-bottom: 0.5rem;
             color: var(--text-main);
             display: flex;
@@ -162,9 +182,10 @@
             opacity: 0;
             transform: translateX(-8px);
             transition: all 0.25s ease;
-            color: var(--accent);
+            color: var(--accent-2);
             width: 20px;
             height: 20px;
+            flex-shrink: 0;
         }
 
         .tool-card:hover .arrow-icon {
@@ -174,7 +195,7 @@
 
         .tool-desc {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.93rem;
             flex-grow: 1;
         }
 
@@ -201,11 +222,10 @@
 
         <main class="tools-grid">
 
-            <!-- 1. Pointage vidéo -->
-            <a href="/webcam.html" class="tool-card" style="--accent: #f97316;">
+            <!-- 1. Pointage vidéo : Bleu Azur / Saphir -->
+            <a href="/webcam.html" class="tool-card" style="--accent: #38bdf8;">
                 <div class="card-header">
                     <div class="icon-wrapper">
-                        <!-- Icône : Caméra + Réticule de pointage -->
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
                             <circle cx="12" cy="13" r="4"/>
@@ -224,11 +244,10 @@
                 <p class="tool-desc">Enregistrement par webcam et pointage image par image pour l'étude cinématique des mouvements.</p>
             </a>
 
-            <!-- 2. Oscilloscope audio -->
-            <a href="/oscilloscope.html" class="tool-card" style="--accent: #22c55e;">
+            <!-- 2. Oscilloscope audio : Vert Menthe / Émeraude lumineux -->
+            <a href="/oscilloscope.html" class="tool-card" style="--accent: #34d399;">
                 <div class="card-header">
                     <div class="icon-wrapper">
-                        <!-- Icône : Signal sinusoïdal sur écran -->
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="3" width="20" height="18" rx="2" ry="2"/>
                             <path d="M6 12c1.5-4 3-4 4.5 0s3 4 4.5 0 3-4 3 0"/>
@@ -236,7 +255,7 @@
                             <line x1="20" y1="12" x2="22" y2="12" stroke-opacity="0.4"/>
                         </svg>
                     </div>
-                    <span class="category-tag">Ondes & Signaux</span>
+                    <span class="category-tag">Ondes &amp; Signaux</span>
                 </div>
                 <h2 class="tool-title">
                     Oscilloscope audio
@@ -245,11 +264,10 @@
                 <p class="tool-desc">Visualisation temporelle d'un signal sonore capté par le microphone.</p>
             </a>
 
-            <!-- 3. Chronomètre acoustique -->
-            <a href="/deuxmicros.html" class="tool-card" style="--accent: #3b82f6;">
+            <!-- 3. Chronomètre acoustique : Turquoise / Lagune -->
+            <a href="/deuxmicros.html" class="tool-card" style="--accent: #2dd4bf;">
                 <div class="card-header">
                     <div class="icon-wrapper">
-                        <!-- Icône : Onde sonore + Chronomètre -->
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M2 10v3"/>
                             <path d="M6 6v11"/>
@@ -268,18 +286,17 @@
                 <p class="tool-desc">Mesure précise de durées avec déclenchement et arrêt automatiques au dépassement d'un seuil sonore.</p>
             </a>
 
-            <!-- 4. Minuteur -->
-            <a href="/minuteur.html" class="tool-card" style="--accent: #d946ef;">
+            <!-- 4. Minuteur : Corail / Rose Rubis -->
+            <a href="/minuteur.html" class="tool-card" style="--accent: #fb7185;">
                 <div class="card-header">
                     <div class="icon-wrapper">
-                        <!-- Icône : Chronomètre / Sablier moderne -->
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="10" x2="14" y1="2" y2="2"/>
                             <line x1="12" x2="15" y1="14" y2="11"/>
                             <circle cx="12" cy="14" r="8"/>
                         </svg>
                     </div>
-                    <span class="category-tag">Mesure & Gestion</span>
+                    <span class="category-tag">Mesure &amp; Gestion</span>
                 </div>
                 <h2 class="tool-title">
                     Minuteur
@@ -288,11 +305,10 @@
                 <p class="tool-desc">Compte à rebours visuel et sonore pour le suivi temporel des expériences, réactions chimiques ou épreuves.</p>
             </a>
 
-            <!-- 5. Console Python -->
-            <a href="/labpython.html" class="tool-card" style="--accent: #ef4444;">
+            <!-- 5. Console Python : Or / Ambre solaire -->
+            <a href="/labpython.html" class="tool-card" style="--accent: #fbbf24;">
                 <div class="card-header">
                     <div class="icon-wrapper">
-                        <!-- Icône : Terminal de code -->
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="4 17 10 11 4 5"/>
                             <line x1="12" x2="20" y1="19" y2="19"/>
@@ -307,11 +323,10 @@
                 <p class="tool-desc">Environnement d'exécution Python directement dans le navigateur avec bibliothèques scientifiques préchargées.</p>
             </a>
 
-            <!-- 6. Régression linéaire -->
-            <a href="/labreg.html" class="tool-card" style="--accent: #84cc16;">
+            <!-- 6. Régression linéaire : Indigo Pervenche -->
+            <a href="/labreg.html" class="tool-card" style="--accent: #818cf8;">
                 <div class="card-header">
                     <div class="icon-wrapper">
-                        <!-- Icône : Nuage de points et droite de régression -->
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 3v18h18"/>
                             <circle cx="7.5" cy="14.5" r="1.5" fill="currentColor"/>
@@ -330,11 +345,10 @@
                 <p class="tool-desc">Tracé de nuages de points, modélisation graphique, calcul des paramètres d'ajustement et des incertitudes.</p>
             </a>
 
-            <!-- 7. Analyse statistique (Incertitude de type A) -->
-            <a href="/typea.html" class="tool-card" style="--accent: #10b981;">
+            <!-- 7. Analyse statistique (Incertitude de type A) : Bleu Cobalt / Électrique -->
+            <a href="/typea.html" class="tool-card" style="--accent: #60a5fa;">
                 <div class="card-header">
                     <div class="icon-wrapper">
-                        <!-- Icône : Courbe de distribution gaussienne et moyenne -->
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="2" y1="20" x2="22" y2="20"/>
                             <path d="M2 20c3.5 0 5-2 6.5-8s2-8 3.5-8 2 2 3.5 8 3 8 6.5 8"/>
@@ -350,11 +364,10 @@
                 <p class="tool-desc">Analyse statistique d'une série de mesures, calcul de l'incertitude-type, visualisation de la dispersion et écart normalisé.</p>
             </a>
             
-            <!-- Incertitude de type B (Monte-Carlo) -->
-            <a href="/typeb.html" class="tool-card" style="--accent: #8b5cf6;">
+            <!-- 8. Incertitude de type B (Monte-Carlo) : Violet Améthyste -->
+            <a href="/typeb.html" class="tool-card" style="--accent: #c084fc;">
                 <div class="card-header">
                     <div class="icon-wrapper">
-                        <!-- Icône : dé et histogramme -->
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="2" width="9" height="9" rx="2"/>
                             <circle cx="4.75" cy="4.75" r="0.6" fill="currentColor"/>
@@ -372,66 +385,65 @@
                 <p class="tool-desc">Propagation des incertitudes par simulation de Monte-Carlo : histogramme du résultat, budget d'incertitude et écart normalisé à une valeur de référence.</p>
             </a>
 
-            <!-- GBF Acoustique -->
-			<a href="/gbf.html" class="tool-card" style="--accent: #ec4899;">
-			    <div class="card-header">
-			        <div class="icon-wrapper">
-			            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-			                <circle cx="12" cy="12" r="9"/>
-			                <line x1="12" y1="12" x2="16" y2="8"/>
-			                <path d="M7 17c1.5-2 3-2 5 0s3.5 2 5 0"/>
-			            </svg>
-			        </div>
-			        <span class="category-tag">Ondes & Signaux</span>
-			    </div>
-			    <h2 class="tool-title">
-			        GBF acoustique
-			        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-			    </h2>
-			    <p class="tool-desc">Générateur basses fréquences double voie avec synthèse de signaux périodiques, étude des battements et visualisation.</p>
-			</a>
+            <!-- 9. GBF Acoustique : Rose Fuchsia / Néon doux -->
+            <a href="/gbf.html" class="tool-card" style="--accent: #f472b6;">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"/>
+                            <line x1="12" y1="12" x2="16" y2="8"/>
+                            <path d="M7 17c1.5-2 3-2 5 0s3.5 2 5 0"/>
+                        </svg>
+                    </div>
+                    <span class="category-tag">Ondes &amp; Signaux</span>
+                </div>
+                <h2 class="tool-title">
+                    GBF acoustique
+                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </h2>
+                <p class="tool-desc">Générateur basses fréquences double voie avec synthèse de signaux périodiques, étude des battements et visualisation.</p>
+            </a>
 
-            <!-- Banc de mesure sur image -->
-			<a href="/mesure-image.html" class="tool-card" style="--accent: #f59e0b;">
-			    <div class="card-header">
-			        <div class="icon-wrapper">
-			            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-			                <rect x="3" y="4" width="18" height="14" rx="2"/>
-			                <path d="M3 21h18"/>
-			                <path d="M7 21v-2M11 21v-1.5M15 21v-2M19 21v-1.5"/>
-			                <path d="M7 14l4-5 3 3 3-4"/>
-			            </svg>
-			        </div>
-			        <span class="category-tag">Optique & Mesure</span>
-			    </div>
-			    <h2 class="tool-title">
-			        Banc de mesure sur image
-			        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-			    </h2>
-			    <p class="tool-desc">Étalonnage d'une photo, distances et angles, décomposition en canaux RVB et profil de luminosité I(x) (interfrange, diffraction).</p>
-			</a>
+            <!-- 10. Banc de mesure sur image :Mandarine / Cuivre doux -->
+            <a href="/mesure-image.html" class="tool-card" style="--accent: #fb923c;">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="14" rx="2"/>
+                            <path d="M3 21h18"/>
+                            <path d="M7 21v-2M11 21v-1.5M15 21v-2M19 21v-1.5"/>
+                            <path d="M7 14l4-5 3 3 3-4"/>
+                        </svg>
+                    </div>
+                    <span class="category-tag">Optique &amp; Mesure</span>
+                </div>
+                <h2 class="tool-title">
+                    Banc de mesure sur image
+                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </h2>
+                <p class="tool-desc">Étalonnage d'une photo, distances et angles, décomposition en canaux RVB et profil de luminosité I(x) (interfrange, diffraction).</p>
+            </a>
 
-            <!-- Analyseur de spectre et sonomètre -->
-			<a href="/spectre.html" class="tool-card" style="--accent: #06b6d4;">
-			    <div class="card-header">
-			        <div class="icon-wrapper">
-			            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-			                <line x1="4" y1="20" x2="4" y2="14"/>
-			                <line x1="8" y1="20" x2="8" y2="6"/>
-			                <line x1="12" y1="20" x2="12" y2="11"/>
-			                <line x1="16" y1="20" x2="16" y2="15"/>
-			                <line x1="20" y1="20" x2="20" y2="17"/>
-			            </svg>
-			        </div>
-			        <span class="category-tag">Acoustique</span>
-			    </div>
-			    <h2 class="tool-title">
-			        Spectre &amp; sonomètre
-			        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-			    </h2>
-			    <p class="tool-desc">Sonomètre (niveau instantané, équivalent, maximal et minimal), analyse spectrale et spectrogramme d'un son capté par le microphone, avec repérage des harmoniques.</p>
-			</a>
-
+            <!-- 11. Analyseur de spectre et sonomètre : Cyan Arctique -->
+            <a href="/spectre.html" class="tool-card" style="--accent: #22d3ee;">
+                <div class="card-header">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" y1="20" x2="4" y2="14"/>
+                            <line x1="8" y1="20" x2="8" y2="6"/>
+                            <line x1="12" y1="20" x2="12" y2="11"/>
+                            <line x1="16" y1="20" x2="16" y2="15"/>
+                            <line x1="20" y1="20" x2="20" y2="17"/>
+                        </svg>
+                    </div>
+                    <span class="category-tag">Acoustique</span>
+                </div>
+                <h2 class="tool-title">
+                    Spectre &amp; sonomètre
+                    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </h2>
+                <p class="tool-desc">Sonomètre (niveau instantané, équivalent, maximal et minimal), analyse spectrale et spectrogramme d'un son capté par le microphone, avec repérage des harmoniques.</p>
+            </a>
 
         </main>
     </div>
