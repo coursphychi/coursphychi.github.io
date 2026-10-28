@@ -23,16 +23,11 @@ td, th {
 # Formation des images et lentille convergente
 
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold;"><a href="https://presentationssite.github.io/2nde/lumiere"><a href="../cours/lentilles">Cours <b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/2nde/lentilles"><b>Cours 📽️</b> </a> + <a href="../cours/lentilles"><b style="color:#FEAE00"><i class="fa-solid fa-scroll"></i></b></a></p>
 
 [![](/cm-lentille.png)](/cm-lentille.pdf)
 
 
-
-{{<youtube zvWzX-wxseQ>}}
-
-
-<br>
 
 ## Documents et autres
 
@@ -61,4 +56,5 @@ td, th {
 </div>
 
 
+{{< youtube-plus id="zvWzX-wxseQ" ratio="16x9" width="800" shadow="true" rounded="true" >}}
 
