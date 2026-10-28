@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Minuteur Ultimatum</title>
 
-  <!-- Polices Google Fonts pour un look moderne et digital -->
+  <!-- Polices Google Fonts : Plus Jakarta Sans (UI moderne) & JetBrains Mono (Chiffres tabulaires) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;800&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Font Awesome pour les icônes -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,11 +26,11 @@
     body {
       min-height: 100vh;
       margin: 0;
-      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       color: #ffffff;
       background:
-        radial-gradient(70vmax 55vmax at 12% 8%, color-mix(in oklab, var(--c1) 70%, transparent), transparent 65%),
-        radial-gradient(65vmax 55vmax at 92% 95%, color-mix(in oklab, var(--c2) 60%, transparent), transparent 65%),
+        radial-gradient(70vmax 55vmax at 12% 8%, color-mix(in oklab, var(--c1) 65%, transparent), transparent 65%),
+        radial-gradient(65vmax 55vmax at 92% 95%, color-mix(in oklab, var(--c2) 55%, transparent), transparent 65%),
         var(--c0);
       background-attachment: fixed;
       display: flex;
@@ -38,111 +38,154 @@
       align-items: center;
       justify-content: center;
       gap: 28px;
-      padding: 28px 14px;
+      padding: 28px 16px;
       user-select: none;
+      -webkit-font-smoothing: antialiased;
     }
+
+    /* Panneau principal Glassmorphism haute définition */
     .panel {
-      width: min(1000px, 100%);
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.24);
+      width: min(1040px, 100%);
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.04) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 32px;
-      padding: 30px 28px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.30), inset 0 0 24px rgba(255, 255, 255, 0.06);
+      padding: 32px 32px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow:
+        0 30px 80px -15px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+        inset 0 0 32px rgba(255, 255, 255, 0.03);
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
+    /* Barre supérieure de contrôle */
     .top {
       display: flex;
-      gap: 12px;
+      gap: 14px;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
       margin-bottom: 18px;
-      background: rgba(0, 0, 0, 0.18);
-      padding: 12px 20px;
-      border-radius: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.12);
+      background: rgba(0, 0, 0, 0.24);
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.25);
     }
+
+    /* Bloc de saisie horaire unifié */
     .input-group {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 20px;
+      gap: 4px;
+      background: rgba(0, 0, 0, 0.28);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
       color: rgba(255, 255, 255, 0.9);
+    }
+    .input-group i {
+      font-size: 16px;
+      opacity: 0.75;
       margin-right: 6px;
+      color: var(--c1);
     }
     .input-group .unit {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      opacity: 0.8;
+      opacity: 0.65;
+      margin-right: 6px;
+    }
+    .input-group .unit:last-child {
+      margin-right: 0;
     }
     input[type="number"] {
-      width: 62px;
-      font-size: 22px;
+      width: 48px;
+      font-size: 20px;
       font-weight: 800;
       font-family: 'JetBrains Mono', monospace;
-      padding: 8px 6px;
-      border-radius: 14px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      background: rgba(0, 0, 0, 0.3);
+      padding: 4px 2px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
       color: #ffffff;
       outline: none;
-      text-align: center;
-      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-align: right;
+      transition: all 0.2s ease;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"]:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.08);
     }
     input[type="number"]:focus {
-      border-color: #ffffff;
-      background: rgba(0, 0, 0, 0.5);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-      transform: scale(1.05);
+      border-color: rgba(255, 255, 255, 0.5);
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
     }
     input[type="number"]:disabled {
       opacity: 0.5;
     }
-    /* Boutons circulaires avec icônes */
+
+    /* Boutons d'action circulaires */
+    .btn-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
     .btn {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.10);
       color: #ffffff;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      font-size: 18px;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
     .btn:hover:not(:disabled) {
-      transform: scale(1.15) translateY(-3px);
-      background: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      border-color: #ffffff;
+      transform: translateY(-2px) scale(1.06);
+      background: rgba(255, 255, 255, 0.24);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.8);
     }
     .btn:active:not(:disabled) {
       transform: scale(0.95);
     }
     .btn:disabled {
-      opacity: 0.35;
+      opacity: 0.3;
       cursor: not-allowed;
       background: transparent;
-      border-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.12);
       box-shadow: none;
     }
     #start:not(:disabled) {
-      background: rgba(255, 255, 255, 0.22);
-      border-color: rgba(255, 255, 255, 0.65);
+      background: #ffffff;
+      color: #0f172a;
+      border-color: #ffffff;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.28);
     }
+    #start:hover:not(:disabled) {
+      background: #f8fafc;
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.45);
+    }
+
     /* Pastilles (préréglages, échelles, modes) */
     .chips {
       display: flex;
-      gap: 6px;
+      gap: 7px;
       flex-wrap: wrap;
       justify-content: center;
     }
@@ -150,40 +193,48 @@
       font-family: inherit;
       font-size: 13px;
       font-weight: 700;
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.20);
       border-radius: 999px;
-      padding: 6px 12px;
+      padding: 6px 13px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.18s ease;
     }
     .chip:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.20);
+      border-color: rgba(255, 255, 255, 0.45);
+      color: #ffffff;
     }
     .chip.active {
       background: #ffffff;
       color: #0f172a;
       border-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     .chip:disabled {
-      opacity: 0.4;
+      opacity: 0.38;
       cursor: not-allowed;
     }
-    /* Roue et affichage */
+
+    /* Grille centrale : Cadran circulaire + Afficheur géant */
     .main {
       display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 26px;
+      grid-template-columns: 360px 1fr;
+      gap: 36px;
       align-items: center;
       width: 100%;
+      margin-top: 8px;
     }
-    @media (max-width: 760px) {
+    @media (max-width: 820px) {
       .main {
         grid-template-columns: 1fr;
         justify-items: center;
+        gap: 24px;
       }
     }
+
+    /* Curseur circulaire (Dial) */
     .dial-wrap {
       display: flex;
       flex-direction: column;
@@ -191,11 +242,12 @@
       gap: 10px;
     }
     #dial {
-      width: min(330px, 82vw);
+      width: min(350px, 84vw);
       height: auto;
       touch-action: none;
       cursor: grab;
-      filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35));
+      filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.45));
+      overflow: visible;
     }
     #dial.locked {
       cursor: default;
@@ -203,73 +255,104 @@
     #dial:active:not(.locked) {
       cursor: grabbing;
     }
+    #dial #dHandle {
+      transition: transform 0.04s linear;
+    }
+    #dial:not(.locked) #dHandleKnob {
+      transition: r 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #dial:not(.locked):hover #dHandleKnob {
+      r: 13.5px;
+    }
     .scale-label {
       font-size: 12px;
       font-weight: 700;
-      opacity: 0.8;
+      letter-spacing: 0.03em;
+      opacity: 0.75;
       margin-right: 4px;
       align-self: center;
     }
+
+    /* Zone d'affichage numérique */
     .readout {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+    }
+    .timer-card {
+      background: rgba(0, 0, 0, 0.20);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 28px;
+      padding: 18px 34px;
+      box-shadow: inset 0 2px 16px rgba(0, 0, 0, 0.25);
+      margin-bottom: 6px;
     }
     .timer {
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 800;
-      font-size: clamp(64px, 11vw, 140px);
+      font-size: clamp(64px, 10.5vw, 134px);
       line-height: 1;
-      letter-spacing: -3px;
-      margin: 10px 0;
-      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+      letter-spacing: -4px;
+      text-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
       font-variant-numeric: tabular-nums;
     }
     .timer.long {
-      font-size: clamp(46px, 7.5vw, 96px);
+      font-size: clamp(44px, 7vw, 92px);
       letter-spacing: -2px;
     }
     .timer.urgent {
       animation: pulse 1s ease-in-out infinite;
+      color: #ffe4e6;
     }
     @keyframes pulse {
-      50% { transform: scale(1.04); }
+      50% { transform: scale(1.035); }
     }
     .sub {
       display: flex;
       justify-content: center;
-      gap: 12px;
-      font-size: 15px;
+      gap: 10px;
+      font-size: 14px;
       font-weight: 700;
-      margin-top: 14px;
+      margin-top: 12px;
       flex-wrap: wrap;
     }
     .badge {
-      padding: 8px 18px;
+      padding: 8px 16px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(0, 0, 0, 0.26);
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      white-space: nowrap;
+    }
+    /* Chiffres tabulaires et alignement à droite quand la largeur est figée pendant le décompte */
+    #remaining {
+      justify-content: space-between;
+      font-variant-numeric: tabular-nums;
     }
     .rt-toggle {
       font-family: inherit;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 800;
       color: #0f172a;
       background: #ffffff;
       border: none;
       border-radius: 999px;
-      padding: 10px 20px;
+      padding: 11px 22px;
       cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-      transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+      transition: all 0.2s ease;
     }
     .rt-toggle:hover {
       transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.32);
     }
     body.blink {
       animation: blink 0.4s steps(2, end) infinite;
@@ -295,13 +378,16 @@
     }
     .rt-head h2 {
       margin: 0;
-      font-size: 24px;
-      font-weight: 900;
+      font-size: 22px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .zone {
       height: 230px;
       border-radius: 24px;
-      border: 2px solid rgba(255, 255, 255, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.22);
       background: rgba(0, 0, 0, 0.35);
       display: flex;
       flex-direction: column;
@@ -313,24 +399,27 @@
       cursor: pointer;
       touch-action: manipulation;
       user-select: none;
+      transition: background 0.15s, border-color 0.15s;
     }
     .zone .big {
-      font-size: clamp(26px, 5vw, 42px);
-      font-weight: 900;
-      line-height: 1.1;
+      font-size: clamp(24px, 4.5vw, 38px);
+      font-weight: 800;
+      line-height: 1.15;
     }
     .zone .small {
-      font-size: 15px;
-      font-weight: 700;
-      opacity: 0.85;
+      font-size: 14.5px;
+      font-weight: 600;
+      opacity: 0.82;
     }
     .zone.wait {
       background: rgba(0, 0, 0, 0.55);
+      border-style: dashed;
     }
     .zone.go {
       background: #f8fafc;
       color: #0f172a;
       border-color: #ffffff;
+      border-style: solid;
     }
     .zone.go .arrow {
       font-size: clamp(70px, 14vw, 130px);
@@ -339,6 +428,7 @@
     }
     .zone.bad {
       background: rgba(225, 29, 72, 0.55);
+      border-color: rgba(251, 113, 133, 0.8);
     }
     .zone.result .big {
       font-family: 'JetBrains Mono', monospace;
@@ -355,26 +445,28 @@
     .rt-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 15px;
-      background: rgba(0, 0, 0, 0.18);
+      font-size: 14.5px;
+      background: rgba(0, 0, 0, 0.20);
       border-radius: 16px;
       overflow: hidden;
     }
     .rt-table th, .rt-table td {
-      padding: 10px 12px;
+      padding: 11px 12px;
       text-align: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
     }
     .rt-table th {
-      font-size: 13px;
-      opacity: 0.8;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.78;
     }
     .rt-table td.res {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 800;
     }
     .rt-table tr.current td {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.10);
     }
     .trials {
       display: flex;
@@ -386,14 +478,14 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
       font-weight: 500;
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 8px;
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.16);
     }
     .trial.excluded {
       text-decoration: line-through;
-      opacity: 0.6;
+      opacity: 0.55;
     }
     .rt-actions {
       display: flex;
@@ -407,45 +499,47 @@
       font-weight: 700;
     }
     .explain {
-      background: rgba(0, 0, 0, 0.22);
+      background: rgba(0, 0, 0, 0.24);
+      border: 1px solid rgba(255, 255, 255, 0.10);
       border-radius: 20px;
-      padding: 18px 22px;
-      line-height: 1.6;
-      font-size: 15.5px;
+      padding: 20px 24px;
+      line-height: 1.65;
+      font-size: 15px;
     }
     .explain h3 {
       margin: 0 0 10px;
-      font-size: 19px;
+      font-size: 18px;
     }
     .explain h4 {
-      margin: 16px 0 4px;
-      font-size: 16px;
+      margin: 18px 0 6px;
+      font-size: 15.5px;
     }
     .explain p {
       margin: 6px 0;
+      color: rgba(255, 255, 255, 0.92);
     }
     .explain table {
       width: 100%;
       border-collapse: collapse;
-      margin: 10px 0;
-      font-size: 14.5px;
+      margin: 12px 0;
+      font-size: 14px;
     }
     .explain th, .explain td {
-      padding: 8px 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 9px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       text-align: left;
       vertical-align: top;
     }
     .explain th {
-      font-size: 12px;
+      font-size: 11.5px;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      opacity: 0.8;
+      letter-spacing: 0.05em;
+      opacity: 0.75;
     }
     .explain td.v {
       font-family: 'JetBrains Mono', monospace;
       white-space: nowrap;
-      font-weight: 500;
+      font-weight: 700;
     }
     .table-scroll {
       overflow-x: auto;
@@ -457,9 +551,13 @@
       }
       .top {
         padding: 10px 12px;
+        border-radius: 24px;
+      }
+      .timer-card {
+        padding: 14px 20px;
       }
       .explain {
-        padding: 14px 14px;
+        padding: 14px;
       }
       .explain td.v {
         white-space: normal;
@@ -479,13 +577,15 @@
         <input id="seconds" type="number" min="0" max="59" step="1" value="0" aria-label="Secondes" />
         <span class="unit">s</span>
       </div>
-      <button class="btn" id="start" title="Démarrer"><i class="fa-solid fa-play"></i></button>
-      <button class="btn" id="pause" title="Pause" disabled><i class="fa-solid fa-pause"></i></button>
-      <button class="btn" id="reset" title="Réinitialiser" disabled><i class="fa-solid fa-rotate-left"></i></button>
-      <button class="btn" id="mute" title="Activer/Désactiver le son"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="btn-controls">
+        <button class="btn" id="start" title="Démarrer (Barre d'espace)"><i class="fa-solid fa-play"></i></button>
+        <button class="btn" id="pause" title="Pause (Barre d'espace)" disabled><i class="fa-solid fa-pause"></i></button>
+        <button class="btn" id="reset" title="Réinitialiser" disabled><i class="fa-solid fa-rotate-left"></i></button>
+        <button class="btn" id="mute" title="Activer/Désactiver le son"><i class="fa-solid fa-volume-high"></i></button>
+      </div>
     </div>
 
-    <div class="chips" id="presets" style="margin-bottom: 14px;">
+    <div class="chips" id="presets" style="margin-bottom: 16px;">
       <button class="chip" data-s="30">30 s</button>
       <button class="chip" data-s="60">1 min</button>
       <button class="chip" data-s="120">2 min</button>
@@ -499,7 +599,7 @@
 
     <div class="main">
       <div class="dial-wrap">
-        <svg id="dial" viewBox="0 0 300 300" aria-label="Roue de réglage : faire glisser pour choisir la durée"></svg>
+        <svg id="dial" viewBox="0 0 320 320" aria-label="Roue de réglage : faire glisser ou tourner la molette pour choisir la durée"></svg>
         <div class="scale-label" id="scaleUnit">Graduations en minutes</div>
         <div class="chips" id="scales">
           <span class="scale-label">Un tour =</span>
@@ -510,13 +610,15 @@
         </div>
       </div>
       <div class="readout">
-        <div class="timer" id="display">05:00</div>
+        <div class="timer-card">
+          <div class="timer" id="display">05:00</div>
+        </div>
         <div class="sub">
           <span class="badge" id="status"><i class="fa-solid fa-circle-check"></i> Prêt</span>
           <span class="badge" id="remaining"><i class="fa-solid fa-stopwatch"></i> Restant : 300,0 s</span>
           <span class="badge" id="endAt" hidden></span>
         </div>
-        <div class="sub">
+        <div class="sub" style="margin-top: 16px;">
           <button class="rt-toggle" id="rtToggle"><i class="fa-solid fa-bolt"></i> Tester son temps de réaction</button>
         </div>
       </div>
@@ -599,7 +701,6 @@
     const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 
     // --- 1. Couleurs de fond : interpolation dans l'espace OKLab ---
-    // Du calme (émeraude) à l'urgence (rose-rouge), en passant par l'indigo, le violet et l'orange.
     const STOPS = [
       { f: 1.00, c0: '#064e3b', c1: '#10b981', c2: '#0ea5e9' },
       { f: 0.60, c0: '#1e1b4b', c1: '#6366f1', c2: '#06b6d4' },
@@ -663,8 +764,8 @@
     const SCALES = [120, 600, 3600, 43200];          // un tour de roue : 2 min, 10 min, 1 h, 12 h
     const SNAP = { 120: 1, 600: 5, 3600: 15, 43200: 300 }; // pas de réglage de la roue (s)
     const MAX_S = 99 * 3600 + 59 * 60 + 59;
-    let endAt = null;                                   // instant de fin (performance.now), pendant le décompte
-    let endTimer = null;                                // minuteur de secours si l'onglet passe en arrière-plan
+    let endAt = null;
+    let endTimer = null;
 
     let muted = false;
     let audioCtx = null;
@@ -706,10 +807,11 @@
       displayEl.textContent = clock;
       displayEl.classList.toggle('long', clock.length > 5);
       displayEl.classList.toggle('urgent', running && remainingMs < 10000);
-      remainingEl.innerHTML = remainingMs >= 3600000
-        ? `<i class="fa-solid fa-stopwatch"></i> Restant : ${fmtLong(remainingMs / 1000)}`
-        : `<i class="fa-solid fa-stopwatch"></i> Restant : ${(remainingMs / 1000).toFixed(1).replace('.', ',')} s`;
-      // Heure de fin prévue et temps restant dans le titre de l'onglet (utile pour les longues durées)
+      const remText = remainingMs >= 3600000
+        ? fmtLong(remainingMs / 1000)
+        : `${(remainingMs / 1000).toFixed(1).replace('.', ',')} s`;
+      remainingEl.innerHTML = `<span><i class="fa-solid fa-stopwatch"></i> Restant :</span><span>${remText}</span>`;
+      
       const endEl = $('endAt');
       endEl.hidden = !running;
       if (running) {
@@ -725,7 +827,10 @@
       pauseBtn.disabled = !running;
       resetBtn.disabled = isPristine();
       hoursEl.disabled = minutesEl.disabled = secondsEl.disabled = !isPristine();
-      document.querySelectorAll('#presets .chip').forEach((b) => { b.disabled = !isPristine(); });
+      document.querySelectorAll('#presets .chip').forEach((b) => {
+        b.disabled = !isPristine();
+        b.classList.toggle('active', isPristine() && Number(b.dataset.s) * 1000 === totalMs);
+      });
       dial.classList.toggle('locked', !isPristine());
       updateDial();
     }
@@ -734,16 +839,15 @@
       statusEl.innerHTML = `<i class="fa-solid ${icon}"></i> ${txt}`;
     }
 
-    // Choix de la durée (en secondes) depuis les champs, la roue ou les préréglages
     function setDuration(seconds, fromInputs) {
       seconds = clamp(Math.round(seconds), 0, MAX_S);
       totalMs = remainingMs = seconds * 1000;
+      remainingEl.style.width = ''; // Libère la largeur lors du choix d'une nouvelle durée
       if (!fromInputs) {
         hoursEl.value = Math.floor(seconds / 3600);
         minutesEl.value = Math.floor((seconds % 3600) / 60);
         secondsEl.value = seconds % 60;
       }
-      // Échelle de la roue : la plus petite qui contient la durée
       if (fromInputs || seconds > scaleS) setScale(SCALES.find((sc) => seconds <= sc) || 43200);
       stopAlarm();
       stopBlink();
@@ -759,11 +863,14 @@
       return v(hoursEl, 99) * 3600 + v(minutesEl, 59) * 60 + v(secondsEl, 59);
     }
 
-    // --- 3. Roue de réglage (façon minuteur mécanique) ---
-    // La partie fixe (lunette, graduations, chiffres) est construite une fois par échelle ;
-    // seuls le disque, l'anneau, l'aiguille et l'éclairage des graduations suivent le temps.
-    const CX = 150, CY = 150;
-    const R_RING = 140, R_TICK = 131, R_LABEL = 108, R_WELL = 88, R_SECTOR = 84;
+    // --- 3. Curseur circulaire haute précision (Chronographe moderne) ---
+    const CX = 160, CY = 160;
+    const R_OUTER = 152;
+    const R_RING = 138;        // Anneau lumineux principal de progression
+    const R_TICK_OUT = 123;    // Graduations
+    const R_LABEL = 99;        // Chiffres du cadran
+    const R_WELL = 78;         // Cuvette centrale
+    const R_SECTOR = 74;       // Secteur balayé translucide
     let dialParts = null;
     let litTicks = -1;
 
@@ -782,64 +889,120 @@
       const every = scaleS === 600 ? 6 : 5;
       let svg = `
         <defs>
-          <radialGradient id="dFace" cx="50%" cy="30%" r="75%">
-            <stop offset="0" stop-color="#ffffff" stop-opacity="0.24"/>
-            <stop offset="1" stop-color="#ffffff" stop-opacity="0.05"/>
+          <!-- Surface du cadran principal -->
+          <radialGradient id="dFace" cx="50%" cy="25%" r="80%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
+            <stop offset="55%" stop-color="#ffffff" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="#000000" stop-opacity="0.22"/>
           </radialGradient>
-          <linearGradient id="dBezel" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#ffffff" stop-opacity="0.75"/>
-            <stop offset="1" stop-color="#ffffff" stop-opacity="0.08"/>
+
+          <!-- Lunette métallique externe -->
+          <linearGradient id="dBezel" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65"/>
+            <stop offset="50%" stop-color="#ffffff" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#000000" stop-opacity="0.35"/>
           </linearGradient>
+
+          <!-- Dégradé dynamique de la piste active -->
           <linearGradient id="dColor" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" style="stop-color: var(--c1)"/>
-            <stop offset="1" style="stop-color: var(--c2)"/>
+            <stop offset="0%" style="stop-color: var(--c1)"/>
+            <stop offset="100%" style="stop-color: var(--c2)"/>
           </linearGradient>
-          <radialGradient id="dWell" cx="50%" cy="45%" r="60%">
-            <stop offset="0.7" stop-color="#000000" stop-opacity="0.18"/>
-            <stop offset="1" stop-color="#000000" stop-opacity="0.38"/>
+
+          <!-- Secteur translucide interne -->
+          <radialGradient id="dSectorFill" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color: var(--c1); stop-opacity: 0.12"/>
+            <stop offset="70%" style="stop-color: var(--c1); stop-opacity: 0.38"/>
+            <stop offset="100%" style="stop-color: var(--c2); stop-opacity: 0.65"/>
           </radialGradient>
-          <radialGradient id="dHub" cx="38%" cy="32%" r="75%">
-            <stop offset="0" stop-color="#ffffff"/>
-            <stop offset="1" stop-color="#cbd5e1"/>
+
+          <!-- Cuvette centrale creusée -->
+          <radialGradient id="dWell" cx="50%" cy="40%" r="65%">
+            <stop offset="0%" stop-color="#000000" stop-opacity="0.22"/>
+            <stop offset="75%" stop-color="#000000" stop-opacity="0.38"/>
+            <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
           </radialGradient>
-          <filter id="dShadow" x="-50%" y="-50%" width="200%" height="200%">
-            <feDropShadow dx="0" dy="2" stdDeviation="2.2" flood-color="#000" flood-opacity="0.35"/>
+
+          <!-- Moyeu central biseauté -->
+          <linearGradient id="dHub" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#cbd5e1"/>
+          </linearGradient>
+
+          <filter id="dShadow" x="-40%" y="-40%" width="180%" height="180%">
+            <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.45"/>
           </filter>
-          <filter id="dGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="5" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+
+          <filter id="dGlow" x="-25%" y="-25%" width="150%" height="150%">
+            <feGaussianBlur stdDeviation="4.5" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
           </filter>
         </defs>
-        <circle cx="${CX}" cy="${CY}" r="148" fill="none" stroke="url(#dBezel)" stroke-width="2.5"/>
-        <circle cx="${CX}" cy="${CY}" r="146" fill="url(#dFace)"/>
-        <circle cx="${CX}" cy="${CY}" r="${R_RING}" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="5"/>
-        <path id="dArc" fill="none" stroke="url(#dColor)" stroke-width="5" stroke-linecap="round" filter="url(#dGlow)"/>`;
+
+        <!-- Boîtier et lunette externe -->
+        <circle cx="${CX}" cy="${CY}" r="${R_OUTER}" fill="url(#dFace)" stroke="url(#dBezel)" stroke-width="2"/>
+        <circle cx="${CX}" cy="${CY}" r="${R_OUTER - 5}" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+
+        <!-- Gorge de l'anneau de progression -->
+        <circle cx="${CX}" cy="${CY}" r="${R_RING}" fill="none" stroke="rgba(0,0,0,0.38)" stroke-width="12"/>
+        <circle cx="${CX}" cy="${CY}" r="${R_RING}" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="10"/>
+
+        <!-- Arc lumineux actif -->
+        <circle id="dRingFull" cx="${CX}" cy="${CY}" r="${R_RING}" fill="none" stroke="url(#dColor)" stroke-width="10" filter="url(#dGlow)" style="display:none"/>
+        <path id="dArc" fill="none" stroke="url(#dColor)" stroke-width="10" stroke-linecap="round" filter="url(#dGlow)"/>
+      `;
+
+      // Graduations et chiffres tabulaires
       for (let k = 0; k < 60; k++) {
         const major = k % every === 0;
-        const [xa, ya] = polar(R_TICK, k * 6), [xb, yb] = polar(R_TICK - (major ? 13 : 7), k * 6);
-        svg += `<line class="dTick" data-major="${major ? 1 : 0}" x1="${xa.toFixed(2)}" y1="${ya.toFixed(2)}" x2="${xb.toFixed(2)}" y2="${yb.toFixed(2)}" stroke="#fff" stroke-width="${major ? 2.4 : 1.2}" stroke-linecap="round"/>`;
+        const [xa, ya] = polar(R_TICK_OUT, k * 6);
+        const [xb, yb] = polar(R_TICK_OUT - (major ? 11 : 5.5), k * 6);
+        svg += `<line class="dTick" data-major="${major ? 1 : 0}" x1="${xa.toFixed(2)}" y1="${ya.toFixed(2)}" x2="${xb.toFixed(2)}" y2="${yb.toFixed(2)}" stroke="#ffffff" stroke-width="${major ? 2.2 : 1.2}" stroke-linecap="round"/>`;
         if (major) {
           const [xt, yt] = polar(R_LABEL, k * 6);
-          svg += `<text class="dLabel" data-k="${k}" x="${xt.toFixed(2)}" y="${yt.toFixed(2)}" text-anchor="middle" dominant-baseline="central" font-family="Nunito, sans-serif" font-weight="800" font-size="13" fill="#fff">${scaleLabel(k * scaleS / 60)}</text>`;
+          svg += `<text class="dLabel" data-k="${k}" x="${xt.toFixed(2)}" y="${yt.toFixed(2)}" text-anchor="middle" dominant-baseline="central" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="12.5" fill="#ffffff">${scaleLabel(k * scaleS / 60)}</text>`;
         }
       }
+
+      // Cuvette interne, secteur radar, aiguille fuselée et curseur rotatif
       svg += `
-        <circle cx="${CX}" cy="${CY}" r="${R_WELL}" fill="url(#dWell)"/>
-        <circle id="dFull" cx="${CX}" cy="${CY}" r="${R_SECTOR}" fill="url(#dColor)" stroke="rgba(255,255,255,0.85)" stroke-width="1.5"/>
-        <path id="dSector" fill="url(#dColor)" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linejoin="round"/>
-        <line id="dNeedle" x1="${CX}" y1="${CY}" stroke="#fff" stroke-width="3" stroke-linecap="round" filter="url(#dShadow)"/>
-        <g id="dHandle" filter="url(#dShadow)">
-          <circle r="10" fill="#fff"/>
-          <circle r="4.5" style="fill: var(--c1)"/>
+        <!-- Cuvette centrale -->
+        <circle cx="${CX}" cy="${CY}" r="${R_WELL}" fill="url(#dWell)" stroke="rgba(255,255,255,0.14)" stroke-width="1.2"/>
+        <circle cx="${CX}" cy="${CY}" r="${R_WELL - 22}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="3 4"/>
+
+        <!-- Secteur angulaire translucide -->
+        <circle id="dFull" cx="${CX}" cy="${CY}" r="${R_SECTOR}" fill="url(#dSectorFill)" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
+        <path id="dSector" fill="url(#dSectorFill)" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linejoin="round"/>
+
+        <!-- Groupe Aiguille horlogère fuselée -->
+        <g id="dNeedleGroup" filter="url(#dShadow)">
+          <path d="M ${CX - 3.5} ${CY + 16} L ${CX - 1.2} ${CY - R_SECTOR + 4} L ${CX} ${CY - R_SECTOR - 4} L ${CX + 1.2} ${CY - R_SECTOR + 4} L ${CX + 3.5} ${CY + 16} Z" fill="#ffffff"/>
         </g>
-        <circle cx="${CX}" cy="${CY}" r="15" fill="url(#dHub)" filter="url(#dShadow)"/>
-        <circle cx="${CX}" cy="${CY}" r="5" style="fill: var(--c0)"/>`;
+
+        <!-- Poignée de réglage sur l'anneau externe -->
+        <g id="dHandle" filter="url(#dShadow)">
+          <circle r="15" fill="rgba(255,255,255,0.18)"/>
+          <circle id="dHandleKnob" r="11.5" fill="#ffffff" stroke="rgba(15,23,42,0.15)" stroke-width="1"/>
+          <circle r="5" style="fill: var(--c1)"/>
+          <circle r="2" fill="#ffffff"/>
+        </g>
+
+        <!-- Moyeu central -->
+        <circle cx="${CX}" cy="${CY}" r="14" fill="url(#dHub)" filter="url(#dShadow)"/>
+        <circle cx="${CX}" cy="${CY}" r="6" style="fill: var(--c0)"/>
+        <circle cx="${CX}" cy="${CY}" r="2.2" fill="#ffffff" opacity="0.85"/>
+      `;
+
       dial.innerHTML = svg;
       dialParts = {
         arc: dial.querySelector('#dArc'),
+        ringFull: dial.querySelector('#dRingFull'),
         full: dial.querySelector('#dFull'),
         sector: dial.querySelector('#dSector'),
-        needle: dial.querySelector('#dNeedle'),
+        needleGroup: dial.querySelector('#dNeedleGroup'),
         handle: dial.querySelector('#dHandle'),
         ticks: [...dial.querySelectorAll('.dTick')],
         labels: [...dial.querySelectorAll('.dLabel')]
@@ -854,34 +1017,38 @@
       const frac = clamp(shownS / scaleS, 0, 1);
       const ang = frac * 360;
       const P = dialParts;
-      // Disque et anneau de progression
+
       const full = frac >= 0.9999;
       P.full.style.display = full ? '' : 'none';
+      P.ringFull.style.display = full ? '' : 'none';
       P.sector.style.display = !full && frac > 0 ? '' : 'none';
-      P.arc.style.display = frac > 0 ? '' : 'none';
+      P.arc.style.display = !full && frac > 0 ? '' : 'none';
+
       if (!full && frac > 0) {
-        const [x1, y1] = polar(R_SECTOR, 0), [x2, y2] = polar(R_SECTOR, ang);
-        P.sector.setAttribute('d', `M${CX} ${CY} L${x1} ${y1} A${R_SECTOR} ${R_SECTOR} 0 ${ang > 180 ? 1 : 0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`);
+        const [sx1, sy1] = polar(R_SECTOR, 0), [sx2, sy2] = polar(R_SECTOR, ang);
+        P.sector.setAttribute('d', `M${CX} ${CY} L${sx1} ${sy1} A${R_SECTOR} ${R_SECTOR} 0 ${ang > 180 ? 1 : 0} 1 ${sx2.toFixed(2)} ${sy2.toFixed(2)} Z`);
+
+        const [rx1, ry1] = polar(R_RING, 0), [rx2, ry2] = polar(R_RING, ang);
+        P.arc.setAttribute('d', `M${rx1} ${ry1} A${R_RING} ${R_RING} 0 ${ang > 180 ? 1 : 0} 1 ${rx2.toFixed(2)} ${ry2.toFixed(2)}`);
       }
-      if (frac > 0) {
-        const a = Math.min(ang, 359.99);
-        const [x1, y1] = polar(R_RING, 0), [x2, y2] = polar(R_RING, a);
-        P.arc.setAttribute('d', `M${x1} ${y1} A${R_RING} ${R_RING} 0 ${a > 180 ? 1 : 0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`);
-      }
-      // Aiguille et poignée
-      const [hx, hy] = polar(R_SECTOR, ang);
-      P.needle.setAttribute('x2', hx.toFixed(2));
-      P.needle.setAttribute('y2', hy.toFixed(2));
+
+      // Rotation de l'aiguille fuselée et positionnement de la poignée sur l'anneau
+      P.needleGroup.setAttribute('transform', `rotate(${ang.toFixed(2)} ${CX} ${CY})`);
+      const [hx, hy] = polar(R_RING, ang);
       P.handle.setAttribute('transform', `translate(${hx.toFixed(2)} ${hy.toFixed(2)})`);
-      // Graduations éclairées dans la zone de temps restant (mises à jour seulement si besoin)
+
+      // Éclairage progressif des graduations et des chiffres
       const lit = frac > 0 ? Math.floor(ang / 6 + 1e-9) + 1 : 0;
       if (lit !== litTicks) {
         litTicks = lit;
         P.ticks.forEach((t, k) => {
           const on = k < lit;
-          t.setAttribute('stroke-opacity', on ? (t.dataset.major === '1' ? 1 : 0.85) : (t.dataset.major === '1' ? 0.45 : 0.25));
+          t.setAttribute('stroke-opacity', on ? (t.dataset.major === '1' ? 1 : 0.85) : (t.dataset.major === '1' ? 0.35 : 0.18));
         });
-        P.labels.forEach((l) => l.setAttribute('fill-opacity', Number(l.dataset.k) < lit ? 1 : 0.5));
+        P.labels.forEach((l) => {
+          const on = Number(l.dataset.k) < lit;
+          l.setAttribute('fill-opacity', on ? 1 : 0.42);
+        });
       }
     }
 
@@ -894,11 +1061,12 @@
 
     document.querySelectorAll('#scales .chip').forEach((b) => b.addEventListener('click', () => setScale(Number(b.dataset.scale))));
 
-    // Glisser sur la roue : l'angle compté depuis midi dans le sens horaire donne la durée
+    // Glisser sur la roue
     let dragging = false;
     function angleFromEvent(e) {
       const r = dial.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width * 300 - CX, y = (e.clientY - r.top) / r.height * 300 - CY;
+      const x = (e.clientX - r.left) / r.width * 320 - CX;
+      const y = (e.clientY - r.top) / r.height * 320 - CY;
       let a = Math.atan2(x, -y) * 180 / Math.PI;
       return a < 0 ? a + 360 : a;
     }
@@ -907,7 +1075,6 @@
       const step = SNAP[scaleS];
       let sec = Math.round(a / 360 * scaleS / step) * step;
       const prev = Math.min(totalMs / 1000, scaleS);
-      // Pendant un glissement, pas de saut d'un bord à l'autre en passant par midi
       if (moving && prev > 0.75 * scaleS && sec < 0.25 * scaleS) sec = scaleS;
       if (moving && prev < 0.25 * scaleS && sec > 0.75 * scaleS) sec = 0;
       if (sec !== prev) setDuration(sec, false);
@@ -988,8 +1155,6 @@
       endTimer = null;
     }
 
-    // Filet de sécurité : si l'onglet est en arrière-plan, l'animation est suspendue,
-    // mais ce minuteur déclenche quand même l'alarme à l'heure prévue.
     function checkEnd() {
       if (!running) return;
       remainingMs = endAt - performance.now();
@@ -1022,6 +1187,7 @@
       stopBlink();
       stopCountdown();
       remainingMs = totalMs;
+      remainingEl.style.width = ''; // Réinitialise la largeur auto
       setStatus('Prêt', 'fa-circle-check');
       updateUI();
     }
@@ -1029,10 +1195,18 @@
     startBtn.addEventListener('click', () => {
       stopAlarm();
       stopBlink();
-      if (remainingMs <= 0) remainingMs = totalMs;
+      if (remainingMs <= 0) {
+        remainingMs = totalMs;
+        remainingEl.style.width = '';
+        updateUI();
+      }
       if (totalMs <= 0) {
         setStatus('Durée nulle', 'fa-triangle-exclamation');
         return;
+      }
+      // Figer la largeur de la cellule #remaining sur la taille initiale choisie pour toute la durée du décompte
+      if (!remainingEl.style.width) {
+        remainingEl.style.width = `${Math.ceil(remainingEl.getBoundingClientRect().width)}px`;
       }
       if (!muted) ensureAudioContext();
       running = true;
@@ -1062,23 +1236,35 @@
       if (isPristine()) setDuration(readInputs(), true);
     }));
 
+    // Raccourci Barre d'espace pour Démarrer / Pause quand le test de réaction est fermé
+    window.addEventListener('keydown', (e) => {
+      if (!rtPanel.hidden || e.repeat) return;
+      const tag = document.activeElement && document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'BUTTON') return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (running) pauseBtn.click();
+        else startBtn.click();
+      }
+    });
+
     // --- 6. Test du temps de réaction ---
     const rtPanel = $('rtPanel');
     const zone = $('zone');
     const MODE_NAMES = { visual: 'Visuel', audio: 'Sonore', choice: 'Choix (← ou →)' };
     const RT = {
       mode: 'visual',
-      state: 'idle',          // idle → wait → go → result → wait…
+      state: 'idle',
       timer: null,
-      onset: null,            // instant du stimulus (horloge de performance.now, en ms)
-      expected: null,         // flèche attendue en mode « choix »
-      trials: [],             // { mode, ms, excluded }
+      onset: null,
+      expected: null,
+      trials: [],
       falseStarts: { visual: 0, audio: 0, choice: 0 },
       errors: 0
     };
 
     $('rtToggle').addEventListener('click', () => {
-      $('rtToggle').blur(); // sinon la barre d'espace, utilisée pendant le test, réactiverait ce bouton
+      $('rtToggle').blur();
       rtPanel.hidden = !rtPanel.hidden;
       $('rtToggle').innerHTML = rtPanel.hidden
         ? '<i class="fa-solid fa-bolt"></i> Tester son temps de réaction'
@@ -1124,7 +1310,6 @@
       RT.state = 'wait';
       RT.onset = null;
       setZone('wait', RT.mode === 'audio' ? 'Écoutez…' : 'Attendez…', RT.mode === 'audio' ? 'appuyez dès que vous entendez le bip' : 'ne bougez pas avant le signal');
-      // Délai aléatoire, pour que le signal ne puisse pas être anticipé
       RT.timer = setTimeout(rtStimulus, 1500 + Math.random() * 2500);
     }
 
@@ -1134,7 +1319,6 @@
         const ctx = ensureAudioContext();
         const when = ctx.currentTime + 0.05;
         beepAt(when, 1000, 180, 0.25);
-        // Conversion de l'instant audio en instant « performance.now », latence de sortie comprise
         let perfAt;
         if (ctx.getOutputTimestamp) {
           const ts = ctx.getOutputTimestamp();
@@ -1142,7 +1326,7 @@
         }
         if (perfAt === undefined) perfAt = performance.now() + (when - ctx.currentTime + (ctx.outputLatency || ctx.baseLatency || 0)) * 1000;
         RT.onset = perfAt;
-        return; // aucun changement visuel : seul le son compte
+        return;
       }
       if (RT.mode === 'choice') {
         RT.expected = Math.random() < 0.5 ? 'left' : 'right';
@@ -1150,7 +1334,6 @@
       } else {
         setZone('go', '⚡ MAINTENANT !', '');
       }
-      // Instant du stimulus : début de l'image qui l'affiche
       requestAnimationFrame((ts) => { RT.onset = ts; });
     }
 
@@ -1195,7 +1378,7 @@
       let dir = null;
       if (e.key === 'ArrowLeft') dir = 'left';
       if (e.key === 'ArrowRight') dir = 'right';
-      if (RT.mode === 'choice' && RT.state === 'go' && !dir) return; // en mode choix, seules les flèches comptent
+      if (RT.mode === 'choice' && RT.state === 'go' && !dir) return;
       e.preventDefault();
       rtRespond(e.timeStamp, dir);
     });
@@ -1205,7 +1388,6 @@
       rtRespond(e.timeStamp, e.clientX < r.left + r.width / 2 ? 'left' : 'right');
     });
 
-    // Statistiques (même écriture que l'outil « Incertitude de type A ») : u arrondie par excès à 1 CS
     function stats(mode) {
       const v = RT.trials.filter((t) => t.mode === mode && !t.excluded).map((t) => t.ms);
       const N = v.length;
@@ -1244,7 +1426,6 @@
 
       $('trials').innerHTML = RT.trials.filter((t) => t.mode === RT.mode)
         .map((t, k) => `<span class="trial ${t.excluded ? 'excluded' : ''}" title="${t.excluded ? 'Anticipation : essai exclu' : `Essai ${k + 1}`}">${Math.round(t.ms)}</span>`).join('');
-
     }
 
     $('rtClear').addEventListener('click', () => {
