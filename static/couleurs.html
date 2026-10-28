@@ -361,18 +361,19 @@
 
         .beam {
             position: absolute;
-            width: 46%;
+            /* Cadre 16 × 10 : disques de rayon 3,1 centrés en (6,3 ; 3,5), (9,7 ; 3,5) et (8 ; 6,44) */
+            width: 38.75%;
             aspect-ratio: 1;
             border-radius: 50%;
             mix-blend-mode: screen;
         }
 
         .beams-caption {
-            position: absolute;
-            left: 0.6rem;
-            bottom: 0.45rem;
-            font-size: 0.72rem;
-            color: rgba(255, 255, 255, 0.7);
+            display: block;
+            margin-top: 0.4rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
         /* --- Damier --- */
@@ -637,11 +638,11 @@
             <div>
                 <div class="swatch" id="swatch"><span class="code-pill" id="codePill" title="Cliquer pour copier">#FFA028</span></div>
                 <div class="beams" id="beams">
-                    <div class="beam" id="beamR" style="left: 14%; top: 4%;"></div>
-                    <div class="beam" id="beamG" style="left: 40%; top: 4%;"></div>
-                    <div class="beam" id="beamB" style="left: 27%; top: 38%;"></div>
-                    <span class="beams-caption">Les trois faisceaux superposés sur un écran noir</span>
+                    <div class="beam" id="beamR" style="left: 20%; top: 4%;"></div>
+                    <div class="beam" id="beamG" style="left: 41.25%; top: 4%;"></div>
+                    <div class="beam" id="beamB" style="left: 30.625%; top: 33.4%;"></div>
                 </div>
+                <span class="beams-caption">Les trois faisceaux superposés sur un écran noir</span>
             </div>
         </div>
         <div class="explain" style="margin-top: 1.25rem;">
