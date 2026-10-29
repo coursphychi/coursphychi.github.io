@@ -232,12 +232,14 @@ depuis le CDN jsDelivr, en **version épinglée** (`LIBS.pyodide` en haut de
 
 - **Paquets automatiques** : les `import` du programme sont détectés et les
   bibliothèques correspondantes téléchargées à la demande.
-- **Paquets hors Pyodide (seaborn…)** : Pyodide ne fournit qu'une liste fixe
+- **Paquets hors Pyodide (seaborn, plotly…)** : Pyodide ne fournit qu'une liste fixe
   de paquets. Les paquets PyPI écrits en **Python pur** peuvent s'y ajouter
   (via `micropip`) :
   - **seaborn** s'installe tout seul dès que le code fait `import seaborn` ;
     il figure dans la liste blanche `LIBS.pypiAuto` en haut de `player.html`
     (testé : seaborn 0.13.2 + pandas 3.0 + matplotlib 3.10) ;
+  - **plotly** de même, dès que le code fait `import plotly…` (pandas est
+    préchargé avec lui, car `plotly.express` en a besoin) ;
   - pour un autre paquet, ajoute `packages="pint"` au shortcode, ou ajoute-le
     à `LIBS.pypiAuto` pour tout le site.
   
@@ -247,6 +249,12 @@ depuis le CDN jsDelivr, en **version épinglée** (`LIBS.pyodide` en haut de
   du code compilé (C, Fortran…) absents de Pyodide ne peuvent pas s'installer.
 - **Graphes** : `plt.show()` insère la figure dans la console, à sa place parmi
   les `print()`. Une figure créée sans `plt.show()` est affichée à la fin.
+- **Graphes interactifs (plotly)** : `fig.show()` transmet la figure à
+  Plotly.js (`LIBS.plotlyJs`, version épinglée), qui la dessine dans la console :
+  survol des points pour lire leurs coordonnées, zoom… La figure prend toute la
+  largeur de la fenêtre. **À garder** si `player.html` est remplacé par une
+  version plus ancienne : `LIBS.plotlyJs`, `plotly` dans `LIBS.pypiAuto`,
+  `PYO_PLOTLY`, `pyoPlotly()` et le relais `plotly` de `pyhost.js`.
 - **Erreurs** : traceback réduit au seul programme de l'élève, ligne fautive
   marquée d'un point rouge (comme en `python`).
 - **Fichiers** : les fichiers texte écrits apparaissent dans « Fichiers générés ».
@@ -255,7 +263,7 @@ depuis le CDN jsDelivr, en **version épinglée** (`LIBS.pyodide` en haut de
 **Une seule installation par page.** Toutes les fenêtres `pyodide` d'une
 même page partagent **une seule instance** de Python : la première qui en a
 besoin la démarre (avec ses bibliothèques), les suivantes la réutilisent
-aussitôt — numpy, matplotlib ou seaborn ne sont installés qu'une fois.
+aussitôt — numpy, matplotlib, seaborn ou plotly ne sont installés qu'une fois.
 L'instance est hébergée par la page elle-même (via `pyhost.js`, à déployer
 avec `player.html`), pas par une fenêtre : recharger une fenêtre (bouton ■)
 ne la perd pas. Chaque exécution garde ses propres variables et ses propres

@@ -22,8 +22,9 @@
     loading: null,   // promesse de l'instance
     ready: false,    // instance démarrée ?
     mpl: false,      // matplotlib configuré ?
+    plotly: false,   // plotly configuré ?
     owner: null,     // jeton de la fenêtre qui détient le tour
-    cur: null        // ses relais { out(bytes, isErr), stdin(), image(b64) }
+    cur: null        // ses relais { out(bytes, isErr), stdin(), image(b64), plotly(json) }
   };
 
   // Une fenêtre est vivante si une iframe de la page porte encore son jeton
@@ -62,11 +63,14 @@
       }).then(function () {
         return window.loadPyodide({ indexURL: indexURL });
       }).then(function (py) {
-        var out = relay("out"), stdin = relay("stdin"), image = relay("image");
+        var out = relay("out"), stdin = relay("stdin"), image = relay("image"), plotly = relay("plotly");
         py.setStdout({ write: function (b) { out(b, false); return b.length; } });
         py.setStderr({ write: function (b) { out(b, true);  return b.length; } });
         py.setStdin({ stdin: function () { return stdin(); } });
-        py.registerJsModule("tkbridge", { image: function (b64) { image(b64); } });
+        py.registerJsModule("tkbridge", {
+          image: function (b64) { image(b64); },
+          plotly: function (json) { plotly(json); }
+        });
         return py.runPythonAsync(bootCode).then(function () { S.ready = true; return py; });
       });
       S.loading.catch(function () { S.loading = null; });   // nouvel essai possible
