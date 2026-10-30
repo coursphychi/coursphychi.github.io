@@ -90,6 +90,7 @@
 
     .formula-input {
       flex: 1;
+      min-width: 0;
       padding: 7px 10px;
       font-size: 0.95rem;
       font-family: 'Consolas', 'Courier New', monospace;
@@ -104,6 +105,8 @@
     }
 
     .btn {
+      flex-shrink: 0;
+      white-space: nowrap;
       background: #fff;
       border: 1px solid var(--border-color);
       color: #3c4043;
@@ -117,6 +120,32 @@
 
     .btn:hover {
       background: #f1f3f4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .container {
+        padding: 14px;
+      }
+      .toolbar {
+        padding: 8px;
+        gap: 6px;
+      }
+      .cell-address {
+        width: 42px;
+        padding: 6px 2px;
+        font-size: 0.85rem;
+      }
+      .fx-icon {
+        padding: 0 2px;
+        font-size: 0.95rem;
+      }
+      .btn {
+        padding: 7px 8px;
+        font-size: 0.8rem;
+      }
     }
 
     /* Grille du tableur */
