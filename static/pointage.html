@@ -166,6 +166,14 @@
       height: 100%;
       display: none;
       cursor: crosshair;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+
+    /* Étalonnage et pointage : le doigt agit sur l'image (pas de défilement ni de zoom de la page) */
+    canvas#workCanvas.touch-edit {
+      touch-action: none;
     }
 
     .grid-overlay {
@@ -579,6 +587,7 @@
         <div class="section-body">
           <div class="help-box">
             <strong>Cliquez sur l'objet</strong> pour enregistrer sa position et avancer d'une frame. Revenez sur n'importe quelle frame avec ◀ ▶ pour corriger un point.
+            Au doigt, posez le doigt près de l'objet : une <strong>loupe</strong> montre la zone cachée ; ajustez en glissant, le point est enregistré quand vous levez le doigt.
           </div>
 
           <div class="stat-grid">
@@ -707,7 +716,15 @@
     let origin = { x: 150, y: 400 };
     let draggingHandle = null;
     let axisAngle = 0;   // rotation du repère en degrés, sens trigonométrique (à l'écran, y vers le haut)
-    const ROT_HANDLE = 92;   // distance (px) de O à la poignée de rotation, sur l'axe x
+    const ROT_HANDLE = 92;   // distance (px) de O à la poignée de rotation, sur l'axe x (× uiScale)
+
+    // Facteur d'agrandissement des repères graphiques (axes, poignées, lettres) : 1 sur un écran
+    // ordinaire ; plus grand quand l'image est fortement réduite (téléphone), pour rester lisible et saisissable.
+    function uiScale() {
+      const cssW = workCanvas.getBoundingClientRect().width;
+      return cssW ? Math.max(1, workCanvas.width / cssW / 1.4) : 1;
+    }
+    const rotHandleDist = () => ROT_HANDLE * uiScale();
 
     // Vecteurs unitaires des axes, en coordonnées du canevas (ordonnées vers le bas)
     function axisVectors() {
@@ -1086,6 +1103,7 @@
         camToolbar.style.display = 'none';
         frameNav.style.display = 'flex';
         if (step === 4) computeKinematicsTable();
+        workCanvas.classList.toggle('touch-edit', step === 2 || step === 3);
         goToFrame(currentFrameIndex);
       }
       updateLayout();
@@ -1128,57 +1146,58 @@
 
       ctx.clearRect(0, 0, w, h);
       ctx.drawImage(frames[currentFrameIndex].bitmap, 0, 0, w, h);
+      const u = uiScale();   // tailles des repères graphiques, lisibles même sur petit écran
 
       // Repère (O, x, y)
       ctx.save();
       ctx.strokeStyle = 'rgba(59, 130, 246, 0.85)';
       ctx.fillStyle = 'rgba(59, 130, 246, 0.95)';
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 2 * u;
 
       const { ex, ey } = axisVectors();
       const far = w + h;   // assez long pour traverser toute l'image, quel que soit l'angle
-      ctx.setLineDash([6, 6]);
+      ctx.setLineDash([6 * u, 6 * u]);
       ctx.beginPath();
-      [ex, ey].forEach((u) => {
-        const p1 = along(origin, u, -far), p2 = along(origin, u, far);
+      [ex, ey].forEach((d) => {
+        const p1 = along(origin, d, -far), p2 = along(origin, d, far);
         ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
       });
       ctx.stroke();
 
       ctx.setLineDash([]);
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 3 * u;
       ctx.beginPath();
-      [[ex, ey], [ey, ex]].forEach(([u, n]) => {   // n : direction perpendiculaire, pour la pointe de flèche
-        const tip = along(origin, u, 55), b1 = along(origin, u, 45, n, 5), b2 = along(origin, u, 45, n, -5);
+      [[ex, ey], [ey, ex]].forEach(([d, n]) => {   // n : direction perpendiculaire, pour la pointe de flèche
+        const tip = along(origin, d, 55 * u), b1 = along(origin, d, 45 * u, n, 5 * u), b2 = along(origin, d, 45 * u, n, -5 * u);
         ctx.moveTo(origin.x, origin.y); ctx.lineTo(tip.x, tip.y);
         ctx.moveTo(b1.x, b1.y); ctx.lineTo(tip.x, tip.y); ctx.lineTo(b2.x, b2.y);
       });
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.arc(origin.x, origin.y, 7, 0, Math.PI * 2);
+      ctx.arc(origin.x, origin.y, 7 * u, 0, Math.PI * 2);
       ctx.fill();
       // Noms des axes à côté des pointillés (et non dessus) : x sous l'axe x, y à gauche de l'axe y
-      ctx.font = 'bold 15px system-ui';
+      ctx.font = `bold ${15 * u}px system-ui`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      const lO = along(origin, ex, -14, ey, -14), lx = along(origin, ex, 52, ey, -15), ly = along(origin, ey, 52, ex, -15);
+      const lO = along(origin, ex, -14 * u, ey, -14 * u), lx = along(origin, ex, 52 * u, ey, -15 * u), ly = along(origin, ey, 52 * u, ex, -15 * u);
       ctx.fillText('O', lO.x, lO.y);
       ctx.fillText('x', lx.x, lx.y);
       ctx.fillText('y', ly.x, ly.y);
 
       // Poignée de rotation du repère (étape d'étalonnage)
       if (currentStep === 2) {
-        const r = along(origin, ex, ROT_HANDLE);
+        const r = along(origin, ex, rotHandleDist());
         ctx.beginPath();
-        ctx.arc(r.x, r.y, 10, 0, Math.PI * 2);
+        ctx.arc(r.x, r.y, 10 * u, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
         ctx.fill();
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 2 * u;
         ctx.stroke();
         ctx.fillStyle = 'rgba(147, 197, 253, 1)';
-        ctx.font = 'bold 14px system-ui';
-        ctx.fillText('↻', r.x, r.y + 1);
+        ctx.font = `bold ${14 * u}px system-ui`;
+        ctx.fillText('↻', r.x, r.y + u);
       }
       ctx.restore();
 
@@ -1187,7 +1206,7 @@
         ctx.save();
         ctx.strokeStyle = '#f59e0b';
         ctx.fillStyle = '#f59e0b';
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 3 * u;
 
         ctx.beginPath();
         ctx.moveTo(scaleA.x, scaleA.y);
@@ -1196,14 +1215,14 @@
 
         [ { pt: scaleA, label: 'A' }, { pt: scaleB, label: 'B' } ].forEach(item => {
           ctx.beginPath();
-          ctx.arc(item.pt.x, item.pt.y, 9, 0, Math.PI * 2);
+          ctx.arc(item.pt.x, item.pt.y, 9 * u, 0, Math.PI * 2);
           ctx.fill();
           ctx.strokeStyle = '#000';
-          ctx.lineWidth = 2;
+          ctx.lineWidth = 2 * u;
           ctx.stroke();
           ctx.fillStyle = '#fef08a';
-          ctx.font = 'bold 16px system-ui';
-          ctx.fillText(item.label, item.pt.x + 12, item.pt.y - 10);
+          ctx.font = `bold ${16 * u}px system-ui`;
+          ctx.fillText(item.label, item.pt.x + 12 * u, item.pt.y - 10 * u);
           ctx.fillStyle = '#f59e0b';
         });
         ctx.restore();
@@ -1217,9 +1236,9 @@
 
         const isCurrent = (i === currentFrameIndex);
         ctx.strokeStyle = isCurrent ? '#10b981' : '#ef4444';
-        ctx.lineWidth = isCurrent ? 3 : 2;
+        ctx.lineWidth = (isCurrent ? 3 : 2) * u;
 
-        const r = isCurrent ? 10 : 6;
+        const r = (isCurrent ? 10 : 6) * u;
         ctx.beginPath();
         ctx.moveTo(p.xPx - r, p.yPx); ctx.lineTo(p.xPx + r, p.yPx);
         ctx.moveTo(p.xPx, p.yPx - r); ctx.lineTo(p.xPx, p.yPx + r);
@@ -1227,10 +1246,52 @@
 
         if (isCurrent) {
           ctx.beginPath();
-          ctx.arc(p.xPx, p.yPx, 14, 0, Math.PI * 2);
+          ctx.arc(p.xPx, p.yPx, 14 * u, 0, Math.PI * 2);
           ctx.stroke();
         }
       }
+      ctx.restore();
+
+      if (aim) drawLoupe(aim);
+    }
+
+    // Loupe (pointage au doigt) : zone sous le doigt grossie, affichée au-dessus de lui
+    const loupeSrc = document.createElement('canvas');
+    function drawLoupe(p) {
+      const w = workCanvas.width, h = workCanvas.height;
+      const k = workCanvas.width / (workCanvas.getBoundingClientRect().width || workCanvas.width);   // px canevas par px écran
+      const R = Math.min(58 * k, 0.24 * Math.min(w, h)), Z = 2.5, src = R / Z, m = 6 * k;
+      // dans le coin de l'image le plus éloigné du doigt : jamais sous le doigt, jamais coupée
+      const cx = p.x < w / 2 ? w - R - m : R + m;
+      const cy = p.y < h / 2 ? h - R - m : R + m;
+      // copie de la zone visée (image + repère + points), avant de dessiner la loupe par-dessus
+      loupeSrc.width = Math.ceil(2 * src);
+      loupeSrc.height = Math.ceil(2 * src);
+      const lc = loupeSrc.getContext('2d');
+      lc.fillStyle = '#000';
+      lc.fillRect(0, 0, loupeSrc.width, loupeSrc.height);
+      lc.drawImage(workCanvas, p.x - src, p.y - src, 2 * src, 2 * src, 0, 0, loupeSrc.width, loupeSrc.height);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.save();
+      ctx.clip();
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(loupeSrc, cx - R, cy - R, 2 * R, 2 * R);
+      ctx.restore();
+      ctx.lineWidth = 3 * k;
+      ctx.strokeStyle = '#fff';
+      ctx.stroke();
+      // réticule au centre de la loupe = point qui sera posé
+      ctx.lineWidth = 1.5 * k;
+      ctx.strokeStyle = currentStep === 3 && !draggingHandle ? '#10b981' : '#f59e0b';
+      ctx.beginPath();
+      ctx.moveTo(cx - 14 * k, cy); ctx.lineTo(cx - 4 * k, cy);
+      ctx.moveTo(cx + 4 * k, cy); ctx.lineTo(cx + 14 * k, cy);
+      ctx.moveTo(cx, cy - 14 * k); ctx.lineTo(cx, cy - 4 * k);
+      ctx.moveTo(cx, cy + 4 * k); ctx.lineTo(cx, cy + 14 * k);
+      ctx.stroke();
       ctx.restore();
     }
 
@@ -1249,55 +1310,114 @@
       return Math.hypot(p1.x - p2.x, p1.y - p2.y);
     }
 
-    workCanvas.addEventListener('mousedown', (e) => {
-      const pos = getCanvasCoords(e);
-      if (pos.x < 0 || pos.x > workCanvas.width || pos.y < 0 || pos.y > workCanvas.height) return;
+    // --- Souris, doigt et stylet : événements « pointer » ---
+    // Au doigt, la loupe montre la zone cachée par le doigt ; le point (ou la poignée)
+    // est posé au lever du doigt. À la souris, le pointage reste immédiat.
+    let aim = null;              // position visée au doigt (coordonnées du canevas), ou null
+    let activePointer = null;    // identifiant du pointeur en cours d'utilisation
+    let grabOffset = { x: 0, y: 0 };   // écart poignée − pointeur au moment de la saisie (la poignée ne saute pas)
 
-      const hitRadius = Math.max(18, Math.min(workCanvas.width, workCanvas.height) * 0.025);
+    // Rayon de saisie des poignées : fixe à l'écran (plus large au doigt), converti en pixels du canevas
+    function hitRadiusFor(e) {
+      const cssPerCanvas = workCanvas.getBoundingClientRect().width / workCanvas.width || 1;
+      const cssR = e.pointerType === 'touch' ? 26 : e.pointerType === 'pen' ? 16 : 12;
+      return Math.max(18, Math.min(workCanvas.width, workCanvas.height) * 0.025, cssR / cssPerCanvas);
+    }
 
-      if (currentStep === 2) {
-        if (dist(pos, scaleA) < hitRadius) { draggingHandle = 'A'; return; }
-        if (dist(pos, scaleB) < hitRadius) { draggingHandle = 'B'; return; }
-        if (dist(pos, origin) < hitRadius) { draggingHandle = 'O'; return; }
-        if (dist(pos, along(origin, axisVectors().ex, ROT_HANDLE)) < hitRadius) { draggingHandle = 'R'; return; }
+    function clampToCanvas(pos) {
+      return { x: Math.max(0, Math.min(workCanvas.width, pos.x)), y: Math.max(0, Math.min(workCanvas.height, pos.y)) };
+    }
+
+    function placePoint(pos) {
+      points[currentFrameIndex] = { xPx: pos.x, yPx: pos.y };
+      updateTrackingStats();
+      renderCanvas();
+      if (currentFrameIndex < frames.length - 1) {
+        setTimeout(() => goToFrame(currentFrameIndex + 1), 90);
       }
+    }
 
-      if (currentStep === 3) {
-        if (dist(pos, origin) < hitRadius * 0.8) {
-          draggingHandle = 'O';
-          return;
-        }
-        points[currentFrameIndex] = { xPx: pos.x, yPx: pos.y };
-        updateTrackingStats();
-        renderCanvas();
-
-        if (currentFrameIndex < frames.length - 1) {
-          setTimeout(() => goToFrame(currentFrameIndex + 1), 90);
-        }
-      }
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!draggingHandle) return;
-      const pos = getCanvasCoords(e);
-      const clampedX = Math.max(0, Math.min(workCanvas.width, pos.x));
-      const clampedY = Math.max(0, Math.min(workCanvas.height, pos.y));
-
-      if (draggingHandle === 'A') scaleA = { x: clampedX, y: clampedY };
-      if (draggingHandle === 'B') scaleB = { x: clampedX, y: clampedY };
-      if (draggingHandle === 'O') origin = { x: clampedX, y: clampedY };
+    // Renvoie la nouvelle position de la poignée déplacée (pour centrer la loupe dessus)
+    function moveHandle(pos) {
+      const c = clampToCanvas({ x: pos.x + grabOffset.x, y: pos.y + grabOffset.y });
+      if (draggingHandle === 'A') scaleA = c;
+      if (draggingHandle === 'B') scaleB = c;
+      if (draggingHandle === 'O') origin = c;
       if (draggingHandle === 'R') {
-        // angle de la direction O → souris, arrondi au dixième de degré ; aimanté sur 0° (± 1°)
+        // angle de la direction O → pointeur, arrondi au dixième de degré ; aimanté sur 0° (± 1°)
         let a = Math.atan2(origin.y - pos.y, pos.x - origin.x) * 180 / Math.PI;
         if (Math.abs(a) < 1) a = 0;
         setAxisAngle(Math.round(a * 10) / 10);
       }
-
       updateScaleStats();
+      return c;
+    }
+
+    function grab(handle, pos, touch) {
+      draggingHandle = handle;
+      const h = handle === 'A' ? scaleA : handle === 'B' ? scaleB : handle === 'O' ? origin : null;
+      grabOffset = h ? { x: h.x - pos.x, y: h.y - pos.y } : { x: 0, y: 0 };
+      if (touch && h) aim = { x: h.x, y: h.y };
+    }
+
+    workCanvas.addEventListener('pointerdown', (e) => {
+      if (activePointer !== null || (e.pointerType === 'mouse' && e.button !== 0)) return;
+      const pos = getCanvasCoords(e);
+      if (pos.x < 0 || pos.x > workCanvas.width || pos.y < 0 || pos.y > workCanvas.height) return;
+      const touch = e.pointerType === 'touch';
+      const hitRadius = hitRadiusFor(e);
+
+      if (currentStep === 2) {
+        // poignée la plus proche du pointeur, dans le rayon de saisie
+        const cands = [['A', scaleA], ['B', scaleB], ['O', origin], ['R', along(origin, axisVectors().ex, rotHandleDist())]]
+          .map(([n, q]) => [n, dist(pos, q)]).filter(([, d]) => d < hitRadius).sort((m, n) => m[1] - n[1]);
+        if (!cands.length) return;
+        grab(cands[0][0], pos, touch);
+      } else if (currentStep === 3) {
+        if (dist(pos, origin) < hitRadius * 0.8) {
+          grab('O', pos, touch);
+        } else if (touch) {
+          aim = pos;                       // le point sera posé au lever du doigt
+        } else {
+          placePoint(pos);
+          return;
+        }
+      } else {
+        return;
+      }
+      activePointer = e.pointerId;
+      try { workCanvas.setPointerCapture(e.pointerId); } catch (err) { /* pointeur déjà relâché */ }
+      e.preventDefault();
       renderCanvas();
     });
 
-    window.addEventListener('mouseup', () => { draggingHandle = null; });
+    workCanvas.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== activePointer) return;
+      const pos = getCanvasCoords(e);
+      if (draggingHandle) {
+        const c = moveHandle(pos);
+        if (aim) aim = c;                       // loupe centrée sur la poignée
+      } else if (aim) {
+        aim = clampToCanvas(pos);               // loupe centrée sous le doigt
+      }
+      renderCanvas();
+    });
+
+    function endPointer(e, commit) {
+      if (e.pointerId !== activePointer) return;
+      if (commit && currentStep === 3 && aim && !draggingHandle) {
+        aim = null;
+        activePointer = null;
+        placePoint(clampToCanvas(getCanvasCoords(e)));
+        return;
+      }
+      draggingHandle = null;
+      aim = null;
+      activePointer = null;
+      renderCanvas();
+    }
+    workCanvas.addEventListener('pointerup', (e) => endPointer(e, true));
+    workCanvas.addEventListener('pointercancel', (e) => endPointer(e, false));
 
     // Longueur de l'étalon : virgule ou point comme séparateur décimal (ex. : 0,50 ou 0.50)
     let lastScaleMeters = 1;
