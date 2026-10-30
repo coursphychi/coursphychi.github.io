@@ -581,6 +581,12 @@
             }
         }
 
+        /* Panneau « Affichage » dans la colonne de droite (grand écran) : une seule colonne */
+        .side-col .display-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 1rem;
+        }
+
         .thumb-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1749,6 +1755,8 @@
             S.display.mode = btn.dataset.mode;
             syncDisplayControls();
             scheduleDisplay();
+            // Le profil suit le canal affiché : R, V ou B seul ; « Couleurs » → canal automatique
+            setProfileChannel(btn.dataset.mode === 'rgb' ? 'auto' : btn.dataset.mode);
         });
     });
 
@@ -2521,7 +2529,14 @@
         const Lpx = (pd.values.length - 1) * pd.step;
         const Lu = toUnits(Lpx);
         const xOf = px => CH.left + (Lpx > 0 ? px / Lpx : 0) * pw;
-        const yOf = v => CH.top + ph * (1 - v / 255);
+        // Échelle verticale ajustée aux valeurs du profil (et donc au canal choisi), arrondie
+        // à des graduations « rondes » et bornée à [0 ; 255]
+        let vMin = Infinity, vMax = -Infinity;
+        for (const val of pd.values) { if (val < vMin) vMin = val; if (val > vMax) vMax = val; }
+        const ySt = niceStep(Math.max(8, vMax - vMin), 4);
+        const yLo = Math.max(0, Math.floor((vMin - 0.06 * (vMax - vMin)) / ySt) * ySt);
+        const yHi = Math.min(255, Math.max(yLo + ySt, Math.ceil((vMax + 0.06 * (vMax - vMin)) / ySt) * ySt));
+        const yOf = v => CH.top + ph * (1 - (v - yLo) / (yHi - yLo));
 
         pctx.font = '10px JetBrains Mono, monospace';
         pctx.lineWidth = 1;
@@ -2542,7 +2557,13 @@
         pctx.textAlign = 'right';
         pctx.fillText(`x (${unitLabel()})`, CH.left + pw, CH.top + ph + 18);
         pctx.textBaseline = 'middle';
-        [0, 64, 128, 192, 255].forEach(v => {
+        const yTicks = [];
+        for (let t = Math.ceil(yLo / ySt) * ySt; t <= yHi + 1e-9; t += ySt) yTicks.push(Math.round(t));
+        if (yHi === 255 && yTicks[yTicks.length - 1] !== 255) {
+            if (255 - yTicks[yTicks.length - 1] < 0.4 * ySt) yTicks.pop();   // évite deux graduations collées
+            yTicks.push(255);
+        }
+        yTicks.forEach(v => {
             const y = yOf(v);
             pctx.strokeStyle = 'rgba(148, 163, 184, 0.14)';
             pctx.beginPath();
@@ -2559,14 +2580,16 @@
         pctx.fillText('I (valeur du pixel)', 0, 0);
         pctx.restore();
 
-        // Niveau de saturation
-        pctx.strokeStyle = 'rgba(239, 68, 68, 0.6)';
-        pctx.setLineDash([5, 4]);
-        pctx.beginPath();
-        pctx.moveTo(CH.left, yOf(255));
-        pctx.lineTo(CH.left + pw, yOf(255));
-        pctx.stroke();
-        pctx.setLineDash([]);
+        // Niveau de saturation (seulement s'il est dans l'échelle affichée)
+        if (yHi >= 255) {
+            pctx.strokeStyle = 'rgba(239, 68, 68, 0.6)';
+            pctx.setLineDash([5, 4]);
+            pctx.beginPath();
+            pctx.moveTo(CH.left, yOf(255));
+            pctx.lineTo(CH.left + pw, yOf(255));
+            pctx.stroke();
+            pctx.setLineDash([]);
+        }
 
         // Courbe
         const v = pd.values;
@@ -2586,6 +2609,9 @@
         pctx.fill();
 
         // Curseurs
+        // Nom de chaque curseur à côté de son trait (pas dessus) : à l'extérieur de l'intervalle
+        // C₁C₂ (la double flèche Δx est à l'intérieur), sauf s'il sortirait du graphique
+        const leftK = S.cursors[0] <= S.cursors[1] ? 0 : 1;
         [[0, COLORS.ch1, 'C₁'], [1, COLORS.ch2, 'C₂']].forEach(([k, col, name]) => {
             const x = xOf(S.cursors[k]);
             pctx.strokeStyle = col;
@@ -2596,9 +2622,13 @@
             pctx.stroke();
             pctx.fillStyle = col;
             pctx.font = '700 11px Inter, sans-serif';
-            pctx.textAlign = 'center';
             pctx.textBaseline = 'top';
-            pctx.fillText(name, x, CH.top + 2);
+            const tw = pctx.measureText(name).width, gap = 5;
+            let onLeft = k === leftK;
+            if (onLeft && x - gap - tw < CH.left) onLeft = false;
+            if (!onLeft && x + gap + tw > CH.left + pw) onLeft = true;
+            pctx.textAlign = onLeft ? 'right' : 'left';
+            pctx.fillText(name, onLeft ? x - gap : x + gap, CH.top + 2);
         });
         // Double flèche Δx
         const xa = xOf(Math.min(...S.cursors)), xb = xOf(Math.max(...S.cursors));
@@ -2693,12 +2723,16 @@
         requestRender();
     });
 
-    document.getElementById('channelSelect').addEventListener('change', (e) => {
-        S.channel = e.target.value;
+    function setProfileChannel(ch) {
+        S.channel = ch;
+        document.getElementById('channelSelect').value = ch;
+        if (!S.profile) return;
         computeProfile();
         updatePanels();
         requestRender();
-    });
+    }
+
+    document.getElementById('channelSelect').addEventListener('change', (e) => setProfileChannel(e.target.value));
 
     document.getElementById('bandSelect').addEventListener('change', (e) => {
         S.band = parseInt(e.target.value, 10);
@@ -2871,6 +2905,21 @@
         updatePanels();
     });
     new ResizeObserver(() => renderThumbs()).observe(document.getElementById('thumbGrid'));
+
+    // Place du panneau « Affichage et canaux » : en bas de la colonne de droite (après les étapes
+    // 1 à 3, qui restent visibles) quand les deux colonnes tiennent côte à côte, sinon sous le profil
+    const wideLayout = window.matchMedia('(min-width: 1051px)');
+    function placeDisplayPanel() {
+        const panel = document.getElementById('displayPanel');
+        if (wideLayout.matches) {
+            document.querySelector('.side-col').appendChild(panel);
+        } else {
+            document.getElementById('profilePanel').after(panel);
+        }
+        requestAnimationFrame(() => { drawHistogram(); renderThumbs(); });
+    }
+    wideLayout.addEventListener('change', placeDisplayPanel);
+    placeDisplayPanel();
 
     syncDisplayControls();
     drawHistogram();
