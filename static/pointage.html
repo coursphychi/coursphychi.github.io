@@ -227,7 +227,7 @@
       flex-wrap: wrap;
     }
 
-    button, select, input[type="number"] {
+    button, select, input[type="number"], input.decimal {
       font-family: inherit;
       font-size: 0.84rem;
       padding: 0.42rem 0.75rem;
@@ -356,6 +356,7 @@
     }
 
     .input-group input { width: 120px; }
+    input.decimal.invalid { border-color: #ef4444; box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25); }
 
     .stat-grid {
       display: grid;
@@ -532,7 +533,7 @@
           <div class="field-row">
             <label for="scaleMeters">Longueur réelle du segment AB :</label>
             <div class="input-group">
-              <input type="number" id="scaleMeters" value="1.00" step="0.01" min="0.001">
+              <input type="text" class="decimal" id="scaleMeters" value="1,00" inputmode="decimal" autocomplete="off" spellcheck="false" title="Virgule ou point acceptés (ex. : 0,50)">
               <span>m</span>
             </div>
           </div>
@@ -1243,10 +1244,20 @@
 
     window.addEventListener('mouseup', () => { draggingHandle = null; });
 
+    // Longueur de l'étalon : virgule ou point comme séparateur décimal (ex. : 0,50 ou 0.50)
+    let lastScaleMeters = 1;
+    function readScaleMeters() {
+      const txt = scaleMetersInput.value.trim().replace(/\s/g, '').replace(',', '.');
+      const v = /^\d*\.?\d+$|^\d+\.$/.test(txt) ? parseFloat(txt) : NaN;
+      const ok = Number.isFinite(v) && v > 0;
+      scaleMetersInput.classList.toggle('invalid', !ok);
+      if (ok) lastScaleMeters = v;
+      return lastScaleMeters;   // saisie incomplète ou invalide : on garde la dernière valeur correcte
+    }
+
     function getPixelsPerMeter() {
       const pxLen = dist(scaleA, scaleB);
-      const meters = parseFloat(scaleMetersInput.value) || 1;
-      return pxLen / meters;
+      return pxLen / readScaleMeters();
     }
 
     function updateScaleStats() {
@@ -1257,6 +1268,16 @@
     }
 
     scaleMetersInput.addEventListener('input', updateScaleStats);
+    // En quittant le champ : écriture avec virgule décimale, en gardant les chiffres saisis
+    // (0,50 reste 0,50) ; une saisie invalide est remplacée par la dernière valeur correcte.
+    scaleMetersInput.addEventListener('change', () => {
+      const v = readScaleMeters();
+      scaleMetersInput.value = scaleMetersInput.classList.contains('invalid')
+        ? String(v).replace('.', ',')
+        : scaleMetersInput.value.trim().replace(/\s/g, '').replace('.', ',').replace(/^,/, '0,');
+      scaleMetersInput.classList.remove('invalid');
+      updateScaleStats();
+    });
 
     btnCenterOrigin.addEventListener('click', () => {
       origin = { x: Math.round(workCanvas.width / 2), y: Math.round(workCanvas.height / 2) };
