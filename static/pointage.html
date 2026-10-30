@@ -225,7 +225,7 @@
       justify-content: center;
       display: none;
     }
-    body.on-step1 .expand-btn { display: inline-flex; }
+    body.can-expand .expand-btn { display: inline-flex; }
 
     .rec-fab {
       display: none;
@@ -260,7 +260,15 @@
 
     body.cam-expanded header,
     body.cam-expanded main > :not(.stage-card),
-    body.cam-expanded .bottom-bar { display: none; }
+    body.cam-expanded.on-step1 .bottom-bar { display: none; }
+    /* Étalonnage et pointage agrandis : la barre de navigation reste sous l'image (sans la masquer) */
+    body.cam-expanded .bottom-bar {
+      padding-bottom: calc(0.55rem + env(safe-area-inset-bottom, 0px));
+      padding-left: calc(0.9rem + env(safe-area-inset-left, 0px));
+      padding-right: calc(0.9rem + env(safe-area-inset-right, 0px));
+    }
+    .fs-only { display: none; }
+    body.cam-expanded.on-step3 .fs-only { display: inline-flex; }
     body.cam-expanded .stage-card {
       position: fixed;
       inset: 0;
@@ -269,7 +277,7 @@
       border-radius: 0;
     }
     body.cam-expanded .viewport { padding: 0; }
-    body.cam-expanded .rec-fab { display: inline-flex; }
+    body.cam-expanded.on-step1 .rec-fab { display: inline-flex; }
     body.cam-expanded .badge-overlay { top: calc(0.65rem + env(safe-area-inset-top, 0px)); }
     body.cam-expanded .expand-btn { top: calc(0.6rem + env(safe-area-inset-top, 0px)); }
 
@@ -353,11 +361,13 @@
       width: 100%;
       display: none;
       align-items: center;
-      gap: 0.65rem;
+      flex-wrap: wrap;            /* écran étroit : compteur et boutons passent à la ligne */
+      gap: 0.45rem 0.65rem;
     }
 
     .frame-nav input[type="range"] {
       flex: 1;
+      min-width: 140px;
       accent-color: var(--primary);
       cursor: pointer;
     }
@@ -507,7 +517,7 @@
     tr.clickable-row { cursor: pointer; }
   </style>
 </head>
-<body class="on-step1">
+<body class="on-step1 can-expand">
 
   <header>
     <div class="brand">
@@ -549,7 +559,7 @@
           <span id="overlayText">Caméra inactive</span>
         </div>
 
-        <button id="btnExpand" class="expand-btn" title="Agrandir la vidéo (plein écran)" aria-label="Agrandir la vidéo">⛶</button>
+        <button id="btnExpand" class="expand-btn" title="Agrandir l'image (plein écran)" aria-label="Agrandir l'image">⛶</button>
         <button id="btnRecFab" class="rec-fab" title="Enregistrer / arrêter" aria-label="Enregistrer ou arrêter" disabled></button>
         <div id="rotateHint" class="rotate-hint">↻ Tournez le téléphone pour agrandir l'image</div>
       </div>
@@ -578,6 +588,7 @@
           <input type="range" id="frameSlider" min="0" max="0" value="0">
           <button id="btnNextFrame" title="Frame suivante (Flèche droite)">▶</button>
           <span id="frameCounter" class="frame-counter">Frame 1 / 1 (0.000 s)</span>
+          <button id="btnFsDelete" class="fs-only" title="Effacer le point de cette image">Effacer le point</button>
         </div>
       </div>
     </section>
@@ -1022,7 +1033,7 @@
       if (on === document.body.classList.contains('cam-expanded')) return;
       document.body.classList.toggle('cam-expanded', on);
       btnExpand.textContent = on ? '✕' : '⛶';
-      btnExpand.title = on ? 'Réduire la vidéo' : 'Agrandir la vidéo (plein écran)';
+      btnExpand.title = on ? 'Réduire' : 'Agrandir l\'image (plein écran)';
       syncRecFab();
       if (on) {
         // vrai plein écran quand le navigateur le permet (masque aussi ses barres) ;
@@ -1231,8 +1242,9 @@
 
     function switchStep(step) {
       currentStep = step;
-      document.body.classList.toggle('on-step1', step === 1);
-      if (step !== 1) setExpanded(false);
+      [1, 2, 3, 4].forEach((k) => document.body.classList.toggle(`on-step${k}`, step === k));
+      document.body.classList.toggle('can-expand', step <= 3);
+      setExpanded(false);   // changement d'étape : retour à l'affichage complet
       tabs.forEach((t, i) => t.classList.toggle('active', i === step - 1));
       panels.forEach((p, i) => p.classList.toggle('active', i === step - 1));
 
@@ -1647,6 +1659,7 @@
       updateTrackingStats();
       renderCanvas();
     });
+    document.getElementById('btnFsDelete').addEventListener('click', () => btnDeletePoint.click());
 
     btnClearAllPoints.addEventListener('click', () => {
       points.fill(null);
