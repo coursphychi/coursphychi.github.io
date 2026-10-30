@@ -642,10 +642,14 @@
           </div>
 
           <div class="field-row">
-            <label for="scaleMeters">Longueur réelle du segment AB :</label>
             <div class="input-group">
-              <input type="text" class="decimal" id="scaleMeters" value="1,00" inputmode="decimal" autocomplete="off" spellcheck="false" title="Virgule ou point acceptés (ex. : 0,50)">
-              <span>m</span>
+              <label for="scaleMeters" style="font-size: 0.8rem; color: var(--text-muted);">Longueur AB :</label>
+              <input type="text" class="decimal" id="scaleMeters" value="1,00" inputmode="decimal" autocomplete="off" spellcheck="false" title="Longueur réelle de l'étalon AB (virgule ou point acceptés, ex. : 0,50)" style="width: 90px;">
+              <select id="scaleUnit" title="Unité de la longueur saisie (les positions et vitesses restent calculées en m et m/s)">
+                <option value="0.001">mm</option>
+                <option value="0.01">cm</option>
+                <option value="1" selected>m</option>
+              </select>
             </div>
           </div>
 
@@ -1575,16 +1579,19 @@
     workCanvas.addEventListener('pointerup', (e) => endPointer(e, true));
     workCanvas.addEventListener('pointercancel', (e) => endPointer(e, false));
 
-    // Longueur de l'étalon : virgule ou point comme séparateur décimal (ex. : 0,50 ou 0.50)
-    let lastScaleMeters = 1;
-    function readScaleMeters() {
+    // Longueur de l'étalon : virgule ou point comme séparateur décimal (ex. : 0,50 ou 0.50),
+    // dans l'unité choisie (mm, cm ou m) ; les calculs se font ensuite en mètres.
+    const scaleUnitSelect = document.getElementById('scaleUnit');
+    let lastScaleValue = 1;
+    function readScaleValue() {
       const txt = scaleMetersInput.value.trim().replace(/\s/g, '').replace(',', '.');
       const v = /^\d*\.?\d+$|^\d+\.$/.test(txt) ? parseFloat(txt) : NaN;
       const ok = Number.isFinite(v) && v > 0;
       scaleMetersInput.classList.toggle('invalid', !ok);
-      if (ok) lastScaleMeters = v;
-      return lastScaleMeters;   // saisie incomplète ou invalide : on garde la dernière valeur correcte
+      if (ok) lastScaleValue = v;
+      return lastScaleValue;   // saisie incomplète ou invalide : on garde la dernière valeur correcte
     }
+    const readScaleMeters = () => readScaleValue() * parseFloat(scaleUnitSelect.value);
 
     function getPixelsPerMeter() {
       const pxLen = dist(scaleA, scaleB);
@@ -1594,15 +1601,16 @@
     function updateScaleStats() {
       const pxLen = dist(scaleA, scaleB);
       const ratio = getPixelsPerMeter();
-      statPxLen.textContent = `${pxLen.toFixed(1)} px`;
-      statScaleRatio.textContent = `${ratio.toFixed(1)} px/m`;
+      statPxLen.textContent = `${pxLen.toFixed(1).replace('.', ',')} px`;
+      statScaleRatio.textContent = `${ratio.toFixed(1).replace('.', ',')} px/m`;
     }
 
     scaleMetersInput.addEventListener('input', updateScaleStats);
+    scaleUnitSelect.addEventListener('change', updateScaleStats);
     // En quittant le champ : écriture avec virgule décimale, en gardant les chiffres saisis
     // (0,50 reste 0,50) ; une saisie invalide est remplacée par la dernière valeur correcte.
     scaleMetersInput.addEventListener('change', () => {
-      const v = readScaleMeters();
+      const v = readScaleValue();
       scaleMetersInput.value = scaleMetersInput.classList.contains('invalid')
         ? String(v).replace('.', ',')
         : scaleMetersInput.value.trim().replace(/\s/g, '').replace('.', ',').replace(/^,/, '0,');

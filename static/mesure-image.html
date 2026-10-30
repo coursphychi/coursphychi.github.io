@@ -433,6 +433,11 @@
             margin-bottom: 0.75rem;
         }
 
+        .num-input.invalid {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25);
+        }
+
         .num-input {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.88rem;
@@ -1072,7 +1077,7 @@
                 </div>
                 <div class="field-row">
                     <label for="calibLen">Longueur AB :</label>
-                    <input type="number" class="num-input" id="calibLen" value="10" step="any" min="0">
+                    <input type="text" class="num-input" id="calibLen" value="10" inputmode="decimal" autocomplete="off" spellcheck="false" title="Virgule ou point acceptés (ex. : 2,5)">
                     <select id="calibUnit">
                         <option value="µm">µm</option>
                         <option value="mm">mm</option>
@@ -2899,13 +2904,28 @@
     // Étalonnage
     const calibLen = document.getElementById('calibLen');
     const calibUnit = document.getElementById('calibUnit');
+    // Longueur de l'étalon : virgule ou point comme séparateur décimal (ex. : 2,5 ou 2.5)
+    function readCalibLen() {
+        const txt = calibLen.value.trim().replace(/\s/g, '').replace(',', '.');
+        const v = /^\d*\.?\d+$|^\d+\.$/.test(txt) ? parseFloat(txt) : NaN;
+        const ok = Number.isFinite(v) && v > 0;
+        calibLen.classList.toggle('invalid', !ok);
+        return ok ? v : null;
+    }
     calibLen.addEventListener('input', () => {
-        const v = parseFloat(calibLen.value.replace(',', '.'));
-        if (v > 0) {
+        const v = readCalibLen();
+        if (v !== null) {
             S.calib.len = v;
             S.calib.set = true;
             updatePanels();
         }
+    });
+    // En quittant le champ : virgule décimale, chiffres saisis conservés ; saisie invalide → dernière valeur correcte
+    calibLen.addEventListener('change', () => {
+        calibLen.value = readCalibLen() === null
+            ? String(S.calib.len).replace('.', ',')
+            : calibLen.value.trim().replace(/\s/g, '').replace('.', ',').replace(/^,/, '0,');
+        calibLen.classList.remove('invalid');
     });
     calibUnit.addEventListener('change', () => {
         S.calib.unit = calibUnit.value;
