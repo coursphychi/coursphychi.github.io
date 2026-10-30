@@ -356,6 +356,8 @@
     }
 
     .input-group input { width: 120px; }
+    .math { font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 1.05em; white-space: nowrap; }
+    .input-group button { padding: 0.42rem 0.6rem; }
     input.decimal.invalid { border-color: #ef4444; box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25); }
 
     .stat-grid {
@@ -527,7 +529,8 @@
 
         <div class="section-body">
           <div class="help-box">
-            Déplacez les extrémités <strong>A</strong> et <strong>B</strong> du segment jaune sur l'étalon, ainsi que l'origine <strong>O</strong> du repère $(O, x, y)$.
+            Déplacez les extrémités <strong>A</strong> et <strong>B</strong> du segment jaune sur l'étalon, ainsi que l'origine <strong>O</strong> du repère <span class="math">(O, x, y)</span>.
+            Si la caméra n'est pas droite, tournez le repère avec la poignée <strong>↻</strong> au bout de l'axe <span class="math">x</span>, ou alignez un axe sur l'étalon.
           </div>
 
           <div class="field-row">
@@ -535,6 +538,17 @@
             <div class="input-group">
               <input type="text" class="decimal" id="scaleMeters" value="1,00" inputmode="decimal" autocomplete="off" spellcheck="false" title="Virgule ou point acceptés (ex. : 0,50)">
               <span>m</span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label for="axisAngle">Rotation du repère (sens trigonométrique) :</label>
+            <div class="input-group">
+              <input type="text" class="decimal" id="axisAngle" value="0" inputmode="decimal" autocomplete="off" spellcheck="false" title="Angle en degrés, virgule ou point acceptés" style="width: 80px;">
+              <span>°</span>
+              <button id="btnAxisX" title="Oriente l'axe x selon le segment AB (étalon horizontal)">x ∥ AB</button>
+              <button id="btnAxisY" title="Oriente l'axe y selon le segment AB (étalon vertical)">y ∥ AB</button>
+              <button id="btnAxisReset" title="Repère aligné sur les bords de l'image">0°</button>
             </div>
           </div>
 
@@ -692,6 +706,15 @@
     let scaleB = { x: 500, y: 300 };
     let origin = { x: 150, y: 400 };
     let draggingHandle = null;
+    let axisAngle = 0;   // rotation du repère en degrés, sens trigonométrique (à l'écran, y vers le haut)
+    const ROT_HANDLE = 92;   // distance (px) de O à la poignée de rotation, sur l'axe x
+
+    // Vecteurs unitaires des axes, en coordonnées du canevas (ordonnées vers le bas)
+    function axisVectors() {
+      const a = axisAngle * Math.PI / 180;
+      return { ex: { x: Math.cos(a), y: -Math.sin(a) }, ey: { x: -Math.sin(a), y: -Math.cos(a) } };
+    }
+    const along = (p, u, k, v, l) => ({ x: p.x + u.x * k + (v ? v.x * l : 0), y: p.y + u.y * k + (v ? v.y * l : 0) });
     let points = [];
 
     // =========================================================================
@@ -1112,26 +1135,51 @@
       ctx.fillStyle = 'rgba(59, 130, 246, 0.95)';
       ctx.lineWidth = 2;
 
+      const { ex, ey } = axisVectors();
+      const far = w + h;   // assez long pour traverser toute l'image, quel que soit l'angle
       ctx.setLineDash([6, 6]);
       ctx.beginPath();
-      ctx.moveTo(0, origin.y); ctx.lineTo(w, origin.y);
-      ctx.moveTo(origin.x, 0); ctx.lineTo(origin.x, h);
+      [ex, ey].forEach((u) => {
+        const p1 = along(origin, u, -far), p2 = along(origin, u, far);
+        ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+      });
       ctx.stroke();
 
       ctx.setLineDash([]);
       ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.moveTo(origin.x, origin.y); ctx.lineTo(origin.x + 55, origin.y);
-      ctx.moveTo(origin.x, origin.y); ctx.lineTo(origin.x, origin.y - 55);
+      [[ex, ey], [ey, ex]].forEach(([u, n]) => {   // n : direction perpendiculaire, pour la pointe de flèche
+        const tip = along(origin, u, 55), b1 = along(origin, u, 45, n, 5), b2 = along(origin, u, 45, n, -5);
+        ctx.moveTo(origin.x, origin.y); ctx.lineTo(tip.x, tip.y);
+        ctx.moveTo(b1.x, b1.y); ctx.lineTo(tip.x, tip.y); ctx.lineTo(b2.x, b2.y);
+      });
       ctx.stroke();
 
       ctx.beginPath();
       ctx.arc(origin.x, origin.y, 7, 0, Math.PI * 2);
       ctx.fill();
+      // Noms des axes à côté des pointillés (et non dessus) : x sous l'axe x, y à gauche de l'axe y
       ctx.font = 'bold 15px system-ui';
-      ctx.fillText('O', origin.x - 18, origin.y + 18);
-      ctx.fillText('x', origin.x + 62, origin.y + 5);
-      ctx.fillText('y', origin.x - 5, origin.y - 62);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const lO = along(origin, ex, -14, ey, -14), lx = along(origin, ex, 52, ey, -15), ly = along(origin, ey, 52, ex, -15);
+      ctx.fillText('O', lO.x, lO.y);
+      ctx.fillText('x', lx.x, lx.y);
+      ctx.fillText('y', ly.x, ly.y);
+
+      // Poignée de rotation du repère (étape d'étalonnage)
+      if (currentStep === 2) {
+        const r = along(origin, ex, ROT_HANDLE);
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, 10, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(147, 197, 253, 1)';
+        ctx.font = 'bold 14px system-ui';
+        ctx.fillText('↻', r.x, r.y + 1);
+      }
       ctx.restore();
 
       // Segment d'étalonnage AB
@@ -1211,6 +1259,7 @@
         if (dist(pos, scaleA) < hitRadius) { draggingHandle = 'A'; return; }
         if (dist(pos, scaleB) < hitRadius) { draggingHandle = 'B'; return; }
         if (dist(pos, origin) < hitRadius) { draggingHandle = 'O'; return; }
+        if (dist(pos, along(origin, axisVectors().ex, ROT_HANDLE)) < hitRadius) { draggingHandle = 'R'; return; }
       }
 
       if (currentStep === 3) {
@@ -1237,6 +1286,12 @@
       if (draggingHandle === 'A') scaleA = { x: clampedX, y: clampedY };
       if (draggingHandle === 'B') scaleB = { x: clampedX, y: clampedY };
       if (draggingHandle === 'O') origin = { x: clampedX, y: clampedY };
+      if (draggingHandle === 'R') {
+        // angle de la direction O → souris, arrondi au dixième de degré ; aimanté sur 0° (± 1°)
+        let a = Math.atan2(origin.y - pos.y, pos.x - origin.x) * 180 / Math.PI;
+        if (Math.abs(a) < 1) a = 0;
+        setAxisAngle(Math.round(a * 10) / 10);
+      }
 
       updateScaleStats();
       renderCanvas();
@@ -1279,6 +1334,40 @@
       updateScaleStats();
     });
 
+    // --- Rotation du repère ---
+    const axisAngleInput = document.getElementById('axisAngle');
+
+    function setAxisAngle(a) {
+      a = ((a + 180) % 360 + 360) % 360 - 180;   // ramené dans [-180 ; 180[
+      axisAngle = a = Math.round(a * 1000) / 1000;   // supprime le bruit d'arrondi des flottants
+      axisAngleInput.value = String(Math.round(a * 10) / 10).replace('.', ',');
+      axisAngleInput.classList.remove('invalid');
+      renderCanvas();
+    }
+
+    axisAngleInput.addEventListener('input', () => {
+      const txt = axisAngleInput.value.trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
+      const v = /^-?(\d*\.?\d+|\d+\.)$/.test(txt) ? parseFloat(txt) : NaN;
+      axisAngleInput.classList.toggle('invalid', !Number.isFinite(v));
+      if (Number.isFinite(v)) { axisAngle = v; renderCanvas(); }
+    });
+    axisAngleInput.addEventListener('change', () => setAxisAngle(axisAngle));
+
+    // Angle du segment AB, ramené dans ]-90 ; 90] (le sens de parcours de AB est sans importance)
+    function abAngle() {
+      let a = Math.atan2(scaleA.y - scaleB.y, scaleB.x - scaleA.x) * 180 / Math.PI;
+      if (a > 90) a -= 180;
+      if (a <= -90) a += 180;
+      return a;
+    }
+    document.getElementById('btnAxisX').addEventListener('click', () => setAxisAngle(abAngle()));
+    document.getElementById('btnAxisY').addEventListener('click', () => {
+      let a = abAngle() - 90;          // l'axe y (à +90° de x) suit AB
+      if (a < -90) a += 180;
+      setAxisAngle(a);
+    });
+    document.getElementById('btnAxisReset').addEventListener('click', () => setAxisAngle(0));
+
     btnCenterOrigin.addEventListener('click', () => {
       origin = { x: Math.round(workCanvas.width / 2), y: Math.round(workCanvas.height / 2) };
       renderCanvas();
@@ -1307,6 +1396,7 @@
 
     function getKinematicData() {
       const pxPerMeter = getPixelsPerMeter();
+      const ax = axisVectors();   // coordonnées projetées sur les axes (éventuellement tournés) du repère
       const valid = [];
 
       for (let i = 0; i < frames.length; i++) {
@@ -1314,8 +1404,8 @@
           valid.push({
             frameIdx: i,
             t: frames[i].time,
-            x: (points[i].xPx - origin.x) / pxPerMeter,
-            y: (origin.y - points[i].yPx) / pxPerMeter,
+            x: ((points[i].xPx - origin.x) * ax.ex.x + (points[i].yPx - origin.y) * ax.ex.y) / pxPerMeter,
+            y: ((points[i].xPx - origin.x) * ax.ey.x + (points[i].yPx - origin.y) * ax.ey.y) / pxPerMeter,
             vx: null,
             vy: null
           });
