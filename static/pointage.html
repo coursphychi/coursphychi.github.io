@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ChronoPointage — Acquisition & Pointage Vidéo</title>
   <style>
     :root {
@@ -206,6 +206,91 @@
       pointer-events: none;
       z-index: 5;
     }
+
+    /* --- Vidéo agrandie (acquisition) : plein écran, ou toute la fenêtre si le navigateur
+           refuse le plein écran (iPhone) ; gros bouton d'enregistrement par-dessus l'image --- */
+    .expand-btn {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
+      z-index: 6;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-size: 1.15rem;
+      justify-content: center;
+      display: none;
+    }
+    body.on-step1 .expand-btn { display: inline-flex; }
+
+    .rec-fab {
+      display: none;
+      position: absolute;
+      left: 50%;
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      transform: translateX(-50%);
+      z-index: 6;
+      width: 72px;
+      height: 72px;
+      padding: 0;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      background: rgba(0, 0, 0, 0.35);
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    }
+    .rec-fab::after {
+      content: '';
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--danger);
+      transition: all 0.2s;
+    }
+    .rec-fab.recording::after {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+    .rec-fab:disabled { opacity: 0.4; }
+
+    body.cam-expanded header,
+    body.cam-expanded main > :not(.stage-card),
+    body.cam-expanded .bottom-bar { display: none; }
+    body.cam-expanded .stage-card {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      border: 0;
+      border-radius: 0;
+    }
+    body.cam-expanded .viewport { padding: 0; }
+    body.cam-expanded .rec-fab { display: inline-flex; }
+    body.cam-expanded .badge-overlay { top: calc(0.65rem + env(safe-area-inset-top, 0px)); }
+    body.cam-expanded .expand-btn { top: calc(0.6rem + env(safe-area-inset-top, 0px)); }
+
+    .rotate-hint {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: calc(3.6rem + env(safe-area-inset-top, 0px));
+      transform: translateX(-50%);
+      z-index: 6;
+      max-width: calc(100% - 2rem);
+      text-align: center;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    body.cam-expanded .rotate-hint.show { display: block; }
 
     .rec-dot {
       width: 9px;
@@ -422,7 +507,7 @@
     tr.clickable-row { cursor: pointer; }
   </style>
 </head>
-<body>
+<body class="on-step1">
 
   <header>
     <div class="brand">
@@ -463,6 +548,10 @@
         <div id="overlayBadge" class="badge-overlay">
           <span id="overlayText">Caméra inactive</span>
         </div>
+
+        <button id="btnExpand" class="expand-btn" title="Agrandir la vidéo (plein écran)" aria-label="Agrandir la vidéo">⛶</button>
+        <button id="btnRecFab" class="rec-fab" title="Enregistrer / arrêter" aria-label="Enregistrer ou arrêter" disabled></button>
+        <div id="rotateHint" class="rotate-hint">↻ Tournez le téléphone pour agrandir l'image</div>
       </div>
 
       <!-- Barre d'outils sous l'image -->
@@ -800,6 +889,12 @@
       const vpH = viewport.clientHeight - pad;
       const finalFit = fitBox(mediaW, mediaH, vpW, vpH);
 
+      // Vidéo agrandie sur téléphone : suggérer de tourner l'écran si l'image et l'écran
+      // n'ont pas la même orientation (paysage / portrait)
+      const small = Math.min(window.innerWidth, window.innerHeight) < 600;
+      const mismatch = (mediaW > mediaH) !== (window.innerWidth > window.innerHeight);
+      document.getElementById('rotateHint').classList.toggle('show', small && mismatch && mediaW !== mediaH);
+
       mediaBox.style.width = `${finalFit.w}px`;
       mediaBox.style.height = `${finalFit.h}px`;
 
@@ -848,6 +943,7 @@
 
         liveVideo.srcObject = stream;
         btnRecord.disabled = false;
+        syncRecFab();
 
         const track = stream.getVideoTracks()[0];
         const settings = track.getSettings();
@@ -910,6 +1006,51 @@
     btnRecord.addEventListener('click', () => {
       if (isRecording) stopRecording();
       else startRecording();
+      syncRecFab();
+    });
+
+    // --- Vidéo agrandie pendant l'acquisition ---
+    const btnExpand = document.getElementById('btnExpand');
+    const btnRecFab = document.getElementById('btnRecFab');
+
+    function syncRecFab() {
+      btnRecFab.disabled = btnRecord.disabled;
+      btnRecFab.classList.toggle('recording', isRecording);
+    }
+
+    function setExpanded(on) {
+      if (on === document.body.classList.contains('cam-expanded')) return;
+      document.body.classList.toggle('cam-expanded', on);
+      btnExpand.textContent = on ? '✕' : '⛶';
+      btnExpand.title = on ? 'Réduire la vidéo' : 'Agrandir la vidéo (plein écran)';
+      syncRecFab();
+      if (on) {
+        // vrai plein écran quand le navigateur le permet (masque aussi ses barres) ;
+        // sinon (iPhone) la vidéo occupe déjà toute la fenêtre grâce à la classe CSS
+        const el = document.documentElement;
+        const req = el.requestFullscreen || el.webkitRequestFullscreen;
+        if (req && !document.fullscreenElement) {
+          Promise.resolve(req.call(el)).then(() => {
+            // téléphone : orientation de l'écran assortie à celle de l'image, si le navigateur l'autorise
+            const { w, h } = getEffectiveMediaDimensions();
+            if (screen.orientation && screen.orientation.lock) {
+              screen.orientation.lock(w >= h ? 'landscape' : 'portrait').catch(() => {});
+            }
+          }).catch(() => {});
+        }
+      } else {
+        if (screen.orientation && screen.orientation.unlock) { try { screen.orientation.unlock(); } catch (e) {} }
+        if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
+      }
+      requestAnimationFrame(updateLayout);
+    }
+
+    btnExpand.addEventListener('click', () => setExpanded(!document.body.classList.contains('cam-expanded')));
+    btnRecFab.addEventListener('click', () => btnRecord.click());
+    // Échap ou geste « retour » : la sortie du plein écran réduit aussi la vidéo
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement) setExpanded(false);
+      requestAnimationFrame(updateLayout);
     });
 
     function drawTransformedVideoToCanvas(targetCanvas) {
@@ -997,6 +1138,7 @@
       }
       btnRecord.textContent = "● Enregistrer";
       overlayBadge.innerHTML = `<span id="overlayText">${frames.length} frames capturées</span>`;
+      setExpanded(false);   // on revient à la page pour passer à l'étalonnage
 
       if (frames.length >= 2) {
         prepareFramesForAnalysis();
@@ -1089,6 +1231,8 @@
 
     function switchStep(step) {
       currentStep = step;
+      document.body.classList.toggle('on-step1', step === 1);
+      if (step !== 1) setExpanded(false);
       tabs.forEach((t, i) => t.classList.toggle('active', i === step - 1));
       panels.forEach((p, i) => p.classList.toggle('active', i === step - 1));
 
