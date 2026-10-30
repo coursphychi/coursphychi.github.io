@@ -1171,7 +1171,7 @@
         profile: null,      // { a, b }
         profileData: null,  // { values: Float64Array, step (px), saturated (fraction) }
         cursors: [0, 0],    // positions des curseurs le long du profil (px)
-        channel: 'auto',     // canal choisi ('auto' : le plus contrasté)
+        channel: 'auto',     // canal choisi ('auto' : luminance, ou canal seul nettement plus contrasté)
         usedChannel: 'lum',
         band: 5,
         snap: true,
@@ -2453,8 +2453,12 @@
         return { values, step, saturated: sat / (n * S.band), range: max - min, channel: ch };
     }
 
-    // En mode « Auto », on retient le canal le plus contrasté parmi ceux qui ne saturent pas
-    // (une figure produite par un laser rouge n'a presque rien dans les canaux vert et bleu).
+    // En mode « Auto », on retient la luminance, sauf si un canal seul est nettement plus contrasté
+    // (lumière colorée : une figure produite par un laser rouge n'a presque rien en vert et en bleu,
+    // et sa luminance est alors trois fois moins contrastée que le canal rouge). En lumière blanche,
+    // les trois canaux et la luminance ont presque le même contraste : la luminance est gardée.
+    // Les signaux qui saturent (plus de 1 % des pixels à 255) sont écartés.
+    const AUTO_LUM_RATIO = 0.75;   // luminance gardée si son contraste atteint 75 % du meilleur canal
     function computeProfile() {
         if (!S.profile || !S.img) return;
         if (S.channel !== 'auto') {
@@ -2462,9 +2466,13 @@
         } else {
             const all = ['lum', 'r', 'g', 'b'].map(sampleProfile);
             const ok = all.filter(d => d.saturated <= 0.01);
-            S.profileData = ok.length
-                ? ok.reduce((best, d) => d.range > best.range ? d : best)
-                : all.reduce((best, d) => d.saturated < best.saturated ? d : best);
+            if (!ok.length) {
+                S.profileData = all.reduce((best, d) => d.saturated < best.saturated ? d : best);
+            } else {
+                const best = ok.reduce((m, d) => d.range > m.range ? d : m);
+                const lum = ok.find(d => d.channel === 'lum');
+                S.profileData = lum && lum.range >= AUTO_LUM_RATIO * best.range ? lum : best;
+            }
         }
         const names = { lum: 'luminance', r: 'rouge', g: 'vert', b: 'bleu' };
         document.querySelector('#channelSelect option[value="auto"]').textContent =
