@@ -247,6 +247,9 @@
   <div class="progress" id="progress" aria-label="Avancement"></div>
   <div class="spacer"></div>
   <div class="ctrl">
+    <label class="meas" title="Résistance de la thermistance utilisée, à 20 °C (indiquée sur la boîte ou mesurée à l'ohmmètre) ; Entrée pour l'utiliser">R<sub>T</sub> à 20&nbsp;°C&nbsp;:
+      <input type="text" id="r20Input" inputmode="decimal" autocomplete="off" spellcheck="false" value="1 500" style="width: 5.4em;"> Ω
+    </label>
     <label class="meas" title="Tension U_R0 mesurée en TP (virgule ou point) ; Entrée pour l'utiliser">Mesure U<sub>R0</sub>&nbsp;:
       <input type="text" id="uInput" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="—"> V
     </label>
@@ -272,11 +275,11 @@
   <section class="card steps">
     <h2>Raisonnement</h2>
     <ol id="steps"></ol>
-    <p class="note">Valeurs de l'exemple&nbsp;: générateur de 6,0&nbsp;V, R<sub>0</sub> = 1&nbsp;500&nbsp;Ω, R<sub>P</sub> = 1&nbsp;kΩ, thermistance CTN de 1&nbsp;500&nbsp;Ω à 25&nbsp;°C (échauffement par le courant négligé).</p>
+    <p class="note">Valeurs de l'exemple&nbsp;: générateur de 6,0&nbsp;V, R<sub>0</sub> = 1&nbsp;500&nbsp;Ω, R<sub>P</sub> = 1&nbsp;kΩ, thermistance CTN de <span id="r20Note">1&nbsp;500</span>&nbsp;Ω à 20&nbsp;°C, de coefficient B = 4&nbsp;000&nbsp;K (échauffement par le courant négligé).</p>
   </section>
 
   <section class="card graph" id="cardE">
-    <h2>Courbe d'étalonnage de la thermistance</h2>
+    <h2>Courbe d'étalonnage de la thermistance <span id="r20Title"></span></h2>
     <canvas id="cvE" aria-label="Courbe d'étalonnage de la thermistance, avec la lecture de la température"></canvas>
   </section>
   </div>
@@ -289,8 +292,15 @@
   function fr(x, nd) { return x.toFixed(nd).replace('.', ',').replace('-', '−'); }
 
   /* ===== Modèles (mêmes que dans le cours « Électricité » de 2nde) ===== */
-  var TH = { R25: 1500, B: 4000, T25: 298.15 };
-  function Rtherm(theta) { return TH.R25 * Math.exp(TH.B * (1 / (theta + 273.15) - 1 / TH.T25)); }
+  /* Thermistance CTN : R(θ) = R20 · exp[B (1/T − 1/T20)] ; R20 réglable (les thermistances du TP diffèrent) */
+  var TH = { R20: 1500, B: 4000, T20: 293.15 };
+  function Rtherm(theta) { return TH.R20 * Math.exp(TH.B * (1 / (theta + 273.15) - 1 / TH.T20)); }
+  function frInt(x) { return Math.round(x).toLocaleString('fr-FR'); }
+  /* graduation « ronde » (1, 2 ou 5 × 10^n) */
+  function niceStep(range, target) {
+    var raw = range / target, p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / p;
+    return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p;
+  }
   var IS = 0.02 / Math.exp(2.0 / 0.05);
   function Udel(I) { return 0.05 * Math.log(1 + Math.max(0, I) / IS); }
   function solveI(f, lo, hi) { for (var k = 0; k < 70; k++) { var m = (lo + hi) / 2; if (f(m) > 0) { hi = m; } else { lo = m; } } return (lo + hi) / 2; }
@@ -451,13 +461,15 @@
     if (etape >= 3) { reading(c, P, X(v.UR0), Y(v.I2 * 1000), fr(v.I2 * 1000, 2) + ' mA', fr(v.UR0, 2) + ' V'); }
   }
   function grEtal(S, v) {
-    var c = S.ctx, P = frame(S, '4\u202f000'), tmax = 85, rmax = 4500;
+    /* échelle verticale adaptée à la thermistance : la courbe démarre à 2 °C */
+    var top = Rtherm(2), st = niceStep(top, 4), rtop = Math.ceil(top / st) * st, rmax = rtop * 1.06, tmax = 85;
+    var c = S.ctx, P = frame(S, frInt(rtop));
     function X(t) { return P.L + t / tmax * (P.R - P.L); }
     function Y(r) { return P.B - r / rmax * (P.B - P.T); }
     c.clearRect(0, 0, S.w, S.h);
     var xs = [], ys = [];
     for (var t = 0; t <= 80; t += 10) { xs.push([X(t), String(t)]); }
-    for (var r = 0; r <= 4000; r += 1000) { ys.push([Y(r), r.toLocaleString('fr-FR')]); }
+    for (var r = 0; r <= rtop + 1e-9; r += st) { ys.push([Y(r), frInt(r)]); }
     axes(c, P, xs, ys, 'θ (°C) →', 'R (Ω) →');
     c.strokeStyle = 'rgba(5,150,105,.85)'; c.lineWidth = 3; c.beginPath();
     for (var k = 0; k <= 160; k++) { var tt = 2 + 80 * k / 160; if (k === 0) { c.moveTo(X(tt), Y(Rtherm(tt))); } else { c.lineTo(X(tt), Y(Rtherm(tt))); } }
@@ -476,7 +488,7 @@
     function (v) { return '<b>Loi des nœuds</b>&nbsp;: le courant de la thermistance se partage entre les deux branches&nbsp;: I<sub>G</sub> = I<sub>1</sub> + I<sub>2</sub> = ' + fr(v.I1 * 1000, 2) + ' + ' + fr(v.I2 * 1000, 2) + ' = <b>' + fr(v.IG * 1000, 2) + '&nbsp;mA</b>.'; },
     function (v) { return '<b>Loi d’Ohm</b> pour la thermistance&nbsp;: R<sub>T</sub> = U<sub>RT</sub> / I<sub>G</sub> = ' + fr(v.URT, 2) + ' / ' + fr(v.IG, 5) + ' = <b>' + Math.round(v.RT).toLocaleString('fr-FR') + '&nbsp;Ω</b>.'; },
     function (v) {
-      var s = '<b>Courbe d’étalonnage</b> de la thermistance&nbsp;: R<sub>T</sub> = ' + Math.round(v.RT).toLocaleString('fr-FR') + '&nbsp;Ω correspond à <b>θ ≈ ' + Math.round(v.th) + '&nbsp;°C</b>.';
+      var s = '<b>Courbe d’étalonnage</b> de la thermistance (' + frInt(TH.R20) + '&nbsp;Ω à 20&nbsp;°C)&nbsp;: R<sub>T</sub> = ' + Math.round(v.RT).toLocaleString('fr-FR') + '&nbsp;Ω correspond à <b>θ ≈ ' + Math.round(v.th) + '&nbsp;°C</b>.';
       if (v.th < 0 || v.th > 85) { return s + ' Cette valeur sort de la courbe d’étalonnage (0 à 85&nbsp;°C)&nbsp;: vérifiez la mesure.'; }
       return s + (UR0user === null ? ' Un thermomètre plongé dans l’eau indique ' + fr(theta, 1) + '&nbsp;°C&nbsp;: la mesure est réussie&nbsp;!' : ' Comparez avec la température lue au thermomètre.');
     }
@@ -521,6 +533,24 @@
   }
   $('uInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') { appliquerMesure(); this.blur(); } e.stopPropagation(); });
   $('uInput').addEventListener('change', appliquerMesure);
+
+  /* Résistance de la thermistance à 20 °C : virgule, espaces et suffixe k acceptés (1 500 ; 1,5 k ; 4,7k).
+     La courbe d'étalonnage et tout le raisonnement sont recalculés aussitôt, à l'étape en cours. */
+  function appliquerR20() {
+    var inp = $('r20Input'), t = inp.value.trim().replace(/[\s\u202f\u00a0]/g, '').replace(',', '.').replace(/(Ω|ohms?)$/i, '');
+    var k = /k$/i.test(t); if (k) { t = t.slice(0, -1); }
+    var r = /^\d*\.?\d+$/.test(t) ? parseFloat(t) * (k ? 1000 : 1) : NaN;
+    var ok = Number.isFinite(r) && r >= 10 && r <= 1e6;
+    inp.classList.toggle('invalid', !ok);
+    if (!ok) { return; }
+    TH.R20 = r;
+    inp.value = frInt(r);
+    $('r20Note').textContent = frInt(r);
+    $('r20Title').textContent = r === 1500 ? '' : '(' + frInt(r) + ' Ω à 20 °C)';
+    maj();
+  }
+  $('r20Input').addEventListener('keydown', function (e) { if (e.key === 'Enter') { appliquerR20(); this.blur(); } e.stopPropagation(); });
+  $('r20Input').addEventListener('change', appliquerR20);
 
   /* Intégrée dans une présentation reveal.js (iframe), la page renvoie la main à la présentation
      une fois les étapes épuisées : « suivant » à la dernière étape passe à la diapositive suivante,
