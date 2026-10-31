@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bathythermographe : de la tension à la température</title>
+<style>
+  /* Page unique pensée pour la vidéoprojection en paysage (16:9) et l'intégration
+     dans une présentation reveal.js (iframe) : tout tient dans la fenêtre, sans défilement. */
+  :root {
+    --ink: #1E293B;
+    --muted: #64748B;
+    --line: #E2E8F0;
+    --bg: #F1F5F9;
+    --card: #FFFFFF;
+    --blue: #2563EB;
+    --blue-bg: #EFF6FF;
+    --red: #E11D48;
+    --violet: #7C3AED;
+    --amber: #D97706;
+    --green: #059669;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    /* taille de base proportionnelle à la fenêtre : lisible au fond de la classe */
+    font-size: clamp(9px, min(2.05vh, 1.12vw), 40px);
+    line-height: 1.35;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 1.4vh;
+    padding: 1.6vh 1.6vw;
+    overflow: hidden;
+  }
+
+  /* --- En-tête --- */
+  header {
+    display: flex;
+    align-items: center;
+    gap: 1.2em;
+    flex-wrap: wrap;
+  }
+  h1 {
+    margin: 0;
+    font-size: 1.45em;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  h1 span { color: var(--blue); }
+  .progress {
+    display: flex;
+    gap: 0.35em;
+    align-items: center;
+    font-weight: 700;
+    color: var(--muted);
+    font-size: 0.85em;
+  }
+  .progress i {
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 50%;
+    background: #CBD5E1;
+    transition: background 0.25s, transform 0.25s;
+  }
+  .progress i.done { background: var(--blue); }
+  .progress i.cur { background: var(--blue); transform: scale(1.35); }
+  .spacer { flex: 1; }
+  .ctrl {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    flex-wrap: wrap;
+  }
+  button, .meas input {
+    font: inherit;
+    font-size: 0.9em;
+    border-radius: 0.55em;
+    border: 1px solid #CBD5E1;
+    background: var(--card);
+    color: var(--ink);
+    padding: 0.4em 0.85em;
+  }
+  button { cursor: pointer; font-weight: 700; }
+  button:hover { border-color: var(--blue); }
+  button.main { background: var(--blue); border-color: var(--blue); color: #fff; }
+  button:disabled { opacity: 0.4; cursor: default; }
+  .meas {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .meas input {
+    width: 5em;
+    text-align: center;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-weight: 700;
+  }
+  .meas input.invalid { border-color: var(--red); box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.2); }
+
+  /* --- Disposition : schéma | étapes / graphique DEL + Rp | courbe d'étalonnage --- */
+  main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+    gap: 1.4vw;
+    min-height: 0;
+  }
+  /* deux colonnes indépendantes : le raisonnement (à droite) dispose de plus de hauteur que le schéma */
+  .col { display: flex; flex-direction: column; gap: 1.4vh; min-height: 0; min-width: 0; }
+  .col > .schema { flex: 1.3 1 0; }
+  .col > .steps { flex: 1.75 1 0; }
+  .col > .graph { flex: 1 1 0; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 0.8em;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0.7em 0.9em;
+  }
+  .card h2 {
+    margin: 0 0 0.35em;
+    font-size: 0.82em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+  .schema { padding: 0.4em; }
+  .schema .svgbox { flex: 1; min-height: 0; display: flex; }
+  .schema svg { width: 100%; height: 100%; }
+
+  .steps ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: st;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    overflow: auto;
+    min-height: 0;
+  }
+  .steps li {
+    counter-increment: st;
+    position: relative;
+    padding: 0.2em 0.6em 0.2em 2.3em;
+    border-radius: 0.5em;
+    color: #475569;
+    font-size: 0.86em;
+    line-height: 1.28;
+  }
+  .steps li::before {
+    content: counter(st);
+    position: absolute;
+    left: 0.45em;
+    top: 0.3em;
+    width: 1.45em;
+    height: 1.45em;
+    border-radius: 50%;
+    background: #E2E8F0;
+    color: var(--ink);
+    font-weight: 800;
+    font-size: 0.85em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .steps li.cur {
+    background: var(--blue-bg);
+    color: var(--ink);
+    font-size: 1.02em;
+    padding-top: 0.35em;
+    padding-bottom: 0.35em;
+    box-shadow: inset 0.22em 0 0 var(--blue);
+    animation: appear 0.35s ease-out;
+  }
+  .steps li.cur::before { background: var(--blue); color: #fff; }
+  .steps li b { color: var(--ink); }
+  @keyframes appear { from { opacity: 0; transform: translateY(0.4em); } }
+  @media (prefers-reduced-motion: reduce) { .steps li.cur { animation: none; } }
+  .steps .start {
+    margin: auto 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 1em;
+  }
+  .note {
+    margin-top: auto;
+    padding-top: 0.4em;
+    font-size: 0.72em;
+    color: var(--muted);
+  }
+
+  .graph canvas { flex: 1; min-height: 0; width: 100%; display: block; }
+
+  /* Fenêtre étroite ou en portrait (ordinateur du professeur, téléphone) : tout s'empile et défile */
+  @media (max-aspect-ratio: 5/4) {
+    html, body { height: auto; }
+    body { display: block; overflow: auto; font-size: clamp(13px, 2.6vw, 22px); }
+    header { margin-bottom: 1.4vh; }
+    main, .col { display: flex; flex-direction: column; gap: 1.4vh; }
+    .col > .schema, .col > .steps, .col > .graph { flex: none; }
+    .schema .svgbox { aspect-ratio: 620 / 368; flex: none; }
+    .graph canvas { flex: none; height: 34vh; }
+    .steps ol { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Bathythermographe&nbsp;: du <span>voltmètre</span> à la <span>température</span></h1>
+  <div class="progress" id="progress" aria-label="Avancement"></div>
+  <div class="spacer"></div>
+  <div class="ctrl">
+    <label class="meas" title="Tension U_R0 mesurée en TP (virgule ou point) ; Entrée pour l'utiliser">Mesure U<sub>R0</sub>&nbsp;:
+      <input type="text" id="uInput" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="—"> V
+    </label>
+    <button id="bNew" title="Tirer une autre température d'eau (N)">🎲 Autre eau</button>
+    <button id="bPrev" title="Étape précédente (←)">◀</button>
+    <button id="bNext" class="main" title="Étape suivante (→, Espace)">Étape suivante ▶</button>
+  </div>
+</header>
+
+<main>
+  <div class="col">
+  <section class="card schema" aria-label="Schéma du montage">
+    <div class="svgbox" id="schema"></div>
+  </section>
+
+  <section class="card graph">
+    <h2>Caractéristique de l'ensemble DEL + R<sub>P</sub></h2>
+    <canvas id="cvA" aria-label="Caractéristique de l'ensemble DEL et conducteur ohmique de protection, avec la lecture du point de fonctionnement"></canvas>
+  </section>
+  </div>
+
+  <div class="col">
+  <section class="card steps">
+    <h2>Raisonnement</h2>
+    <ol id="steps"></ol>
+    <p class="note">Valeurs de l'exemple&nbsp;: générateur de 10,0&nbsp;V, R<sub>0</sub> = 1&nbsp;500&nbsp;Ω, R<sub>P</sub> = 1&nbsp;kΩ, thermistance CTN de 1&nbsp;500&nbsp;Ω à 25&nbsp;°C (échauffement par le courant négligé).</p>
+  </section>
+
+  <section class="card graph">
+    <h2>Courbe d'étalonnage de la thermistance</h2>
+    <canvas id="cvE" aria-label="Courbe d'étalonnage de la thermistance, avec la lecture de la température"></canvas>
+  </section>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  function fr(x, nd) { return x.toFixed(nd).replace('.', ',').replace('-', '−'); }
+
+  /* ===== Modèles (mêmes que dans le cours « Électricité » de 2nde) ===== */
+  var TH = { R25: 1500, B: 4000, T25: 298.15 };
+  function Rtherm(theta) { return TH.R25 * Math.exp(TH.B * (1 / (theta + 273.15) - 1 / TH.T25)); }
+  var IS = 0.02 / Math.exp(2.0 / 0.05);
+  function Udel(I) { return 0.05 * Math.log(1 + Math.max(0, I) / IS); }
+  function solveI(f, lo, hi) { for (var k = 0; k < 70; k++) { var m = (lo + hi) / 2; if (f(m) > 0) { hi = m; } else { lo = m; } } return (lo + hi) / 2; }
+
+  var UG = 10.0, R0 = 1500, RP = 1000, NE = 6;
+  var theta = null;      /* température de l'eau tirée au hasard (mode démonstration) */
+  var UR0user = null;    /* tension saisie (mode correction du TP) */
+  var etape = 0;
+
+  function Iass(U) { return U <= 0 ? 0 : solveI(function (i) { return Udel(i) + RP * i - U; }, 0, 0.1); }   /* DEL + R_P soumis à U */
+
+  function valeurs() {
+    var UR0;
+    if (UR0user !== null) {
+      UR0 = UR0user;
+    } else {
+      var RT = Rtherm(theta);
+      var lo = 0, hi = UG;
+      for (var k = 0; k < 70; k++) { var m = (lo + hi) / 2; if (m + RT * (m / R0 + Iass(m)) > UG) { hi = m; } else { lo = m; } }
+      UR0 = Math.round((lo + hi) / 2 * 100) / 100;
+    }
+    var URT = Math.round((UG - UR0) * 100) / 100, I1 = UR0 / R0, I2 = Math.round(Iass(UR0) * 1e5) / 1e5, IG = I1 + I2, RTc = URT / IG;
+    var th = solveI(function (t) { return -Rtherm(t) + RTc; }, -40, 150);
+    return { UR0: UR0, URT: URT, I1: I1, I2: I2, IG: IG, RT: RTc, th: th };
+  }
+
+  /* ===== Petit moteur de schémas électriques (SVG) ===== */
+  var CI = (function () {
+    var INK = '#1E293B', F = "font-family='system-ui, sans-serif'";
+    function n(v) { return Math.round(v * 10) / 10; }
+    function wire(pts) { return "<polyline points='" + pts.map(function (p) { return n(p[0]) + ',' + n(p[1]); }).join(' ') + "' fill='none' stroke='" + INK + "' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/>"; }
+    function text(x, y, s, col, size, anchor, weight) {
+      return "<text x='" + n(x) + "' y='" + n(y) + "' font-size='" + (size || 13) + "' text-anchor='" + (anchor || 'middle') + "' fill='" + (col || INK) + "' " + F + (weight ? " font-weight='" + weight + "'" : '') + ">" + s + "</text>";
+    }
+    function qty(x, y, L, sub, col, anchor, size) {
+      size = size || 14;
+      return "<text x='" + n(x) + "' y='" + n(y) + "' font-size='" + size + "' text-anchor='" + (anchor || 'middle') + "' fill='" + col + "' font-family='Georgia, serif' font-weight='700'><tspan font-style='italic'>" + L + "</tspan>" + (sub ? "<tspan font-size='" + Math.round(size * 0.68) + "' dy='" + Math.round(size * 0.28) + "'>" + sub + "</tspan>" : '') + "</text>";
+    }
+    function node(x, y) { return "<circle cx='" + n(x) + "' cy='" + n(y) + "' r='3.6' fill='" + INK + "'/>"; }
+    function res(x, y, o) {
+      var w = o === 'v' ? 16 : 40, h = o === 'v' ? 40 : 16;
+      return "<rect x='" + n(x - w / 2) + "' y='" + n(y - h / 2) + "' width='" + w + "' height='" + h + "' fill='#fff' stroke='" + INK + "' stroke-width='2'/>";
+    }
+    function therm(x, y, o) {
+      var s = res(x, y, o), pts = o === 'v' ? [[x - 13, y + 30], [x - 13, y + 19], [x + 13, y - 19], [x + 13, y - 30]] : [[x - 30, y + 13], [x - 19, y + 13], [x + 19, y - 13], [x + 30, y - 13]];
+      return s + "<polyline points='" + pts.map(function (p) { return n(p[0]) + ',' + n(p[1]); }).join(' ') + "' fill='none' stroke='" + INK + "' stroke-width='1.6' stroke-linejoin='round'/>";
+    }
+    function gen(x, y, plus) {
+      var s = "<circle cx='" + n(x) + "' cy='" + n(y) + "' r='17' fill='#fff' stroke='" + INK + "' stroke-width='2'/>" + text(x, y + 5, 'G', INK, 14, 'middle', 700);
+      var pp = { t: [x - 14, y - 20] }, mm = { t: [x - 14, y + 30] };
+      return s + text(pp[plus][0], pp[plus][1], '+', '#DC2626', 15, 'middle', 700) + text(mm[plus][0], mm[plus][1], '−', '#2563EB', 15, 'middle', 700);
+    }
+    function meter(x, y, L) {   /* borne V en haut, COM en bas */
+      return "<circle cx='" + n(x) + "' cy='" + n(y) + "' r='13' fill='#fff' stroke='" + INK + "' stroke-width='2'/>" + text(x, y + 5, L, INK, 13, 'middle', 700) +
+        text(x + 10, y - 16, 'V', '#DC2626', 10.5, 'start', 700) + text(x + 10, y + 24, 'COM', '#2563EB', 10.5, 'start', 700);
+    }
+    function led(x, y) {   /* DEL, sens passant vers le bas */
+      return "<g transform='translate(" + n(x) + ',' + n(y) + ")'><polygon points='-11,-9 11,-9 0,9' fill='#fff' stroke='" + INK + "' stroke-width='2'/><line x1='-11' y1='9' x2='11' y2='9' stroke='" + INK + "' stroke-width='2.4'/>" +
+        "<path d='M14,-6 l8,-6 M18,-2 l8,-6' stroke='" + INK + "' stroke-width='1.4'/><polygon points='22,-12 18,-11 21,-8' fill='" + INK + "'/><polygon points='26,-8 22,-7 25,-4' fill='" + INK + "'/></g>";
+    }
+    function iarr(x, y, dir, L, sub, col, lx, ly) {
+      var r = { r: 0, d: 90, l: 180, u: -90 }[dir];
+      var s = "<g transform='translate(" + n(x) + ',' + n(y) + ") rotate(" + r + ")'><polygon points='7,0 -6,-6 -6,6' fill='" + col + "'/></g>";
+      if (L) { s += qty(x + (lx || 0), y + (ly || -10), L, sub, col); }
+      return s;
+    }
+    function uarr(x1, y1, x2, y2, col) {
+      var dx = x2 - x1, dy = y2 - y1, Ln = Math.hypot(dx, dy), ux = dx / Ln, uy = dy / Ln;
+      return "<line x1='" + n(x1) + "' y1='" + n(y1) + "' x2='" + n(x2 - ux * 8) + "' y2='" + n(y2 - uy * 8) + "' stroke='" + col + "' stroke-width='2.2' stroke-linecap='round'/>" +
+        "<polygon points='" + n(x2) + ',' + n(y2) + ' ' + n(x2 - ux * 11 - uy * 5) + ',' + n(y2 - uy * 11 + ux * 5) + ' ' + n(x2 - ux * 11 + uy * 5) + ',' + n(y2 - uy * 11 - ux * 5) + "' fill='" + col + "'/>";
+    }
+    return { wire: wire, text: text, qty: qty, node: node, res: res, therm: therm, gen: gen, meter: meter, led: led, iarr: iarr, uarr: uarr };
+  })();
+
+  function schema(v) {
+    var on = function (k) { return etape >= k; }, col = function (k, c) { return on(k) ? c : '#94A3B8'; };
+    var F = "font-family='system-ui, sans-serif'", G = "font-family='Georgia, serif'";
+    var b = "<defs><linearGradient id='gEau' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#DBEAFE'/><stop offset='1' stop-color='#93C5FD'/></linearGradient></defs>";
+    /* bain d'eau autour de la thermistance */
+    b += "<rect x='298' y='50' width='170' height='100' rx='14' fill='url(#gEau)' fill-opacity='.75' stroke='#60A5FA' stroke-width='1.2'/>";
+    b += "<path d='M306,64 q8,-5 16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0' fill='none' stroke='#fff' stroke-width='1.4' stroke-opacity='.9'/>";
+    var thTxt = on(6) ? 'θ ≈ ' + Math.round(v.th) + ' °C' : 'θ = ?';
+    b += "<text x='428' y='100' font-size='11.5' text-anchor='middle' fill='#1E3A8A' " + F + " font-weight='700'>eau</text><text x='428' y='117' font-size='11.5' text-anchor='middle' fill='" + (on(6) ? '#E11D48' : '#1E3A8A') + "' " + F + " font-weight='700'>" + thTxt + "</text>";
+    /* afficheur : DEL + R_P */
+    b += "<rect x='494' y='206' width='52' height='112' rx='10' fill='rgba(187,247,208,.55)' stroke='#4ADE80' stroke-dasharray='5 4'/>";
+    /* fils */
+    b += CI.wire([[120, 40], [370, 40], [370, 170]]) + CI.wire([[260, 170], [520, 170]]) + CI.wire([[260, 170], [260, 330], [520, 330], [520, 170]]) + CI.wire([[370, 330], [370, 350], [120, 350], [120, 40]]);
+    b += CI.wire([[260, 210], [350, 210], [350, 290], [260, 290]]);
+    /* dipôles */
+    b += CI.gen(120, 192, 't') + CI.therm(370, 100, 'v') + CI.res(260, 250, 'v') + CI.res(520, 288, 'v');
+    var glow = Math.min(1, v.I2 / 0.006);
+    if (glow > 0.02) { b += "<circle cx='520' cy='236' r='" + (12 + 15 * glow).toFixed(1) + "' fill='rgba(239,68,68," + (0.4 * glow).toFixed(2) + ")'/>"; }
+    b += CI.led(520, 236);
+    b += CI.node(370, 170) + CI.node(370, 330) + CI.node(260, 210) + CI.node(260, 290) + CI.meter(350, 250, 'V');
+    b += "<rect x='368' y='237' width='76' height='26' rx='6' fill='#0F172A'/><text x='406' y='255' font-size='13.5' text-anchor='middle' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>" + fr(v.UR0, 2) + " V</text>";
+    /* noms et valeurs */
+    b += "<text x='348' y='96' font-size='13' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>T</tspan></text>";
+    b += "<text x='246' y='246' font-size='13' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>0</tspan></text><text x='246' y='264' font-size='10.5' text-anchor='end' fill='#64748B' " + F + ">1 500 Ω</text>";
+    b += "<text x='554' y='240' font-size='11' fill='#15803D' " + F + " font-weight='700'>DEL</text>";
+    b += "<text x='554' y='286' font-size='13' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>P</tspan></text><text x='554' y='303' font-size='10.5' fill='#64748B' " + F + ">1 kΩ</text>";
+    b += "<text x='554' y='262' font-size='10.5' fill='#16A34A' " + F + " font-style='italic'>afficheur</text>";
+    /* tensions */
+    b += CI.uarr(80, 240, 80, 144, '#475569') + CI.qty(70, 196, 'U', 'G', '#475569', 'end') + CI.text(80, 262, '10,0 V', '#475569', 11.5, 'middle', 700);
+    b += CI.uarr(486, 125, 486, 75, col(2, '#7C3AED')) + CI.qty(494, 104, 'U', 'RT', col(2, '#7C3AED'), 'start', 13);
+    b += CI.uarr(280, 278, 280, 222, col(1, '#E11D48')) + CI.qty(287, 254, 'U', 'R0', col(1, '#E11D48'), 'start', 12.5);
+    /* intensités */
+    b += CI.iarr(240, 40, 'r', on(5) ? 'I' : '', 'G', '#2563EB', 0, -10) + CI.iarr(260, 190, 'd', on(3) ? 'I' : '', '1', '#D97706', -14, 4) + CI.iarr(520, 190, 'd', on(4) ? 'I' : '', '2', '#059669', 14, 4);
+    return "<svg viewBox='0 0 620 368' preserveAspectRatio='xMidYMid meet' role='img' aria-label=\"Montage : le générateur alimente la thermistance, plongée dans l’eau, puis deux branches en dérivation : le conducteur ohmique R0, aux bornes duquel un voltmètre mesure la tension, et l’afficheur formé de la DEL et de son conducteur ohmique de protection RP\">" + b + "</svg>";
+  }
+
+  /* ===== Graphiques (tailles proportionnelles au canevas, pour la projection) ===== */
+  function canvasCtx(cv) {
+    var dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
+    cv.width = Math.max(1, Math.round(w * dpr)); cv.height = Math.max(1, Math.round(h * dpr));
+    var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx: ctx, w: w, h: h, f: Math.max(11, Math.min(26, Math.min(h / 15, w / 30))) };
+  }
+  function txt(c, s, x, y, color, font, align) {
+    c.font = font; c.textAlign = align || 'center'; c.lineJoin = 'round'; c.lineWidth = 4; c.strokeStyle = 'rgba(255,255,255,.92)';
+    c.strokeText(s, x, y); c.fillStyle = color; c.fillText(s, x, y);
+  }
+  function frame(S, widest) {   /* marges et polices du graphique ; widest : plus longue graduation de l'axe vertical */
+    var f = S.f, small = f + 'px system-ui, sans-serif';
+    S.ctx.font = small;
+    var tw = S.ctx.measureText(widest).width;
+    return { f: f, L: tw + 2.9 * f, R: S.w - 1.2 * f, T: 1.1 * f, B: S.h - 2.6 * f, small: small, bold: '700 ' + (f * 1.05) + 'px system-ui, sans-serif' };
+  }
+  function axes(c, P, xs, ys, xl, yl) {
+    c.strokeStyle = '#E2E8F0'; c.lineWidth = 1;
+    xs.forEach(function (v) { c.beginPath(); c.moveTo(v[0], P.T); c.lineTo(v[0], P.B); c.stroke(); txt(c, v[1], v[0], P.B + 1.2 * P.f, '#475569', P.small); });
+    ys.forEach(function (v) { c.beginPath(); c.moveTo(P.L, v[0]); c.lineTo(P.R, v[0]); c.stroke(); txt(c, v[1], P.L - 0.5 * P.f, v[0] + 0.35 * P.f, '#475569', P.small, 'right'); });
+    c.strokeStyle = '#1E293B'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(P.L, P.T); c.lineTo(P.L, P.B); c.lineTo(P.R, P.B); c.stroke();
+    txt(c, xl, P.R - 2.4 * P.f, P.B + 2.3 * P.f, '#475569', P.small);
+    c.save(); c.translate(P.f * 0.9, (P.T + P.B) / 2); c.rotate(-Math.PI / 2); txt(c, yl, 0, 0, '#475569', P.small); c.restore();
+  }
+  function reading(c, P, x, y, labelY, labelX) {   /* construction de lecture en pointillés rouges */
+    c.strokeStyle = '#E11D48'; c.lineWidth = 2; c.setLineDash([6, 5]);
+    c.beginPath(); c.moveTo(x, P.B); c.lineTo(x, y); c.lineTo(P.L, y); c.stroke(); c.setLineDash([]);
+    c.fillStyle = '#E11D48'; c.beginPath(); c.arc(x, y, 0.42 * P.f, 0, 2 * Math.PI); c.fill();
+    txt(c, labelY, P.L + 0.5 * P.f, y - 0.6 * P.f, '#E11D48', P.bold, 'left');
+    var yl = (P.B - y) < 2.4 * P.f ? y - 0.9 * P.f : P.B - 0.6 * P.f;   /* point proche de l'axe : étiquette au-dessus du point */
+    txt(c, labelX, x + 0.5 * P.f, yl, '#E11D48', P.bold, 'left');
+  }
+  function grAssoc(S, v) {
+    var c = S.ctx, P = frame(S, '8'), umax = 10, imax = 8;
+    function X(u) { return P.L + u / umax * (P.R - P.L); }
+    function Y(i) { return P.B - i / imax * (P.B - P.T); }
+    c.clearRect(0, 0, S.w, S.h);
+    var xs = [], ys = []; for (var u = 0; u <= 10; u += 2) { xs.push([X(u), String(u)]); } for (var i = 0; i <= 8; i += 2) { ys.push([Y(i), String(i)]); }
+    axes(c, P, xs, ys, 'U (V) →', 'I (mA) →');
+    c.strokeStyle = '#059669'; c.lineWidth = 3; c.beginPath();
+    for (var k = 0; k <= 200; k++) { var uu = umax * k / 200, ii = Iass(uu) * 1000; if (k === 0) { c.moveTo(X(uu), Y(ii)); } else { c.lineTo(X(uu), Y(ii)); } }
+    c.stroke();
+    txt(c, 'DEL + Rₚ', X(8.4), Y(Iass(8.4) * 1000) - 0.9 * P.f, '#059669', P.bold);
+    if (etape >= 3) { reading(c, P, X(v.UR0), Y(v.I2 * 1000), fr(v.I2 * 1000, 2) + ' mA', fr(v.UR0, 2) + ' V'); }
+  }
+  function grEtal(S, v) {
+    var c = S.ctx, P = frame(S, '4\u202f000'), tmax = 85, rmax = 4500;
+    function X(t) { return P.L + t / tmax * (P.R - P.L); }
+    function Y(r) { return P.B - r / rmax * (P.B - P.T); }
+    c.clearRect(0, 0, S.w, S.h);
+    var xs = [], ys = [];
+    for (var t = 0; t <= 80; t += 10) { xs.push([X(t), String(t)]); }
+    for (var r = 0; r <= 4000; r += 1000) { ys.push([Y(r), r.toLocaleString('fr-FR')]); }
+    axes(c, P, xs, ys, 'θ (°C) →', 'R (Ω) →');
+    c.strokeStyle = 'rgba(5,150,105,.85)'; c.lineWidth = 3; c.beginPath();
+    for (var k = 0; k <= 160; k++) { var tt = 2 + 80 * k / 160; if (k === 0) { c.moveTo(X(tt), Y(Rtherm(tt))); } else { c.lineTo(X(tt), Y(Rtherm(tt))); } }
+    c.stroke();
+    if (etape >= 6 && v.th >= 0 && v.th <= tmax) {
+      reading(c, P, X(v.th), Y(v.RT), Math.round(v.RT).toLocaleString('fr-FR') + ' Ω', 'θ ≈ ' + Math.round(v.th) + ' °C');
+    }
+  }
+
+  /* ===== Étapes du raisonnement ===== */
+  var TXT = [
+    function (v) { return '<b>Mesure</b>&nbsp;: le voltmètre indique la tension aux bornes du conducteur ohmique&nbsp;: <b>U<sub>R0</sub> = ' + fr(v.UR0, 2) + '&nbsp;V</b>.'; },
+    function (v) { return '<b>Loi des mailles</b> (maille générateur, thermistance, R<sub>0</sub>)&nbsp;: U<sub>G</sub> = U<sub>RT</sub> + U<sub>R0</sub>, donc U<sub>RT</sub> = 10,0 − ' + fr(v.UR0, 2) + ' = <b>' + fr(v.URT, 2) + '&nbsp;V</b>.'; },
+    function (v) { return '<b>Loi d’Ohm</b> pour R<sub>0</sub>&nbsp;: I<sub>1</sub> = U<sub>R0</sub> / R<sub>0</sub> = ' + fr(v.UR0, 2) + ' / 1&nbsp;500 = <b>' + fr(v.I1 * 1000, 2) + '&nbsp;mA</b>.'; },
+    function (v) { return '<b>Point de fonctionnement</b> de DEL + R<sub>P</sub>&nbsp;: en dérivation avec R<sub>0</sub>, il est soumis à la même tension, ' + fr(v.UR0, 2) + '&nbsp;V. Sur sa caractéristique (en bas à gauche)&nbsp;: <b>I<sub>2</sub> = ' + fr(v.I2 * 1000, 2) + '&nbsp;mA</b>.'; },
+    function (v) { return '<b>Loi des nœuds</b>&nbsp;: le courant de la thermistance se partage entre les deux branches&nbsp;: I<sub>G</sub> = I<sub>1</sub> + I<sub>2</sub> = ' + fr(v.I1 * 1000, 2) + ' + ' + fr(v.I2 * 1000, 2) + ' = <b>' + fr(v.IG * 1000, 2) + '&nbsp;mA</b>.'; },
+    function (v) { return '<b>Loi d’Ohm</b> pour la thermistance&nbsp;: R<sub>T</sub> = U<sub>RT</sub> / I<sub>G</sub> = ' + fr(v.URT, 2) + ' / ' + fr(v.IG, 5) + ' = <b>' + Math.round(v.RT).toLocaleString('fr-FR') + '&nbsp;Ω</b>.'; },
+    function (v) {
+      var s = '<b>Courbe d’étalonnage</b> (en bas à droite)&nbsp;: R<sub>T</sub> = ' + Math.round(v.RT).toLocaleString('fr-FR') + '&nbsp;Ω correspond à <b>θ ≈ ' + Math.round(v.th) + '&nbsp;°C</b>.';
+      if (v.th < 0 || v.th > 85) { return s + ' Cette valeur sort de la courbe d’étalonnage (0 à 85&nbsp;°C)&nbsp;: vérifiez la mesure.'; }
+      return s + (UR0user === null ? ' Un thermomètre plongé dans l’eau indique ' + fr(theta, 1) + '&nbsp;°C&nbsp;: la mesure est réussie&nbsp;!' : ' Comparez avec la température lue au thermomètre.');
+    }
+  ];
+
+  var SA, SE;
+  function maj() {
+    var v = valeurs();
+    $('schema').innerHTML = schema(v);
+    $('steps').innerHTML = TXT.slice(0, etape + 1).map(function (f, k) { return '<li class="' + (k === etape ? 'cur' : '') + '">' + f(v) + '</li>'; }).join('');
+    var cur = $('steps').querySelector('li.cur'); if (cur && cur.scrollIntoView) { cur.scrollIntoView({ block: 'nearest' }); }
+    $('progress').innerHTML = 'Étape ' + (etape + 1) + '/' + (NE + 1) + '&nbsp;' + Array.apply(null, Array(NE + 1)).map(function (_, k) { return '<i class="' + (k < etape ? 'done' : (k === etape ? 'cur' : '')) + '"></i>'; }).join('');
+    $('bPrev').disabled = etape === 0;
+    $('bNext').disabled = etape === NE;
+    if (SA) { grAssoc(SA, v); grEtal(SE, v); }
+  }
+
+  function setup() { SA = canvasCtx($('cvA')); SE = canvasCtx($('cvE')); maj(); }
+  function next() { if (etape < NE) { etape++; maj(); } }
+  function prev() { if (etape > 0) { etape--; maj(); } }
+  function nouvelleEau() {
+    UR0user = null; $('uInput').value = ''; $('uInput').classList.remove('invalid');
+    theta = 8 + Math.round(Math.random() * 650) / 10;
+    etape = 0; maj();
+  }
+
+  $('bNext').addEventListener('click', next);
+  $('bPrev').addEventListener('click', prev);
+  $('bNew').addEventListener('click', nouvelleEau);
+
+  /* Tension mesurée en TP : virgule ou point ; Entrée (ou sortie du champ) pour l'appliquer */
+  function appliquerMesure() {
+    var inp = $('uInput'), t = inp.value.trim().replace(/\s/g, '').replace(',', '.');
+    if (t === '') { inp.classList.remove('invalid'); return; }
+    var u = /^\d*\.?\d+$/.test(t) ? parseFloat(t) : NaN;
+    var ok = Number.isFinite(u) && u > 0 && u < UG;
+    inp.classList.toggle('invalid', !ok);
+    if (!ok) { return; }
+    UR0user = Math.round(u * 100) / 100;
+    inp.value = fr(UR0user, 2);
+    etape = 0; maj();
+  }
+  $('uInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') { appliquerMesure(); this.blur(); } e.stopPropagation(); });
+  $('uInput').addEventListener('change', appliquerMesure);
+
+  /* Intégrée dans une présentation reveal.js (iframe), la page renvoie la main à la présentation
+     une fois les étapes épuisées : « suivant » à la dernière étape passe à la diapositive suivante,
+     « précédent » à la première revient à la précédente (API postMessage de reveal.js). */
+  function reveal(method) {
+    if (window.parent && window.parent !== window) {
+      try { window.parent.postMessage(JSON.stringify({ method: method, args: [] }), '*'); } catch (err) { /* hors présentation */ }
+    }
+  }
+
+  /* Clavier (et télécommande de présentation) : → Espace Page↓ = suivant ; ← Page↑ = précédent ; N = autre eau ; Début = étape 1 */
+  document.addEventListener('keydown', function (e) {
+    if (e.target && e.target.tagName === 'INPUT') { return; }
+    var k = e.key;
+    if (k === 'ArrowRight' || k === ' ' || k === 'PageDown' || k === 'Enter') { if (etape < NE) { next(); } else { reveal('next'); } }
+    else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'Backspace') { if (etape > 0) { prev(); } else { reveal('prev'); } }
+    else if (k === 'n' || k === 'N') { nouvelleEau(); }
+    else if (k === 'Home') { etape = 0; maj(); }
+    else { return; }
+    e.preventDefault();
+  });
+
+  var rt = null;
+  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(setup, 120); });
+  theta = 8 + Math.round(Math.random() * 650) / 10;
+  setup();
+})();
+</script>
+</body>
+</html>
