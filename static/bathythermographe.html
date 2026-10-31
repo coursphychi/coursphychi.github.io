@@ -274,7 +274,7 @@
   <div class="progress" id="progress" aria-label="Avancement"></div>
   <div class="spacer"></div>
   <div class="ctrl">
-    <label class="meas" title="Tension U_R0 mesurée en TP (virgule ou point) ; Entrée pour l'utiliser">Mesure U<sub>R0</sub>&nbsp;:
+    <label class="meas" title="Tension U_R0 mesurée en TP (virgule ou point) ; Entrée pour l'utiliser"><span>Mesure U<sub>R0</sub>&nbsp;:</span>
       <input type="text" id="uInput" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="—"> V
     </label>
     <button id="bNew" title="Tirer une autre température d'eau (N)">🎲 Autre eau</button>
@@ -302,14 +302,16 @@
     <div class="setup">
       <div class="setup-row">
         <span class="setup-title">Montage utilisé</span>
-        <label title="Résistance de la thermistance à 20 °C (mesurée à l'ohmmètre) ; Entrée pour l'utiliser">R<sub>T</sub> à 20&nbsp;°C
+        <label title="Tension aux bornes du générateur ; Entrée pour l'utiliser"><span>U<sub>G</sub></span>
+          <input type="text" id="ugInput" inputmode="decimal" autocomplete="off" spellcheck="false" value="6,0" style="width: 4em;"> V</label>
+        <label title="Résistance de la thermistance à 20 °C (mesurée à l'ohmmètre) ; Entrée pour l'utiliser"><span>R<sub>T</sub> à 20&nbsp;°C</span>
           <input type="text" id="r20Input" inputmode="decimal" autocomplete="off" spellcheck="false" value="1 500"> Ω</label>
-        <label title="Conducteur ohmique de protection de la DEL ; Entrée pour l'utiliser">R<sub>P</sub>
+        <label title="Conducteur ohmique de protection de la DEL ; Entrée pour l'utiliser"><span>R<sub>P</sub></span>
           <input type="text" id="rpInput" inputmode="decimal" autocomplete="off" spellcheck="false" value="1 000"> Ω</label>
         <label title="La couleur fixe la tension de seuil de la DEL, donc la caractéristique de l'ensemble DEL + R_P">DEL
           <select id="ledSelect"></select></label>
       </div>
-      <p class="note">Générateur de 6,0&nbsp;V, R<sub>0</sub> = 1&nbsp;500&nbsp;Ω. Thermistance CTN modélisée avec un coefficient B ≈ 4&nbsp;000&nbsp;K (valeur typique)&nbsp;; DEL&nbsp;: tension de seuil typique de sa couleur&nbsp;; échauffement de la thermistance par le courant négligé.</p>
+      <p class="note">R<sub>0</sub> = 1&nbsp;500&nbsp;Ω. Thermistance CTN modélisée avec un coefficient B ≈ 4&nbsp;000&nbsp;K (valeur typique)&nbsp;; DEL&nbsp;: tension de seuil typique de sa couleur&nbsp;; échauffement de la thermistance par le courant négligé.</p>
     </div>
   </section>
 
@@ -502,7 +504,8 @@
     function X(u) { return P.L + u / umax * (P.R - P.L); }
     function Y(i) { return P.B - i / imax * (P.B - P.T); }
     c.clearRect(0, 0, S.w, S.h);
-    var xs = [], ys = []; for (var u = 0; u <= umax + 1e-9; u += 1) { xs.push([X(u), String(u)]); } for (var i = 0; i <= itop + 1e-9; i += ist) { ys.push([Y(i), fr(i, nd)]); }
+    var ust = niceStep(umax, 6), und = ust < 1 ? 1 : 0;
+    var xs = [], ys = []; for (var u = 0; u <= umax + 1e-9; u += ust) { xs.push([X(u), fr(u, und)]); } for (var i = 0; i <= itop + 1e-9; i += ist) { ys.push([Y(i), fr(i, nd)]); }
     axes(c, P, xs, ys, 'U (V) →', 'I (mA) →');
     c.strokeStyle = '#059669'; c.lineWidth = 3; c.beginPath();
     for (var k = 0; k <= 200; k++) { var uu = umax * k / 200, ii = Iass(uu) * 1000; if (k === 0) { c.moveTo(X(uu), Y(ii)); } else { c.lineTo(X(uu), Y(ii)); } }
@@ -613,6 +616,23 @@
      sont recalculés aussitôt, à l'étape en cours */
   champOhm('r20Input', 10, 1e6, function (r) { TH.R20 = r; });
   champOhm('rpInput', 10, 1e5, function (r) { RP = r; });
+
+  /* Tension du générateur (V) ; une mesure U_R0 saisie qui la dépasserait n'a plus de sens : elle est écartée */
+  (function () {
+    var inp = $('ugInput');
+    function go() {
+      var t = inp.value.trim().replace(/\s/g, '').replace(',', '.').replace(/V$/i, '');
+      var u = /^\d*\.?\d+$/.test(t) ? parseFloat(t) : NaN, ok = Number.isFinite(u) && u >= 1 && u <= 30;
+      inp.classList.toggle('invalid', !ok);
+      if (!ok) { return; }
+      UG = Math.round(u * 10) / 10;
+      inp.value = fr(UG, 1);
+      if (UR0user !== null && UR0user >= UG) { UR0user = null; $('uInput').classList.add('invalid'); }
+      maj();
+    }
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { go(); this.blur(); } e.stopPropagation(); });
+    inp.addEventListener('change', go);
+  })();
   $('ledSelect').innerHTML = Object.keys(LEDS).map(function (k) {
     return '<option value="' + k + '">' + LEDS[k].nom + ' (seuil \u2248 ' + fr(LEDS[k].vf - 0.2, 1) + ' V)</option>';
   }).join('');
