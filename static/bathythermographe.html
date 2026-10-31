@@ -193,11 +193,38 @@
     font-size: 1em;
   }
   .note {
-    margin-top: auto;
-    padding-top: 0.4em;
+    margin: 0.35em 0 0;
     font-size: 0.72em;
     color: var(--muted);
   }
+  /* Bloc « Montage utilisé » : ce qui change d'un poste de TP à l'autre */
+  .setup {
+    margin-top: auto;
+    padding-top: 0.5em;
+    border-top: 1px solid var(--line);
+  }
+  .setup-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35em 1em;
+    font-size: 0.82em;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .setup-row .setup-title { color: var(--ink); font-weight: 800; }
+  .setup-row label { display: flex; align-items: center; gap: 0.3em; }
+  .setup input, .setup select {
+    font: inherit;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid #CBD5E1;
+    border-radius: 0.45em;
+    padding: 0.2em 0.45em;
+  }
+  .setup input { width: 5.2em; text-align: center; font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .setup input.invalid { border-color: var(--red); box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.2); }
 
   .graph canvas { flex: 1; min-height: 0; width: 100%; display: block; }
 
@@ -247,9 +274,6 @@
   <div class="progress" id="progress" aria-label="Avancement"></div>
   <div class="spacer"></div>
   <div class="ctrl">
-    <label class="meas" title="Résistance de la thermistance utilisée, à 20 °C (indiquée sur la boîte ou mesurée à l'ohmmètre) ; Entrée pour l'utiliser">R<sub>T</sub> à 20&nbsp;°C&nbsp;:
-      <input type="text" id="r20Input" inputmode="decimal" autocomplete="off" spellcheck="false" value="1 500" style="width: 5.4em;"> Ω
-    </label>
     <label class="meas" title="Tension U_R0 mesurée en TP (virgule ou point) ; Entrée pour l'utiliser">Mesure U<sub>R0</sub>&nbsp;:
       <input type="text" id="uInput" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="—"> V
     </label>
@@ -266,7 +290,7 @@
   </section>
 
   <section class="card graph" id="cardA">
-    <h2>Caractéristique de l'ensemble DEL + R<sub>P</sub></h2>
+    <h2>Caractéristique de l'ensemble DEL + R<sub>P</sub> <span id="assocTitle"></span></h2>
     <canvas id="cvA" aria-label="Caractéristique de l'ensemble DEL et conducteur ohmique de protection, avec la lecture du point de fonctionnement"></canvas>
   </section>
   </div>
@@ -275,7 +299,18 @@
   <section class="card steps">
     <h2>Raisonnement</h2>
     <ol id="steps"></ol>
-    <p class="note">Valeurs de l'exemple&nbsp;: générateur de 6,0&nbsp;V, R<sub>0</sub> = 1&nbsp;500&nbsp;Ω, R<sub>P</sub> = 1&nbsp;kΩ, thermistance CTN de <span id="r20Note">1&nbsp;500</span>&nbsp;Ω à 20&nbsp;°C, de coefficient B = 4&nbsp;000&nbsp;K (échauffement par le courant négligé).</p>
+    <div class="setup">
+      <div class="setup-row">
+        <span class="setup-title">Montage utilisé</span>
+        <label title="Résistance de la thermistance à 20 °C (mesurée à l'ohmmètre) ; Entrée pour l'utiliser">R<sub>T</sub> à 20&nbsp;°C
+          <input type="text" id="r20Input" inputmode="decimal" autocomplete="off" spellcheck="false" value="1 500"> Ω</label>
+        <label title="Conducteur ohmique de protection de la DEL ; Entrée pour l'utiliser">R<sub>P</sub>
+          <input type="text" id="rpInput" inputmode="decimal" autocomplete="off" spellcheck="false" value="1 000"> Ω</label>
+        <label title="La couleur fixe la tension de seuil de la DEL, donc la caractéristique de l'ensemble DEL + R_P">DEL
+          <select id="ledSelect"></select></label>
+      </div>
+      <p class="note">Générateur de 6,0&nbsp;V, R<sub>0</sub> = 1&nbsp;500&nbsp;Ω. Thermistance CTN modélisée avec un coefficient B ≈ 4&nbsp;000&nbsp;K (valeur typique)&nbsp;; DEL&nbsp;: tension de seuil typique de sa couleur&nbsp;; échauffement de la thermistance par le courant négligé.</p>
+    </div>
   </section>
 
   <section class="card graph" id="cardE">
@@ -301,7 +336,18 @@
     var raw = range / target, p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / p;
     return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p;
   }
-  var IS = 0.02 / Math.exp(2.0 / 0.05);
+  /* DEL : U = n·V_T·ln(1 + I/I_S), avec I_S fixé par la tension typique vf à 20 mA de sa couleur */
+  var LEDS = {
+    rouge:   { nom: 'rouge',   vf: 1.9, ink: '#DC2626', rgb: '239,68,68' },
+    orange:  { nom: 'orange',  vf: 2.0, ink: '#EA580C', rgb: '249,115,22' },
+    jaune:   { nom: 'jaune',   vf: 2.1, ink: '#CA8A04', rgb: '234,179,8' },
+    verte:   { nom: 'verte',   vf: 2.2, ink: '#16A34A', rgb: '34,197,94' },
+    bleue:   { nom: 'bleue',   vf: 3.0, ink: '#2563EB', rgb: '59,130,246' },
+    blanche: { nom: 'blanche', vf: 3.1, ink: '#64748B', rgb: '250,204,21' }
+  };
+  var LED = LEDS.rouge, IS = 0;
+  function setLed(key) { LED = LEDS[key]; IS = 0.02 / Math.exp(LED.vf / 0.05); }
+  setLed('rouge');
   function Udel(I) { return 0.05 * Math.log(1 + Math.max(0, I) / IS); }
   function solveI(f, lo, hi) { for (var k = 0; k < 70; k++) { var m = (lo + hi) / 2; if (f(m) > 0) { hi = m; } else { lo = m; } } return (lo + hi) / 2; }
 
@@ -310,7 +356,8 @@
   var UR0user = null;    /* tension saisie (mode correction du TP) */
   var etape = 0;
 
-  function Iass(U) { return U <= 0 ? 0 : solveI(function (i) { return Udel(i) + RP * i - U; }, 0, 0.1); }   /* DEL + R_P soumis à U */
+  function Iass(U) { return U <= 0 ? 0 : solveI(function (i) { return Udel(i) + RP * i - U; }, 0, U / RP + 0.01); }   /* DEL + R_P soumis à U */
+  function fmtOhm(r) { return r >= 1000 ? fr(r / 1000, r % 1000 === 0 ? 0 : (r % 100 === 0 ? 1 : 2)) + ' k\u03a9' : Math.round(r) + ' \u03a9'; }
 
   function valeurs() {
     var UR0;
@@ -395,15 +442,15 @@
     /* dipôles */
     b += CI.gen(120, 192, 't') + CI.therm(370, 100, 'v') + CI.res(260, 250, 'v') + CI.res(520, 288, 'v');
     var glow = Math.min(1, v.I2 / 0.0035);
-    if (glow > 0.02) { b += "<circle cx='520' cy='236' r='" + (12 + 15 * glow).toFixed(1) + "' fill='rgba(239,68,68," + (0.4 * glow).toFixed(2) + ")'/>"; }
+    if (glow > 0.02) { b += "<circle cx='520' cy='236' r='" + (12 + 15 * glow).toFixed(1) + "' fill='rgba(" + LED.rgb + "," + (0.45 * glow).toFixed(2) + ")'/>"; }
     b += CI.led(520, 236);
     b += CI.node(370, 170) + CI.node(370, 330) + CI.node(260, 210) + CI.node(260, 290) + CI.meter(350, 250, 'V');
     b += "<rect x='368' y='237' width='76' height='26' rx='6' fill='#0F172A'/><text x='406' y='255' font-size='" + fs(13.5) + "' text-anchor='middle' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>" + fr(v.UR0, 2) + " V</text>";
     /* noms et valeurs */
     b += "<text x='348' y='96' font-size='" + fs(13) + "' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>T</tspan></text>";
     b += "<text x='246' y='246' font-size='" + fs(13) + "' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>0</tspan></text><text x='246' y='264' font-size='" + fs(10.5) + "' text-anchor='end' fill='#64748B' " + F + ">1 500 Ω</text>";
-    b += "<text x='554' y='240' font-size='" + fs(11) + "' fill='#15803D' " + F + " font-weight='700'>DEL</text>";
-    b += "<text x='554' y='286' font-size='" + fs(13) + "' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>P</tspan></text><text x='554' y='303' font-size='" + fs(10.5) + "' fill='#64748B' " + F + ">1 kΩ</text>";
+    b += "<text x='554' y='240' font-size='" + fs(11) + "' fill='" + LED.ink + "' " + F + " font-weight='700'>DEL</text>";
+    b += "<text x='554' y='286' font-size='" + fs(13) + "' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>P</tspan></text><text x='554' y='303' font-size='" + fs(10.5) + "' fill='#64748B' " + F + ">" + fmtOhm(RP) + "</text>";
     b += "<text x='554' y='262' font-size='" + fs(10.5) + "' fill='#16A34A' " + F + " font-style='italic'>afficheur</text>";
     /* tensions */
     b += CI.uarr(80, 240, 80, 144, '#475569') + CI.qty(70, 196, 'U', 'G', '#475569', 'end') + CI.text(80, 262, fr(UG, 1) + ' V', '#475569', 11.5, 'middle', 700);
@@ -439,20 +486,23 @@
     txt(c, xl, P.R - 2.4 * P.f, P.B + 2.3 * P.f, '#475569', P.small);
     c.save(); c.translate(P.f * 0.9, (P.T + P.B) / 2); c.rotate(-Math.PI / 2); txt(c, yl, 0, 0, '#475569', P.small); c.restore();
   }
-  function reading(c, P, x, y, labelY, labelX) {   /* construction de lecture en pointillés rouges */
+  function reading(c, P, x, y, labelY, labelX, descending) {   /* construction de lecture en pointillés rouges */
     c.strokeStyle = '#E11D48'; c.lineWidth = 2; c.setLineDash([6, 5]);
     c.beginPath(); c.moveTo(x, P.B); c.lineTo(x, y); c.lineTo(P.L, y); c.stroke(); c.setLineDash([]);
     c.fillStyle = '#E11D48'; c.beginPath(); c.arc(x, y, 0.42 * P.f, 0, 2 * Math.PI); c.fill();
     txt(c, labelY, P.L + 0.5 * P.f, y - 0.6 * P.f, '#E11D48', P.bold, 'left');
-    var yl = (P.B - y) < 2.4 * P.f ? y - 0.9 * P.f : P.B - 0.6 * P.f;   /* point proche de l'axe : étiquette au-dessus du point */
+    /* courbe décroissante et point proche de l'axe : la courbe passe en bas à droite, étiquette au-dessus du point */
+    var yl = descending && (P.B - y) < 2.4 * P.f ? y - 0.9 * P.f : P.B - 0.6 * P.f;
     txt(c, labelX, x + 0.5 * P.f, yl, '#E11D48', P.bold, 'left');
   }
   function grAssoc(S, v) {
-    var c = S.ctx, P = frame(S, '5'), umax = UG, imax = 5;
+    /* échelle verticale adaptée à R_P et à la DEL */
+    var iTop = Math.max(0.5, Iass(UG) * 1000), ist = niceStep(iTop, 5), itop = Math.ceil(iTop / ist - 1e-9) * ist, nd = ist < 1 ? 1 : 0;
+    var c = S.ctx, P = frame(S, fr(itop, nd)), umax = UG, imax = itop * 1.04;
     function X(u) { return P.L + u / umax * (P.R - P.L); }
     function Y(i) { return P.B - i / imax * (P.B - P.T); }
     c.clearRect(0, 0, S.w, S.h);
-    var xs = [], ys = []; for (var u = 0; u <= umax + 1e-9; u += 1) { xs.push([X(u), String(u)]); } for (var i = 0; i <= imax; i += 1) { ys.push([Y(i), String(i)]); }
+    var xs = [], ys = []; for (var u = 0; u <= umax + 1e-9; u += 1) { xs.push([X(u), String(u)]); } for (var i = 0; i <= itop + 1e-9; i += ist) { ys.push([Y(i), fr(i, nd)]); }
     axes(c, P, xs, ys, 'U (V) →', 'I (mA) →');
     c.strokeStyle = '#059669'; c.lineWidth = 3; c.beginPath();
     for (var k = 0; k <= 200; k++) { var uu = umax * k / 200, ii = Iass(uu) * 1000; if (k === 0) { c.moveTo(X(uu), Y(ii)); } else { c.lineTo(X(uu), Y(ii)); } }
@@ -475,7 +525,7 @@
     for (var k = 0; k <= 160; k++) { var tt = 2 + 80 * k / 160; if (k === 0) { c.moveTo(X(tt), Y(Rtherm(tt))); } else { c.lineTo(X(tt), Y(Rtherm(tt))); } }
     c.stroke();
     if (etape >= 6 && v.th >= 0 && v.th <= tmax) {
-      reading(c, P, X(v.th), Y(v.RT), Math.round(v.RT).toLocaleString('fr-FR') + ' Ω', 'θ ≈ ' + Math.round(v.th) + ' °C');
+      reading(c, P, X(v.th), Y(v.RT), Math.round(v.RT).toLocaleString('fr-FR') + ' Ω', 'θ ≈ ' + Math.round(v.th) + ' °C', true);
     }
   }
 
@@ -484,7 +534,7 @@
     function (v) { return '<b>Mesure</b>&nbsp;: le voltmètre indique la tension aux bornes du conducteur ohmique&nbsp;: <b>U<sub>R0</sub> = ' + fr(v.UR0, 2) + '&nbsp;V</b>.'; },
     function (v) { return '<b>Loi des mailles</b> (maille générateur, thermistance, R<sub>0</sub>)&nbsp;: U<sub>G</sub> = U<sub>RT</sub> + U<sub>R0</sub>, donc U<sub>RT</sub> = ' + fr(UG, 1) + ' − ' + fr(v.UR0, 2) + ' = <b>' + fr(v.URT, 2) + '&nbsp;V</b>.'; },
     function (v) { return '<b>Loi d’Ohm</b> pour R<sub>0</sub>&nbsp;: I<sub>1</sub> = U<sub>R0</sub> / R<sub>0</sub> = ' + fr(v.UR0, 2) + ' / 1&nbsp;500 = <b>' + fr(v.I1 * 1000, 2) + '&nbsp;mA</b>.'; },
-    function (v) { return '<b>Point de fonctionnement</b> de DEL + R<sub>P</sub>&nbsp;: en dérivation avec R<sub>0</sub>, il est soumis à la même tension, ' + fr(v.UR0, 2) + '&nbsp;V. On lit sur la caractéristique de l’ensemble DEL + R<sub>P</sub>&nbsp;: <b>I<sub>2</sub> = ' + fr(v.I2 * 1000, 2) + '&nbsp;mA</b>.'; },
+    function (v) { return '<b>Point de fonctionnement</b> de DEL + R<sub>P</sub>&nbsp;: en dérivation avec R<sub>0</sub>, il est soumis à la même tension, ' + fr(v.UR0, 2) + '&nbsp;V. On lit sur la caractéristique de l’ensemble DEL + R<sub>P</sub>&nbsp;: <b>I<sub>2</sub> = ' + fr(v.I2 * 1000, 2) + '&nbsp;mA</b>' + (v.I2 < 5e-5 ? '&nbsp;: la tension est inférieure au seuil de la DEL, qui reste éteinte.' : '.'); },
     function (v) { return '<b>Loi des nœuds</b>&nbsp;: le courant de la thermistance se partage entre les deux branches&nbsp;: I<sub>G</sub> = I<sub>1</sub> + I<sub>2</sub> = ' + fr(v.I1 * 1000, 2) + ' + ' + fr(v.I2 * 1000, 2) + ' = <b>' + fr(v.IG * 1000, 2) + '&nbsp;mA</b>.'; },
     function (v) { return '<b>Loi d’Ohm</b> pour la thermistance&nbsp;: R<sub>T</sub> = U<sub>RT</sub> / I<sub>G</sub> = ' + fr(v.URT, 2) + ' / ' + fr(v.IG, 5) + ' = <b>' + Math.round(v.RT).toLocaleString('fr-FR') + '&nbsp;Ω</b>.'; },
     function (v) {
@@ -536,21 +586,39 @@
 
   /* Résistance de la thermistance à 20 °C : virgule, espaces et suffixe k acceptés (1 500 ; 1,5 k ; 4,7k).
      La courbe d'étalonnage et tout le raisonnement sont recalculés aussitôt, à l'étape en cours. */
-  function appliquerR20() {
-    var inp = $('r20Input'), t = inp.value.trim().replace(/[\s\u202f\u00a0]/g, '').replace(',', '.').replace(/(Ω|ohms?)$/i, '');
+  function parseOhm(str) {   /* « 1 500 », « 1,5 k », « 4,7kΩ »… → ohms, ou NaN */
+    var t = str.trim().replace(/[\s\u202f\u00a0]/g, '').replace(',', '.').replace(/(Ω|ohms?)$/i, '');
     var k = /k$/i.test(t); if (k) { t = t.slice(0, -1); }
-    var r = /^\d*\.?\d+$/.test(t) ? parseFloat(t) * (k ? 1000 : 1) : NaN;
-    var ok = Number.isFinite(r) && r >= 10 && r <= 1e6;
-    inp.classList.toggle('invalid', !ok);
-    if (!ok) { return; }
-    TH.R20 = r;
-    inp.value = frInt(r);
-    $('r20Note').textContent = frInt(r);
-    $('r20Title').textContent = r === 1500 ? '' : '(' + frInt(r) + ' Ω à 20 °C)';
-    maj();
+    return /^\d*\.?\d+$/.test(t) ? parseFloat(t) * (k ? 1000 : 1) : NaN;
   }
-  $('r20Input').addEventListener('keydown', function (e) { if (e.key === 'Enter') { appliquerR20(); this.blur(); } e.stopPropagation(); });
-  $('r20Input').addEventListener('change', appliquerR20);
+  function champOhm(id, min, max, apply) {
+    var inp = $(id);
+    function go() {
+      var r = parseOhm(inp.value), ok = Number.isFinite(r) && r >= min && r <= max;
+      inp.classList.toggle('invalid', !ok);
+      if (!ok) { return; }
+      inp.value = frInt(r);
+      apply(r);
+      titres();
+      maj();
+    }
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') { go(); this.blur(); } e.stopPropagation(); });
+    inp.addEventListener('change', go);
+  }
+  function titres() {
+    $('r20Title').textContent = '(' + frInt(TH.R20) + ' \u03a9 à 20 °C)';
+    $('assocTitle').innerHTML = '(DEL ' + LED.nom + ', R<sub>P</sub> = ' + fmtOhm(RP) + ')';
+  }
+  /* Montage utilisé : la courbe d'étalonnage, la caractéristique et tout le raisonnement
+     sont recalculés aussitôt, à l'étape en cours */
+  champOhm('r20Input', 10, 1e6, function (r) { TH.R20 = r; });
+  champOhm('rpInput', 10, 1e5, function (r) { RP = r; });
+  $('ledSelect').innerHTML = Object.keys(LEDS).map(function (k) {
+    return '<option value="' + k + '">' + LEDS[k].nom + ' (seuil \u2248 ' + fr(LEDS[k].vf - 0.2, 1) + ' V)</option>';
+  }).join('');
+  $('ledSelect').addEventListener('change', function () { setLed(this.value); titres(); maj(); });
+  $('ledSelect').addEventListener('keydown', function (e) { e.stopPropagation(); });
+  titres();
 
   /* Intégrée dans une présentation reveal.js (iframe), la page renvoie la main à la présentation
      une fois les étapes épuisées : « suivant » à la dernière étape passe à la diapositive suivante,
