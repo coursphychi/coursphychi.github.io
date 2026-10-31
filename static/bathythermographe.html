@@ -201,16 +201,42 @@
 
   .graph canvas { flex: 1; min-height: 0; width: 100%; display: block; }
 
-  /* Fenêtre étroite ou en portrait (ordinateur du professeur, téléphone) : tout s'empile et défile */
-  @media (max-aspect-ratio: 5/4) {
+  /* Téléphone (portrait ou paysage) et fenêtre étroite : tout s'empile et défile, dans l'ordre
+     schéma → raisonnement → caractéristique → courbe d'étalonnage ; les boutons restent en haut */
+  @media (max-aspect-ratio: 5/4), (max-height: 520px) {
     html, body { height: auto; }
-    body { display: block; overflow: auto; font-size: clamp(13px, 2.6vw, 22px); }
-    header { margin-bottom: 1.4vh; }
-    main, .col { display: flex; flex-direction: column; gap: 1.4vh; }
+    body {
+      display: block;
+      overflow: auto;
+      padding: 0 3vw 3vh;
+      font-size: clamp(13px, min(2.9vw, 3.8vh), 20px);
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: var(--bg);
+      padding: 0.5em 0;
+      margin-bottom: 0.6em;
+      gap: 0.45em 0.8em;
+      box-shadow: 0 6px 8px -8px rgba(15, 23, 42, 0.35);
+    }
+    h1 { font-size: 1.12em; }
+    .spacer { display: none; }
+    .ctrl { width: 100%; }
+    .ctrl button, .meas input { min-height: 2.6em; }
+    #bNext { flex: 1; }
+    main { display: flex; flex-direction: column; gap: 0.8em; }
+    .col { display: contents; }
     .col > .schema, .col > .steps, .col > .graph { flex: none; }
+    .schema { order: 1; }
+    .steps { order: 2; }
+    #cardA { order: 3; }
+    #cardE { order: 4; }
     .schema .svgbox { aspect-ratio: 620 / 368; flex: none; }
-    .graph canvas { flex: none; height: 34vh; }
+    .graph canvas { flex: none; height: clamp(220px, 36vh, 380px); }
     .steps ol { overflow: visible; }
+    .steps li { scroll-margin-top: 9em; }
   }
 </style>
 </head>
@@ -236,7 +262,7 @@
     <div class="svgbox" id="schema"></div>
   </section>
 
-  <section class="card graph">
+  <section class="card graph" id="cardA">
     <h2>Caractéristique de l'ensemble DEL + R<sub>P</sub></h2>
     <canvas id="cvA" aria-label="Caractéristique de l'ensemble DEL et conducteur ohmique de protection, avec la lecture du point de fonctionnement"></canvas>
   </section>
@@ -246,10 +272,10 @@
   <section class="card steps">
     <h2>Raisonnement</h2>
     <ol id="steps"></ol>
-    <p class="note">Valeurs de l'exemple&nbsp;: générateur de 10,0&nbsp;V, R<sub>0</sub> = 1&nbsp;500&nbsp;Ω, R<sub>P</sub> = 1&nbsp;kΩ, thermistance CTN de 1&nbsp;500&nbsp;Ω à 25&nbsp;°C (échauffement par le courant négligé).</p>
+    <p class="note">Valeurs de l'exemple&nbsp;: générateur de 6,0&nbsp;V, R<sub>0</sub> = 1&nbsp;500&nbsp;Ω, R<sub>P</sub> = 1&nbsp;kΩ, thermistance CTN de 1&nbsp;500&nbsp;Ω à 25&nbsp;°C (échauffement par le courant négligé).</p>
   </section>
 
-  <section class="card graph">
+  <section class="card graph" id="cardE">
     <h2>Courbe d'étalonnage de la thermistance</h2>
     <canvas id="cvE" aria-label="Courbe d'étalonnage de la thermistance, avec la lecture de la température"></canvas>
   </section>
@@ -269,7 +295,7 @@
   function Udel(I) { return 0.05 * Math.log(1 + Math.max(0, I) / IS); }
   function solveI(f, lo, hi) { for (var k = 0; k < 70; k++) { var m = (lo + hi) / 2; if (f(m) > 0) { hi = m; } else { lo = m; } } return (lo + hi) / 2; }
 
-  var UG = 10.0, R0 = 1500, RP = 1000, NE = 6;
+  var UG = 6.0, R0 = 1500, RP = 1000, NE = 6;
   var theta = null;      /* température de l'eau tirée au hasard (mode démonstration) */
   var UR0user = null;    /* tension saisie (mode correction du TP) */
   var etape = 0;
@@ -292,15 +318,17 @@
   }
 
   /* ===== Petit moteur de schémas électriques (SVG) ===== */
+  var TK = 1;   /* agrandissement des textes du schéma (écran étroit : téléphone) */
+  function fs(v) { return Math.round(v * TK * 10) / 10; }
   var CI = (function () {
     var INK = '#1E293B', F = "font-family='system-ui, sans-serif'";
     function n(v) { return Math.round(v * 10) / 10; }
     function wire(pts) { return "<polyline points='" + pts.map(function (p) { return n(p[0]) + ',' + n(p[1]); }).join(' ') + "' fill='none' stroke='" + INK + "' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/>"; }
     function text(x, y, s, col, size, anchor, weight) {
-      return "<text x='" + n(x) + "' y='" + n(y) + "' font-size='" + (size || 13) + "' text-anchor='" + (anchor || 'middle') + "' fill='" + (col || INK) + "' " + F + (weight ? " font-weight='" + weight + "'" : '') + ">" + s + "</text>";
+      return "<text x='" + n(x) + "' y='" + n(y) + "' font-size='" + fs(size || 13) + "' text-anchor='" + (anchor || 'middle') + "' fill='" + (col || INK) + "' " + F + (weight ? " font-weight='" + weight + "'" : '') + ">" + s + "</text>";
     }
     function qty(x, y, L, sub, col, anchor, size) {
-      size = size || 14;
+      size = fs(size || 14);
       return "<text x='" + n(x) + "' y='" + n(y) + "' font-size='" + size + "' text-anchor='" + (anchor || 'middle') + "' fill='" + col + "' font-family='Georgia, serif' font-weight='700'><tspan font-style='italic'>" + L + "</tspan>" + (sub ? "<tspan font-size='" + Math.round(size * 0.68) + "' dy='" + Math.round(size * 0.28) + "'>" + sub + "</tspan>" : '') + "</text>";
     }
     function node(x, y) { return "<circle cx='" + n(x) + "' cy='" + n(y) + "' r='3.6' fill='" + INK + "'/>"; }
@@ -340,6 +368,7 @@
   })();
 
   function schema(v) {
+    TK = $('schema').clientWidth < 560 ? 1.35 : 1;
     var on = function (k) { return etape >= k; }, col = function (k, c) { return on(k) ? c : '#94A3B8'; };
     var F = "font-family='system-ui, sans-serif'", G = "font-family='Georgia, serif'";
     var b = "<defs><linearGradient id='gEau' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#DBEAFE'/><stop offset='1' stop-color='#93C5FD'/></linearGradient></defs>";
@@ -347,7 +376,7 @@
     b += "<rect x='298' y='50' width='170' height='100' rx='14' fill='url(#gEau)' fill-opacity='.75' stroke='#60A5FA' stroke-width='1.2'/>";
     b += "<path d='M306,64 q8,-5 16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0' fill='none' stroke='#fff' stroke-width='1.4' stroke-opacity='.9'/>";
     var thTxt = on(6) ? 'θ ≈ ' + Math.round(v.th) + ' °C' : 'θ = ?';
-    b += "<text x='428' y='100' font-size='11.5' text-anchor='middle' fill='#1E3A8A' " + F + " font-weight='700'>eau</text><text x='428' y='117' font-size='11.5' text-anchor='middle' fill='" + (on(6) ? '#E11D48' : '#1E3A8A') + "' " + F + " font-weight='700'>" + thTxt + "</text>";
+    b += "<text x='428' y='100' font-size='" + fs(11.5) + "' text-anchor='middle' fill='#1E3A8A' " + F + " font-weight='700'>eau</text><text x='428' y='117' font-size='" + fs(11.5) + "' text-anchor='middle' fill='" + (on(6) ? '#E11D48' : '#1E3A8A') + "' " + F + " font-weight='700'>" + thTxt + "</text>";
     /* afficheur : DEL + R_P */
     b += "<rect x='494' y='206' width='52' height='112' rx='10' fill='rgba(187,247,208,.55)' stroke='#4ADE80' stroke-dasharray='5 4'/>";
     /* fils */
@@ -355,23 +384,23 @@
     b += CI.wire([[260, 210], [350, 210], [350, 290], [260, 290]]);
     /* dipôles */
     b += CI.gen(120, 192, 't') + CI.therm(370, 100, 'v') + CI.res(260, 250, 'v') + CI.res(520, 288, 'v');
-    var glow = Math.min(1, v.I2 / 0.006);
+    var glow = Math.min(1, v.I2 / 0.0035);
     if (glow > 0.02) { b += "<circle cx='520' cy='236' r='" + (12 + 15 * glow).toFixed(1) + "' fill='rgba(239,68,68," + (0.4 * glow).toFixed(2) + ")'/>"; }
     b += CI.led(520, 236);
     b += CI.node(370, 170) + CI.node(370, 330) + CI.node(260, 210) + CI.node(260, 290) + CI.meter(350, 250, 'V');
-    b += "<rect x='368' y='237' width='76' height='26' rx='6' fill='#0F172A'/><text x='406' y='255' font-size='13.5' text-anchor='middle' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>" + fr(v.UR0, 2) + " V</text>";
+    b += "<rect x='368' y='237' width='76' height='26' rx='6' fill='#0F172A'/><text x='406' y='255' font-size='" + fs(13.5) + "' text-anchor='middle' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>" + fr(v.UR0, 2) + " V</text>";
     /* noms et valeurs */
-    b += "<text x='348' y='96' font-size='13' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>T</tspan></text>";
-    b += "<text x='246' y='246' font-size='13' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>0</tspan></text><text x='246' y='264' font-size='10.5' text-anchor='end' fill='#64748B' " + F + ">1 500 Ω</text>";
-    b += "<text x='554' y='240' font-size='11' fill='#15803D' " + F + " font-weight='700'>DEL</text>";
-    b += "<text x='554' y='286' font-size='13' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='9' dy='3'>P</tspan></text><text x='554' y='303' font-size='10.5' fill='#64748B' " + F + ">1 kΩ</text>";
-    b += "<text x='554' y='262' font-size='10.5' fill='#16A34A' " + F + " font-style='italic'>afficheur</text>";
+    b += "<text x='348' y='96' font-size='" + fs(13) + "' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>T</tspan></text>";
+    b += "<text x='246' y='246' font-size='" + fs(13) + "' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>0</tspan></text><text x='246' y='264' font-size='" + fs(10.5) + "' text-anchor='end' fill='#64748B' " + F + ">1 500 Ω</text>";
+    b += "<text x='554' y='240' font-size='" + fs(11) + "' fill='#15803D' " + F + " font-weight='700'>DEL</text>";
+    b += "<text x='554' y='286' font-size='" + fs(13) + "' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>P</tspan></text><text x='554' y='303' font-size='" + fs(10.5) + "' fill='#64748B' " + F + ">1 kΩ</text>";
+    b += "<text x='554' y='262' font-size='" + fs(10.5) + "' fill='#16A34A' " + F + " font-style='italic'>afficheur</text>";
     /* tensions */
-    b += CI.uarr(80, 240, 80, 144, '#475569') + CI.qty(70, 196, 'U', 'G', '#475569', 'end') + CI.text(80, 262, '10,0 V', '#475569', 11.5, 'middle', 700);
+    b += CI.uarr(80, 240, 80, 144, '#475569') + CI.qty(70, 196, 'U', 'G', '#475569', 'end') + CI.text(80, 262, fr(UG, 1) + ' V', '#475569', 11.5, 'middle', 700);
     b += CI.uarr(486, 125, 486, 75, col(2, '#7C3AED')) + CI.qty(494, 104, 'U', 'RT', col(2, '#7C3AED'), 'start', 13);
     b += CI.uarr(280, 278, 280, 222, col(1, '#E11D48')) + CI.qty(287, 254, 'U', 'R0', col(1, '#E11D48'), 'start', 12.5);
     /* intensités */
-    b += CI.iarr(240, 40, 'r', on(5) ? 'I' : '', 'G', '#2563EB', 0, -10) + CI.iarr(260, 190, 'd', on(3) ? 'I' : '', '1', '#D97706', -14, 4) + CI.iarr(520, 190, 'd', on(4) ? 'I' : '', '2', '#059669', 14, 4);
+    b += CI.iarr(240, 40, 'r', 'I', 'G', '#2563EB', 0, -10) + CI.iarr(260, 190, 'd', 'I', '1', '#D97706', -14, 4) + CI.iarr(520, 190, 'd', 'I', '2', '#059669', 14, 4);
     return "<svg viewBox='0 0 620 368' preserveAspectRatio='xMidYMid meet' role='img' aria-label=\"Montage : le générateur alimente la thermistance, plongée dans l’eau, puis deux branches en dérivation : le conducteur ohmique R0, aux bornes duquel un voltmètre mesure la tension, et l’afficheur formé de la DEL et de son conducteur ohmique de protection RP\">" + b + "</svg>";
   }
 
@@ -409,16 +438,16 @@
     txt(c, labelX, x + 0.5 * P.f, yl, '#E11D48', P.bold, 'left');
   }
   function grAssoc(S, v) {
-    var c = S.ctx, P = frame(S, '8'), umax = 10, imax = 8;
+    var c = S.ctx, P = frame(S, '5'), umax = UG, imax = 5;
     function X(u) { return P.L + u / umax * (P.R - P.L); }
     function Y(i) { return P.B - i / imax * (P.B - P.T); }
     c.clearRect(0, 0, S.w, S.h);
-    var xs = [], ys = []; for (var u = 0; u <= 10; u += 2) { xs.push([X(u), String(u)]); } for (var i = 0; i <= 8; i += 2) { ys.push([Y(i), String(i)]); }
+    var xs = [], ys = []; for (var u = 0; u <= umax + 1e-9; u += 1) { xs.push([X(u), String(u)]); } for (var i = 0; i <= imax; i += 1) { ys.push([Y(i), String(i)]); }
     axes(c, P, xs, ys, 'U (V) →', 'I (mA) →');
     c.strokeStyle = '#059669'; c.lineWidth = 3; c.beginPath();
     for (var k = 0; k <= 200; k++) { var uu = umax * k / 200, ii = Iass(uu) * 1000; if (k === 0) { c.moveTo(X(uu), Y(ii)); } else { c.lineTo(X(uu), Y(ii)); } }
     c.stroke();
-    txt(c, 'DEL + Rₚ', X(8.4), Y(Iass(8.4) * 1000) - 0.9 * P.f, '#059669', P.bold);
+    txt(c, 'DEL + Rₚ', X(0.84 * umax), Y(Iass(0.84 * umax) * 1000) - 0.9 * P.f, '#059669', P.bold);
     if (etape >= 3) { reading(c, P, X(v.UR0), Y(v.I2 * 1000), fr(v.I2 * 1000, 2) + ' mA', fr(v.UR0, 2) + ' V'); }
   }
   function grEtal(S, v) {
@@ -441,13 +470,13 @@
   /* ===== Étapes du raisonnement ===== */
   var TXT = [
     function (v) { return '<b>Mesure</b>&nbsp;: le voltmètre indique la tension aux bornes du conducteur ohmique&nbsp;: <b>U<sub>R0</sub> = ' + fr(v.UR0, 2) + '&nbsp;V</b>.'; },
-    function (v) { return '<b>Loi des mailles</b> (maille générateur, thermistance, R<sub>0</sub>)&nbsp;: U<sub>G</sub> = U<sub>RT</sub> + U<sub>R0</sub>, donc U<sub>RT</sub> = 10,0 − ' + fr(v.UR0, 2) + ' = <b>' + fr(v.URT, 2) + '&nbsp;V</b>.'; },
+    function (v) { return '<b>Loi des mailles</b> (maille générateur, thermistance, R<sub>0</sub>)&nbsp;: U<sub>G</sub> = U<sub>RT</sub> + U<sub>R0</sub>, donc U<sub>RT</sub> = ' + fr(UG, 1) + ' − ' + fr(v.UR0, 2) + ' = <b>' + fr(v.URT, 2) + '&nbsp;V</b>.'; },
     function (v) { return '<b>Loi d’Ohm</b> pour R<sub>0</sub>&nbsp;: I<sub>1</sub> = U<sub>R0</sub> / R<sub>0</sub> = ' + fr(v.UR0, 2) + ' / 1&nbsp;500 = <b>' + fr(v.I1 * 1000, 2) + '&nbsp;mA</b>.'; },
-    function (v) { return '<b>Point de fonctionnement</b> de DEL + R<sub>P</sub>&nbsp;: en dérivation avec R<sub>0</sub>, il est soumis à la même tension, ' + fr(v.UR0, 2) + '&nbsp;V. Sur sa caractéristique (en bas à gauche)&nbsp;: <b>I<sub>2</sub> = ' + fr(v.I2 * 1000, 2) + '&nbsp;mA</b>.'; },
+    function (v) { return '<b>Point de fonctionnement</b> de DEL + R<sub>P</sub>&nbsp;: en dérivation avec R<sub>0</sub>, il est soumis à la même tension, ' + fr(v.UR0, 2) + '&nbsp;V. On lit sur la caractéristique de l’ensemble DEL + R<sub>P</sub>&nbsp;: <b>I<sub>2</sub> = ' + fr(v.I2 * 1000, 2) + '&nbsp;mA</b>.'; },
     function (v) { return '<b>Loi des nœuds</b>&nbsp;: le courant de la thermistance se partage entre les deux branches&nbsp;: I<sub>G</sub> = I<sub>1</sub> + I<sub>2</sub> = ' + fr(v.I1 * 1000, 2) + ' + ' + fr(v.I2 * 1000, 2) + ' = <b>' + fr(v.IG * 1000, 2) + '&nbsp;mA</b>.'; },
     function (v) { return '<b>Loi d’Ohm</b> pour la thermistance&nbsp;: R<sub>T</sub> = U<sub>RT</sub> / I<sub>G</sub> = ' + fr(v.URT, 2) + ' / ' + fr(v.IG, 5) + ' = <b>' + Math.round(v.RT).toLocaleString('fr-FR') + '&nbsp;Ω</b>.'; },
     function (v) {
-      var s = '<b>Courbe d’étalonnage</b> (en bas à droite)&nbsp;: R<sub>T</sub> = ' + Math.round(v.RT).toLocaleString('fr-FR') + '&nbsp;Ω correspond à <b>θ ≈ ' + Math.round(v.th) + '&nbsp;°C</b>.';
+      var s = '<b>Courbe d’étalonnage</b> de la thermistance&nbsp;: R<sub>T</sub> = ' + Math.round(v.RT).toLocaleString('fr-FR') + '&nbsp;Ω correspond à <b>θ ≈ ' + Math.round(v.th) + '&nbsp;°C</b>.';
       if (v.th < 0 || v.th > 85) { return s + ' Cette valeur sort de la courbe d’étalonnage (0 à 85&nbsp;°C)&nbsp;: vérifiez la mesure.'; }
       return s + (UR0user === null ? ' Un thermomètre plongé dans l’eau indique ' + fr(theta, 1) + '&nbsp;°C&nbsp;: la mesure est réussie&nbsp;!' : ' Comparez avec la température lue au thermomètre.');
     }
