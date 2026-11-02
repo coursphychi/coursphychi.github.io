@@ -113,7 +113,7 @@
   /* deux colonnes indépendantes : le raisonnement (à droite) dispose de plus de hauteur que le schéma */
   .col { display: flex; flex-direction: column; gap: 1.4vh; min-height: 0; min-width: 0; }
   .col > .schema { flex: 1.3 1 0; }
-  .col > .steps { flex: 1.75 1 0; }
+  .col > .steps { flex: 2.05 1 0; }
   .col > .graph { flex: 1 1 0; }
   .card {
     background: var(--card);
@@ -207,8 +207,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.35em 1em;
-    font-size: 0.82em;
+    gap: 0.35em 0.75em;
+    font-size: 0.8em;
     font-weight: 600;
     color: var(--muted);
   }
@@ -223,7 +223,7 @@
     border-radius: 0.45em;
     padding: 0.2em 0.45em;
   }
-  .setup input { width: 5.2em; text-align: center; font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .setup input { width: 4.4em; text-align: center; font-family: ui-monospace, Menlo, Consolas, monospace; }
   .setup input.invalid { border-color: var(--red); box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.2); }
 
   .graph canvas { flex: 1; min-height: 0; width: 100%; display: block; }
@@ -303,15 +303,17 @@
       <div class="setup-row">
         <span class="setup-title">Montage utilisé</span>
         <label title="Tension aux bornes du générateur ; Entrée pour l'utiliser"><span>U<sub>G</sub></span>
-          <input type="text" id="ugInput" inputmode="decimal" autocomplete="off" spellcheck="false" value="6,0" style="width: 4em;"> V</label>
+          <input type="text" id="ugInput" inputmode="decimal" autocomplete="off" spellcheck="false" value="6,0" style="width: 3.2em;"> V</label>
         <label title="Résistance de la thermistance à 20 °C (mesurée à l'ohmmètre) ; Entrée pour l'utiliser"><span>R<sub>T</sub> à 20&nbsp;°C</span>
           <input type="text" id="r20Input" inputmode="decimal" autocomplete="off" spellcheck="false" value="1 500"> Ω</label>
+        <label title="Conducteur ohmique aux bornes duquel le voltmètre mesure U_R0 ; Entrée pour l'utiliser"><span>R<sub>0</sub></span>
+          <input type="text" id="r0Input" inputmode="decimal" autocomplete="off" spellcheck="false" value="1 000"> Ω</label>
         <label title="Conducteur ohmique de protection de la DEL ; Entrée pour l'utiliser"><span>R<sub>P</sub></span>
-          <input type="text" id="rpInput" inputmode="decimal" autocomplete="off" spellcheck="false" value="1 000"> Ω</label>
+          <input type="text" id="rpInput" inputmode="decimal" autocomplete="off" spellcheck="false" value="330"> Ω</label>
         <label title="La couleur fixe la tension de seuil de la DEL, donc la caractéristique de l'ensemble DEL + R_P">DEL
           <select id="ledSelect"></select></label>
       </div>
-      <p class="note">R<sub>0</sub> = 1&nbsp;500&nbsp;Ω. Thermistance CTN modélisée avec un coefficient B ≈ 4&nbsp;000&nbsp;K (valeur typique)&nbsp;; DEL&nbsp;: tension de seuil typique de sa couleur&nbsp;; échauffement de la thermistance par le courant négligé.</p>
+      <p class="note">Modèles&nbsp;: CTN de coefficient B ≈ 4&nbsp;000&nbsp;K, seuils typiques des DEL&nbsp;; échauffement de la thermistance négligé.</p>
     </div>
   </section>
 
@@ -353,7 +355,7 @@
   function Udel(I) { return 0.05 * Math.log(1 + Math.max(0, I) / IS); }
   function solveI(f, lo, hi) { for (var k = 0; k < 70; k++) { var m = (lo + hi) / 2; if (f(m) > 0) { hi = m; } else { lo = m; } } return (lo + hi) / 2; }
 
-  var UG = 6.0, R0 = 1500, RP = 1000, NE = 6;
+  var UG = 6.0, R0 = 1000, RP = 330, NE = 6;
   var theta = null;      /* température de l'eau tirée au hasard (mode démonstration) */
   var UR0user = null;    /* tension saisie (mode correction du TP) */
   var etape = 0;
@@ -450,7 +452,7 @@
     b += "<rect x='368' y='237' width='76' height='26' rx='6' fill='#0F172A'/><text x='406' y='255' font-size='" + fs(13.5) + "' text-anchor='middle' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>" + fr(v.UR0, 2) + " V</text>";
     /* noms et valeurs */
     b += "<text x='348' y='96' font-size='" + fs(13) + "' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>T</tspan></text>";
-    b += "<text x='246' y='246' font-size='" + fs(13) + "' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>0</tspan></text><text x='246' y='264' font-size='" + fs(10.5) + "' text-anchor='end' fill='#64748B' " + F + ">1 500 Ω</text>";
+    b += "<text x='246' y='246' font-size='" + fs(13) + "' text-anchor='end' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>0</tspan></text><text x='246' y='264' font-size='" + fs(10.5) + "' text-anchor='end' fill='#64748B' " + F + ">" + fmtOhm(R0) + "</text>";
     b += "<text x='554' y='240' font-size='" + fs(11) + "' fill='" + LED.ink + "' " + F + " font-weight='700'>DEL</text>";
     b += "<text x='554' y='286' font-size='" + fs(13) + "' fill='#1E293B' " + G + " font-weight='700'><tspan font-style='italic'>R</tspan><tspan font-size='" + fs(9) + "' dy='3'>P</tspan></text><text x='554' y='303' font-size='" + fs(10.5) + "' fill='#64748B' " + F + ">" + fmtOhm(RP) + "</text>";
     b += "<text x='554' y='262' font-size='" + fs(10.5) + "' fill='#16A34A' " + F + " font-style='italic'>afficheur</text>";
@@ -493,9 +495,21 @@
     c.beginPath(); c.moveTo(x, P.B); c.lineTo(x, y); c.lineTo(P.L, y); c.stroke(); c.setLineDash([]);
     c.fillStyle = '#E11D48'; c.beginPath(); c.arc(x, y, 0.42 * P.f, 0, 2 * Math.PI); c.fill();
     txt(c, labelY, P.L + 0.5 * P.f, y - 0.6 * P.f, '#E11D48', P.bold, 'left');
-    /* courbe décroissante et point proche de l'axe : la courbe passe en bas à droite, étiquette au-dessus du point */
-    var yl = descending && (P.B - y) < 2.4 * P.f ? y - 0.9 * P.f : P.B - 0.6 * P.f;
-    txt(c, labelX, x + 0.5 * P.f, yl, '#E11D48', P.bold, 'left');
+    /* Valeur lue en abscisse : en bas, à droite du trait vertical, sauf si le point est proche de l'axe
+       (la courbe passerait alors sur l'étiquette) :
+       - courbe décroissante : elle descend à droite du point → étiquette au-dessus, à droite ;
+       - courbe croissante : elle est sous le point à sa gauche → étiquette au-dessus, à gauche,
+         remontée d'un cran si elle chevauche la valeur lue en ordonnée. */
+    if ((P.B - y) >= 2.4 * P.f) {
+      txt(c, labelX, x + 0.5 * P.f, P.B - 0.6 * P.f, '#E11D48', P.bold, 'left');
+    } else if (descending) {
+      txt(c, labelX, x + 0.5 * P.f, y - 0.9 * P.f, '#E11D48', P.bold, 'left');
+    } else {
+      c.font = P.bold;
+      var wY = c.measureText(labelY).width, wX = c.measureText(labelX).width, xr = x - 0.6 * P.f;
+      var yl = xr - wX < P.L + 0.5 * P.f + wY + 0.6 * P.f ? y - 2.1 * P.f : y - 0.9 * P.f;
+      txt(c, labelX, xr, yl, '#E11D48', P.bold, 'right');
+    }
   }
   function grAssoc(S, v) {
     /* échelle verticale adaptée à R_P et à la DEL */
@@ -536,7 +550,7 @@
   var TXT = [
     function (v) { return '<b>Mesure</b>&nbsp;: le voltmètre indique la tension aux bornes du conducteur ohmique&nbsp;: <b>U<sub>R0</sub> = ' + fr(v.UR0, 2) + '&nbsp;V</b>.'; },
     function (v) { return '<b>Loi des mailles</b> (maille générateur, thermistance, R<sub>0</sub>)&nbsp;: U<sub>G</sub> = U<sub>RT</sub> + U<sub>R0</sub>, donc U<sub>RT</sub> = ' + fr(UG, 1) + ' − ' + fr(v.UR0, 2) + ' = <b>' + fr(v.URT, 2) + '&nbsp;V</b>.'; },
-    function (v) { return '<b>Loi d’Ohm</b> pour R<sub>0</sub>&nbsp;: I<sub>1</sub> = U<sub>R0</sub> / R<sub>0</sub> = ' + fr(v.UR0, 2) + ' / 1&nbsp;500 = <b>' + fr(v.I1 * 1000, 2) + '&nbsp;mA</b>.'; },
+    function (v) { return '<b>Loi d’Ohm</b> pour R<sub>0</sub>&nbsp;: I<sub>1</sub> = U<sub>R0</sub> / R<sub>0</sub> = ' + fr(v.UR0, 2) + ' / ' + frInt(R0).replace(/\s/g, '&nbsp;') + ' = <b>' + fr(v.I1 * 1000, 2) + '&nbsp;mA</b>.'; },
     function (v) { return '<b>Point de fonctionnement</b> de DEL + R<sub>P</sub>&nbsp;: en dérivation avec R<sub>0</sub>, il est soumis à la même tension, ' + fr(v.UR0, 2) + '&nbsp;V. On lit sur la caractéristique de l’ensemble DEL + R<sub>P</sub>&nbsp;: <b>I<sub>2</sub> = ' + fr(v.I2 * 1000, 2) + '&nbsp;mA</b>' + (v.I2 < 5e-5 ? '&nbsp;: la tension est inférieure au seuil de la DEL, qui reste éteinte.' : '.'); },
     function (v) { return '<b>Loi des nœuds</b>&nbsp;: le courant de la thermistance se partage entre les deux branches&nbsp;: I<sub>G</sub> = I<sub>1</sub> + I<sub>2</sub> = ' + fr(v.I1 * 1000, 2) + ' + ' + fr(v.I2 * 1000, 2) + ' = <b>' + fr(v.IG * 1000, 2) + '&nbsp;mA</b>.'; },
     function (v) { return '<b>Loi d’Ohm</b> pour la thermistance&nbsp;: R<sub>T</sub> = U<sub>RT</sub> / I<sub>G</sub> = ' + fr(v.URT, 2) + ' / ' + fr(v.IG, 5) + ' = <b>' + Math.round(v.RT).toLocaleString('fr-FR') + '&nbsp;Ω</b>.'; },
@@ -615,6 +629,7 @@
   /* Montage utilisé : la courbe d'étalonnage, la caractéristique et tout le raisonnement
      sont recalculés aussitôt, à l'étape en cours */
   champOhm('r20Input', 10, 1e6, function (r) { TH.R20 = r; });
+  champOhm('r0Input', 10, 1e6, function (r) { R0 = r; });
   champOhm('rpInput', 10, 1e5, function (r) { RP = r; });
 
   /* Tension du générateur (V) ; une mesure U_R0 saisie qui la dépasserait n'a plus de sens : elle est écartée */
