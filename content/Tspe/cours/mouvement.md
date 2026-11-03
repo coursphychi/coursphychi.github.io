@@ -258,7 +258,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
 <p class="nt-center nt-chrono-form">Point milieu&nbsp;: $\vec{v}_i \approx \dfrac{\overrightarrow{\mathrm{M}_{i-1}\mathrm{M}_{i+1}}}{2\tau}$, puis $\Delta\vec{v}_i = \vec{v}_{i+1}-\vec{v}_{i-1}$ et $\vec{a}_i \approx \dfrac{\Delta\vec{v}_i}{2\tau}$.</p>
 <div class="nt-read" aria-live="polite"><span>écart avec la vraie accélération&nbsp;: <b class="out-err"></b></span></div>
 <p class="nt-msg" aria-live="polite"></p>
-<p class="nt-note">Les points sont séparés par une durée constante $\tau$. On reporte les deux vecteurs vitesse à partir de $\mathrm{M}_i$ pour construire $\Delta\vec{v}_i$. Les échelles des vecteurs sont arbitraires&nbsp;; la vraie accélération (en pointillés gris) est calculée à partir de l'équation du mouvement.</p>
+<p class="nt-note">Les points sont séparés par une durée constante $\tau$. Pour construire $\Delta\vec{v}_i$, on reporte en $\mathrm{M}_i$ le vecteur $\vec{v}_{i+1}$, puis, à son extrémité, le vecteur $-\vec{v}_{i-1}$&nbsp;: $\Delta\vec{v}_i$ va de $\mathrm{M}_i$ à l'extrémité de $-\vec{v}_{i-1}$. Les échelles des vecteurs sont arbitraires&nbsp;; la vraie accélération (en pointillés gris) est calculée à partir de l'équation du mouvement.</p>
 </div>
 
 <details class="nt-d">
@@ -714,7 +714,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     if (!root) { return; }
     var cv = $(root, 'canvas'), rI = $(root, 'input[type="range"]'), cbV = $(root, '[data-p="v"]'), cbD = $(root, '[data-p="dv"]'), cbA = $(root, '[data-p="a"]'), cbE = $(root, '[data-p="ex"]');
     var msg = $(root, '.nt-msg'), oE = $(root, '.out-err'), oF = $(root, '.nt-chrono-form'), bR = $(root, '[data-act="replay"]'), S, mode = 'para', meth = 'mil';
-    var TAU = 0.08, prog = 3, anim = null, box = {}, cam = null;
+    var TAU = 0.08, prog = 4, anim = null, box = {}, cam = null;
     var MOV = {
       para: { n: 15, i0: 4, f: function (t) { return [0.3 + 3.2 * t, 0.3 + 4.6 * t - 4.905 * t * t]; }, kv: 0.2, ka: 0.05, m: 'Chute libre (lancer oblique) : le vecteur accélération est le même en tout point, vertical et vers le bas.' },
       circ: { n: 17, i0: 8, f: function (t) { var w = 2.6; return [2.1 + 1.0 * Math.cos(w * t - 2.6), 1.15 + 1.0 * Math.sin(w * t - 2.6)]; }, kv: 0.3, ka: 0.09, m: 'Mouvement circulaire uniforme : la vitesse garde la même norme, mais sa direction tourne ; le vecteur accélération pointe vers le centre du cercle.' },
@@ -754,7 +754,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
         var r = cons(P, i), Mi = P[i], ta = trueAcc(i);
         add([r.Pa[0] + r.va[0] * m.kv, r.Pa[1] + r.va[1] * m.kv]); add([r.Pb[0] + r.vb[0] * m.kv, r.Pb[1] + r.vb[1] * m.kv]);
         if (mode !== 'frein') {
-          add([Mi[0] + r.va[0] * m.kv, Mi[1] + r.va[1] * m.kv]); add([Mi[0] + r.vb[0] * m.kv, Mi[1] + r.vb[1] * m.kv]);
+          add([Mi[0] + r.vb[0] * m.kv, Mi[1] + r.vb[1] * m.kv]); add([Mi[0] + (r.vb[0] - r.va[0]) * m.kv, Mi[1] + (r.vb[1] - r.va[1]) * m.kv]);
           add([Mi[0] + r.ax * m.ka, Mi[1] + r.ay * m.ka]); add([Mi[0] + ta[0] * m.ka, Mi[1] + ta[1] * m.ka]);
         }
       }
@@ -773,7 +773,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       if (lin) {
         var lx = [];
         for (var jl = Math.max(0, i - 3); jl <= Math.min(P.length - 1, i + 3); jl++) { lx.push(P[jl][0]); }
-        lx.push(r.Pa[0] + r.va[0] * KV, r.Pb[0] + r.vb[0] * KV, Mi[0] + r.va[0] * KV, Mi[0] + r.ax * KA, Mi[0] + ta[0] * KA);
+        lx.push(r.Pa[0] + r.va[0] * KV, r.Pb[0] + r.vb[0] * KV, Mi[0] + r.vb[0] * KV, Mi[0] + (r.vb[0] - r.va[0]) * KV, Mi[0] + r.ax * KA, Mi[0] + ta[0] * KA);
         var lx0 = Math.min.apply(null, lx), lx1 = Math.max.apply(null, lx), kl = (w - 2 * pad - 30) / (lx1 - lx0);
         tg = { k: kl, ox: w / 2 - (lx0 + lx1) / 2 * kl, oy: h * 0.4 + 1.0 * kl };
       } else {
@@ -781,7 +781,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
         var addB = function (q) { bx.push(q[0]); by.push(q[1]); };
         for (var jb = Math.max(0, i - 3); jb <= Math.min(P.length - 1, i + 3); jb++) { addB(P[jb]); }
         addB([r.Pa[0] + r.va[0] * KV, r.Pa[1] + r.va[1] * KV]); addB([r.Pb[0] + r.vb[0] * KV, r.Pb[1] + r.vb[1] * KV]);
-        addB([Mi[0] + r.va[0] * KV, Mi[1] + r.va[1] * KV]); addB([Mi[0] + r.vb[0] * KV, Mi[1] + r.vb[1] * KV]);
+        addB([Mi[0] + r.vb[0] * KV, Mi[1] + r.vb[1] * KV]); addB([Mi[0] + (r.vb[0] - r.va[0]) * KV, Mi[1] + (r.vb[1] - r.va[1]) * KV]);
         addB([Mi[0] + r.ax * KA, Mi[1] + r.ay * KA]); if (cbE.checked) { addB([Mi[0] + ta[0] * KA, Mi[1] + ta[1] * KA]); }
         if (mode === 'circ') { addB([2.0, 1.25]); }   /* le centre O (et son nom) reste visible */
         var x0 = Math.min.apply(null, bx), x1 = Math.max.apply(null, bx), y0 = Math.min.apply(null, by), y1 = Math.max.apply(null, by);
@@ -801,7 +801,37 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
         if (nx * aS[0] + ny * aS[1] > 0) { nx = -nx; ny = -ny; }
         return [nx, ny];
       }
-      var labels = [];
+      var labels = [], obst = [];
+      function seg(id, x1, y1, x2, y2) {   /* une flèche tracée devient un obstacle pour les étiquettes (sauf la sienne) */
+        var n = Math.max(1, Math.ceil(Math.hypot(x2 - x1, y2 - y1) / 6));
+        for (var q = 0; q <= n; q++) { obst.push({ x: x1 + (x2 - x1) * q / n, y: y1 + (y2 - y1) * q / n, w: 4, h: 4, id: 'seg' }); }
+      }
+      function vec(id, x1, y1, x2, y2, color, lw, dash) { arrow(c, x1, y1, x2, y2, color, lw, dash); seg(id, x1, y1, x2, y2); }
+      var FV = 'italic 700 15px Georgia, serif', FM = 'italic 700 13px Georgia, serif';
+      function boxW(s, font) { c.font = font; return c.measureText(s).width + 4; }
+      /* étiquette au bout d'une flèche : positions candidates toutes collées à l'extrémité, la première libre est retenue */
+      function tipLab(id, name, x1, y1, x2, y2, n, color, pr, neg) {
+        var d = [x2 - x1, y2 - y1], dn = Math.hypot(d[0], d[1]) || 1; d = [d[0] / dn, d[1] / dn];
+        var bw = boxW((neg ? '−' : '') + name, FV), bh = 22, r1 = bh / 2 + 5, r2 = bw / 2 + 6;
+        var C = [[n[0] * r1 - d[0] * 2, n[1] * r1 - d[1] * 2], [d[0] * r2, d[1] * r2], [n[0] * r1 + d[0] * 8, n[1] * r1 + d[1] * 8],
+                 [-n[0] * r1 - d[0] * 2, -n[1] * r1 - d[1] * 2], [n[0] * r1 - d[0] * 14, n[1] * r1 - d[1] * 14], [-n[0] * r1 + d[0] * 8, -n[1] * r1 + d[1] * 8]];
+        C = C.concat(C.slice(0, 4).map(function (o) { return [o[0] * 1.5, o[1] * 1.5]; }));
+        labels.push({ id: id, w: bw, h: bh, pr: pr, c: C.map(function (o) { return [x2 + o[0], y2 + o[1]]; }), f: function (x, y) { drawVec(name, x, y, color, neg); } });
+      }
+      /* étiquette au milieu d'une flèche (pour Δv) */
+      function midLab(id, name, x1, y1, x2, y2, n, color, pr) {
+        var mx = (x1 + x2) / 2, my = (y1 + y2) / 2, d = [x2 - x1, y2 - y1], dn = Math.hypot(d[0], d[1]) || 1; d = [d[0] / dn, d[1] / dn];
+        var bw = boxW(name, FV), bh = 22, r1 = Math.abs(n[0]) * bw / 2 + Math.abs(n[1]) * bh / 2 + 6;
+        var C = [[0, 0], [10, 0], [-10, 0], [0, 8]].map(function (o) { return [mx + n[0] * (r1 + o[1]) + d[0] * o[0], my + n[1] * (r1 + o[1]) + d[1] * o[0]]; });
+        C = C.concat([[0, 0], [10, 0], [-10, 0]].map(function (o) { return [mx - n[0] * r1 + d[0] * o[0], my - n[1] * r1 + d[1] * o[0]]; }));
+        labels.push({ id: id, w: bw, h: bh, pr: pr, c: C, f: function (x, y) { drawVec(name, x, y, color, false); } });
+      }
+      function drawVec(name, x, y, color, neg) {   /* nom de vecteur centré en (x, y) ; « − » éventuel hors de la flèche */
+        if (!neg) { vecLabel(c, name, x, y + 6, color); return; }
+        c.font = FV; var wm = c.measureText('−').width, wv = c.measureText(name).width, x0 = x - (wm + wv) / 2;
+        txt(c, '−', x0 + wm / 2, y + 6, color, FV, 'center', true);
+        vecLabel(c, name, x0 + wm + wv / 2, y + 6, color);
+      }
       c.clearRect(0, 0, w, h);
       if (mode === 'circ') {   /* centre du cercle */
         var cx = X(2.1), cy = Y(1.15);
@@ -816,108 +846,120 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
         if (j === i) { c.fillStyle = '#FFFFFF'; c.beginPath(); c.arc(s[0], s[1], 8, 0, 2 * Math.PI); c.fill(); }
         c.fillStyle = on ? CT : 'rgba(225,29,72,.32)';
         c.beginPath(); c.arc(s[0], s[1], j === i ? 5.5 : (on ? 4.2 : 3.6), 0, 2 * Math.PI); c.fill();
+        obst.push({ x: s[0], y: s[1], w: 10, h: 10, id: 'p' + j });
       });
-      /* étiquettes des points M : côté intérieur (celui de l'accélération), décalées vers l'arrière pour M_i */
+      /* noms des points M : on essaie des positions tout autour du point, en commençant par la préférée */
       var nameJ = meth === 'mil' ? [i - 1, i, i + 1] : [i, i + 1];
       nameJ.forEach(function (j) {
         var s = S2(P[j]), tg2 = [X(P[Math.min(j + 1, P.length - 1)][0]) - X(P[Math.max(j - 1, 0)][0]), Y(P[Math.min(j + 1, P.length - 1)][1]) - Y(P[Math.max(j - 1, 0)][1])], tn = Math.hypot(tg2[0], tg2[1]) || 1;
-        var px, py, ln;
-        if (lin) { px = s[0]; py = s[1] + 16; ln = [0, 1]; }
-        else if (j === i) {   /* M_i : côté extérieur, un peu en arrière (l'accélération part vers l'intérieur, les vitesses vers l'avant) */
-          ln = outN(tg2); px = s[0] + ln[0] * 16 - tg2[0] / tn * 11; py = s[1] + ln[1] * 16 - tg2[1] / tn * 11;
-        } else { var n1 = outN(tg2); ln = [-n1[0], -n1[1]]; var sg = j < i ? -1 : 1; px = s[0] + ln[0] * 15 + sg * tg2[0] / tn * 9; py = s[1] + ln[1] * 15 + sg * tg2[1] / tn * 9;   /* voisins : côté intérieur, écartés de a_i le long de la trajectoire */ }
-        labels.push({ x: px, y: py, w: 22, h: 16, nx: ln[0], ny: ln[1], pr: 3, f: function (x, y) { txt(c, 'M' + ind(j), x, y + 5, CT, 'italic 700 13px Georgia, serif', 'center', true); } });
+        var pref;
+        if (lin) { pref = Math.PI / 2; }
+        else {
+          var no = outN(tg2), t1 = [tg2[0] / tn, tg2[1] / tn], v0;
+          if (j === i) { v0 = [no[0] - t1[0] * 0.7, no[1] - t1[1] * 0.7]; }   /* M_i : côté extérieur, un peu en arrière */
+          else { var sg = j < i ? -1 : 1; v0 = [-no[0] + sg * t1[0] * 0.6, -no[1] + sg * t1[1] * 0.6]; }   /* voisins : côté intérieur, écartés de a_i */
+          pref = Math.atan2(v0[1], v0[0]);
+        }
+        var bw = boxW('M' + ind(j), FM), C = [];
+        [0, 0.6, -0.6, 1.2, -1.2, 1.9, -1.9, Math.PI].forEach(function (da) { C.push([s[0] + Math.cos(pref + da) * 16, s[1] + Math.sin(pref + da) * 15]); });
+        labels.push({ id: 'p' + j, w: bw, h: 15, pr: 4, c: C, f: function (x, y) { txt(c, 'M' + ind(j), x, y + 5, CT, FM, 'center', true); } });
       });
-      /* vecteurs vitesse aux points : nom collé à l'extrémité, du côté extérieur */
-      function vTip(name, tail, v, color) {
-        var a = S2(tail), b = S2([tail[0] + v[0] * KV, tail[1] + v[1] * KV]), d = [b[0] - a[0], b[1] - a[1]], dn = Math.hypot(d[0], d[1]) || 1;
-        var n = lin ? [0, -1] : outN(d);
-        labels.push({ x: b[0] + n[0] * 14 - d[0] / dn * 3, y: b[1] + n[1] * 14 - d[1] / dn * 3, w: 26, h: 26, nx: n[0], ny: n[1], pr: 0, f: function (x, y) { vecLabel(c, name, x, y + 6, color); } });
-      }
+      /* vecteurs vitesse aux points */
       if (cbV.checked) {
         [[r.Pa, r.va, r.ja], [r.Pb, r.vb, r.jb]].forEach(function (q) {
           var a = S2(q[0]), b = S2([q[0][0] + q[1][0] * KV, q[0][1] + q[1][1] * KV]);
-          arrow(c, a[0], a[1], b[0], b[1], CV, 2.8);
-          vTip('v' + ind(q[2]), q[0], q[1], CV);
+          vec('v' + q[2], a[0], a[1], b[0], b[1], CV, 2.8);
+          tipLab('v' + q[2], 'v' + ind(q[2]), a[0], a[1], b[0], b[1], lin ? [0, -1] : outN([b[0] - a[0], b[1] - a[1]]), CV, 0);
         });
       }
-      /* construction de Δv : 1) on reporte les deux vecteurs vitesse en M_i ; 2) Δv joint leurs extrémités ; 3) a_i en M_i */
-      var u1 = ease(prog), u2 = ease(prog - 1), u3 = cbD.checked ? ease(prog - 2) : 1;
-      var Ms = S2(Mi);
-      if (cbD.checked) {
-        if (lin) {   /* mouvement rectiligne : tout est sur une même droite, on décale la construction sur des lignes au-dessous */
-          var rows = [Ms[1] + 46, Ms[1] + 66, Ms[1] + 90];
-          var tA = Ms[0] + r.va[0] * KV * k, tB = Ms[0] + r.vb[0] * KV * k;
-          c.strokeStyle = 'rgba(71,85,105,.35)'; c.lineWidth = 1; c.setLineDash([3, 3]);
-          c.beginPath(); c.moveTo(Ms[0], Ms[1] + 9); c.lineTo(Ms[0], rows[1] + 6); c.stroke(); c.setLineDash([]);
-          var pa = S2(r.Pa), pb = S2(r.Pb);
-          var a0 = lerp([pa[0], pa[1]], [Ms[0], rows[0]], u1), b0 = lerp([pb[0], pb[1]], [Ms[0], rows[1]], u1);
-          arrow(c, a0[0], a0[1], a0[0] + r.va[0] * KV * k, a0[1], CVc, 2.2, [6, 4]);
-          arrow(c, b0[0], b0[1], b0[0] + r.vb[0] * KV * k, b0[1], CVc, 2.2, [6, 4]);
-          if (prog > 1) {
-            c.strokeStyle = 'rgba(5,150,105,.45)'; c.lineWidth = 1; c.setLineDash([3, 3]);
-            c.beginPath(); c.moveTo(tA, rows[0]); c.lineTo(tA, rows[2]); c.moveTo(tB, rows[1]); c.lineTo(tB, rows[2]); c.stroke(); c.setLineDash([]);
-            arrow(c, tA, rows[2], tA + (tB - tA) * u2, rows[2], CA, 2.6);
-            if (u2 >= 1) { labels.push({ x: (tA + tB) / 2, y: rows[2] + 20, w: 36, h: 26, nx: 0, ny: 1, pr: 1, f: function (x, y) { vecLabel(c, 'Δv' + ind(i), x, y + 6, CA); } }); }
-          }
-        } else {
-          var A0 = lerp(r.Pa, Mi, u1), B0 = lerp(r.Pb, Mi, u1);
-          var A1 = [A0[0] + r.va[0] * KV, A0[1] + r.va[1] * KV], B1 = [B0[0] + r.vb[0] * KV, B0[1] + r.vb[1] * KV];
-          arrow(c, X(A0[0]), Y(A0[1]), X(A1[0]), Y(A1[1]), CVc, 2.2, [6, 4]);
-          arrow(c, X(B0[0]), Y(B0[1]), X(B1[0]), Y(B1[1]), CVc, 2.2, [6, 4]);
-          if (prog > 1) {
-            var ta1 = S2([Mi[0] + r.va[0] * KV, Mi[1] + r.va[1] * KV]), tb1 = S2([Mi[0] + r.vb[0] * KV, Mi[1] + r.vb[1] * KV]);
-            arrow(c, ta1[0], ta1[1], ta1[0] + (tb1[0] - ta1[0]) * u2, ta1[1] + (tb1[1] - ta1[1]) * u2, CA, 2.6);
-            if (u2 >= 1) {   /* nom de Δv : au milieu, du côté opposé à M_i */
-              var mx = (ta1[0] + tb1[0]) / 2, my = (ta1[1] + tb1[1]) / 2, dd = [tb1[0] - ta1[0], tb1[1] - ta1[1]], dn = Math.hypot(dd[0], dd[1]) || 1;
-              var nx = -dd[1] / dn, ny = dd[0] / dn; if (nx * (Ms[0] - mx) + ny * (Ms[1] - my) > 0) { nx = -nx; ny = -ny; }
-              labels.push({ x: mx + nx * 22, y: my + ny * 22, w: 36, h: 26, nx: nx, ny: ny, pr: 1, f: function (x, y) { vecLabel(c, 'Δv' + ind(i), x, y + 6, CA); } });
-            }
-          }
-        }
-      }
-      /* vecteur accélération en M_i (et vraie accélération) */
+      /* construction de Δv_i, qui part de M_i :
+         1) on reporte v_{i+1} en M_i ; 2) à son extrémité, on reporte −v_{i−1} (le vecteur se retourne) ;
+         3) Δv_i va de M_i à l'extrémité de −v_{i−1} ; 4) a_i, de même direction et de même sens que Δv_i */
+      var u1 = ease(prog), u2 = ease(prog - 1), u3 = ease(prog - 2), u4 = cbD.checked ? ease(prog - 3) : 1;
+      var Ms = S2(Mi), CDV = '#065F46';
+      var vA = [r.va[0] * KV * k, -r.va[1] * KV * k], vB = [r.vb[0] * KV * k, -r.vb[1] * KV * k];   /* vecteurs vitesse à l'écran (px) */
+      function rot(v, t) { var cs = Math.cos(t), sn = Math.sin(t); return [v[0] * cs - v[1] * sn, v[0] * sn + v[1] * cs]; }
       var aRow = lin ? Ms[1] - 30 : Ms[1], eRow = lin ? Ms[1] - 52 : Ms[1];
+      var aEnd = [Ms[0] + r.ax * KA * k * u4, aRow - r.ay * KA * k * u4];
+      /* a_i d'abord (il est plus long que Δv_i et sur la même droite : Δv_i est tracé par-dessus, plus fin et plus foncé) */
+      if (cbE.checked) { vec('ex', Ms[0], eRow, Ms[0] + ta[0] * KA * k, eRow - ta[1] * KA * k, 'rgba(30,41,59,.5)', 2, [3, 3]); }
       if (lin && (cbA.checked || cbE.checked)) {
         c.strokeStyle = 'rgba(71,85,105,.35)'; c.lineWidth = 1; c.setLineDash([3, 3]);
         c.beginPath(); c.moveTo(Ms[0], Ms[1] - 9); c.lineTo(Ms[0], (cbE.checked ? eRow : aRow) - 4); c.stroke(); c.setLineDash([]);
       }
-      if (cbE.checked) { arrow(c, Ms[0], eRow, Ms[0] + ta[0] * KA * k, eRow - ta[1] * KA * k, 'rgba(30,41,59,.5)', 2, [3, 3]); }
-      if (cbA.checked && u3 > 0) {
-        var ex = Ms[0] + r.ax * KA * k * u3, ey = aRow - r.ay * KA * k * u3;
-        arrow(c, Ms[0], aRow, ex, ey, CA, 3.6);
-        if (u3 >= 1) {
-          var ad = [ex - Ms[0], ey - aRow], an = Math.hypot(ad[0], ad[1]) || 1;
-          labels.push({ x: ex + ad[0] / an * 15, y: ey + ad[1] / an * 15, w: 26, h: 26, nx: ad[0] / an, ny: ad[1] / an, pr: 2, f: function (x, y) { vecLabel(c, 'a' + ind(i), x, y + 6, CA); } });
+      if (cbA.checked && u4 > 0) {
+        vec('a', Ms[0], aRow, aEnd[0], aEnd[1], CA, 3.8);
+        if (u4 >= 1) { var ad = [aEnd[0] - Ms[0], aEnd[1] - aRow], an = Math.hypot(ad[0], ad[1]) || 1; tipLab('a', 'a' + ind(i), Ms[0], aRow, aEnd[0], aEnd[1], [-ad[1] / an, ad[0] / an], CA, 2); }
+      }
+      if (cbD.checked && prog > 0) {
+        var rows = lin ? [Ms[1] + 44, Ms[1] + 66, Ms[1] + 90] : [Ms[1], Ms[1], Ms[1]];
+        var pb = S2(r.Pb), pa = S2(r.Pa);
+        /* 1) copie de v_{i+1} en M_i */
+        var b0 = lerp(pb, [Ms[0], rows[0]], u1), b1 = [b0[0] + vB[0], b0[1] + vB[1]];
+        vec('cb', b0[0], b0[1], b1[0], b1[1], CVc, 2.2, [6, 4]);
+        var tipB = [Ms[0] + vB[0], rows[0] + vB[1]];
+        if (lin) {
+          c.strokeStyle = 'rgba(71,85,105,.35)'; c.lineWidth = 1; c.setLineDash([3, 3]);
+          c.beginPath(); c.moveTo(Ms[0], Ms[1] + 9); c.lineTo(Ms[0], rows[2] + 6); c.stroke(); c.setLineDash([]);
+        }
+        /* 2) −v_{i−1} reporté à l'extrémité de la copie de v_{i+1} */
+        if (prog > 1) {
+          /* d'abord v_{i−1} glisse, à l'endroit, jusqu'à sa place finale ; puis il se retourne sur place (rotation autour de son milieu) */
+          var startA = lin ? [tipB[0], rows[1]] : tipB, mid = [startA[0] - vA[0] / 2, startA[1] - vA[1] / 2];
+          var ut = ease(2 * (prog - 1)), ur = ease(2 * (prog - 1.5));
+          var va2 = lin ? [vA[0] * Math.cos(Math.PI * ur), 0] : rot(vA, Math.PI * ur);   /* sur une droite : il se replie puis s'allonge en sens inverse */
+          var m0 = lerp([pa[0] + vA[0] / 2, pa[1] + vA[1] / 2], mid, ut);
+          var a0 = [m0[0] - va2[0] / 2, m0[1] - va2[1] / 2], a1 = [m0[0] + va2[0] / 2, m0[1] + va2[1] / 2];
+          vec('ca', a0[0], a0[1], a1[0], a1[1], CVc, 2.2, [6, 4]);
+          if (lin) {
+            c.strokeStyle = 'rgba(71,85,105,.35)'; c.lineWidth = 1; c.setLineDash([3, 3]);
+            c.beginPath(); c.moveTo(tipB[0], rows[0]); c.lineTo(tipB[0], rows[1]); c.stroke(); c.setLineDash([]);
+          }
+          if (u2 >= 1) { tipLab('ca', 'v' + ind(r.ja), a0[0], a0[1], a1[0], a1[1], lin ? [0, 1] : outN([a1[0] - a0[0], a1[1] - a0[1]]), CV, 1, true); }
+        }
+        /* 3) Δv_i, de M_i à l'extrémité de −v_{i−1} */
+        if (prog > 2) {
+          var dv = [vB[0] - vA[0], vB[1] - vA[1]], d0 = [Ms[0], rows[2]], d1 = [d0[0] + dv[0] * u3, d0[1] + dv[1] * u3];
+          if (lin) {
+            c.strokeStyle = 'rgba(71,85,105,.35)'; c.lineWidth = 1; c.setLineDash([3, 3]);
+            c.beginPath(); c.moveTo(Ms[0] + dv[0], rows[1]); c.lineTo(Ms[0] + dv[0], rows[2]); c.stroke(); c.setLineDash([]);
+          }
+          vec('dv', d0[0], d0[1], d1[0], d1[1], CDV, 2.4);
+          if (u3 >= 1) {   /* nom de Δv : au milieu, du côté opposé au triangle de construction */
+            var dd = [dv[0], dv[1]], dn2 = Math.hypot(dd[0], dd[1]) || 1, nn2 = [-dd[1] / dn2, dd[0] / dn2];
+            if (nn2[0] * (tipB[0] - d0[0]) + nn2[1] * (tipB[1] - d0[1]) > 0) { nn2 = [-nn2[0], -nn2[1]]; }
+            midLab('dv', 'Δv' + ind(i), d0[0], d0[1], d1[0], d1[1], lin ? [0, 1] : nn2, CDV, 1);
+          }
         }
       }
-      /* toutes les étiquettes en dernier, par-dessus les tracés ; une étiquette qui en chevauche une autre
-         (déjà placée, plus prioritaire) est éloignée pas à pas dans sa direction de décalage */
+      /* toutes les étiquettes en dernier, par-dessus les tracés : pour chacune, la première position candidate
+         qui ne chevauche ni une étiquette déjà placée, ni un point, ni une autre flèche */
       var placed = [];
-      P.forEach(function (q) { var sq = S2(q); placed.push({ x: sq[0], y: sq[1], w: 12, h: 12 }); });   /* les points sont des obstacles */
+      function cost(L, x, y) {   /* nombre de chevauchements (une étiquette compte beaucoup plus qu'un bout de trait) */
+        if (x - L.w / 2 < 2 || x + L.w / 2 > w - 2 || y - L.h / 2 < 2 || y + L.h / 2 > h - 2) { return 1e6; }
+        function hit(q) { return q.id !== L.id && Math.abs(q.x - x) < (q.w + L.w) / 2 && Math.abs(q.y - y) < (q.h + L.h) / 2; }
+        return placed.filter(hit).length * 50 + obst.filter(hit).length;
+      }
       labels.sort(function (a, b) { return a.pr - b.pr; }).forEach(function (L) {
-        for (var tr = 0; tr < 8; tr++) {
-          var hit = placed.some(function (q) { return Math.abs(q.x - L.x) < (q.w + L.w) / 2 + 2 && Math.abs(q.y - L.y) < (q.h + L.h) / 2; });
-          if (!hit) { break; }
-          L.x += L.nx * 6; L.y += L.ny * 6;
-        }
-        L.x = Math.max(L.w / 2 + 2, Math.min(w - L.w / 2 - 2, L.x)); L.y = Math.max(L.h / 2 + 2, Math.min(h - L.h / 2 - 2, L.y));
-        placed.push(L); L.f(L.x, L.y);
+        var best = L.c[0], bc = Infinity;
+        for (var q = 0; q < L.c.length; q++) { var cq = cost(L, L.c[q][0], L.c[q][1]); if (cq < bc) { bc = cq; best = L.c[q]; } if (cq === 0) { break; } }
+        var bx2 = Math.max(L.w / 2 + 2, Math.min(w - L.w / 2 - 2, best[0])), by2 = Math.max(L.h / 2 + 2, Math.min(h - L.h / 2 - 2, best[1]));
+        placed.push({ x: bx2, y: by2, w: L.w, h: L.h, id: L.id }); L.f(bx2, by2);
       });
       var ang = Math.abs(Math.atan2(r.ax * ta[1] - r.ay * ta[0], r.ax * ta[0] + r.ay * ta[1])) * 180 / Math.PI, nr = Math.hypot(r.ax, r.ay) / Math.hypot(ta[0], ta[1]) - 1;
       oE.textContent = fr(ang, 1) + '° en direction, ' + (Math.abs(nr) < 0.0005 ? '0' : fr(nr * 100, 1)) + ' % en norme';
       msg.textContent = m.m;
     }
-    /* déroulé de la construction : 3 étapes d'environ 0,8 s */
+    /* déroulé de la construction : 4 étapes d'environ 0,8 s */
     function replay() {
-      if (RM) { prog = 3; draw(); return; }
+      if (RM) { prog = 4; draw(); return; }
       prog = 0; var t0 = null;
       if (anim) { cancelAnimationFrame(anim); }
       function stepC(ts) {
         if (t0 === null) { t0 = ts; }
-        prog = Math.min(3, (ts - t0) / 800);
+        prog = Math.min(4, (ts - t0) / 800);
         draw(true);
-        anim = prog < 3 ? requestAnimationFrame(stepC) : null;
+        anim = prog < 4 ? requestAnimationFrame(stepC) : null;
       }
       anim = requestAnimationFrame(stepC);
     }
