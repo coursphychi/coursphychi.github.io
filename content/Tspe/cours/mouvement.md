@@ -249,6 +249,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
 </div>
 <label class="nt-ctrl">Point M<sub>i</sub> étudié&nbsp;: <input type="range" min="2" max="12" step="1" value="4"></label>
 <div class="nt-btns">
+<button type="button" class="nt-btn nt-btn-main" data-act="replay"><i class="fa-solid fa-rotate-right"></i>&nbsp; Revoir la construction</button>
 <label class="nt-check"><input type="checkbox" data-p="v" checked> vecteurs vitesse</label>
 <label class="nt-check"><input type="checkbox" data-p="dv" checked> construction de $\Delta\vec{v}_i$</label>
 <label class="nt-check"><input type="checkbox" data-p="a" checked> $\vec{a}_i$</label>
@@ -712,105 +713,227 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     var root = document.getElementById('lab-chrono');
     if (!root) { return; }
     var cv = $(root, 'canvas'), rI = $(root, 'input[type="range"]'), cbV = $(root, '[data-p="v"]'), cbD = $(root, '[data-p="dv"]'), cbA = $(root, '[data-p="a"]'), cbE = $(root, '[data-p="ex"]');
-    var msg = $(root, '.nt-msg'), oE = $(root, '.out-err'), oF = $(root, '.nt-chrono-form'), S, mode = 'para', meth = 'mil';
-    var TAU = 0.08;
+    var msg = $(root, '.nt-msg'), oE = $(root, '.out-err'), oF = $(root, '.nt-chrono-form'), bR = $(root, '[data-act="replay"]'), S, mode = 'para', meth = 'mil';
+    var TAU = 0.08, prog = 3, anim = null, box = {}, cam = null;
     var MOV = {
-      para: { n: 15, i0: 4, f: function (t) { return [0.3 + 3.2 * t, 0.3 + 4.6 * t - 4.905 * t * t]; }, kv: 0.28, ka: 0.065, m: 'Chute libre (lancer oblique) : le vecteur accélération est le même en tout point, vertical et vers le bas.' },
-      circ: { n: 17, i0: 8, f: function (t) { var w = 2.6; return [2.1 + 1.0 * Math.cos(w * t - 2.6), 1.15 + 1.0 * Math.sin(w * t - 2.6)]; }, kv: 0.22, ka: 0.07, m: 'Mouvement circulaire uniforme : la vitesse garde la même norme, mais sa direction tourne ; le vecteur accélération pointe vers le centre du cercle.' },
+      para: { n: 15, i0: 4, f: function (t) { return [0.3 + 3.2 * t, 0.3 + 4.6 * t - 4.905 * t * t]; }, kv: 0.2, ka: 0.05, m: 'Chute libre (lancer oblique) : le vecteur accélération est le même en tout point, vertical et vers le bas.' },
+      circ: { n: 17, i0: 8, f: function (t) { var w = 2.6; return [2.1 + 1.0 * Math.cos(w * t - 2.6), 1.15 + 1.0 * Math.sin(w * t - 2.6)]; }, kv: 0.3, ka: 0.09, m: 'Mouvement circulaire uniforme : la vitesse garde la même norme, mais sa direction tourne ; le vecteur accélération pointe vers le centre du cercle.' },
       frein: { n: 14, i0: 5, f: function (t) { return [0.3 + 4.4 * t - 2.6 * t * t, 1.0]; }, kv: 0.12, ka: 0.08, m: 'Mouvement rectiligne freiné : les vecteurs vitesse raccourcissent ; le vecteur accélération est opposé au mouvement.' }
     };
     var FORM = {
       mil: 'Point milieu : $\\vec{v}_i \\approx \\dfrac{\\overrightarrow{\\mathrm{M}_{i-1}\\mathrm{M}_{i+1}}}{2\\tau}$, puis $\\Delta\\vec{v}_i = \\vec{v}_{i+1}-\\vec{v}_{i-1}$ et $\\vec{a}_i \\approx \\dfrac{\\Delta\\vec{v}_i}{2\\tau}$.',
-      apr: 'Point d\u2019après : $\\vec{v}_i \\approx \\dfrac{\\overrightarrow{\\mathrm{M}_{i}\\mathrm{M}_{i+1}}}{\\tau}$, puis $\\Delta\\vec{v}_i = \\vec{v}_{i+1}-\\vec{v}_{i}$ et $\\vec{a}_i \\approx \\dfrac{\\Delta\\vec{v}_i}{\\tau}$.'
+      apr: 'Point d’après : $\\vec{v}_i \\approx \\dfrac{\\overrightarrow{\\mathrm{M}_{i}\\mathrm{M}_{i+1}}}{\\tau}$, puis $\\Delta\\vec{v}_i = \\vec{v}_{i+1}-\\vec{v}_{i}$ et $\\vec{a}_i \\approx \\dfrac{\\Delta\\vec{v}_i}{\\tau}$.'
     };
+    var CVc = 'rgba(245,158,11,.85)';   /* copies reportées en M_i */
     function pts() { var m = MOV[mode], P = []; for (var i = 0; i < m.n; i++) { P.push(m.f(i * TAU)); } return P; }
-    function draw() {
-      var P = pts(), m = MOV[mode], c = S.ctx, w = S.w, h = S.h;
-      /* cadrage : les points ET les extrémités de tous les vecteurs vitesse possibles doivent rester visibles */
-      var xs = P.map(function (p) { return p[0]; }), ys = P.map(function (p) { return p[1]; });
-      for (var jj = 1; jj < P.length - 1; jj++) {
-        var vxj = (P[jj + 1][0] - P[jj - 1][0]) / (2 * TAU), vyj = (P[jj + 1][1] - P[jj - 1][1]) / (2 * TAU);
-        xs.push(P[jj][0] + vxj * m.kv); ys.push(P[jj][1] + vyj * m.kv);
-      }
-      var x0 = Math.min.apply(null, xs) - 0.35, x1 = Math.max.apply(null, xs) + 0.35, y0 = Math.min.apply(null, ys) - 0.45, y1 = Math.max.apply(null, ys) + 0.45;
-      var k = Math.min(w / (x1 - x0), h / (y1 - y0));
-      function X(x) { return (w - (x1 - x0) * k) / 2 + (x - x0) * k; }
-      function Y(y) { return h - (h - (y1 - y0) * k) / 2 - (y - y0) * k; }
-      rI.max = m.n - 3; if (+rI.value > m.n - 3) { rI.value = m.n - 3; } if (+rI.value < 2) { rI.value = 2; }
-      var i = parseInt(rI.value, 10), mil = meth === 'mil';
-      if (mode === 'circ') { c.save(); }
-      /* points utilisés par la méthode choisie */
-      var jlo = mil ? i - 2 : i, jhi = i + 2;
-      var lab = [];
-      c.clearRect(0, 0, w, h);
-      if (mode === 'circ') {   /* centre du cercle */
-        c.strokeStyle = col('--ink'); c.lineWidth = 1.5; c.beginPath(); c.moveTo(X(2.1) - 6, Y(1.15)); c.lineTo(X(2.1) + 6, Y(1.15)); c.moveTo(X(2.1), Y(1.15) - 6); c.lineTo(X(2.1), Y(1.15) + 6); c.stroke();
-        txt(c, 'O', X(2.1) - 10, Y(1.15) - 8, col('--ink'), 'italic 700 13px Georgia, serif');
-        c.restore();
-      }
-      P.forEach(function (p, j) {
-        c.fillStyle = (j >= jlo && j <= jhi) ? CT : 'rgba(225,29,72,.40)';
-        c.beginPath(); c.arc(X(p[0]), Y(p[1]), j === i ? 6 : 4, 0, 2 * Math.PI); c.fill();
-        if (j >= (mil ? i - 1 : i) && j <= i + 1) { lab.push([j, p]); }
-      });
-      var KV = m.kv, KA = m.ka, va, vb, Pa, Pb, la, lb, div, labels = [];
-      if (mil) {
+    /* vecteurs utiles à la construction au point M_i, selon la méthode */
+    function cons(P, i) {
+      var r = {};
+      if (meth === 'mil') {
         var vm = function (j) { return [(P[j + 1][0] - P[j - 1][0]) / (2 * TAU), (P[j + 1][1] - P[j - 1][1]) / (2 * TAU)]; };
-        va = vm(i - 1); vb = vm(i + 1); Pa = P[i - 1]; Pb = P[i + 1]; la = 'v' + ind(i - 1); lb = 'v' + ind(i + 1); div = 2 * TAU;
+        r.va = vm(i - 1); r.vb = vm(i + 1); r.Pa = P[i - 1]; r.Pb = P[i + 1]; r.ja = i - 1; r.jb = i + 1; r.div = 2 * TAU;
       } else {
         var vp = function (j) { return [(P[j + 1][0] - P[j][0]) / TAU, (P[j + 1][1] - P[j][1]) / TAU]; };
-        va = vp(i); vb = vp(i + 1); Pa = P[i]; Pb = P[i + 1]; la = 'v' + ind(i); lb = 'v' + ind(i + 1); div = TAU;
+        r.va = vp(i); r.vb = vp(i + 1); r.Pa = P[i]; r.Pb = P[i + 1]; r.ja = i; r.jb = i + 1; r.div = TAU;
       }
-      if (cbV.checked) {
-        arrow(c, X(Pa[0]), Y(Pa[1]), X(Pa[0] + va[0] * KV), Y(Pa[1] + va[1] * KV), CV, 2.6);
-        arrow(c, X(Pb[0]), Y(Pb[1]), X(Pb[0] + vb[0] * KV), Y(Pb[1] + vb[1] * KV), CV, 2.6);
-        if (mode === 'frein') {   /* vecteurs horizontaux : étiquettes au-dessus du milieu de chaque vecteur */
-          labels.push(function () { vecLabel(c, la, X(Pa[0] + va[0] * KV / 2), Y(Pa[1]) - 14, CV); });
-          labels.push(function () { vecLabel(c, lb, X(Pb[0] + vb[0] * KV / 2), Y(Pb[1]) - 14, CV); });
-        } else {   /* au milieu de chaque vecteur, décalée du côté convexe de la trajectoire (à l'opposé de l'accélération) */
-          labels.push(function () { sideLabel(la, Pa, va); });
-          labels.push(function () { sideLabel(lb, Pb, vb); });
+      r.ax = (r.vb[0] - r.va[0]) / r.div; r.ay = (r.vb[1] - r.va[1]) / r.div;
+      return r;
+    }
+    function trueAcc(i) {   /* dérivée seconde calculée avec un pas minuscule */
+      var m = MOV[mode], hh = 1e-3, ti = i * TAU, fp = m.f(ti + hh), f0 = m.f(ti), fm = m.f(ti - hh);
+      return [(fp[0] - 2 * f0[0] + fm[0]) / (hh * hh), (fp[1] - 2 * f0[1] + fm[1]) / (hh * hh)];
+    }
+    /* cadrage fixe pour un mouvement et une méthode : tous les points et toutes les constructions possibles restent visibles */
+    function frame(P) {
+      var key = mode + meth;
+      if (box[key]) { return box[key]; }
+      var m = MOV[mode], xs = [], ys = [];
+      function add(p) { xs.push(p[0]); ys.push(p[1]); }
+      P.forEach(add);
+      for (var i = 2; i <= m.n - 3; i++) {
+        var r = cons(P, i), Mi = P[i], ta = trueAcc(i);
+        add([r.Pa[0] + r.va[0] * m.kv, r.Pa[1] + r.va[1] * m.kv]); add([r.Pb[0] + r.vb[0] * m.kv, r.Pb[1] + r.vb[1] * m.kv]);
+        if (mode !== 'frein') {
+          add([Mi[0] + r.va[0] * m.kv, Mi[1] + r.va[1] * m.kv]); add([Mi[0] + r.vb[0] * m.kv, Mi[1] + r.vb[1] * m.kv]);
+          add([Mi[0] + r.ax * m.ka, Mi[1] + r.ay * m.ka]); add([Mi[0] + ta[0] * m.ka, Mi[1] + ta[1] * m.ka]);
         }
       }
-      var Mi = P[i], ax = (vb[0] - va[0]) / div, ay = (vb[1] - va[1]) / div;
-      function sideLabel(s, Q, vv) {
-        var x1p = X(Q[0]), y1p = Y(Q[1]), x2p = X(Q[0] + vv[0] * KV), y2p = Y(Q[1] + vv[1] * KV);
-        var dx = x2p - x1p, dy = y2p - y1p, nn = Math.hypot(dx, dy) || 1, nx = -dy / nn, ny = dx / nn;
-        if (nx * ax - ny * ay > 0) { nx = -nx; ny = -ny; }   /* l'axe y de l'écran est inversé */
-        vecLabel(c, s, (x1p + x2p) / 2 + nx * 20, (y1p + y2p) / 2 + ny * 20 + 6, CV);
+      box[key] = [Math.min.apply(null, xs), Math.max.apply(null, xs), Math.min.apply(null, ys), Math.max.apply(null, ys)];
+      return box[key];
+    }
+    function ease(u) { u = Math.max(0, Math.min(1, u)); return u * u * (3 - 2 * u); }
+    function lerp(a, b, u) { return [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u]; }
+    function draw(smooth) {
+      var P = pts(), m = MOV[mode], c = S.ctx, w = S.w, h = S.h, lin = mode === 'frein';
+      rI.max = m.n - 3; if (+rI.value > m.n - 3) { rI.value = m.n - 3; } if (+rI.value < 2) { rI.value = 2; }
+      var i = parseInt(rI.value, 10), r = cons(P, i), Mi = P[i], KV = m.kv, KA = m.ka, ta = trueAcc(i);
+      /* échelle et centrage : cadrage resserré sur la construction en cours (points voisins de M_i et extrémités
+         des vecteurs), qui glisse en douceur quand on change de point. Rectiligne : seule l'abscisse compte. */
+      var pad = 40, tg;
+      if (lin) {
+        var lx = [];
+        for (var jl = Math.max(0, i - 3); jl <= Math.min(P.length - 1, i + 3); jl++) { lx.push(P[jl][0]); }
+        lx.push(r.Pa[0] + r.va[0] * KV, r.Pb[0] + r.vb[0] * KV, Mi[0] + r.va[0] * KV, Mi[0] + r.ax * KA, Mi[0] + ta[0] * KA);
+        var lx0 = Math.min.apply(null, lx), lx1 = Math.max.apply(null, lx), kl = (w - 2 * pad - 30) / (lx1 - lx0);
+        tg = { k: kl, ox: w / 2 - (lx0 + lx1) / 2 * kl, oy: h * 0.4 + 1.0 * kl };
+      } else {
+        var bx = [], by = [];
+        var addB = function (q) { bx.push(q[0]); by.push(q[1]); };
+        for (var jb = Math.max(0, i - 3); jb <= Math.min(P.length - 1, i + 3); jb++) { addB(P[jb]); }
+        addB([r.Pa[0] + r.va[0] * KV, r.Pa[1] + r.va[1] * KV]); addB([r.Pb[0] + r.vb[0] * KV, r.Pb[1] + r.vb[1] * KV]);
+        addB([Mi[0] + r.va[0] * KV, Mi[1] + r.va[1] * KV]); addB([Mi[0] + r.vb[0] * KV, Mi[1] + r.vb[1] * KV]);
+        addB([Mi[0] + r.ax * KA, Mi[1] + r.ay * KA]); if (cbE.checked) { addB([Mi[0] + ta[0] * KA, Mi[1] + ta[1] * KA]); }
+        if (mode === 'circ') { addB([2.0, 1.25]); }   /* le centre O (et son nom) reste visible */
+        var x0 = Math.min.apply(null, bx), x1 = Math.max.apply(null, bx), y0 = Math.min.apply(null, by), y1 = Math.max.apply(null, by);
+        var kk = Math.min((w - 2 * pad) / (x1 - x0), (h - 2 * pad) / (y1 - y0));
+        tg = { k: kk, ox: w / 2 - (x0 + x1) / 2 * kk, oy: h / 2 + (y0 + y1) / 2 * kk };
       }
+      if (!cam || !smooth) { cam = tg; }
+      else { cam = { k: cam.k + (tg.k - cam.k) * 0.16, ox: cam.ox + (tg.ox - cam.ox) * 0.16, oy: cam.oy + (tg.oy - cam.oy) * 0.16 }; }
+      var k = cam.k;
+      function X(x) { return cam.ox + x * k; }
+      function Y(y) { return cam.oy - y * k; }
+      function S2(p) { return [X(p[0]), Y(p[1])]; }
+      /* directions à l'écran : la normale « extérieure » est opposée à l'accélération */
+      var aS = [r.ax, -r.ay], aN = Math.hypot(aS[0], aS[1]) || 1;
+      function outN(d) {   /* normale unitaire à d, du côté opposé à l'accélération */
+        var n = Math.hypot(d[0], d[1]) || 1, nx = -d[1] / n, ny = d[0] / n;
+        if (nx * aS[0] + ny * aS[1] > 0) { nx = -nx; ny = -ny; }
+        return [nx, ny];
+      }
+      var labels = [];
+      c.clearRect(0, 0, w, h);
+      if (mode === 'circ') {   /* centre du cercle */
+        var cx = X(2.1), cy = Y(1.15);
+        c.strokeStyle = col('--slate'); c.lineWidth = 1.5; c.beginPath(); c.moveTo(cx - 6, cy); c.lineTo(cx + 6, cy); c.moveTo(cx, cy - 6); c.lineTo(cx, cy + 6); c.stroke();
+        txt(c, 'O', cx - 12, cy - 9, col('--slate'), 'italic 700 14px Georgia, serif');
+      }
+      if (lin) { c.strokeStyle = '#E2E8F0'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(pad / 2, Y(1)); c.lineTo(w - pad / 2, Y(1)); c.stroke(); }
+      /* points de la chronophotographie ; ceux qui servent à la construction sont pleins */
+      var jlo = meth === 'mil' ? i - 2 : i, jhi = i + 2;
+      P.forEach(function (p, j) {
+        var on = j >= jlo && j <= jhi, s = S2(p);
+        if (j === i) { c.fillStyle = '#FFFFFF'; c.beginPath(); c.arc(s[0], s[1], 8, 0, 2 * Math.PI); c.fill(); }
+        c.fillStyle = on ? CT : 'rgba(225,29,72,.32)';
+        c.beginPath(); c.arc(s[0], s[1], j === i ? 5.5 : (on ? 4.2 : 3.6), 0, 2 * Math.PI); c.fill();
+      });
+      /* étiquettes des points M : côté intérieur (celui de l'accélération), décalées vers l'arrière pour M_i */
+      var nameJ = meth === 'mil' ? [i - 1, i, i + 1] : [i, i + 1];
+      nameJ.forEach(function (j) {
+        var s = S2(P[j]), tg2 = [X(P[Math.min(j + 1, P.length - 1)][0]) - X(P[Math.max(j - 1, 0)][0]), Y(P[Math.min(j + 1, P.length - 1)][1]) - Y(P[Math.max(j - 1, 0)][1])], tn = Math.hypot(tg2[0], tg2[1]) || 1;
+        var px, py, ln;
+        if (lin) { px = s[0]; py = s[1] + 16; ln = [0, 1]; }
+        else if (j === i) {   /* M_i : côté extérieur, un peu en arrière (l'accélération part vers l'intérieur, les vitesses vers l'avant) */
+          ln = outN(tg2); px = s[0] + ln[0] * 16 - tg2[0] / tn * 11; py = s[1] + ln[1] * 16 - tg2[1] / tn * 11;
+        } else { var n1 = outN(tg2); ln = [-n1[0], -n1[1]]; var sg = j < i ? -1 : 1; px = s[0] + ln[0] * 15 + sg * tg2[0] / tn * 9; py = s[1] + ln[1] * 15 + sg * tg2[1] / tn * 9;   /* voisins : côté intérieur, écartés de a_i le long de la trajectoire */ }
+        labels.push({ x: px, y: py, w: 22, h: 16, nx: ln[0], ny: ln[1], pr: 3, f: function (x, y) { txt(c, 'M' + ind(j), x, y + 5, CT, 'italic 700 13px Georgia, serif', 'center', true); } });
+      });
+      /* vecteurs vitesse aux points : nom collé à l'extrémité, du côté extérieur */
+      function vTip(name, tail, v, color) {
+        var a = S2(tail), b = S2([tail[0] + v[0] * KV, tail[1] + v[1] * KV]), d = [b[0] - a[0], b[1] - a[1]], dn = Math.hypot(d[0], d[1]) || 1;
+        var n = lin ? [0, -1] : outN(d);
+        labels.push({ x: b[0] + n[0] * 14 - d[0] / dn * 3, y: b[1] + n[1] * 14 - d[1] / dn * 3, w: 26, h: 26, nx: n[0], ny: n[1], pr: 0, f: function (x, y) { vecLabel(c, name, x, y + 6, color); } });
+      }
+      if (cbV.checked) {
+        [[r.Pa, r.va, r.ja], [r.Pb, r.vb, r.jb]].forEach(function (q) {
+          var a = S2(q[0]), b = S2([q[0][0] + q[1][0] * KV, q[0][1] + q[1][1] * KV]);
+          arrow(c, a[0], a[1], b[0], b[1], CV, 2.8);
+          vTip('v' + ind(q[2]), q[0], q[1], CV);
+        });
+      }
+      /* construction de Δv : 1) on reporte les deux vecteurs vitesse en M_i ; 2) Δv joint leurs extrémités ; 3) a_i en M_i */
+      var u1 = ease(prog), u2 = ease(prog - 1), u3 = cbD.checked ? ease(prog - 2) : 1;
+      var Ms = S2(Mi);
       if (cbD.checked) {
-        var e1 = [Mi[0] + vb[0] * KV, Mi[1] + vb[1] * KV], e2 = [e1[0] - va[0] * KV, e1[1] - va[1] * KV];
-        arrow(c, X(Mi[0]), Y(Mi[1]), X(e1[0]), Y(e1[1]), CV, 2, [5, 4]);
-        arrow(c, X(e1[0]), Y(e1[1]), X(e2[0]), Y(e2[1]), '#D97706', 2, [5, 4]);
-        arrow(c, X(Mi[0]), Y(Mi[1]), X(e2[0]), Y(e2[1]), CA, 2.4);
-        /* étiquette de Δv : au milieu du vecteur, du côté opposé au triangle de construction */
-        var mx = (X(Mi[0]) + X(e2[0])) / 2, my = (Y(Mi[1]) + Y(e2[1])) / 2, dx = X(e2[0]) - X(Mi[0]), dy = Y(e2[1]) - Y(Mi[1]), nn = Math.hypot(dx, dy) || 1;
-        var nx = -dy / nn, ny = dx / nn; if (nx * (X(e1[0]) - mx) + ny * (Y(e1[1]) - my) > 0) { nx = -nx; ny = -ny; }
-        if (mode === 'frein') { labels.push(function () { vecLabel(c, '\u0394v' + ind(i), mx, my + 46, CA); }); }   /* sous l'axe, les étiquettes de vitesse étant au-dessus */
-        else { labels.push(function () { vecLabel(c, '\u0394v' + ind(i), mx + nx * 22, my + ny * 22 + 6, CA); }); }
+        if (lin) {   /* mouvement rectiligne : tout est sur une même droite, on décale la construction sur des lignes au-dessous */
+          var rows = [Ms[1] + 46, Ms[1] + 66, Ms[1] + 90];
+          var tA = Ms[0] + r.va[0] * KV * k, tB = Ms[0] + r.vb[0] * KV * k;
+          c.strokeStyle = 'rgba(71,85,105,.35)'; c.lineWidth = 1; c.setLineDash([3, 3]);
+          c.beginPath(); c.moveTo(Ms[0], Ms[1] + 9); c.lineTo(Ms[0], rows[1] + 6); c.stroke(); c.setLineDash([]);
+          var pa = S2(r.Pa), pb = S2(r.Pb);
+          var a0 = lerp([pa[0], pa[1]], [Ms[0], rows[0]], u1), b0 = lerp([pb[0], pb[1]], [Ms[0], rows[1]], u1);
+          arrow(c, a0[0], a0[1], a0[0] + r.va[0] * KV * k, a0[1], CVc, 2.2, [6, 4]);
+          arrow(c, b0[0], b0[1], b0[0] + r.vb[0] * KV * k, b0[1], CVc, 2.2, [6, 4]);
+          if (prog > 1) {
+            c.strokeStyle = 'rgba(5,150,105,.45)'; c.lineWidth = 1; c.setLineDash([3, 3]);
+            c.beginPath(); c.moveTo(tA, rows[0]); c.lineTo(tA, rows[2]); c.moveTo(tB, rows[1]); c.lineTo(tB, rows[2]); c.stroke(); c.setLineDash([]);
+            arrow(c, tA, rows[2], tA + (tB - tA) * u2, rows[2], CA, 2.6);
+            if (u2 >= 1) { labels.push({ x: (tA + tB) / 2, y: rows[2] + 20, w: 36, h: 26, nx: 0, ny: 1, pr: 1, f: function (x, y) { vecLabel(c, 'Δv' + ind(i), x, y + 6, CA); } }); }
+          }
+        } else {
+          var A0 = lerp(r.Pa, Mi, u1), B0 = lerp(r.Pb, Mi, u1);
+          var A1 = [A0[0] + r.va[0] * KV, A0[1] + r.va[1] * KV], B1 = [B0[0] + r.vb[0] * KV, B0[1] + r.vb[1] * KV];
+          arrow(c, X(A0[0]), Y(A0[1]), X(A1[0]), Y(A1[1]), CVc, 2.2, [6, 4]);
+          arrow(c, X(B0[0]), Y(B0[1]), X(B1[0]), Y(B1[1]), CVc, 2.2, [6, 4]);
+          if (prog > 1) {
+            var ta1 = S2([Mi[0] + r.va[0] * KV, Mi[1] + r.va[1] * KV]), tb1 = S2([Mi[0] + r.vb[0] * KV, Mi[1] + r.vb[1] * KV]);
+            arrow(c, ta1[0], ta1[1], ta1[0] + (tb1[0] - ta1[0]) * u2, ta1[1] + (tb1[1] - ta1[1]) * u2, CA, 2.6);
+            if (u2 >= 1) {   /* nom de Δv : au milieu, du côté opposé à M_i */
+              var mx = (ta1[0] + tb1[0]) / 2, my = (ta1[1] + tb1[1]) / 2, dd = [tb1[0] - ta1[0], tb1[1] - ta1[1]], dn = Math.hypot(dd[0], dd[1]) || 1;
+              var nx = -dd[1] / dn, ny = dd[0] / dn; if (nx * (Ms[0] - mx) + ny * (Ms[1] - my) > 0) { nx = -nx; ny = -ny; }
+              labels.push({ x: mx + nx * 22, y: my + ny * 22, w: 36, h: 26, nx: nx, ny: ny, pr: 1, f: function (x, y) { vecLabel(c, 'Δv' + ind(i), x, y + 6, CA); } });
+            }
+          }
+        }
       }
-      /* vraie accélération en M_i (dérivée seconde calculée avec un pas minuscule) */
-      var hh = 1e-3, ti = i * TAU, fp = m.f(ti + hh), f0 = m.f(ti), fm = m.f(ti - hh);
-      var tx = (fp[0] - 2 * f0[0] + fm[0]) / (hh * hh), ty = (fp[1] - 2 * f0[1] + fm[1]) / (hh * hh);
-      if (cbE.checked) { arrow(c, X(Mi[0]), Y(Mi[1]), X(Mi[0] + tx * KA), Y(Mi[1] + ty * KA), 'rgba(30,41,59,.55)', 2, [3, 3]); }
-      if (cbA.checked) {
-        arrow(c, X(Mi[0]), Y(Mi[1]), X(Mi[0] + ax * KA), Y(Mi[1] + ay * KA), CA, 3.4);
-        labels.push(function () { tipLabel(c, 'a' + ind(i), X(Mi[0]), Y(Mi[1]), X(Mi[0] + ax * KA), Y(Mi[1] + ay * KA), CA); });
+      /* vecteur accélération en M_i (et vraie accélération) */
+      var aRow = lin ? Ms[1] - 30 : Ms[1], eRow = lin ? Ms[1] - 52 : Ms[1];
+      if (lin && (cbA.checked || cbE.checked)) {
+        c.strokeStyle = 'rgba(71,85,105,.35)'; c.lineWidth = 1; c.setLineDash([3, 3]);
+        c.beginPath(); c.moveTo(Ms[0], Ms[1] - 9); c.lineTo(Ms[0], (cbE.checked ? eRow : aRow) - 4); c.stroke(); c.setLineDash([]);
       }
-      /* toutes les étiquettes en dernier, par-dessus les tracés */
-      lab.forEach(function (q) { txt(c, 'M' + ind(q[0]), X(q[1][0]) + 4, Y(q[1][1]) + 21, CT, 'italic 700 12px Georgia, serif', 'center', true); });
-      labels.forEach(function (f) { f(); });
-      var ang = Math.abs(Math.atan2(ax * ty - ay * tx, ax * tx + ay * ty)) * 180 / Math.PI, nr = Math.hypot(ax, ay) / Math.hypot(tx, ty) - 1;
-      oE.textContent = fr(ang, 1) + '\u00b0 en direction, ' + (Math.abs(nr) < 0.0005 ? '0' : fr(nr * 100, 1)) + ' % en norme';
+      if (cbE.checked) { arrow(c, Ms[0], eRow, Ms[0] + ta[0] * KA * k, eRow - ta[1] * KA * k, 'rgba(30,41,59,.5)', 2, [3, 3]); }
+      if (cbA.checked && u3 > 0) {
+        var ex = Ms[0] + r.ax * KA * k * u3, ey = aRow - r.ay * KA * k * u3;
+        arrow(c, Ms[0], aRow, ex, ey, CA, 3.6);
+        if (u3 >= 1) {
+          var ad = [ex - Ms[0], ey - aRow], an = Math.hypot(ad[0], ad[1]) || 1;
+          labels.push({ x: ex + ad[0] / an * 15, y: ey + ad[1] / an * 15, w: 26, h: 26, nx: ad[0] / an, ny: ad[1] / an, pr: 2, f: function (x, y) { vecLabel(c, 'a' + ind(i), x, y + 6, CA); } });
+        }
+      }
+      /* toutes les étiquettes en dernier, par-dessus les tracés ; une étiquette qui en chevauche une autre
+         (déjà placée, plus prioritaire) est éloignée pas à pas dans sa direction de décalage */
+      var placed = [];
+      P.forEach(function (q) { var sq = S2(q); placed.push({ x: sq[0], y: sq[1], w: 12, h: 12 }); });   /* les points sont des obstacles */
+      labels.sort(function (a, b) { return a.pr - b.pr; }).forEach(function (L) {
+        for (var tr = 0; tr < 8; tr++) {
+          var hit = placed.some(function (q) { return Math.abs(q.x - L.x) < (q.w + L.w) / 2 + 2 && Math.abs(q.y - L.y) < (q.h + L.h) / 2; });
+          if (!hit) { break; }
+          L.x += L.nx * 6; L.y += L.ny * 6;
+        }
+        L.x = Math.max(L.w / 2 + 2, Math.min(w - L.w / 2 - 2, L.x)); L.y = Math.max(L.h / 2 + 2, Math.min(h - L.h / 2 - 2, L.y));
+        placed.push(L); L.f(L.x, L.y);
+      });
+      var ang = Math.abs(Math.atan2(r.ax * ta[1] - r.ay * ta[0], r.ax * ta[0] + r.ay * ta[1])) * 180 / Math.PI, nr = Math.hypot(r.ax, r.ay) / Math.hypot(ta[0], ta[1]) - 1;
+      oE.textContent = fr(ang, 1) + '° en direction, ' + (Math.abs(nr) < 0.0005 ? '0' : fr(nr * 100, 1)) + ' % en norme';
       msg.textContent = m.m;
     }
+    /* déroulé de la construction : 3 étapes d'environ 0,8 s */
+    function replay() {
+      if (RM) { prog = 3; draw(); return; }
+      prog = 0; var t0 = null;
+      if (anim) { cancelAnimationFrame(anim); }
+      function stepC(ts) {
+        if (t0 === null) { t0 = ts; }
+        prog = Math.min(3, (ts - t0) / 800);
+        draw(true);
+        anim = prog < 3 ? requestAnimationFrame(stepC) : null;
+      }
+      anim = requestAnimationFrame(stepC);
+    }
     function form() { oF.innerHTML = FORM[meth]; if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([oF]); } else if (window.renderMathInElement) { window.renderMathInElement(oF); } }
-    rI.addEventListener('input', draw);
-    [cbV, cbD, cbA, cbE].forEach(function (x) { x.addEventListener('change', draw); });
-    $$(root, 'input[name="mov"]').forEach(function (x) { x.addEventListener('change', function () { mode = x.value; rI.value = MOV[mode].i0; draw(); }); });
-    $$(root, 'input[name="meth"]').forEach(function (x) { x.addEventListener('change', function () { meth = x.value; form(); draw(); }); });
-    function setup() { S = canvasCtx(cv); draw(); }
+    rI.addEventListener('input', replay);
+    [cbV, cbA, cbE].forEach(function (x) { x.addEventListener('change', draw); });
+    cbD.addEventListener('change', replay);
+    bR.addEventListener('click', replay);
+    $$(root, 'input[name="mov"]').forEach(function (x) { x.addEventListener('change', function () { mode = x.value; cam = null; rI.value = MOV[mode].i0; replay(); }); });
+    $$(root, 'input[name="meth"]').forEach(function (x) { x.addEventListener('change', function () { meth = x.value; form(); replay(); }); });
+    function setup() {
+      cv.style.height = Math.round(Math.max(300, Math.min(430, cv.clientWidth * 0.62))) + 'px';   /* moins haut sur téléphone */
+      S = canvasCtx(cv); draw();
+    }
+    var seen = false;
+    watchVisible(cv, function (v) { if (v && !seen) { seen = true; replay(); } });   /* la construction se joue quand on arrive sur l'animation */
     setup(); onResize(setup);
   })();
   /* ================= 4. Position, vitesse et accélération d'un mouvement rectiligne ================= */
