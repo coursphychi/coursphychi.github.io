@@ -321,13 +321,13 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
 
 <div class="nt-b nt-ask">
 <p class="nt-tag"><i class="fa-solid fa-circle-question"></i>Question</p>
-<p>Tracer les évolutions de la position $\color{#2A6BC4}x(t)$, de la vitesse $\color{#D97706}v(t)$ et de l'accélération $\color{#059669}a(t)$ pour un mouvement rectiligne uniforme, puis pour un mouvement rectiligne uniformément accéléré.</p>
+<p>Tracer les évolutions de la position $\color{#2A6BC4}x(t)$, de la vitesse $\color{#F59E0B}v(t)$ et de l'accélération $\color{#059669}a(t)$ pour un mouvement rectiligne uniforme, puis pour un mouvement rectiligne uniformément accéléré.</p>
 </div>
 
 <div class="nt-lab" id="lab-xva">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
 <p class="nt-lab-title">Position, vitesse et accélération d'un mouvement rectiligne</p>
-<canvas style="height:430px;" aria-label="Mobile sur une piste rectiligne et graphes de x(t), v(t) et a(t)"></canvas>
+<canvas style="height:540px;" aria-label="Mobile sur une piste rectiligne et graphes de x(t), v(t) et a(t)"></canvas>
 <div class="nt-ctrls">
 <label class="nt-ctrl">Position initiale $x_0$&nbsp;: <b class="out-x0"></b><input type="range" data-p="x0" min="-10" max="10" step="0.5" value="-8"></label>
 <label class="nt-ctrl">Vitesse initiale $v_0$&nbsp;: <b class="out-v0"></b><input type="range" data-p="v0" min="-6" max="10" step="0.5" value="5"></label>
@@ -381,7 +381,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
 <p class="nt-tag"><i class="fa-solid fa-book-open"></i>Le repère de Frenet</p>
 <p>Pour décrire le mouvement circulaire d'un point M sur un cercle de centre O, on utilise un <span class="imp nt-hole">repère de Frenet</span>. C'est un repère mobile centré au point étudié M et de vecteurs unitaires&nbsp;:</p>
 <ul class="nt-facts">
-<li>$\color{#D97706}\vec{u}_T$&nbsp;: <b style="color:#D97706;">vecteur tangent</b>, tangent à la trajectoire, orienté dans le sens du mouvement&nbsp;;</li>
+<li>$\color{#F59E0B}\vec{u}_T$&nbsp;: <b style="color:#F59E0B;">vecteur tangent</b>, tangent à la trajectoire, orienté dans le sens du mouvement&nbsp;;</li>
 <li>$\color{#059669}\vec{u}_N$&nbsp;: <b style="color:#059669;">vecteur normal</b>, de direction (OM), orienté vers le centre O.</li>
 </ul>
 <p class="nt-note">$\vec{u}_T$ est parfois noté $\vec{T}$ et $\vec{u}_N$ noté $\vec{N}$.</p>
@@ -467,7 +467,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ROOT = getComputedStyle(document.documentElement);
   function col(name) { return ROOT.getPropertyValue(name).trim() || '#2A6BC4'; }
-  var CP = '#2A6BC4', CV = '#D97706', CA = '#059669', CT = '#E11D48';   /* position, vitesse, accélération, trajectoire */
+  var CP = '#2A6BC4', CV = '#F59E0B', CA = '#059669', CT = '#E11D48';   /* position, vitesse, accélération, trajectoire */
   function fr(x, nd) { return x.toFixed(nd).replace('.', ',').replace('-', '\u2212'); }
   function $(root, sel) { return root.querySelector(sel); }
   function $$(root, sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
@@ -497,6 +497,9 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     if (halo) { c.lineJoin = 'round'; c.lineWidth = 4; c.strokeStyle = 'rgba(248,250,252,.95)'; c.strokeText(s, x, y); }
     c.fillStyle = color; c.fillText(s, x, y);
   }
+  function rr(c, x, y, w, h, r) {   /* rectangle à coins arrondis (repli si roundRect absent) */
+    c.beginPath(); if (c.roundRect) { c.roundRect(x, y, w, h, r); } else { c.rect(x, y, w, h); }
+  }
   function ind(n) { return String(n).replace(/[0-9]/g, function (d) { return '\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088\u2089'[+d]; }); }   /* indice en caractères souscrits : v₃, M₄… */
   function vecLabel(c, s, x, y, color, noBg) {   /* lettre surmontée d'une flèche ; un fin contour clair la détache des tracés (sauf noBg) */
     c.font = 'italic 700 15px Georgia, serif'; c.textAlign = 'center'; c.lineJoin = 'round'; c.lineCap = 'round';
@@ -524,9 +527,6 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     var C_SKY1 = '#DCEEFB', C_SKY2 = '#F5FAFE', C_GRASS = '#E4F0DF', C_TREE = '#B9DBB4', C_TREE2 = '#A3CF9F', C_TRUNK = '#C8B8A6', C_POLE = '#CBD5E1';
     var C_BODY = CP, C_WALL = '#F1F6FD', C_DARK = '#334155';
     function hash(i) { var s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); }
-    function rr(c, x, y, w, h, r) {   /* rectangle à coins arrondis (repli si roundRect absent) */
-      c.beginPath(); if (c.roundRect) { c.roundRect(x, y, w, h, r); } else { c.rect(x, y, w, h); }
-    }
     function draw() {
       if (!S) { return; }
       var c = S.ctx, w = S.w, h = S.h, yg = h - 40, narrow = w < 500;
@@ -690,7 +690,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       /* corde */
       arrow(c, X(A[0]), Y(A[1]), X(B[0]), Y(B[1]), CP, 2.2);
       /* tangente */
-      c.strokeStyle = 'rgba(217,119,6,.45)'; c.setLineDash([5, 5]); c.lineWidth = 1.5;
+      c.strokeStyle = 'rgba(245,158,11,.5)'; c.setLineDash([5, 5]); c.lineWidth = 1.5;
       c.beginPath(); c.moveTo(X(A[0] - Vx * 0.6), Y(A[1] - Vy * 0.6)); c.lineTo(X(A[0] + Vx * 0.9), Y(A[1] + Vy * 0.9)); c.stroke(); c.setLineDash([]);
       arrow(c, X(A[0]), Y(A[1]), X(A[0] + Vx * KV), Y(A[1] + Vy * KV), CV, 3.2);
       arrow(c, X(A[0]), Y(A[1]), X(A[0] + vx * KV), Y(A[1] + vy * KV), CA, 2.6, [6, 4]);
@@ -782,7 +782,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       if (cbD.checked) {
         var e1 = [Mi[0] + vb[0] * KV, Mi[1] + vb[1] * KV], e2 = [e1[0] - va[0] * KV, e1[1] - va[1] * KV];
         arrow(c, X(Mi[0]), Y(Mi[1]), X(e1[0]), Y(e1[1]), CV, 2, [5, 4]);
-        arrow(c, X(e1[0]), Y(e1[1]), X(e2[0]), Y(e2[1]), '#B45309', 2, [5, 4]);
+        arrow(c, X(e1[0]), Y(e1[1]), X(e2[0]), Y(e2[1]), '#D97706', 2, [5, 4]);
         arrow(c, X(Mi[0]), Y(Mi[1]), X(e2[0]), Y(e2[1]), CA, 2.4);
         /* étiquette de Δv : au milieu du vecteur, du côté opposé au triangle de construction */
         var mx = (X(Mi[0]) + X(e2[0])) / 2, my = (Y(Mi[1]) + Y(e2[1])) / 2, dx = X(e2[0]) - X(Mi[0]), dy = Y(e2[1]) - Y(Mi[1]), nn = Math.hypot(dx, dy) || 1;
@@ -822,48 +822,102 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     function p() { return { x0: +rX.value, v0: +rV.value, a: +rA.value }; }
     function X(q, s) { return q.x0 + q.v0 * s + 0.5 * q.a * s * s; }
     function V(q, s) { return q.v0 + q.a * s; }
+    var CPd = '#1E4E9C', CVd = '#B45309', CAd = '#047857';   /* versions foncées, pour le texte des pastilles */
+    function nice(range, n) {   /* pas « rond » (1, 2, 2,5 ou 5 × 10ⁿ) donnant environ n intervalles */
+      var r = range / Math.max(1, n), pw = Math.pow(10, Math.floor(Math.log(r) / Math.LN10)), m = r / pw;
+      return (m <= 1 ? 1 : (m <= 2 ? 2 : (m <= 2.5 ? 2.5 : (m <= 5 ? 5 : 10)))) * pw;
+    }
+    function pill(c, s, x, y, fg, base) {   /* étiquette sur pastille teintée */
+      c.font = '700 11.5px system-ui, sans-serif'; var tw = c.measureText(s).width;
+      c.fillStyle = 'rgba(255,255,255,.92)'; rr(c, x, y, tw + 14, 19, 9.5); c.fill();
+      c.globalAlpha = 0.14; c.fillStyle = base; rr(c, x, y, tw + 14, 19, 9.5); c.fill(); c.globalAlpha = 1;
+      txt(c, s, x + 7, y + 13.5, fg, '700 11.5px system-ui, sans-serif', 'left');
+    }
     function draw() {
       var q = p(), c = S.ctx, w = S.w, h = S.h, ts = t % (TM + 1.0), tt = Math.min(ts, TM);
-      oX.textContent = fr(q.x0, 1) + ' m'; oV.textContent = fr(q.v0, 1) + ' m\u00b7s\u207b\u00b9'; oA.textContent = fr(q.a, 1) + ' m\u00b7s\u207b\u00b2';
+      oX.textContent = fr(q.x0, 1) + ' m'; oV.textContent = fr(q.v0, 1) + ' m·s⁻¹'; oA.textContent = fr(q.a, 1) + ' m·s⁻²';
       c.clearRect(0, 0, w, h);
-      /* piste */
-      var trackY = 34, xs = [];
+      /* ---- piste ---- */
+      var trackY = 76, xs = [];
       for (var s0 = 0; s0 <= TM; s0 += 0.1) { xs.push(X(q, s0)); }
       var lo = Math.min.apply(null, xs), hi = Math.max.apply(null, xs), span = Math.max(10, hi - lo);
       var stp = span > 120 ? 25 : (span > 60 ? 10 : 5);   /* pas des graduations selon l'étendue */
       var XMIN = Math.floor(lo / stp) * stp - stp, XMAX = Math.ceil(hi / stp) * stp + stp;
-      function PX(x) { return 40 + (x - XMIN) / (XMAX - XMIN) * (w - 80); }
-      c.strokeStyle = col('--slate'); c.lineWidth = 2; c.beginPath(); c.moveTo(PX(XMIN), trackY + 10); c.lineTo(PX(XMAX), trackY + 10); c.stroke();
+      function PX(x) { return 30 + (x - XMIN) / (XMAX - XMIN) * (w - 60); }
+      c.lineCap = 'round'; c.strokeStyle = '#CBD5E1'; c.lineWidth = 4;
+      c.beginPath(); c.moveTo(PX(XMIN), trackY); c.lineTo(PX(XMAX), trackY); c.stroke();
       var sk = Math.max(1, Math.ceil(34 / Math.abs(PX(XMIN + stp) - PX(XMIN)))), ig = 0;   /* graduations écrites une sur deux (ou trois…) si la place manque */
-      for (var g = XMIN; g <= XMAX; g += stp, ig++) { c.beginPath(); c.moveTo(PX(g), trackY + 6); c.lineTo(PX(g), trackY + 14); c.stroke(); if (ig % sk === 0) { txt(c, g + ' m', PX(g), trackY + 27, col('--muted'), '10px system-ui, sans-serif'); } }
-      var xc = Math.max(XMIN, Math.min(XMAX, X(q, tt)));
-      c.fillStyle = CP; c.beginPath(); if (c.roundRect) { c.roundRect(PX(xc) - 14, trackY - 8, 28, 16, 5); } else { c.rect(PX(xc) - 14, trackY - 8, 28, 16); } c.fill();
-      var vv = V(q, tt);
-      /* échelle choisie pour que la plus grande vitesse atteinte donne une flèche de 60 px */
-      var vmax = 0.1; for (var s1 = 0; s1 <= TM; s1 += 0.1) { vmax = Math.max(vmax, Math.abs(V(q, s1))); }
-      if (Math.abs(vv) > 0.05) { arrow(c, PX(xc), trackY - 16, PX(xc) + vv / vmax * 60, trackY - 16, CV, 2.6); }
-      /* trois graphes */
-      var G = [{ f: function (s) { return X(q, s); }, c: CP, n: 'x(t) (m)' }, { f: function (s) { return V(q, s); }, c: CV, n: 'v(t) (m\u00b7s\u207b\u00b9)' }, { f: function () { return q.a; }, c: CA, n: 'a(t) (m\u00b7s\u207b\u00b2)' }];
-      var top = 66, gh = (h - top - 22) / 3;
+      c.strokeStyle = '#94A3B8'; c.lineWidth = 1;
+      for (var g = XMIN; g <= XMAX + 1e-9; g += stp, ig++) {
+        c.beginPath(); c.moveTo(PX(g), trackY + 4); c.lineTo(PX(g), trackY + 9); c.stroke();
+        if (ig % sk === 0) { txt(c, g + ' m', PX(g), trackY + 21, col('--muted'), '600 10px system-ui, sans-serif'); }
+      }
+      /* positions passées, toutes les 0,5 s : leur espacement montre la vitesse */
+      for (var sp = 0; sp <= tt + 1e-9; sp += 0.5) {
+        c.fillStyle = 'rgba(42,107,196,.30)'; c.beginPath(); c.arc(PX(X(q, sp)), trackY, 3.5, 0, 2 * Math.PI); c.fill();
+      }
+      /* le mobile : un petit chariot */
+      var xc = Math.max(XMIN, Math.min(XMAX, X(q, tt))), cx = PX(xc);
+      c.fillStyle = CP; rr(c, cx - 15, trackY - 21, 30, 13, 4); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.35)'; rr(c, cx - 10, trackY - 18.5, 20, 4, 2); c.fill();
+      c.fillStyle = '#334155';
+      [-8, 8].forEach(function (d) { c.beginPath(); c.arc(cx + d, trackY - 6, 4, 0, 2 * Math.PI); c.fill(); });
+      /* vecteurs vitesse et accélération, portés par le mobile */
+      var vv = V(q, tt), vmax = 0.1;
+      for (var s1 = 0; s1 <= TM; s1 += 0.1) { vmax = Math.max(vmax, Math.abs(V(q, s1))); }   /* la plus grande vitesse atteinte donne une flèche de 60 px */
+      function vecOn(val, len, y, color, colorTxt, name) {
+        if (Math.abs(val) < 0.05 || Math.abs(len) < 8) { return; }   /* flèche trop courte : ni flèche ni étiquette */
+        var x2 = cx + len, sg = len > 0 ? 1 : -1;
+        arrow(c, cx, y, x2, y, color, 2.6);
+        vecLabel(c, name, Math.max(12, Math.min(w - 12, x2 + sg * 12)), y + 5, colorTxt);
+      }
+      vecOn(vv, vv / vmax * 60, trackY - 32, CV, CV, 'v');
+      vecOn(q.a, q.a / 4 * 45, trackY - 56, CA, CA, 'a');
+      /* ---- trois graphes, chacun dans sa carte ---- */
+      var G = [{ f: function (s) { return X(q, s); }, c: CP, d: CPd, n: 'x (m)' },
+               { f: function (s) { return V(q, s); }, c: CV, d: CVd, n: 'v (m·s⁻¹)' },
+               { f: function () { return q.a; }, c: CA, d: CAd, n: 'a (m·s⁻²)' }];
+      var top = trackY + 34, gap = 10, ph = (h - top - 22 - 2 * gap) / 3, L = 48, R = w - 16;
+      function GX(s) { return L + s / TM * (R - L); }
       G.forEach(function (gr, k) {
-        var y0 = top + k * gh, L = 46, R = w - 14, T = y0 + 6, B = y0 + gh - 10, vals = [];
-        for (var s = 0; s <= TM; s += 0.05) { vals.push(gr.f(s)); }
+        var y0 = top + k * (ph + gap), T = y0 + 32, B = y0 + ph - 10, vals = [];   /* bande d'en-tête réservée à la pastille */
+        for (var s = 0; s <= TM + 1e-9; s += 0.05) { vals.push(gr.f(s)); }
         var mn = Math.min(0, Math.min.apply(null, vals)), mx = Math.max(0, Math.max.apply(null, vals));
-        if (mx - mn < 1) { mx += 0.5; mn -= 0.5; }
-        function GX(s) { return L + s / TM * (R - L); }
+        if (mx - mn < 1e-9) { mn -= 1; mx += 1; }
+        var st = nice(mx - mn, Math.max(2, Math.floor((B - T) / 26)));
+        mn = Math.floor(mn / st + 1e-9) * st; mx = Math.ceil(mx / st - 1e-9) * st;
         function GY(v) { return B - (v - mn) / (mx - mn) * (B - T); }
-        c.strokeStyle = col('--line'); c.lineWidth = 1; c.beginPath(); c.moveTo(L, T); c.lineTo(L, B); c.stroke();
-        c.strokeStyle = col('--muted'); c.beginPath(); c.moveTo(L, GY(0)); c.lineTo(R, GY(0)); c.stroke();
-        txt(c, gr.n, L + 8, T + 10, gr.c, '700 12px system-ui, sans-serif', 'left');
-        [mn, mx].forEach(function (v) { if (Math.abs(v) > 1e-9 && Math.abs(GY(v) - GY(0)) > 12) { txt(c, fr(v, Math.abs(v) < 10 ? 1 : 0), L - 6, GY(v) + 4, col('--muted'), '10px system-ui, sans-serif', 'right'); c.strokeStyle = col('--line'); c.beginPath(); c.moveTo(L - 3, GY(v)); c.lineTo(L, GY(v)); c.stroke(); } });
-        txt(c, '0', L - 6, GY(0) + 4, col('--muted'), '10px system-ui, sans-serif', 'right');
-        c.strokeStyle = gr.c; c.lineWidth = 2.4; c.beginPath();
-        vals.forEach(function (v, j) { var xx = GX(j * 0.05), yy = GY(v); if (j === 0) { c.moveTo(xx, yy); } else { c.lineTo(xx, yy); } });
-        c.stroke();
-        c.fillStyle = gr.c; c.beginPath(); c.arc(GX(tt), GY(gr.f(tt)), 5, 0, 2 * Math.PI); c.fill();
-        if (k === 2) { for (var s2 = 0; s2 <= TM; s2++) { txt(c, s2 + ' s', GX(s2), B + 14, col('--muted'), '10px system-ui, sans-serif'); } }
+        c.fillStyle = '#FFFFFF'; c.strokeStyle = col('--line'); c.lineWidth = 1; rr(c, 6.5, y0 + 0.5, w - 13, ph, 10); c.fill(); c.stroke();
+        /* quadrillage fin (0,5 s ; demi-pas) puis principal (1 s ; pas) */
+        c.lineWidth = 1;
+        for (var gs = 0; gs <= TM + 1e-9; gs += 0.5) {
+          c.strokeStyle = (Math.abs(gs - Math.round(gs)) < 1e-9) ? '#E2E8F0' : '#F1F5F9';
+          c.beginPath(); c.moveTo(Math.round(GX(gs)) + 0.5, T); c.lineTo(Math.round(GX(gs)) + 0.5, B); c.stroke();
+        }
+        var nd = st >= 1 && Math.abs(st - Math.round(st)) < 1e-9 ? 0 : (st >= 0.1 ? 1 : 2);
+        for (var gv = mn; gv <= mx + st / 4; gv += st / 2) {
+          var major = Math.abs(gv / st - Math.round(gv / st)) < 1e-6, yy = Math.round(GY(gv)) + 0.5;
+          c.strokeStyle = Math.abs(gv) < 1e-9 ? '#94A3B8' : (major ? '#E2E8F0' : '#F1F5F9');
+          c.beginPath(); c.moveTo(L, yy); c.lineTo(R, yy); c.stroke();
+          if (major) { txt(c, Math.abs(gv) < 1e-9 ? '0' : fr(gv, nd), L - 7, yy + 3.5, col('--slate'), '10px system-ui, sans-serif', 'right'); }
+        }
+        /* curseur de l'instant t */
+        c.strokeStyle = 'rgba(30,41,59,.28)'; c.setLineDash([3, 3]);
+        c.beginPath(); c.moveTo(GX(tt), T - 4); c.lineTo(GX(tt), B + 4); c.stroke(); c.setLineDash([]);
+        /* courbe : en léger pour la suite, en plein jusqu'à l'instant t */
+        function path(t1) {
+          c.beginPath();
+          for (var j = 0; j * 0.05 <= t1 + 1e-9; j++) { var px = GX(j * 0.05), py = GY(gr.f(j * 0.05)); if (j === 0) { c.moveTo(px, py); } else { c.lineTo(px, py); } }
+          c.lineTo(GX(t1), GY(gr.f(t1)));
+        }
+        c.lineJoin = 'round'; c.strokeStyle = gr.c;
+        c.globalAlpha = 0.25; c.lineWidth = 2; path(TM); c.stroke(); c.globalAlpha = 1;
+        c.lineWidth = 2.8; path(tt); c.stroke();
+        c.fillStyle = '#FFFFFF'; c.beginPath(); c.arc(GX(tt), GY(gr.f(tt)), 6.5, 0, 2 * Math.PI); c.fill();
+        c.fillStyle = gr.c; c.beginPath(); c.arc(GX(tt), GY(gr.f(tt)), 4.5, 0, 2 * Math.PI); c.fill();
+        pill(c, gr.n, 14, y0 + 7, gr.d, gr.c);
+        if (k === 2) { for (var s2 = 0; s2 <= TM; s2++) { txt(c, s2 + ' s', GX(s2), y0 + ph + 15, col('--slate'), '10px system-ui, sans-serif'); } }
       });
-      c.strokeStyle = 'rgba(30,41,59,.25)'; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(46 + tt / TM * (w - 60), top); c.lineTo(46 + tt / TM * (w - 60), h - 22); c.stroke(); c.setLineDash([]);
       msg.textContent = q.a === 0 ? (q.v0 === 0 ? 'Le mobile est immobile.' : 'Mouvement rectiligne uniforme : v(t) est constante, x(t) est une fonction affine du temps et a(t) est nulle.')
         : 'Mouvement rectiligne uniformément ' + (q.v0 * q.a < 0 ? 'varié : ' : 'accéléré : ') + 'a(t) est constante, v(t) est une fonction affine du temps et x(t) une parabole.' + (q.v0 * q.a < 0 ? ' Ici le mobile freine, s\u2019arrête (v = 0, sommet de la parabole) puis repart en sens inverse.' : '');
     }
