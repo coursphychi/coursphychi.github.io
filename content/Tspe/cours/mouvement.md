@@ -522,7 +522,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     var U = 2.0, H = 1.25, G = 9.81, RB = 0.09, FL = 0.45, LW = 4.4, XB = 2.05;   /* FL : hauteur du plancher ; LW : longueur du wagon ; XB : abscisse du lâcher dans le wagon */
     var TL = Math.sqrt(2 * (H - RB) / G), SLOW = 4, HOLD = 0.5, REST = 1.4, CYCLE = HOLD + TL * SLOW + REST;
     var C_SKY1 = '#DCEEFB', C_SKY2 = '#F5FAFE', C_GRASS = '#E4F0DF', C_TREE = '#B9DBB4', C_TREE2 = '#A3CF9F', C_TRUNK = '#C8B8A6', C_POLE = '#CBD5E1';
-    var C_BODY = CP, C_WALL = '#F1F6FD', C_DARK = '#334155', C_SKIN = '#F3C9A4', C_SHIRT = '#0E7490';
+    var C_BODY = CP, C_WALL = '#F1F6FD', C_DARK = '#334155';
     function hash(i) { var s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); }
     function rr(c, x, y, w, h, r) {   /* rectangle à coins arrondis (repli si roundRect absent) */
       c.beginPath(); if (c.roundRect) { c.roundRect(x, y, w, h, r); } else { c.rect(x, y, w, h); }
@@ -580,19 +580,14 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       c.strokeStyle = 'rgba(42,107,196,.25)'; c.lineWidth = 1.5;
       for (j = 0; j < 4; j++) { rr(c, X(xTrain + 0.45 + j * 0.95), Y(FL + 2.0), 0.7 * k, 0.75 * k, 0.12 * k); c.stroke(); }
       c.fillStyle = 'rgba(42,107,196,.07)'; c.fillRect(wx, Y(FL + 0.95), wr - wx, Y(FL) - Y(FL + 0.95));   /* soubassement de la paroi */
-      /* le passager, debout, bras tendu vers le point de lâcher */
-      var px = xTrain + XB - 0.5, released = tp > 0;
-      var hip = Y(FL + 0.88), sh = Y(FL + 1.4), handX = X(xTrain + XB) - (RB + 0.04) * k, handY = Y(FL + H);
-      c.lineCap = 'round'; c.lineJoin = 'round';
-      c.strokeStyle = C_DARK; c.lineWidth = 0.13 * k;   /* jambes */
-      c.beginPath(); c.moveTo(X(px - 0.03), hip); c.lineTo(X(px - 0.12), Y(FL + 0.05)); c.moveTo(X(px + 0.03), hip); c.lineTo(X(px + 0.12), Y(FL + 0.05)); c.stroke();
-      c.strokeStyle = C_SHIRT; c.lineWidth = 0.17 * k;   /* bras arrière, tronc */
-      c.beginPath(); c.moveTo(X(px), sh + 0.04 * k); c.lineTo(X(px - 0.12), Y(FL + 0.95)); c.stroke();
-      c.lineWidth = 0.3 * k; c.beginPath(); c.moveTo(X(px), sh); c.lineTo(X(px), hip); c.stroke();
-      c.lineWidth = 0.13 * k; c.beginPath(); c.moveTo(X(px + 0.04), sh + 0.03 * k); c.lineTo(handX - 0.06 * k, handY); c.stroke();   /* bras tendu */
-      c.fillStyle = C_SKIN; c.beginPath(); c.arc(handX - 0.04 * k, handY, 0.065 * k, 0, 2 * Math.PI); c.fill();
-      c.beginPath(); c.arc(X(px + 0.02), Y(FL + 1.6), 0.13 * k, 0, 2 * Math.PI); c.fill();   /* tête */
-      c.fillStyle = '#5B4636'; c.beginPath(); c.arc(X(px + 0.01), Y(FL + 1.62), 0.135 * k, Math.PI * 0.95, Math.PI * 2.1); c.fill();
+      /* le passager (bonhomme fil de fer), debout, bras tendu vers le point de lâcher */
+      var px = xTrain + XB - 0.45, released = tp > 0, handX = X(xTrain + XB) - (RB + 0.03) * k, handY = Y(FL + H);
+      c.strokeStyle = '#94A3B8'; c.lineWidth = Math.max(2.5, 0.045 * k); c.lineCap = 'round'; c.lineJoin = 'round';
+      c.beginPath(); c.moveTo(X(px), Y(FL + 1.35)); c.lineTo(X(px), Y(FL + 0.75));   /* tronc */
+      c.moveTo(X(px), Y(FL + 0.75)); c.lineTo(X(px - 0.15), Y(FL)); c.moveTo(X(px), Y(FL + 0.75)); c.lineTo(X(px + 0.15), Y(FL));   /* jambes */
+      c.moveTo(X(px), Y(FL + 1.25)); c.lineTo(handX, handY);   /* bras tendu */
+      c.moveTo(X(px), Y(FL + 1.25)); c.lineTo(X(px - 0.2), Y(FL + 0.85)); c.stroke();   /* autre bras */
+      c.fillStyle = '#94A3B8'; c.beginPath(); c.arc(X(px), Y(FL + 1.52), 0.14 * k, 0, 2 * Math.PI); c.fill();   /* tête */
       /* trajectoire de la balle : chronophotographie (une position toutes les 0,04 s) + tracé continu */
       function bx(s) { return sol ? XB + U * s : XB; }
       function by(s) { return Math.max(FL + RB, FL + H - 0.5 * G * s * s); }
