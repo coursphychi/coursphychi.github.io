@@ -90,6 +90,7 @@ draft = false
 ## 7. Schémas et animations
 
 - Couleurs harmonieuses, bleu dominant (en-tête du thème) ; traits fins ; étiquettes sobres. Palette : variables de `:root` dans `cours.css`.
+- Couleurs des grandeurs cinématiques (mouvement, lois de Newton…) : position `#2A6BC4`, vitesse `#F59E0B` (dans le texte et le LaTeX : `#A16207`, plus foncé pour rester lisible), accélération `#059669`, trajectoire `#E11D48`.
 - **Personnages** : toujours dessinés en **bonhomme fil de fer** (traits gris `#94A3B8`, tête en disque plein, pas de vêtements ni de couleur de peau), y compris quand le reste de la scène est détaillé.
 - **Légendes** : le moins possible. Ne pas nommer ce qui se reconnaît (« wagon », « sol »…) ; garder seulement les étiquettes indispensables (grandeurs et appareils d'un montage, vecteurs, axes).
 - Dans les dessins, pas d'effet décoratif qui n'apporte rien à la physique (par exemple une ombre sous un objet).

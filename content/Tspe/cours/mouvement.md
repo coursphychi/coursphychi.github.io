@@ -321,7 +321,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
 
 <div class="nt-b nt-ask">
 <p class="nt-tag"><i class="fa-solid fa-circle-question"></i>Question</p>
-<p>Tracer les évolutions de la position $\color{#2A6BC4}x(t)$, de la vitesse $\color{#F59E0B}v(t)$ et de l'accélération $\color{#059669}a(t)$ pour un mouvement rectiligne uniforme, puis pour un mouvement rectiligne uniformément accéléré.</p>
+<p>Tracer les évolutions de la position $\color{#2A6BC4}x(t)$, de la vitesse $\color{#A16207}v(t)$ et de l'accélération $\color{#059669}a(t)$ pour un mouvement rectiligne uniforme, puis pour un mouvement rectiligne uniformément accéléré.</p>
 </div>
 
 <div class="nt-lab" id="lab-xva">
@@ -381,7 +381,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
 <p class="nt-tag"><i class="fa-solid fa-book-open"></i>Le repère de Frenet</p>
 <p>Pour décrire le mouvement circulaire d'un point M sur un cercle de centre O, on utilise un <span class="imp nt-hole">repère de Frenet</span>. C'est un repère mobile centré au point étudié M et de vecteurs unitaires&nbsp;:</p>
 <ul class="nt-facts">
-<li>$\color{#F59E0B}\vec{u}_T$&nbsp;: <b style="color:#F59E0B;">vecteur tangent</b>, tangent à la trajectoire, orienté dans le sens du mouvement&nbsp;;</li>
+<li>$\color{#A16207}\vec{u}_T$&nbsp;: <b style="color:#A16207;">vecteur tangent</b>, tangent à la trajectoire, orienté dans le sens du mouvement&nbsp;;</li>
 <li>$\color{#059669}\vec{u}_N$&nbsp;: <b style="color:#059669;">vecteur normal</b>, de direction (OM), orienté vers le centre O.</li>
 </ul>
 <p class="nt-note">$\vec{u}_T$ est parfois noté $\vec{T}$ et $\vec{u}_N$ noté $\vec{N}$.</p>
@@ -467,7 +467,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ROOT = getComputedStyle(document.documentElement);
   function col(name) { return ROOT.getPropertyValue(name).trim() || '#2A6BC4'; }
-  var CP = '#2A6BC4', CV = '#F59E0B', CA = '#059669', CT = '#E11D48';   /* position, vitesse, accélération, trajectoire */
+  var CP = '#2A6BC4', CV = '#F59E0B', CA = '#059669', CT = '#E11D48';   /* position, vitesse (texte : #A16207, plus foncé), accélération, trajectoire */
   function fr(x, nd) { return x.toFixed(nd).replace('.', ',').replace('-', '\u2212'); }
   function $(root, sel) { return root.querySelector(sel); }
   function $$(root, sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
@@ -822,7 +822,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     function p() { return { x0: +rX.value, v0: +rV.value, a: +rA.value }; }
     function X(q, s) { return q.x0 + q.v0 * s + 0.5 * q.a * s * s; }
     function V(q, s) { return q.v0 + q.a * s; }
-    var CPd = '#1E4E9C', CVd = '#B45309', CAd = '#047857';   /* versions foncées, pour le texte des pastilles */
+    var CPd = '#1E4E9C', CVd = '#A16207', CAd = '#047857';   /* versions foncées, pour le texte des pastilles */
     function nice(range, n) {   /* pas « rond » (1, 2, 2,5 ou 5 × 10ⁿ) donnant environ n intervalles */
       var r = range / Math.max(1, n), pw = Math.pow(10, Math.floor(Math.log(r) / Math.LN10)), m = r / pw;
       return (m <= 1 ? 1 : (m <= 2 ? 2 : (m <= 2.5 ? 2.5 : (m <= 5 ? 5 : 10)))) * pw;
