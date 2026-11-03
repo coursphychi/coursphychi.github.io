@@ -92,7 +92,7 @@ draft = false
 - Couleurs harmonieuses, bleu dominant (en-tête du thème) ; traits fins ; étiquettes sobres. Palette : variables de `:root` dans `cours.css`.
 - **Personnages** : toujours dessinés en **bonhomme fil de fer** (traits gris `#94A3B8`, tête en disque plein, pas de vêtements ni de couleur de peau), y compris quand le reste de la scène est détaillé.
 - **Légendes** : le moins possible. Ne pas nommer ce qui se reconnaît (« wagon », « sol »…) ; garder seulement les étiquettes indispensables (grandeurs et appareils d'un montage, vecteurs, axes).
-- Pas d'effets décoratifs qui n'apportent rien à la physique (ombres portées, etc.).
+- Dans les dessins, pas d'effet décoratif qui n'apporte rien à la physique (par exemple une ombre sous un objet).
 - **Aucun texte coupé** par un trait : décaler l'étiquette, ou la poser sur une pastille de fond.
 - Sur fond sombre : texte sans halo blanc (ou halo sombre).
 - Fonction d'écriture sur canvas : `save()` / `restore()` autour du halo, sinon les tracés suivants héritent de la couleur blanche (grilles invisibles).
