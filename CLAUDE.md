@@ -70,7 +70,7 @@ draft = false
 
 - Démonstrations : listes `<ol class="nt-steps">`.
 - Tableaux : `<div class="nt-scroll"><table class="nt-t">` (`nt-t-egal` si aucune colonne n'est une colonne d'en-tête).
-- Champs de saisie compacts, unité collée : `<span class="nt-champ"><label>…</label><input type="text"><span class="nt-u">mL</span></span>`.
+- Champs de saisie compacts, unité collée : `<span class="nt-champ"><label>…</label><input type="text"><span class="nt-u">mL</span></span>` (style commun dans `cours.css` ; `class="nt-large"` sur l'`input` pour un champ de texte long).
 
 ## 5. Médias
 
@@ -78,7 +78,7 @@ draft = false
 - Exception rare, à justifier : une image vraiment irremplaçable. Elle est alors hébergée sur `https://presentationssite.github.io/<fichier>`.
 - Images et vidéos avec légende : `style="margin-top:0.5em; margin-bottom:0;"` sur l'image ou la vidéo.
 - YouTube : `{{< youtube-plus id="…" ratio="16x9" width="500" shadow=true rounded=true >}}`, intégré directement plutôt qu'en lien. Dans un bloc HTML, pas de ligne vide autour.
-- Animations eduMedia : `<div class="nt-embed"><iframe …></iframe></div>`. GeoGebra : plutôt en lien.
+- Vidéo locale ou animation eduMedia : `<div class="nt-embed"><video …></video></div>` ou `<div class="nt-embed"><iframe …></iframe></div>` (style commun dans `cours.css` ; iframe au format 5:4 par défaut, variantes `nt-169`, `nt-large`, `nt-bandeau`). GeoGebra : plutôt en lien.
 
 ## 6. LaTeX (MathJax)
 
