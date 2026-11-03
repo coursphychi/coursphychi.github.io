@@ -554,9 +554,9 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
           var th = 0.75 + 0.55 * hash(i + 50), rf = 0.38 + 0.18 * hash(i + 90);
           c.fillStyle = C_TRUNK; c.fillRect(xs - 0.045 * k, base - th * k, 0.09 * k, th * k);
           c.fillStyle = hh > 0.7 ? C_TREE2 : C_TREE;
-          c.beginPath(); c.arc(xs, base - (th + rf * 0.6) * k, rf * k, 0, 2 * Math.PI);
-          c.arc(xs - rf * 0.55 * k, base - (th + rf * 0.15) * k, rf * 0.7 * k, 0, 2 * Math.PI);
-          c.arc(xs + rf * 0.55 * k, base - (th + rf * 0.2) * k, rf * 0.72 * k, 0, 2 * Math.PI); c.fill();
+          [[0, 0.6, 1], [-0.55, 0.15, 0.7], [0.55, 0.2, 0.72]].forEach(function (f) {   /* trois disques, chacun dans son propre chemin */
+            c.beginPath(); c.arc(xs + f[0] * rf * k, base - (th + f[1] * rf) * k, f[2] * rf * k, 0, 2 * Math.PI); c.fill();
+          });
         } else {                            /* buisson */
           c.fillStyle = C_TREE; c.beginPath(); c.ellipse(xs, base, 0.32 * k, 0.2 * k, 0, Math.PI, 2 * Math.PI); c.fill();
         }
@@ -573,12 +573,12 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       var wx = X(xTrain), wr = X(xTrain + LW), yF = Y(FL), yR = Y(FL + 2.4), post = 0.13 * k, roof = 0.24 * k;
       c.fillStyle = C_WALL; c.beginPath(); c.rect(wx, yR, wr - wx, yF - yR);
       for (var j = 0; j < 4; j++) {
-        var wl = X(xTrain + 0.45 + j * 0.95), wy = Y(FL + 2.0);
-        if (c.roundRect) { c.roundRect(wl, wy, 0.7 * k, 0.75 * k, 0.12 * k); } else { c.rect(wl, wy, 0.7 * k, 0.75 * k); }
+        var wl = X(xTrain + 0.45 + j * 0.95), wy = Y(FL + 2.05);   /* bas des fenêtres à 1,05 m du plancher, nettement sous le bras tendu (1,25 m) */
+        if (c.roundRect) { c.roundRect(wl, wy, 0.7 * k, 1.0 * k, 0.12 * k); } else { c.rect(wl, wy, 0.7 * k, 1.0 * k); }
       }
       c.fill('evenodd');
       c.strokeStyle = 'rgba(42,107,196,.25)'; c.lineWidth = 1.5;
-      for (j = 0; j < 4; j++) { rr(c, X(xTrain + 0.45 + j * 0.95), Y(FL + 2.0), 0.7 * k, 0.75 * k, 0.12 * k); c.stroke(); }
+      for (j = 0; j < 4; j++) { rr(c, X(xTrain + 0.45 + j * 0.95), Y(FL + 2.05), 0.7 * k, 1.0 * k, 0.12 * k); c.stroke(); }
       c.fillStyle = 'rgba(42,107,196,.07)'; c.fillRect(wx, Y(FL + 0.95), wr - wx, Y(FL) - Y(FL + 0.95));   /* soubassement de la paroi */
       /* le passager (bonhomme fil de fer), debout, bras tendu vers le point de lâcher */
       var px = xTrain + XB - 0.45, released = tp > 0, handX = X(xTrain + XB) - (RB + 0.03) * k, handY = Y(FL + H);
@@ -602,11 +602,9 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
           c.beginPath(); c.arc(X(bx(s)), Y(by(s)), Math.max(2.2, 0.035 * k), 0, 2 * Math.PI); c.fill();
         }
       }
-      /* plancher, ombre de la balle, balle */
+      /* plancher, balle */
       c.fillStyle = '#CBD5E1'; c.fillRect(wx, yF - 0.06 * k, wr - wx, 0.06 * k);
-      var bX = X(bx(tp)), bY = Y(by(tp)), rpx = RB * k, hgt = by(tp) - FL - RB;
-      c.fillStyle = 'rgba(30,41,59,' + (0.28 - 0.14 * hgt / H) + ')';
-      c.beginPath(); c.ellipse(bX, yF - 0.06 * k, rpx * (1.1 - 0.4 * hgt / H), rpx * 0.3, 0, 0, 2 * Math.PI); c.fill();
+      var bX = X(bx(tp)), bY = Y(by(tp)), rpx = RB * k;
       var gball = c.createRadialGradient(bX - rpx * 0.35, bY - rpx * 0.35, rpx * 0.1, bX, bY, rpx);
       gball.addColorStop(0, '#FB7185'); gball.addColorStop(1, '#BE123C');
       c.fillStyle = gball; c.beginPath(); c.arc(bX, bY, rpx, 0, 2 * Math.PI); c.fill();
@@ -616,7 +614,6 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
       c.fillStyle = '#458EEC'; c.fillRect(wx + 0.1 * k, yR - roof * 0.62, wr - wx - 0.2 * k, 2);
       c.fillStyle = C_BODY; c.fillRect(wx, yR, post, yF - yR); c.fillRect(wr - post, yR, post, yF - yR);
       c.fillStyle = C_DARK; rr(c, wx - 0.04 * k, yF, wr - wx + 0.08 * k, 0.16 * k, 3); c.fill();
-      txt(c, 'wagon', (wx + wr) / 2, yR - roof / 2 + 4, '#FFFFFF', '700 ' + Math.max(10, Math.round(0.17 * k)) + 'px system-ui, sans-serif');
       /* bogies et roues : elles tournent par rapport au wagon, quel que soit le référentiel */
       var rw = 0.2 * k, rot = U * tp / 0.2;
       [0.75, LW - 0.75].forEach(function (cb) {
