@@ -714,7 +714,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     if (!root) { return; }
     var cv = $(root, 'canvas'), rI = $(root, 'input[type="range"]'), cbV = $(root, '[data-p="v"]'), cbD = $(root, '[data-p="dv"]'), cbA = $(root, '[data-p="a"]'), cbE = $(root, '[data-p="ex"]');
     var msg = $(root, '.nt-msg'), oE = $(root, '.out-err'), oF = $(root, '.nt-chrono-form'), bR = $(root, '[data-act="replay"]'), S, mode = 'para', meth = 'mil';
-    var TAU = 0.08, prog = 4, anim = null, box = {}, cam = null;
+    var TAU = 0.08, prog = 4, anim = null, box = {}, cam = null, lpos = {};   /* lpos : position choisie pour chaque étiquette pendant la construction */
     var MOV = {
       para: { n: 15, i0: 4, f: function (t) { return [0.3 + 3.2 * t, 0.3 + 4.6 * t - 4.905 * t * t]; }, kv: 0.2, ka: 0.05, m: 'Chute libre (lancer oblique) : le vecteur accélération est le même en tout point, vertical et vers le bas.' },
       circ: { n: 17, i0: 8, f: function (t) { var w = 2.6; return [2.1 + 1.0 * Math.cos(w * t - 2.6), 1.15 + 1.0 * Math.sin(w * t - 2.6)]; }, kv: 0.3, ka: 0.09, m: 'Mouvement circulaire uniforme : la vitesse garde la même norme, mais sa direction tourne ; le vecteur accélération pointe vers le centre du cercle.' },
@@ -941,8 +941,14 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
         return placed.filter(hit).length * 50 + obst.filter(hit).length;
       }
       labels.sort(function (a, b) { return a.pr - b.pr; }).forEach(function (L) {
-        var best = L.c[0], bc = Infinity;
-        for (var q = 0; q < L.c.length; q++) { var cq = cost(L, L.c[q][0], L.c[q][1]); if (cq < bc) { bc = cq; best = L.c[q]; } if (cq === 0) { break; } }
+        /* pendant la construction animée, une étiquette garde la position choisie à son apparition
+           (sinon elle sauterait d'une place à l'autre au gré des flèches qui bougent) */
+        var best = L.c[0], bc = Infinity, qb = 0;
+        if (smooth && lpos[L.id] !== undefined) { qb = Math.min(lpos[L.id], L.c.length - 1); best = L.c[qb]; }
+        else {
+          for (var q = 0; q < L.c.length; q++) { var cq = cost(L, L.c[q][0], L.c[q][1]); if (cq < bc) { bc = cq; best = L.c[q]; qb = q; } if (cq === 0) { break; } }
+          if (smooth) { lpos[L.id] = qb; }
+        }
         var bx2 = Math.max(L.w / 2 + 2, Math.min(w - L.w / 2 - 2, best[0])), by2 = Math.max(L.h / 2 + 2, Math.min(h - L.h / 2 - 2, best[1]));
         placed.push({ x: bx2, y: by2, w: L.w, h: L.h, id: L.id }); L.f(bx2, by2);
       });
@@ -953,7 +959,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     /* déroulé de la construction : 4 étapes d'environ 0,8 s */
     function replay() {
       if (RM) { prog = 4; draw(); return; }
-      prog = 0; var t0 = null;
+      prog = 0; lpos = {}; var t0 = null;
       if (anim) { cancelAnimationFrame(anim); }
       function stepC(ts) {
         if (t0 === null) { t0 = ts; }
