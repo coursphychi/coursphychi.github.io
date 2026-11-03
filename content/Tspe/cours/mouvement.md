@@ -37,7 +37,7 @@ draft = false
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
 <p class="nt-lab-title">Un même mouvement, deux référentiels</p>
 <p class="nt-note">Un passager lâche une balle dans un train qui roule à vitesse constante (animation au ralenti).</p>
-<canvas style="height:260px;" aria-label="Chute d'une balle lâchée dans un train en mouvement, vue depuis le quai ou depuis le wagon"></canvas>
+<canvas style="height:300px;" aria-label="Chute d'une balle lâchée dans un train en mouvement, vue depuis le quai ou depuis le wagon"></canvas>
 <div class="nt-ctrl">Référentiel&nbsp;:
 <div class="nt-seg" role="radiogroup">
 <label><input type="radio" name="ref" value="sol" checked><span>terrestre (le quai)</span></label>
@@ -518,58 +518,148 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     var root = document.getElementById('lab-ref');
     if (!root) { return; }
     var cv = $(root, 'canvas'), msg = $(root, '.nt-msg'), btn = $(root, '[data-act="play"]'), S, mode = 'sol', playing = !RM, visible = true, t = 0, last = null;
-    var U = 2.0, H = 1.25, G = 9.81, TF = Math.sqrt(2 * H / G), SLOW = 4, CYCLE = TF * SLOW + 1.2;
+    /* grandeurs physiques (m, s) : vitesse du train, hauteur de lâcher au-dessus du plancher, rayon de la balle */
+    var U = 2.0, H = 1.25, G = 9.81, RB = 0.09, FL = 0.45, LW = 4.4, XB = 2.05;   /* FL : hauteur du plancher ; LW : longueur du wagon ; XB : abscisse du lâcher dans le wagon */
+    var TL = Math.sqrt(2 * (H - RB) / G), SLOW = 4, HOLD = 0.5, REST = 1.4, CYCLE = HOLD + TL * SLOW + REST;
+    var C_SKY1 = '#DCEEFB', C_SKY2 = '#F5FAFE', C_GRASS = '#E4F0DF', C_TREE = '#B9DBB4', C_TREE2 = '#A3CF9F', C_TRUNK = '#C8B8A6', C_POLE = '#CBD5E1';
+    var C_BODY = CP, C_WALL = '#F1F6FD', C_DARK = '#334155', C_SKIN = '#F3C9A4', C_SHIRT = '#0E7490';
+    function hash(i) { var s = Math.sin(i * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); }
+    function rr(c, x, y, w, h, r) {   /* rectangle à coins arrondis (repli si roundRect absent) */
+      c.beginPath(); if (c.roundRect) { c.roundRect(x, y, w, h, r); } else { c.rect(x, y, w, h); }
+    }
     function draw() {
       if (!S) { return; }
-      var c = S.ctx, w = S.w, h = S.h, k = Math.min(78, w / 8.5), yg = h - 30;
-      c.clearRect(0, 0, w, h);
-      var TL = Math.sqrt(2 * (H - 7 / k) / G);                       /* instant où la balle touche le plancher */
-      var tc = t % CYCLE, tp = Math.min(tc / SLOW, TL);           /* temps physique (ralenti), figé à l'arrivée */
-      var sol = mode === 'sol', x0 = 0.8;
+      var c = S.ctx, w = S.w, h = S.h, yg = h - 40, narrow = w < 500;
+      var travel = U * TL, sol = mode === 'sol';
+      var k = Math.min(68, (yg - 74) / (FL + 2.4), (w - 28) / (LW + travel));   /* échelle (px/m) adaptée à la largeur */
+      var tc = t % CYCLE, tp = Math.min(Math.max((tc - HOLD) / SLOW, 0), TL);   /* temps physique (ralenti), figé à l'arrivée */
       /* dans le référentiel terrestre le train avance ; dans celui du train, c'est le sol qui recule */
-      var xTrain = sol ? x0 + U * tp : x0, shift = sol ? 0 : U * tp;
-      function X(xm) { return 20 + xm * k; }
+      var span = sol ? LW + travel : LW, ox = (w - span * k) / 2;
+      var xTrain = sol ? U * tp : 0, shift = sol ? 0 : U * tp;
+      function X(xm) { return ox + xm * k; }
       function Y(ym) { return yg - ym * k; }
-      var gg = c.createLinearGradient(0, yg, 0, h); gg.addColorStop(0, '#E2E8F0'); gg.addColorStop(1, '#F1F5F9');
-      c.fillStyle = gg; c.fillRect(0, yg, w, h - yg);
-      c.strokeStyle = '#CBD5E1'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(0, yg); c.lineTo(w, yg); c.stroke();
-      /* petits piquets le long de la voie (repères fixes du sol) */
-      for (var p = -10; p < 40; p++) {
-        var xp = X(p - shift);
-        if (xp > -10 && xp < w + 10) { c.fillStyle = '#CBD5E1'; c.beginPath(); if (c.roundRect) { c.roundRect(xp - 2, yg - 16, 4, 16, 2); } else { c.rect(xp - 2, yg - 16, 4, 16); } c.fill(); }
+      c.clearRect(0, 0, w, h);
+      /* ciel et talus */
+      var gs = c.createLinearGradient(0, 0, 0, yg); gs.addColorStop(0, C_SKY1); gs.addColorStop(1, C_SKY2);
+      c.fillStyle = gs; c.fillRect(0, 0, w, yg);
+      c.fillStyle = C_GRASS; c.fillRect(0, Y(0.32), w, yg - Y(0.32));
+      /* décor lié au sol : arbres, buissons et poteaux (tous immobiles dans le référentiel terrestre) */
+      var D = 1.15, x0m = (0 - ox) / k + shift, x1m = (w - ox) / k + shift;
+      for (var i = Math.floor(x0m / D) - 2; i <= Math.ceil(x1m / D) + 2; i++) {
+        var hh = hash(i), xs = X(i * D + hh * 0.5 - shift), base = Y(0.32);
+        if (((i % 5) + 5) % 5 === 0) {   /* poteau de caténaire */
+          c.fillStyle = C_POLE; c.fillRect(xs - 0.04 * k, Y(3.35), 0.08 * k, base - Y(3.35));
+          c.fillRect(xs - 0.04 * k, Y(3.3), 0.75 * k, 0.05 * k);
+        } else if (hh > 0.4) {             /* arbre */
+          var th = 0.75 + 0.55 * hash(i + 50), rf = 0.38 + 0.18 * hash(i + 90);
+          c.fillStyle = C_TRUNK; c.fillRect(xs - 0.045 * k, base - th * k, 0.09 * k, th * k);
+          c.fillStyle = hh > 0.7 ? C_TREE2 : C_TREE;
+          c.beginPath(); c.arc(xs, base - (th + rf * 0.6) * k, rf * k, 0, 2 * Math.PI);
+          c.arc(xs - rf * 0.55 * k, base - (th + rf * 0.15) * k, rf * 0.7 * k, 0, 2 * Math.PI);
+          c.arc(xs + rf * 0.55 * k, base - (th + rf * 0.2) * k, rf * 0.72 * k, 0, 2 * Math.PI); c.fill();
+        } else {                            /* buisson */
+          c.fillStyle = C_TREE; c.beginPath(); c.ellipse(xs, base, 0.32 * k, 0.2 * k, 0, Math.PI, 2 * Math.PI); c.fill();
+        }
       }
-      txt(c, 'sol', 30, yg + 20, col('--slate'), '600 12px system-ui, sans-serif', 'left');
-      /* wagon */
-      var wx = X(xTrain), ww = 4.2 * k, wh = 2.3 * k;
-      c.fillStyle = 'rgba(42,107,196,.08)'; c.strokeStyle = CP; c.lineWidth = 2.5;
-      c.beginPath(); c.rect(wx, Y(2.5), ww, wh); c.fill(); c.stroke();
-      /* roues : elles tournent quand le train avance par rapport au sol */
-      var rw = 0.18 * k, rot = U * tp / 0.18;
-      [0.8, 3.4].forEach(function (r) {
-        var cx0 = wx + r * k, cy0 = yg - rw;
-        c.fillStyle = '#94A3B8'; c.beginPath(); c.arc(cx0, cy0, rw, 0, 2 * Math.PI); c.fill();
-        c.fillStyle = '#E2E8F0'; c.beginPath(); c.arc(cx0, cy0, rw * 0.55, 0, 2 * Math.PI); c.fill();
-        c.strokeStyle = '#94A3B8'; c.lineWidth = 1.5;
-        for (var q = 0; q < 3; q++) { var an = rot + q * Math.PI / 3; c.beginPath(); c.moveTo(cx0 - Math.cos(an) * rw * 0.55, cy0 - Math.sin(an) * rw * 0.55); c.lineTo(cx0 + Math.cos(an) * rw * 0.55, cy0 + Math.sin(an) * rw * 0.55); c.stroke(); }
+      /* voie : ballast, traverses, rail */
+      var gb = c.createLinearGradient(0, yg, 0, h); gb.addColorStop(0, '#DAD6D2'); gb.addColorStop(1, '#ECEAE7');
+      c.fillStyle = gb; c.fillRect(0, yg, w, h - yg);
+      c.fillStyle = '#B5ACA3';
+      for (var q = Math.floor(x0m / 0.55) - 1; q <= Math.ceil(x1m / 0.55) + 1; q++) {
+        var xq = X(q * 0.55 - shift); rr(c, xq - 0.11 * k, yg + 3, 0.22 * k, 6, 2); c.fill();
+      }
+      c.fillStyle = '#64748B'; c.fillRect(0, yg, w, 4); c.fillStyle = 'rgba(255,255,255,.55)'; c.fillRect(0, yg, w, 1.2);
+      /* wagon en coupe : paroi du fond percée de fenêtres (on voit le décor défiler à travers) */
+      var wx = X(xTrain), wr = X(xTrain + LW), yF = Y(FL), yR = Y(FL + 2.4), post = 0.13 * k, roof = 0.24 * k;
+      c.fillStyle = C_WALL; c.beginPath(); c.rect(wx, yR, wr - wx, yF - yR);
+      for (var j = 0; j < 4; j++) {
+        var wl = X(xTrain + 0.45 + j * 0.95), wy = Y(FL + 2.0);
+        if (c.roundRect) { c.roundRect(wl, wy, 0.7 * k, 0.75 * k, 0.12 * k); } else { c.rect(wl, wy, 0.7 * k, 0.75 * k); }
+      }
+      c.fill('evenodd');
+      c.strokeStyle = 'rgba(42,107,196,.25)'; c.lineWidth = 1.5;
+      for (j = 0; j < 4; j++) { rr(c, X(xTrain + 0.45 + j * 0.95), Y(FL + 2.0), 0.7 * k, 0.75 * k, 0.12 * k); c.stroke(); }
+      c.fillStyle = 'rgba(42,107,196,.07)'; c.fillRect(wx, Y(FL + 0.95), wr - wx, Y(FL) - Y(FL + 0.95));   /* soubassement de la paroi */
+      /* le passager, debout, bras tendu vers le point de lâcher */
+      var px = xTrain + XB - 0.5, released = tp > 0;
+      var hip = Y(FL + 0.88), sh = Y(FL + 1.4), handX = X(xTrain + XB) - (RB + 0.04) * k, handY = Y(FL + H);
+      c.lineCap = 'round'; c.lineJoin = 'round';
+      c.strokeStyle = C_DARK; c.lineWidth = 0.13 * k;   /* jambes */
+      c.beginPath(); c.moveTo(X(px - 0.03), hip); c.lineTo(X(px - 0.12), Y(FL + 0.05)); c.moveTo(X(px + 0.03), hip); c.lineTo(X(px + 0.12), Y(FL + 0.05)); c.stroke();
+      c.strokeStyle = C_SHIRT; c.lineWidth = 0.17 * k;   /* bras arrière, tronc */
+      c.beginPath(); c.moveTo(X(px), sh + 0.04 * k); c.lineTo(X(px - 0.12), Y(FL + 0.95)); c.stroke();
+      c.lineWidth = 0.3 * k; c.beginPath(); c.moveTo(X(px), sh); c.lineTo(X(px), hip); c.stroke();
+      c.lineWidth = 0.13 * k; c.beginPath(); c.moveTo(X(px + 0.04), sh + 0.03 * k); c.lineTo(handX - 0.06 * k, handY); c.stroke();   /* bras tendu */
+      c.fillStyle = C_SKIN; c.beginPath(); c.arc(handX - 0.04 * k, handY, 0.065 * k, 0, 2 * Math.PI); c.fill();
+      c.beginPath(); c.arc(X(px + 0.02), Y(FL + 1.6), 0.13 * k, 0, 2 * Math.PI); c.fill();   /* tête */
+      c.fillStyle = '#5B4636'; c.beginPath(); c.arc(X(px + 0.01), Y(FL + 1.62), 0.135 * k, Math.PI * 0.95, Math.PI * 2.1); c.fill();
+      /* trajectoire de la balle : chronophotographie (une position toutes les 0,04 s) + tracé continu */
+      function bx(s) { return sol ? XB + U * s : XB; }
+      function by(s) { return Math.max(FL + RB, FL + H - 0.5 * G * s * s); }
+      if (released) {
+        c.strokeStyle = 'rgba(225,29,72,.35)'; c.lineWidth = 1.6; c.setLineDash([]);
+        c.beginPath(); for (var s2 = 0; s2 <= tp; s2 += 0.01) { var a = X(bx(s2)), b = Y(by(s2)); if (s2 === 0) { c.moveTo(a, b); } else { c.lineTo(a, b); } }
+        c.lineTo(X(bx(tp)), Y(by(tp))); c.stroke();
+        var n = 0; for (var s = 0; s <= tp + 1e-9; s += 0.04) { n++; }
+        var m = 0;
+        for (s = 0; s <= tp + 1e-9; s += 0.04) {
+          m++; c.fillStyle = 'rgba(225,29,72,' + (0.25 + 0.45 * m / n) + ')';
+          c.beginPath(); c.arc(X(bx(s)), Y(by(s)), Math.max(2.2, 0.035 * k), 0, 2 * Math.PI); c.fill();
+        }
+      }
+      /* plancher, ombre de la balle, balle */
+      c.fillStyle = '#CBD5E1'; c.fillRect(wx, yF - 0.06 * k, wr - wx, 0.06 * k);
+      var bX = X(bx(tp)), bY = Y(by(tp)), rpx = RB * k, hgt = by(tp) - FL - RB;
+      c.fillStyle = 'rgba(30,41,59,' + (0.28 - 0.14 * hgt / H) + ')';
+      c.beginPath(); c.ellipse(bX, yF - 0.06 * k, rpx * (1.1 - 0.4 * hgt / H), rpx * 0.3, 0, 0, 2 * Math.PI); c.fill();
+      var gball = c.createRadialGradient(bX - rpx * 0.35, bY - rpx * 0.35, rpx * 0.1, bX, bY, rpx);
+      gball.addColorStop(0, '#FB7185'); gball.addColorStop(1, '#BE123C');
+      c.fillStyle = gball; c.beginPath(); c.arc(bX, bY, rpx, 0, 2 * Math.PI); c.fill();
+      /* caisse du wagon : toit, montants, châssis */
+      c.fillStyle = C_BODY;
+      rr(c, wx - 0.04 * k, yR - roof, wr - wx + 0.08 * k, roof + 0.04 * k, [0.18 * k, 0.18 * k, 3, 3]); c.fill();
+      c.fillStyle = '#458EEC'; c.fillRect(wx + 0.1 * k, yR - roof * 0.62, wr - wx - 0.2 * k, 2);
+      c.fillStyle = C_BODY; c.fillRect(wx, yR, post, yF - yR); c.fillRect(wr - post, yR, post, yF - yR);
+      c.fillStyle = C_DARK; rr(c, wx - 0.04 * k, yF, wr - wx + 0.08 * k, 0.16 * k, 3); c.fill();
+      txt(c, 'wagon', (wx + wr) / 2, yR - roof / 2 + 4, '#FFFFFF', '700 ' + Math.max(10, Math.round(0.17 * k)) + 'px system-ui, sans-serif');
+      /* bogies et roues : elles tournent par rapport au wagon, quel que soit le référentiel */
+      var rw = 0.2 * k, rot = U * tp / 0.2;
+      [0.75, LW - 0.75].forEach(function (cb) {
+        c.fillStyle = '#475569'; rr(c, X(xTrain + cb - 0.48), Y(0.3), 0.96 * k, 0.12 * k, 3); c.fill();
+        [-0.26, 0.26].forEach(function (dx) {
+          var cx0 = X(xTrain + cb + dx), cy0 = Y(0.2);
+          c.fillStyle = C_DARK; c.beginPath(); c.arc(cx0, cy0, rw, 0, 2 * Math.PI); c.fill();
+          c.fillStyle = '#CBD5E1'; c.beginPath(); c.arc(cx0, cy0, rw * 0.68, 0, 2 * Math.PI); c.fill();
+          c.strokeStyle = '#64748B'; c.lineWidth = Math.max(1.2, 0.025 * k);
+          for (var e = 0; e < 3; e++) { var an = rot + e * Math.PI / 3; c.beginPath(); c.moveTo(cx0 - Math.cos(an) * rw * 0.66, cy0 - Math.sin(an) * rw * 0.66); c.lineTo(cx0 + Math.cos(an) * rw * 0.66, cy0 + Math.sin(an) * rw * 0.66); c.stroke(); }
+          c.fillStyle = C_DARK; c.beginPath(); c.arc(cx0, cy0, rw * 0.18, 0, 2 * Math.PI); c.fill();
+        });
       });
-      txt(c, 'wagon', wx + ww - 30, Y(2.5) + 18, CP, '600 12px system-ui, sans-serif');
-      /* traces de la balle (une position tous les 0,04 s) */
-      function bxAt(s) { return sol ? x0 + 1.6 + U * s : x0 + 1.6; }
-      var tr = [];
-      for (var s = 0; s <= tp + 1e-9; s += 0.04) { tr.push([bxAt(s), Math.max(0.2 + 7 / k, 0.2 + H - 0.5 * G * s * s)]); }
-      tr.forEach(function (q, i) { c.fillStyle = 'rgba(225,29,72,' + (0.25 + 0.5 * i / tr.length) + ')'; c.beginPath(); c.arc(X(q[0]), Y(q[1]), 3, 0, 2 * Math.PI); c.fill(); });
-      var rb = 7 / k, bx = bxAt(tp), by = Math.max(0.2 + rb, 0.2 + H - 0.5 * G * tp * tp);   /* la balle s'arrête sur le plancher */
-      c.fillStyle = CT; c.beginPath(); c.arc(X(bx), Y(by), 7, 0, 2 * Math.PI); c.fill();
-      /* le passager, debout dans le wagon, bras tendu */
-      var px = xTrain + 1.15;
-      c.strokeStyle = '#94A3B8'; c.lineWidth = 3; c.lineCap = 'round';
-      c.beginPath(); c.moveTo(X(px), Y(1.55)); c.lineTo(X(px), Y(0.95));
-      c.moveTo(X(px), Y(0.95)); c.lineTo(X(px - 0.15), Y(0.2)); c.moveTo(X(px), Y(0.95)); c.lineTo(X(px + 0.15), Y(0.2));
-      c.moveTo(X(px), Y(1.45)); c.lineTo(X(xTrain + 1.6) - 9, Y(0.2 + H) - 3);
-      c.moveTo(X(px), Y(1.45)); c.lineTo(X(px - 0.2), Y(1.05)); c.stroke();
-      c.fillStyle = '#94A3B8'; c.beginPath(); c.arc(X(px), Y(1.72), 0.14 * k, 0, 2 * Math.PI); c.fill();
-      txt(c, mode === 'sol' ? (w < 500 ? 'Depuis le quai (terrestre)' : 'Vue depuis le quai (référentiel terrestre)') : (w < 500 ? 'Depuis le wagon (train)' : 'Vue depuis le wagon (référentiel du train)'), w / 2, 20, col('--ink'));   /* titre raccourci sur téléphone */
-      msg.textContent = mode === 'sol' ? 'Pour une personne sur le quai, la balle avance avec le train pendant sa chute : sa trajectoire est une portion de parabole.'
+      /* ce qui bouge dans le référentiel choisi : le train (vu du quai) ou le sol (vu du wagon) */
+      var mid = (wx + wr) / 2, La = Math.min(0.9 * k, 60);
+      if (sol) {
+        var ya = yR - roof - 16;
+        arrow(c, mid - La / 2, ya, mid + La / 2, ya, C_BODY, 2.6);
+        vecLabel(c, 'v', mid + La / 2 + 12, ya + 5, C_BODY);
+        txt(c, 'train', mid + La / 2 + 22, ya + 5, C_BODY, '600 12px system-ui, sans-serif', 'left', true);
+      } else {
+        var yb = yg + 26;
+        arrow(c, mid + La / 2, yb, mid - La / 2, yb, col('--slate'), 2.6);
+        txt(c, 'sol', mid - La / 2 - 10, yb + 5, col('--slate'), '600 12px system-ui, sans-serif', 'right');
+        vecLabel(c, 'v', mid - La / 2 - 10 - c.measureText('sol').width - 9, yb + 5, col('--slate'), true);
+      }
+      /* étiquette du référentiel et chronomètre */
+      var lab = sol ? (narrow ? 'Vu du quai' : 'Référentiel terrestre · vu depuis le quai') : (narrow ? 'Vu du wagon' : 'Référentiel du train · vu depuis le wagon');
+      c.font = '700 12.5px system-ui, sans-serif'; var lw = c.measureText(lab).width;
+      c.fillStyle = 'rgba(255,255,255,.92)'; c.strokeStyle = col('--line'); c.lineWidth = 1;
+      rr(c, 10, 10, lw + 34, 26, 13); c.fill(); c.stroke();
+      c.fillStyle = sol ? '#059669' : C_BODY; c.beginPath(); c.arc(24, 23, 4.5, 0, 2 * Math.PI); c.fill();
+      txt(c, lab, 34, 27.5, col('--ink'), '700 12.5px system-ui, sans-serif', 'left');
+      var ts = 't = ' + fr(tp, 2) + ' s';
+      c.font = '600 12px ui-monospace, SFMono-Regular, Menlo, monospace'; var tw = c.measureText(ts).width;
+      c.fillStyle = 'rgba(255,255,255,.92)'; rr(c, w - tw - 30, 10, tw + 20, 26, 13); c.fill(); c.stroke();
+      txt(c, ts, w - 20, 27.5, col('--slate'), '600 12px ui-monospace, SFMono-Regular, Menlo, monospace', 'right');
+      msg.textContent = sol ? 'Pour une personne sur le quai, la balle avance avec le train pendant sa chute : sa trajectoire est une portion de parabole.'
         : 'Pour le passager, la balle tombe à la verticale, juste sous sa main : sa trajectoire est un segment de droite.';
     }
     function step(ts) {
@@ -581,7 +671,7 @@ Pour l'obtenir, on calcule un taux de variation sur un petit intervalle, puis on
     btn.addEventListener('click', function () { playing = !playing; playLabel(btn, playing); });
     function setup() { S = canvasCtx(cv); draw(); }
     watchVisible(cv, function (v) { visible = v; });
-    if (RM) { t = TF * SLOW; }
+    if (RM) { t = HOLD + TL * SLOW; }
     playLabel(btn, playing); setup(); onResize(setup); requestAnimationFrame(step);
   })();
   /* trajectoire commune aux animations 2 : M(t) = (x(t), y(t)) en mètres */
