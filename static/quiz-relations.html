@@ -41,6 +41,14 @@
     --neon-g3: rgba(168, 85, 247, .35);
     --accent: linear-gradient(90deg, #2563EB, #7C3AED 55%, #D946EF);
     --accent-1: #7C3AED;
+    /* cadres « juste » et « faux » : teinte vive, dégradé doux, ombre colorée */
+    --juste-a: #10B981;
+    --faux-a: #F43F5E;
+    --juste-grad: linear-gradient(135deg, #F0FDF6 0%, #D7F8E7 100%);
+    --faux-grad: linear-gradient(135deg, #FFF6F7 0%, #FFE1E7 100%);
+    --juste-ombre: 0 8px 22px rgba(16, 185, 129, .16);
+    --faux-ombre: 0 8px 22px rgba(244, 63, 94, .14);
+    --verre: rgba(255, 255, 255, .62);
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
@@ -74,6 +82,13 @@
       --neon-g3: rgba(192, 38, 211, .55);
       --accent: linear-gradient(90deg, #60A5FA, #A78BFA 55%, #F0ABFC);
       --accent-1: #A78BFA;
+      --juste-a: #34D399;
+      --faux-a: #FB7185;
+      --juste-grad: linear-gradient(135deg, rgba(52, 211, 153, .17) 0%, rgba(52, 211, 153, .06) 100%);
+      --faux-grad: linear-gradient(135deg, rgba(251, 113, 133, .17) 0%, rgba(251, 113, 133, .06) 100%);
+      --juste-ombre: 0 0 0 1px rgba(52, 211, 153, .12), 0 8px 26px rgba(52, 211, 153, .14);
+      --faux-ombre: 0 0 0 1px rgba(251, 113, 133, .12), 0 8px 26px rgba(251, 113, 133, .13);
+      --verre: rgba(255, 255, 255, .05);
       color-scheme: dark;
     }
   }
@@ -399,6 +414,91 @@
   .item .m { font-size: 1.12rem; overflow-x: auto; padding: .35em .15em; }
   .item .bad { color: var(--faux); }
   .item .good { color: var(--juste); }
+
+  /* =====================================================================
+     Cadres « juste » et « faux » : version vivante
+     ===================================================================== */
+  .option { padding-right: 2.9rem; }   /* place réservée à la pastille ✓ / ✗ */
+  .option.is-correct {
+    background: var(--juste-grad); border-color: var(--juste-a); border-bottom-color: var(--juste);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--juste-a) 18%, transparent), var(--juste-ombre);
+  }
+  .option.is-wrong {
+    background: var(--faux-grad); border-color: var(--faux-a); border-bottom-color: var(--faux);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--faux-a) 14%, transparent), var(--faux-ombre);
+  }
+  .option.is-correct .mark { background: linear-gradient(135deg, #34D399, #059669); box-shadow: 0 0 0 4px color-mix(in srgb, var(--juste-a) 22%, transparent), 0 4px 10px rgba(5, 150, 105, .35); }
+  .option.is-wrong .mark { background: linear-gradient(135deg, #FB7185, #E11D48); box-shadow: 0 0 0 4px color-mix(in srgb, var(--faux-a) 20%, transparent), 0 4px 10px rgba(225, 29, 72, .3); }
+
+  /* bandeau de verdict : pastille-icône à gauche, dégradé, ombre colorée */
+  .verdict {
+    display: flex; align-items: center; justify-content: center; gap: .6rem;
+    border-radius: 14px; padding: .6rem 1rem;
+    background: color-mix(in srgb, var(--accent-1) 9%, var(--enonce)); color: var(--encre-2);
+    border: 1px solid color-mix(in srgb, var(--accent-1) 28%, transparent);
+  }
+  .verdict::before {
+    content: "\1F4A1"; flex: none; width: 1.7rem; height: 1.7rem; border-radius: 50%;
+    display: grid; place-items: center; font-size: .95rem; line-height: 1;
+    background: var(--enonce); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-1) 18%, transparent);
+  }
+  .feedback.ok .verdict { background: var(--juste-grad); color: var(--juste); border-color: color-mix(in srgb, var(--juste-a) 40%, transparent); box-shadow: var(--juste-ombre); }
+  .feedback.ok .verdict::before { content: "\2713"; color: #fff; font-weight: 700; background: linear-gradient(135deg, #34D399, #059669); box-shadow: 0 0 0 4px color-mix(in srgb, var(--juste-a) 22%, transparent); }
+  .feedback.ko .verdict { background: var(--faux-grad); color: var(--faux); border-color: color-mix(in srgb, var(--faux-a) 40%, transparent); box-shadow: var(--faux-ombre); }
+  .feedback.ko .verdict::before { content: "\2717"; color: #fff; font-weight: 700; background: linear-gradient(135deg, #FB7185, #E11D48); box-shadow: 0 0 0 4px color-mix(in srgb, var(--faux-a) 20%, transparent); }
+
+  /* étapes de la correction : l'étape fautive et le résultat ressortent comme des cartes */
+  .step.err, .step.final {
+    position: relative; overflow: hidden; border-radius: 12px; padding-left: 2.45rem;
+  }
+  .step.err::after, .step.final::after {   /* liseré de couleur à gauche */
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  }
+  .step.err { background: var(--faux-grad); border: 1px solid color-mix(in srgb, var(--faux-a) 45%, transparent); box-shadow: var(--faux-ombre); }
+  .step.err::after { background: linear-gradient(180deg, #FB7185, #E11D48); }
+  .step.err::before { left: .7rem; color: #fff; border-color: transparent; background: linear-gradient(135deg, #FB7185, #E11D48); box-shadow: 0 2px 6px rgba(225, 29, 72, .3); }
+  .step.final { background: var(--juste-grad); border: 1px solid color-mix(in srgb, var(--juste-a) 45%, transparent); box-shadow: var(--juste-ombre); }
+  .step.final::after { background: linear-gradient(180deg, #34D399, #059669); }
+  .step.final::before { left: .7rem; color: #fff; border-color: transparent; background: linear-gradient(135deg, #34D399, #059669); box-shadow: 0 2px 6px rgba(5, 150, 105, .3); }
+  .step.final.err { background: var(--faux-grad); border-color: color-mix(in srgb, var(--faux-a) 45%, transparent); box-shadow: var(--faux-ombre); }
+  .step.final.err::after { background: linear-gradient(180deg, #FB7185, #E11D48); }
+  .step.final.err::before { background: linear-gradient(135deg, #FB7185, #E11D48); box-shadow: 0 2px 6px rgba(225, 29, 72, .3); }
+  .step .blame {
+    display: flex; gap: .5rem; align-items: flex-start;
+    margin-top: .45rem; padding: .45rem .65rem; border: 0; border-radius: 10px;
+    background: var(--verre); color: var(--faux);
+  }
+  .step .blame::before {
+    content: "!"; flex: none; width: 1.25rem; height: 1.25rem; margin-top: .1rem; border-radius: 50%;
+    display: grid; place-items: center; font-size: .78rem; font-weight: 700; color: #fff;
+    background: linear-gradient(135deg, #FB7185, #E11D48);
+  }
+
+  /* vérification numérique */
+  details.check .bad, details.check .good { border-radius: 10px; padding: .45rem .7rem; border-left: 4px solid; }
+  details.check .bad { background: var(--faux-grad); border-left-color: var(--faux-a); }
+  details.check .good { background: var(--juste-grad); border-left-color: var(--juste-a); }
+
+  /* récapitulatif des erreurs : réponse donnée / réponse attendue */
+  .item .box { position: relative; overflow: hidden; border-radius: 12px; padding: .6rem .8rem .55rem 1rem; }
+  .item .box::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+  .item .box.bad-box { background: var(--faux-grad); border: 1px solid color-mix(in srgb, var(--faux-a) 40%, transparent); box-shadow: var(--faux-ombre); }
+  .item .box.bad-box::after { background: linear-gradient(180deg, #FB7185, #E11D48); }
+  .item .box.good-box { background: var(--juste-grad); border: 1px solid color-mix(in srgb, var(--juste-a) 40%, transparent); box-shadow: var(--juste-ombre); }
+  .item .box.good-box::after { background: linear-gradient(180deg, #34D399, #059669); }
+  .item .lab { display: inline-flex; align-items: center; gap: .4rem; }
+  .item .lab::before {
+    width: 1.15rem; height: 1.15rem; border-radius: 50%; display: grid; place-items: center;
+    font-size: .7rem; color: #fff; letter-spacing: 0;
+  }
+  .item .bad-box .lab { color: var(--faux); }
+  .item .good-box .lab { color: var(--juste); }
+  .item .bad-box .lab::before { content: "\2717"; background: linear-gradient(135deg, #FB7185, #E11D48); }
+  .item .good-box .lab::before { content: "\2713"; background: linear-gradient(135deg, #34D399, #059669); }
+
+  /* escalier : marches réussies ou manquées en dégradé */
+  .tick.ok { background: linear-gradient(180deg, var(--juste-a), var(--juste)); }
+  .tick.ko { background: linear-gradient(180deg, var(--faux-a), var(--faux)); }
 
   @media (prefers-reduced-motion: reduce) {
     .fade, .option.is-correct, .option.is-wrong, .serie.pop, .relation .hl-cible, .prompt .hl-cible, .feedback.ok .verdict::after { animation: none; }
