@@ -244,8 +244,9 @@
     border: 1.5px solid var(--trait-fort); border-bottom-width: 3px; border-radius: 6px;
   }
   .option .expr { flex: 1; text-align: center; font-size: 1.42rem; overflow-x: auto; padding: .4em .3em; }
-  .option:hover:not(:disabled) { border-color: var(--accent-1); background: var(--survol); transform: translateY(-2px); box-shadow: 0 6px 16px color-mix(in srgb, var(--accent-1) 18%, transparent); }
-  .option:hover:not(:disabled) .key { color: var(--accent-1); border-color: var(--accent-1); }
+  /* survol : seulement après un vrai mouvement de souris (classe .survol), jamais au doigt ni sous un pointeur resté immobile */
+  .options.survol .option:hover:not(:disabled) { border-color: var(--accent-1); background: var(--survol); transform: translateY(-2px); box-shadow: 0 6px 16px color-mix(in srgb, var(--accent-1) 18%, transparent); }
+  .options.survol .option:hover:not(:disabled) .key { color: var(--accent-1); border-color: var(--accent-1); }
   .option:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
   .option:disabled { cursor: default; box-shadow: none; }
   .option.is-correct { border-color: var(--juste); background: var(--juste-fond); color: var(--juste); animation: pop .32s ease-out; }
@@ -503,7 +504,7 @@
   @media (prefers-reduced-motion: reduce) {
     .fade, .option.is-correct, .option.is-wrong, .serie.pop, .relation .hl-cible, .prompt .hl-cible, .feedback.ok .verdict::after { animation: none; }
     .option, .tick, .option .mark, .score .arc { transition: none; }
-    .option:hover:not(:disabled) { transform: none; }
+    .options.survol .option:hover:not(:disabled) { transform: none; }
     .option:active:not(:disabled), .btn:active { transform: none; }
   }
 </style>
@@ -1438,6 +1439,7 @@ function showQuestion() {
   math(els.target, q.targetTex, q.targetTxt);
 
   els.options.innerHTML = '';
+  els.options.classList.remove('survol');   /* aucune proposition ne paraît choisie à l'arrivée de la question */
   q.options.forEach((o, k) => {
     const b = document.createElement('button');
     b.type = 'button';
@@ -1652,6 +1654,8 @@ els.chronoToggle.addEventListener('click', () => {
 majToggle();
 
 $('dunno').addEventListener('click', () => answer(-1));
+/* le survol des propositions ne s'active qu'au premier vrai déplacement de la souris sur la nouvelle question */
+els.options.addEventListener('pointermove', e => { if (e.pointerType === 'mouse' && (e.movementX || e.movementY)) els.options.classList.add('survol'); });
 els.next.addEventListener('click', next);
 els.restart.addEventListener('click', start);
 els.retry.addEventListener('click', startRetry);
