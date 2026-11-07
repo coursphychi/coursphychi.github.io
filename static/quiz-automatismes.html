@@ -74,7 +74,8 @@
   }
   .option .key { flex: none; width: 1rem; font-size: .8rem; color: var(--muted); }
   .option .expr { flex: 1; text-align: center; font-size: 1.2rem; overflow-x: auto; padding: .15em 0; }
-  .option:hover:not(:disabled) { border-color: var(--ink); background: var(--hover); }
+  /* survol : seulement après un vrai mouvement de souris (pas au doigt, ni sous un pointeur resté immobile) */
+  .options.survol .option:hover:not(:disabled) { border-color: var(--ink); background: var(--hover); }
   .option:disabled { cursor: default; color: var(--ink); }
   .option.is-correct { border-color: var(--ok); background: var(--ok-bg); color: var(--ok); }
   .option.is-wrong { border-color: var(--ko); background: var(--ko-bg); color: var(--ko); }
@@ -149,10 +150,43 @@
   .err .how { color: var(--muted); }
 
   .tend-title { font-size: clamp(1.5rem, 5.5vw, 2rem); font-weight: normal; margin: .6rem 0 0; text-align: center; }
+  .tend-sub { text-align: center; font-style: italic; color: var(--muted); margin: .2rem 0 0; font-size: 1rem; }
+  .tend-sub:empty { display: none; }
+
+  /* ---------- choix d'un entraînement (accueil) ---------- */
+  .intro { justify-content: flex-start; }
+  .intro-lead { padding-top: clamp(1rem, 8vh, 4.5rem); }
+  .pick { margin-top: 2.4rem; border-top: 1px solid var(--rule); }
+  .pick-title { font-size: 1.25rem; font-weight: normal; margin: 1.3rem 0 .2rem; }
+  .pick > .hint { color: var(--muted); margin: 0 0 .4rem; font-size: 1rem; }
+  .pick-theme { padding: .85rem 0 .9rem; border-bottom: 1px solid var(--rule); }
+  .pick-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .pick-name { font-size: 1.12rem; }
+  .pick-head .btn { margin-left: auto; }   /* reste à droite, même renvoyé à la ligne sur téléphone */
+
+  /* lignes de compétence cliquables (accueil et bilan) */
+  .skill-btns { list-style: none; padding: 0; margin: .45rem 0 0; display: grid; grid-template-columns: 1fr; gap: .05rem .8rem; }
+  @media (min-width: 620px) { .skill-btns { grid-template-columns: 1fr 1fr; } }
+  .skill-btn {
+    width: 100%; display: flex; align-items: baseline; gap: .6rem;
+    background: none; border: 0; border-radius: 6px; padding: .28rem .5rem; margin: 0 -.5rem;
+    font: inherit; font-size: .97rem; line-height: 1.45; color: var(--ink-soft); text-align: left; cursor: pointer;
+  }
+  .skill-btns .skill-btn { width: calc(100% + 1rem); }
+  .skill-btn .arrow { margin-left: auto; padding-left: .4rem; color: var(--rule-strong); transition: transform .12s, color .12s; }
+  .skill-btn:hover { background: var(--hover); color: var(--ink); }
+  .skill-btn:hover .arrow { color: var(--ink); transform: translateX(2px); }
+  .skill-list li { padding: 0; }
+  .skill-list .skill-btn { width: calc(100% + 1rem); color: inherit; font-size: inherit; }
+  .skill-list .skill-btn .meta { margin-left: auto; }
+  .skill-list .skill-btn .meta + .arrow { margin-left: 0; }
+  .skill-list.static li { padding: .05rem 0; }
+  .theme-foot { display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; margin-top: .25rem; }
+  .theme-foot .hint { font-size: .9rem; color: var(--muted); font-style: italic; }
 
   @media (prefers-reduced-motion: reduce) {
     .fade { animation: none; }
-    .option { transition: none; }
+    .option, .skill-btn .arrow { transition: none; }
   }
 </style>
 </head>
@@ -162,16 +196,27 @@
     <div class="top">
       <span class="title" id="title">Automatismes</span>
       <span class="meta-top"><span class="chrono" id="chrono"></span><span class="count" id="count"></span>
-      <button class="link" id="stop" type="button" hidden>Arrêter</button></span>
+      <button class="link" id="stop" type="button" hidden>Arrêter</button>
+      <button class="link" id="home" type="button" hidden>Accueil</button></span>
     </div>
     <div class="ticks" id="ticks" aria-hidden="true"></div>
   </header>
 
   <section class="stage centered intro" id="screen-intro">
-    <h1 class="intro-title">Ordres de grandeur, conversions, écriture scientifique, chiffres significatifs</h1>
-    <p>Seize questions pour faire le point, de la plus simple à la plus exigeante. À la fin, un bilan indique ce qui est maîtrisé et propose un entraînement ciblé sur chaque thème.</p>
-    <p class="hint">En cas de doute, choisir « Je ne sais pas » plutôt que répondre au hasard : le bilan sera plus fiable.</p>
-    <div class="actions"><button class="btn" id="go" type="button">Commencer le diagnostic</button></div>
+    <div class="intro-lead">
+      <h1 class="intro-title">Ordres de grandeur, conversions, écriture scientifique, chiffres significatifs</h1>
+      <p>Seize questions pour faire le point, de la plus simple à la plus exigeante. À la fin, un bilan indique ce qui est maîtrisé et propose un entraînement ciblé sur chaque thème.</p>
+      <p class="hint">En cas de doute, choisir « Je ne sais pas » plutôt que répondre au hasard : le bilan sera plus fiable.</p>
+      <div class="actions">
+        <button class="btn" id="go" type="button">Commencer le diagnostic</button>
+        <button class="btn ghost" id="see-bilan" type="button" hidden>Revoir le dernier bilan</button>
+      </div>
+    </div>
+    <div class="pick">
+      <h2 class="pick-title">Ou s’entraîner directement</h2>
+      <p class="hint">Sur un thème entier, ou sur une seule compétence. L’entraînement s’arrête quand chaque compétence choisie est réussie trois fois d’affilée.</p>
+      <div id="pick-list"></div>
+    </div>
   </section>
 
   <section class="stage" id="screen-q" hidden aria-live="polite">
@@ -195,12 +240,14 @@
 
   <section class="stage" id="screen-tend" hidden>
     <h2 class="tend-title" id="te-title"></h2>
+    <p class="tend-sub" id="te-sub"></p>
     <p class="times" id="te-times"></p>
     <p class="comment" id="te-comment"></p>
-    <ul class="skill-list" id="te-skills"></ul>
+    <ul class="skill-list static" id="te-skills"></ul>
     <div class="actions">
       <button class="btn" id="te-back" type="button">Retour au bilan</button>
       <button class="btn ghost" id="te-again" type="button">Nouvel entraînement sur ce thème</button>
+      <button class="btn ghost" id="te-home" type="button">Choisir un autre entraînement</button>
     </div>
   </section>
 
@@ -214,7 +261,7 @@
 const CONFIG = {
   seuilOdG: 5,
   seuilLent: 25000,     // au-delà, une réponse juste est signalée comme non encore automatique (ms)          // ordre de grandeur de a × 10^n : 10^n si a < seuil, 10^(n+1) sinon (5 ou Math.sqrt(10))
-  critere: 3,           // réussites consécutives pour valider une compétence à l'entraînement
+  critere: 3,           // réussites consécutives pour valider une compétence à l'entraînement (le texte d'accueil dit « trois fois »)
   maxEntrainement: 30,  // nombre maximal de questions par entraînement
   chrono: true          // false : chronomètre masqué par défaut
 };
@@ -1122,7 +1169,7 @@ function buildDiagnostic(avoid) {
    Interface
    ===================================================================== */
 const $ = id => document.getElementById(id);
-const S = { phase: 'intro', diag: null, train: null, q: null, locked: false, seen: new Set(), trained: {} };
+const S = { phase: 'intro', diag: null, train: null, q: null, locked: false, seen: new Set(), trained: {}, valid: new Set() };   /* valid : compétences validées à l'entraînement pendant la séance (« t-s ») */
 
 function plainTex(tex) {
   return tex
@@ -1181,17 +1228,68 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) chron
 
 function show(name) {
   ['intro', 'q', 'bilan', 'tend'].forEach(n => { $('screen-' + n).hidden = n !== name; });
+  $('home').hidden = !(name === 'bilan' || name === 'tend');
   window.scrollTo(0, 0);
 }
 function header(title, count, stop) {
   $('title').textContent = title;
   $('count').textContent = count || '';
-  $('count').hidden = !!stop;
   $('stop').hidden = !stop;
+}
+const diagFini = () => !!(S.diag && S.diag.answers.length === S.diag.questions.length);
+
+/* ---------- Accueil : diagnostic ou entraînement direct ---------- */
+function skillButton(t, s, meta) {   /* une ligne de compétence qui lance son entraînement */
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'skill-btn';
+  const ok = S.valid.has(t + '-' + s);
+  b.innerHTML = '<span class="dot' + (meta === undefined ? (ok ? ' ok' : '') : meta.cls) + '"></span><span class="nm"></span>'
+    + (meta && meta.txt !== undefined ? '<span class="meta"></span>' : '') + '<span class="arrow" aria-hidden="true">›</span>';
+  b.querySelector('.nm').textContent = THEMES[t].skills[s].name;
+  if (meta && meta.txt !== undefined) { const m = b.querySelector('.meta'); m.textContent = meta.txt; if (meta.slow) m.classList.add('slow'); }
+  b.setAttribute('aria-label', 'S’entraîner sur : ' + THEMES[t].skills[s].name + (ok ? ' (validée)' : ''));
+  b.title = 'S’entraîner sur cette compétence';
+  b.addEventListener('click', () => startTraining(t, s));
+  return b;
+}
+function showIntro() {
+  S.phase = 'intro';
+  chrono.stop();
+  $('chrono').textContent = '';   /* pas de chronomètre sur l'accueil */
+  header('Automatismes', '', false);
+  $('ticks').className = 'ticks'; $('ticks').innerHTML = '';
+  $('see-bilan').hidden = !diagFini();
+  $('go').textContent = S.diag ? 'Nouveau diagnostic' : 'Commencer le diagnostic';
+  const box = $('pick-list');
+  box.innerHTML = '';
+  THEMES.forEach((th, t) => {
+    const div = document.createElement('div');
+    div.className = 'pick-theme';
+    const head = document.createElement('div');
+    head.className = 'pick-head';
+    head.innerHTML = '<span class="pick-name"></span>';
+    head.firstChild.textContent = th.name;
+    const all = document.createElement('button');
+    all.type = 'button';
+    all.className = 'btn small ghost';
+    all.textContent = 'Tout le thème';
+    all.setAttribute('aria-label', 'S’entraîner sur tout le thème : ' + th.name);
+    all.addEventListener('click', () => startTraining(t, null));
+    head.appendChild(all);
+    div.appendChild(head);
+    const ul = document.createElement('ul');
+    ul.className = 'skill-btns';
+    th.skills.forEach((sk, s) => { const li = document.createElement('li'); li.appendChild(skillButton(t, s)); ul.appendChild(li); });
+    div.appendChild(ul);
+    box.appendChild(div);
+  });
+  show('intro');
 }
 
 /* ---------- Diagnostic ---------- */
 function startDiagnostic() {
+  if (diagFini()) S.diagPrec = S.diag;   /* gardé si le nouveau diagnostic est abandonné */
   S.phase = 'diag';
   chrono.reset();
   S.diag = { questions: buildDiagnostic(S.seen), answers: [], i: 0 };
@@ -1212,7 +1310,7 @@ function diagTicks() {
 }
 function diagQuestion() {
   const q = S.diag.questions[S.diag.i];
-  header('Diagnostic', (S.diag.i + 1) + ' / ' + S.diag.questions.length, false);
+  header('Diagnostic', (S.diag.i + 1) + ' / ' + S.diag.questions.length, true);
   diagTicks();
   showQuestion(q, THEMES[q.theme].name);
 }
@@ -1225,6 +1323,7 @@ function showQuestion(q, context) {
   rich($('prompt'), q.prompt);
   const box = $('options');
   box.innerHTML = '';
+  box.classList.remove('survol');
   q.options.forEach((o, k) => {
     const b = document.createElement('button');
     b.type = 'button';
@@ -1322,6 +1421,7 @@ function showBilan() {
   }
   afficherTemps();
   header('Bilan du diagnostic', '', false);
+  show('bilan');
   $('ticks').className = 'ticks';
   diagTicks();
   mathInto($('b-score'), '\\dfrac{' + total + '}{' + ans.length + '}');
@@ -1356,12 +1456,11 @@ function showBilan() {
       const a = ans.find(x => x.q.theme === t && x.q.skill === s);
       const li = document.createElement('li');
       li.className = a && a.ok ? '' : 'miss';
-      li.innerHTML = '<span class="dot ' + (a && a.ok ? 'ok' : 'ko') + '"></span><span></span><span class="meta"></span>';
-      li.children[1].textContent = sk.name;
-      if (a && chrono.visible) {
-        li.children[2].textContent = moyenne(a.dt);
-        if (a.ok && a.dt > CONFIG.seuilLent) li.children[2].classList.add('slow');
-      }
+      li.appendChild(skillButton(t, s, {
+        cls: ' ' + (a && a.ok ? 'ok' : 'ko'),
+        txt: a && chrono.visible ? moyenne(a.dt) : '',
+        slow: !!(a && a.ok && a.dt > CONFIG.seuilLent)
+      }));
       ul.appendChild(li);
     });
     div.appendChild(ul);
@@ -1371,13 +1470,17 @@ function showBilan() {
       p.textContent = `Entraînement : ${S.trained[t]} compétence${S.trained[t] > 1 ? 's' : ''} sur 4 validée${S.trained[t] > 1 ? 's' : ''}.`;
       div.appendChild(p);
     }
+    const foot = document.createElement('div');
+    foot.className = 'theme-foot';
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'btn small' + (t === rec ? '' : ' ghost');
-    btn.textContent = 'S’entraîner';
-    btn.setAttribute('aria-label', 'S’entraîner : ' + th.name);
-    btn.addEventListener('click', () => startTraining(t));
-    div.appendChild(btn);
+    btn.textContent = 'S’entraîner sur le thème';
+    btn.setAttribute('aria-label', 'S’entraîner sur tout le thème : ' + th.name);
+    btn.addEventListener('click', () => startTraining(t, null));
+    foot.appendChild(btn);
+    if (t === 0) { const h = document.createElement('span'); h.className = 'hint'; h.textContent = 'ou cliquer sur une compétence'; foot.appendChild(h); }
+    div.appendChild(foot);
     box.appendChild(div);
   });
 
@@ -1405,26 +1508,29 @@ function showBilan() {
     rich(it.querySelector('.how'), 'Méthode : ' + a.q.method);
     list.appendChild(it);
   });
-  show('bilan');
 }
 
 /* ---------- Entraînement ciblé ---------- */
-function startTraining(t) {
+/* only : null pour tout le thème, ou l'indice de la seule compétence travaillée.
+   Une réussite au diagnostic compte déjà pour une réussite (si le diagnostic a été fait). */
+function startTraining(t, only = null, fresh = false) {
   const skills = THEMES[t].skills.map((sk, s) => {
-    const a = S.diag.answers.find(x => x.q.theme === t && x.q.skill === s);
+    const a = !fresh && diagFini() ? S.diag.answers.find(x => x.q.theme === t && x.q.skill === s) : null;
     return { streak: a && a.ok ? 1 : 0, attempts: 0, errors: 0 };
   });
-  S.train = { t, skills, last: -1, retry: null, count: 0, cur: -1, ms: 0 };
+  S.train = { t, only, skills, last: -1, retry: null, count: 0, cur: -1, ms: 0 };
   S.phase = 'train';
   chrono.reset();
   show('q');
   trainNext();
 }
+const trainLabel = tr => (tr.only === null ? THEMES[tr.t].short : THEMES[tr.t].skills[tr.only].name.toLowerCase());
 function trainTicks() {
   const tk = $('ticks');
   tk.className = 'ticks grouped';
   tk.innerHTML = '';
   S.train.skills.forEach((sk, s) => {
+    if (S.train.only !== null && s !== S.train.only) return;
     const g = document.createElement('span');
     g.className = 'tick-group' + (s === S.train.cur ? ' active' : '');
     g.style.setProperty('--c', CONFIG.critere);
@@ -1438,7 +1544,7 @@ function trainTicks() {
 }
 function trainNext() {
   const tr = S.train;
-  const open = tr.skills.map((_, i) => i).filter(i => tr.skills[i].streak < CONFIG.critere);
+  const open = tr.skills.map((_, i) => i).filter(i => (tr.only === null || i === tr.only) && tr.skills[i].streak < CONFIG.critere);
   if (!open.length || tr.count >= CONFIG.maxEntrainement) { showTrainEnd(); return; }
   let s;
   if (tr.retry && tr.retry.due <= tr.count && open.includes(tr.retry.skill)) {
@@ -1452,7 +1558,7 @@ function trainNext() {
   }
   if (tr.retry && tr.retry.skill === s) tr.retry = null;
   tr.cur = s; tr.last = s; tr.count++;
-  header('Entraînement : ' + THEMES[tr.t].short, '', true);
+  header('Entraînement : ' + trainLabel(tr), '', true);
   trainTicks();
   showQuestion(makeQ(tr.t, s, S.seen), THEMES[tr.t].skills[s].name);
 }
@@ -1469,21 +1575,31 @@ function recordTraining(q, ok, dt) {
 function showTrainEnd() {
   const tr = S.train;
   S.phase = 'tend';
-  const done = tr.skills.filter(sk => sk.streak >= CONFIG.critere).length;
-  S.trained[tr.t] = done;
+  const idx = tr.only === null ? [0, 1, 2, 3] : [tr.only];
+  idx.forEach(s => { if (tr.skills[s].streak >= CONFIG.critere) S.valid.add(tr.t + '-' + s); });
+  const done = idx.filter(s => tr.skills[s].streak >= CONFIG.critere).length;
+  if (tr.only === null) S.trained[tr.t] = done;
   chrono.stop();
-  header('Entraînement : ' + THEMES[tr.t].short, '', false);
+  header('Entraînement : ' + trainLabel(tr), '', false);
   trainTicks();
-  $('te-title').textContent = THEMES[tr.t].name;
+  $('te-title').textContent = tr.only === null ? THEMES[tr.t].name : THEMES[tr.t].skills[tr.only].name;
+  $('te-sub').textContent = tr.only === null ? '' : THEMES[tr.t].name;
+  $('te-back').textContent = diagFini() ? 'Retour au bilan' : 'Retour à l’accueil';
+  $('te-again').textContent = tr.only === null ? 'Nouvel entraînement sur ce thème' : 'Nouvel entraînement sur cette compétence';
+  $('te-home').hidden = !diagFini();
   $('te-times').textContent = chrono.visible && tr.ms
     ? `${tr.count} question${tr.count > 1 ? 's' : ''} en ${duree(tr.ms)}, soit ${moyenne(tr.ms / tr.count)} par question.`
     : '';
-  $('te-comment').textContent = done === 4
+  $('te-comment').textContent = tr.only !== null
+    ? (done ? `Compétence validée : ${CONFIG.critere} réussites d’affilée. Pour que cela dure, y revenir dans quelques jours : revenir sur une notion après un délai la consolide.`
+            : 'Compétence pas encore validée. Relire les méthodes données dans les corrections, puis reprendre plus tard : les notions reviennent plus solidement après une pause.')
+    : done === 4
     ? `Les quatre compétences sont validées, chacune réussie ${CONFIG.critere} fois d’affilée. Pour que cela dure, refaire le diagnostic dans quelques jours : revenir sur une notion après un délai la consolide.`
     : `${done} compétence${done > 1 ? 's' : ''} sur 4 validée${done > 1 ? 's' : ''}. Reprendre plus tard est utile : les notions reviennent plus solidement après une pause.`;
   const ul = $('te-skills');
   ul.innerHTML = '';
   THEMES[tr.t].skills.forEach((skd, s) => {
+    if (tr.only !== null && s !== tr.only) return;
     const sk = tr.skills[s];
     const v = sk.streak >= CONFIG.critere;
     const li = document.createElement('li');
@@ -1493,7 +1609,7 @@ function showTrainEnd() {
     li.children[2].textContent = sk.attempts
       ? `${sk.attempts} question${sk.attempts > 1 ? 's' : ''}, ${sk.errors} erreur${sk.errors > 1 ? 's' : ''}`
         + (chrono.visible ? `, ${moyenne(sk.ms / sk.attempts)} en moyenne` : '')
-      : 'validée au diagnostic';
+      : (sk.streak >= CONFIG.critere ? 'validée au diagnostic' : 'pas encore travaillée');
     ul.appendChild(li);
   });
   show('tend');
@@ -1534,16 +1650,18 @@ $('go').addEventListener('click', startDiagnostic);
 $('dunno').addEventListener('click', () => answer(-1));
 $('next').addEventListener('click', next);
 $('b-redo').addEventListener('click', startDiagnostic);
-$('stop').addEventListener('click', showTrainEnd);
-$('te-back').addEventListener('click', showBilan);
-$('te-again').addEventListener('click', () => {
-  const t = S.train.t;
-  S.train = { t, skills: THEMES[t].skills.map(() => ({ streak: 0, attempts: 0, errors: 0 })), last: -1, retry: null, count: 0, cur: -1, ms: 0 };
-  S.phase = 'train';
-  chrono.reset();
-  show('q');
-  trainNext();
+$('see-bilan').addEventListener('click', showBilan);
+$('home').addEventListener('click', showIntro);
+$('te-home').addEventListener('click', showIntro);
+$('stop').addEventListener('click', () => {
+  if (S.phase === 'train') { showTrainEnd(); return; }
+  if (S.phase === 'diag' && confirm('Arrêter le diagnostic ? Les réponses déjà données ne seront pas conservées.')) { S.diag = S.diagPrec || null; showIntro(); }
 });
+$('te-back').addEventListener('click', () => (diagFini() ? showBilan() : showIntro()));
+$('te-again').addEventListener('click', () => startTraining(S.train.t, S.train.only, true));
+/* le survol des propositions ne s'active qu'au premier vrai déplacement de la souris sur la nouvelle question */
+$('options').addEventListener('pointermove', e => { if (e.pointerType === 'mouse' && (e.movementX || e.movementY)) $('options').classList.add('survol'); });
+showIntro();
 
 document.addEventListener('keydown', e => {
   if (e.altKey || e.ctrlKey || e.metaKey) return;
