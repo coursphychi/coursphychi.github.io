@@ -280,7 +280,7 @@ Le premier quiz utilise de simples lettres pour que l'on puisse se concentrer su
 
 <br>
 
-<a class="btn btn1" href="/quiz-relations.html">Quiz avec lettres simples</a>
+<a class="btn btn1" href="/quiz-relations.html?mode=lettres">Quiz avec lettres simples</a>
 
 <br>
 
