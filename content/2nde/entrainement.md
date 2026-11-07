@@ -292,13 +292,15 @@ La cible idéale à atteindre est un score de 10/10 en environ une minute 🥳
 <img src="/gifyoda.gif" style="box-shadow:none;background:none;border-radius:10px;">
 </div>
 
-Lorsqu'on commence à s'aguerrir, on peut passer à ce quiz de même complexité algébrique mais qui utilise cette fois de véritables relations de physique-chimie (ce qui peut rendre les notations beaucoup plus lourdes et donc moins faciles à manipuler mentalement).
+Lorsqu'on commence à s'aguerrir, on peut remplacer les simples lettres par des symboles de grandeurs au sein de véritables relations de physique-chimie (ce qui peut rendre les notations beaucoup plus lourdes et donc moins faciles à manipuler mentalement).
 
 <br>
 
 <a class="btn btn2" href="/quiz-relations.html?mode=physique">Quiz avec des vraies relations</a>
 
+<br>
 
+---
 
 
 ## Calculs numériques et écriture d'un résultat
