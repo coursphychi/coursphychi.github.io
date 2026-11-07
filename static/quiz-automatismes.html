@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Automatismes : ordres de grandeur, conversions, écriture scientifique, chiffres significatifs</title>
+<script>
+  /* thème clair ou sombre : choix mémorisé (commun aux quiz du site), sinon réglage du système */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('coursphychi-theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <style>
@@ -20,6 +29,22 @@
     --mid: #946200;
     --ko: #B42318;
     --ko-bg: #FBEDEB;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --paper: #12161F;
+    --ink: #E6E9F2;
+    --ink-soft: #C3CBDD;
+    --muted: #8F97AC;
+    --rule: #2A3142;
+    --rule-strong: #4B5570;
+    --hover: #1B2130;
+    --ok: #4CC38A;
+    --ok-bg: rgba(76, 195, 138, .12);
+    --mid: #E2B24C;
+    --ko: #FF7D72;
+    --ko-bg: rgba(255, 125, 114, .12);
+    color-scheme: dark;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--paper); color: var(--ink); }
@@ -181,6 +206,15 @@
   .skill-list .skill-btn .meta { margin-left: auto; }
   .skill-list .skill-btn .meta + .arrow { margin-left: 0; }
   .skill-list.static li { padding: .05rem 0; }
+  .theme-pick { display: flex; align-items: center; gap: .7rem; margin-top: 1.1rem; color: var(--muted); font-size: .95rem; }
+  .seg-sobre { display: inline-flex; border: 1px solid var(--rule-strong); border-radius: 999px; padding: 2px; }
+  .seg-sobre button {
+    font: inherit; font-size: .92rem; border: 0; background: none; color: var(--muted); cursor: pointer;
+    padding: .2rem .85rem; border-radius: 999px; display: inline-flex; align-items: center; gap: .35rem;
+    transition: background-color .15s, color .15s;
+  }
+  .seg-sobre button[aria-checked="true"] { background: var(--ink); color: var(--paper); }
+  .seg-sobre button:not([aria-checked="true"]):hover { color: var(--ink); }
   .theme-foot { display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; margin-top: .25rem; }
   .theme-foot .hint { font-size: .9rem; color: var(--muted); font-style: italic; }
 
@@ -210,6 +244,12 @@
       <div class="actions">
         <button class="btn" id="go" type="button">Commencer le diagnostic</button>
         <button class="btn ghost" id="see-bilan" type="button" hidden>Revoir le dernier bilan</button>
+      </div>
+      <div class="theme-pick">Affichage
+        <span class="seg-sobre" role="radiogroup" aria-label="Thème d’affichage">
+          <button type="button" role="radio" data-theme-val="light">☀ Clair</button>
+          <button type="button" role="radio" data-theme-val="dark">☾ Sombre</button>
+        </span>
       </div>
     </div>
     <div class="pick">
@@ -1661,6 +1701,17 @@ $('te-back').addEventListener('click', () => (diagFini() ? showBilan() : showInt
 $('te-again').addEventListener('click', () => startTraining(S.train.t, S.train.only, true));
 /* le survol des propositions ne s'active qu'au premier vrai déplacement de la souris sur la nouvelle question */
 $('options').addEventListener('pointermove', e => { if (e.pointerType === 'mouse' && (e.movementX || e.movementY)) $('options').classList.add('survol'); });
+/* choix du thème */
+function majTheme() {
+  const t = document.documentElement.getAttribute('data-theme');
+  document.querySelectorAll('[data-theme-val]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.themeVal === t)));
+}
+document.querySelectorAll('[data-theme-val]').forEach(b => b.addEventListener('click', () => {
+  document.documentElement.setAttribute('data-theme', b.dataset.themeVal);
+  try { localStorage.setItem('coursphychi-theme', b.dataset.themeVal); } catch (e) {}
+  majTheme();
+}));
+majTheme();
 showIntro();
 
 document.addEventListener('keydown', e => {
