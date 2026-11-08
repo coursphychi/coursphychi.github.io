@@ -180,7 +180,7 @@
 
   /* ---------- choix d'un entraînement (accueil) ---------- */
   .intro { justify-content: flex-start; }
-  .intro-lead { padding-top: clamp(1rem, 8vh, 4.5rem); }
+  .intro-lead { padding-top: clamp(.4rem, 6vh, 3.5rem); }
   .pick { margin-top: 2.4rem; border-top: 1px solid var(--rule); }
   .pick-title { font-size: 1.25rem; font-weight: normal; margin: 1.3rem 0 .2rem; }
   .pick > .hint { color: var(--muted); margin: 0 0 .4rem; font-size: 1rem; }
@@ -206,11 +206,12 @@
   .skill-list .skill-btn .meta { margin-left: auto; }
   .skill-list .skill-btn .meta + .arrow { margin-left: 0; }
   .skill-list.static li { padding: .05rem 0; }
-  .theme-pick { display: flex; align-items: center; gap: .7rem; margin-top: 1.1rem; color: var(--muted); font-size: .95rem; }
+  .theme-row { display: flex; justify-content: flex-end; margin-top: -.9rem; }   /* sélecteur de thème, en haut à droite, sous le temps */
+  .seg-sobre svg { width: 15px; height: 15px; display: block; }
   .seg-sobre { display: inline-flex; border: 1px solid var(--rule-strong); border-radius: 999px; padding: 2px; }
   .seg-sobre button {
     font: inherit; font-size: .92rem; border: 0; background: none; color: var(--muted); cursor: pointer;
-    padding: .2rem .85rem; border-radius: 999px; display: inline-flex; align-items: center; gap: .35rem;
+    padding: .32rem .62rem; border-radius: 999px; display: inline-flex; align-items: center; gap: .35rem;
     transition: background-color .15s, color .15s;
   }
   .seg-sobre button[aria-checked="true"] { background: var(--ink); color: var(--paper); }
@@ -237,6 +238,12 @@
   </header>
 
   <section class="stage centered intro" id="screen-intro">
+    <div class="theme-row">
+      <span class="seg-sobre" role="radiogroup" aria-label="Thème d’affichage">
+        <button type="button" role="radio" data-theme-val="light" aria-label="Thème clair" title="Thème clair"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></button>
+        <button type="button" role="radio" data-theme-val="dark" aria-label="Thème sombre" title="Thème sombre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      </span>
+    </div>
     <div class="intro-lead">
       <h1 class="intro-title">Ordres de grandeur, conversions, écriture scientifique, chiffres significatifs</h1>
       <p>Seize questions pour faire le point, de la plus simple à la plus exigeante. À la fin, un bilan indique ce qui est maîtrisé et propose un entraînement ciblé sur chaque thème.</p>
@@ -244,12 +251,6 @@
       <div class="actions">
         <button class="btn" id="go" type="button">Commencer le diagnostic</button>
         <button class="btn ghost" id="see-bilan" type="button" hidden>Revoir le dernier bilan</button>
-      </div>
-      <div class="theme-pick">Affichage
-        <span class="seg-sobre" role="radiogroup" aria-label="Thème d’affichage">
-          <button type="button" role="radio" data-theme-val="light">☀ Clair</button>
-          <button type="button" role="radio" data-theme-val="dark">☾ Sombre</button>
-        </span>
       </div>
     </div>
     <div class="pick">

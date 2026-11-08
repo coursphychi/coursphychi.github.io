@@ -30,11 +30,6 @@
     --trait: #D5DCE8;
     --trait-fort: #AEB8CC;
     --survol: #EDF1F9;
-    --feutre: rgba(255, 220, 45, .88);
-    --feutre-bord: rgba(255, 210, 20, .52);
-    --feutre-reflet: rgba(255, 255, 255, .22);
-    --feutre-melange: multiply;
-    --feutre-texte: inherit;
     --stylo: #1856C9;
     --stylo-fond: rgba(24, 86, 201, .09);
     --juste: #117543;
@@ -71,11 +66,6 @@
       --trait: #273250;
       --trait-fort: #414F78;
       --survol: #1C2947;
-      --feutre: rgba(250, 196, 25, .42);
-      --feutre-bord: rgba(250, 196, 25, .22);
-      --feutre-reflet: rgba(255, 255, 255, .06);
-      --feutre-melange: normal;
-      --feutre-texte: #FFF7D6;
       --stylo: #84B3FF;
       --stylo-fond: rgba(132, 179, 255, .13);
       --juste: #52D18C;
@@ -201,23 +191,6 @@
     28% { opacity: 1; }
     36% { opacity: .65; }
     48%, 100% { opacity: 1; }
-  }
-  /* variantes historiques au surligneur : ?surlignage=feutre ou ?surlignage=discret */
-  .surlignage-feutre .hl-cible, .surlignage-discret .hl-cible { color: var(--feutre-texte); text-shadow: none; animation: none; margin: 0 .08em; padding: 0 .04em; }
-  .surlignage-feutre .hl-cible::before, .surlignage-discret .hl-cible::before {
-    content: ""; position: absolute; z-index: -1; pointer-events: none;
-    left: -.1em; right: -.06em; top: .14em; bottom: .02em;
-    border-radius: .5em .26em .46em .3em / .42em .56em .38em .5em;
-    background:
-      linear-gradient(to bottom, transparent 28%, var(--feutre-reflet) 35%, transparent 45%),
-      linear-gradient(100deg, var(--feutre-bord) 0%, var(--feutre) 14%, var(--feutre) 84%, var(--feutre-bord) 100%);
-    transform: rotate(var(--rot, -1deg)) skewX(-8deg);
-    mix-blend-mode: var(--feutre-melange);
-  }
-  body.surlignage-discret .hl-cible::before {
-    left: -.02em; right: -.02em; top: 52%; bottom: 14%;
-    border-radius: .12em; transform: none;
-    background: var(--feutre);
   }
   .hl-bouge {
     color: var(--stylo);
@@ -699,13 +672,6 @@
           <div class="graduations" aria-hidden="true"><span>5</span><span>10</span><span>15</span><span>20</span></div>
         </div>
       </div>
-      <div class="reglage empile">
-        <div><div class="nom"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".6" fill="currentColor"/></svg></span>Repérage de la grandeur</div><div class="aide">La grandeur à isoler est mise en valeur dans chaque expression.</div></div>
-        <div class="seg" role="radiogroup" aria-label="Repérage de la grandeur" data-cle="surlignage">
-          <button type="button" role="radio" data-val="neon">Néon</button>
-          <button type="button" role="radio" data-val="feutre">Surligneur</button>
-        </div>
-      </div>
       <div class="reglage">
         <div><div class="nom"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><polyline points="12 9 12 13 14.5 15"/><line x1="10" y1="2" x2="14" y2="2"/></svg></span>Chronomètre</div><div class="aide">Il ne tourne que pendant la recherche de la réponse.</div></div>
         <button type="button" class="switch" role="switch" data-cle="chrono" aria-label="Chronomètre"></button>
@@ -771,7 +737,6 @@ const CONFIG = {
   multSymbolPhysique: '\\times',  // mode physique : '\\times', '\\cdot' ou '' (juxtaposition)
   swapProbability: 0.25,          // dès la question 4 : relation parfois écrite « expression = grandeur »
   courbe: 0.65,                   // < 1 : les dernières bandes de difficulté sont resserrées sur le haut de l'échelle
-  surlignage: 'neon',             // 'neon' (halo lumineux), 'feutre' (trait de surligneur) ou 'discret' (bande basse) ; URL : ?surlignage=feutre
   autoAdvance: true,              // passer seul à la question suivante après une bonne réponse
   autoAdvanceMs: 900,             // délai de ce passage automatique
   chrono: true                    // false : chronomètre masqué par défaut
@@ -851,7 +816,7 @@ function factorOrder(t) {
   return [a, b];
 }
 
-/* Marquage visuel : la grandeur cherchée (surlignée) et le terme déplacé à l'étape en cours.
+/* Marquage visuel : la grandeur cherchée (halo néon) et le terme déplacé à l'étape en cours.
    Rendu par \htmlClass, que KaTeX n'accepte qu'avec l'option trust (voir math()). */
 const HL = { cible: null, bouge: new Set() };
 let TRI_PRODUITS = false;   // vrai en mode lettres
@@ -1481,7 +1446,6 @@ const KATEX_OPTS = { throwOnError: false, displayMode: false, strict: 'ignore', 
 function math(el, texStr, txtStr) {
   if (window.katex) {
     katex.render(texStr, el, KATEX_OPTS);
-    if (CONFIG.surlignage === 'feutre') el.querySelectorAll('.hl-cible').forEach(n => n.style.setProperty('--rot', (Math.random() * 1.8 - 1.5).toFixed(2) + 'deg'));
   } else el.textContent = txtStr;
 }
 
@@ -1896,10 +1860,6 @@ const ecrireStock = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {}
 const REG = {};   /* réglages en cours de choix sur l'accueil */
 let signature = '';
 
-function appliquerSurlignage(v) {
-  document.body.classList.toggle('surlignage-feutre', v === 'feutre');
-  document.body.classList.toggle('surlignage-discret', v === 'discret');
-}
 function majAccueil() {
   /* sélecteurs segmentés : position de l'indicateur glissant */
   document.querySelectorAll('.seg').forEach(seg => {
@@ -1918,7 +1878,6 @@ function majAccueil() {
   nb.style.setProperty('--pct', ((REG.nb - nb.min) / (nb.max - nb.min) * 100) + '%');
   $('nb-val').textContent = REG.nb + ' questions';
   $('home-sub').textContent = REG.nb + ' questions de difficulté croissante pour rendre automatiques les manipulations de relations. Chaque erreur est corrigée pas à pas.';
-  appliquerSurlignage(REG.surlignage);
   const ap = REG.mode === 'physique'
     ? ['v = \\dfrac{\\htmlClass{hl-cible}{d}}{\\Delta t}', '\\htmlClass{hl-cible}{d}']
     : ['a = \\dfrac{\\htmlClass{hl-cible}{b}}{c}', '\\htmlClass{hl-cible}{b}'];
@@ -1933,12 +1892,11 @@ function showHome() {
   window.scrollTo({ top: 0 });
 }
 function lancerDepuisAccueil() {
-  Object.assign(CONFIG, { mode: REG.mode, niveaux: REG.niveaux.slice(), nbQuestions: REG.nb, surlignage: REG.surlignage, chrono: REG.chrono, autoAdvance: REG.auto });
+  Object.assign(CONFIG, { mode: REG.mode, niveaux: REG.niveaux.slice(), nbQuestions: REG.nb, chrono: REG.chrono, autoAdvance: REG.auto });
   ecrireStock(CLE_REGLAGES, JSON.stringify(REG));
   const sig = JSON.stringify([REG.mode, REG.niveaux, REG.nb]);
   if (sig !== signature) { record = null; signature = sig; }   /* le record de séance n'a de sens qu'à réglages égaux */
   chrono.visible = REG.chrono; majToggle();
-  appliquerSurlignage(REG.surlignage);
   start();
 }
 
@@ -1987,7 +1945,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mode: st.mode === 'physique' || st.mode === 'lettres' ? st.mode : CONFIG.mode,
     niveaux: Array.isArray(st.niveaux) && st.niveaux.length ? st.niveaux.filter(x => ['2de', '1re', 'Tle'].includes(x)) : CONFIG.niveaux.slice(),
     nb: Number.isInteger(st.nb) ? Math.min(20, Math.max(5, st.nb)) : CONFIG.nbQuestions,
-    surlignage: ['neon', 'feutre'].includes(st.surlignage) ? st.surlignage : CONFIG.surlignage,
     chrono: typeof st.chrono === 'boolean' ? st.chrono : CONFIG.chrono,
     auto: typeof st.auto === 'boolean' ? st.auto : CONFIG.autoAdvance
   });
@@ -1995,8 +1952,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const u = new URLSearchParams(location.search);
   const md = u.get('mode');
   if (md === 'lettres' || md === 'physique') REG.mode = md;
-  const sl = u.get('surlignage');
-  if (sl === 'neon' || sl === 'feutre' || sl === 'discret') REG.surlignage = sl;
   const n = u.get('niveau');
   if (n) {
     const choix = n.split(',').map(x => x.trim()).filter(x => ['2de', '1re', 'Tle'].includes(x));
