@@ -426,11 +426,12 @@ hidden = true
 <p class="nt-lab-title">Une lampe branchée sur un générateur</p>
 <div class="nt-duo">
 <div class="nt-svgbox nt-ptf-svg"></div>
-<canvas aria-label="Caractéristiques du générateur idéal et de la lampe, et leur point d'intersection"></canvas>
+<canvas aria-label="Caractéristiques du générateur réel et de la lampe, et leur point d'intersection"></canvas>
 </div>
-<label class="nt-ctrl">Tension du générateur&nbsp;: <b class="out-E"></b><input type="range" data-p="E" min="1" max="8" step="0.1" value="6"></label>
+<label class="nt-ctrl">Tension à vide du générateur, E&nbsp;: <b class="out-E"></b><input type="range" data-p="E" min="1" max="8" step="0.1" value="6"></label>
+<label class="nt-ctrl">Résistance interne du générateur, r&nbsp;: <b class="out-r"></b><input type="range" data-p="r" min="0" max="20" step="0.5" value="5"></label>
 <div class="nt-read" aria-live="polite"><span>point de fonctionnement&nbsp;: <b class="out-pt"></b></span></div>
-<p class="nt-note">Le générateur est idéal&nbsp;: la tension à ses bornes ne dépend pas de l'intensité qu'il débite. Sa caractéristique est donc une droite horizontale. Le point de fonctionnement donne la tension aux bornes de la lampe et l'intensité qui la traverse.</p>
+<p class="nt-note">Le générateur est réel&nbsp;: il se comporte comme un générateur idéal de tension E (sa tension « à vide », quand il ne débite pas) associé en série à une petite résistance interne r. Plus il débite de courant, plus la tension à ses bornes diminue&nbsp;: U<sub>G</sub> = E − r × I. Sa caractéristique est donc une droite décroissante, qui part de E. Avec r = 0, on retrouve le générateur idéal, dont la caractéristique est horizontale. Le point de fonctionnement donne la tension aux bornes de la lampe et l'intensité qui la traverse.</p>
 </div>
 
 
@@ -921,7 +922,9 @@ hidden = true
     function schema(st) {
       var b = CI.wire([[50, 60], [250, 60], [250, 190], [50, 190], [50, 60]]) + CI.wire([[250, 85], [310, 85], [310, 165], [250, 165]]);
       b += CI.gen(50, 125, 'v', 't', 'G') + CI.meter(150, 60, 'A', 'l');
-      if (mode === 'gen') { b += flecheReglage(26, 140, 68, 92); }   /* symbole du générateur réglable (au-dessus de la lettre G) */
+      if (mode === 'gen') {   /* symbole du générateur réglable : flèche oblique passant par le centre ; lettre G redessinée par-dessus, détourée de blanc */
+        b += flecheReglage(27, 148, 74, 101) + "<text x='50' y='130' font-size='14' text-anchor='middle' fill='#1E293B' stroke='#fff' stroke-width='4' stroke-linejoin='round' paint-order='stroke' font-family='system-ui, sans-serif' font-weight='700'>G</text>";
+      }
       b += dip === 'ohm' ? CI.res(250, 125, 'v') : (dip === 'lampe' ? CI.lamp(250, 125, Math.min(1, st.I / 0.3)) : (dip === 'del' ? CI.led(250, 125, 'v', 'd') : CI.therm(250, 125, 'v')));
       b += CI.meter(310, 125, 'V', 't') + CI.node(250, 85) + CI.node(250, 165);
       if (mode === 'rheo') { b += CI.rheo(150, 190, 'h'); }
@@ -985,21 +988,26 @@ hidden = true
     function setup() { box.innerHTML = schema(etat()); hauteurCommune(box, cv); S = canvasCtx(cv); maj(); }
     setup(); onResize(setup);
   })();
-  /* ================= Le point de fonctionnement : une lampe sur un générateur idéal ================= */
+  /* ================= Le point de fonctionnement : une lampe sur un générateur réel ================= */
   (function () {
     var root = document.getElementById('lab-ptf');
     if (!root) { return; }
-    var cv = $(root, 'canvas'), box = $(root, '.nt-ptf-svg'), rE = $(root, '[data-p="E"]'), oE = $(root, '.out-E'), oP = $(root, '.out-pt'), S;
-    function circuit(Eg, I0, U0) {
-      var b = CI.wire([[90, 40], [250, 40], [250, 200], [90, 200], [90, 40]]) + CI.gen(90, 120, 'v', 't') + CI.lamp(250, 120, Math.min(1, I0 / 0.3));
-      b += CI.uarr(52, 165, 52, 75, '', '', '#E11D48') + CI.qty(44, 125, 'U', 'G', '#E11D48', 'end') + CI.text(52, 186, fr(Eg, 1) + ' V', '#E11D48', 12, 'middle', 700);
-      b += CI.uarr(288, 165, 288, 75, '', '', '#2563EB') + CI.qty(296, 125, 'U', 'L', '#2563EB', 'start') + CI.text(288, 186, fr(U0, 1) + ' V', '#2563EB', 12, 'middle', 700);
-      b += CI.iarr(170, 40, 'r', 'I', '', '#B45309', 0, -12) + CI.text(170, 64, fr(I0, 3) + ' A', '#B45309', 12, 'middle', 700);
-      return CI.svg(340, 222, b, 'Une lampe branchée directement sur un générateur de tension idéal', 'nt-svg nt-svg-s');
+    var cv = $(root, 'canvas'), box = $(root, '.nt-ptf-svg'), rE = $(root, '[data-p="E"]'), rR = $(root, '[data-p="r"]'), oE = $(root, '.out-E'), oR = $(root, '.out-r'), oP = $(root, '.out-pt'), S;
+    /* générateur réel = générateur idéal (tension à vide E) en série avec sa résistance interne r */
+    function circuit(E, r, I0, U0) {
+      var b = CI.wire([[90, 40], [250, 40], [250, 200], [90, 200], [90, 40]]);
+      b += "<rect x='62' y='62' width='56' height='118' rx='8' fill='rgba(225,29,72,.05)' stroke='#E11D48' stroke-width='1.2' stroke-dasharray='5 4'/>";
+      b += CI.gen(90, 92, 'v', 't') + CI.res(90, 148, 'v');
+      b += CI.text(124, 97, 'E = ' + fr(E, 1) + ' V', '#475569', 11.5, 'start', 700) + CI.text(124, 153, 'r = ' + fr(r, r % 1 ? 1 : 0) + ' Ω', '#475569', 11.5, 'start', 700);
+      b += CI.lamp(250, 120, Math.min(1, I0 / 0.3));
+      b += CI.uarr(40, 172, 40, 70, '', '', '#E11D48') + CI.qty(32, 125, 'U', 'G', '#E11D48', 'end') + CI.text(40, 192, fr(U0, 2) + ' V', '#E11D48', 12, 'middle', 700);
+      b += CI.uarr(288, 165, 288, 75, '', '', '#2563EB') + CI.qty(296, 125, 'U', 'L', '#2563EB', 'start') + CI.text(288, 186, fr(U0, 2) + ' V', '#2563EB', 12, 'middle', 700);
+      b += CI.iarr(170, 40, 'r', 'I', '', '#B45309', 0, -12) + CI.text(185, 64, fr(I0, 3) + ' A', '#B45309', 12, 'middle', 700);
+      return CI.svg(340, 222, b, 'Une lampe branchée sur un générateur réel, modélisé par un générateur idéal de tension E en série avec sa résistance interne r', 'nt-svg nt-svg-s');
     }
     function draw() {
-      var Eg = +rE.value, lamp = DIP.lampe, c = S.ctx, w = S.w, h = S.h, L = 48, R = w - 16, T = 14, B = h - 34, imax = 0.4, umax = 10;
-      oE.textContent = fr(Eg, 1) + ' V';
+      var E = +rE.value, r = +rR.value, lamp = DIP.lampe, c = S.ctx, w = S.w, h = S.h, L = 48, R = w - 16, T = 14, B = h - 34, imax = 0.4, umax = 10;
+      oE.textContent = fr(E, 1) + ' V'; oR.textContent = fr(r, r % 1 ? 1 : 0) + ' Ω';
       function X(i) { return L + i / imax * (R - L); }
       function Y(u) { return B - u / umax * (B - T); }
       c.clearRect(0, 0, w, h);
@@ -1007,23 +1015,30 @@ hidden = true
       for (var k = 0; k <= 8; k++) { var xi = X(k * 0.05); c.beginPath(); c.moveTo(xi, T); c.lineTo(xi, B); c.stroke(); if (k % 2 === 0) { txt(c, fr(k * 0.05, 1), xi, B + 15, '#475569', '11px system-ui, sans-serif'); } }
       for (var u = 0; u <= umax; u += 2) { c.beginPath(); c.moveTo(L, Y(u)); c.lineTo(R, Y(u)); c.stroke(); txt(c, String(u), L - 6, Y(u) + 4, '#475569', '11px system-ui, sans-serif', 'right'); }
       c.strokeStyle = '#1E293B'; c.lineWidth = 1.2; c.beginPath(); c.moveTo(L, T); c.lineTo(L, B); c.lineTo(R, B); c.stroke();
-      txt(c, 'I (A) \u2192', R - 26, B + 28, '#475569', '11px system-ui, sans-serif');
-      c.save(); c.translate(14, (T + B) / 2); c.rotate(-Math.PI / 2); txt(c, 'U (V) \u2192', 0, 0, '#475569', '11px system-ui, sans-serif'); c.restore();
-      /* générateur idéal : sa tension ne dépend pas de l'intensité (droite horizontale) */
-      c.strokeStyle = '#E11D48'; c.lineWidth = 2.4; c.beginPath(); c.moveTo(X(0), Y(Eg)); c.lineTo(X(imax), Y(Eg)); c.stroke();
-      txt(c, 'générateur idéal', X(0.02), Y(Eg) - 8, '#E11D48', '600 11.5px system-ui, sans-serif', 'left');
+      txt(c, 'I (A) →', R - 26, B + 28, '#475569', '11px system-ui, sans-serif');
+      c.save(); c.translate(14, (T + B) / 2); c.rotate(-Math.PI / 2); txt(c, 'U (V) →', 0, 0, '#475569', '11px system-ui, sans-serif'); c.restore();
+      /* générateur réel : U_G = E − r × I, droite décroissante qui part de la tension à vide E */
+      var iEnd = r > 0 ? Math.min(imax, E / r) : imax;
+      c.strokeStyle = '#E11D48'; c.lineWidth = 2.4; c.beginPath(); c.moveTo(X(0), Y(E)); c.lineTo(X(iEnd), Y(E - r * iEnd)); c.stroke();
+      c.fillStyle = '#E11D48'; c.beginPath(); c.arc(X(0), Y(E), 3.5, 0, 2 * Math.PI); c.fill();
+      txt(c, 'E', L + 7, Y(E) - 7, '#E11D48', '700 12px Georgia, serif', 'left');
+      txt(c, r > 0 ? 'générateur réel' : 'générateur idéal (r = 0)', X(0.03), Y(E - r * 0.03) - 9, '#E11D48', '600 11.5px system-ui, sans-serif', 'left');
       c.strokeStyle = '#2563EB'; c.lineWidth = 2.4; c.beginPath();
       for (var j = 0; j <= 200; j++) { var ii = imax * j / 200, uu = lamp.U(ii); if (uu > umax) { break; } if (j === 0) { c.moveTo(X(ii), Y(uu)); } else { c.lineTo(X(ii), Y(uu)); } }
       c.stroke(); txt(c, 'lampe', X(0.345), Y(lamp.U(0.345)) + 4, '#2563EB', '600 11.5px system-ui, sans-serif', 'left');
-      var I0 = solveI(function (i) { return lamp.U(i) - Eg; }, 0, imax), U0 = Eg;
-      c.strokeStyle = 'rgba(30,41,59,.5)'; c.setLineDash([4, 4]); c.lineWidth = 1.2; c.beginPath(); c.moveTo(X(I0), Y(U0)); c.lineTo(X(I0), B); c.stroke(); c.setLineDash([]);
+      var I0 = solveI(function (i) { return lamp.U(i) + r * i - E; }, 0, imax), U0 = E - r * I0;
+      c.strokeStyle = 'rgba(30,41,59,.5)'; c.setLineDash([4, 4]); c.lineWidth = 1.2; c.beginPath(); c.moveTo(X(I0), B); c.lineTo(X(I0), Y(U0)); c.lineTo(L, Y(U0)); c.stroke(); c.setLineDash([]);
       c.fillStyle = '#F59E0B'; c.beginPath(); c.arc(X(I0), Y(U0), 7, 0, 2 * Math.PI); c.fill(); c.strokeStyle = '#fff'; c.lineWidth = 2; c.stroke();
-      txt(c, 'point de fonctionnement', X(I0) + (X(I0) > (L + R) / 2 ? -10 : 10), Y(U0) + 20, '#B45309', '700 11.5px system-ui, sans-serif', X(I0) > (L + R) / 2 ? 'right' : 'left');
+      /* étiquette en bas à droite du point (la lampe monte vers la droite, au-dessus) ; sinon en bas à gauche, sous la droite du générateur */
+      c.font = '700 11.5px system-ui, sans-serif';
+      var lab = 'point de fonctionnement', tw = c.measureText(lab).width, droite = X(I0) + 12 + tw < R;
+      txt(c, lab, droite ? X(I0) + 12 : X(I0) - 12, Math.min(B - 7, Y(U0) + (droite ? 22 : 34)), '#B45309', '700 11.5px system-ui, sans-serif', droite ? 'left' : 'right');   /* jamais sur les graduations */
       oP.innerHTML = 'I = ' + fr(I0, 3) + '&nbsp;A &nbsp;; U = ' + fr(U0, 2) + '&nbsp;V';
-      box.innerHTML = circuit(Eg, I0, U0);
+      box.innerHTML = circuit(E, r, I0, U0);
     }
     rE.addEventListener('input', draw);
-    function setup() { box.innerHTML = circuit(+rE.value, 0.2, +rE.value); hauteurCommune(box, cv); S = canvasCtx(cv); draw(); }
+    rR.addEventListener('input', draw);
+    function setup() { box.innerHTML = circuit(+rE.value, +rR.value, 0.2, +rE.value); hauteurCommune(box, cv); S = canvasCtx(cv); draw(); }
     setup(); onResize(setup);
   })();
   /* graphe commun : courbe d'étalonnage R = f(θ), avec points relevés, courbe (à la demande) et construction éventuelle */
