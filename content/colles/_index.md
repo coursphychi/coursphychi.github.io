@@ -60,6 +60,10 @@ details[open] > summary:first-of-type {
  <td style="border-top:none;"><a href="./tsiolkovsky"><b>Équation de Tsiolkovsky</b></a></td>
  </tr>
    <tr>
+  <th rowspan="1 ">Optique géométrique (sup)</th>
+  <td><a href="./photocopieur"><b>Photocopieur</b></a></td>
+  </tr>
+   <tr>
   <th rowspan="2 ">Frottements</th>
   <td style="border-bottom:none;"><a href="./verre"><b>Verre et tonneau</b></a></td>
   </tr>

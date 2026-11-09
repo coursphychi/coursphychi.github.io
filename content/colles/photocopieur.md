@@ -1,6 +1,6 @@
 ---
 title: "Photocopieur"
-date: 2026-11-09T23:00:00+01:00
+date: 2021-03-06T14:23:56+01:00
 weight : 1
 draft: false
 hidden: true
@@ -28,8 +28,8 @@ hidden: true
   }
 
 details > summary:first-of-type {
-  display: list-item;
-  cursor: pointer;
+  display: list-item;    
+  cursor: pointer;       
 }
 
 details > summary:first-of-type {
@@ -38,7 +38,6 @@ details > summary:first-of-type {
 details[open] > summary:first-of-type {
   list-style-type: disclosure-open;
 }
-
 .pc-figs { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: center; margin: 1em 0 1.5em; }
 .pc-figs svg { flex: 1 1 320px; max-width: 520px; height: auto; }
 .pc-box { background: #fff; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 12px 14px; margin: 1em 0 1.5em; }
@@ -57,7 +56,12 @@ details[open] > summary:first-of-type {
 </style>
 
 
+
+
+
 # Photocopieur
+
+<p style="text-align:center;"><i>CCINP</i></p>
 
 <div class="pc-figs">
 <svg viewBox="0 0 470 330" role="img" aria-label="Figure 1 : le document (point A) et le récepteur (point A') sont distants de 384 mm ; la lentille divergente L1, de centre O1, est placée à 180 mm du récepteur" font-family="Helvetica, Arial, sans-serif" font-style="italic" fill="#111">
@@ -103,12 +107,18 @@ details[open] > summary:first-of-type {
 </svg>
 </div>
 
-<!-- ÉNONCÉ : à insérer ici -->
+On considère un photocopieur, qui forme l'image d'un document à photocopier sur un récepteur, qui est une surface photosensible. On place à 180 mm du récepteur une lentille (L1) de focale -90 mm (fig.1).
+1. Est-il possible de voir quelque chose sur le récepteur ?
+2. On place ensuite une lentille (L’) à 180 mm du document (fig. 2). Déterminer sa focale pour obtenir une image sur le récepteur.<br>
+En déduire le grandissement  de l’association des deux lentilles et indiquer quel type de tirage permettra cet objectif : transformation de A4 en A3 ou de A4 en A5.
+3. (L’) est en réalité un système de deux lentilles (L2) et (L3) accolées, avec (L2) identique à (L1). Calculer la distance focale image  de la lentille (L3). Quelle est la nature de cette lentille mince ?
+4. On glisse alors la lentille (L3) afin de l’accoler à (L1). Montrer que l’image du document reste sur le récepteur et calculer le grandissement correspondant  correspondant à l’association de ces trois lentilles ; en déduire le type de tirage obtenu.
 
-### Agrandir ou réduire en déplaçant une seule lentille
-
-La lentille $(L')$ est l'association de deux lentilles minces accolées : $(L_2)$, divergente et identique à $(L_1)$ ($f'_2=f'_1=-90\text{ mm}$), et $(L_3)$, convergente ($f'_3=35\text{ mm}$). Seule $(L_3)$ est mobile : accolée à $(L_2)$, elle donne l'agrandissement&nbsp;; accolée à $(L_1)$, elle donne la réduction. Dans les deux cas, l'image se forme sur le récepteur, qui n'a pas bougé.
-
+<details>
+<summary id="commsum">
+Animation : la lentille mobile (L<sub>3</sub>) et le tracé des rayons</summary>
+<blockquote id="comm">
+La lentille (L<sub>3</sub>) glisse de (L<sub>2</sub>) à (L<sub>1</sub>). Les rayons bleus sont issus du bord supérieur du document, les rouges du bord inférieur. Tant que (L<sub>3</sub>) est entre ses deux positions extrêmes, les rayons d'un même faisceau ne se recoupent plus sur le récepteur : l'image y est floue.
 <div class="pc-box" id="pc-anim">
 <svg viewBox="0 0 760 330" role="img" aria-label="Tracé des rayons issus des deux bords du document à travers les lentilles L2, L3 et L1 jusqu'au récepteur, pour la position choisie de la lentille mobile L3">
 <line x1="20" y1="165" x2="738" y2="165" stroke="#94A3B8" stroke-width="1.2"/><polygon points="746,165 736,161 736,169" fill="#94A3B8"/>
@@ -152,8 +162,8 @@ La lentille $(L')$ est l'association de deux lentilles minces accolées : $(L_2)
 </svg>
 </div>
 </div>
-
-Les rayons bleus sont issus du bord supérieur du document, les rouges du bord inférieur. Tant que $(L_3)$ est entre ses deux positions extrêmes, les rayons d'un même faisceau ne se recoupent plus sur le récepteur : l'image y est floue.
+</blockquote>
+</details>
 
 <script>
 (function () {
