@@ -57,6 +57,13 @@ hidden = true
 .nt-figs img { width: 100%; border-radius: 10px; }
 .nt-figs figcaption { font-size: 0.88em; color: var(--muted); margin-top: 0.3em; }
 .nt-bilan-steps li p { margin: 0.2em 0 !important; }
+/* animations « caractéristique » et « point de fonctionnement » : schéma et graphique côte à côte,
+   de même hauteur ; empilés sur un écran étroit */
+.nt-duo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 14px; align-items: center; margin: 0.6em 0; }
+.nt-duo .nt-svgbox { margin: 0; }
+.nt-duo .nt-svg { margin: 0 auto; }
+.nt-duo canvas { display: block; width: 100%; height: 260px; background: #fff; border-radius: 10px; border: 1px solid var(--line); }
+@media (max-width: 640px) { .nt-duo { grid-template-columns: minmax(0, 1fr); } }
 </style>
 
 <div class="nt-quizbar">
@@ -339,7 +346,7 @@ hidden = true
 
 ### Le montage pour tracer une caractéristique {.nt-h3}
 
-<div class="nt-svgbox"><svg class='nt-svg' viewBox='0 0 720 250' role='img' aria-label="Deux montages pour tracer la caractéristique d'un dipôle : avec un générateur de tension réglable, ou avec un générateur fixe et un rhéostat en série. Dans les deux cas, l'ampèremètre est en série avec le dipôle et le voltmètre en dérivation à ses bornes"><g><polyline points='50,60 250,60 250,190 50,190 50,60' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><polyline points='250,85 300,85 300,165 250,165' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><circle cx='50' cy='125' r='17' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='50' y='130' font-size='14' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>G</text><text x='36' y='105' font-size='15' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>+</text><text x='36' y='155' font-size='15' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>−</text><circle cx='150' cy='60' r='13' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='150' y='65' font-size='13' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='130' y='54' font-size='10.5' text-anchor='end' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='170' y='54' font-size='10.5' text-anchor='start' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>COM</text><rect x='242' y='105' width='16' height='40' fill='#FEF3C7' stroke='#1E293B' stroke-width='2'/><text x='250' y='129' font-size='13' text-anchor='middle' fill='#92400E' font-family='system-ui, sans-serif' font-weight='700'>?</text><circle cx='300' cy='125' r='13' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='300' y='130' font-size='13' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>V</text><text x='310' y='109' font-size='10.5' text-anchor='start' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>V</text><text x='310' y='149' font-size='10.5' text-anchor='start' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>COM</text><circle cx='250' cy='85' r='3.6' fill='#1E293B'/><circle cx='250' cy='165' r='3.6' fill='#1E293B'/><text x='50' y='175' font-size='11' text-anchor='middle' fill='#64748B' font-family='system-ui, sans-serif'></text><text x='160' y='244' font-size='12.5' text-anchor='middle' fill='#334155' font-family='system-ui, sans-serif' font-weight='700'>générateur de tension réglable</text></g><g transform='translate(370,0)'><polyline points='50,60 250,60 250,190 50,190 50,60' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><polyline points='250,85 300,85 300,165 250,165' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><circle cx='50' cy='125' r='17' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='50' y='130' font-size='14' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>G</text><text x='36' y='105' font-size='15' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>+</text><text x='36' y='155' font-size='15' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>−</text><circle cx='150' cy='60' r='13' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='150' y='65' font-size='13' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='130' y='54' font-size='10.5' text-anchor='end' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='170' y='54' font-size='10.5' text-anchor='start' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>COM</text><rect x='242' y='105' width='16' height='40' fill='#FEF3C7' stroke='#1E293B' stroke-width='2'/><text x='250' y='129' font-size='13' text-anchor='middle' fill='#92400E' font-family='system-ui, sans-serif' font-weight='700'>?</text><circle cx='300' cy='125' r='13' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='300' y='130' font-size='13' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>V</text><text x='310' y='109' font-size='10.5' text-anchor='start' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>V</text><text x='310' y='149' font-size='10.5' text-anchor='start' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>COM</text><circle cx='250' cy='85' r='3.6' fill='#1E293B'/><circle cx='250' cy='165' r='3.6' fill='#1E293B'/><rect x='130' y='182' width='40' height='16' fill='#fff' stroke='#1E293B' stroke-width='2'/><line x1='124' y1='204' x2='170.7' y2='178.8' stroke='#1E293B' stroke-width='1.6'/><polygon points='176,176 170,183.8 166.2,176.7' fill='#1E293B'/><text x='150' y='222' font-size='11' text-anchor='middle' fill='#64748B' font-family='system-ui, sans-serif'>rhéostat (résistance variable)</text><text x='50' y='175' font-size='11' text-anchor='middle' fill='#64748B' font-family='system-ui, sans-serif'></text><text x='160' y='244' font-size='12.5' text-anchor='middle' fill='#334155' font-family='system-ui, sans-serif' font-weight='700'>générateur fixe + rhéostat</text></g></svg></div>
+<div class="nt-svgbox"><svg class='nt-svg' viewBox='0 0 720 250' role='img' aria-label="Deux montages pour tracer la caractéristique d'un dipôle : avec un générateur de tension réglable, ou avec un générateur fixe et un rhéostat en série. Dans les deux cas, l'ampèremètre est en série avec le dipôle et le voltmètre en dérivation à ses bornes"><g><polyline points='50,60 250,60 250,190 50,190 50,60' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><polyline points='250,85 300,85 300,165 250,165' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><circle cx='50' cy='125' r='17' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='50' y='130' font-size='14' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>G</text><text x='36' y='105' font-size='15' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>+</text><text x='36' y='155' font-size='15' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>−</text><circle cx='150' cy='60' r='13' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='150' y='65' font-size='13' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='130' y='54' font-size='10.5' text-anchor='end' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='170' y='54' font-size='10.5' text-anchor='start' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>COM</text><rect x='242' y='105' width='16' height='40' fill='#FEF3C7' stroke='#1E293B' stroke-width='2'/><text x='250' y='129' font-size='13' text-anchor='middle' fill='#92400E' font-family='system-ui, sans-serif' font-weight='700'>?</text><circle cx='300' cy='125' r='13' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='300' y='130' font-size='13' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>V</text><text x='310' y='109' font-size='10.5' text-anchor='start' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>V</text><text x='310' y='149' font-size='10.5' text-anchor='start' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>COM</text><circle cx='250' cy='85' r='3.6' fill='#1E293B'/><circle cx='250' cy='165' r='3.6' fill='#1E293B'/><text x='50' y='175' font-size='11' text-anchor='middle' fill='#64748B' font-family='system-ui, sans-serif'></text><text x='160' y='244' font-size='12.5' text-anchor='middle' fill='#334155' font-family='system-ui, sans-serif' font-weight='700'>générateur de tension réglable</text></g><g transform='translate(370,0)'><polyline points='50,60 250,60 250,190 50,190 50,60' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><polyline points='250,85 300,85 300,165 250,165' fill='none' stroke='#1E293B' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/><circle cx='50' cy='125' r='17' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='50' y='130' font-size='14' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>G</text><text x='36' y='105' font-size='15' text-anchor='middle' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>+</text><text x='36' y='155' font-size='15' text-anchor='middle' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>−</text><circle cx='150' cy='60' r='13' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='150' y='65' font-size='13' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='130' y='54' font-size='10.5' text-anchor='end' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>A</text><text x='170' y='54' font-size='10.5' text-anchor='start' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>COM</text><rect x='242' y='105' width='16' height='40' fill='#FEF3C7' stroke='#1E293B' stroke-width='2'/><text x='250' y='129' font-size='13' text-anchor='middle' fill='#92400E' font-family='system-ui, sans-serif' font-weight='700'>?</text><circle cx='300' cy='125' r='13' fill='#fff' stroke='#1E293B' stroke-width='2'/><text x='300' y='130' font-size='13' text-anchor='middle' fill='#1E293B' font-family='system-ui, sans-serif' font-weight='700'>V</text><text x='310' y='109' font-size='10.5' text-anchor='start' fill='#DC2626' font-family='system-ui, sans-serif' font-weight='700'>V</text><text x='310' y='149' font-size='10.5' text-anchor='start' fill='#2563EB' font-family='system-ui, sans-serif' font-weight='700'>COM</text><circle cx='250' cy='85' r='3.6' fill='#1E293B'/><circle cx='250' cy='165' r='3.6' fill='#1E293B'/><rect x='130' y='182' width='40' height='16' fill='#fff' stroke='#1E293B' stroke-width='2'/><line x1='120' y1='207' x2='176.8' y2='173.1' stroke='#1E293B' stroke-width='1.6'/><polygon points='182,170 176.3,178 172.2,171.2' fill='#1E293B'/><text x='150' y='222' font-size='11' text-anchor='middle' fill='#64748B' font-family='system-ui, sans-serif'>rhéostat (résistance variable)</text><text x='50' y='175' font-size='11' text-anchor='middle' fill='#64748B' font-family='system-ui, sans-serif'></text><text x='160' y='244' font-size='12.5' text-anchor='middle' fill='#334155' font-family='system-ui, sans-serif' font-weight='700'>générateur fixe + rhéostat</text></g></svg></div>
 
 <div class="nt-b nt-prop">
 <p class="nt-tag"><i class="fa-solid fa-star"></i>À retenir</p>
@@ -369,9 +376,9 @@ hidden = true
 <label><input type="radio" name="cmode" value="gen"><span>générateur réglable</span></label>
 </div>
 </div>
-<div class="nt-lab-pair" style="grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: center;">
-<div class="nt-svgbox nt-carac-svg" style="margin:0;"></div>
-<canvas style="height:260px; background:#fff; border-radius:10px;" aria-label="Caractéristique U = f(I) : les points relevés"></canvas>
+<div class="nt-duo">
+<div class="nt-svgbox nt-carac-svg"></div>
+<canvas aria-label="Caractéristique U = f(I) : les points relevés"></canvas>
 </div>
 <label class="nt-ctrl"><span class="out-slabel">Résistance du rhéostat</span>&nbsp;: <b class="out-s"></b><input type="range" min="0" max="1" step="0.002" value="0.3"></label>
 <div class="nt-read" aria-live="polite"><span>U = <b class="out-u"></b></span><span>I = <b class="out-i"></b></span><span>U/I = <b class="out-r"></b></span></div>
@@ -417,8 +424,10 @@ hidden = true
 <div class="nt-lab" id="lab-ptf">
 <p class="nt-tag"><i class="fa-solid fa-hand-pointer"></i>Animation interactive</p>
 <p class="nt-lab-title">Une lampe branchée sur un générateur</p>
-<div class="nt-svgbox nt-ptf-svg" style="max-width:420px; margin-left:auto; margin-right:auto;"></div>
-<canvas style="height:270px; background:#fff;" aria-label="Caractéristiques du générateur idéal et de la lampe, et leur point d'intersection"></canvas>
+<div class="nt-duo">
+<div class="nt-svgbox nt-ptf-svg"></div>
+<canvas aria-label="Caractéristiques du générateur idéal et de la lampe, et leur point d'intersection"></canvas>
+</div>
 <label class="nt-ctrl">Tension du générateur&nbsp;: <b class="out-E"></b><input type="range" data-p="E" min="1" max="8" step="0.1" value="6"></label>
 <div class="nt-read" aria-live="polite"><span>point de fonctionnement&nbsp;: <b class="out-pt"></b></span></div>
 <p class="nt-note">Le générateur est idéal&nbsp;: la tension à ses bornes ne dépend pas de l'intensité qu'il débite. Sa caractéristique est donc une droite horizontale. Le point de fonctionnement donne la tension aux bornes de la lampe et l'intensité qui la traverse.</p>
@@ -543,7 +552,7 @@ hidden = true
       return s;
     }
     function rheo(x, y, o) {   /* rhéostat : conducteur ohmique traversé d'une flèche oblique */
-      var s = res(x, y, o), a = o === 'v' ? [x - 18, y + 20, x + 16, y - 20] : [x - 26, y + 14, x + 26, y - 14];
+      var s = res(x, y, o), a = o === 'v' ? [x - 20, y + 30, x + 20, y - 32] : [x - 30, y + 17, x + 32, y - 20];
       var dx = a[2] - a[0], dy = a[3] - a[1], L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L;
       s += "<line x1='" + n(a[0]) + "' y1='" + n(a[1]) + "' x2='" + n(a[2] - ux * 6) + "' y2='" + n(a[3] - uy * 6) + "' stroke='" + INK + "' stroke-width='1.6'/>";
       s += "<polygon points='" + n(a[2]) + ',' + n(a[3]) + ' ' + n(a[2] - ux * 9 - uy * 4) + ',' + n(a[3] - uy * 9 + ux * 4) + ' ' + n(a[2] - ux * 9 + uy * 4) + ',' + n(a[3] - uy * 9 - ux * 4) + "' fill='" + INK + "'/>";
@@ -552,6 +561,7 @@ hidden = true
     function lamp(x, y, glow) {
       var s = '';
       if (glow) { s += "<circle cx='" + n(x) + "' cy='" + n(y) + "' r='" + n(14 + 10 * glow) + "' fill='rgba(250,204,21," + (0.35 * glow) + ")'/>"; }
+      s += "<circle cx='" + n(x) + "' cy='" + n(y) + "' r='14' fill='#fff'/>";   /* fond opaque : le fil ne transparaît pas */
       s += "<circle cx='" + n(x) + "' cy='" + n(y) + "' r='14' fill='" + (glow ? 'rgba(254,240,138,' + (0.4 + 0.6 * glow) + ')' : '#fff') + "' stroke='" + INK + "' stroke-width='2'/>";
       var d = 9.9; s += "<path d='M" + n(x - d) + ',' + n(y - d) + ' L' + n(x + d) + ',' + n(y + d) + ' M' + n(x + d) + ',' + n(y - d) + ' L' + n(x - d) + ',' + n(y + d) + "' stroke='" + INK + "' stroke-width='2'/>";
       return s;
@@ -879,6 +889,18 @@ hidden = true
       var T = TH.T25, U = 0; for (var k = 0; k < 60; k++) { var R = TH.R25 * Math.exp(TH.B * (1 / T - 1 / TH.T25)); U = R * I; T = 0.5 * T + 0.5 * (TH.T25 + TH.Rth * U * I); } return U; }, Imax: 0.005, Umax: 6.5, unitI: 'mA', kI: 1000, Rh: [1000, 20000], UG: 4.5 }
   };
   function solveI(f, lo, hi) { for (var k = 0; k < 70; k++) { var m = (lo + hi) / 2; if (f(m) > 0) { hi = m; } else { lo = m; } } return (lo + hi) / 2; }
+  /* Graphique à côté d'un schéma (.nt-duo) : même hauteur que le schéma sur grand écran (240 px au moins),
+     hauteur fixe quand ils sont empilés (écran étroit) */
+  function hauteurCommune(box, cv) {
+    var sv = box.querySelector('svg'), large = window.matchMedia('(min-width: 641px)').matches;
+    cv.style.height = (large && sv ? Math.max(240, Math.round(sv.getBoundingClientRect().height)) : 260) + 'px';
+  }
+  /* flèche oblique traversant un symbole (dipôle réglable) */
+  function flecheReglage(x1, y1, x2, y2) {
+    var dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, r = function (v) { return Math.round(v * 10) / 10; };
+    return "<line x1='" + x1 + "' y1='" + y1 + "' x2='" + r(x2 - ux * 6) + "' y2='" + r(y2 - uy * 6) + "' stroke='#1E293B' stroke-width='1.6'/>" +
+      "<polygon points='" + x2 + ',' + y2 + ' ' + r(x2 - ux * 9 - uy * 4) + ',' + r(y2 - uy * 9 + ux * 4) + ' ' + r(x2 - ux * 9 + uy * 4) + ',' + r(y2 - uy * 9 - ux * 4) + "' fill='#1E293B'/>";
+  }
   /* ================= Tracer la caractéristique d'un dipôle ================= */
   (function () {
     var root = document.getElementById('lab-carac');
@@ -899,15 +921,17 @@ hidden = true
     function schema(st) {
       var b = CI.wire([[50, 60], [250, 60], [250, 190], [50, 190], [50, 60]]) + CI.wire([[250, 85], [310, 85], [310, 165], [250, 165]]);
       b += CI.gen(50, 125, 'v', 't', 'G') + CI.meter(150, 60, 'A', 'l');
+      if (mode === 'gen') { b += flecheReglage(26, 140, 68, 92); }   /* symbole du générateur réglable (au-dessus de la lettre G) */
       b += dip === 'ohm' ? CI.res(250, 125, 'v') : (dip === 'lampe' ? CI.lamp(250, 125, Math.min(1, st.I / 0.3)) : (dip === 'del' ? CI.led(250, 125, 'v', 'd') : CI.therm(250, 125, 'v')));
       b += CI.meter(310, 125, 'V', 't') + CI.node(250, 85) + CI.node(250, 165);
       if (mode === 'rheo') { b += CI.rheo(150, 190, 'h'); }
       else if (dip === 'del') { b += CI.res(150, 190, 'h') + CI.text(150, 215, 'protection 100 \u03a9', '#64748B', 10.5); }
-      b += CI.text(24, 129, mode === 'gen' ? 'réglable' : '6,0 V', '#64748B', 10, 'end');
+      if (mode === 'gen') { b += CI.text(20, 120, 'réglable', '#475569', 11, 'end', 700) + CI.text(20, 136, st.reg, '#475569', 11, 'end'); }
+      else { b += CI.text(20, 130, '6,0 V', '#475569', 11.5, 'end', 700); }
       /* écrans des appareils */
       b += "<rect x='110' y='4' width='80' height='26' rx='5' fill='#0F172A'/><text x='150' y='22' font-size='13' text-anchor='middle' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>" + fr(st.I * 1000, st.I < 0.01 ? 2 : 1) + " mA</text>";
       b += "<rect x='330' y='112' width='74' height='26' rx='5' fill='#0F172A'/><text x='367' y='130' font-size='13' text-anchor='middle' fill='#4ADE80' font-family='ui-monospace, Menlo, monospace'>" + fr(st.U, 2) + " V</text>";
-      return CI.svg(410, 230, b, 'Montage de tracé de la caractéristique, avec les valeurs lues sur l\u2019ampèremètre et le voltmètre', 'nt-svg');
+      return CI.svg(448, 232, "<g transform='translate(38,0)'>" + b + "</g>", 'Montage de tracé de la caractéristique, avec les valeurs lues sur l\u2019ampèremètre et le voltmètre', 'nt-svg');
     }
     function graphe(st) {
       if (!S) { return; }
@@ -932,8 +956,11 @@ hidden = true
           txt(c, 'loi d\u2019Ohm (1 500 \u03a9)', X(0.0033), Y(5.6), '#E11D48', '600 11px system-ui, sans-serif');
         }
       }
-      pts.forEach(function (p) { c.fillStyle = '#E11D48'; c.beginPath(); c.arc(X(p[0]), Y(p[1]), 4, 0, 2 * Math.PI); c.fill(); });
-      c.strokeStyle = '#E11D48'; c.lineWidth = 1.5; c.beginPath(); c.arc(X(st.I), Y(st.U), 7, 0, 2 * Math.PI); c.stroke();
+      /* point courant : projeté en pointillés sur les axes */
+      c.strokeStyle = 'rgba(225,29,72,.35)'; c.lineWidth = 1; c.setLineDash([3, 4]);
+      c.beginPath(); c.moveTo(X(st.I), B); c.lineTo(X(st.I), Y(st.U)); c.lineTo(L, Y(st.U)); c.stroke(); c.setLineDash([]);
+      pts.forEach(function (p) { c.fillStyle = '#E11D48'; c.beginPath(); c.arc(X(p[0]), Y(p[1]), 4.5, 0, 2 * Math.PI); c.fill(); c.strokeStyle = '#fff'; c.lineWidth = 1.5; c.stroke(); });
+      c.strokeStyle = '#E11D48'; c.lineWidth = 2; c.beginPath(); c.arc(X(st.I), Y(st.U), 7.5, 0, 2 * Math.PI); c.stroke();
     }
     function maj() {
       var st = etat();
@@ -955,7 +982,7 @@ hidden = true
     });
     $$(root, 'input[name="cdip"]').forEach(function (r) { r.addEventListener('change', function () { dip = r.value; pts = []; modele = false; msg.textContent = ''; maj(); }); });
     $$(root, 'input[name="cmode"]').forEach(function (r) { r.addEventListener('change', function () { mode = r.value; pts = []; msg.textContent = mode === 'gen' ? 'Générateur réglable&nbsp;: on règle directement la tension.' : 'Générateur fixe (6,0 V) et rhéostat&nbsp;: en faisant varier la résistance du rhéostat, on fait varier l\u2019intensité dans le circuit.'; maj(); }); });
-    function setup() { S = canvasCtx(cv); maj(); }
+    function setup() { box.innerHTML = schema(etat()); hauteurCommune(box, cv); S = canvasCtx(cv); maj(); }
     setup(); onResize(setup);
   })();
   /* ================= Le point de fonctionnement : une lampe sur un générateur idéal ================= */
@@ -964,11 +991,11 @@ hidden = true
     if (!root) { return; }
     var cv = $(root, 'canvas'), box = $(root, '.nt-ptf-svg'), rE = $(root, '[data-p="E"]'), oE = $(root, '.out-E'), oP = $(root, '.out-pt'), S;
     function circuit(Eg, I0, U0) {
-      var b = CI.wire([[80, 30], [260, 30], [260, 130], [80, 130], [80, 30]]) + CI.gen(80, 80, 'v', 't') + CI.lamp(260, 80, Math.min(1, I0 / 0.3));
-      b += CI.uarr(44, 112, 44, 48, '', '', '#E11D48') + CI.qty(36, 86, 'U', 'G', '#E11D48', 'end') + CI.text(44, 150, fr(Eg, 1) + ' V', '#E11D48', 11.5, 'middle', 700);
-      b += CI.uarr(294, 112, 294, 48, '', '', '#2563EB') + CI.qty(302, 86, 'U', 'L', '#2563EB', 'start');
-      b += CI.iarr(170, 30, 'r', 'I', '', '#B45309', 0, -10);
-      return CI.svg(360, 160, b, 'Une lampe branchée directement sur un générateur de tension idéal', 'nt-svg nt-svg-s');
+      var b = CI.wire([[90, 40], [250, 40], [250, 200], [90, 200], [90, 40]]) + CI.gen(90, 120, 'v', 't') + CI.lamp(250, 120, Math.min(1, I0 / 0.3));
+      b += CI.uarr(52, 165, 52, 75, '', '', '#E11D48') + CI.qty(44, 125, 'U', 'G', '#E11D48', 'end') + CI.text(52, 186, fr(Eg, 1) + ' V', '#E11D48', 12, 'middle', 700);
+      b += CI.uarr(288, 165, 288, 75, '', '', '#2563EB') + CI.qty(296, 125, 'U', 'L', '#2563EB', 'start') + CI.text(288, 186, fr(U0, 1) + ' V', '#2563EB', 12, 'middle', 700);
+      b += CI.iarr(170, 40, 'r', 'I', '', '#B45309', 0, -12) + CI.text(170, 64, fr(I0, 3) + ' A', '#B45309', 12, 'middle', 700);
+      return CI.svg(340, 222, b, 'Une lampe branchée directement sur un générateur de tension idéal', 'nt-svg nt-svg-s');
     }
     function draw() {
       var Eg = +rE.value, lamp = DIP.lampe, c = S.ctx, w = S.w, h = S.h, L = 48, R = w - 16, T = 14, B = h - 34, imax = 0.4, umax = 10;
@@ -996,7 +1023,7 @@ hidden = true
       box.innerHTML = circuit(Eg, I0, U0);
     }
     rE.addEventListener('input', draw);
-    function setup() { S = canvasCtx(cv); draw(); }
+    function setup() { box.innerHTML = circuit(+rE.value, 0.2, +rE.value); hauteurCommune(box, cv); S = canvasCtx(cv); draw(); }
     setup(); onResize(setup);
   })();
   /* graphe commun : courbe d'étalonnage R = f(θ), avec points relevés, courbe (à la demande) et construction éventuelle */
