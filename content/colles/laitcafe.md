@@ -57,8 +57,8 @@ On prépare un café au lait.
 
 À l'instant $t=0$, le café, brûlant, est déjà dans la tasse.
 
-Le lait à température ambiante.
+Le lait est à température ambiante.
 
-Pour refroidir le café plus rapidement plus rapidement, vaut-il mieux verser le lait dans la tasse de café à l’instant $t=0$, ou bien attendre avant de verser le lait&nbsp;?
+Pour refroidir le café plus rapidement, vaut-il mieux verser le lait dans la tasse de café à l’instant $t=0$, ou bien attendre avant de verser le lait&nbsp;?
 
 
