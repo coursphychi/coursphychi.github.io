@@ -77,7 +77,7 @@ details.pc-details[open] > summary:first-of-type { border-bottom: 1px solid #E2E
 
 
 
-# Photocopieur
+<h1 style="overflow-x:auto;">Photocopieur</h1>
 
 <p style="text-align:center;"><i>CCINP</i></p>
 
