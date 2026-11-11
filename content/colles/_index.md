@@ -60,10 +60,6 @@ details[open] > summary:first-of-type {
  <td style="border-top:none;"><a href="./tsiolkovsky"><b>Équation de Tsiolkovsky</b></a></td>
  </tr>
    <tr>
-  <th rowspan="1 ">Optique géométrique (sup)</th>
-  <td><a href="./photocopieur"><b>Photocopieur</b></a></td>
-  </tr>
-   <tr>
   <th rowspan="2 ">Frottements</th>
   <td style="border-bottom:none;"><a href="./verre"><b>Verre et tonneau</b></a></td>
   </tr>
@@ -80,6 +76,10 @@ details[open] > summary:first-of-type {
     <tr>
   <th rowspan="1 ">Transferts thermiques</th>
   <td><a href="./laitcafe"><b> Lait dans le café </b></a></td>
+  </tr>
+     <tr>
+  <th rowspan="1 ">Optique géométrique (sup)</th>
+  <td><a href="./photocopieur"><b>Photocopieur</b></a></td>
   </tr>
       <tr>
   <th rowspan="1 ">Onde dans cavité</th>
