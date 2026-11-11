@@ -15,6 +15,12 @@
     rounded : true/false — coins arrondis (défaut : false)
     start   : instant de départ, en secondes ("90") ou au format "m:ss" / "h:mm:ss" ("1:30")
     end     : instant d'arrêt, mêmes formats
+    loading : "eager" (défaut : la vidéo se charge dès l'ouverture de la page) | "lazy"
+              (chargement différé jusqu'à l'approche de la vidéo, pour une page très chargée)
+
+  Affichage rapide : la miniature de la vidéo sert de fond pendant le chargement du
+  lecteur (qui apparaît ensuite en fondu par-dessus), et la page se connecte d'avance
+  aux serveurs de YouTube.
 */ -}}
 
 {{- /* ---------- 1. Récupération et validation de l'identifiant ---------- */ -}}
@@ -77,6 +83,10 @@
   {{- end -}}
 {{- end -}}
 
+{{- /* ---------- 5 bis. Chargement : immédiat par défaut ---------- */ -}}
+{{- $loading := "eager" -}}
+{{- if .IsNamedParams -}}{{- if eq (.Get "loading") "lazy" -}}{{- $loading = "lazy" -}}{{- end -}}{{- end -}}
+
 {{- /* ---------- 6. Construction de l'URL ---------- */ -}}
 {{- $params := slice -}}
 {{- with $times.Get "start" -}}{{- $params = $params | append (printf "start=%s" .) -}}{{- end -}}
@@ -112,6 +122,8 @@
 */ -}}
 {{- if not (.Page.Scratch.Get "ytPlusFadeAssets") -}}
 {{- .Page.Scratch.Set "ytPlusFadeAssets" true }}
+<link rel="preconnect" href="https://www.youtube-nocookie.com">
+<link rel="preconnect" href="https://i.ytimg.com">
 <style>
 .yt-plus iframe { opacity: 0; transition: opacity .45s ease; }
 .yt-plus iframe.is-loaded { opacity: 1; }
@@ -148,6 +160,6 @@ if (f.hasAttribute('data-yt-loaded') && shown(f)) fadeIn(f);
 </script>
 {{- end }}
 {{/* ---------- 8. Rendu ---------- */ -}}
-<div class="yt-plus" style="width:{{ $width }};max-width:100%;margin:1.5rem auto;aspect-ratio:{{ $ratioCSS | safeCSS }};{{ if $rounded }}border-radius:0.75rem;overflow:hidden;{{ end }}{{ if $shadow }}box-shadow:0 10px 30px rgba(0,0,0,.30);{{ end }}">
-<iframe src="{{ $src }}" style="display:block;width:100%;height:100%;border:0;border-radius:inherit;" title="Lecteur vidéo YouTube" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="yt-plus" style="width:{{ $width }};max-width:100%;margin:1.5rem auto;aspect-ratio:{{ $ratioCSS | safeCSS }};background:#000 url(https://i.ytimg.com/vi/{{ $id }}/hqdefault.jpg) center/cover no-repeat;{{ if $rounded }}border-radius:0.75rem;overflow:hidden;{{ end }}{{ if $shadow }}box-shadow:0 10px 30px rgba(0,0,0,.30);{{ end }}">
+<iframe src="{{ $src }}" style="display:block;width:100%;height:100%;border:0;border-radius:inherit;" title="Lecteur vidéo YouTube" loading="{{ $loading }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
