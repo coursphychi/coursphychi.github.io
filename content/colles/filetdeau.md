@@ -148,6 +148,5 @@ $\displaystyle a_{\text{ion}}=\frac{F_\ell}{\rho\pi a^2}=\frac{2\varepsilon_0rE^
 
 ---
 
-Une version restreinte à l'électrostatique de cette colle est disponible : [Filet d'eau (électrostatique)](../filetdeau_electro/).
 
 Cette expérience est détaillée, avec l'estimation du champ dépolarisant et le rôle de la charge des gouttes, dans la page [La déviation du filet d'eau](https://sciencesilencieuse.github.io/physique/electromag/filetdeau/).
