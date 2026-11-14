@@ -86,8 +86,12 @@ details[open] > summary:first-of-type {
   <td><a href="./cavite"><b> Deux plans puis un troisième</b></a></td>
   </tr>
   <tr>
-  <th rowspan="1 ">Électrostatique et conduction</th>
+  <th rowspan="1 ">Transversal</th>
   <td><a href="./filetdeau"><b>Filet d'eau</b></a></td>
+  </tr>
+  <tr>
+  <th rowspan="1 ">Électrostatique</th>
+  <td><a href="./filetdeau_electro"><b>Filet d'eau (électrostatique)</b></a></td>
   </tr>
   <tr>
   <th rowspan="2 ">Thermochimie</th>
