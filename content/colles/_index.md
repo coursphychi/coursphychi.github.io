@@ -59,6 +59,14 @@ details[open] > summary:first-of-type {
   <tr>
  <td style="border-top:none;"><a href="./tsiolkovsky"><b>Équation de Tsiolkovsky</b></a></td>
  </tr>
+     <tr>
+  <th rowspan="1 ">Électrocinétique (sup)</th>
+  <td><a href="./eprom"><b> EEPROM </b></a></td>
+  </tr>
+       <tr>
+  <th rowspan="1 ">Optique géométrique (sup)</th>
+  <td><a href="./photocopieur"><b>Photocopieur</b></a></td>
+  </tr>
    <tr>
   <th rowspan="2 ">Frottements</th>
   <td style="border-bottom:none;"><a href="./verre"><b>Verre et tonneau</b></a></td>
@@ -74,24 +82,16 @@ details[open] > summary:first-of-type {
  <td style="border-top:none;"><a href="./spaghetti"><b>Spaghettification</b></a></td>
  </tr>
     <tr>
-  <th rowspan="1 ">Transferts thermiques</th>
-  <td><a href="./laitcafe"><b> Lait dans le café </b></a></td>
-  </tr>
-     <tr>
-  <th rowspan="1 ">Optique géométrique (sup)</th>
-  <td><a href="./photocopieur"><b>Photocopieur</b></a></td>
+  <th rowspan="1 ">Électrostatique</th>
+  <td><a href="./filetdeau_electro"><b>Filet d'eau</b></a></td>
   </tr>
       <tr>
   <th rowspan="1 ">Onde dans cavité</th>
   <td><a href="./cavite"><b> Deux plans puis un troisième</b></a></td>
   </tr>
-  <tr>
-  <th rowspan="1 ">Transversal</th>
-  <td><a href="./filetdeau"><b>Filet d'eau</b></a></td>
-  </tr>
-  <tr>
-  <th rowspan="1 ">Électrostatique</th>
-  <td><a href="./filetdeau_electro"><b>Filet d'eau (électrostatique)</b></a></td>
+      <tr>
+  <th rowspan="1 ">Transferts thermiques</th>
+  <td><a href="./laitcafe"><b> Lait dans le café </b></a></td>
   </tr>
   <tr>
   <th rowspan="2 ">Thermochimie</th>
@@ -101,8 +101,8 @@ details[open] > summary:first-of-type {
  <td style="border-top:none;"><a href="./ethanol"><b>Éthanol</b></a></td>
  </tr>
    <tr>
-  <th rowspan="1 ">Électrocinétique (sup)</th>
-  <td><a href="./eprom"><b> EEPROM </b></a></td>
+  <th rowspan="1 ">Transversal</th>
+  <td><a href="./filetdeau"><b>Filet d'eau</b> (φ stat + E + conducteur)</a></td>
   </tr>
 </table>
 </div>

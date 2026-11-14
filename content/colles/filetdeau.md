@@ -132,14 +132,14 @@ Correction</summary>
 
 7. Le modèle dipolaire prédit une force **nulle** (question 4), donc un filet non dévié. La déviation observée montre que le filet porte une **charge nette** : la force $q\overrightarrow{E}$ ne demande aucun gradient. Le sens de la déviation donne le signe de cette charge.
 
-8. Avec $\overrightarrow{j}=\sigma\overrightarrow{E}$, $\operatorname{div}\overrightarrow{j}+\dfrac{\partial\rho_e}{\partial t}=0$ et $\operatorname{div}\overrightarrow{E}=\dfrac{\rho_e}{\varepsilon_r\varepsilon_0}$ :
-$$\frac{\partial\rho_e}{\partial t}+\frac{\sigma}{\varepsilon_r\varepsilon_0}\rho_e=0\quad\Longrightarrow\quad\rho_e(t)=\rho_e(0)\mkern3mu \mathrm{e}^{-t/\tau_e},\qquad\tau_e=\frac{\varepsilon_r\varepsilon_0}{\sigma}.$$
+8. Avec $\overrightarrow{j}=\sigma\overrightarrow{E}$, $\operatorname{div}\overrightarrow{j}+\dfrac{\partial\rho_e}{\partial t}=0$ et $\operatorname{div}\overrightarrow{E}=\dfrac{\rho_e}{\varepsilon_r\varepsilon_0}$ :<br>
+$\displaystyle \frac{\partial\rho_e}{\partial t}+\frac{\sigma}{\varepsilon_r\varepsilon_0}\rho_e=0\quad\Longrightarrow\quad\rho_e(t)=\rho_e(0)\mkern3mu \mathrm{e}^{-t/\tau_e},\qquad\tau_e=\frac{\varepsilon_r\varepsilon_0}{\sigma}.$
 Numériquement $\tau_e=\dfrac{80\times8{,}85\times10^{-12}}{5\times10^{-2}}\approx1{,}4\times10^{-8}\ \mathrm{s}$, soit $14\ \mathrm{ns}\ll\Delta t_1=40\ \mathrm{ms}$. Les charges libres se réorganisent beaucoup plus vite que le temps de traversée : à l'échelle de l'expérience, le filet est un **conducteur à l'équilibre**, équipotentiel, au potentiel de la terre (même pour de l'eau très pure, $\sigma\approx5\times10^{-6}\ \mathrm{S\cdot m^{-1}}$ donne seulement $0{,}13\ \mathrm{ms}$). Les ions positifs sont attirés vers le flanc qui fait face à la règle (si elle est négative), les ions négatifs refoulés vers le robinet : le filet s'électrise **par influence**.
 
-9. Théorème de Gauss sur un cylindre coaxial de rayon $\rho$ et de hauteur $h$ : $2\pi\rho h\mkern3mu E_{\text{filet}}(\rho)=\dfrac{\lambda h}{\varepsilon_0}$, d'où $E_{\text{filet}}=\dfrac{\lambda}{2\pi\varepsilon_0\rho}$. En $\rho=r$, l'égalité avec $E$ donne
-$$\lambda\approx2\pi\varepsilon_0Er=2\pi\times8{,}85\times10^{-12}\times10^5\times0{,}02\approx1{,}1\times10^{-7}\ \mathrm{C\cdot m^{-1}}.$$
-La force par unité de longueur est $F_\ell=\lambda E\approx1{,}1\times10^{-2}\ \mathrm{N\cdot m^{-1}}$, et
-$$a_{\text{ion}}=\frac{F_\ell}{\rho\pi a^2}=\frac{2\varepsilon_0rE^2}{\rho a^2}\approx3{,}5\ \mathrm{m\cdot s^{-2}}.$$
+9. Théorème de Gauss sur un cylindre coaxial de rayon $\rho$ et de hauteur $h$ : $2\pi\rho h\mkern3mu E_{\text{filet}}(\rho)=\dfrac{\lambda h}{\varepsilon_0}$, d'où $E_{\text{filet}}=\dfrac{\lambda}{2\pi\varepsilon_0\rho}$. En $\rho=r$, l'égalité avec $E$ donne<br>
+$\displaystyle \lambda\approx2\pi\varepsilon_0Er=2\pi\times8{,}85\times10^{-12}\times10^5\times0{,}02\approx1{,}1\times10^{-7}\ \mathrm{C\cdot m^{-1}}.$
+La force par unité de longueur est $F_\ell=\lambda E\approx1{,}1\times10^{-2}\ \mathrm{N\cdot m^{-1}}$, et<br>
+$\displaystyle a_{\text{ion}}=\frac{F_\ell}{\rho\pi a^2}=\frac{2\varepsilon_0rE^2}{\rho a^2}\approx3{,}5\ \mathrm{m\cdot s^{-2}}.$
 
 10. $\Delta x_{\text{ion}}=3{,}5\times0{,}04\times0{,}12\approx1{,}7\ \mathrm{cm}$ : **le bon ordre de grandeur**, soit environ 70 fois plus que le mécanisme dipolaire, ou 10 fois plus même avec $\chi=79$. Le rapport des deux accélérations est indépendant de $E$ : $\dfrac{a_{\text{ion}}}{a_{\text{dip}}}=\dfrac{2}{\chi}\left(\dfrac ra\right)^2\approx70$. Le facteur $(r/a)^2$ traduit la différence entre une charge nette, portée par la surface du filet et que le champ attire directement, et des dipôles neutres répartis dans tout son volume, sur lesquels le champ n'agit que par son gradient. Pour trancher : isoler électriquement le filet de la terre (robinet en plastique, ou filet tombant dans un seau isolé) ; ou, mieux, **mesurer la charge des gouttes** qui se détachent du filet à l'aide d'une coupelle de Faraday ou d'un électroscope : si elles portent une charge de signe opposé à celui de la règle, le mécanisme est bien l'influence, et non la polarité de la molécule.
 

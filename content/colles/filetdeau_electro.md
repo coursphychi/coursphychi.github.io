@@ -45,11 +45,15 @@ details > summary:first-of-type {
 details[open] > summary:first-of-type {
   list-style-type: disclosure-open;
 }
+h1
+{
+overflow-x:auto;
+}
 </style>
 
 
 
-# Filet d'eau (électrostatique)
+<h1>Filet d'eau (électrostatique)</h1>
 
 On frotte une règle en plastique contre un pull en laine et on l'approche, à quelques centimètres, d'un mince filet d'eau qui s'écoule d'un robinet : le filet s'incurve vers la règle, de l'ordre du centimètre au bas de l'évier.
 
@@ -86,14 +90,16 @@ Correction</summary>
 
 2. $F=qE(x+d)-qE(x)\simeq qd\mkern3mu \dfrac{\mathrm{d}E}{\mathrm{d}x}=p\mkern3mu \dfrac{\mathrm{d}E}{\mathrm{d}x}$. En champ uniforme, les deux forces sont égales et opposées : la résultante est **nulle** (il reste un couple, qui fait pivoter le dipôle). Il faut un gradient de champ pour attirer un dipôle.
 
-3. Par sommation sur un volume unité, $f=P\left|\dfrac{\mathrm{d}E}{\mathrm{d}r}\right|=\dfrac{PE}{r}$, dirigée vers les zones de champ fort, donc vers la règle, quel que soit le signe de sa charge ($P$ et $E$ changent de signe ensemble : la force varie comme $\frac12\mkern3mu \frac{\mathrm{d}(E^2)}{\mathrm{d}r}$). Avec $P=\varepsilon_0(\varepsilon_r-1)E$,
-$$f=\frac{\varepsilon_0(\varepsilon_r-1)E^2}{r}=\frac{8{,}85\times10^{-12}\times79\times10^{10}}{0{,}02}\approx3{,}5\times10^{2}\ \mathrm{N\cdot m^{-3}},\qquad a_{\text{dip}}=\frac f\rho\approx0{,}35\ \mathrm{m\cdot s^{-2}}.$$
+3. Par sommation sur un volume unité, $f=P\left|\dfrac{\mathrm{d}E}{\mathrm{d}r}\right|=\dfrac{PE}{r}$, dirigée vers les zones de champ fort, donc vers la règle, quel que soit le signe de sa charge ($P$ et $E$ changent de signe ensemble : la force varie comme $\frac12\mkern3mu \frac{\mathrm{d}(E^2)}{\mathrm{d}r}$). Avec $P=\varepsilon_0(\varepsilon_r-1)E$,<br>
+$\displaystyle f=\frac{\varepsilon_0(\varepsilon_r-1)E^2}{r}=\frac{8{,}85\times10^{-12}\times79\times10^{10}}{0{,}02}\approx3{,}5\times10^{2}\ \mathrm{N\cdot m^{-3}},\qquad a_{\text{dip}}=\frac f\rho\approx0{,}35\ \mathrm{m\cdot s^{-2}}.$
+
 Puis $\Delta x=0{,}35\times0{,}04\times(0{,}02+0{,}10)\approx1{,}7\ \mathrm{mm}$, six fois moins que le centimètre observé, et c'est déjà une **surestimation**.
 
 4. a) Gauss sur un cylindre coaxial de rayon $\rho<a$ et de longueur $h$ : $2\pi\rho h\mkern3mu E=\dfrac{\rho_0\mkern3mu \pi\rho^2h}{\varepsilon_0}$, d'où $\overrightarrow{E}=\dfrac{\rho_0}{2\varepsilon_0}\overrightarrow{OM}$ (le facteur $\frac12$ vient du rapport de la surface du disque $\pi\rho^2$ à son périmètre $2\pi\rho$).
 
-   b) Soit $O_+$ et $O_-$ les axes des deux cylindres, avec $\overrightarrow{O_-O_+}=\overrightarrow{\delta}$. Par superposition,
-   $$\overrightarrow{E_{\text{dép}}}=\frac{\rho_0}{2\varepsilon_0}\overrightarrow{O_+M}-\frac{\rho_0}{2\varepsilon_0}\overrightarrow{O_-M}=\frac{\rho_0}{2\varepsilon_0}\overrightarrow{O_+O_-}=-\frac{\rho_0\overrightarrow{\delta}}{2\varepsilon_0}=-\frac{\overrightarrow{P}}{2\varepsilon_0}.$$
+   b) Soit $O_+$ et $O_-$ les axes des deux cylindres, avec $\overrightarrow{O_-O_+}=\overrightarrow{\delta}$. Par superposition,<br>
+   $\displaystyle \overrightarrow{E_{\text{dép}}}=\frac{\rho_0}{2\varepsilon_0}\overrightarrow{O_+M}-\frac{\rho_0}{2\varepsilon_0}\overrightarrow{O_-M}=\frac{\rho_0}{2\varepsilon_0}\overrightarrow{O_+O_-}=-\frac{\rho_0\overrightarrow{\delta}}{2\varepsilon_0}=-\frac{\overrightarrow{P}}{2\varepsilon_0}.$
+   
    Le champ dépolarisant est **uniforme** dans le filet et **opposé** à $\overrightarrow{P}$ : les charges de polarisation écrantent le champ appliqué.
 
    c) On a $\overrightarrow{E_{\text{int}}}=\overrightarrow{E}-\dfrac{\overrightarrow{P}}{2\varepsilon_0}=\overrightarrow{E}-\dfrac{\varepsilon_r-1}{2}\overrightarrow{E_{\text{int}}}$, soit
@@ -125,12 +131,14 @@ Correction</summary>
 5. Le modèle de l'eau polarisée prédit une force **nulle** en champ uniforme (question 2), donc un filet non dévié. La déviation observée montre que le filet porte une **charge nette** : la force $q\overrightarrow{E}$ ne demande aucun gradient. Le sens de la déviation donne le signe de cette charge.
 
 6. a) Gauss sur un cylindre coaxial de rayon $\rho$ et de longueur $h$ : $E_{\text{filet}}(\rho)=\dfrac{\lambda}{2\pi\varepsilon_0\rho}$. La tension entre le filet ($\rho=a$) et la règle ($\rho\approx r$) est
-   $$|V_0|=\int_a^rE_{\text{filet}}(\rho)\mkern3mu \mathrm{d}\rho=\frac{|\lambda|}{2\pi\varepsilon_0}\ln\frac ra,\qquad\text{donc}\qquad C_\ell=\frac{|\lambda|}{|V_0|}=\frac{2\pi\varepsilon_0}{\ln(r/a)}.$$
+
+   $\displaystyle |V_0|=\int_a^rE_{\text{filet}}(\rho)\mkern3mu \mathrm{d}\rho=\frac{|\lambda|}{2\pi\varepsilon_0}\ln\frac ra,\qquad\text{donc}\qquad C_\ell=\frac{|\lambda|}{|V_0|}=\frac{2\pi\varepsilon_0}{\ln(r/a)}.$
 
    b) $\ln(r/a)=\ln20\approx3{,}0$, donc $C_\ell\approx1{,}9\times10^{-11}\ \mathrm{F\cdot m^{-1}}$ et $|\lambda|=C_\ell|V_0|\approx1{,}1\times10^{-7}\ \mathrm{C\cdot m^{-1}}$. Le champ propre du filet à la distance $r$ vaut $\dfrac{|\lambda|}{2\pi\varepsilon_0r}\approx\dfrac{1{,}1\times10^{-7}}{5{,}6\times10^{-11}\times0{,}02}\approx1\times10^{5}\ \mathrm{V\cdot m^{-1}}$ : c'est bien l'ordre de grandeur du champ de la règle, dont il compense l'effet à l'intérieur de l'eau. Le modèle est cohérent. On retrouve d'ailleurs $|\lambda|\approx2\pi\varepsilon_0Er$, c'est-à-dire la charge linéique $\Lambda$ de la règle de la question 1.
 
-7. $F_\ell=|\lambda|E\approx1{,}1\times10^{-2}\ \mathrm{N\cdot m^{-1}}$. La masse linéique du filet est $\mu=\rho\pi a^2\approx3{,}1\times10^{-3}\ \mathrm{kg\cdot m^{-1}}$, donc
-   $$a_{\text{ion}}=\frac{F_\ell}{\mu}=\frac{2\varepsilon_0rE^2}{\rho a^2}\approx3{,}5\ \mathrm{m\cdot s^{-2}},\qquad\Delta x_{\text{ion}}=3{,}5\times0{,}04\times0{,}12\approx1{,}7\ \mathrm{cm}.$$
+7. $F_\ell=|\lambda|E\approx1{,}1\times10^{-2}\ \mathrm{N\cdot m^{-1}}$. La masse linéique du filet est $\mu=\rho\pi a^2\approx3{,}1\times10^{-3}\ \mathrm{kg\cdot m^{-1}}$, donc<br>
+   $\displaystyle a_{\text{ion}}=\frac{F_\ell}{\mu}=\frac{2\varepsilon_0rE^2}{\rho a^2}\approx3{,}5\ \mathrm{m\cdot s^{-2}},\qquad\Delta x_{\text{ion}}=3{,}5\times0{,}04\times0{,}12\approx1{,}7\ \mathrm{cm}.$
+   
    C'est **le bon ordre de grandeur**, environ 400 fois la déviation dipolaire corrigée de la question 4. Le rapport des accélérations est, avec $a_{\text{dip}}=\dfrac{2\varepsilon_0}{\rho r}\dfrac{\varepsilon_r-1}{\varepsilon_r+1}E^2$ :
    $$\frac{a_{\text{ion}}}{a_{\text{dip}}}=\frac{\varepsilon_r+1}{\varepsilon_r-1}\left(\frac ra\right)^2\approx400,$$
    **indépendant de $E$** : les deux forces varient comme $E^2$, on ne peut donc pas les départager en changeant l'intensité du champ. Le facteur $(r/a)^2$ traduit la différence entre une charge nette, que le champ attire directement, et des dipôles neutres, sur lesquels il n'agit que par son gradient.
