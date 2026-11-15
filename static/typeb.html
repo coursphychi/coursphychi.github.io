@@ -1405,8 +1405,15 @@
     let model = null;
     let lastRun = null;
 
+    // Saisie d'un nombre : virgule ou point, espaces ignorés ; puissance de 10 écrite
+    // « 6,67e-11 », « 6,67×10^-11 », « 6,67x10^-11 », « 6,67*10^-11 » ou « 6,67.10^-11 »
+    function numText(s) {
+        return String(s).trim().replace(/\s/g, '').replace(/\u2212/g, '-')
+            .replace(/(?:[×xX*·.]|\\times)10\^\{?\(?([+-]?\d+)\)?\}?$/, 'e$1');
+    }
+
     function parseNum(s) {
-        const v = parseFloat(String(s).replace(',', '.').replace(/\s/g, ''));
+        const v = parseFloat(numText(s).replace(',', '.'));
         return isFinite(v) ? v : NaN;
     }
 
@@ -1835,8 +1842,27 @@
     }
 
     // Nombre saisi par l'élève, écrit en LaTeX sans perdre ses chiffres significatifs
+    // Valeur saisie, écrite en LaTeX en gardant ses chiffres significatifs : puissance de 10
+    // saisie → « mantisse × 10^n » ; nombre très petit ou très grand → écriture scientifique
     function typedTex(s) {
-        return String(s).trim().replace(/\s/g, '').replace(/[.,]/g, '{,}').replace(/[^0-9{},+\-eE]/g, '');
+        const t = numText(s);
+        const m = t.match(/^([+-]?)(\d*[.,]?\d*)(?:[eE]([+-]?\d+))?$/);
+        if (!m || !/\d/.test(m[2])) return t.replace(/[.,]/g, '{,}').replace(/[^0-9{},+\-]/g, '');
+        const sign = m[1] === '-' ? '-' : '';
+        const mant = m[2];
+        if (m[3] !== undefined) {
+            const e = Number(m[3]);
+            return sign + mant.replace(/[.,]/, '{,}') + (e === 0 ? '' : ` \\times 10^{${e}}`);
+        }
+        const v = parseFloat(mant.replace(',', '.'));
+        if (v !== 0 && (v < 1e-3 || v >= 1e5)) {
+            // chiffres significatifs saisis (zéros de tête exclus ; zéros finaux d'un entier non comptés)
+            let digits = mant.replace(/^[0.,]+/, '');
+            if (!/[.,]/.test(mant)) digits = digits.replace(/0+$/, '') || '0';
+            const sig = Math.max(1, digits.replace(/[.,]/g, '').length);
+            return sign + formatSciLatex(v, sig, false);
+        }
+        return sign + mant.replace(/[.,]/, '{,}');
     }
 
     function renderBudget(R, sym, uT) {
