@@ -1461,7 +1461,7 @@
                 const p = parseNum(st.param);
                 const u = law.param ? law.u(p) : 0;
                 card.querySelector('.var-u').textContent = law.param
-                    ? (isFinite(u) ? `u = ${law.param === 'a' ? `a/√${st.law === 'uniform' ? 3 : 6} = ` : ''}${fmtPlain(u, 3)} ${st.unit}` : 'demi-étendue à saisir')
+                    ? (isFinite(u) ? `u = ${law.param === 'a' ? `a/√${st.law === 'uniform' ? 3 : 6} = ` : ''}${fmtPlain(u, 3)} ${unitPlain(st.unit)}` : 'demi-étendue à saisir')
                     : 'aucune incertitude';
             };
             card.querySelectorAll('input, select').forEach(el => el.addEventListener('input', () => { sync(); scheduleRun(); }));
@@ -1732,8 +1732,47 @@
         };
     }
 
+    // --- Unités : « m/s^2 », « m.s-2 », « mol/L », « mol·L⁻¹ », « J/(kg.K) »… → liste [symbole, exposant] ---
+    const SUP_IN = { '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁻': '-', '⁺': '+' };
+    function parseUnit(unit) {
+        let t = String(unit).trim().replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+/g, m => '^' + [...m].map(c => SUP_IN[c]).join(''))
+            .replace(/\u2212/g, '-').replace(/\s*([./·*×⋅])\s*/g, '$1').replace(/\s+/g, '.');
+        if (!t) return [];
+        const out = [];
+        // groupes séparés par « / » ; tout ce qui suit un « / » est au dénominateur
+        const parts = t.split('/');
+        for (let g = 0; g < parts.length; g++) {
+            let part = parts[g];
+            if (g > 0 && /^\(.*\)$/.test(part)) part = part.slice(1, -1);
+            if (!part) return null;
+            if (g === 0 && part === '1' && parts.length > 1) continue;   // « 1/s » → s⁻¹
+            for (const f of part.split(/[.·*×⋅]/)) {
+                const m = f.match(/^([A-Za-zµμΩ°%‰Å']+)(?:\^?\{?\(?([+-]?\d+)\)?\}?)?$/);
+                if (!m) return null;
+                const e = m[2] === undefined ? 1 : Number(m[2]);
+                const sym = m[1].replace('μ', 'µ'), same = out.find(x => x[0] === sym);
+                if (same) same[1] += g > 0 ? -e : e;   // « m/s/s » → m·s⁻²
+                else out.push([sym, g > 0 ? -e : e]);
+            }
+        }
+        return out.filter(x => x[1] !== 0);
+    }
+
     function unitTex(unit) {
-        return unit ? `\\,\\text{${unit.replace(/[\\{}$]/g, '')}}` : '';
+        if (!unit) return '';
+        const f = parseUnit(unit);
+        const clean = s => s.replace(/[\\{}$^_#&%]/g, c => c === '%' ? '\\%' : '');
+        if (!f) return `\\,\\text{${clean(unit)}}`;   // écriture non reconnue : recopiée telle quelle
+        if (!f.length) return '';
+        if (f.length === 1 && f[0][0] === '°' && f[0][1] === 1) return '\\text{°}';   // angle : 40° sans espace
+        return '\\,' + f.map(([u, e]) => `\\text{${clean(u)}}${e === 1 ? '' : `^{${e}}`}`).join('\\cdot ');
+    }
+
+    // Version texte (histogramme, cartes) : m·s⁻², mol·L⁻¹
+    const SUP_OUT = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '-': '⁻' };
+    function unitPlain(unit) {
+        const f = unit ? parseUnit(unit) : [];
+        return !f ? String(unit) : f.map(([u, e]) => u + (e === 1 ? '' : String(e).replace(/./g, c => SUP_OUT[c]))).join('·');
     }
 
     function render(R) {
@@ -1978,7 +2017,7 @@
             svg += `<text x="${X(x)}" y="${pad.t + ph + 18}" text-anchor="middle" font-size="11" fill="${col('--text-muted')}">${fmtPlain(Math.abs(x) < step * 1e-9 ? 0 : x, 6)}</text>`;
         }
         const unit = unitInput.value.trim();
-        svg += `<text x="${pad.l + pw}" y="${H - 6}" text-anchor="end" font-size="11" font-weight="600" fill="${col('--text-muted')}">${model.target}${unit ? ` (${unit})` : ''}</text>`;
+        svg += `<text x="${pad.l + pw}" y="${H - 6}" text-anchor="end" font-size="11" font-weight="600" fill="${col('--text-muted')}">${model.target}${unit ? ` (${escAttr(unitPlain(unit))})` : ''}</text>`;
         const caption = W < 640 ? 'Courbe verte : loi normale' : `Histogramme des ${formatSciSvg(R.y.length, 3)} valeurs simulées · courbe verte : loi normale de même moyenne et même écart-type`;
         svg += `<text x="${pad.l}" y="${H - 6}" font-size="11" fill="${col('--text-muted')}">${caption}</text>`;
         svg += '</svg>';
