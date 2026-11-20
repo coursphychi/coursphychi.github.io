@@ -353,6 +353,26 @@
 
     .btn-primary { background: var(--primary); border-color: var(--primary); color: white; }
     .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+    /* Bouton « Importer vidéo » (un <label> autour d'un input file) : même gabarit que
+       « Activer la caméra », mais en bleu canard pour distinguer les deux points de départ */
+    .btn-teal {
+      --teal: #0f7c8a;
+      --teal-hover: #0b6471;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.84rem;
+      padding: 0.42rem 0.75rem;
+      border-radius: 7px;
+      border: 1px solid var(--teal);
+      background: var(--teal);
+      color: white;
+      transition: background 0.15s;
+    }
+    .btn-teal:hover { background: var(--teal-hover); }
+    .btn-teal:focus-within { outline: 2px solid var(--teal); outline-offset: 2px; }
     .btn-danger { background: var(--danger); border-color: var(--danger); color: white; }
     .btn-success { background: var(--success); border-color: var(--success); color: white; }
 
@@ -576,7 +596,7 @@
             <button id="btnRotate" title="Pivoter le flux de 90° (pratique si la webcam est fixée verticalement)">↻ Pivoter 90°</button>
             <button id="btnMirror" title="Inverser gauche/droite">Miroir</button>
             <button id="btnGrid" title="Afficher une grille d'alignement">Grille</button>
-            <label style="cursor:pointer; padding:0.42rem 0.75rem; border:1px solid var(--border); border-radius:7px; background:var(--bg); font-size:0.84rem;">
+            <label class="btn-teal">
               Importer vidéo…
               <input type="file" id="fileInput" accept="video/*" style="display:none;">
             </label>
