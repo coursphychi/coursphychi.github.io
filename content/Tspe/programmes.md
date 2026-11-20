@@ -663,6 +663,7 @@ Pour importer les tableaux `regressi` dans le programme ci-dessous, utiliser le 
 # IMPORTATION DES MODULES
 # #####
 from math import sqrt
+from statistics import mean
 import matplotlib.pyplot as plt
 plt.style.use("seaborn-v0_8")
 
@@ -674,7 +675,7 @@ vx = []
 vy = []
 ax = []
 ay = []
-a = []
+norme_a = []
 
 # nombres d'éléments pointés
 n = len(x)
@@ -711,7 +712,6 @@ n = len(vx)
 
 
 
-
 # #####
 # Calcul de la norme de l'accélération en chaque position
 # #####
@@ -725,6 +725,9 @@ n = len(vx)
 
 
 
+
+print("Liste des valeurs de la norme de l'accélération :\n", norme_a)
+print("Valeur moyenne :", mean(norme_a),"m/s²")
 
 # #####
 # On retire à nouveau les extrémités où a n'est pas calculée
