@@ -1366,24 +1366,62 @@
         ctx.save();
         ctx.strokeStyle = '#f59e0b';
         ctx.fillStyle = '#f59e0b';
-        ctx.lineWidth = 3 * u;
+        ctx.lineCap = 'butt';
 
-        ctx.beginPath();
-        ctx.moveTo(scaleA.x, scaleA.y);
-        ctx.lineTo(scaleB.x, scaleB.y);
-        ctx.stroke();
-
-        [ { pt: scaleA, label: 'A' }, { pt: scaleB, label: 'B' } ].forEach(item => {
-          ctx.beginPath();
-          ctx.arc(item.pt.x, item.pt.y, 9 * u, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.strokeStyle = '#000';
-          ctx.lineWidth = 2 * u;
+        // Les extrémités du segment sont matérialisées par un trait de repère perpendiculaire
+        // (comme sur une règle) passant exactement par A et B ; l'anneau autour n'est que la
+        // poignée de saisie : il est vide, pour que le segment y soit visible jusqu'au centre.
+        const ang = Math.atan2(scaleB.y - scaleA.y, scaleB.x - scaleA.x);
+        const nx = -Math.sin(ang), ny = Math.cos(ang);   // normale au segment
+        const tick = 21 * u;                              // demi-longueur du trait de repère
+        const strokeBoth = (path, width) => {             // liseré sombre sous le trait ambre : lisible sur tout fond
+          ctx.strokeStyle = 'rgba(0, 0, 0, 0.85)';
+          ctx.lineWidth = width + 2.5 * u;
+          path();
           ctx.stroke();
-          ctx.fillStyle = '#fef08a';
+          ctx.strokeStyle = '#f59e0b';
+          ctx.lineWidth = width;
+          path();
+          ctx.stroke();
+        };
+
+        strokeBoth(() => {
+          ctx.beginPath();
+          ctx.moveTo(scaleA.x, scaleA.y);
+          ctx.lineTo(scaleB.x, scaleB.y);
+        }, 2 * u);
+
+        [ { pt: scaleA, label: 'A', s: -1 }, { pt: scaleB, label: 'B', s: 1 } ].forEach(item => {
+          const { x, y } = item.pt;
+          // trait de repère exactement sur l'extrémité
+          strokeBoth(() => {
+            ctx.beginPath();
+            ctx.moveTo(x - nx * tick, y - ny * tick);
+            ctx.lineTo(x + nx * tick, y + ny * tick);
+          }, 2 * u);
+          // anneau de saisie (vide)
+          strokeBoth(() => {
+            ctx.beginPath();
+            ctx.arc(x, y, 9 * u, 0, Math.PI * 2);
+          }, 1.5 * u);
+          // petit point central : l'extrémité est bien le centre de l'anneau
+          ctx.beginPath();
+          ctx.arc(x, y, 1.8 * u, 0, Math.PI * 2);
+          ctx.fillStyle = '#fff';
+          ctx.fill();
+          // nom du point (avec liseré pour la lisibilité)
           ctx.font = `bold ${16 * u}px system-ui`;
-          ctx.fillText(item.label, item.pt.x + 12 * u, item.pt.y - 10 * u);
-          ctx.fillStyle = '#f59e0b';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.lineJoin = 'round';
+          ctx.strokeStyle = 'rgba(0, 0, 0, 0.85)';
+          ctx.lineWidth = 3.5 * u;
+          // nom placé dans le prolongement du segment, au-delà du trait de repère
+          const lx = Math.min(w - 8 * u, Math.max(8 * u, x + item.s * Math.cos(ang) * 30 * u));
+          const ly = Math.min(h - 8 * u, Math.max(8 * u, y + item.s * Math.sin(ang) * 30 * u));
+          ctx.strokeText(item.label, lx, ly);
+          ctx.fillStyle = '#fef08a';
+          ctx.fillText(item.label, lx, ly);
         });
         ctx.restore();
       }
