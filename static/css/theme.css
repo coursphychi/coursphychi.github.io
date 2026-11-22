@@ -1269,6 +1269,19 @@ pre .copy-to-clipboard:hover {
   border-bottom: 4px solid #9c6fb6;
 }
 
+/* icône maison : léger grossissement (avec petit rebond) au survol */
+#homelinks .fa-home {
+  display: inline-block;
+  transition: transform .28s cubic-bezier(.34, 1.56, .64, 1);
+}
+#homelinks a:hover .fa-home,
+#homelinks a:focus-visible .fa-home {
+  transform: scale(1.4);
+}
+@media (prefers-reduced-motion: reduce) {
+  #homelinks .fa-home { transition: none; }
+}
+
 #searchResults {
     text-align: left;
 }
