@@ -246,7 +246,7 @@
         .cube .f3 { transform: rotateX(90deg) translateZ(70px); }
         .cube .f4 { transform: rotateX(-90deg) translateZ(70px); }
         /* intérieur du cube : comble les coins arrondis des faces */
-        .cube .core { position: absolute; inset: 4px; background: #cbd5e1; border-radius: 6px; }
+        .cube .core { position: absolute; inset: 1.5px; background: #e2e8f0; }   /* plans pleins à angles vifs (aucun jour aux arêtes), juste en retrait des faces */
         .cube .core.c2 { transform: rotateY(90deg); }
         .cube .core.c3 { transform: rotateX(90deg); }
         .token { position: absolute; inset: 0; }
@@ -706,14 +706,18 @@
     let dieBusy = false;
     let dieStats = { faces: 6, counts: [], n: 0, sum: 0, hist: [] };
     const PIPS = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
-    // orientation du cube (rotateX, rotateY) qui présente la face k au spectateur
-    const FACE_ROT = { 1: [0, 0], 2: [0, -90], 3: [-90, 0], 4: [90, 0], 5: [0, 90], 6: [0, 180] };
-    const TILT = [-16, 18];   // léger angle de vue (appliqué dans le repère du spectateur) : on voit le dé en relief
-    let cubeRot = [0, 0, 0];
+    // Le résultat se lit sur la face SUPÉRIEURE, comme pour un vrai dé.
+    // Orientation (rotateX, rotateZ) qui amène la face k en haut ; le dé peut ensuite pivoter
+    // librement autour de la verticale (lacet), sans changer la face du dessus.
+    const FACE_ROT = { 1: [90, 0], 2: [0, -90], 3: [0, 0], 4: [180, 0], 5: [0, 90], 6: [-90, 0] };
+    const VIEW = -32;   // on regarde le dé un peu d'au-dessus (repère du spectateur)
+    let cubeRot = [30, 0, 0];   // [lacet, rotateX, rotateZ]
+    const restYaw = () => 18 + randInt(0, 36) + 90 * randInt(0, 3);   // position d'arrêt autour de la verticale
 
     cube.innerHTML = '<div class="core"></div><div class="core c2"></div><div class="core c3"></div>' +
         [1, 2, 3, 4, 5, 6].map((k) => `<div class="f f${k}">${Array.from({ length: 9 }, (_, j) => `<i class="${PIPS[k].includes(j) ? 'on' : ''}"></i>`).join('')}</div>`).join('');
-    function setCube(r) { cubeRot = r; cube.style.transform = `rotateX(${TILT[0]}deg) rotateY(${TILT[1]}deg) rotateX(${r[0]}deg) rotateY(${r[1]}deg) rotateZ(${r[2]}deg)`; }
+    // ordre d'application : rotateZ, puis rotateX (face choisie en haut), puis le lacet, puis l'angle de vue
+    function setCube(r) { cubeRot = r; cube.style.transform = `rotateX(${VIEW}deg) rotateY(${r[0]}deg) rotateX(${r[1]}deg) rotateZ(${r[2]}deg)`; }
 
     // jeton : silhouette du dé correspondant (d4 triangle, d8 losange, d10 cerf-volant, d12 pentagone, d20 hexagone…)
     function shapeSvg(N) {
@@ -743,7 +747,7 @@
     function showDie(v) {
         const isCube = dieStats.faces === 6;
         cube.hidden = !isCube; token.hidden = isCube;
-        if (isCube) { const f = FACE_ROT[v || 1]; setCube([f[0], f[1], 0]); }
+        if (isCube) { const f = FACE_ROT[v || 1]; setCube([cubeRot[0], f[0], f[1]]); }
         else { setTokenNumber(v); token.style.transform = ''; token.querySelector('svg').style.transform = ''; }
         dieToss.style.transform = ''; dieShadow.style.transform = ''; dieShadow.style.opacity = '';
     }
@@ -789,7 +793,7 @@
         if (N === 6) {
             const f = FACE_ROT[v];
             from = cubeRot.slice();
-            to = [nextAngle(from[0], f[0], 2 + randInt(0, 1)), nextAngle(from[1], f[1], 2 + randInt(0, 1)), nextAngle(from[2], 0, 1)];
+            to = [nextAngle(from[0], restYaw(), 1), nextAngle(from[1], f[0], 2 + randInt(0, 1)), nextAngle(from[2], f[1], 1 + randInt(0, 1))];
         }
         (function frame(now) {
             const t = Math.min(1, (now - t0) / dur), e = easeOut(t), y = hop(t);
