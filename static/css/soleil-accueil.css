@@ -172,6 +172,8 @@
   transition: transform .2s, box-shadow .3s, border-color .3s;
 }
 :root:has(.sol-accueil) #body .sol-docs li > a:first-child:hover { transform: translateY(-3px); border-color: var(--p) !important; color: #fff; box-shadow: 0 0 32px -4px var(--p); }
+:root:has(.sol-accueil) #body .sol-docs a, :root:has(.sol-accueil) #body .sol-docs a:hover, :root:has(.sol-accueil) #body .sol-docs a span, :root:has(.sol-accueil) #body .sol-docs a:hover span, :root:has(.sol-accueil) #body .sol-docs a i { text-decoration: none !important; background-size: 0 0 !important; }
+:root:has(.sol-accueil) #body .sol-docs a span, :root:has(.sol-accueil) #body .sol-docs a:hover span { background-image: none !important; }
 :root:has(.sol-accueil) #body .sol-docs li > a:first-child > i { flex: none; width: 2.1em; height: 2.1em; display: grid; place-items: center; border-radius: 50%; font-size: 1rem; color: #090c22; background: var(--p); box-shadow: 0 0 18px var(--p); }
 :root:has(.sol-accueil) #body .sol-docs .sol-corr { display: inline-block !important; position: absolute !important; right: 10px; bottom: 8px; padding: .1em .7em; border-radius: 99px; font-size: .78rem; font-weight: 600; color: #ffd0d4 !important; background: rgba(255, 70, 90, .18) !important; border: 1px solid rgba(255, 95, 109, .7) !important; }
 :root:has(.sol-accueil) #body .sol-docs .sol-corr:hover { color: #fff !important; background: rgba(255, 70, 90, .4) !important; }
