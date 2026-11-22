@@ -49,4 +49,9 @@
 <script src="{{ .Params.js }}"></script>
 {{ end }}
 
+<!-- Feuille de style propre à une page : front matter  page_css = "css/ma-page.css"  (chargée uniquement sur cette page) -->
+{{ with .Params.page_css }}
+<link rel="stylesheet" href="{{ . | relURL }}">
+{{ end }}
+
 <link rel="stylesheet" href="{{ "css/notice.css" | relURL }}">

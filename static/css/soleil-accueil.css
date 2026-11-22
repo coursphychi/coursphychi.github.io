@@ -1,0 +1,198 @@
+/*
+ * Page d'accueil « Le Soleil » : style repris de la présentation (fond d'espace, halos, dégradés).
+ *
+ * Chargé uniquement par content/1ES/soleil/_index.md (page_css = "css/soleil-accueil.css")
+ * et limité à cette page : chaque règle est préfixée par  :root:has(.sol-accueil)  (le conteneur
+ * .sol-accueil n'existe que sur cette page).
+ */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+/* ---- couleurs du thème « learn » redéfinies pour cette page (variables du thème) ---- */
+:root:has(.sol-accueil) {
+  --sol-acc: #ffb938;
+  --sol-acc2: #ff5f6d;
+  --sol-glass: rgba(14, 20, 56, .62);
+  --sol-edge: rgba(255, 255, 255, .13);
+  --MAIN-TEXT-color: #e8ecff;
+  --MAIN-TITLES-TEXT-color: #ffffff;
+  --MAIN-LINK-color: #6fd3ff;
+  --MAIN-LINK-HOVER-color: #b4ecff;
+  --MAIN-ANCHOR-color: #ffb938;
+  --MENU-HOME-LINK-color: #e8ecff;
+  --MENU-HOME-LINK-HOVERED-color: #ffb938;
+  --MENU-HEADER-BG-color: linear-gradient(160deg, #1a2160 0%, #0b0f33 100%);
+  --MENU-HEADER-BORDER-color: #ffb938;
+  --MENU-SEARCH-BG-color: rgba(255, 255, 255, .07);
+  --MENU-SEARCH-BOX-color: rgba(255, 255, 255, .24);
+  --MENU-SEARCH-BOX-ICONS-color: #aab4e6;
+  --MENU-SECTIONS-BG-color: rgba(5, 7, 24, .9);
+  --MENU-SECTIONS-ACTIVE-BG-color: rgba(18, 24, 66, .92);
+  --MENU-SECTIONS-LINK-color: #c9d1f5;
+  --MENU-SECTIONS-LINK-HOVER-color: #ffffff;
+  --MENU-SECTION-ACTIVE-CATEGORY-color: #0a0c22;
+  --MENU-SECTION-ACTIVE-CATEGORY-BG-color: linear-gradient(90deg, #ffb938, #ff7a5c);
+  --MENU-SECTION-HR-color: rgba(255, 255, 255, .1);
+  --MENU-VISITED-color: #ffb938;
+  background: #04050d;
+}
+
+/* ---- fond d'espace animé (nébuleuses et étoiles), derrière tout le contenu ---- */
+:root:has(.sol-accueil) body { background: transparent !important; font-family: 'Outfit', 'Work Sans', sans-serif; font-weight: 300; }
+:root:has(.sol-accueil) body::before {
+  content: ""; position: fixed; inset: -25%; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(38% 34% at 24% 30%, rgba(255, 120, 20, .30) 0, transparent 72%),
+    radial-gradient(44% 40% at 78% 72%, rgba(40, 130, 255, .30) 0, transparent 72%),
+    radial-gradient(34% 30% at 72% 16%, rgba(255, 90, 140, .18) 0, transparent 72%),
+    radial-gradient(60% 50% at 50% 100%, rgba(30, 40, 110, .45) 0, transparent 75%);
+  animation: sol-nebula 48s ease-in-out infinite alternate;
+}
+:root:has(.sol-accueil) body::after {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 18%, #fff, transparent),
+    radial-gradient(1px 1px at 33% 72%, rgba(255, 255, 255, .85), transparent),
+    radial-gradient(1.6px 1.6px at 58% 24%, #fff, transparent),
+    radial-gradient(1px 1px at 81% 58%, rgba(255, 255, 255, .8), transparent),
+    radial-gradient(1.3px 1.3px at 92% 12%, #cfe4ff, transparent),
+    radial-gradient(1px 1px at 47% 88%, #ffe9c4, transparent),
+    radial-gradient(1.2px 1.2px at 70% 40%, rgba(255, 255, 255, .7), transparent),
+    radial-gradient(1px 1px at 6% 60%, rgba(255, 255, 255, .8), transparent);
+  background-size: 420px 380px; opacity: .75; animation: sol-twinkle 7s ease-in-out infinite alternate;
+}
+@keyframes sol-nebula { 0% { transform: translate3d(-2%, -1%, 0) rotate(0deg) scale(1); } 100% { transform: translate3d(3%, 2%, 0) rotate(7deg) scale(1.12); } }
+@keyframes sol-twinkle { 0% { opacity: .45; } 100% { opacity: .9; } }
+@keyframes sol-spin { to { transform: rotate(360deg); } }
+@keyframes sol-breathe { 0%, 100% { transform: translate(-50%, -50%) scale(.97); } 50% { transform: translate(-50%, -50%) scale(1.04); } }
+@keyframes sol-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* ---- structure du thème : zones transparentes, barre du haut et pied de page en verre sombre ---- */
+:root:has(.sol-accueil) #body,
+:root:has(.sol-accueil) #body-inner,
+:root:has(.sol-accueil) #body .padding { background: transparent !important; }
+:root:has(.sol-accueil) #body-inner { color: var(--MAIN-TEXT-color); }
+:root:has(.sol-accueil) #top-bar { background: var(--sol-glass) !important; border: 1px solid var(--sol-edge); border-radius: 14px; backdrop-filter: blur(6px); }
+:root:has(.sol-accueil) #top-bar,
+:root:has(.sol-accueil) #top-bar a,
+:root:has(.sol-accueil) #top-bar i,
+:root:has(.sol-accueil) #breadcrumbs,
+:root:has(.sol-accueil) #breadcrumbs a { color: #c9d1f5 !important; }
+:root:has(.sol-accueil) #top-bar a:hover { color: #ffb938 !important; }
+:root:has(.sol-accueil) #body hr { border: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .22), transparent); }
+:root:has(.sol-accueil) .footline,
+:root:has(.sol-accueil) #body .footline { color: #8c96c4; border-color: rgba(255, 255, 255, .1); }
+:root:has(.sol-accueil) #navigation .nav { color: #c9d1f5; }
+:root:has(.sol-accueil) #sidebar { box-shadow: 0 0 40px rgba(0, 0, 0, .55); backdrop-filter: blur(8px); }
+:root:has(.sol-accueil) #sidebar #header-wrapper { border-bottom-width: 3px; box-shadow: 0 6px 30px -8px rgba(255, 185, 56, .5); }
+:root:has(.sol-accueil) #sidebar ul.topics > li > a,
+:root:has(.sol-accueil) #sidebar ul li a { transition: background .25s, color .25s, padding-left .25s; }
+:root:has(.sol-accueil) #sidebar ul li.active > a { font-weight: 600; box-shadow: 0 0 24px -4px rgba(255, 138, 92, .6); }
+:root:has(.sol-accueil) #homelinks { box-shadow: none; }
+
+/* ---- contenu ---- */
+:root:has(.sol-accueil) .sol-accueil h1, :root:has(.sol-accueil) .sol-accueil h2, :root:has(.sol-accueil) .sol-accueil p, :root:has(.sol-accueil) .sol-accueil li, :root:has(.sol-accueil) #body .sol-accueil a, :root:has(.sol-accueil) .sol-accueil span, :root:has(.sol-accueil) .sol-accueil small { font-family: 'Outfit', 'Work Sans', sans-serif !important; }
+:root:has(.sol-accueil) .sol-accueil { max-width: 880px; margin: 0 auto; font-size: 1.12rem; line-height: 1.55; }
+:root:has(.sol-accueil) #body .sol-accueil a { color: #6fd3ff; text-decoration: none; border-bottom: 1px solid rgba(111, 211, 255, .35); transition: color .2s, border-color .2s; }
+:root:has(.sol-accueil) #body .sol-accueil a { background-image: none; }
+:root:has(.sol-accueil) #body .sol-accueil a:hover { color: #fff; border-color: #fff; }
+:root:has(.sol-accueil) .sol-accueil img { max-width: 100%; margin: 0 auto; }
+
+/* héros : une éclipse (couronne autour d'un disque sombre qui porte le titre) */
+:root:has(.sol-accueil) .sol-hero { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 600px; padding: 70px 20px 50px; margin-bottom: 10px; isolation: isolate; }
+:root:has(.sol-accueil) .sol-eclipse { position: absolute; left: 50%; top: 50%; width: min(760px, 118vw); aspect-ratio: 1; transform: translate(-50%, -50%); z-index: -1; pointer-events: none; animation: sol-breathe 6s ease-in-out infinite; }
+:root:has(.sol-accueil) .sol-eclipse::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle closest-side, #05060f 0 60%, #fff3b0 63%, #ffc83d 66%, #ff8a1f 74%, #ff3d4a 86%, rgba(255, 61, 74, 0) 100%);
+  filter: blur(1.5px); opacity: .95;
+}
+:root:has(.sol-accueil) .sol-eclipse::after {
+  content: ""; position: absolute; inset: -6%;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 196, 70, .34) 0 1.4deg, transparent 1.4deg 8deg);
+  -webkit-mask-image: radial-gradient(circle closest-side, transparent 52%, #000 66%, transparent 100%);
+  mask-image: radial-gradient(circle closest-side, transparent 52%, #000 66%, transparent 100%);
+  animation: sol-spin 90s linear infinite;
+}
+:root:has(.sol-accueil) .sol-hero h1 {
+  max-width: 440px; margin: 0; font-size: clamp(1.9rem, 5.6vw, 3.1rem); line-height: 1.08; font-weight: 800; letter-spacing: -.01em; text-transform: none;
+  background: linear-gradient(100deg, var(--sol-acc), var(--sol-acc2) 60%, var(--sol-acc)); background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 22px rgba(255, 150, 60, .55)); animation: sol-shine 9s linear infinite;
+}
+@keyframes sol-shine { to { background-position: 200% 0; } }
+:root:has(.sol-accueil) .sol-sub { max-width: 380px; margin: .9em 0 1.3em; font-size: 1.05rem; color: #e8ecff; font-weight: 300; }
+:root:has(.sol-accueil) .sol-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+:root:has(.sol-accueil) #body .sol-btn {
+  display: inline-flex !important; position: relative !important; align-items: center; gap: .6em; padding: .55em 1.5em; border-radius: 99px; font-weight: 600; font-size: 1.05rem;
+  color: #f4f6ff !important; background: rgba(255, 255, 255, .08) !important; border: 1.5px solid rgba(255, 255, 255, .28) !important;
+  transition: transform .2s, box-shadow .25s, background .25s;
+}
+:root:has(.sol-accueil) #body .sol-btn small { display: none; }
+:root:has(.sol-accueil) #body .sol-btn:hover { transform: translateY(-2px); background: rgba(255, 255, 255, .16) !important; box-shadow: 0 0 26px -2px rgba(111, 211, 255, .6); }
+:root:has(.sol-accueil) #body .sol-btn-main { padding: .7em 2em; color: #0a0c20 !important; background: linear-gradient(90deg, #ffb938, #ff7a5c) !important; border-color: transparent !important; box-shadow: 0 0 34px -4px rgba(255, 150, 60, .8); flex-wrap: wrap; justify-content: center; }
+:root:has(.sol-accueil) #body .sol-btn-main:hover { color: #0a0c20 !important; background: linear-gradient(90deg, #ffc65e, #ff8d70) !important; box-shadow: 0 0 44px -2px rgba(255, 150, 60, .95); }
+:root:has(.sol-accueil) #body .sol-btn-main small { display: block; flex-basis: 100%; margin-top: -.15em; font-size: .72em; font-weight: 400; opacity: .8; text-align: center; }
+
+/* photo du système solaire */
+:root:has(.sol-accueil) .sol-photo { margin: 10px 0 30px; }
+:root:has(.sol-accueil) .sol-photo img { display: block; border-radius: 22px; box-shadow: 0 0 60px -10px rgba(255, 185, 56, .6), 0 20px 50px rgba(0, 0, 0, .5); animation: sol-rise .6s ease both; }
+
+/* parties numérotées, avec une couleur d'ambiance par partie (orange, bleu, violet) */
+:root:has(.sol-accueil) .sol-part { --p: #ffb938; --p2: #ff5f6d; margin: 44px 0; padding: 26px 28px 30px; border-radius: 24px; background: linear-gradient(160deg, rgba(16, 22, 58, .72), rgba(5, 7, 22, .78)); border: 1px solid var(--sol-edge); box-shadow: 0 20px 60px rgba(0, 0, 0, .5), 0 0 70px -22px var(--p); }
+:root:has(.sol-accueil) .sol-p2 { --p: #5cc8ff; --p2: #38f0c4; }
+:root:has(.sol-accueil) .sol-p3 { --p: #b69cff; --p2: #ff7ac8; }
+:root:has(.sol-accueil) .sol-part h2 {
+  display: flex; align-items: center; gap: .55em; margin: 0 0 .9em; padding: 0; border: 0; text-transform: none; font-size: 1.9rem; font-weight: 800; letter-spacing: -.01em; line-height: 1.1;
+  background: linear-gradient(100deg, var(--p), var(--p2) 60%, var(--p)); background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent !important; animation: sol-shine 9s linear infinite;
+}
+:root:has(.sol-accueil) .sol-part h2 .num {
+  flex: none; font-size: 2.6rem; font-weight: 800; line-height: 1; color: var(--p); -webkit-text-fill-color: var(--p);
+  filter: drop-shadow(0 0 12px var(--p));
+}
+:root:has(.sol-accueil) .sol-p1 h2 .num { filter: url(#sol-o1) drop-shadow(0 0 12px #ffb938); }
+:root:has(.sol-accueil) .sol-p2 h2 .num { filter: url(#sol-o2) drop-shadow(0 0 12px #5cc8ff); }
+:root:has(.sol-accueil) .sol-p3 h2 .num { filter: url(#sol-o3) drop-shadow(0 0 12px #b69cff); }
+
+/* médias : cadres arrondis à halo */
+:root:has(.sol-accueil) .sol-media { margin: 0 auto 22px; max-width: 800px; border-radius: 16px; overflow: hidden; box-shadow: 0 0 44px -8px var(--p), 0 12px 36px rgba(0, 0, 0, .5); border: 1px solid var(--sol-edge); line-height: 0; background: #05060f; }
+:root:has(.sol-accueil) .sol-media video,
+:root:has(.sol-accueil) .sol-media img { display: block; width: 100%; height: auto; margin: 0; border-radius: 0; }
+:root:has(.sol-accueil) #body .sol-media a { display: block !important; border: 0; }
+:root:has(.sol-accueil) .sol-media .yt-plus { margin: 0 !important; }
+:root:has(.sol-accueil) .sol-xkcd { background: #fff; padding: 10px; }
+:root:has(.sol-accueil) .sol-note { margin: 26px 0 12px; padding: .7em 1em; border-left: 4px solid var(--p); border-radius: 0 14px 14px 0; background: linear-gradient(90deg, rgba(255, 255, 255, .07), transparent); font-size: 1rem; }
+:root:has(.sol-accueil) .sol-note > i { color: var(--p); margin-right: .35em; }
+
+/* documents : cartes cliquables */
+:root:has(.sol-accueil) .sol-docs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+:root:has(.sol-accueil) .sol-docs li { position: relative; margin: 0; padding: 0; list-style: none; }
+:root:has(.sol-accueil) #body .sol-docs li > a:first-child {
+  display: flex !important; position: relative !important; align-items: center; gap: .8em; height: 100%; padding: .85em 1em; border-radius: 18px; color: #eef1ff; font-size: 1rem; line-height: 1.25; font-weight: 400;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .03)) !important; border: 1.5px solid rgba(255, 255, 255, .15) !important;
+  transition: transform .2s, box-shadow .3s, border-color .3s;
+}
+:root:has(.sol-accueil) #body .sol-docs li > a:first-child:hover { transform: translateY(-3px); border-color: var(--p) !important; color: #fff; box-shadow: 0 0 32px -4px var(--p); }
+:root:has(.sol-accueil) #body .sol-docs li > a:first-child > i { flex: none; width: 2.1em; height: 2.1em; display: grid; place-items: center; border-radius: 50%; font-size: 1rem; color: #090c22; background: var(--p); box-shadow: 0 0 18px var(--p); }
+:root:has(.sol-accueil) #body .sol-docs .sol-corr { display: inline-block !important; position: absolute !important; right: 10px; bottom: 8px; padding: .1em .7em; border-radius: 99px; font-size: .78rem; font-weight: 600; color: #ffd0d4 !important; background: rgba(255, 70, 90, .18) !important; border: 1px solid rgba(255, 95, 109, .7) !important; }
+:root:has(.sol-accueil) #body .sol-docs .sol-corr:hover { color: #fff !important; background: rgba(255, 70, 90, .4) !important; }
+:root:has(.sol-accueil) #body .sol-docs li:has(.sol-corr) > a:first-child { padding-bottom: 2.1em !important; }
+
+@media (max-width: 760px) {
+  :root:has(.sol-accueil) #body { overflow-x: clip; }
+  :root:has(.sol-accueil) .sol-eclipse { width: 175vw; }
+  :root:has(.sol-accueil) .sol-hero h1 { max-width: 80vw; font-size: 1.9rem; }
+  :root:has(.sol-accueil) .sol-sub { max-width: 78vw; }
+  :root:has(.sol-accueil) .sol-hero { min-height: 560px; padding: 50px 10px 40px; }
+  :root:has(.sol-accueil) .sol-part { padding: 20px 16px 22px; border-radius: 20px; margin: 30px 0; }
+  :root:has(.sol-accueil) .sol-part h2 { font-size: 1.45rem; }
+  :root:has(.sol-accueil) .sol-part h2 .num { font-size: 2.1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:has(.sol-accueil) body::before,
+:root:has(.sol-accueil) body::after,
+:root:has(.sol-accueil) .sol-eclipse,
+:root:has(.sol-accueil) .sol-eclipse::after,
+:root:has(.sol-accueil) .sol-hero h1,
+:root:has(.sol-accueil) .sol-part h2,
+:root:has(.sol-accueil) .sol-photo img { animation: none; }
+}
