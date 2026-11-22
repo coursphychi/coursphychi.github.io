@@ -220,24 +220,38 @@
         .coin .side small { font-size: 2.6rem; line-height: 1; margin-bottom: 0.2rem; }
         .coin .side.back { transform: rotateX(180deg); background: radial-gradient(circle at 35% 30%, #f1f5f9, #cbd5e1 45%, #94a3b8 85%, #64748b); color: #1e293b; box-shadow: inset 0 0 0 8px rgba(71, 85, 105, 0.5), inset 0 0 0 11px rgba(241, 245, 249, 0.6), 0 8px 24px rgba(0, 0, 0, 0.35); }
 
-        /* Dé */
-        .die {
-            width: 150px;
-            height: 150px;
-            border-radius: 26px;
-            background: linear-gradient(145deg, #ffffff, #e2e8f0);
-            color: #1e1b4b;
-            box-shadow: inset 0 -6px 0 rgba(15, 23, 42, 0.12), 0 12px 28px rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 700;
-            font-size: 4.2rem;
+        /* Dé : cube 3D (6 faces) ou jeton en forme de dé (autres nombres de faces) */
+        .die-area { position: relative; width: 200px; height: 270px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 38px; perspective: 900px; }
+        .die-toss { position: relative; z-index: 1; width: 140px; height: 140px; transform-style: preserve-3d; will-change: transform; }
+        .cube { position: absolute; inset: 0; transform-style: preserve-3d; }
+        .cube .f {
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            background: radial-gradient(circle at 30% 25%, #ffffff, #f1f5f9 55%, #d8dee8);
+            box-shadow: inset 0 0 0 1.5px rgba(15, 23, 42, 0.12), inset 0 -10px 18px rgba(15, 23, 42, 0.1);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            padding: 17px;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
-        .die.pips { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); padding: 20px; }
-        .die.pips i { width: 24px; height: 24px; border-radius: 50%; background: #1e1b4b; place-self: center; visibility: hidden; }
-        .die.pips i.on { visibility: visible; }
+        .cube .f i { width: 22px; height: 22px; border-radius: 50%; place-self: center; visibility: hidden; background: radial-gradient(circle at 38% 35%, #4338ca, #1e1b4b 70%); box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.8); }
+        .cube .f i.on { visibility: visible; }
+        .cube .f1 { transform: translateZ(70px); }
+        .cube .f6 { transform: rotateY(180deg) translateZ(70px); }
+        .cube .f2 { transform: rotateY(90deg) translateZ(70px); }
+        .cube .f5 { transform: rotateY(-90deg) translateZ(70px); }
+        .cube .f3 { transform: rotateX(90deg) translateZ(70px); }
+        .cube .f4 { transform: rotateX(-90deg) translateZ(70px); }
+        /* intérieur du cube : comble les coins arrondis des faces */
+        .cube .core { position: absolute; inset: 4px; background: #cbd5e1; border-radius: 6px; }
+        .cube .core.c2 { transform: rotateY(90deg); }
+        .cube .core.c3 { transform: rotateX(90deg); }
+        .token { position: absolute; inset: 0; }
+        .token svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35)); }
+        .die-shadow { position: absolute; z-index: 0; left: 50%; bottom: 10px; width: 136px; height: 24px; margin-left: -68px; border-radius: 50%; background: radial-gradient(ellipse, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0) 70%); }
 
         .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 0.5rem; margin: 0.75rem 0; }
         .stat { background: var(--bg-recessed); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.45rem 0.6rem; }
@@ -274,7 +288,10 @@
             text-shadow: 0 6px 30px rgba(0, 0, 0, 0.35);
             min-height: 1.1em;
         }
-        .student-name.spinning { opacity: 0.75; filter: blur(0.5px); }
+        /* défilement des prénoms : chaque prénom glisse depuis le haut (aucun filtre : pas d'artefacts) */
+        .student-name { position: relative; padding: 0.05em 0.2em; }
+        .student-name span { display: inline-block; }
+        .student-name.spinning { color: rgba(255, 255, 255, 0.82); }
         .student-name.pop { animation: pop 0.45s cubic-bezier(.2, 1.6, .4, 1); }
         @keyframes pop { 0% { transform: scale(0.7); } 100% { transform: scale(1); } }
         .stage-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
@@ -392,7 +409,13 @@
         <div class="grid2">
             <div class="panel">
                 <div class="stage" id="dieStage">
-                    <div class="die" id="die">?</div>
+                    <div class="die-area">
+                        <div class="die-toss" id="dieToss">
+                            <div class="cube" id="cube"></div>
+                            <div class="token" id="token" hidden></div>
+                        </div>
+                        <div class="die-shadow" id="dieShadow"></div>
+                    </div>
                     <div class="result-line" id="dieResult">Cliquez sur « Lancer » (ou appuyez sur Espace)</div>
                 </div>
                 <div class="row" style="margin-top: 1rem; justify-content: center;">
@@ -679,21 +702,50 @@
     }
 
     // ======================= DÉ =======================
-    const die = $('die');
+    const cube = $('cube'), token = $('token'), dieToss = $('dieToss'), dieShadow = $('dieShadow');
     let dieBusy = false;
     let dieStats = { faces: 6, counts: [], n: 0, sum: 0, hist: [] };
     const PIPS = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
+    // orientation du cube (rotateX, rotateY) qui présente la face k au spectateur
+    const FACE_ROT = { 1: [0, 0], 2: [0, -90], 3: [-90, 0], 4: [90, 0], 5: [0, 90], 6: [0, 180] };
+    const TILT = [-16, 18];   // léger angle de vue (appliqué dans le repère du spectateur) : on voit le dé en relief
+    let cubeRot = [0, 0, 0];
+
+    cube.innerHTML = '<div class="core"></div><div class="core c2"></div><div class="core c3"></div>' +
+        [1, 2, 3, 4, 5, 6].map((k) => `<div class="f f${k}">${Array.from({ length: 9 }, (_, j) => `<i class="${PIPS[k].includes(j) ? 'on' : ''}"></i>`).join('')}</div>`).join('');
+    function setCube(r) { cubeRot = r; cube.style.transform = `rotateX(${TILT[0]}deg) rotateY(${TILT[1]}deg) rotateX(${r[0]}deg) rotateY(${r[1]}deg) rotateZ(${r[2]}deg)`; }
+
+    // jeton : silhouette du dé correspondant (d4 triangle, d8 losange, d10 cerf-volant, d12 pentagone, d20 hexagone…)
+    function shapeSvg(N) {
+        const poly = (k, r, rot) => Array.from({ length: k }, (_, i) => { const a = rot + i * 2 * Math.PI / k; return `${(50 + r * Math.cos(a)).toFixed(1)},${(52 + r * Math.sin(a)).toFixed(1)}`; }).join(' ');
+        const S = {
+            2: '<circle cx="50" cy="50" r="46" class="sh"/>',
+            4: '<polygon points="50,6 95,86 5,86" class="sh"/>',
+            8: '<polygon points="50,3 97,50 50,97 3,50" class="sh"/>',
+            10: '<polygon points="50,3 95,40 50,97 5,40" class="sh"/>',
+            12: `<polygon points="${poly(5, 47, -Math.PI / 2)}" class="sh"/>`,
+            20: `<polygon points="${poly(6, 48, -Math.PI / 2)}" class="sh"/><polygon points="${poly(3, 30, -Math.PI / 2)}" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>`
+        };
+        const body = S[N] || '<rect x="5" y="5" width="90" height="90" rx="18" class="sh"/>';
+        const ty = N === 4 ? 70 : N === 12 ? 62 : 60;
+        return `<svg viewBox="0 0 100 100"><defs><linearGradient id="gTok" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d8dee8"/></linearGradient></defs>` +
+            `<style>.sh{fill:url(#gTok);stroke:#94a3b8;stroke-width:1.6;stroke-linejoin:round}</style>${body}` +
+            `<text x="50" y="${ty}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" fill="#1e1b4b">?</text></svg>`;
+    }
+    function setTokenNumber(v) {
+        const t = token.querySelector('text');
+        const str = v === null ? '?' : String(v);
+        t.textContent = str;
+        t.setAttribute('font-size', dieStats.faces === 4 ? (str.length > 1 ? 24 : 30) : str.length > 2 ? 26 : str.length > 1 ? 34 : 40);
+    }
 
     function nFaces() { return Math.max(2, Math.min(120, Math.round(Number($('dieFaces').value) || 6))); }
     function showDie(v) {
-        if (dieStats.faces === 6 && v !== null) {
-            die.className = 'die pips';
-            die.innerHTML = Array.from({ length: 9 }, (_, k) => `<i class="${PIPS[v].includes(k) ? 'on' : ''}"></i>`).join('');
-        } else {
-            die.className = 'die';
-            die.textContent = v === null ? '?' : String(v);
-            die.style.fontSize = v !== null && v >= 100 ? '3.2rem' : '';
-        }
+        const isCube = dieStats.faces === 6;
+        cube.hidden = !isCube; token.hidden = isCube;
+        if (isCube) { const f = FACE_ROT[v || 1]; setCube([f[0], f[1], 0]); }
+        else { setTokenNumber(v); token.style.transform = ''; token.querySelector('svg').style.transform = ''; }
+        dieToss.style.transform = ''; dieShadow.style.transform = ''; dieShadow.style.opacity = '';
     }
     function resetDie() {
         dieStats = { faces: nFaces(), counts: new Array(nFaces()).fill(0), n: 0, sum: 0, hist: [] };
@@ -701,6 +753,7 @@
         document.querySelectorAll('#diePresets .chip-btn').forEach((b) => b.classList.toggle('active', Number(b.dataset.f) === dieStats.faces));
         $('dieMeanTh').textContent = fmt((dieStats.faces + 1) / 2, 1);
         $('dieResult').textContent = 'Cliquez sur « Lancer » (ou appuyez sur Espace)';
+        if (dieStats.faces !== 6) token.innerHTML = shapeSvg(dieStats.faces);
         showDie(null);
         renderDieStats();
     }
@@ -714,6 +767,16 @@
         $('dieHist').innerHTML = dieStats.hist.map((v) => `<span>${v}</span>`).join('');
         drawDieChart();
     }
+
+    // hauteur du dé pendant le lancer (en px, vers le haut) : un grand saut puis deux petits rebonds
+    function hop(t) {
+        const arc = (a, b, hgt) => (t >= a && t < b ? hgt * 4 * (t - a) * (b - t) / ((b - a) * (b - a)) : 0);
+        return arc(0, 0.55, 95) + arc(0.55, 0.8, 24) + arc(0.8, 0.93, 7);
+    }
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    // angle d'arrivée ≥ angle actuel, avec quelques tours complets
+    const nextAngle = (cur, target, turns) => Math.ceil((cur - target) / 360) * 360 + target + 360 * turns;
+
     function rollDie() {
         if (dieBusy) return;
         const N = dieStats.faces, v = randInt(1, N);
@@ -721,23 +784,31 @@
         if (REDUCED) { finish(); return; }
         dieBusy = true;
         $('dieResult').textContent = '…';
-        const dur = 1100;
-        die.animate([
-            { transform: 'translate(0,0) rotate(0deg)' },
-            { transform: 'translate(-40px,-60px) rotate(-200deg)', offset: 0.3 },
-            { transform: 'translate(35px,-20px) rotate(-420deg)', offset: 0.6 },
-            { transform: 'translate(-8px,0) rotate(-680deg)', offset: 0.85 },
-            { transform: 'translate(0,0) rotate(-720deg)' }
-        ], { duration: dur, easing: 'cubic-bezier(.3,.7,.4,1)' });
-        // faces qui défilent de plus en plus lentement
-        let t = 0, delay = 45;
-        (function tick() {
-            if (t + delay >= dur - 60) return;
-            showDie(randInt(1, N));
-            t += delay; delay *= 1.18;
-            setTimeout(tick, delay);
-        })();
-        setTimeout(finish, dur);
+        const dur = 1400, t0 = performance.now();
+        let from, to, lastHalf = 0;
+        if (N === 6) {
+            const f = FACE_ROT[v];
+            from = cubeRot.slice();
+            to = [nextAngle(from[0], f[0], 2 + randInt(0, 1)), nextAngle(from[1], f[1], 2 + randInt(0, 1)), nextAngle(from[2], 0, 1)];
+        }
+        (function frame(now) {
+            const t = Math.min(1, (now - t0) / dur), e = easeOut(t), y = hop(t);
+            dieToss.style.transform = `translateY(${-y}px)`;
+            dieShadow.style.transform = `scale(${1 - y / 160})`;
+            dieShadow.style.opacity = String(1 - y / 140);
+            if (N === 6) {
+                setCube(from.map((a, i) => a + (to[i] - a) * e));
+            } else {
+                // le jeton tourne sur lui-même ; le nombre change à chaque demi-tour (quand on le voit par la tranche)
+                const ang = 1080 * e, half = Math.floor((ang + 90) / 180);
+                if (half !== lastHalf) { lastHalf = half; setTokenNumber(t > 0.75 ? v : randInt(1, N)); }
+                token.style.transform = `rotateY(${ang}deg)`;
+                const m = ((ang % 360) + 360) % 360;
+                token.querySelector('svg').style.transform = m > 90 && m < 270 ? 'scaleX(-1)' : '';   // nombre jamais lu à l'envers
+            }
+            if (t < 1) requestAnimationFrame(frame);
+            else finish();
+        })(t0);
     }
     function rollMany(n) {
         if (dieBusy) return;
@@ -962,10 +1033,18 @@
         if (!p.length || stuBusy) return;
         const winner = p[randInt(0, p.length - 1)];
         const nameEl = $('stuName');
+        // affiche un prénom ; en défilement, il glisse depuis le haut
+        const show = (label, slide) => {
+            const sp = document.createElement('span');
+            sp.textContent = label;
+            nameEl.replaceChildren(sp);
+            if (slide && !REDUCED) sp.animate([{ transform: 'translateY(-0.3em)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: slide, easing: 'cubic-bezier(.2,.7,.3,1)' });
+            return sp;
+        };
         const finish = () => {
-            nameEl.textContent = winner.label;
             nameEl.classList.remove('spinning');
-            if (!REDUCED) { nameEl.classList.remove('pop'); void nameEl.offsetWidth; nameEl.classList.add('pop'); }
+            const sp = show(winner.label, 0);
+            if (!REDUCED) sp.animate([{ transform: 'scale(0.72)', opacity: 0.4 }, { transform: 'scale(1.06)', opacity: 1, offset: 0.65 }, { transform: 'scale(1)' }], { duration: 480, easing: 'ease-out' });
             drawn.add(winner.label);
             stuBusy = false;
             renderStudents();
@@ -975,15 +1054,15 @@
         $('stuDraw').disabled = true;
         $('stuInfo').textContent = 'Tirage en cours…';
         nameEl.classList.add('spinning');
-        // les prénoms défilent de plus en plus lentement
-        let delay = 45, t = 0, last = null;
+        // les prénoms défilent de plus en plus lentement, sans répéter deux fois de suite le même
+        let delay = 55, t = 0, last = null;
         (function tick() {
-            if (t > 1500) { finish(); return; }
+            if (t > 1700) { finish(); return; }
             let s;
             do { s = p[randInt(0, p.length - 1)]; } while (p.length > 1 && s === last);
             last = s;
-            nameEl.textContent = s.label;
-            t += delay; delay *= 1.14;
+            show(s.label, Math.min(delay * 0.9, 160));
+            t += delay; delay *= 1.13;
             setTimeout(tick, delay);
         })();
     }
