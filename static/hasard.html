@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasard et tirage au sort</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #f1f5f9;
+            --bg-panel: #ffffff;
+            --bg-recessed: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+            --border-subtle: #e2e8f0;
+            --accent: #c026d3;
+            --accent-soft: rgba(192, 38, 211, 0.1);
+            --accent-glow: rgba(192, 38, 211, 0.22);
+            --good: #059669;
+            --stage-bg: linear-gradient(160deg, #1e1b4b, #4a044e);
+            --shadow-panel: 0 10px 25px -5px rgba(15, 23, 42, 0.07), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+            --radius: 16px;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0b1120;
+            --bg-panel: #151f32;
+            --bg-recessed: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #26354d;
+            --border-subtle: #1e293b;
+            --accent: #e879f9;
+            --accent-soft: rgba(232, 121, 249, 0.12);
+            --accent-glow: rgba(232, 121, 249, 0.25);
+            --good: #34d399;
+            --shadow-panel: 0 12px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        [hidden] { display: none !important; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 1.5rem 1rem 3rem;
+            transition: background-color 0.25s, color 0.25s;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1180px; margin: 0 auto; }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .brand { display: flex; align-items: center; gap: 0.85rem; }
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #c026d3, #7c3aed);
+            box-shadow: 0 4px 12px var(--accent-glow);
+            flex-shrink: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            padding: 9px;
+        }
+        .brand-icon i { width: 6px; height: 6px; border-radius: 50%; background: #fff; place-self: center; }
+        h1 { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; }
+        .subtitle { color: var(--text-muted); font-size: 0.85rem; }
+        .theme-toggle {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* Onglets */
+        .tabs {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.3rem;
+            box-shadow: var(--shadow-panel);
+        }
+        .tab {
+            flex: 1 1 auto;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font: inherit;
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 0.6rem 0.9rem;
+            border-radius: 9px;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+        .tab:hover { color: var(--text-main); }
+        .tab.active { background: var(--accent); color: #fff; box-shadow: 0 4px 12px var(--accent-glow); }
+
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-panel);
+            padding: 1.25rem;
+        }
+        .grid2 {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 1.25rem;
+            align-items: start;
+        }
+        @media (max-width: 860px) { .grid2 { grid-template-columns: minmax(0, 1fr); } }
+
+        h2 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+        h3 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 1rem 0 0.5rem; }
+
+        .row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+        label { font-size: 0.9rem; font-weight: 500; }
+        input[type="number"], input[type="text"], textarea, select {
+            font: inherit;
+            font-size: 0.92rem;
+            color: var(--text-main);
+            background: var(--bg-recessed);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.4rem 0.55rem;
+        }
+        input[type="number"] { width: 6.5rem; font-family: 'JetBrains Mono', monospace; }
+        input[type="range"] { accent-color: var(--accent); flex: 1; min-width: 140px; }
+        textarea { width: 100%; min-height: 8rem; resize: vertical; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+
+        .btn {
+            font: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            background: var(--bg-panel);
+            color: var(--text-main);
+            padding: 0.5rem 0.9rem;
+            cursor: pointer;
+            transition: transform 0.1s, background 0.15s, border-color 0.15s;
+        }
+        .btn:hover { border-color: var(--accent); }
+        .btn:active { transform: scale(0.97); }
+        .btn:disabled { opacity: 0.45; cursor: default; transform: none; }
+        .btn-main { background: var(--accent); border-color: var(--accent); color: #fff; font-size: 1rem; padding: 0.65rem 1.4rem; box-shadow: 0 4px 12px var(--accent-glow); }
+        .btn-main:hover { filter: brightness(1.08); }
+        .btn-small { font-size: 0.82rem; padding: 0.35rem 0.65rem; }
+        .chips { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+        .chip-btn { font: inherit; font-size: 0.82rem; font-weight: 600; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-recessed); color: var(--text-main); padding: 0.25rem 0.7rem; cursor: pointer; }
+        .chip-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+        .note { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.75rem; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Scène (pièce, dé, tirage) */
+        .stage {
+            position: relative;
+            border-radius: 14px;
+            background: var(--stage-bg);
+            color: #fff;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem 1rem;
+            overflow: hidden;
+            perspective: 900px;
+        }
+        .stage .result-line { font-size: 1.05rem; font-weight: 600; min-height: 1.5em; text-align: center; opacity: 0.95; }
+        .stage .result-line b { font-size: 1.35rem; }
+
+        /* Pièce 3D */
+        .coin-toss { width: 170px; height: 170px; }
+        .coin { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; }
+        .coin .side {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            color: #713f12;
+            background: radial-gradient(circle at 35% 30%, #fef9c3, #facc15 45%, #ca8a04 85%, #a16207);
+            box-shadow: inset 0 0 0 8px rgba(161, 98, 7, 0.55), inset 0 0 0 11px rgba(254, 249, 195, 0.6), 0 8px 24px rgba(0, 0, 0, 0.35);
+        }
+        .coin .side span { font-size: 1.6rem; }
+        .coin .side small { font-size: 2.6rem; line-height: 1; margin-bottom: 0.2rem; }
+        .coin .side.back { transform: rotateX(180deg); background: radial-gradient(circle at 35% 30%, #f1f5f9, #cbd5e1 45%, #94a3b8 85%, #64748b); color: #1e293b; box-shadow: inset 0 0 0 8px rgba(71, 85, 105, 0.5), inset 0 0 0 11px rgba(241, 245, 249, 0.6), 0 8px 24px rgba(0, 0, 0, 0.35); }
+
+        /* Dé */
+        .die {
+            width: 150px;
+            height: 150px;
+            border-radius: 26px;
+            background: linear-gradient(145deg, #ffffff, #e2e8f0);
+            color: #1e1b4b;
+            box-shadow: inset 0 -6px 0 rgba(15, 23, 42, 0.12), 0 12px 28px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 4.2rem;
+        }
+        .die.pips { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); padding: 20px; }
+        .die.pips i { width: 24px; height: 24px; border-radius: 50%; background: #1e1b4b; place-self: center; visibility: hidden; }
+        .die.pips i.on { visibility: visible; }
+
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 0.5rem; margin: 0.75rem 0; }
+        .stat { background: var(--bg-recessed); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.45rem 0.6rem; }
+        .stat .k { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+        .stat .v { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.05rem; }
+        .chart { width: 100%; height: 220px; display: block; background: var(--bg-recessed); border: 1px solid var(--border-subtle); border-radius: 10px; }
+        .history { display: flex; flex-wrap: wrap; gap: 0.25rem; min-height: 1.6rem; }
+        .history span { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 600; padding: 0.1rem 0.4rem; border-radius: 6px; background: var(--bg-recessed); border: 1px solid var(--border-subtle); }
+        .history span.p { color: #a16207; }
+        .history span.f { color: #475569; }
+        [data-theme="dark"] .history span.p { color: #facc15; }
+        [data-theme="dark"] .history span.f { color: #cbd5e1; }
+
+        /* Nombres */
+        .big-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: clamp(2.6rem, 8vw, 4.8rem);
+            line-height: 1.1;
+            text-align: center;
+            word-break: break-all;
+        }
+        .num-list { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; max-height: 11rem; overflow: auto; }
+        .num-list span { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.15rem; padding: 0.25rem 0.6rem; border-radius: 8px; background: rgba(255, 255, 255, 0.12); }
+        .numbox .stage { min-height: 200px; }
+
+        /* Élèves */
+        .student-name {
+            font-weight: 800;
+            font-size: clamp(2.6rem, 9vw, 6.5rem);
+            line-height: 1.05;
+            text-align: center;
+            letter-spacing: -0.02em;
+            text-shadow: 0 6px 30px rgba(0, 0, 0, 0.35);
+            min-height: 1.1em;
+        }
+        .student-name.spinning { opacity: 0.75; filter: blur(0.5px); }
+        .student-name.pop { animation: pop 0.45s cubic-bezier(.2, 1.6, .4, 1); }
+        @keyframes pop { 0% { transform: scale(0.7); } 100% { transform: scale(1); } }
+        .stage-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+        .stage-actions .btn { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); color: #fff; }
+        .stage-actions .btn-main { background: #fff; color: #86198f; border-color: #fff; }
+        .stage:fullscreen { border-radius: 0; min-height: 100vh; }
+        .stage:fullscreen .student-name { font-size: 14vw; }
+        .stage:fullscreen .result-line { font-size: 1.6rem; }
+
+        .students-list { display: flex; flex-wrap: wrap; gap: 0.35rem; max-height: 22rem; overflow: auto; padding: 0.2rem; }
+        .stu {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.86rem;
+            font-weight: 600;
+            padding: 0.3rem 0.65rem 0.3rem 0.45rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--bg-recessed);
+            cursor: pointer;
+            user-select: none;
+        }
+        .stu input { accent-color: var(--accent); }
+        .stu.off { opacity: 0.45; text-decoration: line-through; }
+        .stu.drawn { background: var(--accent-soft); border-color: var(--accent); }
+        .stu.drawn::after { content: '✓'; color: var(--accent); font-weight: 800; }
+        .dropzone {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .dropzone.over { border-color: var(--accent); background: var(--accent-soft); }
+        .file-btn { position: relative; overflow: hidden; display: inline-block; }
+        .file-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+        @media (prefers-reduced-motion: reduce) { .student-name.pop { animation: none; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="brand">
+            <div class="brand-icon" aria-hidden="true"><i></i><i style="visibility:hidden"></i><i></i><i style="visibility:hidden"></i><i></i><i style="visibility:hidden"></i><i></i><i style="visibility:hidden"></i><i></i></div>
+            <div>
+                <h1>Hasard et tirage au sort</h1>
+                <div class="subtitle">Pile ou face, dé, nombres aléatoires et tirage au sort d'un élève</div>
+            </div>
+        </div>
+        <button class="theme-toggle" id="themeBtn" title="Changer le thème (Clair / Sombre)">🌓</button>
+    </header>
+
+    <nav class="tabs" id="tabs">
+        <button class="tab active" data-tab="coin">🪙 Pile ou face</button>
+        <button class="tab" data-tab="die">🎲 Dé</button>
+        <button class="tab" data-tab="num">🔢 Nombres</button>
+        <button class="tab" data-tab="stu">🧑‍🎓 Élève au hasard</button>
+    </nav>
+
+    <!-- ===================== PILE OU FACE ===================== -->
+    <section data-pane="coin">
+        <div class="grid2">
+            <div class="panel">
+                <div class="stage" id="coinStage">
+                    <div class="coin-toss" id="coinToss">
+                        <div class="coin" id="coin">
+                            <div class="side front"><small>1</small><span>PILE</span></div>
+                            <div class="side back"><small>☺</small><span>FACE</span></div>
+                        </div>
+                    </div>
+                    <div class="result-line" id="coinResult">Cliquez sur « Lancer » (ou appuyez sur Espace)</div>
+                </div>
+                <div class="row" style="margin-top: 1rem; justify-content: center;">
+                    <button class="btn btn-main" id="coinFlip">Lancer</button>
+                    <button class="btn" data-coin-n="10">× 10</button>
+                    <button class="btn" data-coin-n="100">× 100</button>
+                    <button class="btn" data-coin-n="1000">× 1 000</button>
+                    <button class="btn" id="coinReset">Remise à zéro</button>
+                </div>
+                <h3>Probabilité (pièce truquée ou non)</h3>
+                <div class="row">
+                    <label for="coinBias">P(pile)</label>
+                    <input type="range" id="coinBias" min="0" max="100" step="1" value="50">
+                    <span class="mono" id="coinBiasVal">0,50</span>
+                </div>
+                <div class="chips" id="coinPresets">
+                    <button class="chip-btn active" data-p="50">Pièce équilibrée</button>
+                    <button class="chip-btn" data-p="60">P(pile) = 0,6</button>
+                    <button class="chip-btn" data-p="75">P(pile) = 0,75</button>
+                    <button class="chip-btn" data-p="90">P(pile) = 0,9</button>
+                </div>
+            </div>
+            <div class="panel">
+                <h2>Résultats</h2>
+                <div class="stats">
+                    <div class="stat"><div class="k">Lancers</div><div class="v" id="coinN">0</div></div>
+                    <div class="stat"><div class="k">Pile</div><div class="v" id="coinP">0</div></div>
+                    <div class="stat"><div class="k">Face</div><div class="v" id="coinF">0</div></div>
+                    <div class="stat"><div class="k">Fréquence de pile</div><div class="v" id="coinFreq">—</div></div>
+                </div>
+                <canvas class="chart" id="coinChart" aria-label="Évolution de la fréquence de pile en fonction du nombre de lancers"></canvas>
+                <h3>Derniers lancers</h3>
+                <div class="history" id="coinHist"></div>
+                <p class="note">Quand le nombre de lancers augmente, la fréquence de « pile » se rapproche de sa probabilité (pointillés) : c'est la <b>loi des grands nombres</b>. Sur un petit nombre de lancers, elle peut s'en écarter nettement : c'est la <b>fluctuation d'échantillonnage</b>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== DÉ ===================== -->
+    <section data-pane="die" hidden>
+        <div class="grid2">
+            <div class="panel">
+                <div class="stage" id="dieStage">
+                    <div class="die" id="die">?</div>
+                    <div class="result-line" id="dieResult">Cliquez sur « Lancer » (ou appuyez sur Espace)</div>
+                </div>
+                <div class="row" style="margin-top: 1rem; justify-content: center;">
+                    <button class="btn btn-main" id="dieRoll">Lancer</button>
+                    <button class="btn" data-die-n="10">× 10</button>
+                    <button class="btn" data-die-n="100">× 100</button>
+                    <button class="btn" data-die-n="1000">× 1 000</button>
+                    <button class="btn" id="dieReset">Remise à zéro</button>
+                </div>
+                <h3>Nombre de faces</h3>
+                <div class="row">
+                    <input type="number" id="dieFaces" min="2" max="120" step="1" value="6" aria-label="Nombre de faces">
+                    <div class="chips" id="diePresets">
+                        <button class="chip-btn" data-f="4">4</button>
+                        <button class="chip-btn active" data-f="6">6</button>
+                        <button class="chip-btn" data-f="8">8</button>
+                        <button class="chip-btn" data-f="10">10</button>
+                        <button class="chip-btn" data-f="12">12</button>
+                        <button class="chip-btn" data-f="20">20</button>
+                        <button class="chip-btn" data-f="100">100</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <h2>Résultats</h2>
+                <div class="stats">
+                    <div class="stat"><div class="k">Lancers</div><div class="v" id="dieN">0</div></div>
+                    <div class="stat"><div class="k">Moyenne</div><div class="v" id="dieMean">—</div></div>
+                    <div class="stat"><div class="k">Moyenne théorique</div><div class="v" id="dieMeanTh">3,5</div></div>
+                </div>
+                <canvas class="chart" id="dieChart" aria-label="Fréquence d'apparition de chaque face"></canvas>
+                <h3>Derniers lancers</h3>
+                <div class="history" id="dieHist"></div>
+                <p class="note">Le dé est équilibré : chaque face a la même probabilité 1/n (pointillés). Avec peu de lancers, les fréquences fluctuent beaucoup ; avec 1 000 lancers ou plus, elles se rapprochent toutes de 1/n.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== NOMBRES ===================== -->
+    <section data-pane="num" hidden>
+        <div class="grid2">
+            <div class="panel numbox">
+                <h2>Entier entre deux bornes</h2>
+                <div class="row">
+                    <label for="intMin">de</label><input type="number" id="intMin" value="1" step="1">
+                    <label for="intMax">à</label><input type="number" id="intMax" value="100" step="1">
+                    <span class="note" style="margin:0">(bornes comprises)</span>
+                </div>
+                <div class="row">
+                    <label for="intCount">Combien ?</label><input type="number" id="intCount" value="1" min="1" max="1000" step="1">
+                    <label><input type="checkbox" id="intUnique"> sans répétition</label>
+                </div>
+                <div class="stage">
+                    <div class="big-number" id="intOut">—</div>
+                    <div class="num-list" id="intList" hidden></div>
+                </div>
+                <div class="row" style="margin-top: 1rem; justify-content: center;">
+                    <button class="btn btn-main" id="intGo">Tirer</button>
+                    <button class="btn" id="intCopy">Copier</button>
+                    <span class="note" id="intMsg" style="margin:0"></span>
+                </div>
+            </div>
+            <div class="panel numbox">
+                <h2>Nombre décimal entre 0 et 1</h2>
+                <div class="row">
+                    <label for="decDigits">Décimales</label><input type="number" id="decDigits" value="4" min="1" max="12" step="1">
+                    <label for="decCount">Combien ?</label><input type="number" id="decCount" value="1" min="1" max="1000" step="1">
+                </div>
+                <div class="stage">
+                    <div class="big-number" id="decOut">—</div>
+                    <div class="num-list" id="decList" hidden></div>
+                </div>
+                <div class="row" style="margin-top: 1rem; justify-content: center;">
+                    <button class="btn btn-main" id="decGo">Tirer</button>
+                    <button class="btn" id="decCopy">Copier</button>
+                    <span class="note" id="decMsg" style="margin:0"></span>
+                </div>
+                <p class="note">Le nombre suit une loi uniforme sur [0 ; 1[ : il est tronqué au nombre de décimales choisi (jamais arrondi à 1). C'est l'équivalent de <span class="mono">random()</span> en Python ou de ALEA() dans un tableur.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ÉLÈVE AU HASARD ===================== -->
+    <section data-pane="stu" hidden>
+        <div class="panel" style="margin-bottom: 1.25rem;">
+            <div class="stage" id="stuStage" style="min-height: 340px;">
+                <div class="student-name" id="stuName">?</div>
+                <div class="result-line" id="stuInfo">Importez une liste d'élèves ci-dessous</div>
+                <div class="stage-actions">
+                    <button class="btn btn-main" id="stuDraw" disabled>Tirer au sort</button>
+                    <button class="btn" id="stuFs" title="Afficher en plein écran (pour la projection)">⛶ Plein écran</button>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 1rem; justify-content: center;">
+                <label><input type="checkbox" id="stuNoRepeat" checked> Sans remise : chaque élève n'est tiré qu'une fois, jusqu'à épuisement de la liste</label>
+                <button class="btn btn-small" id="stuResetDraws">Remettre tout le monde en jeu</button>
+            </div>
+        </div>
+        <div class="grid2">
+            <div class="panel">
+                <h2>Liste des élèves</h2>
+                <div class="dropzone" id="stuDrop">
+                    <p style="margin-bottom: 0.6rem;">Glissez ici le fichier CSV exporté de Pronote, ou</p>
+                    <span class="btn btn-main file-btn">📂 Importer un fichier CSV<input type="file" id="stuFile" accept=".csv,.txt,text/csv,text/plain"></span>
+                </div>
+                <p class="note">Pronote : les noms sont dans la première colonne, sous la forme <span class="mono">NOM Prénom</span>. Seuls les prénoms sont affichés ; quand deux élèves ont le même prénom, on ajoute l'initiale du nom (Lucas M., Lucas T.).</p>
+                <details style="margin-top: 0.75rem;">
+                    <summary style="cursor: pointer; font-weight: 600; font-size: 0.9rem;">… ou coller une liste de noms</summary>
+                    <textarea id="stuPaste" placeholder="DUPONT Marie&#10;MARTIN Lucas&#10;MARTIN-DURAND Lucas&#10;…" style="margin-top: 0.5rem;"></textarea>
+                    <button class="btn btn-small" id="stuPasteGo" style="margin-top: 0.4rem;">Utiliser cette liste</button>
+                </details>
+                <p class="note" id="stuLoadMsg"></p>
+            </div>
+            <div class="panel">
+                <h2>Qui participe ? <span class="note mono" id="stuCount" style="margin-left: 0.4rem;"></span></h2>
+                <div class="row">
+                    <button class="btn btn-small" id="stuAll">Tout cocher</button>
+                    <button class="btn btn-small" id="stuNone">Tout décocher</button>
+                    <button class="btn btn-small" id="stuInvert">Inverser</button>
+                    <button class="btn btn-small" id="stuClear" title="Oublier la liste enregistrée dans ce navigateur">Effacer la liste</button>
+                </div>
+                <div class="students-list" id="stuList"><span class="note">Aucune liste chargée.</span></div>
+                <p class="note">Décochez les absents, ou ne cochez qu'un groupe. Les élèves déjà tirés sont marqués d'un ✓. La liste reste enregistrée dans ce navigateur (elle n'est envoyée nulle part).</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+(function () {
+    'use strict';
+    const $ = (id) => document.getElementById(id);
+    const REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fmt = (x, d) => x.toFixed(d).replace('.', ',');
+    const fmtInt = (n) => n.toLocaleString('fr-FR');
+
+    // --- Thème ---
+    function storageGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+    function storageSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* stockage indisponible */ } }
+    function storageDel(k) { try { localStorage.removeItem(k); } catch (e) { /* stockage indisponible */ } }
+    function setTheme(t) { document.documentElement.setAttribute('data-theme', t); storageSet('theme_pref', t); redrawCharts(); }
+    const savedTheme = storageGet('theme_pref');
+    if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    else if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark');
+    $('themeBtn').addEventListener('click', () => setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+    const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+    // --- Hasard : générateur cryptographique du navigateur ---
+    const buf32 = new Uint32Array(2);
+    function u32() { crypto.getRandomValues(buf32); return buf32[0]; }
+    function random() {   // décimal uniforme sur [0 ; 1[ avec 53 bits
+        crypto.getRandomValues(buf32);
+        return ((buf32[0] >>> 5) * 67108864 + (buf32[1] >>> 6)) / 9007199254740992;
+    }
+    function randInt(a, b) {   // entier uniforme sur [a ; b], sans biais (rejet)
+        const n = b - a + 1;
+        if (n <= 4294967296) {
+            const lim = 4294967296 - (4294967296 % n);
+            let x;
+            do { x = u32(); } while (x >= lim);
+            return a + (x % n);
+        }
+        return a + Math.floor(random() * n);
+    }
+
+    // --- Onglets ---
+    let currentTab = 'coin';
+    document.querySelectorAll('#tabs .tab').forEach((t) => t.addEventListener('click', () => {
+        currentTab = t.dataset.tab;
+        document.querySelectorAll('#tabs .tab').forEach((x) => x.classList.toggle('active', x === t));
+        document.querySelectorAll('[data-pane]').forEach((p) => { p.hidden = p.dataset.pane !== currentTab; });
+        redrawCharts();
+    }));
+
+    // --- Petit utilitaire de graphique (canevas net sur écran haute densité) ---
+    function canvasCtx(cv) {
+        const dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
+        cv.width = Math.max(1, Math.round(w * dpr)); cv.height = Math.max(1, Math.round(h * dpr));
+        const c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return { c, w, h };
+    }
+
+    // ======================= PILE OU FACE =======================
+    const coin = $('coin'), coinToss = $('coinToss');
+    let coinAngle = 0, coinBusy = false;
+    const coinStats = { n: 0, p: 0, freq: [], hist: [] };   // freq : fréquence de pile après chaque lancer
+
+    function pPile() { return Number($('coinBias').value) / 100; }
+    function updateBias() {
+        $('coinBiasVal').textContent = fmt(pPile(), 2);
+        document.querySelectorAll('#coinPresets .chip-btn').forEach((b) => b.classList.toggle('active', Number(b.dataset.p) === Number($('coinBias').value)));
+        drawCoinChart();
+    }
+    $('coinBias').addEventListener('input', updateBias);
+    document.querySelectorAll('#coinPresets .chip-btn').forEach((b) => b.addEventListener('click', () => { $('coinBias').value = b.dataset.p; updateBias(); }));
+
+    function recordCoin(isPile) {
+        coinStats.n++;
+        if (isPile) coinStats.p++;
+        coinStats.freq.push(coinStats.p / coinStats.n);
+        coinStats.hist.push(isPile);
+        if (coinStats.hist.length > 40) coinStats.hist.shift();
+    }
+    function showCoinFace(isPile) {
+        coinAngle = isPile ? 0 : 180;
+        coin.style.transform = `rotateX(${coinAngle}deg)`;
+    }
+    function renderCoinStats() {
+        $('coinN').textContent = fmtInt(coinStats.n);
+        $('coinP').textContent = fmtInt(coinStats.p);
+        $('coinF').textContent = fmtInt(coinStats.n - coinStats.p);
+        $('coinFreq').textContent = coinStats.n ? fmt(coinStats.p / coinStats.n, 3) : '—';
+        $('coinHist').innerHTML = coinStats.hist.map((x) => `<span class="${x ? 'p' : 'f'}">${x ? 'P' : 'F'}</span>`).join('');
+        drawCoinChart();
+    }
+    function flipCoin() {
+        if (coinBusy) return;
+        const isPile = random() < pPile();
+        const finish = () => {
+            recordCoin(isPile);
+            $('coinResult').innerHTML = isPile ? 'Résultat : <b>PILE</b>' : 'Résultat : <b>FACE</b>';
+            renderCoinStats();
+            coinBusy = false;
+        };
+        if (REDUCED) { showCoinFace(isPile); finish(); return; }
+        coinBusy = true;
+        $('coinResult').textContent = '…';
+        // rotation : plusieurs tours, puis la bonne face vers le spectateur
+        const start = coinAngle;
+        const end = Math.ceil(start / 360) * 360 + 360 * (4 + randInt(0, 2)) + (isPile ? 0 : 180);
+        const dur = 1300;
+        coin.animate([{ transform: `rotateX(${start}deg)` }, { transform: `rotateX(${end}deg)` }], { duration: dur, easing: 'cubic-bezier(.25,.8,.35,1)' });
+        coinToss.animate([
+            { transform: 'translateY(0) scale(1)' },
+            { transform: 'translateY(-90px) scale(1.12)', offset: 0.42 },
+            { transform: 'translateY(0) scale(1)', offset: 0.85 },
+            { transform: 'translateY(-10px) scale(1)', offset: 0.93 },
+            { transform: 'translateY(0) scale(1)' }
+        ], { duration: dur, easing: 'ease-in-out' });
+        coin.style.transform = `rotateX(${end}deg)`;
+        coinAngle = end % 360;
+        setTimeout(() => { coin.style.transform = `rotateX(${coinAngle}deg)`; finish(); }, dur);
+    }
+    function flipMany(n) {
+        if (coinBusy) return;
+        let last = true, nb = 0;
+        for (let k = 0; k < n; k++) { last = random() < pPile(); if (last) nb++; recordCoin(last); }
+        showCoinFace(last);
+        $('coinResult').innerHTML = `${fmtInt(n)} lancers : <b>${fmtInt(nb)}</b> pile et <b>${fmtInt(n - nb)}</b> face`;
+        renderCoinStats();
+    }
+    $('coinFlip').addEventListener('click', flipCoin);
+    document.querySelectorAll('[data-coin-n]').forEach((b) => b.addEventListener('click', () => flipMany(Number(b.dataset.coinN))));
+    $('coinReset').addEventListener('click', () => {
+        coinStats.n = 0; coinStats.p = 0; coinStats.freq = []; coinStats.hist = [];
+        $('coinResult').textContent = 'Cliquez sur « Lancer » (ou appuyez sur Espace)';
+        renderCoinStats();
+    });
+
+    function drawCoinChart() {
+        const cv = $('coinChart');
+        if (!cv.clientWidth) return;
+        const { c, w, h } = canvasCtx(cv);
+        const L = 58, R = w - 12, T = 12, B = h - 30, n = coinStats.freq.length;
+        const X = (i) => L + (n > 1 ? (i / (n - 1)) : 0) * (R - L), Y = (f) => B - f * (B - T);
+        c.clearRect(0, 0, w, h);
+        c.font = '11px Inter, sans-serif';
+        c.fillStyle = css('--text-muted'); c.strokeStyle = css('--border-subtle'); c.lineWidth = 1;
+        c.textAlign = 'right'; c.textBaseline = 'middle';
+        [0, 0.25, 0.5, 0.75, 1].forEach((f) => { c.beginPath(); c.moveTo(L, Y(f)); c.lineTo(R, Y(f)); c.stroke(); c.fillText(fmt(f, 2), L - 6, Y(f)); });
+        c.textAlign = 'center'; c.textBaseline = 'top';
+        c.fillText(n ? `nombre de lancers (${fmtInt(n)})` : 'nombre de lancers', (L + R) / 2, B + 10);
+        c.save(); c.translate(12, (T + B) / 2); c.rotate(-Math.PI / 2); c.textBaseline = 'middle'; c.fillText('fréquence de pile', 0, 0); c.restore();
+        // probabilité
+        c.strokeStyle = css('--accent'); c.setLineDash([6, 5]); c.lineWidth = 1.5;
+        c.beginPath(); c.moveTo(L, Y(pPile())); c.lineTo(R, Y(pPile())); c.stroke(); c.setLineDash([]);
+        if (!n) return;
+        // fréquence (sous-échantillonnée si beaucoup de points)
+        const step = Math.max(1, Math.floor(n / 1500));
+        c.strokeStyle = css('--good'); c.lineWidth = 2; c.beginPath();
+        for (let i = 0; i < n; i += step) { if (i === 0) c.moveTo(X(i), Y(coinStats.freq[i])); else c.lineTo(X(i), Y(coinStats.freq[i])); }
+        c.lineTo(X(n - 1), Y(coinStats.freq[n - 1]));
+        c.stroke();
+    }
+
+    // ======================= DÉ =======================
+    const die = $('die');
+    let dieBusy = false;
+    let dieStats = { faces: 6, counts: [], n: 0, sum: 0, hist: [] };
+    const PIPS = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
+
+    function nFaces() { return Math.max(2, Math.min(120, Math.round(Number($('dieFaces').value) || 6))); }
+    function showDie(v) {
+        if (dieStats.faces === 6 && v !== null) {
+            die.className = 'die pips';
+            die.innerHTML = Array.from({ length: 9 }, (_, k) => `<i class="${PIPS[v].includes(k) ? 'on' : ''}"></i>`).join('');
+        } else {
+            die.className = 'die';
+            die.textContent = v === null ? '?' : String(v);
+            die.style.fontSize = v !== null && v >= 100 ? '3.2rem' : '';
+        }
+    }
+    function resetDie() {
+        dieStats = { faces: nFaces(), counts: new Array(nFaces()).fill(0), n: 0, sum: 0, hist: [] };
+        $('dieFaces').value = dieStats.faces;
+        document.querySelectorAll('#diePresets .chip-btn').forEach((b) => b.classList.toggle('active', Number(b.dataset.f) === dieStats.faces));
+        $('dieMeanTh').textContent = fmt((dieStats.faces + 1) / 2, 1);
+        $('dieResult').textContent = 'Cliquez sur « Lancer » (ou appuyez sur Espace)';
+        showDie(null);
+        renderDieStats();
+    }
+    function recordDie(v) {
+        dieStats.counts[v - 1]++; dieStats.n++; dieStats.sum += v;
+        dieStats.hist.push(v); if (dieStats.hist.length > 40) dieStats.hist.shift();
+    }
+    function renderDieStats() {
+        $('dieN').textContent = fmtInt(dieStats.n);
+        $('dieMean').textContent = dieStats.n ? fmt(dieStats.sum / dieStats.n, 2) : '—';
+        $('dieHist').innerHTML = dieStats.hist.map((v) => `<span>${v}</span>`).join('');
+        drawDieChart();
+    }
+    function rollDie() {
+        if (dieBusy) return;
+        const N = dieStats.faces, v = randInt(1, N);
+        const finish = () => { recordDie(v); showDie(v); $('dieResult').innerHTML = `Résultat : <b>${v}</b>`; renderDieStats(); dieBusy = false; };
+        if (REDUCED) { finish(); return; }
+        dieBusy = true;
+        $('dieResult').textContent = '…';
+        const dur = 1100;
+        die.animate([
+            { transform: 'translate(0,0) rotate(0deg)' },
+            { transform: 'translate(-40px,-60px) rotate(-200deg)', offset: 0.3 },
+            { transform: 'translate(35px,-20px) rotate(-420deg)', offset: 0.6 },
+            { transform: 'translate(-8px,0) rotate(-680deg)', offset: 0.85 },
+            { transform: 'translate(0,0) rotate(-720deg)' }
+        ], { duration: dur, easing: 'cubic-bezier(.3,.7,.4,1)' });
+        // faces qui défilent de plus en plus lentement
+        let t = 0, delay = 45;
+        (function tick() {
+            if (t + delay >= dur - 60) return;
+            showDie(randInt(1, N));
+            t += delay; delay *= 1.18;
+            setTimeout(tick, delay);
+        })();
+        setTimeout(finish, dur);
+    }
+    function rollMany(n) {
+        if (dieBusy) return;
+        let v = 1;
+        for (let k = 0; k < n; k++) { v = randInt(1, dieStats.faces); recordDie(v); }
+        showDie(v);
+        $('dieResult').innerHTML = `${fmtInt(n)} lancers effectués (dernier : <b>${v}</b>)`;
+        renderDieStats();
+    }
+    $('dieRoll').addEventListener('click', rollDie);
+    document.querySelectorAll('[data-die-n]').forEach((b) => b.addEventListener('click', () => rollMany(Number(b.dataset.dieN))));
+    $('dieReset').addEventListener('click', resetDie);
+    $('dieFaces').addEventListener('change', resetDie);
+    document.querySelectorAll('#diePresets .chip-btn').forEach((b) => b.addEventListener('click', () => { $('dieFaces').value = b.dataset.f; resetDie(); }));
+
+    function drawDieChart() {
+        const cv = $('dieChart');
+        if (!cv.clientWidth) return;
+        const { c, w, h } = canvasCtx(cv);
+        const N = dieStats.faces, L = 58, R = w - 12, T = 12, B = h - 30;
+        const fr = dieStats.counts.map((k) => (dieStats.n ? k / dieStats.n : 0));
+        const top = Math.max(1.6 / N, ...fr) * 1.1;
+        const Y = (f) => B - f / top * (B - T), bw = (R - L) / N;
+        c.clearRect(0, 0, w, h);
+        c.font = '11px Inter, sans-serif'; c.fillStyle = css('--text-muted'); c.strokeStyle = css('--border-subtle'); c.lineWidth = 1;
+        c.textAlign = 'right'; c.textBaseline = 'middle';
+        const st = top > 0.5 ? 0.1 : top > 0.2 ? 0.05 : top > 0.1 ? 0.02 : top > 0.04 ? 0.01 : 0.005;
+        for (let f = 0; f <= top + 1e-9; f += st) { c.beginPath(); c.moveTo(L, Y(f)); c.lineTo(R, Y(f)); c.stroke(); c.fillText(fmt(f, st < 0.01 ? 3 : 2), L - 6, Y(f)); }
+        c.fillStyle = css('--accent');
+        fr.forEach((f, k) => { const x = L + k * bw + Math.min(2, bw * 0.12); c.fillRect(x, Y(f), Math.max(1, bw - 2 * Math.min(2, bw * 0.12)), B - Y(f)); });
+        c.strokeStyle = css('--good'); c.setLineDash([6, 5]); c.lineWidth = 1.5;
+        c.beginPath(); c.moveTo(L, Y(1 / N)); c.lineTo(R, Y(1 / N)); c.stroke(); c.setLineDash([]);
+        c.fillStyle = css('--text-muted'); c.textAlign = 'center'; c.textBaseline = 'top';
+        const every = Math.ceil(N / Math.max(1, Math.floor((R - L) / 26)));
+        for (let k = 0; k < N; k++) if ((k + 1) % every === 0 || k === 0) c.fillText(String(k + 1), L + (k + 0.5) * bw, B + 4);
+        c.fillText('face', (L + R) / 2, B + 17);
+        c.save(); c.translate(12, (T + B) / 2); c.rotate(-Math.PI / 2); c.textBaseline = 'middle'; c.fillText('fréquence', 0, 0); c.restore();
+    }
+
+    // ======================= NOMBRES =======================
+    function intVal(id) { const v = Number(String($(id).value).replace(',', '.')); return Number.isFinite(v) ? Math.round(v) : NaN; }
+    let lastInts = [], lastDecs = [];
+    function showNumbers(outId, listId, values, label) {
+        const out = $(outId), list = $(listId);
+        if (values.length === 1) { out.hidden = false; list.hidden = true; out.textContent = values[0]; }
+        else { out.hidden = true; list.hidden = false; list.innerHTML = values.map((v) => `<span>${v}</span>`).join(''); }
+        if (!REDUCED) (values.length === 1 ? out : list).animate([{ opacity: 0, transform: 'scale(.85)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 260, easing: 'ease-out' });
+    }
+    $('intGo').addEventListener('click', () => {
+        let a = intVal('intMin'), b = intVal('intMax'), k = Math.max(1, Math.min(1000, intVal('intCount') || 1));
+        const msg = $('intMsg'); msg.textContent = '';
+        if (!Number.isFinite(a) || !Number.isFinite(b)) { msg.textContent = 'Bornes à préciser.'; return; }
+        if (a > b) { [a, b] = [b, a]; $('intMin').value = a; $('intMax').value = b; }
+        const n = b - a + 1;
+        let vals = [];
+        if ($('intUnique').checked) {
+            if (k > n) { msg.textContent = `Impossible : seulement ${fmtInt(n)} entiers différents entre ${a} et ${b}.`; return; }
+            if (n <= 100000) {   // mélange partiel de Fisher-Yates
+                const pool = Array.from({ length: n }, (_, i) => a + i);
+                for (let i = 0; i < k; i++) { const j = randInt(i, n - 1); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+                vals = pool.slice(0, k);
+            } else {
+                const seen = new Set();
+                while (seen.size < k) seen.add(randInt(a, b));
+                vals = [...seen];
+            }
+        } else {
+            for (let i = 0; i < k; i++) vals.push(randInt(a, b));
+        }
+        lastInts = vals.map(String);
+        showNumbers('intOut', 'intList', vals.map((v) => String(v).replace('-', '−')));
+    });
+    $('decGo').addEventListener('click', () => {
+        const d = Math.max(1, Math.min(12, intVal('decDigits') || 4)), k = Math.max(1, Math.min(1000, intVal('decCount') || 1));
+        const p = Math.pow(10, d), vals = [];
+        for (let i = 0; i < k; i++) vals.push(fmt(Math.floor(random() * p) / p, d));   // tronqué : reste dans [0 ; 1[
+        lastDecs = vals;
+        showNumbers('decOut', 'decList', vals);
+    });
+    function copyList(list, msgId) {
+        if (!list.length) return;
+        const done = () => { $(msgId).textContent = '✓ Copié'; setTimeout(() => { $(msgId).textContent = ''; }, 2500); };
+        if (navigator.clipboard) navigator.clipboard.writeText(list.join('\n')).then(done, () => { $(msgId).textContent = 'Copie impossible'; });
+    }
+    $('intCopy').addEventListener('click', () => copyList(lastInts, 'intMsg'));
+    $('decCopy').addEventListener('click', () => copyList(lastDecs, 'decMsg'));
+
+    // ======================= ÉLÈVE AU HASARD =======================
+    // students : { nom, prenom, label, active }
+    let students = [], drawn = new Set(), stuBusy = false;
+    const STORE = 'hasard_eleves';
+    const noAccent = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    const isUpperWord = (w) => /[A-ZÀ-ÖØ-Þ]/.test(w) && w === w.toUpperCase();
+    const capitalize = (s) => s.toLowerCase().replace(/(^|[\s'-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
+
+    // « NOM Prénom » (NOM en majuscules, éventuellement composé) ; accepte aussi « Prénom NOM »
+    function parseName(cell) {
+        const t = cell.replace(/\s+/g, ' ').trim();
+        if (!t) return null;
+        const toks = t.split(' ');
+        let k = 0;
+        while (k < toks.length && isUpperWord(toks[k])) k++;
+        let nom, prenom;
+        if (k > 0 && k < toks.length) { nom = toks.slice(0, k).join(' '); prenom = toks.slice(k).join(' '); }
+        else if (k === toks.length) {   // tout en majuscules : le dernier mot est le prénom
+            if (toks.length === 1) { nom = ''; prenom = capitalize(t); }
+            else { nom = toks.slice(0, -1).join(' '); prenom = capitalize(toks[toks.length - 1]); }
+        } else {
+            let j = toks.length;
+            while (j > 0 && isUpperWord(toks[j - 1])) j--;
+            if (j < toks.length && j > 0) { prenom = toks.slice(0, j).join(' '); nom = toks.slice(j).join(' '); }
+            else { nom = ''; prenom = t; }
+        }
+        return { nom, prenom };
+    }
+
+    // Première cellule d'une ligne CSV (guillemets gérés)
+    function firstCell(line, sep) {
+        line = line.trim();
+        if (line.startsWith('"')) {
+            let out = '', i = 1;
+            for (; i < line.length; i++) {
+                if (line[i] === '"') { if (line[i + 1] === '"') { out += '"'; i++; } else break; }
+                else out += line[i];
+            }
+            return out;
+        }
+        const j = sep ? line.indexOf(sep) : -1;
+        return j < 0 ? line : line.slice(0, j);
+    }
+
+    function parseList(text) {
+        const lines = text.replace(/^﻿/, '').split(/\r\n|\n|\r/).filter((l) => l.trim());
+        const sample = lines.slice(0, 20).join('\n');
+        const counts = { ';': (sample.match(/;/g) || []).length, '\t': (sample.match(/\t/g) || []).length, ',': (sample.match(/,/g) || []).length };
+        const sep = Object.keys(counts).reduce((a, b) => (counts[b] > counts[a] ? b : a));
+        const out = [];
+        for (const line of lines) {
+            const cell = firstCell(line, counts[sep] ? sep : '').trim();
+            const key = noAccent(cell);
+            if (!cell || /^(eleves?|nom|noms|nom( et)? prenoms?|prenoms? nom|identite)\b/.test(key)) continue;   // ligne d'en-tête
+            const p = parseName(cell);
+            if (p && p.prenom) out.push(p);
+        }
+        return out;
+    }
+
+    // Prénom seul ; en cas d'homonymie, initiale (ou début) du nom
+    function makeLabels(list) {
+        const groups = {};
+        list.forEach((s) => { (groups[noAccent(s.prenom)] = groups[noAccent(s.prenom)] || []).push(s); });
+        Object.values(groups).forEach((g) => {
+            if (g.length === 1) { g[0].label = g[0].prenom; return; }
+            // initiale, puis davantage de lettres du nom tant que deux noms différents se confondent ;
+            // si un nom est le début d'un autre (MARTIN / MARTIN-DURAND) : noms complets ;
+            // vrais homonymes (même prénom, même nom) : numérotés
+            const noms = [...new Set(g.map((s) => noAccent(s.nom)))];
+            const maxLen = Math.max(...noms.map((n) => n.length));
+            let len = 0;
+            for (let k = 1; k <= maxLen; k++) {
+                if (new Set(noms.map((n) => n.slice(0, k))).size === noms.length) { len = k; break; }
+                if (noms.some((n) => n.length <= k)) break;
+            }
+            g.forEach((s) => {
+                if (!s.nom) { s.label = s.prenom; return; }
+                const cut = len && len < s.nom.length ? capitalize(s.nom.slice(0, len)) + '.' : capitalize(s.nom);
+                s.label = `${s.prenom} ${cut}`;
+            });
+            const seen = {};
+            g.forEach((s) => { seen[s.label] = (seen[s.label] || 0) + 1; });
+            const num = {};
+            g.forEach((s) => { if (seen[s.label] > 1) { num[s.label] = (num[s.label] || 0) + 1; s.label = `${s.label} (${num[s.label]})`; } });
+        });
+        return list;
+    }
+
+    function setStudents(list, msg) {
+        students = makeLabels(list.map((s) => ({ nom: s.nom, prenom: s.prenom, active: s.active !== false })))
+            .sort((a, b) => a.label.localeCompare(b.label, 'fr'));
+        drawn = new Set();
+        saveStudents();
+        renderStudents();
+        $('stuLoadMsg').textContent = msg || '';
+        $('stuName').textContent = '?';
+    }
+    function saveStudents() {
+        if (students.length) storageSet(STORE, JSON.stringify(students.map((s) => ({ nom: s.nom, prenom: s.prenom, active: s.active }))));
+        else storageDel(STORE);
+    }
+    function pool() {
+        const act = students.filter((s) => s.active);
+        return $('stuNoRepeat').checked ? act.filter((s) => !drawn.has(s.label)) : act;
+    }
+    function renderStudents() {
+        const list = $('stuList');
+        if (!students.length) {
+            list.innerHTML = '<span class="note">Aucune liste chargée.</span>';
+        } else {
+            list.innerHTML = '';
+            students.forEach((s) => {
+                const el = document.createElement('label');
+                el.className = 'stu' + (s.active ? '' : ' off') + (drawn.has(s.label) ? ' drawn' : '');
+                el.title = `${s.nom} ${s.prenom}`.trim();
+                const cb = document.createElement('input');
+                cb.type = 'checkbox'; cb.checked = s.active;
+                cb.addEventListener('change', () => { s.active = cb.checked; saveStudents(); renderStudents(); });
+                el.append(cb, document.createTextNode(s.label));
+                list.appendChild(el);
+            });
+        }
+        const act = students.filter((s) => s.active).length, rest = pool().length;
+        $('stuCount').textContent = students.length ? `${act} / ${students.length}` : '';
+        $('stuDraw').disabled = !rest || stuBusy;
+        if (!students.length) $('stuInfo').textContent = "Importez une liste d'élèves ci-dessous";
+        else if (!act) $('stuInfo').textContent = 'Cochez au moins un élève dans la liste';
+        else if (!rest) $('stuInfo').textContent = 'Tout le monde est passé ! « Remettre tout le monde en jeu » pour recommencer.';
+        else if (!stuBusy) $('stuInfo').textContent = $('stuNoRepeat').checked ? `${rest} élève${rest > 1 ? 's' : ''} encore en jeu sur ${act}` : `${act} élève${act > 1 ? 's' : ''} en jeu`;
+    }
+
+    function drawStudent() {
+        const p = pool();
+        if (!p.length || stuBusy) return;
+        const winner = p[randInt(0, p.length - 1)];
+        const nameEl = $('stuName');
+        const finish = () => {
+            nameEl.textContent = winner.label;
+            nameEl.classList.remove('spinning');
+            if (!REDUCED) { nameEl.classList.remove('pop'); void nameEl.offsetWidth; nameEl.classList.add('pop'); }
+            drawn.add(winner.label);
+            stuBusy = false;
+            renderStudents();
+        };
+        if (REDUCED || p.length === 1) { finish(); return; }
+        stuBusy = true;
+        $('stuDraw').disabled = true;
+        $('stuInfo').textContent = 'Tirage en cours…';
+        nameEl.classList.add('spinning');
+        // les prénoms défilent de plus en plus lentement
+        let delay = 45, t = 0, last = null;
+        (function tick() {
+            if (t > 1500) { finish(); return; }
+            let s;
+            do { s = p[randInt(0, p.length - 1)]; } while (p.length > 1 && s === last);
+            last = s;
+            nameEl.textContent = s.label;
+            t += delay; delay *= 1.14;
+            setTimeout(tick, delay);
+        })();
+    }
+
+    async function readFileText(file) {
+        const buf = await file.arrayBuffer();
+        try { return new TextDecoder('utf-8', { fatal: true }).decode(buf); }
+        catch (e) { return new TextDecoder('windows-1252').decode(buf); }   // export Pronote en ANSI
+    }
+    async function loadFile(file) {
+        if (!file) return;
+        const list = parseList(await readFileText(file));
+        if (!list.length) { $('stuLoadMsg').textContent = `Aucun nom trouvé dans « ${file.name} ».`; return; }
+        setStudents(list, `✓ ${list.length} élèves importés depuis « ${file.name} ».`);
+    }
+    $('stuFile').addEventListener('change', (e) => { loadFile(e.target.files[0]); e.target.value = ''; });
+    const drop = $('stuDrop');
+    ['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+    ['dragleave', 'drop'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+    drop.addEventListener('drop', (e) => loadFile(e.dataTransfer.files[0]));
+    $('stuPasteGo').addEventListener('click', () => {
+        const list = parseList($('stuPaste').value);
+        if (!list.length) { $('stuLoadMsg').textContent = 'Aucun nom trouvé dans le texte collé.'; return; }
+        setStudents(list, `✓ ${list.length} élèves chargés.`);
+    });
+    $('stuDraw').addEventListener('click', drawStudent);
+    $('stuAll').addEventListener('click', () => { students.forEach((s) => { s.active = true; }); saveStudents(); renderStudents(); });
+    $('stuNone').addEventListener('click', () => { students.forEach((s) => { s.active = false; }); saveStudents(); renderStudents(); });
+    $('stuInvert').addEventListener('click', () => { students.forEach((s) => { s.active = !s.active; }); saveStudents(); renderStudents(); });
+    $('stuClear').addEventListener('click', () => { if (students.length && confirm('Effacer la liste des élèves de ce navigateur ?')) setStudents([], 'Liste effacée.'); });
+    $('stuResetDraws').addEventListener('click', () => { drawn = new Set(); $('stuName').textContent = '?'; renderStudents(); });
+    $('stuNoRepeat').addEventListener('change', renderStudents);
+    $('stuFs').addEventListener('click', () => {
+        const st = $('stuStage');
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (st.requestFullscreen) st.requestFullscreen().catch(() => {});
+    });
+
+    // --- Clavier : Espace ou Entrée = action principale de l'onglet ---
+    document.addEventListener('keydown', (e) => {
+        const tag = e.target && e.target.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON' || e.repeat) return;
+        if (e.key !== ' ' && e.key !== 'Enter') return;
+        e.preventDefault();
+        if (currentTab === 'coin') flipCoin();
+        else if (currentTab === 'die') rollDie();
+        else if (currentTab === 'num') $('intGo').click();
+        else if (currentTab === 'stu') drawStudent();
+    });
+
+    function redrawCharts() { drawCoinChart(); drawDieChart(); }
+    let rt = null;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(redrawCharts, 120); });
+
+    // --- Initialisation ---
+    updateBias();
+    resetDie();
+    renderCoinStats();
+    try {
+        const saved = JSON.parse(storageGet(STORE) || 'null');
+        if (Array.isArray(saved) && saved.length) setStudents(saved, `Liste précédente rechargée (${saved.length} élèves).`);
+    } catch (e) { /* liste enregistrée illisible : ignorée */ }
+    renderStudents();
+})();
+</script>
+</body>
+</html>
