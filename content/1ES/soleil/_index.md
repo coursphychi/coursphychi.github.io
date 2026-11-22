@@ -8,7 +8,7 @@ chapter = false
 
 # Le Soleil, notre source d'énergie
 
-<p style="text-align:center;font-size: 25px"><a href="https://presentationssite.github.io/1es/soleil">Présentation</a></p>
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/1es/soleil">Présentation </a></p>
 
 <p style="text-align:center;font-size: 25px"><a href="/recapsoleil.pdf">Récap</a></p>
 
@@ -22,16 +22,15 @@ chapter = false
 
 ## Rayonnement solaire
 
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-{{<youtube MWUEh0xqtB4>}}
-</div>
+
+{{< youtube-plus id="MWUEh0xqtB4" ratio="16x9" width="800" shadow="true" rounded="true" >}}
 
 ---
 
 
 ## Bilan radiatif terrestre
 
-<video controls style="margin: 0; padding: 0;display:block;position:relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);max-width:100%">
+<video controls style="margin: 0; padding: 0;display:block;position:relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);max-width:100%;border-radius:10px;">
   <source src="/inclinaison.mp4" type="video/mp4">
 </video>
 
@@ -39,16 +38,16 @@ chapter = false
 
 [Applet Geogebra](https://www.geogebra.org/m/ezzzm95w) pour visualiser l'origine géométrique des lignes imaginaires que sont les tropiques et cercles polaires en lien avec les solstices et les équinoxes :
 
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius:10px;">
 <a href="https://www.geogebra.org/m/ezzzm95w">
-<img src="/solsticegeogebra.png">
+<img src="/solsticegeogebra.png" style="border-radius:10px;">
 </a>
 </div>
 
 
 Vidéo filmée à Pune, en Inde, le 13 Mai 2023 (source&nbsp;: [संकेत](https://x.com/i/status/1657420559335182336)) + [tracking du zéro shadow day](https://alokm.com/zsd.html) + [tracking du point subsolaire](https://www.skymarvels.com/infopages/vids/Earth%20-%20Sub-solar%20Point%20001.htm)&nbsp;:
 
-<video width="800" controls style="margin: 0; padding: 0;display:block;position:relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);max-width:100%">
+<video width="800" controls style="margin: 0; padding: 0;display:block;position:relative;margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);max-width:100%; border-radius:10px;">
   <source src="/noshadow.mp4" type="video/mp4">
 </video>
 
