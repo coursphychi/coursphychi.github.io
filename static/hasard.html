@@ -249,8 +249,7 @@
         .cube .core { position: absolute; inset: 1.5px; background: #e2e8f0; }   /* plans pleins à angles vifs (aucun jour aux arêtes), juste en retrait des faces */
         .cube .core.c2 { transform: rotateY(90deg); }
         .cube .core.c3 { transform: rotateX(90deg); }
-        .token { position: absolute; inset: 0; }
-        .token svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35)); }
+        .poly { position: absolute; left: -30px; top: -30px; width: 200px; height: 200px; }
         .die-shadow { position: absolute; z-index: 0; left: 50%; bottom: 10px; width: 136px; height: 24px; margin-left: -68px; border-radius: 50%; background: radial-gradient(ellipse, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0) 70%); }
 
         .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 0.5rem; margin: 0.75rem 0; }
@@ -412,7 +411,7 @@
                     <div class="die-area">
                         <div class="die-toss" id="dieToss">
                             <div class="cube" id="cube"></div>
-                            <div class="token" id="token" hidden></div>
+                            <canvas class="poly" id="polyCv" hidden aria-label="Dé"></canvas>
                         </div>
                         <div class="die-shadow" id="dieShadow"></div>
                     </div>
@@ -702,7 +701,7 @@
     }
 
     // ======================= DÉ =======================
-    const cube = $('cube'), token = $('token'), dieToss = $('dieToss'), dieShadow = $('dieShadow');
+    const cube = $('cube'), polyCv = $('polyCv'), dieToss = $('dieToss'), dieShadow = $('dieShadow');
     let dieBusy = false;
     let dieStats = { faces: 6, counts: [], n: 0, sum: 0, hist: [] };
     const PIPS = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
@@ -719,36 +718,184 @@
     // ordre d'application : rotateZ, puis rotateX (face choisie en haut), puis le lacet, puis l'angle de vue
     function setCube(r) { cubeRot = r; cube.style.transform = `rotateX(${VIEW}deg) rotateY(${r[0]}deg) rotateX(${r[1]}deg) rotateZ(${r[2]}deg)`; }
 
-    // jeton : silhouette du dé correspondant (d4 triangle, d8 losange, d10 cerf-volant, d12 pentagone, d20 hexagone…)
-    function shapeSvg(N) {
-        const poly = (k, r, rot) => Array.from({ length: k }, (_, i) => { const a = rot + i * 2 * Math.PI / k; return `${(50 + r * Math.cos(a)).toFixed(1)},${(52 + r * Math.sin(a)).toFixed(1)}`; }).join(' ');
-        const S = {
-            2: '<circle cx="50" cy="50" r="46" class="sh"/>',
-            4: '<polygon points="50,6 95,86 5,86" class="sh"/>',
-            8: '<polygon points="50,3 97,50 50,97 3,50" class="sh"/>',
-            10: '<polygon points="50,3 95,40 50,97 5,40" class="sh"/>',
-            12: `<polygon points="${poly(5, 47, -Math.PI / 2)}" class="sh"/>`,
-            20: `<polygon points="${poly(6, 48, -Math.PI / 2)}" class="sh"/><polygon points="${poly(3, 30, -Math.PI / 2)}" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>`
-        };
-        const body = S[N] || '<rect x="5" y="5" width="90" height="90" rx="18" class="sh"/>';
-        const ty = N === 4 ? 70 : N === 12 ? 62 : 60;
-        return `<svg viewBox="0 0 100 100"><defs><linearGradient id="gTok" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d8dee8"/></linearGradient></defs>` +
-            `<style>.sh{fill:url(#gTok);stroke:#94a3b8;stroke-width:1.6;stroke-linejoin:round}</style>${body}` +
-            `<text x="50" y="${ty}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" fill="#1e1b4b">?</text></svg>`;
+    // ---------- Polyèdres en 3D (d4, d8, d10, d12, d20) et boule numérotée (autres nombres de faces) ----------
+    // Repère : x à droite, y vers le haut, z vers le spectateur. Rotations en quaternions [w, x, y, z].
+    const V3 = {
+        add: (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]],
+        sub: (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]],
+        mul: (a, k) => [a[0] * k, a[1] * k, a[2] * k],
+        dot: (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2],
+        cross: (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]],
+        norm: (a) => { const l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; }
+    };
+    const Q = {
+        mul: (a, b) => [a[0] * b[0] - a[1] * b[1] - a[2] * b[2] - a[3] * b[3], a[0] * b[1] + a[1] * b[0] + a[2] * b[3] - a[3] * b[2],
+            a[0] * b[2] - a[1] * b[3] + a[2] * b[0] + a[3] * b[1], a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0]],
+        axis: (ax, ang) => { const s = Math.sin(ang / 2); ax = V3.norm(ax); return [Math.cos(ang / 2), ax[0] * s, ax[1] * s, ax[2] * s]; },
+        rot: (q, v) => { const p = Q.mul(Q.mul(q, [0, v[0], v[1], v[2]]), [q[0], -q[1], -q[2], -q[3]]); return [p[1], p[2], p[3]]; },
+        slerp: (a, b, t) => {
+            let d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+            if (d < 0) { b = b.map((x) => -x); d = -d; }
+            if (d > 0.9995) { const r = a.map((x, i) => x + (b[i] - x) * t); const l = Math.hypot(...r); return r.map((x) => x / l); }
+            const th = Math.acos(d), s = Math.sin(th);
+            return a.map((x, i) => (Math.sin((1 - t) * th) * x + Math.sin(t * th) * b[i]) / s);
+        },
+        fromBasis: (m) => {   // m : colonnes = images des axes x, y, z
+            const [m00, m10, m20] = m[0], [m01, m11, m21] = m[1], [m02, m12, m22] = m[2], tr = m00 + m11 + m22;
+            let q;
+            if (tr > 0) { const S = Math.sqrt(tr + 1) * 2; q = [0.25 * S, (m21 - m12) / S, (m02 - m20) / S, (m10 - m01) / S]; }
+            else if (m00 > m11 && m00 > m22) { const S = Math.sqrt(1 + m00 - m11 - m22) * 2; q = [(m21 - m12) / S, 0.25 * S, (m01 + m10) / S, (m02 + m20) / S]; }
+            else if (m11 > m22) { const S = Math.sqrt(1 + m11 - m00 - m22) * 2; q = [(m02 - m20) / S, (m01 + m10) / S, 0.25 * S, (m12 + m21) / S]; }
+            else { const S = Math.sqrt(1 + m22 - m00 - m11) * 2; q = [(m10 - m01) / S, (m02 + m20) / S, (m12 + m21) / S, 0.25 * S]; }
+            const l = Math.hypot(...q); return q.map((x) => x / l);
+        }
+    };
+    const PHI = (1 + Math.sqrt(5)) / 2;
+    // faces d'un polyèdre convexe : plans d'appui passant par au moins trois sommets
+    function hullFaces(V) {
+        const F = [], seen = new Set(), eps = 1e-6;
+        for (let i = 0; i < V.length; i++) for (let j = i + 1; j < V.length; j++) for (let k = j + 1; k < V.length; k++) {
+            let n = V3.cross(V3.sub(V[j], V[i]), V3.sub(V[k], V[i]));
+            if (Math.hypot(...n) < eps) continue;
+            n = V3.norm(n); let d = V3.dot(n, V[i]);
+            if (d < 0) { n = V3.mul(n, -1); d = -d; }
+            if (V.some((v) => V3.dot(n, v) > d + eps)) continue;
+            const f = V.map((v, m) => m).filter((m) => Math.abs(V3.dot(n, V[m]) - d) < eps), key = f.join(',');
+            if (!seen.has(key)) { seen.add(key); F.push({ f, n }); }
+        }
+        return F;
     }
-    function setTokenNumber(v) {
-        const t = token.querySelector('text');
-        const str = v === null ? '?' : String(v);
-        t.textContent = str;
-        t.setAttribute('font-size', dieStats.faces === 4 ? (str.length > 1 ? 24 : 30) : str.length > 2 ? 26 : str.length > 1 ? 34 : 40);
+    // ordonne les sommets d'une face autour de sa normale
+    function orderFace(V, f, n) {
+        const c = V3.mul(f.reduce((a, i) => V3.add(a, V[i]), [0, 0, 0]), 1 / f.length);
+        const e1 = V3.norm(V3.sub(V[f[0]], c)), e2 = V3.cross(n, e1);
+        const ang = (i) => { const p = V3.sub(V[i], c); return Math.atan2(V3.dot(p, e2), V3.dot(p, e1)); };
+        return f.slice().sort((i, j) => ang(i) - ang(j));
+    }
+    function buildSolid(N) {
+        let V;
+        if (N === 4) V = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]];
+        else if (N === 8) V = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
+        else if (N === 20) { V = []; [-1, 1].forEach((a) => [-1, 1].forEach((b) => { V.push([0, a, b * PHI], [a, b * PHI, 0], [b * PHI, 0, a]); })); }
+        else if (N === 12) {
+            V = [];
+            [-1, 1].forEach((a) => [-1, 1].forEach((b) => [-1, 1].forEach((c) => V.push([a, b, c]))));
+            [-1, 1].forEach((a) => [-1, 1].forEach((b) => { V.push([0, a / PHI, b * PHI], [a / PHI, b * PHI, 0], [b * PHI, 0, a / PHI]); }));
+        } else if (N === 10) {
+            // trapézoèdre pentagonal : deux pôles (0, ±h, 0) et dix sommets en zigzag à hauteur ±a ;
+            // h choisi pour que chaque cerf-volant soit plan : h = a·(1 + cos 36°)/(1 − cos 36°)
+            const a = 0.11, c36 = Math.cos(Math.PI / 5), h = a * (1 + c36) / (1 - c36);
+            V = [[0, h, 0], [0, -h, 0]];
+            for (let i = 0; i < 10; i++) V.push([Math.cos(i * Math.PI / 5), (i % 2 ? -a : a), Math.sin(i * Math.PI / 5)]);
+        } else return null;
+        // normalisation : rayon circonscrit 1
+        const R = Math.max(...V.map((v) => Math.hypot(...v))) / (N === 4 ? 1.18 : 1);   // le tétraèdre, plus « creux », est un peu agrandi
+        V = V.map((v) => V3.mul(v, 1 / R));
+        const H = hullFaces(V);
+        const faces = H.map(({ f: f0, n }, k) => {
+            const f = orderFace(V, f0, n);
+            const c = V3.mul(f.reduce((acc, i) => V3.add(acc, V[i]), [0, 0, 0]), 1 / f.length);
+            // le haut du nombre pointe vers le sommet le plus éloigné du centre de la face (le pôle pour le d10)
+            let far = f[0]; f.forEach((i) => { if (Math.hypot(...V3.sub(V[i], c)) > Math.hypot(...V3.sub(V[far], c)) + 1e-6) far = i; });
+            const d = V3.sub(V[far], c), u = V3.norm(V3.sub(d, V3.mul(n, V3.dot(d, n))));
+            // rayon du plus grand disque centré en c inscrit dans la face
+            const inr = Math.min(...f.map((i, j) => { const A = V[i], B = V[f[(j + 1) % f.length]], AB = V3.sub(B, A), AC = V3.sub(c, A); const t = V3.dot(AC, AB) / V3.dot(AB, AB); return Math.hypot(...V3.sub(AC, V3.mul(AB, t))); }));
+            return { idx: f, c, n, u, inr, num: k + 1 };
+        });
+        return { V, faces };
+    }
+    const DICE_COL = { 4: [220, 38, 38], 8: [22, 163, 74], 10: [234, 88, 12], 12: [37, 99, 235], 20: [124, 58, 237] };
+    const UP_VIEW = V3.norm([0, 0.62, 0.78]);   // face du dessus, vue un peu d'au-dessus
+    const LIGHT = V3.norm([-0.45, 0.75, 0.55]);
+    let solid = null, polyQ = [1, 0, 0, 0], polyShown = null;
+
+    // orientation qui met la face « face » en haut (normale vers UP_VIEW), son nombre à l'endroit
+    function restQuat(face, yawJitter) {
+        const D = UP_VIEW, Up = V3.norm(V3.sub([0, 1, 0], V3.mul(D, D[1]))), Rt = V3.cross(Up, D);
+        const n = face.n, u = face.u, r = V3.cross(u, n);
+        // base source (r, u, n) → base cible (Rt, Up, D) : R = B_cible · B_sourceᵀ
+        const col = (j) => [0, 1, 2].map((i) => Rt[i] * r[j] + Up[i] * u[j] + D[i] * n[j]);
+        const q = Q.fromBasis([col(0), col(1), col(2)]);
+        return Q.mul(Q.axis(D, yawJitter || 0), q);
+    }
+    function polyCtx() {
+        const dpr = window.devicePixelRatio || 1, w = 200, h = 200;
+        if (polyCv.width !== w * dpr) { polyCv.width = w * dpr; polyCv.height = h * dpr; }
+        const c = polyCv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return { c, w, h, dpr };
+    }
+    function drawPoly(q, shownNum) {
+        const { c, w, h, dpr } = polyCtx();
+        const S = 74, Dz = 5.5, cx = w / 2, cy = h / 2 + 4;
+        const P = (v) => { const k = Dz / (Dz - v[2]); return [cx + S * v[0] * k, cy - S * v[1] * k]; };
+        c.clearRect(0, 0, w, h);
+        const N = dieStats.faces;
+        if (!solid) {   // boule numérotée
+            const g = c.createRadialGradient(cx - 22, cy - 26, 6, cx, cy, S);
+            g.addColorStop(0, '#ffffff'); g.addColorStop(0.55, '#f472b6'); g.addColorStop(1, '#831843');
+            c.fillStyle = g; c.beginPath(); c.arc(cx, cy, S * 0.92, 0, 2 * Math.PI); c.fill();
+            const n = Q.rot(q, [0, 0, 1]), u = Q.rot(q, [0, 1, 0]);
+            if (n[2] > -0.15) {   // pastille numérotée (dessinée dans son plan : ellipse en perspective)
+                const C = V3.mul(n, 0.92), r = V3.cross(u, n), P0 = P(C), Px = P(V3.add(C, r)), Py = P(V3.add(C, u));
+                c.save();
+                const K = dpr / 100;   // repère de la pastille au 1/100 (évite des tailles de police inférieures au pixel)
+                c.setTransform(K * (Px[0] - P0[0]), K * (Px[1] - P0[1]), K * -(Py[0] - P0[0]), K * -(Py[1] - P0[1]), dpr * P0[0], dpr * P0[1]);
+                c.globalAlpha = Math.min(1, (n[2] + 0.15) * 3);
+                c.fillStyle = '#fff'; c.beginPath(); c.arc(0, 0, 46, 0, 2 * Math.PI); c.fill();
+                c.fillStyle = '#1e1b4b'; c.font = `700 ${String(shownNum).length > 2 ? 30 : String(shownNum).length > 1 ? 40 : 50}px "JetBrains Mono", monospace`;
+                c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(String(shownNum), 0, 3);
+                c.restore();
+            }
+            // reflet
+            c.fillStyle = 'rgba(255,255,255,0.35)'; c.beginPath(); c.ellipse(cx - 26, cy - 32, 16, 10, -0.6, 0, 2 * Math.PI); c.fill();
+            return;
+        }
+        const col = DICE_COL[N];
+        const faces = solid.faces.map((f) => {
+            const n = Q.rot(q, f.n);
+            const pts = f.idx.map((i) => Q.rot(q, solid.V[i]));
+            const z = pts.reduce((a, p) => a + p[2], 0) / pts.length;
+            return { f, n, pts, z };
+        }).filter((o) => o.n[2] > 0.02).sort((a, b) => a.z - b.z);
+        c.lineJoin = 'round';
+        faces.forEach(({ f, n, pts }) => {
+            const lam = Math.max(0, V3.dot(n, LIGHT)), spec = Math.pow(Math.max(0, V3.dot(V3.norm(V3.add(LIGHT, [0, 0, 1])), n)), 24);
+            const k = 0.5 + 0.55 * lam;
+            const rgb = col.map((x) => Math.min(255, Math.round(x * k + 255 * 0.35 * spec)));
+            c.fillStyle = `rgb(${rgb.join(',')})`;
+            c.strokeStyle = `rgba(${col.map((x) => Math.round(x * 0.45)).join(',')},0.9)`;
+            c.lineWidth = 1.6;
+            c.beginPath(); pts.forEach((p, i) => { const s2 = P(p); if (i) c.lineTo(s2[0], s2[1]); else c.moveTo(s2[0], s2[1]); }); c.closePath(); c.fill(); c.stroke();
+            // nombre posé sur la face, en perspective
+            const C = Q.rot(q, f.c), u = Q.rot(q, f.u), r = V3.cross(u, n), P0 = P(C), Px = P(V3.add(C, r)), Py = P(V3.add(C, u));
+            // la face 1 porte la valeur affichée ; la face qui la portait normalement prend le 1 (pas de doublon)
+            const sv = shownNum.value, num = f.num === 1 ? sv : f.num === sv ? 1 : f.num;
+            const str = String(num), fsz = 100 * f.inr * (str.length > 1 ? 1.05 : 1.35);
+            c.save();
+            const K = dpr / 100;   // repère de la face au 1/100
+            c.setTransform(K * (Px[0] - P0[0]), K * (Px[1] - P0[1]), K * -(Py[0] - P0[0]), K * -(Py[1] - P0[1]), dpr * P0[0], dpr * P0[1]);
+            c.globalAlpha = Math.max(0, Math.min(1, (n[2] - 0.22) * 2.6));   // nombres des faces trop obliques estompés
+            c.fillStyle = '#ffffff'; c.font = `800 ${fsz}px Inter, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
+            c.fillText(str, 0, N === 4 ? fsz * 0.05 : 0);
+            if ((num === 6 || num === 9) && N >= 10) { c.fillRect(-fsz * 0.28, fsz * 0.42, fsz * 0.56, fsz * 0.08); }   // 6 et 9 soulignés
+            c.restore();
+        });
     }
 
     function nFaces() { return Math.max(2, Math.min(120, Math.round(Number($('dieFaces').value) || 6))); }
+    // les nombres réels de faces d'un dé (1 à N) sont répartis sur le polyèdre ; la face « 1 » porte le résultat
+    function showPoly(v) {
+        const N = dieStats.faces;
+        const val = v === null ? N : v;
+        if (solid) { polyQ = restQuat(solid.faces[0], (randInt(0, 40) - 20) * Math.PI / 180); polyShown = { face: 1, value: val }; }
+        else { polyQ = restQuat({ n: [0, 0, 1], u: [0, 1, 0] }, (randInt(0, 30) - 15) * Math.PI / 180); polyShown = v === null ? '?' : v; }
+        drawPoly(polyQ, polyShown);
+    }
     function showDie(v) {
         const isCube = dieStats.faces === 6;
-        cube.hidden = !isCube; token.hidden = isCube;
+        cube.hidden = !isCube; polyCv.hidden = isCube;
         if (isCube) { const f = FACE_ROT[v || 1]; setCube([cubeRot[0], f[0], f[1]]); }
-        else { setTokenNumber(v); token.style.transform = ''; token.querySelector('svg').style.transform = ''; }
+        else showPoly(v);
         dieToss.style.transform = ''; dieShadow.style.transform = ''; dieShadow.style.opacity = '';
     }
     function resetDie() {
@@ -757,7 +904,7 @@
         document.querySelectorAll('#diePresets .chip-btn').forEach((b) => b.classList.toggle('active', Number(b.dataset.f) === dieStats.faces));
         $('dieMeanTh').textContent = fmt((dieStats.faces + 1) / 2, 1);
         $('dieResult').textContent = 'Cliquez sur « Lancer » (ou appuyez sur Espace)';
-        if (dieStats.faces !== 6) token.innerHTML = shapeSvg(dieStats.faces);
+        solid = dieStats.faces === 6 ? null : buildSolid(dieStats.faces);
         showDie(null);
         renderDieStats();
     }
@@ -789,12 +936,19 @@
         dieBusy = true;
         $('dieResult').textContent = '…';
         const dur = 1400, t0 = performance.now();
-        let from, to, lastHalf = 0;
+        let from, to, q0, qF, spinAx, spinAng;
         if (N === 6) {
             const f = FACE_ROT[v];
             from = cubeRot.slice();
             to = [nextAngle(from[0], restYaw(), 1), nextAngle(from[1], f[0], 2 + randInt(0, 1)), nextAngle(from[2], f[1], 1 + randInt(0, 1))];
+        } else {
+            // roulé : interpolation vers l'orientation d'arrêt + rotation supplémentaire qui s'amortit
+            q0 = polyQ;
+            qF = solid ? restQuat(solid.faces[0], (randInt(0, 40) - 20) * Math.PI / 180) : restQuat({ n: [0, 0, 1], u: [0, 1, 0] }, (randInt(0, 30) - 15) * Math.PI / 180);
+            spinAx = V3.norm([random() - 0.5, random() - 0.5, random() - 0.5]);
+            spinAng = (3 + 2 * random()) * Math.PI * 2;
         }
+        let lastSwap = -1, shownVal = solid ? randInt(1, N) : '?';
         (function frame(now) {
             const t = Math.min(1, (now - t0) / dur), e = easeOut(t), y = hop(t);
             dieToss.style.transform = `translateY(${-y}px)`;
@@ -803,12 +957,14 @@
             if (N === 6) {
                 setCube(from.map((a, i) => a + (to[i] - a) * e));
             } else {
-                // le jeton tourne sur lui-même ; le nombre change à chaque demi-tour (quand on le voit par la tranche)
-                const ang = 1080 * e, half = Math.floor((ang + 90) / 180);
-                if (half !== lastHalf) { lastHalf = half; setTokenNumber(t > 0.75 ? v : randInt(1, N)); }
-                token.style.transform = `rotateY(${ang}deg)`;
-                const m = ((ang % 360) + 360) % 360;
-                token.querySelector('svg').style.transform = m > 90 && m < 270 ? 'scaleX(-1)' : '';   // nombre jamais lu à l'envers
+                const q = Q.mul(Q.axis(spinAx, spinAng * (1 - e)), Q.slerp(q0, qF, e));
+                // la face qui portera le résultat affiche des valeurs au hasard tant qu'elle n'est pas encore bien visible
+                const nUp = solid ? Q.rot(q, solid.faces[0].n) : Q.rot(q, [0, 0, 1]);
+                const visible = nUp[2] > 0.25, slot = Math.floor(t * 12);
+                if (t > 0.72) shownVal = v;
+                else if (!visible && slot !== lastSwap) { lastSwap = slot; shownVal = randInt(1, N); }
+                polyQ = q;
+                drawPoly(q, solid ? { face: 1, value: shownVal } : shownVal);
             }
             if (t < 1) requestAnimationFrame(frame);
             else finish();
