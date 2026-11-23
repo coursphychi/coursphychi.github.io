@@ -39,7 +39,7 @@ figcaption {
 
 ## Forme de la Terre
 
-<video width="300" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<video width="300" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:5px;">
   <source src="/tiktokplatiste.mp4" type="video/mp4">
 </video>
 
@@ -57,18 +57,21 @@ C'est quand même dommage que l'école n'ait pas su apporter des réponses aux �
 ### Horizon
 
 
-<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
-<img src="/eolienneshoriz.png">
+<div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius:10px;">
+<img src="/eolienneshoriz.png" style="border-radius:10px;">
 </div>
 
 
 Jusqu'où peut-on voir ?  Pourquoi peut-on parfois voir plus loin&nbsp;?
 
-Une [**première activité**](/acthorizon.pdf) pour tenter de répondre à ces questions.
+Une première activité pour tenter de répondre à ces questions&nbsp;:
 
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="/acthorizon.pdf"> Activité horizon </a></p>
 
-<video width="640" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-  <source src="/courburetwitter.mp4" type="video/mp4">
+<br>
+
+<video width="640" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:10px;">
+  <source src="/courburetwitter.mp4" type="video/mp4"é>
 </video>
 
 <br>
@@ -81,13 +84,9 @@ Une [**première activité**](/acthorizon.pdf) pour tenter de répondre à ces q
 
 Comment un savant de la Grèce Antique a-t-il réussi à déterminer la taille de la Terre avec un bâton&nbsp;?
 
-<br>
 
-<div style="position:relative; width:640px; max-width:100%; height:480px; margin-left: auto; margin-right: auto;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-<iframe width="640" height="480"  src="https://www.youtube.com/embed/j-n74K3VaYI" title="Ératosthène : mesure de la circonférence terrestre" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width:100%"></iframe>
-</div>
+{{< youtube-plus id="j-n74K3VaYI" ratio="4x3" width="800" shadow="true" rounded="true" >}}
 
-<br>
 
 Notre ami platiste a raison de dire que le calcul d'Ératosthène ne prouve pas que la Terre est sphérique. Il trouve juste son rayon si elle l'était (et c'est déjà pas mal). Les résultats d'une théorie dépendent complètement du modèle dans lequel la théorie s'inscrit.<br>
 À partir des mêmes observations (ombre à Alexandrie mais pas à Syène à midi au solstice d'été) mais des prémisses différentes (un modèle de Terre plate avec un petit Soleil flottant au-dessus), Anaxagore aboutissait ainsi deux siècles avant Ératosthène aux mêmes résultats numériques mais il leur donnait une signification bien différente ; le Soleil serait situé, selon lui, à 6500 km de la Terre.
@@ -98,7 +97,7 @@ Notre ami platiste a raison de dire que le calcul d'Ératosthène ne prouve pas 
 Une des preuves de la rotondité rapportée par Aristote, l'ombre de la Terre pendant une éclipse de Lune, est bien illustrée sur la superposition de photos ci-dessous (le contraste et la luminosité ont été boostés sur l'image centrale).
 
 <figure>
-<img src="/photeclipse.png">
+<img src="/photeclipse.png" style=border-radius:10px;">
 <figcaption>Photo composite de l'éclipse lunaire de 8 novembre 2022 (Andrew McCarthy).</figcaption>
 </figure>
 
@@ -110,7 +109,8 @@ Si cette preuve est compatible avec une Terre ronde mais plate, les deux autres 
 
 ![](/metremeridien.png)
 
-[**Documentaire sur la naissance du mètre pendant la révolution française.**](https://www.youtube.com/watch?v=uq5AKUdpsHQ)<!---(https://www.dailymotion.com/embed/video/x1ns2j0)-->
+
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://www.youtube.com/watch?v=uq5AKUdpsHQ"> Documentaire sur la naissance du mètre<br>pendant la révolution française. </a></p>
 
 
 <div style="position:relative; width:800px; max-width: 100%; margin-left: auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
@@ -125,11 +125,13 @@ Quel est le trajet le plus court entre deux points&nbsp;?
 
 Dans un espace plat, c'est la droite. Mais ce n'est plus cas si l'espace est courbe&nbsp;! 
 
-On le constate dans l'[**exemple du trajet en avion entre Bordeau et Portland**](https://presentationssite.github.io/1es/avion/).
+On le constate bien dans le cas d'un long trajet en avion&nbsp;:
+
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;font-weight:bold"><a href="https://presentationssite.github.io/1es/avion/">Trajet Bordeau-Portland</a></p>
 
 <br>
 
-<video width="400" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<video width="400" controls style="display:block;max-width:100%;position:relative;margin-left:auto;margin-right: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius:5px;">
   <source src="/indiatousa.mp4" type="video/mp4">
 </video>
 
@@ -151,13 +153,12 @@ La projection la plus utilisée est celle de **Mercator**. Elle a pour avantage 
 
 
 Les cartes intéractives suivantes mettent en lumière ses inconvénients&nbsp;:
-- [les aires grandissent lorsqu'on s'éloigne de l'équateur](https://www.partir.com/cartedumonde/appli.html#taille)
-- [pareil pour les distances](https://www.partir.com/cartedumonde/appli.html#distances)
-- [La ligne droite n'est pas le trajet le plus court](https://www.partir.com/cartedumonde/appli.html#trajets)
+- [les aires grandissent lorsqu'on s'éloigne de l'équateur](https://www.partir.com/cartedumonde/appli.html)
+- [pareil pour les distances](https://www.partir.com/cartedumonde/appli-regle.html)
+- [La ligne droite n'est pas le trajet le plus court](https://www.partir.com/cartedumonde/appli-trajet.html)
 
 
-Pour comparaison, la projection de Peters conserve les aires (mais pas les angles)&nbsp;:
+En september 2026, le gouvernement français adopte la projection Eckert IV pour exprimer son soutien à la proposition de l'Union Africaine à l'ONU d'utiliser une carte mondiale conservant les aires plutôt que la projection Mercator habituelle.
 
-
-![](/projpeters.png?width=800px)
+![](https://upload.wikimedia.org/wikipedia/commons/c/c5/Ecker_IV_projection_SW.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled?width=800px)
 
