@@ -25,7 +25,7 @@ page_css = "css/soleil-accueil.css"
 <h1>Le Soleil, notre source d'énergie</h1>
 <p class="sol-sub">Rayonnement, couleur des étoiles et bilan radiatif de la Terre</p>
 <nav class="sol-actions">
-<a class="sol-btn sol-btn-main" href="https://presentationssite.github.io/1es/soleil"><i class="fas fa-play"></i> Présentation<small>animations interactives et QCM</small></a>
+<a class="sol-btn sol-btn-main" href="https://presentationssite.github.io/1es/soleil"><i class="fas fa-play"></i> Présentation</a>
 <a class="sol-btn" href="/recapsoleil.pdf"><i class="fas fa-file-pdf"></i> Récap</a>
 </nav>
 </header>
@@ -39,6 +39,7 @@ page_css = "css/soleil-accueil.css"
 <div class="sol-media">
 {{< youtube-plus id="MWUEh0xqtB4" ratio="16x9" >}}
 </div>
+
 </section>
 
 <section class="sol-part sol-p2">
@@ -66,9 +67,6 @@ page_css = "css/soleil-accueil.css"
 </video>
 </div>
 
-<div class="sol-media sol-xkcd">
-<img src="https://www.explainxkcd.com/wiki/images/5/56/solar_panel_placement_2x.png" alt="xkcd : Solar Panel Placement">
-</div>
 </section>
 
 <section class="sol-part sol-p3">
