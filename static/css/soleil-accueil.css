@@ -159,7 +159,7 @@
 :root:has(.sol-accueil) .sol-media img { display: block; width: 100%; height: auto; margin: 0; border-radius: 0; }
 :root:has(.sol-accueil) #body .sol-media a { display: block !important; border: 0; }
 :root:has(.sol-accueil) .sol-media .yt-plus { margin: 0 !important; }
-:root:has(.sol-accueil) .sol-media .ggb-wrapper { margin: 0 !important; max-width: none !important; }
+:root:has(.sol-accueil) .sol-media .ggb-wrapper { margin: 0 !important; max-width: none !important; background: #fff; }
 :root:has(.sol-accueil) .sol-xkcd { background: #fff; padding: 10px; }
 :root:has(.sol-accueil) .sol-note { margin: 26px 0 12px; padding: .7em 1em; border-left: 4px solid var(--p); border-radius: 0 14px 14px 0; background: linear-gradient(90deg, rgba(255, 255, 255, .07), transparent); font-size: 1rem; }
 :root:has(.sol-accueil) .sol-note > i { color: var(--p); margin-right: .35em; }

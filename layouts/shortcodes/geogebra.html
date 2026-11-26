@@ -15,6 +15,10 @@
   - rightclick : "true" pour activer clic droit, zoom molette et clavier (défaut false)
   - rounded  : "true" pour un léger arrondi des coins (défaut false)
   - shadow   : "true" pour une ombre portée (défaut false)
+  - auto     : "true" pour adapter la hauteur à la largeur d'après les dimensions enregistrées du matériel
+               (lues auprès de l'API GeoGebra au chargement de la page) : évite les marges quand les
+               proportions de l'appliquette ne sont pas connues. width/height servent alors de repli
+               si l'API est injoignable (défaut false : comportement inchangé).
 */ -}}
 {{- $id := .Get "id" -}}
 {{- $w := .Get "width" | default "1011" -}}
@@ -26,6 +30,7 @@
 {{- $drag := eq (.Get "drag") "true" -}}
 {{- $szb := eq (.Get "zoombuttons") "true" -}}
 {{- $rc := eq (.Get "rightclick") "true" -}}
+{{- $auto := eq (.Get "auto") "true" -}}
 {{- $uid := printf "ggb-%s-%d" $id .Ordinal -}}
 
 <div class="ggb-wrapper{{ if $rounded }} ggb-rounded{{ end }}{{ if $shadow }} ggb-shadow{{ end }}"
@@ -33,7 +38,7 @@
   <iframe
     scrolling="no"
     title="Appliquette GeoGebra"
-    src="https://www.geogebra.org/material/iframe/id/{{ $id }}/width/{{ $w }}/height/{{ $h }}/border/ffffff/sfsb/true/szb/{{ $szb }}/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/{{ $rc }}/ld/false/sdz/{{ $drag }}/ctl/false"
+    {{ if $auto }}data-src={{ else }}src={{ end }}"https://www.geogebra.org/material/iframe/id/{{ $id }}/width/{{ $w }}/height/{{ $h }}/border/ffffff/sfsb/true/szb/{{ $szb }}/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/{{ $rc }}/ld/false/sdz/{{ $drag }}/ctl/false"
     allowfullscreen
     loading="lazy">
   </iframe>
@@ -45,6 +50,26 @@
     </svg>
   </button>
 </div>
+{{ if $auto }}
+<script>
+(function () {
+  var w = document.getElementById('{{ $uid }}'); if (!w) return;
+  var f = w.querySelector('iframe'), done = false;
+  function go(W, H) {
+    if (done) return; done = true;
+    var u = f.getAttribute('data-src');
+    if (W && H) { w.style.setProperty('--ggb-ratio', W + ' / ' + H); u = u.replace(/width\/\d+\/height\/\d+/, 'width/' + W + '/height/' + H); }
+    f.setAttribute('src', u);
+  }
+  // dimensions enregistrées du matériel ; repli sur width/height du shortcode si l'API ne répond pas
+  var t = setTimeout(function () { go(); }, 3000);
+  fetch('https://api.geogebra.org/v1.0/materials/{{ $id }}?fields=width,height')
+    .then(function (r) { return r.json(); })
+    .then(function (m) { clearTimeout(t); go(parseInt(m.width, 10), parseInt(m.height, 10)); })
+    .catch(function () { clearTimeout(t); go(); });
+})();
+</script>
+{{ end }}
 
 <style>
   .ggb-wrapper {
