@@ -1223,20 +1223,64 @@
       requestAnimationFrame(updateLayout);
     });
 
-    function drawTransformedVideoToCanvas(targetCanvas) {
-      const rawW = liveVideo.videoWidth;
-      const rawH = liveVideo.videoHeight;
-      const swapped = (camRotation % 180 !== 0);
+    // Dessine une source (vidéo ou image) dans un canevas, avec la rotation et le miroir choisis
+    function drawTransformed(targetCanvas, src, rawW, rawH, rot, mirrored) {
+      const swapped = (rot % 180 !== 0);
       targetCanvas.width = swapped ? rawH : rawW;
       targetCanvas.height = swapped ? rawW : rawH;
 
       const c = targetCanvas.getContext('2d');
       c.save();
       c.translate(targetCanvas.width / 2, targetCanvas.height / 2);
-      c.rotate((camRotation * Math.PI) / 180);
-      if (isMirrored) c.scale(-1, 1);
-      c.drawImage(liveVideo, -rawW / 2, -rawH / 2, rawW, rawH);
+      c.rotate((rot * Math.PI) / 180);
+      if (mirrored) c.scale(-1, 1);
+      c.drawImage(src, -rawW / 2, -rawH / 2, rawW, rawH);
       c.restore();
+    }
+
+    function drawTransformedVideoToCanvas(targetCanvas) {
+      drawTransformed(targetCanvas, liveVideo, liveVideo.videoWidth, liveVideo.videoHeight, camRotation, isMirrored);
+    }
+
+    // --- Capture directe des images de la caméra (WebCodecs) ---
+    // Chaque image arrive avec son instant de capture exact, indépendamment de la charge de la page :
+    // contrairement à la lecture de la balise <video>, une page occupée ne fait plus perdre d'images.
+    // Les conversions en bitmaps se terminent en arrière-plan ; stopRecording les attend.
+    let recReader = null;
+    let capturePending = [];
+
+    async function captureWithProcessor(track) {
+      const reader = new MediaStreamTrackProcessor({ track, maxBufferSize: 120 }).readable.getReader();
+      recReader = reader;
+      let t0 = null;
+      try {
+        while (isRecording) {
+          const { value: vf, done } = await reader.read();
+          if (done || !vf) break;
+          if (!isRecording) { vf.close(); break; }
+          const t = vf.timestamp / 1e6;   // µs → s
+          if (t0 === null) t0 = t;
+          const entry = { bitmap: null, time: t - t0 };
+          frames.push(entry);
+          const rot = camRotation, mir = isMirrored, w = vf.displayWidth, h = vf.displayHeight;
+          const pending = createImageBitmap(vf);   // copie immédiate de l'image : on peut libérer le tampon de la caméra aussitôt
+          vf.close();
+          capturePending.push(pending.then((bmp) => {
+            if (rot === 0 && !mir) {
+              entry.bitmap = bmp;
+            } else {
+              const c = document.createElement('canvas');
+              drawTransformed(c, bmp, w, h, rot, mir);
+              bmp.close();
+              entry.bitmap = c;
+            }
+          }).catch((err) => console.error(err)));
+          const ot = document.getElementById('overlayText');
+          if (ot) ot.textContent = `${frames.length} frames (${entry.time.toFixed(2)} s)`;
+        }
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     function startRecording() {
@@ -1262,6 +1306,12 @@
       };
       mediaRecorder.start();
 
+      if (typeof MediaStreamTrackProcessor === 'function' && typeof createImageBitmap === 'function') {
+        captureWithProcessor(stream.getVideoTracks()[0]);
+        return;
+      }
+
+      // Repli (navigateurs sans WebCodecs) : lecture de la balise <video>, sensible à la charge de la page
       let firstTime = null;
       let lastPresentedFrames = -1;
 
@@ -1302,12 +1352,22 @@
       }
     }
 
-    function stopRecording() {
+    async function stopRecording() {
       isRecording = false;
+      btnRecord.textContent = "● Enregistrer";
+      if (recReader) {
+        try { await recReader.cancel(); } catch (err) { /* flux déjà fermé */ }
+        recReader = null;
+      }
       if (mediaRecorder && mediaRecorder.state !== 'inactive') {
         mediaRecorder.stop();
       }
-      btnRecord.textContent = "● Enregistrer";
+      if (capturePending.length) {
+        overlayBadge.innerHTML = '<span id="overlayText">Finalisation des images…</span>';
+        await Promise.all(capturePending);
+        capturePending = [];
+        frames = frames.filter((f) => f.bitmap);
+      }
       overlayBadge.innerHTML = `<span id="overlayText">${frames.length} frames capturées</span>`;
       setExpanded(false);   // on revient à la page pour passer à l'étalonnage
 
@@ -1371,13 +1431,23 @@
       const med = sorted[Math.floor(sorted.length / 2)];
       const ms = (x) => (x * 1000).toFixed(1).replace('.', ',');
 
-      // Nombre de pas de grille de chaque intervalle (1 normalement, 2 ou plus si des images manquent),
-      // puis pas affiné sur toute la durée : le jitter se moyenne.
+      // Pas de la grille. Médiane des intervalles, sauf si plus de la moitié sont des « trous » (la médiane
+      // vaut alors un multiple du vrai pas) : on teste donc médiane/1, /2, /3, /4 et on garde le plus grand
+      // pas dont tous les intervalles sont proches d'un nombre entier de pas.
+      // Chaque intervalle vaut alors 1 pas (normal) ou plus (images manquantes) ; le pas est ensuite
+      // affiné sur toute la durée, ce qui moyenne le jitter.
+      const total0 = raw[n - 1] - raw[0];
+      const stepsOf = (s) => d.map((x) => Math.max(1, Math.round(x / s)));
+      const residual = (s) => Math.sqrt(d.reduce((acc, x) => acc + Math.pow(x / s - Math.max(1, Math.round(x / s)), 2), 0) / d.length);
       let missing = 0, step = med;
-      if (med > 0) {
-        const K = d.reduce((s, x) => s + Math.max(1, Math.round(x / med)), 0);
+      if (med > 0 && total0 > 0) {
+        let s0 = med;
+        for (let k = 1; k <= 4; k++) {
+          if (residual(med / k) < 0.3) { s0 = med / k; break; }
+        }
+        const K = stepsOf(s0).reduce((a, b) => a + b, 0);
         missing = K - (n - 1);
-        step = (raw[n - 1] - raw[0]) / K;
+        step = total0 / K;
       }
 
       if (chkRegularTime.checked && step > 0) {
