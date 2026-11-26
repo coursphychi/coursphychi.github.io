@@ -496,6 +496,29 @@
       border-radius: 7px;
     }
 
+    /* Réglage du temps d'exposition (partie Acquisition) */
+    .exposure-ctl {
+      margin-top: 0.55rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.7rem;
+      border-radius: 7px;
+    }
+    .exposure-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .exposure-head .val { font-size: 0.84rem; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+    .exposure-row { display: flex; align-items: center; gap: 0.55rem; margin-top: 0.3rem; }
+    .exposure-row input[type="range"] { flex: 1; min-width: 0; accent-color: var(--primary); cursor: pointer; }
+    .exposure-row input[type="range"]:disabled { cursor: not-allowed; }
+    .exposure-row button { padding: 0.25rem 0.55rem; font-size: 0.78rem; }
+    .exposure-ctl .note { margin-top: 0.3rem; font-size: 0.72rem; color: var(--text-muted); }
+
     .stat-box .label { font-size: 0.72rem; color: var(--text-muted); }
     .stat-box .val { font-size: 0.94rem; font-weight: 600; margin-top: 0.1rem; font-variant-numeric: tabular-nums; }
 
@@ -641,6 +664,18 @@
               <div class="label">Cadence mesurée</div>
               <div class="val" id="statFps">—</div>
             </div>
+          </div>
+          <div class="exposure-ctl">
+            <div class="exposure-head">
+              <label for="exposureSlider">Temps d'exposition</label>
+              <span class="val" id="exposureVal">Auto</span>
+            </div>
+            <div class="exposure-row">
+              <input type="range" id="exposureSlider" min="0" max="100" step="1" value="50" disabled
+                     title="Court : images nettes pour un objet rapide, mais plus sombres. Long : image plus lumineuse, mais objet flou.">
+              <button id="btnExposureAuto" disabled title="Revenir à l'exposition automatique de la caméra">Auto</button>
+            </div>
+            <div class="note" id="exposureNote">Activez la caméra pour régler l'exposition.</div>
           </div>
         </div>
       </div>
@@ -805,6 +840,10 @@
     const downloadContainer = document.getElementById('downloadContainer');
     const downloadVideoBtn = document.getElementById('downloadVideoBtn');
     const btnGoToScale = document.getElementById('btnGoToScale');
+    const exposureSlider = document.getElementById('exposureSlider');
+    const exposureVal = document.getElementById('exposureVal');
+    const exposureNote = document.getElementById('exposureNote');
+    const btnExposureAuto = document.getElementById('btnExposureAuto');
 
     const scaleMetersInput = document.getElementById('scaleMeters');
     const statPxLen = document.getElementById('statPxLen');
@@ -955,6 +994,7 @@
         stream.getTracks().forEach(t => t.stop());
         stream = null;
       }
+      resetExposureUI();
     }
 
     async function startCamera(deviceId = null) {
@@ -982,6 +1022,7 @@
 
         const track = stream.getVideoTracks()[0];
         const settings = track.getSettings();
+        setupExposure(track);
 
         liveVideo.onloadedmetadata = () => {
           updateResolutionStats();
@@ -996,6 +1037,89 @@
         overlayText.textContent = "Erreur caméra : " + err.message;
       }
     }
+
+    // --- RÉGLAGE DU TEMPS D'EXPOSITION (si la caméra l'autorise) ---
+    // Un temps court fige mieux le mouvement (images nettes, donc pointage plus précis) mais assombrit l'image.
+    // La norme MediaStream exprime exposureTime en unités de 100 µs ; le curseur est gradué
+    // logarithmiquement, car ce sont les rapports de temps (1/60 s → 1/120 s…) qui comptent.
+    const EXPOSURE_UNIT = 1e-4;   // s
+    let exposureTrack = null;
+    let exposureRange = null;     // { min, max, step } en unités de 100 µs
+    let exposureBusy = false;
+    let exposureWanted = null;    // dernière valeur demandée, appliquée dès que la caméra est libre
+
+    function formatExposure(units) {
+      const t = units * EXPOSURE_UNIT;
+      const ms = (t * 1000).toFixed(t < 0.01 ? 2 : 1).replace('.', ',');
+      return t < 0.25 ? `1/${Math.round(1 / t)} s (${ms} ms)` : `${t.toFixed(2).replace('.', ',')} s`;
+    }
+    const exposureFromSlider = (s) => exposureRange.min * Math.pow(exposureRange.max / exposureRange.min, s / 100);
+    const sliderFromExposure = (v) => 100 * Math.log(v / exposureRange.min) / Math.log(exposureRange.max / exposureRange.min);
+
+    function resetExposureUI(note) {
+      exposureTrack = null;
+      exposureRange = null;
+      exposureWanted = null;
+      exposureSlider.disabled = true;
+      btnExposureAuto.disabled = true;
+      exposureVal.textContent = 'Auto';
+      exposureNote.textContent = note || "Activez la caméra pour régler l'exposition.";
+    }
+
+    function setupExposure(track) {
+      const caps = track.getCapabilities ? track.getCapabilities() : {};
+      const modes = caps.exposureMode || [];
+      const et = caps.exposureTime;
+      if (!et || !(et.max > et.min) || !modes.includes('manual')) {
+        resetExposureUI("Cette caméra ne permet pas de régler l'exposition depuis le navigateur.");
+        return;
+      }
+      exposureTrack = track;
+      exposureRange = { min: Math.max(et.min, 1), max: et.max, step: et.step || 1 };
+      const cur = track.getSettings().exposureTime;
+      exposureSlider.value = cur ? Math.min(100, Math.max(0, sliderFromExposure(cur))) : 50;
+      exposureSlider.disabled = false;
+      btnExposureAuto.disabled = false;
+      exposureVal.textContent = 'Auto';
+      exposureNote.textContent = "Déplacez le curseur pour passer en manuel, puis Auto pour revenir au réglage automatique.";
+    }
+
+    async function applyExposure(advanced) {
+      exposureBusy = true;
+      try {
+        await exposureTrack.applyConstraints({ advanced: [advanced] });
+        const actual = exposureTrack.getSettings().exposureTime;   // valeur réellement retenue (arrondie par la caméra)
+        if (advanced.exposureMode === 'manual') {
+          exposureVal.textContent = formatExposure(actual || advanced.exposureTime);
+        }
+      } catch (err) {
+        console.error(err);
+        exposureNote.textContent = "La caméra a refusé ce réglage d'exposition.";
+      }
+      exposureBusy = false;
+      if (exposureWanted !== null && exposureTrack) {   // le curseur a bougé pendant l'application
+        const v = exposureWanted;
+        exposureWanted = null;
+        applyExposure({ exposureMode: 'manual', exposureTime: v });
+      }
+    }
+
+    exposureSlider.addEventListener('input', () => {
+      if (!exposureTrack) return;
+      const { min, max, step } = exposureRange;
+      let v = Math.round(exposureFromSlider(parseFloat(exposureSlider.value)) / step) * step;
+      v = Math.min(max, Math.max(min, v));
+      exposureVal.textContent = formatExposure(v);
+      if (exposureBusy) { exposureWanted = v; return; }
+      applyExposure({ exposureMode: 'manual', exposureTime: v });
+    });
+
+    btnExposureAuto.addEventListener('click', () => {
+      if (!exposureTrack) return;
+      exposureWanted = null;
+      exposureVal.textContent = 'Auto';
+      applyExposure({ exposureMode: 'continuous' });
+    });
 
     function updateResolutionStats() {
       const { w, h } = getEffectiveMediaDimensions();
