@@ -54,9 +54,7 @@ page_css = "css/soleil-accueil.css"
 <p class="sol-note"><i class="fas fa-globe-europe"></i> <a href="https://www.geogebra.org/m/ezzzm95w">Applet Geogebra</a> pour visualiser l'origine géométrique des lignes imaginaires que sont les tropiques et cercles polaires en lien avec les solstices et les équinoxes&nbsp;:</p>
 
 <div class="sol-media">
-<a href="https://www.geogebra.org/m/ezzzm95w">
-<img src="/solsticegeogebra.png" alt="Applet GeoGebra : solstices et équinoxes">
-</a>
+{{< geogebra id="ezzzm95w" width="1542" height="1010" maxwidth="800" >}}
 </div>
 
 <p class="sol-note"><i class="fas fa-video"></i> Vidéo filmée à Pune, en Inde, le 13 Mai 2023 (source&nbsp;: <a href="https://x.com/i/status/1657420559335182336">संकेत</a>) + <a href="https://alokm.com/zsd.html">tracking du zéro shadow day</a> + <a href="https://www.skymarvels.com/infopages/vids/Earth%20-%20Sub-solar%20Point%20001.htm">tracking du point subsolaire</a>&nbsp;:</p>
