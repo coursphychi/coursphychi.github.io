@@ -518,6 +518,8 @@
     .exposure-row input[type="range"]:disabled { cursor: not-allowed; }
     .exposure-row button { padding: 0.25rem 0.55rem; font-size: 0.78rem; }
     .exposure-ctl .note, .opt-box .note { margin-top: 0.3rem; font-size: 0.72rem; color: var(--text-muted); }
+    .capture-mode .val.ok { color: #34d399; }
+    .capture-mode .val.warn { color: #fbbf24; }
     .opt-box label { display: flex; align-items: center; gap: 0.45rem; font-size: 0.84rem; cursor: pointer; }
     .opt-box input[type="checkbox"] { accent-color: var(--primary); cursor: pointer; }
 
@@ -678,6 +680,13 @@
               <button id="btnExposureAuto" disabled title="Revenir à l'exposition automatique de la caméra">Auto</button>
             </div>
             <div class="note" id="exposureNote">Activez la caméra pour régler l'exposition.</div>
+          </div>
+          <div class="opt-box capture-mode">
+            <div class="exposure-head">
+              <span>Mode de capture</span>
+              <span class="val" id="captureModeVal"></span>
+            </div>
+            <div class="note" id="captureModeNote"></div>
           </div>
         </div>
       </div>
@@ -863,6 +872,8 @@
     const statTrackedCount = document.getElementById('statTrackedCount');
     const statDt = document.getElementById('statDt');
     const chkRegularTime = document.getElementById('chkRegularTime');
+    const captureModeVal = document.getElementById('captureModeVal');
+    const captureModeNote = document.getElementById('captureModeNote');
     const timeNote = document.getElementById('timeNote');
     const btnDeletePoint = document.getElementById('btnDeletePoint');
     const btnClearAllPoints = document.getElementById('btnClearAllPoints');
@@ -1248,6 +1259,20 @@
     // Les conversions en bitmaps se terminent en arrière-plan ; stopRecording les attend.
     let recReader = null;
     let capturePending = [];
+    const DIRECT_CAPTURE = typeof MediaStreamTrackProcessor === 'function' && typeof createImageBitmap === 'function';
+    let captureMode = null;   // 'direct' | 'repli' | 'import' : méthode ayant produit les frames actuelles
+
+    (function showCaptureMode() {
+      if (DIRECT_CAPTURE) {
+        captureModeVal.textContent = '✓ Directe';
+        captureModeVal.className = 'val ok';
+        captureModeNote.textContent = "Les images sont lues directement dans le flux de la caméra, avec leur instant exact : une page chargée ne fait pas perdre d'images.";
+      } else {
+        captureModeVal.textContent = '⚠ Repli';
+        captureModeVal.className = 'val warn';
+        captureModeNote.textContent = "Ce navigateur ne permet pas la capture directe : des images peuvent être perdues si l'ordinateur est chargé. Préférez Chrome ou Edge pour l'acquisition en direct.";
+      }
+    })();
 
     async function captureWithProcessor(track) {
       const reader = new MediaStreamTrackProcessor({ track, maxBufferSize: 120 }).readable.getReader();
@@ -1306,7 +1331,8 @@
       };
       mediaRecorder.start();
 
-      if (typeof MediaStreamTrackProcessor === 'function' && typeof createImageBitmap === 'function') {
+      captureMode = DIRECT_CAPTURE ? 'direct' : 'repli';
+      if (DIRECT_CAPTURE) {
         captureWithProcessor(stream.getVideoTracks()[0]);
         return;
       }
@@ -1382,6 +1408,7 @@
       if (!file) return;
 
       overlayBadge.innerHTML = `<span id="overlayText">Extraction des frames...</span>`;
+      captureMode = 'import';
       frames = [];
       points = [];
 
@@ -1468,7 +1495,8 @@
       statDt.textContent = `${ms(avgDt)} ms`;
 
       const dmin = sorted[0], dmax = sorted[sorted.length - 1];
-      let note = `Intervalles mesurés : de ${ms(dmin)} à ${ms(dmax)} ms.`;
+      const modeTxt = { direct: 'Capture directe. ', repli: 'Capture en mode de repli. ', import: 'Vidéo importée. ' }[captureMode] || '';
+      let note = `${modeTxt}Intervalles mesurés : de ${ms(dmin)} à ${ms(dmax)} ms.`;
       note += chkRegularTime.checked ? ` Ramenés à ${ms(step)} ms.` : ' Instants mesurés utilisés tels quels.';
       if (missing > 0) note += ` ⚠ ${missing} image${missing > 1 ? 's' : ''} manquante${missing > 1 ? 's' : ''} probable${missing > 1 ? 's' : ''} (intervalles multiples de Δt conservés).`;
       timeNote.textContent = note;
