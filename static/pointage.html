@@ -497,7 +497,7 @@
     }
 
     /* Réglage du temps d'exposition (partie Acquisition) */
-    .exposure-ctl {
+    .exposure-ctl, .opt-box {
       margin-top: 0.55rem;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -517,7 +517,9 @@
     .exposure-row input[type="range"] { flex: 1; min-width: 0; accent-color: var(--primary); cursor: pointer; }
     .exposure-row input[type="range"]:disabled { cursor: not-allowed; }
     .exposure-row button { padding: 0.25rem 0.55rem; font-size: 0.78rem; }
-    .exposure-ctl .note { margin-top: 0.3rem; font-size: 0.72rem; color: var(--text-muted); }
+    .exposure-ctl .note, .opt-box .note { margin-top: 0.3rem; font-size: 0.72rem; color: var(--text-muted); }
+    .opt-box label { display: flex; align-items: center; gap: 0.45rem; font-size: 0.84rem; cursor: pointer; }
+    .opt-box input[type="checkbox"] { accent-color: var(--primary); cursor: pointer; }
 
     .stat-box .label { font-size: 0.72rem; color: var(--text-muted); }
     .stat-box .val { font-size: 0.94rem; font-weight: 600; margin-top: 0.1rem; font-variant-numeric: tabular-nums; }
@@ -759,6 +761,13 @@
               <div class="val" id="statDt">— ms</div>
             </div>
           </div>
+          <div class="opt-box">
+            <label title="Les images d'une webcam arrivent avec un léger jitter (intervalles inégaux) alors que la caméra les capture à cadence régulière. Cette option replace les instants sur une grille de pas constant, ce qui évite du bruit sur les vitesses.">
+              <input type="checkbox" id="chkRegularTime" checked>
+              Instants régularisés (Δt constant)
+            </label>
+            <div class="note" id="timeNote"></div>
+          </div>
         </div>
       </div>
 
@@ -853,6 +862,8 @@
 
     const statTrackedCount = document.getElementById('statTrackedCount');
     const statDt = document.getElementById('statDt');
+    const chkRegularTime = document.getElementById('chkRegularTime');
+    const timeNote = document.getElementById('timeNote');
     const btnDeletePoint = document.getElementById('btnDeletePoint');
     const btnClearAllPoints = document.getElementById('btnClearAllPoints');
     const btnGoToTable = document.getElementById('btnGoToTable');
@@ -1265,7 +1276,8 @@
           lastPresentedFrames = metadata.presentedFrames;
         }
 
-        const rawTime = now / 1000;
+        // captureTime (instant de capture par la caméra) est moins entaché de jitter que `now` (instant d'affichage)
+        const rawTime = ((metadata && metadata.captureTime) || now) / 1000;
         if (firstTime === null) firstTime = rawTime;
         const relTime = rawTime - firstTime;
 
@@ -1345,6 +1357,56 @@
       }
     });
 
+    // --- INSTANTS DES FRAMES : mesurés ou régularisés ---
+    // Les instants mesurés (rawTime) fluctuent : la caméra capture à cadence régulière, mais la
+    // livraison des images au navigateur ne l'est pas. La régularisation replace chaque instant
+    // sur la grille t₀ + k·Δt, où Δt est le pas typique (médiane des intervalles) affiné sur toute
+    // la durée. Une image réellement manquante (intervalle ≈ 2Δt ou plus) garde son vrai décalage :
+    // on ne l'efface pas, on la signale.
+    function applyTimeMode() {
+      const n = frames.length;
+      const raw = frames.map((f) => f.rawTime);
+      const d = raw.slice(1).map((t, i) => t - raw[i]);
+      const sorted = [...d].sort((a, b) => a - b);
+      const med = sorted[Math.floor(sorted.length / 2)];
+      const ms = (x) => (x * 1000).toFixed(1).replace('.', ',');
+
+      // Nombre de pas de grille de chaque intervalle (1 normalement, 2 ou plus si des images manquent),
+      // puis pas affiné sur toute la durée : le jitter se moyenne.
+      let missing = 0, step = med;
+      if (med > 0) {
+        const K = d.reduce((s, x) => s + Math.max(1, Math.round(x / med)), 0);
+        missing = K - (n - 1);
+        step = (raw[n - 1] - raw[0]) / K;
+      }
+
+      if (chkRegularTime.checked && step > 0) {
+        let kPrev = -1;
+        frames.forEach((f, i) => {
+          const k = Math.max(kPrev + 1, Math.round((raw[i] - raw[0]) / step));   // strictement croissant
+          f.time = k * step;
+          kPrev = k;
+        });
+      } else {
+        frames.forEach((f) => { f.time = f.rawTime - raw[0]; });
+      }
+
+      const total = frames[n - 1].time - frames[0].time;
+      // avec la grille, la cadence est son pas (une image manquante ne fausse pas la moyenne)
+      const avgDt = chkRegularTime.checked && step > 0 ? step : total / (n - 1);
+      statFps.textContent = `${(avgDt > 0 ? 1 / avgDt : 0).toFixed(1)} fps`;
+      statDt.textContent = `${ms(avgDt)} ms`;
+
+      const dmin = sorted[0], dmax = sorted[sorted.length - 1];
+      let note = `Intervalles mesurés : de ${ms(dmin)} à ${ms(dmax)} ms.`;
+      note += chkRegularTime.checked ? ` Ramenés à ${ms(step)} ms.` : ' Instants mesurés utilisés tels quels.';
+      if (missing > 0) note += ` ⚠ ${missing} image${missing > 1 ? 's' : ''} manquante${missing > 1 ? 's' : ''} probable${missing > 1 ? 's' : ''} (intervalles multiples de Δt conservés).`;
+      timeNote.textContent = note;
+
+      if (currentStep > 1) goToFrame(currentFrameIndex);
+    }
+    chkRegularTime.addEventListener('change', () => { if (frames.length >= 2) applyTimeMode(); });
+
     function prepareFramesForAnalysis() {
       points = new Array(frames.length).fill(null);
       currentFrameIndex = 0;
@@ -1368,12 +1430,8 @@
       frameSlider.max = frames.length - 1;
       frameSlider.value = 0;
 
-      const totalDuration = frames[frames.length - 1].time - frames[0].time;
-      const avgDt = totalDuration / (frames.length - 1);
-      const realFps = avgDt > 0 ? (1 / avgDt) : 0;
-
-      statFps.textContent = `${realFps.toFixed(1)} fps`;
-      statDt.textContent = `${(avgDt * 1000).toFixed(1)} ms`;
+      frames.forEach((f) => { f.rawTime = f.time; });   // instants mesurés, conservés pour pouvoir désactiver la régularisation
+      applyTimeMode();
 
       tabs[1].disabled = false;
       tabs[2].disabled = false;
