@@ -266,8 +266,6 @@ details.nt-more > summary:focus-visible { outline: 3px solid var(--nt-ink); outl
 
 <h1 style="overflow-x:auto;">Automatismes</h1>
 
-<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/2nde/maths"><b>Cours 📽️</b> </a></p>
-
 Les quiz ci-dessous visent à vérifier ou installer certains automatismes très utiles (voire indispensable) en physique-chimie.
 
 ## Jouer avec les relations
@@ -310,6 +308,8 @@ Lorsqu'on commence à s'aguerrir, on peut remplacer les simples lettres par des 
 <!--<div style="position:relative;margin-left:auto;margin-right:auto;width:100%;max-width:100%;margin-bottom:-1em;margin-top:-1em;">
 <img src="/bandeaunum.png" style="box-shadow:none;background:none;border-radius:3px;">
 </div>-->
+
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/2nde/maths"><b>Cours 📽️</b> </a></p>
 
 Une fois qu'on a déterminé la bonne formule littérale pour la grandeur cherchée, on calcule (on dit qu'on fait l'application numérique). 
 
