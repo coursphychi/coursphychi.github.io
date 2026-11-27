@@ -266,6 +266,8 @@ details.nt-more > summary:focus-visible { outline: 3px solid var(--nt-ink); outl
 
 <h1 style="overflow-x:auto;">Automatismes</h1>
 
+<p style="text-align:center;font-size: 25px;border-top:solid  lightgray 5px;padding-top:20px;border-bottom:solid  lightgray 5px;padding-bottom:20px;"><a href="https://presentationssite.github.io/2nde/maths"><b>Cours 📽️</b> </a></p>
+
 Les quiz ci-dessous visent à vérifier ou installer certains automatismes très utiles (voire indispensable) en physique-chimie.
 
 ## Jouer avec les relations
